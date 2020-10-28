@@ -9,5 +9,5 @@
 в репозитории), в разделе Project Template выберите Basic Kanban.
 
 Альтернативой для GitHub Kanban Board может служить Trello.
-
+Обязательно исследуйте эту альтернативу, она вам может понравиться:
 https://trello.com/
