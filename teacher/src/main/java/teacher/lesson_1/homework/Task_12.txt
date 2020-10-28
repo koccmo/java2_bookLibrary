@@ -7,3 +7,7 @@
 Находясь в разделе Projects нажмите зелёную кнопку New Project,
 дайте название вашему проекту (такое же как и название модуля
 в репозитории), в разделе Project Template выберите Basic Kanban.
+
+Альтернативой для GitHub Kanban Board может служить Trello.
+
+https://trello.com/
