@@ -1,6 +1,3 @@
 include 'teacher'
 include 'team_a'
 include 'team_b'
-include 'team_retarded'
-include 'team_static_startup'
-
