@@ -1,4 +1,4 @@
-package homeLab;
+package team_static_startup.application;
 
 class ProductListApplication {
 
