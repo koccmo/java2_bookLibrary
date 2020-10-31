@@ -8,7 +8,7 @@ class ProductListApplication {
     List<Product> productList;
 
     public ProductListApplication() {
-        this.productList = new ArrayList();
+        this.productList = new ArrayList<>();
     }
 
     public static void main(String[] args) {
