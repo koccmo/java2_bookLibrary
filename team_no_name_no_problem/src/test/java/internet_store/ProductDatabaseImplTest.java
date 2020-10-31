@@ -2,6 +2,8 @@ package internet_store;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ProductDatabaseImplTest {
@@ -57,4 +59,17 @@ public class ProductDatabaseImplTest {
         assertTrue(deleteResult);
     }
 
+    @Test
+    public void getProductListTest() {
+        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+
+        Product firstProduct = new Product("Laptop","Dell",400);
+        Product secondProduct = new Product("Refrigerator","Electrolux",300);
+        productDatabase.save(firstProduct);
+        productDatabase.save(secondProduct);
+        List<Product> listOfAllProducts = productDatabase.getProductList();
+        assertTrue(listOfAllProducts.contains(firstProduct));
+        assertTrue(listOfAllProducts.contains(secondProduct));
+        assertEquals(listOfAllProducts.size(),2);
+    }
 }
