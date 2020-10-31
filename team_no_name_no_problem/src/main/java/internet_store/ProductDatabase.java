@@ -6,5 +6,6 @@ public interface ProductDatabase {
 
     boolean deleteById(long id);
 
-    void printProducts ();
+
+    void printProducts();
 }
