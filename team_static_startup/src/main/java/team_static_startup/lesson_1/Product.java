@@ -1,4 +1,4 @@
-package team_static_startup.igors_test;
+package team_static_startup.lesson_1;
 
 import java.math.BigDecimal;
 import java.util.Objects;

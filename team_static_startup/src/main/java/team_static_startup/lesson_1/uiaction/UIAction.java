@@ -1,4 +1,4 @@
-package team_static_startup.igors_test.uiaction;
+package team_static_startup.lesson_1.uiaction;
 
 public interface UIAction {
 
