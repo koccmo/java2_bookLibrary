@@ -17,8 +17,8 @@ class ProductList {
         menuNumberToActionMap.put(1, new SaveProductUIAction(productDatabase));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(productDatabase));
         menuNumberToActionMap.put(3, new DeleteProductUIAction(productDatabase));
-/*        menuNumberToActionMap.put(4, new DeleteByAuthorUIAction(bookDatabase));
-        menuNumberToActionMap.put(5, new DeleteByTitleUIAction(bookDatabase));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(productDatabase));
+/*        menuNumberToActionMap.put(5, new DeleteByTitleUIAction(bookDatabase));
         menuNumberToActionMap.put(6, new FindByIdUIAction(bookDatabase));
         menuNumberToActionMap.put(7, new FindByAuthorUIAction(bookDatabase));
         menuNumberToActionMap.put(8, new FindByTitleUIAction(bookDatabase));
@@ -37,6 +37,7 @@ class ProductList {
             System.out.println("\n1. Adding product to Database");
             System.out.println("2. Deleting product from Database by ID");
             System.out.println("3. Deleting product from Database by all parameters");
+            System.out.println("4. Deleting product from Database by name");
             System.out.println("0. Exit the program");
             System.out.println("-----------------------------------------------------------------");
             System.out.print("Please enter menu number: ");

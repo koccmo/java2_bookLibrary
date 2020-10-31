@@ -8,6 +8,8 @@ public interface ProductDatabase {
 
     boolean delete(Product product);
 
+    void deleteByProductName(String product);
+
 //    Optional<Book> findById(Long bookId);
 
 //    List<Book> findByAuthor(String author);
@@ -15,8 +17,6 @@ public interface ProductDatabase {
 //    List<Book> findByTitle(String title);
 
 //    int countAllBooks();
-
-//    void deleteByAuthor(String author);
 
 //    void deleteByTitle(String title);
 

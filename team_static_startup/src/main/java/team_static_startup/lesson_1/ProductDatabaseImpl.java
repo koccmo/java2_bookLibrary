@@ -35,4 +35,9 @@ public class ProductDatabaseImpl implements ProductDatabase {
         return false;
     }
 
+    @Override
+    public void deleteByProductName(String productName) {
+        productList.removeIf(products -> (products.getName().equals(productName)));
+    }
+
 }

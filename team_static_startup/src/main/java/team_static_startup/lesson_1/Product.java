@@ -38,11 +38,12 @@ public class Product {
         Product product = (Product) o;
         return Objects.equals(id, product.id) &&
                 Objects.equals(productName, product.productName) &&
-                Objects.equals(productDescription, product.productDescription);
+                Objects.equals(productDescription, product.productDescription) &&
+                Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productName, productDescription);
+        return Objects.hash(id, productName, productDescription, price);
     }
 }
