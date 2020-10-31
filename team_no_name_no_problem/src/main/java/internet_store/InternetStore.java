@@ -1,8 +1,4 @@
-package internet_store.application;
-
-import internet_store.ProductDatabase;
-import internet_store.ProductDatabaseImpl;
-
+package internet_store;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,13 +14,17 @@ public class InternetStore {
         menuNumberToAction = new HashMap();
 
         menuNumberToAction.put(1, new AddItemUIAction(productDatabase));
+        menuNumberToAction.put(2, new DeleteByIdUIAction(productDatabase));
+        menuNumberToAction.put(3, new PrintProductsUIAction(productDatabase));
     }
 
     public void run() {
 
         while (true) {
             System.out.println("\nMenu\n" +
-                    "1   Add item\n+" +
+                    "1   Add item\n" +
+                    "2   Delete by id\n" +
+                    "3   Print products\n" +
                     "0   Exit");
 
             Scanner in = new Scanner(System.in);
