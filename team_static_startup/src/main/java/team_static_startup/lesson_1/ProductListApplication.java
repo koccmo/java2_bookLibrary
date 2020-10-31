@@ -1,4 +1,4 @@
-package team_static_startup.igors_test;
+package team_static_startup.lesson_1;
 
 class ProductListApplication {
 

@@ -1,7 +1,7 @@
-package team_static_startup.igors_test.uiaction;
+package team_static_startup.lesson_1.uiaction;
 
-import team_static_startup.igors_test.Product;
-import team_static_startup.igors_test.ProductDatabase;
+import team_static_startup.lesson_1.Product;
+import team_static_startup.lesson_1.ProductDatabase;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

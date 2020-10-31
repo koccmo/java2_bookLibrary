@@ -1,4 +1,4 @@
-package team_static_startup.igors_test;
+package team_static_startup.lesson_1;
 
 public interface ProductDatabase {
 
@@ -6,7 +6,7 @@ public interface ProductDatabase {
 
     boolean delete(Long productId);
 
-//    boolean delete(Book book);
+    boolean delete(Product product);
 
 //    Optional<Book> findById(Long bookId);
 

@@ -1,6 +1,6 @@
-package team_static_startup.igors_test;
+package team_static_startup.lesson_1;
 
-import team_static_startup.igors_test.uiaction.*;
+import team_static_startup.lesson_1.uiaction.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,17 +16,17 @@ class ProductList {
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new SaveProductUIAction(productDatabase));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(productDatabase));
-//        menuNumberToActionMap.put(3, new DeleteProductUIAction(bookDatabase));
-//        menuNumberToActionMap.put(4, new DeleteByAuthorUIAction(bookDatabase));
-//        menuNumberToActionMap.put(5, new DeleteByTitleUIAction(bookDatabase));
-//        menuNumberToActionMap.put(6, new FindByIdUIAction(bookDatabase));
-//        menuNumberToActionMap.put(7, new FindByAuthorUIAction(bookDatabase));
-//        menuNumberToActionMap.put(8, new FindByTitleUIAction(bookDatabase));
-//        menuNumberToActionMap.put(9, new FindUniqueAuthorsUIAction(bookDatabase));
-//        menuNumberToActionMap.put(10, new FindUniqueTitlesUIAction(bookDatabase));
-//        menuNumberToActionMap.put(11, new FindUniqueBooksUIAction(bookDatabase));
-//        menuNumberToActionMap.put(12, new CountAllBooksUIAction(bookDatabase));
-
+        menuNumberToActionMap.put(3, new DeleteProductUIAction(productDatabase));
+/*        menuNumberToActionMap.put(4, new DeleteByAuthorUIAction(bookDatabase));
+        menuNumberToActionMap.put(5, new DeleteByTitleUIAction(bookDatabase));
+        menuNumberToActionMap.put(6, new FindByIdUIAction(bookDatabase));
+        menuNumberToActionMap.put(7, new FindByAuthorUIAction(bookDatabase));
+        menuNumberToActionMap.put(8, new FindByTitleUIAction(bookDatabase));
+        menuNumberToActionMap.put(9, new FindUniqueAuthorsUIAction(bookDatabase));
+        menuNumberToActionMap.put(10, new FindUniqueTitlesUIAction(bookDatabase));
+        menuNumberToActionMap.put(11, new FindUniqueBooksUIAction(bookDatabase));
+        menuNumberToActionMap.put(12, new CountAllBooksUIAction(bookDatabase));
+*/
 
     }
 
@@ -36,9 +36,9 @@ class ProductList {
         while (true) {
             System.out.println("\n1. Adding product to Database");
             System.out.println("2. Deleting product from Database by ID");
-            System.out.println("3. Deleting product from Database by ***");
+            System.out.println("3. Deleting product from Database by all parameters");
             System.out.println("0. Exit the program");
-            System.out.println("---------------------------------------");
+            System.out.println("-----------------------------------------------------------------");
             System.out.print("Please enter menu number: ");
             int userSelectedMenuNumber = Integer.parseInt(sc.nextLine());
             if (userSelectedMenuNumber == 0) {
