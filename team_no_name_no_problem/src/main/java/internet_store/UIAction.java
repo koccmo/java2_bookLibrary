@@ -1,4 +1,4 @@
-package internet_store.application;
+package internet_store;
 
 interface UIAction {
 
