@@ -25,5 +25,6 @@ public class SaveProductUIAction implements UIAction {
         BigDecimal productPrice = myInput.nextBigDecimal();
 
         productDatabase.save(new Product(productName, productDescription, productPrice));
+        System.out.println("\nProduct added\n" + productName + "\n" + productDescription + "\n" + productPrice + " EUR");
     }
 }

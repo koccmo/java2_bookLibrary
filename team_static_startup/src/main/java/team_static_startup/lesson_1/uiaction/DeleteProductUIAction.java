@@ -26,9 +26,9 @@ public class DeleteProductUIAction implements UIAction {
 
         boolean productDeleted = productDatabase.delete(new Product(productName, productDescription, productPrice));
         if (productDeleted) {
-            System.out.println("Product deleted");
+            System.out.println("\nProduct deleted");
         } else {
-            System.out.println("There is no such product in the database");
+            System.out.println("\nThere is no such product in the database");
         }
     }
 
