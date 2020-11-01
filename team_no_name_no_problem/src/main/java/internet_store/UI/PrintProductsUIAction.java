@@ -1,6 +1,6 @@
-package internet_store;
+package internet_store.UI;
 
-import java.util.Scanner;
+import internet_store.ProductDatabase;
 
 class PrintProductsUIAction implements UIAction {
 
