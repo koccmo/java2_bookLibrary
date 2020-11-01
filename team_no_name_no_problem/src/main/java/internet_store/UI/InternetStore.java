@@ -1,5 +1,7 @@
-package internet_store;
+package internet_store.UI;
 
+import internet_store.ProductDatabase;
+import internet_store.ProductDatabaseImpl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

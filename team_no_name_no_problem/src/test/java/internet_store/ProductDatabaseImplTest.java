@@ -1,5 +1,6 @@
 package internet_store;
 
+import internet_store.domain.Product;
 import org.junit.Test;
 
 import java.util.List;
