@@ -98,4 +98,46 @@ public class ProductDatabaseImplTest {
         assertEquals(listOfAllProducts.size(),2);
     }
 
+    @Test
+    public void changeProductTitleTest() {
+        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+
+        Product firstProduct = new Product("Laptop","Dell",400);
+        Product secondProduct = new Product("Refrigerator","Electrolux",300);
+        Product thirdProduct = new Product("TV","Radiotehnika",3);
+        productDatabase.save(firstProduct);
+        productDatabase.save(secondProduct);
+        productDatabase.save(thirdProduct);
+        productDatabase.changeTitle(1L,"Personal Computer");
+        productDatabase.changeTitle(2L,"Holodiljnik");
+        productDatabase.changeTitle(3L,"Televizor");
+        String titleOfFirstProduct = firstProduct.getTitle();
+        String titleOfSecondProduct = secondProduct.getTitle();
+        String titleOfThirdProduct = thirdProduct.getTitle();
+        assertTrue(titleOfFirstProduct.equals("Personal Computer"));
+        assertTrue(titleOfSecondProduct.equals("Holodiljnik"));
+        assertFalse(titleOfThirdProduct.equals("TV"));
+    }
+
+    @Test
+    public void changeDescriptionTest() {
+        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+
+        Product firstProduct = new Product("Laptop","Dell",400);
+        Product secondProduct = new Product("Refrigerator","Electrolux",300);
+        Product thirdProduct = new Product("TV","Radiotehnika",3);
+        productDatabase.save(firstProduct);
+        productDatabase.save(secondProduct);
+        productDatabase.save(thirdProduct);
+        productDatabase.changeDescription(1L,"Samsung");
+        productDatabase.changeDescription(2L,"LG");
+        productDatabase.changeDescription(3L,"LCD Screens");
+        String descriptionOfFirstProduct = firstProduct.getDescription();
+        String descriptionOfSecondProduct = secondProduct.getDescription();
+        String descriptionOfThirdProduct = thirdProduct.getDescription();
+        assertTrue(descriptionOfFirstProduct.equals("Samsung"));
+        assertFalse(descriptionOfSecondProduct.equals("Holodiljnik"));
+        assertTrue(descriptionOfThirdProduct.equals("LCD Screens"));
+    }
+
 }
