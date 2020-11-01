@@ -20,6 +20,8 @@ public class InternetStore {
         menuNumberToAction.put(3, new PrintProductsUIAction(productDatabase));
         menuNumberToAction.put(4, new ChangeTitleUIAction(productDatabase));
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(productDatabase));
+        menuNumberToAction.put(6, new FindAnyByTitleUIAction(productDatabase));
+        menuNumberToAction.put(7, new FindAllByTitleUIAction(productDatabase));
     }
 
     public void run() {
@@ -31,6 +33,8 @@ public class InternetStore {
                     "3   Print products\n" +
                     "4   Change title\n" +
                     "5   Change description\n" +
+                    "6   Find any by title\n" +
+                    "7   Find all by title\n" +
                     "0   Exit");
 
             Scanner in = new Scanner(System.in);
@@ -60,7 +64,7 @@ public class InternetStore {
         if (uiAction != null) {
             uiAction.execute();
         } else {
-            System.out.println("Menu item not exist: " + userSelectedMenuNumber);
+            System.out.println("Menu item does not exist: " + userSelectedMenuNumber);
         }
     }
 
