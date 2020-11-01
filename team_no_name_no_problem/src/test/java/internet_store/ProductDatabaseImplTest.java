@@ -97,4 +97,5 @@ public class ProductDatabaseImplTest {
         assertFalse(listOfAllProducts.contains(thirdProduct));
         assertEquals(listOfAllProducts.size(),2);
     }
+
 }
