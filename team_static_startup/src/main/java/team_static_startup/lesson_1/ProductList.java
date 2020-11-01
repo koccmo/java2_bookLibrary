@@ -18,16 +18,6 @@ class ProductList {
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(productDatabase));
         menuNumberToActionMap.put(3, new DeleteProductUIAction(productDatabase));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(productDatabase));
-/*        menuNumberToActionMap.put(5, new DeleteByTitleUIAction(bookDatabase));
-        menuNumberToActionMap.put(6, new FindByIdUIAction(bookDatabase));
-        menuNumberToActionMap.put(7, new FindByAuthorUIAction(bookDatabase));
-        menuNumberToActionMap.put(8, new FindByTitleUIAction(bookDatabase));
-        menuNumberToActionMap.put(9, new FindUniqueAuthorsUIAction(bookDatabase));
-        menuNumberToActionMap.put(10, new FindUniqueTitlesUIAction(bookDatabase));
-        menuNumberToActionMap.put(11, new FindUniqueBooksUIAction(bookDatabase));
-        menuNumberToActionMap.put(12, new CountAllBooksUIAction(bookDatabase));
-*/
-
     }
 
     public void run() {
