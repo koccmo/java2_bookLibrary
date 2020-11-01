@@ -4,6 +4,7 @@ import internet_store.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductDatabaseImpl implements ProductDatabase{
 
@@ -69,6 +70,24 @@ public class ProductDatabaseImpl implements ProductDatabase{
             }
         }
         return false;
+    }
+
+    @Override
+    public Optional<Product> findAnyByTitle(String title) {
+        return productList.stream()
+                .filter(product -> product.getTitle().startsWith(title))
+                .findAny();
+    }
+
+    @Override
+    public List<Product> findAllByTitle(String title) {
+        List <Product> listOfSpecificProducts = new ArrayList<>();
+        for (Product product : productList){
+            if (product.getTitle().startsWith(title)){
+                listOfSpecificProducts.add(product);
+            }
+        }
+        return listOfSpecificProducts;
     }
 
 
