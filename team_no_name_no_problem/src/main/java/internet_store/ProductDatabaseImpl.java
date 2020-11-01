@@ -45,5 +45,16 @@ public class ProductDatabaseImpl implements ProductDatabase{
         }
     }
 
+    @Override
+    public boolean ChangeTitle(long id, String newTitle) {
+        for (int i = 0; i < productList.size(); i++){
+            if (productList.get(i).getId() == id) {
+                productList.get(i).setTitle(newTitle);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
