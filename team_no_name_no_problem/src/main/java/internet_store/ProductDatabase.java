@@ -6,7 +6,9 @@ public interface ProductDatabase {
 
     boolean deleteById(long id);
 
-    void printProducts();
+    boolean printProducts();
 
-    boolean ChangeTitle(long id, String newTitle);
+    boolean changeTitle(long id, String newTitle);
+
+    boolean changeDescription(long id, String newDescription);
 }
