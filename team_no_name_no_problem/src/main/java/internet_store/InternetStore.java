@@ -16,6 +16,8 @@ public class InternetStore {
         menuNumberToAction.put(1, new AddItemUIAction(productDatabase));
         menuNumberToAction.put(2, new DeleteByIdUIAction(productDatabase));
         menuNumberToAction.put(3, new PrintProductsUIAction(productDatabase));
+        menuNumberToAction.put(4, new ChangeTitleUIAction(productDatabase));
+        menuNumberToAction.put(5, new ChangeDescriptionUIAction(productDatabase));
     }
 
     public void run() {
@@ -25,6 +27,8 @@ public class InternetStore {
                     "1   Add item\n" +
                     "2   Delete by id\n" +
                     "3   Print products\n" +
+                    "4   Change title\n" +
+                    "5   Change description\n" +
                     "0   Exit");
 
             Scanner in = new Scanner(System.in);
