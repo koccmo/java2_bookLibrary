@@ -7,4 +7,6 @@ public interface ProductDatabase {
     boolean deleteById(long id);
 
     void printProducts();
+
+    boolean ChangeTitle(long id, String newTitle);
 }
