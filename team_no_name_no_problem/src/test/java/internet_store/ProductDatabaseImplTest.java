@@ -10,7 +10,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void saveProductTest() {
-
         ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
 
         Product firstProduct = new Product("Laptop","Dell",400);
@@ -19,6 +18,18 @@ public class ProductDatabaseImplTest {
         boolean saveResult2 = productDatabase.save(secondProduct);
         assertTrue(saveResult1);
         assertTrue(saveResult2);
+    }
+
+    @Test
+    public void saveProductTestNotValidInput() {
+        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+
+        Product firstProduct = new Product("Laptop","Dell",400);
+        Product secondProduct = new Product("Laptop","Dell",400);
+        boolean saveResult1 = productDatabase.save(firstProduct);
+        boolean saveResult2 = productDatabase.save(secondProduct);
+        assertTrue(saveResult1);
+        assertFalse(saveResult2);
     }
 
     @Test
@@ -60,16 +71,29 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void getProductListTest() {
+    public void deleteByIdTestNoIdInDatabase() {
         ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
 
         Product firstProduct = new Product("Laptop","Dell",400);
         Product secondProduct = new Product("Refrigerator","Electrolux",300);
         productDatabase.save(firstProduct);
         productDatabase.save(secondProduct);
+        assertFalse(productDatabase.deleteById(7L));
+    }
+
+    @Test
+    public void getProductListTest() {
+        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+
+        Product firstProduct = new Product("Laptop","Dell",400);
+        Product secondProduct = new Product("Refrigerator","Electrolux",300);
+        Product thirdProduct = new Product("TV","Radiotehnika",3);
+        productDatabase.save(firstProduct);
+        productDatabase.save(secondProduct);
         List<Product> listOfAllProducts = productDatabase.getProductList();
         assertTrue(listOfAllProducts.contains(firstProduct));
         assertTrue(listOfAllProducts.contains(secondProduct));
+        assertFalse(listOfAllProducts.contains(thirdProduct));
         assertEquals(listOfAllProducts.size(),2);
     }
 }
