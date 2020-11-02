@@ -6,8 +6,4 @@ public class TestClass {
         System.out.println("Method added by Alexander");
     }
 
-    //test
-
-
-
 }
