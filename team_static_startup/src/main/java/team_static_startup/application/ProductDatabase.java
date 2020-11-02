@@ -1,5 +1,7 @@
 package team_static_startup.application;
 
+import java.util.List;
+
 public interface ProductDatabase {
 
     Long save(Product product);
@@ -9,5 +11,7 @@ public interface ProductDatabase {
     boolean delete(Product product);
 
     void deleteByProductName(String product);
+
+    List<Product> getProductList();
 
 }
