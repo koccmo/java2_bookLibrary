@@ -12,6 +12,8 @@ public interface ProductDatabase {
 
     void deleteByProductName(String product);
 
+    List<Product> findByProductName(String productName);
+
     List<Product> getProductList();
 
 }
