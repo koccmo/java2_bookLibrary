@@ -193,8 +193,5 @@ public class ProductDatabaseImplTest {
         assertTrue(resultOfFindingAllTV.contains(thirdProduct));
         assertFalse(resultOfFindingAllTV.contains(secondProduct));
         assertEquals(resultOfFindingAllTV.size(),1);
-
-
-
     }
 }
