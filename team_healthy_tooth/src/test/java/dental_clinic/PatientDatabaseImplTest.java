@@ -1,8 +1,10 @@
 package dental_clinic;
 
 import dental_clinic.domain.PatientPersonalData;
+import dental_clinic.domain.ToothStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PatientDatabaseImplTest {
     private CardDatabaseImpl impl = new CardDatabaseImpl();
@@ -14,13 +16,15 @@ public class PatientDatabaseImplTest {
         test.testAddPatient();
         test.testFindPatientBySurname();
         test.testFindPatientByPersonalCode();
+        test.testUpdateJowlData();
+        test.testPrintPatientHistory();
         test.testDeletePatient();
 
         test.finaliseTests();
 
     }
 
-    //patient1 for tests 1, 2, 3
+    //patient1 for tests 1, 2, 3, 4, 5
     PatientPersonalData patient1 = new PatientPersonalData(
             "name", "surname", "phone", "pCode"
     );
@@ -61,14 +65,25 @@ public class PatientDatabaseImplTest {
         && resultNegative.isEmpty());
     }
 
-    //Test 4 : testing invalid patient removal in .deletePatient
+
+    //Test 4 : testing .updateJowlData + .printPatientCardForVisit
+    private void testUpdateJowlData() {
+        impl.updateJowlData(1L, 21, Optional.empty(), ToothStatus.KARIES);
+        impl.printPatientCardForVisit(1L);
+    }
+
+    //Task 5 : testing .printPatientHistory
+    private void testPrintPatientHistory() {
+        impl.printPatientHistory(1L);
+    }
+
+    //Test 6 : testing invalid patient removal in .deletePatient
     private void testDeletePatient() {
         System.out.print("Testing .deletePatient ... ");
 
         printTestResult(impl.deletePatient(1L)
-        && !impl.deletePatient(9999L)); //id 9999 is invalid
+                && !impl.deletePatient(9999L)); //id 9999 is invalid
     }
-
 
     private void printTestResult(boolean successCondition) {
         if (successCondition) {
