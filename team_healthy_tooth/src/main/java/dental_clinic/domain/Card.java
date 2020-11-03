@@ -3,15 +3,14 @@ package dental_clinic.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Card {
 
-    private Patient patient;
+    private PatientPersonalData patientPersonalData;
     private Map  <Integer, ToothInfo> jowl;
 
-    public Card (Patient patient){
-        this.patient = patient;
+    public Card (PatientPersonalData patientPersonalData){
+        this.patientPersonalData = patientPersonalData;
         jowl = createNewJowl();
     }
 
@@ -45,12 +44,8 @@ public class Card {
         return newJowl;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public PatientPersonalData getPatient() {
+        return patientPersonalData;
     }
 
     public Map<Integer, ToothInfo> getJowl() {
@@ -59,10 +54,8 @@ public class Card {
 
     public boolean updateJowl(int toothNumber, Optional <String> comment, ToothStatus toothStatus) {
         if (jowl.containsKey(toothNumber)) {
-            ToothInfo newToothInfo = jowl.get(toothNumber);
-            newToothInfo.addComment(comment);
-            newToothInfo.addStatus(toothStatus);
-            jowl.put(toothNumber, newToothInfo);
+            jowl.get(toothNumber).addComment(comment);
+            jowl.get(toothNumber).addStatus(toothStatus);
             return true;
         }else{
             return false;
@@ -71,7 +64,7 @@ public class Card {
 
     @Override
     public String toString() {
-        String result = "Card{ patient=" + patient;
+        String result = "Card{ patient=" + patientPersonalData;
        for (Integer key : jowl.keySet()){
            result += key + " " + jowl.get(key) + "\n";
        }
