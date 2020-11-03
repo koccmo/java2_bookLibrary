@@ -22,7 +22,7 @@ public class FindByProductNameUIAction implements UIAction {
         List<Product> productFound = productDatabase.findByProductName(productName);
 
         if (productFound.isEmpty()) {
-            System.out.println("No product with name = " + productName + " in the database");
+            System.out.println("\nNo product with name = " + productName + " in the database");
         } else {
             System.out.println("\nFound products in the database :");
             for (Product product : productFound) {
