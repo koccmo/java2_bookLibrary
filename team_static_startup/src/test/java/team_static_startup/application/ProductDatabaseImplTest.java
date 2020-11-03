@@ -1,11 +1,12 @@
 package team_static_startup.application;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +26,6 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-	@Ignore
     public void shouldDeleteProductById() {
         productDatabase.save(new Product("tv", "good tv", new BigDecimal("499.99")));
         productDatabase.delete(1L);
