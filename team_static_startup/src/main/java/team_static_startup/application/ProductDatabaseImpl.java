@@ -54,5 +54,6 @@ public class ProductDatabaseImpl implements ProductDatabase {
             }
         }
         return productsByName;
+
     }
 }

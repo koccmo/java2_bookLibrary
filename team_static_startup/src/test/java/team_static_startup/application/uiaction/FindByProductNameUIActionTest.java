@@ -74,6 +74,7 @@ public class FindByProductNameUIActionTest {
                         + "No product with name = Pineapple in the database"
                         ,outputStreamCaptor.toString().trim());
     }
+
 }
 
 
