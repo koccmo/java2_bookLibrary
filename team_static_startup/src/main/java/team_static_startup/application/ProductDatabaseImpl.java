@@ -49,7 +49,7 @@ public class ProductDatabaseImpl implements ProductDatabase {
     public List<Product> findByProductName(String productName) {
         List<Product> productsByName = new ArrayList<>();
         for (Product product : productList) {
-            if (product.getName().equals(productName)) {
+            if (product.getName().toLowerCase().equals(productName.toLowerCase())) {
                 productsByName.add(product);
             }
         }
