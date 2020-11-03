@@ -18,6 +18,8 @@ public class DentalClinic {
 
         menuNumberToAction.put(1, new AddPatientUIAction(cardDatabase));
         menuNumberToAction.put(2, new DeletePatientUIAction(cardDatabase));
+        menuNumberToAction.put(3, new PrintCardBaseUIAction(cardDatabase));
+        menuNumberToAction.put(4, new PrintPatientCardUIAction(cardDatabase));
     }
 
     public void run(){
@@ -27,6 +29,8 @@ public class DentalClinic {
             System.out.println("\nMenu\n" +
                     "1   Add patient\n" +
                     "2   Delete by id\n" +
+                    "3   Print card database\n" +
+                    "4   Print patientCard database\n" +
                     "0   Exit");
 
             Scanner in = new Scanner(System.in);

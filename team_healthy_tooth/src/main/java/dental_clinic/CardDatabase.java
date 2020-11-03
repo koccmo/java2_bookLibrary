@@ -10,4 +10,6 @@ public interface CardDatabase {
 
     void printDatabase();
 
+    boolean printPatientCard(long id);
+
 }
