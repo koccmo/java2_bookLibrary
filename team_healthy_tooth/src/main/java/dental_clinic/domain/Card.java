@@ -71,15 +71,12 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "patient=" + patient +
-                convertWithStream(jowl);
+        String result = "Card{ patient=" + patient;
+       for (Integer key : jowl.keySet()){
+           result += key + " " + jowl.get(key) + "\n";
+       }
+        return result;
     }
 
-    public String convertWithStream(Map<Integer, ?> map) {
-        String mapAsString = map.keySet().stream()
-                .map(key -> key + "=" + map.get(key))
-                .collect(Collectors.joining(", ", "{", "}"));
-        return mapAsString;
-    }
+
 }
