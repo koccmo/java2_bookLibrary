@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Patient {
+public class PatientPersonalData {
 
     long id;
     private final String name;
@@ -14,7 +14,7 @@ public class Patient {
     private final String personalCode;
     private List<String> attendingDoctors;
 
-    public Patient (String name, String surname, String phone, String personalCode, String...attendingDoctors){
+    public PatientPersonalData(String name, String surname, String phone, String personalCode, String...attendingDoctors){
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -66,12 +66,12 @@ public class Patient {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(name.toLowerCase(), patient.name.toLowerCase()) &&
-                Objects.equals(surname.toLowerCase(), patient.surname.toLowerCase()) &&
-                Objects.equals(phone, patient.phone) &&
-                Objects.equals(personalCode, patient.personalCode) &&
-                Objects.equals(attendingDoctors, patient.attendingDoctors);
+        PatientPersonalData patientPersonalData = (PatientPersonalData) o;
+        return Objects.equals(name.toLowerCase(), patientPersonalData.name.toLowerCase()) &&
+                Objects.equals(surname.toLowerCase(), patientPersonalData.surname.toLowerCase()) &&
+                Objects.equals(phone, patientPersonalData.phone) &&
+                Objects.equals(personalCode, patientPersonalData.personalCode) &&
+                Objects.equals(attendingDoctors, patientPersonalData.attendingDoctors);
     }
 
     @Override
