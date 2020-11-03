@@ -1,0 +1,7 @@
+Lesson 3 plan:
+
+1. Git branches
+2. Work with pull requests
+3. Code with me plugin presentation (from students)
+4. Team leadership
+5. User stories
