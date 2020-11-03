@@ -18,13 +18,13 @@ public class CardDatabaseImpl implements CardDatabase {
 
     @Override
     public boolean addPatient(Patient patient) {
-        /*Optional <Patient> result = cardList.stream()
+        Optional <Patient> result = cardList.stream()
                 .map(card -> card.getPatient())
                 .filter(patient1 -> patient1.equals(patient))
                 .findAny();
         if (result.isPresent()){
             return false;
-        }else*/
+        }else
             {
             patient.setId(id);
             cardList.add(new Card(patient));

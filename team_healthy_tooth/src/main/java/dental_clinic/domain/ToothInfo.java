@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class ToothInfo {
 
-    private List <Optional <String>> comment;
+    private List <Optional <String>> comment = new ArrayList<>();
     private List<ToothStatus> status;
 
     public ToothInfo (Optional<String> comment, ToothStatus...status){
