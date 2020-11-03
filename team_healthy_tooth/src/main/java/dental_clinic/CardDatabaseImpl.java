@@ -18,11 +18,7 @@ public class CardDatabaseImpl implements CardDatabase {
 
     @Override
     public boolean addPatient(Patient patient) {
-        Optional <Patient> result = cardList.stream()
-                .map(card -> card.getPatient())
-                .filter(patient1 -> patient1.equals(patient))
-                .findAny();
-        if (result.isPresent()){
+        if (cardListContainsPatient(patient)){
             return false;
         }else
             {
@@ -47,5 +43,32 @@ public class CardDatabaseImpl implements CardDatabase {
     @Override
     public void printDatabase() {
         cardList.forEach(System.out::println);
+    }
+
+    @Override
+    public boolean printPatientCard(long id) {
+            for (int i = 0; i < cardList.size(); i++){
+                if (cardList.get(i).getPatient().getId() == id){
+                    System.out.println(cardList.get(i).toString());
+                    return true;
+                }
+            }
+        return false;
+    }
+
+    private boolean cardListContainsPatient (Patient patient){
+        Optional <Patient> result = cardList.stream()
+                .map(card -> card.getPatient())
+                .filter(patient1 -> patient1.equals(patient))
+                .findAny();
+        return result.isPresent();
+    }
+
+    private boolean cardListContainsId (long id){
+        Optional <Patient> result = cardList.stream()
+                .map(card -> card.getPatient())
+                .filter(patient1 -> patient1.getId() == id)
+                .findAny();
+        return result.isPresent();
     }
 }
