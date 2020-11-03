@@ -20,6 +20,10 @@ public class DentalClinic {
         menuNumberToAction.put(2, new DeletePatientUIAction(cardDatabase));
         menuNumberToAction.put(3, new PrintCardBaseUIAction(cardDatabase));
         menuNumberToAction.put(4, new PrintPatientCardUIAction(cardDatabase));
+        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(cardDatabase));
+        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(cardDatabase));
+        menuNumberToAction.put(7, new UpdateJowlDataUIAction(cardDatabase));
+        menuNumberToAction.put(8, new PrintPatientCardForVisitUIAction(cardDatabase));
     }
 
     public void run(){
@@ -30,7 +34,11 @@ public class DentalClinic {
                     "1   Add patient\n" +
                     "2   Delete by id\n" +
                     "3   Print card database\n" +
-                    "4   Print patientCard database\n" +
+                    "4   Print patient card database\n" +
+                    "5   Find patient by surname database\n" +
+                    "6   Print patient by personal code database\n" +
+                    "7   Update patient's jowl data in database\n" +
+                    "8   Print patient card for visit\n" +
                     "0   Exit");
 
             Scanner in = new Scanner(System.in);
