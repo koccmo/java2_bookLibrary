@@ -10,7 +10,7 @@ public interface ProductDatabase {
 
     boolean delete(Product product);
 
-    void deleteByProductName(String product);
+    boolean deleteByProductName(String product);
 
     List<Product> findByProductName(String productName);
 
