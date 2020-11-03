@@ -19,13 +19,13 @@ import java.util.List;
 public class FindByProductNameUIActionTest {
 
     ProductDatabase productDatabase = new ProductDatabaseImpl();
-    ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
+    private final ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
 
-    Product product1 = new Product("Pineapple", "Very good", new BigDecimal("5"));
+    Product product1 = new Product("PineApple", "Very good", new BigDecimal("5"));
     Product product2 = new Product("Orange", "Sweet", new BigDecimal("2"));
-    Product product3 = new Product("Pineapple", "Bad", new BigDecimal("1"));
+    Product product3 = new Product("PINEAPPLE", "Bad", new BigDecimal("1"));
 
     @Test
     public void ShouldFindTwoProductsWithSameName () {
@@ -70,25 +70,10 @@ public class FindByProductNameUIActionTest {
         testFind.execute();
 
         assertEquals(
-                "Enter product name to search for: \n" +
-                        "No product with name = Pineapple in the database",
-                outputStreamCaptor.toString().trim());
+                "Enter product name to search for: \n"
+                        + "No product with name = Pineapple in the database"
+                        ,outputStreamCaptor.toString().trim());
     }
-
-
-    @Test
-    public void ShouldFindOneProductViaUIAction () {
-        productDatabase.save(product1);
-
-        FindByProductNameUIAction testFind = new FindByProductNameUIAction(productDatabase);
-        testFind.execute();
-
-        /*assertEquals("Enter product name to search for: \n"
-                        + "Found 1 products in the database :\n"
-                        + "Product{id = 1, productName = 'Pineapple', productDescription = 'Very good', price = 5}"
-                        , outputStreamCaptor.toString().trim());*/
-    }
-
 
 }
 

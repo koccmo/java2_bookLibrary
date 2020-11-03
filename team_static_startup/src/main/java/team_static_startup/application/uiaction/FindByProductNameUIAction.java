@@ -24,7 +24,7 @@ public class FindByProductNameUIAction implements UIAction {
         if (productFound.isEmpty()) {
             System.out.println("\nNo product with name = " + productName + " in the database");
         } else {
-            System.out.println("\nFound products in the database :");
+            System.out.println("\nFound " + productFound.size() + " product(s) in the database : ");
             for (Product product : productFound) {
                 System.out.print(product.toString() + "\n");
             }
