@@ -28,9 +28,10 @@ public class PrintProductsToConsoleUIActionTest {
         System.setOut(standartOut);
     }
 
+    ProductDatabase productDatabase = new ProductDatabaseImpl();
+
     @Test
     public void shouldPrintOutProducts() {
-        ProductDatabase productDatabase = new ProductDatabaseImpl();
         productDatabase.save(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
         productDatabase.save(new Product("Lenovo ThinkPad", "notebook", new BigDecimal("3000.00")));
         PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(productDatabase);
@@ -41,7 +42,6 @@ public class PrintProductsToConsoleUIActionTest {
 
     @Test
     public void shouldNotPrintOutProducts_whenDatabaseIsEmpty() {
-        ProductDatabase productDatabase = new ProductDatabaseImpl();
         PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(productDatabase);
         victim.execute();
         assertEquals("", outputStreamCaptor.toString().trim());
