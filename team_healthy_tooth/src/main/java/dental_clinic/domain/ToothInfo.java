@@ -33,9 +33,13 @@ public class ToothInfo {
 
     @Override
     public String toString() {
-        return "ToothInfo{" +
-                "comment=" + comment +
-                ", status=" + status +
-                '}';
+        String result = "ToothInfo{ ";
+        for (int i = 0; i < comment.size(); i++){
+            if (comment.get(i).isPresent()){
+                result += " " + comment.get(i) + " ";
+            }
+            result += "status=" + status +'}';
+        }
+        return result;
     }
 }
