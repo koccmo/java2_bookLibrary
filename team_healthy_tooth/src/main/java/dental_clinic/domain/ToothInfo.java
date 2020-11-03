@@ -30,4 +30,12 @@ public class ToothInfo {
     public void addStatus(ToothStatus status) {
         this.status.add(status);
     }
+
+    @Override
+    public String toString() {
+        return "ToothInfo{" +
+                "comment=" + comment +
+                ", status=" + status +
+                '}';
+    }
 }
