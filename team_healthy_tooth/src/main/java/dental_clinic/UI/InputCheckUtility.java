@@ -1,5 +1,6 @@
 package dental_clinic.UI;
 
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,6 +96,15 @@ public class InputCheckUtility {
             }
         }
         return input;
+    }
+
+    public Optional<String> inputComment(String message){
+        String input;
+        Scanner in = new Scanner(System.in);
+        System.out.println(message);
+        input = in.nextLine();
+
+        return Optional.of(input);
     }
 
     private boolean containsOnlyDigits(String input){
