@@ -46,13 +46,13 @@ public class BookListApplication {
 				break;
 			}
 			case 4: {
-				exitProgrammAction();
+				exitProgramAction();
 				break;
 			}
 		}
 	}
 
-	private static void exitProgrammAction() {
+	private static void exitProgramAction() {
 		System.out.println("Good by!");
 		System.exit(0);
 	}
