@@ -14,9 +14,9 @@ public class ProductDatabaseImpl implements ProductDatabase {
     }
 
     @Override
-    public boolean delete(Long productId) {
+    public boolean delete(Long productIdLong) {
         for (Product product : productList) {
-            if (product.getId().equals(productId)) {
+            if (product.getId().equals(productIdLong)) {
                 productList.remove(product);
                 return true;
             }
@@ -36,13 +36,13 @@ public class ProductDatabaseImpl implements ProductDatabase {
     }
 
     @Override
-    public void deleteByProductName(String productName) {
-        productList.removeIf(products -> (products.getName().equals(productName)));
+    public boolean deleteByProductName(String productName) {
+        return productList.removeIf(products -> (products.getName().equals(productName)));
     }
 
     @Override
     public List<Product> getProductList() {
-        return productList;
+        return new ArrayList<>(productList);
     }
 
     @Override
