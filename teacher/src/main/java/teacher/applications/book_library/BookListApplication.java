@@ -17,15 +17,10 @@ public class BookListApplication {
 			System.out.println("4. Exit");
 
 			System.out.println("");
-			System.out.println("Enter menu item number to execute:");
 
+			System.out.println("Enter menu item number to execute:");
 			Scanner scanner = new Scanner(System.in);
 			int userChoice = Integer.parseInt(scanner.nextLine());
-
-			if (userChoice == 4) {
-				System.out.println("Good by!");
-				break;
-			}
 
 			switch (userChoice) {
 				case 1: {
@@ -54,6 +49,10 @@ public class BookListApplication {
 					}
 					System.out.println("Book list end.");
 					break;
+				}
+				case 4: {
+					System.out.println("Good by!");
+					System.exit(0);
 				}
 			}
 			System.out.println("");
