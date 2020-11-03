@@ -12,7 +12,9 @@ class PrintCardBaseUIAction implements UIAction {
 
     public void execute(){
 
-        cardDatabase.printDatabase();
+        if (!cardDatabase.printDatabase()){
+            System.out.println("Database is empty");
+        }
 
     }
 
