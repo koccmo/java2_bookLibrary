@@ -15,8 +15,8 @@ class AddPatientUIAction implements UIAction {
     public void execute(){
         String name = inputCheckUtility.inputValidString("Please enter name");
         String surname = inputCheckUtility.inputValidString("Please enter surname");
-        String phone = inputCheckUtility.inputValidString("Please enter phone");
-        String personalCode = inputCheckUtility.inputValidString("Please enter personal code");
+        String phone = inputCheckUtility.inputValidPhone("Please enter phone");
+        String personalCode = inputCheckUtility.inputValidPersonalCode("Please enter personal code");
         String doctor = inputCheckUtility.inputValidString("Please enter doctor's surname");
 
         Patient patient = new Patient(name, surname, phone, personalCode, doctor);

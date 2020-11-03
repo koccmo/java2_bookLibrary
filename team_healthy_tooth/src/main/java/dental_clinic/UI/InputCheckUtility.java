@@ -1,6 +1,8 @@
 package dental_clinic.UI;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputCheckUtility {
 
@@ -64,4 +66,48 @@ public class InputCheckUtility {
         }
         return input;
     }
+
+    public String inputValidPhone(String message){
+        String input;
+        Scanner in = new Scanner(System.in);
+        while (true){
+            System.out.println(message);
+            input = in.nextLine();
+            if (containsOnlyDigits(input) && input.length() == 8){
+                break;
+            }else{
+                System.out.println("Please enter valid value!");
+            }
+        }
+        return input;
+    }
+
+    public String inputValidPersonalCode(String message){
+        String input;
+        Scanner in = new Scanner(System.in);
+        while (true){
+            System.out.println(message);
+            input = in.nextLine();
+            if (containsOnlyDigits(input) && input.length() == 11){
+                break;
+            }else{
+                System.out.println("Please enter valid value!");
+            }
+        }
+        return input;
+    }
+
+    private boolean containsOnlyDigits(String input){
+        String regex = "[0-9]+";
+
+        Pattern p = Pattern.compile(regex);
+        if (input == null) {
+            return false;
+        }
+
+        Matcher m = p.matcher(input);
+
+        return m.matches();
+    }
+
 }
