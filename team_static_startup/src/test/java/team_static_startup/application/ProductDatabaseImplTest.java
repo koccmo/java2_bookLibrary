@@ -30,7 +30,7 @@ public class ProductDatabaseImplTest {
 	@Ignore
     public void shouldDeleteProductById() {
         productDatabase.save(new Product("tv", "good tv", new BigDecimal("499.99")));
-        productDatabase.delete(0L);
+        productDatabase.delete(1L);
         assertEquals(0, productDatabase.getProductList().size());
     }
 
