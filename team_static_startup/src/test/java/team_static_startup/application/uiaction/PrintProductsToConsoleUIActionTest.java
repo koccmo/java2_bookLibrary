@@ -18,6 +18,8 @@ public class PrintProductsToConsoleUIActionTest {
     private final PrintStream standartOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
+    ProductDatabase productDatabase = new ProductDatabaseImpl();
+
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -27,8 +29,6 @@ public class PrintProductsToConsoleUIActionTest {
     public void tearDown() {
         System.setOut(standartOut);
     }
-
-    ProductDatabase productDatabase = new ProductDatabaseImpl();
 
     @Test
     public void shouldPrintOutProducts() {
