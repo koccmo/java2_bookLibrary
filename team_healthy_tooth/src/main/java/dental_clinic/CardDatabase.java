@@ -1,15 +1,27 @@
 package dental_clinic;
 
-import dental_clinic.domain.Patient;
+import dental_clinic.domain.PatientPersonalData;
+import dental_clinic.domain.ToothStatus;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface CardDatabase {
 
-    boolean addPatient(Patient patient);
+    boolean addPatient(PatientPersonalData patientPersonalData);
 
     boolean deletePatient(long id);
 
-    void printDatabase();
+    boolean printDatabase();
 
-    boolean printPatientCard(long id);
+    boolean printPatientHistory(long id);
+
+    List<PatientPersonalData> findPatientBySurname (String surname);
+
+    List <PatientPersonalData> findPatientByPersonalCode (String personalCode);
+
+    boolean updateJowlData (long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus);
+
+    boolean printPatientCardForVisit(long id);
 
 }
