@@ -18,7 +18,7 @@ class FindAnyByTitleUIAction implements UIAction {
         if (productDatabase.findAnyByTitle(title).isPresent()){
             System.out.println(productDatabase.findAnyByTitle(title).get());
         }else{
-            System.out.println("Product with title " + title +" isn't present in database");
+            System.out.println("Product with title " + title +" isn't present in database!");
         }
 
     }
