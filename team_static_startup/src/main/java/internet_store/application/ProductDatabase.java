@@ -1,4 +1,4 @@
-package team_static_startup.application;
+package internet_store.application;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package team_static_startup.application.uiaction;
+package internet_store.application.uiaction;
 
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import team_static_startup.application.Product;
-import team_static_startup.application.ProductDatabase;
-import team_static_startup.application.ProductDatabaseImpl;
+import internet_store.application.Product;
+import internet_store.application.ProductDatabase;
+import internet_store.application.ProductDatabaseImpl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

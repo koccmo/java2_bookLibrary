@@ -1,4 +1,4 @@
-package team_static_startup.application.uiaction;
+package internet_store.application.uiaction;
 
 public interface UIAction {
 

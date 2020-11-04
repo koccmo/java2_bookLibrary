@@ -1,6 +1,6 @@
-package team_static_startup.application;
+package internet_store.application;
 
-import team_static_startup.application.uiaction.*;
+import internet_store.application.uiaction.*;
 
 import java.util.HashMap;
 import java.util.Map;

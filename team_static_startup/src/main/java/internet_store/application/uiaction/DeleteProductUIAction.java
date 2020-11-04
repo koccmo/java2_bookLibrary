@@ -1,7 +1,7 @@
-package team_static_startup.application.uiaction;
+package internet_store.application.uiaction;
 
-import team_static_startup.application.Product;
-import team_static_startup.application.ProductDatabase;
+import internet_store.application.Product;
+import internet_store.application.ProductDatabase;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
