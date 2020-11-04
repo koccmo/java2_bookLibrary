@@ -11,7 +11,7 @@ public interface CustomerDatabase {
 
     boolean deleteCustomer(long id);
 
-    boolean printCustomerInfo();
+    boolean printCustomersInfo();
 
     Optional<Customer> findCustomersByNameAndSurname(String name, String surname);
 
