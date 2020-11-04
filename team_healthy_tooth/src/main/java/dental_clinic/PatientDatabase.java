@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface PatientDatabase {
 
-    boolean addPatient(PersonalData personalData);
+    boolean addPatient(PersonalData personalData, String doctor);
 
     boolean deletePatient(long id);
 
     boolean printDatabase();
 
-    boolean printPatientHistory(long id);
+    boolean printSpecificPatientHistory(long id);
 
     List<PersonalData> findPatientBySurname (String surname);
 

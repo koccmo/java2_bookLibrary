@@ -33,8 +33,8 @@ public class PatientDatabaseImplTest {
     private void testAddPatient() {
         System.out.print("Testing .addPatient ... ");
 
-        printTestResult(impl.addPatient(patient1)
-        && !impl.addPatient(patient1));
+        printTestResult(impl.addPatient(patient1, "doctor")
+        && !impl.addPatient(patient1, "doctor"));
     }
 
     //Test 2 : testing .findPatientBySurname
@@ -74,7 +74,7 @@ public class PatientDatabaseImplTest {
 
     //Task 5 : testing .printPatientHistory
     private void testPrintPatientHistory() {
-        impl.printPatientHistory(1L);
+        impl.printSpecificPatientHistory(1L);
     }
 
     //Test 6 : testing invalid patient removal in .deletePatient
