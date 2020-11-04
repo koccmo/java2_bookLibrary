@@ -20,6 +20,7 @@ class ProductList {
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(productDatabase));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(productDatabase));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(productDatabase));
+        menuNumberToActionMap.put(7, new FindByIdUIAction(productDatabase));
     }
 
     public void run() {
@@ -32,6 +33,7 @@ class ProductList {
             System.out.println("4. Delete product from database by name");
             System.out.println("5. Print out all database products");
             System.out.println("6. Find product(s) from database by name");
+            System.out.println("7. Find product(s) from database by ID");
             System.out.println("0. Exit the program");
             System.out.println("---------------------------------------------------------");
             System.out.print("Please enter menu number: ");
