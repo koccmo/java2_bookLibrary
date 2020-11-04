@@ -1,13 +1,13 @@
 package dental_clinic;
 
-import dental_clinic.domain.PatientPersonalData;
+import dental_clinic.domain.PersonalData;
 import dental_clinic.domain.ToothStatus;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PatientDatabaseImplTest {
-    private CardDatabaseImpl impl = new CardDatabaseImpl();
+    private PatientDatabaseImpl impl = new PatientDatabaseImpl();
     private boolean isSomeTestFailed = false;
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class PatientDatabaseImplTest {
     }
 
     //patient1 for tests 1, 2, 3, 4, 5
-    PatientPersonalData patient1 = new PatientPersonalData(
+    PersonalData patient1 = new PersonalData(
             "name", "surname", "phone", "pCode"
     );
 
@@ -41,10 +41,10 @@ public class PatientDatabaseImplTest {
     private void testFindPatientBySurname() {
         System.out.print("Testing .findPatientBySurname ... ");
 
-        List<PatientPersonalData> resultPositive = //should find patient1
+        List<PersonalData> resultPositive = //should find patient1
                 impl.findPatientBySurname("surname");
 
-        List<PatientPersonalData> resultNegative = //should find nothing
+        List<PersonalData> resultNegative = //should find nothing
                 impl.findPatientBySurname("invalid surname");
 
         printTestResult(resultPositive.contains(patient1)
@@ -55,10 +55,10 @@ public class PatientDatabaseImplTest {
     private void testFindPatientByPersonalCode() {
         System.out.print("Testing .findPatientByPersonalCode ... ");
 
-        List<PatientPersonalData> resultPositive = //should find patient1
+        List<PersonalData> resultPositive = //should find patient1
                 impl.findPatientByPersonalCode("pCode");
 
-        List<PatientPersonalData> resultNegative = //should find nothing
+        List<PersonalData> resultNegative = //should find nothing
                 impl.findPatientByPersonalCode("invalid pCode");
 
         printTestResult(resultPositive.contains(patient1)

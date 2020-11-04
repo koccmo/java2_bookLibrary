@@ -1,7 +1,7 @@
 package dental_clinic;
 
-import dental_clinic.domain.Card;
-import dental_clinic.domain.PatientPersonalData;
+import dental_clinic.domain.Patient;
+import dental_clinic.domain.PersonalData;
 import dental_clinic.domain.ToothInfo;
 import dental_clinic.domain.ToothStatus;
 
@@ -11,20 +11,20 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CardDatabaseImpl implements CardDatabase {
+public class PatientDatabaseImpl implements PatientDatabase {
 
     private Long id= 1L;
-    private List<Card> cardList = new ArrayList<>();
+    private List<Patient> patientList = new ArrayList<>();
 
 
     @Override
-    public boolean addPatient(PatientPersonalData patientPersonalData) {
-        if (cardListContainsPatient(patientPersonalData)){
+    public boolean addPatient(PersonalData personalData) {
+        if (cardListContainsPatient(personalData)){
             return false;
         }else
             {
-            patientPersonalData.setId(id);
-            cardList.add(new Card(patientPersonalData));
+            personalData.setId(id);
+            patientList.add(new Patient(personalData));
             id++;
         }
         return true;
@@ -32,9 +32,9 @@ public class CardDatabaseImpl implements CardDatabase {
 
     @Override
     public boolean deletePatient(long id) {
-        for (int i = 0; i < cardList.size(); i++){
-            if (cardList.get(i).getPatient().getId() == id){
-                cardList.remove(i);
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPatient().getId() == id){
+                patientList.remove(i);
                 return true;
             }
         }
@@ -43,15 +43,15 @@ public class CardDatabaseImpl implements CardDatabase {
 
     @Override
     public boolean printDatabase() {
-        cardList.forEach(System.out::println);
-        return !cardList.isEmpty();
+        patientList.forEach(System.out::println);
+        return !patientList.isEmpty();
     }
 
     @Override
     public boolean printPatientHistory(long id) {
-            for (int i = 0; i < cardList.size(); i++){
+            for (int i = 0; i < patientList.size(); i++){
                 if (isSpecificPatient(i, id)){
-                    System.out.println(cardList.get(i).toString());
+                    System.out.println(patientList.get(i).toString());
                     return true;
                 }
             }
@@ -59,17 +59,17 @@ public class CardDatabaseImpl implements CardDatabase {
     }
 
     @Override
-    public List<PatientPersonalData> findPatientBySurname(String surname) {
-        return cardList.stream()
-                .map(card -> card.getPatient())
+    public List<PersonalData> findPatientBySurname(String surname) {
+        return patientList.stream()
+                .map(patient -> patient.getPatient())
                 .filter(patientPersonalData -> patientPersonalData.getSurname().equalsIgnoreCase(surname))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PatientPersonalData> findPatientByPersonalCode(String personalCode) {
-        return cardList.stream()
-                .map(card -> card.getPatient())
+    public List<PersonalData> findPatientByPersonalCode(String personalCode) {
+        return patientList.stream()
+                .map(patient -> patient.getPatient())
                 .filter(patientPersonalData -> patientPersonalData.getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
@@ -77,8 +77,8 @@ public class CardDatabaseImpl implements CardDatabase {
     @Override
     public boolean updateJowlData(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
 
-        Optional <Card> patientsCard = cardList.stream()
-                .filter(card -> card.getPatient().getId() == id)
+        Optional <Patient> patientsCard = patientList.stream()
+                .filter(patient -> patient.getPatient().getId() == id)
                 .findFirst();
         if (patientsCard.isPresent()){
             patientsCard.get().updateJowl(toothNumber, comment, toothStatus);
@@ -91,9 +91,9 @@ public class CardDatabaseImpl implements CardDatabase {
 
     @Override
     public boolean printPatientCardForVisit(long id) {
-        for (int i = 0; i < cardList.size(); i++){
+        for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
-                System.out.println(cardList.get(i).getPatient());
+                System.out.println(patientList.get(i).getPatient());
                 printActualInfoAboutJowl(i);
                 return true;
             }
@@ -101,36 +101,36 @@ public class CardDatabaseImpl implements CardDatabase {
         return false;
     }
 
-    private boolean cardListContainsPatient (PatientPersonalData patientPersonalData){
-        Optional <PatientPersonalData> result = cardList.stream()
-                .map(card -> card.getPatient())
-                .filter(patient1 -> patient1.equals(patientPersonalData))
+    private boolean cardListContainsPatient (PersonalData personalData){
+        Optional <PersonalData> result = patientList.stream()
+                .map(patient -> patient.getPatient())
+                .filter(patient1 -> patient1.equals(personalData))
                 .findAny();
         return result.isPresent();
     }
 
-    private void updatePatientsCard(Card patientsCard, long id){
-        for (int i = 0; i < cardList.size(); i++){
-            if (cardList.get(i).getPatient().getId() == id){
-                cardList.set(i, patientsCard);
+    private void updatePatientsCard(Patient patientsPatient, long id){
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPatient().getId() == id){
+                patientList.set(i, patientsPatient);
             }
         }
     }
 
     private boolean cardListContainsId (long id){
-        Optional <PatientPersonalData> result = cardList.stream()
-                .map(card -> card.getPatient())
+        Optional <PersonalData> result = patientList.stream()
+                .map(patient -> patient.getPatient())
                 .filter(patient1 -> patient1.getId() == id)
                 .findAny();
         return result.isPresent();
     }
 
     private boolean isSpecificPatient (int index, long id) {
-        return cardList.get(index).getPatient().getId() == id;
+        return patientList.get(index).getPatient().getId() == id;
     }
 
     private void printActualInfoAboutJowl(int index){
-        Map<Integer, ToothInfo> result = cardList.get(index).getJowl();
+        Map<Integer, ToothInfo> result = patientList.get(index).getJowl();
         String toothInfoForPrint = "";
 
         for (Integer key : result.keySet()){

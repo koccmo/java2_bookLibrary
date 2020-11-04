@@ -1,20 +1,20 @@
 package dental_clinic.UI;
 
-import dental_clinic.CardDatabase;
+import dental_clinic.PatientDatabase;
 
 class PrintPatientCardForVisitUIAction implements UIAction {
 
-    private CardDatabase cardDatabase;
+    private PatientDatabase patientDatabase;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public PrintPatientCardForVisitUIAction(CardDatabase cardDatabase){
-        this.cardDatabase = cardDatabase;
+    public PrintPatientCardForVisitUIAction(PatientDatabase patientDatabase){
+        this.patientDatabase = patientDatabase;
     }
 
     public void execute(){
         long id = inputCheckUtility.inputValidLong("Please enter patient id");
 
-        if (!cardDatabase.printPatientCardForVisit(id)){
+        if (!patientDatabase.printPatientCardForVisit(id)){
             System.out.println("Database doesn't contain patient with id " + id);
         }
 

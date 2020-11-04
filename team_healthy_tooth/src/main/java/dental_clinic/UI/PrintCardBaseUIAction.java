@@ -1,18 +1,18 @@
 package dental_clinic.UI;
 
-import dental_clinic.CardDatabase;
+import dental_clinic.PatientDatabase;
 
 class PrintCardBaseUIAction implements UIAction {
 
-    private CardDatabase cardDatabase;
+    private PatientDatabase patientDatabase;
 
-    public PrintCardBaseUIAction(CardDatabase cardDatabase){
-        this.cardDatabase = cardDatabase;
+    public PrintCardBaseUIAction(PatientDatabase patientDatabase){
+        this.patientDatabase = patientDatabase;
     }
 
     public void execute(){
 
-        if (!cardDatabase.printDatabase()){
+        if (!patientDatabase.printDatabase()){
             System.out.println("Database is empty");
         }
 

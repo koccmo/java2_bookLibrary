@@ -1,7 +1,7 @@
 package dental_clinic.UI;
 
-import dental_clinic.CardDatabase;
-import dental_clinic.CardDatabaseImpl;
+import dental_clinic.PatientDatabase;
+import dental_clinic.PatientDatabaseImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +12,18 @@ public class DentalClinic {
     private Map<Integer, UIAction> menuNumberToAction;
 
     public DentalClinic() {
-        CardDatabase cardDatabase = new CardDatabaseImpl();
+        PatientDatabase patientDatabase = new PatientDatabaseImpl();
 
         menuNumberToAction = new HashMap();
 
-        menuNumberToAction.put(1, new AddPatientUIAction(cardDatabase));
-        menuNumberToAction.put(2, new DeletePatientUIAction(cardDatabase));
-        menuNumberToAction.put(3, new PrintCardBaseUIAction(cardDatabase));
-        menuNumberToAction.put(4, new PrintPatientCardUIAction(cardDatabase));
-        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(cardDatabase));
-        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(cardDatabase));
-        menuNumberToAction.put(7, new UpdateJowlDataUIAction(cardDatabase));
-        menuNumberToAction.put(8, new PrintPatientCardForVisitUIAction(cardDatabase));
+        menuNumberToAction.put(1, new AddPatientUIAction(patientDatabase));
+        menuNumberToAction.put(2, new DeletePatientUIAction(patientDatabase));
+        menuNumberToAction.put(3, new PrintCardBaseUIAction(patientDatabase));
+        menuNumberToAction.put(4, new PrintPatientCardUIAction(patientDatabase));
+        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(patientDatabase));
+        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(patientDatabase));
+        menuNumberToAction.put(7, new UpdateJowlDataUIAction(patientDatabase));
+        menuNumberToAction.put(8, new PrintPatientCardForVisitUIAction(patientDatabase));
     }
 
     public void run(){
