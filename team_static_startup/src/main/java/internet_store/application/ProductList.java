@@ -21,7 +21,7 @@ class ProductList {
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(productDatabase));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(productDatabase));
         menuNumberToActionMap.put(7, new FindByIdUIAction(productDatabase));
-        menuNumberToActionMap.put(8, new FindByIdAndChangeNameUIAction(productDatabase));
+        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(productDatabase));
     }
 
     public void run() {
