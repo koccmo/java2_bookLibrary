@@ -69,19 +69,15 @@ public class PatientDatabaseImpl implements PatientDatabase {
                 .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
-    //TODO //Подумаю и напишу :)
+
     @Override
     public boolean updateJowlData(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
-    /*
-        Optional <Patient> patientsCard = patientList.stream()
-                .filter(patient -> patient.getPersonalData().getId() == id)
-                .findFirst();
-        if (patientsCard.isPresent()){
-            patientsCard.get().getJowl().updateJowl(toothNumber, comment, toothStatus);
-            updatePatientsCard(patientsCard.get(), id);
-            if (patientsCard.get().getJowl().keySet().contains(toothNumber)) return true;
-            else return false;
-        }*/
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPersonalData().getId() == id){
+                patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -93,28 +89,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return result.isPresent();
     }
 
-    //Подумаю и напишу :)
-    private void updatePatientsCard(Patient patientsPatient, long id){
-        for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == id){
-                patientList.set(i, patientsPatient);
-            }
-        }
-    }
-
-    private boolean cardListContainsId (long id){
-        Optional <PersonalData> result = patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patient1 -> patient1.getId() == id)
-                .findAny();
-        return result.isPresent();
-    }
 
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;
     }
 
-    //Подумаю и напишу :)
+    //Тут я размышляла надо ли на карточке печатать последнее инфо или всю историю... :)
     private void printActualInfoAboutJowl(int index){
         /*Map<Integer, ToothInfo> result = patientList.get(index).getJowl();
         String toothInfoForPrint = "";
