@@ -35,7 +35,7 @@ public class Product {
         return productDescription;
     }
 
-    public void setProductDescription(String productDescription) {
+    public void setDescription(String productDescription) {
         this.productDescription = productDescription;
     }
 

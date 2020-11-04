@@ -54,6 +54,16 @@ public class ProductDatabaseImpl implements ProductDatabase {
             }
         }
         return productsByName;
-
     }
+
+    @Override
+    public Optional<Product> findById(Long productId) {
+        for (Product product : productList) {
+            if (product.getId().equals(productId)) {
+                return Optional.of(product);
+            }
+        }
+        return Optional.empty();
+    }
+
 }
