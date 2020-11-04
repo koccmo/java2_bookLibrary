@@ -32,9 +32,9 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "personalData=" + personalData +
-                ", jowl=" + jowl +
-                ", attendingDoctors=" + String.join(", ", attendingDoctors) +
+                "personalData: " + personalData +
+                jowl +
+                "attendingDoctors: " + String.join(", ", attendingDoctors) +
                 '}';
     }
 

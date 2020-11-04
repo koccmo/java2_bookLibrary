@@ -1,107 +1,64 @@
 package dental_clinic;
 
+import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
-import dental_clinic.domain.ToothStatus;
+import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
-public class PatientDatabaseImplTest {
-    private PatientDatabaseImpl impl = new PatientDatabaseImpl();
-    private boolean isSomeTestFailed = false;
+public class PatientDatabaseImplTest extends TestCase {
 
-    public static void main(String[] args) {
-        PatientDatabaseImplTest test = new PatientDatabaseImplTest();
-
-        test.testAddPatient();
-        test.testFindPatientBySurname();
-        test.testFindPatientByPersonalCode();
-        test.testUpdateJowlData();
-        test.testPrintPatientHistory();
-        test.testDeletePatient();
-
-        test.finaliseTests();
-
-    }
-
-    //patient1 for tests 1, 2, 3, 4, 5
-    PersonalData patient1 = new PersonalData(
+    PatientDatabaseImpl database;
+    PersonalData personalData = new PersonalData(
             "name", "surname", "phone", "pCode"
     );
 
-    //Test 1 : testing duplicate patient in .addPatient
-    private void testAddPatient() {
-        System.out.print("Testing .addPatient ... ");
-
-        printTestResult(impl.addPatient(patient1, "doctor")
-        && !impl.addPatient(patient1, "doctor"));
+    public void setUp() throws Exception {
+        super.setUp();
+        database = new PatientDatabaseImpl();
+        database.addPatient(personalData, "doctor1");
     }
 
-    //Test 2 : testing .findPatientBySurname
-    private void testFindPatientBySurname() {
-        System.out.print("Testing .findPatientBySurname ... ");
-
-        //List<PersonalData> resultPositive = //should find patient1
-                //impl.findPatientBySurname("surname");
-
-        //List<PersonalData> resultNegative = //should find nothing
-                //impl.findPatientBySurname("invalid surname");
-
-        //printTestResult(resultPositive.contains(patient1)
-        //&& resultNegative.isEmpty());
+    public void testAddPatient() {
+        //this personal data is already in database from setUp
+        assertFalse(database.addPatient(personalData, "doctor"));
     }
 
-    //Test 3 : testing .findPatientByPersonalCode
-    private void testFindPatientByPersonalCode() {
-        System.out.print("Testing .findPatientByPersonalCode ... ");
+    public void testDeletePatient() {
+        assertTrue(database.deletePatient(1L));
+        assertFalse(database.deletePatient(1L));
+    }
 
-        //List<PersonalData> resultPositive = //should find patient1
-           //     impl.findPatientByPersonalCode("pCode");
+    public void testPrintDatabase() {
+        assertTrue(database.printDatabase());
+        database.deletePatient(1L);
+        assertFalse(database.printDatabase());
+    }
 
-        //List<PersonalData> resultNegative = //should find nothing
-        //        impl.findPatientByPersonalCode("invalid pCode");
+    public void testPrintSpecificPatientHistory() {
+        //id555 is not in database
+        assertTrue(database.printSpecificPatientHistory(1L));
+        assertFalse(database.printSpecificPatientHistory(555L));
+    }
 
-        //printTestResult(resultPositive.contains(patient1)
-        //&& resultNegative.isEmpty());
+    /*
+
+    для теста нужно получить Patient, тк методы find возвращают список Patient'ов
+    было бы круто придумать геттер пациентов для тестов в databaseImpl
+
+    public void testFindPatientBySurname() {
+        List<Patient> result = database.findPatientBySurname("surname");
+        assertTrue(result.contains(personalData));
+    }
+
+    public void testFindPatientByPersonalCode() {
+        List<Patient> result = database.findPatientByPersonalCode("pCode");
+        assertTrue(result.contains(personalData));
     }
 
 
-    //Test 4 : testing .updateJowlData + .printPatientCardForVisit
-    private void testUpdateJowlData() {
-        impl.updateJowlData(1L, 21, Optional.empty(), ToothStatus.KARIES);
-        //impl.printPatientCardForVisit(1L);
+    public void testUpdateJowlData() {
     }
-
-    //Task 5 : testing .printPatientHistory
-    private void testPrintPatientHistory() {
-        impl.printSpecificPatientHistory(1L);
-    }
-
-    //Test 6 : testing invalid patient removal in .deletePatient
-    private void testDeletePatient() {
-        System.out.print("Testing .deletePatient ... ");
-
-        printTestResult(impl.deletePatient(1L)
-                && !impl.deletePatient(9999L)); //id 9999 is invalid
-    }
-
-    private void printTestResult(boolean successCondition) {
-        if (successCondition) {
-            System.out.println("Test OK");
-        }
-        else {
-            System.out.println("Test FAIL");
-            isSomeTestFailed = true;
-        }
-    }
-
-    private void finaliseTests() {
-        if (!isSomeTestFailed) {
-            System.out.println("All tests OK");
-        }
-        else {
-            System.out.println("Some tests FAILED");
-        }
-    }
-
+     */
 }
