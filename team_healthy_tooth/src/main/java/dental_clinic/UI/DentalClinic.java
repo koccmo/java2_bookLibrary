@@ -5,9 +5,10 @@ import dental_clinic.PatientDatabaseImpl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class DentalClinic {
+
+    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     private Map<Integer, UIAction> menuNumberToAction;
 
@@ -28,39 +29,38 @@ public class DentalClinic {
 
     public void run(){
 
-        while(true) {
+        boolean isWorking = true;
+        while(isWorking) {
 
-            System.out.println("\nMenu\n" +
-                    "1   Add patient\n" +
-                    "2   Delete by id\n" +
-                    "3   Print card database\n" +
-                    "4   Print patient card database\n" +
-                    "5   Find patient by surname database\n" +
-                    "6   Print patient by personal code database\n" +
-                    "7   Update patient's jowl data in database\n" +
-                    "8   Print patient card for visit\n" +
-                    "0   Exit");
+            printMenu();
 
-            Scanner in = new Scanner(System.in);
-            int userSelectedMenuNumber;
+            int userSelectedMenuNumber = inputCheckUtility.inputValidInteger("Please enter menu number: ");
 
-            while (true) {
-                try {
-                    System.out.println("Please enter menu number: ");
-                    userSelectedMenuNumber = Integer.parseInt(in.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("It's not valid number!");
-                }
-            }
+            isWorking = nullIsNotPressed(userSelectedMenuNumber);
 
-            if (userSelectedMenuNumber == 0) {
-                System.out.println(":) End of work day!");
-                break;
-            } else {
-                executeUIAction(userSelectedMenuNumber);
-            }
+        }
+    }
 
+    private void printMenu(){
+        System.out.println("\nMenu\n" +
+                "1   Add patient\n" +
+                "2   Delete by id\n" +
+                "3   Print card database\n" +
+                "4   Print patient card database\n" +
+                "5   Find patient by surname database\n" +
+                "6   Print patient by personal code database\n" +
+                "7   Update patient's jowl data in database\n" +
+                "8   Print patient card for visit\n" +
+                "0   Exit");
+    }
+
+    private boolean nullIsNotPressed(int userSelectedMenuNumber){
+        if (userSelectedMenuNumber == 0) {
+            System.out.println(":) End of work day!");
+            return false;
+        } else {
+            executeUIAction(userSelectedMenuNumber);
+            return true;
         }
     }
 
