@@ -15,8 +15,9 @@ public class Sorter<E extends Product> {
                 Product second = data[j+1];
                 if (second.getPrice() > first.getPrice()) {
                     swapElements(j);
-                } else if (second.getPrice() == first.getPrice()) {
+                    if (second.getTitle().compareTo(first.getTitle()) < 0) {
                         swapElements(j);
+                    }
                 }
             }
         }

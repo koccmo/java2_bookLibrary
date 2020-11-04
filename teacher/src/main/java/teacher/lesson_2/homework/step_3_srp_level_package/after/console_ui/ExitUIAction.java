@@ -1,4 +1,4 @@
-package teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui;
+package teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui;
 
 public class ExitUIAction implements UIAction {
 	@Override

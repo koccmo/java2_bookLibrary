@@ -1,4 +1,4 @@
-package teacher.lesson_2.homework.step_3_srp_level_layer.after;
+package teacher.lesson_2.homework.step_3_srp_level_package.after;
 
 import java.util.Objects;
 
