@@ -17,11 +17,11 @@ class AddPatientUIAction implements UIAction {
         String surname = inputCheckUtility.inputValidString("Please enter surname");
         String phone = inputCheckUtility.inputValidPhone("Please enter phone");
         String personalCode = inputCheckUtility.inputValidPersonalCode("Please enter personal code");
-
+        String doctor = inputCheckUtility.inputValidString("Please enter doctor");
 
         PersonalData personalData = new PersonalData(name, surname, phone, personalCode);
 
-        if (patientDatabase.addPatient(personalData)){
+        if (patientDatabase.addPatient(personalData, doctor)){
             System.out.println("Patient added");
         }else{
             System.out.println("The same patient is in database");
