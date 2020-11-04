@@ -24,9 +24,9 @@ public class AddCustomerUIAction implements UIAction{
 
         int phoneNumber = inputCheckUtility.inputValidInteger("Please enter your phone number: ");
 
-        //Customer newCustomer = new Customer(name, surname, address, email, phoneNumber);
-        // красные поля на адресе и номере телефона - хелп ))
-        //customerDatabase.addCustomer(newCustomer);
+        Customer newCustomer = new Customer(name, surname, phoneNumber, address, email);
+
+        customerDatabase.addCustomer(newCustomer);
 
     }
 }
