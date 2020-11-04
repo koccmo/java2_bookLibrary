@@ -58,9 +58,9 @@ public class ProductDatabaseImpl implements ProductDatabase {
 
     @Override
     public Optional<Product> findById(Long productId) {
-        for (Product product : productList) {
-            if (product.getId().equals(productId)) {
-                return Optional.of(product);
+        for (Product products : productList) {
+            if (products.getId().equals(productId)) {
+                return Optional.of(products);
             }
         }
         return Optional.empty();
@@ -69,9 +69,9 @@ public class ProductDatabaseImpl implements ProductDatabase {
     @Override
     public List<Product> findByProductIDAndChangeName(Long productId) {
         List<Product> productsById = new ArrayList<>();
-        for (Product product : productList) {
-            if (product.getId().equals(productId)) {
-                productsById.add(product);
+        for (Product products : productList) {
+            if (products.getId().equals(productId)) {
+                productsById.add(products);
             }
         }
         return productsById;

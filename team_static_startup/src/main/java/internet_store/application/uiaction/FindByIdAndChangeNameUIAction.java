@@ -27,7 +27,6 @@ public class FindByIdAndChangeNameUIAction implements UIAction{
             System.out.println("Found next product in the DataBase :");
             System.out.print(productFound.toString() + "\n");
         }
-
     }
 
 }
