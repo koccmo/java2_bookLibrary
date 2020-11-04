@@ -192,7 +192,7 @@ public class ProductDatabaseImplTest {
 
         List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitle("Laptop");
         List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
-        List <Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
+        List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
 
         assertTrue(resultOfFindingAllLaptops.contains(firstProduct));
         assertTrue(resultOfFindingAllLaptops.contains(secondProduct));
