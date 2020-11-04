@@ -1,4 +1,4 @@
-package teacher.lesson_2.homework.step_2_srp_level_class_integface.before;
+package teacher.lesson_2.homework.step_2_srp_level_class_interface.before;
 
 import java.util.Objects;
 

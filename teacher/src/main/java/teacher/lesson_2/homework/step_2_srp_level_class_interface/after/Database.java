@@ -1,4 +1,4 @@
-package teacher.lesson_2.homework.step_2_srp_level_class_integface.after;
+package teacher.lesson_2.homework.step_2_srp_level_class_interface.after;
 
 import java.util.List;
 
