@@ -45,23 +45,24 @@ public class ProductRepository {
     }
 
     /**
-     * Method to add product to the store if not present similar product.
+     * Method to add new product to the store, if the similar product does not exist.
      */
     public void addProduct(final String name, final String description, final double price){
-        Product product = new Product(name, description, price);
-        boolean containsProduct = false;
-        for (Product productTemp : productList) {
-            if (product.equals(productTemp)) {
-                containsProduct = true;
-            }
-        }
-        if (!containsProduct) {
-            productList.add(product);
+        Product productFound = productList.stream()
+                .filter(product -> name.equals(product.getName())
+                            && description.equals(product.getDescription())
+                            && price == product.getPrice())
+                .findAny()
+                .orElse(null);
+        if (productFound == null){
+            productList.add(new Product(name, description, price));
+        } else {
+            System.out.println("Product already exists in the store.");
         }
     }
 
     /**
-     * Method to remove product form the store by name.
+     * Method to remove product by name.
      */
     public void removeProductByName(final String name){
         Product productToRemove = findProductByName(name);
@@ -71,7 +72,7 @@ public class ProductRepository {
     }
 
     /**
-     * Method to remove product form the store by ID.
+     * Method to remove product by ID.
      */
     public void removeProductById(final long id){
         Product productToRemove = findProductById(id);
@@ -81,42 +82,42 @@ public class ProductRepository {
     }
 
     /**
-     * Method to find product by the name.
+     * Method to find product by name.
      */
     public Product findProductByName(final String name) {
-        Product foundProduct = null;
-        for (Product product : productList) {
-            if (name.equals(product.getName())) {
-                foundProduct = product;
-            }
+        Product productFound = productList.stream()
+                                .filter(product -> name.equals(product.getName()))
+                                .findAny()
+                                .orElse(null);
+        if (productFound == null) {
+            System.out.println("Product is not found.");
         }
-        return foundProduct;
+        return productFound;
     }
 
     /**
-     * Method to find product by the ID.
+     * Method to find product by ID.
      */
     public Product findProductById(final long id) {
-        Product foundProduct = null;
-        for (Product product : productList) {
-            if (id == product.getId()) {
-                foundProduct = product;
-            }
+        Product productFound = productList.stream()
+                .filter(product -> id == product.getId())
+                .findAny()
+                .orElse(null);
+        if (productFound == null) {
+            System.out.println("Product is not found.");
         }
-        return foundProduct;
+        return productFound;
     }
 
     /**
-     * Method to print out all the list of products form the store.
+     * Method to print out all the products form the store.
      */
     public void printOutAllProducts(){
         if (productList.isEmpty()) {
             System.out.println("Store is empty now.");
         } else {
             Collections.sort(productList, Product.idComparator);
-            for (Product product : productList) {
-                System.out.println(product);
-            }
+            productList.stream().forEach(product -> System.out.println(product));
         }
     }
 
@@ -127,9 +128,12 @@ public class ProductRepository {
                               final String newName,
                               final String newDescription,
                               final double newPrice){
-        Product foundProduct = findProductById(id);
-        foundProduct.setName(newName);
-        foundProduct.setDescription(newDescription);
-        foundProduct.setPrice(newPrice);
+        Product productFound = findProductById(id);
+        if (productFound != null) {
+            productFound.setName(newName);
+            productFound.setDescription(newDescription);
+            productFound.setPrice(newPrice);
+            System.out.println("Product is updated.");
+        }
     }
 }

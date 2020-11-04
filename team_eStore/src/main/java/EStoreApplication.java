@@ -28,34 +28,40 @@ public class EStoreApplication {
                     System.out.println("Type \"Enter\" to continue.");
                     break;
                 case "2":
-                    System.out.println("Type ID of the product you want to remove: ");
+                    System.out.println("Find product by \"ID\": ");
                     id = Long.parseLong(scanner.nextLine());
-                    productRepository.removeProductById(id);
+                    System.out.println("Product found: ");
+                    System.out.println(productRepository.findProductById(id));
                     System.out.println("Type \"Enter\" to continue.");
                     break;
                 case "3":
-                    System.out.println("The list of the products: ");
-                    productRepository.printOutAllProducts();
+                    System.out.println("Find product by \"name\": ");
+                    name = scanner.nextLine();
+                    System.out.println("Product found: ");
+                    System.out.println(productRepository.findProductByName(name));
                     System.out.println("Type \"Enter\" to continue.");
                     break;
                 case "4":
-                    System.out.println("Find product by \"name\": ");
-                    name = scanner.nextLine();
-                    Product product = productRepository.findProductByName(name);
-                    System.out.println("Product found: ");
-                    System.out.println(product);
+                    System.out.println("Type ID of the product you want to remove: ");
+                    id = Long.parseLong(scanner.nextLine());
+                    productRepository.removeProductById(id);
                     System.out.println("Type \"Enter\" to continue.");
                     break;
                 case "5":
                     System.out.println("Type ID of the product you want to update info: ");
                     id = Long.parseLong(scanner.nextLine());
                     System.out.println("Type the updated product name: ");
-                    String newName = scanner.nextLine();
+                    name = scanner.nextLine();
                     System.out.println("Type product updated description: ");
                     description = scanner.nextLine();
-                    System.out.println("Please type updated price: ");
+                    System.out.println("Type updated price: ");
                     price = Double.parseDouble(scanner.nextLine());
-                    productRepository.updateProductById(id, newName, description, price);
+                    productRepository.updateProductById(id, name, description, price);
+                    System.out.println("Type \"Enter\" to continue.");
+                    break;
+                case "6":
+                    System.out.println("The list of the products store contains: ");
+                    productRepository.printOutAllProducts();
                     System.out.println("Type \"Enter\" to continue.");
                     break;
                 default:
