@@ -33,7 +33,7 @@ public class InputCheckUtility {
                 }
             }
 
-            if (input > 0){
+            if (input >= 0){
                 break;
             }else{
                 System.out.println("Please enter valid value!");

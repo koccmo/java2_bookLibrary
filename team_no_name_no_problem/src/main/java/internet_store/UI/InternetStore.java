@@ -4,11 +4,12 @@ import internet_store.ProductDatabase;
 import internet_store.ProductDatabaseImpl;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class InternetStore {
 
     private Map<Integer, UIAction> menuNumberToAction;
+
+    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public InternetStore() {
         ProductDatabase productDatabase = new ProductDatabaseImpl();
@@ -26,36 +27,37 @@ public class InternetStore {
 
     public void run() {
 
-        while (true) {
-            System.out.println("\nMenu\n" +
-                    "1   Add item\n" +
-                    "2   Delete by id\n" +
-                    "3   Print products\n" +
-                    "4   Change title\n" +
-                    "5   Change description\n" +
-                    "6   Find any by title\n" +
-                    "7   Find all by title\n" +
-                    "0   Exit");
+        boolean isWorking = true;
 
-            Scanner in = new Scanner(System.in);
-            int userSelectedMenuNumber;
+        while (isWorking) {
 
-            while (true) {
-                try {
-                    System.out.println("Please enter menu number: ");
-                    userSelectedMenuNumber = Integer.parseInt(in.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("It's not valid number!");
-                }
-            }
+            printMenu();
 
-            if (userSelectedMenuNumber == 0) {
-                System.out.println(":) End of work day!");
-                break;
-            } else {
-                executeUIAction(userSelectedMenuNumber);
-            }
+            int userSelectedMenuNumber = inputCheckUtility.inputValidInteger("Please enter menu number: ");
+
+            isWorking = isNullNotPressed(userSelectedMenuNumber);
+        }
+    }
+
+    private void printMenu(){
+        System.out.println("\nMenu\n" +
+                "1   Add item\n" +
+                "2   Delete by id\n" +
+                "3   Print products\n" +
+                "4   Change title\n" +
+                "5   Change description\n" +
+                "6   Find any by title\n" +
+                "7   Find all by title\n" +
+                "0   Exit");
+    }
+
+    private boolean isNullNotPressed(int userSelectedMenuNumber){
+        if (userSelectedMenuNumber == 0) {
+            System.out.println(":) End of work day!");
+            return false;
+        } else {
+            executeUIAction(userSelectedMenuNumber);
+            return true;
         }
     }
 
