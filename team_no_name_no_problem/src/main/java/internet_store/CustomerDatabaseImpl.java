@@ -31,7 +31,7 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public boolean printCustomerInfo(){
+    public boolean printCustomersInfo(){
         if (customerList.size() > 0) {
             System.out.println("Customers in database: ");
             customerList.forEach(System.out::println);
