@@ -1,12 +1,12 @@
-package teacher.lesson_2.homework.step_3_srp_level_layer.after;
+package teacher.lesson_2.homework.step_3_srp_level_package.after;
 
 import java.util.Scanner;
 
-import teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui.AddBookUIAction;
-import teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui.ExitUIAction;
-import teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui.GetAllBooksUIAction;
-import teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui.RemoveBookUIAction;
-import teacher.lesson_2.homework.step_3_srp_level_layer.after.console_ui.UIAction;
+import teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui.AddBookUIAction;
+import teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui.ExitUIAction;
+import teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui.GetAllBooksUIAction;
+import teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui.RemoveBookUIAction;
+import teacher.lesson_2.homework.step_3_srp_level_package.after.console_ui.UIAction;
 
 public class BookListApplication {
 
