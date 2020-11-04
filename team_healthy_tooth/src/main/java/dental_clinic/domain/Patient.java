@@ -1,17 +1,17 @@
 package dental_clinic.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
-public class Card {
+public class Patient {
 
-    private PatientPersonalData patientPersonalData;
+    private PersonalData personalData;
     private Map  <Integer, ToothInfo> jowl;
+    private List<String> attendingDoctors;
 
-    public Card (PatientPersonalData patientPersonalData){
-        this.patientPersonalData = patientPersonalData;
+    public Patient(PersonalData personalData, String...attendingDoctors){
+        this.personalData = personalData;
         jowl = createNewJowl();
+        this.attendingDoctors = new ArrayList<>(Arrays.asList(attendingDoctors));
     }
 
     private Map <Integer, ToothInfo> createNewJowl(){
@@ -44,12 +44,20 @@ public class Card {
         return newJowl;
     }
 
-    public PatientPersonalData getPatient() {
-        return patientPersonalData;
+    public PersonalData getPatient() {
+        return personalData;
     }
 
     public Map<Integer, ToothInfo> getJowl() {
         return jowl;
+    }
+
+    public List<String> getAttendingDoctors() {
+        return attendingDoctors;
+    }
+
+    public void addAttendingDoctor(String attendingDoctor) {
+        this.attendingDoctors.add(attendingDoctor);
     }
 
     public boolean updateJowl(int toothNumber, Optional <String> comment, ToothStatus toothStatus) {
@@ -64,12 +72,25 @@ public class Card {
 
     @Override
     public String toString() {
-        String result = "Card{ patient=" + patientPersonalData;
+        String result = "Patient{ personal data=" + personalData;
        for (Integer key : jowl.keySet()){
            result += key + " " + jowl.get(key) + "\n";
        }
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return Objects.equals(personalData, patient.personalData) &&
+                Objects.equals(jowl, patient.jowl) &&
+                Objects.equals(attendingDoctors, patient.attendingDoctors);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(personalData, jowl, attendingDoctors);
+    }
 }

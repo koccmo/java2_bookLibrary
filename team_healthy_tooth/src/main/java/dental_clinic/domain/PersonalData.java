@@ -1,25 +1,22 @@
 package dental_clinic.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class PatientPersonalData {
+public class PersonalData {
 
     long id;
     private final String name;
     private String surname;
     private String phone;
     private final String personalCode;
-    private List<String> attendingDoctors;
 
-    public PatientPersonalData(String name, String surname, String phone, String personalCode, String...attendingDoctors){
+
+    public PersonalData(String name, String surname, String phone, String personalCode){
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.personalCode = personalCode;
-        this.attendingDoctors = new ArrayList<>(Arrays.asList(attendingDoctors));
+
     }
 
     public long getId (){
@@ -42,10 +39,6 @@ public class PatientPersonalData {
         return personalCode;
     }
 
-    public List<String> getAttendingDoctors() {
-        return attendingDoctors;
-    }
-
     public void setId (long id){
         this.id = id;
     }
@@ -58,25 +51,21 @@ public class PatientPersonalData {
         this.phone = phone;
     }
 
-    public void addAttendingDoctor(String attendingDoctor) {
-        this.attendingDoctors.add(attendingDoctor);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PatientPersonalData patientPersonalData = (PatientPersonalData) o;
-        return Objects.equals(name.toLowerCase(), patientPersonalData.name.toLowerCase()) &&
-                Objects.equals(surname.toLowerCase(), patientPersonalData.surname.toLowerCase()) &&
-                Objects.equals(phone, patientPersonalData.phone) &&
-                Objects.equals(personalCode, patientPersonalData.personalCode) &&
-                Objects.equals(attendingDoctors, patientPersonalData.attendingDoctors);
+        PersonalData personalData = (PersonalData) o;
+        return Objects.equals(name.toLowerCase(), personalData.name.toLowerCase()) &&
+                Objects.equals(surname.toLowerCase(), personalData.surname.toLowerCase()) &&
+                Objects.equals(phone, personalData.phone) &&
+                Objects.equals(personalCode, personalData.personalCode);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, phone, personalCode, attendingDoctors);
+        return Objects.hash(name, surname, phone, personalCode);
     }
 
     @Override
@@ -86,7 +75,6 @@ public class PatientPersonalData {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                ", personalCode='" + personalCode + '\'' +
-                ", attendingDoctors=" + attendingDoctors + "\n";
+                ", personalCode='" + personalCode + "\n";
     }
 }
