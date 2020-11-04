@@ -4,10 +4,10 @@ import internet_store.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class FindProductTest {
     private static final List<Product> products = new ArrayList<>();
@@ -82,26 +82,26 @@ public class FindProductTest {
 
     @Test
     public void findProductIndex_1() {
-        int result = findProduct.findProductId(products, 1);
+        int result = findProduct.findProductIndex(products, 1);
         assertEquals(0, result);
 
     }
 
     @Test
     public void findProductIndex_2() {
-        int result = findProduct.findProductId(products, 2);
+        int result = findProduct.findProductIndex(products, 2);
         assertEquals(1, result);
     }
 
     @Test
     public void findProductIndex_3() {
-        int result = findProduct.findProductId(products, 3);
+        int result = findProduct.findProductIndex(products, 3);
         assertEquals(2, result);
     }
 
     @Test
     public void findProductIndex_IndexNotExist() {
-        int result = findProduct.findProductId(products, 4);
+        int result = findProduct.findProductIndex(products, 4);
         assertEquals(-1, result);
     }
 }

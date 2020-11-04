@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class FindProduct {
-    final int NOT_ID_FIND = -1;
+    final int NO_ID_FIND = -1;
     final int LIST_FIRST_ELEMENT = 0;
     final Product EMPTY_OBJECT = null;
 
@@ -18,10 +18,10 @@ public class FindProduct {
         return products.stream().filter(pr -> pr.getId() == id).findFirst().orElse(EMPTY_OBJECT);
     }
 
-    public int findProductId(List<Product> products, long id) {
+    public int findProductIndex(List<Product> products, long id) {
         return IntStream.range(LIST_FIRST_ELEMENT, products.size())
                 .filter(i -> products.get(i).getId() == id)
                 .findFirst()
-                .orElse(NOT_ID_FIND);
+                .orElse(NO_ID_FIND);
     }
 }

@@ -42,7 +42,7 @@ public class InnerDatabaseImpl implements InnerDatabase {
 
         if (updatedProduct != null) {
             new AddProductCommand().addTo(updatedProduct);
-            int productIndex = findProduct.findProductId(products, id);
+            int productIndex = findProduct.findProductIndex(products, id);
             products.set(productIndex, updatedProduct);
             System.out.println("Product updated");
         } else {
