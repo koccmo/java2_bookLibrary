@@ -5,50 +5,19 @@ import java.util.*;
 public class Patient {
 
     private PersonalData personalData;
-    private Map  <Integer, ToothInfo> jowl;
-    private List<String> attendingDoctors;
+    private Jowl jowl = new Jowl();
+    private List<String> attendingDoctors = new ArrayList<>();
 
-    public Patient(PersonalData personalData, String...attendingDoctors){
+    public Patient(PersonalData personalData, String attendingDoctor){
         this.personalData = personalData;
-        jowl = createNewJowl();
-        this.attendingDoctors = new ArrayList<>(Arrays.asList(attendingDoctors));
+        this.attendingDoctors.add(attendingDoctor);
     }
 
-    private Map <Integer, ToothInfo> createNewJowl(){
-        Map <Integer, ToothInfo> newJowl = new HashMap<>();
-        for (int i = 18; i>10; i--) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 21; i<29; i++) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 55; i>50; i--) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 61; i<66; i++) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-
-        for (int i = 48; i>40; i--) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 31; i<39; i++) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 85; i>80; i--) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        for (int i = 71; i<76; i++) {
-            newJowl.put(i, new ToothInfo(Optional.empty(), ToothStatus.HEALTHY));
-        }
-        return newJowl;
-    }
-
-    public PersonalData getPatient() {
+    public PersonalData getPersonalData() {
         return personalData;
     }
 
-    public Map<Integer, ToothInfo> getJowl() {
+    public Jowl getJowl (){
         return jowl;
     }
 
@@ -60,23 +29,13 @@ public class Patient {
         this.attendingDoctors.add(attendingDoctor);
     }
 
-    public boolean updateJowl(int toothNumber, Optional <String> comment, ToothStatus toothStatus) {
-        if (jowl.containsKey(toothNumber)) {
-            jowl.get(toothNumber).addComment(comment);
-            jowl.get(toothNumber).addStatus(toothStatus);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     @Override
     public String toString() {
-        String result = "Patient{ personal data=" + personalData;
-       for (Integer key : jowl.keySet()){
-           result += key + " " + jowl.get(key) + "\n";
-       }
-        return result;
+        return "Patient{" +
+                "personalData=" + personalData +
+                ", jowl=" + jowl +
+                ", attendingDoctors=" + String.join(", ", attendingDoctors) +
+                '}';
     }
 
     @Override
@@ -93,4 +52,5 @@ public class Patient {
     public int hashCode() {
         return Objects.hash(personalData, jowl, attendingDoctors);
     }
+
 }

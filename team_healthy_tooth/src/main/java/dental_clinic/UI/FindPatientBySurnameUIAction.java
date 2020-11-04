@@ -1,7 +1,7 @@
 package dental_clinic.UI;
 
 import dental_clinic.PatientDatabase;
-import dental_clinic.domain.PersonalData;
+import dental_clinic.domain.Patient;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ class FindPatientBySurnameUIAction implements UIAction {
     public void execute(){
         String surname = inputCheckUtility.inputValidString("Please enter surname");
 
-        List<PersonalData> result = patientDatabase.findPatientBySurname(surname);
+        List<Patient> result = patientDatabase.findPatientBySurname(surname);
 
         if (result.isEmpty()){
             System.out.println("Database doesn't contain patient with surname " + surname);

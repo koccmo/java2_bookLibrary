@@ -14,7 +14,7 @@ class PrintPatientCardUIAction implements UIAction {
     public void execute(){
         long id = inputCheckUtility.inputValidLong("Please enter patient id");
 
-        if (!patientDatabase.printPatientHistory(id)){
+        if (!patientDatabase.printSpecificPatientHistory(id)){
             System.out.println("Database doesn't contain patient with id " + id);
         }
 

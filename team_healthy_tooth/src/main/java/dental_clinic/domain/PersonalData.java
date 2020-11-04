@@ -56,16 +56,13 @@ public class PersonalData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonalData personalData = (PersonalData) o;
-        return Objects.equals(name.toLowerCase(), personalData.name.toLowerCase()) &&
-                Objects.equals(surname.toLowerCase(), personalData.surname.toLowerCase()) &&
-                Objects.equals(phone, personalData.phone) &&
-                Objects.equals(personalCode, personalData.personalCode);
+        return Objects.equals(personalCode, personalData.personalCode);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, phone, personalCode);
+        return Objects.hash(personalCode);
     }
 
     @Override
