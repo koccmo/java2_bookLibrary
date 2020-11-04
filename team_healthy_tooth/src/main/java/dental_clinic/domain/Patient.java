@@ -6,11 +6,11 @@ public class Patient {
 
     private PersonalData personalData;
     private Jowl jowl = new Jowl();
-    private List<String> attendingDoctors;
+    private List<String> attendingDoctors = new ArrayList<>();
 
-    public Patient(PersonalData personalData, String...attendingDoctors){
+    public Patient(PersonalData personalData, String attendingDoctor){
         this.personalData = personalData;
-        this.attendingDoctors = new ArrayList<>(Arrays.asList(attendingDoctors));
+        this.attendingDoctors.add(attendingDoctor);
     }
 
     public PersonalData getPersonalData() {
@@ -29,13 +29,12 @@ public class Patient {
         this.attendingDoctors.add(attendingDoctor);
     }
 
-
     @Override
     public String toString() {
         return "Patient{" +
                 "personalData=" + personalData +
                 ", jowl=" + jowl +
-                ", attendingDoctors=" + attendingDoctors +
+                ", attendingDoctors=" + String.join(", ", attendingDoctors) +
                 '}';
     }
 
@@ -53,4 +52,5 @@ public class Patient {
     public int hashCode() {
         return Objects.hash(personalData, jowl, attendingDoctors);
     }
+
 }

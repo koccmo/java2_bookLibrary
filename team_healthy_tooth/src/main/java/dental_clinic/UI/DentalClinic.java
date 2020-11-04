@@ -24,7 +24,6 @@ public class DentalClinic {
         menuNumberToAction.put(5, new FindPatientBySurnameUIAction(patientDatabase));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(patientDatabase));
         menuNumberToAction.put(7, new UpdateJowlDataUIAction(patientDatabase));
-        menuNumberToAction.put(8, new PrintPatientCardForVisitUIAction(patientDatabase));
     }
 
     public void run(){
@@ -50,7 +49,6 @@ public class DentalClinic {
                 "5   Find patient by surname database\n" +
                 "6   Print patient by personal code database\n" +
                 "7   Update patient's jowl data in database\n" +
-                "8   Print patient card for visit\n" +
                 "0   Exit");
     }
 

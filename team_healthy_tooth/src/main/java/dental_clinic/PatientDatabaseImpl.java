@@ -2,12 +2,10 @@ package dental_clinic;
 
 import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
-import dental_clinic.domain.ToothInfo;
 import dental_clinic.domain.ToothStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,18 +57,16 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<PersonalData> findPatientBySurname(String surname) {
+    public List<Patient> findPatientBySurname(String surname) {
         return patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patientPersonalData -> patientPersonalData.getSurname().equalsIgnoreCase(surname))
+                .filter(patient -> patient.getPersonalData().getSurname().equalsIgnoreCase(surname))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PersonalData> findPatientByPersonalCode(String personalCode) {
+    public List<Patient> findPatientByPersonalCode(String personalCode) {
         return patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patientPersonalData -> patientPersonalData.getPersonalCode().equals(personalCode))
+                .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
     //TODO //Подумаю и напишу :)
@@ -86,20 +82,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
             if (patientsCard.get().getJowl().keySet().contains(toothNumber)) return true;
             else return false;
         }*/
-        return false;
-    }
-
-    //Подумаю и напишу :)
-    @Override
-    public boolean printPatientCardForVisit(long id) {
-        for (int i = 0; i < patientList.size(); i++){
-            if (isSpecificPatient(i, id)){
-                System.out.println(patientList.get(i).getPersonalData());
-                //printActualInfoAboutJowl(i);
-                System.out.println(patientList.get(i).getAttendingDoctors());
-                return true;
-            }
-        }
         return false;
     }
 

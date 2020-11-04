@@ -57,5 +57,12 @@ public class Jowl {
         }
     }
 
-
+    @Override
+    public String toString() {
+        String result = "Jowl{\n";
+        for (Integer key : jowl.keySet()){
+            result += key + " " + jowl.get(key) + "\n";
+        }
+        return result;
+    }
 }
