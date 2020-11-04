@@ -18,4 +18,7 @@ public interface ProductDatabase {
     List<Product> getProductList();
 
     Optional<Product> findById(Long id);
+
+    List<Product> findByProductIDAndChangeName(Long id);
+
 }

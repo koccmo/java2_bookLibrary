@@ -24,17 +24,8 @@ public class FindByIdUIAction implements UIAction {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
             System.out.println("Found next product in the DataBase :");
-            System.out.println("Product name: " + productOpt.get().getName());
-            System.out.println("Product description: " + productOpt.get().getDescription());
-/*
-            System.out.println("Changing product in the database : ");
-            System.out.print("Enter product name : ");
-            String productName = myInput.nextLine();
-            System.out.print("Enter product description : ");
-            String productDescription = myInput.nextLine();
-*/
-        }
-
+            System.out.print(productOpt.toString() + "\n");
+            }
     }
 
 }

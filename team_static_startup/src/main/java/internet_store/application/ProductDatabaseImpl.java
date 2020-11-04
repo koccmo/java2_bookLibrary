@@ -66,4 +66,15 @@ public class ProductDatabaseImpl implements ProductDatabase {
         return Optional.empty();
     }
 
+    @Override
+    public List<Product> findByProductIDAndChangeName(Long productId) {
+        List<Product> productsById = new ArrayList<>();
+        for (Product product : productList) {
+            if (product.getId().equals(productId)) {
+                productsById.add(product);
+            }
+        }
+        return productsById;
+    }
+
 }
