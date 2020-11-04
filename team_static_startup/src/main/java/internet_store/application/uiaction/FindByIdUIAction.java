@@ -3,7 +3,6 @@ package internet_store.application.uiaction;
 import internet_store.application.Product;
 import internet_store.application.ProductDatabase;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Scanner;
 
