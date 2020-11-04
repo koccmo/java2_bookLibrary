@@ -63,6 +63,15 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
+    public void shouldChangeProductName_whenNewNameIsCompound() {
+        productDatabase.save(new Product("TV", "SONY", new BigDecimal("900.00")));
+        productDatabase.save(new Product("TV", "SAMSUNG", new BigDecimal("1000.00")));
+        boolean result = productDatabase.changeProductName(2L, "TV Set");
+        assertTrue(result);
+        assertEquals("TV Set", productDatabase.getProductList().get(1).getName());
+    }
+
+    @Test
     public void shouldChangeProductName_whenIdNotFound() {
         productDatabase.save(new Product("iphone", "mobile phone", new BigDecimal("900.00")));
         productDatabase.save(new Product("macbook", "notebook", new BigDecimal("2000.00")));
