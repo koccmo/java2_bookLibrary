@@ -1,5 +1,7 @@
 package dental_clinic;
 
+import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.PatientDatabaseImpl;
 import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
 import org.junit.Before;
@@ -62,6 +64,31 @@ public class PatientDatabaseImplTests {
         assertTrue(patientDatabase.findPatientBySurname("Bobbins").equals(expectedList));
         assertTrue(patientDatabase.findPatientBySurname("Robertson").equals(new ArrayList<>()));
     }
+
+     @Test
+    public void testFindPatientByPersonalCode(){
+        List <Patient> expectedList = new ArrayList<>();
+        Patient patient = new Patient(personalData1, doctor1);
+        expectedList.add(patient);
+        assertTrue(patientDatabase.findPatientByPersonalCode("12345678900").equals(expectedList));
+        assertTrue(patientDatabase.findPatientByPersonalCode("12345678945").equals(new ArrayList<>()));
+     }
+
+    @Test
+    public void testAddVisit(){
+
+    }
+
+     //@Override
+    //    public boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
+    //        for (int i = 0; i < patientList.size(); i++){
+    //            if (patientList.get(i).getPersonalData().getId() == id){
+    //                patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
+    //                return true;
+    //            }
+    //        }
+    //        return false;
+    //    }
 
 
 

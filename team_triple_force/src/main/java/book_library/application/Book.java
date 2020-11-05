@@ -1,4 +1,4 @@
-package team_triple_force.application;
+package book_library.application;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class Book {
         this.yearOfBookIssue = yearOfBookIssue;
     }
 
-    public String getBookTitle() {
+     public String getBookTitle() {
         return bookTitle;
     }
 
@@ -76,13 +76,11 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book {" +
+        return "Book Id="+id+" {" +
                 "bookTitle='" + bookTitle + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
-                ", bookPrice=" + bookPrice +
-                ", id=" + id +
+                ", bookPrice=" + bookPrice + '\'' +
                 ", yearOfBookIssue=" + yearOfBookIssue +
-                '}';
+                "}";
     }
-
 }

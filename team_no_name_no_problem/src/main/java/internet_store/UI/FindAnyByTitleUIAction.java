@@ -1,7 +1,6 @@
 package internet_store.UI;
 
-import internet_store.ProductDatabase;
-import internet_store.domain.Product;
+import internet_store.database.ProductDatabase;
 
 class FindAnyByTitleUIAction implements UIAction {
 

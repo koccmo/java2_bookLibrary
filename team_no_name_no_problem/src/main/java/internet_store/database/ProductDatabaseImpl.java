@@ -1,4 +1,4 @@
-package internet_store;
+package internet_store.database;
 
 import internet_store.domain.Product;
 
@@ -12,7 +12,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     private Long id= 1L;
     private List<Product> productList = new ArrayList<>();
 
-    List <Product> getProductList(){
+    public List <Product> getProductList(){
         return productList;
     }
 

@@ -1,7 +1,7 @@
 package dental_clinic.UI;
 
-import dental_clinic.PatientDatabase;
-import dental_clinic.PatientDatabaseImpl;
+import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.PatientDatabaseImpl;
 
 import java.util.HashMap;
 import java.util.Map;
