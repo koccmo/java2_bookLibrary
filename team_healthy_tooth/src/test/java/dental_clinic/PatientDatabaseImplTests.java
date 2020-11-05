@@ -54,6 +54,15 @@ public class PatientDatabaseImplTests {
         assertTrue(currentList.equals(expectedList));
     }
 
+    @Test
+    public void testFindPatientBySurname(){
+        List <Patient> expectedList = new ArrayList<>();
+        Patient patient = new Patient(personalData1, doctor1);
+        expectedList.add(patient);
+        assertTrue(patientDatabase.findPatientBySurname("Bobbins").equals(expectedList));
+        assertTrue(patientDatabase.findPatientBySurname("Robertson").equals(new ArrayList<>()));
+    }
+
 
 
 }

@@ -4,7 +4,10 @@ import dental_clinic.domain.PersonalData;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-public class PatientDatabaseImplTest extends TestCase {
+public class PatientDatabaseImplTest{
+
+//} extends TestCase {
+    /*
 
     PatientDatabaseImpl database;
     PersonalData personalData = new PersonalData(
