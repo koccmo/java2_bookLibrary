@@ -1,5 +1,6 @@
-package internet_store;
+/*package internet_store;
 
+import internet_store.database.CustomerDatabaseImpl;
 import internet_store.domain.Customer;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class CustomerDatabaseImplTest {
-/*
+
     @Test
     public void addCustomerTest(){
         CustomerDatabaseImpl customerDatabase = new CustomerDatabaseImpl();
@@ -22,9 +23,8 @@ public class CustomerDatabaseImplTest {
                 "Savva", "Jablokov",
                 27446291, "Kamiela 42-77",
                 "kakdela@gmail.com");
-        boolean saveResult1 = customerDatabase.addCustomer(firstCustomer);
+        customerDatabase.addCustomer(firstCustomer);
         customerDatabase.addCustomer(secondCustomer);
-        assertTrue(saveResult1);
         assertTrue(customerDatabase.getCustomerList().contains(secondCustomer));
     }
 
@@ -190,5 +190,6 @@ public class CustomerDatabaseImplTest {
         List<Customer> resultOfAllFindings2 = customerDatabase.findAllCustomersByName("Savva");
         List<Customer> resultOfAllFindings3 = customerDatabase.findAllCustomersByName("Anton");
     }
-*/
+
 }
+*/

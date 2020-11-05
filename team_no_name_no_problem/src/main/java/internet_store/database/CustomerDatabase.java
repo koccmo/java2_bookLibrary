@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CustomerDatabase {
 
-    boolean addCustomer(Customer customer);
+    void addCustomer(Customer customer);
 
     boolean deleteCustomer(long id);
 
