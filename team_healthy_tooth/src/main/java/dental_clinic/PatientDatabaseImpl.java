@@ -14,6 +14,10 @@ public class PatientDatabaseImpl implements PatientDatabase {
     private Long id= 1L;
     private List<Patient> patientList = new ArrayList<>();
 
+    @Override
+    public List<Patient>getPatientList(){
+        return patientList;
+    }
 
     @Override
     public boolean addPatient(PersonalData personalData, String doctor) {

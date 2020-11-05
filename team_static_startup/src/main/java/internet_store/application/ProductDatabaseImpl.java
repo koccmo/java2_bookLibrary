@@ -66,17 +66,6 @@ public class ProductDatabaseImpl implements ProductDatabase {
         return Optional.empty();
     }
 
-//    @Override
-//    public List<Product> findByProductIDAndChangeName(Long productId) {
-//        List<Product> productsById = new ArrayList<>();
-//        for (Product products : productList) {
-//            if (products.getId().equals(productId)) {
-//                productsById.add(products);
-//            }
-//        }
-//        return productsById;
-//    }
-
     @Override
     public boolean changeProductName(Long productId, String newName) {
         for (Product product : productList) {

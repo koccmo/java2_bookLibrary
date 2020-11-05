@@ -2,6 +2,7 @@ package dental_clinic.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Jowl {
@@ -64,5 +65,18 @@ public class Jowl {
             result += key + " " + jowl.get(key) + "\n";
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jowl jowl1 = (Jowl) o;
+        return Objects.equals(jowl, jowl1.jowl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(jowl);
     }
 }

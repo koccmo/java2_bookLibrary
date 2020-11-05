@@ -1,9 +1,6 @@
 package dental_clinic.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ToothInfo {
 
@@ -41,5 +38,19 @@ public class ToothInfo {
             result += "status=" + status +'}';
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ToothInfo toothInfo = (ToothInfo) o;
+        return Objects.equals(comment, toothInfo.comment) &&
+                Objects.equals(status, toothInfo.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(comment, status);
     }
 }

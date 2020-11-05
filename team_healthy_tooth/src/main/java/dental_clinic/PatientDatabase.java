@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface PatientDatabase {
 
+    List<Patient>getPatientList();
+
     boolean addPatient(PersonalData personalData, String doctor);
 
     boolean deletePatient(long id);
