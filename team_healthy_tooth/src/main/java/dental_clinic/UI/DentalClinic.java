@@ -23,7 +23,7 @@ public class DentalClinic {
         menuNumberToAction.put(4, new PrintPatientCardUIAction(patientDatabase));
         menuNumberToAction.put(5, new FindPatientBySurnameUIAction(patientDatabase));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(patientDatabase));
-        menuNumberToAction.put(7, new UpdateJowlDataUIAction(patientDatabase));
+        menuNumberToAction.put(7, new AddVisitUIAction(patientDatabase));
     }
 
     public void run(){

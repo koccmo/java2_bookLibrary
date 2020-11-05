@@ -71,7 +71,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean updateJowlData(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
+    public boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
                 patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
