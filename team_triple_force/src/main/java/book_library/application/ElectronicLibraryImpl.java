@@ -1,4 +1,4 @@
-package team_triple_force.application;
+package book_library.application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.List;
 public class ElectronicLibraryImpl implements ElectronicLibrary {
 
     private final List<Book> bookList = new ArrayList<>();
-    private Long bookId;
+    private Long bookId = 1L;
 
     @Override
-    public Long saveBook(Book book) {
+    public void saveBook(Book book) {
         book.setId(bookId);
+        bookId++;
         bookList.add(book);
-        return ++bookId;
     }
 
     @Override
@@ -28,18 +28,20 @@ public class ElectronicLibraryImpl implements ElectronicLibrary {
     }
 
     @Override
-    public boolean deleteBookById(Book BookId) {
-        for (Book book : bookList) {
-            if (book.getId().equals(bookId)) {
-                bookList.remove(book);
-                return true;
-            }
-        }
-        return false;
+    public void deleteBookById(Long BookId) {
+        bookList.stream()
+                .filter(book -> book.getId().equals(bookId))
+                .findFirst()
+                .ifPresent(book -> bookList.remove(book));
     }
 
     @Override
     public void deleteBookByTitle(String bookTitle) {
         bookList.removeIf(books -> (books.getBookTitle().equals(bookTitle)));
+    }
+
+    @Override
+    public List<Book> getElectronicLibrary() {
+        return bookList;
     }
 }
