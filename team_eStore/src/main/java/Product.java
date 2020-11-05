@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Product {
     private static long count = 0;
-    private long id;
+    private final long id;
     private String name;
     private String description;
     private double price;
@@ -12,7 +12,7 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
-        count++;
+        this.count++;
         this.id = count;
     }
 
@@ -41,7 +41,8 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return name.equals(product.name);
+        return name.equals(product.name)
+                && description.equals(product.getDescription());
     }
 
     public double getPrice() {
