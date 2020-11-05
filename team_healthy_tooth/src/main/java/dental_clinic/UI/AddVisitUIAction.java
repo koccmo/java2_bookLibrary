@@ -5,12 +5,12 @@ import dental_clinic.domain.ToothStatus;
 
 import java.util.Optional;
 
-class UpdateJowlDataUIAction implements UIAction {
+class AddVisitUIAction implements UIAction {
 
     private PatientDatabase patientDatabase;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public UpdateJowlDataUIAction(PatientDatabase patientDatabase){
+    public AddVisitUIAction(PatientDatabase patientDatabase){
         this.patientDatabase = patientDatabase;
     }
 
@@ -23,7 +23,7 @@ class UpdateJowlDataUIAction implements UIAction {
 
         ToothStatus toothStatus = inputToothStatus();
 
-        if (!patientDatabase.updateJowlData(id, toothNumber, comment, toothStatus)){
+        if (!patientDatabase.addVisit(id, toothNumber, comment, toothStatus)){
             System.out.println("Not correct input");
         }
 
