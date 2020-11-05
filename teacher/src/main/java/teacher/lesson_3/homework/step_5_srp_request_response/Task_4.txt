@@ -1,8 +1,8 @@
 Переведите AddXXXUIAction и AddXXXService на использование
 AddXXXRequest и AddXXXResponse объектов.
 
-AddXXXUIAction должен создавать AddXXXRequest, заполнить его
-всеми полученными от пользователя данными и передать в
+AddXXXUIAction должен создавать AddXXXRequest, заполнять его
+полученными от пользователя данными и передать в
 AddXXXService.execute() метод.
 
 AddXXXService.execute() обратно должен возвращать AddXXXResponse
