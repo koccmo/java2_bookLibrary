@@ -44,6 +44,9 @@ public class PatientDatabaseImplTest extends TestCase {
     для теста нужно получить Patient, тк методы find возвращают список Patient'ов
     было бы круто придумать геттер пациентов для тестов в databaseImpl
 
+    Создала геттер. Глянь плз JUnit 4 тесты в классе PatientDatabaseImplTests
+    Мы такие на Джава1 писали :)
+
     public void testFindPatientBySurname() {
         List<Patient> result = database.findPatientBySurname("surname");
         assertTrue(result.contains(personalData));
