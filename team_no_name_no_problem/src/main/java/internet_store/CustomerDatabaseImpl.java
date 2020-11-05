@@ -15,8 +15,9 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public void addCustomer(Customer customer){
+    public boolean addCustomer(Customer customer){
         customerList.add(customer);
+        return false;
     }
 
     @Override
