@@ -39,12 +39,17 @@ class ProductList {
             System.out.println("0. Exit the program");
             System.out.println("---------------------------------------------------------");
             System.out.print("Please enter menu number: ");
-            int userSelectedMenuNumber = Integer.parseInt(sc.nextLine());
-            if (userSelectedMenuNumber == 0) {
-                System.out.println("Thank you! Good bye!");
-                break;
-            } else {
-                executeUIAction(userSelectedMenuNumber);
+            try {
+                int userSelectedMenuNumber = Integer.parseInt(sc.nextLine());
+                if (userSelectedMenuNumber == 0) {
+                    System.out.println("Thank you! Good bye!");
+                    break;
+                } else {
+                    executeUIAction(userSelectedMenuNumber);
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println("\nIncorrect input, please enter number");
             }
         }
     }
@@ -54,7 +59,7 @@ class ProductList {
         if (uiAction != null) {
             uiAction.execute();
         } else {
-            System.out.println("Menu item not exist: " + userSelectedMenuNumber);
+            System.out.println("Menu item doesn't exist: " + userSelectedMenuNumber);
         }
     }
 
