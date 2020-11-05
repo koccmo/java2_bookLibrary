@@ -1,6 +1,6 @@
 package internet_store.UI;
 
-import internet_store.ProductDatabase;
+import internet_store.database.ProductDatabase;
 
 class ChangeTitleUIAction implements UIAction {
 
