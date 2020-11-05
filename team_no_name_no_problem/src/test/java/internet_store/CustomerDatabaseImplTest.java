@@ -9,7 +9,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class CustomerDatabaseImplTest {
-
+/*
     @Test
     public void addCustomerTest(){
         CustomerDatabaseImpl customerDatabase = new CustomerDatabaseImpl();
@@ -190,5 +190,5 @@ public class CustomerDatabaseImplTest {
         List<Customer> resultOfAllFindings2 = customerDatabase.findAllCustomersByName("Savva");
         List<Customer> resultOfAllFindings3 = customerDatabase.findAllCustomersByName("Anton");
     }
-
+*/
 }
