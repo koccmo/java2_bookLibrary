@@ -1,6 +1,6 @@
 package dental_clinic.UI;
 
-import dental_clinic.PatientDatabase;
+import dental_clinic.database.PatientDatabase;
 
 class DeletePatientUIAction implements UIAction {
 

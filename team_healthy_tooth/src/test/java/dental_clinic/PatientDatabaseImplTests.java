@@ -1,5 +1,7 @@
 package dental_clinic;
 
+import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.PatientDatabaseImpl;
 import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
 import org.junit.Before;
