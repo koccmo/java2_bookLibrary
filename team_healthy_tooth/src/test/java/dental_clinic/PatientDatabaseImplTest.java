@@ -1,11 +1,8 @@
 package dental_clinic;
 
-import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
 import junit.framework.TestCase;
 import org.junit.Test;
-
-import java.util.List;
 
 public class PatientDatabaseImplTest extends TestCase {
 
