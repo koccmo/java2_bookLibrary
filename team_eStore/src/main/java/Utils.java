@@ -8,16 +8,7 @@ public class Utils {
         System.out.println("1 - add product to the store");
         System.out.println("2 - remove product from the store by ID");
         System.out.println("3 - print list of products");
-        System.out.println("4 - find product by NAME");
+        System.out.println("4 - find product by \"name\"");
         System.out.println("5 - update product info");
-    }
-
-    /**
-     * Method to clear screen
-     */
-    public static void clearScreen() {
-        for(int i = 0; i < 80; i++) {
-            System.out.print("\b");
-        }
     }
 }
