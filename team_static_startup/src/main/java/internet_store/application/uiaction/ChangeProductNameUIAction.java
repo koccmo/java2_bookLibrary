@@ -27,15 +27,6 @@ public class ChangeProductNameUIAction implements UIAction {
         } else {
             System.out.println("We couldn't find product with id " + id);
         }
-
-//        List<Product> productFound = productDatabase.findByProductIDAndChangeName(id);
-//
-//        if (productFound.isEmpty()) {
-//            System.out.println("\nNo product with ID = " + id + " in the database");
-//        } else {
-//            System.out.println("Found next product in the DataBase :");
-//            System.out.print(productFound.toString() + "\n");
-//        }
     }
 
 }

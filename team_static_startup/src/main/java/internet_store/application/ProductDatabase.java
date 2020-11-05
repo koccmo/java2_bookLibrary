@@ -19,8 +19,6 @@ public interface ProductDatabase {
 
     Optional<Product> findById(Long id);
 
-//    List<Product> findByProductIDAndChangeName(Long id);
-
     boolean changeProductName(Long id, String newName);
 
 }
