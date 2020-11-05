@@ -6,3 +6,4 @@ Lesson 3 plan:
 3. Code with me plugin presentation (from students)
 4. Team leadership
 5. User stories (agile practice)
+6. Event based applications (request/response model)
