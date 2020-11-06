@@ -4,6 +4,7 @@ import internet_store.database.ProductDatabase;
 import internet_store.database.ProductDatabaseImpl;
 import internet_store.services.AddProductService;
 import internet_store.services.DeleteByIdService;
+import internet_store.services.GetProductListService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class InternetStore {
     ProductDatabase productDatabase = new ProductDatabaseImpl();
     AddProductService addProductService = new AddProductService(productDatabase);
     DeleteByIdService deleteByIdService = new DeleteByIdService(productDatabase);
+    GetProductListService getProductListService = new GetProductListService(productDatabase);
 
     public InternetStore() {
 
@@ -24,7 +26,7 @@ public class InternetStore {
 
         menuNumberToAction.put(1, new AddProductUIAction(addProductService));
         menuNumberToAction.put(2, new DeleteByIdUIAction(deleteByIdService));
-        menuNumberToAction.put(3, new PrintProductsUIAction(productDatabase));
+        menuNumberToAction.put(3, new GetProductListUIAction(getProductListService));
         menuNumberToAction.put(4, new ChangeTitleUIAction(productDatabase));
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(productDatabase));
         menuNumberToAction.put(6, new FindAnyByTitleUIAction(productDatabase));
