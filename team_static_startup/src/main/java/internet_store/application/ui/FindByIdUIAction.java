@@ -1,24 +1,24 @@
-package internet_store.application.uiaction;
+package internet_store.application.ui;
 
-import internet_store.application.Product;
-import internet_store.application.ProductDatabase;
+import internet_store.application.domain.Product;
+import internet_store.application.database.Database;
 
 import java.util.Optional;
 import java.util.Scanner;
 
 public class FindByIdUIAction implements UIAction {
 
-    private final ProductDatabase productDatabase;
+    private final Database database;
 
-    public FindByIdUIAction(ProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
+    public FindByIdUIAction(Database database) {
+        this.database = database;
     }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for searching : ");
         Long id = myInput.nextLong();
-        Optional<Product> productOpt = productDatabase.findById(id);
+        Optional<Product> productOpt = database.findById(id);
 
         if (productOpt.isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");

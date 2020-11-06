@@ -1,5 +1,7 @@
 package internet_store.application;
 
+import internet_store.application.database.InMemoryDatabase;
+import internet_store.application.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,12 +10,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ProductDatabaseImplTest {
-    ProductDatabaseImpl productDatabase;
+public class InMemoryDatabaseTest {
+    InMemoryDatabase productDatabase;
 
     @Before
     public void setUp() {
-        productDatabase = new ProductDatabaseImpl();
+        productDatabase = new InMemoryDatabase();
     }
 
     @Test

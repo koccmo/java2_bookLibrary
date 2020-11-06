@@ -1,9 +1,11 @@
-package internet_store.application;
+package internet_store.application.database;
+
+import internet_store.application.domain.Product;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductDatabase {
+public interface Database {
 
     Long save(Product product);
 

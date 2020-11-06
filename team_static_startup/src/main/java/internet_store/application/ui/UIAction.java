@@ -1,4 +1,4 @@
-package internet_store.application.uiaction;
+package internet_store.application.ui;
 
 public interface UIAction {
 
