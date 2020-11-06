@@ -16,7 +16,7 @@ class ProductList {
         Database database = new InMemoryDatabase();
 
         menuNumberToActionMap = new HashMap<>();
-        menuNumberToActionMap.put(1, new SaveProductUIAction(database));
+        menuNumberToActionMap.put(1, new AddProductUIAction(database));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(database));
         menuNumberToActionMap.put(3, new DeleteProductUIAction(database));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(database));

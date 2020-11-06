@@ -6,11 +6,11 @@ import internet_store.application.database.Database;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class SaveProductUIAction implements UIAction {
+public class AddProductUIAction implements UIAction {
 
     private final Database database;
 
-    public SaveProductUIAction(Database database) {
+    public AddProductUIAction(Database database) {
         this.database = database;
     }
 
