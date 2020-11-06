@@ -17,7 +17,7 @@ public interface ProductDatabase {
 
     void changeTitle(long id, String newTitle);
 
-    boolean changeDescription(long id, String newDescription);
+    void changeDescription(long id, String newDescription);
 
     Optional<Product> findAnyByTitle (String title);
 

@@ -62,14 +62,12 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public boolean changeDescription(long id, String newDescription) {
+    public void changeDescription(long id, String newDescription) {
         for (int i = 0; i < productList.size(); i++){
             if (id == productList.get(i).getId()){
                 productList.get(i).setDescription(newDescription);
-                return true;
             }
         }
-        return false;
     }
 
     @Override

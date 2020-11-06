@@ -3,21 +3,22 @@ package internet_store.UI.product;
 import internet_store.UI.InputCheckUtility;
 import internet_store.UI.UIAction;
 import internet_store.database.product.ProductDatabase;
+import internet_store.services.product.ChangeDescriptionService;
 
 public class ChangeDescriptionUIAction implements UIAction {
 
-    private ProductDatabase productDatabase;
+    private ChangeDescriptionService changeDescriptionService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public ChangeDescriptionUIAction(ProductDatabase itemDatabase){
-        this.productDatabase = itemDatabase;
+    public ChangeDescriptionUIAction(ChangeDescriptionService changeDescriptionService) {
+        this.changeDescriptionService = changeDescriptionService;
     }
 
     public void execute(){
         long id = inputCheckUtility.inputValidLong("Please enter product's id");
         String description = inputCheckUtility.inputValidString("Please enter new description: ");
 
-        if (productDatabase.changeDescription(id, description)) {
+        if (changeDescriptionService.execute(id, description)) {
             System.out.println("Description of product with id " + id + " was changed");
         }
     }

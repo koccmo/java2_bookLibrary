@@ -3,10 +3,7 @@ package internet_store.UI;
 import internet_store.UI.product.*;
 import internet_store.database.product.ProductDatabase;
 import internet_store.database.product.ProductDatabaseImpl;
-import internet_store.services.product.AddProductService;
-import internet_store.services.product.ChangeTitleService;
-import internet_store.services.product.DeleteByIdService;
-import internet_store.services.product.GetAllProductsService;
+import internet_store.services.product.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +18,7 @@ public class InternetStore {
     DeleteByIdService deleteByIdService = new DeleteByIdService(productDatabase);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
+    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
 
     public InternetStore() {
 
@@ -31,7 +29,7 @@ public class InternetStore {
         menuNumberToAction.put(2, new DeleteByIdUIAction(deleteByIdService));
         menuNumberToAction.put(3, new GetAllProductsUIAction(getAllProductsService));
         menuNumberToAction.put(4, new ChangeTitleUIAction(changeTitleService));
-        menuNumberToAction.put(5, new ChangeDescriptionUIAction(productDatabase));
+        menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
         menuNumberToAction.put(6, new FindAnyByTitleUIAction(productDatabase));
         menuNumberToAction.put(7, new FindAllByTitleUIAction(productDatabase));
     }

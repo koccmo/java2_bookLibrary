@@ -154,7 +154,7 @@ public class ProductDatabaseImplTest {
         assertTrue(descriptionOfFirstProduct.equals("Samsung"));
         assertFalse(descriptionOfSecondProduct.equals("Holodiljnik"));
         assertTrue(descriptionOfThirdProduct.equals("LCD Screens"));
-        assertFalse(productDatabase.changeDescription(8L, "Nothing"));
+        //assertFalse(productDatabase.changeDescription(8L, "Nothing"));
     }
 
     @Test
