@@ -19,6 +19,8 @@ public class InternetStore {
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
     ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
+    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase);
+    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase);
 
     public InternetStore() {
 
@@ -30,8 +32,8 @@ public class InternetStore {
         menuNumberToAction.put(3, new GetAllProductsUIAction(getAllProductsService));
         menuNumberToAction.put(4, new ChangeTitleUIAction(changeTitleService));
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
-        menuNumberToAction.put(6, new FindAnyByTitleUIAction(productDatabase));
-        menuNumberToAction.put(7, new FindAllByTitleUIAction(productDatabase));
+        menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
+        menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
     }
 
     public void run() {
