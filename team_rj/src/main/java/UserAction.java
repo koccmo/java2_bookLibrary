@@ -10,28 +10,8 @@ public class UserAction {
         this.printGreeting();
         while (true) {
             this.printUserMenu();
-            int userInput = this.getUserInput();
-
-            switch (userInput) {
-                case 1:
-                    printProducts(products);
-                    break;
-                case 2:
-                    searchProductByName(products);
-                    break;
-                case 3:
-                    addNewProduct(products);
-                    break;
-                case 4:
-                    System.out.println("Not emplemented");
-                    break;
-                case 5:
-                    removeProduct(products);
-                    break;
-                case 0:
-                    this.printGoodBye();
-                    System.exit(0);
-            }
+            int userInput = this.getUserInputOfMenuItem();
+            executeMenuItem(products, userInput);
         }
     }
 
@@ -55,7 +35,30 @@ public class UserAction {
         System.out.println("0 - exit");
     }
 
-    public int getUserInput() {
+    public void executeMenuItem(List<Product> products, int menuItem) {
+        switch (menuItem) {
+            case 1:
+                printProducts(products);
+                break;
+            case 2:
+                searchProductByName(products);
+                break;
+            case 3:
+                addNewProduct(products);
+                break;
+            case 4:
+                System.out.println("Not emplemented");
+                break;
+            case 5:
+                removeProduct(products);
+                break;
+            case 0:
+                exitProgram();
+                break;
+        }
+    }
+
+    public int getUserInputOfMenuItem() {
         Scanner sc = new Scanner(System.in);
         int userInput;
         while (true) {
@@ -138,6 +141,7 @@ public class UserAction {
         description = "Enter description of product";
         String productDescription = getLine(description);
         products.add(new Product(productName, productDescription));
+        System.out.println("Seccessfully added");
     }
 
     public void removeProduct(List<Product> products) {
@@ -151,6 +155,15 @@ public class UserAction {
                 productsRemoved++;
             }
         }
-        System.out.println(productsRemoved + " products removed");
+        if (productsRemoved == 1) {
+            System.out.println(productsRemoved + " product removed");
+        } else {
+            System.out.println(productsRemoved + " products removed");
+        }
+    }
+
+    public void exitProgram() {
+        this.printGoodBye();
+        System.exit(0);
     }
 }
