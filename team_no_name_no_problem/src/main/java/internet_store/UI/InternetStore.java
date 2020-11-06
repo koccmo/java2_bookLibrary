@@ -2,6 +2,8 @@ package internet_store.UI;
 
 import internet_store.database.ProductDatabase;
 import internet_store.database.ProductDatabaseImpl;
+import internet_store.services.AddProductServices;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,13 +12,15 @@ public class InternetStore {
     private Map<Integer, UIAction> menuNumberToAction;
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
+    ProductDatabase productDatabase = new ProductDatabaseImpl();
+    AddProductServices addProductServices = new AddProductServices(productDatabase);
 
     public InternetStore() {
-        ProductDatabase productDatabase = new ProductDatabaseImpl();
+
 
         menuNumberToAction = new HashMap();
 
-        menuNumberToAction.put(1, new AddItemUIAction(productDatabase));
+        menuNumberToAction.put(1, new AddProductUIAction(addProductServices));
         menuNumberToAction.put(2, new DeleteByIdUIAction(productDatabase));
         menuNumberToAction.put(3, new PrintProductsUIAction(productDatabase));
         menuNumberToAction.put(4, new ChangeTitleUIAction(productDatabase));

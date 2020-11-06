@@ -1,15 +1,15 @@
 package internet_store.UI;
 
 import internet_store.domain.Product;
-import internet_store.database.ProductDatabase;
+import internet_store.services.AddProductServices;
 
-class AddItemUIAction implements UIAction {
+class AddProductUIAction implements UIAction {
 
-    private ProductDatabase productDatabase;
+    private AddProductServices addProductServices;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public AddItemUIAction(ProductDatabase itemDatabase){
-        this.productDatabase = itemDatabase;
+    public AddProductUIAction(AddProductServices addProductServices) {
+        this.addProductServices = addProductServices;
     }
 
     public void execute(){
@@ -20,7 +20,7 @@ class AddItemUIAction implements UIAction {
         int price = inputCheckUtility.inputValidInteger("Please enter product's price");
 
         Product newProduct = new Product(title, description, price);
-        productDatabase.save(newProduct);
+        addProductServices.addProduct(newProduct);
     }
 
 }
