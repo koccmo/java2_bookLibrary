@@ -3,6 +3,7 @@ package dental_clinic.UI;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.database.PatientDatabaseImpl;
 import dental_clinic.services.AddPatientServices;
+import dental_clinic.services.DeletePatientServices;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +17,12 @@ public class DentalClinic {
     public DentalClinic() {
         PatientDatabase patientDatabase = new PatientDatabaseImpl();
         AddPatientServices addPatientServices = new AddPatientServices(patientDatabase);
+        DeletePatientServices deletePatientServices = new DeletePatientServices(patientDatabase);
 
         menuNumberToAction = new HashMap();
 
         menuNumberToAction.put(1, new AddPatientUIAction(addPatientServices));
-        menuNumberToAction.put(2, new DeletePatientUIAction(patientDatabase));
+        menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientServices));
         menuNumberToAction.put(3, new PrintCardBaseUIAction(patientDatabase));
         menuNumberToAction.put(4, new PrintPatientCardUIAction(patientDatabase));
         menuNumberToAction.put(5, new FindPatientBySurnameUIAction(patientDatabase));
