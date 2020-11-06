@@ -5,11 +5,11 @@ import internet_store.domain.Product;
 
 import java.util.List;
 
-public class GetProductListService {
+public class GetAllProductsService {
 
     private final ProductDatabase productDatabase;
 
-    public GetProductListService(ProductDatabase productDatabase) {
+    public GetAllProductsService(ProductDatabase productDatabase) {
         this.productDatabase = productDatabase;
     }
 
