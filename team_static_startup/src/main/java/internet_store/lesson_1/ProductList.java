@@ -1,8 +1,6 @@
-package internet_store.application;
+package internet_store.lesson_1;
 
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
-import internet_store.application.ui.*;
+import internet_store.lesson_1.uiaction.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +11,17 @@ class ProductList {
     private final Map<Integer, UIAction> menuNumberToActionMap;
 
     public ProductList() {
-        Database database = new InMemoryDatabase();
+        ProductDatabase productDatabase = new ProductDatabaseImpl();
 
         menuNumberToActionMap = new HashMap<>();
-        menuNumberToActionMap.put(1, new AddProductUIAction(database));
-        menuNumberToActionMap.put(2, new DeleteByIdUIAction(database));
-        menuNumberToActionMap.put(3, new DeleteProductUIAction(database));
-        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(database));
-        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(database));
-        menuNumberToActionMap.put(6, new FindByProductNameUIAction(database));
-        menuNumberToActionMap.put(7, new FindByIdUIAction(database));
-        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(database));
-        menuNumberToActionMap.put(0, new ExitProgramUIAction());
+        menuNumberToActionMap.put(1, new SaveProductUIAction(productDatabase));
+        menuNumberToActionMap.put(2, new DeleteByIdUIAction(productDatabase));
+        menuNumberToActionMap.put(3, new DeleteProductUIAction(productDatabase));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(productDatabase));
+        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(productDatabase));
+        menuNumberToActionMap.put(6, new FindByProductNameUIAction(productDatabase));
+        menuNumberToActionMap.put(7, new FindByIdUIAction(productDatabase));
+        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(productDatabase));
     }
 
     public void run() {

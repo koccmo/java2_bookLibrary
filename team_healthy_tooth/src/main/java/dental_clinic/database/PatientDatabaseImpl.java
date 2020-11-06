@@ -15,32 +15,24 @@ public class PatientDatabaseImpl implements PatientDatabase {
     private List<Patient> patientList = new ArrayList<>();
 
     @Override
-    public List<Patient>getPatientList(){
+    public List<Patient> getPatientList(){
         return patientList;
     }
 
     @Override
-    public boolean addPatient(PersonalData personalData, String doctor) {
-        if (cardListContainsPatient(personalData)){
-            return false;
-        }else
-            {
+    public void addPatient(PersonalData personalData) {
             personalData.setId(id);
-            patientList.add(new Patient(personalData, doctor));
+            patientList.add(new Patient(personalData));
             id++;
-        }
-        return true;
     }
 
     @Override
-    public boolean deletePatient(long id) {
+    public void deletePatient(long id) {
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
                 patientList.remove(i);
-                return true;
             }
         }
-        return false;
     }
 
     @Override
@@ -84,15 +76,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
         }
         return false;
     }
-
-    private boolean cardListContainsPatient (PersonalData personalData){
-        Optional <PersonalData> result = patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patient1 -> patient1.equals(personalData))
-                .findAny();
-        return result.isPresent();
-    }
-
 
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;

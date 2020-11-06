@@ -1,5 +1,6 @@
 package internet_store;
 
+import internet_store.database.CustomerDatabaseImpl;
 import internet_store.domain.Customer;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class CustomerDatabaseImplTest {
-/*
+
     @Test
     public void addCustomerTest(){
         CustomerDatabaseImpl customerDatabase = new CustomerDatabaseImpl();
@@ -22,13 +23,12 @@ public class CustomerDatabaseImplTest {
                 "Savva", "Jablokov",
                 27446291, "Kamiela 42-77",
                 "kakdela@gmail.com");
-        boolean saveResult1 = customerDatabase.addCustomer(firstCustomer);
+        customerDatabase.addCustomer(firstCustomer);
         customerDatabase.addCustomer(secondCustomer);
-        assertTrue(saveResult1);
         assertTrue(customerDatabase.getCustomerList().contains(secondCustomer));
     }
 
-    @Test
+ /*   @Test
     public void addCustomerTestNotValidInput(){
         CustomerDatabaseImpl customerDatabase = new CustomerDatabaseImpl();
 
@@ -51,7 +51,7 @@ public class CustomerDatabaseImplTest {
         assertTrue(saveResult1);
         assertTrue(saveResult2);
         assertFalse(customerDatabase.addCustomer(thirdCustomer));
-    }
+    }*/
 
     @Test
     public void deleteCustomerTest(){
@@ -105,7 +105,7 @@ public class CustomerDatabaseImplTest {
                 "kakdela@gmail.com");
         customerDatabase.addCustomer(firstCustomer);
         customerDatabase.addCustomer(secondCustomer);
-        assertFalse(customerDatabase.deleteCustomer(2L));
+        assertFalse(customerDatabase.deleteCustomer(6L));
     }
 
     @Test
@@ -128,7 +128,6 @@ public class CustomerDatabaseImplTest {
         assertTrue(listOfAllCustomers.contains(firstCustomer));
         assertTrue(listOfAllCustomers.contains(secondCustomer));
         assertFalse(listOfAllCustomers.size() > 2);
-        //Anvar - proverj etot verhnij!
     }
 
     @Test
@@ -190,5 +189,5 @@ public class CustomerDatabaseImplTest {
         List<Customer> resultOfAllFindings2 = customerDatabase.findAllCustomersByName("Savva");
         List<Customer> resultOfAllFindings3 = customerDatabase.findAllCustomersByName("Anton");
     }
-*/
+
 }
