@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class InputValidation {
     public int validateUserMenuChoice(String userStringInput) {
         int choice;
@@ -12,5 +15,18 @@ public class InputValidation {
             }
         }
         return -1;
+    }
+
+    public Boolean validateString(String userInput) {
+        if (userInput == null || userInput.isEmpty()) {
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile("[A-Za-z]*");
+        Matcher m = pattern.matcher(userInput);
+        if (m.matches()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -5,11 +5,13 @@ public class Product {
     private String name;
     private String description;
     private int quantity;
+    private int price;
 
     public Product(String name, String description) {
         this.name = name;
         this.description = description;
         this.quantity = 0;
+        this.price = 0;
     }
 
     public String getName() {
@@ -18,6 +20,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -56,6 +66,7 @@ public class Product {
                 "name : " + this.name +
                 ", description : " + this.description +
                 ", available : " + this.quantity +
+                ", price per unit : " + this.price +
                 '}';
     }
 }
