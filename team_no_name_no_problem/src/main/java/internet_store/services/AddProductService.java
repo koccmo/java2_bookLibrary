@@ -3,11 +3,11 @@ package internet_store.services;
 import internet_store.database.ProductDatabase;
 import internet_store.domain.Product;
 
-public class AddProductServices {
+public class AddProductService {
 
     private final ProductDatabase productDatabase;
 
-    public AddProductServices(ProductDatabase productDatabase) {
+    public AddProductService(ProductDatabase productDatabase) {
         this.productDatabase = productDatabase;
     }
 
