@@ -28,7 +28,7 @@ public class CustomerDatabaseImplTest {
         assertTrue(customerDatabase.getCustomerList().contains(secondCustomer));
     }
 
- /*   @Test
+    @Test
     public void addCustomerTestNotValidInput(){
         CustomerDatabaseImpl customerDatabase = new CustomerDatabaseImpl();
 
@@ -49,9 +49,9 @@ public class CustomerDatabaseImplTest {
         boolean saveResult1 = customerDatabase.addCustomer(firstCustomer);
         boolean saveResult2 = customerDatabase.addCustomer(secondCustomer);
         assertTrue(saveResult1);
-        assertTrue(saveResult2);
+        assertFalse(saveResult2);
         assertFalse(customerDatabase.addCustomer(thirdCustomer));
-    }*/
+    }
 
     @Test
     public void deleteCustomerTest(){

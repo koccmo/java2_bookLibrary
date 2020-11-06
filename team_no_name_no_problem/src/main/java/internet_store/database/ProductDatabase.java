@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface ProductDatabase {
 
+    public List <Product> getProductList();
+
     boolean save(Product product);
 
     boolean deleteById(long id);
