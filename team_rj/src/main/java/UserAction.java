@@ -3,28 +3,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserAction {
-    InputValidation iv = new InputValidation();
-    private List<Product> products = initializeProducts();
+    private InputValidation iv = new InputValidation();
+    private ProductDataBase database = new ProductDataBaseImplementation();
 
     public void run() {
         this.printGreeting();
         while (true) {
             this.printUserMenu();
             int userInput = this.getUserInputOfMenuItem();
-            executeMenuItem(products, userInput);
+            executeMenuItem(userInput);
         }
     }
 
-    public void printGreeting() {
+    private void printGreeting() {
         System.out.println("Welcome to RedDots!");
     }
 
-    public void printGoodBye() {
+    private void printGoodBye() {
         System.out.println("");
         System.out.println("Thanks for visiting RedDots!");
     }
 
-    public void printUserMenu() {
+    private void printUserMenu() {
         System.out.println("");
         System.out.println("Choose option by typing a valid number");
         System.out.println("1 - list of products");
@@ -35,22 +35,22 @@ public class UserAction {
         System.out.println("0 - exit");
     }
 
-    public void executeMenuItem(List<Product> products, int menuItem) {
+    private void executeMenuItem(int menuItem) {
         switch (menuItem) {
             case 1:
-                printProducts(products);
+                printAllProducts();
                 break;
             case 2:
-                searchProductByName(products);
+                searchProductByName();
                 break;
             case 3:
-                addNewProduct(products);
+                addNewProduct();
                 break;
             case 4:
                 System.out.println("Not emplemented");
                 break;
             case 5:
-                removeProduct(products);
+                removeProduct();
                 break;
             case 0:
                 exitProgram();
@@ -73,22 +73,21 @@ public class UserAction {
         return userInput;
     }
 
-    public List<Product> initializeProducts() {
-        List<Product> products = new ArrayList<Product>();
-        products.add(new Product("Apple", "Juicy red apples"));
-        products.add(new Product("Melon", "Melons from Georgia"));
-        products.add(new Product("Grapes", "Small blue grapes"));
-        return products;
+    private void printAllProducts() {
+        System.out.println("");
+        System.out.println("List of products");
+        if (!database.printProducts()) {
+            System.out.println("No products available");
+        }
     }
 
-    public void printProducts(List<Product> products) {
+    private void printSpecificListOfProducts(List<Product> products) {
         System.out.println("");
         System.out.println("List of products");
         if (products.size() == 0) {
             System.out.println("No products available");
             return;
         }
-
         for (Product product : products) {
             System.out.println(product);
         }
@@ -109,16 +108,11 @@ public class UserAction {
         return inputString;
     }
 
-    public void searchProductByName(List<Product> products) {
+    private void searchProductByName() {
         String description = "Enter name of product to search: ";
         String productToSearch = getString(description);
-        List<Product> foundProducts = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getName().toLowerCase().equals(productToSearch.toLowerCase())) {
-                foundProducts.add(product);
-            }
-        }
-        printProducts(foundProducts);
+        List<Product> foundProducts = database.searchProductByName(productToSearch);
+        printSpecificListOfProducts(foundProducts);
     }
 
     public String getLine(String description) {
@@ -135,26 +129,24 @@ public class UserAction {
         return inputLine;
     }
 
-    public void addNewProduct(List<Product> products) {
+    private void addNewProduct() {
         String description = "Enter name of product";
         String productName = getString(description);
         description = "Enter description of product";
         String productDescription = getLine(description);
-        products.add(new Product(productName, productDescription));
-        System.out.println("Seccessfully added");
+        Product product = new Product(productName, productDescription);
+        if (database.addNewProduct(product)) {
+            System.out.println("Seccessfully added");
+        } else {
+            System.out.println("Product has not been added");
+        }
     }
 
-    public void removeProduct(List<Product> products) {
+    private void removeProduct() {
         String description = "Enter name of product to remove: ";
         String productToRemove = getString(description);
-        int productsRemoved = 0;
+        int productsRemoved = database.removeProduct(productToRemove);
 
-        for (int i = products.size() - 1; i >=0; i--) {
-            if (products.get(i).getName().toLowerCase().equals(productToRemove.toLowerCase())) {
-                products.remove(products.get(i));
-                productsRemoved++;
-            }
-        }
         if (productsRemoved == 1) {
             System.out.println(productsRemoved + " product removed");
         } else {
@@ -162,7 +154,7 @@ public class UserAction {
         }
     }
 
-    public void exitProgram() {
+    private void exitProgram() {
         this.printGoodBye();
         System.exit(0);
     }

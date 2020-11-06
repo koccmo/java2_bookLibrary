@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Product {
-    //private int id;
+    private Long id;
     private String name;
     private String description;
     private int quantity;
@@ -12,6 +12,14 @@ public class Product {
         this.description = description;
         this.quantity = 0;
         this.price = 0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,13 +65,13 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, quantity);
+        return Objects.hash(id, name, description, quantity, price);
     }
 
     @Override
     public String toString() {
-        return "Product {" +
-                "name : " + this.name +
+        return "Product {" + "id : " + this.id +
+                ", name : " + this.name +
                 ", description : " + this.description +
                 ", available : " + this.quantity +
                 ", price per unit : " + this.price +
