@@ -20,13 +20,13 @@ public class UserAction {
                     searchProductByName(products);
                     break;
                 case 3:
-                    System.out.println("Add new product");
+                    addNewProduct(products);
                     break;
                 case 4:
-                    System.out.println("Edit product data");
+                    System.out.println("Not emplemented");
                     break;
                 case 5:
-                    System.out.println("Remove product");
+                    removeProduct(products);
                     break;
                 case 0:
                     this.printGoodBye();
@@ -91,30 +91,66 @@ public class UserAction {
         }
     }
 
-    public String getProductNameForSearch(List<Product> products) {
+    public String getString(String description) {
         Scanner sc = new Scanner(System.in);
         System.out.println("");
-        String productName = "";
+        String inputString = "";
         while (true) {
-            System.out.print("Enter name of product to search: ");
-            productName = sc.nextLine();
-            if (iv.validateString(productName)) {
+            System.out.println(description);
+            inputString = sc.nextLine();
+            if (iv.validateString(inputString)) {
                 break;
             }
             System.out.println("Invalid input.");
         }
-        return productName;
+        return inputString;
     }
 
     public void searchProductByName(List<Product> products) {
-        String productToSearch = getProductNameForSearch(products);
+        String description = "Enter name of product to search: ";
+        String productToSearch = getString(description);
         List<Product> foundProducts = new ArrayList<>();
         for (Product product : products) {
-            if (product.getName().equals(productToSearch)) {
+            if (product.getName().toLowerCase().equals(productToSearch.toLowerCase())) {
                 foundProducts.add(product);
             }
         }
         printProducts(foundProducts);
     }
 
+    public String getLine(String description) {
+        Scanner sc = new Scanner(System.in);
+        String inputLine = "";
+        while (true) {
+            System.out.println(description);
+            inputLine = sc.nextLine();
+            if (iv.validateLine(inputLine)) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return inputLine;
+    }
+
+    public void addNewProduct(List<Product> products) {
+        String description = "Enter name of product";
+        String productName = getString(description);
+        description = "Enter description of product";
+        String productDescription = getLine(description);
+        products.add(new Product(productName, productDescription));
+    }
+
+    public void removeProduct(List<Product> products) {
+        String description = "Enter name of product to remove: ";
+        String productToRemove = getString(description);
+        int productsRemoved = 0;
+
+        for (int i = products.size() - 1; i >=0; i--) {
+            if (products.get(i).getName().toLowerCase().equals(productToRemove.toLowerCase())) {
+                products.remove(products.get(i));
+                productsRemoved++;
+            }
+        }
+        System.out.println(productsRemoved + " products removed");
+    }
 }

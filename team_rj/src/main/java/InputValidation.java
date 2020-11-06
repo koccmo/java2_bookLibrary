@@ -29,4 +29,18 @@ public class InputValidation {
         }
         return false;
     }
+
+    public Boolean validateLine(String userInput) {
+        userInput = userInput.replaceAll("\\s+","");
+        if (userInput == null || userInput.isEmpty()) {
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile("[A-Za-z_0-9]*");
+        Matcher m = pattern.matcher(userInput);
+        if (m.matches()) {
+            return true;
+        }
+        return false;
+    }
 }
