@@ -49,8 +49,22 @@ public class PatientDatabaseImplTest {
         assertTrue(patientDatabase.getPatientList().size() == 0);
     }
 
+    @Test
+    public void testFindPatientBySurname(){
+        List <Patient> expectedList = new ArrayList<>();
+        Patient patient = new Patient(personalData1);
+        expectedList.add(patient);
+        assertTrue(patientDatabase.findPatientBySurname("Bobbins").equals(expectedList));
+        assertTrue(patientDatabase.findPatientBySurname("Jhonson").equals(new ArrayList<>()));
+    }
 
-
-
+    @Test
+    public void testFindPatientByPersonalCode(){
+        List <Patient> expectedList = new ArrayList<>();
+        Patient patient = new Patient(personalData1);
+        expectedList.add(patient);
+        assertTrue(patientDatabase.findPatientByPersonalCode("12345678900").equals(expectedList));
+        assertTrue(patientDatabase.findPatientByPersonalCode("12345678907").equals(new ArrayList<>()));
+    }
 
 }

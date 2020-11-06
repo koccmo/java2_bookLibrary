@@ -15,7 +15,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     private List<Patient> patientList = new ArrayList<>();
 
     @Override
-    public List<Patient>getPatientList(){
+    public List<Patient> getPatientList(){
         return patientList;
     }
 
@@ -76,7 +76,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
         }
         return false;
     }
-
 
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;
