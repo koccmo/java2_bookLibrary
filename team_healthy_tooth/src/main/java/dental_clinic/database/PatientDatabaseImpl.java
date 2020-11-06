@@ -27,14 +27,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean deletePatient(long id) {
+    public void deletePatient(long id) {
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
                 patientList.remove(i);
-                return true;
             }
         }
-        return false;
     }
 
     @Override

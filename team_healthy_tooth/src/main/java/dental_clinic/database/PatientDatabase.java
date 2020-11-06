@@ -13,7 +13,7 @@ public interface PatientDatabase {
 
     void addPatient(PersonalData personalData);
 
-    boolean deletePatient(long id);
+    void deletePatient(long id);
 
     boolean printDatabase();
 
