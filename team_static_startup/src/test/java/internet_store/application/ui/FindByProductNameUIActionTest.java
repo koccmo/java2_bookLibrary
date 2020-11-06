@@ -30,9 +30,9 @@ public class FindByProductNameUIActionTest {
     @Test
     public void ShouldFindTwoProductsWithSameName () {
 
-        database.save(product1);
-        database.save(product2);
-        database.save(product3);
+        database.add(product1);
+        database.add(product2);
+        database.add(product3);
 
         List<Product> testList = new ArrayList<>(database.findByProductName("Pineapple"));
         assertTrue(testList.get(0).equals(product1));
@@ -43,8 +43,8 @@ public class FindByProductNameUIActionTest {
     @Test
     public void ShouldFindNoProducts () {
 
-        database.save(product1);
-        database.save(product2);
+        database.add(product1);
+        database.add(product2);
 
         List<Product> testList = new ArrayList<>(database.findByProductName("Coconut"));
         assertTrue(testList.isEmpty());
@@ -64,7 +64,7 @@ public class FindByProductNameUIActionTest {
 
     @Test
     public void ShouldFindNoProductsViaUIAction () {
-        database.save(product2);
+        database.add(product2);
 
         FindByProductNameUIAction testFind = new FindByProductNameUIAction(database);
         testFind.execute();

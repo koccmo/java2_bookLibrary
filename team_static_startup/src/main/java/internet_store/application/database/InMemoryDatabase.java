@@ -9,7 +9,7 @@ public class InMemoryDatabase implements Database {
     private final List<Product> productList = new ArrayList<>();
 
     @Override
-    public Long save(Product product) {
+    public Long add(Product product) {
         product.setId(id);
         productList.add(product);
         return ++id;

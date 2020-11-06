@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface Database {
 
-    Long save(Product product);
+    Long add(Product product);
 
     boolean delete(Long productId);
 

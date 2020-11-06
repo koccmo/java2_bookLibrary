@@ -32,8 +32,8 @@ public class PrintProductsToConsoleUIActionTest {
 
     @Test
     public void shouldPrintOutProducts() {
-        database.save(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
-        database.save(new Product("Lenovo ThinkPad", "notebook", new BigDecimal("3000.00")));
+        database.add(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
+        database.add(new Product("Lenovo ThinkPad", "notebook", new BigDecimal("3000.00")));
         PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(database);
         victim.execute();
         assertEquals("Product{id = 1, productName = 'iPhone', productDescription = 'mobile phone', price = 950.00}\n" +
