@@ -34,6 +34,7 @@ public class InternetStore {
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
         menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
         menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
+        menuNumberToAction.put(0, new ExitUIAction());
     }
 
     public void run() {
