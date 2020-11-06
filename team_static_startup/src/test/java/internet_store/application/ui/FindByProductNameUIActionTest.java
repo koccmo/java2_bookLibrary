@@ -1,12 +1,12 @@
-package internet_store.application.uiaction;
+package internet_store.application.ui;
 
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import internet_store.application.Product;
-import internet_store.application.ProductDatabase;
-import internet_store.application.ProductDatabaseImpl;
+import internet_store.application.domain.Product;
+import internet_store.application.database.Database;
+import internet_store.application.database.InMemoryDatabase;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FindByProductNameUIActionTest {
 
-    ProductDatabase productDatabase = new ProductDatabaseImpl();
+    Database database = new InMemoryDatabase();
     private final ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
@@ -30,11 +30,11 @@ public class FindByProductNameUIActionTest {
     @Test
     public void ShouldFindTwoProductsWithSameName () {
 
-        productDatabase.save(product1);
-        productDatabase.save(product2);
-        productDatabase.save(product3);
+        database.save(product1);
+        database.save(product2);
+        database.save(product3);
 
-        List<Product> testList = new ArrayList<>(productDatabase.findByProductName("Pineapple"));
+        List<Product> testList = new ArrayList<>(database.findByProductName("Pineapple"));
         assertTrue(testList.get(0).equals(product1));
         assertTrue(testList.get(1).equals(product3));
         assertTrue(testList.size() == 2);
@@ -43,10 +43,10 @@ public class FindByProductNameUIActionTest {
     @Test
     public void ShouldFindNoProducts () {
 
-        productDatabase.save(product1);
-        productDatabase.save(product2);
+        database.save(product1);
+        database.save(product2);
 
-        List<Product> testList = new ArrayList<>(productDatabase.findByProductName("Coconut"));
+        List<Product> testList = new ArrayList<>(database.findByProductName("Coconut"));
         assertTrue(testList.isEmpty());
     }
 
@@ -64,9 +64,9 @@ public class FindByProductNameUIActionTest {
 
     @Test
     public void ShouldFindNoProductsViaUIAction () {
-        productDatabase.save(product2);
+        database.save(product2);
 
-        FindByProductNameUIAction testFind = new FindByProductNameUIAction(productDatabase);
+        FindByProductNameUIAction testFind = new FindByProductNameUIAction(database);
         testFind.execute();
 
         assertEquals(

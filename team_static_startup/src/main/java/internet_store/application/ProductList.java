@@ -1,6 +1,8 @@
 package internet_store.application;
 
-import internet_store.application.uiaction.*;
+import internet_store.application.database.Database;
+import internet_store.application.database.InMemoryDatabase;
+import internet_store.application.ui.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,17 +13,17 @@ class ProductList {
     private final Map<Integer, UIAction> menuNumberToActionMap;
 
     public ProductList() {
-        ProductDatabase productDatabase = new ProductDatabaseImpl();
+        Database database = new InMemoryDatabase();
 
         menuNumberToActionMap = new HashMap<>();
-        menuNumberToActionMap.put(1, new SaveProductUIAction(productDatabase));
-        menuNumberToActionMap.put(2, new DeleteByIdUIAction(productDatabase));
-        menuNumberToActionMap.put(3, new DeleteProductUIAction(productDatabase));
-        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(productDatabase));
-        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(productDatabase));
-        menuNumberToActionMap.put(6, new FindByProductNameUIAction(productDatabase));
-        menuNumberToActionMap.put(7, new FindByIdUIAction(productDatabase));
-        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(productDatabase));
+        menuNumberToActionMap.put(1, new SaveProductUIAction(database));
+        menuNumberToActionMap.put(2, new DeleteByIdUIAction(database));
+        menuNumberToActionMap.put(3, new DeleteProductUIAction(database));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(database));
+        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(database));
+        menuNumberToActionMap.put(6, new FindByProductNameUIAction(database));
+        menuNumberToActionMap.put(7, new FindByIdUIAction(database));
+        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(database));
     }
 
     public void run() {

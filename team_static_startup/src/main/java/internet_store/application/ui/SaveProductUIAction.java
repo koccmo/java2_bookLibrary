@@ -1,17 +1,17 @@
-package internet_store.application.uiaction;
+package internet_store.application.ui;
 
-import internet_store.application.Product;
-import internet_store.application.ProductDatabase;
+import internet_store.application.domain.Product;
+import internet_store.application.database.Database;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class SaveProductUIAction implements UIAction {
 
-    private final ProductDatabase productDatabase;
+    private final Database database;
 
-    public SaveProductUIAction(ProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
+    public SaveProductUIAction(Database database) {
+        this.database = database;
     }
 
     public void execute() {
@@ -24,7 +24,7 @@ public class SaveProductUIAction implements UIAction {
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
 
-        productDatabase.save(new Product(productName, productDescription, productPrice));
+        database.save(new Product(productName, productDescription, productPrice));
         System.out.println("\nProduct added\n" + productName + "\n" + productDescription + "\n" + productPrice + " EUR");
     }
 }

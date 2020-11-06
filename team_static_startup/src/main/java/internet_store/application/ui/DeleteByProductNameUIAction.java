@@ -1,15 +1,15 @@
-package internet_store.application.uiaction;
+package internet_store.application.ui;
 
-import internet_store.application.ProductDatabase;
+import internet_store.application.database.Database;
 
 import java.util.Scanner;
 
 public class DeleteByProductNameUIAction implements UIAction {
 
-    private final ProductDatabase productDatabase;
+    private final Database database;
 
-    public DeleteByProductNameUIAction(ProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
+    public DeleteByProductNameUIAction(Database database) {
+        this.database = database;
     }
 
     public void execute() {
@@ -18,7 +18,7 @@ public class DeleteByProductNameUIAction implements UIAction {
         System.out.print("Enter product name : ");
         String productName = myInput.nextLine();
 
-        productDatabase.deleteByProductName(productName);
+        database.deleteByProductName(productName);
     }
 
 }
