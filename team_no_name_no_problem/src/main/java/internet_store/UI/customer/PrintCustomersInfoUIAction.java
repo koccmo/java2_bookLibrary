@@ -1,8 +1,9 @@
-package internet_store.UI;
+package internet_store.UI.customer;
 
-import internet_store.database.CustomerDatabase;
+import internet_store.UI.UIAction;
+import internet_store.database.customer.CustomerDatabase;
 
-public class PrintCustomersInfoUIAction implements UIAction{
+public class PrintCustomersInfoUIAction implements UIAction {
 
     private CustomerDatabase customerDatabase;
 

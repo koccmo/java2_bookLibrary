@@ -1,11 +1,13 @@
-package internet_store.UI;
+package internet_store.UI.customer;
 
-import internet_store.database.CustomerDatabase;
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
+import internet_store.database.customer.CustomerDatabase;
 import internet_store.domain.Customer;
 
 import java.util.List;
 
-public class FindAllCustomersBySurnameUIAction implements UIAction{
+public class FindAllCustomersBySurnameUIAction implements UIAction {
 
     private CustomerDatabase customerDatabase;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();

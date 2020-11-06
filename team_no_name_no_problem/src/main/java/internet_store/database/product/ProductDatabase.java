@@ -1,4 +1,4 @@
-package internet_store.database;
+package internet_store.database.product;
 
 import internet_store.domain.Product;
 
@@ -9,15 +9,15 @@ public interface ProductDatabase {
 
     public List <Product> getProductList();
 
-    boolean save(Product product);
+    boolean add(Product product);
 
     boolean deleteById(long id);
 
     boolean printProducts();
 
-    boolean changeTitle(long id, String newTitle);
+    void changeTitle(long id, String newTitle);
 
-    boolean changeDescription(long id, String newDescription);
+    void changeDescription(long id, String newDescription);
 
     Optional<Product> findAnyByTitle (String title);
 

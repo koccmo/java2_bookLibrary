@@ -1,9 +1,11 @@
-package internet_store.UI;
+package internet_store.UI.product;
 
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
 import internet_store.domain.Product;
-import internet_store.services.AddProductService;
+import internet_store.services.product.AddProductService;
 
-class AddProductUIAction implements UIAction {
+public class AddProductUIAction implements UIAction {
 
     private AddProductService addProductService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();

@@ -1,7 +1,7 @@
 package internet_store.UI;
 
-interface UIAction {
+public interface UIAction {
 
-    void execute();
+    public void execute();
 
 }

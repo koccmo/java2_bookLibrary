@@ -1,4 +1,4 @@
-package internet_store.database;
+package internet_store.database.customer;
 
 import internet_store.domain.Customer;
 import java.util.ArrayList;

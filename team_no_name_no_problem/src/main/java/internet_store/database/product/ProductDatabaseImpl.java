@@ -1,4 +1,4 @@
-package internet_store.database;
+package internet_store.database.product;
 
 import internet_store.domain.Product;
 
@@ -18,7 +18,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public boolean save(Product product) {
+    public boolean add(Product product) {
         if (productList.contains(product)){
             return false;
         }else{
@@ -53,25 +53,21 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public boolean changeTitle(long id, String newTitle) {
+    public void changeTitle(long id, String newTitle) {
         for (int i = 0; i < productList.size(); i++){
             if (productList.get(i).getId() == id) {
                 productList.get(i).setTitle(newTitle);
-                return true;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean changeDescription(long id, String newDescription) {
+    public void changeDescription(long id, String newDescription) {
         for (int i = 0; i < productList.size(); i++){
             if (id == productList.get(i).getId()){
                 productList.get(i).setDescription(newDescription);
-                return true;
             }
         }
-        return false;
     }
 
     @Override
