@@ -11,7 +11,7 @@ public interface PatientDatabase {
 
     List<Patient>getPatientList();
 
-    boolean addPatient(PersonalData personalData, String doctor);
+    void addPatient(PersonalData personalData);
 
     boolean deletePatient(long id);
 

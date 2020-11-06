@@ -8,9 +8,8 @@ public class Patient {
     private Jowl jowl = new Jowl();
     private List<String> attendingDoctors = new ArrayList<>();
 
-    public Patient(PersonalData personalData, String attendingDoctor){
+    public Patient(PersonalData personalData){
         this.personalData = personalData;
-        this.attendingDoctors.add(attendingDoctor);
     }
 
     public PersonalData getPersonalData() {

@@ -2,14 +2,16 @@ package dental_clinic.UI;
 
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.domain.PersonalData;
+import dental_clinic.services.AddPatientServices;
 
 class AddPatientUIAction implements UIAction {
 
-    private PatientDatabase patientDatabase;
+    private final AddPatientServices addPatientServices;
+
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public AddPatientUIAction(PatientDatabase patientDatabase){
-        this.patientDatabase = patientDatabase;
+    public AddPatientUIAction(AddPatientServices addPatientServices) {
+        this.addPatientServices = addPatientServices;
     }
 
     public void execute(){
@@ -21,7 +23,7 @@ class AddPatientUIAction implements UIAction {
 
         PersonalData personalData = new PersonalData(name, surname, phone, personalCode);
 
-        if (patientDatabase.addPatient(personalData, doctor)){
+        if (addPatientServices.addPatient(personalData)){
             System.out.println("Patient added");
         }else{
             System.out.println("The same patient is in database");
@@ -30,4 +32,3 @@ class AddPatientUIAction implements UIAction {
     }
 
 }
-

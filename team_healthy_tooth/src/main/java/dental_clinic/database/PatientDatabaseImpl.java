@@ -20,16 +20,10 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean addPatient(PersonalData personalData, String doctor) {
-        if (cardListContainsPatient(personalData)){
-            return false;
-        }else
-            {
+    public void addPatient(PersonalData personalData) {
             personalData.setId(id);
-            patientList.add(new Patient(personalData, doctor));
+            patientList.add(new Patient(personalData));
             id++;
-        }
-        return true;
     }
 
     @Override
@@ -83,14 +77,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
             }
         }
         return false;
-    }
-
-    private boolean cardListContainsPatient (PersonalData personalData){
-        Optional <PersonalData> result = patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patient1 -> patient1.equals(personalData))
-                .findAny();
-        return result.isPresent();
     }
 
 
