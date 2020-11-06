@@ -1,6 +1,6 @@
-package internet_store.services;
+package internet_store.services.product;
 
-import internet_store.database.ProductDatabase;
+import internet_store.database.product.ProductDatabase;
 import internet_store.domain.Product;
 
 import java.util.List;

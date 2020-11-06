@@ -1,11 +1,13 @@
-package internet_store.UI;
+package internet_store.UI.product;
 
-import internet_store.database.ProductDatabase;
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
+import internet_store.database.product.ProductDatabase;
 import internet_store.domain.Product;
 
 import java.util.List;
 
-class FindAllByTitleUIAction implements UIAction {
+public class FindAllByTitleUIAction implements UIAction {
 
     private ProductDatabase productDatabase;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();

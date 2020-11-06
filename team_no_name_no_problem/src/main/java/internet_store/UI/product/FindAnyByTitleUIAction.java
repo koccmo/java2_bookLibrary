@@ -1,8 +1,10 @@
-package internet_store.UI;
+package internet_store.UI.product;
 
-import internet_store.database.ProductDatabase;
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
+import internet_store.database.product.ProductDatabase;
 
-class FindAnyByTitleUIAction implements UIAction {
+public class FindAnyByTitleUIAction implements UIAction {
 
     private ProductDatabase productDatabase;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();

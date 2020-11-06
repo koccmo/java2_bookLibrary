@@ -1,6 +1,6 @@
 package internet_store;
 
-import internet_store.database.CustomerDatabaseImpl;
+import internet_store.database.customer.CustomerDatabaseImpl;
 import internet_store.domain.Customer;
 import org.junit.Test;
 

@@ -1,9 +1,10 @@
-package internet_store.UI;
+package internet_store.UI.product;
 
-import internet_store.database.ProductDatabase;
-import internet_store.services.DeleteByIdService;
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
+import internet_store.services.product.DeleteByIdService;
 
-class DeleteByIdUIAction implements UIAction {
+public class DeleteByIdUIAction implements UIAction {
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     private DeleteByIdService deleteByIdService;

@@ -1,8 +1,10 @@
-package internet_store.UI;
+package internet_store.UI.customer;
 
-import internet_store.database.CustomerDatabase;
+import internet_store.UI.InputCheckUtility;
+import internet_store.UI.UIAction;
+import internet_store.database.customer.CustomerDatabase;
 
-public class DeleteCustomerUIAction implements UIAction{
+public class DeleteCustomerUIAction implements UIAction {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
