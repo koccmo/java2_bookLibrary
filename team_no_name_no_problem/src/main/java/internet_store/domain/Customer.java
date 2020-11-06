@@ -73,10 +73,10 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return phoneNumber == customer.phoneNumber &&
-                Objects.equals(name, customer.name) &&
-                Objects.equals(surname, customer.surname) &&
-                Objects.equals(address, customer.address) &&
-                Objects.equals(email, customer.email);
+                Objects.equals(name.toLowerCase(), customer.name.toLowerCase()) &&
+                Objects.equals(surname.toLowerCase(), customer.surname.toLowerCase()) &&
+                Objects.equals(address.toLowerCase(), customer.address.toLowerCase()) &&
+                Objects.equals(email.toLowerCase(), customer.email.toLowerCase());
     }
 
     @Override
