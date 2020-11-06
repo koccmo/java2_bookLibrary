@@ -1,13 +1,15 @@
-package internet_store.application;
+package internet_store.application.database;
+
+import internet_store.application.domain.Product;
 
 import java.util.*;
 
-public class ProductDatabaseImpl implements ProductDatabase {
+public class InMemoryDatabase implements Database {
     private Long id = 1L;
     private final List<Product> productList = new ArrayList<>();
 
     @Override
-    public Long save(Product product) {
+    public Long add(Product product) {
         product.setId(id);
         productList.add(product);
         return ++id;

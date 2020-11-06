@@ -1,7 +1,7 @@
-package internet_store.application.uiaction;
+package internet_store.lesson_1.uiaction;
 
-import internet_store.application.Product;
-import internet_store.application.ProductDatabase;
+import internet_store.lesson_1.Product;
+import internet_store.lesson_1.ProductDatabase;
 
 import java.util.List;
 

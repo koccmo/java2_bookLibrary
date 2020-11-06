@@ -1,4 +1,4 @@
-package internet_store.application;
+package internet_store.lesson_1;
 
 import java.util.List;
 import java.util.Optional;
