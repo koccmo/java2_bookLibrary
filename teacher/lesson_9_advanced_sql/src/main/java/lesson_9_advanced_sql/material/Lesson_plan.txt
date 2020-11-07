@@ -1,0 +1,5 @@
+Lesson 9 plan:
+
+1. Create table
+2. Database Users
+3. User rights
