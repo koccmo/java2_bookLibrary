@@ -3,6 +3,7 @@ package dental_clinic.database;
 import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
 import dental_clinic.domain.ToothStatus;
+import dental_clinic.domain.Visit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +61,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
+    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor) {
         for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == id){
-                patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
+            if (isSpecificPatient(i, id)){
+                Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+                patientList.get(i).addVisit(visit);
+                patientList.get(i).updateJowl(toothNumber, toothStatus);
             }
         }
     }
