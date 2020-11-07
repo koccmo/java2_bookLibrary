@@ -1,22 +1,21 @@
 package dental_clinic.UI;
 
-import dental_clinic.database.PatientDatabase;
-import dental_clinic.services.DeletePatientServices;
+import dental_clinic.services.DeletePatientService;
 
 class DeletePatientUIAction implements UIAction {
 
-    private DeletePatientServices deletePatientServices;
+    private DeletePatientService deletePatientService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public DeletePatientUIAction(DeletePatientServices deletePatientServices) {
-        this.deletePatientServices = deletePatientServices;
+    public DeletePatientUIAction(DeletePatientService deletePatientService) {
+        this.deletePatientService = deletePatientService;
     }
 
     public void execute(){
 
         long id = inputCheckUtility.inputValidLong("Please enter patients id");
 
-        if (deletePatientServices.deletePatient(id)){
+        if (deletePatientService.deletePatient(id)){
             System.out.println("Patient with id " + id + " is deleted");
         }else{
             System.out.println("Database doesn't contain patient with id " + id);
