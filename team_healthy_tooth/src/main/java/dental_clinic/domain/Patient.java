@@ -22,6 +22,10 @@ public class Patient {
         return jowl;
     }
 
+    public List<Visit> getVisits() {
+        return visits;
+    }
+
     public void addVisit(Visit visit){
         visits.add(visit);
     }
