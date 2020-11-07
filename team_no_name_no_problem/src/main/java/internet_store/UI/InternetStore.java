@@ -24,7 +24,7 @@ public class InternetStore {
 
     public InternetStore() {
 
-
+        //TODO Correct ExitUIAction
         menuNumberToAction = new HashMap();
 
         menuNumberToAction.put(1, new AddProductUIAction(addProductService));
