@@ -60,14 +60,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
+    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
                 patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
-                return true;
             }
         }
-        return false;
     }
 
     private boolean isSpecificPatient (int index, long id) {

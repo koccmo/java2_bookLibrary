@@ -23,6 +23,7 @@ public class DentalClinic {
         FindPatientBySurnameService findPatientBySurnameService = new FindPatientBySurnameService(patientDatabase);
         FindPatientByPersonalCodeService findPatientByPersonalCodeService =
                 new FindPatientByPersonalCodeService(patientDatabase);
+        AddVisitService addVisitService = new AddVisitService(patientDatabase);
 
         menuNumberToAction = new HashMap();
 
@@ -33,7 +34,7 @@ public class DentalClinic {
         menuNumberToAction.put(4, new PrintPatientCardUIAction(getSpecificPatientHistoryService));
         menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientBySurnameService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientByPersonalCodeService));
-        menuNumberToAction.put(7, new AddVisitUIAction(patientDatabase));
+        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService));
     }
 
     public void run(){

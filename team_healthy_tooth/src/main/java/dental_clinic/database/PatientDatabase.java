@@ -21,6 +21,6 @@ public interface PatientDatabase {
 
     List<Patient> findPatientByPersonalCode(String personalCode);
 
-    boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus);
+    void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus);
 
 }

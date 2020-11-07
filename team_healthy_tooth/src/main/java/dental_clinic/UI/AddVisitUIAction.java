@@ -2,16 +2,17 @@ package dental_clinic.UI;
 
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.domain.ToothStatus;
+import dental_clinic.services.AddVisitService;
 
 import java.util.Optional;
 
 class AddVisitUIAction implements UIAction {
 
-    private PatientDatabase patientDatabase;
+    private AddVisitService addVisitService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public AddVisitUIAction(PatientDatabase patientDatabase){
-        this.patientDatabase = patientDatabase;
+    public AddVisitUIAction(AddVisitService addVisitService) {
+        this.addVisitService = addVisitService;
     }
 
     public void execute(){
@@ -23,7 +24,7 @@ class AddVisitUIAction implements UIAction {
 
         ToothStatus toothStatus = inputToothStatus();
 
-        if (!patientDatabase.addVisit(id, toothNumber, comment, toothStatus)){
+        if (!addVisitService.execute(id, toothNumber, comment, toothStatus)){
             System.out.println("Not correct input");
         }
 
