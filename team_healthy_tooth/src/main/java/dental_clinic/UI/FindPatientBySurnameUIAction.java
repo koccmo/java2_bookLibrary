@@ -1,6 +1,5 @@
 package dental_clinic.UI;
 
-import dental_clinic.database.PatientDatabase;
 import dental_clinic.domain.Patient;
 import dental_clinic.services.FindPatientBySurnameService;
 
