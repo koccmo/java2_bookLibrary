@@ -2,10 +2,7 @@ package dental_clinic.UI;
 
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.database.PatientDatabaseImpl;
-import dental_clinic.services.AddPatientService;
-import dental_clinic.services.DeletePatientService;
-import dental_clinic.services.GetPatientsService;
-import dental_clinic.services.GetSpecificPatientHistoryService;
+import dental_clinic.services.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +18,9 @@ public class DentalClinic {
         AddPatientService addPatientService = new AddPatientService(patientDatabase);
         DeletePatientService deletePatientService = new DeletePatientService(patientDatabase);
         GetPatientsService getPatientsService = new GetPatientsService(patientDatabase);
-        GetSpecificPatientHistoryService getSpecificPatientHistoryService = new GetSpecificPatientHistoryService(patientDatabase);
+        GetSpecificPatientHistoryService getSpecificPatientHistoryService =
+                new GetSpecificPatientHistoryService(patientDatabase);
+        FindPatientBySurnameService findPatientBySurnameService = new FindPatientBySurnameService(patientDatabase);
 
         menuNumberToAction = new HashMap();
 
@@ -30,7 +29,7 @@ public class DentalClinic {
         menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientService));
         menuNumberToAction.put(3, new PrintPatientDatabaseUIAction(getPatientsService));
         menuNumberToAction.put(4, new PrintPatientCardUIAction(getSpecificPatientHistoryService));
-        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(patientDatabase));
+        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientBySurnameService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(patientDatabase));
         menuNumberToAction.put(7, new AddVisitUIAction(patientDatabase));
     }
