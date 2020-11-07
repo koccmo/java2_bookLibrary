@@ -15,7 +15,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     private List<Patient> patientList = new ArrayList<>();
 
     @Override
-    public List<Patient> getPatientList(){
+    public List<Patient> getPatients(){
         return patientList;
     }
 
@@ -36,20 +36,13 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean printDatabase() {
-        patientList.forEach(System.out::println);
-        return !patientList.isEmpty();
-    }
-
-    @Override
-    public boolean printSpecificPatientHistory(long id) {
+    public Optional <Patient> getSpecificPatientHistory(long id) {
             for (int i = 0; i < patientList.size(); i++){
                 if (isSpecificPatient(i, id)){
-                    System.out.println(patientList.get(i).toString());
-                    return true;
+                    return Optional.of(patientList.get(i));
                 }
             }
-        return false;
+            return Optional.empty();
     }
 
     @Override
