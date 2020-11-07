@@ -20,8 +20,8 @@ public class ChangeTitleService {
     }
 
     private boolean databaseContainsSpecificId(long id){
-        for (int i = 0; i < productDatabase.getProductList().size(); i++){
-            if (productDatabase.getProductList().get(i).getId() == id) {
+        for (int i = 0; i < productDatabase.getProducts().size(); i++){
+            if (productDatabase.getProducts().get(i).getId() == id) {
                 return true;
             }
         }

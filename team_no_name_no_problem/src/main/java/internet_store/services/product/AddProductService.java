@@ -11,11 +11,11 @@ public class AddProductService {
         this.productDatabase = productDatabase;
     }
 
-    public boolean addProduct(Product product){
-        if (productDatabase.getProductList().contains(product)){
+    public boolean execute(Product product){
+        if (productDatabase.getProducts().contains(product)){
             return false;
         }else{
-            productDatabase.addProduct(product);
+            productDatabase.add(product);
             return true;
         }
     }

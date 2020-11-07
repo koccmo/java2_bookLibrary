@@ -20,8 +20,8 @@ public class ChangeDescriptionService {
     }
 
     private boolean containsDatabaseSpecificId(long id){
-        for (int i = 0; i < productDatabase.getProductList().size(); i++){
-            if (id == productDatabase.getProductList().get(i).getId()){
+        for (int i = 0; i < productDatabase.getProducts().size(); i++){
+            if (id == productDatabase.getProducts().get(i).getId()){
                 return true;
             }
         }
