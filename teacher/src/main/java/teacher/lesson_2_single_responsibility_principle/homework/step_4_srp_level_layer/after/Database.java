@@ -1,4 +1,4 @@
-package teacher.lesson_3_request_response_input_data_validation.homework.step_4_srp_level_layer.after;
+package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.after;
 
 import java.util.List;
 
