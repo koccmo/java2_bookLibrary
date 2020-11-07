@@ -1,3 +1,5 @@
+package estore.domain;
+
 import java.util.Objects;
 
 public class Product {
@@ -59,7 +61,8 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(name, product.name) &&
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
                 Objects.equals(description, product.description);
     }
 

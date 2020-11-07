@@ -1,3 +1,5 @@
+package estore.ui;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,10 +11,23 @@ public class InputValidation {
         } catch (Exception e) {
             return -1;
         }
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             if (choice == i) {
                 return choice;
             }
+        }
+        return -1;
+    }
+
+    public int validatePositiveInteger(String userStringInput) {
+        int choice;
+        try {
+            choice = Integer.valueOf(userStringInput);
+        } catch (Exception e) {
+            return -1;
+        }
+        if (choice > 0) {
+            return choice;
         }
         return -1;
     }

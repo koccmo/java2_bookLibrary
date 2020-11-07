@@ -1,3 +1,7 @@
+package estore.database;
+
+import estore.domain.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +58,22 @@ public class ProductDataBaseImplementation implements ProductDataBase {
     }
 
     @Override
-    public int removeProduct(String name) {
+    public int removeProductByName(String name) {
         int productsRemoved = 0;
         for (int i = products.size() - 1; i >=0; i--) {
             if (products.get(i).getName().toLowerCase().equals(name.toLowerCase())) {
+                products.remove(products.get(i));
+                productsRemoved++;
+            }
+        }
+        return productsRemoved;
+    }
+
+    @Override
+    public int removeProductById(Long id) {
+        int productsRemoved = 0;
+        for (int i = products.size() - 1; i >=0; i--) {
+            if (products.get(i).getId().equals(id)) {
                 products.remove(products.get(i));
                 productsRemoved++;
             }

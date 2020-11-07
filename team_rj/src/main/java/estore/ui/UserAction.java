@@ -1,17 +1,25 @@
-import java.util.ArrayList;
+package estore.ui;
+
+import estore.database.ProductDataBase;
+import estore.database.ProductDataBaseImplementation;
+import estore.domain.Product;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class UserAction {
-    private InputValidation iv = new InputValidation();
-    private ProductDataBase database = new ProductDataBaseImplementation();
+    //private InputValidation iv = new InputValidation();
+    //private ProductDataBase database = new ProductDataBaseImplementation();
 
     public void run() {
+        InputValidation iv = new InputValidation();
+        ProductDataBase database = new ProductDataBaseImplementation();
+
         this.printGreeting();
         while (true) {
             this.printUserMenu();
-            int userInput = this.getUserInputOfMenuItem();
-            executeMenuItem(userInput);
+            int userInput = this.getUserInputOfMenuItem(iv);
+            executeMenuItem(userInput, database, iv);
         }
     }
 
@@ -31,26 +39,30 @@ public class UserAction {
         System.out.println("2 - find product by name");
         System.out.println("3 - add new product");
         System.out.println("4 - edit product data");
-        System.out.println("5 - remove product");
+        System.out.println("5 - remove product by name");
+        System.out.println("6 - remove product by id");
         System.out.println("0 - exit");
     }
 
-    private void executeMenuItem(int menuItem) {
+    private void executeMenuItem(int menuItem, ProductDataBase database, InputValidation iv) {
         switch (menuItem) {
             case 1:
                 printListOfProducts(database.getDatabase());
                 break;
             case 2:
-                searchProductByName();
+                searchProductByName(database, iv);
                 break;
             case 3:
-                addNewProduct();
+                addNewProduct(database, iv);
                 break;
             case 4:
                 System.out.println("Not emplemented");
                 break;
             case 5:
-                removeProduct();
+                removeProductByName(database, iv);
+                break;
+            case 6:
+                removeProductById(database, iv);
                 break;
             case 0:
                 exitProgram();
@@ -58,7 +70,7 @@ public class UserAction {
         }
     }
 
-    public int getUserInputOfMenuItem() {
+    public int getUserInputOfMenuItem(InputValidation iv) {
         Scanner sc = new Scanner(System.in);
         int userInput;
         while (true) {
@@ -85,7 +97,7 @@ public class UserAction {
         }
     }
 
-    public String getString(String description) {
+    public String getString(String description, InputValidation iv) {
         Scanner sc = new Scanner(System.in);
         System.out.println("");
         String inputString = "";
@@ -100,14 +112,14 @@ public class UserAction {
         return inputString;
     }
 
-    private void searchProductByName() {
+    private void searchProductByName(ProductDataBase database, InputValidation iv) {
         String description = "Enter name of product to search: ";
-        String productToSearch = getString(description);
+        String productToSearch = getString(description, iv);
         List<Product> foundProducts = database.searchProductByName(productToSearch);
         printListOfProducts(foundProducts);
     }
 
-    public String getLine(String description) {
+    public String getLine(String description, InputValidation iv) {
         Scanner sc = new Scanner(System.in);
         String inputLine = "";
         while (true) {
@@ -121,11 +133,11 @@ public class UserAction {
         return inputLine;
     }
 
-    private void addNewProduct() {
+    private void addNewProduct(ProductDataBase database, InputValidation iv) {
         String description = "Enter name of product";
-        String productName = getString(description);
+        String productName = getString(description, iv);
         description = "Enter description of product";
-        String productDescription = getLine(description);
+        String productDescription = getLine(description, iv);
         Product product = new Product(productName, productDescription);
         if (database.addNewProduct(product)) {
             System.out.println("Seccessfully added");
@@ -134,10 +146,37 @@ public class UserAction {
         }
     }
 
-    private void removeProduct() {
+    private void removeProductByName(ProductDataBase database, InputValidation iv) {
         String description = "Enter name of product to remove: ";
-        String productToRemove = getString(description);
-        int productsRemoved = database.removeProduct(productToRemove);
+        String productToRemove = getString(description, iv);
+        int productsRemoved = database.removeProductByName(productToRemove);
+
+        if (productsRemoved == 1) {
+            System.out.println(productsRemoved + " product removed");
+        } else {
+            System.out.println(productsRemoved + " products removed");
+        }
+    }
+
+    public int getPositiveInteger(String description, InputValidation iv) {
+        Scanner sc = new Scanner(System.in);
+        int userInput;
+        while (true) {
+            System.out.print("Choice: ");
+            String userStringInput = sc.nextLine();
+            userInput = iv.validatePositiveInteger(userStringInput);
+            if (userInput != -1) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return userInput;
+    }
+
+    private void removeProductById(ProductDataBase database, InputValidation iv) {
+        String description = "Enter id of product to remove: ";
+        int productToRemoveId = getPositiveInteger(description, iv);
+        int productsRemoved = database.removeProductById(Long.valueOf(productToRemoveId));
 
         if (productsRemoved == 1) {
             System.out.println(productsRemoved + " product removed");

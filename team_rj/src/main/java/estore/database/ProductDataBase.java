@@ -1,3 +1,7 @@
+package estore.database;
+
+import estore.domain.Product;
+
 import java.util.List;
 
 public interface ProductDataBase {
@@ -6,7 +10,9 @@ public interface ProductDataBase {
 
     boolean addNewProduct(Product product);
 
-    int removeProduct(String name);
+    int removeProductByName(String name);
+
+    int removeProductById(Long id);
 
     List<Product> getDatabase();
 
