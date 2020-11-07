@@ -2,16 +2,17 @@ package internet_store.application.ui;
 
 import internet_store.application.domain.Product;
 import internet_store.application.database.Database;
+import internet_store.application.services.FindProductService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class FindByProductNameUIAction implements UIAction {
 
-    private final Database database;
+    private final FindProductService findProductService;
 
-    public FindByProductNameUIAction(Database database) {
-        this.database = database;
+    public FindByProductNameUIAction(FindProductService findProductService) {
+        this.findProductService = findProductService;
     }
 
     public void execute() {
@@ -19,7 +20,7 @@ public class FindByProductNameUIAction implements UIAction {
         System.out.print("Enter product name to search for: ");
         String productName = myInput.nextLine();
 
-        List<Product> productFound = database.findByProductName(productName);
+        List<Product> productFound = findProductService.findByProductName(productName);
 
         if (productFound.isEmpty()) {
             System.out.println("\nNo product with name = " + productName + " in the database");
