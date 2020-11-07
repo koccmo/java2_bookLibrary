@@ -14,7 +14,12 @@ public class GetSpecificPatientHistoryService {
     }
 
     public Optional<Patient> execute(long id){
-        return patientDatabase.getSpecificPatientHistory(id);
+        for (int i = 0; i < patientDatabase.getPatients().size(); i++){
+            if (isSpecificPatient(i, id)){
+                return Optional.of(patientDatabase.getPatients().get(i));
+            }
+        }
+        return Optional.empty();
     }
 
     private boolean isSpecificPatient (int index, long id) {
