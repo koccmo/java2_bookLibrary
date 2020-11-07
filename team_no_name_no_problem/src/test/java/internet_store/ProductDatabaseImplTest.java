@@ -205,7 +205,7 @@ public class ProductDatabaseImplTest {
 
         assertEquals(0, resultOfFindingAllPC.size());
     }
-
+/*
     @Test
     public void findProductByIdTest() {
         ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
@@ -229,5 +229,5 @@ public class ProductDatabaseImplTest {
         assertTrue(resultOfFindingLaptopAcer.isPresent());
         assertFalse(resultOfFindingTV.isPresent());
         assertFalse(resultOfFiningGPS.isPresent());
-    }
+    } */
 }
