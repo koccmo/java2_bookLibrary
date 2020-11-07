@@ -1,8 +1,10 @@
-package teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after;
+package teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.database;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.Book;
 
 public class InMemoryDatabaseImpl implements Database {
 

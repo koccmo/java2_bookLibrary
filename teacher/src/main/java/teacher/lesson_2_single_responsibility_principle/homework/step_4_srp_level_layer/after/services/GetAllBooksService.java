@@ -3,7 +3,7 @@ package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_lev
 import java.util.List;
 
 import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.after.Book;
-import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.after.Database;
+import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.after.database.Database;
 
 public class GetAllBooksService {
 

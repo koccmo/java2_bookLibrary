@@ -3,7 +3,7 @@ package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_lev
 import java.util.Scanner;
 
 import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.Book;
-import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.Database;
+import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.database.Database;
 
 public class AddBookUIAction implements UIAction {
 

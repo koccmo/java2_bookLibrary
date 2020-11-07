@@ -1,6 +1,6 @@
 package teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.before.services;
 
-import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.before.Database;
+import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.before.database.Database;
 
 public class RemoveBookService {
 

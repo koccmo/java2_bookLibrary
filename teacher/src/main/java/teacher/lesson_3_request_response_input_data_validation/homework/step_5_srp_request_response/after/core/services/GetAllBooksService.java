@@ -3,7 +3,7 @@ package teacher.lesson_3_request_response_input_data_validation.homework.step_5_
 import java.util.List;
 
 import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.Book;
-import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.Database;
+import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.database.Database;
 import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.requests.GetAllBooksRequest;
 import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.responses.GetAllBooksResponse;
 

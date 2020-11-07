@@ -1,6 +1,6 @@
 package teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.services;
 
-import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.Database;
+import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.database.Database;
 import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.requests.RemoveBookRequest;
 import teacher.lesson_3_request_response_input_data_validation.homework.step_5_srp_request_response.after.core.responses.RemoveBookResponse;
 

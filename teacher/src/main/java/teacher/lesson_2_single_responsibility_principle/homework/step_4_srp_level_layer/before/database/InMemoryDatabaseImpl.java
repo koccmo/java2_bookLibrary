@@ -1,7 +1,9 @@
-package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before;
+package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.Book;
 
 public class InMemoryDatabaseImpl implements Database {
 

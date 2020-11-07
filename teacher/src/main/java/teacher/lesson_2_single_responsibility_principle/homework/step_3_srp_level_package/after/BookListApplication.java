@@ -7,6 +7,8 @@ import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_leve
 import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.console_ui.GetAllBooksUIAction;
 import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.console_ui.RemoveBookUIAction;
 import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.console_ui.UIAction;
+import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.database.Database;
+import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.database.InMemoryDatabaseImpl;
 
 public class BookListApplication {
 

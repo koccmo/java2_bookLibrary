@@ -1,6 +1,6 @@
 package teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.console_ui;
 
-import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.Database;
+import teacher.lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before.database.Database;
 
 public class GetAllBooksUIAction implements UIAction {
 

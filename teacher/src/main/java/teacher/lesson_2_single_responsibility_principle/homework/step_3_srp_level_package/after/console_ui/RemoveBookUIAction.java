@@ -2,7 +2,7 @@ package teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_lev
 
 import java.util.Scanner;
 
-import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.Database;
+import teacher.lesson_2_single_responsibility_principle.homework.step_3_srp_level_package.after.database.Database;
 
 public class RemoveBookUIAction implements UIAction {
 
