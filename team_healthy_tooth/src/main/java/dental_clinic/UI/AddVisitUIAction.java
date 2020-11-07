@@ -24,8 +24,12 @@ class AddVisitUIAction implements UIAction {
 
         ToothStatus toothStatus = inputToothStatus();
 
-        if (!addVisitService.execute(id, toothNumber, comment, toothStatus)){
+        String doctor = inputCheckUtility.inputValidString("Please enter doctor name");
+
+        if (!addVisitService.execute(id, toothNumber, comment, toothStatus, doctor)){
             System.out.println("Not correct input");
+        }else{
+            System.out.println("Visit added successfully!");
         }
 
     }

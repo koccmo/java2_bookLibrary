@@ -54,8 +54,8 @@ public class DentalClinic {
         System.out.println("\nMenu\n" +
                 "1   Add patient\n" +
                 "2   Delete by id\n" +
-                "3   Print card database\n" +
-                "4   Print patient card database\n" +
+                "3   Print patients database\n" +
+                "4   Print specific patient information\n" +
                 "5   Find patient by surname\n" +
                 "6   Find patient by personal code\n" +
                 "7   Update patient's jowl data in database\n" +
