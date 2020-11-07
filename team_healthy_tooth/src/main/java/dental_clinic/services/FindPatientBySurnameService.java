@@ -16,7 +16,7 @@ public class FindPatientBySurnameService {
 
     public List<Patient> execute(String surname){
         return patientDatabase.getPatients().stream()
-                .filter(patient -> patient.getPersonalData().getSurname().equalsIgnoreCase(surname))
+                .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }
