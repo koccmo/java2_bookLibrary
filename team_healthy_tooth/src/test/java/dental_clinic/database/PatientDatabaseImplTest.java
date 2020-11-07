@@ -26,27 +26,27 @@ public class PatientDatabaseImplTest {
         List<Patient> expectedList = new ArrayList<>();
         Patient patient = new Patient(personalData1);
         expectedList.add(patient);
-        assertTrue(patientDatabase.getPatientList().equals(expectedList));
+        assertTrue(patientDatabase.getPatients().equals(expectedList));
     }
 
     @Test
     public void testAddPatient(){
         patientDatabase.addPatient(personalData2);
-        patientDatabase.getPatientList().contains(personalData2);
+        patientDatabase.getPatients().contains(personalData2);
     }
 
     @Test
     public void testIdGeneration(){
-        assertTrue(patientDatabase.getPatientList().get(0).getPersonalData().getId() == 1);
+        assertTrue(patientDatabase.getPatients().get(0).getPersonalData().getId() == 1);
         patientDatabase.addPatient(personalData2);
-        assertTrue(patientDatabase.getPatientList().get(1).getPersonalData().getId() == 2);
+        assertTrue(patientDatabase.getPatients().get(1).getPersonalData().getId() == 2);
     }
 
     @Test
     public void testDeletePatient(){
-        assertTrue(patientDatabase.getPatientList().size() == 1);
+        assertTrue(patientDatabase.getPatients().size() == 1);
         patientDatabase.deletePatient(1);
-        assertTrue(patientDatabase.getPatientList().size() == 0);
+        assertTrue(patientDatabase.getPatients().size() == 0);
     }
 
     @Test
