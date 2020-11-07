@@ -3,6 +3,7 @@ package internet_store.application.database;
 import internet_store.application.domain.Product;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class InMemoryDatabase implements Database {
     private Long id = 1L;
@@ -49,23 +50,16 @@ public class InMemoryDatabase implements Database {
 
     @Override
     public List<Product> findByProductName(String productName) {
-        List<Product> productsByName = new ArrayList<>();
-        for (Product product : productList) {
-            if (product.getName().toLowerCase().equals(productName.toLowerCase())) {
-                productsByName.add(product);
-            }
-        }
-        return productsByName;
+        return productList.stream()
+                .filter(productInDataBase -> productInDataBase.getName().equalsIgnoreCase(productName))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Product> findById(Long productId) {
-        for (Product products : productList) {
-            if (products.getId().equals(productId)) {
-                return Optional.of(products);
-            }
-        }
-        return Optional.empty();
+        return productList.stream()
+                .filter(productInDataBase -> productInDataBase.getId().equals(productId))
+                .findFirst();
     }
 
     @Override
