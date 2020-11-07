@@ -13,6 +13,8 @@ public interface ProductDatabase {
 
     boolean deleteById(long id);
 
+    Optional<Product> findById(Long id);
+
     boolean printProducts();
 
     void changeTitle(long id, String newTitle);
