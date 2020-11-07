@@ -12,7 +12,7 @@ class PrintPatientDatabaseUIAction implements UIAction {
 
     public void execute(){
 
-        if (!getPatientsService.execute().isEmpty()){
+        if (getPatientsService.execute().isEmpty()){
             System.out.println("Database is empty");
         }else{
             getPatientsService.execute().forEach(System.out::println);
