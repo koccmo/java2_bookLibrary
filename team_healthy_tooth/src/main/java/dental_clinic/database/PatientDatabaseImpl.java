@@ -49,7 +49,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     @Override
     public List<Patient> findPatientBySurname(String surname) {
         return patientList.stream()
-                .filter(patient -> patient.getPersonalData().getSurname().equalsIgnoreCase(surname))
+                .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
