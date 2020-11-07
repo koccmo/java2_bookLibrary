@@ -35,19 +35,18 @@ public class DentalClinic {
         menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientBySurnameService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientByPersonalCodeService));
         menuNumberToAction.put(7, new AddVisitUIAction(addVisitService));
+        menuNumberToAction.put(0, new ExitUIAction());
     }
 
     public void run(){
 
-        boolean isWorking = true;
-        while(isWorking) {
+        while(true) {
 
             printMenu();
 
             int userSelectedMenuNumber = inputCheckUtility.inputValidInteger("Please enter menu number: ");
 
-            isWorking = nullIsNotPressed(userSelectedMenuNumber);
-
+            executeUIAction(userSelectedMenuNumber);
         }
     }
 
@@ -61,16 +60,6 @@ public class DentalClinic {
                 "6   Find patient by personal code\n" +
                 "7   Update patient's jowl data in database\n" +
                 "0   Exit");
-    }
-
-    private boolean nullIsNotPressed(int userSelectedMenuNumber){
-        if (userSelectedMenuNumber == 0) {
-            System.out.println(":) End of work day!");
-            return false;
-        } else {
-            executeUIAction(userSelectedMenuNumber);
-            return true;
-        }
     }
 
     private void executeUIAction (int userSelectedMenuNumber) {
