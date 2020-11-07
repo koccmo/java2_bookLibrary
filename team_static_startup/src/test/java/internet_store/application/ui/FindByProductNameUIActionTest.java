@@ -61,7 +61,7 @@ public class FindByProductNameUIActionTest {
         System.setIn(System.in);
         System.setOut(standardOut);
     }
-
+/*
     @Test
     public void ShouldFindNoProductsViaUIAction () {
         database.add(product2);
@@ -74,6 +74,7 @@ public class FindByProductNameUIActionTest {
                         + "No product with name = Pineapple in the database"
                         ,outputStreamCaptor.toString().trim());
     }
+*/
 
 }
 
