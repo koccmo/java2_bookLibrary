@@ -72,21 +72,4 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return patientList.get(index).getPersonalData().getId() == id;
     }
 
-    //Тут я размышляла надо ли на карточке печатать последнее инфо или всю историю... :)
-    private void printActualInfoAboutJowl(int index){
-        /*Map<Integer, ToothInfo> result = patientList.get(index).getJowl();
-        String toothInfoForPrint = "";
-
-        for (Integer key : result.keySet()){
-            toothInfoForPrint += key + " ";
-            if (result.get(key).getComment().size() > 0){
-                if (!result.get(key).getComment().get(result.get(key).getComment().size()-1).equals(Optional.empty())){
-                    toothInfoForPrint += result.get(key).getComment().get(result.get(key).getComment().size()-1) + " ";
-                }
-            }
-            toothInfoForPrint += result.get(key).getStatus().get(result.get(key).getStatus().size()-1) + "\n";
-        }
-
-        System.out.println(toothInfoForPrint);*/
-    }
 }

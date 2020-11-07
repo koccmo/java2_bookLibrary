@@ -15,6 +15,8 @@ public interface PatientDatabase {
 
     void deletePatient(long id);
 
+    //addDoctor
+
     Optional <Patient> getSpecificPatientHistory(long id);
 
     List<Patient> findPatientBySurname(String surname);
