@@ -1,5 +1,6 @@
 package estore.ui;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,5 +58,64 @@ public class InputValidation {
             return true;
         }
         return false;
+    }
+
+    public String getLine(String description) {
+        Scanner sc = new Scanner(System.in);
+        String inputLine = "";
+        while (true) {
+            System.out.println(description);
+            inputLine = sc.nextLine();
+            if (validateLine(inputLine)) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return inputLine;
+    }
+
+    public String getString(String description) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("");
+        String inputString = "";
+        while (true) {
+            System.out.println(description);
+            inputString = sc.nextLine();
+            if (validateString(inputString)) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return inputString;
+    }
+
+    public int getPositiveInteger(String description) {
+        Scanner sc = new Scanner(System.in);
+        int userInput;
+        while (true) {
+            System.out.println(description);
+            String userStringInput = sc.nextLine();
+            userInput = validatePositiveInteger(userStringInput);
+            if (userInput != -1) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return userInput;
+    }
+
+    public int getUserInputOfMenuItem() {
+        Scanner sc = new Scanner(System.in);
+        int userInput;
+        while (true) {
+            System.out.print("Choice: ");
+            String userStringInput = sc.nextLine();
+            userInput = validateUserMenuChoice(userStringInput);
+            if (userInput != -1) {
+                break;
+            }
+            System.out.println("Invalid input.");
+        }
+        return userInput;
     }
 }
