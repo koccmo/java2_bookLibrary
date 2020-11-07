@@ -64,12 +64,4 @@ public class ProductDataBaseImplementation implements ProductDataBase {
         }
         return productsRemoved;
     }
-
-    @Override
-    public boolean printProducts() {
-        for (Product product : products) {
-            System.out.println(product);
-        }
-        return (products.size() != 0);
-    }
 }

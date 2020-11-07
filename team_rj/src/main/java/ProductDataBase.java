@@ -8,8 +8,6 @@ public interface ProductDataBase {
 
     int removeProduct(String name);
 
-    boolean printProducts();
-
     List<Product> getDatabase();
 
     int getDatabaseSize();

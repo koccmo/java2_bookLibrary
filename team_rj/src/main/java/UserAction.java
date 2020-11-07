@@ -38,7 +38,7 @@ public class UserAction {
     private void executeMenuItem(int menuItem) {
         switch (menuItem) {
             case 1:
-                printAllProducts();
+                printListOfProducts(database.getDatabase());
                 break;
             case 2:
                 searchProductByName();
@@ -73,15 +73,7 @@ public class UserAction {
         return userInput;
     }
 
-    private void printAllProducts() {
-        System.out.println("");
-        System.out.println("List of products");
-        if (!database.printProducts()) {
-            System.out.println("No products available");
-        }
-    }
-
-    private void printSpecificListOfProducts(List<Product> products) {
+    private void printListOfProducts(List<Product> products) {
         System.out.println("");
         System.out.println("List of products");
         if (products.size() == 0) {
@@ -112,7 +104,7 @@ public class UserAction {
         String description = "Enter name of product to search: ";
         String productToSearch = getString(description);
         List<Product> foundProducts = database.searchProductByName(productToSearch);
-        printSpecificListOfProducts(foundProducts);
+        printListOfProducts(foundProducts);
     }
 
     public String getLine(String description) {
