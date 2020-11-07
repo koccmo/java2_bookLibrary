@@ -4,13 +4,13 @@ import dental_clinic.services.GetSpecificPatientHistoryService;
 
 import java.util.Optional;
 
-class PrintPatientCardUIAction implements UIAction {
+class PrintSpecificPatientHistoryUIAction implements UIAction {
 
     private final GetSpecificPatientHistoryService printSpecificPatientHistory;
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public PrintPatientCardUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
+    public PrintSpecificPatientHistoryUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
         this.printSpecificPatientHistory = printSpecificPatientHistory;
     }
 
@@ -20,9 +20,8 @@ class PrintPatientCardUIAction implements UIAction {
         if (printSpecificPatientHistory.execute(id).equals(Optional.empty())){
             System.out.println("Database doesn't contain patient with id " + id);
         }else{
-            printSpecificPatientHistory.execute(id);
+            System.out.println(printSpecificPatientHistory.execute(id).get().toString());
         }
-
     }
 
 }
