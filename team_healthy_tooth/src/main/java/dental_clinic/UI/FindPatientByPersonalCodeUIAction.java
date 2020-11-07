@@ -1,24 +1,24 @@
 package dental_clinic.UI;
 
-import dental_clinic.database.PatientDatabase;
 import dental_clinic.domain.Patient;
+import dental_clinic.services.FindPatientByPersonalCodeService;
 
 import java.util.List;
 
 class FindPatientByPersonalCodeUIAction implements UIAction {
 
-    private PatientDatabase patientDatabase;
+    private FindPatientByPersonalCodeService findPatientByPersonalCode;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public FindPatientByPersonalCodeUIAction(PatientDatabase patientDatabase){
-        this.patientDatabase = patientDatabase;
+    public FindPatientByPersonalCodeUIAction(FindPatientByPersonalCodeService findPatientByPersonalCode) {
+        this.findPatientByPersonalCode = findPatientByPersonalCode;
     }
 
     public void execute(){
 
         String personalCode = inputCheckUtility.inputValidPersonalCode("Please enter personal code");
 
-        List<Patient> result = patientDatabase.findPatientByPersonalCode(personalCode);
+        List<Patient> result = findPatientByPersonalCode.execute(personalCode);
 
         if (result.isEmpty()){
             System.out.println("Database doesn't contain patient with personal code " + personalCode);
