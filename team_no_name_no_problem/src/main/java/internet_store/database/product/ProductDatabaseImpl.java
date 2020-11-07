@@ -13,12 +13,12 @@ public class ProductDatabaseImpl implements ProductDatabase{
     private List<Product> productList = new ArrayList<>();
 
     @Override
-    public List <Product> getProductList(){
+    public List <Product> getProducts(){
         return productList;
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void add(Product product) {
             product.setId(id);
             productList.add(product);
             id++;
