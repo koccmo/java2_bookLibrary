@@ -2,6 +2,7 @@ include 'teacher:lesson_1_introduction'
 include 'teacher:lesson_2_single_responsibility_principle'
 include 'teacher:lesson_3_request_response_input_data_validation'
 include 'teacher:lesson_4_git_brancing_pull_request_code_review'
+include 'teacher:lesson_5_testing_with_junit_and_mockito'
 
 
 include 'team_retarded'
