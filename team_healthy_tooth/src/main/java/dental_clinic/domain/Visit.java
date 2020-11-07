@@ -17,8 +17,20 @@ public class Visit {
         this.doctor = doctor;
     }
 
+    public int getToothNumber() {
+        return toothNumber;
+    }
+
     public Optional<String> getComment() {
         return comment;
+    }
+
+    public ToothStatus getToothStatus() {
+        return toothStatus;
+    }
+
+    public String getDoctor() {
+        return doctor;
     }
 
     @Override
