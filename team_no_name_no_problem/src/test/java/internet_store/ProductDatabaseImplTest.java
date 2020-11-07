@@ -205,7 +205,7 @@ public class ProductDatabaseImplTest {
 
         assertEquals(0, resultOfFindingAllPC.size());
     }
-/*
+
     @Test
     public void findProductByIdTest() {
         ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
@@ -222,12 +222,12 @@ public class ProductDatabaseImplTest {
 
         Optional<Product> resultOfFindingLaptopDell = productDatabase.findById(1L);
         Optional<Product> resultOfFindingLaptopAcer = productDatabase.findById(2L);
-        Optional<Product> resultOfFindingTV = productDatabase.findById(4L);
+        Optional<Product> resultOfFindingTV = productDatabase.findById(5L);
         Optional<Product> resultOfFiningGPS = productDatabase.findById(7L);
 
         assertTrue(resultOfFindingLaptopDell.isPresent());
         assertTrue(resultOfFindingLaptopAcer.isPresent());
         assertFalse(resultOfFindingTV.isPresent());
         assertFalse(resultOfFiningGPS.isPresent());
-    } */
+    }
 }
