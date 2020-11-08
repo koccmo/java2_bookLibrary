@@ -1,6 +1,7 @@
 package internet_store.database.product;
 
 import internet_store.domain.Product;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,14 +12,21 @@ import static org.junit.Assert.*;
 
 public class ProductDatabaseImplTest {
 
-    @Test
-    public void getProductListTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+    ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
+    Product firstProduct = new Product("Laptop", "Dell", 400);
+    Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
+    Product thirdProduct = new Product("TV", "Radiotehnika", 3);
+    Product fourthProduct = new Product("GPS Navigator", "Car accessories", 45);
+    Product fifthProduct = new Product("Laptop","Acer",300);
 
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
+    @Before
+    public void init() {
         productDatabase.add(firstProduct);
         productDatabase.add(secondProduct);
+    }
+    @Test
+    public void getProductListTest() {
+
 
         List<Product> listOfAllProducts = productDatabase.getProducts();
 
@@ -35,12 +43,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void addProductTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         assertTrue(productDatabase.getProducts().contains(firstProduct));
         assertTrue(productDatabase.getProducts().contains(secondProduct));
         assertTrue(productDatabase.getProducts().size() == 2);
@@ -49,26 +51,13 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void generateProductIdTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         long firstId = firstProduct.getId();
-        long secondId = secondProduct.getId();
         assertTrue(firstId == 1L);
         assertTrue(productDatabase.getProducts().get(1).getId() == 2);
     }
 
     @Test
     public void deleteByIdTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.deleteById(1L);
         assertFalse(productDatabase.getProducts().contains(firstProduct));
         assertTrue(productDatabase.getProducts().contains(secondProduct));
@@ -76,12 +65,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void deleteByIdTestNoIdInDatabase() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         assertTrue(productDatabase.getProducts().size() == 2);
         productDatabase.deleteById(7L);
         assertTrue(productDatabase.getProducts().size() == 2);
@@ -89,13 +72,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void changeProductTitleTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        Product thirdProduct = new Product("TV", "Radiotehnika", 3);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.add(thirdProduct);
 
         productDatabase.changeTitle(1L, "Personal Computer");
@@ -113,13 +89,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void changeDescriptionTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        Product thirdProduct = new Product("TV", "Radiotehnika", 3);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.add(thirdProduct);
 
         productDatabase.changeDescription(1L, "Samsung");
@@ -137,13 +106,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void findAnyProductByTitleTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Refrigerator", "Electrolux", 300);
-        Product thirdProduct = new Product("TV", "Radiotehnika", 3);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.add(thirdProduct);
 
         Optional<Product> resultOfFindingLaptop = productDatabase.findAnyByTitle("Laptop");
@@ -160,24 +122,18 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void findAllProductsByTitleTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Laptop", "Acer", 300);
-        Product thirdProduct = new Product("TV", "Radiotehnika", 3);
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.add(thirdProduct);
+        productDatabase.add(fifthProduct);
 
         List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitle("Laptop");
         List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
         List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
 
         assertTrue(resultOfFindingAllLaptops.contains(firstProduct));
-        assertTrue(resultOfFindingAllLaptops.contains(secondProduct));
+        assertTrue(resultOfFindingAllLaptops.contains(fifthProduct));
         assertEquals(resultOfFindingAllLaptops.size(), 2);
 
-        assertTrue(resultOfFindingAllTV.contains(thirdProduct));
+        assertFalse(resultOfFindingAllTV.contains(fifthProduct));
         assertFalse(resultOfFindingAllTV.contains(secondProduct));
         assertEquals(resultOfFindingAllTV.size(), 1);
 
@@ -186,15 +142,6 @@ public class ProductDatabaseImplTest {
 
     @Test
     public void findProductByIdTest() {
-        ProductDatabaseImpl productDatabase = new ProductDatabaseImpl();
-
-        Product firstProduct = new Product("Laptop", "Dell", 400);
-        Product secondProduct = new Product("Laptop", "Acer", 300);
-        Product thirdProduct = new Product("TV", "Radiotehnika", 3);
-        Product fourthProduct = new Product("GPS Navigator", "Car accessories", 45);
-
-        productDatabase.add(firstProduct);
-        productDatabase.add(secondProduct);
         productDatabase.add(thirdProduct);
         productDatabase.add(fourthProduct);
 
