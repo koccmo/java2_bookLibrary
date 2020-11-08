@@ -10,10 +10,10 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     private Long id = 1L;
     private List<Customer> customerList = new ArrayList<>();
 
-    public List<Customer> getCustomerList() {
+    @Override
+    public List<Customer> getCustomers() {
         return customerList;
     }
-
 
     @Override
     public boolean addCustomer(Customer customer){
@@ -36,18 +36,6 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean printCustomersInfo(){
-        if (customerList.size() > 0) {
-            System.out.println("Customers in database: ");
-            customerList.forEach(System.out::println);
-            return true;
-        } else {
-            System.out.println("Customer database is empty!");
-            return false;
-        }
     }
 
     @Override
