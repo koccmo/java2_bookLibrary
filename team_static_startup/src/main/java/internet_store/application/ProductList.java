@@ -3,6 +3,7 @@ package internet_store.application;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
 import internet_store.application.services.FindProductService;
+import internet_store.application.services.GetProductListService;
 import internet_store.application.ui.*;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ class ProductList {
     private final Database database = new InMemoryDatabase();
 
     FindProductService findProductService = new FindProductService(database);
+    GetProductListService getProductListService = new GetProductListService(database);
 
     public ProductList() {
 
@@ -23,7 +25,7 @@ class ProductList {
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(database));
         menuNumberToActionMap.put(3, new DeleteProductUIAction(database));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(database));
-        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(database));
+        menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));
         menuNumberToActionMap.put(7, new FindByIdUIAction(findProductService));
         menuNumberToActionMap.put(8, new ChangeProductNameUIAction(database));

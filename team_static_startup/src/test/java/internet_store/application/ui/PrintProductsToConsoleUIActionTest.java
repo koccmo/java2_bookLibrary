@@ -1,5 +1,6 @@
 package internet_store.application.ui;
 
+import internet_store.application.services.GetProductListService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,8 @@ public class PrintProductsToConsoleUIActionTest {
     public void shouldPrintOutProducts() {
         database.add(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
         database.add(new Product("Lenovo ThinkPad", "notebook", new BigDecimal("3000.00")));
-        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(database);
+        GetProductListService service = new GetProductListService(database);
+        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
         victim.execute();
         assertEquals("Product{id = 1, productName = 'iPhone', productDescription = 'mobile phone', price = 950.00}\n" +
                 "Product{id = 2, productName = 'Lenovo ThinkPad', productDescription = 'notebook', price = 3000.00}", outputStreamCaptor.toString().trim());
@@ -42,7 +44,8 @@ public class PrintProductsToConsoleUIActionTest {
 
     @Test
     public void shouldNotPrintOutProducts_whenDatabaseIsEmpty() {
-        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(database);
+        GetProductListService service = new GetProductListService(database);
+        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
         victim.execute();
         assertEquals("", outputStreamCaptor.toString().trim());
     }
