@@ -1,0 +1,6 @@
+Lesson 3 plan:
+
+1. Event based applications
+2. Request/response model
+3. Input data validation
+4. Error response model
