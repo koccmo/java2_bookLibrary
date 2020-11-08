@@ -25,7 +25,7 @@ public class CustomerDatabaseImplTest {
                 "kakdela@gmail.com");
         customerDatabase.addCustomer(firstCustomer);
         customerDatabase.addCustomer(secondCustomer);
-        assertTrue(customerDatabase.getCustomerList().contains(secondCustomer));
+        assertTrue(customerDatabase.getCustomers().contains(secondCustomer));
     }
 
     @Test
@@ -69,8 +69,8 @@ public class CustomerDatabaseImplTest {
         customerDatabase.addCustomer(secondCustomer);
         boolean deleteResult = customerDatabase.deleteCustomer(1L);
         assertTrue(deleteResult);
-        assertFalse(customerDatabase.getCustomerList().contains(firstCustomer));
-        assertTrue(customerDatabase.getCustomerList().contains(secondCustomer));
+        assertFalse(customerDatabase.getCustomers().contains(firstCustomer));
+        assertTrue(customerDatabase.getCustomers().contains(secondCustomer));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class CustomerDatabaseImplTest {
         customerDatabase.addCustomer(firstCustomer);
         customerDatabase.addCustomer(secondCustomer);
 
-        List<Customer> listOfAllCustomers = customerDatabase.getCustomerList();
+        List<Customer> listOfAllCustomers = customerDatabase.getCustomers();
 
         assertTrue(listOfAllCustomers.contains(firstCustomer));
         assertTrue(listOfAllCustomers.contains(secondCustomer));
