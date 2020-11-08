@@ -4,14 +4,15 @@ import internet_store.UI.InputCheckUtility;
 import internet_store.UI.UIAction;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.domain.Customer;
+import internet_store.services.customer.AddCustomerService;
 
 public class AddCustomerUIAction implements UIAction {
 
-    private CustomerDatabase customerDatabase;
+    private AddCustomerService addPersonService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public AddCustomerUIAction(CustomerDatabase personDatabase){
-        this.customerDatabase = personDatabase;
+    public AddCustomerUIAction(AddCustomerService addPersonService){
+        this.addPersonService = addPersonService;
     }
 
     public void execute(){
@@ -28,7 +29,7 @@ public class AddCustomerUIAction implements UIAction {
 
         Customer newCustomer = new Customer(name, surname, phoneNumber, address, email);
 
-        customerDatabase.addCustomer(newCustomer);
+        addPersonService.execute(newCustomer);
 
     }
 }
