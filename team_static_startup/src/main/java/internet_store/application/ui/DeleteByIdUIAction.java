@@ -1,22 +1,23 @@
 package internet_store.application.ui;
 
 import internet_store.application.database.Database;
+import internet_store.application.services.DeleteProductService;
 
 import java.util.Scanner;
 
 public class DeleteByIdUIAction implements UIAction {
 
-    private final Database database;
+    private final DeleteProductService deleteProductService;
 
-    public DeleteByIdUIAction(Database database) {
-        this.database = database;
+    public DeleteByIdUIAction(DeleteProductService deleteProductService) {
+        this.deleteProductService = deleteProductService;
     }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for deleting: ");
         Long id = myInput.nextLong();
-        boolean productDeleted = database.delete(id);
+        boolean productDeleted = deleteProductService.delete(id);
 
         if (productDeleted) {
             System.out.println("\nProduct with ID = " + id + " deleted");

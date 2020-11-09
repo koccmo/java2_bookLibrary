@@ -2,16 +2,17 @@ package internet_store.application.ui;
 
 import internet_store.application.domain.Product;
 import internet_store.application.database.Database;
+import internet_store.application.services.DeleteProductService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class DeleteProductUIAction implements UIAction {
 
-    private final Database database;
+    private final DeleteProductService deleteProductService;
 
-    public DeleteProductUIAction(Database database) {
-        this.database = database;
+    public DeleteProductUIAction(DeleteProductService deleteProductService) {
+        this.deleteProductService = deleteProductService;
     }
 
     public void execute() {
@@ -24,7 +25,7 @@ public class DeleteProductUIAction implements UIAction {
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
 
-        boolean productDeleted = database.delete(new Product(productName, productDescription, productPrice));
+        boolean productDeleted = deleteProductService.delete(new Product(productName, productDescription, productPrice));
         if (productDeleted) {
             System.out.println("\nProduct deleted");
         } else {
