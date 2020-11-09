@@ -2,16 +2,17 @@ package internet_store.UI.customer;
 
 import internet_store.UI.UIAction;
 import internet_store.database.customer.CustomerDatabase;
+import internet_store.services.customer.GetAllCustomersService;
 
 public class PrintCustomersInfoUIAction implements UIAction {
 
-    private CustomerDatabase customerDatabase;
+    private GetAllCustomersService getAllCustomersService;
 
-    public PrintCustomersInfoUIAction(CustomerDatabase personDatabase){
-        this.customerDatabase = personDatabase;
+    public PrintCustomersInfoUIAction(GetAllCustomersService getAllCustomersService){
+        this.getAllCustomersService = getAllCustomersService;
     }
 
     public void execute(){
-        customerDatabase.printCustomersInfo();
+        getAllCustomersService.execute();
     }
 }
