@@ -26,11 +26,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public void deleteById(long id) {
-        for (int i = 0; i< productList.size(); i++){
-            if (productList.get(i).getId() == id){
-                productList.remove(i);
-            }
-        }
+        productList.removeIf(product -> product.getId() == id);
     }
 
     @Override
