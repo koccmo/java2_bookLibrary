@@ -65,16 +65,6 @@ public class ProductDatabaseImpl implements ProductDatabase{
                 .collect(Collectors.toList());
     }
 
-    /*public Optional<Product> findById(Long id) {
-        for (int i = 0; i < productList.size(); i++) {
-            Product listOfProducts = productList.get(i);
-            if (listOfProducts.getId() == id) {
-                return Optional.of(listOfProducts);
-            }
-        }
-        return Optional.empty();
-    }*/
-
     @Override
     public Optional<Product> findById(Long id) {
         return productList.stream()
