@@ -20,10 +20,8 @@ public class RemoveBookUIAction implements UIActions {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Book ID: ");
-        String bookTitle = scanner.nextLine();
-        System.out.println("Enter book author: ");
-        String bookAuthor = scanner.nextLine();
-        removeBookService.removeBook(bookTitle, bookAuthor);
+        long bookID = scanner.nextLong();
+        removeBookService.removeBook(bookID);
         System.out.println("Your book was removed from list.");
     }
 }
