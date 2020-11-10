@@ -4,6 +4,7 @@ import internet_store.domain.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CustomerDatabaseImpl implements CustomerDatabase{
 
@@ -50,13 +51,9 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public List<Customer> findAllCustomersByName(String name){
-        List<Customer> listOfEqualCustomersNames = new ArrayList<>();
-        for (Customer customer : customerList){
-            if (customer.equals(name)){
-                customerList.add(customer);
-            }
-        }
-        return listOfEqualCustomersNames;
+        return customerList.stream()
+                .filter(customer -> customer.getName().equals(name))
+                .collect(Collectors.toList());
     }
 
     @Override
