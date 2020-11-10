@@ -74,7 +74,7 @@ public class InMemoryDatabaseTest {
 //    }
 //
 //    @Test
-//    public void shouldChangeProductName_whenIdNotFound() {
+//    public void shouldNotChangeProductName_whenIdNotFound() {
 //        productDatabase.add(new Product("iphone", "mobile phone", new BigDecimal("900.00")));
 //        productDatabase.add(new Product("macbook", "notebook", new BigDecimal("2000.00")));
 //        boolean result = productDatabase.changeProductName(3L, "macbook2");
