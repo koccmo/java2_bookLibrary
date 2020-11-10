@@ -48,23 +48,18 @@ public class CustomerDatabaseImplTest {
     @Test
     public void deleteCustomerTest(){
 
-        boolean deleteResult = customerDatabase.deleteCustomer(1L);
-        assertTrue(deleteResult);
+        customerDatabase.deleteCustomer(1L);
         assertFalse(customerDatabase.getCustomers().contains(firstCustomer));
         assertTrue(customerDatabase.getCustomers().contains(secondCustomer));
     }
 
-    @Test
-    public void deleteCustomerTest2(){
-
-        boolean deleteResult = customerDatabase.deleteCustomer(2L);
-        assertTrue(deleteResult);
-    }
 
     @Test
     public void deleteCustomerTestNoCustomerInDatabase(){
 
-        assertFalse(customerDatabase.deleteCustomer(6L));
+        customerDatabase.getCustomers().size();
+        customerDatabase.deleteCustomer(3);
+        assertTrue(customerDatabase.getCustomers().contains(firstCustomer));
     }
 
     @Test

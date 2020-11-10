@@ -29,24 +29,23 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public boolean deleteCustomer(long id){
-        for (int i = 0; i < customerList.size(); i++){
+    public void deleteCustomer(long id){
+        customerList.removeIf(customer -> customer.getId() == id);
+        /*for (int i = 0; i < customerList.size(); i++){
             if (customerList.get(i).getId() == id){
                 customerList.remove(i);
                 return true;
             }
         }
-        return false;
+        return false;*/
     }
 
     @Override
     public Optional<Customer> findCustomersByNameAndSurname(String name, String surname){
-        for (Customer customer : customerList) {
-            if ((customer.getName().equals(name)) && (customer.getSurname().equals(surname))) {
-                return Optional.of(customer);
-            }
-        }
-        return Optional.empty();
+       return customerList.stream()
+               .filter(customer -> customer.getName().equals(name)
+                       && customer.getSurname().equals(surname))
+               .findAny();
     }
 
     @Override
@@ -57,13 +56,9 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public List<Customer> findAllCustomersBySurname(String surname){
-        List<Customer> listOfEqualCustomersSurnames = new ArrayList<>();
-        for (Customer customer : customerList){
-            if (customer.equals(surname)){
-                customerList.add(customer);
-            }
-        }
-        return listOfEqualCustomersSurnames;
+    public List<Customer> findAllCustomersBySurname(String surname) {
+        return customerList.stream()
+                .filter(customer -> customer.getSurname().equals(surname))
+                .collect(Collectors.toList());
     }
 }
