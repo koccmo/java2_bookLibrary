@@ -20,6 +20,8 @@ public class ChangeDescriptionUIAction implements UIAction {
 
         if (changeDescriptionService.execute(id, description)) {
             System.out.println("Description of product with id " + id + " was changed");
+        }else{
+            System.out.println("No id " + id + " in database");
         }
     }
 

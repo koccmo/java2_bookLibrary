@@ -108,7 +108,7 @@ public class CustomerDatabaseImplTest {
         List<Customer> resultOfAllFindings3 = customerDatabase.findAllCustomersByName("Anton");
         List<Customer> resultOfAllFindings4 = customerDatabase.findAllCustomersByName("Mihail");
 
-        assertFalse(resultOfAllFindings1.contains(secondCustomer));
+        assertTrue(resultOfAllFindings1.contains(firstCustomer));
         assertFalse(resultOfAllFindings2.contains(thirdCustomer));
     }
 
