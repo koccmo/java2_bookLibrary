@@ -43,12 +43,7 @@ class ProductList {
             printOutMenu();
             try {
                 int userSelectedMenuNumber = Integer.parseInt(sc.nextLine());
-                if (userSelectedMenuNumber == 0) {
-                    System.out.println("Thank you! Good bye!");
-                    break;
-                } else {
-                    executeUIAction(userSelectedMenuNumber);
-                }
+                executeUIAction(userSelectedMenuNumber);
             } catch (NumberFormatException e) {
                 System.out.println("\nIncorrect input, please enter number");
             }
