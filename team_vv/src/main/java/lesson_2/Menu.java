@@ -1,9 +1,9 @@
-package application_target_list;
+package lesson_2;
 
-import application_target_list.console_ui.*;
-import application_target_list.database.Database;
-import application_target_list.database.TargetListImpl;
-import application_target_list.services.*;
+import lesson_2.console_ui.*;
+import lesson_2.database.Database;
+import lesson_2.database.TargetListImpl;
+import lesson_2.services.*;
 
 import java.util.Scanner;
 

@@ -1,8 +1,8 @@
-package application_target_list;
+package lesson_1;
 
 import java.util.Objects;
 
-public class Target {
+class Target {
 
     private String name;
     private String description;

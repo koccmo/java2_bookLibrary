@@ -1,5 +1,4 @@
-package application_target_list;
-
+package lesson_1;
 
 import java.util.ArrayList;
 import java.util.List;

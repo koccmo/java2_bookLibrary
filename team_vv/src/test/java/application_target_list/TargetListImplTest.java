@@ -1,5 +1,6 @@
 package application_target_list;
 
+import application_target_list.database.TargetListImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,14 +13,14 @@ public class TargetListImplTest {
     @Test
     public void testAddTarget_list_size_v1() {
         targetsDatabase.addTarget(firstTarget);
-        Assert.assertEquals(targetsDatabase.targetsList.size(), 1);
+        Assert.assertEquals(targetsDatabase.getTargetsList().size(), 1);
     }
 
     @Test
     public void testAddTarget_list_size_v2() {
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
-        Assert.assertEquals(targetsDatabase.targetsList.size(), 2);
+        Assert.assertEquals(targetsDatabase.getTargetsList().size(), 2);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
         targetsDatabase.deleteTarget(2L);
-        Assert.assertEquals(targetsDatabase.targetsList.size(), 1);
+        Assert.assertEquals(targetsDatabase.getTargetsList().size(), 1);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
         targetsDatabase.deleteTarget(1L);
-        Assert.assertEquals(targetsDatabase.targetsList.size(), 1);
+        Assert.assertEquals(targetsDatabase.getTargetsList().size(), 1);
     }
 
     @Test
@@ -60,7 +61,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
         targetsDatabase.deleteTarget(2L);
-        Assert.assertEquals(targetsDatabase.targetsList.get(0).getName(), firstTarget.getName());
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(0).getName(), firstTarget.getName());
     }
 
     @Test
@@ -68,7 +69,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
         targetsDatabase.deleteTarget(1L);
-        Assert.assertEquals(targetsDatabase.targetsList.get(0).getName(), secondTarget.getName());
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(0).getName(), secondTarget.getName());
     }
 
     @Test
@@ -77,7 +78,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         String newTargetName = "new name";
         targetsDatabase.changeTargetName(1L, newTargetName);
-        Assert.assertEquals(targetsDatabase.targetsList.get(0).getName(), newTargetName);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(0).getName(), newTargetName);
     }
 
     @Test
@@ -86,7 +87,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         String newTargetName = "new name";
         targetsDatabase.changeTargetName(2L, newTargetName);
-        Assert.assertEquals(targetsDatabase.targetsList.get(1).getName(), newTargetName);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(1).getName(), newTargetName);
     }
 
     @Test
@@ -95,7 +96,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         String newTargetDescription = "new description";
         targetsDatabase.changeTargetDescription(1L, newTargetDescription);
-        Assert.assertEquals(targetsDatabase.targetsList.get(0).getDescription(), newTargetDescription);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(0).getDescription(), newTargetDescription);
     }
 
     @Test
@@ -104,7 +105,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         String newTargetDescription = "new description";
         targetsDatabase.changeTargetDescription(2L, newTargetDescription);
-        Assert.assertEquals(targetsDatabase.targetsList.get(1).getDescription(), newTargetDescription);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(1).getDescription(), newTargetDescription);
     }
 
     @Test
@@ -113,7 +114,7 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         int newTargetDeadline = 2;
         targetsDatabase.changeTargetDeadline(1L, newTargetDeadline);
-        Assert.assertEquals(targetsDatabase.targetsList.get(0).getDeadline(), newTargetDeadline);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(0).getDeadline(), newTargetDeadline);
     }
 
     @Test
@@ -122,6 +123,6 @@ public class TargetListImplTest {
         targetsDatabase.addTarget(secondTarget);
         int newTargetDeadline = 2;
         targetsDatabase.changeTargetDeadline(2L, newTargetDeadline);
-        Assert.assertEquals(targetsDatabase.targetsList.get(1).getDeadline(), newTargetDeadline);
+        Assert.assertEquals(targetsDatabase.getTargetsList().get(1).getDeadline(), newTargetDeadline);
     }
 }

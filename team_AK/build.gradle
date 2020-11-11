@@ -2,4 +2,6 @@ dependencies {
 	testCompile 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok:1.18.16'
 	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+	compile 'commons-validator:commons-validator:1.7'
+	compile 'com.googlecode.libphonenumber:libphonenumber:8.12.12'
 }
