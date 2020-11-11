@@ -1,3 +1,4 @@
-Напишите тесты на SearchBooksRequestValidator.
-В тестах предусмотрите все возможные варианты.
-Для каждого варианта напишите отдельный юнит тест.
+Так как валидация SearchBooksRequest становится довольно большой
+перенесите её в отдельный класс SearchBooksRequestValidator. В
+классе SearchBooksRequestValidator должен быть метод
+    public List<CoreError> validate(SearchBooksRequest request)

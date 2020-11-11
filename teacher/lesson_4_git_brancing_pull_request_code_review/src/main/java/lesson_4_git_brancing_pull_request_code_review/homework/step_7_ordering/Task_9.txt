@@ -1,4 +1,9 @@
-Так как валидация SearchBooksRequest становится довольно большой
-перенесите её в отдельный класс SearchBooksRequestValidator. В
-классе SearchBooksRequestValidator должен быть метод
-    public List<CoreError> validate(SearchBooksRequest request)
+Реализуйте проверку на стороне бизнес логики полей
+класса SearchBooksRequest:
+    private String orderBy;
+    private String orderDirection;
+
+Поля должны быть или указаны оба вместе или не указаны вообще.
+
+Запрос считается не корректным если указано только одно из
+этих двух полей.
