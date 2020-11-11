@@ -9,8 +9,8 @@ public class AddBookUIAction implements UIActions {
 
     private final AddBookService addBookService;
 
-    public AddBookUIAction(AddBookService dddBookService) {
-        this.addBookService = dddBookService;
+    public AddBookUIAction(AddBookService addBookService) {
+        this.addBookService = addBookService;
     }
 
     @Override

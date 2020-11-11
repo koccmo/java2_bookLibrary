@@ -19,9 +19,3 @@ public class RemoveBookService {
             .ifPresent(book -> database.getListBooks().remove(book));
     }
 }
-
-
-
-
-
-
