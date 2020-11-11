@@ -1,4 +1,4 @@
-package internet_store;
+package internet_store.database.product;
 
 import internet_store.database.customer.CustomerDatabaseImpl;
 import internet_store.domain.Customer;
@@ -59,7 +59,7 @@ public class CustomerDatabaseImplTest {
 
         customerDatabase.getCustomers().size();
         customerDatabase.deleteCustomer(3);
-        assertTrue(customerDatabase.getCustomers().contains(firstCustomer));
+        customerDatabase.getCustomers().size();
     }
 
     @Test
@@ -96,15 +96,33 @@ public class CustomerDatabaseImplTest {
     public void findAllCustomersByNameTest(){
 
         customerDatabase.addCustomer(thirdCustomer);
-        customerDatabase.addCustomer(fourthCustomer);
 
-        List<Customer> resultOfAllFindings1 = customerDatabase.findAllCustomersByName("Mihail");
-        List<Customer> resultOfAllFindings2 = customerDatabase.findAllCustomersByName("Savva");
-        List<Customer> resultOfAllFindings3 = customerDatabase.findAllCustomersByName("Anton");
-        List<Customer> resultOfAllFindings4 = customerDatabase.findAllCustomersByName("Mihail");
+        List<Customer> resultOfAllEqualNames1 = customerDatabase.findAllCustomersByName("Mihail");
+        List<Customer> resultOfAllEqualNames2 = customerDatabase.findAllCustomersByName("Savva");
+        List<Customer> resultOfAllEqualNames3 = customerDatabase.findAllCustomersByName("Anton");
 
-        assertTrue(resultOfAllFindings1.contains(firstCustomer));
-        assertFalse(resultOfAllFindings2.contains(thirdCustomer));
+        assertTrue(resultOfAllEqualNames1.contains(firstCustomer));
+        assertTrue(resultOfAllEqualNames3.contains(thirdCustomer));
+        assertFalse(resultOfAllEqualNames1.contains(secondCustomer));
+        assertFalse(resultOfAllEqualNames2.contains(thirdCustomer));
     }
+
+    @Test
+    public void findAllCustomersBySurnameTest(){
+
+        customerDatabase.addCustomer(thirdCustomer);
+
+        List<Customer> resultOfAllEqualSurnames1 = customerDatabase.findAllCustomersBySurname("Galkin");
+        List<Customer> resultOfAllEqualSurnames2 = customerDatabase.findAllCustomersBySurname("Jablokov");
+        List<Customer> resultOfAllEqualSurnames3 = customerDatabase.findAllCustomersBySurname("Moiseev");
+
+        assertTrue(resultOfAllEqualSurnames1.contains(firstCustomer));
+        assertTrue(resultOfAllEqualSurnames2.contains(secondCustomer));
+        assertTrue(resultOfAllEqualSurnames3.contains(thirdCustomer));
+        assertFalse(resultOfAllEqualSurnames1.contains(secondCustomer));
+        assertFalse(resultOfAllEqualSurnames2.contains(thirdCustomer));
+        assertFalse(resultOfAllEqualSurnames3.contains(firstCustomer));
+    }
+
 
 }
