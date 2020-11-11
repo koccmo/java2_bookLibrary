@@ -1,4 +1,4 @@
-package application_target_list;
+package lesson_2;
 
 public  class TargetListApplication {
 
