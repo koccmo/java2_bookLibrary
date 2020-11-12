@@ -1,22 +1,16 @@
 package internet_store.application;
 
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
-import internet_store.application.services.ChangeProductNameService;
-import internet_store.application.services.DeleteProductService;
-import internet_store.application.services.FindProductService;
-import internet_store.application.services.GetProductListService;
+import internet_store.application.database.*;
+import internet_store.application.services.*;
 import internet_store.application.ui.*;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 class ProductList {
 
     private final Map<Integer, UIAction> menuNumberToActionMap;
     private final Database database = new InMemoryDatabase();
 
+    AddProductService addProductService = new AddProductService(database);
     FindProductService findProductService = new FindProductService(database);
     GetProductListService getProductListService = new GetProductListService(database);
     DeleteProductService deleteProductService = new DeleteProductService(database);
@@ -25,7 +19,7 @@ class ProductList {
     public ProductList() {
 
         menuNumberToActionMap = new HashMap<>();
-        menuNumberToActionMap.put(1, new AddProductUIAction(database));
+        menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteProductService));
         menuNumberToActionMap.put(3, new DeleteProductUIAction(deleteProductService));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
