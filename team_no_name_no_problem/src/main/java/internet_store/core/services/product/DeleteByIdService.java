@@ -1,4 +1,4 @@
-package internet_store.services.product;
+package internet_store.core.services.product;
 
 import internet_store.database.product.ProductDatabase;
 import internet_store.domain.Product;

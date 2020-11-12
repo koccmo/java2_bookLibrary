@@ -1,7 +1,7 @@
 package internet_store.UI.product;
 
 import internet_store.UI.UIAction;
-import internet_store.services.product.GetAllProductsService;
+import internet_store.core.services.product.GetAllProductsService;
 
 public class GetAllProductsUIAction implements UIAction {
 

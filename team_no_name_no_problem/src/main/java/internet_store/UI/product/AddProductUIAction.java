@@ -3,7 +3,7 @@ package internet_store.UI.product;
 import internet_store.UI.InputCheckUtility;
 import internet_store.UI.UIAction;
 import internet_store.domain.Product;
-import internet_store.services.product.AddProductService;
+import internet_store.core.services.product.AddProductService;
 
 public class AddProductUIAction implements UIAction {
 
