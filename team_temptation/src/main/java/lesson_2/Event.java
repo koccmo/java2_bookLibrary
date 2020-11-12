@@ -2,16 +2,16 @@ package lesson_2;
 
 import java.util.Objects;
 
-public class Trip {
+public class Event {
 
     private long idNumber;
-    private String tripName;
+    private String eventName;
     private String startDate;
     private String finishDate;
     private String detailsDescription;
 
-    public Trip(String tripName, String startDate, String finishDate, String detailsDescription) {
-        this.tripName = tripName;
+    public Event(String eventName, String startDate, String finishDate, String detailsDescription) {
+        this.eventName = eventName;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.detailsDescription = detailsDescription;
@@ -25,12 +25,12 @@ public class Trip {
         return idNumber;
     }
 
-    public String getTripName() {
-        return tripName;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setTripName(String tripName) {
-        this.tripName = tripName;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getStartDate() {
@@ -62,24 +62,24 @@ public class Trip {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Trip trip = (Trip) o;
-        return idNumber == trip.idNumber &&
-                Objects.equals(tripName, trip.tripName) &&
-                Objects.equals(startDate, trip.startDate) &&
-                Objects.equals(finishDate, trip.finishDate) &&
-                Objects.equals(detailsDescription, trip.detailsDescription);
+        Event event = (Event) o;
+        return idNumber == event.idNumber &&
+                Objects.equals(eventName, event.eventName) &&
+                Objects.equals(startDate, event.startDate) &&
+                Objects.equals(finishDate, event.finishDate) &&
+                Objects.equals(detailsDescription, event.detailsDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idNumber, tripName, startDate, finishDate, detailsDescription);
+        return Objects.hash(idNumber, eventName, startDate, finishDate, detailsDescription);
     }
 
     @Override
     public String toString() {
         return "Trip{" +
                 "idNumber=" + idNumber +
-                ", tripName='" + tripName + '\'' +
+                ", eventName='" + eventName + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", finishDate='" + finishDate + '\'' +
                 ", detailsDescription='" + detailsDescription + '\'' +

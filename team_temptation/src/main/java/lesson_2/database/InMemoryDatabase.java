@@ -1,6 +1,6 @@
 package lesson_2.database;
 
-import lesson_2.Trip;
+import lesson_2.Event ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,23 +8,23 @@ import java.util.List;
 public class InMemoryDatabase implements Database {
 
     private long idCounter = 1L;
-    private List<Trip> trips = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
 
 
     @Override
-    public void add(Trip trip) {
-        trip.setIdNumber(idCounter);
-        trips.add(trip);
+    public void add(Event event) {
+        event.setIdNumber(idCounter);
+        events.add(event);
         idCounter++;
     }
 
     @Override
-    public void remove(Trip trip) {
-        trips.remove(trip);
+    public boolean remove (String eventName) {
+        return getEventsList().removeIf(items -> items.getEventName().equals(eventName));
     }
 
     @Override
-    public List<Trip> getTripList() {
-        return trips;
+    public List<Event> getEventsList() {
+        return events;
     }
 }
