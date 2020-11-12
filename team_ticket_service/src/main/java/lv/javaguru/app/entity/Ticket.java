@@ -8,29 +8,36 @@ import java.util.Objects;
 public class Ticket {
     private String departure;
     private String destination;
-    private GregorianCalendar departDate;
-    private GregorianCalendar returnDate;
-    private int row;
-    private int seat;
+    private String departDate;
+    private String returnDate;
+    private String seat;
+    private Long id ;
 
-    public Ticket(String departure, String destination, GregorianCalendar departDate, GregorianCalendar returnDate, int row, int seat) {
+    public Ticket(String departure, String destination, String departDate, String returnDate, String seat) {
         this.departure = departure;
         this.destination = destination;
         this.departDate = departDate;
         this.returnDate = returnDate;
-        this.row = row;
         this.seat = seat;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "departure='" + departure + '\'' +
-                ", destination='" + destination + '\n' +
-                ", departDate=" + new SimpleDateFormat("yyyy/MM/dd").format(departDate.getTime()) + "\n" +
-                ", returnDate=" + new SimpleDateFormat("yyyy/MM/dd").format(returnDate.getTime()) + "\n" +
-                ", row=" + row + "\n" +
-                ", seat=" + seat +
+                ", destination='" + destination + '\'' +
+                ", departDate='" + departDate + '\'' +
+                ", returnDate='" + returnDate + '\'' +
+                ", seat='" + seat + '\'' +
+                ", id=" + id +
                 '}';
     }
 
@@ -39,19 +46,18 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return row == ticket.row &&
-                seat == ticket.seat &&
-                Objects.equals(departure, ticket.departure) &&
+        return Objects.equals(departure, ticket.departure) &&
                 Objects.equals(destination, ticket.destination) &&
                 Objects.equals(departDate, ticket.departDate) &&
-                Objects.equals(returnDate, ticket.returnDate);
+                Objects.equals(returnDate, ticket.returnDate) &&
+                Objects.equals(seat, ticket.seat) &&
+                Objects.equals(id, ticket.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departure, destination, departDate, returnDate, row, seat);
+        return Objects.hash(departure, destination, departDate, returnDate, seat, id);
     }
-
 
     public String getDeparture() {
         return departure;
@@ -69,35 +75,27 @@ public class Ticket {
         this.destination = destination;
     }
 
-    public GregorianCalendar getDepartDate() {
+    public String getDepartDate() {
         return departDate;
     }
 
-    public void setDepartDate(GregorianCalendar departDate) {
+    public void setDepartDate(String departDate) {
         this.departDate = departDate;
     }
 
-    public GregorianCalendar getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(GregorianCalendar returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getSeat() {
+    public String getSeat() {
         return seat;
     }
 
-    public void setSeat(int seat) {
+    public void setSeat(String seat) {
         this.seat = seat;
     }
 }
