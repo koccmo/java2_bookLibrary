@@ -1,6 +1,6 @@
-package lesson_3_request_response_input_data_validation.code.before.services;
+package lesson_3_request_response_input_data_validation.code.after.core.services;
 
-import lesson_3_request_response_input_data_validation.code.before.database.Database;
+import lesson_3_request_response_input_data_validation.code.after.database.Database;
 
 public class RemoveBookService {
 

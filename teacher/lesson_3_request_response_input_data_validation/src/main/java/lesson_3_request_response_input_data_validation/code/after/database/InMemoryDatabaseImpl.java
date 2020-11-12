@@ -1,9 +1,9 @@
-package lesson_3_request_response_input_data_validation.code.before.database;
+package lesson_3_request_response_input_data_validation.code.after.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lesson_3_request_response_input_data_validation.code.before.Book;
+import lesson_3_request_response_input_data_validation.code.after.core.domain.Book;
 
 public class InMemoryDatabaseImpl implements Database {
 

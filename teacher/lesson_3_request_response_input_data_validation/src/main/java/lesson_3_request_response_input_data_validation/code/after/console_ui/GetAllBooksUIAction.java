@@ -1,6 +1,6 @@
-package lesson_3_request_response_input_data_validation.code.before.console_ui;
+package lesson_3_request_response_input_data_validation.code.after.console_ui;
 
-import lesson_3_request_response_input_data_validation.code.before.services.GetAllBooksService;
+import lesson_3_request_response_input_data_validation.code.after.core.services.GetAllBooksService;
 
 public class GetAllBooksUIAction implements UIAction {
 

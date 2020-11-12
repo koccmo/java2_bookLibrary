@@ -1,22 +1,24 @@
-package lesson_3_request_response_input_data_validation.code.before;
+package lesson_3_request_response_input_data_validation.code.after;
 
 import java.util.Scanner;
 
-import lesson_3_request_response_input_data_validation.code.before.console_ui.AddBookUIAction;
-import lesson_3_request_response_input_data_validation.code.before.console_ui.ExitUIAction;
-import lesson_3_request_response_input_data_validation.code.before.console_ui.GetAllBooksUIAction;
-import lesson_3_request_response_input_data_validation.code.before.console_ui.RemoveBookUIAction;
-import lesson_3_request_response_input_data_validation.code.before.console_ui.UIAction;
-import lesson_3_request_response_input_data_validation.code.before.database.Database;
-import lesson_3_request_response_input_data_validation.code.before.database.InMemoryDatabaseImpl;
-import lesson_3_request_response_input_data_validation.code.before.services.AddBookService;
-import lesson_3_request_response_input_data_validation.code.before.services.GetAllBooksService;
-import lesson_3_request_response_input_data_validation.code.before.services.RemoveBookService;
+import lesson_3_request_response_input_data_validation.code.after.console_ui.AddBookUIAction;
+import lesson_3_request_response_input_data_validation.code.after.console_ui.ExitUIAction;
+import lesson_3_request_response_input_data_validation.code.after.console_ui.GetAllBooksUIAction;
+import lesson_3_request_response_input_data_validation.code.after.console_ui.RemoveBookUIAction;
+import lesson_3_request_response_input_data_validation.code.after.console_ui.UIAction;
+import lesson_3_request_response_input_data_validation.code.after.database.Database;
+import lesson_3_request_response_input_data_validation.code.after.database.InMemoryDatabaseImpl;
+import lesson_3_request_response_input_data_validation.code.after.core.services.AddBookRequestValidator;
+import lesson_3_request_response_input_data_validation.code.after.core.services.AddBookService;
+import lesson_3_request_response_input_data_validation.code.after.core.services.GetAllBooksService;
+import lesson_3_request_response_input_data_validation.code.after.core.services.RemoveBookService;
 
 public class BookListApplication {
 
 	private static Database database = new InMemoryDatabaseImpl();
-	private static AddBookService addBookService = new AddBookService(database);
+	private static AddBookRequestValidator addBookRequestValidator = new AddBookRequestValidator();
+	private static AddBookService addBookService = new AddBookService(database, addBookRequestValidator);
 	private static RemoveBookService removeBookService = new RemoveBookService(database);
 	private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
 	private static UIAction addBookUIAction = new AddBookUIAction(addBookService);

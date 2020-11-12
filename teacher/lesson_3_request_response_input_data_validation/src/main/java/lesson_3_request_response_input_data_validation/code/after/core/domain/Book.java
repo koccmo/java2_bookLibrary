@@ -1,4 +1,4 @@
-package lesson_3_request_response_input_data_validation.code.before;
+package lesson_3_request_response_input_data_validation.code.after.core.domain;
 
 import java.util.Objects;
 
