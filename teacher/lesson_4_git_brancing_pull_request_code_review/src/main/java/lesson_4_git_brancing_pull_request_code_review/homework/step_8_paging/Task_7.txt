@@ -1,0 +1,2 @@
+Добавить возможность в SearchBooksUIAction
+указывать параметры pageNumber и pageSize.
