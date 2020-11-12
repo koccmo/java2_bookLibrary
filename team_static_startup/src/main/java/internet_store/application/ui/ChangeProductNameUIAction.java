@@ -1,15 +1,15 @@
 package internet_store.application.ui;
 
-import internet_store.application.database.Database;
+import internet_store.application.services.ChangeProductNameService;
 
 import java.util.Scanner;
 
 public class ChangeProductNameUIAction implements UIAction {
 
-    private final Database database;
+    private final ChangeProductNameService changeProductNameService;
 
-    public ChangeProductNameUIAction(Database database) {
-        this.database = database;
+    public ChangeProductNameUIAction(ChangeProductNameService changeProductNameService) {
+        this.changeProductNameService = changeProductNameService;
     }
 
     public void execute() {
@@ -18,9 +18,9 @@ public class ChangeProductNameUIAction implements UIAction {
         Long id = myInput.nextLong();
         myInput.nextLine();
         System.out.print("Enter new name for product: ");
-        String name = myInput.nextLine();
+        String newName = myInput.nextLine();
 
-        boolean productFound = database.changeProductName(id, name);
+        boolean productFound = changeProductNameService.changeProductName(id, newName);
 
         if (productFound) {
             System.out.println("Product name changed successfully!");

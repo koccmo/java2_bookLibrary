@@ -11,7 +11,7 @@ public interface CustomerDatabase {
 
     boolean addCustomer(Customer customer);
 
-    boolean deleteCustomer(long id);
+    void deleteCustomer(long id);
 
     Optional<Customer> findCustomersByNameAndSurname(String name, String surname);
 

@@ -26,11 +26,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public void deleteById(long id) {
-        for (int i = 0; i< productList.size(); i++){
-            if (productList.get(i).getId() == id){
-                productList.remove(i);
-            }
-        }
+        productList.removeIf(product -> product.getId() == id);
     }
 
     @Override
@@ -67,13 +63,8 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public Optional<Product> findById(Long id) {
-        for (int i = 0; i < productList.size(); i++) {
-            Product listOfProducts = productList.get(i);
-            if (listOfProducts.getId() == id) {
-                return Optional.of(listOfProducts);
-            }
-        }
-        return Optional.empty();
+        return productList.stream()
+            .filter(product -> product.getId() == id)
+                .findAny();
     }
-
 }
