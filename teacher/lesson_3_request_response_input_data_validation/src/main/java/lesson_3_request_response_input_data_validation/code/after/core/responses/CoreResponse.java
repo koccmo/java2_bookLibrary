@@ -2,7 +2,7 @@ package lesson_3_request_response_input_data_validation.code.after.core.response
 
 import java.util.List;
 
-public abstract class CoreResponse {
+abstract class CoreResponse {
 
 	private List<CoreError> errors;
 
@@ -19,5 +19,4 @@ public abstract class CoreResponse {
 	public boolean hasErrors() {
 		return errors != null && !errors.isEmpty();
 	}
-
 }

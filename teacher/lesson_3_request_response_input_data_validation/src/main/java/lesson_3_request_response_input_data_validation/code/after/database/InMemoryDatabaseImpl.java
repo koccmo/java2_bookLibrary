@@ -2,6 +2,7 @@ package lesson_3_request_response_input_data_validation.code.after.database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import lesson_3_request_response_input_data_validation.code.after.core.domain.Book;
 
@@ -18,11 +19,16 @@ public class InMemoryDatabaseImpl implements Database {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		books.stream()
+	public boolean deleteById(Long id) {
+		boolean isBookDeleted = false;
+		Optional<Book> bookToDeleteOpt = books.stream()
 				.filter(book -> book.getId().equals(id))
-				.findFirst()
-				.ifPresent(book -> books.remove(book));
+				.findFirst();
+		if (bookToDeleteOpt.isPresent()) {
+			Book bookToRemove = bookToDeleteOpt.get();
+			isBookDeleted = books.remove(bookToRemove);
+		}
+		return isBookDeleted;
 	}
 
 	@Override

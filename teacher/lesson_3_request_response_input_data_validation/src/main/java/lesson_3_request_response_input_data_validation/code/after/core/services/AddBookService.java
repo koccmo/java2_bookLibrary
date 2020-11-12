@@ -11,10 +11,10 @@ import lesson_3_request_response_input_data_validation.code.after.core.responses
 public class AddBookService {
 
 	private Database database;
-	private AddBookRequestValidator validator;
+	private AddBookValidator validator;
 
 	public AddBookService(Database database,
-						  AddBookRequestValidator validator) {
+						  AddBookValidator validator) {
 		this.database = database;
 		this.validator = validator;
 	}
@@ -24,9 +24,11 @@ public class AddBookService {
 		if (!errors.isEmpty()) {
 			return new AddBookResponse(errors);
 		}
-		Book book = new Book(request.getBookTitle(), request.getBookAuthor());
+
+		Book book = new Book(request.getTitle(), request.getAuthor());
 		database.save(book);
-		return new AddBookResponse();
+
+		return new AddBookResponse(book);
 	}
 
 }

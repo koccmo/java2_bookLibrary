@@ -8,7 +8,7 @@ public interface Database {
 
 	void save(Book book);
 
-	void deleteById(Long id);
+	boolean deleteById(Long id);
 
 	List<Book> getAllBooks();
 
