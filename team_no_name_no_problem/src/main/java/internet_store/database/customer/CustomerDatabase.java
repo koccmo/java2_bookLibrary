@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface CustomerDatabase {
 
+    public List <Customer> getCustomers();
+
     boolean addCustomer(Customer customer);
 
-    boolean deleteCustomer(long id);
-
-    boolean printCustomersInfo();
+    void deleteCustomer(long id);
 
     Optional<Customer> findCustomersByNameAndSurname(String name, String surname);
 

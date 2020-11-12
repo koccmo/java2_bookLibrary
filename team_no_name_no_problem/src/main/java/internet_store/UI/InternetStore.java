@@ -24,7 +24,6 @@ public class InternetStore {
 
     public InternetStore() {
 
-
         menuNumberToAction = new HashMap();
 
         menuNumberToAction.put(1, new AddProductUIAction(addProductService));
@@ -39,15 +38,13 @@ public class InternetStore {
 
     public void run() {
 
-        boolean isWorking = true;
-
-        while (isWorking) {
+        while (true) {
 
             printMenu();
 
             int userSelectedMenuNumber = inputCheckUtility.inputValidInteger("Please enter menu number: ");
 
-            isWorking = isNullNotPressed(userSelectedMenuNumber);
+            executeUIAction(userSelectedMenuNumber);
         }
     }
 
@@ -61,16 +58,6 @@ public class InternetStore {
                 "6   Find any by title\n" +
                 "7   Find all by title\n" +
                 "0   Exit");
-    }
-
-    private boolean isNullNotPressed(int userSelectedMenuNumber){
-        if (userSelectedMenuNumber == 0) {
-            System.out.println(":) End of work day!");
-            return false;
-        } else {
-            executeUIAction(userSelectedMenuNumber);
-            return true;
-        }
     }
 
     private void executeUIAction (int userSelectedMenuNumber) {

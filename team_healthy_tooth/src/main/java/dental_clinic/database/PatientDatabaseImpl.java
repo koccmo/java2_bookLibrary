@@ -3,6 +3,7 @@ package dental_clinic.database;
 import dental_clinic.domain.Patient;
 import dental_clinic.domain.PersonalData;
 import dental_clinic.domain.ToothStatus;
+import dental_clinic.domain.Visit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     private List<Patient> patientList = new ArrayList<>();
 
     @Override
-    public List<Patient> getPatientList(){
+    public List<Patient> getPatients(){
         return patientList;
     }
 
@@ -36,26 +37,19 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean printDatabase() {
-        patientList.forEach(System.out::println);
-        return !patientList.isEmpty();
-    }
-
-    @Override
-    public boolean printSpecificPatientHistory(long id) {
+    public Optional <Patient> getSpecificPatientHistory(long id) {
             for (int i = 0; i < patientList.size(); i++){
                 if (isSpecificPatient(i, id)){
-                    System.out.println(patientList.get(i).toString());
-                    return true;
+                    return Optional.of(patientList.get(i));
                 }
             }
-        return false;
+            return Optional.empty();
     }
 
     @Override
     public List<Patient> findPatientBySurname(String surname) {
         return patientList.stream()
-                .filter(patient -> patient.getPersonalData().getSurname().equalsIgnoreCase(surname))
+                .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -67,35 +61,18 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus) {
+    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor) {
         for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == id){
-                patientList.get(i).getJowl().updateJowl(toothNumber, comment, toothStatus);
-                return true;
+            if (isSpecificPatient(i, id)){
+                Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+                patientList.get(i).addVisit(visit);
+                patientList.get(i).updateJowl(toothNumber, toothStatus);
             }
         }
-        return false;
     }
 
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;
     }
 
-    //Тут я размышляла надо ли на карточке печатать последнее инфо или всю историю... :)
-    private void printActualInfoAboutJowl(int index){
-        /*Map<Integer, ToothInfo> result = patientList.get(index).getJowl();
-        String toothInfoForPrint = "";
-
-        for (Integer key : result.keySet()){
-            toothInfoForPrint += key + " ";
-            if (result.get(key).getComment().size() > 0){
-                if (!result.get(key).getComment().get(result.get(key).getComment().size()-1).equals(Optional.empty())){
-                    toothInfoForPrint += result.get(key).getComment().get(result.get(key).getComment().size()-1) + " ";
-                }
-            }
-            toothInfoForPrint += result.get(key).getStatus().get(result.get(key).getStatus().size()-1) + "\n";
-        }
-
-        System.out.println(toothInfoForPrint);*/
-    }
 }

@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface ProductDatabase {
 
-    public List <Product> getProductList();
+    public List <Product> getProducts();
 
-    boolean add(Product product);
+    void add(Product product);
 
-    boolean deleteById(long id);
+    void deleteById(long id);
 
-    boolean printProducts();
+    Optional<Product> findById(Long id);
 
     void changeTitle(long id, String newTitle);
 

@@ -5,8 +5,10 @@ import java.util.*;
 public class Patient {
 
     private PersonalData personalData;
-    private Jowl jowl = new Jowl();
-    private List<String> attendingDoctors = new ArrayList<>();
+
+    Jowl jowl = new Jowl();
+
+    List <Visit> visits = new ArrayList<>();
 
     public Patient(PersonalData personalData){
         this.personalData = personalData;
@@ -16,25 +18,20 @@ public class Patient {
         return personalData;
     }
 
-    public Jowl getJowl (){
+    public Jowl getJowl() {
         return jowl;
     }
 
-    public List<String> getAttendingDoctors() {
-        return attendingDoctors;
+    public List<Visit> getVisits() {
+        return visits;
     }
 
-    public void addAttendingDoctor(String attendingDoctor) {
-        this.attendingDoctors.add(attendingDoctor);
+    public void addVisit(Visit visit){
+        visits.add(visit);
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "personalData: " + personalData +
-                jowl +
-                "attendingDoctors: " + String.join(", ", attendingDoctors) +
-                '}';
+    public void updateJowl(int toothNumber, ToothStatus toothStatus){
+        jowl.updateJowl(toothNumber, toothStatus);
     }
 
     @Override
@@ -44,12 +41,20 @@ public class Patient {
         Patient patient = (Patient) o;
         return Objects.equals(personalData, patient.personalData) &&
                 Objects.equals(jowl, patient.jowl) &&
-                Objects.equals(attendingDoctors, patient.attendingDoctors);
+                Objects.equals(visits, patient.visits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personalData, jowl, attendingDoctors);
+        return Objects.hash(personalData, jowl, visits);
     }
 
+    @Override
+    public String toString() {
+        return "\nPatient{" +
+                personalData +
+                ", jowl=" + jowl +
+                ", visits=" + visits +
+                '}';
+    }
 }

@@ -12,7 +12,7 @@ public class DeleteByIdService {
     }
 
     public boolean execute(long id){
-        for (int i = 0; i < productDatabase.getProductList().size(); i++){
+        for (int i = 0; i < productDatabase.getProducts().size(); i++){
             if (getCurrentProduct(i).getId() == id){
                 productDatabase.deleteById(id);
                 return true;
@@ -22,6 +22,6 @@ public class DeleteByIdService {
     }
 
     private Product getCurrentProduct (int index){
-        return productDatabase.getProductList().get(index);
+        return productDatabase.getProducts().get(index);
     }
 }

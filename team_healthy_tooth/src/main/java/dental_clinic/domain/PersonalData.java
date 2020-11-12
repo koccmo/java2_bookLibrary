@@ -67,7 +67,7 @@ public class PersonalData {
 
     @Override
     public String toString() {
-        return "\nPatient{" +
+        return "\nPersonal data:{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

@@ -22,7 +22,7 @@ public class AddProductUIAction implements UIAction {
         int price = inputCheckUtility.inputValidInteger("Please enter product's price");
 
         Product newProduct = new Product(title, description, price);
-        addProductService.addProduct(newProduct);
+        addProductService.execute(newProduct);
     }
 
 }

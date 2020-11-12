@@ -1,6 +1,8 @@
 package internet_store.application.ui;
 
 import static org.junit.Assert.*;
+
+import internet_store.application.services.FindProductService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,7 @@ import java.util.List;
 public class FindByProductNameUIActionTest {
 
     Database database = new InMemoryDatabase();
+    FindProductService findProductService = new FindProductService(database);
     private final ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
@@ -66,7 +69,7 @@ public class FindByProductNameUIActionTest {
     public void ShouldFindNoProductsViaUIAction () {
         database.add(product2);
 
-        FindByProductNameUIAction testFind = new FindByProductNameUIAction(database);
+        FindByProductNameUIAction testFind = new FindByProductNameUIAction(findProductService);
         testFind.execute();
 
         assertEquals(
@@ -74,6 +77,7 @@ public class FindByProductNameUIActionTest {
                         + "No product with name = Pineapple in the database"
                         ,outputStreamCaptor.toString().trim());
     }
+
 
 }
 

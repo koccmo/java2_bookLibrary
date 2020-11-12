@@ -2,7 +2,7 @@ package application_target_list;
 
 import java.util.Objects;
 
-class Target {
+public class Target {
 
     private String name;
     private String description;

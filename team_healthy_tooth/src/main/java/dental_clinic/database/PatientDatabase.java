@@ -9,22 +9,20 @@ import java.util.Optional;
 
 public interface PatientDatabase {
 
-    List<Patient>getPatientList();
+    List<Patient> getPatients();
 
     void addPatient(PersonalData personalData);
 
     void deletePatient(long id);
 
-    boolean printDatabase();
+    //addDoctor
 
-    boolean printSpecificPatientHistory(long id);
+    Optional <Patient> getSpecificPatientHistory(long id);
 
     List<Patient> findPatientBySurname(String surname);
 
     List<Patient> findPatientByPersonalCode(String personalCode);
 
-    boolean addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus);
-
-
+    void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor);
 
 }

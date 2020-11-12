@@ -1,5 +1,6 @@
 package application.controllers;
 
+/*
 import application.items.Product;
 import org.junit.jupiter.api.Test;
 
@@ -150,7 +151,7 @@ class ListControllerTest {
     }
 
     @Test
-    void findByPredicate() { // DG не уверен что правильно
+    void findByPredicate() {
         subject.add("Honda", "2.0", 5000.0);
         subject.add("Mazda", "3.0", 3500.0);
         subject.add("Opel", "1.6", 4000.0);
@@ -169,3 +170,4 @@ class ListControllerTest {
     }
 }
 
+*/

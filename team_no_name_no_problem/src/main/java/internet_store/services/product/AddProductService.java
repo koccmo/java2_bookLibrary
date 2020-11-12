@@ -11,8 +11,13 @@ public class AddProductService {
         this.productDatabase = productDatabase;
     }
 
-    public void addProduct(Product product){
-        productDatabase.add(product);
+    public boolean execute(Product product){
+        if (productDatabase.getProducts().contains(product)){
+            return false;
+        }else{
+            productDatabase.add(product);
+            return true;
+        }
     }
 
 }

@@ -14,6 +14,6 @@ public class GetAllProductsService {
     }
 
     public List<Product> execute(){
-        return productDatabase.getProductList();
+        return productDatabase.getProducts();
     }
 }

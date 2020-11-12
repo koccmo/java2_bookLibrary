@@ -13,43 +13,20 @@ public class ProductDatabaseImpl implements ProductDatabase{
     private List<Product> productList = new ArrayList<>();
 
     @Override
-    public List <Product> getProductList(){
+    public List <Product> getProducts(){
         return productList;
     }
 
     @Override
-    public boolean add(Product product) {
-        if (productList.contains(product)){
-            return false;
-        }else{
+    public void add(Product product) {
             product.setId(id);
             productList.add(product);
             id++;
-        }
-        return true;
     }
 
     @Override
-    public boolean deleteById(long id) {
-        for (int i = 0; i< productList.size(); i++){
-            if (productList.get(i).getId() == id){
-                productList.remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean printProducts() {
-        if (productList.size() > 0) {
-            System.out.println("Products in database: ");
-            productList.forEach(System.out::println);
-            return true;
-        }else{
-            System.out.println("Database is empty");
-            return false;
-        }
+    public void deleteById(long id) {
+        productList.removeIf(product -> product.getId() == id);
     }
 
     @Override
@@ -84,4 +61,10 @@ public class ProductDatabaseImpl implements ProductDatabase{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productList.stream()
+            .filter(product -> product.getId() == id)
+                .findAny();
+    }
 }
