@@ -1,8 +1,5 @@
-package lv.javaguru.app.entity;
+package lv.javaguru.app.core.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Ticket {

@@ -1,6 +1,6 @@
-package lv.javaguru.app.ui;
+package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.businesslogic.GetAllReservationsService;
+import lv.javaguru.app.core.services.GetAllReservationsService;
 
 public class ShowReservationsAction implements UIActions {
 

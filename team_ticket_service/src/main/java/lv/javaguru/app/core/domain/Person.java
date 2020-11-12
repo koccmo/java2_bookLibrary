@@ -1,4 +1,4 @@
-package lv.javaguru.app.entity;
+package lv.javaguru.app.core.domain;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package lv.javaguru.app.ui;
+package lv.javaguru.app.console_ui;
 
 public class ExitAction implements UIActions {
 

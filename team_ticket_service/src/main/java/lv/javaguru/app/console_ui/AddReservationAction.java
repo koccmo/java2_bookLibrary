@@ -1,8 +1,10 @@
-package lv.javaguru.app.ui;
+package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.businesslogic.AddReservationService;
-import lv.javaguru.app.entity.Person;
-import lv.javaguru.app.entity.Ticket;
+import lv.javaguru.app.core.services.AddReservationService;
+import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.core.request.AddReservationRequest;
+import lv.javaguru.app.core.response.AddReservationResponse;
 
 import java.util.Scanner;
 
@@ -18,8 +20,14 @@ public class AddReservationAction implements UIActions {
     public void execute() {
         Ticket t = fillTicket();
         Person p = fillPerson();
-        addReservationService.addReservation(p, t);
-        System.out.println("Your reservation was added to list.");
+
+        AddReservationRequest request = new AddReservationRequest(p, t);
+        AddReservationResponse response = addReservationService.execute(request);
+
+        if (response.hasErrors())
+            response.getErrorList().forEach(System.out::println);
+        else
+            System.out.println("Your reservation was added to list.");
     }
 
     private static Ticket fillTicket() {
@@ -38,12 +46,9 @@ public class AddReservationAction implements UIActions {
         String returnDate = scanner.nextLine();
 
         System.out.println("Enter seat: ");
-        int row = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("Enter seat: ");
         String seat = scanner.nextLine();
 
-        return new Ticket(departure, destination, departureDate, returnDate,  seat);
+        return new Ticket(departure, destination, departureDate, returnDate, seat);
     }
 
     private static Person fillPerson() {

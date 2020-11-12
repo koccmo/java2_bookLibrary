@@ -1,7 +1,7 @@
-package lv.javaguru.app.ui;
+package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.businesslogic.DeleteReservationService;
-import lv.javaguru.app.entity.Person;
+import lv.javaguru.app.core.services.DeleteReservationService;
+import lv.javaguru.app.core.domain.Person;
 
 import java.util.Scanner;
 

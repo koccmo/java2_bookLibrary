@@ -1,10 +1,6 @@
-package lv.javaguru.app.businesslogic;
+package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.entity.Person;
-import lv.javaguru.app.entity.Ticket;
-
-import java.util.Map;
 
 public class GetAllReservationsService {
 
