@@ -2,9 +2,8 @@ package internet_store.UI.customer;
 
 import internet_store.UI.InputCheckUtility;
 import internet_store.UI.UIAction;
-import internet_store.database.customer.CustomerDatabase;
 import internet_store.domain.Customer;
-import internet_store.services.customer.FindAllCustomersBySurnameService;
+import internet_store.core.services.customer.FindAllCustomersBySurnameService;
 
 import java.util.List;
 
