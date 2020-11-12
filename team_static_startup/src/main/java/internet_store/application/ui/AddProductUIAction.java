@@ -1,17 +1,16 @@
 package internet_store.application.ui;
 
-import internet_store.application.domain.Product;
-import internet_store.application.database.Database;
+import internet_store.application.services.AddProductService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class AddProductUIAction implements UIAction {
 
-    private final Database database;
+    private final AddProductService addProductService;
 
-    public AddProductUIAction(Database database) {
-        this.database = database;
+    public AddProductUIAction(AddProductService addProductService) {
+        this.addProductService = addProductService;
     }
 
     public void execute() {
@@ -24,7 +23,7 @@ public class AddProductUIAction implements UIAction {
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
 
-        database.add(new Product(productName, productDescription, productPrice));
+        addProductService.addProduct(productName, productDescription, productPrice);
         System.out.println("\nProduct added\n" + productName + "\n" + productDescription + "\n" + productPrice + " EUR");
     }
 }

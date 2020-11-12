@@ -1,4 +1,8 @@
+<<<<<<< HEAD:teacher/lesson_2_single_responsibility_principle/src/main/java/lesson_2_single_responsibility_principle/homework/step_4_srp_level_layer/before/Book.java
+package lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.before;
+=======
 package lesson_2_single_responsibility_principle.homework.step_4_srp_level_layer.after;
+>>>>>>> origin/master:teacher/lesson_2_single_responsibility_principle/src/main/java/lesson_2_single_responsibility_principle/homework/step_4_srp_level_layer/after/Book.java
 
 import java.util.Objects;
 
