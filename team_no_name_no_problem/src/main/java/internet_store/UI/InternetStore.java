@@ -1,6 +1,7 @@
 package internet_store.UI;
 
 import internet_store.UI.product.*;
+import internet_store.core.services.product.*;
 import internet_store.database.product.ProductDatabase;
 import internet_store.database.product.ProductDatabaseImpl;
 import internet_store.services.product.*;

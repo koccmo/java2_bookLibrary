@@ -1,8 +1,7 @@
 package internet_store.UI.customer;
 
 import internet_store.UI.UIAction;
-import internet_store.database.customer.CustomerDatabase;
-import internet_store.services.customer.GetAllCustomersService;
+import internet_store.core.services.customer.GetAllCustomersService;
 
 public class PrintCustomersInfoUIAction implements UIAction {
 
