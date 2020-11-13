@@ -1,8 +1,8 @@
-package estore.service;
+package estore.core.service;
 
 import estore.database.ProductDataBase;
-import estore.requests.RemoveProductByIdRequest;
-import estore.responses.RemoveProductByIdResponse;
+import estore.core.requests.RemoveProductByIdRequest;
+import estore.core.responses.RemoveProductByIdResponse;
 
 public class RemoveProductByIdService {
 

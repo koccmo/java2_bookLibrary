@@ -1,9 +1,9 @@
-package estore.service;
+package estore.core.service;
 
 import estore.database.ProductDataBase;
 import estore.domain.Product;
-import estore.requests.SearchProductByNameRequest;
-import estore.responses.SearchProductByNameResponse;
+import estore.core.requests.SearchProductByNameRequest;
+import estore.core.responses.SearchProductByNameResponse;
 
 import java.util.List;
 

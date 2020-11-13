@@ -1,4 +1,4 @@
-package estore.requests;
+package estore.core.requests;
 
 public class AddNewProductRequest {
 

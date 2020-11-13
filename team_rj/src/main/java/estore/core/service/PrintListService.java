@@ -1,4 +1,4 @@
-package estore.service;
+package estore.core.service;
 
 import java.util.List;
 import estore.domain.Product;

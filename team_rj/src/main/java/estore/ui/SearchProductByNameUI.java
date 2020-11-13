@@ -1,13 +1,9 @@
 package estore.ui;
 
-import estore.database.ProductDataBase;
-import estore.requests.SearchProductByNameRequest;
-import estore.responses.SearchProductByNameResponse;
-import estore.service.PrintListService;
-import estore.domain.Product;
-import estore.service.SearchProductByNameService;
-
-import java.util.List;
+import estore.core.requests.SearchProductByNameRequest;
+import estore.core.responses.SearchProductByNameResponse;
+import estore.core.service.PrintListService;
+import estore.core.service.SearchProductByNameService;
 
 public class SearchProductByNameUI implements UIAction {
 

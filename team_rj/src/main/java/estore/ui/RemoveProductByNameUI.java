@@ -1,9 +1,8 @@
 package estore.ui;
 
-import estore.database.ProductDataBase;
-import estore.requests.RemoveProductByNameRequest;
-import estore.responses.RemoveProductByNameResponse;
-import estore.service.RemoveProductByNameService;
+import estore.core.requests.RemoveProductByNameRequest;
+import estore.core.responses.RemoveProductByNameResponse;
+import estore.core.service.RemoveProductByNameService;
 
 public class RemoveProductByNameUI implements UIAction {
 

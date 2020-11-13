@@ -1,9 +1,9 @@
-package estore.service;
+package estore.core.service;
 
 import estore.database.ProductDataBase;
 import estore.domain.Product;
-import estore.requests.AddNewProductRequest;
-import estore.responses.AddNewProductResponse;
+import estore.core.requests.AddNewProductRequest;
+import estore.core.responses.AddNewProductResponse;
 
 public class AddNewProductService {
 

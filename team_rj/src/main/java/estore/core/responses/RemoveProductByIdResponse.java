@@ -1,10 +1,10 @@
-package estore.responses;
+package estore.core.responses;
 
-public class RemoveProductByNameResponse {
+public class RemoveProductByIdResponse {
 
     private int productsRemoved;
 
-    public RemoveProductByNameResponse(int productsRemoved) {
+    public RemoveProductByIdResponse(int productsRemoved) {
         this.productsRemoved = productsRemoved;
     }
 

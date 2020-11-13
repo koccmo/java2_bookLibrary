@@ -1,8 +1,8 @@
 package estore.ui;
 
-import estore.requests.RemoveProductByIdRequest;
-import estore.responses.RemoveProductByIdResponse;
-import estore.service.RemoveProductByIdService;
+import estore.core.requests.RemoveProductByIdRequest;
+import estore.core.responses.RemoveProductByIdResponse;
+import estore.core.service.RemoveProductByIdService;
 
 public class RemoveProductByIdUI implements UIAction {
 

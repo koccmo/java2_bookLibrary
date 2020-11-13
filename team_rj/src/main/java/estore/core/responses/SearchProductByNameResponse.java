@@ -1,4 +1,4 @@
-package estore.responses;
+package estore.core.responses;
 
 import estore.domain.Product;
 

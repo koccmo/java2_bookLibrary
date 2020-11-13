@@ -1,8 +1,8 @@
 package estore.ui;
 
-import estore.requests.AddNewProductRequest;
-import estore.responses.AddNewProductResponse;
-import estore.service.AddNewProductService;
+import estore.core.requests.AddNewProductRequest;
+import estore.core.responses.AddNewProductResponse;
+import estore.core.service.AddNewProductService;
 
 public class AddProductUI implements UIAction {
 

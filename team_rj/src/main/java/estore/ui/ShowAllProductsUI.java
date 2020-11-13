@@ -1,18 +1,23 @@
 package estore.ui;
 
-import estore.database.ProductDataBase;
-import estore.service.PrintListService;
+import estore.core.requests.ShowAllProductsRequest;
+import estore.core.responses.ShowAllProductsResponse;
+import estore.core.service.PrintListService;
+import estore.core.service.ShowAllProductsService;
 
 public class ShowAllProductsUI implements UIAction {
 
-    private ProductDataBase database;
+    //private ProductDataBase database;
+    private ShowAllProductsService showAllProductsService;
 
-    public ShowAllProductsUI(ProductDataBase database) {
-        this.database = database;
+    public ShowAllProductsUI(ShowAllProductsService showAllProductsService) {
+        this.showAllProductsService = showAllProductsService;
     }
 
     @Override
     public void execute() {
-        PrintListService.printListOfProducts(database.getDatabase());
+        ShowAllProductsRequest request = new ShowAllProductsRequest();
+        ShowAllProductsResponse response = showAllProductsService.execute(request);
+        PrintListService.printListOfProducts(response.getProducts());
     }
 }
