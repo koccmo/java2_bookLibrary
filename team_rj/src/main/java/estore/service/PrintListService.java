@@ -1,10 +1,10 @@
 package estore.service;
 
+import java.util.List;
 import estore.domain.Product;
 
-import java.util.List;
+public class PrintListService {
 
-public class PrintList {
     public static void printListOfProducts(List<Product> products) {
         System.out.println("");
         System.out.println("List of products");
@@ -16,4 +16,5 @@ public class PrintList {
             System.out.println(product);
         }
     }
+
 }

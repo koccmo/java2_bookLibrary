@@ -1,6 +1,6 @@
 package estore.ui;
 
-public class ExitProgram implements UIAction {
+public class ExitProgramUI implements UIAction {
 
     @Override
     public void execute() {

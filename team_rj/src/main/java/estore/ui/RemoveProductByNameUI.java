@@ -2,12 +2,12 @@ package estore.ui;
 
 import estore.database.ProductDataBase;
 
-public class RemoveProductByName implements UIAction {
+public class RemoveProductByNameUI implements UIAction {
 
     private ProductDataBase database;
     private InputValidation iv;
 
-    public RemoveProductByName(ProductDataBase database, InputValidation iv) {
+    public RemoveProductByNameUI(ProductDataBase database, InputValidation iv) {
         this.database = database;
         this.iv = iv;
     }

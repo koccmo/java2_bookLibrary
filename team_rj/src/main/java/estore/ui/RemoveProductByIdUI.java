@@ -1,14 +1,15 @@
 package estore.ui;
 
-import estore.database.ProductDataBase;
+import estore.service.RemoveProductByIdService;
 
-public class RemoveProductById implements UIAction {
+public class RemoveProductByIdUI implements UIAction {
 
-    private ProductDataBase database;
+    //private ProductDataBase database;
+    private RemoveProductByIdService removeProductByIdService;
     private InputValidation iv;
 
-    public RemoveProductById(ProductDataBase database, InputValidation iv) {
-        this.database = database;
+    public RemoveProductByIdUI(RemoveProductByIdService removeProductByIdService, InputValidation iv) {
+        this.removeProductByIdService = removeProductByIdService;
         this.iv = iv;
     }
 
@@ -16,7 +17,7 @@ public class RemoveProductById implements UIAction {
     public void execute() {
         String description = "Enter id of product to remove: ";
         int productToRemoveId = iv.getPositiveInteger(description);
-        int productsRemoved = database.removeProductById(Long.valueOf(productToRemoveId));
+        int productsRemoved = removeProductByIdService.execute(productToRemoveId);
 
         if (productsRemoved == 1) {
             System.out.println(productsRemoved + " product removed.");

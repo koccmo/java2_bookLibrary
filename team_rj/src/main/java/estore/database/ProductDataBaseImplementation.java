@@ -1,9 +1,8 @@
 package estore.database;
 
-import estore.domain.Product;
-
 import java.util.ArrayList;
 import java.util.List;
+import estore.domain.Product;
 
 public class ProductDataBaseImplementation implements ProductDataBase {
 
