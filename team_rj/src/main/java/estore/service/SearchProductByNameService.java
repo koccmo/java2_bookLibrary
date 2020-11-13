@@ -2,6 +2,8 @@ package estore.service;
 
 import estore.database.ProductDataBase;
 import estore.domain.Product;
+import estore.requests.SearchProductByNameRequest;
+import estore.responses.SearchProductByNameResponse;
 
 import java.util.List;
 
@@ -13,9 +15,9 @@ public class SearchProductByNameService {
         this.database = database;
     }
 
-    public List<Product> execute(String productToSearch) {
-        List<Product> foundProducts = database.searchProductByName(productToSearch);
-        return foundProducts;
+    public SearchProductByNameResponse execute(SearchProductByNameRequest request) {
+        List<Product> foundProducts = database.searchProductByName(request.getProductName());
+        return new SearchProductByNameResponse(foundProducts);
     }
 
 }

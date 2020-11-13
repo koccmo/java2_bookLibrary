@@ -1,6 +1,8 @@
 package estore.service;
 
 import estore.database.ProductDataBase;
+import estore.requests.RemoveProductByNameRequest;
+import estore.responses.RemoveProductByNameResponse;
 
 public class RemoveProductByNameService {
 
@@ -10,9 +12,9 @@ public class RemoveProductByNameService {
         this.database = database;
     }
 
-    public int execute(String productToRemoveName) {
-        int productsRemoved = database.removeProductByName(productToRemoveName);
-        return productsRemoved;
+    public RemoveProductByNameResponse execute(RemoveProductByNameRequest request) {
+        int productsRemoved = database.removeProductByName(request.getProductName());
+        return new RemoveProductByNameResponse(productsRemoved);
     }
 
 }
