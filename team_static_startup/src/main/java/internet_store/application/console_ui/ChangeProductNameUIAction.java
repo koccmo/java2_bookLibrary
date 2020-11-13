@@ -1,6 +1,6 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
-import internet_store.application.services.ChangeProductNameService;
+import internet_store.application.core.services.ChangeProductNameService;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package internet_store.application.services;
+package internet_store.application.core.services;
 
 import internet_store.application.database.Database;
 

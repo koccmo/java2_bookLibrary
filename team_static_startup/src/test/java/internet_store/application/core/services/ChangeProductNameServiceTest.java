@@ -1,8 +1,8 @@
-package internet_store.application.services;
+package internet_store.application.core.services;
 
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
-import internet_store.application.domain.Product;
+import internet_store.application.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 

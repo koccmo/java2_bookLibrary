@@ -1,12 +1,12 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
 import static org.junit.Assert.*;
 
-import internet_store.application.services.FindProductService;
+import internet_store.application.core.services.FindProductService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import internet_store.application.domain.Product;
+import internet_store.application.core.domain.Product;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
 
@@ -38,9 +38,9 @@ public class FindByProductNameUIActionTest {
         database.add(product3);
 
         List<Product> testList = new ArrayList<>(database.findByProductName("Pineapple"));
-        assertTrue(testList.get(0).equals(product1));
-        assertTrue(testList.get(1).equals(product3));
-        assertTrue(testList.size() == 2);
+        assertEquals(testList.get(0), product1);
+        assertEquals(testList.get(1), product3);
+        assertEquals(2, testList.size());
     }
 
     @Test

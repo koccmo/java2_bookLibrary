@@ -1,8 +1,7 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
-import internet_store.application.domain.Product;
-import internet_store.application.database.Database;
-import internet_store.application.services.GetProductListService;
+import internet_store.application.core.domain.Product;
+import internet_store.application.core.services.GetProductListService;
 
 import java.util.List;
 

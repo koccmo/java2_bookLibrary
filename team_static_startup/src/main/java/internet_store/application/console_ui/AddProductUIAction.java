@@ -1,6 +1,6 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
-import internet_store.application.services.AddProductService;
+import internet_store.application.core.services.AddProductService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

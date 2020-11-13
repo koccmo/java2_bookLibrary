@@ -1,7 +1,7 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
-import internet_store.application.domain.Product;
-import internet_store.application.services.FindProductService;
+import internet_store.application.core.domain.Product;
+import internet_store.application.core.services.FindProductService;
 
 import java.util.Optional;
 import java.util.Scanner;

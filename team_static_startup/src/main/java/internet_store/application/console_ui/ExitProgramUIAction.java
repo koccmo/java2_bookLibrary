@@ -1,4 +1,4 @@
-package internet_store.application.ui;
+package internet_store.application.console_ui;
 
 public class ExitProgramUIAction implements UIAction{
 

@@ -1,4 +1,4 @@
-package internet_store.application.domain;
+package internet_store.application.core.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
