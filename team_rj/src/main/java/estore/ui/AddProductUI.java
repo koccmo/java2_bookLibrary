@@ -1,10 +1,12 @@
 package estore.ui;
 
+import estore.requests.AddNewProductRequest;
+import estore.responses.AddNewProductResponse;
 import estore.service.AddNewProductService;
 
 public class AddProductUI implements UIAction {
 
-    AddNewProductService addNewProductService;
+    private AddNewProductService addNewProductService;
     private InputValidation iv;
 
     public AddProductUI(AddNewProductService addNewProductService, InputValidation iv) {
@@ -19,11 +21,13 @@ public class AddProductUI implements UIAction {
         description = "Enter description of product";
         String productDescription = iv.getLine(description);
 
-        boolean successfullyAdded = addNewProductService.execute(productName, productDescription);
-        if (successfullyAdded) {
-            System.out.println("Product was added to DB.");
+        AddNewProductRequest request = new AddNewProductRequest(productName, productDescription);
+        AddNewProductResponse response = addNewProductService.execute(request);
+
+        if (response.isSuccessfullyAdded()) {
+            System.out.println("New product with id #" + response.getProduct().getId() + " successfully added.");
         } else {
-            System.out.println("Product was not added!");
+            System.out.println("Failed to add new product");
         }
     }
 }
