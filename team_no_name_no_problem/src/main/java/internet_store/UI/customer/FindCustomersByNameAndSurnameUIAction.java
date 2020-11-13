@@ -2,8 +2,7 @@ package internet_store.UI.customer;
 
 import internet_store.UI.InputCheckUtility;
 import internet_store.UI.UIAction;
-import internet_store.database.customer.CustomerDatabase;
-import internet_store.services.customer.FindAllCustomersByNameAndSurnameService;
+import internet_store.core.services.customer.FindAllCustomersByNameAndSurnameService;
 
 public class FindCustomersByNameAndSurnameUIAction implements UIAction {
 
