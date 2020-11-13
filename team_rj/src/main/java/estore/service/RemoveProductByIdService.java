@@ -1,6 +1,8 @@
 package estore.service;
 
 import estore.database.ProductDataBase;
+import estore.requests.RemoveProductByIdRequest;
+import estore.responses.RemoveProductByIdResponse;
 
 public class RemoveProductByIdService {
 
@@ -10,9 +12,9 @@ public class RemoveProductByIdService {
         this.database = database;
     }
 
-    public int execute(int productToRemoveId) {
-        int productsRemoved = database.removeProductById(Long.valueOf(productToRemoveId));
-        return productsRemoved;
+    public RemoveProductByIdResponse execute(RemoveProductByIdRequest request) {
+        int productsRemoved = database.removeProductById(request.getProductId());
+        return new RemoveProductByIdResponse(productsRemoved);
     }
 
 }

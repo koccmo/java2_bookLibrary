@@ -2,6 +2,8 @@ package estore.service;
 
 import estore.database.ProductDataBase;
 import estore.domain.Product;
+import estore.requests.AddNewProductRequest;
+import estore.responses.AddNewProductResponse;
 
 public class AddNewProductService {
 
@@ -11,9 +13,12 @@ public class AddNewProductService {
         this.database = database;
     }
 
-    public boolean execute(String productName, String productDescription) {
-        Product product = new Product(productName, productDescription);
-        boolean successfullyAdded = database.addNewProduct(product);
-        return successfullyAdded;
+    public AddNewProductResponse execute(AddNewProductRequest request) {
+        Product product = new Product(request.getProductName(), request.getProductDescription());
+        database.addNewProduct(product);
+        AddNewProductResponse response = new AddNewProductResponse(product);
+        response.setSuccessfullyAdded(true);
+        return response;
     }
+
 }
