@@ -15,8 +15,7 @@ public class ChangeProductNameUIAction implements UIAction {
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product Id to search for: ");
-        Long id = myInput.nextLong();
-        myInput.nextLine();
+        Long id = Long.parseLong(myInput.nextLine());
         System.out.print("Enter new name for product: ");
         String newName = myInput.nextLine();
 
