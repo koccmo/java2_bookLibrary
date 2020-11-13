@@ -4,16 +4,20 @@ import estore.database.ProductDataBase;
 import estore.database.ProductDataBaseImplementation;
 import estore.service.AddNewProductService;
 import estore.service.RemoveProductByIdService;
+import estore.service.RemoveProductByNameService;
+import estore.service.SearchProductByNameService;
 
 public class UserAction {
     private static InputValidation iv = new InputValidation();
     private static ProductDataBase database = new ProductDataBaseImplementation();
     private static AddNewProductService addNewProductService = new AddNewProductService(database);
     private static RemoveProductByIdService removeProductByIdService = new RemoveProductByIdService(database);
+    private static RemoveProductByNameService removeProductByNameService = new RemoveProductByNameService(database);
+    private static SearchProductByNameService searchProductByNameService = new SearchProductByNameService(database);
     private static UIAction addNewProductUI = new AddProductUI(addNewProductService, iv);
-    private static UIAction removeProductByName = new RemoveProductByNameUI(database, iv);
+    private static UIAction removeProductByName = new RemoveProductByNameUI(removeProductByNameService, iv);
     private static UIAction removeProductById = new RemoveProductByIdUI(removeProductByIdService, iv);
-    private static UIAction searchProductByName = new SearchProductByNameUI(database, iv);
+    private static UIAction searchProductByName = new SearchProductByNameUI(searchProductByNameService, iv);
     private static UIAction showAllProducts = new ShowAllProductsUI(database);
     private static UIAction exitProgram = new ExitProgramUI();
 

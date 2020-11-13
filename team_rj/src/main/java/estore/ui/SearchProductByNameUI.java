@@ -3,16 +3,17 @@ package estore.ui;
 import estore.database.ProductDataBase;
 import estore.service.PrintListService;
 import estore.domain.Product;
+import estore.service.SearchProductByNameService;
 
 import java.util.List;
 
 public class SearchProductByNameUI implements UIAction {
 
-    private ProductDataBase database;
+    private SearchProductByNameService searchProductByNameService;
     private InputValidation iv;
 
-    public SearchProductByNameUI(ProductDataBase database, InputValidation iv) {
-        this.database = database;
+    public SearchProductByNameUI(SearchProductByNameService searchProductByNameService, InputValidation iv) {
+        this.searchProductByNameService = searchProductByNameService;
         this.iv = iv;
     }
 
@@ -20,7 +21,7 @@ public class SearchProductByNameUI implements UIAction {
     public void execute() {
         String description = "Enter name of product to search: ";
         String productToSearch = iv.getString(description);
-        List<Product> foundProducts = database.searchProductByName(productToSearch);
+        List<Product> foundProducts = searchProductByNameService.execute(productToSearch);
         PrintListService.printListOfProducts(foundProducts);
     }
 }
