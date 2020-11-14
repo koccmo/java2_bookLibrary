@@ -1,6 +1,5 @@
 package dental_clinic.core.responses;
 
-import dental_clinic.core.domain.Patient;
 
 import java.util.List;
 
