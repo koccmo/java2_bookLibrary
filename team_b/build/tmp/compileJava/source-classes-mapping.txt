@@ -1,2 +1,0 @@
-team_b/application/Book.java
- team_b.application.Book
