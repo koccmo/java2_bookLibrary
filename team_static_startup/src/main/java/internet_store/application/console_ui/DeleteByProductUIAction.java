@@ -6,11 +6,11 @@ import internet_store.application.core.services.DeleteProductService;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class DeleteProductUIAction implements UIAction {
+public class DeleteByProductUIAction implements UIAction {
 
     private final DeleteProductService deleteProductService;
 
-    public DeleteProductUIAction(DeleteProductService deleteProductService) {
+    public DeleteByProductUIAction(DeleteProductService deleteProductService) {
         this.deleteProductService = deleteProductService;
     }
 
