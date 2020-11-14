@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="EStoreApplicationUnitTests" tests="15" skipped="0" failures="0" errors="0" timestamp="2020-11-08T20:12:27" hostname="DESKTOP-URLGS70" time="0.028">
+  <properties/>
+  <testcase name="testAddProductFail" classname="EStoreApplicationUnitTests" time="0.005"/>
+  <testcase name="testFindProductByNameSuccess" classname="EStoreApplicationUnitTests" time="0.001"/>
+  <testcase name="testAddProductSuccess" classname="EStoreApplicationUnitTests" time="0.002"/>
+  <testcase name="testUpdateProductSuccess" classname="EStoreApplicationUnitTests" time="0.002"/>
+  <testcase name="testUpdateProductFail" classname="EStoreApplicationUnitTests" time="0.001"/>
+  <testcase name="testRemoveProductByNameSuccess" classname="EStoreApplicationUnitTests" time="0.014"/>
+  <testcase name="testRemoveProductByIdSuccess" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testInitializeProductList" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testFindProductByNameFail" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testFindProductByIdFail" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testRemoveProductByNameFail" classname="EStoreApplicationUnitTests" time="0.001"/>
+  <testcase name="testRemoveProductByIdFail" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testPrivateConstructor" classname="EStoreApplicationUnitTests" time="0.001"/>
+  <testcase name="testGetProductRepository" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <testcase name="testFindProductByIdSuccess" classname="EStoreApplicationUnitTests" time="0.0"/>
+  <system-out><![CDATA[Product already exists in the store.
+Product is updated.
+Product is not found.
+Product is not found.
+Product is not found.
+Product is not found.
+Product is not found.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

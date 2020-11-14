@@ -1,0 +1,16 @@
+dental_clinic/services/AddVisitServiceTest.java
+ dental_clinic.services.AddVisitServiceTest
+dental_clinic/services/GetPatientsServiceTest.java
+ dental_clinic.services.GetPatientsServiceTest
+dental_clinic/services/DeletePatientServicesTest.java
+ dental_clinic.services.DeletePatientServicesTest
+dental_clinic/services/FindPatientByPersonalCodeServiceTest.java
+ dental_clinic.services.FindPatientByPersonalCodeServiceTest
+dental_clinic/services/GetSpecificPatientHistoryServiceTest.java
+ dental_clinic.services.GetSpecificPatientHistoryServiceTest
+dental_clinic/services/AddPatientServicesTest.java
+ dental_clinic.services.AddPatientServicesTest
+dental_clinic/services/FindPatientBySurnameServiceTest.java
+ dental_clinic.services.FindPatientBySurnameServiceTest
+dental_clinic/database/PatientDatabaseImplTest.java
+ dental_clinic.database.PatientDatabaseImplTest

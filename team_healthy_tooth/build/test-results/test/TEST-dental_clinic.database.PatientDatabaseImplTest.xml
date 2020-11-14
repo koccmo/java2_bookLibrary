@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dental_clinic.database.PatientDatabaseImplTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2020-11-08T20:12:29" hostname="DESKTOP-URLGS70" time="0.009">
+  <properties/>
+  <testcase name="testGetPatients" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.004"/>
+  <testcase name="testAddVisitJowlData" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.001"/>
+  <testcase name="testFindPatientBySurname" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.001"/>
+  <testcase name="testAddVisitVisitData" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.0"/>
+  <testcase name="testIdGeneration" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.0"/>
+  <testcase name="testAddPatient" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.001"/>
+  <testcase name="testFindPatientByPersonalCode" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.0"/>
+  <testcase name="testDeletePatient" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.0"/>
+  <testcase name="testGetSpecificPatientHistory" classname="dental_clinic.database.PatientDatabaseImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
