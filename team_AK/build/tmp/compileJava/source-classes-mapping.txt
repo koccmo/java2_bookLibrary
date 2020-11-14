@@ -1,0 +1,43 @@
+lesson_1/database/InnerDatabaseImpl.java
+ lesson_1.database.InnerDatabaseImpl
+lesson_1/product_find_handler/FindProduct.java
+ lesson_1.product_find_handler.FindProduct
+internet_store/log/Events.java
+ internet_store.log.Events
+lesson_1/user_handler/UserInput.java
+ lesson_1.user_handler.UserInput
+lesson_1/menu/UpdateMenu.java
+ lesson_1.menu.UpdateMenu
+lesson_1/product_fields/SetQuantityHandler.java
+ lesson_1.product_fields.SetQuantityHandler
+lesson_1/menu/DeleteMenu.java
+ lesson_1.menu.DeleteMenu
+lesson_1/user_handler/UserInputValue.java
+ lesson_1.user_handler.UserInputValue
+lesson_1/command_handler/DeleteProductCommand.java
+ lesson_1.command_handler.DeleteProductCommand
+lesson_1/product_fields/SetPriceHandler.java
+ lesson_1.product_fields.SetPriceHandler
+lesson_1/product_fields/ProductFieldsResources.java
+ lesson_1.product_fields.ProductFieldsResources
+lesson_1/product_fields/InputHandler.java
+ lesson_1.product_fields.InputHandler
+lesson_1/command_handler/AddProductCommand.java
+ lesson_1.command_handler.AddProductCommand
+internet_store/domain/Product.java
+ internet_store.domain.Product
+lesson_1/command_handler/UpdateProduct.java
+ lesson_1.command_handler.UpdateProduct
+lesson_1/product_fields/SetDescriptionHandler.java
+ lesson_1.product_fields.SetDescriptionHandler
+lesson_1/database/InnerDatabase.java
+ lesson_1.database.InnerDatabase
+lesson_1/ProductListApplication.java
+ lesson_1.ProductListApplication
+lesson_1/product_fields/SetTitleHandler.java
+ lesson_1.product_fields.SetTitleHandler
+internet_store/domain/Client.java
+ internet_store.domain.Client
+ internet_store.domain.Client$ClientBuilder
+lesson_1/menu/MainMenu.java
+ lesson_1.menu.MainMenu

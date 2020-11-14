@@ -20,11 +20,4 @@ public class AddPatientRequest {
         return personalData;
     }
 
-    public Jowl getJowl() {
-        return jowl;
-    }
-
-    public List<Visit> getVisits() {
-        return visits;
-    }
 }
