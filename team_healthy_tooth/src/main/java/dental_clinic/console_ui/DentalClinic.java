@@ -17,7 +17,8 @@ public class DentalClinic {
         PatientDatabase patientDatabase = new PatientDatabaseImpl();
         AddPatientValidator addPatientValidator = new AddPatientValidator();
         AddPatientService addPatientService = new AddPatientService(patientDatabase, addPatientValidator);
-        DeletePatientService deletePatientService = new DeletePatientService(patientDatabase);
+        DeletePatientValidator deletePatientValidator = new DeletePatientValidator();
+        DeletePatientService deletePatientService = new DeletePatientService(patientDatabase, deletePatientValidator);
         GetPatientsService getPatientsService = new GetPatientsService(patientDatabase);
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
                 new GetSpecificPatientHistoryService(patientDatabase);
