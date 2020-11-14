@@ -1,28 +1,33 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.Patient;
-import dental_clinic.core.services.FindPatientBySurnameService;
+import dental_clinic.core.requests.FindPatientBySurnameRequest;
+import dental_clinic.core.responses.FindPatientBySurnameResponse;
+import dental_clinic.core.services.FindPatientsBySurnameService;
 
 import java.util.List;
+import java.util.Scanner;
 
 class FindPatientBySurnameUIAction implements UIAction {
 
-    private FindPatientBySurnameService findPatientBySurname;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+    private FindPatientsBySurnameService findPatientBySurname;
 
-    public FindPatientBySurnameUIAction(FindPatientBySurnameService findPatientBySurname) {
+    public FindPatientBySurnameUIAction(FindPatientsBySurnameService findPatientBySurname) {
         this.findPatientBySurname = findPatientBySurname;
     }
 
     public void execute(){
-        String surname = inputCheckUtility.inputValidString("Please enter surname");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter surname");
+        String surname = in.nextLine();
 
-        List<Patient> result = findPatientBySurname.execute(surname);
+        FindPatientBySurnameRequest findPatientBySurnameRequest = new FindPatientBySurnameRequest(surname);
+        FindPatientBySurnameResponse findPatientBySurnameResponse = findPatientBySurname.execute(findPatientBySurnameRequest);
 
-        if (result.isEmpty()){
-            System.out.println("Database doesn't contain patient with surname " + surname);
+        if (findPatientBySurnameResponse.hasErrors()){
+            findPatientBySurnameResponse.getErrors().forEach(System.out::println);
         }else{
-            result.forEach(System.out::println);
+            findPatientBySurnameResponse.getSpecificPatient().forEach(System.out::println);
         }
 
     }

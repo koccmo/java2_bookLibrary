@@ -1,39 +1,57 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.requests.AddVisitRequest;
+import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.services.AddVisitService;
 
 import java.util.Optional;
+import java.util.Scanner;
 
 class AddVisitUIAction implements UIAction {
 
     private AddVisitService addVisitService;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+    //InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public AddVisitUIAction(AddVisitService addVisitService) {
         this.addVisitService = addVisitService;
     }
 
     public void execute(){
-        long id = inputCheckUtility.inputValidLong("Please enter patient's id");
+        Scanner in = new Scanner(System.in);
 
-        int toothNumber = inputCheckUtility.inputValidInteger("Please input tooth number");
+        System.out.println("Please enter patient's id");
+        long id = in.nextLong();
 
-        Optional<String> comment = inputCheckUtility.inputComment("Please input comment if necessary or press enter");
+        System.out.println("Please input tooth number");
+        int toothNumber = in.nextInt();
 
-        ToothStatus toothStatus = inputToothStatus();
+        System.out.println("Please input comment if necessary or press enter");
+        String commentIn = in.nextLine();
+        commentIn = in.nextLine();
+        Optional<String> comment = Optional.of(commentIn);
 
-        String doctor = inputCheckUtility.inputValidString("Please enter doctor name");
+        System.out.println("Please enter tooth status");
+        printToothStatuses();
+        int variant = in.nextInt();
+        ToothStatus toothStatus = inputToothStatus(variant);
 
-        if (!addVisitService.execute(id, toothNumber, comment, toothStatus, doctor)){
-            System.out.println("Not correct input");
+        System.out.println("Please enter doctor's name");
+        String doctor = in.nextLine();
+        doctor = in.nextLine();
+
+        AddVisitRequest addVisitRequest = new AddVisitRequest(id, toothNumber, comment, toothStatus, doctor);
+        AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
+
+        if (addVisitResponse.hasErrors()){
+            addVisitResponse.getErrors().forEach(System.out::println);
         }else{
             System.out.println("Visit added successfully!");
         }
 
     }
 
-    ToothStatus inputToothStatus(){
+    private void printToothStatuses(){
         System.out.println(
                 "1   KARIES\n" +
                         "2   PLOMBA\n" +
@@ -47,10 +65,11 @@ class AddVisitUIAction implements UIAction {
                         "10  PLAST_KRONITIS\n" +
                         "11  TILTINI\n" +
                         "12  HEALTHY\n");
+    }
 
-        int variant = 0;
-        while (variant < 1 || variant > 12)
-        variant = inputCheckUtility.inputValidInteger("Please choose tooth status");
+    //I don't know how to validate it :((
+    ToothStatus inputToothStatus(int variant){
+
         switch (variant) {
             case 1: return ToothStatus.KARIES;
             case 2: return ToothStatus.PLOMBA;

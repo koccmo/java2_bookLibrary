@@ -6,17 +6,17 @@ import dental_clinic.core.domain.Patient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FindPatientBySurnameService {
+public class FindPatientsByPersonalCodeService {
 
     private final PatientDatabase patientDatabase;
 
-    public FindPatientBySurnameService(PatientDatabase patientDatabase) {
+    public FindPatientsByPersonalCodeService(PatientDatabase patientDatabase) {
         this.patientDatabase = patientDatabase;
     }
 
-    public List<Patient> execute(String surname){
+    public List<Patient> execute(String personalCode){
         return patientDatabase.getPatients().stream()
-                .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
+                .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
 }

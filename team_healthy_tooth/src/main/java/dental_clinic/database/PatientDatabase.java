@@ -15,13 +15,11 @@ public interface PatientDatabase {
 
     void deletePatient(long id);
 
-    //TODO addDoctor
-
     Optional <Patient> getSpecificPatientHistory(long id);
 
-    List<Patient> findPatientBySurname(String surname);
+    List<Patient> findPatientsBySurname(String surname);
 
-    List<Patient> findPatientByPersonalCode(String personalCode);
+    List<Patient> findPatientsByPersonalCode(String personalCode);
 
     void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor);
 

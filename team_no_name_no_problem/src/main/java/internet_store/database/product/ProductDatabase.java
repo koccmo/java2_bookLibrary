@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProductDatabase {
 
-    public List <Product> getProducts();
+    List <Product> getProducts();
 
     void add(Product product);
 
