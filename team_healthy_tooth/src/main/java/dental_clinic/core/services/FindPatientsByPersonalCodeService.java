@@ -6,11 +6,11 @@ import dental_clinic.core.domain.Patient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FindPatientByPersonalCodeService {
+public class FindPatientsByPersonalCodeService {
 
     private final PatientDatabase patientDatabase;
 
-    public FindPatientByPersonalCodeService(PatientDatabase patientDatabase) {
+    public FindPatientsByPersonalCodeService(PatientDatabase patientDatabase) {
         this.patientDatabase = patientDatabase;
     }
 
