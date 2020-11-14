@@ -23,9 +23,11 @@ public class DentalClinic {
         GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
                 new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
-        FindPatientBySurnameService findPatientBySurnameService = new FindPatientBySurnameService(patientDatabase);
-        FindPatientByPersonalCodeService findPatientByPersonalCodeService =
-                new FindPatientByPersonalCodeService(patientDatabase);
+        FindPatientsBySurnameValidator findPatientsBySurnameValidator = new FindPatientsBySurnameValidator();
+        FindPatientsBySurnameService findPatientsBySurnameService =
+                new FindPatientsBySurnameService(patientDatabase, findPatientsBySurnameValidator);
+        FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
+                new FindPatientsByPersonalCodeService(patientDatabase);
         AddVisitService addVisitService = new AddVisitService(patientDatabase);
 
         menuNumberToAction = new HashMap();
@@ -35,8 +37,8 @@ public class DentalClinic {
         menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientService));
         menuNumberToAction.put(3, new PrintPatientDatabaseUIAction(getPatientsService));
         menuNumberToAction.put(4, new PrintSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
-        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientBySurnameService));
-        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientByPersonalCodeService));
+        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientsBySurnameService));
+        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
         menuNumberToAction.put(7, new AddVisitUIAction(addVisitService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
