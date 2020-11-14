@@ -16,7 +16,7 @@
 	private static UIAction getAllBooksUIAction = new GetAllBooksUIAction(getAllBooksService);
 	private static UIAction exitUIAction = new ExitUIAction();
 
-и лежит в главном классе нашего приложения.
+и находится в главном классе приложения.
 
 Следуя принципу SRP мы должны логику инициализации приложения
 отделить от самого кода приложения и реализовать отдельно. Это

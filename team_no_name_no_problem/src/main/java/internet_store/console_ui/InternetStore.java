@@ -17,7 +17,8 @@ public class InternetStore {
     ProductDatabase productDatabase = new ProductDatabaseImpl();
     AddProductValidator addProductValidator = new AddProductValidator();
     AddProductService addProductService = new AddProductService(productDatabase, addProductValidator);
-    DeleteByIdService deleteByIdService = new DeleteByIdService(productDatabase);
+    DeleteProductValidator deleteProductValidator = new DeleteProductValidator();
+    DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductValidator);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
     ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);

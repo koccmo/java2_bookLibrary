@@ -25,7 +25,7 @@ public class FindPatientByPersonalCodeValidator {
 
     private boolean isRegexCorrect(String personalCode) {
         // 123456-12345 OR 12345612345
-        return Pattern.matches("/d{6}/-?/d{5}", personalCode);
+        return Pattern.matches("//d{6}/-?//d{5}", personalCode);
     }
 
 }

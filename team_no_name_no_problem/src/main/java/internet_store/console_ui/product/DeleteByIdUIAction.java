@@ -1,11 +1,13 @@
 package internet_store.console_ui.product;
 
-import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
+import internet_store.core.requests.product.DeleteProductRequest;
+import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.DeleteByIdService;
 
+import java.util.Scanner;
+
 public class DeleteByIdUIAction implements UIAction {
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     private DeleteByIdService deleteByIdService;
 
@@ -15,12 +17,18 @@ public class DeleteByIdUIAction implements UIAction {
 
     public void execute(){
 
-        long id = inputCheckUtility.inputValidLong("Please enter product's id to delete");
+        Scanner in = new Scanner(System.in);
 
-        if (deleteByIdService.execute(id)){
-            System.out.println("Product is deleted");
+        System.out.println("Please enter product's id to delete");
+        long id = in.nextLong();
+
+        DeleteProductRequest deleteProductRequest = new DeleteProductRequest(id);
+        DeleteProductResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
+
+        if (deleteProductResponse.hasErrors()){
+            deleteProductResponse.getErrors().forEach(System.out::println);
         }else{
-            System.out.println("No id " + id + " in database");
+            System.out.println("Product is deleted");
         }
     }
 
