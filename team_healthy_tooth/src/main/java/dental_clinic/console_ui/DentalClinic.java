@@ -20,8 +20,9 @@ public class DentalClinic {
         DeletePatientValidator deletePatientValidator = new DeletePatientValidator();
         DeletePatientService deletePatientService = new DeletePatientService(patientDatabase, deletePatientValidator);
         GetPatientsService getPatientsService = new GetPatientsService(patientDatabase);
+        GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
-                new GetSpecificPatientHistoryService(patientDatabase);
+                new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
         FindPatientBySurnameService findPatientBySurnameService = new FindPatientBySurnameService(patientDatabase);
         FindPatientByPersonalCodeService findPatientByPersonalCodeService =
                 new FindPatientByPersonalCodeService(patientDatabase);
