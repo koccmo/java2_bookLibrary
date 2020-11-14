@@ -1,2 +1,0 @@
-application/bd/ProductListDatabaseTest.java
- application.bd.ProductListDatabaseTest

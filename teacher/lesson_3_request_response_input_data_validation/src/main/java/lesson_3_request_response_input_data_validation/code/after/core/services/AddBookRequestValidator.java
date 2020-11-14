@@ -6,7 +6,7 @@ import java.util.List;
 import lesson_3_request_response_input_data_validation.code.after.core.requests.AddBookRequest;
 import lesson_3_request_response_input_data_validation.code.after.core.responses.CoreError;
 
-public class AddBookValidator {
+public class AddBookRequestValidator {
 
 	public List<CoreError> validate(AddBookRequest request) {
 		List<CoreError> errors = new ArrayList<>();
