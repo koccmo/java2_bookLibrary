@@ -18,6 +18,6 @@ public abstract class CoreResponse {
         }
 
         public boolean hasErrors() {
-            return errors != null & !errors.isEmpty();
+            return errors != null && !errors.isEmpty();
         }
     }
