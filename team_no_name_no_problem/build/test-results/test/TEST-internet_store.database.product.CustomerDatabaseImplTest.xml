@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="internet_store.database.product.CustomerDatabaseImplTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2020-11-14T11:14:39" hostname="LAPTOP-4RH8MILU" time="0.012">
+  <properties/>
+  <testcase name="findAllCustomersBySurnameTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.006"/>
+  <testcase name="findAllCustomersByNameTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.001"/>
+  <testcase name="addCustomerTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.0"/>
+  <testcase name="deleteCustomerTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.002"/>
+  <testcase name="getCustomerListTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.0"/>
+  <testcase name="findAnyCustomerByNameAndSurnameTest" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.001"/>
+  <testcase name="deleteCustomerTestNoCustomerInDatabase" classname="internet_store.database.product.CustomerDatabaseImplTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

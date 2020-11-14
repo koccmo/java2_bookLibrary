@@ -1,6 +1,6 @@
 package internet_store;
 
-import internet_store.UI.InternetStore;
+import internet_store.console_ui.InternetStore;
 
 public class ProductListApplication {
 

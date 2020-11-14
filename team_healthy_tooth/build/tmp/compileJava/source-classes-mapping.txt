@@ -1,0 +1,62 @@
+dental_clinic/console_ui/InputCheckUtility.java
+ dental_clinic.console_ui.InputCheckUtility
+dental_clinic/console_ui/AddVisitUIAction.java
+ dental_clinic.console_ui.AddVisitUIAction
+dental_clinic/console_ui/DeletePatientUIAction.java
+ dental_clinic.console_ui.DeletePatientUIAction
+dental_clinic/core/services/GetPatientsService.java
+ dental_clinic.core.services.GetPatientsService
+dental_clinic/console_ui/DentalClinic.java
+ dental_clinic.console_ui.DentalClinic
+dental_clinic/core/requests/AddPatientRequest.java
+ dental_clinic.core.requests.AddPatientRequest
+dental_clinic/DentalClinicApplication.java
+ dental_clinic.DentalClinicApplication
+dental_clinic/core/services/DeletePatientService.java
+ dental_clinic.core.services.DeletePatientService
+dental_clinic/core/responses/AddPatientResponse.java
+ dental_clinic.core.responses.AddPatientResponse
+dental_clinic/core/services/FindPatientBySurnameService.java
+ dental_clinic.core.services.FindPatientBySurnameService
+dental_clinic/core/domain/Visit.java
+ dental_clinic.core.domain.Visit
+dental_clinic/core/services/AddPatientService.java
+ dental_clinic.core.services.AddPatientService
+dental_clinic/core/domain/Patient.java
+ dental_clinic.core.domain.Patient
+dental_clinic/core/services/GetSpecificPatientHistoryService.java
+ dental_clinic.core.services.GetSpecificPatientHistoryService
+dental_clinic/console_ui/AddPatientUIAction.java
+ dental_clinic.console_ui.AddPatientUIAction
+dental_clinic/database/PatientDatabaseImpl.java
+ dental_clinic.database.PatientDatabaseImpl
+dental_clinic/console_ui/PrintSpecificPatientHistoryUIAction.java
+ dental_clinic.console_ui.PrintSpecificPatientHistoryUIAction
+dental_clinic/core/responses/CoreResponse.java
+ dental_clinic.core.responses.CoreResponse
+dental_clinic/core/domain/PersonalData.java
+ dental_clinic.core.domain.PersonalData
+dental_clinic/console_ui/ExitUIAction.java
+ dental_clinic.console_ui.ExitUIAction
+dental_clinic/console_ui/FindPatientBySurnameUIAction.java
+ dental_clinic.console_ui.FindPatientBySurnameUIAction
+dental_clinic/core/responses/CoreError.java
+ dental_clinic.core.responses.CoreError
+dental_clinic/core/services/FindPatientByPersonalCodeService.java
+ dental_clinic.core.services.FindPatientByPersonalCodeService
+dental_clinic/core/domain/ToothStatus.java
+ dental_clinic.core.domain.ToothStatus
+dental_clinic/core/services/AddVisitService.java
+ dental_clinic.core.services.AddVisitService
+dental_clinic/database/PatientDatabase.java
+ dental_clinic.database.PatientDatabase
+dental_clinic/console_ui/UIAction.java
+ dental_clinic.console_ui.UIAction
+dental_clinic/core/domain/Jowl.java
+ dental_clinic.core.domain.Jowl
+dental_clinic/console_ui/FindPatientByPersonalCodeUIAction.java
+ dental_clinic.console_ui.FindPatientByPersonalCodeUIAction
+dental_clinic/console_ui/PrintPatientDatabaseUIAction.java
+ dental_clinic.console_ui.PrintPatientDatabaseUIAction
+dental_clinic/core/services/AddPatientValidator.java
+ dental_clinic.core.services.AddPatientValidator
