@@ -1,14 +1,15 @@
 package lv.javaguru.app;
 
-import lv.javaguru.app.businesslogic.AddReservationService;
-import lv.javaguru.app.businesslogic.DeleteReservationService;
-import lv.javaguru.app.businesslogic.GetAllReservationsService;
+import lv.javaguru.app.core.services.AddReservationService;
+import lv.javaguru.app.core.services.DeleteReservationService;
+import lv.javaguru.app.core.services.GetAllReservationsService;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.InMemoryDatabase;
-import lv.javaguru.app.ui.AddReservationAction;
-import lv.javaguru.app.ui.DeleteReservationAction;
-import lv.javaguru.app.ui.ExitAction;
-import lv.javaguru.app.ui.ShowReservationsAction;
+import lv.javaguru.app.core.request.AddReservationRequestValidator;
+import lv.javaguru.app.console_ui.AddReservationAction;
+import lv.javaguru.app.console_ui.DeleteReservationAction;
+import lv.javaguru.app.console_ui.ExitAction;
+import lv.javaguru.app.console_ui.ShowReservationsAction;
 
 import java.util.*;
 
@@ -17,8 +18,8 @@ public class Main {
     public static void main(String[] args) {
 
         Database database = new InMemoryDatabase();
-
-        AddReservationService addReservationService = new AddReservationService(database);
+        AddReservationRequestValidator validator = new AddReservationRequestValidator();
+        AddReservationService addReservationService = new AddReservationService(database, validator);
         AddReservationAction addReservationAction = new AddReservationAction(addReservationService);
 
         DeleteReservationService deleteReservationService = new DeleteReservationService(database);
