@@ -47,14 +47,14 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientBySurname(String surname) {
+    public List<Patient> findPatientsBySurname(String surname) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Patient> findPatientByPersonalCode(String personalCode) {
+    public List<Patient> findPatientsByPersonalCode(String personalCode) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
