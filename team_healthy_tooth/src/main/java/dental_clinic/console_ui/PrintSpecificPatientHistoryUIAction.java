@@ -1,26 +1,31 @@
 package dental_clinic.console_ui;
 
+import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
+import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.GetSpecificPatientHistoryService;
 
-import java.util.Optional;
+import java.util.Scanner;
 
 class PrintSpecificPatientHistoryUIAction implements UIAction {
 
     private final GetSpecificPatientHistoryService printSpecificPatientHistory;
-
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public PrintSpecificPatientHistoryUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
         this.printSpecificPatientHistory = printSpecificPatientHistory;
     }
 
     public void execute(){
-        long id = inputCheckUtility.inputValidLong("Please enter patient id");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter patient id");
+        long id = in.nextLong();
 
-        if (printSpecificPatientHistory.execute(id).equals(Optional.empty())){
-            System.out.println("Database doesn't contain patient with id " + id);
+        GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(id);
+        GetSpecificPatientHistoryResponse getSpecificPatientHistoryResponse = printSpecificPatientHistory.execute(getSpecificPatientHistoryRequest);
+
+        if (getSpecificPatientHistoryResponse.hasErrors()){
+            getSpecificPatientHistoryResponse.getErrors().forEach(System.out::println);
         }else{
-            System.out.println(printSpecificPatientHistory.execute(id).get().toString());
+            System.out.println(getSpecificPatientHistoryResponse.getSpecificPatient().toString());
         }
     }
 
