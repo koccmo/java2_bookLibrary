@@ -15,7 +15,7 @@ public interface PatientDatabase {
 
     void deletePatient(long id);
 
-    //addDoctor
+    //TODO addDoctor
 
     Optional <Patient> getSpecificPatientHistory(long id);
 
