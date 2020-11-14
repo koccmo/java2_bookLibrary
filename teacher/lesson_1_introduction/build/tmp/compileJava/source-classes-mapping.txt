@@ -1,4 +1,0 @@
-lesson_1_introduction/code/after/Book.java
- lesson_1_introduction.code.after.Book
-lesson_1_introduction/code/after/BookListApplication.java
- lesson_1_introduction.code.after.BookListApplication

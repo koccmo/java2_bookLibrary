@@ -1,41 +1,87 @@
 lesson_1/database/InnerDatabaseImpl.java
  lesson_1.database.InnerDatabaseImpl
+lesson_1/user_handler/UserInput.java
+ lesson_1.user_handler.UserInput
+lesson_1/product_fields/SetQuantityHandler.java
+ lesson_1.product_fields.SetQuantityHandler
+lesson_2/database/InnerDatabase.java
+ lesson_2.database.InnerDatabase
+lesson_1/menu/DeleteMenu.java
+ lesson_1.menu.DeleteMenu
+lesson_2/ProductListApplication.java
+ lesson_2.ProductListApplication
+lesson_1/user_handler/UserInputValue.java
+ lesson_1.user_handler.UserInputValue
+lesson_2/user_interface/console/menu_items_handler/DeleteProduct.java
+ lesson_2.user_interface.console.menu_items_handler.DeleteProduct
+lesson_2/user_interface/console/user_handler/UserInput.java
+ lesson_2.user_interface.console.user_handler.UserInput
+lesson_2/user_interface/console/menu/UpdateMenu.java
+ lesson_2.user_interface.console.menu.UpdateMenu
+lesson_1/command_handler/DeleteProductCommand.java
+ lesson_1.command_handler.DeleteProductCommand
+lesson_2/user_interface/console/menu_items_handler/AddProduct.java
+ lesson_2.user_interface.console.menu_items_handler.AddProduct
+lesson_1/command_handler/AddProductCommand.java
+ lesson_1.command_handler.AddProductCommand
+lesson_1/product_fields/SetDescriptionHandler.java
+ lesson_1.product_fields.SetDescriptionHandler
+lesson_2/service/RemoveProductService.java
+ lesson_2.service.RemoveProductService
+lesson_2/user_interface/console/product_fields/SetPriceHandler.java
+ lesson_2.user_interface.console.product_fields.SetPriceHandler
+lesson_2/service/ProductReportService.java
+ lesson_2.service.ProductReportService
+lesson_2/service/UpdateProductService.java
+ lesson_2.service.UpdateProductService
 lesson_1/product_find_handler/FindProduct.java
  lesson_1.product_find_handler.FindProduct
 internet_store/log/Events.java
  internet_store.log.Events
-lesson_1/user_handler/UserInput.java
- lesson_1.user_handler.UserInput
 lesson_1/menu/UpdateMenu.java
  lesson_1.menu.UpdateMenu
-lesson_1/product_fields/SetQuantityHandler.java
- lesson_1.product_fields.SetQuantityHandler
-lesson_1/menu/DeleteMenu.java
- lesson_1.menu.DeleteMenu
-lesson_1/user_handler/UserInputValue.java
- lesson_1.user_handler.UserInputValue
-lesson_1/command_handler/DeleteProductCommand.java
- lesson_1.command_handler.DeleteProductCommand
+lesson_2/user_interface/console/product_fields/SetTitleHandler.java
+ lesson_2.user_interface.console.product_fields.SetTitleHandler
+lesson_2/service/AddProductService.java
+ lesson_2.service.AddProductService
+lesson_2/database/InnerDatabaseImpl.java
+ lesson_2.database.InnerDatabaseImpl
+lesson_2/user_interface/console/menu/DeleteMenu.java
+ lesson_2.user_interface.console.menu.DeleteMenu
+lesson_2/user_interface/console/menu_items_handler/UpdateProduct.java
+ lesson_2.user_interface.console.menu_items_handler.UpdateProduct
+lesson_2/user_interface/console/product_fields/SetQuantityHandler.java
+ lesson_2.user_interface.console.product_fields.SetQuantityHandler
+lesson_2/user_interface/console/menu/MainMenu.java
+ lesson_2.user_interface.console.menu.MainMenu
 lesson_1/product_fields/SetPriceHandler.java
  lesson_1.product_fields.SetPriceHandler
 lesson_1/product_fields/ProductFieldsResources.java
  lesson_1.product_fields.ProductFieldsResources
 lesson_1/product_fields/InputHandler.java
  lesson_1.product_fields.InputHandler
-lesson_1/command_handler/AddProductCommand.java
- lesson_1.command_handler.AddProductCommand
 internet_store/domain/Product.java
  internet_store.domain.Product
 lesson_1/command_handler/UpdateProduct.java
  lesson_1.command_handler.UpdateProduct
-lesson_1/product_fields/SetDescriptionHandler.java
- lesson_1.product_fields.SetDescriptionHandler
+lesson_2/service/FindProductService.java
+ lesson_2.service.FindProductService
 lesson_1/database/InnerDatabase.java
  lesson_1.database.InnerDatabase
+lesson_2/user_interface/console/product_fields/ProductFieldsResources.java
+ lesson_2.user_interface.console.product_fields.ProductFieldsResources
+lesson_2/user_interface/console/user_handler/UserInputValue.java
+ lesson_2.user_interface.console.user_handler.UserInputValue
+lesson_2/user_interface/console/ConsoleUI.java
+ lesson_2.user_interface.console.ConsoleUI
+lesson_2/user_interface/console/product_fields/SetDescriptionHandler.java
+ lesson_2.user_interface.console.product_fields.SetDescriptionHandler
 lesson_1/ProductListApplication.java
  lesson_1.ProductListApplication
 lesson_1/product_fields/SetTitleHandler.java
  lesson_1.product_fields.SetTitleHandler
+lesson_2/user_interface/console/product_fields/InputHandler.java
+ lesson_2.user_interface.console.product_fields.InputHandler
 internet_store/domain/Client.java
  internet_store.domain.Client
  internet_store.domain.Client$ClientBuilder

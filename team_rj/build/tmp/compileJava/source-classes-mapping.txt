@@ -1,28 +1,58 @@
-estore/ui/UIAction.java
- estore.ui.UIAction
-estore/ui/InputValidation.java
- estore.ui.InputValidation
-estore/service/PrintList.java
- estore.service.PrintList
-estore/ui/SearchProductByName.java
- estore.ui.SearchProductByName
+estore/core/service/ShowAllProductsService.java
+ estore.core.service.ShowAllProductsService
+estore/core/requests/ShowAllProductsRequest.java
+ estore.core.requests.ShowAllProductsRequest
 estore/domain/Product.java
  estore.domain.Product
-estore/ui/ShowAllProducts.java
- estore.ui.ShowAllProducts
+estore/core/service/AddNewProductService.java
+ estore.core.service.AddNewProductService
+estore/core/service/PrintListService.java
+ estore.core.service.PrintListService
 estore/ProductApplication.java
  estore.ProductApplication
-estore/ui/RemoveProductByName.java
- estore.ui.RemoveProductByName
-estore/ui/AddProduct.java
- estore.ui.AddProduct
+estore/core/requests/SearchProductByNameRequest.java
+ estore.core.requests.SearchProductByNameRequest
+estore/core/service/RemoveProductByIdService.java
+ estore.core.service.RemoveProductByIdService
+estore/core/responses/AddNewProductResponse.java
+ estore.core.responses.AddNewProductResponse
+estore/core/service/RemoveProductByNameService.java
+ estore.core.service.RemoveProductByNameService
+estore/ui/UIAction.java
+ estore.ui.UIAction
+estore/core/requests/AddNewProductRequest.java
+ estore.core.requests.AddNewProductRequest
+estore/ui/ShowAllProductsUI.java
+ estore.ui.ShowAllProductsUI
+estore/ui/InputValidation.java
+ estore.ui.InputValidation
+estore/ui/SearchProductByNameUI.java
+ estore.ui.SearchProductByNameUI
+estore/core/requests/RemoveProductByNameRequest.java
+ estore.core.requests.RemoveProductByNameRequest
+estore/core/responses/SearchProductByNameResponse.java
+ estore.core.responses.SearchProductByNameResponse
+estore/core/responses/RemoveProductByNameResponse.java
+ estore.core.responses.RemoveProductByNameResponse
+estore/ui/ExitProgramUI.java
+ estore.ui.ExitProgramUI
 estore/ui/UserAction.java
  estore.ui.UserAction
-estore/ui/ExitProgram.java
- estore.ui.ExitProgram
+estore/core/responses/RemoveProductByIdResponse.java
+ estore.core.responses.RemoveProductByIdResponse
+estore/ui/RemoveProductByIdUI.java
+ estore.ui.RemoveProductByIdUI
+estore/ui/RemoveProductByNameUI.java
+ estore.ui.RemoveProductByNameUI
 estore/database/ProductDataBase.java
  estore.database.ProductDataBase
 estore/database/ProductDataBaseImplementation.java
  estore.database.ProductDataBaseImplementation
-estore/ui/RemoveProductById.java
- estore.ui.RemoveProductById
+estore/ui/AddProductUI.java
+ estore.ui.AddProductUI
+estore/core/responses/ShowAllProductsResponse.java
+ estore.core.responses.ShowAllProductsResponse
+estore/core/service/SearchProductByNameService.java
+ estore.core.service.SearchProductByNameService
+estore/core/requests/RemoveProductByIdRequest.java
+ estore.core.requests.RemoveProductByIdRequest

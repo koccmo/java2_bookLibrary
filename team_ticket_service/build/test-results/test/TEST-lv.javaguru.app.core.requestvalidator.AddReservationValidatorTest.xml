@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2020-11-14T08:30:20" hostname="LAPTOP-4RH8MILU" time="0.014">
+<testsuite name="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2020-11-14T11:14:44" hostname="LAPTOP-4RH8MILU" time="0.019">
   <properties/>
-  <testcase name="validPerson" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.004"/>
-  <testcase name="noNameTest" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.008"/>
-  <testcase name="noSurnameTest" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.002">
+  <testcase name="validPerson" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.003"/>
+  <testcase name="noNameTest" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.012"/>
+  <testcase name="noSurnameTest" classname="lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest" time="0.004">
     <failure message="org.junit.ComparisonFailure: Failed! expected:&lt;...Error{field='persons[Name', message='Wrong ]name!'}]&gt; but was:&lt;...Error{field='persons[Surname', message='Wrong sur]name!'}]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: Failed! expected:&lt;...Error{field='persons[Name', message='Wrong ]name!'}]&gt; but was:&lt;...Error{field='persons[Surname', message='Wrong sur]name!'}]&gt;
 	at org.junit.Assert.assertEquals(Assert.java:117)
 	at lv.javaguru.app.core.requestvalidator.AddReservationValidatorTest.noSurnameTest(AddReservationValidatorTest.java:48)

@@ -1,7 +1,7 @@
 package internet_store.core.services.product;
 
 import internet_store.database.product.ProductDatabase;
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 
 public class AddProductService {
 

@@ -1,6 +1,6 @@
 package internet_store.database.customer;
 
-import internet_store.domain.Customer;
+import internet_store.core.domain.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

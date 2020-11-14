@@ -1,2 +1,0 @@
-application_target_list/TargetListImplTest.java
- application_target_list.TargetListImplTest

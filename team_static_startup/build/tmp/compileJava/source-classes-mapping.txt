@@ -1,62 +1,108 @@
+internet_store/lesson_2/domain/Product.java
+ internet_store.lesson_2.domain.Product
 internet_store/lesson_1/uiaction/DeleteByIdUIAction.java
  internet_store.lesson_1.uiaction.DeleteByIdUIAction
+internet_store/application/console_ui/FindByProductNameUIAction.java
+ internet_store.application.console_ui.FindByProductNameUIAction
 internet_store/lesson_1/uiaction/PrintProductsToConsoleUIAction.java
  internet_store.lesson_1.uiaction.PrintProductsToConsoleUIAction
 internet_store/lesson_1/uiaction/DeleteProductUIAction.java
  internet_store.lesson_1.uiaction.DeleteProductUIAction
-internet_store/application/ui/ChangeProductNameUIAction.java
- internet_store.application.ui.ChangeProductNameUIAction
-internet_store/lesson_1/uiaction/SaveProductUIAction.java
- internet_store.lesson_1.uiaction.SaveProductUIAction
-internet_store/application/services/AddProductService.java
- internet_store.application.services.AddProductService
-internet_store/lesson_1/ProductDatabaseImpl.java
- internet_store.lesson_1.ProductDatabaseImpl
-internet_store/application/ui/DeleteByProductNameUIAction.java
- internet_store.application.ui.DeleteByProductNameUIAction
-internet_store/application/ui/ExitProgramUIAction.java
- internet_store.application.ui.ExitProgramUIAction
-internet_store/application/ui/PrintProductsToConsoleUIAction.java
- internet_store.application.ui.PrintProductsToConsoleUIAction
+internet_store/lesson_2/database/InMemoryDatabase.java
+ internet_store.lesson_2.database.InMemoryDatabase
+internet_store/application/console_ui/DeleteByProductNameUIAction.java
+ internet_store.application.console_ui.DeleteByProductNameUIAction
 internet_store/lesson_1/ProductListApplication.java
  internet_store.lesson_1.ProductListApplication
 internet_store/lesson_1/uiaction/FindByProductNameUIAction.java
  internet_store.lesson_1.uiaction.FindByProductNameUIAction
-internet_store/application/ui/AddProductUIAction.java
- internet_store.application.ui.AddProductUIAction
-internet_store/lesson_1/Product.java
- internet_store.lesson_1.Product
-internet_store/application/domain/Product.java
- internet_store.application.domain.Product
-internet_store/application/ProductList.java
- internet_store.application.ProductList
-internet_store/application/ui/DeleteProductUIAction.java
- internet_store.application.ui.DeleteProductUIAction
+internet_store/application/core/domain/Product.java
+ internet_store.application.core.domain.Product
 internet_store/lesson_1/ProductDatabase.java
  internet_store.lesson_1.ProductDatabase
+internet_store/lesson_2/ui/UIAction.java
+ internet_store.lesson_2.ui.UIAction
 internet_store/application/database/Database.java
  internet_store.application.database.Database
-internet_store/lesson_1/uiaction/DeleteByProductNameUIAction.java
- internet_store.lesson_1.uiaction.DeleteByProductNameUIAction
-internet_store/application/services/FindProductService.java
- internet_store.application.services.FindProductService
-internet_store/application/ui/FindByProductNameUIAction.java
- internet_store.application.ui.FindByProductNameUIAction
+internet_store/application/core/services/GetProductListService.java
+ internet_store.application.core.services.GetProductListService
+internet_store/lesson_2/ui/FindByProductNameUIAction.java
+ internet_store.lesson_2.ui.FindByProductNameUIAction
+internet_store/lesson_2/services/ChangeProductNameService.java
+ internet_store.lesson_2.services.ChangeProductNameService
+internet_store/application/console_ui/ChangeProductNameUIAction.java
+ internet_store.application.console_ui.ChangeProductNameUIAction
 internet_store/lesson_1/ProductList.java
  internet_store.lesson_1.ProductList
-internet_store/application/ui/FindByIdUIAction.java
- internet_store.application.ui.FindByIdUIAction
-internet_store/application/ProductListApplication.java
- internet_store.application.ProductListApplication
+internet_store/application/console_ui/ExitProgramUIAction.java
+ internet_store.application.console_ui.ExitProgramUIAction
+internet_store/application/console_ui/FindByIdUIAction.java
+ internet_store.application.console_ui.FindByIdUIAction
+internet_store/application/console_ui/DeleteProductUIAction.java
+ internet_store.application.console_ui.DeleteProductUIAction
 internet_store/application/database/InMemoryDatabase.java
  internet_store.application.database.InMemoryDatabase
-internet_store/lesson_1/uiaction/ChangeProductNameUIAction.java
- internet_store.lesson_1.uiaction.ChangeProductNameUIAction
-internet_store/application/ui/UIAction.java
- internet_store.application.ui.UIAction
-internet_store/application/ui/DeleteByIdUIAction.java
- internet_store.application.ui.DeleteByIdUIAction
-internet_store/lesson_1/uiaction/UIAction.java
- internet_store.lesson_1.uiaction.UIAction
+internet_store/lesson_2/ui/PrintProductsToConsoleUIAction.java
+ internet_store.lesson_2.ui.PrintProductsToConsoleUIAction
+internet_store/lesson_2/ui/DeleteProductUIAction.java
+ internet_store.lesson_2.ui.DeleteProductUIAction
 internet_store/lesson_1/uiaction/FindByIdUIAction.java
  internet_store.lesson_1.uiaction.FindByIdUIAction
+internet_store/lesson_2/ProductListApplication.java
+ internet_store.lesson_2.ProductListApplication
+internet_store/application/console_ui/AddProductUIAction.java
+ internet_store.application.console_ui.AddProductUIAction
+internet_store/application/core/services/DeleteProductService.java
+ internet_store.application.core.services.DeleteProductService
+internet_store/lesson_1/uiaction/SaveProductUIAction.java
+ internet_store.lesson_1.uiaction.SaveProductUIAction
+internet_store/lesson_2/ui/ChangeProductNameUIAction.java
+ internet_store.lesson_2.ui.ChangeProductNameUIAction
+internet_store/application/core/services/AddProductService.java
+ internet_store.application.core.services.AddProductService
+internet_store/lesson_1/ProductDatabaseImpl.java
+ internet_store.lesson_1.ProductDatabaseImpl
+internet_store/lesson_2/ui/DeleteByIdUIAction.java
+ internet_store.lesson_2.ui.DeleteByIdUIAction
+internet_store/application/console_ui/DeleteByIdUIAction.java
+ internet_store.application.console_ui.DeleteByIdUIAction
+internet_store/lesson_2/database/Database.java
+ internet_store.lesson_2.database.Database
+internet_store/application/core/services/ChangeProductNameService.java
+ internet_store.application.core.services.ChangeProductNameService
+internet_store/lesson_2/ui/AddProductUIAction.java
+ internet_store.lesson_2.ui.AddProductUIAction
+internet_store/application/console_ui/UIAction.java
+ internet_store.application.console_ui.UIAction
+internet_store/lesson_1/Product.java
+ internet_store.lesson_1.Product
+internet_store/application/console_ui/PrintProductsToConsoleUIAction.java
+ internet_store.application.console_ui.PrintProductsToConsoleUIAction
+internet_store/application/ProductList.java
+ internet_store.application.ProductList
+internet_store/lesson_2/services/DeleteProductService.java
+ internet_store.lesson_2.services.DeleteProductService
+internet_store/lesson_1/uiaction/DeleteByProductNameUIAction.java
+ internet_store.lesson_1.uiaction.DeleteByProductNameUIAction
+internet_store/application/core/services/FindProductService.java
+ internet_store.application.core.services.FindProductService
+internet_store/lesson_2/services/FindProductService.java
+ internet_store.lesson_2.services.FindProductService
+internet_store/lesson_2/ui/ExitProgramUIAction.java
+ internet_store.lesson_2.ui.ExitProgramUIAction
+internet_store/application/ProductListApplication.java
+ internet_store.application.ProductListApplication
+internet_store/lesson_2/ui/FindByIdUIAction.java
+ internet_store.lesson_2.ui.FindByIdUIAction
+internet_store/lesson_2/services/GetProductListService.java
+ internet_store.lesson_2.services.GetProductListService
+internet_store/lesson_1/uiaction/ChangeProductNameUIAction.java
+ internet_store.lesson_1.uiaction.ChangeProductNameUIAction
+internet_store/lesson_1/uiaction/UIAction.java
+ internet_store.lesson_1.uiaction.UIAction
+internet_store/lesson_2/ui/DeleteByProductNameUIAction.java
+ internet_store.lesson_2.ui.DeleteByProductNameUIAction
+internet_store/lesson_2/ProductList.java
+ internet_store.lesson_2.ProductList
+internet_store/lesson_2/services/AddProductService.java
+ internet_store.lesson_2.services.AddProductService

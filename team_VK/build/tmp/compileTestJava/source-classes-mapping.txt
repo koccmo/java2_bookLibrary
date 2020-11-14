@@ -1,2 +1,0 @@
-team_VK/application/BookTest.java
- team_VK.application.BookTest

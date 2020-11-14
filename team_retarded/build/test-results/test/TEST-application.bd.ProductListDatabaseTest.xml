@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="application.bd.ProductListDatabaseTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-11-14T08:30:16" hostname="LAPTOP-4RH8MILU" time="0.088">
+<testsuite name="application.bd.ProductListDatabaseTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-11-14T11:14:41" hostname="LAPTOP-4RH8MILU" time="0.11">
   <properties/>
-  <testcase name="filter_by_price()" classname="application.bd.ProductListDatabaseTest" time="0.019"/>
-  <testcase name="filter_by_name()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="filter_by_price()" classname="application.bd.ProductListDatabaseTest" time="0.023"/>
+  <testcase name="filter_by_name()" classname="application.bd.ProductListDatabaseTest" time="0.002"/>
   <testcase name="delete_by_id()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
-  <testcase name="delete_by_predicate()" classname="application.bd.ProductListDatabaseTest" time="0.048"/>
+  <testcase name="delete_by_predicate()" classname="application.bd.ProductListDatabaseTest" time="0.059"/>
   <testcase name="filter_by_price_range()" classname="application.bd.ProductListDatabaseTest" time="0.003"/>
   <testcase name="add()" classname="application.bd.ProductListDatabaseTest" time="0.004"/>
-  <testcase name="delete_by_price_range()" classname="application.bd.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="delete_by_price_range()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
   <testcase name="clear()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
   <testcase name="filter_by_description()" classname="application.bd.ProductListDatabaseTest" time="0.0"/>
   <testcase name="delete_by_name()" classname="application.bd.ProductListDatabaseTest" time="0.0"/>
-  <testcase name="delete_by_price()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="delete_by_price()" classname="application.bd.ProductListDatabaseTest" time="0.002"/>
   <testcase name="delete_by_description()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
   <testcase name="get_by_id()" classname="application.bd.ProductListDatabaseTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
