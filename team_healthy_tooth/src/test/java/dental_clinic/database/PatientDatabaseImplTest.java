@@ -1,8 +1,8 @@
 package dental_clinic.database;
 
-import dental_clinic.domain.Patient;
-import dental_clinic.domain.PersonalData;
-import dental_clinic.domain.ToothStatus;
+import dental_clinic.core.domain.Patient;
+import dental_clinic.core.domain.PersonalData;
+import dental_clinic.core.domain.ToothStatus;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,10 +71,10 @@ public class PatientDatabaseImplTest {
         List <Patient> expectedList = new ArrayList<>();
         Patient patient = new Patient(personalData1);
         expectedList.add(patient);
-        assertTrue(patientDatabase.findPatientBySurname("Bobbins").equals(expectedList));
-        assertTrue(patientDatabase.findPatientBySurname("BOBBINS").equals(expectedList));
-        assertTrue(patientDatabase.findPatientBySurname("Bob").equals(expectedList));
-        assertTrue(patientDatabase.findPatientBySurname("Jhonson").equals(new ArrayList<>()));
+        assertTrue(patientDatabase.findPatientsBySurname("Bobbins").equals(expectedList));
+        assertTrue(patientDatabase.findPatientsBySurname("BOBBINS").equals(expectedList));
+        assertTrue(patientDatabase.findPatientsBySurname("Bob").equals(expectedList));
+        assertTrue(patientDatabase.findPatientsBySurname("Jhonson").equals(new ArrayList<>()));
     }
 
     @Test
@@ -82,8 +82,8 @@ public class PatientDatabaseImplTest {
         List <Patient> expectedList = new ArrayList<>();
         Patient patient = new Patient(personalData1);
         expectedList.add(patient);
-        assertTrue(patientDatabase.findPatientByPersonalCode("12345678900").equals(expectedList));
-        assertTrue(patientDatabase.findPatientByPersonalCode("12345678907").equals(new ArrayList<>()));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").equals(expectedList));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").equals(new ArrayList<>()));
     }
 
     @Test

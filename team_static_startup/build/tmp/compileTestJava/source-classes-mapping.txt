@@ -1,0 +1,12 @@
+internet_store/application/core/services/FindProductServiceTest.java
+ internet_store.application.core.services.FindProductServiceTest
+internet_store/application/console_ui/FindByProductNameUIActionTest.java
+ internet_store.application.console_ui.FindByProductNameUIActionTest
+internet_store/application/InMemoryDatabaseTest.java
+ internet_store.application.InMemoryDatabaseTest
+internet_store/application/console_ui/PrintProductsToConsoleUIActionTest.java
+ internet_store.application.console_ui.PrintProductsToConsoleUIActionTest
+internet_store/application/core/services/GetProductListServiceTest.java
+ internet_store.application.core.services.GetProductListServiceTest
+internet_store/application/core/services/ChangeProductNameServiceTest.java
+ internet_store.application.core.services.ChangeProductNameServiceTest

@@ -1,19 +1,20 @@
 package internet_store.application;
 
 import internet_store.application.database.*;
-import internet_store.application.services.*;
-import internet_store.application.ui.*;
+import internet_store.application.core.services.*;
+import internet_store.application.console_ui.*;
 import java.util.*;
 
 class ProductList {
 
     private final Map<Integer, UIAction> menuNumberToActionMap;
     private final Database database = new InMemoryDatabase();
+    private final DeleteByProductNameValidator validator = new DeleteByProductNameValidator();
 
     AddProductService addProductService = new AddProductService(database);
     FindProductService findProductService = new FindProductService(database);
     GetProductListService getProductListService = new GetProductListService(database);
-    DeleteProductService deleteProductService = new DeleteProductService(database);
+    DeleteProductService deleteProductService = new DeleteProductService(database, validator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database);
 
     public ProductList() {
@@ -21,7 +22,7 @@ class ProductList {
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteProductService));
-        menuNumberToActionMap.put(3, new DeleteProductUIAction(deleteProductService));
+        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteProductService));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));

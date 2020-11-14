@@ -1,7 +1,7 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.entity.Person;
-import lv.javaguru.app.entity.Ticket;
+import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.Ticket;
 
 import java.util.Map;
 
