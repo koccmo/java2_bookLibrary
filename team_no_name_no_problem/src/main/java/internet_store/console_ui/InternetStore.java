@@ -15,7 +15,8 @@ public class InternetStore {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
     ProductDatabase productDatabase = new ProductDatabaseImpl();
-    AddProductService addProductService = new AddProductService(productDatabase);
+    AddProductValidator addProductValidator = new AddProductValidator();
+    AddProductService addProductService = new AddProductService(productDatabase, addProductValidator);
     DeleteByIdService deleteByIdService = new DeleteByIdService(productDatabase);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
