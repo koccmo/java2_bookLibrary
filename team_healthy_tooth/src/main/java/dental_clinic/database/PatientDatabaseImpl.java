@@ -1,9 +1,9 @@
 package dental_clinic.database;
 
-import dental_clinic.domain.Patient;
-import dental_clinic.domain.PersonalData;
-import dental_clinic.domain.ToothStatus;
-import dental_clinic.domain.Visit;
+import dental_clinic.core.domain.Patient;
+import dental_clinic.core.domain.PersonalData;
+import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 
 import java.util.ArrayList;
 import java.util.List;

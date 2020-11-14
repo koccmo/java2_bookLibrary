@@ -1,6 +1,6 @@
 package dental_clinic;
 
-import dental_clinic.UI.DentalClinic;
+import dental_clinic.console_ui.DentalClinic;
 
 public class DentalClinicApplication {
 
