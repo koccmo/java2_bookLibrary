@@ -1,5 +1,7 @@
 package internet_store.core.response;
 
+import java.util.Objects;
+
 public class CoreError {
 
     private String field;
@@ -16,5 +18,27 @@ public class CoreError {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public String toString() {
+        return "CoreError{" +
+                "field='" + field + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CoreError coreError = (CoreError) o;
+        return Objects.equals(field, coreError.field) &&
+                Objects.equals(message, coreError.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(field, message);
     }
 }
