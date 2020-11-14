@@ -28,7 +28,8 @@ public class DentalClinic {
                 new FindPatientsBySurnameService(patientDatabase, findPatientsBySurnameValidator);
         FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
                 new FindPatientsByPersonalCodeService(patientDatabase);
-        AddVisitService addVisitService = new AddVisitService(patientDatabase);
+        AddVisitValidator addVisitValidator = new AddVisitValidator();
+        AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
 
         menuNumberToAction = new HashMap();
 
@@ -63,7 +64,7 @@ public class DentalClinic {
                 "4   Print specific patient information\n" +
                 "5   Find patient by surname\n" +
                 "6   Find patient by personal code\n" +
-                "7   Update patient's jowl data in database\n" +
+                "7   Add visit\n" +
                 "0   Exit");
     }
 
