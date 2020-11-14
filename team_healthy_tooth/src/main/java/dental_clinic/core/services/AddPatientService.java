@@ -40,15 +40,6 @@ public class AddPatientService {
     }
 
 
-    public boolean addPatient (PersonalData personalData){
-        if (containsDatabasePatientPersonalData(personalData)){
-            return false;
-        }else{
-            patientDatabase.addPatient(personalData);
-            return true;
-        }
-    }
-
     private boolean containsDatabasePatientPersonalData(PersonalData personalData){
         Optional<PersonalData> result = patientDatabase.getPatients().stream()
                 .map(patient -> patient.getPersonalData())
