@@ -1,11 +1,15 @@
 package dental_clinic.console_ui;
 
+import dental_clinic.core.requests.DeletePatientRequest;
+import dental_clinic.core.responses.DeletePatientResponse;
 import dental_clinic.core.services.DeletePatientService;
+
+import java.util.Scanner;
 
 class DeletePatientUIAction implements UIAction {
 
     private DeletePatientService deletePatientService;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+    //InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public DeletePatientUIAction(DeletePatientService deletePatientService) {
         this.deletePatientService = deletePatientService;
@@ -13,12 +17,17 @@ class DeletePatientUIAction implements UIAction {
 
     public void execute(){
 
-        long id = inputCheckUtility.inputValidLong("Please enter patients id");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter patients id");
+        long id = in.nextLong();
 
-        if (deletePatientService.deletePatient(id)){
-            System.out.println("Patient with id " + id + " is deleted");
+        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(id);
+        DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);
+
+        if (deletePatientResponse.hasErrors()){
+            deletePatientResponse.getErrors().forEach(System.out::println);
         }else{
-            System.out.println("Database doesn't contain patient with id " + id);
+            System.out.println("Patient with id " + id + " is deleted");
         }
     }
 
