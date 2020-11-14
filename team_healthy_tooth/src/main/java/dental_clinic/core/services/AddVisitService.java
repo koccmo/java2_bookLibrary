@@ -4,12 +4,9 @@ import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class AddVisitService {
 
@@ -38,7 +35,7 @@ public class AddVisitService {
                 return new AddVisitResponse();
             }
         }
-        errors.add(new CoreError("id", "Database doesnt't contain patient wirh id " + addVisitRequest.getId()));
+        errors.add(new CoreError("id", "Database doesnt't contain patient with id " + addVisitRequest.getId()));
         return new AddVisitResponse(errors);
     }
 
