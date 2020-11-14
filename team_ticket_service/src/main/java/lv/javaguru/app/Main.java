@@ -1,26 +1,89 @@
 package lv.javaguru.app;
 
-import lv.javaguru.app.entity.Person;
-import lv.javaguru.app.entity.Ticket;
+import lv.javaguru.app.core.services.AddReservationService;
+import lv.javaguru.app.core.services.DeleteReservationService;
+import lv.javaguru.app.core.services.GetAllReservationsService;
+import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.InMemoryDatabase;
+import lv.javaguru.app.core.request.AddReservationRequestValidator;
+import lv.javaguru.app.console_ui.AddReservationAction;
+import lv.javaguru.app.console_ui.DeleteReservationAction;
+import lv.javaguru.app.console_ui.ExitAction;
+import lv.javaguru.app.console_ui.ShowReservationsAction;
 
 import java.util.*;
 
 public class Main {
-    private static final Map<Person, Ticket> reservations = new HashMap<>();
 
     public static void main(String[] args) {
-        Repository repository = new Repository(reservations);
-        Person person = new Person("Sergejs", "Aleksejevs");
 
+        Database database = new InMemoryDatabase();
+        AddReservationRequestValidator validator = new AddReservationRequestValidator();
+        AddReservationService addReservationService = new AddReservationService(database, validator);
+        AddReservationAction addReservationAction = new AddReservationAction(addReservationService);
 
-        GregorianCalendar d = new GregorianCalendar(2020, Calendar.NOVEMBER, 5);
-        GregorianCalendar r = new GregorianCalendar(2020, Calendar.NOVEMBER, 1);
+        DeleteReservationService deleteReservationService = new DeleteReservationService(database);
+        DeleteReservationAction deleteReservationAction = new DeleteReservationAction(deleteReservationService);
 
+        GetAllReservationsService getAllReservationsService = new GetAllReservationsService(database);
+        ShowReservationsAction showReservationsAction = new ShowReservationsAction(getAllReservationsService);
 
-        Ticket ticket = new Ticket("Riga", "Barcelona", d, r, 2, 3);
-        System.out.println(ticket);
+        ExitAction exitAction = new ExitAction();
 
-        repository.addReservation(person, ticket);
-        System.out.println(repository);
+        while (true) {
+            printProgramMenu();
+            int menuNumber = getMenuNumberFromUser();
+            switch (menuNumber) {
+                case 1: {
+                    addReservationAction.execute();
+                    break;
+                }
+                case 2: {
+                    System.out.println("Delete by: \n1. Person\n2. Id");
+                    int submenuNumber = getMenuNumberFromUser();
+                    switch (submenuNumber) {
+                        case 1: {
+                            deleteReservationAction.execute();
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("Enter Id:");
+                            Scanner scanner = new Scanner(System.in);
+                            Long id =  Long.parseLong(scanner.nextLine());
+                            deleteReservationAction.execute(id);
+                            break;
+                        }
+                    }
+                }
+                case 3: {
+                    showReservationsAction.execute();
+                    break;
+                }
+                case 4: {
+                    exitAction.execute();
+                    break;
+                }
+            }
+        }
+
     }
+
+
+    private static void printProgramMenu() {
+        System.out.println("\nProgram menu:\n" +
+                "1. Add reservation to list\n" +
+                "2. Delete reservation from list\n" +
+                "3. Show all reservations in the list\n" +
+                "4. Exit");
+    }
+
+
+    private static int getMenuNumberFromUser() {
+        System.out.println("Enter menu item number to execute:");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+
 }
+

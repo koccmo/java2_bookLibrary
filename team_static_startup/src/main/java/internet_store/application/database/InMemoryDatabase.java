@@ -1,6 +1,6 @@
 package internet_store.application.database;
 
-import internet_store.application.domain.Product;
+import internet_store.application.core.domain.Product;
 
 import java.util.*;
 import java.util.stream.Collectors;
