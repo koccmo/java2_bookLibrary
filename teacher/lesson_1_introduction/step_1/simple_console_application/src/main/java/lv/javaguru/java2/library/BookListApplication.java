@@ -1,4 +1,4 @@
-package lesson_1_introduction.code.after;
+package lv.javaguru.java2.library;
 
 import java.util.ArrayList;
 import java.util.List;
