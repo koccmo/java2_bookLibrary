@@ -12,6 +12,7 @@ public class AddVisitRequest {
     private ToothStatus toothStatus;
     private String doctor;
 
+
     public AddVisitRequest(long id, int toothNumber, Optional<String>comment, ToothStatus toothStatus, String doctor){
         this.id = id;
         this.toothNumber = toothNumber;

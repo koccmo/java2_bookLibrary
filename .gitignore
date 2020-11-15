@@ -1,3 +1,8 @@
+#java specific
+*.class
+*.jar
+
+
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -12,9 +17,17 @@
 
 ### IntelliJ IDEA ###
 .idea
+/.idea/
+/.idea/
 *.iws
 *.iml
 *.ipr
+
+### Gradle ###
+.gradle
+/build/
+
+
 /teacher/build/
 
 /teacher/lesson_1_introduction/build/

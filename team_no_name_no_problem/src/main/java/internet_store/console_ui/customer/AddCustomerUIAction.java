@@ -3,9 +3,9 @@ package internet_store.console_ui.customer;
 import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
 import internet_store.core.domain.Customer;
-import internet_store.core.services.customer.AddCustomerService;
+/*import internet_store.core.services.customer.AddCustomerService;*/
 
-public class AddCustomerUIAction implements UIAction {
+/*public class AddCustomerUIAction implements UIAction {
 
     private AddCustomerService addPersonService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
@@ -24,11 +24,11 @@ public class AddCustomerUIAction implements UIAction {
 
         String email = inputCheckUtility.inputValidString("Please enter your email: ");
 
-        int phoneNumber = inputCheckUtility.inputValidInteger("Please enter your phone number: ");
+        String phoneNumber = inputCheckUtility.inputValidString("Please enter your phone number: ");
 
         Customer newCustomer = new Customer(name, surname, phoneNumber, address, email);
 
         addPersonService.execute(newCustomer);
 
     }
-}
+}*/

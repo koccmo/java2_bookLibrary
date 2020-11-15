@@ -9,6 +9,10 @@ public class ShoppingCart {
     Product product;
     Integer quantity;
 
+    public Map<Product, Integer> getShoppingCart() {
+        return shoppingCart;
+    }
+
     Map <Product, Integer> shoppingCart = new HashMap <>();
 
     void addProduct(Product product, Integer quantity){
@@ -19,10 +23,6 @@ public class ShoppingCart {
         if (shoppingCart.keySet().contains(product)){
             shoppingCart.remove(product);
         }
-    }
-
-    void changeProductQuantity(Product product, int quantity){
-        shoppingCart.put(product, quantity);
     }
 
 }

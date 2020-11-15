@@ -7,7 +7,7 @@ import internet_store.core.services.customer.FindAllCustomersByNameService;
 
 import java.util.List;
 
-public class FindAllCustomersByNameUIAction implements UIAction {
+/*public class FindAllCustomersByNameUIAction implements UIAction {
 
     private FindAllCustomersByNameService findAllCustomersByNameService;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
@@ -26,4 +26,4 @@ public class FindAllCustomersByNameUIAction implements UIAction {
             result.forEach(System.out::println);
         }
     }
-}
+}*/

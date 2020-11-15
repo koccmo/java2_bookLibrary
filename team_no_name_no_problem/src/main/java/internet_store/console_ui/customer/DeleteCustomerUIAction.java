@@ -4,7 +4,7 @@ import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
 import internet_store.core.services.customer.DeleteCustomerService;
 
-public class DeleteCustomerUIAction implements UIAction {
+/*public class DeleteCustomerUIAction implements UIAction {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
@@ -24,4 +24,4 @@ public class DeleteCustomerUIAction implements UIAction {
             System.out.println("There's no such id " + id + " in database");
         }
     }
-}
+}*/

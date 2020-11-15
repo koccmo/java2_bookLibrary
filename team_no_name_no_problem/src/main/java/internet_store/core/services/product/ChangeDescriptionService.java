@@ -1,21 +1,37 @@
 package internet_store.core.services.product;
 
+import internet_store.core.requests.product.ChangeDescriptionRequest;
+import internet_store.core.response.CoreError;
+import internet_store.core.response.product.ChangeDescriptionResponse;
 import internet_store.database.product.ProductDatabase;
+
+import java.util.List;
 
 public class ChangeDescriptionService {
 
     private final ProductDatabase productDatabase;
+    private final ChangeDescriptionRequestValidator changeDescriptionRequestValidator;
 
-    public ChangeDescriptionService(ProductDatabase productDatabase) {
+    public ChangeDescriptionService(ProductDatabase productDatabase, ChangeDescriptionRequestValidator changeDescriptionRequestValidator) {
         this.productDatabase = productDatabase;
+        this.changeDescriptionRequestValidator = changeDescriptionRequestValidator;
     }
 
-    public boolean execute(long id, String newDescription){
-        if (containsDatabaseSpecificId(id)){
-            productDatabase.changeDescription(id, newDescription);
-            return true;
+    public ChangeDescriptionResponse execute(ChangeDescriptionRequest changeDescriptionRequest){
+
+        List<CoreError> errors = changeDescriptionRequestValidator.validate(changeDescriptionRequest);
+
+        if (!errors.isEmpty()){
+            return new ChangeDescriptionResponse(errors);
+        }
+
+        if (containsDatabaseSpecificId(changeDescriptionRequest.getId())){
+            productDatabase.changeDescription(changeDescriptionRequest.getId(), changeDescriptionRequest.getDescription());
+            return new ChangeDescriptionResponse(changeDescriptionRequest.getId());
         }else{
-            return false;
+            errors.add(new CoreError("database", "Database doesn't contain product with id "
+                    + changeDescriptionRequest.getId()));
+            return new ChangeDescriptionResponse(errors);
         }
     }
 
