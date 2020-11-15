@@ -16,9 +16,8 @@ public class DeleteBookByIdUICommand implements UICommand {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter book Id : ");
-        Long bookId = scanner.nextLong();
-        electronicLibrary.deleteBookById(bookId);
-
- //       System.out.println(!bookDeleted ? "\nSorry, book with Id " + bookId + " is not in electronic library" : "\nBook with Id " + bookId + " successfully deleted");
+        Long id = Long.parseLong(scanner.nextLine());
+        electronicLibrary.deleteBookById(id);
+       System.out.println("\nBook with Id=" + id + " successfully deleted!");
     }
 }

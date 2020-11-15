@@ -40,7 +40,7 @@ public class BookListApplication {
         System.out.println("3. Delete book from electronic library by author");
         System.out.println("4. Delete book from electronic library by Id");
         System.out.println("5. Print all books in electronic library");
-        System.out.println("9. Exit program menu");
+        System.out.println("0. Exit program menu");
         System.out.println("================================================");
     }
 
@@ -72,7 +72,7 @@ public class BookListApplication {
                 printAllBooksUICommand.execute();
                 break;
             }
-            case 9: {
+            case 0: {
                 exitUICommand.execute();
                 break;
             }

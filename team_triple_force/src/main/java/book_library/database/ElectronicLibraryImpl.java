@@ -30,11 +30,8 @@ public class ElectronicLibraryImpl implements ElectronicLibrary {
     }
 
     @Override
-    public void deleteBookById(Long BookId) {
-        bookList.stream()
-                .filter(book -> book.getId().equals(bookId))
-                .findFirst()
-                .ifPresent(bookList::remove);
+    public void deleteBookById(Long id) {
+        bookList.removeIf(books -> (books.getId().equals(id)));
     }
 
     @Override
