@@ -25,8 +25,8 @@ public class FindProductByIdService {
 
         if (!errors.isEmpty()){
             return new FindByIdResponse(errors);
-        }
 
+        }
         Optional<Product> expectedProduct = productDatabase.findById(findByIdRequest.getId());
 
         if (expectedProduct.isEmpty()) {
