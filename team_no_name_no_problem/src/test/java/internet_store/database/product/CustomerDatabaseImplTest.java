@@ -1,7 +1,7 @@
 package internet_store.database.product;
 
 import internet_store.database.customer.CustomerDatabaseImpl;
-import internet_store.domain.Customer;
+import internet_store.core.domain.Customer;
 import org.junit.Before;
 import org.junit.Test;
 

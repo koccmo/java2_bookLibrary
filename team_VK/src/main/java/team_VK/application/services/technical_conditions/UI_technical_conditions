@@ -1,0 +1,15 @@
+
+
+field Title
+Can't be null     ->     reject if not                  "Field bookTitle must be not empty"
+Can't be ""     ->     reject if not                    "Field bookTitle must be not empty"
+Can't be one ore more Space     ->     reject if not    "Field bookTitle can't be Space"
+Can't be shorter then 3 characters     ->     reject if not     "Field bookTitle is too short"
+Can contain only letter, " ", ",", ".", "-", ":", "!", "?"   characters     ->      reject if not   "Field bookTitle contains illegal characters"
+
+field Author
+Can't be null     ->     reject if not                  "Field bookAuthor must be not empty"
+Can't be ""     ->     reject if not                    "Field bookAuthor must be not empty"
+Can't be one ore more Space     ->     reject if not    "Field bookAuthor can't be Space"
+Can't be shorter then 3 characters     ->     reject if not     "Field bookAuthor is too short"
+Can contain letter,  characters     ->      reject if not   "Field bookAuthor contains illegal characters"
