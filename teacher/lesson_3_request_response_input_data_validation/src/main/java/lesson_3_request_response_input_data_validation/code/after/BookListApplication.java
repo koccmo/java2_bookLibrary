@@ -10,15 +10,15 @@ import lesson_3_request_response_input_data_validation.code.after.console_ui.UIA
 import lesson_3_request_response_input_data_validation.code.after.database.Database;
 import lesson_3_request_response_input_data_validation.code.after.database.InMemoryDatabaseImpl;
 import lesson_3_request_response_input_data_validation.code.after.core.services.AddBookService;
-import lesson_3_request_response_input_data_validation.code.after.core.services.AddBookValidator;
+import lesson_3_request_response_input_data_validation.code.after.core.services.AddBookRequestValidator;
 import lesson_3_request_response_input_data_validation.code.after.core.services.GetAllBooksService;
 import lesson_3_request_response_input_data_validation.code.after.core.services.RemoveBookService;
 
 public class BookListApplication {
 
 	private static Database database = new InMemoryDatabaseImpl();
-	private static AddBookValidator addBookValidator = new AddBookValidator();
-	private static AddBookService addBookService = new AddBookService(database, addBookValidator);
+	private static AddBookRequestValidator addBookRequestValidator = new AddBookRequestValidator();
+	private static AddBookService addBookService = new AddBookService(database, addBookRequestValidator);
 	private static RemoveBookService removeBookService = new RemoveBookService(database);
 	private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
 	private static UIAction addBookUIAction = new AddBookUIAction(addBookService);
