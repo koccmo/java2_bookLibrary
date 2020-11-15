@@ -3,7 +3,7 @@ package internet_store.console_ui.customer;
 import internet_store.console_ui.UIAction;
 import internet_store.core.services.customer.GetAllCustomersService;
 
-public class PrintCustomersInfoUIAction implements UIAction {
+/*public class PrintCustomersInfoUIAction implements UIAction {
 
     private GetAllCustomersService getAllCustomersService;
 
@@ -14,4 +14,4 @@ public class PrintCustomersInfoUIAction implements UIAction {
     public void execute(){
         getAllCustomersService.execute();
     }
-}
+}*/

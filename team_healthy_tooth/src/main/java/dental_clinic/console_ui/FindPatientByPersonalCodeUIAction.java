@@ -1,16 +1,16 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.Patient;
-import dental_clinic.core.services.FindPatientByPersonalCodeService;
+import dental_clinic.core.services.FindPatientsByPersonalCodeService;
 
 import java.util.List;
 
 class FindPatientByPersonalCodeUIAction implements UIAction {
 
-    private FindPatientByPersonalCodeService findPatientByPersonalCode;
+    private FindPatientsByPersonalCodeService findPatientByPersonalCode;
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public FindPatientByPersonalCodeUIAction(FindPatientByPersonalCodeService findPatientByPersonalCode) {
+    public FindPatientByPersonalCodeUIAction(FindPatientsByPersonalCodeService findPatientByPersonalCode) {
         this.findPatientByPersonalCode = findPatientByPersonalCode;
     }
 

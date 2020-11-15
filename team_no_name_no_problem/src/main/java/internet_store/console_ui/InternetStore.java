@@ -15,13 +15,21 @@ public class InternetStore {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
     ProductDatabase productDatabase = new ProductDatabaseImpl();
-    AddProductService addProductService = new AddProductService(productDatabase);
-    DeleteByIdService deleteByIdService = new DeleteByIdService(productDatabase);
+    AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
+    AddProductService addProductService = new AddProductService(productDatabase, addProductRequestValidator);
+    DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
+    DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductRequestValidator);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
-    ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
-    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
-    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase);
-    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase);
+    ChangeTitleRequestValidator changeTitleRequestValidator = new ChangeTitleRequestValidator();
+    ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase, changeTitleRequestValidator);
+    ChangeDescriptionRequestValidator changeDescriptionRequestValidator = new ChangeDescriptionRequestValidator();
+    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase, changeDescriptionRequestValidator);
+    FindAnyByTitleRequestValidator findAnyByTitleRequestValidator = new FindAnyByTitleRequestValidator();
+    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase, findAnyByTitleRequestValidator);
+    FindAllProductsByTitleRequestValidator findAllProductsByTitleRequestValidator = new FindAllProductsByTitleRequestValidator();
+    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase, findAllProductsByTitleRequestValidator);
+    FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
+    FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
 
     public InternetStore() {
 
@@ -34,6 +42,7 @@ public class InternetStore {
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
         menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
         menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
+        menuNumberToAction.put(8, new FindByIdUIAction(findProductByIdService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -58,6 +67,7 @@ public class InternetStore {
                 "5   Change description\n" +
                 "6   Find any by title\n" +
                 "7   Find all by title\n" +
+                "8   Find product by id\n"+
                 "0   Exit");
     }
 
