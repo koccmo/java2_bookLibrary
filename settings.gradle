@@ -1,4 +1,8 @@
-include 'teacher:lesson_1_introduction:step_1:simple_console_application'
+include 'teacher:lesson_1_introduction:step_1_simple_console_application'
+include 'teacher:lesson_2_single_responsibility_principle:step_2_srp_level_method'
+include 'teacher:lesson_2_single_responsibility_principle:step_3_srp_level_class'
+include 'teacher:lesson_2_single_responsibility_principle:step_4_srp_level_package'
+include 'teacher:lesson_2_single_responsibility_principle:step_5_srp_level_application_layer'
 
 
 include 'teacher:lesson_2_single_responsibility_principle'
