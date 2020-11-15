@@ -31,7 +31,7 @@ public class DeleteByIdService {
                 return new DeleteProductResponse(deleteProductRequest.getId());
             }
         }
-        errors.add(new CoreError("database", "database doesnt't contain product with id "
+        errors.add(new CoreError("database", "database doesn't contain product with id "
                 + deleteProductRequest.getId()));
         return new DeleteProductResponse(errors);
     }
