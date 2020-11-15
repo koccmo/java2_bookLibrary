@@ -24,6 +24,8 @@ public class InternetStore {
     ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
     FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase);
     FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase);
+    FindByIdValidator findByIdValidator = new FindByIdValidator();
+    FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdValidator);
 
     public InternetStore() {
 
@@ -36,6 +38,7 @@ public class InternetStore {
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
         menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
         menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
+        menuNumberToAction.put(8, new FindByIdUIAction(findProductByIdService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -60,6 +63,7 @@ public class InternetStore {
                 "5   Change description\n" +
                 "6   Find any by title\n" +
                 "7   Find all by title\n" +
+                "8   Find product by id\n"+
                 "0   Exit");
     }
 
