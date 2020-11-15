@@ -1,4 +1,6 @@
-package book_library.application;
+package book_library.ui;
+
+import book_library.database.ElectronicLibrary;
 
 import java.util.Scanner;
 

@@ -1,4 +1,6 @@
-package book_library.application;
+package book_library.database;
+
+import book_library.core.domain.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ElectronicLibraryImpl implements ElectronicLibrary {
         bookList.stream()
                 .filter(book -> book.getId().equals(bookId))
                 .findFirst()
-                .ifPresent(book -> bookList.remove(book));
+                .ifPresent(bookList::remove);
     }
 
     @Override
