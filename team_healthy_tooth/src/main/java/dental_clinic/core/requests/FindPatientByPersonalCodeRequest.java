@@ -5,7 +5,7 @@ public class FindPatientByPersonalCodeRequest {
 
     private String personalCodeToSearch;
 
-    FindPatientByPersonalCodeRequest(String personalCodeToSearch) {
+    public FindPatientByPersonalCodeRequest(String personalCodeToSearch) {
         this.personalCodeToSearch = personalCodeToSearch;
     }
 
