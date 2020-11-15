@@ -1,4 +1,0 @@
-lv/javaguru/java2/library/Book.java
- lv.javaguru.java2.library.Book
-lv/javaguru/java2/library/BookListApplication.java
- lv.javaguru.java2.library.BookListApplication
