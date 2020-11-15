@@ -1,4 +1,6 @@
-package book_library.application;
+package book_library.ui;
+
+import book_library.ui.UICommand;
 
 public class ExitUICommand implements UICommand {
 

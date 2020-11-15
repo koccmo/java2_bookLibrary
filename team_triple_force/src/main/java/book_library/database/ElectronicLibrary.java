@@ -1,4 +1,6 @@
-package book_library.application;
+package book_library.database;
+
+import book_library.core.domain.Book;
 
 import java.util.List;
 

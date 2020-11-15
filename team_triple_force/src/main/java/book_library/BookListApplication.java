@@ -1,4 +1,10 @@
-package book_library.application;
+package book_library;
+
+import book_library.core.services.AddBookService;
+import book_library.core.services.AddBookValidator;
+import book_library.database.ElectronicLibrary;
+import book_library.database.ElectronicLibraryImpl;
+import book_library.ui.*;
 
 import java.util.Scanner;
 
@@ -6,12 +12,16 @@ public class BookListApplication {
 
     private static final ElectronicLibrary electronicLibrary = new ElectronicLibraryImpl();
 
-    private static final UICommand addBookUICommand = new AddBookUICommand(electronicLibrary);
+    private static final AddBookValidator addBookValidator = new AddBookValidator();
+    private static final AddBookService addBookService = new AddBookService(electronicLibrary, addBookValidator);
+
+    private static final UICommand addBookUICommand = new AddBookUICommand(addBookService);
     private static final UICommand deleteBookByTitleUICommand = new DeleteBookByTitleUICommand(electronicLibrary);
     private static final UICommand deleteBookByAuthorUICommand = new DeleteBookByAuthorUICommand(electronicLibrary);
     private static final UICommand deleteBookByIdUICommand = new DeleteBookByIdUICommand(electronicLibrary);
     private static final UICommand printAllBooksUICommand = new PrintAllBooksUICommand(electronicLibrary);
     private static final UICommand exitUICommand = new ExitUICommand();
+
 
     public static void main(String[] args) {
         do {
