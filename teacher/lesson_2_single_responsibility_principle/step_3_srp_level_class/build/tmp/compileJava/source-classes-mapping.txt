@@ -1,0 +1,8 @@
+lv/javaguru/java2/library/Book.java
+ lv.javaguru.java2.library.Book
+lv/javaguru/java2/library/BookListApplication.java
+ lv.javaguru.java2.library.BookListApplication
+lv/javaguru/java2/library/InMemoryDatabaseImpl.java
+ lv.javaguru.java2.library.InMemoryDatabaseImpl
+lv/javaguru/java2/library/Database.java
+ lv.javaguru.java2.library.Database
