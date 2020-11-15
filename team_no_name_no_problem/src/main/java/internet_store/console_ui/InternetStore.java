@@ -22,9 +22,12 @@ public class InternetStore {
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
     ChangeTitleRequestValidator changeTitleRequestValidator = new ChangeTitleRequestValidator();
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase, changeTitleRequestValidator);
-    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
-    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase);
-    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase);
+    ChangeDescriptionRequestValidator changeDescriptionRequestValidator = new ChangeDescriptionRequestValidator();
+    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase, changeDescriptionRequestValidator);
+    FindAnyByTitleRequestValidator findAnyByTitleRequestValidator = new FindAnyByTitleRequestValidator();
+    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase, findAnyByTitleRequestValidator);
+    FindAllProductsByTitleRequestValidator findAllProductsByTitleRequestValidator = new FindAllProductsByTitleRequestValidator();
+    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase, findAllProductsByTitleRequestValidator);
     FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
     FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
 
