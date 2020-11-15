@@ -15,17 +15,18 @@ public class InternetStore {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
     ProductDatabase productDatabase = new ProductDatabaseImpl();
-    AddProductValidator addProductValidator = new AddProductValidator();
-    AddProductService addProductService = new AddProductService(productDatabase, addProductValidator);
-    DeleteProductValidator deleteProductValidator = new DeleteProductValidator();
-    DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductValidator);
+    AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
+    AddProductService addProductService = new AddProductService(productDatabase, addProductRequestValidator);
+    DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
+    DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductRequestValidator);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
-    ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase);
+    ChangeTitleRequestValidator changeTitleRequestValidator = new ChangeTitleRequestValidator();
+    ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase, changeTitleRequestValidator);
     ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase);
     FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase);
     FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase);
-    FindByIdValidator findByIdValidator = new FindByIdValidator();
-    FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdValidator);
+    FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
+    FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
 
     public InternetStore() {
 
