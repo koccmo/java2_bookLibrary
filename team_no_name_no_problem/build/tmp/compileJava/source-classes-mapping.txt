@@ -1,7 +1,7 @@
-internet_store/core/services/customer/FindAllCustomersByNameAndSurnameService.java
- internet_store.core.services.customer.FindAllCustomersByNameAndSurnameService
 internet_store/core/requests/customer/DeleteCustomerRequest.java
  internet_store.core.requests.customer.DeleteCustomerRequest
+internet_store/core/services/customer/FindAllCustomersByNameAndSurnameService.java
+ internet_store.core.services.customer.FindAllCustomersByNameAndSurnameService
 internet_store/core/domain/Sorter.java
  internet_store.core.domain.Sorter
 internet_store/core/domain/Order.java
@@ -30,10 +30,10 @@ internet_store/core/services/customer/DeleteCustomerService.java
  internet_store.core.services.customer.DeleteCustomerService
 internet_store/core/services/customer/FindAllCustomersBySurnameService.java
  internet_store.core.services.customer.FindAllCustomersBySurnameService
-internet_store/console_ui/customer/AddCustomerUIAction.java
- internet_store.console_ui.customer.AddCustomerUIAction
 internet_store/core/domain/ShoppingCart.java
  internet_store.core.domain.ShoppingCart
+internet_store/console_ui/customer/AddCustomerUIAction.java
+ internet_store.console_ui.customer.AddCustomerUIAction
 internet_store/core/response/customer/AddCustomerResponse.java
  internet_store.core.response.customer.AddCustomerResponse
 internet_store/database/product/ProductDatabase.java
@@ -46,10 +46,10 @@ internet_store/database/customer/CustomerDatabaseImpl.java
  internet_store.database.customer.CustomerDatabaseImpl
 internet_store/console_ui/customer/DeleteCustomerUIAction.java
  internet_store.console_ui.customer.DeleteCustomerUIAction
-internet_store/console_ui/customer/PrintCustomersInfoUIAction.java
- internet_store.console_ui.customer.PrintCustomersInfoUIAction
 internet_store/core/services/product/DeleteByIdService.java
  internet_store.core.services.product.DeleteByIdService
+internet_store/console_ui/customer/PrintCustomersInfoUIAction.java
+ internet_store.console_ui.customer.PrintCustomersInfoUIAction
 internet_store/database/customer/CustomerDatabase.java
  internet_store.database.customer.CustomerDatabase
 internet_store/console_ui/customer/ExitUIAction.java
@@ -80,10 +80,10 @@ internet_store/core/services/product/ChangeTitleService.java
  internet_store.core.services.product.ChangeTitleService
 internet_store/core/requests/customer/AddCustomerRequest.java
  internet_store.core.requests.customer.AddCustomerRequest
-internet_store/core/services/product/FindAnyByTitleService.java
- internet_store.core.services.product.FindAnyByTitleService
 internet_store/core/response/CoreError.java
  internet_store.core.response.CoreError
+internet_store/core/services/product/FindAnyByTitleService.java
+ internet_store.core.services.product.FindAnyByTitleService
 internet_store/core/requests/customer/FindCustomerByNameAndSurnameRequest.java
  internet_store.core.requests.customer.FindCustomerByNameAndSurnameRequest
 internet_store/core/services/product/AddProductService.java
