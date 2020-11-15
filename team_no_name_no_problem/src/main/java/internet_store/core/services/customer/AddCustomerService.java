@@ -1,5 +1,6 @@
 package internet_store.core.services.customer;
 
+import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.AddCustomerResponse;
@@ -7,7 +8,7 @@ import internet_store.database.customer.CustomerDatabase;
 
 import java.util.List;
 
-public class AddCustomerService {
+/*public class AddCustomerService {
 
     private final CustomerDatabase customerDatabase;
     private final AddCustomerRequestValidator addCustomerRequestValidator;
@@ -18,7 +19,7 @@ public class AddCustomerService {
         this.addCustomerRequestValidator = addCustomerRequestValidator;
     }
 
-    public AddCustomerResponse execute (AddCustomerRequest addCustomerRequest){
+    public AddCustomerResponse execute (Customer addCustomerRequest){
 
         List<CoreError> errors = addCustomerRequestValidator.validate(addCustomerRequest);
         if (!errors.isEmpty()){
@@ -27,4 +28,4 @@ public class AddCustomerService {
         customerDatabase.addCustomer(addCustomerRequest.getCustomer());
         return new AddCustomerResponse(addCustomerRequest.getCustomer());
     }
-}
+}*/
