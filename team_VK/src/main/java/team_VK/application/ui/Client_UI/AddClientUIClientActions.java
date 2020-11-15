@@ -1,7 +1,6 @@
 package team_VK.application.ui.Client_UI;
 
-import team_VK.application.services.AddBookService;
-import team_VK.application.services.client_services.AddClientService;
+import team_VK.application.core.services.client_services.AddClientService;
 
 import java.util.Scanner;
 
