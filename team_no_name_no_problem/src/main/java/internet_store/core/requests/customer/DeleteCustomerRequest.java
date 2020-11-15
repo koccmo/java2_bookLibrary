@@ -2,17 +2,14 @@ package internet_store.core.requests.customer;
 
 public class DeleteCustomerRequest {
 
-    private Long customerByIdRemove;
+    private Long id;
 
-    public DeleteCustomerRequest(Long customerByIdRemove) {
-        this.customerByIdRemove = customerByIdRemove;
+    public DeleteCustomerRequest(long id){
+        this.id = id;
     }
 
-    public Long getCustomerByIdRemove() {
-        return customerByIdRemove;
+    public long getId(){
+        return id;
     }
 
-    public void setCustomerByIdRemove(Long customerByIdRemove) {
-        this.customerByIdRemove = customerByIdRemove;
-    }
 }
