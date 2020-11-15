@@ -9,9 +9,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AddProductValidatorTest {
+public class AddProductRequestValidatorTest {
 
-    AddProductValidator addProductValidator = new AddProductValidator();
+    AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
 
     @Test
     public void testInvalidInputTitle(){
@@ -19,7 +19,7 @@ public class AddProductValidatorTest {
 
         Product product = new Product("", "Description", 5);
         AddProductRequest addProductRequest = new AddProductRequest(product);
-        List<CoreError> errors = addProductValidator.validate(addProductRequest);
+        List<CoreError> errors = addProductRequestValidator.validate(addProductRequest);
 
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(expectedError));
@@ -31,7 +31,7 @@ public class AddProductValidatorTest {
 
         Product product = new Product("Title", null, 5);
         AddProductRequest addProductRequest = new AddProductRequest(product);
-        List<CoreError> errors = addProductValidator.validate(addProductRequest);
+        List<CoreError> errors = addProductRequestValidator.validate(addProductRequest);
 
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(expectedError));
@@ -43,7 +43,7 @@ public class AddProductValidatorTest {
 
         Product product = new Product("Title", "Description", -2);
         AddProductRequest addProductRequest = new AddProductRequest(product);
-        List<CoreError> errors = addProductValidator.validate(addProductRequest);
+        List<CoreError> errors = addProductRequestValidator.validate(addProductRequest);
 
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(expectedError));
@@ -54,7 +54,7 @@ public class AddProductValidatorTest {
 
         Product product = new Product("Title", "Description", 5);
         AddProductRequest addProductRequest = new AddProductRequest(product);
-        List<CoreError> errors = addProductValidator.validate(addProductRequest);
+        List<CoreError> errors = addProductRequestValidator.validate(addProductRequest);
 
         assertTrue(errors.isEmpty());
     }
