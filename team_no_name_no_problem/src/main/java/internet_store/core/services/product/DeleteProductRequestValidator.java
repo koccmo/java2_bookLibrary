@@ -6,7 +6,7 @@ import internet_store.core.response.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteProductValidator {
+public class DeleteProductRequestValidator {
 
     public List<CoreError> validate (DeleteProductRequest deleteProductRequest){
 

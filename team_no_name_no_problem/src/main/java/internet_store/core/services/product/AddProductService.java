@@ -4,23 +4,22 @@ import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.database.product.ProductDatabase;
-import internet_store.core.domain.Product;
 
 import java.util.List;
 
 public class AddProductService {
 
     private final ProductDatabase productDatabase;
-    private final AddProductValidator addProductValidator;
+    private final AddProductRequestValidator addProductRequestValidator;
 
-    public AddProductService(ProductDatabase productDatabase, AddProductValidator addProductValidator) {
+    public AddProductService(ProductDatabase productDatabase, AddProductRequestValidator addProductRequestValidator) {
         this.productDatabase = productDatabase;
-        this.addProductValidator = addProductValidator;
+        this.addProductRequestValidator = addProductRequestValidator;
     }
 
     public AddProductResponse execute(AddProductRequest addProductRequest){
 
-        List<CoreError>errors = addProductValidator.validate(addProductRequest);
+        List<CoreError>errors = addProductRequestValidator.validate(addProductRequest);
         if (!errors.isEmpty()){
             return new AddProductResponse(errors);
         }

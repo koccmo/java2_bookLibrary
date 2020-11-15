@@ -6,7 +6,7 @@ import internet_store.core.response.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindByIdValidator {
+public class FindByIdRequestValidator {
 
     public List<CoreError> validate (FindByIdRequest findByIdRequest){
         List<CoreError>errors = new ArrayList<>();

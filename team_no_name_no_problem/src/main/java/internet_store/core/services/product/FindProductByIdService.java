@@ -12,16 +12,16 @@ import java.util.Optional;
 public class FindProductByIdService {
 
     private final ProductDatabase productDatabase;
-    private final FindByIdValidator findByIdValidator;
+    private final FindByIdRequestValidator findByIdRequestValidator;
 
-    public FindProductByIdService(ProductDatabase productDatabase, FindByIdValidator findByIdValidator) {
+    public FindProductByIdService(ProductDatabase productDatabase, FindByIdRequestValidator findByIdRequestValidator) {
         this.productDatabase = productDatabase;
-        this.findByIdValidator = findByIdValidator;
+        this.findByIdRequestValidator = findByIdRequestValidator;
     }
 
     public FindByIdResponse execute (FindByIdRequest findByIdRequest){
 
-        List<CoreError> errors = findByIdValidator.validate(findByIdRequest);
+        List<CoreError> errors = findByIdRequestValidator.validate(findByIdRequest);
 
         if (!errors.isEmpty()){
             return new FindByIdResponse(errors);

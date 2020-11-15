@@ -11,16 +11,16 @@ import java.util.List;
 public class DeleteByIdService {
 
     private final ProductDatabase productDatabase;
-    private final DeleteProductValidator deleteProductValidator;
+    private final DeleteProductRequestValidator deleteProductRequestValidator;
 
-    public DeleteByIdService(ProductDatabase productDatabase, DeleteProductValidator deleteProductValidator) {
+    public DeleteByIdService(ProductDatabase productDatabase, DeleteProductRequestValidator deleteProductRequestValidator) {
         this.productDatabase = productDatabase;
-        this.deleteProductValidator = deleteProductValidator;
+        this.deleteProductRequestValidator = deleteProductRequestValidator;
     }
 
     public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest){
 
-        List <CoreError> errors = deleteProductValidator.validate(deleteProductRequest);
+        List <CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
 
         if (!errors.isEmpty()){
             return new DeleteProductResponse(errors);

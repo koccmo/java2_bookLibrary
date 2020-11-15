@@ -6,7 +6,7 @@ import internet_store.core.response.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddProductValidator {
+public class AddProductRequestValidator {
 
     public List<CoreError> validate (AddProductRequest addProductRequest){
         List <CoreError> errors = new ArrayList<>();
