@@ -7,6 +7,7 @@ import internet_store.core.response.customer.FindCustomerByNameResponse;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,20 +21,19 @@ public class FindAllCustomersByNameService {
         this.findCustomerByNameValidator = findCustomerByNameValidator;
     }
 
-    public FindCustomerByNameResponse execute(FindCustomerByNameRequest findCustomerByNameRequest){
+    public FindCustomerByNameResponse execute(FindCustomerByNameRequest findCustomerByNameRequest) {
 
         List<CoreError> errors = findCustomerByNameValidator.validate(findCustomerByNameRequest);
-        if (!errors.isEmpty()){
-            return new FindCustomerByNameResponse(errors);
+        if (!errors.isEmpty()) {
+            return new FindCustomerByNameResponse(errors, new ArrayList<>());
         }
 
-        List<Customer> expectedCustomer = customerDatabase.findAllCustomersByName(findCustomerByNameRequest.getName());
-        if (expectedCustomer.isEmpty()){
-            errors.add(new CoreError("database","Database doesn't contain this name"
+        if (customerDatabase.findAllCustomersByName(findCustomerByNameRequest.getName()).isEmpty()){
+            errors.add(new CoreError("database","Database doesn't contain such customer name"
             + findCustomerByNameRequest.getName()));
-            return new FindCustomerByNameResponse(errors);
+            return new FindCustomerByNameResponse(errors, new ArrayList<>());
         }
-        return new FindCustomerByNameResponse(customerDatabase.findAllCustomersByName(
-                findCustomerByNameRequest.getName()).get(1));
+        return new FindCustomerByNameResponse(customerDatabase.findAllCustomersByName
+                (findCustomerByNameRequest.getName()));
     }
 }
