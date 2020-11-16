@@ -17,7 +17,7 @@ public class ChangeDescriptionRequestValidator {
         }
 
         if (changeDescriptionRequest.getDescription() == null || changeDescriptionRequest.getDescription().isEmpty()){
-            errors.add(new CoreError("id", "Not valid input for description"));
+            errors.add(new CoreError("description", "Not valid input for description"));
         }
 
         return errors;
