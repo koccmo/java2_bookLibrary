@@ -28,6 +28,8 @@ public class ShoppingCartTest {
 
         assertTrue(resultOfShoppingCart.containsKey(laptopDell));
         assertTrue(resultOfShoppingCart.keySet().contains(refrigerator));
+        assertEquals(resultOfShoppingCart.size(),4);
+        assertFalse(resultOfShoppingCart.size() == 5);
     }
 
 }
