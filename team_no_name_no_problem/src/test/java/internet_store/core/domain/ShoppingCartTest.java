@@ -28,6 +28,28 @@ public class ShoppingCartTest {
 
         assertTrue(resultOfShoppingCart.containsKey(laptopDell));
         assertTrue(resultOfShoppingCart.keySet().contains(refrigerator));
+        assertEquals(resultOfShoppingCart.size(),4);
+        assertFalse(resultOfShoppingCart.size() == 5);
+    }
+
+    @Test
+    public void shoppingCartDeleteProduct() {
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+
+        Product mobilePhone = new Product("Samsung", "Galaxy S7", 600);
+        Product backPack = new Product("ECCO", "For travelling", 90);
+
+        shoppingCart.addProduct(mobilePhone,1);
+        shoppingCart.addProduct(backPack,1);
+        shoppingCart.deleteProduct(backPack);
+
+        Map<Product, Integer> resultOfShoppingCart = shoppingCart.getShoppingCart();
+
+        assertTrue(resultOfShoppingCart.size() == 1);
+        assertTrue(resultOfShoppingCart.containsKey(mobilePhone));
+        assertFalse(resultOfShoppingCart.size() == 2);
+        assertFalse(resultOfShoppingCart.containsKey(backPack));
     }
 
 }
