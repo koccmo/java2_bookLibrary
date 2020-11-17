@@ -3,8 +3,8 @@ package internet_store.console_ui.customer;
 
 import internet_store.console_ui.UIAction;
 
-import internet_store.core.requests.customer.FindCustomerBySurnameRequest;
-import internet_store.core.response.customer.FindCustomerBySurnameResponse;
+import internet_store.core.requests.customer.FindAllCustomersBySurnameRequest;
+import internet_store.core.response.customer.FindAllCustomersBySurnameResponse;
 import internet_store.core.services.customer.FindAllCustomersBySurnameService;
 
 import java.util.Scanner;
@@ -23,14 +23,14 @@ public class FindAllCustomersBySurnameUIAction implements UIAction {
         System.out.println("Please enter customer's surname for search: ");
         String surname = in.nextLine();
 
-        FindCustomerBySurnameRequest findCustomerBySurnameRequest = new FindCustomerBySurnameRequest(surname);
-        FindCustomerBySurnameResponse findCustomerBySurnameResponse = findAllCustomersBySurname
-                .execute(findCustomerBySurnameRequest);
+        FindAllCustomersBySurnameRequest findAllCustomersBySurnameRequest = new FindAllCustomersBySurnameRequest(surname);
+        FindAllCustomersBySurnameResponse findAllCustomersBySurnameResponse = findAllCustomersBySurname
+                .execute(findAllCustomersBySurnameRequest);
 
-        if (findCustomerBySurnameResponse.hasErrors()){
-            findCustomerBySurnameResponse.getErrors().forEach(System.out::println);
+        if (findAllCustomersBySurnameResponse.hasErrors()){
+            findAllCustomersBySurnameResponse.getErrors().forEach(System.out::println);
         } else {
-            findCustomerBySurnameResponse.getCustomerList().forEach(System.out::println);
+            findAllCustomersBySurnameResponse.getCustomerList().forEach(System.out::println);
         }
     }
 }
