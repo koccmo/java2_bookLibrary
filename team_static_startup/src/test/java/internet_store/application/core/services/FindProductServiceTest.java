@@ -20,14 +20,16 @@ public class FindProductServiceTest {
         database = new InMemoryDatabase();
         findProductService = new FindProductService(database);
     }
-
+/*
     @Test
     public void shouldFindProductByProductName() {
         database.add(new Product("tv", "good tv", new BigDecimal("499.99")));
         database.add(new Product("tv", "good tv, good", new BigDecimal("399.99")));
         List<Product> testArray = findProductService.findByProductName("tv");
+        productNameRequest.getProductName()
         assertEquals(2, testArray.size());
     }
+*/
 
     @Test
     public void findById() {

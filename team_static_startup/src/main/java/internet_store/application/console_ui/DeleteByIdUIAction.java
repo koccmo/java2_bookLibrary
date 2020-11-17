@@ -1,5 +1,6 @@
 package internet_store.application.console_ui;
 
+import internet_store.application.core.requests.DeleteByIdRequest;
 import internet_store.application.core.services.DeleteProductService;
 
 import java.util.Scanner;
@@ -16,7 +17,9 @@ public class DeleteByIdUIAction implements UIAction {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for deleting: ");
         Long id = myInput.nextLong();
-        boolean productDeleted = deleteProductService.delete(id);
+        DeleteByIdRequest request = new DeleteByIdRequest(id);
+
+        boolean productDeleted = deleteProductService.deleteById(request);
 
         if (productDeleted) {
             System.out.println("\nProduct with ID = " + id + " deleted");
