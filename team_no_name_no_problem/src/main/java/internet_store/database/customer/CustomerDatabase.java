@@ -13,7 +13,9 @@ public interface CustomerDatabase {
 
     void deleteCustomer(long id);
 
-    Optional<Customer> findCustomersByNameAndSurname(String name, String surname);
+    Optional<Customer> findById(Long id);
+
+    List<Customer> findCustomersByNameAndSurname(String name, String surname);
 
     List<Customer> findAllCustomersByName(String name);
 
