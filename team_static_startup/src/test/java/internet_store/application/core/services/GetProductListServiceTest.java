@@ -1,14 +1,15 @@
 package internet_store.application.core.services;
 
+import internet_store.application.core.domain.Product;
+import internet_store.application.core.responses.PrintProductsToConsoleResponse;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
-import internet_store.application.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class GetProductListServiceTest {
 
@@ -24,12 +25,15 @@ public class GetProductListServiceTest {
         database.add(new Product("iphone12", "mobile phone", new BigDecimal("900.00")));
         database.add(new Product("imac", "pc", new BigDecimal("4000.00")));
         GetProductListService service = new GetProductListService(database);
-        assertEquals(database.getProductList(), service.getProductList());
+        PrintProductsToConsoleResponse response = service.getProductList();
+
+        assertEquals(database.getProductList(), response.getProductList());
     }
 
     @Test
     public void shouldReturnProductList_whenItIsEmpty() {
         GetProductListService service = new GetProductListService(database);
-        assertEquals(database.getProductList(), service.getProductList());
+        PrintProductsToConsoleResponse response = service.getProductList();
+        assertEquals(database.getProductList(), response.getProductList());
     }
 }

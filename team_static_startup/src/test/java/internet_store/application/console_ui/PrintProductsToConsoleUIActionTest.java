@@ -1,22 +1,22 @@
 package internet_store.application.console_ui;
 
+import internet_store.application.core.domain.Product;
 import internet_store.application.core.services.GetProductListService;
+import internet_store.application.database.Database;
+import internet_store.application.database.InMemoryDatabase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import internet_store.application.core.domain.Product;
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PrintProductsToConsoleUIActionTest {
 
-    private final PrintStream standartOut = System.out;
+    private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     Database database = new InMemoryDatabase();
@@ -28,18 +28,17 @@ public class PrintProductsToConsoleUIActionTest {
 
     @After
     public void tearDown() {
-        System.setOut(standartOut);
+        System.setOut(standardOut);
     }
 
     @Test
     public void shouldPrintOutProducts() {
         database.add(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
-        database.add(new Product("Lenovo ThinkPad", "notebook", new BigDecimal("3000.00")));
+
         GetProductListService service = new GetProductListService(database);
         PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
         victim.execute();
-        assertEquals("Product{id = 1, productName = 'iPhone', productDescription = 'mobile phone', price = 950.00}\n" +
-                "Product{id = 2, productName = 'Lenovo ThinkPad', productDescription = 'notebook', price = 3000.00}", outputStreamCaptor.toString().trim());
+        assertEquals("Product{id = 1, productName = 'iPhone', productDescription = 'mobile phone', price = 950.00}", outputStreamCaptor.toString().trim());
     }
 
     @Test
@@ -47,6 +46,6 @@ public class PrintProductsToConsoleUIActionTest {
         GetProductListService service = new GetProductListService(database);
         PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
         victim.execute();
-        assertEquals("", outputStreamCaptor.toString().trim());
+        assertEquals("Database is empty.", outputStreamCaptor.toString().trim());
     }
 }
