@@ -6,15 +6,15 @@ import internet_store.core.response.CoreResponse;
 
 import java.util.List;
 
-public class FindCustomerBySurnameResponse extends CoreResponse {
+public class FindAllCustomersBySurnameResponse extends CoreResponse {
 
     List<Customer> customerList;
 
-    public FindCustomerBySurnameResponse(List<Customer> customerList) {
+    public FindAllCustomersBySurnameResponse(List<Customer> customerList) {
         this.customerList = customerList;
     }
 
-    public FindCustomerBySurnameResponse(List<CoreError> errors, List<Customer> customerList) {
+    public FindAllCustomersBySurnameResponse(List<CoreError> errors, List<Customer> customerList) {
         super(errors);
         this.customerList = customerList;
     }
