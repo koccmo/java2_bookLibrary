@@ -1,7 +1,6 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.DeleteByIdRequest;
 import internet_store.application.core.requests.FindByProductNameRequest;
 import internet_store.application.core.services.FindProductService;
 

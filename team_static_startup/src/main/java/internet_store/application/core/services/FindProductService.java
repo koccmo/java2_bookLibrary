@@ -11,14 +11,9 @@ public class FindProductService {
 
     private final Database database;
 
-
     public FindProductService(Database database) {
         this.database = database;
     }
-
-//    public List<Product> findByProductName(String productName) {
-//        return database.findByProductName(productName);
-//    }
 
     public List<Product> findByProductName(FindByProductNameRequest productNameRequest) {
         return database.findByProductName(productNameRequest.getProductName());
@@ -27,6 +22,5 @@ public class FindProductService {
     public Optional<Product> findById(Long productId) {
         return database.findById(productId);
     }
-
 
 }
