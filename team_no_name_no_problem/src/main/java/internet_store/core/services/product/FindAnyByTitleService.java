@@ -4,10 +4,8 @@ import internet_store.core.requests.product.FindAnyByTitleRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.FindAnyByTitleResponse;
 import internet_store.database.product.ProductDatabase;
-import internet_store.core.domain.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public class FindAnyByTitleService {
 

@@ -8,17 +8,18 @@ import java.util.List;
 
 public class FindCustomerBySurnameResponse extends CoreResponse {
 
-    private Customer expectedCustomer;
+    List<Customer> customerList;
 
-    public FindCustomerBySurnameResponse(Customer expectedCustomer) {
-        this.expectedCustomer = expectedCustomer;
+    public FindCustomerBySurnameResponse(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 
-    public FindCustomerBySurnameResponse(List<CoreError> errors, Customer expectedCustomer) {
+    public FindCustomerBySurnameResponse(List<CoreError> errors, List<Customer> customerList) {
         super(errors);
+        this.customerList = customerList;
     }
 
-    public Customer getExpectedCustomer() {
-        return expectedCustomer;
+    public List<Customer> getCustomerList(){
+        return customerList;
     }
 }

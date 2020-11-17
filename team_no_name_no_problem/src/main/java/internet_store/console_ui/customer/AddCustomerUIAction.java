@@ -1,34 +1,49 @@
 package internet_store.console_ui.customer;
 
-import internet_store.console_ui.InputCheckUtility;
+
 import internet_store.console_ui.UIAction;
 import internet_store.core.domain.Customer;
-/*import internet_store.core.services.customer.AddCustomerService;*/
+import internet_store.core.requests.customer.AddCustomerRequest;
+import internet_store.core.response.customer.AddCustomerResponse;
+import internet_store.core.services.customer.AddCustomerService;
 
-/*public class AddCustomerUIAction implements UIAction {
+import java.util.Scanner;
 
-    private AddCustomerService addPersonService;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+public class AddCustomerUIAction implements UIAction {
 
-    public AddCustomerUIAction(AddCustomerService addPersonService){
-        this.addPersonService = addPersonService;
+    private AddCustomerService addCustomerService;
+
+    public AddCustomerUIAction(AddCustomerService addCustomerService){
+        this.addCustomerService = addCustomerService;
     }
 
     public void execute(){
 
-        String name = inputCheckUtility.inputValidString("Please enter your name: ");
+        Scanner in = new Scanner(System.in);
 
-        String surname = inputCheckUtility.inputValidString("Please enter your surname: ");
+        System.out.println("Please enter customer's name: ");
+        String name = in.nextLine();
 
-        String address = inputCheckUtility.inputValidString("Please enter your address: ");
+        System.out.println("Please enter customer's surname: ");
+        String surname = in.nextLine();
 
-        String email = inputCheckUtility.inputValidString("Please enter your email: ");
+        System.out.println("Please enter customer's phone number: ");
+        String phoneNumber = in.nextLine();
 
-        String phoneNumber = inputCheckUtility.inputValidString("Please enter your phone number: ");
+        System.out.println("Please enter customer's address: ");
+        String address = in.nextLine();
+
+        System.out.println("Please enter customer's e-mail: ");
+        String email = in.nextLine();
 
         Customer newCustomer = new Customer(name, surname, phoneNumber, address, email);
 
-        addPersonService.execute(newCustomer);
-
+        AddCustomerRequest addCustomerRequest = new AddCustomerRequest(newCustomer);
+        AddCustomerResponse addCustomerResponse = addCustomerService.execute(addCustomerRequest);
+        if (addCustomerResponse.hasErrors()){
+            addCustomerResponse.getErrors().forEach(System.out::println);
+        } else {
+            System.out.println("Customer was successfully added");
+        }
     }
-}*/
+}
