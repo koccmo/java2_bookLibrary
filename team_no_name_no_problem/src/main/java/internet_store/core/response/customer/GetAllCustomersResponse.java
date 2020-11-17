@@ -6,15 +6,15 @@ import internet_store.core.response.CoreResponse;
 
 import java.util.List;
 
-public class GetCustomersResponse extends CoreResponse {
+public class GetAllCustomersResponse extends CoreResponse {
 
     private List<Customer> customers;
 
-    public GetCustomersResponse(List<Customer> customers) {
+    public GetAllCustomersResponse(List<Customer> customers) {
         this.customers = customers;
     }
 
-    public GetCustomersResponse(List<CoreError> errors, List<Customer> customers) {
+    public GetAllCustomersResponse(List<CoreError> errors, List<Customer> customers) {
         super(errors);
     }
 
