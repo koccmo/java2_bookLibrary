@@ -11,10 +11,10 @@ import lv.javaguru.java2.library.core.responses.CoreError;
 public class AddBookService {
 
 	private Database database;
-	private AddBookValidator validator;
+	private AddBookRequestValidator validator;
 
 	public AddBookService(Database database,
-						  AddBookValidator validator) {
+						  AddBookRequestValidator validator) {
 		this.database = database;
 		this.validator = validator;
 	}

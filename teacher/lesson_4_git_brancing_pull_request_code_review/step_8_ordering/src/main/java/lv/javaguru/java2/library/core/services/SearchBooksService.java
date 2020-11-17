@@ -11,10 +11,10 @@ import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 public class SearchBooksService {
 
 	private Database database;
-	private SearchBooksValidator validator;
+	private SearchBooksRequestValidator validator;
 
 	public SearchBooksService(Database database,
-							  SearchBooksValidator validator) {
+							  SearchBooksRequestValidator validator) {
 		this.database = database;
 		this.validator = validator;
 	}
@@ -35,6 +35,11 @@ public class SearchBooksService {
 		if (request.isTitleProvided() && request.isAuthorProvided()) {
 			books = database.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
 		}
+
+		if (request.getOrderBy() != null && request.getOrderDirection() != null) {
+			// implement ordering here!!
+		}
+
 		return new SearchBooksResponse(books, null);
 	}
 

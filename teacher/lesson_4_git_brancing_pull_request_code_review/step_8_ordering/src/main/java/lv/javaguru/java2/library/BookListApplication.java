@@ -11,23 +11,23 @@ import lv.javaguru.java2.library.console_ui.UIAction;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.library.core.services.AddBookService;
-import lv.javaguru.java2.library.core.services.AddBookValidator;
+import lv.javaguru.java2.library.core.services.AddBookRequestValidator;
 import lv.javaguru.java2.library.core.services.GetAllBooksService;
 import lv.javaguru.java2.library.core.services.RemoveBookService;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
-import lv.javaguru.java2.library.core.services.SearchBooksValidator;
+import lv.javaguru.java2.library.core.services.SearchBooksRequestValidator;
 
 public class BookListApplication {
 
 	private static Database database = new InMemoryDatabaseImpl();
 
-	private static AddBookValidator addBookValidator = new AddBookValidator();
-	private static SearchBooksValidator searchBooksValidator = new SearchBooksValidator();
+	private static AddBookRequestValidator addBookRequestValidator = new AddBookRequestValidator();
+	private static SearchBooksRequestValidator searchBooksRequestValidator = new SearchBooksRequestValidator();
 
-	private static AddBookService addBookService = new AddBookService(database, addBookValidator);
+	private static AddBookService addBookService = new AddBookService(database, addBookRequestValidator);
 	private static RemoveBookService removeBookService = new RemoveBookService(database);
 	private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
-	private static SearchBooksService searchBooksService = new SearchBooksService(database, searchBooksValidator);
+	private static SearchBooksService searchBooksService = new SearchBooksService(database, searchBooksRequestValidator);
 
 	private static UIAction addBookUIAction = new AddBookUIAction(addBookService);
 	private static UIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);

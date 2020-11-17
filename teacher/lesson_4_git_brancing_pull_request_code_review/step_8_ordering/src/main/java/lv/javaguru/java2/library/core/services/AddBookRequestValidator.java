@@ -7,7 +7,7 @@ import java.util.Optional;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 
-public class AddBookValidator {
+public class AddBookRequestValidator {
 
 	public List<CoreError> validate(AddBookRequest request) {
 		List<CoreError> errors = new ArrayList<>();
