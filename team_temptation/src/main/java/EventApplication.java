@@ -1,14 +1,13 @@
-package lesson_2;
-
-import lesson_2.database.Database;
-import lesson_2.database.InMemoryDatabase;
-import lesson_2.services.AddEventService;
-import lesson_2.services.DisplayEventListService;
-import lesson_2.services.RemoveEventService;
-import lesson_2.ui.AddEventUIAction;
-import lesson_2.ui.DisplayEventUIAction;
-import lesson_2.ui.ExitEventUIAction;
-import lesson_2.ui.RemoveEventUIAction;
+import database.Database;
+import database.InMemoryDatabase;
+import core.services.AddEventRequestValidator;
+import core.services.AddEventService;
+import core.services.DisplayEventListService;
+import core.services.RemoveEventService;
+import ui.AddEventUIAction;
+import ui.DisplayEventUIAction;
+import ui.ExitEventUIAction;
+import ui.RemoveEventUIAction;
 
 import java.util.Scanner;
 
@@ -18,7 +17,8 @@ public class EventApplication {
 
         Database database = new InMemoryDatabase();
 
-        AddEventService addEventService = new AddEventService(database);
+        AddEventRequestValidator validator = new AddEventRequestValidator();
+        AddEventService addEventService = new AddEventService(database, validator);
         AddEventUIAction addEventUIAction = new AddEventUIAction(addEventService);
 
         RemoveEventService removeEventService = new RemoveEventService(database);
@@ -53,7 +53,6 @@ public class EventApplication {
             }
             System.out.println("");
         }
-
 
     }
 

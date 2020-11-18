@@ -1,4 +1,4 @@
-package lesson_2.ui;
+package ui;
 
 public class ExitEventUIAction implements UIAction {
 

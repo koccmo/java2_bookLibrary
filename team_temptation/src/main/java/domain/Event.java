@@ -1,4 +1,4 @@
-package lesson_2;
+package domain;
 
 import java.util.Objects;
 
