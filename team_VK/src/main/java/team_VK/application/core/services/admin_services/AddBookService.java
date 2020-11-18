@@ -6,6 +6,7 @@ import team_VK.application.database.database_Admin.Database;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.responses.CoreError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddBookService {
@@ -21,18 +22,15 @@ public class AddBookService {
 
     public AddBookResponse addBook(AddBookRequest request) {
 
-        List<CoreError> errors;
-
-        errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request);
 
 
         if (errors.size() == 0) {
             Book book = new Book(request.bookTitle, request.bookAuthor);
             database.addBook(book);
-            return new AddBookResponse();
-        } else {
-            return new AddBookResponse(errors);
         }
+        return new AddBookResponse(errors);
+
     }
 
 }

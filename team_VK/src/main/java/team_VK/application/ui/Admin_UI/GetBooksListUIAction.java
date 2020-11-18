@@ -22,13 +22,13 @@ public class GetBooksListUIAction implements UIActions {
         GetBookListRequest request = new GetBookListRequest();
         GetBookListResponse response = getBooksListService.getBooksList(request);
 
-
-        System.out.println("Book list:");
-
-        for (Book book : response.getBooksList().getListBooks()) {
-            System.out.println(book);
+        if (!response.havesError()) {
+            System.out.println("Please see books list above");
+        } else {
+            response.getErrorList().forEach(coreError -> System.out.println(coreError.toString()));
         }
-        System.out.println("End of list");
+
+
         System.out.println();
 
     }
