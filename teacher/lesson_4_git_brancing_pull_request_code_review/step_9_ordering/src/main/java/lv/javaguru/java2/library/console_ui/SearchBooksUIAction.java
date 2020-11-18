@@ -3,6 +3,7 @@ package lv.javaguru.java2.library.console_ui;
 import java.util.Scanner;
 
 import lv.javaguru.java2.library.Book;
+import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
@@ -23,7 +24,13 @@ public class SearchBooksUIAction implements UIAction {
 		System.out.println("Enter book author: ");
 		String author = scanner.nextLine();
 
-		SearchBooksRequest request = new SearchBooksRequest(title, author);
+		System.out.println("Enter orderBy (title||author): ");
+		String orderBy = scanner.nextLine();
+		System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
+		String orderDirection = scanner.nextLine();
+		Ordering ordering = new Ordering(orderBy, orderDirection);
+
+		SearchBooksRequest request = new SearchBooksRequest(title, author, ordering);
 		SearchBooksResponse response = searchBooksService.execute(request);
 
 		if (response.hasErrors()) {

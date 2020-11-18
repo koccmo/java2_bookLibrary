@@ -5,8 +5,7 @@ public class SearchBooksRequest {
 	private String title;
 	private String author;
 
-	private String orderBy;
-	private String orderDirection;
+	private Ordering ordering;
 
 	public SearchBooksRequest(String title, String author) {
 		this.title = title;
@@ -15,12 +14,10 @@ public class SearchBooksRequest {
 
 	public SearchBooksRequest(String title,
 							  String author,
-							  String orderBy,
-							  String orderDirection) {
+							  Ordering ordering) {
 		this.title = title;
 		this.author = author;
-		this.orderBy = orderBy;
-		this.orderDirection = orderDirection;
+		this.ordering = ordering;
 	}
 
 	public String getTitle() {
@@ -39,11 +36,7 @@ public class SearchBooksRequest {
 		return this.author != null && !this.author.isEmpty();
 	}
 
-	public String getOrderBy() {
-		return orderBy;
-	}
-
-	public String getOrderDirection() {
-		return orderDirection;
+	public Ordering getOrdering() {
+		return ordering;
 	}
 }
