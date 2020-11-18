@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lv.javaguru.java2.library.Book;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.Ordering;
+import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
@@ -31,6 +32,7 @@ public class SearchBooksService {
 
 		List<Book> books = search(request);
 		books = order(books, request.getOrdering());
+		books = paging(books, request.getPaging());
 
 		return new SearchBooksResponse(books, null);
 	}
@@ -61,6 +63,18 @@ public class SearchBooksService {
 			books = database.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
 		}
 		return books;
+	}
+
+	private List<Book> paging(List<Book> books, Paging paging) {
+		if (paging != null) {
+			int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+			return books.stream()
+					.skip(skip)
+					.limit(paging.getPageSize())
+					.collect(Collectors.toList());
+		} else {
+			return books;
+		}
 	}
 
 }
