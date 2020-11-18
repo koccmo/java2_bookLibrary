@@ -1,8 +1,10 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
+import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.requests.FindByProductNameRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.responses.FindByProductNameResponse;
 import internet_store.application.database.Database;
 
@@ -34,8 +36,8 @@ public class FindProductService {
         return response;
     }
 
-    public Optional<Product> findById(Long productId) {
-        return database.findById(productId);
+    public FindByIdResponse findById(FindByIdRequest idRequest) {
+        return new FindByIdResponse(database.findById(idRequest.getProductId()));
     }
 
 }

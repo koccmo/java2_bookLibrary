@@ -47,12 +47,12 @@ public class FindProductServiceTest {
     }
 
 
-    @Test
+/*    @Test
     public void findById() {
         Product productTV = new Product("tv", "good tv", new BigDecimal("499.99"));
         database.add(productTV);
         Product productToFind = findProductService.findById(1L).get();
         assertEquals(productTV, productToFind);
-    }
+    }*/
 
 }
