@@ -30,12 +30,12 @@ public class FindByIdUIAction implements UIAction {
 
         /*if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
-                    System.out.println("Error: " + coreError.getField() + " " + coreError.getField()));*/
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));*/
 
         if (response.getProductFoundById().isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
-            System.out.println("Found next product in the DataBase :");
+            System.out.println("Found product in the database :");
             System.out.print(foundProduct.get(0).toString() + "\n");
         }
     }
