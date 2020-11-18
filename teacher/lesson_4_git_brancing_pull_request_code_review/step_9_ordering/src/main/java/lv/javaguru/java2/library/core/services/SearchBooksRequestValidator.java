@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 
@@ -12,10 +13,12 @@ public class SearchBooksRequestValidator {
 	public List<CoreError> validate(SearchBooksRequest request) {
 		List<CoreError> errors = new ArrayList<>();
 		errors.addAll(validateSearchFields(request));
-		validateOrderBy(request).ifPresent(errors::add);
-		validateOrderDirection(request).ifPresent(errors::add);
-		validateMandatoryOrderBy(request).ifPresent(errors::add);
-		validateMandatoryOrderDirection(request).ifPresent(errors::add);
+		if (request.getOrdering() != null) {
+			validateOrderBy(request.getOrdering()).ifPresent(errors::add);
+			validateOrderDirection(request.getOrdering()).ifPresent(errors::add);
+			validateMandatoryOrderBy(request.getOrdering()).ifPresent(errors::add);
+			validateMandatoryOrderDirection(request.getOrdering()).ifPresent(errors::add);
+		}
 		return errors;
 	}
 
@@ -32,29 +35,29 @@ public class SearchBooksRequestValidator {
 		return str == null || str.isEmpty();
 	}
 
-	private Optional<CoreError> validateOrderBy(SearchBooksRequest request) {
-		return (request.getOrderBy() != null
-				&& (request.getOrderBy().equals("author") || request.getOrderBy().equals("title")))
+	private Optional<CoreError> validateOrderBy(Ordering ordering) {
+		return (ordering.getOrderBy() != null
+				&& !(ordering.getOrderBy().equals("author") || ordering.getOrderBy().equals("title")))
 				? Optional.of(new CoreError("orderBy", "Must contain 'author' or 'title' only!"))
 				: Optional.empty();
 	}
 
-	private Optional<CoreError> validateOrderDirection(SearchBooksRequest request) {
-		return (request.getOrderDirection() != null
-				&& (request.getOrderDirection().equals("ASCENDING") || request.getOrderBy().equals("DESCENDING")))
+	private Optional<CoreError> validateOrderDirection(Ordering ordering) {
+		return (ordering.getOrderDirection() != null
+				&& !(ordering.getOrderDirection().equals("ASCENDING") || ordering.getOrderBy().equals("DESCENDING")))
 				? Optional.of(new CoreError("orderDirection", "Must contain 'ASCENDING' or 'DESCENDING' only!"))
 				: Optional.empty();
 	}
 
-	private Optional<CoreError> validateMandatoryOrderBy(SearchBooksRequest request) {
-		return (request.getOrderDirection() != null && request.getOrderBy() == null)
-				? Optional.of(new CoreError("orderBy", "Must be not empty!"))
+	private Optional<CoreError> validateMandatoryOrderBy(Ordering ordering) {
+		return (ordering.getOrderDirection() != null && ordering.getOrderBy() == null)
+				? Optional.of(new CoreError("orderBy", "Must not be empty!"))
 				: Optional.empty();
 	}
 
-	private Optional<CoreError> validateMandatoryOrderDirection(SearchBooksRequest request) {
-		return (request.getOrderBy() != null && request.getOrderDirection() == null)
-				? Optional.of(new CoreError("orderDirection", "Must be not empty!"))
+	private Optional<CoreError> validateMandatoryOrderDirection(Ordering ordering) {
+		return (ordering.getOrderBy() != null && ordering.getOrderDirection() == null)
+				? Optional.of(new CoreError("orderDirection", "Must not be empty!"))
 				: Optional.empty();
 	}
 

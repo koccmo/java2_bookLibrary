@@ -24,6 +24,7 @@ public class GetAllCustomersService {
             errors.add(new CoreError("database", "Customer database is empty"));
             return new GetAllCustomersResponse(errors, new ArrayList<>());
             }
+
         List<Customer> customers = customerDatabase.getCustomers();
         return new GetAllCustomersResponse(customers);
         }

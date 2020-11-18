@@ -9,7 +9,7 @@ import internet_store.database.product.ProductDatabaseImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InternetStore {
+public class InternetStoreBusinessSide {
 
     private Map<Integer, UIAction> menuNumberToAction;
 
@@ -31,7 +31,7 @@ public class InternetStore {
     FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
     FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
 
-    public InternetStore() {
+    public InternetStoreBusinessSide() {
 
         menuNumberToAction = new HashMap();
 

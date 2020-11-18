@@ -1,9 +1,9 @@
 package internet_store.console_ui.customer;
 
-/*
 import internet_store.console_ui.UIAction;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.FindAllCustomersByNameAndSurnameRequest;
+import internet_store.core.response.customer.FindAllCustomersByNameAndSurnameResponse;
 import internet_store.core.services.customer.FindAllCustomersByNameAndSurnameService;
 
 import java.util.List;
@@ -20,16 +20,22 @@ public class FindCustomersByNameAndSurnameUIAction implements UIAction {
     public void execute(){
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter customer's name and surname for search: ");
+        System.out.println("Please enter customer's name for search: ");
         String name = in.nextLine();
+
+        System.out.println("Please enter customer's surname for search: ");
         String surname = in.nextLine();
 
         FindAllCustomersByNameAndSurnameRequest findCustomerByNameAndSurnameRequest =
                 new FindAllCustomersByNameAndSurnameRequest(name, surname);
-        List<Customer> findCustomerByNameAndSurnameResponse =
-                findAllCustomersByNameAndSurname.execute(findCustomerByNameAndSurnameRequest.getName(),
-                        findCustomerByNameAndSurnameRequest.getSurname());
 
-        if (findCustomerByNameAndSurnameResponse)
+        FindAllCustomersByNameAndSurnameResponse findCustomerByNameAndSurnameResponse =
+                findAllCustomersByNameAndSurname.execute(findCustomerByNameAndSurnameRequest);
+
+        if (findCustomerByNameAndSurnameResponse.hasErrors()){
+            findCustomerByNameAndSurnameResponse.getErrors().forEach(System.out::println);
+        }else{
+            findCustomerByNameAndSurnameResponse.getCustomerList().forEach(System.out::println);
+        }
     }
-}*/
+}

@@ -33,6 +33,6 @@ public class FindCustomerByIdService {
             + findCustomerByIdRequest.getId()));
             return new FindCustomerByIdResponse(errors);
         }
-        return new FindCustomerByIdResponse(customerDatabase.findById(findCustomerByIdRequest.getId()).get());
+        return new FindCustomerByIdResponse(customerDatabase.findById(findCustomerByIdRequest.getId()));
     }
 }

@@ -5,12 +5,13 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.CoreResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FindCustomerByIdResponse extends CoreResponse {
 
-    private Customer expectedCustomer;
+    private Optional<Customer> expectedCustomer;
 
-    public FindCustomerByIdResponse(Customer customer){
+    public FindCustomerByIdResponse(Optional<Customer> customer){
         this.expectedCustomer = customer;
     }
 
@@ -18,7 +19,7 @@ public class FindCustomerByIdResponse extends CoreResponse {
         super(errors);
     }
 
-    public Customer getCustomer(){
+    public Optional<Customer> getCustomer(){
         return expectedCustomer;
     }
 }

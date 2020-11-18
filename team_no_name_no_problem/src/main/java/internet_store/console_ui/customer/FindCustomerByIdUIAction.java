@@ -30,7 +30,7 @@ public class FindCustomerByIdUIAction implements UIAction {
             findCUstomerByIdResponse.getErrors().forEach(System.out::println);
         } else {
             System.out.println("Customer with id: " + id);
-            System.out.println(findCUstomerByIdResponse.getCustomer());
+            System.out.println(findCUstomerByIdResponse.getCustomer().get());
         }
     }
 }

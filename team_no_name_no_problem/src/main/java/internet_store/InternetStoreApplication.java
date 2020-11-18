@@ -1,12 +1,12 @@
 package internet_store;
 
-import internet_store.console_ui.InternetStore;
+import internet_store.console_ui.InternetStoreBusinessSide;
 
 public class InternetStoreApplication {
 
     public static void main(String[] args) {
-        InternetStore internetStore = new InternetStore();
-        internetStore.run();
+        InternetStoreBusinessSide internetStoreBusinessSide = new InternetStoreBusinessSide();
+        internetStoreBusinessSide.run();
     }
 
 }

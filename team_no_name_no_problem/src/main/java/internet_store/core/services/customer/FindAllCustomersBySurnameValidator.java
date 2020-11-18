@@ -12,7 +12,7 @@ public class FindAllCustomersBySurnameValidator {
         List<CoreError> errors = new ArrayList<>();
 
         if (findAllCustomersBySurnameRequest.getSurname() == null ||
-                findAllCustomersBySurnameRequest.getSurname() != findAllCustomersBySurnameRequest.getSurname()){
+                findAllCustomersBySurnameRequest.getSurname().isEmpty()){
             errors.add(new CoreError("surname", "Not valid input for surname"));
         }
         return errors;

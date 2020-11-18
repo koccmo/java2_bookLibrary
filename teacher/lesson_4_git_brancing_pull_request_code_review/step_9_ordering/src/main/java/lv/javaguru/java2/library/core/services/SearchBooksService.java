@@ -1,9 +1,14 @@
 package lv.javaguru.java2.library.core.services;
 
+import javax.swing.*;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lv.javaguru.java2.library.Book;
 import lv.javaguru.java2.library.core.database.Database;
+import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
@@ -36,8 +41,15 @@ public class SearchBooksService {
 			books = database.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
 		}
 
-		if (request.getOrderBy() != null && request.getOrderDirection() != null) {
-			// implement ordering here!!
+		if (request.getOrdering() != null) {
+			Ordering ordering = request.getOrdering();
+			Comparator<Book> comparator = ordering.getOrderBy().equals("title")
+					? Comparator.comparing(Book::getTitle)
+					: Comparator.comparing(Book::getAuthor);
+			if (ordering.getOrderDirection().equals("DESCENDING")) {
+				comparator = comparator.reversed();
+			}
+			books.sort(comparator);
 		}
 
 		return new SearchBooksResponse(books, null);
