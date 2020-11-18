@@ -13,9 +13,10 @@ class ProductList {
     private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
     private final FindProductValidator validatorFindProduct = new FindProductValidator();
     private final FindByIdValidator findByIdValidator = new FindByIdValidator();
+    private final AddProductValidator addProductValidator = new AddProductValidator();
 
 
-    AddProductService addProductService = new AddProductService(database);
+    AddProductService addProductService = new AddProductService(database, addProductValidator);
     FindProductService findProductService = new FindProductService(database, validatorFindProduct);
     FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
