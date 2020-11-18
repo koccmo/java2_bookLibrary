@@ -11,9 +11,11 @@ class ProductList {
     private final Database database = new InMemoryDatabase();
     private final DeleteByProductNameValidator validator = new DeleteByProductNameValidator();
     private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
+    private final FindProductValidator validatorFindProduct = new FindProductValidator();
+
 
     AddProductService addProductService = new AddProductService(database);
-    FindProductService findProductService = new FindProductService(database);
+    FindProductService findProductService = new FindProductService(database, validatorFindProduct);
     GetProductListService getProductListService = new GetProductListService(database);
     DeleteProductService deleteProductService = new DeleteProductService(database, validator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
