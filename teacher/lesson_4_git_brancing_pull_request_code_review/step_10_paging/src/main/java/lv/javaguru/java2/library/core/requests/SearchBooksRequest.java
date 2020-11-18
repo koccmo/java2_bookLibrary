@@ -6,6 +6,7 @@ public class SearchBooksRequest {
 	private String author;
 
 	private Ordering ordering;
+	private Paging paging;
 
 	public SearchBooksRequest(String title, String author) {
 		this.title = title;
@@ -18,6 +19,24 @@ public class SearchBooksRequest {
 		this.title = title;
 		this.author = author;
 		this.ordering = ordering;
+	}
+
+	public SearchBooksRequest(String title,
+							  String author,
+							  Paging paging) {
+		this.title = title;
+		this.author = author;
+		this.paging = paging;
+	}
+
+	public SearchBooksRequest(String title,
+							  String author,
+							  Ordering ordering,
+							  Paging paging) {
+		this.title = title;
+		this.author = author;
+		this.ordering = ordering;
+		this.paging = paging;
 	}
 
 	public String getTitle() {
@@ -38,5 +57,9 @@ public class SearchBooksRequest {
 
 	public Ordering getOrdering() {
 		return ordering;
+	}
+
+	public Paging getPaging() {
+		return paging;
 	}
 }
