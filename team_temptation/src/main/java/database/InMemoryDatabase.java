@@ -1,6 +1,6 @@
-package lesson_2.database;
+package database;
 
-import lesson_2.Event ;
+import domain.Event;
 
 import java.util.ArrayList;
 import java.util.List;

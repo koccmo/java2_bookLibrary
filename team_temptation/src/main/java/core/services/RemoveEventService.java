@@ -1,6 +1,6 @@
-package lesson_2.services;
+package core.services;
 
-import lesson_2.database.Database;
+import database.Database;
 
 public class RemoveEventService {
     private final Database database;

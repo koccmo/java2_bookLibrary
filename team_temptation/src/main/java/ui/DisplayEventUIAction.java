@@ -1,7 +1,7 @@
-package lesson_2.ui;
+package ui;
 
-import lesson_2.Event;
-import lesson_2.services.DisplayEventListService;
+import domain.Event;
+import core.services.DisplayEventListService;
 
 public class DisplayEventUIAction implements UIAction {
 

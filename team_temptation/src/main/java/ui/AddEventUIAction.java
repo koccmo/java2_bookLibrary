@@ -1,6 +1,8 @@
-package lesson_2.ui;
+package ui;
 
-import lesson_2.services.AddEventService;
+import core.requests.AddEventRequest;
+import core.responses.AddEventResponse;
+import core.services.AddEventService;
 
 import java.util.Scanner;
 
@@ -23,7 +25,14 @@ public class AddEventUIAction implements UIAction {
         String finishDate = scanner.nextLine();
         System.out.println("Enter an event description: ");
         String detailDescription = scanner.nextLine();
-        addEventService.addEvent(eventName, startDate, finishDate, detailDescription);
-        System.out.println("Your trip was added to list.");
+        AddEventRequest request = new AddEventRequest(eventName, startDate, finishDate, detailDescription);
+        AddEventResponse response = addEventService.addEvent(request);
+
+        if (response.hasError()) {
+            response.getErrors().forEach(System.out::println);
+        } else {
+            System.out.println("Your trip was added to list.");
+        }
+
     }
 }

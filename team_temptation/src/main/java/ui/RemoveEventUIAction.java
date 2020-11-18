@@ -1,6 +1,6 @@
-package lesson_2.ui;
+package ui;
 
-import lesson_2.services.RemoveEventService;
+import core.services.RemoveEventService;
 
 import java.util.Scanner;
 

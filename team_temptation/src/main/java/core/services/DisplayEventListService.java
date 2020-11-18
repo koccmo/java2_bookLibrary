@@ -1,7 +1,7 @@
-package lesson_2.services;
+package core.services;
 
-import lesson_2.Event;
-import lesson_2.database.Database;
+import domain.Event;
+import database.Database;
 
 import java.util.List;
 

@@ -1,8 +1,3 @@
-В запросе SearchBooksRequest замените поля:
-
-    private Integer pageNumber;
-    private Integer pageSize;
-
-в которых указываются параметры постраничного просмотра данных на:
+В классе SearchBooksUIAction реализуйте заполнение:
 
     private Paging paging;
