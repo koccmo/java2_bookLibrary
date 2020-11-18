@@ -10,7 +10,7 @@ import team_VK.application.ui.Admin_UI.RemoveBookUIAction;
 
 import java.util.Scanner;
 
-public class LibraryAdminAplication {
+public class LibraryAdminApplication {
 
     public static void main(String[] args) {
 
