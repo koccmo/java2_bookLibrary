@@ -12,7 +12,7 @@ public class FindAllCustomersByNameValidator {
         List<CoreError> errors = new ArrayList<>();
 
         if (findAllCustomersByNameRequest.getName() == null ||
-                findAllCustomersByNameRequest.getName() != findAllCustomersByNameRequest.getName()){
+                findAllCustomersByNameRequest.getName().isEmpty()){
             errors.add(new CoreError("name", "Not valid input for name"));
         }
         return errors;
