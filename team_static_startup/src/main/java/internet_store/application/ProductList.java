@@ -12,10 +12,12 @@ class ProductList {
     private final DeleteByProductNameValidator validator = new DeleteByProductNameValidator();
     private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
     private final FindProductValidator validatorFindProduct = new FindProductValidator();
+    private final FindByIdValidator findByIdValidator = new FindByIdValidator();
 
 
     AddProductService addProductService = new AddProductService(database);
     FindProductService findProductService = new FindProductService(database, validatorFindProduct);
+    FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
     DeleteProductService deleteProductService = new DeleteProductService(database, validator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
@@ -30,7 +32,7 @@ class ProductList {
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));
-        menuNumberToActionMap.put(7, new FindByIdUIAction(findProductService));
+        menuNumberToActionMap.put(7, new FindByIdUIAction(findByIdService));
         menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService));
         menuNumberToActionMap.put(0, new ExitProgramUIAction());
     }
