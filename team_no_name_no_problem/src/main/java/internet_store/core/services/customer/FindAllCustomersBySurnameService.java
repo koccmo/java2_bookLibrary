@@ -25,7 +25,7 @@ public class FindAllCustomersBySurnameService {
         }
 
         if (customerDatabase.findAllCustomersBySurname(findAllCustomersBySurnameRequest.getSurname()).isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain such customer surname"
+            errors.add(new CoreError("database", "Database doesn't contain such customer surname "
             + findAllCustomersBySurnameRequest.getSurname()));
         return new FindAllCustomersBySurnameResponse(errors, new ArrayList<>());
     }
