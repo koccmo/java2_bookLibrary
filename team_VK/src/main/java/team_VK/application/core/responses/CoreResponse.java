@@ -17,7 +17,7 @@ public abstract class CoreResponse {
     }
     public boolean havesError() {
 
-        if (errorList.size()>0) {
+        if (!errorList.isEmpty()) {
             return true;
         } else return false;
     }

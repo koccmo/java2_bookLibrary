@@ -6,14 +6,8 @@ import java.util.List;
 
 public class GetBookListResponse extends CoreResponse {
 
-    DatabaseInMemory booksList;
-    public GetBookListResponse(List<CoreError> errorList, DatabaseInMemory booksList) {
+    public GetBookListResponse(List<CoreError> errorList) {
         super(errorList);
-        this.booksList = booksList;
-    }
-
-    public DatabaseInMemory getBooksList() {
-        return booksList;
     }
 
     public GetBookListResponse() {
