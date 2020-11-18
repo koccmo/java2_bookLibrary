@@ -22,7 +22,9 @@ public class RemoveBookUIAction implements UIActions {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Book ID: ");
-        long bookID = scanner.nextLong();
+        String bookIDSt = scanner.nextLine();
+        long bookID = Long.decode(bookIDSt);
+
         System.out.println("Book Title: ");
         String bookTitle = scanner.nextLine();
 

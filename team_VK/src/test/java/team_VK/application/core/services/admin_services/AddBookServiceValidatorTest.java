@@ -1,4 +1,4 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.admin_services;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class AddBookServiceValidatorTest {
 
         AddBookServiceValidator subject = new AddBookServiceValidator();
         errors = subject.validate(addBookRequest);
-        Assert.assertTrue(errors.size() == 0);
+        Assert.assertEquals(0, errors.size());
 
     }
 
@@ -81,7 +81,7 @@ public class AddBookServiceValidatorTest {
 
         AddBookServiceValidator subject = new AddBookServiceValidator();
         errors = subject.validate(addBookRequest);
-        Assert.assertTrue(errors.size() == 0);
+        Assert.assertEquals(0, errors.size());
 
     }
 

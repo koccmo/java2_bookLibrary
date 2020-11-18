@@ -1,4 +1,4 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.admin_services;
 
 import org.junit.Assert;
 import org.junit.Test;

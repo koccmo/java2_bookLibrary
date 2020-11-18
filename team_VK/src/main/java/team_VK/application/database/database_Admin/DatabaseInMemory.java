@@ -10,6 +10,13 @@ public class DatabaseInMemory implements Database {
     private long idCounter = 1L;
     List<Book> books = new ArrayList<>();
 
+    public DatabaseInMemory() {
+    }
+
+    public DatabaseInMemory(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public void addBook(Book book) {
         book.setID(idCounter);

@@ -20,7 +20,7 @@ public class RemoveBookService {
         RemoveBookServiceValidator validator = new RemoveBookServiceValidator();
 
         List<CoreError> errors;
-        errors = validator.validate(request);
+        errors = validator.validate(request, database);
 
         if (errors.size() == 0) {
             database.getListBooks().stream()
