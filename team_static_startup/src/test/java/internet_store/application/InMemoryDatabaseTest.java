@@ -24,14 +24,14 @@ public class InMemoryDatabaseTest {
         productDatabase.add(new Product("tv", "good tv", new BigDecimal("499.99")));
         assertEquals(2, productDatabase.getProductList().size());
     }
-
+/*
     @Test
     public void shouldDeleteProductById() {
         productDatabase.add(new Product("tv", "good tv", new BigDecimal("499.99")));
         productDatabase.delete(1L);
         assertEquals(0, productDatabase.getProductList().size());
     }
-
+*/
     @Test
     public void shouldDeleteProductByProductObject() {
         Product tv = new Product("tv", "good tv", new BigDecimal("499.99"));

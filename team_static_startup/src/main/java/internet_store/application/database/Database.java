@@ -9,7 +9,7 @@ public interface Database {
 
     Long add(Product product);
 
-    boolean delete(Long productId);
+    boolean deleteByProductId(Long productId);
 
     boolean delete(Product product);
 

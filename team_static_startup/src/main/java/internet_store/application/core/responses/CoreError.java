@@ -2,8 +2,8 @@ package internet_store.application.core.responses;
 
 public class CoreError {
 
-    private String field;
-    private String message;
+    private final String field;
+    private final String message;
 
     public CoreError(String field, String message) {
         this.field = field;

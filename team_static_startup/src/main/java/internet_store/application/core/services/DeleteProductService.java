@@ -2,8 +2,7 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.*;
-import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.DeleteByProductNameResponse;
+import internet_store.application.core.responses.*;
 import internet_store.application.database.Database;
 
 import java.util.List;
@@ -31,10 +30,6 @@ public class DeleteProductService {
 
     public boolean delete(Product product) {
         return database.delete(product);
-    }
-
-    public boolean deleteById(DeleteByIdRequest productNameRequest) {
-        return database.delete(productNameRequest.getId());
     }
 
 }
