@@ -1,25 +1,27 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.FindByProductNameRequest;
+import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.FindByProductNameResponse;
+import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.database.Database;
 
 import java.util.List;
 
-public class FindProductService {
+public class FindByIdService {
 
     private final Database database;
-    private final FindProductValidator validator;
+    private final FindByIdValidator validator;
 
-    public FindProductService(Database database, FindProductValidator validator) {
+
+    public FindByIdService(Database database, FindByIdValidator validator) {
         this.database = database;
         this.validator = validator;
     }
 
 
-    public FindByProductNameResponse findByProductName(FindByProductNameRequest productNameRequest) {
+
+  /*  public FindByProductNameResponse findByProductName(FindByProductNameRequest productNameRequest) {
         List<CoreError> errors = validator.validate(productNameRequest);
         if (!errors.isEmpty()){
             FindByProductNameResponse responseErrors = new FindByProductNameResponse
@@ -32,6 +34,11 @@ public class FindProductService {
         FindByProductNameResponse response = new FindByProductNameResponse
                 .ResponseBuilder().withListOfFoundProducts(byProductName).build();
         return response;
+    }*/
+
+    public FindByIdResponse findById(FindByIdRequest idRequest) {
+        return new FindByIdResponse(database.findById(idRequest.getProductId()), validator.validate(idRequest));
     }
 
 }
+

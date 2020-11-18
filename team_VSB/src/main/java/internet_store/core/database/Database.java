@@ -1,6 +1,6 @@
-package internet_store.application.database;
+package internet_store.core.database;
 
-import internet_store.application.core.domain.Product;
+import internet_store.core.domain.Product;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +19,7 @@ public interface Database {
 
     List<Product> getProductList();
 
-    List<Product> findById(Long id);
+    Optional<Product> findById(Long id);
 
     boolean changeProductName(Long id, String newName);
-
 }

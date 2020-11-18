@@ -1,5 +1,5 @@
 package internet_store;
-
+/*
 public class Utils {
     public static void showMenu(){
         System.out.println("____Welcome to eStore____");
@@ -11,3 +11,4 @@ public class Utils {
         System.out.println("5 - update product info");
     }
 }
+*/
