@@ -12,12 +12,15 @@ public class FindAllCustomersByNameAndSurnameValidator {
         List<CoreError> errors = new ArrayList<>();
 
         if (findAllCustomersByNameAndSurnameRequest.getName() == null ||
-        findAllCustomersByNameAndSurnameRequest.getName() != findAllCustomersByNameAndSurnameRequest.getName() ||
-        findAllCustomersByNameAndSurnameRequest.getSurname() == null ||
-                findAllCustomersByNameAndSurnameRequest.getSurname()
-                        != findAllCustomersByNameAndSurnameRequest.getSurname()){
+        findAllCustomersByNameAndSurnameRequest.getName().isEmpty()){
             errors.add(new CoreError("name", "Not valid input for name"));
         }
+
+        if (findAllCustomersByNameAndSurnameRequest.getSurname() == null ||
+                findAllCustomersByNameAndSurnameRequest.getSurname().isEmpty()){
+            errors.add(new CoreError("name", "Not valid input for name"));
+        }
+
         return errors;
     }
 }
