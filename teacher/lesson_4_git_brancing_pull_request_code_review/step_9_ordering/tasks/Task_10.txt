@@ -1,4 +1,3 @@
-Так как валидация SearchBooksRequest становится довольно большой
-перенесите её в отдельный класс SearchBooksRequestValidator. В
-классе SearchBooksRequestValidator должен быть метод
-    public List<CoreError> validate(SearchBooksRequest request)
+Поправьте на стороне бизнес логики валидацию параметров сортировки,
+использование параметров сортировки при реализации самой сортировки
+и юнит тесты.

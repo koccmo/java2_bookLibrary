@@ -1,9 +1,3 @@
-Реализуйте проверку на стороне бизнес логики полей
-класса SearchBooksRequest:
-    private String orderBy;
-    private String orderDirection;
+В классе SearchBooksUIAction реализуйте заполнение:
 
-Поля должны быть или указаны оба вместе или не указаны вообще.
-
-Запрос считается не корректным если указано только одно из
-этих двух полей.
+    private Ordering ordering;
