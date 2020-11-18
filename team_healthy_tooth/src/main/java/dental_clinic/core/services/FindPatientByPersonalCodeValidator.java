@@ -1,11 +1,9 @@
 package dental_clinic.core.services;
 
-import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
