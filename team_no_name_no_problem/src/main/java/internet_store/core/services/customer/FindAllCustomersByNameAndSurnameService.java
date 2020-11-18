@@ -1,5 +1,6 @@
 package internet_store.core.services.customer;
-/*
+
+import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.FindAllCustomersByNameAndSurnameRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.FindAllCustomersByNameAndSurnameResponse;
@@ -27,13 +28,22 @@ public class FindAllCustomersByNameAndSurnameService {
 
         List<CoreError> errors = findAllCustomersByNameAndSurnameValidator
                 .validate(findAllCustomersByNameAndSurnameRequest);
+
         if (!errors.isEmpty()){
             return new FindAllCustomersByNameAndSurnameResponse(errors, new ArrayList<>());
         }
 
-        if (customerDatabase.findCustomersByNameAndSurname(findAllCustomersByNameAndSurnameRequest.getName().isEmpty() &&
-                findAllCustomersByNameAndSurnameRequest.getSurname().isEmpty())){
+        List <Customer> customers = customerDatabase.findCustomersByNameAndSurname(findAllCustomersByNameAndSurnameRequest.getName(),
+                findAllCustomersByNameAndSurnameRequest.getSurname());
 
+        if (customers.isEmpty()){
+            errors.add(new CoreError("database", "Database doesn't contain customer with name " +
+                    findAllCustomersByNameAndSurnameRequest.getName() + " and surname " +
+                    findAllCustomersByNameAndSurnameRequest.getSurname()));
+            return new FindAllCustomersByNameAndSurnameResponse(errors, new ArrayList<>());
         }
+            return new FindAllCustomersByNameAndSurnameResponse(customers);
+
+
     }
-}*/
+}
