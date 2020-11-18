@@ -1,15 +1,15 @@
 package database;
 
-import domain.Event;
+import domain.Events;
 
 import java.util.List;
 
 public interface Database {
 
-    void add (Event event);
+    void add (Events event);
 
     boolean remove (String eventName);
 
-    List<Event> getEventsList ();
+    List<Events> getEventsList ();
 
 }

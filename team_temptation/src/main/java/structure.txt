@@ -16,8 +16,9 @@ Class Events:
     int durationHours;
     int maxNumberParticipants;
     int minNumberParticipants;
-    String rout; // List<StayPoint>
+    String route; // List<StayPoint>
     int eventRating;
+    String detailsDescription;
     
 Class Guides:
     long guideId;

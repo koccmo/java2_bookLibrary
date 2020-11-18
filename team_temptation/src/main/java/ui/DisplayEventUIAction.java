@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Event;
+import domain.Events;
 import core.services.DisplayEventListService;
 
 public class DisplayEventUIAction implements UIAction {
@@ -14,7 +14,7 @@ public class DisplayEventUIAction implements UIAction {
     @Override
     public void execute() {
         System.out.println("Here is a list of events: ");
-        for (Event item : displayEventListService.getEventsList()) {
+        for (Events item : displayEventListService.getEventsList()) {
             System.out.println(item);
         }
         System.out.println("This is the end.");

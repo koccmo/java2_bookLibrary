@@ -3,31 +3,52 @@ package core.requests;
 public class AddEventRequest {
 
     private String eventName;
-    private String startDate;
-    private String finishDate;
-    private String detailDescription;
+    private String eventKind;
+    //    private Guides guide;
+    private int durationHours;
+    private int maxNumberParticipants;
+    private int minNumberParticipants;
+    private String route; // List<StayPoint>
 
-    public AddEventRequest(String eventName, String startDate, String finishDate, String detailDescription) {
+    private String detailsDescription;
+
+    public AddEventRequest(String eventName, String eventKind, int durationHours,
+                           int maxNumberParticipants, int minNumberParticipants,
+                           String route, String detailsDescription) {
         this.eventName = eventName;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
-        this.detailDescription = detailDescription;
+        this.eventKind = eventKind;
+        this.durationHours = durationHours;
+        this.maxNumberParticipants = maxNumberParticipants;
+        this.minNumberParticipants = minNumberParticipants;
+        this.route = route;
+        this.detailsDescription = detailsDescription;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getEventKind() {
+        return eventKind;
     }
 
-    public String getFinishDate() {
-        return finishDate;
+    public int getDurationHours() {
+        return durationHours;
     }
 
-    public String getDetailDescription() {
-        return detailDescription;
+    public int getMaxNumberParticipants() {
+        return maxNumberParticipants;
     }
 
+    public int getMinNumberParticipants() {
+        return minNumberParticipants;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public String getDetailsDescription() {
+        return detailsDescription;
+    }
 }

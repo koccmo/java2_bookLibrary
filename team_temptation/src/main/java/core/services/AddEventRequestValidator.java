@@ -17,17 +17,37 @@ public class AddEventRequestValidator {
             CoreError error = new CoreError("eventName", "Must be not empty");
             errors.add(error);
         }
-        if (request.getStartDate() == null || request.getStartDate().isEmpty()) {
+        if (request.getEventKind() == null || request.getEventKind().isEmpty()) {
             // error
-            CoreError error = new CoreError("startDate", "Must be not empty");
+            CoreError error = new CoreError("eventKind", "Must be not empty");
             errors.add(error);
         }
-        if (request.getFinishDate() == null || request.getFinishDate().isEmpty()) {
+        if (request.getDurationHours() == 0) {
             // error
-            CoreError error = new CoreError("finishDate", "Must be not empty");
+            CoreError error = new CoreError("durationHours", "Must be bigger than 0");
             errors.add(error);
         }
-        if (request.getDetailDescription() == null || request.getDetailDescription().isEmpty()) {
+        if (request.getMaxNumberParticipants() == 0) {
+            // error
+            CoreError error = new CoreError("maxNumberParticipants", "Must be bigger than 0");
+            errors.add(error);
+        }
+        if (request.getMinNumberParticipants() == 0) {
+            // error
+            CoreError error = new CoreError("minNumberParticipants", "Must be bigger than 0");
+            errors.add(error);
+        }
+        if (request.getMinNumberParticipants() > request.getMaxNumberParticipants()) {
+            // error
+            CoreError error = new CoreError("minNumberParticipants", "Must not be bigger than maxNumber");
+            errors.add(error);
+        }
+        if (request.getRoute() == null || request.getRoute().isEmpty()) {
+            // error
+            CoreError error = new CoreError("detailDescription", "Must be not empty");
+            errors.add(error);
+        }
+        if (request.getDetailsDescription() == null || request.getDetailsDescription().isEmpty()) {
             // error
             CoreError error = new CoreError("detailDescription", "Must be not empty");
             errors.add(error);

@@ -1,6 +1,6 @@
 package core.services;
 
-import domain.Event;
+import domain.Events;
 import database.Database;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class DisplayEventListService {
         this.database = database;
     }
 
-    public List<Event> getEventsList () {
+    public List<Events> getEventsList () {
         return database.getEventsList();
     }
 

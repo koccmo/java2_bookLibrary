@@ -1,6 +1,6 @@
 package core.services;
 
-import domain.Event;
+import domain.Events;
 import database.Database;
 import core.requests.AddEventRequest;
 import core.responses.AddEventResponse;
@@ -26,7 +26,10 @@ public class AddEventService {
             return new AddEventResponse(errors);
         }
 
-        Event event = new Event(request.getEventName(), request.getStartDate(), request.getFinishDate(), request.getDetailDescription());
+        Events event = new Events(request.getEventName(), request.getEventKind(),
+                request.getDurationHours(), request.getMaxNumberParticipants(),
+                request.getMinNumberParticipants(), request.getRoute(),
+                request.getDetailsDescription());
         database.add(event);
 
         return new AddEventResponse();

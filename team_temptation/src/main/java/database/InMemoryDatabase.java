@@ -1,6 +1,6 @@
 package database;
 
-import domain.Event;
+import domain.Events;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import java.util.List;
 public class InMemoryDatabase implements Database {
 
     private long idCounter = 1L;
-    private List<Event> events = new ArrayList<>();
+    private List<Events> events = new ArrayList<>();
 
 
     @Override
-    public void add(Event event) {
-        event.setIdNumber(idCounter);
+    public void add(Events event) {
+        event.setEventId(idCounter);
         events.add(event);
         idCounter++;
     }
@@ -24,7 +24,7 @@ public class InMemoryDatabase implements Database {
     }
 
     @Override
-    public List<Event> getEventsList() {
+    public List<Events> getEventsList() {
         return events;
     }
 }
