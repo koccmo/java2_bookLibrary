@@ -3,6 +3,7 @@ package internet_store.application.console_ui;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.FindByIdResponse;
+import internet_store.application.core.services.FindByIdService;
 import internet_store.application.core.services.FindProductService;
 
 import java.util.List;
@@ -11,10 +12,10 @@ import java.util.Scanner;
 
 public class FindByIdUIAction implements UIAction {
 
-    private final FindProductService findProductService;
+    private final FindByIdService findByIdService;
 
-    public FindByIdUIAction(FindProductService findProductService) {
-        this.findProductService = findProductService;
+    public FindByIdUIAction(FindByIdService findByIdService) {
+        this.findByIdService = findByIdService;
     }
 
     public void execute() {
@@ -23,9 +24,13 @@ public class FindByIdUIAction implements UIAction {
         Long id = myInput.nextLong();
 
         FindByIdRequest request = new FindByIdRequest(id);
-        FindByIdResponse response = findProductService.findById(request);
+        FindByIdResponse response = findByIdService.findById(request);
 
         List<Product> foundProduct = response.getProductFoundById();
+
+        /*if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getField()));*/
 
         if (response.getProductFoundById().isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");

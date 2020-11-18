@@ -3,14 +3,15 @@ package internet_store.application.core.responses;
 import internet_store.application.core.domain.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public class FindByIdResponse {
 
-    List<Product> productFoundById;
+    private List<Product> productFoundById;
+    private List<CoreError> foundErrorList;
 
-    public FindByIdResponse(List productFoundById) {
+    public FindByIdResponse(List<Product> productFoundById, List<CoreError> foundErrorList) {
         this.productFoundById = productFoundById;
+        this.foundErrorList = foundErrorList;
     }
 
     public List getProductFoundById() {
