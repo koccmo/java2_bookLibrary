@@ -48,37 +48,9 @@ public class InMemoryDatabaseImpl implements Database {
 	}
 
 	@Override
-	public List<Book> findByTitle(String title, Ordering ordering) {
-		Comparator<Book> comparator = ordering.getOrderBy().equals("title")
-				? Comparator.comparing(Book::getTitle)
-				: Comparator.comparing(Book::getAuthor);
-		if (ordering.getOrderDirection().equals("DESCENDING")) {
-			comparator = comparator.reversed();
-		}
-		return books.stream()
-				.filter(book -> book.getTitle().equals(title))
-				.sorted(comparator)
-				.collect(Collectors.toList());
-	}
-
-	@Override
 	public List<Book> findByAuthor(String author) {
 		return books.stream()
 				.filter(book -> book.getAuthor().equals(author))
-				.collect(Collectors.toList());
-	}
-
-	@Override
-	public List<Book> findByAuthor(String author, Ordering ordering) {
-		Comparator<Book> comparator = ordering.getOrderBy().equals("title")
-				? Comparator.comparing(Book::getTitle)
-				: Comparator.comparing(Book::getAuthor);
-		if (ordering.getOrderDirection().equals("DESCENDING")) {
-			comparator = comparator.reversed();
-		}
-		return books.stream()
-				.filter(book -> book.getAuthor().equals(author))
-				.sorted(comparator)
 				.collect(Collectors.toList());
 	}
 
@@ -87,21 +59,6 @@ public class InMemoryDatabaseImpl implements Database {
 		return books.stream()
 				.filter(book -> book.getAuthor().equals(author))
 				.filter(book -> book.getTitle().equals(title))
-				.collect(Collectors.toList());
-	}
-
-	@Override
-	public List<Book> findByTitleAndAuthor(String title, String author, Ordering ordering) {
-		Comparator<Book> comparator = ordering.getOrderBy().equals("title")
-				? Comparator.comparing(Book::getTitle)
-				: Comparator.comparing(Book::getAuthor);
-		if (ordering.getOrderDirection().equals("DESCENDING")) {
-			comparator = comparator.reversed();
-		}
-		return books.stream()
-				.filter(book -> book.getAuthor().equals(author))
-				.filter(book -> book.getTitle().equals(title))
-				.sorted(comparator)
 				.collect(Collectors.toList());
 	}
 

@@ -15,14 +15,8 @@ public interface Database {
 
 	List<Book> findByTitle(String title);
 
-	List<Book> findByTitle(String title, Ordering ordering);
-
 	List<Book> findByAuthor(String author);
 
-	List<Book> findByAuthor(String author, Ordering ordering);
-
 	List<Book> findByTitleAndAuthor(String title, String author);
-
-	List<Book> findByTitleAndAuthor(String title, String author, Ordering ordering);
 
 }
