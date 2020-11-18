@@ -1,5 +1,5 @@
 package internet_store;
-
+/*
 import java.util.Scanner;
 
 public class StoreApp {
@@ -70,3 +70,6 @@ public class StoreApp {
         }
     }
 }
+
+
+ */
