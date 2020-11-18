@@ -10,18 +10,20 @@ class ProductList {
     private final Map<Integer, UIAction> menuNumberToActionMap;
     private final Database database = new InMemoryDatabase();
     private final DeleteByProductNameValidator validator = new DeleteByProductNameValidator();
+    private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
 
     AddProductService addProductService = new AddProductService(database);
     FindProductService findProductService = new FindProductService(database);
     GetProductListService getProductListService = new GetProductListService(database);
     DeleteProductService deleteProductService = new DeleteProductService(database, validator);
+    DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database);
 
     public ProductList() {
 
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
-        menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteProductService));
+        menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteByProductIdService));
         menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteProductService));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));

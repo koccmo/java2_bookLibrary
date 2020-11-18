@@ -1,6 +1,7 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
+import internet_store.application.core.requests.FindByProductNameRequest;
 import internet_store.application.core.services.FindProductService;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class FindByProductNameUIAction implements UIAction {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product name to search for: ");
         String productName = myInput.nextLine();
-
-        List<Product> productFound = findProductService.findByProductName(productName);
+        FindByProductNameRequest request = new FindByProductNameRequest(productName);
+        List<Product> productFound = findProductService.findByProductName(request);
 
         if (productFound.isEmpty()) {
             System.out.println("\nNo product with name = " + productName + " in the database");

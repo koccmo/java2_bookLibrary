@@ -1,7 +1,8 @@
 package internet_store.application.core.services;
 
-import internet_store.application.database.Database;
 import internet_store.application.core.domain.Product;
+import internet_store.application.core.responses.PrintProductsToConsoleResponse;
+import internet_store.application.database.Database;
 
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class GetProductListService {
         this.database = database;
     }
 
-    public List<Product> getProductList() {
-        return database.getProductList();
+    public PrintProductsToConsoleResponse getProductList() {
+        List<Product> productList = database.getProductList();
+        return new PrintProductsToConsoleResponse(productList);
     }
+
 }

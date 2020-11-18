@@ -1,29 +1,36 @@
 package internet_store.console_ui.customer;
 
-import internet_store.console_ui.InputCheckUtility;
+
 import internet_store.console_ui.UIAction;
-import internet_store.core.domain.Customer;
+
+import internet_store.core.requests.customer.FindAllCustomersBySurnameRequest;
+import internet_store.core.response.customer.FindAllCustomersBySurnameResponse;
 import internet_store.core.services.customer.FindAllCustomersBySurnameService;
 
-import java.util.List;
+import java.util.Scanner;
 
 public class FindAllCustomersBySurnameUIAction implements UIAction {
 
     private FindAllCustomersBySurnameService findAllCustomersBySurname;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public FindAllCustomersBySurnameUIAction(FindAllCustomersBySurnameService findAllCustomersBySurname) {
         this.findAllCustomersBySurname = findAllCustomersBySurname;
     }
 
     public void execute(){
-        String surname = inputCheckUtility.inputValidString("Please enter customer's surname for search: ");
+        Scanner in = new Scanner(System.in);
 
-        List<Customer> result = findAllCustomersBySurname.execute(surname);
-        if (result.size() == 0){
-            System.out.println("Customer's with surname " + surname + " isn't presented in database!");
+        System.out.println("Please enter customer's surname for search: ");
+        String surname = in.nextLine();
+
+        FindAllCustomersBySurnameRequest findAllCustomersBySurnameRequest = new FindAllCustomersBySurnameRequest(surname);
+        FindAllCustomersBySurnameResponse findAllCustomersBySurnameResponse = findAllCustomersBySurname
+                .execute(findAllCustomersBySurnameRequest);
+
+        if (findAllCustomersBySurnameResponse.hasErrors()){
+            findAllCustomersBySurnameResponse.getErrors().forEach(System.out::println);
         } else {
-            result.forEach(System.out::println);
+            findAllCustomersBySurnameResponse.getCustomerList().forEach(System.out::println);
         }
     }
 }

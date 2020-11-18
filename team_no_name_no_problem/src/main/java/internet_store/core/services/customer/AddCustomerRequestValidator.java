@@ -16,7 +16,7 @@ public class AddCustomerRequestValidator {
         }
         if (addCustomerRequest.getCustomer().getSurname() == null ||
                 addCustomerRequest.getCustomer().getSurname().isEmpty()){
-            errors.add(new CoreError("surname", "Not valid input for name"));
+            errors.add(new CoreError("surname", "Not valid input for surname"));
         }
         if (addCustomerRequest.getCustomer().getPhoneNumber() == null ||
                 addCustomerRequest.getCustomer().getPhoneNumber().isEmpty()){

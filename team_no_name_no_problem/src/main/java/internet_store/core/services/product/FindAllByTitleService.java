@@ -4,7 +4,7 @@ import internet_store.core.requests.product.FindAllByTitleRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.FindAllByTitleResponse;
 import internet_store.database.product.ProductDatabase;
-import internet_store.core.domain.Product;
+
 
 import java.util.ArrayList;
 import java.util.List;

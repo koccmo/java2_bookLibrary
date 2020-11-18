@@ -26,9 +26,9 @@ public class InMemoryDatabaseTest {
     }
 
     @Test
-    public void shouldDeleteProductById() {
+    public void shouldDeleteProductByProductId() {
         productDatabase.add(new Product("tv", "good tv", new BigDecimal("499.99")));
-        productDatabase.delete(1L);
+        productDatabase.deleteByProductId(1L);
         assertEquals(0, productDatabase.getProductList().size());
     }
 

@@ -1,9 +1,8 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.DeleteByProductNameRequest;
-import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.DeleteByProductNameResponse;
+import internet_store.application.core.requests.*;
+import internet_store.application.core.responses.*;
 import internet_store.application.database.Database;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 public class DeleteProductService {
 
     private final Database database;
-    private DeleteByProductNameValidator validator;
+    private final DeleteByProductNameValidator validator;
 
     public DeleteProductService(Database database, DeleteByProductNameValidator validator) {
         this.database = database;
@@ -32,10 +31,5 @@ public class DeleteProductService {
     public boolean delete(Product product) {
         return database.delete(product);
     }
-
-    public boolean delete(Long productIdLong) {
-        return database.delete(productIdLong);
-    }
-
 
 }

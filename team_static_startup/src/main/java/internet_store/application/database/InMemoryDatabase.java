@@ -17,7 +17,7 @@ public class InMemoryDatabase implements Database {
     }
 
     @Override
-    public boolean delete(Long productIdLong) {
+    public boolean deleteByProductId(Long productIdLong) {
         for (Product product : productList) {
             if (product.getId().equals(productIdLong)) {
                 productList.remove(product);
