@@ -26,7 +26,7 @@ public class FindAllCustomersByNameService {
         }
 
         if (customerDatabase.findAllCustomersByName(findAllCustomersByNameRequest.getName()).isEmpty()){
-            errors.add(new CoreError("database","Database doesn't contain such customer name"
+            errors.add(new CoreError("database","Database doesn't contain such customer name "
             + findAllCustomersByNameRequest.getName()));
             return new FindAllCustomersByNameResponse(errors, new ArrayList<>());
         }
