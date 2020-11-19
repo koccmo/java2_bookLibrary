@@ -1,11 +1,11 @@
-package application_target_list;
+package lesson_3;
 
-import application_target_list.console_ui.*;
-import application_target_list.console_ui.actions.*;
-import application_target_list.core.database.Database;
-import application_target_list.core.database.TargetListImpl;
-import application_target_list.core.services.*;
-import application_target_list.core.services.validators.*;
+import lesson_3.console_ui.UIAction;
+import lesson_3.console_ui.actions.*;
+import lesson_3.core.database.Database;
+import lesson_3.core.database.TargetListImpl;
+import lesson_3.core.services.*;
+import lesson_3.core.services.validators.*;
 
 import java.util.Scanner;
 
