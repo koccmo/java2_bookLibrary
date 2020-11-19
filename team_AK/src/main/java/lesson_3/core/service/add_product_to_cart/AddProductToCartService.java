@@ -48,6 +48,7 @@ public class AddProductToCartService {
         ProductQuantityValidator quantityValidator = new ProductQuantityValidator();
         List<CoreError> errors = quantityValidator.validate(product.getQuantity(), userQuantity);
         if (errors.isEmpty()) {
+            product.setQuantity(userQuantity);
             cart.addProductToCart(product);
         }
         return errors;

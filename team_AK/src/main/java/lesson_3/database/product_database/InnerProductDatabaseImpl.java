@@ -53,6 +53,4 @@ public class InnerProductDatabaseImpl implements InnerProductDatabase {
     private boolean isProductListEmpty(List<Product> products) {
         return products.size() == 0;
     }
-
-
 }
