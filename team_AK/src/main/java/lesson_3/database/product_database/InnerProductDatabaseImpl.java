@@ -45,7 +45,14 @@ public class InnerProductDatabaseImpl implements InnerProductDatabase {
         return products;
     }
 
+    @Override
+    public void clear() {
+        products.clear();
+    }
+
     private boolean isProductListEmpty(List<Product> products) {
         return products.size() == 0;
     }
+
+
 }

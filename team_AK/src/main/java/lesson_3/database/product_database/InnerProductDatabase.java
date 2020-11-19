@@ -14,4 +14,7 @@ public interface InnerProductDatabase {
     void showReport();
 
     List<Product> getAllProducts();
+
+    void clear();
+
 }

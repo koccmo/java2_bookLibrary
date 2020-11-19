@@ -9,4 +9,5 @@ public class Client {
     private String surname;
     private String phoneNumber;
     private String email;
+    private Cart clientCart;
 }
