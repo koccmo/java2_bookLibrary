@@ -19,6 +19,7 @@ public class AddTargetUIAction implements UIAction {
     @Override
     public void execute() {
 
+        while (true){
             Scanner scr = new Scanner(System.in);
 
             System.out.print("Enter target name: ");
@@ -36,15 +37,15 @@ public class AddTargetUIAction implements UIAction {
 
 
             if (response.hasErrors()) {
-                System.out.println("----------");
                 for (CoreError errors : response.getErrorList()) {
                     System.out.println("Error: " + errors.getField() + " " + errors.getMessage());
                 }
-                System.out.println("----------");
             } else {
                 System.out.println("----------");
                 System.out.println("Your target was added to list.");
                 System.out.println("----------");
+                break;
             }
+        }
     }
 }
