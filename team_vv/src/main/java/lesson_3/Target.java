@@ -1,4 +1,4 @@
-package application_target_list;
+package lesson_3;
 
 import java.util.Objects;
 
