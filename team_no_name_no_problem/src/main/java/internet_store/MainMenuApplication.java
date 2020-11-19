@@ -1,4 +1,4 @@
-package internet_store.database;
+package internet_store;
 
 import internet_store.console_ui.InternetStoreBusinessSide;
 import internet_store.console_ui.InternetStoreCustomerSide;
