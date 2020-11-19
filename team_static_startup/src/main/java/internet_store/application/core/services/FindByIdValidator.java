@@ -11,7 +11,7 @@ public class FindByIdValidator {
     public List<CoreError> validate(FindByIdRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (request.getProductId() == null || request.getProductId().toString().isEmpty()) {
+        if (request.getProductId() == null) {
             errors.add(new CoreError("Product ID", "Should not be empty."));
         }
         return errors;
