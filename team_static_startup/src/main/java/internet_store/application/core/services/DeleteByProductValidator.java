@@ -1,6 +1,5 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
 
