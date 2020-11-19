@@ -169,7 +169,7 @@ class ProductListDatabaseTest {
         List<Product> actual = subject.filter(product -> product.getPrice().compareTo(new BigDecimal("300")) > 0 &&
                 product.getPrice().compareTo(new BigDecimal("1000")) < 0);
 //        assert ONLY if all products in the actual List have id 5; 6; 8
-        assertThat(actual).allMatch(product -> product.getId() == 5 || product.getId() == 6 || product.getId() == 8);
+        assertThat(actual).allMatch(product -> product.getId() == 6 || product.getId() == 8);
     }
 }
 
