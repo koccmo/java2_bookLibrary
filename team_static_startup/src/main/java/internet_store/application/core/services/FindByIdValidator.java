@@ -11,11 +11,15 @@ public class FindByIdValidator {
     public List<CoreError> validate(FindByIdRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (request.getProductId() == null) {
+        if (request.getProductId() == null || (request.getProductId().isBlank())) {
             errors.add(new CoreError("Product ID", "Should not be empty."));
+        } else try {
+            Long.parseLong(request.getProductId());
+        } catch (NumberFormatException e) {
+            errors.add(new CoreError("Product ID", "Should be valid."));
         }
         return errors;
+
+
     }
-
-
 }

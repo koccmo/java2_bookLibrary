@@ -20,7 +20,7 @@ public class FindByIdValidatorTest {
         validator = new FindByIdValidator();
     }
 
-    @Test
+   @Test
     public void shallNotPassWhenIdIsNull() {
         FindByIdRequest request = new FindByIdRequest(null);
         List<CoreError> errors = validator.validate(request);
@@ -31,9 +31,28 @@ public class FindByIdValidatorTest {
 
     @Test
     public void shouldReturnNoErrorWhenIdIsNotNull() {
-        FindByIdRequest request = new FindByIdRequest(1L);
+        FindByIdRequest request = new FindByIdRequest("1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(0, errors.size());
+    }
+
+
+    @Test
+    public void shallNotPassWhenIdIsEmpty() {
+        FindByIdRequest request = new FindByIdRequest(" ");
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Product ID", errors.get(0).getField());
+        assertEquals("Should not be empty.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shallNotPassWhenIdIsNotNumber() {
+        FindByIdRequest request = new FindByIdRequest("MISTAKE");
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        /*assertEquals("Product ID", errors.get(0).getField());
+        assertEquals("Should not be empty.", errors.get(0).getMessage());*/
     }
 
 }
