@@ -1,4 +1,6 @@
 package internet_store;
+/*
+import internet_store.core.domain.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,3 +107,5 @@ public class Database {
         }
     }
 }
+
+ */

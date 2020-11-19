@@ -1,11 +1,9 @@
 package dental_clinic.core.services;
 
-import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -25,7 +23,9 @@ public class FindPatientByPersonalCodeValidator {
 
     private boolean isRegexCorrect(String personalCode) {
         // 123456-12345 OR 12345612345
-        return Pattern.matches("/d{6}/-?/d{5}", personalCode);
+        //return Pattern.matches("/d{6}/-?/d{5}", personalCode);
+        return Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode);
+
     }
 
 }

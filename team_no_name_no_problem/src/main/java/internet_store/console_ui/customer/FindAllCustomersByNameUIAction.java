@@ -1,29 +1,35 @@
 package internet_store.console_ui.customer;
 
-import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
-import internet_store.core.domain.Customer;
+import internet_store.core.requests.customer.FindAllCustomersByNameRequest;
+import internet_store.core.response.customer.FindAllCustomersByNameResponse;
 import internet_store.core.services.customer.FindAllCustomersByNameService;
 
-import java.util.List;
+import java.util.Scanner;
 
 public class FindAllCustomersByNameUIAction implements UIAction {
 
-    private FindAllCustomersByNameService findAllCustomersByNameService;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+    private FindAllCustomersByNameService findAllCustomersByName;
 
-    public FindAllCustomersByNameUIAction(FindAllCustomersByNameService findAllCustomersByNameService) {
-        this.findAllCustomersByNameService = findAllCustomersByNameService;
+    public FindAllCustomersByNameUIAction(FindAllCustomersByNameService findAllCustomersByName){
+        this.findAllCustomersByName = findAllCustomersByName;
     }
 
     public void execute(){
-        String name = inputCheckUtility.inputValidString("Please enter customers name for search: ");
 
-        List<Customer> result = findAllCustomersByNameService.execute(name);
-        if (result.size() == 0){
-            System.out.println("Customer's with name " + name + "isn't presented in database!");
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Please enter customer name for search: ");
+        String name = in.nextLine();
+
+        FindAllCustomersByNameRequest findAllCustomersByNameRequest = new FindAllCustomersByNameRequest(name);
+        FindAllCustomersByNameResponse findAllCustomersByNameResponse = findAllCustomersByName
+                .execute(findAllCustomersByNameRequest);
+
+        if (findAllCustomersByNameResponse.hasErrors()){
+            findAllCustomersByNameResponse.getErrors().forEach(System.out::println);
         } else {
-            result.forEach(System.out::println);
+            findAllCustomersByNameResponse.getCustomerList().forEach(System.out::println);
         }
     }
 }

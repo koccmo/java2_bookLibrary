@@ -1,31 +1,45 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
+import internet_store.application.core.requests.FindByIdRequest;
+import internet_store.application.core.responses.FindByIdResponse;
+import internet_store.application.core.services.FindByIdService;
 import internet_store.application.core.services.FindProductService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class FindByIdUIAction implements UIAction {
 
-    private final FindProductService findProductService;
+    private final FindByIdService findByIdService;
 
-    public FindByIdUIAction(FindProductService findProductService) {
-        this.findProductService = findProductService;
+    public FindByIdUIAction(FindByIdService findByIdService) {
+        this.findByIdService = findByIdService;
     }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for searching : ");
-        Long id = myInput.nextLong();
-        Optional<Product> productOpt = findProductService.findById(id);
+        String id = myInput.nextLine();
 
-        if (productOpt.isEmpty()) {
+        FindByIdRequest request = new FindByIdRequest(id);
+        FindByIdResponse response = findByIdService.findById(request);
+
+        Optional<Product> foundProduct = response.getProductFoundById();
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
+        } else { if (response.getProductFoundById().isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
-            System.out.println("Found next product in the DataBase :");
-            System.out.print(productOpt.toString() + "\n");
+            Product product = foundProduct.get();
+            System.out.println("Found product in the database :");
+            System.out.print(product.toString() + "\n");
+        }
         }
     }
+
 
 }

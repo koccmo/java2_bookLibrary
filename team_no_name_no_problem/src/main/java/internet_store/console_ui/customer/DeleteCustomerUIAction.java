@@ -1,12 +1,13 @@
 package internet_store.console_ui.customer;
 
-import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
+import internet_store.core.requests.customer.DeleteCustomerRequest;
+import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.DeleteCustomerService;
 
-public class DeleteCustomerUIAction implements UIAction {
+import java.util.Scanner;
 
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+public class DeleteCustomerUIAction implements UIAction {
 
     private DeleteCustomerService deleteCustomerService;
 
@@ -16,12 +17,18 @@ public class DeleteCustomerUIAction implements UIAction {
 
     public void execute(){
 
-        long id = inputCheckUtility.inputValidLong("Please enter customer's id to delete");
+        Scanner in = new Scanner(System.in);
 
-        if (deleteCustomerService.execute(id)){
-            System.out.println("Customer is deleted");
+        System.out.println("Please enter customer's id you want ot delete");
+        long id = in.nextLong();
+
+        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(id);
+        DeleteCustomerResponse deleteCustomerResponse = deleteCustomerService.execute(deleteCustomerRequest);
+
+        if (deleteCustomerResponse.hasErrors()){
+            deleteCustomerResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("There's no such id " + id + " in database");
+            System.out.println("Customer is deleted");
         }
     }
 }
