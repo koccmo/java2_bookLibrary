@@ -9,7 +9,8 @@ class ProductList {
 
     private final Map<Integer, UIAction> menuNumberToActionMap;
     private final Database database = new InMemoryDatabase();
-    private final DeleteByProductNameValidator validator = new DeleteByProductNameValidator();
+    private final DeleteByProductNameValidator deleteByNameValidator = new DeleteByProductNameValidator();
+    private final DeleteByProductValidator deleteByProductValidator = new DeleteByProductValidator();
     private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
     private final FindProductValidator validatorFindProduct = new FindProductValidator();
     private final FindByIdValidator findByIdValidator = new FindByIdValidator();
@@ -20,7 +21,8 @@ class ProductList {
     FindProductService findProductService = new FindProductService(database, validatorFindProduct);
     FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
-    DeleteProductService deleteProductService = new DeleteProductService(database, validator);
+    DeleteProductService deleteByNameService = new DeleteProductService(database, deleteByNameValidator);
+    DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database);
 
@@ -29,8 +31,8 @@ class ProductList {
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteByProductIdService));
-        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteProductService));
-        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
+        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteByProductService));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteByNameService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));
         menuNumberToActionMap.put(7, new FindByIdUIAction(findByIdService));

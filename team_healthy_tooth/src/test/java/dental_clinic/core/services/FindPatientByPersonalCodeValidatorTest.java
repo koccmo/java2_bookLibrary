@@ -2,57 +2,57 @@ package dental_clinic.core.services;
 
 import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import java.util.List;
 
-import org.junit.Ignore;
+import static org.junit.Assert.*;
 
-@Ignore
-public class FindPatientByPersonalCodeValidatorTest extends TestCase {
+public class FindPatientByPersonalCodeValidatorTest {
 
-    FindPatientByPersonalCodeValidator validator;
-    List<CoreError> testErrorList;
+    FindPatientByPersonalCodeValidator findPatientByPersonalCodeValidator = new FindPatientByPersonalCodeValidator();
 
-    public void testValidate() {
-        this.validator = new FindPatientByPersonalCodeValidator();
-        FindPatientByPersonalCodeValidatorTest test = new FindPatientByPersonalCodeValidatorTest();
+    @Test
+    public void testCodeContainsLetters(){
+        CoreError expectedError = new CoreError("Personal data : personal code",
+                    "Invalid input for personal code!");
 
-        test.testGoodRequest1();
-        test.testGoodRequest2();
+        FindPatientByPersonalCodeRequest findPatientByPersonalCodeRequest = new FindPatientByPersonalCodeRequest("lklkmn-oipl");
+        List<CoreError> errors = findPatientByPersonalCodeValidator.validate(findPatientByPersonalCodeRequest);
 
-        test.testBadRequest1();
-        test.testBadRequest2();
+        assertTrue(errors.size() == 1);
+        assertTrue(errors.contains(expectedError));
+
     }
 
-    private boolean isListEmpty(List<CoreError> testErrorList) {
-        return testErrorList.isEmpty();
+    @Test
+    public void testNotValidLength(){
+        CoreError expectedError = new CoreError("Personal data : personal code",
+                "Invalid input for personal code!");
+
+        FindPatientByPersonalCodeRequest findPatientByPersonalCodeRequest = new FindPatientByPersonalCodeRequest("121212123");
+        List<CoreError> errors = findPatientByPersonalCodeValidator.validate(findPatientByPersonalCodeRequest);
+
+        assertTrue(errors.size() == 1);
+        assertTrue(errors.contains(expectedError));
     }
 
-    public void testGoodRequest1() {
-        FindPatientByPersonalCodeRequest goodRequest =
-                new FindPatientByPersonalCodeRequest("123456-12345");
-        testErrorList = validator.validate(goodRequest);
-        assertTrue(isListEmpty(testErrorList));
+    @Test
+    public void testValidInputWithDefis(){
+
+        FindPatientByPersonalCodeRequest findPatientByPersonalCodeRequest = new FindPatientByPersonalCodeRequest("150385-12223");
+        List<CoreError> errors = findPatientByPersonalCodeValidator.validate(findPatientByPersonalCodeRequest);
+
+        assertTrue(errors.size() == 0);
     }
 
-    public void testGoodRequest2() {
-        FindPatientByPersonalCodeRequest goodRequest =
-                new FindPatientByPersonalCodeRequest("12345612345");
-        testErrorList = validator.validate(goodRequest);
-        assertTrue(isListEmpty(testErrorList));
+    @Test
+    public void testValidInputWithoutDefis(){
+
+        FindPatientByPersonalCodeRequest findPatientByPersonalCodeRequest = new FindPatientByPersonalCodeRequest("25047512569");
+        List<CoreError> errors = findPatientByPersonalCodeValidator.validate(findPatientByPersonalCodeRequest);
+
+        assertTrue(errors.size() == 0);
     }
 
-    public void testBadRequest1() {
-        FindPatientByPersonalCodeRequest badRequest =
-                new FindPatientByPersonalCodeRequest("x23456-12345");
-        testErrorList = validator.validate(badRequest);
-        assertFalse(isListEmpty(testErrorList));
-    }
-
-    public void testBadRequest2() {
-        FindPatientByPersonalCodeRequest badRequest =
-                new FindPatientByPersonalCodeRequest("123456-123456");
-        testErrorList = validator.validate(badRequest);
-        assertFalse(isListEmpty(testErrorList));
-    }
 }
