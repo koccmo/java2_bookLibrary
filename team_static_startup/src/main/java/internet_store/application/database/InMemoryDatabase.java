@@ -56,10 +56,10 @@ public class InMemoryDatabase implements Database {
     }
 
     @Override
-    public List<Product> findById(Long productId) {
+    public Optional<Product> findById(Long productId) {
         return productList.stream()
                 .filter(productInDataBase -> productInDataBase.getId().equals(productId))
-                .collect(Collectors.toList());
+                .findFirst();
     }
 
     @Override

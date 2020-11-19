@@ -20,24 +20,11 @@ public class FindByIdService {
     }
 
 
-
-  /*  public FindByProductNameResponse findByProductName(FindByProductNameRequest productNameRequest) {
-        List<CoreError> errors = validator.validate(productNameRequest);
-        if (!errors.isEmpty()){
-            FindByProductNameResponse responseErrors = new FindByProductNameResponse
-                    .ResponseBuilder().withListOfErrors(errors).build();
-            return responseErrors ;
-        }
-
-        List<Product> byProductName = database.findByProductName(productNameRequest.getProductName());
-
-        FindByProductNameResponse response = new FindByProductNameResponse
-                .ResponseBuilder().withListOfFoundProducts(byProductName).build();
-        return response;
-    }*/
-
     public FindByIdResponse findById(FindByIdRequest idRequest) {
-        return new FindByIdResponse(database.findById(idRequest.getProductId()), validator.validate(idRequest));
+        List<CoreError> errors = validator.validate(idRequest);
+        if (!errors.isEmpty()){
+            return new FindByIdResponse(errors);
+        } else return new FindByIdResponse(database.findById(idRequest.getProductId()));
     }
 
 }

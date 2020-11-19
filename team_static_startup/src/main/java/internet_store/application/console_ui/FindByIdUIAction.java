@@ -26,18 +26,19 @@ public class FindByIdUIAction implements UIAction {
         FindByIdRequest request = new FindByIdRequest(id);
         FindByIdResponse response = findByIdService.findById(request);
 
-        List<Product> foundProduct = response.getProductFoundById();
+        Optional<Product> foundProduct = response.getProductFoundById();
 
-        /*if (response.hasErrors()) {
+        if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
-                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));*/
-
-        if (response.getProductFoundById().isEmpty()) {
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
+        } else { if (response.getProductFoundById().isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
             System.out.println("Found product in the database :");
-            System.out.print(foundProduct.get(0).toString() + "\n");
+            System.out.print(foundProduct.toString() + "\n");
+        }
         }
     }
+
 
 }
