@@ -22,7 +22,6 @@ public class MainMenuApplication {
         System.out.println();
 
         System.out.println("Please enter you choice here: ");
-
         int choice = in.nextInt();
 
         switch (choice) {
@@ -34,7 +33,7 @@ public class MainMenuApplication {
             break;
 
             default:
-                System.out.println("There is no such option");
+                System.out.println("There is no such option. Please choose 1 or 2");
         }
     }
 }
