@@ -34,8 +34,9 @@ public class FindByIdUIAction implements UIAction {
         } else { if (response.getProductFoundById().isEmpty()) {
             System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
+            Product product = foundProduct.get();
             System.out.println("Found product in the database :");
-            System.out.print(foundProduct.toString() + "\n");
+            System.out.print(product.toString() + "\n");
         }
         }
     }
