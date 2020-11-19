@@ -2,13 +2,13 @@ package internet_store.application.core.requests;
 
 public class FindByIdRequest {
 
-    private Long productId;
+    private String productId;
 
-    public FindByIdRequest(Long productId) {
+    public FindByIdRequest(String productId) {
         this.productId = productId;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 

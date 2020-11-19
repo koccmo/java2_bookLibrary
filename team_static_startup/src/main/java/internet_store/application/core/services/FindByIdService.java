@@ -20,11 +20,13 @@ public class FindByIdService {
     }
 
 
-    public FindByIdResponse findById(FindByIdRequest idRequest) {
-        List<CoreError> errors = validator.validate(idRequest);
+    public FindByIdResponse findById(FindByIdRequest request) {
+        List<CoreError> errors = validator.validate(request);
+        Long id = Long.parseLong(request.getProductId());
+
         if (!errors.isEmpty()){
             return new FindByIdResponse(errors);
-        } else return new FindByIdResponse(database.findById(idRequest.getProductId()));
+        } else return new FindByIdResponse(database.findById(id));
     }
 
 }

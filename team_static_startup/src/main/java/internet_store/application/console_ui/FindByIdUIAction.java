@@ -21,7 +21,7 @@ public class FindByIdUIAction implements UIAction {
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for searching : ");
-        Long id = myInput.nextLong();
+        String id = myInput.nextLine();
 
         FindByIdRequest request = new FindByIdRequest(id);
         FindByIdResponse response = findByIdService.findById(request);
