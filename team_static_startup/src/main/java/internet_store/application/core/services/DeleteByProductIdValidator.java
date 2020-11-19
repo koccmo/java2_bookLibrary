@@ -16,7 +16,7 @@ public class DeleteByProductIdValidator {
         } else try {
             Long.parseLong(request.getProductId());
         } catch (NumberFormatException e) {
-            errors.add(new CoreError("Product ID", "Should be valid."));
+            errors.add(new CoreError("Product ID", "Should be number."));
         }
         return errors;
     }

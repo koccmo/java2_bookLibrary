@@ -1,19 +1,18 @@
 package application.ui;
 
-import application.items.Product;
-import application.services.FilterService;
+import application.core.requests.FilterProductsByPriceRequest;
+import application.core.responses.FilterProductsByPriceResponse;
+import application.core.services.FilterProductsByPriceService;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Scanner;
 
 
-public class FilterByPriceMinMaxUIAction implements UIAction {
-    private final FilterService filterService;
+public class FilterProductsByPriceUIAction implements UIAction {
+    private final FilterProductsByPriceService service;
 
 
-    public FilterByPriceMinMaxUIAction(FilterService filterService) {
-        this.filterService = filterService;
+    public FilterProductsByPriceUIAction(FilterProductsByPriceService service) {
+        this.service = service;
     }
 
     @Override
@@ -25,14 +24,16 @@ public class FilterByPriceMinMaxUIAction implements UIAction {
             priceMax = getPriceMax();
         } while (priceMin < 0 && priceMax < priceMin);
 
-        System.out.println("All products are successfully found:  ");
-        double finalPriceMax = priceMax;
-        double finalPriceMin = priceMin;
-        List<Product> products = filterService.Filter(product -> product.getPrice().compareTo(new BigDecimal(Double.toString(finalPriceMin))) > 0 &&
-                product.getPrice().compareTo(new BigDecimal(Double.toString(finalPriceMax))) < 0);
-        for (Product product : products) {
-            System.out.println(product);
+
+        FilterProductsByPriceResponse response = service.execute(new FilterProductsByPriceRequest(priceMin,priceMax));
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError -> System.out.println("Error in the field - "
+                    + coreError.getField() + ": " + coreError.getMessage()));
+        } else {
+            System.out.println("All products are successfully found:  ");
+            response.getProductsByFilter().forEach(System.out::println);
         }
+
     }
 
     private double getPriceMin() {
