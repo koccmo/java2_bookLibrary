@@ -33,7 +33,7 @@ public class MainMenuApplication {
             break;
 
             default:
-                System.out.println("There is no such option. Please choose number 1 or 2");
+                System.out.println("There is no such option. Please, choose number 1 or 2");
         }
     }
 }
