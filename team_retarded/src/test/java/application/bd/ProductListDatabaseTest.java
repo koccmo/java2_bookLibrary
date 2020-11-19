@@ -102,8 +102,8 @@ class ProductListDatabaseTest {
         subject.add("volleyball","ball",35.0);
         subject.delete(product -> product.getPrice().compareTo(new BigDecimal("10.0")) > 0 &&
                 product.getPrice().compareTo(new BigDecimal("70.0")) < 0);
-        assertThat(subject.getList()).noneMatch(product -> product.getPrice().compareTo(new BigDecimal("11.0")) > 0
-        && product.getPrice().compareTo(new BigDecimal("69.0")) < 0);
+        assertThat(subject.getList()).noneMatch(product -> product.getPrice().compareTo(new BigDecimal("10.0")) > 0
+        || product.getPrice().compareTo(new BigDecimal("70.0")) < 0);
 
 
     }
@@ -168,8 +168,8 @@ class ProductListDatabaseTest {
 //        Price range from 300 to 1000
         List<Product> actual = subject.filter(product -> product.getPrice().compareTo(new BigDecimal("300")) > 0 &&
                 product.getPrice().compareTo(new BigDecimal("1000")) < 0);
-//        assert ONLY if all products in the actual List have id  6; 8
-        assertThat(actual).allMatch(product ->  product.getId() == 6 || product.getId() == 8);
+//        assert ONLY if all products in the actual List have id 5; 6; 8
+        assertThat(actual).allMatch(product -> product.getId() == 5 || product.getId() == 6 || product.getId() == 8);
     }
 }
 
