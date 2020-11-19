@@ -7,11 +7,11 @@ public class Customer {
     private long id;
     private String name;
     private String surname;
-    private int phoneNumber;
+    private String phoneNumber;
     private String address;
     private String email;
 
-    public Customer(String name, String surname, int phoneNumber, String address, String email) {
+    public Customer(String name, String surname, String phoneNumber, String address, String email) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -43,11 +43,11 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

@@ -1,7 +1,6 @@
 package team_VK.application.database.database_Clients;
 
-import team_VK.application.Book;
-import team_VK.application.Client;
+import team_VK.application.core.domain.Client;
 
 import java.util.List;
 

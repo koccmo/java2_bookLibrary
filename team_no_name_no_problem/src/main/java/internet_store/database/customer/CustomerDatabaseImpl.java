@@ -31,21 +31,22 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     @Override
     public void deleteCustomer(long id){
         customerList.removeIf(customer -> customer.getId() == id);
-        /*for (int i = 0; i < customerList.size(); i++){
-            if (customerList.get(i).getId() == id){
-                customerList.remove(i);
-                return true;
-            }
-        }
-        return false;*/
+
     }
 
     @Override
-    public Optional<Customer> findCustomersByNameAndSurname(String name, String surname){
+    public Optional<Customer> findById(Long id){
+        return customerList.stream()
+                .filter(customer -> customer.getId() == id)
+                .findAny();
+    }
+
+    @Override
+    public List<Customer> findCustomersByNameAndSurname(String name, String surname){
        return customerList.stream()
                .filter(customer -> customer.getName().equals(name)
-                       && customer.getSurname().equals(surname))
-               .findAny();
+               && customer.getSurname().equals(surname))
+               .collect(Collectors.toList());
     }
 
     @Override

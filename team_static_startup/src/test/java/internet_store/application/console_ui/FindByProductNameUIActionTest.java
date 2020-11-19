@@ -1,14 +1,13 @@
 package internet_store.application.console_ui;
 
-import static org.junit.Assert.*;
-
+import internet_store.application.core.domain.Product;
 import internet_store.application.core.services.FindProductService;
+import internet_store.application.core.services.FindProductValidator;
+import internet_store.application.database.Database;
+import internet_store.application.database.InMemoryDatabase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import internet_store.application.core.domain.Product;
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,11 +16,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 
 public class FindByProductNameUIActionTest {
 
     Database database = new InMemoryDatabase();
-    FindProductService findProductService = new FindProductService(database);
+    FindProductValidator validator = new FindProductValidator();
+    FindProductService findProductService = new FindProductService(database, validator);
     private final ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
@@ -74,7 +77,7 @@ public class FindByProductNameUIActionTest {
 
         assertEquals(
                 "Enter product name to search for: \n"
-                        + "No product with name = Pineapple in the database"
+                        + "No product with name = Pineapple found in the database"
                         ,outputStreamCaptor.toString().trim());
     }
 

@@ -1,21 +1,32 @@
 package application_target_list;
 
 import application_target_list.console_ui.*;
-import application_target_list.database.Database;
-import application_target_list.database.TargetListImpl;
-import application_target_list.services.*;
+import application_target_list.console_ui.actions.*;
+import application_target_list.core.database.Database;
+import application_target_list.core.database.TargetListImpl;
+import application_target_list.core.services.*;
+import application_target_list.core.services.validators.*;
 
 import java.util.Scanner;
 
 public class Menu {
 
     Database targetsDatabase = new TargetListImpl();
+
+    AddTargetValidator addTargetValidator = new AddTargetValidator();
+    DeleteTargetValidator deleteTargetValidator = new DeleteTargetValidator();
+    ChangeTargetNameValidator changeTargetNameValidator = new ChangeTargetNameValidator();
+    ChangeTargetDescriptionValidator changeTargetDescriptionValidator = new ChangeTargetDescriptionValidator();
+    ChangeTargetDeadlineValidator changeTargetDeadlineValidator = new ChangeTargetDeadlineValidator();
+
+
     GetAllTargetsService getAllTargetsService = new GetAllTargetsService(targetsDatabase);
-    AddTargetService addTargetService = new AddTargetService(targetsDatabase);
-    DeleteTargetService deleteTargetService = new DeleteTargetService(targetsDatabase);
-    ChangeTargetNameService changeTargetNameService = new ChangeTargetNameService(targetsDatabase);
-    ChangeTargetDescriptionService changeTargetDescriptionService = new ChangeTargetDescriptionService(targetsDatabase);
-    ChangeTargetDeadlineService changeTargetDeadlineService = new ChangeTargetDeadlineService(targetsDatabase);
+    AddTargetService addTargetService = new AddTargetService(targetsDatabase, addTargetValidator);
+    DeleteTargetService deleteTargetService = new DeleteTargetService(targetsDatabase, deleteTargetValidator);
+    ChangeTargetNameService changeTargetNameService = new ChangeTargetNameService(targetsDatabase, changeTargetNameValidator);
+    ChangeTargetDescriptionService changeTargetDescriptionService = new ChangeTargetDescriptionService(targetsDatabase, changeTargetDescriptionValidator);
+    ChangeTargetDeadlineService changeTargetDeadlineService = new ChangeTargetDeadlineService(targetsDatabase, changeTargetDeadlineValidator);
+
     UIAction menuUiAction = new MenuUIAction();
     UIAction targetChangesMenuUIAction = new TargetChangesMenuUIAction();
     UIAction changeTargetDeadlineUIAction = new ChangeTargetDeadlineUIAction(changeTargetDeadlineService);
@@ -25,6 +36,7 @@ public class Menu {
     UIAction addTargetUIAction = new AddTargetUIAction(addTargetService);
     UIAction exitUIAction = new ExitUIAction();
     UIAction getAllTargetsUIAction = new GetAllTargetsUIAction(getAllTargetsService);
+
     Scanner src = new Scanner(System.in);
 
 
