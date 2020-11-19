@@ -10,13 +10,11 @@ public class DeleteByProductIdValidator {
 
     public List<CoreError> validate (DeleteByProductIdRequest request){
         List<CoreError> errors = new ArrayList<>();
-
         Long productId = request.getProductId();
-//        if(productId == null || productId.isEmpty()){
+
         if(productId == null){
             errors.add(new CoreError("Product Id", "Product Id must not be empty."));
         }
-
         return errors;
     }
 
