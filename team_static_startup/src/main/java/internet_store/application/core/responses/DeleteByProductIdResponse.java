@@ -13,7 +13,6 @@ public class DeleteByProductIdResponse extends CoreResponse {
     public DeleteByProductIdResponse(List<CoreError> errors) {
         super(errors);
     }
-
     public boolean isBookRemoved() {
         return bookRemoved;
     }
