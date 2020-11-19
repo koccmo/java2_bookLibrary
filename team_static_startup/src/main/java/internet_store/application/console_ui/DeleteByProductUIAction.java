@@ -1,6 +1,9 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
+import internet_store.application.core.requests.DeleteByProductRequest;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.DeleteProductService;
 
 import java.math.BigDecimal;
@@ -23,6 +26,19 @@ public class DeleteByProductUIAction implements UIAction {
         String productDescription = myInput.nextLine();
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
+        DeleteByProductRequest request = new DeleteByProductRequest(productName, productDescription, productPrice);
+        DeleteByProductResponse response = deleteProductService.deleteByProduct(request);
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            System.out.println("\nProduct deleted\n"
+                    + response.getDeletedProduct().getName() + "\n"
+                    + response.getDeletedProduct().getDescription() + "\n"
+                    + response.getDeletedProduct().getPrice() + " EUR");
+        }
 
         boolean productDeleted = deleteProductService.delete(new Product(productName, productDescription, productPrice));
         if (productDeleted) {
