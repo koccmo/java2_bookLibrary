@@ -18,12 +18,11 @@ public class DeleteByProductIdService {
 
     public DeleteByProductIdResponse deleteByProductId(DeleteByProductIdRequest productIdRequest) {
         List<CoreError> errors = validator.validate(productIdRequest);
+        Long id = Long.parseLong(productIdRequest.getProductId());
+
         if (!errors.isEmpty()){
             return new DeleteByProductIdResponse(errors);
-        }
-        boolean isRemoved = database.deleteByProductId(productIdRequest.getProductId());
-
-        return  new DeleteByProductIdResponse(isRemoved);
+        } else return new DeleteByProductIdResponse(database.deleteByProductId(id));
     }
 
 }
