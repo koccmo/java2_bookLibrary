@@ -4,6 +4,7 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByProductNameRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindByProductNameResponse;
+import internet_store.application.core.services.validators.FindProductValidator;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
 import org.junit.Before;

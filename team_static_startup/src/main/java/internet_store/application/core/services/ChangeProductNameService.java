@@ -1,9 +1,9 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.requests.ChangeProductNameRequest;
-import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.services.validators.ChangeProductNameValidator;
 import internet_store.application.database.Database;
 
 import java.util.List;

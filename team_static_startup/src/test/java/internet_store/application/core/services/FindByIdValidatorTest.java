@@ -3,6 +3,7 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.services.validators.FindByIdValidator;
 import org.junit.Before;
 import org.junit.Test;
 

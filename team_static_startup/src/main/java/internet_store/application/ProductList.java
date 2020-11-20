@@ -1,5 +1,6 @@
 package internet_store.application;
 
+import internet_store.application.core.services.validators.*;
 import internet_store.application.database.*;
 import internet_store.application.core.services.*;
 import internet_store.application.console_ui.*;

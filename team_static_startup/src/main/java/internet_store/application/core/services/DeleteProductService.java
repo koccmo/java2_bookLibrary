@@ -3,6 +3,8 @@ package internet_store.application.core.services;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.*;
 import internet_store.application.core.responses.*;
+import internet_store.application.core.services.validators.DeleteByProductNameValidator;
+import internet_store.application.core.services.validators.DeleteByProductValidator;
 import internet_store.application.database.Database;
 
 import java.util.List;
