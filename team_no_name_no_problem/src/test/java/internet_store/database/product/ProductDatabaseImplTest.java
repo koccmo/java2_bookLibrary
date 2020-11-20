@@ -105,22 +105,6 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void findAnyProductByTitleTest() {
-        productDatabase.add(thirdProduct);
-
-        Optional<Product> resultOfFindingLaptop = productDatabase.findAnyByTitle("Laptop");
-        Optional<Product> resultOfFindingRefrigerator = productDatabase.findAnyByTitle("REFRIGERATOR");
-        Optional<Product> resultOfFindingTV = productDatabase.findAnyByTitle("TV");
-        Optional<Product> resultOfFindingMicrophone = productDatabase.findAnyByTitle("Microphone");
-
-        assertTrue(resultOfFindingLaptop.isPresent());
-        assertTrue(resultOfFindingRefrigerator.isPresent());
-        assertTrue(resultOfFindingTV.isPresent());
-        assertFalse(resultOfFindingMicrophone.isPresent());
-
-    }
-
-    @Test
     public void findAllProductsByTitleTest() {
         productDatabase.add(thirdProduct);
         productDatabase.add(fifthProduct);
