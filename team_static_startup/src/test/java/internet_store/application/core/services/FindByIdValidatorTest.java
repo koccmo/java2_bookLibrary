@@ -51,8 +51,8 @@ public class FindByIdValidatorTest {
         FindByIdRequest request = new FindByIdRequest("MISTAKE");
         List<CoreError> errors = validator.validate(request);
         assertEquals(1, errors.size());
-        /*assertEquals("Product ID", errors.get(0).getField());
-        assertEquals("Should not be empty.", errors.get(0).getMessage());*/
+        assertEquals("Product ID", errors.get(0).getField());
+        assertEquals("Should be valid.", errors.get(0).getMessage());
     }
 
 }

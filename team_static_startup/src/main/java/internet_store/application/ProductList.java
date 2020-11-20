@@ -15,6 +15,7 @@ class ProductList {
     private final FindProductValidator validatorFindProduct = new FindProductValidator();
     private final FindByIdValidator findByIdValidator = new FindByIdValidator();
     private final AddProductValidator addProductValidator = new AddProductValidator();
+    private final ChangeProductNameValidator changeProductNameValidator = new ChangeProductNameValidator();
 
 
     AddProductService addProductService = new AddProductService(database, addProductValidator);
@@ -24,7 +25,7 @@ class ProductList {
     DeleteProductService deleteByNameService = new DeleteProductService(database, deleteByNameValidator);
     DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
-    ChangeProductNameService changeProductNameService = new ChangeProductNameService(database);
+    ChangeProductNameService changeProductNameService = new ChangeProductNameService(database, changeProductNameValidator);
 
     public ProductList() {
 
@@ -36,7 +37,7 @@ class ProductList {
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));
         menuNumberToActionMap.put(7, new FindByIdUIAction(findByIdService));
-        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService));
+        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService, findByIdService));
         menuNumberToActionMap.put(0, new ExitProgramUIAction());
     }
 
