@@ -9,7 +9,7 @@ import estore.database.ProductDataBaseImplementation;
 import estore.core.service.*;
 
 public class UserAction {
-    private static InputValidation iv = new InputValidation();
+    private static UserMenuChoiceValidation iv = new UserMenuChoiceValidation();
     private static AddNewProductValidator addNewProductValidator = new AddNewProductValidator();
     private static RemoveProductByIdValidator removeProductByIdValidator = new RemoveProductByIdValidator();
     private static RemoveProductByNameValidator removeProductByNameValidator = new RemoveProductByNameValidator();
@@ -28,28 +28,19 @@ public class UserAction {
     private static UIAction exitProgram = new ExitProgramUI();
 
     public void run() {
+        UserMenu userMenu = new UserMenu();
         this.printGreeting();
         while (true) {
-            this.printUserMenu();
-            int userInput = iv.getUserInputOfMenuItem();
+            System.out.println("");
+            System.out.println("Choose option by typing a valid number");
+            userMenu.printUserMenu();
+            int userInput = iv.getUserInputOfMenuItem(userMenu.getUserMenuSize());
             executeMenuItem(userInput);
         }
     }
 
     private void printGreeting() {
         System.out.println("Welcome to RedDots!");
-    }
-
-    private void printUserMenu() {
-        System.out.println("");
-        System.out.println("Choose option by typing a valid number");
-        System.out.println("1 - list of products");
-        System.out.println("2 - find product by name");
-        System.out.println("3 - add new product");
-        System.out.println("4 - edit product data");
-        System.out.println("5 - remove product by name");
-        System.out.println("6 - remove product by id");
-        System.out.println("0 - exit");
     }
 
     private void executeMenuItem(int menuItem) {
