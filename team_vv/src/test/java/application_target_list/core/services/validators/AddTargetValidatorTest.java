@@ -13,6 +13,7 @@ public class AddTargetValidatorTest {
 
     AddTargetValidator validator = new AddTargetValidator();
 
+
     @Test
     public void testValidate_validRequest() {
         AddTargetRequest request = new AddTargetRequest("name", "description", 2);
@@ -26,7 +27,7 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
 
@@ -37,7 +38,7 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target description"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
     @Test
@@ -55,7 +56,7 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target description"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target deadline"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be negative!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
     }
 
     @Test
@@ -73,11 +74,11 @@ public class AddTargetValidatorTest {
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 3);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
         Assert.assertTrue(actualErrors.get(1).getField().contains("Target description"));
-        Assert.assertTrue(actualErrors.get(1).getMessage().contains("Must not be empty!"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must not be empty!"));
         Assert.assertTrue(actualErrors.get(2).getField().contains("Target deadline"));
-        Assert.assertTrue(actualErrors.get(2).getMessage().contains("Must not be negative!"));
+        Assert.assertTrue(actualErrors.get(2).getMessage().contains("must not be negative!"));
     }
 
 

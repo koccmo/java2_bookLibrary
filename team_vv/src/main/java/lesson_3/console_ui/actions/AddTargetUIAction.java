@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class AddTargetUIAction implements UIAction {
 
     private AddTargetService addTargetService;
+    Scanner scr = new Scanner(System.in);
 
     public  AddTargetUIAction(AddTargetService addTargetService) {
         this.addTargetService = addTargetService;
@@ -19,14 +20,12 @@ public class AddTargetUIAction implements UIAction {
     @Override
     public void execute() {
 
-            Scanner scr = new Scanner(System.in);
+        while (true){
 
             System.out.print("Enter target name: ");
             String targetName = scr.nextLine();
-
             System.out.print("Enter target description: ");
             String targetDescription = scr.nextLine();
-
             System.out.print("Enter target deadline(days): ");
             Integer targetDeadline = Integer.parseInt(scr.nextLine());
 
@@ -36,15 +35,15 @@ public class AddTargetUIAction implements UIAction {
 
 
             if (response.hasErrors()) {
-                System.out.println("----------");
                 for (CoreError errors : response.getErrorList()) {
                     System.out.println("Error: " + errors.getField() + " " + errors.getMessage());
                 }
-                System.out.println("----------");
             } else {
                 System.out.println("----------");
                 System.out.println("Your target was added to list.");
                 System.out.println("----------");
+                break;
             }
+        }
     }
 }

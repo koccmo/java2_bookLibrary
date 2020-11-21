@@ -1,6 +1,5 @@
 package internet_store.console_ui.product;
 
-import internet_store.console_ui.InputCheckUtility;
 import internet_store.console_ui.UIAction;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;

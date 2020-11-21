@@ -18,12 +18,12 @@ public class ChangeTargetDescriptionService {
     }
 
     public ChangeTargetDescriptionResponse execute(ChangeTargetDescriptionRequest request){
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (!errors.isEmpty()) {
             return new ChangeTargetDescriptionResponse(errors);
         }
-        database.changeTargetDescription(request.getTargetIdTOChange(), request.getNewTargetDescription());
-        return new ChangeTargetDescriptionResponse(request.getTargetIdTOChange(), request.getNewTargetDescription());
+        database.changeTargetDescription(request.getTargetIdToChange(), request.getNewTargetDescription());
+        return new ChangeTargetDescriptionResponse(request.getTargetIdToChange(), request.getNewTargetDescription());
     }
 }

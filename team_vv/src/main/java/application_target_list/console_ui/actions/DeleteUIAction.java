@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class DeleteUIAction implements UIAction {
 
-    private DeleteTargetService deleteTargetService;
+    private final DeleteTargetService deleteTargetService;
+    private final Scanner scr = new Scanner(System.in);
 
     public DeleteUIAction(DeleteTargetService deleteTargetService){
         this.deleteTargetService = deleteTargetService;
@@ -18,26 +19,44 @@ public class DeleteUIAction implements UIAction {
 
     @Override
     public void execute() {
-        try {
-            Scanner scr = new Scanner(System.in);
-            System.out.print("Enter target ID: ");
-            Long targetId = Long.parseLong(scr.nextLine());
-            DeleteTargetRequest request = new DeleteTargetRequest(targetId);
-            DeleteTargetResponse response = deleteTargetService.execute(request);
+        while (true) {
+            Long targetId = getIdFromUser();
+
+            DeleteTargetRequest request = createRequest(targetId);
+            DeleteTargetResponse response = createResponse(request);
 
             if (response.hasErrors()) {
-                for (CoreError errors : response.getErrorList()) {
-                    System.out.println("Error: " + errors.getField() + " " + errors.getMessage());
-                }
+                printResponseErrors(response);
             } else {
-                System.out.println("----------");
-                System.out.println("Target was deleted!");
-                System.out.println("----------");
+                printResponseResultMessage();
+                break;
             }
-        }catch (NumberFormatException ignored){
-
         }
+    }
 
+    private void printResponseResultMessage(){
+        System.out.println("----------");
+        System.out.println("Target was deleted!");
+        System.out.println("----------");
+    }
+
+    private void printResponseErrors(DeleteTargetResponse response){
+        for (CoreError error : response.getErrorList()) {
+            System.out.println("Error: " + error.getField() + " " + error.getMessage());
         }
+    }
+
+    private DeleteTargetResponse createResponse(DeleteTargetRequest request){
+        return deleteTargetService.execute(request);
+    }
+
+    private DeleteTargetRequest createRequest(Long targetId){
+        return new DeleteTargetRequest(targetId);
+    }
+
+    private Long getIdFromUser(){
+        System.out.print("Enter target ID: ");
+        return Long.parseLong(scr.nextLine());
+    }
 
 }

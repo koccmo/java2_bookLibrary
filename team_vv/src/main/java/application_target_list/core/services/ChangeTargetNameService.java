@@ -19,7 +19,7 @@ public class ChangeTargetNameService {
     }
 
     public ChangeTargetNameResponse execute(ChangeTargetNameRequest request){
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (!errors.isEmpty()) {
             return new ChangeTargetNameResponse(errors);

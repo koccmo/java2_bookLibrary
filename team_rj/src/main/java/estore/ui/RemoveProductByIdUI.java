@@ -4,28 +4,36 @@ import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.service.RemoveProductByIdService;
 
+import java.util.Scanner;
+
 public class RemoveProductByIdUI implements UIAction {
 
     private RemoveProductByIdService removeProductByIdService;
-    private InputValidation iv;
 
-    public RemoveProductByIdUI(RemoveProductByIdService removeProductByIdService, InputValidation iv) {
+    public RemoveProductByIdUI(RemoveProductByIdService removeProductByIdService) {
         this.removeProductByIdService = removeProductByIdService;
-        this.iv = iv;
     }
 
     @Override
     public void execute() {
-        String description = "Enter id of product to remove: ";
-        int productToRemoveId = iv.getPositiveInteger(description);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter id of product to remove: ");
+        String productToRemoveId = sc.nextLine();
 
-        RemoveProductByIdRequest request = new RemoveProductByIdRequest(Long.valueOf(productToRemoveId));
+        RemoveProductByIdRequest request = new RemoveProductByIdRequest(productToRemoveId);
         RemoveProductByIdResponse response = removeProductByIdService.execute(request);
 
-        if (response.getProductsRemoved() == 1) {
-            System.out.println(response.getProductsRemoved() + " product removed.");
+        if (response.getProductsRemoved() == -1) {
+            for (int i = 0; i < response.getErrors().size(); i++) {
+                System.out.print(response.getErrors().get(i).getField() + " ");
+                System.out.println(response.getErrors().get(i).getMessage());
+            }
         } else {
-            System.out.println(response.getProductsRemoved() + " products removed.");
+            if (response.getProductsRemoved() == 1) {
+                System.out.println(response.getProductsRemoved() + " product removed.");
+            } else {
+                System.out.println(response.getProductsRemoved() + " products removed.");
+            }
         }
     }
 }

@@ -18,10 +18,12 @@ public class DeleteUIAction implements UIAction {
 
     @Override
     public void execute() {
-        try {
+        while (true) {
             Scanner scr = new Scanner(System.in);
+
             System.out.print("Enter target ID: ");
             Long targetId = Long.parseLong(scr.nextLine());
+
             DeleteTargetRequest request = new DeleteTargetRequest(targetId);
             DeleteTargetResponse response = deleteTargetService.execute(request);
 
@@ -33,11 +35,9 @@ public class DeleteUIAction implements UIAction {
                 System.out.println("----------");
                 System.out.println("Target was deleted!");
                 System.out.println("----------");
+                break;
             }
-        }catch (NumberFormatException ignored){
-
         }
-
-        }
+    }
 
 }

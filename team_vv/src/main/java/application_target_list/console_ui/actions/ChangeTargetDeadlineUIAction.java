@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class ChangeTargetDeadlineUIAction implements UIAction {
 
     private final ChangeTargetDeadlineService changeTargetDeadlineService;
+    private final Scanner scr = new Scanner(System.in);
 
     public ChangeTargetDeadlineUIAction(ChangeTargetDeadlineService changeTargetDeadlineService){
         this.changeTargetDeadlineService = changeTargetDeadlineService;
@@ -18,28 +19,50 @@ public class ChangeTargetDeadlineUIAction implements UIAction {
 
     @Override
     public void execute() {
-        Scanner scr = new Scanner(System.in);
+        while (true) {
+            Long targetId = getIdFromUser();
+            Integer newTargetDeadline = getNewDeadlineFromUser();
 
-        System.out.print("Enter target ID: ");
-        Long targetId = Long.parseLong(scr.nextLine());
+            ChangeTargetDeadlineRequest request = createRequest(targetId, newTargetDeadline);
+            ChangeTargetDeadlineResponse response = createResponse(request);
 
-        System.out.print("Enter new target deadline: ");
-        int newTargetDeadline = Integer.parseInt(scr.nextLine());
-
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(targetId, newTargetDeadline);
-        ChangeTargetDeadlineResponse response = changeTargetDeadlineService.execute(request);
-
-        if (response.hasErrors()) {
-            System.out.println("----------");
-            for (CoreError errors : response.getErrorList()) {
-                System.out.println("Error: " + errors.getField() + " " + errors.getMessage());
+            if (response.hasErrors()) {
+                printResponseErrors(response);
+            } else {
+                printResponseResultMessage();
+                break;
             }
-            System.out.println("----------");
-        } else {
-            System.out.println("----------");
-            System.out.println("Target deadline was changed!");
-            System.out.println("----------");
         }
+    }
+
+    private void printResponseResultMessage(){
+        System.out.println("----------");
+        System.out.println("Target deadline was changed!");
+        System.out.println("----------");
+    }
+
+    private void printResponseErrors(ChangeTargetDeadlineResponse response){
+        for (CoreError error : response.getErrorList()) {
+            System.out.println("Error: " + error.getField() + " " + error.getMessage());
+        }
+    }
+
+    private ChangeTargetDeadlineResponse createResponse(ChangeTargetDeadlineRequest request){
+        return changeTargetDeadlineService.execute(request);
+    }
+
+    private ChangeTargetDeadlineRequest createRequest(Long targetId, Integer newTargetDeadline){
+        return new ChangeTargetDeadlineRequest(targetId, newTargetDeadline);
+    }
+
+    private Long getIdFromUser(){
+        System.out.print("Enter target ID: ");
+        return Long.parseLong(scr.nextLine());
+    }
+
+    private Integer getNewDeadlineFromUser(){
+        System.out.print("Enter new target deadline: ");
+       return Integer.parseInt(scr.nextLine());
     }
 
 }

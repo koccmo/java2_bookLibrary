@@ -12,15 +12,15 @@ public class AddTargetValidator {
         List<CoreError> errors = new ArrayList<>();
 
         if (isTargetNameEmpty(request)){
-            errors.add(new CoreError("Target name","Must not be empty!"));
+            errors.add(new CoreError("Target name","must not be empty!"));
         }
 
         if (isTargetDescriptionEmpty(request)){
-            errors.add(new CoreError("Target description", "Must not be empty!"));
+            errors.add(new CoreError("Target description", "must not be empty!"));
         }
 
         if (isDeadlineNegative(request)){
-            errors.add(new CoreError("Target deadline", "Must not be negative!"));
+            errors.add(new CoreError("Target deadline", "must not be negative!"));
         }
 
         return errors;

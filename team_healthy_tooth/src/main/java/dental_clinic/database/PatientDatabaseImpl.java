@@ -47,9 +47,25 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
+    public List<Patient> findPatientByName(String name) {
+        return patientList.stream()
+                .filter(patient -> patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Patient> findPatientsBySurname(String surname) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
+        return patientList.stream()
+                .filter(patient ->
+                        patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()) &&
+                                patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 

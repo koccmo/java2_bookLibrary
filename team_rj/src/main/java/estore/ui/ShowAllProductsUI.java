@@ -7,7 +7,6 @@ import estore.core.service.ShowAllProductsService;
 
 public class ShowAllProductsUI implements UIAction {
 
-    //private ProductDataBase database;
     private ShowAllProductsService showAllProductsService;
 
     public ShowAllProductsUI(ShowAllProductsService showAllProductsService) {
