@@ -1,8 +1,14 @@
 package estore.core.responses;
 
-public class RemoveProductByIdResponse {
+import java.util.List;
+
+public class RemoveProductByIdResponse extends CoreResponse {
 
     private int productsRemoved;
+
+    public RemoveProductByIdResponse(List<CoreError> errors) {
+        super(errors);
+    }
 
     public RemoveProductByIdResponse(int productsRemoved) {
         this.productsRemoved = productsRemoved;

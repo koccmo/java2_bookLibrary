@@ -1,0 +1,67 @@
+package estore.core.service;
+
+import estore.core.requests.AddNewProductRequest;
+import estore.core.responses.CoreError;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class AddNewProductValidator {
+
+    public List<CoreError> validate(AddNewProductRequest request) {
+        List<CoreError> errors = new ArrayList<CoreError>();
+
+        validateProductNameIfEmpty(request).ifPresent(errors::add);
+        validateProductNameUnallowedPattern(request).ifPresent(errors::add);
+        validateProductDescriptionIfEmpty(request).ifPresent(errors::add);
+        validateProductDescriptionUnallowedPattern(request).ifPresent(errors::add);
+        return errors;
+    }
+
+    private Optional<CoreError> validateProductNameIfEmpty(AddNewProductRequest request) {
+        return (request.getProductName() == null || request.getProductName().isEmpty())
+                ? Optional.of(new CoreError("ERROR! Product name", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateProductDescriptionIfEmpty(AddNewProductRequest request) {
+        return (request.getProductDescription() == null || request.getProductDescription().isEmpty())
+                ? Optional.of(new CoreError("ERROR! Product description", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
+        return (!validateString(request.getProductName()))
+                ? Optional.of(new CoreError("ERROR! Product name", "Must contain only english letters!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddNewProductRequest request) {
+        return (!validateLine(request.getProductDescription()))
+                ? Optional.of(new CoreError("ERROR! Product description", "Must contain only english letters and digits!"))
+                : Optional.empty();
+    }
+
+    public Boolean validateString(String userInput) {
+        Pattern pattern = Pattern.compile("[A-Za-z]*");
+        Matcher m = pattern.matcher(userInput);
+        if (m.matches()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean validateLine(String userInput) {
+        userInput = userInput.replaceAll("\\s+","");
+
+        Pattern pattern = Pattern.compile("[A-Za-z_0-9]*");
+        Matcher m = pattern.matcher(userInput);
+        if (m.matches()) {
+            return true;
+        }
+        return false;
+    }
+}
