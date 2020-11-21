@@ -2,8 +2,10 @@ package team_VK.application;
 
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.services.admin_services.GetBookListServiceValidator;
+import team_VK.application.database.database_Admin.DataBaseFiller;
 import team_VK.application.database.database_Admin.Database;
 import team_VK.application.database.database_Admin.DatabaseInMemory;
+import team_VK.application.database.database_Clients.DataBaseClientFiller;
 import team_VK.application.database.database_Clients.DatabaseClients;
 import team_VK.application.database.database_Clients.DatabaseClientsInMemory;
 import team_VK.application.core.services.admin_services.GetBooksListService;
@@ -40,6 +42,12 @@ public class LibraryClientAplication {
         AddClientUIClientActions addClientUIClientActions = new AddClientUIClientActions(addClientService);
 
         ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
+
+        DataBaseFiller DBFiller = new DataBaseFiller();
+        DBFiller.fill();
+
+        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller();
+        DBClientFiller.fill();
 
         while (true) {
             showClientMenu();
