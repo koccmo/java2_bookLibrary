@@ -17,15 +17,13 @@ public class SearchPatientRequestValidator {
         }   if (isNotValidInputForOrdering(searchPatientRequest)){
                 errors.add(new CoreError("search", "Not valid input for ordering parameters"));
             }else{
-            if (isNotValidInputForOrderBy(searchPatientRequest)){
+            if (isNotValidInputForOrderBy(searchPatientRequest) && searchPatientRequest.getOrdering().filledBoth()){
                 errors.add(new CoreError("orderBy", "Not valid input for orderBy"));
             }
-            if (isNotValidInputForOrderDirection(searchPatientRequest)){
+            if (isNotValidInputForOrderDirection(searchPatientRequest) && searchPatientRequest.getOrdering().filledBoth()){
                 errors.add(new CoreError("orderDirection", "Not valid input for orderDirection"));
             }
         }
-
-
         return errors;
     }
 
