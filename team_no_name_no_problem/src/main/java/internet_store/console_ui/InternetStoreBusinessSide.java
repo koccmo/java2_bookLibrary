@@ -15,6 +15,7 @@ public class InternetStoreBusinessSide {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
     ProductDatabase productDatabase = new ProductDatabaseImpl();
+
     AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
     AddProductService addProductService = new AddProductService(productDatabase, addProductRequestValidator);
     DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
@@ -24,12 +25,10 @@ public class InternetStoreBusinessSide {
     ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase, changeTitleRequestValidator);
     ChangeDescriptionRequestValidator changeDescriptionRequestValidator = new ChangeDescriptionRequestValidator();
     ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase, changeDescriptionRequestValidator);
-    FindAnyByTitleRequestValidator findAnyByTitleRequestValidator = new FindAnyByTitleRequestValidator();
-    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase, findAnyByTitleRequestValidator);
-    FindAllProductsByTitleRequestValidator findAllProductsByTitleRequestValidator = new FindAllProductsByTitleRequestValidator();
-    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase, findAllProductsByTitleRequestValidator);
     FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
     FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
+    SearchProductRequestValidator searchProductRequestValidator = new SearchProductRequestValidator();
+    SearchProductService searchProductService = new SearchProductService(productDatabase, searchProductRequestValidator);
 
     public InternetStoreBusinessSide() {
 
@@ -40,9 +39,8 @@ public class InternetStoreBusinessSide {
         menuNumberToAction.put(3, new GetAllProductsUIAction(getAllProductsService));
         menuNumberToAction.put(4, new ChangeTitleUIAction(changeTitleService));
         menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
-        menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
-        menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
-        menuNumberToAction.put(8, new FindByIdUIAction(findProductByIdService));
+        menuNumberToAction.put(6, new FindByIdUIAction(findProductByIdService));
+        menuNumberToAction.put(7, new SearchProductUIAction(searchProductService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -65,9 +63,8 @@ public class InternetStoreBusinessSide {
                 "3   Print products\n" +
                 "4   Change title\n" +
                 "5   Change description\n" +
-                "6   Find any by title\n" +
-                "7   Find all by title\n" +
-                "8   Find product by id\n"+
+                "6   Find product by id\n"+
+                "7   SEARCH\n"+
                 "0   Exit");
     }
 

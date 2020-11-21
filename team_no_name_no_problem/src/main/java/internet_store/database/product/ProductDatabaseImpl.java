@@ -48,18 +48,27 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public Optional<Product> findAnyByTitle(String title) {
-        return productList.stream()
-                .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()))
-                .findAny();
-    }
-
-    @Override
     public List<Product> findAllByTitle(String title) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Product> findAllByDescription(String description) {
+        return productList.stream()
+                .filter(product -> product.getDescription().toLowerCase().startsWith(description.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findAllByTitleAndDescription(String title, String description) {
+        return productList.stream()
+                .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
+                        product.getDescription().toLowerCase().startsWith(description.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public Optional<Product> findById(Long id) {
