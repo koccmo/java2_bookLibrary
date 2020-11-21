@@ -23,13 +23,12 @@ public class DentalClinic {
         GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
                 new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
-        FindPatientsBySurnameValidator findPatientsBySurnameValidator = new FindPatientsBySurnameValidator();
-        FindPatientsBySurnameService findPatientsBySurnameService =
-                new FindPatientsBySurnameService(patientDatabase, findPatientsBySurnameValidator);
         FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
                 new FindPatientsByPersonalCodeService(patientDatabase);
         AddVisitValidator addVisitValidator = new AddVisitValidator();
         AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
+        SearchPatientRequestValidator searchPatientRequestValidator =new SearchPatientRequestValidator();
+        SearchPatientService searchPatientService = new SearchPatientService(patientDatabase, searchPatientRequestValidator);
 
         menuNumberToAction = new HashMap();
 
@@ -38,7 +37,7 @@ public class DentalClinic {
         menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientService));
         menuNumberToAction.put(3, new PrintPatientDatabaseUIAction(getPatientsService));
         menuNumberToAction.put(4, new PrintSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
-        menuNumberToAction.put(5, new FindPatientBySurnameUIAction(findPatientsBySurnameService));
+        menuNumberToAction.put(5, new SearchPatientUIAction(searchPatientService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
         menuNumberToAction.put(7, new AddVisitUIAction(addVisitService));
         menuNumberToAction.put(0, new ExitUIAction());
@@ -62,7 +61,7 @@ public class DentalClinic {
                 "2   Delete by id\n" +
                 "3   Print patients database\n" +
                 "4   Print specific patient information\n" +
-                "5   Find patient by surname\n" +
+                "5   Search by name / surname\n" +
                 "6   Find patient by personal code\n" +
                 "7   Add visit\n" +
                 "0   Exit");
