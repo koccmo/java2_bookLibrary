@@ -1,4 +1,4 @@
-package estore.core.responses;
+package estore.core.validation;
 
 public class CoreError {
 

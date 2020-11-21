@@ -1,5 +1,7 @@
 package estore.core.responses;
 
+import estore.core.validation.CoreError;
+
 import java.util.List;
 
 public class RemoveProductByNameResponse extends CoreResponse {

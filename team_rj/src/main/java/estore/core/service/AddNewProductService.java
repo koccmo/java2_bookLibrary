@@ -1,13 +1,13 @@
 package estore.core.service;
 
-import estore.core.responses.CoreError;
+import estore.core.validation.CoreError;
+import estore.core.validation.AddNewProductValidator;
 import estore.database.ProductDataBase;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class AddNewProductService {
 

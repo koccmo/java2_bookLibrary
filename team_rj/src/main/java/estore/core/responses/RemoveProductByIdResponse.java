@@ -1,5 +1,7 @@
 package estore.core.responses;
 
+import estore.core.validation.CoreError;
+
 import java.util.List;
 
 public class RemoveProductByIdResponse extends CoreResponse {
@@ -8,6 +10,7 @@ public class RemoveProductByIdResponse extends CoreResponse {
 
     public RemoveProductByIdResponse(List<CoreError> errors) {
         super(errors);
+        this.productsRemoved = -1;
     }
 
     public RemoveProductByIdResponse(int productsRemoved) {

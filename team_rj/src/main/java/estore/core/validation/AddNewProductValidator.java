@@ -1,7 +1,6 @@
-package estore.core.service;
+package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
