@@ -2,7 +2,7 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.services.FindProductService;
-import internet_store.application.core.services.FindProductValidator;
+import internet_store.application.core.services.validators.FindProductValidator;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
 import org.junit.After;
