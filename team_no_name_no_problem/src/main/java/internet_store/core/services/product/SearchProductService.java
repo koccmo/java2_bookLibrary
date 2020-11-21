@@ -1,6 +1,6 @@
 package internet_store.core.services.product;
 
-import internet_store.core.requests.customer.SearchProductRequest;
+import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.database.product.ProductDatabase;
