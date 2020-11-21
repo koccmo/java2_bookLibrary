@@ -26,11 +26,11 @@ public class SearchProductService {
         }
 
         if (isTitleAndDescriptionNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
-            searchByTitleAndDescriptionIsProvided(searchProductRequest.getTitle(), searchProductRequest.getDescription());
+            return searchByTitleAndDescriptionIsProvided(searchProductRequest.getTitle(), searchProductRequest.getDescription());
         }
 
         if (isTitleFilled(searchProductRequest.getTitle())){
-            searchByTitleIsProvided(searchProductRequest.getTitle());
+            return searchByTitleIsProvided(searchProductRequest.getTitle());
         }
 
         return searchByDescriptionIsProvided (searchProductRequest.getDescription());
