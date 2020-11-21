@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class AddTargetUIAction implements UIAction {
 
     private AddTargetService addTargetService;
+    Scanner scr = new Scanner(System.in);
 
     public  AddTargetUIAction(AddTargetService addTargetService) {
         this.addTargetService = addTargetService;
@@ -20,14 +21,11 @@ public class AddTargetUIAction implements UIAction {
     public void execute() {
 
         while (true){
-            Scanner scr = new Scanner(System.in);
 
             System.out.print("Enter target name: ");
             String targetName = scr.nextLine();
-
             System.out.print("Enter target description: ");
             String targetDescription = scr.nextLine();
-
             System.out.print("Enter target deadline(days): ");
             Integer targetDeadline = Integer.parseInt(scr.nextLine());
 

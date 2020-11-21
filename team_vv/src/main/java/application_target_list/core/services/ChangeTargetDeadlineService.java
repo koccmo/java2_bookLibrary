@@ -20,7 +20,7 @@ public class ChangeTargetDeadlineService {
     }
 
     public ChangeTargetDeadlineResponse execute(ChangeTargetDeadlineRequest request){
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (!errors.isEmpty()) {
             return new ChangeTargetDeadlineResponse(errors);

@@ -18,7 +18,7 @@ public class DeleteTargetService {
     }
 
     public DeleteTargetResponse execute(DeleteTargetRequest request){
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (!errors.isEmpty()) {
             return new DeleteTargetResponse(errors);
@@ -27,4 +27,5 @@ public class DeleteTargetService {
         database.deleteTarget(request.getTargetIdToDelete());
         return new DeleteTargetResponse(request.getTargetIdToDelete());
     }
+
 }

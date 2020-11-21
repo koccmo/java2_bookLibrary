@@ -30,4 +30,5 @@ public class AddTargetService {
         database.addTarget(target);
         return new AddTargetResponse(target);
     }
+
 }
