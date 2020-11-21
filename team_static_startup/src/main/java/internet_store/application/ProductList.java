@@ -42,6 +42,7 @@ class ProductList {
         menuNumberToActionMap.put(0, new ExitProgramUIAction());
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
         Scanner sc = new Scanner(System.in);
 
