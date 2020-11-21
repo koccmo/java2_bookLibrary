@@ -4,28 +4,36 @@ import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
 import estore.core.service.RemoveProductByNameService;
 
+import java.util.Scanner;
+
 public class RemoveProductByNameUI implements UIAction {
 
     private RemoveProductByNameService removeProductByNameService;
-    private InputValidation iv;
 
-    public RemoveProductByNameUI(RemoveProductByNameService removeProductByNameService, InputValidation iv) {
+    public RemoveProductByNameUI(RemoveProductByNameService removeProductByNameService) {
         this.removeProductByNameService = removeProductByNameService;
-        this.iv = iv;
     }
 
     @Override
     public void execute() {
-        String description = "Enter name of product to remove: ";
-        String productToRemove = iv.getString(description);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter name of product to remove: ");
+        String productToRemove = sc.nextLine();
 
         RemoveProductByNameRequest request = new RemoveProductByNameRequest(productToRemove);
         RemoveProductByNameResponse response = removeProductByNameService.execute(request);
 
-        if (response.getProductsRemoved() == 1) {
-            System.out.println(response.getProductsRemoved() + " product removed.");
+        if (response.getProductsRemoved() == -1) {
+            for (int i = 0; i < response.getErrors().size(); i++) {
+                System.out.print(response.getErrors().get(i).getField() + " ");
+                System.out.println(response.getErrors().get(i).getMessage());
+            }
         } else {
-            System.out.println(response.getProductsRemoved() + " products removed");
+            if (response.getProductsRemoved() == 1) {
+                System.out.println(response.getProductsRemoved() + " product removed.");
+            } else {
+                System.out.println(response.getProductsRemoved() + " products removed.");
+            }
         }
     }
 }

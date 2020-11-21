@@ -2,6 +2,7 @@ package estore.ui;
 
 import estore.core.validation.AddNewProductValidator;
 import estore.core.validation.RemoveProductByIdValidator;
+import estore.core.validation.RemoveProductByNameValidator;
 import estore.database.ProductDataBase;
 import estore.database.ProductDataBaseImplementation;
 import estore.core.service.*;
@@ -10,15 +11,16 @@ public class UserAction {
     private static InputValidation iv = new InputValidation();
     private static AddNewProductValidator addNewProductValidator = new AddNewProductValidator();
     private static RemoveProductByIdValidator removeProductByIdValidator = new RemoveProductByIdValidator();
+    private static RemoveProductByNameValidator removeProductByNameValidator = new RemoveProductByNameValidator();
     private static ProductDataBase database = new ProductDataBaseImplementation();
     private static AddNewProductService addNewProductService = new AddNewProductService(database, addNewProductValidator);
     private static RemoveProductByIdService removeProductByIdService = new RemoveProductByIdService(database, removeProductByIdValidator);
-    private static RemoveProductByNameService removeProductByNameService = new RemoveProductByNameService(database);
+    private static RemoveProductByNameService removeProductByNameService = new RemoveProductByNameService(database, removeProductByNameValidator);
     private static SearchProductByNameService searchProductByNameService = new SearchProductByNameService(database);
     private static ShowAllProductsService showAllProductsService = new ShowAllProductsService(database);
     private static UIAction addNewProductUI = new AddProductUI(addNewProductService);
     private static UIAction removeProductById = new RemoveProductByIdUI(removeProductByIdService);
-    private static UIAction removeProductByName = new RemoveProductByNameUI(removeProductByNameService, iv);
+    private static UIAction removeProductByName = new RemoveProductByNameUI(removeProductByNameService);
     private static UIAction searchProductByName = new SearchProductByNameUI(searchProductByNameService, iv);
     private static UIAction showAllProducts = new ShowAllProductsUI(showAllProductsService);
     private static UIAction exitProgram = new ExitProgramUI();

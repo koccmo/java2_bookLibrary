@@ -10,6 +10,7 @@ public class RemoveProductByNameResponse extends CoreResponse {
 
     public RemoveProductByNameResponse(List<CoreError> errors) {
         super(errors);
+        this.productsRemoved = -1;
     }
 
     public RemoveProductByNameResponse(int productsRemoved) {
