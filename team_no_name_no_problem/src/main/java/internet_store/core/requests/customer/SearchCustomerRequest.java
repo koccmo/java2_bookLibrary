@@ -1,11 +1,11 @@
 package internet_store.core.requests.customer;
 
-public class FindAllCustomersByNameAndSurnameRequest {
+public class SearchCustomerRequest {
 
     private String name;
     private String surname;
 
-    public FindAllCustomersByNameAndSurnameRequest(String name, String surname) {
+    public SearchCustomerRequest(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
