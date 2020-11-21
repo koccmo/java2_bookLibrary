@@ -1,5 +1,7 @@
 package internet_store.application.console_ui;
 
+import internet_store.application.core.requests.AddProductRequest;
+import internet_store.application.core.responses.AddProductResponse;
 import internet_store.application.core.services.AddProductService;
 
 import java.math.BigDecimal;
@@ -22,8 +24,16 @@ public class AddProductUIAction implements UIAction {
         String productDescription = myInput.nextLine();
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
+        AddProductRequest request = new AddProductRequest(productName, productDescription, productPrice);
+        AddProductResponse response = addProductService.execute(request);
 
-        addProductService.addProduct(productName, productDescription, productPrice);
-        System.out.println("\nProduct added\n" + productName + "\n" + productDescription + "\n" + productPrice + " EUR");
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            System.out.println("\nProduct added\n" + productName + "\n" + productDescription + "\n" + productPrice + " EUR");
+        }
     }
+
 }

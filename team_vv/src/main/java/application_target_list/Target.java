@@ -7,10 +7,10 @@ public class Target {
     private String name;
     private String description;
     private Long id;
-    private int deadline;
+    private Integer deadline;
 
 
-    public Target(String name, String description, int deadline) {
+    public Target(String name, String description, Integer deadline) {
         this.name = name;
         this.description = description;
         this.deadline = deadline;
@@ -41,11 +41,11 @@ public class Target {
         return id;
     }
 
-    public void setDeadline(int deadline) {
+    public void setDeadline(Integer deadline) {
         this.deadline = deadline;
     }
 
-    public int getDeadline() {
+    public Integer getDeadline() {
         return deadline;
     }
 
@@ -54,7 +54,7 @@ public class Target {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Target target = (Target) o;
-        return deadline == target.deadline &&
+        return deadline.equals(target.deadline) &&
                 Objects.equals(name, target.name) &&
                 Objects.equals(description, target.description) &&
                 Objects.equals(id, target.id);

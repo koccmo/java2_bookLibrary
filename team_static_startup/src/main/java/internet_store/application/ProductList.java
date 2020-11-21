@@ -1,5 +1,6 @@
 package internet_store.application;
 
+import internet_store.application.core.services.validators.*;
 import internet_store.application.database.*;
 import internet_store.application.core.services.*;
 import internet_store.application.console_ui.*;
@@ -9,24 +10,35 @@ class ProductList {
 
     private final Map<Integer, UIAction> menuNumberToActionMap;
     private final Database database = new InMemoryDatabase();
+    private final DeleteByProductNameValidator deleteByNameValidator = new DeleteByProductNameValidator();
+    private final DeleteByProductValidator deleteByProductValidator = new DeleteByProductValidator();
+    private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
+    private final FindProductValidator validatorFindProduct = new FindProductValidator();
+    private final FindByIdValidator findByIdValidator = new FindByIdValidator();
+    private final AddProductValidator addProductValidator = new AddProductValidator();
+    private final ChangeProductNameValidator changeProductNameValidator = new ChangeProductNameValidator();
 
-    AddProductService addProductService = new AddProductService(database);
-    FindProductService findProductService = new FindProductService(database);
+
+    AddProductService addProductService = new AddProductService(database, addProductValidator);
+    FindProductService findProductService = new FindProductService(database, validatorFindProduct);
+    FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
-    DeleteProductService deleteProductService = new DeleteProductService(database);
-    ChangeProductNameService changeProductNameService = new ChangeProductNameService(database);
+    DeleteProductService deleteByNameService = new DeleteProductService(database, deleteByNameValidator);
+    DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
+    DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
+    ChangeProductNameService changeProductNameService = new ChangeProductNameService(database, changeProductNameValidator);
 
     public ProductList() {
 
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
-        menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteProductService));
-        menuNumberToActionMap.put(3, new DeleteProductUIAction(deleteProductService));
-        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteProductService));
+        menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteByProductIdService));
+        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteByProductService));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteByNameService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindByProductNameUIAction(findProductService));
-        menuNumberToActionMap.put(7, new FindByIdUIAction(findProductService));
-        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService));
+        menuNumberToActionMap.put(7, new FindByIdUIAction(findByIdService));
+        menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService, findByIdService));
         menuNumberToActionMap.put(0, new ExitProgramUIAction());
     }
 

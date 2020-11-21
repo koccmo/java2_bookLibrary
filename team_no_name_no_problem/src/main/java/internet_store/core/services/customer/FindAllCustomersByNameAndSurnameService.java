@@ -1,19 +1,49 @@
 package internet_store.core.services.customer;
 
+import internet_store.core.domain.Customer;
+import internet_store.core.requests.customer.FindAllCustomersByNameAndSurnameRequest;
+import internet_store.core.response.CoreError;
+import internet_store.core.response.customer.FindAllCustomersByNameAndSurnameResponse;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.domain.Customer;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FindAllCustomersByNameAndSurnameService {
 
     private final CustomerDatabase customerDatabase;
+    private final FindAllCustomersByNameAndSurnameValidator findAllCustomersByNameAndSurnameValidator;
 
-    public FindAllCustomersByNameAndSurnameService(CustomerDatabase customerDatabase) {
+
+    public FindAllCustomersByNameAndSurnameService(CustomerDatabase customerDatabase,
+                                                   FindAllCustomersByNameAndSurnameValidator
+                                                           findAllCustomersByNameAndSurnameValidator) {
         this.customerDatabase = customerDatabase;
+        this.findAllCustomersByNameAndSurnameValidator = findAllCustomersByNameAndSurnameValidator;
     }
 
-    public Optional<Customer> execute(String name, String surname){
-        return customerDatabase.findCustomersByNameAndSurname(name,surname);
+    public FindAllCustomersByNameAndSurnameResponse execute(FindAllCustomersByNameAndSurnameRequest
+                                                                    findAllCustomersByNameAndSurnameRequest){
+
+        List<CoreError> errors = findAllCustomersByNameAndSurnameValidator
+                .validate(findAllCustomersByNameAndSurnameRequest);
+
+        if (!errors.isEmpty()){
+            return new FindAllCustomersByNameAndSurnameResponse(errors, new ArrayList<>());
+        }
+
+        List <Customer> customers = customerDatabase.findCustomersByNameAndSurname(findAllCustomersByNameAndSurnameRequest.getName(),
+                findAllCustomersByNameAndSurnameRequest.getSurname());
+
+        if (customers.isEmpty()){
+            errors.add(new CoreError("database", "Database doesn't contain customer with name " +
+                    findAllCustomersByNameAndSurnameRequest.getName() + " and surname " +
+                    findAllCustomersByNameAndSurnameRequest.getSurname()));
+            return new FindAllCustomersByNameAndSurnameResponse(errors, new ArrayList<>());
+        }
+            return new FindAllCustomersByNameAndSurnameResponse(customers);
+
+
     }
 }

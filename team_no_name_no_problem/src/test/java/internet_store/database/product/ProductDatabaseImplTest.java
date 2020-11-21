@@ -1,6 +1,6 @@
 package internet_store.database.product;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -102,22 +102,6 @@ public class ProductDatabaseImplTest {
         assertTrue(descriptionOfFirstProduct.equals("Samsung"));
         assertFalse(descriptionOfSecondProduct.equals("Holodiljnik"));
         assertTrue(descriptionOfThirdProduct.equals("LCD Screens"));
-    }
-
-    @Test
-    public void findAnyProductByTitleTest() {
-        productDatabase.add(thirdProduct);
-
-        Optional<Product> resultOfFindingLaptop = productDatabase.findAnyByTitle("Laptop");
-        Optional<Product> resultOfFindingRefrigerator = productDatabase.findAnyByTitle("REFRIGERATOR");
-        Optional<Product> resultOfFindingTV = productDatabase.findAnyByTitle("TV");
-        Optional<Product> resultOfFindingMicrophone = productDatabase.findAnyByTitle("Microphone");
-
-        assertTrue(resultOfFindingLaptop.isPresent());
-        assertTrue(resultOfFindingRefrigerator.isPresent());
-        assertTrue(resultOfFindingTV.isPresent());
-        assertFalse(resultOfFindingMicrophone.isPresent());
-
     }
 
     @Test

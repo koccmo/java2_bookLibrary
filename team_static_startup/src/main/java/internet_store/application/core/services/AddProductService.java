@@ -1,21 +1,32 @@
 package internet_store.application.core.services;
 
+import internet_store.application.core.requests.AddProductRequest;
+import internet_store.application.core.responses.AddProductResponse;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.services.validators.AddProductValidator;
 import internet_store.application.database.Database;
 import internet_store.application.core.domain.Product;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 public class AddProductService {
 
     private final Database database;
+    private final AddProductValidator validator;
 
-    public AddProductService(Database database) {
+    public AddProductService(Database database, AddProductValidator validator) {
         this.database = database;
+        this.validator = validator;
     }
 
-    public void addProduct(String ProductName, String productDescription, BigDecimal price) {
-        Product product = new Product(ProductName, productDescription, price);
+    public AddProductResponse execute(AddProductRequest request) {
+        List<CoreError> errors = validator.validate(request);
+        if (!errors.isEmpty()) {
+            return new AddProductResponse(errors);
+        }
+
+        Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductPrice());
         database.add(product);
+        return new AddProductResponse(product);
     }
-
 }

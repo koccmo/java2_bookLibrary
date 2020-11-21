@@ -19,6 +19,7 @@ public class Product {
         this.price = tmp.setScale(2, RoundingMode.DOWN);
     }
 
+
     public long getId() {
         return id;
     }
@@ -35,11 +36,11 @@ public class Product {
         return price;
     }
 
-    public void editName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void editDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

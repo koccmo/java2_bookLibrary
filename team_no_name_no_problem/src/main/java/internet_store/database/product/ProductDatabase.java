@@ -1,13 +1,13 @@
 package internet_store.database.product;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductDatabase {
 
-    public List <Product> getProducts();
+    List <Product> getProducts();
 
     void add(Product product);
 
@@ -19,7 +19,9 @@ public interface ProductDatabase {
 
     void changeDescription(long id, String newDescription);
 
-    Optional<Product> findAnyByTitle (String title);
-
     List<Product> findAllByTitle (String title);
+
+    List<Product> findAllByDescription (String description);
+
+    List<Product> findAllByTitleAndDescription (String title, String description);
 }
