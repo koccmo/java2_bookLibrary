@@ -1,6 +1,7 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.requests.Ordering;
+import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.SearchPatientResponse;
 import dental_clinic.core.services.SearchPatientService;
@@ -32,8 +33,16 @@ public class SearchPatientUIAction implements UIAction{
         System.out.println("Please enter order direction: ASC/DESC");
         String orderDirection = in.nextLine();
 
+        System.out.println("Please enter page number");
+        Integer pageNumber = in.nextInt();
+
+        System.out.println("Please enter page size");
+        Integer pageSize = in.nextInt();
+
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+        Paging paging = new Paging(pageNumber, pageSize);
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest(name, surname, new Ordering(orderBy, orderDirection));
+                new SearchPatientRequest(name, surname, ordering, paging);
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         if (searchPatientResponse.hasErrors()){
