@@ -56,7 +56,7 @@ public class SearchPatientRequestValidatorTest {
 
     @Test
     public void testEnteredNameSurnameOrderBy(){
-        //expected error "search", "Not valid input for ordering parameters"
+        CoreError expectedError = new CoreError("search", "Not valid input for ordering parameters");
 
         Ordering blankOrdering = new Ordering("name", "");
         SearchPatientRequest searchPatientRequest =
@@ -64,55 +64,56 @@ public class SearchPatientRequestValidatorTest {
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
+        assertTrue(errors.contains(expectedError));
     }
 
     @Test
     public void testEnteredNameSurnameOrderDirection(){
-        //expected error "search", "Not valid input for ordering parameters"
-
+        CoreError expectedError = new CoreError("search", "Not valid input for ordering parameters");
         Ordering blankOrdering = new Ordering("", "ASC");
         SearchPatientRequest searchPatientRequest =
                 new SearchPatientRequest("Name", "Surname", blankOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
+        assertTrue(errors.contains(expectedError));
     }
 
     @Test
     public void testNoValidParametersForOrderBy(){
-        //"orderBy", "Not valid input for orderBy"
-
+        CoreError expectedError = new CoreError("orderBy", "Not valid input for orderBy");
         Ordering invalidOrdering = new Ordering("not name and not surname, invalid", "DESC");
         SearchPatientRequest searchPatientRequest =
                 new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
+        assertTrue(errors.contains(expectedError));
     }
 
     @Test
     public void testNoValidParametersForOrderDirection(){
-        //"orderDirection", "Not valid input for orderDirection"
-
+        CoreError expectedError = new CoreError("orderDirection", "Not valid input for orderDirection");
         Ordering invalidOrdering = new Ordering("name", "not ASC and not DESC, invalid");
         SearchPatientRequest searchPatientRequest =
                 new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
-
+        assertTrue(errors.contains(expectedError));
         assertEquals(1, errors.size());
     }
 
-    //И прочие комбинации на несколько ошибок
-
     @Test
     public void testInvalidOrderByAndOrderDirection() {
-
+        CoreError expectedError1 = new CoreError("orderBy", "Not valid input for orderBy");
+        CoreError expectedError2 = new CoreError("orderDirection", "Not valid input for orderDirection");
         Ordering invalidOrdering = new Ordering("invalid orderBy", "invalid direction");
         SearchPatientRequest searchPatientRequest =
                 new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(2, errors.size());
+        assertTrue(errors.contains(expectedError1));
+        assertTrue(errors.contains(expectedError2));
     }
 
     @Test
