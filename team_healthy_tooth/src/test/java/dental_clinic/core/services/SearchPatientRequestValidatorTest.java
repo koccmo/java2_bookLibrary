@@ -55,23 +55,72 @@ public class SearchPatientRequestValidatorTest {
     @Test
     public void testEnteredNameSurnameOrderBy(){
         //expected error "search", "Not valid input for ordering parameters"
+
+        Ordering blankOrdering = new Ordering("name", "");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Name", "Surname", blankOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(1, errors.size());
     }
 
     @Test
     public void testEnteredNameSurnameOrderDirection(){
         //expected error "search", "Not valid input for ordering parameters"
+
+        Ordering blankOrdering = new Ordering("", "ASC");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Name", "Surname", blankOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(1, errors.size());
     }
 
     @Test
     public void testNoValidParametersForOrderBy(){
         //"orderBy", "Not valid input for orderBy"
+
+        Ordering invalidOrdering = new Ordering("not name and not surname, invalid", "DESC");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(1, errors.size());
     }
 
     @Test
     public void testNoValidParametersForOrderDirection(){
         //"orderDirection", "Not valid input for orderDirection"
+
+        Ordering invalidOrdering = new Ordering("name", "not ASC and not DESC, invalid");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(1, errors.size());
     }
 
     //И прочие комбинации на несколько ошибок
 
+    @Test
+    public void testInvalidOrderByAndOrderDirection() {
+
+        Ordering invalidOrdering = new Ordering("invalid orderBy", "invalid direction");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(2, errors.size());
+    }
+
+    @Test
+    public void testNullSearchAndInvalidOrdering() {
+
+        Ordering emptyOrdering = new Ordering("invalid", "invalid");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest(null, null, emptyOrdering);
+        List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertEquals(3, errors.size());
+    }
 }
