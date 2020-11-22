@@ -60,7 +60,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering blankOrdering = new Ordering("name", "");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest("Name", "Surname", blankOrdering);
+                new SearchPatientRequest("Name", "Surname", blankOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
@@ -72,7 +72,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering blankOrdering = new Ordering("", "ASC");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest("Name", "Surname", blankOrdering);
+                new SearchPatientRequest("Name", "Surname", blankOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
@@ -84,7 +84,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering invalidOrdering = new Ordering("not name and not surname, invalid", "DESC");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+                new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
@@ -96,7 +96,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering invalidOrdering = new Ordering("name", "not ASC and not DESC, invalid");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+                new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(1, errors.size());
@@ -109,7 +109,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering invalidOrdering = new Ordering("invalid orderBy", "invalid direction");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest("Name", "Surname", invalidOrdering);
+                new SearchPatientRequest("Name", "Surname", invalidOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(2, errors.size());
@@ -120,7 +120,7 @@ public class SearchPatientRequestValidatorTest {
 
         Ordering emptyOrdering = new Ordering("invalid", "invalid");
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest(null, null, emptyOrdering);
+                new SearchPatientRequest(null, null, emptyOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
 
         assertEquals(3, errors.size());
