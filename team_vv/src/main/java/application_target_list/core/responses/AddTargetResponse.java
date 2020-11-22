@@ -1,6 +1,6 @@
 package application_target_list.core.responses;
 
-import application_target_list.Target;
+import application_target_list.core.database.Target;
 
 
 import java.util.List;

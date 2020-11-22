@@ -1,17 +1,14 @@
 package application_target_list.core.responses;
 
-
-
 import application_target_list.core.database.Target;
 import java.util.List;
 
+public class SearchTargetByDescriptionResponse extends CoreResponse{
 
-public class GetAllTargetsResponse extends CoreResponse{
+    private List<Target> targetList;
 
-    private final List<Target> targetList;
-
-
-    public GetAllTargetsResponse(List<Target> targetList) {
+    public SearchTargetByDescriptionResponse(List<CoreError> errorList, List<Target> targetList) {
+        super(errorList);
         this.targetList = targetList;
     }
 

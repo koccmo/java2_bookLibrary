@@ -1,6 +1,6 @@
 package application_target_list.core.services;
 
-import application_target_list.Target;
+import application_target_list.core.database.Target;
 import application_target_list.core.database.Database;
 import application_target_list.core.requests.GetAllTargetsRequest;
 import application_target_list.core.responses.GetAllTargetsResponse;

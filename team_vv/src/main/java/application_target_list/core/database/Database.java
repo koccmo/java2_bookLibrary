@@ -1,7 +1,5 @@
 package application_target_list.core.database;
 
-import application_target_list.Target;
-
 import java.util.List;
 
 public interface Database {
@@ -12,6 +10,7 @@ public interface Database {
     boolean changeTargetDescription(Long targetId, String newDescription);
     boolean changeTargetDeadline(Long targetId, int newDeadline);
     List<Target> getTargetsList();
-
-
+    boolean isIdInTargetList(Long targetId);
+    List<Target> findByTargetName(String targetName);
+    List<Target> findByTargetDescription(String targetDescription);
 }

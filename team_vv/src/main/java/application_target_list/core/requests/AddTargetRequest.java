@@ -1,7 +1,5 @@
 package application_target_list.core.requests;
 
-import application_target_list.Target;
-
 public class AddTargetRequest {
 
     private String name;

@@ -1,8 +1,6 @@
 package application_target_list.core.database;
 
 
-import application_target_list.Target;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class TargetListImpl implements Database {
 
     @Override
     public boolean deleteTarget(Long targetId) {
-        if (isTargetInList(targetId)) {
+        if (isIdInTargetList(targetId)) {
             targetsList.remove(getTargetIndexFromListById(targetId));
             return true;
         }
@@ -29,7 +27,7 @@ public class TargetListImpl implements Database {
 
     @Override
     public boolean changeTargetName(Long targetId, String newName) {
-        if (isTargetInList(targetId)){
+        if (isIdInTargetList(targetId)){
             targetsList.get(getTargetIndexFromListById(targetId)).setName(newName);
             return true;
         }
@@ -38,7 +36,7 @@ public class TargetListImpl implements Database {
 
     @Override
     public boolean changeTargetDescription(Long targetId, String newDescription) {
-        if (isTargetInList(targetId)){
+        if (isIdInTargetList(targetId)){
             targetsList.get(getTargetIndexFromListById(targetId)).setDescription(newDescription);
             return true;
         }
@@ -47,20 +45,44 @@ public class TargetListImpl implements Database {
 
     @Override
     public boolean changeTargetDeadline(Long targetId, int newDeadline) {
-        if (isTargetInList(targetId)){
+        if (isIdInTargetList(targetId)){
             targetsList.get(getTargetIndexFromListById(targetId)).setDeadline(newDeadline);
             return true;
         }
         return false;
     }
 
-    private boolean isTargetInList(Long targetId) {
+    public boolean isIdInTargetList(Long targetId) {
         for (Target tempTarget : targetsList) {
             if (tempTarget.getId().equals(targetId)) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Target> findByTargetName(String targetName) {
+        List<Target> targets = new ArrayList<>();
+
+        for (Target target : targetsList){
+            if (target.getName().contains(targetName)){
+                targets.add(target);
+            }
+        }
+        return targets;
+    }
+
+    @Override
+    public List<Target> findByTargetDescription(String targetDescription) {
+        List<Target> targets = new ArrayList<>();
+
+        for (Target target : targetsList){
+            if (target.getDescription().contains(targetDescription)){
+                targets.add(target);
+            }
+        }
+        return targets;
     }
 
     private int getTargetIndexFromListById(Long targetId) {
@@ -76,4 +98,6 @@ public class TargetListImpl implements Database {
     public List<Target> getTargetsList() {
         return targetsList;
     }
+
+
 }
