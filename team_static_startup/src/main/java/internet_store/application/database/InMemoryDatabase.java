@@ -56,6 +56,21 @@ public class InMemoryDatabase implements Database {
     }
 
     @Override
+    public List<Product> findByProductDescription(String productDescription) {
+        return productList.stream()
+                .filter(productInDataBase -> productInDataBase.getDescription().equalsIgnoreCase(productDescription))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findByNameAndDescription(String name, String description) {
+        return productList.stream()
+                .filter(product -> product.getDescription().equals(description))
+                .filter(book -> book.getName().equals(name))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Product> findById(Long productId) {
         return productList.stream()
                 .filter(productInDataBase -> productInDataBase.getId().equals(productId))

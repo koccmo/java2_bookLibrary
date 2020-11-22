@@ -17,6 +17,10 @@ public interface Database {
 
     List<Product> findByProductName(String productName);
 
+    List<Product> findByProductDescription(String productName);
+
+    List<Product> findByNameAndDescription(String name, String description);
+
     List<Product> getProductList();
 
     Optional<Product> findById(Long id);
