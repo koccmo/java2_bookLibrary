@@ -1,5 +1,6 @@
 package dental_clinic.console_ui;
 
+import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.SearchPatientResponse;
 import dental_clinic.core.services.SearchPatientService;
@@ -25,7 +26,14 @@ public class SearchPatientUIAction implements UIAction{
         System.out.println("Please enter surname for search");
         String surname = in.nextLine();
 
-        SearchPatientRequest searchPatientRequest = new SearchPatientRequest(name, surname);
+        System.out.println("Please enter orderBy: name/surname");
+        String orderBy = in.nextLine();
+
+        System.out.println("Please enter order direction: ASC/DESC");
+        String orderDirection = in.nextLine();
+
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest(name, surname, new Ordering(orderBy, orderDirection));
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         if (searchPatientResponse.hasErrors()){

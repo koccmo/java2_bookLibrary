@@ -4,10 +4,12 @@ public class SearchPatientRequest {
 
     private String name;
     private String surname;
+    private Ordering ordering;
 
-    public SearchPatientRequest(String name, String surname) {
+    public SearchPatientRequest(String name, String surname, Ordering ordering) {
         this.name = name;
         this.surname = surname;
+        this.ordering = ordering;
     }
 
     public String getName() {
@@ -16,6 +18,10 @@ public class SearchPatientRequest {
 
     public String getSurname() {
         return surname;
+    }
+
+    public Ordering getOrdering(){
+        return ordering;
     }
 
 }
