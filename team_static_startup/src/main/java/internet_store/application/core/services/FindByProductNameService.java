@@ -9,12 +9,12 @@ import internet_store.application.database.Database;
 
 import java.util.List;
 
-public class FindProductService {
+public class FindByProductNameService {
 
     private final Database database;
     private final FindProductValidator validator;
 
-    public FindProductService(Database database, FindProductValidator validator) {
+    public FindByProductNameService(Database database, FindProductValidator validator) {
         this.database = database;
         this.validator = validator;
     }

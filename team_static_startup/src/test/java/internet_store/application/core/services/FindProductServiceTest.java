@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class FindProductServiceTest {
-    FindProductService findProductService;
+    FindByProductNameService findByProductNameService;
     FindProductValidator validator;
     Database database;
 
@@ -24,7 +24,7 @@ public class FindProductServiceTest {
     public void setUp() {
         database = new InMemoryDatabase();
         validator = new FindProductValidator();
-        findProductService = new FindProductService(database, validator);
+        findByProductNameService = new FindByProductNameService(database, validator);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FindProductServiceTest {
         database.add(new Product("tv", "good tv", new BigDecimal("499.99")));
         database.add(new Product("tv", "good tv, good", new BigDecimal("399.99")));
         FindByProductNameRequest request = new FindByProductNameRequest("tv");
-        FindByProductNameResponse response = findProductService.findByProductName(request);
+        FindByProductNameResponse response = findByProductNameService.findByProductName(request);
         List<Product> testArray = response.getProductNameList();
         assertEquals(2, testArray.size());
     }
@@ -40,7 +40,7 @@ public class FindProductServiceTest {
     @Test
     public void shouldThrowErrorFindProductByProductName() {
         FindByProductNameRequest request = new FindByProductNameRequest(null);
-        FindByProductNameResponse response = findProductService.findByProductName(request);
+        FindByProductNameResponse response = findByProductNameService.findByProductName(request);
         List<CoreError> errorList = response.getCoreErrorList();
         assertEquals(1, errorList.size());
         assertEquals("Product Name", errorList.get(0).getField());

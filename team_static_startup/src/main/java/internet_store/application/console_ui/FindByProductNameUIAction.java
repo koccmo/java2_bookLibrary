@@ -2,16 +2,16 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.requests.FindByProductNameRequest;
 import internet_store.application.core.responses.FindByProductNameResponse;
-import internet_store.application.core.services.FindProductService;
+import internet_store.application.core.services.FindByProductNameService;
 
 import java.util.Scanner;
 
 public class FindByProductNameUIAction implements UIAction {
 
-    private final FindProductService findProductService;
+    private final FindByProductNameService findByProductNameService;
 
-    public FindByProductNameUIAction(FindProductService findProductService) {
-        this.findProductService = findProductService;
+    public FindByProductNameUIAction(FindByProductNameService findByProductNameService) {
+        this.findByProductNameService = findByProductNameService;
     }
 
     public void execute() {
@@ -19,7 +19,7 @@ public class FindByProductNameUIAction implements UIAction {
         System.out.print("Enter product name to search for: ");
         String productName = myInput.nextLine();
         FindByProductNameRequest request = new FindByProductNameRequest(productName);
-        FindByProductNameResponse response = findProductService.findByProductName(request);
+        FindByProductNameResponse response = findByProductNameService.findByProductName(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
