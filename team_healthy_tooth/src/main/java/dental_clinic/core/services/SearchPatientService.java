@@ -2,6 +2,7 @@ package dental_clinic.core.services;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.requests.Ordering;
+import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.SearchPatientResponse;
@@ -23,21 +24,20 @@ public class SearchPatientService {
     }
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
-
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
-
         if (!errors.isEmpty()){
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
+        return provideSearchResultAccordingToRequest(searchPatientRequest);
+    }
 
+    private SearchPatientResponse provideSearchResultAccordingToRequest(SearchPatientRequest searchPatientRequest){
         if (isNameAndSurnameFilled(searchPatientRequest.getName(), searchPatientRequest.getSurname())){
             return searchByNameAndSurnameIsProvided(searchPatientRequest);
         }
-
         if (isNameFilled(searchPatientRequest.getName())){
             return searchByNameIsProvided(searchPatientRequest);
         }
-
         return searchBySurnameIsProvided(searchPatientRequest);
     }
 
@@ -48,13 +48,15 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchByNameAndSurnameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = order(patientDatabase.findPatientsByNameAndSurname(searchPatientRequest.getName(),
-                searchPatientRequest.getSurname()), searchPatientRequest.getOrdering());
+        List <Patient> patients = patientDatabase.findPatientsByNameAndSurname(searchPatientRequest.getName(),
+                searchPatientRequest.getSurname());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with name " +
                     searchPatientRequest.getName() + " and surname " + searchPatientRequest.getSurname()));
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
+        patients = order(patients, searchPatientRequest.getOrdering());
+        patients = paging(patients, searchPatientRequest.getPaging());
         return new SearchPatientResponse(patients);
     }
 
@@ -64,54 +66,74 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchByNameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = order(patientDatabase.findPatientByName(searchPatientRequest.getName()),
-                searchPatientRequest.getOrdering());
+        List <Patient> patients = patientDatabase.findPatientByName(searchPatientRequest.getName());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with name " +
                     searchPatientRequest.getName()));
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
+        patients = order(patients, searchPatientRequest.getOrdering());
+        patients = paging(patients, searchPatientRequest.getPaging());
         return new SearchPatientResponse(patients);
     }
 
     private SearchPatientResponse searchBySurnameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List<Patient>patients = order(patientDatabase.findPatientsBySurname(searchPatientRequest.getSurname()),
-                searchPatientRequest.getOrdering());
+        List<Patient>patients = patientDatabase.findPatientsBySurname(searchPatientRequest.getSurname());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with surname " +
                     searchPatientRequest.getSurname()));
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
-
+        patients = order(patients, searchPatientRequest.getOrdering());
+        patients = paging(patients, searchPatientRequest.getPaging());
         return new SearchPatientResponse(patients);
     }
 
     private List<Patient> order(List<Patient> patients, Ordering ordering) {
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
-                if (ordering.getOrderDirection().equals("ASC")){
-                    return patients.stream()
-                            .sorted(Comparator.comparing(patient -> patient.getPersonalData().getName()))
-                            .collect(Collectors.toList());
-
-                }else{
-                    return patients.stream()
-                            .sorted((o1,o2) -> o2.getPersonalData().getName().compareTo(o1.getPersonalData().getName()))
-                            .collect(Collectors.toList());
-                }
+                return sortByName(patients, ordering);
             }else{
-                if (ordering.getOrderDirection().equals("ASC")){
-                    return patients.stream()
-                            .sorted(Comparator.comparing(patient -> patient.getPersonalData().getSurname()))
-                            .collect(Collectors.toList());
-
-                }else{
-                    return patients.stream()
-                            .sorted((o1,o2) -> o2.getPersonalData().getSurname().compareTo(o1.getPersonalData().getSurname()))
-                            .collect(Collectors.toList());                }
+                return sortBySurname(patients, ordering);
             }
         }else{
+            return patients;
+        }
+    }
+
+    private List<Patient> sortByName(List<Patient> patients, Ordering ordering){
+        if (ordering.getOrderDirection().equals("ASC")){
+            return patients.stream()
+                    .sorted(Comparator.comparing(patient -> patient.getPersonalData().getName()))
+                    .collect(Collectors.toList());
+        }else{
+            return patients.stream()
+                    .sorted((o1,o2) -> o2.getPersonalData().getName().compareTo(o1.getPersonalData().getName()))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    private List<Patient> sortBySurname(List<Patient> patients, Ordering ordering){
+        if (ordering.getOrderDirection().equals("ASC")){
+            return patients.stream()
+                    .sorted(Comparator.comparing(patient -> patient.getPersonalData().getSurname()))
+                    .collect(Collectors.toList());
+        }else{
+            return patients.stream()
+                    .sorted((o1,o2) -> o2.getPersonalData().getSurname().compareTo(o1.getPersonalData().getSurname()))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    private List<Patient> paging(List<Patient> patients, Paging paging) {
+        if (paging != null) {
+            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            return patients.stream()
+                    .skip(skip)
+                    .limit(paging.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
             return patients;
         }
     }
