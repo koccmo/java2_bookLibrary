@@ -27,7 +27,7 @@ public class SearchProductUIAction implements UIAction {
         System.out.println("Please enter description to search by description");
         String description = in.nextLine();
 
-        System.out.println("Please enter order by");
+        System.out.println("Please enter order by: title / description");
         String orderBy = in.nextLine();
 
         System.out.println("Please enter order direction");

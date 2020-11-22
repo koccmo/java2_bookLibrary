@@ -64,7 +64,7 @@ public class InternetStoreBusinessSide {
                 "4   Change title\n" +
                 "5   Change description\n" +
                 "6   Find product by id\n"+
-                "7   SEARCH\n"+
+                "7   Search product by title / description\n"+
                 "0   Exit");
     }
 
