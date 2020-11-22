@@ -25,22 +25,13 @@ public class InternetStoreCustomerSide {
 
     GetAllCustomersService getAllCustomersService = new GetAllCustomersService(customerDatabase);
 
-    FindAllCustomersByNameAndSurnameValidator findAllCustomersByNameAndSurnameValidator =
-            new FindAllCustomersByNameAndSurnameValidator();
-    FindAllCustomersByNameAndSurnameService findAllCustomersByNameAndSurnameService =
-            new FindAllCustomersByNameAndSurnameService(customerDatabase, findAllCustomersByNameAndSurnameValidator);
-
-    FindAllCustomersByNameValidator findAllCustomersByNameValidator = new FindAllCustomersByNameValidator();
-    FindAllCustomersByNameService findAllCustomersByNameService =
-            new FindAllCustomersByNameService(customerDatabase, findAllCustomersByNameValidator);
-
-    FindAllCustomersBySurnameValidator findAllCustomersBySurnameValidator = new FindAllCustomersBySurnameValidator();
-    FindAllCustomersBySurnameService findAllCustomersBySurnameService =
-            new FindAllCustomersBySurnameService(customerDatabase, findAllCustomersBySurnameValidator);
-
     FindCustomerByIdRequestValidator findCustomerByIdRequestValidator = new FindCustomerByIdRequestValidator();
     FindCustomerByIdService findCustomerByIdService =
             new FindCustomerByIdService(customerDatabase, findCustomerByIdRequestValidator);
+
+    SearchCustomerRequestValidator searchCustomerRequestValidator = new SearchCustomerRequestValidator();
+    SearchCustomerService searchCustomerService =
+            new SearchCustomerService(customerDatabase, searchCustomerRequestValidator);
 
 
 
@@ -51,10 +42,8 @@ public class InternetStoreCustomerSide {
         menuNumberToAction.put(1, new AddCustomerUIAction(addCustomerService));
         menuNumberToAction.put(2, new DeleteCustomerUIAction(deleteCustomerService));
         menuNumberToAction.put(3, new PrintCustomersInfoUIAction(getAllCustomersService));
-        menuNumberToAction.put(4, new FindCustomersByNameAndSurnameUIAction(findAllCustomersByNameAndSurnameService));
-        menuNumberToAction.put(5, new FindAllCustomersByNameUIAction(findAllCustomersByNameService));
-        menuNumberToAction.put(6, new FindAllCustomersBySurnameUIAction(findAllCustomersBySurnameService));
-        menuNumberToAction.put(7, new FindCustomerByIdUIAction(findCustomerByIdService));
+        menuNumberToAction.put(4, new FindCustomerByIdUIAction(findCustomerByIdService));
+        menuNumberToAction.put(5, new SearchCustomerUIAction(searchCustomerService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -75,10 +64,8 @@ public class InternetStoreCustomerSide {
                 "1   Sign in\n" +
                 "2   Delete by id\n" +
                 "3   Print customers\n" +
-                "4   Find customer by name and surname\n" +
-                "5   Find customers by name\n" +
-                "6   Find customers by surname\n" +
-                "7   Find all by id\n" +
+                "4   Find all by id\n" +
+                "5   SEARCH\n" +
                 "0   Exit");
     }
 

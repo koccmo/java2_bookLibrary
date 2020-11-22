@@ -1,7 +1,7 @@
 package internet_store.console_ui.product;
 
 import internet_store.console_ui.UIAction;
-import internet_store.core.requests.customer.SearchProductRequest;
+import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
 

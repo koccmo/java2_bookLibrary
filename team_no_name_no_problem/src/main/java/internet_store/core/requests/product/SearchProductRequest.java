@@ -1,4 +1,4 @@
-package internet_store.core.requests.customer;
+package internet_store.core.requests.product;
 
 public class SearchProductRequest {
 
