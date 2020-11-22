@@ -17,7 +17,7 @@ public class SearchPatientRequestValidator {
         if (isNotValidInputForOrdering(searchPatientRequest)){
             errors.addAll(updateErrorsListForOrdering(searchPatientRequest));
         }
-        if (isNotValidInputForPaging(searchPatientRequest)){
+        if (isNotValidRequestForPaging(searchPatientRequest)){
             errors.addAll(updateErrorsListForPaging(searchPatientRequest));
         }
         return errors;
@@ -35,7 +35,7 @@ public class SearchPatientRequestValidator {
                 (isNotValidInputForOrderDirection(searchPatientRequest));
     }
 
-    private boolean isNotValidInputForPaging(SearchPatientRequest searchPatientRequest){
+    private boolean isNotValidRequestForPaging(SearchPatientRequest searchPatientRequest){
         return (!searchPatientRequest.getPaging().isFilledBoth() &&
                 !searchPatientRequest.getPaging().isEmptyBoth()) ||
                 (isNotValidInputForPageNumber(searchPatientRequest)) ||
