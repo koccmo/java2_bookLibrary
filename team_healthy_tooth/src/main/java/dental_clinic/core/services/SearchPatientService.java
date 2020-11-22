@@ -96,8 +96,8 @@ public class SearchPatientService {
                             .collect(Collectors.toList());
 
                 }else{
-                    return patients.stream() //TODO
-                            .sorted(Comparator.comparing(patient -> patient.getPersonalData().getName()))
+                    return patients.stream()
+                            .sorted((o1,o2) -> o2.getPersonalData().getName().compareTo(o1.getPersonalData().getName()))
                             .collect(Collectors.toList());
                 }
             }else{
@@ -107,8 +107,8 @@ public class SearchPatientService {
                             .collect(Collectors.toList());
 
                 }else{
-                    return patients.stream() //TODO
-                            .sorted(Comparator.comparing(patient -> patient.getPersonalData().getSurname()))
+                    return patients.stream()
+                            .sorted((o1,o2) -> o2.getPersonalData().getSurname().compareTo(o1.getPersonalData().getSurname()))
                             .collect(Collectors.toList());                }
             }
         }else{
