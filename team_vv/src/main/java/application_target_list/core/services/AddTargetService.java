@@ -1,11 +1,11 @@
 package application_target_list.core.services;
 
-import application_target_list.Target;
+import application_target_list.core.database.Target;
 import application_target_list.core.database.Database;
 import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.responses.AddTargetResponse;
 import application_target_list.core.responses.CoreError;
-import application_target_list.core.services.validators.AddTargetValidator;
+import application_target_list.core.validators.AddTargetValidator;
 
 import java.util.List;
 

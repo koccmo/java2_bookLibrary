@@ -1,7 +1,7 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.services.FindProductService;
+import internet_store.application.core.services.FindByProductNameService;
 import internet_store.application.core.services.validators.FindProductValidator;
 import internet_store.application.database.Database;
 import internet_store.application.database.InMemoryDatabase;
@@ -24,7 +24,7 @@ public class FindByProductNameUIActionTest {
 
     Database database = new InMemoryDatabase();
     FindProductValidator validator = new FindProductValidator();
-    FindProductService findProductService = new FindProductService(database, validator);
+    FindByProductNameService findByProductNameService = new FindByProductNameService(database, validator);
     private final ByteArrayInputStream inputNameToFind = new ByteArrayInputStream("Pineapple".getBytes());
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
@@ -72,7 +72,7 @@ public class FindByProductNameUIActionTest {
     public void ShouldFindNoProductsViaUIAction () {
         database.add(product2);
 
-        FindByProductNameUIAction testFind = new FindByProductNameUIAction(findProductService);
+        FindByProductNameUIAction testFind = new FindByProductNameUIAction(findByProductNameService);
         testFind.execute();
 
         assertEquals(

@@ -3,7 +3,7 @@ package application_target_list.core.responses;
 
 import java.util.List;
 
-public class CoreResponse {
+abstract class CoreResponse {
 
     private List<CoreError> errorList;
 

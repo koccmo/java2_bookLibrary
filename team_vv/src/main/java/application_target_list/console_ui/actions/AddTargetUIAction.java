@@ -48,15 +48,14 @@ public class AddTargetUIAction implements UIAction {
         for (CoreError error : response.getErrorList()) {
             System.out.println("Error: " + error.getField() + " " + error.getMessage());
         }
-
     }
 
     private AddTargetResponse createResponse(AddTargetRequest request){
         return addTargetService.execute(request);
     }
 
-    private AddTargetRequest createRequest(String targetName, String targetDescripion, Integer targetDeadline){
-        return new AddTargetRequest(targetName,targetDescripion,targetDeadline);
+    private AddTargetRequest createRequest(String targetName, String targetDescription, Integer targetDeadline){
+        return new AddTargetRequest(targetName,targetDescription,targetDeadline);
     }
 
     private String getNameFromUser(){
