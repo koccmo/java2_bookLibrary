@@ -13,11 +13,15 @@ public class SearchProductRequestValidator {
         List <CoreError> errors = new ArrayList<>();
 
         if (isTitleAndDescriptionEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
-            errors.add(new CoreError("title & description", "Not valid input for search"));
+            errors.add(new CoreError("search", "Not valid input for search"));
         }
 
         if (isNotValidInputForOrdering(searchProductRequest)){
             errors.addAll(updateErrorsListForOrdering(searchProductRequest));
+        }
+
+        if (isNotValidRequestForPaging(searchProductRequest)){
+            errors.addAll(updateErrorsListForPaging(searchProductRequest));
         }
 
         return errors;
@@ -57,6 +61,39 @@ public class SearchProductRequestValidator {
             }
             if (isNotValidInputForOrderDirection(searchProductRequest) && searchProductRequest.getOrdering().filledBoth()) {
                 errors.add(new CoreError("orderDirection", "Not valid input for orderDirection"));
+            }
+        }
+        return  errors;
+    }
+
+    private boolean isNotValidRequestForPaging (SearchProductRequest searchProductRequest){
+        return (!searchProductRequest.getPaging().isFilledBoth() &&
+                !searchProductRequest.getPaging().isEmptyBoth()) ||
+                (isNotValidInputForPageNumber(searchProductRequest)) ||
+                isNotValidInputForPageSize(searchProductRequest);
+    }
+
+    private boolean isNotValidInputForPageNumber(SearchProductRequest searchProductRequest){
+        return searchProductRequest.getPaging().getPageNumber() <= 0;
+    }
+
+    private boolean isNotValidInputForPageSize(SearchProductRequest searchProductRequest){
+        return searchProductRequest.getPaging().getPageSize() <= 0;
+    }
+
+    private List<CoreError> updateErrorsListForPaging(SearchProductRequest searchProductRequest){
+
+        List<CoreError>errors = new ArrayList<>();
+
+        if (!searchProductRequest.getPaging().isFilledBoth() &&
+                !searchProductRequest.getPaging().isEmptyBoth()) {
+            errors.add(new CoreError("search", "Not valid input for paging parameters"));
+        }else {
+            if (isNotValidInputForPageNumber(searchProductRequest)) {
+                errors.add(new CoreError("pageNumber", "Not valid input for page number"));
+            }
+            if (isNotValidInputForPageSize(searchProductRequest)) {
+                errors.add(new CoreError("pageSize", "Not valid input for page size"));
             }
         }
         return  errors;
