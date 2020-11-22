@@ -19,7 +19,7 @@ public class SearchProductRequestValidatorTest {
 
     @Test
     public void testEmptySearch(){
-        CoreError expectedError = new CoreError("title & description", "Not valid input for search");
+        CoreError expectedError = new CoreError("search", "Not valid input for search");
 
         SearchProductRequest searchProductRequest = new SearchProductRequest(null, "", validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
