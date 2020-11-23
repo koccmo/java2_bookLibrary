@@ -1,28 +1,28 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.SearchProductsRequest;
+import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.responses.*;
-import internet_store.application.core.services.validators.SearchProductsRequestValidator;
+import internet_store.application.core.services.validators.FindProductsRequestValidator;
 import internet_store.application.database.Database;
 
 import java.util.List;
 
-public class SearchProductsService {
+public class FindProductsService {
 
     private final Database database;
-    private final SearchProductsRequestValidator validator;
+    private final FindProductsRequestValidator validator;
 
-    public SearchProductsService(Database database,
-                              SearchProductsRequestValidator validator) {
+    public FindProductsService(Database database,
+                               FindProductsRequestValidator validator) {
         this.database = database;
         this.validator = validator;
     }
 
-    public SearchProductsResponse execute(SearchProductsRequest request) {
+    public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
-            return new SearchProductsResponse(null, errors);
+            return new FindProductsResponse(null, errors);
         }
 
         List<Product> products = null;
@@ -36,7 +36,7 @@ public class SearchProductsService {
             products = database.findByNameAndDescription(request.getName(), request.getDescription());
         }
 
-        return new SearchProductsResponse(products, null);
+        return new FindProductsResponse(products, null);
     }
 
 }

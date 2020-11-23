@@ -1,11 +1,11 @@
 package internet_store.application.core.requests;
 
-public class SearchProductsRequest {
+public class FindProductsRequest {
 
     private final String name;
     private final String description;
 
-    public SearchProductsRequest(String name, String description) {
+    public FindProductsRequest(String name, String description) {
         this.name = name;
         this.description = description;
     }

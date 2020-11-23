@@ -1,17 +1,17 @@
 package internet_store.application.console_ui;
 
-import internet_store.application.core.requests.SearchProductsRequest;
-import internet_store.application.core.responses.SearchProductsResponse;
-import internet_store.application.core.services.SearchProductsService;
+import internet_store.application.core.requests.FindProductsRequest;
+import internet_store.application.core.responses.FindProductsResponse;
+import internet_store.application.core.services.FindProductsService;
 
 import java.util.Scanner;
 
-public class SearchProductsUIAction implements UIAction{
+public class FindProductsUIAction implements UIAction{
 
-    private final SearchProductsService searchProductsService;
+    private final FindProductsService findProductsService;
 
-    public SearchProductsUIAction(SearchProductsService searchProductsService) {
-        this.searchProductsService = searchProductsService;
+    public FindProductsUIAction(FindProductsService findProductsService) {
+        this.findProductsService = findProductsService;
     }
 
     @Override
@@ -22,8 +22,8 @@ public class SearchProductsUIAction implements UIAction{
         System.out.print("Enter product description: ");
         String description = scanner.nextLine();
 
-        SearchProductsRequest request = new SearchProductsRequest(name, description);
-        SearchProductsResponse response = searchProductsService.execute(request);
+        FindProductsRequest request = new FindProductsRequest(name, description);
+        FindProductsResponse response = findProductsService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError -> System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
