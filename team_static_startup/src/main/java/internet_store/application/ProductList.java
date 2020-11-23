@@ -13,7 +13,6 @@ class ProductList {
     private final DeleteByProductNameValidator deleteByNameValidator = new DeleteByProductNameValidator();
     private final DeleteByProductValidator deleteByProductValidator = new DeleteByProductValidator();
     private final DeleteByProductIdValidator productIdValidator = new DeleteByProductIdValidator();
-    // private final FindProductValidator validatorFindProduct = new FindProductValidator();
     private final FindByIdValidator findByIdValidator = new FindByIdValidator();
     private final AddProductValidator addProductValidator = new AddProductValidator();
     private final ChangeProductNameValidator changeProductNameValidator = new ChangeProductNameValidator();
@@ -21,7 +20,6 @@ class ProductList {
 
 
     AddProductService addProductService = new AddProductService(database, addProductValidator);
-    // FindByProductNameService findByProductNameService = new FindByProductNameService(database, validatorFindProduct);
     FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
     DeleteProductService deleteByNameService = new DeleteProductService(database, deleteByNameValidator);
@@ -38,7 +36,6 @@ class ProductList {
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteByNameService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindProductsUIAction(findProductsService));
-        // menuNumberToActionMap.put(6, new FindByProductNameUIAction(findByProductNameService));
         menuNumberToActionMap.put(7, new FindByIdUIAction(findByIdService));
         menuNumberToActionMap.put(8, new ChangeProductNameUIAction(changeProductNameService, findByIdService));
         menuNumberToActionMap.put(9, new FindProductsUIAction(findProductsService));
@@ -67,7 +64,6 @@ class ProductList {
         System.out.println("4. Delete product from database by name");
         System.out.println("5. Print out all database products");
         System.out.println("6. Find product(s) from database by name and(or) description");
-        // System.out.println("6. Find product(s) from database by name");
         System.out.println("7. Find product(s) from database by ID");
         System.out.println("8. Find product(s) from database by ID and change name");
         System.out.println("0. Exit the program");

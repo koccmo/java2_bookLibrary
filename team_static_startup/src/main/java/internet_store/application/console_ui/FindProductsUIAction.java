@@ -36,7 +36,6 @@ public class FindProductsUIAction implements UIAction{
                 System.out.println("\nNo product with name = " + name + " found in the database");
 
             }
-//            response.getProducts().forEach(Product::toString);
         }
     }
 
