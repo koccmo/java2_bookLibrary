@@ -4,6 +4,8 @@ public class FindProductsRequest {
 
     private final String name;
     private final String description;
+    private String orderBy;
+    private String orderDirection;
 
     public FindProductsRequest(String name, String description) {
         this.name = name;
