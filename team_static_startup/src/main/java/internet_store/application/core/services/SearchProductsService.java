@@ -29,7 +29,7 @@ public class SearchProductsService {
         if (request.isNameProvided() && !request.isDescriptionProvided()) {
             products = database.findByProductName(request.getName());
         }
-        if (!request.isDescriptionProvided() && request.isDescriptionProvided()) {
+        if (!request.isNameProvided() && request.isDescriptionProvided()) {
             products = database.findByProductDescription(request.getDescription());
         }
         if (request.isNameProvided() && request.isDescriptionProvided()) {
