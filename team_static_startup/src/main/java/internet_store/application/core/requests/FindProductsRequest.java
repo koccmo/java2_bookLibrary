@@ -12,12 +12,28 @@ public class FindProductsRequest {
         this.description = description;
     }
 
+    public FindProductsRequest(String name, String description,
+                               String orderBy, String orderDirection) {
+        this.name = name;
+        this.description = description;
+        this.orderBy = orderBy;
+        this.orderDirection = orderDirection;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
     }
 
     public boolean isNameProvided() {
