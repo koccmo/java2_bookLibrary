@@ -15,8 +15,8 @@ public class FindProductsRequestValidator {
     private List<CoreError> validateSearchFields(FindProductsRequest request) {
         List<CoreError> errors = new ArrayList<>();
         if (isEmpty(request.getName()) && isEmpty(request.getDescription())) {
-            errors.add(new CoreError("name", "Must not be empty!"));
-            errors.add(new CoreError("description", "Must not be empty!"));
+            errors.add(new CoreError("Name", "Must not be empty!"));
+            errors.add(new CoreError("Description", "Must not be empty!"));
         }
         return errors;
     }
