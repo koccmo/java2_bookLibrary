@@ -66,7 +66,7 @@ public class InMemoryDatabase implements Database {
     public List<Product> findByNameAndDescription(String name, String description) {
         return productList.stream()
                 .filter(product -> product.getDescription().equals(description))
-                .filter(book -> book.getName().equals(name))
+                .filter(product -> product.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
