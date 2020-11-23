@@ -4,20 +4,17 @@ public class FindProductsRequest {
 
     private final String name;
     private final String description;
-    private String orderBy;
-    private String orderDirection;
+    private Ordering ordering;
 
     public FindProductsRequest(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public FindProductsRequest(String name, String description,
-                               String orderBy, String orderDirection) {
+    public FindProductsRequest(String name, String description, Ordering ordering) {
         this.name = name;
         this.description = description;
-        this.orderBy = orderBy;
-        this.orderDirection = orderDirection;
+        this.ordering = ordering;
     }
 
     public String getName() {
@@ -28,12 +25,8 @@ public class FindProductsRequest {
         return description;
     }
 
-    public String getOrderBy() {
-        return orderBy;
-    }
-
-    public String getOrderDirection() {
-        return orderDirection;
+    public Ordering getOrdering() {
+        return ordering;
     }
 
     public boolean isNameProvided() {

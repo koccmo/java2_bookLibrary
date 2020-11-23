@@ -1,6 +1,7 @@
 package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.FindProductsRequest;
+import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.responses.CoreError;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
 public class FindProductsRequestValidatorTest {
 
     private FindProductsRequestValidator validator;
+    private Ordering ordering;
 
     @Before
     public void setUp() {
@@ -52,16 +54,18 @@ public class FindProductsRequestValidatorTest {
 
     @Test
     public void shouldNotReturnErrorsOrderingFieldIsFilled() {
-        FindProductsRequest request = new FindProductsRequest("ProductName", "ProductDescription",
-                "Name", "Descending");
+        ordering = new Ordering("Name", "Descending");
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldReturnErrorIfOnlyOneOrderingFieldIsFilled() {
-        FindProductsRequest request = new FindProductsRequest("ProductName", "ProductDescription",
-                "Name", "");
+        ordering = new Ordering("Name", "");
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(1, errors.size());
         assertEquals("Ordering Fields", errors.get(0).getField());
@@ -70,8 +74,9 @@ public class FindProductsRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfOrderingNameIsWrong() {
-        FindProductsRequest request = new FindProductsRequest("ProductName", "ProductDescription",
-                "price", "alphabet");
+        ordering = new Ordering("price", "alphabet");
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(1, errors.size());
         assertEquals("Ordering by", errors.get(0).getField());
@@ -80,8 +85,9 @@ public class FindProductsRequestValidatorTest {
 
     @Test
     public void shouldReturnErrorIfOrderingDirectionIsWrong() {
-        FindProductsRequest request = new FindProductsRequest("ProductName", "ProductDescription",
-                "Name", "alphabet");
+        ordering = new Ordering("Name", "alphabet");
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(1, errors.size());
         assertEquals("Direction", errors.get(0).getField());
