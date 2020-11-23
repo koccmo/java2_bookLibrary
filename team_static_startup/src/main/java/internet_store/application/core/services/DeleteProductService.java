@@ -5,7 +5,7 @@ import internet_store.application.core.requests.*;
 import internet_store.application.core.responses.*;
 import internet_store.application.core.services.validators.DeleteByProductNameValidator;
 import internet_store.application.core.services.validators.DeleteByProductValidator;
-import internet_store.application.database.Database;
+import internet_store.application.core.database.Database;
 
 import java.util.List;
 

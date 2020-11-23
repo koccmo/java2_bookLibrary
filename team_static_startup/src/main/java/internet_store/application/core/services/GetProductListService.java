@@ -2,7 +2,7 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.responses.PrintProductsToConsoleResponse;
-import internet_store.application.database.Database;
+import internet_store.application.core.database.Database;
 
 import java.util.List;
 
