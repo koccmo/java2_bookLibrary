@@ -26,7 +26,7 @@ public class DeleteByProductNameUIAction implements UIAction {
             response.getErrors().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getField()));
         } else {
-            if (response.isBookRemoved()){
+            if (response.isProductRemoved()){
                 System.out.println("\nProduct with name = " + productName + " deleted");
             } else {
                 System.out.println("\nProduct with name = " + productName + " was NOT deleted");

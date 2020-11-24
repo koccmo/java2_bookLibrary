@@ -27,7 +27,7 @@ public class FindProductsRequestValidatorTest {
     }
 
     @Test
-    public void shouldNotReturnErrorsWhenTitleAndAuthorIsProvided() {
+    public void shouldNotReturnErrorsWhenNameAndDescriptionIsProvided() {
         FindProductsRequest request = new FindProductsRequest("Name", "Description");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);

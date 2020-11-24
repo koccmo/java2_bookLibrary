@@ -2,7 +2,6 @@ package internet_store.lesson_3.core.services.validators;
 
 import internet_store.lesson_3.core.requests.FindProductsRequest;
 import internet_store.lesson_3.core.responses.CoreError;
-import internet_store.lesson_3.core.services.validators.FindProductsRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class FindProductsRequestValidatorTest {
     }
 
     @Test
-    public void shouldNotReturnErrorsWhenTitleAndAuthorIsProvided() {
+    public void shouldNotReturnErrorsWhenNameAndDescriptionIsProvided() {
         FindProductsRequest request = new FindProductsRequest("Name", "Description");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
