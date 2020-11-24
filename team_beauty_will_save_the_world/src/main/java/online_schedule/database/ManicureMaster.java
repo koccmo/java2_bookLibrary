@@ -1,6 +1,6 @@
 package online_schedule.database;
 
-import online_schedule.domain.PersonalData;
+import online_schedule.core.domain.PersonalData;
 
 public class ManicureMaster {
 
