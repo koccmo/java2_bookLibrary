@@ -1,10 +1,12 @@
 package internet_store.application.core.services;
 
+import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.responses.*;
+import internet_store.application.core.requests.Ordering;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
-import internet_store.application.core.database.Database;
 
 import java.util.List;
 
@@ -25,6 +27,13 @@ public class FindProductsService {
             return new FindProductsResponse(null, errors);
         }
 
+        List<Product> products = search(request);
+        products = order(products, request.getOrdering());
+
+        return new FindProductsResponse(products, null);
+    }
+
+    private List<Product> search(FindProductsRequest request) {
         List<Product> products = null;
         if (request.isNameProvided() && !request.isDescriptionProvided()) {
             products = database.findByProductName(request.getName());
@@ -35,8 +44,11 @@ public class FindProductsService {
         if (request.isNameProvided() && request.isDescriptionProvided()) {
             products = database.findByNameAndDescription(request.getName(), request.getDescription());
         }
+        return products;
+    }
 
-        return new FindProductsResponse(products, null);
+    private List<Product> order(List<Product> productList, Ordering ordering){
+        return productList;
     }
 
 }
