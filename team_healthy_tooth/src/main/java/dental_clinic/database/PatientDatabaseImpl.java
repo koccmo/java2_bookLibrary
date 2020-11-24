@@ -91,4 +91,17 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return patientList.get(index).getPersonalData().getId() == id;
     }
 
+    @Override
+    public boolean checkPatientById(long id) {
+        boolean statusId = false;
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPersonalData().getId() == id){
+                statusId = true;
+
+            }
+        }
+        return statusId;
+    }
+
+
 }
