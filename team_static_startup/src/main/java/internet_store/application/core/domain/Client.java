@@ -12,12 +12,10 @@ public class Client {
     private String clientPhone;
     private String clientEmail;
 
-    public Client(Long clientId, String clientFirstName, String clientSecondName, String clientPhone, String clientEmail) {
+    public Client(Long clientId, String clientFirstName, String clientSecondName) {
         this.clientId = clientId;
         this.clientFirstName = clientFirstName;
         this.clientSecondName = clientSecondName;
-        this.clientPhone = clientPhone;
-        this.clientEmail = clientEmail;
     }
 
     public Long getClientId() {
