@@ -1,4 +1,4 @@
-package internet_store.application.database;
+package internet_store.application.core.database;
 
 import internet_store.application.core.domain.Product;
 
@@ -17,7 +17,7 @@ public interface Database {
 
     List<Product> findByProductName(String productName);
 
-    List<Product> findByProductDescription(String productName);
+    List<Product> findByProductDescription(String productDescription);
 
     List<Product> findByNameAndDescription(String name, String description);
 

@@ -2,8 +2,8 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.services.GetProductListService;
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
+import internet_store.application.core.database.Database;
+import internet_store.application.core.database.InMemoryDatabase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

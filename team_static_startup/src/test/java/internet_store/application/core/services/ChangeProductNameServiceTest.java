@@ -1,14 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.database.Database;
-import internet_store.application.database.InMemoryDatabase;
-import internet_store.application.core.domain.Product;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
+import internet_store.application.core.database.Database;
 
 public class ChangeProductNameServiceTest {
 

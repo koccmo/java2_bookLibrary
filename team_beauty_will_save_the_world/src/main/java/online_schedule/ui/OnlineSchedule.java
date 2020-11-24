@@ -2,7 +2,6 @@ package online_schedule.ui;
 
 import online_schedule.database.ClientDatabase;
 import online_schedule.database.ClientDatabaseImpl;
-import online_schedule.domain.PersonalData;
 
 import java.util.Map;
 
@@ -39,7 +38,7 @@ public class OnlineSchedule {
                 "5   Select a procedure\n" +
                 "6   Select a date\n" +
                 "7   Select a time\n" +
-                "8   Find Client by mobile number" +
+                "8   Find Client by mobile number\n" +
                 "0   Exit");
     }
 
