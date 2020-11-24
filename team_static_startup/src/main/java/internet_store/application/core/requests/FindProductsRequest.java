@@ -4,10 +4,17 @@ public class FindProductsRequest {
 
     private final String name;
     private final String description;
+    private Ordering ordering;
 
     public FindProductsRequest(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public FindProductsRequest(String name, String description, Ordering ordering) {
+        this.name = name;
+        this.description = description;
+        this.ordering = ordering;
     }
 
     public String getName() {
@@ -16,6 +23,10 @@ public class FindProductsRequest {
 
     public String getDescription() {
         return description;
+    }
+
+    public Ordering getOrdering() {
+        return ordering;
     }
 
     public boolean isNameProvided() {

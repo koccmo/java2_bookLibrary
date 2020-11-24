@@ -1,12 +1,13 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.requests.FindProductsRequest;
+import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
 
 import java.util.Scanner;
 
-public class FindProductsUIAction implements UIAction{
+public class FindProductsUIAction implements UIAction {
 
     private final FindProductsService findProductsService;
 
@@ -22,14 +23,20 @@ public class FindProductsUIAction implements UIAction{
         System.out.print("Enter product description: ");
         String description = scanner.nextLine();
 
-        FindProductsRequest request = new FindProductsRequest(name, description);
+        System.out.print("Enter ordering. By 'Name' or by 'Description' ");
+        String orderingType = scanner.nextLine();
+        System.out.print("Enter ordering 'Ascending' or by 'Descending' ");
+        String orderingDirection = scanner.nextLine();
+
+        Ordering ordering = new Ordering(orderingType, orderingDirection);
+        FindProductsRequest request = new FindProductsRequest(name, description, ordering);
         FindProductsResponse response = findProductsService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError -> System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
 
-            if (!response.getProducts().isEmpty()){
+            if (!response.getProducts().isEmpty()) {
                 System.out.println("\nFound " + response.getProducts().size() + " product(s) in the database : ");
                 response.getProducts().forEach(System.out::println);
             } else {
