@@ -1,8 +1,8 @@
 package online_schedule.database;
 
 
-import online_schedule.domain.Client;
-import online_schedule.domain.PersonalData;
+import online_schedule.core.domain.Client;
+import online_schedule.core.domain.PersonalData;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package online_schedule.response;
+package online_schedule.core.response;
 
-import online_schedule.domain.Client;
+import online_schedule.core.domain.Client;
 
 import java.util.List;
 

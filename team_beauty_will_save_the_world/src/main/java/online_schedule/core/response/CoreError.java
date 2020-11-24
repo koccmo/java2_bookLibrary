@@ -1,4 +1,4 @@
-package online_schedule.response;
+package online_schedule.core.response;
 
 import java.util.Objects;
 

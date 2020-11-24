@@ -1,8 +1,7 @@
-package online_schedule.service;
+package online_schedule.core.service;
 
 import online_schedule.database.ClientDatabase;
-import online_schedule.domain.Client;
-import online_schedule.domain.PersonalData;
+import online_schedule.core.domain.PersonalData;
 
 import java.util.Optional;
 import java.util.function.Predicate;

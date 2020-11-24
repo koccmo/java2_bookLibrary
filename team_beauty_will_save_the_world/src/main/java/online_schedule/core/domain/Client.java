@@ -1,4 +1,4 @@
-package online_schedule.domain;
+package online_schedule.core.domain;
 
 
 import java.util.ArrayList;
