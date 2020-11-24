@@ -36,7 +36,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "\nPatient{" +
+        return "\nClient{" +
                 personalData +
                 ", visits=" + visitList +
                 '}';
