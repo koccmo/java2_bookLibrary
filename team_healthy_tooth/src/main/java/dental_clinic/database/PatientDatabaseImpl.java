@@ -87,6 +87,13 @@ public class PatientDatabaseImpl implements PatientDatabase {
         }
     }
 
+    @Override
+    public Optional<Patient> getPatientCard(long id) {
+        return patientList.stream()
+                .filter(patient -> patient.getPersonalData().getId() == id)
+                .findAny();
+    }
+
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;
     }
