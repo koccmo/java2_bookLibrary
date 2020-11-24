@@ -27,4 +27,6 @@ public interface PatientDatabase {
 
     void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor);
 
+    Optional<Patient> getPatientCard(long id);
+
 }
