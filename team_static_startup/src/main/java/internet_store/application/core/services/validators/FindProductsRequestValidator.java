@@ -42,12 +42,16 @@ public class FindProductsRequestValidator {
 
         if (ordering != null) {
             if (isEmpty(ordering.getOrderBy()) || isEmpty(ordering.getOrderDirection())) {
-                errors.add(new CoreError("Ordering Fields", "Both must be empty or filled!"));
-            } else if (inCorrectOrderingNames(ordering)) {
-                errors.add(new CoreError("Ordering by", "Must be Name or Description."));
-            } else if (inCorrectOrderingDirection(ordering)) {
-                errors.add(new CoreError("Direction", "Must be Ascending or Descending."));
-            }
+                errors.add(new CoreError("Ordering Fields"
+                        , "Both must be empty or filled!")); }
+
+            if (inCorrectOrderingNames(ordering)) {
+                errors.add(new CoreError("Ordering by"
+                        , "Must be Name or Description.")); }
+
+            if (inCorrectOrderingDirection(ordering)) {
+                errors.add(new CoreError("Direction"
+                        , "Must be Ascending or Descending.")); }
         } return errors;
     }
 

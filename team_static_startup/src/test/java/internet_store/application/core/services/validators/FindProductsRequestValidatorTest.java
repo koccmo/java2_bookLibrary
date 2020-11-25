@@ -69,14 +69,17 @@ public class FindProductsRequestValidatorTest {
         FindProductsRequest request = new FindProductsRequest("ProductName"
                 , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
-        assertEquals(1, errors.size());
+        assertEquals(2, errors.size());
         assertEquals("Ordering Fields", errors.get(0).getField());
         assertEquals("Both must be empty or filled!", errors.get(0).getMessage());
+        assertEquals("Direction", errors.get(1).getField());
+        assertEquals("Must be Ascending or Descending.", errors.get(1).getMessage());
+
     }
 
     @Test
     public void shouldReturnErrorIfOrderingNameIsWrong() {
-        ordering = new Ordering("price", "alphabet");
+        ordering = new Ordering("price", "Ascending");
         FindProductsRequest request = new FindProductsRequest("ProductName"
                 , "ProductDescription", ordering);
         List<CoreError> errors = validator.validate(request);
