@@ -1,24 +1,19 @@
 package dental_clinic.core.requests;
 
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 
 import java.util.Optional;
 
 public class AddVisitRequest {
 
     private long id;
-    private int toothNumber;
-    private Optional<String>comment;
-    private ToothStatus toothStatus;
-    private String doctor;
+    private Visit visit;
 
 
-    public AddVisitRequest(long id, int toothNumber, Optional<String>comment, ToothStatus toothStatus, String doctor){
+    public AddVisitRequest(long id, Visit visit){
         this.id = id;
-        this.toothNumber = toothNumber;
-        this.comment = comment;
-        this.toothStatus = toothStatus;
-        this.doctor = doctor;
+        this.visit = visit;
     }
 
     public long getId() {
@@ -26,18 +21,18 @@ public class AddVisitRequest {
     }
 
     public int getToothNumber() {
-        return toothNumber;
+        return visit.getToothNumber();
     }
 
     public Optional<String> getComment() {
-        return comment;
+        return visit.getComment();
     }
 
     public ToothStatus getToothStatus() {
-        return toothStatus;
+        return visit.getToothStatus();
     }
 
     public String getDoctor() {
-        return doctor;
+        return visit.getDoctor();
     }
 }
