@@ -1,6 +1,7 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.requests.CheckPatientByIdRequest;
 import dental_clinic.core.responses.AddVisitResponse;
@@ -52,7 +53,8 @@ class AddVisitUIAction implements UIAction {
             String doctor = in.nextLine();
             doctor = in.nextLine();
 
-            AddVisitRequest addVisitRequest = new AddVisitRequest(id, toothNumber, comment, toothStatus, doctor);
+            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 
             if (addVisitResponse.hasErrors()) {
