@@ -3,6 +3,7 @@ package dental_clinic.database;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -88,7 +89,8 @@ public class PatientDatabaseImplTest {
 
     @Test
     public void testAddVisitJowlData(){
-        patientDatabase.addVisit(1, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        patientDatabase.addVisit(1, newVisit);
 
         List <ToothStatus> expectedList = new ArrayList<>();
         expectedList.add(ToothStatus.HEALTHY);
@@ -98,7 +100,8 @@ public class PatientDatabaseImplTest {
 
     @Test
     public void testAddVisitVisitData(){
-        patientDatabase.addVisit(1, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        patientDatabase.addVisit(1, newVisit);
 
         assertTrue(patientDatabase.getPatients().get(0).getVisits().size() == 1);
         assertTrue(patientDatabase.getPatients().get(0).getVisits().get(0).getToothNumber() == 11);
