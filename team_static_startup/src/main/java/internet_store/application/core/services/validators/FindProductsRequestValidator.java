@@ -2,6 +2,7 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
+import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.CoreError;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class FindProductsRequestValidator {
 
     private List<CoreError> validateSearchFields(FindProductsRequest request) {
         Ordering ordering = request.getOrdering();
+        Paging paging = request.getPaging();
         List<CoreError> errors = new ArrayList<>();
         if (isEmpty(request.getName()) && isEmpty(request.getDescription())) {
             errors.add(new CoreError("Name", "Must not be empty!"));
@@ -31,9 +33,17 @@ public class FindProductsRequestValidator {
                 errors.add(new CoreError("Ordering by", "Must be Name or Description."));
             } else if (inCorrectOrderingDirection(ordering)) {
                 errors.add(new CoreError("Direction", "Must be Ascending or Descending."));
+            } else if (paging != null) {
+                if (!bothFieldsAreEmpty(paging) && !bothFieldsAreFilled(paging)) {
+                    errors.add(new CoreError("Page number and page size", "Both must be empty or filled."));
+                } else if (paging.getPageSize() <= 0) {
+                    errors.add(new CoreError("Page size", "Must be bigger than zero."));
+                } else if (paging.getPageNumber() <= 0) {
+                    errors.add(new CoreError("Page number", "Must be bigger than zero."));
+                }
             }
-        }
-        return errors;
+
+        } return errors;
     }
 
     private boolean isEmpty(String str) {
@@ -48,6 +58,14 @@ public class FindProductsRequestValidator {
     private boolean inCorrectOrderingDirection(Ordering ordering) {
         return !ORDERING_DIRECTION_1.equalsIgnoreCase(ordering.getOrderDirection())
                 && !ORDERING_DIRECTION_2.equalsIgnoreCase(ordering.getOrderDirection());
+    }
+
+    public boolean bothFieldsAreEmpty (Paging paging) {
+        return ((paging.getPageNumber() == null) && (paging.getPageSize() == null));
+    }
+
+    public boolean bothFieldsAreFilled (Paging paging) {
+        return ((paging.getPageNumber() != null) && (paging.getPageSize() != null));
     }
 
 

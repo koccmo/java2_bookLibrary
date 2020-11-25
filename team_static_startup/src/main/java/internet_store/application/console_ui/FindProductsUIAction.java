@@ -2,6 +2,7 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
+import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
 
@@ -28,8 +29,14 @@ public class FindProductsUIAction implements UIAction {
         System.out.print("Enter ordering 'Ascending' or by 'Descending' ");
         String orderingDirection = scanner.nextLine();
 
+        System.out.print("Enter number of products to display on page: ");
+        Integer pageSize = scanner.nextInt();
+        System.out.print("Enter number of products page to show: ");
+        Integer pageNumber = scanner.nextInt();
+
         Ordering ordering = new Ordering(orderingType, orderingDirection);
-        FindProductsRequest request = new FindProductsRequest(name, description, ordering);
+        Paging paging = new Paging(pageNumber, pageSize);
+        FindProductsRequest request = new FindProductsRequest(name, description, ordering, paging);
         FindProductsResponse response = findProductsService.execute(request);
 
         if (response.hasErrors()) {
