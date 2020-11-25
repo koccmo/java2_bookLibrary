@@ -77,12 +77,13 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor) {
+    public void addVisit(long id, Visit newVisit) {
         for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
-                Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+                Visit visit =
+                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(), newVisit.getDoctor());
                 patientList.get(i).addVisit(visit);
-                patientList.get(i).updateJowl(toothNumber, toothStatus);
+                patientList.get(i).updateJowl(newVisit.getToothNumber(), newVisit.getToothStatus());
             }
         }
     }
