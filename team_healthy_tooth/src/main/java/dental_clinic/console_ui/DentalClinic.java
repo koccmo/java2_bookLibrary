@@ -44,6 +44,7 @@ public class DentalClinic {
         menuNumberToAction.put(5, new SearchPatientUIAction(searchPatientService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
         menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, checkPatientByIdService));
+        menuNumberToAction.put(8, new GetPatientCardUIAction(getPatientCardService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
