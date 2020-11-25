@@ -2,6 +2,7 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
+import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.CoreError;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ public class FindProductsRequestValidatorTest {
 
     private FindProductsRequestValidator validator;
     private Ordering ordering;
+    private Paging paging;
 
     @Before
     public void setUp() {
@@ -94,5 +96,113 @@ public class FindProductsRequestValidatorTest {
         assertEquals("Must be Ascending or Descending.", errors.get(0).getMessage());
     }
 
+    @Test
+    public void shouldReturnErrorWhenOnlyPageNumberProvided() {
+        paging = new Paging(null, 2);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page number and page size", errors.get(0).getField());
+        assertEquals("Both must be empty or filled.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOnlyPageSizeProvided() {
+        paging = new Paging(2, null);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page number and page size", errors.get(0).getField());
+        assertEquals("Both must be empty or filled.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnNoErrorWhenBothPagingFieldsNotProvided() {
+        paging = new Paging(null, null);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    public void shouldReturnNoErrorWhenBothPagingFieldsProvided() {
+        paging = new Paging(10, 3);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(0, errors.size());
+    }
+
+
+    @Test
+    public void shouldReturnErrorWhenPageSizeIsZero() {
+        paging = new Paging(2, 0);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page size", errors.get(0).getField());
+        assertEquals("Must be bigger than zero.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void ShouldReturnErrorWhenPageSizeIsLessThanZero() {
+        paging = new Paging(2, -4);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page size", errors.get(0).getField());
+        assertEquals("Must be bigger than zero.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberIsZero() {
+        paging = new Paging(0, 9);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page number", errors.get(0).getField());
+        assertEquals("Must be bigger than zero.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void ShouldReturnErrorWhenPageNumberIsLessThanZero() {
+        paging = new Paging(-3, 3);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("Page number", errors.get(0).getField());
+        assertEquals("Must be bigger than zero.", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnTwoErrorsWhenPageNumberAndSizeIsZero() {
+        paging = new Paging(0, 0);
+        FindProductsRequest request = new FindProductsRequest("ProductName"
+                , "ProductDescription"
+                , paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(2, errors.size());
+        assertEquals("Page size", errors.get(0).getField());
+        assertEquals("Must be bigger than zero.", errors.get(0).getMessage());
+        assertEquals("Page number", errors.get(1).getField());
+        assertEquals("Must be bigger than zero.", errors.get(1).getMessage());
+    }
+
 
 }
+

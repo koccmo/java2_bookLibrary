@@ -23,26 +23,31 @@ public class FindProductsRequestValidator {
         Ordering ordering = request.getOrdering();
         Paging paging = request.getPaging();
         List<CoreError> errors = new ArrayList<>();
+
         if (isEmpty(request.getName()) && isEmpty(request.getDescription())) {
             errors.add(new CoreError("Name", "Must not be empty!"));
             errors.add(new CoreError("Description", "Must not be empty!"));
-        } else if (ordering != null) {
+        }
+
+        if (paging != null) {
+            if (!bothFieldsAreEmpty(paging) && !bothFieldsAreFilled(paging)) {
+                errors.add(new CoreError("Page number and page size"
+                        , "Both must be empty or filled.")); }
+            if (paging.getPageSize() != null && paging.getPageSize() <= 0) {
+                errors.add(new CoreError("Page size", "Must be bigger than zero.")); }
+
+            if (paging.getPageNumber() != null && paging.getPageNumber() <= 0) {
+                errors.add(new CoreError("Page number", "Must be bigger than zero.")); }
+        }
+
+        if (ordering != null) {
             if (isEmpty(ordering.getOrderBy()) || isEmpty(ordering.getOrderDirection())) {
                 errors.add(new CoreError("Ordering Fields", "Both must be empty or filled!"));
             } else if (inCorrectOrderingNames(ordering)) {
                 errors.add(new CoreError("Ordering by", "Must be Name or Description."));
             } else if (inCorrectOrderingDirection(ordering)) {
                 errors.add(new CoreError("Direction", "Must be Ascending or Descending."));
-            } else if (paging != null) {
-                if (!bothFieldsAreEmpty(paging) && !bothFieldsAreFilled(paging)) {
-                    errors.add(new CoreError("Page number and page size", "Both must be empty or filled."));
-                } else if (paging.getPageSize() <= 0) {
-                    errors.add(new CoreError("Page size", "Must be bigger than zero."));
-                } else if (paging.getPageNumber() <= 0) {
-                    errors.add(new CoreError("Page number", "Must be bigger than zero."));
-                }
             }
-
         } return errors;
     }
 

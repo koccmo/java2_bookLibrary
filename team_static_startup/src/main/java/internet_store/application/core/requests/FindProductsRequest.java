@@ -18,6 +18,12 @@ public class FindProductsRequest {
         this.ordering = ordering;
     }
 
+    public FindProductsRequest(String name, String description, Paging paging) {
+        this.name = name;
+        this.description = description;
+        this.paging = paging;
+    }
+
     public FindProductsRequest(String name, String description, Ordering ordering, Paging paging) {
         this.name = name;
         this.description = description;
