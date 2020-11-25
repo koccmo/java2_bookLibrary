@@ -45,7 +45,7 @@ public class GetPatientCardService {
     }
 
     private Patient createPatientCard(GetPatientCardRequest getPatientCardRequest){
-        Patient newPatient = new Patient(getPatientWithSpecificId(getPatientCardRequest.getId()).get().getPersonalData());
+        Patient newPatient = patientDatabase.getPatientCard(getPatientCardRequest.getId()).get();
         Jowl currentStatusOfJowl = new Jowl();
         Jowl specificPatientJowl = getPatientWithSpecificId(getPatientCardRequest.getId()).get().getJowl();
         for (Integer key : specificPatientJowl.getJowl().keySet()){
