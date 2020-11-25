@@ -22,7 +22,7 @@ public class BookBookService {
 
     public BookBookResponse bookBook(BookBookRequest request) {
 
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (errors.size() == 0) {
 

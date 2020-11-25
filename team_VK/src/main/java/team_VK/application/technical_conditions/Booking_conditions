@@ -1,5 +1,5 @@
 
 
-bookID , bookAuthor and bookID are consistent,
 bookStartDate is later then TODAY
+bookID , bookAuthor and bookID are consistent,
 bookingPeriod do not cross any other bookingPeriod for same book
