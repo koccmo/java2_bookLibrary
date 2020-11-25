@@ -12,15 +12,15 @@ public class AddBookServiceTest {
     public void ShouldAddBook() {
 
         DatabaseInMemory databaseActual = new DatabaseInMemory();
-        databaseActual.getListBooks().add(new Book("Foo", "Bar"));
+        databaseActual.getListBooks().add(new Book("Foo", "Bar", 3));
         databaseActual.getListBooks().get(0).setID(1L);
-        databaseActual.getListBooks().add(new Book("Buz", "Qux"));
+        databaseActual.getListBooks().add(new Book("Buz", "Qux",3));
         databaseActual.getListBooks().get(1).setID(2L);
 
         DatabaseInMemory databaseExpected = new DatabaseInMemory();
 
-        databaseExpected.addBook(new Book("Foo", "Bar"));
-        databaseExpected.addBook(new Book("Buz", "Qux"));
+        databaseExpected.addBook(new Book("Foo", "Bar",3));
+        databaseExpected.addBook(new Book("Buz", "Qux",3));
 
 
         Assert.assertEquals(databaseActual.getListBooks(), databaseExpected.getListBooks());

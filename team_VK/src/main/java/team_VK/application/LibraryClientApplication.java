@@ -2,6 +2,8 @@ package team_VK.application;
 
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.services.admin_services.GetBookListServiceValidator;
+import team_VK.application.core.services.client_services.BookBookService;
+import team_VK.application.core.services.client_services.BookBookServiceValidator;
 import team_VK.application.database.database_Admin.DataBaseFiller;
 import team_VK.application.database.database_Admin.Database;
 import team_VK.application.database.database_Admin.DatabaseInMemory;
@@ -12,27 +14,32 @@ import team_VK.application.core.services.admin_services.GetBooksListService;
 import team_VK.application.core.services.client_services.AddClientService;
 import team_VK.application.core.services.client_services.ShowBookService;
 import team_VK.application.ui.Client_UI.AddClientUIClientActions;
+import team_VK.application.ui.Client_UI.BookBookUIClientAction;
 import team_VK.application.ui.Client_UI.ShowBookUIClientActions;
 import team_VK.application.ui.Admin_UI.ExitProgramUIAction;
 import team_VK.application.ui.Admin_UI.GetBooksListUIAction;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class LibraryClientAplication {
+public class LibraryClientApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         DatabaseClients databaseClient = new DatabaseClientsInMemory();
-        Database database = new DatabaseInMemory();
 
-        database.addBook(new Book("Foo", "Bar"));
-        database.addBook(new Book("Buz", "Qux"));
-        database.addBook(new Book("Lorem", "Ipsum"));
+        Database database = new DatabaseInMemory();
+        DataBaseFiller DBFiller = new DataBaseFiller(database);
+        DBFiller.fill();
 
 
         GetBookListServiceValidator getBookListServiceValidator = new GetBookListServiceValidator();
         GetBooksListService getBooksListService = new GetBooksListService(database, getBookListServiceValidator);
         GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
+
+        BookBookServiceValidator bookBookServiceValidator = new BookBookServiceValidator();
+        BookBookService bookBookService = new BookBookService(database,bookBookServiceValidator);
+        BookBookUIClientAction bookBookUIClientAction = new BookBookUIClientAction(bookBookService);
 
         ShowBookService showBookService = new ShowBookService(database);
         ShowBookUIClientActions showBookUIClientActions = new ShowBookUIClientActions(showBookService);
@@ -43,11 +50,8 @@ public class LibraryClientAplication {
 
         ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
 
-        DataBaseFiller DBFiller = new DataBaseFiller();
-        DBFiller.fill();
 
-        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller();
-        DBClientFiller.fill();
+
 
         while (true) {
             showClientMenu();
@@ -57,7 +61,7 @@ public class LibraryClientAplication {
                     getBooksListUIAction.execute();
                     break;
                 case 3: showBookUIClientActions.execute(); break;
-//                case 4: // Book book
+                case 4: bookBookUIClientAction.execute(); break;
                 case 5:
                     addClientUIClientActions.execute();
                     break;

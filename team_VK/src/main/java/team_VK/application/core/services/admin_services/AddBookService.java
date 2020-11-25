@@ -26,7 +26,7 @@ public class AddBookService {
 
 
         if (errors.size() == 0) {
-            Book book = new Book(request.bookTitle, request.bookAuthor);
+            Book book = new Book(request.bookTitle, request.bookAuthor, request.bookingDurationPermitted);
             database.addBook(book);
         }
         return new AddBookResponse(errors);

@@ -5,6 +5,7 @@ import team_VK.application.database.database_Admin.DataBaseFiller;
 import team_VK.application.database.database_Admin.Database;
 import team_VK.application.database.database_Admin.DatabaseInMemory;
 import team_VK.application.database.database_Clients.DataBaseClientFiller;
+import team_VK.application.database.database_Clients.DatabaseClients;
 import team_VK.application.database.database_Clients.DatabaseClientsInMemory;
 import team_VK.application.ui.Admin_UI.AddBookUIAction;
 import team_VK.application.ui.Admin_UI.ExitProgramUIAction;
@@ -18,6 +19,15 @@ public class LibraryAdminApplication {
     public static void main(String[] args) {
 
         Database database = new DatabaseInMemory();
+
+        DataBaseFiller DBFiller = new DataBaseFiller(database);
+        DBFiller.fill();
+
+        DatabaseClients databaseClient = new DatabaseClientsInMemory();
+        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller(databaseClient);
+        DBClientFiller.fill();
+
+
         AddBookServiceValidator validator = new AddBookServiceValidator();
         AddBookService addBookService = new AddBookService(database, validator);
         AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
@@ -31,11 +41,8 @@ public class LibraryAdminApplication {
         GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
         ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
 
-        DataBaseFiller DBFiller = new DataBaseFiller();
-        DBFiller.fill();
 
-        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller();
-        DBClientFiller.fill();
+
 
         while (true) {
             showUserMenu();

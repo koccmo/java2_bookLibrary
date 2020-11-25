@@ -14,6 +14,7 @@ public class GetBooksListService {
     private final Database database;
     private final GetBookListServiceValidator validator;
 
+
     public GetBooksListService(Database database, GetBookListServiceValidator validator) {
         this.database = database;
         this.validator = validator;
@@ -21,9 +22,8 @@ public class GetBooksListService {
 
     public GetBookListResponse getBooksList(GetBookListRequest request) {
 
-        List<CoreError> errors = new ArrayList<>();
+        List<CoreError> errors = validator.validate(request);
 
-        GetBookListResponse response = new GetBookListResponse(errors);
 
         if (errors.size() == 0) {
             System.out.println("Book list:");
@@ -32,6 +32,6 @@ public class GetBooksListService {
             }
             System.out.println("End of list");
         }
-        return response;
+        return new GetBookListResponse(errors);
     }
 }

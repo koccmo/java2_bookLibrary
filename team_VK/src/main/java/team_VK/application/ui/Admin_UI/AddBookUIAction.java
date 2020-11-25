@@ -23,8 +23,10 @@ public class AddBookUIAction implements UIActions {
         String bookTitle = scanner.nextLine();
         System.out.println("Please enter book Author :");
         String bookAuthor = scanner.nextLine();
+        System.out.println("Please enter booking permitted duration");
+        int bookingDurationPermitted = scanner.nextInt();
 
-        AddBookRequest request = new AddBookRequest(bookTitle, bookAuthor);
+        AddBookRequest request = new AddBookRequest(bookTitle, bookAuthor, bookingDurationPermitted);
         AddBookResponse response = addBookService.addBook(request);
 
         if (!response.havesError()) {

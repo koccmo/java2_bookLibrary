@@ -14,13 +14,13 @@ public class RemoveBookServiceTest {
 
 
         DatabaseInMemory databaseActual = new DatabaseInMemory();
-        databaseActual.addBook(new Book("Foo", "Bar"));
-        databaseActual.addBook(new Book("Buz", "Qux"));
-        databaseActual.addBook(new Book("Lorem", "Ipsum"));
+        databaseActual.addBook(new Book("Foo", "Bar",10));
+        databaseActual.addBook(new Book("Buz", "Qux",10));
+        databaseActual.addBook(new Book("Lorem", "Ipsum",10));
 
         DatabaseInMemory databaseExpected = new DatabaseInMemory();
-        databaseExpected.addBook(new Book("Foo", "Bar"));
-        databaseExpected.addBook(new Book("Lorem", "Ipsum"));
+        databaseExpected.addBook(new Book("Foo", "Bar",10));
+        databaseExpected.addBook(new Book("Lorem", "Ipsum",10));
         databaseExpected.getListBooks().get(1).setID(3);
         RemoveBookService subject = new RemoveBookService(databaseActual);
         subject.removeBook(new RemoveBookRequest(2L, "Buz"));

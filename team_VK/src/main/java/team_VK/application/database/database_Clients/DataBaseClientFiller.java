@@ -1,12 +1,18 @@
 package team_VK.application.database.database_Clients;
 
 import team_VK.application.core.domain.Client;
+import team_VK.application.database.database_Admin.Database;
 
 public class DataBaseClientFiller {
 
+    private DatabaseClients databaseClient;
+
+    public DataBaseClientFiller(DatabaseClients databaseClient) {
+        this.databaseClient = databaseClient;
+    }
+
     public void fill() {
 
-        DatabaseClientsInMemory database = new DatabaseClientsInMemory();
 
         Client client1 = new Client("Andrew Petroff");
         Client client2 = new Client("Piter McAndrew");

@@ -58,11 +58,11 @@ public class RemoveBookServiceValidatorTest {
 
     private List<Book> getBooks() {
         List<Book> bookList = new ArrayList<>();
-        Book book1 = new Book("foobar", "barfoo");
+        Book book1 = new Book("foobar", "barfoo",3);
         book1.setID(1);
         bookList.add(book1);
 
-        Book book2 = new Book("quzbuz", "buzqux");
+        Book book2 = new Book("quzbuz", "buzqux",3);
         book2.setID(2);
         bookList.add(book2);
         return bookList;
