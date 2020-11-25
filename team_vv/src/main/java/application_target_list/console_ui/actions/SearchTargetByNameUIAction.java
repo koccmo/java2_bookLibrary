@@ -1,5 +1,6 @@
 package application_target_list.console_ui.actions;
 
+import application_target_list.core.requests.Paging;
 import application_target_list.core.requests.SearchTargetByNameRequest;
 import application_target_list.core.services.SearchTargetByNameService;
 import application_target_list.console_ui.UIAction;
@@ -23,8 +24,21 @@ public class SearchTargetByNameUIAction implements UIAction {
         while (true){
             String targetName = getNameFromUser();
 
-            SearchTargetByNameRequest request = createRequest(targetName);
-            SearchTargetByNameResponse response = createResponse(request);
+            printPagingMessage();
+            int numberFromUser = getNumberFromUser();
+
+            SearchTargetByNameResponse response;
+            if (isPagingNeeded(numberFromUser)){
+                Integer pageNumber = getPageNumberFromUser();
+                Integer pageSize = getPageSizeFromUser();
+                SearchTargetByNameRequest request = createRequestWithPaging(targetName, pageNumber, pageSize);
+                response = createResponse(request);
+
+            } else {
+                SearchTargetByNameRequest request = createRequest(targetName);
+                response = createResponse(request);
+            }
+
 
             if (response.hasErrors()) {
                 printResponseErrors(response);
@@ -33,6 +47,20 @@ public class SearchTargetByNameUIAction implements UIAction {
                 break;
             }
         }
+    }
+
+    private boolean isPagingNeeded(int number){
+        return number == 2;
+    }
+
+    private void printPagingMessage(){
+        System.out.println("Show all target list?");
+        System.out.println("[1] YES");
+        System.out.println("[2] NO");
+    }
+
+    private Integer getNumberFromUser(){
+        return Integer.parseInt(scr.nextLine());
     }
 
     private void printResponseResultMessage(SearchTargetByNameResponse response){
@@ -65,9 +93,24 @@ public class SearchTargetByNameUIAction implements UIAction {
         return new SearchTargetByNameRequest(targetName);
     }
 
+    private SearchTargetByNameRequest createRequestWithPaging(String targetName, Integer pageNumber, Integer pageSize){
+        Paging paging = new Paging(pageNumber, pageSize);
+        return new SearchTargetByNameRequest(targetName, paging);
+    }
+
     private String getNameFromUser(){
         System.out.print("Enter target name: ");
         return scr.nextLine();
+    }
+
+    private Integer getPageNumberFromUser(){
+        System.out.print("Enter page number: ");
+        return Integer.parseInt(scr.nextLine());
+    }
+
+    private Integer getPageSizeFromUser(){
+        System.out.print("Enter page size: ");
+        return Integer.parseInt(scr.nextLine());
     }
 
 }
