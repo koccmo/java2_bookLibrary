@@ -1,6 +1,6 @@
 package lesson_1.product_fields;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 
 import java.util.Scanner;
 

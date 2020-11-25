@@ -1,6 +1,6 @@
 package lesson_2.user_interface.console.menu_items_handler;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 import lesson_1.product_fields.*;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package lesson_1.database;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 
 public interface InnerDatabase {
 

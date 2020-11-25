@@ -1,6 +1,6 @@
 package lesson_2.service;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 import lesson_2.database.InnerDatabase;
 
 public class AddProductService {
