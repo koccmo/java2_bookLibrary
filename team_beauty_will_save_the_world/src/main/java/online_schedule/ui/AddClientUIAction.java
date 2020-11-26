@@ -1,7 +1,7 @@
 package online_schedule.ui;
 
-import online_schedule.domain.PersonalData;
-import online_schedule.service.AddClientService;
+import online_schedule.core.domain.PersonalData;
+import online_schedule.core.service.AddClientService;
 
 public class AddClientUIAction {
 

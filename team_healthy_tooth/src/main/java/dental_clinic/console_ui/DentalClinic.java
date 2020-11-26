@@ -27,8 +27,12 @@ public class DentalClinic {
                 new FindPatientsByPersonalCodeService(patientDatabase);
         AddVisitValidator addVisitValidator = new AddVisitValidator();
         AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
+        CheckPatientByIdValidator checkPatientByIdValidator = new CheckPatientByIdValidator();
+        CheckPatientByIdService checkPatientByIdService = new CheckPatientByIdService(patientDatabase,checkPatientByIdValidator);
         SearchPatientRequestValidator searchPatientRequestValidator =new SearchPatientRequestValidator();
         SearchPatientService searchPatientService = new SearchPatientService(patientDatabase, searchPatientRequestValidator);
+        GetPatientCardRequestValidator getPatientCardRequestValidator = new GetPatientCardRequestValidator();
+        GetPatientCardService getPatientCardService = new GetPatientCardService(patientDatabase, getPatientCardRequestValidator);
 
         menuNumberToAction = new HashMap();
 
@@ -39,7 +43,8 @@ public class DentalClinic {
         menuNumberToAction.put(4, new PrintSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
         menuNumberToAction.put(5, new SearchPatientUIAction(searchPatientService));
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
-        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService));
+        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, checkPatientByIdService));
+        menuNumberToAction.put(8, new GetPatientCardUIAction(getPatientCardService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -64,6 +69,7 @@ public class DentalClinic {
                 "5   Search by name / surname\n" +
                 "6   Find patient by personal code\n" +
                 "7   Add visit\n" +
+                "8   Print patients card\n" +
                 "0   Exit");
     }
 

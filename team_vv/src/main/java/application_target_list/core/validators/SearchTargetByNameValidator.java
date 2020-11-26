@@ -15,7 +15,46 @@ public class SearchTargetByNameValidator {
             errors.add(new CoreError("Target name", "must not be empty!"));
         }
 
+        if (isPaging(request)){
+            if (!isPageNumberCorrect(request)) {
+                errors.add(new CoreError("Page number", "must be greater then 0!"));
+            }
+
+            if (isPageNumberEmpty(request)){
+                errors.add(new CoreError("Page number", "must not be empty"));
+            }
+
+            if (!isPageSizeCorrect(request)){
+                errors.add(new CoreError("Page size", "must be greater then 0!"));
+            }
+
+            if (isPageSizeEmpty(request)){
+                errors.add(new CoreError("Page size", "must not be empty"));
+            }
+
+        }
+
         return errors;
+    }
+
+    private boolean isPageNumberEmpty(SearchTargetByNameRequest request){
+        return request.getPaging().getPageNumber() == null;
+    }
+
+    private boolean isPageSizeEmpty(SearchTargetByNameRequest request){
+        return request.getPaging().getPageSize() == null;
+    }
+
+    private boolean isPageNumberCorrect(SearchTargetByNameRequest request){
+        return request.getPaging().getPageNumber() > 0;
+    }
+
+    private boolean isPageSizeCorrect(SearchTargetByNameRequest request){
+        return request.getPaging().getPageSize() > 0;
+    }
+
+    private boolean isPaging(SearchTargetByNameRequest request){
+        return request.getPaging() != null;
     }
 
     private boolean isTargetNameEmpty(SearchTargetByNameRequest request) {

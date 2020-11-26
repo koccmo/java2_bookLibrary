@@ -1,6 +1,7 @@
 package dental_clinic.core.services;
 
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.CoreError;
 import org.junit.Test;
@@ -21,7 +22,8 @@ public class AddVisitValidatorTest {
         List<CoreError> expectedErrors = new ArrayList<>();
         expectedErrors.add(new CoreError("id", "Not valid input of id"));
 
-        AddVisitRequest addVisitRequest = new AddVisitRequest(-1, 11, comment, ToothStatus.FASETE, "Zlo");
+        Visit newVisit = new Visit( 11, comment, ToothStatus.FASETE, "Zlo");
+        AddVisitRequest addVisitRequest = new AddVisitRequest(-1, newVisit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 
@@ -32,11 +34,11 @@ public class AddVisitValidatorTest {
     public void testNotValidInputToothNumber(){
         CoreError expectedError = new CoreError("tooth number", "Not valid input for tooth number");
 
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1, 2, comment, ToothStatus.FASETE, "Zlo");
+        Visit newVisit = new Visit(2, comment, ToothStatus.FASETE, "Zlo");
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1, newVisit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 
-        coreErrors.forEach(System.out::println);
         assertTrue(coreErrors.contains(expectedError));
     }
 
@@ -44,7 +46,8 @@ public class AddVisitValidatorTest {
     public void testNotValidInputDoctor(){
         CoreError expectedError = new CoreError("doctor", "Not valid input for doctor");
 
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1, 11, comment, ToothStatus.FASETE, "");
+        Visit visit = new Visit(11, comment, ToothStatus.FASETE, "");
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1, visit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 
@@ -54,7 +57,8 @@ public class AddVisitValidatorTest {
     @Test
     public void testValidInput(){
 
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1, 11, comment, ToothStatus.FASETE, "Doctor");
+        Visit visit = new Visit(11, comment, ToothStatus.FASETE, "Doctor");
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1, visit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 

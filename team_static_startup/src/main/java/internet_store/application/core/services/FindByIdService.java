@@ -4,7 +4,7 @@ import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.validators.FindByIdValidator;
-import internet_store.application.database.Database;
+import internet_store.application.core.database.Database;
 
 import java.util.List;
 

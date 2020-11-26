@@ -20,6 +20,10 @@ public class Patient {
         return jowl;
     }
 
+    public void setJowl(Jowl jowl) {
+        this.jowl = jowl;
+    }
+
     public List<Visit> getVisits() {
         return visits;
     }

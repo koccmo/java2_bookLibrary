@@ -1,6 +1,6 @@
 package lesson_1.database;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 import lesson_1.command_handler.AddProductCommand;
 import lesson_1.product_find_handler.FindProduct;
 

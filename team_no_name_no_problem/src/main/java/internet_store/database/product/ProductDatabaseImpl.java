@@ -48,6 +48,15 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public void changePrice(long id, Integer newPrice) {
+        for (int i = 0; i < productList.size(); i++){
+            if (id == productList.get(i).getId()){
+                productList.get(i).setPrice(newPrice);
+            }
+        }
+    }
+
+    @Override
     public List<Product> findAllByTitle(String title) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()))
