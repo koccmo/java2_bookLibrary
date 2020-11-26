@@ -1,4 +1,4 @@
-package application.bd;
+package application.database;
 
 import application.items.Product;
 
@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 public interface Database {
 
-    long add(String productName, String specification, double price);
+    long add(Product product);
 
-    boolean delete(long id);
+    void delete(long id);
 
     void delete(Predicate<Product> predicate);
 
@@ -21,5 +21,6 @@ public interface Database {
     List<Product> filter(Predicate<Product> predicate);
 
     List<Product> getList();
+
 
 }
