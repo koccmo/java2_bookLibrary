@@ -3,7 +3,7 @@ package book_library.core.services;
 import book_library.core.domain.Book;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
-import book_library.database.ElectronicLibrary;
+import book_library.core.database.ElectronicLibrary;
 
 import java.util.List;
 

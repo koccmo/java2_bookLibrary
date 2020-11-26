@@ -2,8 +2,8 @@ package book_library;
 
 import book_library.core.services.AddBookService;
 import book_library.core.services.AddBookValidator;
-import book_library.database.ElectronicLibrary;
-import book_library.database.ElectronicLibraryImpl;
+import book_library.core.database.ElectronicLibrary;
+import book_library.core.database.ElectronicLibraryImpl;
 import book_library.ui.*;
 
 import java.util.Scanner;
@@ -24,11 +24,11 @@ public class BookListApplication {
 
 
     public static void main(String[] args) {
-        do {
+        while (true) {
             applicationMenu();
             int menuValue = getMenuNumberFromUser();
             selectedMenu(menuValue);
-        } while (true);
+        }
     }
 
     private static void applicationMenu() {

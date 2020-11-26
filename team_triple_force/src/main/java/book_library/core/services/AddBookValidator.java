@@ -2,6 +2,8 @@ package book_library.core.services;
 
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,10 @@ public class AddBookValidator {
             errors.add(new CoreError("bookAuthor", "Must not be empty!"));
         }
 
+        BigDecimal bookPrice = request.getBookPrice();
+        if (bookPrice.compareTo(BigDecimal.ZERO) == 0) {
+            errors.add(new CoreError("bookPrice", "Must not be zero!"));
+        }
         return errors;
     }
 }

@@ -1,4 +1,4 @@
-package book_library.database;
+package book_library.core.database;
 
 import book_library.core.domain.Book;
 
@@ -37,6 +37,11 @@ public class ElectronicLibraryImpl implements ElectronicLibrary {
     @Override
     public void deleteBookByTitle(String bookTitle) {
         bookList.removeIf(books -> (books.getBookTitle().equals(bookTitle)));
+    }
+
+    @Override
+    public void deleteBookByAuthor(String bookAuthor) {
+        bookList.removeIf(books -> (books.getBookAuthor().equals(bookAuthor)));
     }
 
     @Override

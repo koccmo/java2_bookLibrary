@@ -1,10 +1,8 @@
 package book_library.ui;
 
-import book_library.core.domain.Book;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.services.AddBookService;
-import book_library.database.ElectronicLibrary;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

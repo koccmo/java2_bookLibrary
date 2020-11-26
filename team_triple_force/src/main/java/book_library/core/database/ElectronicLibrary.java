@@ -1,4 +1,4 @@
-package book_library.database;
+package book_library.core.database;
 
 import book_library.core.domain.Book;
 
@@ -13,6 +13,8 @@ public interface ElectronicLibrary {
     void deleteBookById(Long BookId);
 
     void deleteBookByTitle(String bookTitle);
+
+    void deleteBookByAuthor(String bookAuthor);
 
     List<Book> getElectronicLibrary();
 
