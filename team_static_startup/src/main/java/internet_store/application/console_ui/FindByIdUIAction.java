@@ -4,9 +4,7 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.FindByIdService;
-import internet_store.application.core.services.FindProductService;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 

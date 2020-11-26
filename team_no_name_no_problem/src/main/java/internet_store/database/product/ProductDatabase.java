@@ -19,7 +19,11 @@ public interface ProductDatabase {
 
     void changeDescription(long id, String newDescription);
 
-    Optional<Product> findAnyByTitle (String title);
+    void changePrice(long id, Integer newPrice);
 
     List<Product> findAllByTitle (String title);
+
+    List<Product> findAllByDescription (String description);
+
+    List<Product> findAllByTitleAndDescription (String title, String description);
 }

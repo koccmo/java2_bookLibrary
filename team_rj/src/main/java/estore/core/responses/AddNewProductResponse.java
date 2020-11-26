@@ -1,14 +1,23 @@
 package estore.core.responses;
 
+import estore.core.validation.CoreError;
 import estore.domain.Product;
 
-public class AddNewProductResponse {
+import java.util.List;
+
+public class AddNewProductResponse extends CoreResponse {
 
     private Product product;
-    private boolean SuccessfullyAdded;
+    private boolean successfullyAdded;
+
+    public AddNewProductResponse(List<CoreError> errors) {
+        super(errors);
+        this.successfullyAdded = false;
+    }
 
     public AddNewProductResponse(Product product) {
         this.product = product;
+        this.successfullyAdded = false;
     }
 
     public Product getProduct() {
@@ -16,10 +25,10 @@ public class AddNewProductResponse {
     }
 
     public boolean isSuccessfullyAdded() {
-        return SuccessfullyAdded;
+        return successfullyAdded;
     }
 
     public void setSuccessfullyAdded(boolean successfullyAdded) {
-        SuccessfullyAdded = successfullyAdded;
+        this.successfullyAdded = successfullyAdded;
     }
 }

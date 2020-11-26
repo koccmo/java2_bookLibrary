@@ -47,9 +47,25 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
+    public List<Patient> findPatientByName(String name) {
+        return patientList.stream()
+                .filter(patient -> patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Patient> findPatientsBySurname(String surname) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
+        return patientList.stream()
+                .filter(patient ->
+                        patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()) &&
+                                patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -61,18 +77,39 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void addVisit(long id, int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor) {
+    public void addVisit(long id, Visit newVisit) {
         for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
-                Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+                Visit visit =
+                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(), newVisit.getDoctor());
                 patientList.get(i).addVisit(visit);
-                patientList.get(i).updateJowl(toothNumber, toothStatus);
+                patientList.get(i).updateJowl(newVisit.getToothNumber(), newVisit.getToothStatus());
             }
         }
+    }
+
+    @Override
+    public Optional<Patient> getPatientCard(long id) {
+        return patientList.stream()
+                .filter(patient -> patient.getPersonalData().getId() == id)
+                .findAny();
     }
 
     private boolean isSpecificPatient (int index, long id) {
         return patientList.get(index).getPersonalData().getId() == id;
     }
+
+    @Override
+    public boolean checkPatientById(long id) {
+        boolean statusId = false;
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPersonalData().getId() == id){
+                statusId = true;
+
+            }
+        }
+        return statusId;
+    }
+
 
 }

@@ -4,7 +4,7 @@ import application_target_list.core.database.Database;
 import application_target_list.core.requests.ChangeTargetNameRequest;
 import application_target_list.core.responses.ChangeTargetNameResponse;
 import application_target_list.core.responses.CoreError;
-import application_target_list.core.services.validators.ChangeTargetNameValidator;
+import application_target_list.core.validators.ChangeTargetNameValidator;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ChangeTargetNameService {
     }
 
     public ChangeTargetNameResponse execute(ChangeTargetNameRequest request){
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request, database);
 
         if (!errors.isEmpty()) {
             return new ChangeTargetNameResponse(errors);

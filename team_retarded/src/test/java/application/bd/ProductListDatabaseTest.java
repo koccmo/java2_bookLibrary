@@ -91,6 +91,7 @@ class ProductListDatabaseTest {
         assertThat(subject.getList()).isEmpty();
     }
 
+    /*
     @Test
     void delete_by_price_range() {
         subject.add("Ball", "5size", 50.0);
@@ -106,7 +107,7 @@ class ProductListDatabaseTest {
         || product.getPrice().compareTo(new BigDecimal("70.0")) < 0);
 
 
-    }
+    }*/
 
     @Test
     void clear() {

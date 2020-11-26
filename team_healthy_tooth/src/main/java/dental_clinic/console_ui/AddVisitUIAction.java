@@ -1,9 +1,13 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.AddVisitRequest;
+import dental_clinic.core.requests.CheckPatientByIdRequest;
 import dental_clinic.core.responses.AddVisitResponse;
+import dental_clinic.core.responses.CheckPatientByIdResponse;
 import dental_clinic.core.services.AddVisitService;
+import dental_clinic.core.services.CheckPatientByIdService;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -11,10 +15,12 @@ import java.util.Scanner;
 class AddVisitUIAction implements UIAction {
 
     private AddVisitService addVisitService;
+    private CheckPatientByIdService checkPatientByIdService;
     //InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
-    public AddVisitUIAction(AddVisitService addVisitService) {
+    public AddVisitUIAction(AddVisitService addVisitService, CheckPatientByIdService checkPatientByIdService) {
         this.addVisitService = addVisitService;
+        this.checkPatientByIdService = checkPatientByIdService;
     }
 
     public void execute(){
@@ -23,30 +29,39 @@ class AddVisitUIAction implements UIAction {
         System.out.println("Please enter patient's id");
         long id = in.nextLong();
 
-        System.out.println("Please input tooth number");
-        int toothNumber = in.nextInt();
+        CheckPatientByIdRequest checkPatientByIdRequest = new CheckPatientByIdRequest(id);
+        CheckPatientByIdResponse checkPatientByIdResponse = checkPatientByIdService.execute( checkPatientByIdRequest );
 
-        System.out.println("Please input comment if necessary or press enter");
-        String commentIn = in.nextLine();
-        commentIn = in.nextLine();
-        Optional<String> comment = Optional.of(commentIn);
+        if (checkPatientByIdResponse.hasErrors()){
+            checkPatientByIdResponse.getErrors().forEach(System.out::println);
+        } else {
 
-        System.out.println("Please enter tooth status");
-        printToothStatuses();
-        int variant = in.nextInt();
-        ToothStatus toothStatus = inputToothStatus(variant);
+            System.out.println("Please input tooth number");
+            int toothNumber = in.nextInt();
 
-        System.out.println("Please enter doctor's name");
-        String doctor = in.nextLine();
-        doctor = in.nextLine();
+            System.out.println("Please input comment if necessary or press enter");
+            String commentIn = in.nextLine();
+            commentIn = in.nextLine();
+            Optional<String> comment = Optional.of(commentIn);
 
-        AddVisitRequest addVisitRequest = new AddVisitRequest(id, toothNumber, comment, toothStatus, doctor);
-        AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
+            System.out.println("Please enter tooth status");
+            printToothStatuses();
+            int variant = in.nextInt();
+            ToothStatus toothStatus = inputToothStatus(variant);
 
-        if (addVisitResponse.hasErrors()){
-            addVisitResponse.getErrors().forEach(System.out::println);
-        }else{
-            System.out.println("Visit added successfully!");
+            System.out.println("Please enter doctor's name");
+            String doctor = in.nextLine();
+            doctor = in.nextLine();
+
+            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
+            AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
+
+            if (addVisitResponse.hasErrors()) {
+                addVisitResponse.getErrors().forEach(System.out::println);
+            } else {
+                System.out.println("Visit added successfully!");
+            }
         }
 
     }

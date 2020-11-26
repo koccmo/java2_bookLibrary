@@ -2,7 +2,8 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.*;
-import internet_store.application.database.Database;
+import internet_store.application.core.services.validators.DeleteByProductIdValidator;
+import internet_store.application.core.database.Database;
 
 import java.util.List;
 

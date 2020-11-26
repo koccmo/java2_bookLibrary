@@ -2,6 +2,7 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.services.validators.DeleteByProductValidator;
 import org.junit.Before;
 import org.junit.Test;
 

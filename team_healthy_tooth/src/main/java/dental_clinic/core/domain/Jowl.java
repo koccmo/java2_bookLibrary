@@ -6,7 +6,7 @@ public class Jowl {
 
     private Map<Integer, List<ToothStatus>> jowl;
 
-    Jowl (){
+    public Jowl (){
         jowl = createNewJowl();
     }
 
@@ -44,6 +44,8 @@ public class Jowl {
         }
         return newJowl;
     }
+
+
 
     public boolean updateJowl(int toothNumber, ToothStatus toothStatus) {
         if (jowl.containsKey(toothNumber)) {

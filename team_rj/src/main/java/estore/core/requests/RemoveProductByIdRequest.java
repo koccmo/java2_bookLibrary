@@ -2,13 +2,13 @@ package estore.core.requests;
 
 public class RemoveProductByIdRequest {
 
-    private long productId;
+    private String productId;
 
-    public RemoveProductByIdRequest(long productId) {
+    public RemoveProductByIdRequest(String productId) {
         this.productId = productId;
     }
 
-    public long getProductId() {
+    public String getProductId() {
         return productId;
     }
 

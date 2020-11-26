@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class AddTargetUIAction implements UIAction {
 
-    private AddTargetService addTargetService;
+    private final AddTargetService addTargetService;
+    private final Scanner scr = new Scanner(System.in);
 
     public  AddTargetUIAction(AddTargetService addTargetService) {
         this.addTargetService = addTargetService;
@@ -20,32 +21,55 @@ public class AddTargetUIAction implements UIAction {
     @Override
     public void execute() {
 
-            Scanner scr = new Scanner(System.in);
+        while (true){
+            String targetName = getNameFromUser();
+            String targetDescription = getDescriptionFromUser();
+            Integer targetDeadline = getDeadlineFromUser();
 
-            System.out.print("Enter target name: ");
-            String targetName = scr.nextLine();
-
-            System.out.print("Enter target description: ");
-            String targetDescription = scr.nextLine();
-
-            System.out.print("Enter target deadline(days): ");
-            Integer targetDeadline = Integer.parseInt(scr.nextLine());
-
-
-            AddTargetRequest request = new AddTargetRequest(targetName, targetDescription, targetDeadline);
-            AddTargetResponse response = addTargetService.execute(request);
-
+            AddTargetRequest request = createRequest(targetName,targetDescription,targetDeadline);
+            AddTargetResponse response = createResponse(request);
 
             if (response.hasErrors()) {
-                System.out.println("----------");
-                for (CoreError errors : response.getErrorList()) {
-                    System.out.println("Error: " + errors.getField() + " " + errors.getMessage());
-                }
-                System.out.println("----------");
+                printResponseErrors(response);
             } else {
-                System.out.println("----------");
-                System.out.println("Your target was added to list.");
-                System.out.println("----------");
+                printResponseResultMessage();
+                break;
             }
+        }
+    }
+
+    private void printResponseResultMessage(){
+        System.out.println("----------");
+        System.out.println("Your target was added to list.");
+        System.out.println("----------");
+    }
+
+    private void printResponseErrors(AddTargetResponse response){
+        for (CoreError error : response.getErrorList()) {
+            System.out.println("Error: " + error.getField() + " " + error.getMessage());
+        }
+    }
+
+    private AddTargetResponse createResponse(AddTargetRequest request){
+        return addTargetService.execute(request);
+    }
+
+    private AddTargetRequest createRequest(String targetName, String targetDescription, Integer targetDeadline){
+        return new AddTargetRequest(targetName,targetDescription,targetDeadline);
+    }
+
+    private String getNameFromUser(){
+        System.out.print("Enter target name: ");
+        return scr.nextLine();
+    }
+
+    private String getDescriptionFromUser(){
+        System.out.print("Enter target description: ");
+        return scr.nextLine();
+    }
+
+    private Integer getDeadlineFromUser(){
+        System.out.print("Enter target deadline(days): ");
+        return Integer.parseInt(scr.nextLine());
     }
 }

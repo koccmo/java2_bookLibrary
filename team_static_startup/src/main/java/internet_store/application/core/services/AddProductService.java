@@ -3,10 +3,10 @@ package internet_store.application.core.services;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.AddProductResponse;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.database.Database;
+import internet_store.application.core.services.validators.AddProductValidator;
+import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class AddProductService {

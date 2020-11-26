@@ -15,21 +15,18 @@ public class InternetStoreBusinessSide {
 
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
     ProductDatabase productDatabase = new ProductDatabaseImpl();
+
     AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
     AddProductService addProductService = new AddProductService(productDatabase, addProductRequestValidator);
     DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
     DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductRequestValidator);
     GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
-    ChangeTitleRequestValidator changeTitleRequestValidator = new ChangeTitleRequestValidator();
-    ChangeTitleService changeTitleService = new ChangeTitleService(productDatabase, changeTitleRequestValidator);
-    ChangeDescriptionRequestValidator changeDescriptionRequestValidator = new ChangeDescriptionRequestValidator();
-    ChangeDescriptionService changeDescriptionService = new ChangeDescriptionService(productDatabase, changeDescriptionRequestValidator);
-    FindAnyByTitleRequestValidator findAnyByTitleRequestValidator = new FindAnyByTitleRequestValidator();
-    FindAnyByTitleService findAnyByTitleService = new FindAnyByTitleService(productDatabase, findAnyByTitleRequestValidator);
-    FindAllProductsByTitleRequestValidator findAllProductsByTitleRequestValidator = new FindAllProductsByTitleRequestValidator();
-    FindAllByTitleService findAllByTitleService = new FindAllByTitleService(productDatabase, findAllProductsByTitleRequestValidator);
     FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
     FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
+    SearchProductRequestValidator searchProductRequestValidator = new SearchProductRequestValidator();
+    SearchProductService searchProductService = new SearchProductService(productDatabase, searchProductRequestValidator);
+    ChangeProductValidator changeProductValidator = new ChangeProductValidator();
+    ChangeProductService changeProductService = new ChangeProductService(productDatabase, changeProductValidator);
 
     public InternetStoreBusinessSide() {
 
@@ -38,11 +35,9 @@ public class InternetStoreBusinessSide {
         menuNumberToAction.put(1, new AddProductUIAction(addProductService));
         menuNumberToAction.put(2, new DeleteByIdUIAction(deleteByIdService));
         menuNumberToAction.put(3, new GetAllProductsUIAction(getAllProductsService));
-        menuNumberToAction.put(4, new ChangeTitleUIAction(changeTitleService));
-        menuNumberToAction.put(5, new ChangeDescriptionUIAction(changeDescriptionService));
-        menuNumberToAction.put(6, new FindAnyByTitleUIAction(findAnyByTitleService));
-        menuNumberToAction.put(7, new FindAllByTitleUIAction(findAllByTitleService));
-        menuNumberToAction.put(8, new FindByIdUIAction(findProductByIdService));
+        menuNumberToAction.put(4, new FindByIdUIAction(findProductByIdService));
+        menuNumberToAction.put(5, new SearchProductUIAction(searchProductService));
+        menuNumberToAction.put(6, new ChangeProductUIAction(changeProductService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -63,11 +58,9 @@ public class InternetStoreBusinessSide {
                 "1   Add item\n" +
                 "2   Delete by id\n" +
                 "3   Print products\n" +
-                "4   Change title\n" +
-                "5   Change description\n" +
-                "6   Find any by title\n" +
-                "7   Find all by title\n" +
-                "8   Find product by id\n"+
+                "4   Find product by id\n"+
+                "5   Search product by title / description\n"+
+                "6   Change product\n"+
                 "0   Exit");
     }
 

@@ -8,7 +8,6 @@ import java.util.Optional;
 public class FindByIdResponse extends CoreResponse {
 
     private Optional<Product> productFoundById;
-    //private List<CoreError> errors;
 
     public FindByIdResponse(Optional<Product> productFoundById) {
         this.productFoundById = productFoundById;
