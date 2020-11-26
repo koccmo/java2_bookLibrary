@@ -7,20 +7,20 @@ import java.util.Optional;
 
 public class AddVisitRequest {
 
-    private long id;
+    private Long id;
     private Visit visit;
 
 
-    public AddVisitRequest(long id, Visit visit){
+    public AddVisitRequest(Long id, Visit visit){
         this.id = id;
         this.visit = visit;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public int getToothNumber() {
+    public Integer getToothNumber() {
         return visit.getToothNumber();
     }
 

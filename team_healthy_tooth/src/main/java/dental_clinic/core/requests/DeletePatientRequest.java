@@ -2,9 +2,9 @@ package dental_clinic.core.requests;
 
 public class DeletePatientRequest {
 
-    private long id;
+    private Long id;
 
-    public DeletePatientRequest(long id){
+    public DeletePatientRequest(Long id){
         this.id = id;
     }
 

@@ -12,7 +12,7 @@ public class GetPatientCardRequestValidator {
 
         List <CoreError> errors = new ArrayList<>();
 
-        if (getPatientCardRequest.getId() < 1){
+        if ((getPatientCardRequest.getId() == null) || (getPatientCardRequest.getId() < 1)){
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 

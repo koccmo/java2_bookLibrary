@@ -3,13 +3,13 @@ package dental_clinic.core.requests;
 
 public class CheckPatientByIdRequest {
 
-    private long id;
+    private Long id;
 
-    public CheckPatientByIdRequest(long id) {
+    public CheckPatientByIdRequest(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 

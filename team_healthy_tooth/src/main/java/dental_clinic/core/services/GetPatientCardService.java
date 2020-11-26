@@ -38,7 +38,7 @@ public class GetPatientCardService {
         return new GetPatientCardResponse(patientCard);
     }
     
-    private Optional<Patient> getPatientWithSpecificId(long id){
+    private Optional<Patient> getPatientWithSpecificId(Long id){
         return patientDatabase.getPatients().stream()
                 .filter(patient -> patient.getPersonalData().getId() == id)
                 .findAny();

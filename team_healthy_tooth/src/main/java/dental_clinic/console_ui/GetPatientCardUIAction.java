@@ -20,7 +20,7 @@ public class GetPatientCardUIAction implements UIAction{
         Scanner in = new Scanner(System.in);
 
         System.out.println("Please enter patient id");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(id);
         GetPatientCardResponse getPatientCardResponse = getPatientCardService.execute(getPatientCardRequest);

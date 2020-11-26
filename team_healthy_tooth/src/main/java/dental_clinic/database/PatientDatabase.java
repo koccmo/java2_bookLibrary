@@ -14,9 +14,9 @@ public interface PatientDatabase {
 
     void addPatient(PersonalData personalData);
 
-    void deletePatient(long id);
+    void deletePatient(Long id);
 
-    Optional <Patient> getSpecificPatientHistory(long id);
+    Optional <Patient> getSpecificPatientHistory(Long id);
 
     List<Patient> findPatientByName(String name);
 
@@ -26,9 +26,9 @@ public interface PatientDatabase {
 
     List<Patient> findPatientsByPersonalCode(String personalCode);
 
-    void addVisit(long id, Visit newVisit);
+    void addVisit(Long id, Visit newVisit);
 
-    boolean  checkPatientById(long id);
+    boolean  checkPatientById(Long id);
 
-    Optional<Patient> getPatientCard(long id);
+    Optional<Patient> getPatientCard(Long id);
 }

@@ -5,13 +5,13 @@ import java.util.List;
 
 public class DeletePatientResponse extends CoreResponse{
 
-    private long id;
+    private Long id;
 
     public DeletePatientResponse(List<CoreError> errors){
         super(errors);
     }
 
-    public DeletePatientResponse(long id){
+    public DeletePatientResponse(Long id){
         this.id = id;
     }
 
