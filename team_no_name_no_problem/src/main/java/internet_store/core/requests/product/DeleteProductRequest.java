@@ -2,13 +2,13 @@ package internet_store.core.requests.product;
 
 public class DeleteProductRequest {
 
-    private long id;
+    private Long id;
 
-    public DeleteProductRequest(long id){
+    public DeleteProductRequest(Long id){
         this.id = id;
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 

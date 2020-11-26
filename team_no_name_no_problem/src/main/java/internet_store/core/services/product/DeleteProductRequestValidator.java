@@ -12,7 +12,7 @@ public class DeleteProductRequestValidator {
 
         List<CoreError> errors = new ArrayList<>();
 
-        if (deleteProductRequest.getId() < 1){
+        if ((deleteProductRequest.getId() == null) || (deleteProductRequest.getId() < 1)){
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 
