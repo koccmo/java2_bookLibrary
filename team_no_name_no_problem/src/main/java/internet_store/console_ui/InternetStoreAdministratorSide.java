@@ -9,7 +9,7 @@ import internet_store.database.product.ProductDatabaseImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InternetStoreBusinessSide {
+public class InternetStoreAdministratorSide {
 
     private Map<Integer, UIAction> menuNumberToAction;
 
@@ -28,7 +28,7 @@ public class InternetStoreBusinessSide {
     ChangeProductValidator changeProductValidator = new ChangeProductValidator();
     ChangeProductService changeProductService = new ChangeProductService(productDatabase, changeProductValidator);
 
-    public InternetStoreBusinessSide() {
+    public InternetStoreAdministratorSide() {
 
         menuNumberToAction = new HashMap();
 

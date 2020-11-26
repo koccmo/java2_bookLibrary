@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ChangeProductResponse extends CoreResponse {
 
-    private long id;
+    private Long id;
 
-    public ChangeProductResponse(long id) {
+    public ChangeProductResponse(Long id) {
         this.id = id;
     }
 
@@ -17,7 +17,7 @@ public class ChangeProductResponse extends CoreResponse {
         super(errors);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 }

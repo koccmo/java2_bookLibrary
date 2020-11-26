@@ -27,7 +27,7 @@ public class AddProductUIAction implements UIAction {
         String description = in.nextLine();
 
         System.out.println("Please enter product's price");
-        int price = in.nextInt();
+        Integer price = in.nextInt();
 
         Product newProduct = new Product(title, description, price);
 

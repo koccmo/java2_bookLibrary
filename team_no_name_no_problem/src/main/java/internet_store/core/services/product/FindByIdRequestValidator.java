@@ -11,7 +11,7 @@ public class FindByIdRequestValidator {
     public List<CoreError> validate (FindByIdRequest findByIdRequest){
         List<CoreError>errors = new ArrayList<>();
 
-        if (findByIdRequest.getId() < 1){
+        if ((findByIdRequest.getId() == null) || (findByIdRequest.getId() < 1)){
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 
