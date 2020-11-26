@@ -1,14 +1,14 @@
-package internet_store.lesson_3.core.services;
+package internet_store.application.core.services.validators;
 
-import internet_store.lesson_3.core.requests.DeleteByProductNameRequest;
-import internet_store.lesson_3.core.responses.CoreError;
-import internet_store.lesson_3.core.services.validators.DeleteByProductNameValidator;
+import internet_store.application.core.requests.DeleteByProductNameRequest;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.services.validators.DeleteByProductNameValidator;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DeleteByProductNameValidatorTest {
 

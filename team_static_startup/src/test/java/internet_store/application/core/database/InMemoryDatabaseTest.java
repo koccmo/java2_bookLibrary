@@ -1,7 +1,7 @@
-package internet_store.lesson_3;
+package internet_store.application.core.database;
 
-import internet_store.lesson_3.core.domain.Product;
-import internet_store.lesson_3.database.InMemoryDatabase;
+import internet_store.application.core.database.InMemoryDatabase;
+import internet_store.application.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
