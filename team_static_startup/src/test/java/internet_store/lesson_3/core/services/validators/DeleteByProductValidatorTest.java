@@ -1,15 +1,15 @@
-package internet_store.application.core.services;
+package internet_store.lesson_3.core.services.validators;
 
-import internet_store.application.core.requests.DeleteByProductRequest;
-import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.services.validators.DeleteByProductValidator;
+import internet_store.lesson_3.core.requests.DeleteByProductRequest;
+import internet_store.lesson_3.core.responses.CoreError;
+import internet_store.lesson_3.core.services.validators.DeleteByProductValidator;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DeleteByProductValidatorTest {
 
