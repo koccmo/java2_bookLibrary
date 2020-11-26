@@ -19,7 +19,7 @@ public interface Database {
 
     List<Product> getProductList();
 
-    Optional<Product> findById(Long id);
+    Optional<Product>findById(Long id);
 
     boolean changeProductName(Long id, String newName);
 }
