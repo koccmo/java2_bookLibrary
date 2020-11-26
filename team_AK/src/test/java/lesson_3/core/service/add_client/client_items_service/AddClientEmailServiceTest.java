@@ -1,6 +1,7 @@
 package lesson_3.core.service.add_client.client_items_service;
 
 
+/*
 import lesson_3.core.request.add_client.client_items.AddClientEmailRequest;
 import lesson_3.core.response.add_client.client_items.AddClientEmailResponse;
 import org.junit.Test;
@@ -58,4 +59,4 @@ public class AddClientEmailServiceTest {
         assertTrue(response.hasErrors());
         assertEquals("email unsupported format", response.getErrors().get(0).getMessage());
     }
-}
+}*/
