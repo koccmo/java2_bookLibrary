@@ -5,19 +5,19 @@ import java.util.Optional;
 
 public class Visit {
 
-    private int toothNumber;
+    private Integer toothNumber;
     private Optional<String> comment;
     ToothStatus toothStatus;
     private String doctor;
 
-    public Visit (int toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor){
+    public Visit (Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor){
         this.toothNumber = toothNumber;
         this.comment = comment;
         this.toothStatus = toothStatus;
         this.doctor = doctor;
     }
 
-    public int getToothNumber() {
+    public Integer getToothNumber() {
         return toothNumber;
     }
 

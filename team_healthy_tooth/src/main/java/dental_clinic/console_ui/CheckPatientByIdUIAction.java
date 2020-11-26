@@ -9,7 +9,6 @@ import java.util.Scanner;
 class CheckPatientByIdUIAction implements UIAction {
 
     private CheckPatientByIdService checkPatientByIdService;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public CheckPatientByIdUIAction(CheckPatientByIdService checkPatientById) {
         this.checkPatientByIdService = checkPatientById;

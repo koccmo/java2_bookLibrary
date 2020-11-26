@@ -2,13 +2,13 @@ package dental_clinic.core.requests;
 
 public class GetPatientCardRequest {
 
-    private long id;
+    private Long id;
 
-    public GetPatientCardRequest(long id) {
+    public GetPatientCardRequest(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 }

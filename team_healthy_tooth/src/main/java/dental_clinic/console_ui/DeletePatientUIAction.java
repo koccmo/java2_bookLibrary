@@ -9,7 +9,6 @@ import java.util.Scanner;
 class DeletePatientUIAction implements UIAction {
 
     private DeletePatientService deletePatientService;
-    //InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public DeletePatientUIAction(DeletePatientService deletePatientService) {
         this.deletePatientService = deletePatientService;
@@ -19,7 +18,7 @@ class DeletePatientUIAction implements UIAction {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter patients id");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         DeletePatientRequest deletePatientRequest = new DeletePatientRequest(id);
         DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);

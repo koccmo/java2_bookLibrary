@@ -51,20 +51,20 @@ public class PatientDatabaseImplTest {
     @Test
     public void testDeletePatient(){
         assertTrue(patientDatabase.getPatients().size() == 1);
-        patientDatabase.deletePatient(7);
+        patientDatabase.deletePatient(7L);
         assertTrue(patientDatabase.getPatients().size() == 1);
-        patientDatabase.deletePatient(1);
+        patientDatabase.deletePatient(1L);
         assertFalse(patientDatabase.getPatients().contains(personalData1));
         assertTrue(patientDatabase.getPatients().size() == 0);
     }
 
     @Test
     public void testGetSpecificPatientHistory(){
-        assertTrue(patientDatabase.getSpecificPatientHistory(1).isPresent());
-        assertTrue(patientDatabase.getSpecificPatientHistory(8).isEmpty());
+        assertTrue(patientDatabase.getSpecificPatientHistory(1L).isPresent());
+        assertTrue(patientDatabase.getSpecificPatientHistory(8L).isEmpty());
 
         Patient patient = new Patient(personalData1);
-        assertTrue(patientDatabase.getSpecificPatientHistory(1).get().equals(patient));
+        assertTrue(patientDatabase.getSpecificPatientHistory(1L).get().equals(patient));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class PatientDatabaseImplTest {
     @Test
     public void testAddVisitJowlData(){
         Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
-        patientDatabase.addVisit(1, newVisit);
+        patientDatabase.addVisit(1L, newVisit);
 
         List <ToothStatus> expectedList = new ArrayList<>();
         expectedList.add(ToothStatus.HEALTHY);
@@ -101,7 +101,7 @@ public class PatientDatabaseImplTest {
     @Test
     public void testAddVisitVisitData(){
         Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
-        patientDatabase.addVisit(1, newVisit);
+        patientDatabase.addVisit(1L, newVisit);
 
         assertTrue(patientDatabase.getPatients().get(0).getVisits().size() == 1);
         assertTrue(patientDatabase.getPatients().get(0).getVisits().get(0).getToothNumber() == 11);

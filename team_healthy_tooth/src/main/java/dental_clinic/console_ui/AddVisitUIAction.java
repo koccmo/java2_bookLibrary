@@ -16,7 +16,6 @@ class AddVisitUIAction implements UIAction {
 
     private AddVisitService addVisitService;
     private CheckPatientByIdService checkPatientByIdService;
-    //InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public AddVisitUIAction(AddVisitService addVisitService, CheckPatientByIdService checkPatientByIdService) {
         this.addVisitService = addVisitService;
@@ -27,7 +26,7 @@ class AddVisitUIAction implements UIAction {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Please enter patient's id");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         CheckPatientByIdRequest checkPatientByIdRequest = new CheckPatientByIdRequest(id);
         CheckPatientByIdResponse checkPatientByIdResponse = checkPatientByIdService.execute( checkPatientByIdRequest );
@@ -37,7 +36,7 @@ class AddVisitUIAction implements UIAction {
         } else {
 
             System.out.println("Please input tooth number");
-            int toothNumber = in.nextInt();
+            Integer toothNumber = in.nextInt();
 
             System.out.println("Please input comment if necessary or press enter");
             String commentIn = in.nextLine();
@@ -46,7 +45,7 @@ class AddVisitUIAction implements UIAction {
 
             System.out.println("Please enter tooth status");
             printToothStatuses();
-            int variant = in.nextInt();
+            Integer variant = in.nextInt();
             ToothStatus toothStatus = inputToothStatus(variant);
 
             System.out.println("Please enter doctor's name");

@@ -12,18 +12,13 @@ public class AddVisitValidator {
 
         List <CoreError> coreErrors = new ArrayList<>();
 
-        if (addVisitRequest.getId() < 1){
+        if ((addVisitRequest == null) || (addVisitRequest.getId() < 1)){
             coreErrors.add(new CoreError("id", "Not valid input of id"));
         }
 
         if (!isValidToothNumber(addVisitRequest.getToothNumber())){
             coreErrors.add(new CoreError("tooth number", "Not valid input for tooth number"));
         }
-
-        /*TODO
-        if (){
-            coreErrors.add(new CoreError("Tooth status", "Not valid input for tooth status"));
-        }*/
 
         if (addVisitRequest.getDoctor() == null || addVisitRequest.getDoctor().isEmpty()){
             coreErrors.add(new CoreError("doctor", "Not valid input for doctor"));

@@ -13,7 +13,8 @@ public class CheckPatientByIdValidator {
 
         Long id = request.getId();
 
-        if ( id<0 ) {
+        if ((id == null) || (id < 1)) {
+
             errorsResult.add(new CoreError("id = ",
                     "Invalid input patient ID!"));
         }

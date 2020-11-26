@@ -28,7 +28,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void deletePatient(long id) {
+    public void deletePatient(Long id) {
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
                 patientList.remove(i);
@@ -37,7 +37,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public Optional <Patient> getSpecificPatientHistory(long id) {
+    public Optional <Patient> getSpecificPatientHistory(Long id) {
             for (int i = 0; i < patientList.size(); i++){
                 if (isSpecificPatient(i, id)){
                     return Optional.of(patientList.get(i));
@@ -77,7 +77,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void addVisit(long id, Visit newVisit) {
+    public void addVisit(Long id, Visit newVisit) {
         for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
                 Visit visit =
@@ -89,18 +89,18 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public Optional<Patient> getPatientCard(long id) {
+    public Optional<Patient> getPatientCard(Long id) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getId() == id)
                 .findAny();
     }
 
-    private boolean isSpecificPatient (int index, long id) {
+    private boolean isSpecificPatient (int index, Long id) {
         return patientList.get(index).getPersonalData().getId() == id;
     }
 
     @Override
-    public boolean checkPatientById(long id) {
+    public boolean checkPatientById(Long id) {
         boolean statusId = false;
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){

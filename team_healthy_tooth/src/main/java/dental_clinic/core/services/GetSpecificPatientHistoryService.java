@@ -4,7 +4,6 @@ import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.core.domain.Patient;
 
 import java.util.List;
 import java.util.Optional;
