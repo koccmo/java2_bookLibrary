@@ -1,4 +1,4 @@
-package internet_store.lesson_3.core.services;
+package internet_store.lesson_3.core.services.validators;
 
 import internet_store.lesson_3.core.requests.AddProductRequest;
 import internet_store.lesson_3.core.responses.CoreError;
