@@ -97,5 +97,6 @@ public class ClientDatabaseImpl implements ClientDatabase{
     @Override
     public void addVisit(Visit visit) {
 
+
     }
 }
