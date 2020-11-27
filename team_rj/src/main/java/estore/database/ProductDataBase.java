@@ -7,6 +7,8 @@ public interface ProductDataBase {
 
     List<Product> searchProductByName(String name);
 
+    List<Product> searchProductByCategory(String category);
+
     boolean addNewProduct(Product product);
 
     int removeProductByName(String name);
