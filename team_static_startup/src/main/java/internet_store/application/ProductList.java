@@ -22,8 +22,8 @@ class ProductList {
     AddProductService addProductService = new AddProductService(database, addProductValidator);
     FindByIdService findByIdService = new FindByIdService(database, findByIdValidator);
     GetProductListService getProductListService = new GetProductListService(database);
-    DeleteProductService deleteByNameService = new DeleteProductService(database, deleteByNameValidator);
-    DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
+    DeleteProductByNameService deleteByNameService = new DeleteProductByNameService(database, deleteByNameValidator);
+    DeleteProductByProductService deleteProductByProductService = new DeleteProductByProductService(database, deleteByProductValidator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database, changeProductNameValidator);
     PagingProductsService pagingProductsService = new PagingProductsService();
@@ -38,7 +38,7 @@ class ProductList {
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, new AddProductUIAction(addProductService));
         menuNumberToActionMap.put(2, new DeleteByIdUIAction(deleteByProductIdService));
-        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteByProductService));
+        menuNumberToActionMap.put(3, new DeleteByProductUIAction(deleteProductByProductService));
         menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(deleteByNameService));
         menuNumberToActionMap.put(5, new PrintProductsToConsoleUIAction(getProductListService));
         menuNumberToActionMap.put(6, new FindProductsUIAction(findProductsService));

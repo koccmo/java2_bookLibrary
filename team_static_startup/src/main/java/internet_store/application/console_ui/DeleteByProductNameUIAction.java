@@ -2,16 +2,16 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
-import internet_store.application.core.services.DeleteProductService;
+import internet_store.application.core.services.DeleteProductByNameService;
 
 import java.util.Scanner;
 
 public class DeleteByProductNameUIAction implements UIAction {
 
-    private final DeleteProductService deleteProductService;
+    private final DeleteProductByNameService deleteProductByNameService;
 
-    public DeleteByProductNameUIAction(DeleteProductService deleteProductService) {
-        this.deleteProductService = deleteProductService;
+    public DeleteByProductNameUIAction(DeleteProductByNameService deleteProductByNameService) {
+        this.deleteProductByNameService = deleteProductByNameService;
     }
 
     public void execute() {
@@ -20,7 +20,7 @@ public class DeleteByProductNameUIAction implements UIAction {
         System.out.print("Enter product name : ");
         String productName = myInput.nextLine();
         DeleteByProductNameRequest request = new DeleteByProductNameRequest(productName);
-        DeleteByProductNameResponse response = deleteProductService.deleteByProductName(request);
+        DeleteByProductNameResponse response = deleteProductByNameService.deleteByProductName(request);
 
         if (response.hasErrors()){
             response.getErrors().forEach(coreError ->

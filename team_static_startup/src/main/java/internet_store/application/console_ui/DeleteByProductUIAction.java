@@ -2,19 +2,18 @@ package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.DeleteByProductRequest;
-import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductResponse;
-import internet_store.application.core.services.DeleteProductService;
+import internet_store.application.core.services.DeleteProductByProductService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class DeleteByProductUIAction implements UIAction {
 
-    private final DeleteProductService deleteProductService;
+    private final DeleteProductByProductService deleteProductByProductService;
 
-    public DeleteByProductUIAction(DeleteProductService deleteProductService) {
-        this.deleteProductService = deleteProductService;
+    public DeleteByProductUIAction(DeleteProductByProductService deleteProductByProductService) {
+        this.deleteProductByProductService = deleteProductByProductService;
     }
 
     public void execute() {
@@ -27,11 +26,11 @@ public class DeleteByProductUIAction implements UIAction {
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
         DeleteByProductRequest request = new DeleteByProductRequest(productName, productDescription, productPrice);
-        DeleteByProductResponse response = deleteProductService.deleteByProduct(request);
+        DeleteByProductResponse response = deleteProductByProductService.deleteByProduct(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
-                System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
             );
         } else {
             System.out.println("\nProduct deleted\n"
@@ -40,7 +39,7 @@ public class DeleteByProductUIAction implements UIAction {
                     + response.getDeletedProduct().getPrice() + " EUR");
         }
 
-        boolean productDeleted = deleteProductService.delete(new Product(productName, productDescription, productPrice));
+        boolean productDeleted = deleteProductByProductService.delete(new Product(productName, productDescription, productPrice));
         if (productDeleted) {
             System.out.println("\nProduct deleted");
         } else {

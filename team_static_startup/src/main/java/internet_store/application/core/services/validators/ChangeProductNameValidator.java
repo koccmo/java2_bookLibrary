@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ChangeProductNameValidator {
 
-
     public List<CoreError> validate(ChangeProductNameRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
