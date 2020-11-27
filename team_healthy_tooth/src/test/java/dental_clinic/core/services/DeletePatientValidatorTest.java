@@ -16,7 +16,7 @@ public class DeletePatientValidatorTest {
     public void testNotValidId(){
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
-        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(-8);
+        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(-8L);
         List<CoreError> errors = deletePatientValidator.validate(deletePatientRequest);
 
         assertTrue(errors.size() == 1);
@@ -26,7 +26,7 @@ public class DeletePatientValidatorTest {
     @Test
     public void testValidId(){
 
-        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(1);
+        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(1L);
         List<CoreError> errors = deletePatientValidator.validate(deletePatientRequest);
 
         assertTrue(errors.isEmpty());

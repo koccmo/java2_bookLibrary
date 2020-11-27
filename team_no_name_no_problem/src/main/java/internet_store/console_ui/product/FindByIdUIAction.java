@@ -20,7 +20,7 @@ public class FindByIdUIAction implements UIAction {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Please enter id");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         FindByIdRequest findByIdRequest = new FindByIdRequest(id);
         FindByIdResponse findByIdResponse = findProductByIdService.execute(findByIdRequest);

@@ -1,6 +1,6 @@
 package lesson_2.user_interface.console;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 import lesson_1.menu.MainMenu;
 import lesson_1.user_handler.UserInputValue;
 import lesson_2.ProductListApplication;

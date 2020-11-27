@@ -13,6 +13,7 @@ public class MenuUIAction implements UIAction {
         System.out.println("[2] Add target");
         System.out.println("[3] Delete target");
         System.out.println("[4] Change target parameters");
+        System.out.println("[5] Search target");
         System.out.println("[0] Quit");
     }
 }

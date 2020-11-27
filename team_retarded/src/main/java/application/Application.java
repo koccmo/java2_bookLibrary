@@ -1,9 +1,9 @@
 package application;
 
-import application.bd.Database;
-import application.bd.ProductListDatabase;
 import application.core.services.*;
 import application.core.services.validators.*;
+import application.database.Database;
+import application.database.ProductListDatabase;
 import application.ui.*;
 
 import java.util.Scanner;
@@ -18,6 +18,7 @@ public class Application {
     private static UIAction getListUIAction;
     private static UIAction filterByPriceMinMax;
     private static UIAction clearUIAction;
+    private static UIAction searchProductUIAction;
 
 
     public static void main(String[] args) {
@@ -28,11 +29,12 @@ public class Application {
                 case 0 -> exitUIAction.execute();
                 case 1 -> getListUIAction.execute();
                 case 2 -> getByIdUIAction.execute();
-                case 3 -> filterByNameUIAction.execute();
+                case 3 -> searchProductUIAction.execute();
                 case 4 -> addProductUIAction.execute();
                 case 5 -> deleteUIAction.execute();
                 case 6 -> clearUIAction.execute();
                 case 7 -> filterByPriceMinMax.execute();
+                case 8 -> filterByNameUIAction.execute();
             }
         }
 
@@ -54,7 +56,7 @@ public class Application {
         filterByPriceMinMax = new FilterProductsByPriceUIAction(filterProductsByPriceService);
 
         GetProductByIdValidator getProductByIdValidator = new GetProductByIdValidator();
-        GetProductByIdService getProductByIdService = new GetProductByIdService(db,getProductByIdValidator);
+        GetProductByIdService getProductByIdService = new GetProductByIdService(db, getProductByIdValidator);
         getByIdUIAction = new GetProductByIdUIAction(getProductByIdService);
 
 
@@ -70,6 +72,9 @@ public class Application {
         ClearAllProductsService clearAllProductsService = new ClearAllProductsService(db);
         clearUIAction = new ClearAllProductsUIAction(clearAllProductsService);
 
+        SearchProductValidator searchProductValidator = new SearchProductValidator();
+        SearchProductService searchProductService = new SearchProductService(db, searchProductValidator);
+        searchProductUIAction = new SearchProductUIAction(searchProductService);
 
     }
 
@@ -78,11 +83,12 @@ public class Application {
         System.out.println("Internet Store MENU:");
         System.out.println("[1] - Show all products");
         System.out.println("[2] - Search by ID");
-        System.out.println("[3] - Filter by name");
+        System.out.println("[3] - Search product");
         System.out.println("[4] - Add product");
         System.out.println("[5] - Delete product");
         System.out.println("[6] - Delete All products");
         System.out.println("[7] - Filter by price");
+        System.out.println("[8] - Filter by names");
         System.out.println("[0] - Exit");
         System.out.println("==========================");
     }

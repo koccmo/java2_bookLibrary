@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="application.database.ProductListDatabaseTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-11-26T15:21:00" hostname="PC" time="0.01">
+  <properties/>
+  <testcase name="filter_by_price()" classname="application.database.ProductListDatabaseTest" time="0.002"/>
+  <testcase name="filter_by_name()" classname="application.database.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="delete_by_id()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="delete_by_predicate()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="filter_by_price_range()" classname="application.database.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="add()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="delete_by_price_range()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="clear()" classname="application.database.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="filter_by_description()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="delete_by_name()" classname="application.database.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="delete_by_price()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <testcase name="delete_by_description()" classname="application.database.ProductListDatabaseTest" time="0.0"/>
+  <testcase name="get_by_id()" classname="application.database.ProductListDatabaseTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -4,7 +4,7 @@ import book_library.core.domain.Book;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
-import book_library.database.ElectronicLibrary;
+import book_library.core.database.ElectronicLibrary;
 
 import java.util.List;
 

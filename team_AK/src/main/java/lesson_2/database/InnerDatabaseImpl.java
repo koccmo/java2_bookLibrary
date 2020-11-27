@@ -1,6 +1,6 @@
 package lesson_2.database;
 
-import internet_store.domain.Product;
+import internet_store.core.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,9 +12,9 @@ public class GetSpecificPatientValidator {
 
         List <CoreError> errors = new ArrayList<>();
 
-        long id = getSpecificPatientHistoryRequest.getId();
+        Long id = getSpecificPatientHistoryRequest.getId();
 
-        if (id < 1){
+        if ((id == null) || (id < 1)){
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 

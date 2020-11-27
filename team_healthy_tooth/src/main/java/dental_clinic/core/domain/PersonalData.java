@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class PersonalData {
 
-    long id;
+    private Long id;
     private final String name;
     private String surname;
     private String phone;
@@ -19,7 +19,7 @@ public class PersonalData {
 
     }
 
-    public long getId (){
+    public Long getId (){
         return id;
     }
 
@@ -39,7 +39,7 @@ public class PersonalData {
         return personalCode;
     }
 
-    public void setId (long id){
+    public void setId (Long id){
         this.id = id;
     }
 

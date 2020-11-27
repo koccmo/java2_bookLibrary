@@ -25,12 +25,12 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         productList.removeIf(product -> product.getId() == id);
     }
 
     @Override
-    public void changeTitle(long id, String newTitle) {
+    public void changeTitle(Long id, String newTitle) {
         for (int i = 0; i < productList.size(); i++){
             if (productList.get(i).getId() == id) {
                 productList.get(i).setTitle(newTitle);
@@ -39,10 +39,19 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void changeDescription(long id, String newDescription) {
+    public void changeDescription(Long id, String newDescription) {
         for (int i = 0; i < productList.size(); i++){
             if (id == productList.get(i).getId()){
                 productList.get(i).setDescription(newDescription);
+            }
+        }
+    }
+
+    @Override
+    public void changePrice(Long id, Integer newPrice) {
+        for (int i = 0; i < productList.size(); i++){
+            if (id == productList.get(i).getId()){
+                productList.get(i).setPrice(newPrice);
             }
         }
     }

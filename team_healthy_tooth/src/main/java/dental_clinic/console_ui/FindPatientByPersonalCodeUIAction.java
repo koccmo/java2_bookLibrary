@@ -15,7 +15,6 @@ class FindPatientByPersonalCodeUIAction implements UIAction {
     }
 
     public void execute(){
-
         String personalCode = inputCheckUtility.inputValidPersonalCode("Please enter personal code");
 
         List<Patient> result = findPatientByPersonalCode.execute(personalCode);
@@ -25,7 +24,6 @@ class FindPatientByPersonalCodeUIAction implements UIAction {
         }else{
             result.forEach(System.out::println);
         }
-
     }
 
 }

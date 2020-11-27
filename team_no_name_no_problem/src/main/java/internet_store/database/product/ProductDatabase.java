@@ -11,13 +11,15 @@ public interface ProductDatabase {
 
     void add(Product product);
 
-    void deleteById(long id);
+    void deleteById(Long id);
 
     Optional<Product> findById(Long id);
 
-    void changeTitle(long id, String newTitle);
+    void changeTitle(Long id, String newTitle);
 
-    void changeDescription(long id, String newDescription);
+    void changeDescription(Long id, String newDescription);
+
+    void changePrice(Long id, Integer newPrice);
 
     List<Product> findAllByTitle (String title);
 

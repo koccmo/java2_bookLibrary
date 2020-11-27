@@ -16,7 +16,7 @@ public class GetSpecificPatientValidatorTest {
     public void testNotValidId(){
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
-        GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(-8);
+        GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(-8L);
         List<CoreError> errors = getSpecificPatientValidator.validate(getSpecificPatientHistoryRequest);
 
         assertTrue(errors.size() == 1);
@@ -26,7 +26,7 @@ public class GetSpecificPatientValidatorTest {
     @Test
     public void testValidId(){
 
-        GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(2);
+        GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(2L);
         List<CoreError> errors = getSpecificPatientValidator.validate(getSpecificPatientHistoryRequest);
 
         assertTrue(errors.isEmpty());

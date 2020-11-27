@@ -17,7 +17,7 @@ class PrintSpecificPatientHistoryUIAction implements UIAction {
     public void execute(){
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter patient id");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(id);
         GetSpecificPatientHistoryResponse getSpecificPatientHistoryResponse = printSpecificPatientHistory.execute(getSpecificPatientHistoryRequest);
