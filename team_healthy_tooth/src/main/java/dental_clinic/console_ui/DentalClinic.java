@@ -33,6 +33,8 @@ public class DentalClinic {
         SearchPatientService searchPatientService = new SearchPatientService(patientDatabase, searchPatientRequestValidator);
         GetPatientCardRequestValidator getPatientCardRequestValidator = new GetPatientCardRequestValidator();
         GetPatientCardService getPatientCardService = new GetPatientCardService(patientDatabase, getPatientCardRequestValidator);
+        ChangePersonalDataValidator changePersonalDataValidator = new ChangePersonalDataValidator();
+        ChangePersonalDataService changePersonalDataService = new ChangePersonalDataService(patientDatabase, changePersonalDataValidator);
 
         menuNumberToAction = new HashMap();
 
@@ -45,6 +47,7 @@ public class DentalClinic {
         menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
         menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, checkPatientByIdService));
         menuNumberToAction.put(8, new GetPatientCardUIAction(getPatientCardService));
+        menuNumberToAction.put(9, new ChangePersonalDataUiAction(changePersonalDataService, checkPatientByIdService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -70,6 +73,7 @@ public class DentalClinic {
                 "6   Find patient by personal code\n" +
                 "7   Add visit\n" +
                 "8   Print patients card\n" +
+                "9   Change patient's personal data\n" +
                 "0   Exit");
     }
 
