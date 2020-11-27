@@ -56,6 +56,17 @@ public class ProductDataBaseImplementation implements ProductDataBase {
     }
 
     @Override
+    public List<Product> searchProductByCategory(String category) {
+        List<Product> foundProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getCategory().toLowerCase().equals(category.toLowerCase())) {
+                foundProducts.add(product);
+            }
+        }
+        return foundProducts;
+    }
+
+    @Override
     public boolean addNewProduct(Product product) {
         product.setId(nextProductId);
         this.nextProductId++;

@@ -15,10 +15,11 @@ public class UserMenu {
         menuItems = new ArrayList<>();
         menuItems.add("1 - list of products");
         menuItems.add("2 - find product by name");
-        menuItems.add("3 - add new product");
-        menuItems.add("4 - edit product data");
-        menuItems.add("5 - remove product by name");
-        menuItems.add("6 - remove product by id");
+        menuItems.add("3 - find product by category");
+        menuItems.add("4 - add new product");
+        menuItems.add("5 - edit product data");
+        menuItems.add("6 - remove product by name");
+        menuItems.add("7 - remove product by id");
         menuItems.add("0 - exit");
     }
 
