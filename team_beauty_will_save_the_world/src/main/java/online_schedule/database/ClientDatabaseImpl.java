@@ -2,6 +2,7 @@ package online_schedule.database;
 
 import online_schedule.core.domain.Client;
 import online_schedule.core.domain.PersonalData;
+import online_schedule.core.domain.Visit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ public class ClientDatabaseImpl implements ClientDatabase{
 
     private Long id = 1L;
     private List<Client> clientList = new ArrayList<>();
-    private List<ManicureMaster> manicureMasters = new ArrayList<>();
 
 
 
@@ -21,11 +21,6 @@ public class ClientDatabaseImpl implements ClientDatabase{
         this.id = id;
     }
 
-    @Override
-    public void addManicureMaster(PersonalData personalData) {
-        personalData.getName();
-
-    }
 
     @Override
     public void addHairdresser(PersonalData personalData) {
@@ -61,6 +56,11 @@ public class ClientDatabaseImpl implements ClientDatabase{
 
     }
 
+    @Override
+    public void addManicureMaster(PersonalData personalData) {
+
+    }
+
 
     @Override
     public Optional<Client> getClientHistory(long id) {
@@ -83,6 +83,11 @@ public class ClientDatabaseImpl implements ClientDatabase{
     }
 
     @Override
+    public void addVisit(long id, String master, String name, String surname, String mobileNumber) {
+
+    }
+
+    @Override
     public List<Client> findClientByMobileNumber(String mobileNumber) {
         return clientList.stream()
                 .filter(client -> client.getPersonalData().getMobileNumber()
@@ -90,7 +95,7 @@ public class ClientDatabaseImpl implements ClientDatabase{
     }
 
     @Override
-    public void addVisit(long id, String master, String name, String surname, String mobileNumber) {
+    public void addVisit(Visit visit) {
 
     }
 }
