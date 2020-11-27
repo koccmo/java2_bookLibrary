@@ -26,7 +26,9 @@ class ProductList {
     DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database, changeProductNameValidator);
-    FindProductsService findProductsService = new FindProductsService(database, findProductsRequestValidator);
+    OrderingProductsService orderingProductsService = new OrderingProductsService();
+    FindProductsService findProductsService = new FindProductsService(database, findProductsRequestValidator, orderingProductsService);
+
     public ProductList() {
 
         menuNumberToActionMap = new HashMap<>();

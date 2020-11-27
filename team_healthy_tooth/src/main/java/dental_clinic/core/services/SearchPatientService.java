@@ -128,7 +128,7 @@ public class SearchPatientService {
 
     private List<Patient> paging(List<Patient> patients, Paging paging) {
         if (paging != null) {
-            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            Integer skip = (paging.getPageNumber() - 1) * paging.getPageSize();
             return patients.stream()
                     .skip(skip)
                     .limit(paging.getPageSize())

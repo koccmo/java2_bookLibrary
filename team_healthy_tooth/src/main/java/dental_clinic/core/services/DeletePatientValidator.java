@@ -11,8 +11,8 @@ public class DeletePatientValidator {
     public List<CoreError> validate (DeletePatientRequest deletePatientRequest){
         List <CoreError> errors = new ArrayList<>();
 
-        long id = deletePatientRequest.getId();
-        if (id < 1 ) {
+        Long id = deletePatientRequest.getId();
+        if ((id == null) || (id < 1)) {
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 

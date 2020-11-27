@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="application.core.services.validators.AddProductValidatorTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2020-11-26T15:21:00" hostname="PC" time="0.04">
+  <properties/>
+  <testcase name="validate_description()" classname="application.core.services.validators.AddProductValidatorTest" time="0.034"/>
+  <testcase name="validate_description2()" classname="application.core.services.validators.AddProductValidatorTest" time="0.002"/>
+  <testcase name="validate_priceAll()" classname="application.core.services.validators.AddProductValidatorTest" time="0.001"/>
+  <testcase name="validate_price()" classname="application.core.services.validators.AddProductValidatorTest" time="0.0"/>
+  <testcase name="validate_name_is_100_characters()" classname="application.core.services.validators.AddProductValidatorTest" time="0.0"/>
+  <testcase name="validate_name_is_101_characters()" classname="application.core.services.validators.AddProductValidatorTest" time="0.0"/>
+  <testcase name="validate_price1()" classname="application.core.services.validators.AddProductValidatorTest" time="0.001"/>
+  <testcase name="validate_name_is_3_characters()" classname="application.core.services.validators.AddProductValidatorTest" time="0.0"/>
+  <testcase name="validate_name_is_4_characters()" classname="application.core.services.validators.AddProductValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

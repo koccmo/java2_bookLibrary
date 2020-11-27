@@ -1,0 +1,96 @@
+application/core/responses/ShowAllProductsResponse.java
+ application.core.responses.ShowAllProductsResponse
+application/core/requests/GetProductByIdRequest.java
+ application.core.requests.GetProductByIdRequest
+application/items/Product.java
+ application.items.Product
+application/core/responses/SearchProductResponse.java
+ application.core.responses.SearchProductResponse
+application/core/responses/GetProductByIdResponse.java
+ application.core.responses.GetProductByIdResponse
+application/core/services/DeleteProductService.java
+ application.core.services.DeleteProductService
+application/core/requests/FilterProductsByPriceRequest.java
+ application.core.requests.FilterProductsByPriceRequest
+application/core/services/SearchProductService.java
+ application.core.services.SearchProductService
+application/core/services/validators/FilterProductsByNameValidator.java
+ application.core.services.validators.FilterProductsByNameValidator
+application/core/requests/Ordering.java
+ application.core.requests.Ordering
+application/database/Database.java
+ application.database.Database
+application/core/services/GetProductByIdService.java
+ application.core.services.GetProductByIdService
+application/ui/GetProductByIdUIAction.java
+ application.ui.GetProductByIdUIAction
+application/core/responses/CoreResponse.java
+ application.core.responses.CoreResponse
+application/ui/AddProductUIAction.java
+ application.ui.AddProductUIAction
+application/core/requests/ClearAllProductsRequest.java
+ application.core.requests.ClearAllProductsRequest
+application/ui/ShowAllProductsUIAction.java
+ application.ui.ShowAllProductsUIAction
+application/core/requests/SearchProductRequest.java
+ application.core.requests.SearchProductRequest
+application/database/ProductListDatabase.java
+ application.database.ProductListDatabase
+application/Application.java
+ application.Application
+application/ui/SearchProductUIAction.java
+ application.ui.SearchProductUIAction
+application/core/requests/ShowAllProductsRequest.java
+ application.core.requests.ShowAllProductsRequest
+application/core/responses/ClearAllProductsResponse.java
+ application.core.responses.ClearAllProductsResponse
+application/core/services/validators/FilterProductsByPriceValidator.java
+ application.core.services.validators.FilterProductsByPriceValidator
+application/core/services/validators/SearchProductValidator.java
+ application.core.services.validators.SearchProductValidator
+application/core/responses/FilterProductsByPriceResponse.java
+ application.core.responses.FilterProductsByPriceResponse
+application/core/services/AddProductService.java
+ application.core.services.AddProductService
+application/core/responses/DeleteProductResponse.java
+ application.core.responses.DeleteProductResponse
+application/core/requests/AddProductRequest.java
+ application.core.requests.AddProductRequest
+application/core/responses/FilterProductsByNameResponse.java
+ application.core.responses.FilterProductsByNameResponse
+application/ui/UIAction.java
+ application.ui.UIAction
+application/ui/ClearAllProductsUIAction.java
+ application.ui.ClearAllProductsUIAction
+application/ui/ExitUIAction.java
+ application.ui.ExitUIAction
+application/core/services/FilterProductsByPriceService.java
+ application.core.services.FilterProductsByPriceService
+application/ui/FilterProductsByNameUIAction.java
+ application.ui.FilterProductsByNameUIAction
+application/core/services/ShowAllProductsService.java
+ application.core.services.ShowAllProductsService
+application/core/services/validators/DeleteProductValidator.java
+ application.core.services.validators.DeleteProductValidator
+application/core/requests/FilterProductsByNameRequest.java
+ application.core.requests.FilterProductsByNameRequest
+application/core/responses/AddProductResponse.java
+ application.core.responses.AddProductResponse
+application/core/requests/DeleteProductRequest.java
+ application.core.requests.DeleteProductRequest
+application/ui/DeleteProductUIAction.java
+ application.ui.DeleteProductUIAction
+application/core/requests/Paging.java
+ application.core.requests.Paging
+application/core/services/ClearAllProductsService.java
+ application.core.services.ClearAllProductsService
+application/core/services/FilterProductsByNameService.java
+ application.core.services.FilterProductsByNameService
+application/core/responses/CoreError.java
+ application.core.responses.CoreError
+application/core/services/validators/GetProductByIdValidator.java
+ application.core.services.validators.GetProductByIdValidator
+application/ui/FilterProductsByPriceUIAction.java
+ application.ui.FilterProductsByPriceUIAction
+application/core/services/validators/AddProductValidator.java
+ application.core.services.validators.AddProductValidator

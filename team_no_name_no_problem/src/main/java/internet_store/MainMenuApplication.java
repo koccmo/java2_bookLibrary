@@ -1,6 +1,6 @@
 package internet_store;
 
-import internet_store.console_ui.InternetStoreBusinessSide;
+import internet_store.console_ui.InternetStoreAdministratorSide;
 import internet_store.console_ui.InternetStoreCustomerSide;
 
 import java.util.Scanner;
@@ -9,7 +9,7 @@ public class MainMenuApplication {
 
     public static void main(String[] args) {
 
-        InternetStoreBusinessSide internetStoreBusinessSide = new InternetStoreBusinessSide();
+        InternetStoreAdministratorSide internetStoreAdministratorSide = new InternetStoreAdministratorSide();
         InternetStoreCustomerSide internetStoreCustomerSide = new InternetStoreCustomerSide();
 
         Scanner in = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class MainMenuApplication {
 
         switch (choice) {
 
-            case 1: internetStoreBusinessSide.run();
+            case 1: internetStoreAdministratorSide.run();
             break;
 
             case 2: internetStoreCustomerSide.run();

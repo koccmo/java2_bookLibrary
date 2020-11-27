@@ -17,7 +17,7 @@ public class FindByIdRequestValidatorTest {
 
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
-        FindByIdRequest findByIdRequest = new FindByIdRequest(-9);
+        FindByIdRequest findByIdRequest = new FindByIdRequest(-9L);
         List<CoreError> errors = findByIdRequestValidator.validate(findByIdRequest);
 
         assertTrue(errors.size() == 1);
@@ -27,7 +27,7 @@ public class FindByIdRequestValidatorTest {
     @Test
     public void testValidInput(){
 
-        FindByIdRequest findByIdRequest = new FindByIdRequest(5);
+        FindByIdRequest findByIdRequest = new FindByIdRequest(5L);
         List<CoreError> errors = findByIdRequestValidator.validate(findByIdRequest);
 
         assertTrue(errors.size() == 0);
