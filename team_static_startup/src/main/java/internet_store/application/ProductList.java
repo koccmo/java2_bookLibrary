@@ -26,8 +26,12 @@ class ProductList {
     DeleteProductService deleteByProductService = new DeleteProductService(database, deleteByProductValidator);
     DeleteByProductIdService deleteByProductIdService = new DeleteByProductIdService(database, productIdValidator);
     ChangeProductNameService changeProductNameService = new ChangeProductNameService(database, changeProductNameValidator);
+    PagingProductsService pagingProductsService = new PagingProductsService();
     OrderingProductsService orderingProductsService = new OrderingProductsService();
-    FindProductsService findProductsService = new FindProductsService(database, findProductsRequestValidator, orderingProductsService);
+    FindProductsService findProductsService = new FindProductsService(database,
+            findProductsRequestValidator,
+            orderingProductsService,
+            pagingProductsService);
 
     public ProductList() {
 

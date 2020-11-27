@@ -16,13 +16,16 @@ public class FindProductsService {
     private final Database database;
     private final FindProductsRequestValidator validator;
     private final OrderingProductsService orderingProductsService;
+    private final PagingProductsService pagingProductsService;
 
     public FindProductsService(Database database,
                                FindProductsRequestValidator validator,
-                               OrderingProductsService orderingProductsService) {
+                               OrderingProductsService orderingProductsService,
+                               PagingProductsService pagingProductsService) {
         this.database = database;
         this.validator = validator;
         this.orderingProductsService = orderingProductsService;
+        this.pagingProductsService = pagingProductsService;
     }
 
     public FindProductsResponse execute(FindProductsRequest request) {
@@ -33,7 +36,7 @@ public class FindProductsService {
 
         List<Product> products = search(request);
         products = orderingProductsService.order(products, request.getOrdering());
-
+        products = pagingProductsService.page(products, request.getPaging());
         return new FindProductsResponse(products, null);
     }
 
@@ -48,22 +51,7 @@ public class FindProductsService {
         if (request.isNameProvided() && request.isDescriptionProvided()) {
             products = database.findByNameAndDescription(request.getName(), request.getDescription());
         }
-
-        products = applyPaging(products, request.getPaging());
-
         return products;
-    }
-
-    private List<Product> applyPaging(List<Product> products, Paging paging) {
-        if (paging != null) {
-            int numberOfProductsToSkip = paging.getPageSize() * (paging.getPageNumber() - 1);
-            return products.stream()
-                    .skip(numberOfProductsToSkip)
-                    .limit(paging.getPageSize())
-                    .collect(Collectors.toList());
-        } else {
-            return products;
-        }
     }
 
 }
