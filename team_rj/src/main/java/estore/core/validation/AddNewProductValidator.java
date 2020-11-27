@@ -1,6 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
+import estore.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,9 @@ public class AddNewProductValidator {
         validateProductNameUnallowedPattern(request).ifPresent(errors::add);
         validateProductDescriptionIfEmpty(request).ifPresent(errors::add);
         validateProductDescriptionUnallowedPattern(request).ifPresent(errors::add);
+        validateProductCategoryIfEmpty(request).ifPresent(errors::add);
+        validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
+        validateProductCategoryExistence(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -32,6 +36,12 @@ public class AddNewProductValidator {
                 : Optional.empty();
     }
 
+    private Optional<CoreError> validateProductCategoryIfEmpty(AddNewProductRequest request) {
+        return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
+                ? Optional.of(new CoreError("ERROR! Product category ", "Must not be empty!"))
+                : Optional.empty();
+    }
+
     private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
         return (!validateString(request.getProductName()))
                 ? Optional.of(new CoreError("ERROR! Product name", "Must contain only english letters!"))
@@ -42,6 +52,27 @@ public class AddNewProductValidator {
         return (!validateLine(request.getProductDescription()))
                 ? Optional.of(new CoreError("ERROR! Product description", "Must contain only english letters and digits!"))
                 : Optional.empty();
+    }
+
+    private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductRequest request) {
+        return (!validateString(request.getProductCategory()))
+                ? Optional.of(new CoreError("ERROR! Product category number", "Must contain only english letters!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateProductCategoryExistence(AddNewProductRequest request) {
+        return (!validateCategoryExistence(request.getProductCategory()))
+                ? Optional.of(new CoreError("ERROR! Product category ", "does not exist!"))
+                : Optional.empty();
+    }
+
+    private boolean validateCategoryExistence(String category) {
+        for (ProductCategory pc : ProductCategory.values()) {
+            if (pc.name().equals(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean validateString(String userInput) {

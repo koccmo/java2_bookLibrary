@@ -6,12 +6,14 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    private String category;
     private int quantity;
     private int price;
 
-    public Product(String name, String description) {
+    public Product(String name, String description, String category) {
         this.name = name;
         this.description = description;
+        this.category = category;
         this.quantity = 0;
         this.price = 0;
     }
@@ -56,6 +58,14 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,7 +78,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, quantity, price);
+        return Objects.hash(id, name, description, category, quantity, price);
     }
 
     @Override
@@ -76,6 +86,7 @@ public class Product {
         return "Product {" + "id : " + this.id +
                 ", name : " + this.name +
                 ", description : " + this.description +
+                ", category : " + this.category +
                 ", available : " + this.quantity +
                 ", price per unit : " + this.price +
                 '}';

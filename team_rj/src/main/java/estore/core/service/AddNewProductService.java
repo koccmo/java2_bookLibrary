@@ -6,6 +6,7 @@ import estore.database.ProductDataBase;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
+import estore.domain.ProductCategory;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class AddNewProductService {
             return new AddNewProductResponse(errors);
         }
 
-        Product product = new Product(request.getProductName(), request.getProductDescription());
+        Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductCategory());
 
         database.addNewProduct(product);
         AddNewProductResponse response = new AddNewProductResponse(product);

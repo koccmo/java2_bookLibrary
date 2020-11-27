@@ -3,6 +3,7 @@ package estore.ui;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.service.AddNewProductService;
+import estore.domain.ProductCategory;
 
 import java.util.Scanner;
 
@@ -17,12 +18,18 @@ public class AddProductUI implements UIAction {
     @Override
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter name of product");
+        System.out.println("Enter name of the product");
         String productName = sc.nextLine();
-        System.out.println("Enter description of product");
+        System.out.println("Enter description of the product");
         String productDescription = sc.nextLine();
+        System.out.println("Enter category of the product:");
+        for (ProductCategory pc: ProductCategory.values()) {
+            System.out.print(pc + "   ");
+        }
+        System.out.println();
+        String productCategoryNo = sc.nextLine();
 
-        AddNewProductRequest request = new AddNewProductRequest(productName, productDescription);
+        AddNewProductRequest request = new AddNewProductRequest(productName, productDescription, productCategoryNo);
         AddNewProductResponse response = addNewProductService.execute(request);
 
         if (!response.isSuccessfullyAdded()) {
