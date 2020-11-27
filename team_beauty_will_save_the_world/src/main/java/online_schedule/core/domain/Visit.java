@@ -4,7 +4,10 @@ public class Visit {
 
     private String master;
     private Client client;
-    private String comment;
+    private String procedure;
+    private String mobileNumber;
+
+
 
 
 
