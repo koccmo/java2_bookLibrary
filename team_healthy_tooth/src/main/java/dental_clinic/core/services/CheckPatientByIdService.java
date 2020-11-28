@@ -30,7 +30,7 @@ public class CheckPatientByIdService {
 
         for (int i = 0; i < patientDatabase.getPatients().size(); i++){
             if (getCurrentPatientPersonalData(i).getId() == checkPatientByIdRequest.getId()){
-                patientDatabase.checkPatientById(checkPatientByIdRequest.getId());
+                patientDatabase.containsPatientWithSpecificId(checkPatientByIdRequest.getId());
                 return new CheckPatientByIdResponse(checkPatientByIdRequest.getId());
             }
         }

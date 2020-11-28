@@ -1,4 +1,4 @@
-package dental_clinic.services;
+package dental_clinic.core.services;
 
 import static org.junit.Assert.*;
 

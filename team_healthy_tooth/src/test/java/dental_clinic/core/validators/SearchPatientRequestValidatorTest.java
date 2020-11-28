@@ -1,9 +1,10 @@
-package dental_clinic.core.services;
+package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.SearchPatientRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

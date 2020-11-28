@@ -1,7 +1,8 @@
-package dental_clinic.core.services;
+package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.FindPatientByPersonalCodeValidator;
 import org.junit.Test;
 
 import java.util.List;

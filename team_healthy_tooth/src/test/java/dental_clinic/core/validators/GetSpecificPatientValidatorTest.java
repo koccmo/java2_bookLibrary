@@ -1,7 +1,8 @@
-package dental_clinic.core.services;
+package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.GetSpecificPatientValidator;
 import org.junit.Test;
 
 import java.util.List;
