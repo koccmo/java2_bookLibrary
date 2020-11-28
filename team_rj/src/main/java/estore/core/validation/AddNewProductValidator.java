@@ -1,7 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.domain.ProductCategory;
+import estore.domain.ProductCategoryEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,48 +26,48 @@ public class AddNewProductValidator {
 
     private Optional<CoreError> validateProductNameIfEmpty(AddNewProductRequest request) {
         return (request.getProductName() == null || request.getProductName().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product name", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product name", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductDescriptionIfEmpty(AddNewProductRequest request) {
         return (request.getProductDescription() == null || request.getProductDescription().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product description", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product description", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryIfEmpty(AddNewProductRequest request) {
         return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product category ", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product category", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
         return (!validateString(request.getProductName()))
-                ? Optional.of(new CoreError("ERROR! Product name", "Must contain only english letters!"))
+                ? Optional.of(new CoreError("Product name", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddNewProductRequest request) {
         return (!validateLine(request.getProductDescription()))
-                ? Optional.of(new CoreError("ERROR! Product description", "Must contain only english letters and digits!"))
+                ? Optional.of(new CoreError("Product description", "Must contain only english letters and digits!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductRequest request) {
         return (!validateString(request.getProductCategory()))
-                ? Optional.of(new CoreError("ERROR! Product category number", "Must contain only english letters!"))
+                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryExistence(AddNewProductRequest request) {
         return (!validateCategoryExistence(request.getProductCategory()))
-                ? Optional.of(new CoreError("ERROR! Product category ", "does not exist!"))
+                ? Optional.of(new CoreError("Product category", "does not exist!"))
                 : Optional.empty();
     }
 
     private boolean validateCategoryExistence(String category) {
-        for (ProductCategory pc : ProductCategory.values()) {
+        for (ProductCategoryEnum pc : ProductCategoryEnum.values()) {
             if (pc.name().equals(category)) {
                 return true;
             }

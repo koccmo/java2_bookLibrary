@@ -56,10 +56,10 @@ public class SearchBooksRequest {
 	}
 
 	public Ordering getOrdering() {
-		return ordering;
+		return this.ordering;
 	}
 
 	public Paging getPaging() {
-		return paging;
+		return this.paging;
 	}
 }

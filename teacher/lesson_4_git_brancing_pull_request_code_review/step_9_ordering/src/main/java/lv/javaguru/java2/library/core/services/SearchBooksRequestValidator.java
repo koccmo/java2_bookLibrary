@@ -44,7 +44,7 @@ public class SearchBooksRequestValidator {
 
 	private Optional<CoreError> validateOrderDirection(Ordering ordering) {
 		return (ordering.getOrderDirection() != null
-				&& !(ordering.getOrderDirection().equals("ASCENDING") || ordering.getOrderBy().equals("DESCENDING")))
+				&& !(ordering.getOrderDirection().equals("ASCENDING") || ordering.getOrderDirection().equals("DESCENDING")))
 				? Optional.of(new CoreError("orderDirection", "Must contain 'ASCENDING' or 'DESCENDING' only!"))
 				: Optional.empty();
 	}

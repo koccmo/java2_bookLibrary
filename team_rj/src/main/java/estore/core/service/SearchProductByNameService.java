@@ -2,7 +2,7 @@ package estore.core.service;
 
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
-import estore.database.ProductDataBase;
+import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
@@ -11,11 +11,11 @@ import java.util.List;
 
 public class SearchProductByNameService {
 
-    private ProductDataBase database;
+    private ProductDB productDB;
     private SearchProductByNameValidator validator;
 
-    public SearchProductByNameService(ProductDataBase database, SearchProductByNameValidator validator) {
-        this.database = database;
+    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {
+        this.productDB = productDB;
         this.validator = validator;
     }
 
@@ -26,7 +26,7 @@ public class SearchProductByNameService {
             return new SearchProductByNameResponse(errors);
         }
 
-        List<Product> foundProducts = database.searchProductByName(request.getProductName());
+        List<Product> foundProducts = productDB.searchProductByName(request.getProductName());
         return new SearchProductByNameResponse(foundProducts, foundProducts.size());
     }
 
