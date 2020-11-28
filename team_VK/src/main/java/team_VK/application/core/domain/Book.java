@@ -1,5 +1,6 @@
 package team_VK.application.core.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,13 +16,8 @@ public class Book {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookingDurationPermitted = bookingDurationPermitted;
+        bookings = new ArrayList<>();
     }
-
-
-    public void addBooking() {
-
-    }
-
 
     public List<BookingPeriod> getBookings() {
         return bookings;

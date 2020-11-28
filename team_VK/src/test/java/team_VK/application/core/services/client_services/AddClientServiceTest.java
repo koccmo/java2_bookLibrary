@@ -3,7 +3,7 @@ package team_VK.application.core.services.client_services;
 import org.junit.Assert;
 import org.junit.Test;
 import team_VK.application.core.domain.Client;
-import team_VK.application.database.database_Clients.DatabaseClientsInMemory;
+import team_VK.application.database.DatabaseClientsInMemory;
 
 public class AddClientServiceTest  {
 
