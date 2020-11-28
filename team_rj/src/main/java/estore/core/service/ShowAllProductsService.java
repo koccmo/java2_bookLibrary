@@ -9,14 +9,14 @@ import java.util.List;
 
 public class ShowAllProductsService {
 
-    private ProductDB productDatabase;
+    private ProductDB productDB;
 
-    public ShowAllProductsService(ProductDB productDatabase) {
-        this.productDatabase = productDatabase;
+    public ShowAllProductsService(ProductDB productDB) {
+        this.productDB = productDB;
     }
 
     public ShowAllProductsResponse execute(ShowAllProductsRequest request) {
-        List<Product> foundProducts = productDatabase.getDatabase();
+        List<Product> foundProducts = productDB.getDatabase();
         return new ShowAllProductsResponse(foundProducts);
     }
 

@@ -11,11 +11,11 @@ import java.util.List;
 
 public class AddNewProductService {
 
-    private ProductDB productDatabase;
+    private ProductDB productDB;
     private AddNewProductValidator validator;
 
-    public AddNewProductService(ProductDB productDatabase, AddNewProductValidator validator) {
-        this.productDatabase = productDatabase;
+    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {
+        this.productDB = productDB;
         this.validator = validator;
     }
 
@@ -28,7 +28,7 @@ public class AddNewProductService {
 
         Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductCategory());
 
-        productDatabase.addNewProduct(product);
+        productDB.addNewProduct(product);
         AddNewProductResponse response = new AddNewProductResponse(product);
         response.setSuccessfullyAdded(true);
 

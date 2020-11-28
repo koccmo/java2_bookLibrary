@@ -11,11 +11,11 @@ import java.util.List;
 
 public class SearchProductByNameService {
 
-    private ProductDB productDatabase;
+    private ProductDB productDB;
     private SearchProductByNameValidator validator;
 
-    public SearchProductByNameService(ProductDB productDatabase, SearchProductByNameValidator validator) {
-        this.productDatabase = productDatabase;
+    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {
+        this.productDB = productDB;
         this.validator = validator;
     }
 
@@ -26,7 +26,7 @@ public class SearchProductByNameService {
             return new SearchProductByNameResponse(errors);
         }
 
-        List<Product> foundProducts = productDatabase.searchProductByName(request.getProductName());
+        List<Product> foundProducts = productDB.searchProductByName(request.getProductName());
         return new SearchProductByNameResponse(foundProducts, foundProducts.size());
     }
 

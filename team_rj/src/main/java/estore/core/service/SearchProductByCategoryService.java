@@ -11,11 +11,11 @@ import java.util.List;
 
 public class SearchProductByCategoryService {
 
-    private ProductDB productDatabase;
+    private ProductDB productDB;
     private SearchProductByCategoryValidator validator;
 
-    public SearchProductByCategoryService(ProductDB productDatabase, SearchProductByCategoryValidator validator) {
-        this.productDatabase = productDatabase;
+    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
+        this.productDB = productDB;
         this.validator = validator;
     }
 
@@ -26,7 +26,7 @@ public class SearchProductByCategoryService {
             return new SearchProductByCategoryResponse(errors);
         }
 
-        List<Product> foundProducts = productDatabase.searchProductByCategory(request.getProductCategory());
+        List<Product> foundProducts = productDB.searchProductByCategory(request.getProductCategory());
         return new SearchProductByCategoryResponse(foundProducts, foundProducts.size());
     }
 

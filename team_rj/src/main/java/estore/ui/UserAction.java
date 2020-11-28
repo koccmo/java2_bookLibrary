@@ -15,6 +15,7 @@ public class UserAction {
     private static RemoveProductByNameValidator removeProductByNameValidator = new RemoveProductByNameValidator();
     private static SearchProductByNameValidator searchProductByNameValidator = new SearchProductByNameValidator();
     private static SearchProductByCategoryValidator searchProductByCategoryValidator = new SearchProductByCategoryValidator();
+    private static AddNewProductCategoryValidator addNewProductCategoryValidator = new AddNewProductCategoryValidator();
 
     private static ProductDB productDB = new ProductDBImpl();
     private static ProductCategoryDB productCategoryDB = new ProductCategoryDBImpl();
@@ -25,6 +26,7 @@ public class UserAction {
     private static SearchProductByNameService searchProductByNameService = new SearchProductByNameService(productDB, searchProductByNameValidator);
     private static SearchProductByCategoryService searchProductByCategoryService = new SearchProductByCategoryService(productDB, searchProductByCategoryValidator);
     private static ShowAllProductsService showAllProductsService = new ShowAllProductsService(productDB);
+    private static AddNewProductCategoryService addNewProductCategoryService = new AddNewProductCategoryService(productCategoryDB, addNewProductCategoryValidator);
 
 
     private static UIAction addNewProductUI = new AddProductUI(addNewProductService);
@@ -34,6 +36,7 @@ public class UserAction {
     private static UIAction searchProductByCategory = new SearchProductByCategoryUI(searchProductByCategoryService);
     private static UIAction showAllProducts = new ShowAllProductsUI(showAllProductsService);
     private static UIAction exitProgram = new ExitProgramUI();
+    private static UIAction addNewProductCategory = new AddProductCategoryUI(addNewProductCategoryService);
 
     public void run() {
         UserMenu userMenu = new UserMenu();
@@ -66,7 +69,7 @@ public class UserAction {
                 addNewProductUI.execute();
                 break;
             case 5:
-                System.out.println("Not emplemented");
+                addNewProductCategory.execute();
                 break;
             case 6:
                 removeProductByName.execute();

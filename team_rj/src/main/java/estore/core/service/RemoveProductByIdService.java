@@ -10,11 +10,11 @@ import java.util.List;
 
 public class RemoveProductByIdService {
 
-    private ProductDB productDatabase;
+    private ProductDB productDB;
     private RemoveProductByIdValidator validator;
 
-    public RemoveProductByIdService(ProductDB productDatabase, RemoveProductByIdValidator validator) {
-        this.productDatabase = productDatabase;
+    public RemoveProductByIdService(ProductDB productDB, RemoveProductByIdValidator validator) {
+        this.productDB = productDB;
         this.validator = validator;
     }
 
@@ -25,7 +25,7 @@ public class RemoveProductByIdService {
             return new RemoveProductByIdResponse(errors);
         }
 
-        int productsRemoved = productDatabase.removeProductById(Long.valueOf(request.getProductId()));
+        int productsRemoved = productDB.removeProductById(Long.valueOf(request.getProductId()));
         return new RemoveProductByIdResponse(productsRemoved);
     }
 
