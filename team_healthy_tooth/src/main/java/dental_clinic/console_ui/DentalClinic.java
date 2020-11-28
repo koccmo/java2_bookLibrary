@@ -23,8 +23,9 @@ public class DentalClinic {
         GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
                 new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
+        FindPatientByPersonalCodeValidator findPatientByPersonalCodeValidator = new FindPatientByPersonalCodeValidator();
         FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
-                new FindPatientsByPersonalCodeService(patientDatabase);
+                new FindPatientsByPersonalCodeService(patientDatabase, findPatientByPersonalCodeValidator);
         AddVisitValidator addVisitValidator = new AddVisitValidator();
         AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
         CheckPatientByIdValidator checkPatientByIdValidator = new CheckPatientByIdValidator();
