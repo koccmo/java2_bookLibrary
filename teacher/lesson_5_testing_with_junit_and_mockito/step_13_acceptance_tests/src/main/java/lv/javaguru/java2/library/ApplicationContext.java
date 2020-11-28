@@ -8,7 +8,6 @@ import lv.javaguru.java2.library.console_ui.ExitUIAction;
 import lv.javaguru.java2.library.console_ui.GetAllBooksUIAction;
 import lv.javaguru.java2.library.console_ui.RemoveBookUIAction;
 import lv.javaguru.java2.library.console_ui.SearchBooksUIAction;
-import lv.javaguru.java2.library.console_ui.UIAction;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.library.core.services.AddBookService;
