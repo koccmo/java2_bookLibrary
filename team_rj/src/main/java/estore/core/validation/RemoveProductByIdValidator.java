@@ -18,13 +18,13 @@ public class RemoveProductByIdValidator {
 
     private Optional<CoreError> validateProductIdIfEmpty(RemoveProductByIdRequest request) {
         return (request.getProductId() == null || request.getProductId().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product ID", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product ID", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductIdUnallowedPattern(RemoveProductByIdRequest request) {
         return (!validatePositiveLong(request.getProductId()))
-                ? Optional.of(new CoreError("ERROR! Product ID", "Must contain only digits"))
+                ? Optional.of(new CoreError("Product ID", "Must contain only digits"))
                 : Optional.empty();
     }
 

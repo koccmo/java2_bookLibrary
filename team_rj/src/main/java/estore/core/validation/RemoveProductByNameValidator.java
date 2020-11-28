@@ -20,13 +20,13 @@ public class RemoveProductByNameValidator {
 
     private Optional<CoreError> validateProductNameIfEmpty(RemoveProductByNameRequest request) {
         return (request.getProductName() == null || request.getProductName().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product Name", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product Name", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductNameUnallowedPattern(RemoveProductByNameRequest request) {
         return (!validateString(request.getProductName()))
-                ? Optional.of(new CoreError("ERROR! Product Name", "Must contain only english letters!"))
+                ? Optional.of(new CoreError("Product Name", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
