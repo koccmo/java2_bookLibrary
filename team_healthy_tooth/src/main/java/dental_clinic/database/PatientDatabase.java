@@ -28,7 +28,7 @@ public interface PatientDatabase {
 
     void addVisit(Long id, Visit newVisit);
 
-    boolean  checkPatientById(Long id);
+    boolean containsPatientWithSpecificId(Long id);
 
     Optional<Patient> getPatientCard(Long id);
 
@@ -37,4 +37,6 @@ public interface PatientDatabase {
     void changePhone(long idToSearch, String updatedSurname);
 
     Optional<Patient> findPatientByIdNumber(long idToSearch);
+
+    boolean containsSpecificPersonalData(PersonalData personalData);
 }
