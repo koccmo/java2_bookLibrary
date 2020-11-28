@@ -3,14 +3,13 @@ package estore.database;
 import java.util.ArrayList;
 import java.util.List;
 import estore.domain.Product;
-import estore.domain.ProductCategory;
 
-public class ProductDataBaseImplementation implements ProductDataBase {
+public class ProductDBImpl implements ProductDB {
 
     private Long nextProductId;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
-    public ProductDataBaseImplementation() {
+    public ProductDBImpl() {
         initializeListOfProducts();
         setNextProductId();
     }
@@ -26,6 +25,7 @@ public class ProductDataBaseImplementation implements ProductDataBase {
     }
 
     private void initializeListOfProducts() {
+        products = new ArrayList<>();
         this.products.add(new Product("Apple", "Juicy red apples", "Fruits"));
         this.products.add(new Product("Melon", "Melons from Georgia", "Fruits"));
         this.products.add(new Product("Grapes", "Small blue grapes", "Fruits"));

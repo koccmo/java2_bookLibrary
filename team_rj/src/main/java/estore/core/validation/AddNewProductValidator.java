@@ -1,7 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.domain.ProductCategory;
+import estore.domain.ProductCategoryEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class AddNewProductValidator {
     }
 
     private boolean validateCategoryExistence(String category) {
-        for (ProductCategory pc : ProductCategory.values()) {
+        for (ProductCategoryEnum pc : ProductCategoryEnum.values()) {
             if (pc.name().equals(category)) {
                 return true;
             }

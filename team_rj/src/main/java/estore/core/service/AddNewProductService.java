@@ -2,21 +2,20 @@ package estore.core.service;
 
 import estore.core.validation.CoreError;
 import estore.core.validation.AddNewProductValidator;
-import estore.database.ProductDataBase;
+import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
-import estore.domain.ProductCategory;
 
 import java.util.List;
 
 public class AddNewProductService {
 
-    private ProductDataBase database;
+    private ProductDB productDatabase;
     private AddNewProductValidator validator;
 
-    public AddNewProductService(ProductDataBase database, AddNewProductValidator validator) {
-        this.database = database;
+    public AddNewProductService(ProductDB productDatabase, AddNewProductValidator validator) {
+        this.productDatabase = productDatabase;
         this.validator = validator;
     }
 
@@ -29,7 +28,7 @@ public class AddNewProductService {
 
         Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductCategory());
 
-        database.addNewProduct(product);
+        productDatabase.addNewProduct(product);
         AddNewProductResponse response = new AddNewProductResponse(product);
         response.setSuccessfullyAdded(true);
 

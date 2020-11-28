@@ -4,18 +4,18 @@ import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
-import estore.database.ProductDataBase;
+import estore.database.ProductDB;
 import estore.domain.Product;
 
 import java.util.List;
 
 public class SearchProductByCategoryService {
 
-    private ProductDataBase database;
+    private ProductDB productDatabase;
     private SearchProductByCategoryValidator validator;
 
-    public SearchProductByCategoryService(ProductDataBase database, SearchProductByCategoryValidator validator) {
-        this.database = database;
+    public SearchProductByCategoryService(ProductDB productDatabase, SearchProductByCategoryValidator validator) {
+        this.productDatabase = productDatabase;
         this.validator = validator;
     }
 
@@ -26,7 +26,7 @@ public class SearchProductByCategoryService {
             return new SearchProductByCategoryResponse(errors);
         }
 
-        List<Product> foundProducts = database.searchProductByCategory(request.getProductCategory());
+        List<Product> foundProducts = productDatabase.searchProductByCategory(request.getProductCategory());
         return new SearchProductByCategoryResponse(foundProducts, foundProducts.size());
     }
 

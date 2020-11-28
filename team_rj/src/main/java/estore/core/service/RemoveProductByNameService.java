@@ -2,7 +2,7 @@ package estore.core.service;
 
 import estore.core.validation.CoreError;
 import estore.core.validation.RemoveProductByNameValidator;
-import estore.database.ProductDataBase;
+import estore.database.ProductDB;
 import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class RemoveProductByNameService {
 
-    private ProductDataBase database;
+    private ProductDB productDatabase;
     private RemoveProductByNameValidator validator;
 
-    public RemoveProductByNameService(ProductDataBase database, RemoveProductByNameValidator validator) {
-        this.database = database;
+    public RemoveProductByNameService(ProductDB productDatabase, RemoveProductByNameValidator validator) {
+        this.productDatabase = productDatabase;
         this.validator = validator;
     }
 
@@ -25,7 +25,7 @@ public class RemoveProductByNameService {
             return new RemoveProductByNameResponse(errors);
         }
 
-        int productsRemoved = database.removeProductByName(request.getProductName());
+        int productsRemoved = productDatabase.removeProductByName(request.getProductName());
         return new RemoveProductByNameResponse(productsRemoved);
     }
 

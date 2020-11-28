@@ -17,7 +17,7 @@ public class UserMenu {
         menuItems.add("2 - find product by name");
         menuItems.add("3 - find product by category");
         menuItems.add("4 - add new product");
-        menuItems.add("5 - edit product data");
+        menuItems.add("5 - add new product category");
         menuItems.add("6 - remove product by name");
         menuItems.add("7 - remove product by id");
         menuItems.add("0 - exit");
