@@ -2,7 +2,7 @@ package internet_store.core.requests.customer;
 /*
 import internet_store.core.domain.Customer;
 
-public class LogInCustomerRequest {
+public class LogInExistingCustomerRequest {
 
     private Customer customer;
 
