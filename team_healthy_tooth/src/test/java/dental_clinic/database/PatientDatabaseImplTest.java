@@ -80,11 +80,9 @@ public class PatientDatabaseImplTest {
 
     @Test
     public void testFindPatientByPersonalCode(){
-        List <Patient> expectedList = new ArrayList<>();
-        Patient patient = new Patient(personalData1);
-        expectedList.add(patient);
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").equals(expectedList));
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").equals(new ArrayList<>()));
+        Optional <Patient> expectedPatient = Optional.of(new Patient(personalData1));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").equals(expectedPatient));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").equals(Optional.empty()));
     }
 
     @Test
