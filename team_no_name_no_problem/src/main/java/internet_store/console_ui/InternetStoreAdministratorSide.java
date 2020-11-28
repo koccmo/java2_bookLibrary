@@ -55,12 +55,10 @@ public class InternetStoreAdministratorSide {
 
     private void printMenu(){
         System.out.println("\nMenu\n" +
-                "1   Add item\n" +
-                "2   Delete by id\n" +
-                "3   Print products\n" +
-                "4   Find product by id\n"+
-                "5   Search product by title / description\n"+
-                "6   Change product\n"+
+                "1   Sign in\n" +
+                "2   Delete account by id\n" +
+                "3   SEARCH\n" + // добавть в Product Menu
+                "4   Buy product\n"+ //будет вызвать Шоппинг Карт
                 "0   Exit");
     }
 
