@@ -1,28 +1,35 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.domain.Patient;
+import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
+import dental_clinic.core.responses.FindPatientByPersonalCodeResponse;
 import dental_clinic.core.services.FindPatientsByPersonalCodeService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 
 class FindPatientByPersonalCodeUIAction implements UIAction {
 
     private FindPatientsByPersonalCodeService findPatientByPersonalCode;
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
+
 
     public FindPatientByPersonalCodeUIAction(FindPatientsByPersonalCodeService findPatientByPersonalCode) {
         this.findPatientByPersonalCode = findPatientByPersonalCode;
     }
 
     public void execute(){
-        String personalCode = inputCheckUtility.inputValidPersonalCode("Please enter personal code");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter personal code");
+        String personalCode = in.nextLine();
 
-        List<Patient> result = findPatientByPersonalCode.execute(personalCode);
+        FindPatientByPersonalCodeRequest findPatientByPersonalCodeRequest = new FindPatientByPersonalCodeRequest(personalCode);
+        FindPatientByPersonalCodeResponse findPatientByPersonalCodeResponse = findPatientByPersonalCode.execute(findPatientByPersonalCodeRequest);
 
-        if (result.isEmpty()){
-            System.out.println("Database doesn't contain patient with personal code " + personalCode);
+        if (findPatientByPersonalCodeResponse.hasErrors()){
+            findPatientByPersonalCodeResponse.getErrors().forEach(System.out::println);
         }else{
-            result.forEach(System.out::println);
+            System.out.println("Specific patient: " + findPatientByPersonalCodeResponse.getFoundPatient());
         }
     }
 
