@@ -12,7 +12,7 @@ public class AddVisitValidator {
 
         List <CoreError> coreErrors = new ArrayList<>();
 
-        if ((addVisitRequest == null) || (addVisitRequest.getId() < 1)){
+        if ((addVisitRequest.getId() == null) || (addVisitRequest.getId() < 1)){
             coreErrors.add(new CoreError("id", "Not valid input of id"));
         }
 

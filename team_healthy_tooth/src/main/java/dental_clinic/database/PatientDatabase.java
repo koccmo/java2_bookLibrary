@@ -2,7 +2,6 @@ package dental_clinic.database;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 
 import java.util.List;
@@ -32,11 +31,11 @@ public interface PatientDatabase {
 
     Optional<Patient> getPatientCard(Long id);
 
-    void changeSurname(long idToSearch, String updatedSurname);
+    void changeSurname(Long idToSearch, String updatedSurname);
 
-    void changePhone(long idToSearch, String updatedSurname);
+    void changePhone(Long idToSearch, String updatedSurname);
 
-    Optional<Patient> findPatientByIdNumber(long idToSearch);
+    Optional<Patient> findPatientByIdNumber(Long idToSearch);
 
     boolean containsSpecificPersonalData(PersonalData personalData);
 }
