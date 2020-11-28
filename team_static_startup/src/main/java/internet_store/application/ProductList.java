@@ -1,5 +1,6 @@
 package internet_store.application;
 
+import internet_store.application.core.services.*;
 import internet_store.application.console_ui.*;
 import java.util.*;
 
@@ -11,20 +12,15 @@ class ProductList {
     public ProductList() {
 
         menuNumberToActionMap = new HashMap<>();
-
-        menuNumberToActionMap.put(1, new AddProductUIAction(applicationContext.getBean(AddProductUIAction.class)));
-        menuNumberToActionMap.put(2, new DeleteByIdUIAction(applicationContext.getBean(DeleteByIdUIAction.class)));
-        menuNumberToActionMap.put(3, new DeleteByProductUIAction(applicationContext.getBean(DeleteByProductUIAction.class)));
-        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(applicationContext.getBean(DeleteByProductNameUIAction.class)));
-        menuNumberToActionMap.put(5, new FindByIdUIAction(applicationContext.getBean(FindByIdUIAction.class)));
-        menuNumberToActionMap.put(6, new FindProductsUIAction(applicationContext.getBean(FindProductsUIAction.class)));
-        menuNumberToActionMap.put(7, new ChangeProductNameUIAction(
-                applicationContext.getBean(ChangeProductNameUIAction.class),
-                applicationContext.getBean(FindByIdUIAction.class)));
-        menuNumberToActionMap.put(8, new PrintProductsToConsoleUIAction(applicationContext.getBean(PrintProductsToConsoleUIAction.class)));
+        menuNumberToActionMap.put(1, new AddProductUIAction(applicationContext.getBean(AddProductService.class)));
+        menuNumberToActionMap.put(2, new DeleteByIdUIAction(applicationContext.getBean(DeleteByProductIdService.class)));
+        menuNumberToActionMap.put(3, new DeleteByProductUIAction(applicationContext.getBean(DeleteProductByProductService.class)));
+        menuNumberToActionMap.put(4, new DeleteByProductNameUIAction(applicationContext.getBean(DeleteProductByNameService.class)));
+        menuNumberToActionMap.put(5, new FindByIdUIAction(applicationContext.getBean(FindByIdService.class)));
+        menuNumberToActionMap.put(6, new FindProductsUIAction(applicationContext.getBean(FindProductsService.class)));
+        menuNumberToActionMap.put(7, new ChangeProductNameUIAction(applicationContext.getBean(ChangeProductNameService.class), applicationContext.getBean(FindByIdService.class)));
+        menuNumberToActionMap.put(8, new PrintProductsToConsoleUIAction(applicationContext.getBean(GetProductListService.class)));
         menuNumberToActionMap.put(0, new ExitProgramUIAction());
-//        menuNumberToActionMap.put(0, new ExitProgramUIAction(applicationContext.getBean(ExitProgramUIAction.class)));
-
     }
 
     @SuppressWarnings("InfiniteLoopStatement")
