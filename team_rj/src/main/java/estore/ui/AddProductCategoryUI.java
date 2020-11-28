@@ -25,6 +25,7 @@ public class AddProductCategoryUI implements UIAction {
 
         if (!response.isSuccessfullyAdded()) {
             for (int i = 0; i < response.getErrors().size(); i++) {
+                System.out.print("ERROR! ");
                 System.out.print(response.getErrors().get(i).getField() + " ");
                 System.out.println(response.getErrors().get(i).getMessage());
             }

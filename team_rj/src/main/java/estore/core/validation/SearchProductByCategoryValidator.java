@@ -27,13 +27,13 @@ public class SearchProductByCategoryValidator {
 
     private Optional<CoreError> validateProductCategoryIfEmpty(SearchProductByCategoryRequest request) {
         return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product Category ", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product category", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(SearchProductByCategoryRequest request) {
         return (!validateString(request.getProductCategory()))
-                ? Optional.of(new CoreError("ERROR! Product Category", "Must contain only english letters!"))
+                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
@@ -41,7 +41,7 @@ public class SearchProductByCategoryValidator {
         return (ordering.getOrderBy() != null
                 && !(ordering.getOrderBy().toLowerCase().equals("name") ||
                     ordering.getOrderBy().toLowerCase().equals("price")))
-                ? Optional.of(new CoreError("orderBy ", "Must contain 'name' or 'price' only!"))
+                ? Optional.of(new CoreError("orderBy", "Must contain 'name' or 'price' only!"))
                 : Optional.empty();
     }
 
@@ -51,19 +51,19 @@ public class SearchProductByCategoryValidator {
                     ordering.getOrderDirection().toLowerCase().equals("asc") ||
                     ordering.getOrderDirection().toLowerCase().equals("descending") ||
                     ordering.getOrderDirection().toLowerCase().equals("desc")))
-                ? Optional.of(new CoreError("orderDirection ", "Must contain 'ASCENDING' or 'DESCENDING' only!"))
+                ? Optional.of(new CoreError("orderDirection", "Must contain 'ASCENDING/asc' or 'DESCENDING/desc' only!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateMandatoryOrderBy(Ordering ordering) {
         return (ordering.getOrderDirection() != null && ordering.getOrderBy() == null)
-                ? Optional.of(new CoreError("orderBy ", "Must not be empty!"))
+                ? Optional.of(new CoreError("orderBy", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateMandatoryOrderDirection(Ordering ordering) {
         return (ordering.getOrderBy() != null && ordering.getOrderDirection() == null)
-                ? Optional.of(new CoreError("orderDirection ", "Must not be empty!"))
+                ? Optional.of(new CoreError("orderDirection", "Must not be empty!"))
                 : Optional.empty();
     }
 

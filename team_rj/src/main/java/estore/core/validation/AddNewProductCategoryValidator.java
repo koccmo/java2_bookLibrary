@@ -21,13 +21,13 @@ public class AddNewProductCategoryValidator {
 
     private Optional<CoreError> validateProductCategoryIfEmpty(AddNewProductCategoryRequest request) {
         return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
-                ? Optional.of(new CoreError("ERROR! Product category ", "Must not be empty!"))
+                ? Optional.of(new CoreError("Product category", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductCategoryRequest request) {
         return (!validateString(request.getProductCategory()))
-                ? Optional.of(new CoreError("ERROR! Product category ", "Must contain only english letters!"))
+                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
