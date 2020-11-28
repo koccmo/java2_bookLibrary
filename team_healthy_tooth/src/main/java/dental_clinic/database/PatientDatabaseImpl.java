@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private Long id= 1L;
-    private List<Patient> patientList = new ArrayList<>();
+    private final List<Patient> patientList = new ArrayList<>();
 
     @Override
     public List<Patient> getPatients(){
@@ -29,7 +29,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     @Override
     public void deletePatient(Long id) {
         for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == id){
+            if (patientList.get(i).getPersonalData().getId().equals(id)){
                 patientList.remove(i);
             }
         }
@@ -69,10 +69,10 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsByPersonalCode(String personalCode) {
+    public Optional<Patient> findPatientsByPersonalCode(String personalCode) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
-                .collect(Collectors.toList());
+                .findAny();
     }
 
     @Override
@@ -90,50 +90,48 @@ public class PatientDatabaseImpl implements PatientDatabase {
     @Override
     public Optional<Patient> getPatientCard(Long id) {
         return patientList.stream()
-                .filter(patient -> patient.getPersonalData().getId() == id)
+                .filter(patient -> patient.getPersonalData().getId().equals(id))
                 .findAny();
     }
 
     private boolean isSpecificPatient (int index, Long id) {
-        return patientList.get(index).getPersonalData().getId() == id;
+        return patientList.get(index).getPersonalData().getId().equals(id);
     }
 
     @Override
     public boolean containsPatientWithSpecificId(Long id) {
-        boolean statusId = false;
-        for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == id){
-                statusId = true;
-
+        for (Patient patient : patientList) {
+            if (patient.getPersonalData().getId().equals(id)) {
+                return true;
             }
         }
-        return statusId;
+        return false;
     }
 
     @Override
-    public void changeSurname(long idToSearch, String updatedSurname) {
-        for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == idToSearch){
-                    patientList.get(i).getPersonalData().setSurname(updatedSurname);
-            }
-        }
-    }
-
-    @Override
-    public void changePhone(long idToSearch, String updatedPhone) {
-        for (int i = 0; i < patientList.size(); i++){
-            if (patientList.get(i).getPersonalData().getId() == idToSearch){
-                patientList.get(i).getPersonalData().setPhone(updatedPhone);
+    public void changeSurname(Long idToSearch, String updatedSurname) {
+        for (Patient patient : patientList) {
+            if (patient.getPersonalData().getId().equals(idToSearch)) {
+                patient.getPersonalData().setSurname(updatedSurname);
             }
         }
     }
 
     @Override
-    public Optional<Patient> findPatientByIdNumber(long idToSearch) {
+    public void changePhone(Long idToSearch, String updatedPhone) {
+        for (Patient patient : patientList) {
+            if (patient.getPersonalData().getId().equals(idToSearch)) {
+                patient.getPersonalData().setPhone(updatedPhone);
+            }
+        }
+    }
+
+    @Override
+    public Optional<Patient> findPatientByIdNumber(Long idToSearch) {
         Optional<Patient> result = Optional.empty();
         for (Patient patient : patientList) {
-            long foundId = patient.getPersonalData().getId();
-            if (foundId == idToSearch) {
+            Long foundId = patient.getPersonalData().getId();
+            if (foundId.equals(idToSearch)) {
                 result = Optional.of(patient);
             }
         }
@@ -143,9 +141,8 @@ public class PatientDatabaseImpl implements PatientDatabase {
     @Override
     public boolean containsSpecificPersonalData(PersonalData personalData){
         return patientList.stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(personalData1 -> personalData1.getPersonalCode().equals(personalData.getPersonalCode()))
-                .findAny().isPresent();
+                .map(Patient::getPersonalData)
+                .anyMatch(personalData1 -> personalData1.getPersonalCode().equals(personalData.getPersonalCode()));
     }
 
 }

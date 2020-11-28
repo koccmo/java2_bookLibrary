@@ -25,10 +25,12 @@ public class DeletePatientService {
             return new DeletePatientResponse(errors);
         }
 
-        for (int i = 0; i < patientDatabase.getPatients().size(); i++){
-            if (getCurrentPatientPersonalData(i).getId() == deletePatientRequest.getId()){
-                patientDatabase.deletePatient(deletePatientRequest.getId());
-                return new DeletePatientResponse(deletePatientRequest.getId());
+        if (patientDatabase.containsPatientWithSpecificId(deletePatientRequest.getId())){
+            for (int i = 0; i < patientDatabase.getPatients().size(); i++){
+                if (getCurrentPatientPersonalData(i).getId() == deletePatientRequest.getId()){
+                    patientDatabase.deletePatient(deletePatientRequest.getId());
+                    return new DeletePatientResponse(deletePatientRequest.getId());
+                }
             }
         }
 
