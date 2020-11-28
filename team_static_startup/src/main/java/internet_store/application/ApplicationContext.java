@@ -1,7 +1,7 @@
 package internet_store.application;
 
-import internet_store.application.core.database.Database;
-import internet_store.application.core.database.InMemoryDatabase;
+import internet_store.application.console_ui.*;
+import internet_store.application.core.database.*;
 import internet_store.application.core.services.*;
 import internet_store.application.core.services.validators.*;
 
@@ -23,14 +23,37 @@ public class ApplicationContext {
         beans.put(FindProductsRequestValidator.class, new FindProductsRequestValidator());
         beans.put(ChangeProductNameValidator.class, new ChangeProductNameValidator());
 
-        beans.put(AddProductService.class, new AddProductService(getBean(Database.class), getBean(AddProductValidator.class)));
-        beans.put(DeleteByProductIdService.class, new DeleteByProductIdService(getBean(Database.class), getBean(DeleteByProductIdValidator.class)));
-        beans.put(DeleteProductByProductService.class, new DeleteProductByProductService(getBean(Database.class), getBean(DeleteByProductValidator.class)));
-        beans.put(DeleteProductByNameService.class, new DeleteProductByNameService(getBean(Database.class), getBean(DeleteByProductNameValidator.class)));
-        beans.put(FindByIdService.class, new FindByIdService(getBean(Database.class), getBean(FindByIdValidator.class)));
-        beans.put(FindProductsService.class, new FindProductsService(getBean(Database.class), getBean(FindProductsRequestValidator.class)));
-        beans.put(ChangeProductNameService.class, new ChangeProductNameService(getBean(Database.class), getBean(ChangeProductNameValidator.class)));
+        beans.put(AddProductService.class, new AddProductService(
+                getBean(Database.class), getBean(AddProductValidator.class)));
+        beans.put(DeleteByProductIdService.class, new DeleteByProductIdService(
+                getBean(Database.class), getBean(DeleteByProductIdValidator.class)));
+        beans.put(DeleteProductByProductService.class, new DeleteProductByProductService(
+                getBean(Database.class), getBean(DeleteByProductValidator.class)));
+        beans.put(DeleteProductByNameService.class, new DeleteProductByNameService(
+                getBean(Database.class), getBean(DeleteByProductNameValidator.class)));
+        beans.put(FindByIdService.class, new FindByIdService(
+                getBean(Database.class), getBean(FindByIdValidator.class)));
+        beans.put(FindProductsService.class, new FindProductsService(
+                getBean(Database.class), getBean(FindProductsRequestValidator.class)));
+        beans.put(ChangeProductNameService.class, new ChangeProductNameService(
+                getBean(Database.class), getBean(ChangeProductNameValidator.class)));
         beans.put(GetProductListService.class, new GetProductListService(getBean(Database.class)));
+
+        beans.put(AddProductUIAction.class, new AddProductUIAction(getBean(AddProductService.class)));
+        beans.put(DeleteByIdUIAction.class, new DeleteByIdUIAction(getBean(DeleteByIdUIAction.class)));
+        beans.put(DeleteByProductUIAction.class, new DeleteByProductUIAction(
+                getBean(DeleteProductByProductService.class)));
+        beans.put(DeleteByProductNameUIAction.class, new DeleteByProductNameUIAction(
+                getBean(DeleteProductByNameService.class)));
+        beans.put(FindByIdUIAction.class, new FindByIdUIAction(
+                getBean(FindByIdService.class)));
+        beans.put(FindProductsUIAction.class, new FindProductsUIAction(
+                getBean(FindProductsService.class)));
+        beans.put(ChangeProductNameUIAction.class, new ChangeProductNameUIAction(
+                getBean(ChangeProductNameService.class), getBean(FindByIdService.class)));
+        beans.put(PrintProductsToConsoleUIAction.class, new PrintProductsToConsoleUIAction(
+                getBean(GetProductListService.class)));
+        beans.put(ExitProgramUIAction.class, new ExitProgramUIAction());
     }
 
     public <T extends Object> T getBean(Class c) {
