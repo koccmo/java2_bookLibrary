@@ -23,7 +23,7 @@ public interface PatientDatabase {
 
     List<Patient> findPatientsByNameAndSurname(String name, String surname);
 
-    List<Patient> findPatientsByPersonalCode(String personalCode);
+    Optional<Patient> findPatientsByPersonalCode(String personalCode);
 
     void addVisit(Long id, Visit newVisit);
 

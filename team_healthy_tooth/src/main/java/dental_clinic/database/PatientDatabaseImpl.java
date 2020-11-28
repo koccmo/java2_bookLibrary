@@ -69,10 +69,10 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsByPersonalCode(String personalCode) {
+    public Optional<Patient> findPatientsByPersonalCode(String personalCode) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
-                .collect(Collectors.toList());
+                .findAny();
     }
 
     @Override
