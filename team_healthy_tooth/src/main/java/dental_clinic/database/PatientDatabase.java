@@ -31,4 +31,10 @@ public interface PatientDatabase {
     boolean  checkPatientById(Long id);
 
     Optional<Patient> getPatientCard(Long id);
+
+    void changeSurname(long idToSearch, String updatedSurname);
+
+    void changePhone(long idToSearch, String updatedSurname);
+
+    Optional<Patient> findPatientByIdNumber(long idToSearch);
 }
