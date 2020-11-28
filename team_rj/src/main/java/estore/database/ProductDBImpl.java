@@ -32,12 +32,18 @@ public class ProductDBImpl implements ProductDB {
         this.products.add(new Product("Beer", "Aldaris Pilzenes", "Alcohol"));
         this.products.add(new Product("Beer", "1664 Blanc Alcohol Free", "Alcohol"));
         this.products.add(new Product("Salmon", "Free Baltic salmon", "Fish"));
-        products.get(0).setId(1L);
-        products.get(1).setId(2L);
-        products.get(2).setId(3L);
-        products.get(3).setId(4L);
-        products.get(4).setId(5L);
-        products.get(5).setId(6L);
+        this.products.get(0).setId(1L);
+        this.products.get(1).setId(2L);
+        this.products.get(2).setId(3L);
+        this.products.get(3).setId(4L);
+        this.products.get(4).setId(5L);
+        this.products.get(5).setId(6L);
+        this.products.get(0).setPrice(0.95);
+        this.products.get(1).setPrice(1.25);
+        this.products.get(2).setPrice(1.49);
+        this.products.get(3).setPrice(1.25);
+        this.products.get(4).setPrice(0.89);
+        this.products.get(5).setPrice(12.99);
     }
 
     private void setNextProductId() {
