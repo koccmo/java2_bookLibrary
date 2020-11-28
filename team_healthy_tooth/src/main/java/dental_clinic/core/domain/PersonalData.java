@@ -16,7 +16,6 @@ public class PersonalData {
         this.surname = surname;
         this.phone = phone;
         this.personalCode = personalCode;
-
     }
 
     public Long getId (){

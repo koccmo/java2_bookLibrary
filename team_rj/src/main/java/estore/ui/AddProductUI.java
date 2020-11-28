@@ -3,7 +3,7 @@ package estore.ui;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.service.AddNewProductService;
-import estore.domain.ProductCategory;
+import estore.domain.ProductCategoryEnum;
 
 import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class AddProductUI implements UIAction {
         System.out.println("Enter description of the product");
         String productDescription = sc.nextLine();
         System.out.println("Enter category of the product:");
-        for (ProductCategory pc: ProductCategory.values()) {
+        for (ProductCategoryEnum pc: ProductCategoryEnum.values()) {
             System.out.print(pc + "   ");
         }
         System.out.println();

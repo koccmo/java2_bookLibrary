@@ -3,15 +3,22 @@ package estore.core.requests;
 public class SearchProductByCategoryRequest {
 
     private String productCategory;
-    private String orderBy;
-    private String orderDirection;
+    private Ordering ordering;
 
     public SearchProductByCategoryRequest(String productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public SearchProductByCategoryRequest(String productCategory, Ordering ordering) {
+        this.productCategory = productCategory;
+        this.ordering = ordering;
     }
 
     public String getProductCategory() {
         return productCategory;
     }
 
+    public Ordering getOrdering() {
+        return ordering;
+    }
 }

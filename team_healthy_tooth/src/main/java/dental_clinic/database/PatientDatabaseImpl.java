@@ -2,7 +2,6 @@ package dental_clinic.database;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 
 import java.util.ArrayList;
@@ -111,5 +110,34 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return statusId;
     }
 
+    @Override
+    public void changeSurname(long idToSearch, String updatedSurname) {
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPersonalData().getId() == idToSearch){
+                    patientList.get(i).getPersonalData().setSurname(updatedSurname);
+            }
+        }
+    }
+
+    @Override
+    public void changePhone(long idToSearch, String updatedPhone) {
+        for (int i = 0; i < patientList.size(); i++){
+            if (patientList.get(i).getPersonalData().getId() == idToSearch){
+                patientList.get(i).getPersonalData().setPhone(updatedPhone);
+            }
+        }
+    }
+
+    @Override
+    public Optional<Patient> findPatientByIdNumber(long idToSearch) {
+        Optional<Patient> result = Optional.empty();
+        for (Patient patient : patientList) {
+            long foundId = patient.getPersonalData().getId();
+            if (foundId == idToSearch) {
+                result = Optional.of(patient);
+            }
+        }
+        return result;
+    }
 
 }

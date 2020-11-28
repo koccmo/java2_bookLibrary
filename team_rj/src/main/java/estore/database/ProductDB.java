@@ -3,7 +3,7 @@ package estore.database;
 import java.util.List;
 import estore.domain.Product;
 
-public interface ProductDataBase {
+public interface ProductDB {
 
     List<Product> searchProductByName(String name);
 

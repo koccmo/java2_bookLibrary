@@ -3,14 +3,13 @@ package estore.database;
 import java.util.ArrayList;
 import java.util.List;
 import estore.domain.Product;
-import estore.domain.ProductCategory;
 
-public class ProductDataBaseImplementation implements ProductDataBase {
+public class ProductDBImpl implements ProductDB {
 
     private Long nextProductId;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
-    public ProductDataBaseImplementation() {
+    public ProductDBImpl() {
         initializeListOfProducts();
         setNextProductId();
     }
@@ -26,18 +25,25 @@ public class ProductDataBaseImplementation implements ProductDataBase {
     }
 
     private void initializeListOfProducts() {
+        products = new ArrayList<>();
         this.products.add(new Product("Apple", "Juicy red apples", "Fruits"));
         this.products.add(new Product("Melon", "Melons from Georgia", "Fruits"));
         this.products.add(new Product("Grapes", "Small blue grapes", "Fruits"));
         this.products.add(new Product("Beer", "Aldaris Pilzenes", "Alcohol"));
         this.products.add(new Product("Beer", "1664 Blanc Alcohol Free", "Alcohol"));
         this.products.add(new Product("Salmon", "Free Baltic salmon", "Fish"));
-        products.get(0).setId(1L);
-        products.get(1).setId(2L);
-        products.get(2).setId(3L);
-        products.get(3).setId(4L);
-        products.get(4).setId(5L);
-        products.get(5).setId(6L);
+        this.products.get(0).setId(1L);
+        this.products.get(1).setId(2L);
+        this.products.get(2).setId(3L);
+        this.products.get(3).setId(4L);
+        this.products.get(4).setId(5L);
+        this.products.get(5).setId(6L);
+        this.products.get(0).setPrice(0.95);
+        this.products.get(1).setPrice(1.25);
+        this.products.get(2).setPrice(1.49);
+        this.products.get(3).setPrice(1.25);
+        this.products.get(4).setPrice(0.89);
+        this.products.get(5).setPrice(12.99);
     }
 
     private void setNextProductId() {

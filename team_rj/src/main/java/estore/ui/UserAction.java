@@ -1,8 +1,10 @@
 package estore.ui;
 
 import estore.core.validation.*;
-import estore.database.ProductDataBase;
-import estore.database.ProductDataBaseImplementation;
+import estore.database.ProductCategoryDB;
+import estore.database.ProductCategoryDBImpl;
+import estore.database.ProductDB;
+import estore.database.ProductDBImpl;
 import estore.core.service.*;
 
 public class UserAction {
@@ -13,15 +15,19 @@ public class UserAction {
     private static RemoveProductByNameValidator removeProductByNameValidator = new RemoveProductByNameValidator();
     private static SearchProductByNameValidator searchProductByNameValidator = new SearchProductByNameValidator();
     private static SearchProductByCategoryValidator searchProductByCategoryValidator = new SearchProductByCategoryValidator();
+    private static AddNewProductCategoryValidator addNewProductCategoryValidator = new AddNewProductCategoryValidator();
 
-    private static ProductDataBase database = new ProductDataBaseImplementation();
+    private static ProductDB productDB = new ProductDBImpl();
+    private static ProductCategoryDB productCategoryDB = new ProductCategoryDBImpl();
 
-    private static AddNewProductService addNewProductService = new AddNewProductService(database, addNewProductValidator);
-    private static RemoveProductByIdService removeProductByIdService = new RemoveProductByIdService(database, removeProductByIdValidator);
-    private static RemoveProductByNameService removeProductByNameService = new RemoveProductByNameService(database, removeProductByNameValidator);
-    private static SearchProductByNameService searchProductByNameService = new SearchProductByNameService(database, searchProductByNameValidator);
-    private static SearchProductByCategoryService searchProductByCategoryService = new SearchProductByCategoryService(database, searchProductByCategoryValidator);
-    private static ShowAllProductsService showAllProductsService = new ShowAllProductsService(database);
+    private static AddNewProductService addNewProductService = new AddNewProductService(productDB, addNewProductValidator);
+    private static RemoveProductByIdService removeProductByIdService = new RemoveProductByIdService(productDB, removeProductByIdValidator);
+    private static RemoveProductByNameService removeProductByNameService = new RemoveProductByNameService(productDB, removeProductByNameValidator);
+    private static SearchProductByNameService searchProductByNameService = new SearchProductByNameService(productDB, searchProductByNameValidator);
+    private static SearchProductByCategoryService searchProductByCategoryService = new SearchProductByCategoryService(productDB, searchProductByCategoryValidator);
+    private static ShowAllProductsService showAllProductsService = new ShowAllProductsService(productDB);
+    private static AddNewProductCategoryService addNewProductCategoryService = new AddNewProductCategoryService(productCategoryDB, addNewProductCategoryValidator);
+
 
     private static UIAction addNewProductUI = new AddProductUI(addNewProductService);
     private static UIAction removeProductById = new RemoveProductByIdUI(removeProductByIdService);
@@ -30,6 +36,7 @@ public class UserAction {
     private static UIAction searchProductByCategory = new SearchProductByCategoryUI(searchProductByCategoryService);
     private static UIAction showAllProducts = new ShowAllProductsUI(showAllProductsService);
     private static UIAction exitProgram = new ExitProgramUI();
+    private static UIAction addNewProductCategory = new AddProductCategoryUI(addNewProductCategoryService);
 
     public void run() {
         UserMenu userMenu = new UserMenu();
@@ -62,7 +69,7 @@ public class UserAction {
                 addNewProductUI.execute();
                 break;
             case 5:
-                System.out.println("Not emplemented");
+                addNewProductCategory.execute();
                 break;
             case 6:
                 removeProductByName.execute();
