@@ -30,7 +30,7 @@ public class AddPatientService {
 
         Patient patient = new Patient((addPatientRequest.getPersonalData()));
 
-        if (containsDatabasePatientPersonalData(patient.getPersonalData())){
+        if (patientDatabase.containsSpecificPersonalData(patient.getPersonalData())){
             errors.add(new CoreError("database", "Database contains the same patient"));
             return new AddPatientResponse(errors);
         }else{
@@ -40,11 +40,4 @@ public class AddPatientService {
     }
 
 
-    private boolean containsDatabasePatientPersonalData(PersonalData personalData){
-        Optional<PersonalData> result = patientDatabase.getPatients().stream()
-                .map(patient -> patient.getPersonalData())
-                .filter(patient1 -> patient1.equals(personalData))
-                .findAny();
-        return result.isPresent();
-    }
 }

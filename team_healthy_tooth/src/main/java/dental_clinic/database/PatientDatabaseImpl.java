@@ -99,7 +99,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean checkPatientById(Long id) {
+    public boolean containsPatientWithSpecificId(Long id) {
         boolean statusId = false;
         for (int i = 0; i < patientList.size(); i++){
             if (patientList.get(i).getPersonalData().getId() == id){
@@ -138,6 +138,14 @@ public class PatientDatabaseImpl implements PatientDatabase {
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean containsSpecificPersonalData(PersonalData personalData){
+        return patientList.stream()
+                .map(patient -> patient.getPersonalData())
+                .filter(personalData1 -> personalData1.getPersonalCode().equals(personalData.getPersonalCode()))
+                .findAny().isPresent();
     }
 
 }
