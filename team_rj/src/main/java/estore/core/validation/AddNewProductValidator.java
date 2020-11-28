@@ -62,7 +62,7 @@ public class AddNewProductValidator {
 
     private Optional<CoreError> validateProductCategoryExistence(AddNewProductRequest request) {
         return (!validateCategoryExistence(request.getProductCategory()))
-                ? Optional.of(new CoreError("Product category", "does not exist!"))
+                ? Optional.of(new CoreError("Product category", "Does not exist!"))
                 : Optional.empty();
     }
 
