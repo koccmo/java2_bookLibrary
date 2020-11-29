@@ -1,9 +1,8 @@
-package internet_store.core.service.add_product.product_items_service;
+package internet_store.core.service.product;
 
 
 import internet_store.core.request.product.product_items.AddProductDescriptionRequest;
 import internet_store.core.response.product.product_item.AddProductDescriptionResponse;
-import internet_store.core.service.product.AddProductDescriptionService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

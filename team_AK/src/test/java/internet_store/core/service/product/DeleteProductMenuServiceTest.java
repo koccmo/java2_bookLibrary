@@ -1,11 +1,10 @@
-package internet_store.core.service.delete_product;
+package internet_store.core.service.product;
 
 
 import internet_store.ProductListApplication;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.DeleteProductRequest;
 import internet_store.core.response.product.DeleteProductResponse;
-import internet_store.core.service.product.DeleteProductService;
 import internet_store.database.product_database.InnerProductDatabase;
 import org.junit.Test;
 

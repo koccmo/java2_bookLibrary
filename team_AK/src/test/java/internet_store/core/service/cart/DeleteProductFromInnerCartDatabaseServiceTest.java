@@ -1,4 +1,4 @@
-package internet_store.core.service.delete_from_cart;
+package internet_store.core.service.cart;
 
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
