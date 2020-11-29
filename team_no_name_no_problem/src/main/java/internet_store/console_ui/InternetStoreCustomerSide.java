@@ -63,7 +63,9 @@ public class InternetStoreCustomerSide {
         System.out.println("\nMenu\n" +
                 "1   Sign in\n" +
                 "2   Delete account by id\n" +
-                "3   Buy product\n"+ //будет вызвать Шоппинг Карт
+                "3   Search product\n" +
+                "4   See product list\n" +
+                "5   Buy product\n"+ //будет вызвать Шоппинг Карт
                 "0   Exit");
     }
 
