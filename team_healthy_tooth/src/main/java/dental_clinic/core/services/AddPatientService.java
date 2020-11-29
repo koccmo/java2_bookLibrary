@@ -5,20 +5,18 @@ import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.responses.AddPatientResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.core.domain.PersonalData;
 
 import java.util.List;
-import java.util.Optional;
 
 public class AddPatientService {
 
     private PatientDatabase patientDatabase;
 
-    private AddPatientValidator validator;
+    private AddPatientRequestValidator validator;
 
-    public AddPatientService(PatientDatabase patientDatabase, AddPatientValidator addPatientValidator) {
+    public AddPatientService(PatientDatabase patientDatabase, AddPatientRequestValidator addPatientRequestValidator) {
         this.patientDatabase = patientDatabase;
-        this.validator = addPatientValidator;
+        this.validator = addPatientRequestValidator;
     }
 
     public AddPatientResponse execute (AddPatientRequest addPatientRequest){

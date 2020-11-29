@@ -1,25 +1,23 @@
 package dental_clinic.console_ui;
 
 import dental_clinic.core.requests.ChangePersonalDataRequest;
-import dental_clinic.core.requests.CheckPatientByIdRequest;
+import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ChangePersonalDataResponse;
-import dental_clinic.core.responses.CheckPatientByIdResponse;
-import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreResponse;
 import dental_clinic.core.services.ChangePersonalDataService;
-import dental_clinic.core.services.CheckPatientByIdService;
+import dental_clinic.core.services.ContainsDatabaseIdService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ChangePersonalDataUiAction implements UIAction {
 
     private final ChangePersonalDataService service;
-    private CheckPatientByIdService checkPatientByIdService;
+    private ContainsDatabaseIdService containsDatabaseIdService;
 
-    public ChangePersonalDataUiAction(ChangePersonalDataService service, CheckPatientByIdService checkPatientByIdService) {
+    public ChangePersonalDataUiAction(ChangePersonalDataService service, ContainsDatabaseIdService containsDatabaseIdService) {
         this.service = service;
-        this.checkPatientByIdService = checkPatientByIdService;
+        this.containsDatabaseIdService = containsDatabaseIdService;
     }
 
     public void execute() {
@@ -50,9 +48,9 @@ public class ChangePersonalDataUiAction implements UIAction {
     }
 
     private CoreResponse notExistingId (Long id){
-        CheckPatientByIdRequest checkPatientByIdRequest = new CheckPatientByIdRequest(id);
-        CheckPatientByIdResponse checkPatientByIdResponse = checkPatientByIdService.execute( checkPatientByIdRequest );
-        return checkPatientByIdResponse;
+        ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(id);
+        ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);
+        return containsDatabaseIdResponse;
     }
 
     private void printResult(String surname, String phone){

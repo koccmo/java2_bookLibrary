@@ -14,7 +14,7 @@ public class GetProductListService {
         this.database = database;
     }
 
-    public PrintProductsToConsoleResponse getProductList() {
+    public PrintProductsToConsoleResponse execute() {
         List<Product> productList = database.getProductList();
         return new PrintProductsToConsoleResponse(productList);
     }

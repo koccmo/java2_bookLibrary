@@ -20,7 +20,7 @@ public class DeleteByProductNameUIAction implements UIAction {
         System.out.print("Enter product name : ");
         String productName = myInput.nextLine();
         DeleteByProductNameRequest request = new DeleteByProductNameRequest(productName);
-        DeleteByProductNameResponse response = deleteProductByNameService.deleteByProductName(request);
+        DeleteByProductNameResponse response = deleteProductByNameService.execute(request);
 
         if (response.hasErrors()){
             response.getErrors().forEach(coreError ->

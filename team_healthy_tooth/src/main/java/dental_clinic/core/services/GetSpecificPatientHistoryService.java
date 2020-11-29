@@ -11,24 +11,26 @@ import java.util.Optional;
 public class GetSpecificPatientHistoryService {
 
     private final PatientDatabase patientDatabase;
-    private GetSpecificPatientValidator getSpecificPatientValidator;
+    private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
 
-    public GetSpecificPatientHistoryService(PatientDatabase patientDatabase, GetSpecificPatientValidator getSpecificPatientValidator) {
+    public GetSpecificPatientHistoryService(PatientDatabase patientDatabase, GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator) {
         this.patientDatabase = patientDatabase;
-        this.getSpecificPatientValidator = getSpecificPatientValidator;
+        this.getSpecificPatientHistoryRequestValidator = getSpecificPatientHistoryRequestValidator;
     }
 
     public GetSpecificPatientHistoryResponse execute(GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest){
 
-        List<CoreError> errors = getSpecificPatientValidator.validate(getSpecificPatientHistoryRequest);
+        List<CoreError> errors = getSpecificPatientHistoryRequestValidator.validate(getSpecificPatientHistoryRequest);
 
         if (!errors.isEmpty()){
             return new GetSpecificPatientHistoryResponse(errors);
         }
 
-        for (int i = 0; i < patientDatabase.getPatients().size(); i++){
-            if (isSpecificPatient(i, getSpecificPatientHistoryRequest.getId())){
-                return new GetSpecificPatientHistoryResponse(Optional.of(patientDatabase.getPatients().get(i)));
+        if (patientDatabase.containsPatientWithSpecificId(getSpecificPatientHistoryRequest.getId())){
+            for (int i = 0; i < patientDatabase.getPatients().size(); i++){
+                if (isSpecificPatient(i, getSpecificPatientHistoryRequest.getId())){
+                    return new GetSpecificPatientHistoryResponse(Optional.of(patientDatabase.getPatients().get(i)));
+                }
             }
         }
 
@@ -36,7 +38,7 @@ public class GetSpecificPatientHistoryService {
         return new GetSpecificPatientHistoryResponse(errors);
     }
 
-    private boolean isSpecificPatient (int index, long id) {
-        return patientDatabase.getPatients().get(index).getPersonalData().getId() == id;
+    private boolean isSpecificPatient (int index, Long id) {
+        return patientDatabase.getPatients().get(index).getPersonalData().getId().equals(id);
     }
 }

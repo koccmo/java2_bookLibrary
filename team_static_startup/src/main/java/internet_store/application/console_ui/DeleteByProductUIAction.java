@@ -26,7 +26,7 @@ public class DeleteByProductUIAction implements UIAction {
         System.out.print("Enter product price : ");
         BigDecimal productPrice = myInput.nextBigDecimal();
         DeleteByProductRequest request = new DeleteByProductRequest(productName, productDescription, productPrice);
-        DeleteByProductResponse response = deleteProductByProductService.deleteByProduct(request);
+        DeleteByProductResponse response = deleteProductByProductService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->

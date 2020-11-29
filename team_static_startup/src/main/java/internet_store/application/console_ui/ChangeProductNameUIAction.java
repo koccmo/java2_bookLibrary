@@ -28,7 +28,7 @@ public class ChangeProductNameUIAction implements UIAction {
         String id = myInput.nextLine();
 
         FindByIdRequest idRequest = new FindByIdRequest(id);
-        FindByIdResponse idResponse = findByIdService.findById(idRequest);
+        FindByIdResponse idResponse = findByIdService.execute(idRequest);
 
         Optional<Product> foundProduct = idResponse.getProductFoundById();
 
@@ -48,7 +48,7 @@ public class ChangeProductNameUIAction implements UIAction {
         String newName = myInput.nextLine();
         ChangeProductNameRequest changeProductNameRequest = new ChangeProductNameRequest (foundProduct.get().getId(),
                                                                                           newName);
-        ChangeProductNameResponse changeProductNameResponse = changeProductNameService.changeProductName(changeProductNameRequest);
+        ChangeProductNameResponse changeProductNameResponse = changeProductNameService.execute(changeProductNameRequest);
 
         //boolean productNameChange = changeProductNameService.changeProductName(foundProduct.get().getId(), newName);
 
