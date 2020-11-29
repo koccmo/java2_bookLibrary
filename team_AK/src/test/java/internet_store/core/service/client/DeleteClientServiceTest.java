@@ -1,10 +1,9 @@
-package internet_store.core.service.delete_client;
+package internet_store.core.service.client;
 
 import internet_store.ProductListApplication;
 import internet_store.core.domain.Client;
 import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
-import internet_store.core.service.client.DeleteClientService;
 import internet_store.database.client_database.InnerClientDatabase;
 import org.junit.Test;
 

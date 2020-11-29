@@ -1,9 +1,8 @@
-package internet_store.core.service.add_product.product_items_service;
+package internet_store.core.service.product;
 
 
 import internet_store.core.request.product.product_items.AddProductPriceRequest;
 import internet_store.core.response.product.product_item.AddProductPriceResponse;
-import internet_store.core.service.product.AddProductPriceService;
 import org.junit.Test;
 
 import java.math.BigDecimal;

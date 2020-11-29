@@ -1,8 +1,7 @@
-package internet_store.core.service.add_client.client_items_service;
+package internet_store.core.service.client;
 
 import internet_store.core.request.client.client_items.AddClientNameRequest;
 import internet_store.core.response.client.client_items.AddClientNameResponse;
-import internet_store.core.service.client.AddClientNameService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

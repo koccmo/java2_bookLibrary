@@ -1,9 +1,8 @@
-package internet_store.core.service.add_product_to_cart;
+package internet_store.core.service.cart;
 
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.AddProductToCartRequest;
 import internet_store.core.response.cart.AddProductToCartResponse;
-import internet_store.core.service.cart.AddProductToCartService;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabase;
@@ -38,7 +37,7 @@ public class AddProductToInnerCartDatabaseImplServiceTest {
 
         AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, new BigDecimal("1")));
         assertNull(response.getErrors());
-        assertEquals(1, response.getId());
+        assertEquals(1L, response.getId());
     }
 
     @Test
