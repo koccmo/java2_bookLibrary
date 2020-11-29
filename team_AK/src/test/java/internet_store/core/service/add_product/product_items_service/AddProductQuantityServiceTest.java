@@ -1,8 +1,9 @@
 package internet_store.core.service.add_product.product_items_service;
 
 
-import internet_store.core.request.add_product.product_items.AddProductQuantityRequest;
-import internet_store.core.response.add_product.product_items.AddProductQuantityResponse;
+import internet_store.core.request.product.product_items.AddProductQuantityRequest;
+import internet_store.core.response.product.product_item.AddProductQuantityResponse;
+import internet_store.core.service.product.AddProductQuantityService;
 import org.junit.Test;
 
 import java.math.BigDecimal;

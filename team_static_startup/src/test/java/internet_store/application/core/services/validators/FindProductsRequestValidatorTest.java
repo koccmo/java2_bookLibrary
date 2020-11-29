@@ -1,14 +1,10 @@
 package internet_store.application.core.services.validators;
 
-import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.requests.Ordering;
-import internet_store.application.core.requests.Paging;
+import internet_store.application.core.requests.*;
 import internet_store.application.core.responses.CoreError;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class FindProductsRequestValidatorTest {
@@ -74,7 +70,6 @@ public class FindProductsRequestValidatorTest {
         assertEquals("Both must be empty or filled!", errors.get(0).getMessage());
         assertEquals("Direction", errors.get(1).getField());
         assertEquals("Must be Ascending or Descending.", errors.get(1).getMessage());
-
     }
 
     @Test
@@ -143,7 +138,6 @@ public class FindProductsRequestValidatorTest {
         assertEquals(0, errors.size());
     }
 
-
     @Test
     public void shouldReturnErrorWhenPageSizeIsZero() {
         paging = new Paging(2, 0);
@@ -205,7 +199,6 @@ public class FindProductsRequestValidatorTest {
         assertEquals("Page number", errors.get(1).getField());
         assertEquals("Must be bigger than zero.", errors.get(1).getMessage());
     }
-
 
 }
 

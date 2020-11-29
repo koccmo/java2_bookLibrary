@@ -1,8 +1,9 @@
 package internet_store.core.service.update_cart_service;
 
 import internet_store.core.domain.Product;
-import internet_store.core.request.update_cart_request.UpdateCartRequest;
-import internet_store.core.response.update_cart_response.UpdateCartResponse;
+import internet_store.core.request.cart.UpdateCartRequest;
+import internet_store.core.response.cart.UpdateCartResponse;
+import internet_store.core.service.cart.UpdateCartService;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabaseImpl;
 import org.junit.BeforeClass;

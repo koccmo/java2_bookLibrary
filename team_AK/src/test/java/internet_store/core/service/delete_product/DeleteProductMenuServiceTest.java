@@ -3,8 +3,10 @@ package internet_store.core.service.delete_product;
 
 import internet_store.ProductListApplication;
 import internet_store.core.domain.Product;
-import internet_store.core.request.delete_product.DeleteProductRequest;
-import internet_store.core.response.delete_product.DeleteProductResponse;
+import internet_store.core.request.product.DeleteProductRequest;
+import internet_store.core.response.product.DeleteProductResponse;
+import internet_store.core.service.product.DeleteProductService;
+import internet_store.database.product_database.InnerProductDatabase;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -12,17 +14,20 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteProductMenuServiceTest {
-    DeleteProductService deleteService = new DeleteProductService(ProductListApplication.productDatabase);
+    DeleteProductService deleteService = new DeleteProductService(ProductListApplication.applicationContext
+            .getBean(InnerProductDatabase.class));
 
     @Test
     public void shouldReturnNoErrors() {
+        InnerProductDatabase productDatabase = ProductListApplication.applicationContext
+                .getBean(InnerProductDatabase.class);
         Product product = new Product();
         product.setId(1L);
         product.setTitle("Title");
         product.setDescription("Description");
         product.setQuantity(new BigDecimal("5"));
         product.setPrice(new BigDecimal("100"));
-        ProductListApplication.productDatabase.addProduct(product);
+        productDatabase.addProduct(product);
 
         DeleteProductResponse response = deleteService.execute(new DeleteProductRequest(1L));
         assertEquals(1, response.getId());

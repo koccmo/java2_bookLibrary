@@ -4,7 +4,6 @@ import internet_store.application.console_ui.*;
 import internet_store.application.core.database.*;
 import internet_store.application.core.services.*;
 import internet_store.application.core.services.validators.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class ApplicationContext {
                 getBean(Database.class), getBean(DeleteByProductIdValidator.class)));
         beans.put(DeleteProductByProductService.class, new DeleteProductByProductService(
                 getBean(Database.class), getBean(DeleteByProductValidator.class)));
-        beans.put(DeleteProductByNameService.class, new DeleteProductByNameService(
+        beans.put(DeleteByProductNameService.class, new DeleteByProductNameService(
                 getBean(Database.class), getBean(DeleteByProductNameValidator.class)));
         beans.put(FindByIdService.class, new FindByIdService(
                 getBean(Database.class), getBean(FindByIdValidator.class)));
@@ -44,7 +43,7 @@ public class ApplicationContext {
         beans.put(DeleteByProductUIAction.class, new DeleteByProductUIAction(
                 getBean(DeleteProductByProductService.class)));
         beans.put(DeleteByProductNameUIAction.class, new DeleteByProductNameUIAction(
-                getBean(DeleteProductByNameService.class)));
+                getBean(DeleteByProductNameService.class)));
         beans.put(FindByIdUIAction.class, new FindByIdUIAction(
                 getBean(FindByIdService.class)));
         beans.put(FindProductsUIAction.class, new FindProductsUIAction(

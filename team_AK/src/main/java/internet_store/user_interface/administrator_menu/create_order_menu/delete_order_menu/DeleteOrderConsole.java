@@ -1,8 +1,9 @@
 package internet_store.user_interface.administrator_menu.create_order_menu.delete_order_menu;
 
 import internet_store.ProductListApplication;
-import internet_store.core.request.delete_order.DeleteOrderRequest;
-import internet_store.core.response.delete_order.DeleteOrderResponse;
+import internet_store.core.request.ordering.DeleteOrderRequest;
+import internet_store.core.response.ordering.DeleteOrderResponse;
+import internet_store.core.service.ordering.DeleteOrderService;
 
 public class DeleteOrderConsole {
     public void deleteOrder() {
@@ -11,7 +12,9 @@ public class DeleteOrderConsole {
         long orderId = deleteOrderMenu.getUserDeletedOrderIdInput();
 
         DeleteOrderRequest request = new DeleteOrderRequest(orderId);
-        DeleteOrderResponse response = ProductListApplication.deleteOrderService.execute(request);
+        DeleteOrderService deleteOrderService = ProductListApplication.applicationContext
+                .getBean(DeleteOrderService.class);
+        DeleteOrderResponse response = deleteOrderService.execute(request);
 
         if (!(response.hasErrors())) {
             System.out.println("Order deleted");
