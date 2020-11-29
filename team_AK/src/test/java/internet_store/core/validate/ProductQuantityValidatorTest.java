@@ -22,7 +22,7 @@ public class ProductQuantityValidatorTest {
     public void shouldReturnError_QuantityIsZero() {
         List<CoreError> errors = validator.validate(new BigDecimal("0"), new BigDecimal("0"));
         assertFalse(errors.isEmpty());
-        assertEquals("Add to cart error ", errors.get(0).getField());
+        assertEquals("Quantity error ", errors.get(0).getField());
         assertEquals("Product quantity is zero", errors.get(0).getMessage());
     }
 
@@ -30,7 +30,7 @@ public class ProductQuantityValidatorTest {
     public void shouldReturnError_QuantityIsZero_1() {
         List<CoreError> errors = validator.validate(new BigDecimal("0"), new BigDecimal("5"));
         assertFalse(errors.isEmpty());
-        assertEquals("Add to cart error ", errors.get(0).getField());
+        assertEquals("Quantity error ", errors.get(0).getField());
         assertEquals("Product quantity is zero", errors.get(0).getMessage());
         assertEquals("Quantity error ", errors.get(1).getField());
         assertEquals("No more product's quantity", errors.get(1).getMessage());

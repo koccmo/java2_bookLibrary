@@ -57,7 +57,7 @@ public class AddProductToInnerCartDatabaseImplServiceTest {
 
         AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, new BigDecimal("1")));
 
-        assertEquals("Add to cart error ", response.getErrors().get(0).getField());
+        assertEquals("Quantity error ", response.getErrors().get(0).getField());
         assertEquals("Product quantity is zero", response.getErrors().get(0).getMessage());
         assertEquals("Quantity error ", response.getErrors().get(1).getField());
         assertEquals("No more product's quantity", response.getErrors().get(1).getMessage());

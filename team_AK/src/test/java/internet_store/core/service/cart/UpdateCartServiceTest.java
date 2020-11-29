@@ -3,7 +3,6 @@ package internet_store.core.service.cart;
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.UpdateCartRequest;
 import internet_store.core.response.cart.UpdateCartResponse;
-import internet_store.core.service.cart.UpdateCartService;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabaseImpl;
 import org.junit.BeforeClass;

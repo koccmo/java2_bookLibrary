@@ -11,7 +11,7 @@ public class ProductQuantityValidator {
         List<CoreError> errors = new ArrayList<>();
 
         if (productQuantity.compareTo(BigDecimal.ZERO) == 0) {
-            errors.add(new CoreError("Add to cart error ", "Product quantity is zero"));
+            errors.add(new CoreError("Quantity error ", "Product quantity is zero"));
         }
         if ((productQuantity.subtract(userInputQuantity)).compareTo(BigDecimal.ZERO) < 0) {
             errors.add(new CoreError("Quantity error ", "No more product's quantity"));
