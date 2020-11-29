@@ -21,7 +21,8 @@ public class ChangePersonalDataValidator {
 
     private List<CoreError> isValidUpdatedSurname(String nameToCheck) {
         List<CoreError> errors = new ArrayList<>();
-        if ((nameToCheck != null && !nameToCheck.isEmpty()) && (!nameToCheck.matches("\\w+"))) {
+        if (!nameToCheck.isEmpty()
+                && !nameToCheck.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")) {
             errors.add(new CoreError(
                     "Personal data : surname",
                     "Invalid input! Can only contain letters!"));
@@ -31,8 +32,8 @@ public class ChangePersonalDataValidator {
 
     private List<CoreError> isValidUpdatedPhoneNumber(String phoneNumberToCheck) {
         List<CoreError> errors = new ArrayList<>();
-        if ((phoneNumberToCheck != null && !phoneNumberToCheck.isEmpty()) &&
-                !phoneNumberToCheck.matches("\\d{8}")) {
+        if (!phoneNumberToCheck.isEmpty()
+                && !phoneNumberToCheck.matches("\\d{8}")) {
             errors.add(new CoreError(
                     "Personal data : phone",
                     "Invalid input! Can only contain numbers!"));
