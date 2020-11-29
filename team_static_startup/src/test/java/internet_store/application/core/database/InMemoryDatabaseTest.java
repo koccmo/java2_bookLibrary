@@ -1,13 +1,10 @@
 package internet_store.application.core.database;
 
-import internet_store.application.core.database.InMemoryDatabase;
 import internet_store.application.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class InMemoryDatabaseTest {

@@ -2,21 +2,19 @@ package internet_store.user_interface.administrator_menu.create_client_menu;
 
 import internet_store.ProductListApplication;
 import internet_store.core.domain.Client;
-import internet_store.core.request.add_client.AddClientRequest;
-import internet_store.core.request.delete_client.DeleteClientRequest;
-import internet_store.core.request.update_client.UpdateClientRequest;
-import internet_store.core.response.add_client.AddClientResponse;
-import internet_store.core.response.delete_client.DeleteClientResponse;
-import internet_store.core.response.update_client.UpdateClientResponse;
+import internet_store.core.request.client.AddClientRequest;
+import internet_store.core.request.client.DeleteClientRequest;
+import internet_store.core.request.client.UpdateClientRequest;
+import internet_store.core.response.client.AddClientResponse;
+import internet_store.core.response.client.DeleteClientResponse;
+import internet_store.core.response.client.UpdateClientResponse;
+import internet_store.core.service.client.*;
 import internet_store.user_interface.administrator_menu.create_client_menu.add_client_menu.AddClient;
 import internet_store.user_interface.administrator_menu.create_client_menu.delete_client_menu.DeleteClientMenu;
 import internet_store.user_interface.administrator_menu.create_client_menu.update_client_menu.UpdateClientMenu;
 import internet_store.user_interface.main_menu.MainMenuConsole;
 
 public class ClientMenuConsole {
-    private final ClientMenu clientMenu = new ClientMenu();
-    private final DeleteClientMenu deleteClientMenu = new DeleteClientMenu();
-    private final UpdateClientMenu updateClientMenu = new UpdateClientMenu();
     private final MainMenuConsole mainMenuConsole;
 
     public ClientMenuConsole(MainMenuConsole mainMenuConsole) {
@@ -24,6 +22,22 @@ public class ClientMenuConsole {
     }
 
     public void startClientMenuConsole() {
+        final ClientMenu clientMenu = ProductListApplication.applicationContext
+                .getBean(ClientMenu.class);
+        final DeleteClientMenu deleteClientMenu = ProductListApplication.applicationContext
+                .getBean(DeleteClientMenu.class);
+        final UpdateClientMenu updateClientMenu = ProductListApplication.applicationContext
+                .getBean(UpdateClientMenu.class);
+        final AddClientService addClientService = ProductListApplication.applicationContext
+                .getBean(AddClientService.class);
+        final DeleteClientService deleteClientService = ProductListApplication.applicationContext
+                .getBean(DeleteClientService.class);
+        final UpdateClientService updateClientService = ProductListApplication.applicationContext
+                .getBean(UpdateClientService.class);
+        final UpdateClientAddNewChangesService updateClientAddNewChangesService = ProductListApplication
+                .applicationContext.getBean(UpdateClientAddNewChangesService.class);
+        final PrintClientService printClientService = ProductListApplication.applicationContext
+                .getBean(PrintClientService.class);
         boolean returnMainMenu = true;
         do {
             clientMenu.showClientMenu();
@@ -33,8 +47,7 @@ public class ClientMenuConsole {
                 case 1 -> {
                     Client client = new AddClient().addClient();
                     AddClientRequest clientRequest = new AddClientRequest(client);
-                    AddClientResponse response = ProductListApplication.addClientService
-                            .execute(clientRequest);
+                    AddClientResponse response = addClientService.execute(clientRequest);
                     if (!(response.hasErrors())) {
                         System.out.println("Client add to list");
                     } else {
@@ -46,8 +59,7 @@ public class ClientMenuConsole {
                     deleteClientMenu.showMenuDeleteProduct();
                     long deletedId = deleteClientMenu.getUserDeletedClientIdInput();
                     DeleteClientRequest deleteRequest = new DeleteClientRequest(deletedId);
-                    DeleteClientResponse response = ProductListApplication.deleteClientService
-                            .execute(deleteRequest);
+                    DeleteClientResponse response = deleteClientService.execute(deleteRequest);
                     if (!(response.hasErrors())) {
                         System.out.println("Information about client deleted from list");
                     } else {
@@ -60,29 +72,25 @@ public class ClientMenuConsole {
                     long updatedId = updateClientMenu.getUserUpdatedClientIdInput();
 
                     UpdateClientRequest updateRequest = new UpdateClientRequest(updatedId);
-                    UpdateClientResponse updateResponse = ProductListApplication.updateClientService
-                            .execute(updateRequest);
-
+                    UpdateClientResponse updateResponse = updateClientService.execute(updateRequest);
                     if (updateResponse.hasErrors()) {
                         updateResponse.getErrors().forEach(r -> System.out.println(r.getField() +
                                 r.getMessage()));
                         break;
                     }
-
                     Client client = new AddClient().addClient();
                     AddClientRequest clientRequest = new AddClientRequest(client);
                     clientRequest.getClient().setId(updatedId);
-                    AddClientResponse response = ProductListApplication.updateClientAddNewChangesService
-                            .execute(clientRequest);
+                    AddClientResponse response = updateClientAddNewChangesService.execute(clientRequest);
                     if (!(response.hasErrors())) {
                         System.out.println("Information about client updated");
                     } else {
                         response.getErrors().forEach(r -> System.out.println(r.getField() +
                                 r.getMessage()));
                     }
-
                 }
-                case 4 -> ProductListApplication.printClientService.print();
+                case 4 -> printClientService.print();
+
                 case 5 -> returnMainMenu = false;
                 default -> System.out.println("Wrong input. Try again.");
             }

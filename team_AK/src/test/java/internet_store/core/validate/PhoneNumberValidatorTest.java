@@ -2,7 +2,7 @@ package internet_store.core.validate;
 
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.request.add_client.client_items.AddClientPhoneRequest;
+import internet_store.core.request.client.client_items.AddClientPhoneRequest;
 import org.junit.Test;
 
 import java.util.List;

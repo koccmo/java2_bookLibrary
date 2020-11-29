@@ -1,8 +1,9 @@
 package internet_store.core.service.add_product_to_cart;
 
 import internet_store.core.domain.Product;
-import internet_store.core.request.add_product_to_cart.AddProductToCartRequest;
-import internet_store.core.response.add_product_to_cart.AddProductToCartResponse;
+import internet_store.core.request.cart.AddProductToCartRequest;
+import internet_store.core.response.cart.AddProductToCartResponse;
+import internet_store.core.service.cart.AddProductToCartService;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabase;

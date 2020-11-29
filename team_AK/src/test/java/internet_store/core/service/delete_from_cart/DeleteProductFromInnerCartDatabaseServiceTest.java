@@ -1,11 +1,13 @@
 package internet_store.core.service.delete_from_cart;
 
-import internet_store.ProductListApplication;
 import internet_store.core.domain.Product;
-import internet_store.core.request.delete_product_from_cart.DeleteProductFromCartRequest;
-import internet_store.core.response.delete_from_cart.DeleteProductFromCartResponse;
+import internet_store.core.request.cart.DeleteProductFromCartRequest;
+import internet_store.core.response.cart.DeleteProductFromCartResponse;
+import internet_store.core.service.cart.DeleteProductFromCartService;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
+import internet_store.database.product_database.InnerProductDatabase;
+import internet_store.database.product_database.InnerProductDatabaseImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,14 +27,14 @@ public class DeleteProductFromInnerCartDatabaseServiceTest {
     public void shouldReturnNoErrors() {
         InnerCartDatabase cart = new InnerCartDatabaseImpl();
         DeleteProductFromCartService service = new DeleteProductFromCartService(cart);
-
+        InnerProductDatabase productDatabase = new InnerProductDatabaseImpl();
         Product product = new Product();
         product.setId(1L);
         product.setTitle("Title");
         product.setDescription("Description");
         product.setQuantity(new BigDecimal("5"));
         product.setPrice(new BigDecimal("100"));
-        ProductListApplication.productDatabase.addProduct(product);
+        productDatabase.addProduct(product);
 
         cart.addProductToCart(product);
 
