@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddPatientServicesTest {
 
     @Mock private PatientDatabase patientDatabase;
-    @Mock private AddPatientValidator addPatientValidator;
+    @Mock private AddPatientRequestValidator addPatientRequestValidator;
     @InjectMocks private AddPatientService addPatientService;
 
     @Test
@@ -33,7 +33,7 @@ public class AddPatientServicesTest {
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("Personal data : surname", "Not valid input for surname");
         errors.add(expectedError);
-        Mockito.when(addPatientValidator.validate(addPatientRequest)).thenReturn(errors);
+        Mockito.when(addPatientRequestValidator.validate(addPatientRequest)).thenReturn(errors);
 
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
         assertTrue(addPatientResponse.hasErrors());
@@ -55,7 +55,7 @@ public class AddPatientServicesTest {
         errors.add(expectedError2);
         errors.add(expectedError3);
         errors.add(expectedError4);
-        Mockito.when(addPatientValidator.validate(addPatientRequest)).thenReturn(errors);
+        Mockito.when(addPatientRequestValidator.validate(addPatientRequest)).thenReturn(errors);
 
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
         assertTrue(addPatientResponse.hasErrors());
@@ -74,7 +74,7 @@ public class AddPatientServicesTest {
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("database", "Database contains the same patient");
         errors.add(expectedError);
-        Mockito.when(addPatientValidator.validate(addPatientRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(addPatientRequestValidator.validate(addPatientRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsSpecificPersonalData(personalData)).thenReturn(true);
 
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
@@ -87,7 +87,7 @@ public class AddPatientServicesTest {
     public void testPatientAddedSuccessfully(){
         PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
-        Mockito.when(addPatientValidator.validate(addPatientRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(addPatientRequestValidator.validate(addPatientRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsSpecificPersonalData(personalData)).thenReturn(false);
 
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);

@@ -2,14 +2,18 @@ package internet_store.core.service.delete_client;
 
 import internet_store.ProductListApplication;
 import internet_store.core.domain.Client;
-import internet_store.core.request.delete_client.DeleteClientRequest;
-import internet_store.core.response.delete_client.DeleteClientResponse;
+import internet_store.core.request.client.DeleteClientRequest;
+import internet_store.core.response.client.DeleteClientResponse;
+import internet_store.core.service.client.DeleteClientService;
+import internet_store.database.client_database.InnerClientDatabase;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class DeleteClientServiceTest {
-    DeleteClientService deleteService = new DeleteClientService(ProductListApplication.clientDatabase);
+    DeleteClientService deleteService = new DeleteClientService(ProductListApplication.applicationContext
+    .getBean(InnerClientDatabase.class));
+    InnerClientDatabase clientDatabase = ProductListApplication.applicationContext.getBean(InnerClientDatabase.class);
 
     @Test
     public void shouldReturnNoErrors() {
@@ -19,7 +23,7 @@ public class DeleteClientServiceTest {
         client.setSurname("Surname");
         client.setPhoneNumber("29336699");
         client.setEmail("a@a.lv");
-        ProductListApplication.clientDatabase.addClient(client);
+        clientDatabase.addClient(client);
 
         DeleteClientResponse response = deleteService.execute(new DeleteClientRequest(1L));
         assertEquals(1, response.getId());

@@ -1,7 +1,7 @@
 package internet_store.core.validate;
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.request.add_client.client_items.AddClientEmailRequest;
+import internet_store.core.request.client.client_items.AddClientEmailRequest;
 
 import java.util.ArrayList;
 import java.util.List;
