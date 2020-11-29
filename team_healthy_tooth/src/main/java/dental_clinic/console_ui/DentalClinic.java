@@ -15,21 +15,22 @@ public class DentalClinic {
 
     public DentalClinic() {
         PatientDatabase patientDatabase = new PatientDatabaseImpl();
-        AddPatientValidator addPatientValidator = new AddPatientValidator();
-        AddPatientService addPatientService = new AddPatientService(patientDatabase, addPatientValidator);
+        AddPatientRequestValidator addPatientRequestValidator = new AddPatientRequestValidator();
+        AddPatientService addPatientService = new AddPatientService(patientDatabase, addPatientRequestValidator);
         DeletePatientValidator deletePatientValidator = new DeletePatientValidator();
         DeletePatientService deletePatientService = new DeletePatientService(patientDatabase, deletePatientValidator);
-        GetPatientsService getPatientsService = new GetPatientsService(patientDatabase);
-        GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
+        GetAllPatientsRequestValidator getAllPatientsRequestValidator = new GetAllPatientsRequestValidator();
+        GetAllPatientsService getAllPatientsService = new GetAllPatientsService(patientDatabase, getAllPatientsRequestValidator);
+        GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator = new GetSpecificPatientHistoryRequestValidator();
         GetSpecificPatientHistoryService getSpecificPatientHistoryService =
-                new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
-        FindPatientByPersonalCodeValidator findPatientByPersonalCodeValidator = new FindPatientByPersonalCodeValidator();
-        FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
-                new FindPatientsByPersonalCodeService(patientDatabase, findPatientByPersonalCodeValidator);
+                new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientHistoryRequestValidator);
+        SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator = new SearchPatientByPersonalCodeRequestValidator();
+        SearchPatientsByPersonalCodeService searchPatientsByPersonalCodeService =
+                new SearchPatientsByPersonalCodeService(patientDatabase, searchPatientByPersonalCodeRequestValidator);
         AddVisitValidator addVisitValidator = new AddVisitValidator();
         AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
-        CheckPatientByIdValidator checkPatientByIdValidator = new CheckPatientByIdValidator();
-        CheckPatientByIdService checkPatientByIdService = new CheckPatientByIdService(patientDatabase,checkPatientByIdValidator);
+        ContainsDatabaseIdValidator containsDatabaseIdValidator = new ContainsDatabaseIdValidator();
+        ContainsDatabaseIdService containsDatabaseIdService = new ContainsDatabaseIdService(patientDatabase, containsDatabaseIdValidator);
         SearchPatientRequestValidator searchPatientRequestValidator =new SearchPatientRequestValidator();
         SearchPatientService searchPatientService = new SearchPatientService(patientDatabase, searchPatientRequestValidator);
         GetPatientCardRequestValidator getPatientCardRequestValidator = new GetPatientCardRequestValidator();
@@ -42,13 +43,13 @@ public class DentalClinic {
         //TODO exit class
         menuNumberToAction.put(1, new AddPatientUIAction(addPatientService));
         menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientService));
-        menuNumberToAction.put(3, new PrintPatientDatabaseUIAction(getPatientsService));
-        menuNumberToAction.put(4, new PrintSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
+        menuNumberToAction.put(3, new GetAllPatientsUIAction(getAllPatientsService));
+        menuNumberToAction.put(4, new GetSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
         menuNumberToAction.put(5, new SearchPatientUIAction(searchPatientService));
-        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
-        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, checkPatientByIdService));
+        menuNumberToAction.put(6, new SearchPatientByPersonalCodeUIAction(searchPatientsByPersonalCodeService));
+        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, containsDatabaseIdService));
         menuNumberToAction.put(8, new GetPatientCardUIAction(getPatientCardService));
-        menuNumberToAction.put(9, new ChangePersonalDataUiAction(changePersonalDataService, checkPatientByIdService));
+        menuNumberToAction.put(9, new ChangePersonalDataUiAction(changePersonalDataService, containsDatabaseIdService));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
