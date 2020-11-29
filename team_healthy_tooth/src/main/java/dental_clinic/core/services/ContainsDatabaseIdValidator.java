@@ -15,8 +15,7 @@ public class ContainsDatabaseIdValidator {
 
         if ((id == null) || (id < 1)) {
 
-            errorsResult.add(new CoreError("id = ",
-                    "Invalid input patient ID!"));
+            errorsResult.add(new CoreError("id = ", "Invalid input patient ID!"));
         }
         return errorsResult;
     }
