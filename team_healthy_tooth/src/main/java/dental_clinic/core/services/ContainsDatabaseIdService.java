@@ -28,11 +28,8 @@ public class ContainsDatabaseIdService {
             return new ContainsDatabaseIdResponse(errors);
         }
 
-        for (int i = 0; i < patientDatabase.getPatients().size(); i++){
-            if (getCurrentPatientPersonalData(i).getId() == containsDatabaseIdRequest.getId()){
-                patientDatabase.containsPatientWithSpecificId(containsDatabaseIdRequest.getId());
-                return new ContainsDatabaseIdResponse(containsDatabaseIdRequest.getId());
-            }
+        if (patientDatabase.containsPatientWithSpecificId(containsDatabaseIdRequest.getId())){
+            return new ContainsDatabaseIdResponse(containsDatabaseIdRequest.getId());
         }
 
         errors.add(new CoreError("id = ", "Database doesn't contain patient with id"));
