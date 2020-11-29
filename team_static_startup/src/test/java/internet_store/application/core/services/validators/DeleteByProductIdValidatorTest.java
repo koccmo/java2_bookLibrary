@@ -2,7 +2,6 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.services.validators.DeleteByProductIdValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +34,6 @@ public class DeleteByProductIdValidatorTest {
         List<CoreError> errors = validator.validate(request);
         assertEquals(0, errors.size());
     }
-
 
     @Test
     public void shouldNotPassWhenIdIsEmpty() {

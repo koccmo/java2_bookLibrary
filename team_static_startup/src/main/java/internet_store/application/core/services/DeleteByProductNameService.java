@@ -8,12 +8,12 @@ import internet_store.application.core.services.validators.DeleteByProductNameVa
 
 import java.util.List;
 
-public class DeleteProductByNameService {
+public class DeleteByProductNameService {
 
     private final Database database;
     private DeleteByProductNameValidator deleteByNameValidator;
 
-    public DeleteProductByNameService(Database database, DeleteByProductNameValidator validator) {
+    public DeleteByProductNameService(Database database, DeleteByProductNameValidator validator) {
         this.database = database;
         this.deleteByNameValidator = validator;
     }

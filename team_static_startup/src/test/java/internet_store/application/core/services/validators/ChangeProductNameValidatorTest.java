@@ -4,9 +4,7 @@ import internet_store.application.core.requests.ChangeProductNameRequest;
 import internet_store.application.core.responses.CoreError;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class ChangeProductNameValidatorTest {
@@ -40,8 +38,6 @@ public class ChangeProductNameValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Product new name");
         assertEquals(errors.get(0).getMessage(), "Should not be empty.");
-
     }
-
 
 }
