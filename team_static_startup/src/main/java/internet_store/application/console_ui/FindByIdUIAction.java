@@ -22,7 +22,7 @@ public class FindByIdUIAction implements UIAction {
         String id = myInput.nextLine();
 
         FindByIdRequest request = new FindByIdRequest(id);
-        FindByIdResponse response = findByIdService.findById(request);
+        FindByIdResponse response = findByIdService.execute(request);
 
         Optional<Product> foundProduct = response.getProductFoundById();
 

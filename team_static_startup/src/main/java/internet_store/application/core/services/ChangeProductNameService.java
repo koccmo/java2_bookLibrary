@@ -19,7 +19,7 @@ public class ChangeProductNameService {
         this.validator = validator;
     }
 
-    public ChangeProductNameResponse changeProductName(ChangeProductNameRequest request) {
+    public ChangeProductNameResponse execute(ChangeProductNameRequest request) {
         List<CoreError> errors = validator.validate(request);
         Long id = request.getProductId();
         String newName = request.getProductNewName();
