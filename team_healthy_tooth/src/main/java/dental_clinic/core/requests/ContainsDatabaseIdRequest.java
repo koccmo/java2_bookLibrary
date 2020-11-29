@@ -1,11 +1,11 @@
 package dental_clinic.core.requests;
 
 
-public class CheckPatientByIdRequest {
+public class ContainsDatabaseIdRequest {
 
     private Long id;
 
-    public CheckPatientByIdRequest(Long id) {
+    public ContainsDatabaseIdRequest(Long id) {
         this.id = id;
     }
 

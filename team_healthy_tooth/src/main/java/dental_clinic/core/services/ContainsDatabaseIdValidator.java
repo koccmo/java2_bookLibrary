@@ -1,14 +1,14 @@
 package dental_clinic.core.services;
 
-import dental_clinic.core.requests.CheckPatientByIdRequest;
+import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckPatientByIdValidator {
+public class ContainsDatabaseIdValidator {
 
-    public List<CoreError> validate (CheckPatientByIdRequest request) {
+    public List<CoreError> validate (ContainsDatabaseIdRequest request) {
         List<CoreError> errorsResult = new ArrayList<>();
 
         Long id = request.getId();

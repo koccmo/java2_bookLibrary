@@ -1,11 +1,11 @@
 package dental_clinic.core.requests;
 
 
-public class FindPatientByPersonalCodeRequest {
+public class SearchPatientByPersonalCodeRequest {
 
     private String personalCodeToSearch;
 
-    public FindPatientByPersonalCodeRequest(String personalCodeToSearch) {
+    public SearchPatientByPersonalCodeRequest(String personalCodeToSearch) {
         this.personalCodeToSearch = personalCodeToSearch;
     }
 

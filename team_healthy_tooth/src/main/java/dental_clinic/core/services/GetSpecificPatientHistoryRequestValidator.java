@@ -6,7 +6,7 @@ import dental_clinic.core.responses.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetSpecificPatientValidator {
+public class GetSpecificPatientHistoryRequestValidator {
 
     public List<CoreError> validate (GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest){
 

@@ -2,15 +2,15 @@ package dental_clinic.core.responses;
 
 import java.util.List;
 
-public class CheckPatientByIdResponse extends CoreResponse {
+public class ContainsDatabaseIdResponse extends CoreResponse {
 
     private Long id;
 
-    public CheckPatientByIdResponse(List<CoreError> errors) {
+    public ContainsDatabaseIdResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public CheckPatientByIdResponse(Long id){
+    public ContainsDatabaseIdResponse(Long id){
         this.id = id;
     }
 

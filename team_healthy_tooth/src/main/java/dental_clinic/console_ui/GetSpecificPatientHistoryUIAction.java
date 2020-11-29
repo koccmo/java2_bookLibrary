@@ -6,11 +6,11 @@ import dental_clinic.core.services.GetSpecificPatientHistoryService;
 
 import java.util.Scanner;
 
-class PrintSpecificPatientHistoryUIAction implements UIAction {
+class GetSpecificPatientHistoryUIAction implements UIAction {
 
     private final GetSpecificPatientHistoryService printSpecificPatientHistory;
 
-    public PrintSpecificPatientHistoryUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
+    public GetSpecificPatientHistoryUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
         this.printSpecificPatientHistory = printSpecificPatientHistory;
     }
 

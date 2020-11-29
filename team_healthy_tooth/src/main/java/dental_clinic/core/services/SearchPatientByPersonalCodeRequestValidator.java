@@ -1,15 +1,15 @@
 package dental_clinic.core.services;
 
-import dental_clinic.core.requests.FindPatientByPersonalCodeRequest;
+import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class FindPatientByPersonalCodeValidator {
+public class SearchPatientByPersonalCodeRequestValidator {
 
-    public List<CoreError> validate (FindPatientByPersonalCodeRequest request) {
+    public List<CoreError> validate (SearchPatientByPersonalCodeRequest request) {
         List<CoreError> errorsResult = new ArrayList<>();
 
         String personalCodeToSearch = request.getPersonalCodeToSearch();

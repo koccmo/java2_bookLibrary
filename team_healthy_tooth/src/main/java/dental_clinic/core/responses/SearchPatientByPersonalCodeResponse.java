@@ -4,15 +4,15 @@ import dental_clinic.core.domain.Patient;
 
 import java.util.List;
 
-public class FindPatientByPersonalCodeResponse extends CoreResponse {
+public class SearchPatientByPersonalCodeResponse extends CoreResponse {
 
     private Patient foundPatient;
 
-    public FindPatientByPersonalCodeResponse(List<CoreError> errors) {
+    public SearchPatientByPersonalCodeResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public FindPatientByPersonalCodeResponse(Patient foundPatient) {
+    public SearchPatientByPersonalCodeResponse(Patient foundPatient) {
         this.foundPatient = foundPatient;
     }
 

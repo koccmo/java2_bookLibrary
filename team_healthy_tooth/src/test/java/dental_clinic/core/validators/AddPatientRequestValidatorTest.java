@@ -3,16 +3,16 @@ package dental_clinic.core.validators;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.AddPatientValidator;
+import dental_clinic.core.services.AddPatientRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AddPatientValidatorTest {
+public class AddPatientRequestValidatorTest {
 
-    AddPatientValidator addPatientValidator = new AddPatientValidator();
+    AddPatientRequestValidator addPatientRequestValidator = new AddPatientRequestValidator();
 
     @Test
     public void testNotValidName(){
@@ -21,7 +21,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData(null, "Surname", "12345678", "12345678900");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }
@@ -33,7 +33,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData("name", "", "12345678", "12345678900");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }
@@ -45,7 +45,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData("name", "Surname", "avbd4", "12345678900");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }
@@ -57,7 +57,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData("name", "Surname", "12546", "12345678900");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }
@@ -69,7 +69,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "adfds");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }
@@ -81,7 +81,7 @@ public class AddPatientValidatorTest {
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "1235");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
-        List<CoreError> errors = addPatientValidator.validate(addPatientRequest);
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
     }

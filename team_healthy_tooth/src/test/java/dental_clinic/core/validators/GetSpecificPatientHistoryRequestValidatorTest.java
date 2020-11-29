@@ -2,23 +2,23 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.GetSpecificPatientValidator;
+import dental_clinic.core.services.GetSpecificPatientHistoryRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class GetSpecificPatientValidatorTest {
+public class GetSpecificPatientHistoryRequestValidatorTest {
 
-    GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
+    GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator = new GetSpecificPatientHistoryRequestValidator();
 
     @Test
     public void testNotValidId(){
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
         GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(-8L);
-        List<CoreError> errors = getSpecificPatientValidator.validate(getSpecificPatientHistoryRequest);
+        List<CoreError> errors = getSpecificPatientHistoryRequestValidator.validate(getSpecificPatientHistoryRequest);
 
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(expectedError));
@@ -28,7 +28,7 @@ public class GetSpecificPatientValidatorTest {
     public void testValidId(){
 
         GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(2L);
-        List<CoreError> errors = getSpecificPatientValidator.validate(getSpecificPatientHistoryRequest);
+        List<CoreError> errors = getSpecificPatientHistoryRequestValidator.validate(getSpecificPatientHistoryRequest);
 
         assertTrue(errors.isEmpty());
     }
