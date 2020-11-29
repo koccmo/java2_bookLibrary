@@ -2,13 +2,10 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.services.validators.AddProductValidator;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class AddProductValidatorTest {
@@ -73,4 +70,5 @@ public class AddProductValidatorTest {
         assertEquals(1, result.size());
         assertEquals("Price", result.get(0).getField());
     }
+
 }

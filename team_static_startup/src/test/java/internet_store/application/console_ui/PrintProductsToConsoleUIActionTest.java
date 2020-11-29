@@ -48,4 +48,5 @@ public class PrintProductsToConsoleUIActionTest {
         victim.execute();
         assertEquals("Database is empty.", outputStreamCaptor.toString().trim());
     }
+
 }
