@@ -2,8 +2,9 @@ package internet_store.core.service.delete_order;
 
 import internet_store.core.domain.Client;
 import internet_store.core.domain.Order;
-import internet_store.core.request.delete_order.DeleteOrderRequest;
-import internet_store.core.response.delete_order.DeleteOrderResponse;
+import internet_store.core.request.ordering.DeleteOrderRequest;
+import internet_store.core.response.ordering.DeleteOrderResponse;
+import internet_store.core.service.ordering.DeleteOrderService;
 import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.database.order_database.InnerOrderDatabaseImpl;
 import org.junit.Test;
