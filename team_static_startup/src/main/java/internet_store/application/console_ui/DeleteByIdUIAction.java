@@ -17,7 +17,7 @@ public class DeleteByIdUIAction implements UIAction {
     public void execute() {
         Scanner myInput = new Scanner(System.in);
         System.out.print("Enter product ID for deleting: ");
-        String productId = myInput.nextLine();
+        Long productId = myInput.nextLong();
         DeleteByProductIdRequest request = new DeleteByProductIdRequest(productId);
         DeleteByProductIdResponse response = deleteByProductIdService.execute(request);
 
