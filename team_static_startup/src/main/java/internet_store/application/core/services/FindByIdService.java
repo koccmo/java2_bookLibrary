@@ -20,7 +20,7 @@ public class FindByIdService {
     }
 
 
-    public FindByIdResponse findById(FindByIdRequest request) {
+    public FindByIdResponse execute(FindByIdRequest request) {
         List<CoreError> errors = validator.validate(request);
         Long id = Long.parseLong(request.getProductId());
 

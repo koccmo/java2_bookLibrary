@@ -19,7 +19,7 @@ public class DeleteProductByProductService {
         this.deleteByProductValidator = validator;
     }
 
-    public DeleteByProductResponse deleteByProduct(DeleteByProductRequest request) {
+    public DeleteByProductResponse execute(DeleteByProductRequest request) {
         List<CoreError> errors = deleteByProductValidator.validate(request);
         if (!errors.isEmpty()) {
             return new DeleteByProductResponse(errors);
