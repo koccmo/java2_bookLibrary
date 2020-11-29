@@ -1,5 +1,6 @@
 package application_target_list.console_ui.actions;
 
+import application_target_list.core.requests.Ordering;
 import application_target_list.core.requests.Paging;
 import application_target_list.core.requests.SearchTargetByNameRequest;
 import application_target_list.core.services.SearchTargetByNameService;
@@ -23,17 +24,31 @@ public class SearchTargetByNameUIAction implements UIAction {
     public void execute() {
         while (true){
             String targetName = getNameFromUser();
-
+            printOrderingMessage();
+            int orderingFromUser = getNumberFromUser();
             printPagingMessage();
-            int numberFromUser = getNumberFromUser();
-
+            int pagingFromUser = getNumberFromUser();
             SearchTargetByNameResponse response;
-            if (isPagingNeeded(numberFromUser)){
+
+            if (isOrderingNeeded(orderingFromUser) && isPagingNeeded(pagingFromUser)){
+                String orderByFromUser = getOrderByFromUser();
+                String orderDirectionFromUser = getOrderingDirectionFromUser();
+                Integer pageNumber = getPageNumberFromUser();
+                Integer pageSize = getPageSizeFromUser();
+                SearchTargetByNameRequest request = createRequestWithOrderingAndPaging(targetName,
+                                                                                       orderByFromUser, orderDirectionFromUser,
+                                                                                       pageNumber, pageSize);
+                response = createResponse(request);
+            } else if (isOrderingNeeded(orderingFromUser) && !isPagingNeeded(pagingFromUser)){
+                String orderByFromUser = getOrderByFromUser();
+                String orderDirectionFromUser = getOrderingDirectionFromUser();
+                SearchTargetByNameRequest request = createRequestWithOrdering(targetName, orderByFromUser, orderDirectionFromUser);
+                response = createResponse(request);
+            } else if (isPagingNeeded(pagingFromUser) && !isOrderingNeeded(orderingFromUser)){
                 Integer pageNumber = getPageNumberFromUser();
                 Integer pageSize = getPageSizeFromUser();
                 SearchTargetByNameRequest request = createRequestWithPaging(targetName, pageNumber, pageSize);
                 response = createResponse(request);
-
             } else {
                 SearchTargetByNameRequest request = createRequest(targetName);
                 response = createResponse(request);
@@ -49,6 +64,20 @@ public class SearchTargetByNameUIAction implements UIAction {
         }
     }
 
+    private SearchTargetByNameRequest createRequestWithOrdering(String targetName,String  orderBy,String orderDirection){
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+        return new SearchTargetByNameRequest(targetName, ordering);
+    }
+
+    private SearchTargetByNameRequest createRequestWithPaging(String targetName,Integer pageNumber, Integer pageSize){
+        Paging paging = new Paging(pageNumber, pageSize);
+        return new SearchTargetByNameRequest(targetName, paging);
+    }
+
+    private boolean isOrderingNeeded(int number){
+        return number == 1;
+    }
+
     private boolean isPagingNeeded(int number){
         return number == 2;
     }
@@ -57,6 +86,23 @@ public class SearchTargetByNameUIAction implements UIAction {
         System.out.println("Show all target list?");
         System.out.println("[1] YES");
         System.out.println("[2] NO");
+    }
+
+    private void printOrderingMessage(){
+        System.out.println("Need to sort target list?");
+        System.out.println("[1] YES");
+        System.out.println("[2] NO");
+    }
+
+    private String getOrderByFromUser(){
+        System.out.println("ENTER sort by (name, description or deadline):  ");
+        return scr.nextLine();
+    }
+
+
+    private String getOrderingDirectionFromUser(){
+        System.out.println("ENTER sort direction (ASCENDING or DESCENDING): ");
+        return scr.nextLine();
     }
 
     private Integer getNumberFromUser(){
@@ -93,9 +139,12 @@ public class SearchTargetByNameUIAction implements UIAction {
         return new SearchTargetByNameRequest(targetName);
     }
 
-    private SearchTargetByNameRequest createRequestWithPaging(String targetName, Integer pageNumber, Integer pageSize){
+    private SearchTargetByNameRequest createRequestWithOrderingAndPaging(String targetName,
+                                                                         String orderBy, String orderDirection,
+                                                                         Integer pageNumber, Integer pageSize){
         Paging paging = new Paging(pageNumber, pageSize);
-        return new SearchTargetByNameRequest(targetName, paging);
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+        return new SearchTargetByNameRequest(targetName, ordering, paging);
     }
 
     private String getNameFromUser(){

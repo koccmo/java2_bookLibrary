@@ -3,6 +3,7 @@ package application_target_list.core.validators;
 import application_target_list.core.database.Database;
 import application_target_list.core.database.Target;
 import application_target_list.core.database.TargetListImpl;
+import application_target_list.core.requests.Ordering;
 import application_target_list.core.requests.Paging;
 import application_target_list.core.requests.SearchTargetByDescriptionRequest;
 import application_target_list.core.responses.CoreError;
@@ -27,15 +28,71 @@ public class SearchTargetByDescriptionValidatorTest {
     @Test
     public void testValidate_validRequest_v2() {
         database.addTarget(new Target("name", "description", 1));
-        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", new Paging(1,1));
+        Paging paging = new Paging(1,1);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", paging);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 0);
     }
 
     @Test
-    public void testValidate_invalidRequest_v5() {
+    public void testValidate_validRequest_v3() {
         database.addTarget(new Target("name", "description", 1));
-        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", new Paging(0,0));
+        Ordering ordering = new Ordering("name", "ASCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_validRequest_v4() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("name", "DESCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_validRequest_v5() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("description", "ASCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_validRequest_v6() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("description", "DESCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_validRequest_v7() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("deadline", "ASCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_validRequest_v8() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("deadline", "DESCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 0);
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithPaging_v1() {
+        database.addTarget(new Target("name", "description", 1));
+        Paging paging =  new Paging(0,0);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", paging);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 2);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Page number"));
@@ -45,9 +102,10 @@ public class SearchTargetByDescriptionValidatorTest {
     }
 
     @Test
-    public void testValidate_invalidRequest_v4() {
+    public void testValidate_invalidRequestWithPaging_v2() {
         database.addTarget(new Target("name", "description", 1));
-        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", new Paging(3,0));
+        Paging paging = new Paging(3,0);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", paging);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Page size"));
@@ -55,13 +113,151 @@ public class SearchTargetByDescriptionValidatorTest {
     }
 
     @Test
-    public void testValidate_invalidRequest_v3() {
+    public void testValidate_invalidRequestWithPaging_v3() {
         database.addTarget(new Target("name", "description", 1));
-        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", new Paging(0,1));
+        Paging paging = new Paging(0,1);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", paging);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Page number"));
         Assert.assertTrue(actualErrors.get(0).getMessage().contains("must be greater then 0!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrdering_v1() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("", "");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 4);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain NAME, DESCRIPTION or DEADLINE only!"));
+        Assert.assertTrue(actualErrors.get(2).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(2).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(3).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(3).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrdering_v2() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("", "ASCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 2);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain NAME, DESCRIPTION or DEADLINE only!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrdering_v3() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("na", "DESCENDING");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 1);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must contain NAME, DESCRIPTION or DEADLINE only!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrdering_v4() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("name", "DESCEND");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 1);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrdering_v5() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("name", "");
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 2);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrderingAndPaging_v1() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("", "");
+        Paging paging = new Paging(0,0);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering, paging);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 6);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain NAME, DESCRIPTION or DEADLINE only!"));
+        Assert.assertTrue(actualErrors.get(2).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(2).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(3).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(3).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+        Assert.assertTrue(actualErrors.get(4).getField().contains("Page number"));
+        Assert.assertTrue(actualErrors.get(4).getMessage().contains("must be greater then 0!"));
+        Assert.assertTrue(actualErrors.get(5).getField().contains("Page size"));
+        Assert.assertTrue(actualErrors.get(5).getMessage().contains("must be greater then 0!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrderingAndPaging_v2() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("", "");
+        Paging paging = new Paging(0,1);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering, paging);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 5);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order by"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain NAME, DESCRIPTION or DEADLINE only!"));
+        Assert.assertTrue(actualErrors.get(2).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(2).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(3).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(3).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+        Assert.assertTrue(actualErrors.get(4).getField().contains("Page number"));
+        Assert.assertTrue(actualErrors.get(4).getMessage().contains("must be greater then 0!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrderingAndPaging_v3() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("name", "");
+        Paging paging = new Paging(0,1);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering, paging);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 3);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
+        Assert.assertTrue(actualErrors.get(2).getField().contains("Page number"));
+        Assert.assertTrue(actualErrors.get(2).getMessage().contains("must be greater then 0!"));
+    }
+
+    @Test
+    public void testValidate_invalidRequestWithOrderingAndPaging_v4() {
+        database.addTarget(new Target("name", "description", 1));
+        Ordering ordering = new Ordering("name", "");
+        Paging paging = new Paging(1,1);
+        SearchTargetByDescriptionRequest request = new SearchTargetByDescriptionRequest("description", ordering, paging);
+        List<CoreError> actualErrors = validator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 2);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty"));
+        Assert.assertTrue(actualErrors.get(1).getField().contains("Order direction"));
+        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must contain ASCENDING or DESCENDING only!"));
     }
 
     @Test
