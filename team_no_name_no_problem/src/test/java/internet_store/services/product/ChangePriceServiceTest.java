@@ -30,7 +30,7 @@ public class ChangePriceServiceTest {
     ChangeProductService changeProductService;
 
     @Test
-    public void changeDescriptionOfProductRequestTest() {
+    public void changePriceOfProductRequestTest() {
 
         Product laptop = new Product("Laptop","Samsung",400);
         ChangeProductRequest request1 = new ChangeProductRequest(3L,"Laptop",
