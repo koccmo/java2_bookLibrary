@@ -41,4 +41,36 @@ public class AddProductServiceTest {
         assertEquals(response.getErrors().size(),1);
         assertEquals(response.getErrors().get(0).getField(),"title");
     }
+
+    @Test
+    public void noDescriptionAddedToProductRequestTest() {
+
+        Product laptop = new Product("Laptop",null,400);
+        AddProductRequest request1 = new AddProductRequest(laptop);
+
+        List<CoreError> errors1 = new ArrayList<>();
+        errors1.add(new CoreError("description","Should not be empty!"));
+        Mockito.when(addProductRequestValidator.validate(request1)).thenReturn(errors1);
+
+        AddProductResponse response = addProductService.execute(request1);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+        assertEquals(response.getErrors().get(0).getField(),"description");
+    }
+
+    @Test
+    public void noPriceAddedToProductRequestTest() {
+
+        Product laptop = new Product("Laptop","Samsung",0);
+        AddProductRequest request1 = new AddProductRequest(laptop);
+
+        List<CoreError> errors1 = new ArrayList<>();
+        errors1.add(new CoreError("price","Should not be empty!"));
+        Mockito.when(addProductRequestValidator.validate(request1)).thenReturn(errors1);
+
+        AddProductResponse response = addProductService.execute(request1);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+        assertEquals(response.getErrors().get(0).getField(),"price");
+    }
 }
