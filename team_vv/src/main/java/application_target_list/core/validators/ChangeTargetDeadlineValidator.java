@@ -27,11 +27,19 @@ public class ChangeTargetDeadlineValidator {
             errors.add(new CoreError("Target new deadline", "must not be negative!"));
         }
 
+        if (isDeadlineEmpty(request)){
+            errors.add(new CoreError("Target new deadline", "must not be empty!"));
+        }
+
         return errors;
     }
 
     private boolean isTargetIdEmpty(ChangeTargetDeadlineRequest request) {
         return request.getTargetIdToChange() == null;
+    }
+
+    private boolean isDeadlineEmpty(ChangeTargetDeadlineRequest request) {
+        return request.getNewTargetDeadline() == null;
     }
 
     private boolean isTargetIdNegative(ChangeTargetDeadlineRequest request){

@@ -10,7 +10,7 @@ public class SearchTargetByDescriptionValidator {
     public List<CoreError> validate(SearchTargetByDescriptionRequest request){
         List<CoreError> errors = new ArrayList<>();
 
-        if (isTargetNameEmpty(request)) {
+        if (isTargetDescriptionEmpty(request)) {
             errors.add(new CoreError("Target description", "must not be empty!"));
         }
 
@@ -30,7 +30,7 @@ public class SearchTargetByDescriptionValidator {
         }
 
 
-        if (request.getPaging() != null){
+        if (isPaging(request)){
             if (!isPageNumberCorrect(request)) {
                 errors.add(new CoreError("Page number", "must be greater then 0!"));
             }
@@ -54,6 +54,10 @@ public class SearchTargetByDescriptionValidator {
 
     private boolean isOrdering(SearchTargetByDescriptionRequest request){
         return request.getOrdering() != null;
+    }
+
+    private boolean isPaging(SearchTargetByDescriptionRequest request){
+        return request.getPaging() != null;
     }
 
     private boolean isOrderDirectionIncorrect(SearchTargetByDescriptionRequest request){
@@ -90,7 +94,7 @@ public class SearchTargetByDescriptionValidator {
         return request.getPaging().getPageNumber() == null;
     }
 
-    private boolean isTargetNameEmpty(SearchTargetByDescriptionRequest request) {
+    private boolean isTargetDescriptionEmpty(SearchTargetByDescriptionRequest request) {
         return request.getDescription() == null || request.getDescription().isEmpty();
     }
 }

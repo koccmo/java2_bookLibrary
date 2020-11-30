@@ -8,7 +8,6 @@ import application_target_list.core.requests.SearchTargetByNameRequest;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.responses.SearchTargetByNameResponse;
 import application_target_list.core.validators.SearchTargetByNameValidator;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,8 +30,9 @@ public class SearchTargetByNameService {
         }
 
         List<Target> targets = database.findByTargetName(request.getName());
-        targets = paging(targets, request.getPaging());
         targets = order(targets, request.getOrdering());
+        targets = paging(targets, request.getPaging());
+
 
         return new SearchTargetByNameResponse(null, targets);
     }
