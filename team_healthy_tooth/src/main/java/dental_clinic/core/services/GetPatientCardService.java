@@ -27,29 +27,23 @@ public class GetPatientCardService {
             return new GetPatientCardResponse(errors);
         }
         
-        if (getPatientWithSpecificId(getPatientCardRequest.getId()).isEmpty()){
+        if (!patientDatabase.containsPatientWithSpecificId(getPatientCardRequest.getId())){
             errors.add(new CoreError("database", "Database doesn't contain patient with id " +
                     getPatientCardRequest.getId()));
             return new GetPatientCardResponse(errors);
         }
         
         Patient patientCard = createPatientCard(getPatientCardRequest);
-
         return new GetPatientCardResponse(patientCard);
-    }
-    
-    private Optional<Patient> getPatientWithSpecificId(Long id){
-        return patientDatabase.getPatients().stream()
-                .filter(patient -> patient.getPersonalData().getId() == id)
-                .findAny();
     }
 
     private Patient createPatientCard(GetPatientCardRequest getPatientCardRequest){
         Patient newPatient = patientDatabase.getPatientCard(getPatientCardRequest.getId()).get();
         Jowl currentStatusOfJowl = new Jowl();
-        Jowl specificPatientJowl = getPatientWithSpecificId(getPatientCardRequest.getId()).get().getJowl();
+        Jowl specificPatientJowl = newPatient.getJowl();
         for (Integer key : specificPatientJowl.getJowl().keySet()){
-            currentStatusOfJowl.getJowl().put(key, new ArrayList<>(Arrays.asList(specificPatientJowl.getJowl().get(key).get(specificPatientJowl.getJowl().get(key).size() - 1))));
+            currentStatusOfJowl.getJowl().put(key,
+                    new ArrayList<>(Arrays.asList(specificPatientJowl.getJowl().get(key).get(specificPatientJowl.getJowl().get(key).size() - 1))));
         }
         newPatient.setJowl(currentStatusOfJowl);
         return newPatient;
