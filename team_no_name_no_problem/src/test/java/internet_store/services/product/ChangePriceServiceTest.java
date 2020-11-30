@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 
-public class ChangeDescriptionServiceTest {
+public class ChangePriceServiceTest {
 
     @Mock
     private ProductDatabase productDatabase;
@@ -34,7 +34,7 @@ public class ChangeDescriptionServiceTest {
 
         Product laptop = new Product("Laptop","Samsung",400);
         ChangeProductRequest request1 = new ChangeProductRequest(3L,"Laptop",
-                                                                "Apple",400);
+                "Samsung",650);
         List<CoreError> errors1 = new ArrayList<>();
         errors1.add(new CoreError("database","There is no such product with this ID!"));
         Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
