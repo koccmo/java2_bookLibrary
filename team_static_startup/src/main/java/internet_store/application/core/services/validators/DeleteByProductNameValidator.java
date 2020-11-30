@@ -15,7 +15,7 @@ public class DeleteByProductNameValidator {
         if(productName == null || productName.isEmpty()){
             errors.add(new CoreError("Product Name", "Product Name must not be empty."));
         }
-
         return errors;
     }
+
 }

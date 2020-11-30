@@ -15,7 +15,7 @@ public class PrintProductsToConsoleUIAction implements UIAction {
     }
 
     public void execute() {
-        PrintProductsToConsoleResponse productResponse =getProductListService.getProductList();
+        PrintProductsToConsoleResponse productResponse =getProductListService.execute();
         List<Product> productList = productResponse.getProductList();
         if (productList.isEmpty()){
             System.out.println("Database is empty.");

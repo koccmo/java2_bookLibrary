@@ -1,53 +1,31 @@
 package dental_clinic.console_ui;
 
+import dental_clinic.ApplicationContext;
 import dental_clinic.core.services.*;
-import dental_clinic.database.PatientDatabase;
-import dental_clinic.database.PatientDatabaseImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DentalClinic {
 
+    ApplicationContext applicationContext = new ApplicationContext();
     InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     private Map<Integer, UIAction> menuNumberToAction;
 
     public DentalClinic() {
-        PatientDatabase patientDatabase = new PatientDatabaseImpl();
-        AddPatientValidator addPatientValidator = new AddPatientValidator();
-        AddPatientService addPatientService = new AddPatientService(patientDatabase, addPatientValidator);
-        DeletePatientValidator deletePatientValidator = new DeletePatientValidator();
-        DeletePatientService deletePatientService = new DeletePatientService(patientDatabase, deletePatientValidator);
-        GetPatientsService getPatientsService = new GetPatientsService(patientDatabase);
-        GetSpecificPatientValidator getSpecificPatientValidator = new GetSpecificPatientValidator();
-        GetSpecificPatientHistoryService getSpecificPatientHistoryService =
-                new GetSpecificPatientHistoryService(patientDatabase, getSpecificPatientValidator);
-        FindPatientsByPersonalCodeService findPatientsByPersonalCodeService =
-                new FindPatientsByPersonalCodeService(patientDatabase);
-        AddVisitValidator addVisitValidator = new AddVisitValidator();
-        AddVisitService addVisitService = new AddVisitService(patientDatabase, addVisitValidator);
-        CheckPatientByIdValidator checkPatientByIdValidator = new CheckPatientByIdValidator();
-        CheckPatientByIdService checkPatientByIdService = new CheckPatientByIdService(patientDatabase,checkPatientByIdValidator);
-        SearchPatientRequestValidator searchPatientRequestValidator =new SearchPatientRequestValidator();
-        SearchPatientService searchPatientService = new SearchPatientService(patientDatabase, searchPatientRequestValidator);
-        GetPatientCardRequestValidator getPatientCardRequestValidator = new GetPatientCardRequestValidator();
-        GetPatientCardService getPatientCardService = new GetPatientCardService(patientDatabase, getPatientCardRequestValidator);
-        ChangePersonalDataValidator changePersonalDataValidator = new ChangePersonalDataValidator();
-        ChangePersonalDataService changePersonalDataService = new ChangePersonalDataService(patientDatabase, changePersonalDataValidator);
 
         menuNumberToAction = new HashMap();
 
-        //TODO exit class
-        menuNumberToAction.put(1, new AddPatientUIAction(addPatientService));
-        menuNumberToAction.put(2, new DeletePatientUIAction(deletePatientService));
-        menuNumberToAction.put(3, new PrintPatientDatabaseUIAction(getPatientsService));
-        menuNumberToAction.put(4, new PrintSpecificPatientHistoryUIAction(getSpecificPatientHistoryService));
-        menuNumberToAction.put(5, new SearchPatientUIAction(searchPatientService));
-        menuNumberToAction.put(6, new FindPatientByPersonalCodeUIAction(findPatientsByPersonalCodeService));
-        menuNumberToAction.put(7, new AddVisitUIAction(addVisitService, checkPatientByIdService));
-        menuNumberToAction.put(8, new GetPatientCardUIAction(getPatientCardService));
-        menuNumberToAction.put(9, new ChangePersonalDataUiAction(changePersonalDataService, checkPatientByIdService));
+        menuNumberToAction.put(1, new AddPatientUIAction(applicationContext.getBean(AddPatientService.class)));
+        menuNumberToAction.put(2, new DeletePatientUIAction(applicationContext.getBean(DeletePatientService.class)));
+        menuNumberToAction.put(3, new GetAllPatientsUIAction(applicationContext.getBean(GetAllPatientsService.class)));
+        menuNumberToAction.put(4, new GetSpecificPatientHistoryUIAction(applicationContext.getBean(GetSpecificPatientHistoryService.class)));
+        menuNumberToAction.put(5, new SearchPatientUIAction(applicationContext.getBean(SearchPatientService.class)));
+        menuNumberToAction.put(6, new SearchPatientByPersonalCodeUIAction(applicationContext.getBean(SearchPatientsByPersonalCodeService.class)));
+        menuNumberToAction.put(7, new AddVisitUIAction(applicationContext.getBean(AddVisitService.class), applicationContext.getBean(ContainsDatabaseIdService.class)));
+        menuNumberToAction.put(8, new GetPatientCardUIAction(applicationContext.getBean(GetPatientCardService.class)));
+        menuNumberToAction.put(9, new ChangePersonalDataUiAction(applicationContext.getBean(ChangePersonalDataService.class), applicationContext.getBean(ContainsDatabaseIdService.class)));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 

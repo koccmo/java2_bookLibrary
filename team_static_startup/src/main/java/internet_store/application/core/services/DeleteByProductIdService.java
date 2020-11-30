@@ -17,9 +17,9 @@ public class DeleteByProductIdService {
         this.validator = validator;
     }
 
-    public DeleteByProductIdResponse deleteByProductId(DeleteByProductIdRequest productIdRequest) {
+    public DeleteByProductIdResponse execute(DeleteByProductIdRequest productIdRequest) {
         List<CoreError> errors = validator.validate(productIdRequest);
-        Long id = Long.parseLong(productIdRequest.getProductId());
+        Long id = productIdRequest.getProductId();
 
         if (!errors.isEmpty()){
             return new DeleteByProductIdResponse(errors);

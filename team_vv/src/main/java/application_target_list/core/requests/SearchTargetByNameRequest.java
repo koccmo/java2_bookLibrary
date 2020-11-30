@@ -4,6 +4,7 @@ public class SearchTargetByNameRequest {
 
     private final String name;
     private Paging paging;
+    private Ordering ordering;
 
 
 
@@ -14,6 +15,21 @@ public class SearchTargetByNameRequest {
     public SearchTargetByNameRequest(String name, Paging paging) {
         this.name = name;
         this.paging = paging;
+    }
+
+    public SearchTargetByNameRequest(String name, Ordering ordering) {
+        this.name = name;
+        this.ordering = ordering;
+    }
+
+    public SearchTargetByNameRequest(String name,Ordering ordering, Paging paging) {
+        this.name = name;
+        this.ordering = ordering;
+        this.paging = paging;
+    }
+
+    public Ordering getOrdering() {
+        return ordering;
     }
 
     public Paging getPaging() {

@@ -12,13 +12,15 @@ import java.util.List;
 public class GetAllCustomersService {
 
     private final CustomerDatabase customerDatabase;
+    private final GetAllCustomersValidator getAllCustomersValidator;
 
-    public GetAllCustomersService(CustomerDatabase customerDatabase) {
+    public GetAllCustomersService(CustomerDatabase customerDatabase, GetAllCustomersValidator getAllCustomersValidator) {
         this.customerDatabase = customerDatabase;
+        this.getAllCustomersValidator = getAllCustomersValidator;
     }
 
     public GetAllCustomersResponse execute(GetAllCustomersRequest getAllCustomersRequest){
-        List<CoreError> errors = new ArrayList<>();
+        List<CoreError> errors = getAllCustomersValidator.validate(getAllCustomersRequest);
 
         if (customerDatabase.getCustomers().isEmpty()){
             errors.add(new CoreError("database", "Customer database is empty"));

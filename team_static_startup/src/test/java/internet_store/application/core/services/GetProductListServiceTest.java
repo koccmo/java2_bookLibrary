@@ -25,7 +25,7 @@ public class GetProductListServiceTest {
         database.add(new Product("iphone12", "mobile phone", new BigDecimal("900.00")));
         database.add(new Product("imac", "pc", new BigDecimal("4000.00")));
         GetProductListService service = new GetProductListService(database);
-        PrintProductsToConsoleResponse response = service.getProductList();
+        PrintProductsToConsoleResponse response = service.execute();
 
         assertEquals(database.getProductList(), response.getProductList());
     }
@@ -33,7 +33,7 @@ public class GetProductListServiceTest {
     @Test
     public void shouldReturnProductList_whenItIsEmpty() {
         GetProductListService service = new GetProductListService(database);
-        PrintProductsToConsoleResponse response = service.getProductList();
+        PrintProductsToConsoleResponse response = service.execute();
         assertEquals(database.getProductList(), response.getProductList());
     }
 }

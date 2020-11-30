@@ -1,5 +1,6 @@
 package internet_store.console_ui;
 
+import internet_store.ApplicationContext;
 import internet_store.console_ui.product.*;
 import internet_store.core.services.product.*;
 import internet_store.database.product.ProductDatabase;
@@ -11,33 +12,23 @@ import java.util.Map;
 
 public class InternetStoreAdministratorSide {
 
+    private ApplicationContext applicationContext = new ApplicationContext();
+
     private Map<Integer, UIAction> menuNumberToAction;
 
-    InputCheckUtility inputCheckUtility = new InputCheckUtility();
-    ProductDatabase productDatabase = new ProductDatabaseImpl();
 
-    AddProductRequestValidator addProductRequestValidator = new AddProductRequestValidator();
-    AddProductService addProductService = new AddProductService(productDatabase, addProductRequestValidator);
-    DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
-    DeleteByIdService deleteByIdService = new DeleteByIdService( productDatabase, deleteProductRequestValidator);
-    GetAllProductsService getAllProductsService = new GetAllProductsService(productDatabase);
-    FindByIdRequestValidator findByIdRequestValidator = new FindByIdRequestValidator();
-    FindProductByIdService findProductByIdService = new FindProductByIdService(productDatabase, findByIdRequestValidator);
-    SearchProductRequestValidator searchProductRequestValidator = new SearchProductRequestValidator();
-    SearchProductService searchProductService = new SearchProductService(productDatabase, searchProductRequestValidator);
-    ChangeProductValidator changeProductValidator = new ChangeProductValidator();
-    ChangeProductService changeProductService = new ChangeProductService(productDatabase, changeProductValidator);
+    InputCheckUtility inputCheckUtility = new InputCheckUtility();
 
     public InternetStoreAdministratorSide() {
 
         menuNumberToAction = new HashMap();
 
-        menuNumberToAction.put(1, new AddProductUIAction(addProductService));
-        menuNumberToAction.put(2, new DeleteByIdUIAction(deleteByIdService));
-        menuNumberToAction.put(3, new GetAllProductsUIAction(getAllProductsService));
-        menuNumberToAction.put(4, new FindByIdUIAction(findProductByIdService));
-        menuNumberToAction.put(5, new SearchProductUIAction(searchProductService));
-        menuNumberToAction.put(6, new ChangeProductUIAction(changeProductService));
+        menuNumberToAction.put(1, new AddProductUIAction(applicationContext.getBean(AddProductService.class)));
+        menuNumberToAction.put(2, new DeleteByIdUIAction(applicationContext.getBean(DeleteByIdService.class)));
+        menuNumberToAction.put(3, new GetAllProductsUIAction(applicationContext.getBean(GetAllProductsService.class)));
+        menuNumberToAction.put(4, new FindByIdUIAction(applicationContext.getBean(FindProductByIdService.class)));
+        menuNumberToAction.put(5, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
+        menuNumberToAction.put(6, new ChangeProductUIAction(applicationContext.getBean(ChangeProductService.class)));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
@@ -55,12 +46,12 @@ public class InternetStoreAdministratorSide {
 
     private void printMenu(){
         System.out.println("\nMenu\n" +
-                "1   Add item\n" +
-                "2   Delete by id\n" +
-                "3   Print products\n" +
-                "4   Find product by id\n"+
-                "5   Search product by title / description\n"+
-                "6   Change product\n"+
+                "1   Add product\n" +
+                "2   Delete account by id\n" +
+                "3   Get list of products\n" +
+                "4   Find product by ID\n"+ //будет вызвать Шоппинг Карт
+                "5   Search product\n" +
+                "6   Change product\n" +
                 "0   Exit");
     }
 

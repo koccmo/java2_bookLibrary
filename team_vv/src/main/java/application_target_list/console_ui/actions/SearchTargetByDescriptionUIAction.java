@@ -2,6 +2,7 @@ package application_target_list.console_ui.actions;
 
 import application_target_list.console_ui.UIAction;
 import application_target_list.core.database.Target;
+import application_target_list.core.requests.Ordering;
 import application_target_list.core.requests.Paging;
 import application_target_list.core.requests.SearchTargetByDescriptionRequest;
 import application_target_list.core.responses.CoreError;
@@ -24,20 +25,35 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
     @Override
     public void execute() {
         while (true){
-            String targetName = getDescriptionFromUser();
-
+            String descriptionFromUser = getDescriptionFromUser();
+            printOrderingMessage();
+            int orderingFromUser = getNumberFromUser();
             printPagingMessage();
-            int numberFromUser = getNumberFromUser();
-
+            int pagingFromUser = getNumberFromUser();
             SearchTargetByDescriptionResponse response;
-            if (isPagingNeeded(numberFromUser)){
+
+            if (isOrderingNeeded(orderingFromUser) && isPagingNeeded(pagingFromUser)){
+                String orderByFromUser = getOrderByFromUser();
+                String orderDirectionFromUser = getOrderingDirectionFromUser();
                 Integer pageNumber = getPageNumberFromUser();
                 Integer pageSize = getPageSizeFromUser();
-                SearchTargetByDescriptionRequest request = createRequestWithPaging(targetName, pageNumber, pageSize);
+                SearchTargetByDescriptionRequest request = createRequestWithPagingAndOrdering(descriptionFromUser,
+                                                                                              orderByFromUser, orderDirectionFromUser,
+                                                                                              pageNumber, pageSize);
                 response = createResponse(request);
 
+            } else if (isOrderingNeeded(orderingFromUser) && !isPagingNeeded(pagingFromUser)){
+                String orderByFromUser = getOrderByFromUser();
+                String orderDirectionFromUser = getOrderingDirectionFromUser();
+                SearchTargetByDescriptionRequest request = createRequestWithOrdering(descriptionFromUser, orderByFromUser, orderDirectionFromUser);
+                response = createResponse(request);
+            } else if (!isOrderingNeeded(orderingFromUser) && isPagingNeeded(pagingFromUser)){
+                Integer pageNumber = getPageNumberFromUser();
+                Integer pageSize = getPageSizeFromUser();
+                SearchTargetByDescriptionRequest request = createRequestWithPaging(descriptionFromUser, pageNumber, pageSize);
+                response = createResponse(request);
             } else {
-                SearchTargetByDescriptionRequest request = createRequest(targetName);
+                SearchTargetByDescriptionRequest request = createRequest(descriptionFromUser);
                 response = createResponse(request);
             }
 
@@ -51,6 +67,10 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
         }
     }
 
+    private boolean isOrderingNeeded(int number){
+        return number == 1;
+    }
+
     private boolean isPagingNeeded(int number){
         return number == 2;
     }
@@ -59,6 +79,23 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
         System.out.println("Show all target list?");
         System.out.println("[1] YES");
         System.out.println("[2] NO");
+    }
+
+    private void printOrderingMessage(){
+        System.out.println("Need to sort target list?");
+        System.out.println("[1] YES");
+        System.out.println("[2] NO");
+    }
+
+    private String getOrderByFromUser(){
+        System.out.println("ENTER sort by (name, description or deadline):  ");
+        return scr.nextLine();
+    }
+
+
+    private String getOrderingDirectionFromUser(){
+        System.out.println("ENTER sort direction (ASCENDING or DESCENDING): ");
+        return scr.nextLine();
     }
 
     private Integer getNumberFromUser(){
@@ -100,6 +137,17 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
     private SearchTargetByDescriptionRequest createRequestWithPaging(String targetName, Integer pageNumber, Integer pageSize){
         Paging paging = new Paging(pageNumber, pageSize);
         return new SearchTargetByDescriptionRequest(targetName, paging);
+    }
+
+    private SearchTargetByDescriptionRequest createRequestWithPagingAndOrdering(String targetName,String orderBy, String orderDirection, Integer pageNumber, Integer pageSize){
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+        Paging paging = new Paging(pageNumber, pageSize);
+        return new SearchTargetByDescriptionRequest(targetName, ordering, paging);
+    }
+
+    private SearchTargetByDescriptionRequest createRequestWithOrdering(String targetName,String orderBy, String orderDirection){
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+        return new SearchTargetByDescriptionRequest(targetName, ordering);
     }
 
     private String getDescriptionFromUser(){

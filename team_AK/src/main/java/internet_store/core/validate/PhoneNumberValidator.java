@@ -4,7 +4,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 import internet_store.core.core_error.CoreError;
-import internet_store.core.request.add_client.client_items.AddClientPhoneRequest;
+import internet_store.core.request.client.client_items.AddClientPhoneRequest;
 
 import java.util.ArrayList;
 import java.util.List;

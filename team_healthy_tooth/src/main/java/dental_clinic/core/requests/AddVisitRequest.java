@@ -3,6 +3,7 @@ package dental_clinic.core.requests;
 import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class AddVisitRequest {
@@ -35,4 +36,5 @@ public class AddVisitRequest {
     public String getDoctor() {
         return visit.getDoctor();
     }
+
 }
