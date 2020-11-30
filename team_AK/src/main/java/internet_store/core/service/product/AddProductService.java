@@ -1,5 +1,6 @@
 package internet_store.core.service.product;
 
+import internet_store.ProductListApplication;
 import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.AddProductRequest;
@@ -26,10 +27,10 @@ public class AddProductService implements ProductUpdate {
 
     public AddProductResponse execute(AddProductRequest addProductRequest) {
         List<CoreError> errors = new ArrayList<>();
-        AddProductTitleService titleService = new AddProductTitleService();
-        AddProductDescriptionService descriptionService = new AddProductDescriptionService();
-        AddProductQuantityService quantityService = new AddProductQuantityService();
-        AddProductPriceService priceService = new AddProductPriceService();
+        AddProductTitleService titleService = ProductListApplication.applicationContext.getBean(AddProductTitleService.class);
+        AddProductDescriptionService descriptionService = ProductListApplication.applicationContext.getBean(AddProductDescriptionService.class);
+        AddProductQuantityService quantityService = ProductListApplication.applicationContext.getBean(AddProductQuantityService.class);
+        AddProductPriceService priceService = ProductListApplication.applicationContext.getBean(AddProductPriceService.class);
 
         AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
                 (addProductRequest.getProduct().getTitle()));

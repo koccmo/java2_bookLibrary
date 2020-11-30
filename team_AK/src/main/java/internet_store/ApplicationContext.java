@@ -57,6 +57,10 @@ public class ApplicationContext {
         beans.put(UpdateProductService.class, new UpdateProductService(getBean(InnerProductDatabase.class)));
         beans.put(PrintProductService.class, new PrintProductService(getBean(InnerProductDatabase.class)));
         beans.put(UpdateProductAddNewChangesService.class, new UpdateProductAddNewChangesService(getBean(InnerProductDatabase.class)));
+        beans.put(AddProductTitleService.class,new AddProductTitleService());
+        beans.put(AddProductDescriptionService.class,new AddProductDescriptionService());
+        beans.put(AddProductQuantityService.class,new AddProductQuantityService());
+        beans.put(AddProductPriceService.class,new AddProductPriceService());
 
         beans.put(InnerClientDatabase.class, new InnerClientDatabaseImpl());
         beans.put(AddClientService.class, new AddClientService(getBean(InnerClientDatabase.class)));

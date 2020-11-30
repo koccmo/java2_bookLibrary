@@ -20,10 +20,6 @@ public class DeleteTargetService {
     public DeleteTargetResponse execute(DeleteTargetRequest request){
         List<CoreError> errors = validator.validate(request, database);
 
-        if (!database.isIdInTargetList(request.getTargetIdToDelete())){
-            errors.add(new CoreError("Target ID;","no target with that ID"));
-        }
-
         if (!errors.isEmpty()) {
             return new DeleteTargetResponse(errors);
         }

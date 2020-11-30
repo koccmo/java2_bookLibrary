@@ -16,15 +16,16 @@ public class ChangeTargetDescriptionValidator {
             errors.add(new CoreError("Target ID;","no target with that ID"));
         }
 
-        if (isTargetDescriptionEmpty(request)){
-            errors.add(new CoreError("Target new description","must not be empty!"));
-        }
 
         if (isTargetIdEmpty(request)){
             errors.add(new CoreError("Target ID","must not be empty!"));
         }
         if (isTargetIdNegative(request)){
             errors.add(new CoreError("Target ID","must not be negative!"));
+        }
+
+        if (isTargetDescriptionEmpty(request)){
+            errors.add(new CoreError("Target new description","must not be empty!"));
         }
 
         return errors;

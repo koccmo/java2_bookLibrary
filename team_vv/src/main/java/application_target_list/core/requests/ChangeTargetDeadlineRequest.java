@@ -3,9 +3,9 @@ package application_target_list.core.requests;
 public class ChangeTargetDeadlineRequest {
 
     private Long targetIdToChange;
-    private int newTargetDeadline;
+    private Integer newTargetDeadline;
 
-    public ChangeTargetDeadlineRequest(Long targetIdToChange, int newTargetDeadline) {
+    public ChangeTargetDeadlineRequest(Long targetIdToChange, Integer newTargetDeadline) {
         this.targetIdToChange = targetIdToChange;
         this.newTargetDeadline = newTargetDeadline;
     }
@@ -14,7 +14,7 @@ public class ChangeTargetDeadlineRequest {
         return targetIdToChange;
     }
 
-    public int getNewTargetDeadline() {
+    public Integer getNewTargetDeadline() {
         return newTargetDeadline;
     }
 }
