@@ -18,19 +18,23 @@ public class DeleteByIdService {
         this.deleteProductRequestValidator = deleteProductRequestValidator;
     }
 
-    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest){
+    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
 
-        List <CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
+        List<CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
 
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new DeleteProductResponse(errors);
         }
-        for (int i = 0; i < productDatabase.getProducts().size(); i++){
-            if (getCurrentProduct(i).getId() == deleteProductRequest.getId()){
-                productDatabase.deleteById(deleteProductRequest.getId());
-                return new DeleteProductResponse(deleteProductRequest.getId());
+
+        if (productDatabase.containsId(deleteProductRequest.getId())){
+            for (int i = 0; i < productDatabase.getProducts().size(); i++) {
+                if (getCurrentProduct(i).getId() == deleteProductRequest.getId()) {
+                    productDatabase.deleteById(deleteProductRequest.getId());
+                    return new DeleteProductResponse(deleteProductRequest.getId());
+                }
             }
         }
+
         errors.add(new CoreError("database", "database doesn't contain product with id "
                 + deleteProductRequest.getId()));
         return new DeleteProductResponse(errors);
