@@ -31,7 +31,7 @@ public class FindProductsUIAction implements UIAction {
 
         System.out.print("Enter number of products to display on page: ");
         Integer pageSize = scanner.nextInt();
-        System.out.print("Enter number of products page to show: ");
+        System.out.print("Enter number of page to show: ");
         Integer pageNumber = scanner.nextInt();
 
         Ordering ordering = new Ordering(orderingType, orderingDirection);
