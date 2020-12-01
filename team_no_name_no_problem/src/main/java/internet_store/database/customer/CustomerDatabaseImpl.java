@@ -62,4 +62,16 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
                 .filter(customer -> customer.getSurname().equals(surname))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean containsCustomer(Customer customer){
+        return customerList.stream()
+                .anyMatch(customer1 -> customer1.equals(customer));
+    }
+
+    @Override
+    public boolean containsId(Long id){
+        return customerList.stream()
+                .anyMatch(customer -> customer.getId() == id);
+    }
 }
