@@ -30,20 +30,55 @@ public class DeleteByIdServiceTest {
     DeleteByIdService deleteByIdService;
 
     @Test
-    public void deleteByIdServiceRequestTest() {
+    public void deleteNotValidRequest() {
 
-        Product laptop = new Product("Laptop", "Samsung", 400);
-        productDatabase.add(laptop);
-        DeleteProductRequest request1 = new DeleteProductRequest(2L);
+        DeleteProductRequest request1 = new DeleteProductRequest(-2L);
 
         List<CoreError> errors1 = new ArrayList<>();
-        errors1.add(new CoreError("database", "There is no such ID!"));
+        errors1.add(new CoreError("id", "Not valid input for id"));
+
         Mockito.when(deleteProductRequestValidator.validate(request1)).thenReturn(errors1);
 
         DeleteProductResponse response = deleteByIdService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "database");
+        assertEquals(response.getErrors().get(0).getField(), "id");
+    }
+
+    @Test
+    public void testNoIdInDatabase() {
+
+        DeleteProductRequest request1 = new DeleteProductRequest(2L);
+
+        List<CoreError> errors1 = new ArrayList<>();
+        CoreError expectedError = new CoreError("database", "database doesn't contain product with id 2");
+        errors1.add(expectedError);
+
+        Mockito.when(deleteProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(2L)).thenReturn(false);
+
+        DeleteProductResponse response = deleteByIdService.execute(request1);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().contains(expectedError), true);
+    }
+
+    @Test
+    public void testDeletedSuccessfully() {
+
+        DeleteProductRequest request1 = new DeleteProductRequest(2L);
+        Product product = new Product("Title", "D", 5);
+        product.setId(2L);
+        List<Product>products = new ArrayList<>();
+        products.add(product);
+
+        Mockito.when(deleteProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(2L)).thenReturn(true);
+        Mockito.when(productDatabase.getProducts()).thenReturn(products);
+
+        DeleteProductResponse response = deleteByIdService.execute(request1);
+        assertFalse(response.hasErrors());
+        assertTrue(response.getId().equals(2L));
     }
 
 }
