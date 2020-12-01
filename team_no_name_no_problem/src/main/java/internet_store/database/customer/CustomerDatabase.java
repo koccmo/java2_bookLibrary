@@ -20,4 +20,8 @@ public interface CustomerDatabase {
     List<Customer> findAllCustomersByName(String name);
 
     List<Customer> findAllCustomersBySurname(String surname);
+
+    boolean containsCustomer (Customer customer);
+
+    boolean containsId (Long id);
 }
