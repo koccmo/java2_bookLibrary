@@ -22,7 +22,7 @@ public class ChatBot extends TelegramLongPollingBot {
             .getBean(InnerTelegramDatabase.class);
     private final FindByOrderNumberService findByOrderNumberService = ProductListApplication
             .applicationContext.getBean(FindByOrderNumberService.class);
-    private final         CheckTelegramChatIdService checkTelegramChatIdService = ProductListApplication
+    private final CheckTelegramChatIdService checkTelegramChatIdService = ProductListApplication
             .applicationContext.getBean(CheckTelegramChatIdService.class);
 
     @Override
@@ -51,8 +51,7 @@ public class ChatBot extends TelegramLongPollingBot {
                 printNotFoundOrder();
             }
             if (!(isChatId())) {
-                telegramDatabase.addClientChatId(
-                        new TelegramChatId(chatId, orderNumber));
+                telegramDatabase.addClientChatId(new TelegramChatId(chatId, orderNumber));
             }
         }
     }
