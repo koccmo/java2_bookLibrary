@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 
-public class ChangePriceServiceTest {
+public class ChangeProductServiceTest {
 
     @Mock
     private ProductDatabase productDatabase;
@@ -28,6 +28,38 @@ public class ChangePriceServiceTest {
     private ChangeProductValidator changeProductValidator;
     @InjectMocks
     ChangeProductService changeProductService;
+
+    @Test
+    public void changeDescriptionOfProductRequestTest() {
+
+        Product laptop = new Product("Laptop","Samsung",400);
+        ChangeProductRequest request1 = new ChangeProductRequest(3L,"Laptop",
+                                                                "Apple",400);
+        List<CoreError> errors1 = new ArrayList<>();
+        errors1.add(new CoreError("database","There is no such product with this ID!"));
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+        assertEquals(response.getErrors().get(0).getField(),"database");
+    }
+
+    @Test
+    public void changeTitleOfProductRequestTest() {
+
+        Product laptop = new Product("Laptop","Samsung",400);
+        ChangeProductRequest request1 = new ChangeProductRequest(3L,"Notebook",
+                                                                "Samsung",400);
+        List<CoreError> errors1 = new ArrayList<>();
+        errors1.add(new CoreError("database","There is no such product with this ID!"));
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+        assertEquals(response.getErrors().get(0).getField(),"database");
+    }
 
     @Test
     public void changePriceOfProductRequestTest() {

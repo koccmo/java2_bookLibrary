@@ -1,5 +1,5 @@
 package internet_store.services.product;
-
+/*
 import internet_store.core.requests.product.GetProductsRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.GetProductsResponse;
@@ -43,3 +43,5 @@ public class GetAllProductsServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "title");
     }
 }
+
+ */
