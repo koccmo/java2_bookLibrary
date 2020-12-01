@@ -27,8 +27,11 @@ public class FindProductsService {
 
         List<Product> products = search(request);
 
-        products = new OrderingProductsService().order(products, request.getOrdering());
-        products = new PagingProductsService().page(products, request.getPaging());
+        if (request.getOrdering() != null) {
+            products = new OrderingProductsService().order(products, request.getOrdering());}
+        if (request.getPaging() != null) {
+            products = new PagingProductsService().page(products, request.getPaging());
+        }
         return new FindProductsResponse(products, null);
     }
 
