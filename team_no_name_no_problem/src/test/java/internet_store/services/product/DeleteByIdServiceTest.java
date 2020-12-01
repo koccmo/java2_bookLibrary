@@ -2,10 +2,8 @@ package internet_store.services.product;
 
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductRequest;
-import internet_store.core.requests.product.FindByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductResponse;
-import internet_store.core.response.product.FindByIdResponse;
 import internet_store.core.services.product.DeleteByIdService;
 import internet_store.core.services.product.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
@@ -32,7 +30,7 @@ public class DeleteByIdServiceTest {
     DeleteByIdService deleteByIdService;
 
     @Test
-    public void noTitleAddedToProductRequestTest() {
+    public void deleteByIdServiceRequestTest() {
 
         Product laptop = new Product("Laptop", "Samsung", 400);
         productDatabase.add(laptop);
