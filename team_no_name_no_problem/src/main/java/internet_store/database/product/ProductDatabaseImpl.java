@@ -90,4 +90,10 @@ public class ProductDatabaseImpl implements ProductDatabase{
         return productList.stream()
                 .anyMatch(product1 -> product1.equals(product));
     }
+
+    @Override
+    public boolean containsId(Long id) {
+        return productList.stream()
+                .anyMatch(product -> product.getId().equals(id));
+    }
 }
