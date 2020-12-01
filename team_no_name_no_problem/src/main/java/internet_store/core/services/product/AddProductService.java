@@ -7,7 +7,7 @@ import internet_store.database.product.ProductDatabase;
 
 import java.util.List;
 
-public class AddProductService {
+public class  AddProductService {
 
     private final ProductDatabase productDatabase;
     private final AddProductRequestValidator addProductRequestValidator;
@@ -24,7 +24,7 @@ public class AddProductService {
             return new AddProductResponse(errors);
         }
 
-        if (productDatabase.getProducts().contains(addProductRequest.getProduct())){
+        if (productDatabase.containsProduct(addProductRequest.getProduct())){
             errors.add(new CoreError("database", "Database contains the same product"));
             return new AddProductResponse(errors);
         }
