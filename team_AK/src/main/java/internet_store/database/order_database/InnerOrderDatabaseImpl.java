@@ -60,4 +60,9 @@ public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     public boolean isEmpty() {
         return orders.size() == 0;
     }
+
+    @Override
+    public List<Order> getOrder() {
+        return orders;
+    }
 }
