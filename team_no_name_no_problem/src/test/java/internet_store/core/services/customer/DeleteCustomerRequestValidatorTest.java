@@ -16,7 +16,7 @@ public class DeleteCustomerRequestValidatorTest {
     public void testNotValidId(){
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
-        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(-1);
+        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(-1L);
         List<CoreError> errors = deleteCustomerRequestValidator.validate(deleteCustomerRequest);
 
         assertTrue(errors.size() == 1);
@@ -25,7 +25,7 @@ public class DeleteCustomerRequestValidatorTest {
 
     @Test
     public void testValidInput(){
-        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(2);
+        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(2L);
         List<CoreError> errors = deleteCustomerRequestValidator.validate(deleteCustomerRequest);
 
         assertTrue(errors.isEmpty());
