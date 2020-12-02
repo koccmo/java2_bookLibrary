@@ -19,15 +19,14 @@ public class FindByIdService {
         this.validator = validator;
     }
 
-
     public FindByIdResponse execute(FindByIdRequest request) {
         List<CoreError> errors = validator.validate(request);
-        Long id = Long.parseLong(request.getProductId());
-
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new FindByIdResponse(errors);
-        } else return new FindByIdResponse(database.findById(id));
-    }
+        }
 
+        Long id = Long.parseLong(request.getProductId());
+        return new FindByIdResponse(database.findById(id));
+    }
 }
 
