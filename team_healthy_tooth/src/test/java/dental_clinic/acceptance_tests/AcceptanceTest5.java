@@ -2,36 +2,41 @@ package dental_clinic.acceptance_tests;
 
 import dental_clinic.ApplicationContext;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.*;
+import dental_clinic.core.requests.AddPatientRequest;
+import dental_clinic.core.requests.ChangePersonalDataRequest;
+import dental_clinic.core.requests.GetAllPatientsRequest;
 import dental_clinic.core.responses.GetAllPatientsResponse;
-import dental_clinic.core.services.*;
+import dental_clinic.core.services.AddPatientService;
+import dental_clinic.core.services.ChangePersonalDataService;
+import dental_clinic.core.services.GetAllPatientsService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class AcceptanceTest4 {
+public class AcceptanceTest5 {
 
     private ApplicationContext applicationContext = new  ApplicationContext();
 
     @Test
     public void test(){
         PersonalData personalData1 = new PersonalData("Name", "Surname", "12345678", "25038910523");
-        PersonalData personalData2 = new PersonalData("NameB", "SurnameA", "12345675", "12345668911");
+
         AddPatientRequest addPatientRequest1 = new AddPatientRequest(personalData1);
-        AddPatientRequest addPatientRequest2 = new AddPatientRequest(personalData2);
         addPatientService().execute(addPatientRequest1);
-        addPatientService().execute(addPatientRequest2);
 
         ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(1L, "SurnameB", "");
         changePersonalDataService().execute(changePersonalDataRequest);
 
+        ChangePersonalDataRequest changePersonalDataRequest2 = new ChangePersonalDataRequest(1L, "SurnameK", "87654321");
+        changePersonalDataService().execute(changePersonalDataRequest2);
+
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService().execute(getAllPatientsRequest);
 
-        assertTrue(getAllPatientsResponse.getPatients().size() == 2);
+        assertTrue(getAllPatientsResponse.getPatients().size() == 1);
 
-        assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getSurname().equals("SurnameB"));
-        assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getPhone().equals("12345678"));
+        assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getSurname().equals("SurnameK"));
+        assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getPhone().equals("87654321"));
 
     }
 
