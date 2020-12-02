@@ -2,9 +2,10 @@ package internet_store.application.acceptancetests;
 
 import internet_store.application.ApplicationContext;
 import internet_store.application.core.requests.AddProductRequest;
-import internet_store.application.core.responses.PrintProductsToConsoleResponse;
+import internet_store.application.core.requests.GetAllProductsRequest;
+import internet_store.application.core.responses.GetAllProductsResponse;
 import internet_store.application.core.services.AddProductService;
-import internet_store.application.core.services.GetProductListService;
+import internet_store.application.core.services.GetAllProductsService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,8 @@ public class AddProductAcceptanceTest {
                 "good tv2", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest2);
 
-        PrintProductsToConsoleResponse response = getProductListService().execute();
+        GetAllProductsRequest request = new GetAllProductsRequest();
+        GetAllProductsResponse response = getAllProductsService().execute(request);
         assertEquals(2, response.getProductList().size());
     }
 
@@ -41,7 +43,8 @@ public class AddProductAcceptanceTest {
                 "good tv", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest);
 
-        PrintProductsToConsoleResponse response = getProductListService().execute();
+        GetAllProductsRequest request = new GetAllProductsRequest();
+        GetAllProductsResponse response = getAllProductsService().execute(request);
         assertEquals(0, response.getProductList().size());
     }
 
@@ -51,7 +54,8 @@ public class AddProductAcceptanceTest {
                 null, new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest);
 
-        PrintProductsToConsoleResponse response = getProductListService().execute();
+        GetAllProductsRequest request = new GetAllProductsRequest();
+        GetAllProductsResponse response = getAllProductsService().execute(request);
         assertEquals(0, response.getProductList().size());
     }
 
@@ -61,7 +65,8 @@ public class AddProductAcceptanceTest {
                 "good tv", null);
         getAddProductService().execute(addProductRequest);
 
-        PrintProductsToConsoleResponse response = getProductListService().execute();
+        GetAllProductsRequest request = new GetAllProductsRequest();
+        GetAllProductsResponse response = getAllProductsService().execute(request);
         assertEquals(0, response.getProductList().size());
     }
 
@@ -69,8 +74,8 @@ public class AddProductAcceptanceTest {
         return applicationContext.getBean(AddProductService.class);
     }
 
-    private GetProductListService getProductListService() {
-        return applicationContext.getBean(GetProductListService.class);
+    private GetAllProductsService getAllProductsService() {
+        return applicationContext.getBean(GetAllProductsService.class);
     }
 
 }

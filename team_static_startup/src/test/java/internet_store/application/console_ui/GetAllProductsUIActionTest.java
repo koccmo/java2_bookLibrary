@@ -1,7 +1,7 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.services.GetProductListService;
+import internet_store.application.core.services.GetAllProductsService;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.database.InMemoryDatabase;
 import org.junit.After;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-public class PrintProductsToConsoleUIActionTest {
+public class GetAllProductsUIActionTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -35,16 +35,16 @@ public class PrintProductsToConsoleUIActionTest {
     public void shouldPrintOutProducts() {
         database.add(new Product("iPhone", "mobile phone", new BigDecimal("950.00")));
 
-        GetProductListService service = new GetProductListService(database);
-        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
+        GetAllProductsService service = new GetAllProductsService(database);
+        GetAllProductsUIAction victim = new GetAllProductsUIAction(service);
         victim.execute();
         assertEquals("Product{id = 1, productName = 'iPhone', productDescription = 'mobile phone', price = 950.00}", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void shouldNotPrintOutProducts_whenDatabaseIsEmpty() {
-        GetProductListService service = new GetProductListService(database);
-        PrintProductsToConsoleUIAction victim = new PrintProductsToConsoleUIAction(service);
+        GetAllProductsService service = new GetAllProductsService(database);
+        GetAllProductsUIAction victim = new GetAllProductsUIAction(service);
         victim.execute();
         assertEquals("Database is empty.", outputStreamCaptor.toString().trim());
     }

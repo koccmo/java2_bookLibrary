@@ -36,7 +36,7 @@ public class ApplicationContext {
                 getBean(Database.class), getBean(FindProductsRequestValidator.class)));
         beans.put(ChangeProductNameService.class, new ChangeProductNameService(
                 getBean(Database.class), getBean(ChangeProductNameValidator.class)));
-        beans.put(GetProductListService.class, new GetProductListService(getBean(Database.class)));
+        beans.put(GetAllProductsService.class, new GetAllProductsService(getBean(Database.class)));
 
         beans.put(AddProductUIAction.class, new AddProductUIAction(getBean(AddProductService.class)));
         beans.put(DeleteByIdUIAction.class, new DeleteByIdUIAction(getBean(DeleteByIdUIAction.class)));
@@ -50,8 +50,8 @@ public class ApplicationContext {
                 getBean(FindProductsService.class)));
         beans.put(ChangeProductNameUIAction.class, new ChangeProductNameUIAction(
                 getBean(ChangeProductNameService.class), getBean(FindByIdService.class)));
-        beans.put(PrintProductsToConsoleUIAction.class, new PrintProductsToConsoleUIAction(
-                getBean(GetProductListService.class)));
+        beans.put(GetAllProductsUIAction.class, new GetAllProductsUIAction(
+                getBean(GetAllProductsService.class)));
         beans.put(ExitProgramUIAction.class, new ExitProgramUIAction());
     }
 
