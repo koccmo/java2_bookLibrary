@@ -47,13 +47,13 @@ public class SearchCustomerServiceTest {
 
         assertTrue(response.hasErrors());
         assertTrue(response.getErrors().contains(expectedError));
+        Mockito.verifyNoInteractions(database);
     }
 
-    /*@Test
+    @Test
     public void testNoCustomerWithSuchNameAndSurname() {
         CoreError expectedError =
-                new CoreError("database", "Database doesn't contain patient with name Jarik and surname " +
-                        "Bratuxa");
+                new CoreError("database", "Database doesn't contain customer with name Jarik and surname Bratuha");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
@@ -67,13 +67,14 @@ public class SearchCustomerServiceTest {
 
         assertTrue(response.hasErrors());
         assertTrue(response.getErrors().contains(expectedError));
-        assertTrue(response.getErrors().size() == 1);
-    }*/
 
-    /*@Test
+        assertTrue(response.getErrors().size() == 1);
+    }
+
+    @Test
     public void testNoCustomerWithSuchName() {
         CoreError expectedError =
-                new CoreError("database", "Database doesn't contain patient with name Jarik");
+                new CoreError("database", "Database doesn't contain customer with name: Jarik");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
@@ -87,13 +88,12 @@ public class SearchCustomerServiceTest {
         assertTrue(response.hasErrors());
         assertTrue(response.getErrors().contains(expectedError));
         assertTrue(response.getErrors().size() == 1);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void testNoCustomerWithSuchSurname() {
         CoreError expectedError =
-                new CoreError("database", "Database doesn't contain patient with surname " +
-                        "Brutaxa");
+                new CoreError("database", "Database doesn't contain customer with surname: Brutaxa");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
@@ -108,9 +108,9 @@ public class SearchCustomerServiceTest {
         assertTrue(response.hasErrors());
         assertTrue(response.getErrors().contains(expectedError));
         assertTrue(response.getErrors().size() == 1);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void testSearchBySurname() {
         Customer customer = new Customer("Jarik", "Brutaxa", "phone",
                 "address", "email");
@@ -129,5 +129,5 @@ public class SearchCustomerServiceTest {
         assertTrue(response.getCustomers().size() == 1);
         assertTrue(response.getCustomers().contains(customer));
         assertTrue(response.getCustomers().get(0).equals(customer));
-    }*/
+    }
 }
