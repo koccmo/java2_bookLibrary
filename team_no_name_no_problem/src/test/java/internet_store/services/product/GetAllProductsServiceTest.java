@@ -1,5 +1,6 @@
 package internet_store.services.product;
-/*
+
+import internet_store.core.domain.Product;
 import internet_store.core.requests.product.GetProductsRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.GetProductsResponse;
@@ -29,19 +30,35 @@ public class GetAllProductsServiceTest {
     GetAllProductsService getAllProductsService;
 
     @Test
-    public void getAllProductsRequestTest() {
+    public void testEmptyDatabase() {
 
         GetProductsRequest request1 = new GetProductsRequest();
 
         List<CoreError> errors1 = new ArrayList<>();
-        errors1.add(new CoreError("database", "Should not be empty!"));
-        Mockito.when(getAllProductsValidator.validate(request1)).thenReturn(errors1);
+        CoreError expectedError = new CoreError("database", "Database is empty");
+        errors1.add(expectedError);
+        Mockito.when(getAllProductsValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.getProducts()).thenReturn(new ArrayList<>());
 
         GetProductsResponse response = getAllProductsService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "title");
+        assertTrue(response.getErrors().contains(expectedError));
+    }
+
+    @Test
+    public void testSuccessfullyReceivedList() {
+        Product product = new Product("Title", "D", 5);
+        List<Product> products = new ArrayList<>();
+        products.add(product);
+        GetProductsRequest request1 = new GetProductsRequest();
+
+        Mockito.when(getAllProductsValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.getProducts()).thenReturn(products);
+
+        GetProductsResponse response = getAllProductsService.execute(request1);
+        assertFalse(response.hasErrors());
+        assertTrue(response.getProducts().size() == 1);
+        assertTrue(response.getProducts().equals(products));
     }
 }
-
- */
