@@ -183,4 +183,46 @@ public class FindProductsServiceTest {
         assertEquals(expected.size(), response.getProducts().size());
     }
 
+    @Test
+    public void shouldSearchWhenNameIsProvided() {
+        FindProductsRequest request = new FindProductsRequest("A1", "");
+        List<Product> productList = new ArrayList<>();
+        productList.add(product1);
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findByProductName("A1")).thenReturn(productList);
+
+        FindProductsResponse response = service.execute(request);
+        assertEquals(1, response.getProducts().size());
+        assertEquals("A1", response.getProducts().get(0).getName());
+        assertEquals("B1", response.getProducts().get(0).getDescription());
+    }
+
+    @Test
+    public void shouldSearchWhenDescriptionIsProvided() {
+        FindProductsRequest request = new FindProductsRequest("", "B1");
+        List<Product> productList = new ArrayList<>();
+        productList.add(product1);
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findByProductDescription("B1")).thenReturn(productList);
+
+        FindProductsResponse response = service.execute(request);
+        assertEquals(1, response.getProducts().size());
+        assertEquals("A1", response.getProducts().get(0).getName());
+        assertEquals("B1", response.getProducts().get(0).getDescription());
+    }
+
+    @Test
+    public void shouldSearchWhenBothNameAndDescriptionAreProvided() {
+        FindProductsRequest request = new FindProductsRequest("A1", "B1");
+        List<Product> productList = new ArrayList<>();
+        productList.add(product1);
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findByNameAndDescription("A1", "B1")).thenReturn(productList);
+
+        FindProductsResponse response = service.execute(request);
+        assertEquals(1, response.getProducts().size());
+        assertEquals("A1", response.getProducts().get(0).getName());
+        assertEquals("B1", response.getProducts().get(0).getDescription());
+    }
+
 }
