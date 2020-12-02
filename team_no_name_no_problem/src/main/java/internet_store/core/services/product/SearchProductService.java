@@ -42,7 +42,7 @@ public class SearchProductService {
     }
 
     private boolean isTitleAndDescriptionNotEmpty(String title, String description){
-        return !title.isEmpty() && !description.isEmpty();
+        return title != null && !title.isEmpty() && description != null && !description.isEmpty();
     }
 
     private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
@@ -59,7 +59,7 @@ public class SearchProductService {
     }
 
     private boolean isTitleFilled(String title){
-        return !title.isEmpty();
+        return title != null && !title.isEmpty();
     }
 
     private SearchProductResponse searchByTitleIsProvided(SearchProductRequest searchProductRequest){

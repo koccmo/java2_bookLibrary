@@ -64,11 +64,11 @@ public class SearchCustomerService {
 
 
         private boolean isNameAndSurnameNotEmpty (String name, String surname){
-            return !name.isEmpty() && !surname.isEmpty();
+            return name!= null && !name.isEmpty() && surname != null && !surname.isEmpty();
         }
 
         private boolean isNameFilled (String name){
-            return !name.isEmpty();
+            return name!=null && !name.isEmpty();
         }
 
         private SearchCustomerResponse searchByNameIsProvided (SearchCustomerRequest searchCustomerRequest){
