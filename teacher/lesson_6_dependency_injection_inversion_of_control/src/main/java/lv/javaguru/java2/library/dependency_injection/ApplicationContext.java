@@ -1,4 +1,4 @@
-package lv.javaguru.java2.library;
+package lv.javaguru.java2.library.dependency_injection;
 
 import java.util.HashMap;
 import java.util.Map;

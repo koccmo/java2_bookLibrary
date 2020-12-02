@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import lv.javaguru.java2.library.ApplicationContext;
+import lv.javaguru.java2.library.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
