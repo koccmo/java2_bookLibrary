@@ -30,14 +30,29 @@ public class ChangeProductServiceTest {
     ChangeProductService changeProductService;
 
     @Test
-    public void changeDescriptionOfProductRequestTest() {
+    public void notValidId() {
 
-        Product laptop = new Product("Laptop","Samsung",400);
+        ChangeProductRequest request1 = new ChangeProductRequest(null,"Laptop",
+                "Apple",400);
+        List<CoreError> errors1 = new ArrayList<>();
+        errors1.add(new CoreError("id", "Not valid input for id"));
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+        assertEquals(response.getErrors().get(0).getField(),"id");
+    }
+
+    @Test
+    public void databaseDoesNotContainsId() {
+
         ChangeProductRequest request1 = new ChangeProductRequest(3L,"Laptop",
                                                                 "Apple",400);
         List<CoreError> errors1 = new ArrayList<>();
         errors1.add(new CoreError("database","There is no such product with this ID!"));
-        Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(3L)).thenReturn(false);
 
         ChangeProductResponse response = changeProductService.execute(request1);
         assertEquals(response.hasErrors(),true);
@@ -46,25 +61,54 @@ public class ChangeProductServiceTest {
     }
 
     @Test
-    public void changeTitleOfProductRequestTest() {
+    public void correctIdForChangingDescription() {
 
-        Product laptop = new Product("Laptop","Samsung",400);
+        ChangeProductRequest request1 = new ChangeProductRequest(5L,"Laptop",
+                "Apple",400);
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(5L)).thenReturn(true);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),false);
+        assertEquals(response.getId().equals(5L),true);
+    }
+
+
+    @Test
+    public void notValidPrice() {
+
         ChangeProductRequest request1 = new ChangeProductRequest(3L,"Notebook",
-                                                                "Samsung",400);
+                                                                "Samsung",-1);
         List<CoreError> errors1 = new ArrayList<>();
-        errors1.add(new CoreError("database","There is no such product with this ID!"));
+        errors1.add(new CoreError("price","Not valid input for price!"));
         Mockito.when(changeProductValidator.validate(request1)).thenReturn(errors1);
 
         ChangeProductResponse response = changeProductService.execute(request1);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
-        assertEquals(response.getErrors().get(0).getField(),"database");
+        assertEquals(response.getErrors().get(0).getField(),"price");
     }
 
     @Test
-    public void changePriceOfProductRequestTest() {
+    public void correctIdForChangingTitle() {
 
         Product laptop = new Product("Laptop","Samsung",400);
+        laptop.setId(5L);
+        ChangeProductRequest request1 = new ChangeProductRequest(5L,"Notebook",
+                                                                "Samsung",400);
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(5L)).thenReturn(true);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),false);
+        assertTrue(response.getId().equals(5L));
+    }
+
+    @Test
+    public void incorrectIdForChangingPrice() {
+
+        Product laptop = new Product("Laptop","Samsung",400);
+        laptop.setId(2L);
         ChangeProductRequest request1 = new ChangeProductRequest(3L,"Laptop",
                 "Samsung",650);
         List<CoreError> errors1 = new ArrayList<>();
@@ -75,5 +119,18 @@ public class ChangeProductServiceTest {
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
         assertEquals(response.getErrors().get(0).getField(),"database");
+    }
+
+    @Test
+    public void correctIdForChangingPrice() {
+
+        ChangeProductRequest request1 = new ChangeProductRequest(5L,"Notebook",
+                "Acer",250);
+        Mockito.when(changeProductValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsId(5L)).thenReturn(true);
+
+        ChangeProductResponse response = changeProductService.execute(request1);
+        assertEquals(response.hasErrors(),false);
+        assertTrue(response.getId().equals(5L));
     }
 }

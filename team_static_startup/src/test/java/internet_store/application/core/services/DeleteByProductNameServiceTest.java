@@ -30,13 +30,11 @@ public class DeleteByProductNameServiceTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Product Name", "Product Name must not be empty."));
         Mockito.when(validator.validate(request)).thenReturn(errors);
-
         DeleteByProductNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "Product Name");
-
-        Mockito.verify(validator).validate(request); // better use for addProduct, checking that method was called
+        Mockito.verify(validator).validate(request);
         Mockito.verify(validator).validate(any());
         Mockito.verifyNoInteractions(database);
     }

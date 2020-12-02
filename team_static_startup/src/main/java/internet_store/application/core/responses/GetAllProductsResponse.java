@@ -4,11 +4,11 @@ import internet_store.application.core.domain.Product;
 
 import java.util.List;
 
-public class PrintProductsToConsoleResponse extends CoreResponse{
+public class GetAllProductsResponse extends CoreResponse{
 
     private List<Product> productList;
 
-    public PrintProductsToConsoleResponse(List<Product> productList) {
+    public GetAllProductsResponse(List<Product> productList) {
         this.productList = productList;
     }
 
