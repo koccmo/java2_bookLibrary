@@ -68,6 +68,7 @@ public class CreateOrderTest {
         assertEquals("Name", orderDatabase.getOrder().get(0).getClient().getName());
         assertEquals(new BigDecimal("1.28"), orderDatabase.getOrder().get(0).getProductsInCart().get(0).getPrice());
         assertEquals(new BigDecimal("3.84"), orderDatabase.getOrder().get(0).getProductsInCart().get(0).getSum());
+        assertEquals(OrderStatus.ORDER_RECEIVED, orderDatabase.getOrder().get(0).getOrderStatus());
 
         OrderStatusRequest orderStatusRequest = new OrderStatusRequest(OrderStatus.ITEM_ORDERED_TO_STOCK, 1L);
         OrderStatusService orderStatusService = context.getBean(OrderStatusService.class);
