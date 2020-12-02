@@ -2,13 +2,13 @@ package internet_store.core.requests.customer;
 
 public class FindCustomerByIdRequest {
 
-    private long id;
+    private Long id;
 
-    public FindCustomerByIdRequest(long id) {
+    public FindCustomerByIdRequest(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 }
