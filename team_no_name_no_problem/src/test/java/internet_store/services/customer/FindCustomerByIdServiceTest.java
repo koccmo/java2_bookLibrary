@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
@@ -27,7 +28,7 @@ public class FindCustomerByIdServiceTest {
 
     @Test
     public void testNotValidCustomerIdInput(){
-        FindCustomerByIdRequest request = new FindCustomerByIdRequest(-2);
+        FindCustomerByIdRequest request = new FindCustomerByIdRequest(null);
         CoreError expectedError = new CoreError("id", "Not valid input for id");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
@@ -40,17 +41,30 @@ public class FindCustomerByIdServiceTest {
     }
 
     @Test
+    public void testNoIdInDatabase(){
+        FindCustomerByIdRequest request = new FindCustomerByIdRequest(2L);
+        CoreError expectedError = new CoreError("database", "Database doesn't contain customer with id 2");
+
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findById(2L)).thenReturn(Optional.empty());
+
+        FindCustomerByIdResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertTrue(response.getErrors().contains(expectedError));
+    }
+
+    @Test
     public void testSuccessfullyFindCustomerById(){
         Customer customer = new Customer("name", "surname", "phone", "address",
                 "email");
         customer.setId(2L);
-        List<Customer> customers = new ArrayList<>();
-        customers.add(customer);
         FindCustomerByIdRequest request = new FindCustomerByIdRequest(2L);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findById(2L)).thenReturn(Optional.of(customer));
 
         FindCustomerByIdResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomer().get().equals(customer));
     }
 
 }
