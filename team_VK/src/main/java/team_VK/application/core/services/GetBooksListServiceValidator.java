@@ -6,7 +6,7 @@ import team_VK.application.core.responses.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetBookListServiceValidator {
+public class GetBooksListServiceValidator {
 
     List<CoreError> errors = new ArrayList<>();
 

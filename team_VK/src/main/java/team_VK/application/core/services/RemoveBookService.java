@@ -10,14 +10,14 @@ import java.util.List;
 public class RemoveBookService {
 
     private final Database database;
+    public RemoveBookServiceValidator validator;
 
-    public RemoveBookService(Database database) {
+    public RemoveBookService(Database database, RemoveBookServiceValidator validator) {
         this.database = database;
+        this.validator = validator;
     }
 
     public RemoveBookResponse removeBook(RemoveBookRequest request) {
-
-        RemoveBookServiceValidator validator = new RemoveBookServiceValidator();
 
         List<CoreError> errors;
         errors = validator.validate(request, database);

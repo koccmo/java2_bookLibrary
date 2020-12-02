@@ -35,12 +35,12 @@ public class LibraryApplication {
         AddBookService addBookService = new AddBookService(database, validator);
         AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
 
-
-        RemoveBookService removeBookService = new RemoveBookService(database);
+        RemoveBookServiceValidator removeBookServiceValidator = new RemoveBookServiceValidator();
+        RemoveBookService removeBookService = new RemoveBookService(database, removeBookServiceValidator);
         RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
 
-        GetBookListServiceValidator getBookListServiceValidator = new GetBookListServiceValidator();
-        GetBooksListService getBooksListService = new GetBooksListService(database, getBookListServiceValidator);
+        GetBooksListServiceValidator getBooksListServiceValidator = new GetBooksListServiceValidator();
+        GetBooksListService getBooksListService = new GetBooksListService(database, getBooksListServiceValidator);
         GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
 
         BookBookServiceValidator bookBookServiceValidator = new BookBookServiceValidator();
@@ -50,8 +50,8 @@ public class LibraryApplication {
         ShowBookService showBookService = new ShowBookService(database);
         ShowBookUIActions showBookUIActions = new ShowBookUIActions(showBookService);
 
-
-        AddClientService addClientService = new AddClientService(databaseClient);
+        AddClientServiceValidator addClientServiceValidator = new AddClientServiceValidator();
+        AddClientService addClientService = new AddClientService(databaseClient, addClientServiceValidator);
         AddClientUIActions addClientUIActions = new AddClientUIActions(addClientService);
 
         ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();

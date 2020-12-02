@@ -1,9 +1,10 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.services;
 
 import org.junit.Assert;
 import org.junit.Test;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.core.services.AddBookServiceValidator;
 
 import java.util.ArrayList;
 import java.util.List;

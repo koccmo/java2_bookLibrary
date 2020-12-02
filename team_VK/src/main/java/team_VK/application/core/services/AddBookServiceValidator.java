@@ -33,8 +33,12 @@ public class AddBookServiceValidator {
                 .anyMatch(value -> (value <= 31) ||
                         ((value >= 33) && (value <= 64)) ||
                         ((value >= 91) && (value <= 96)) ||
-                        ((value >= 123) && (value <= 193))||
-                        (value >= 256));
+                        ((value >= 123) && (value <= 159))||
+                        ((value >= 174) && (value <= 180))||
+                        ((value >= 185) && (value <= 207))||
+                        ((value >= 217) && (value <= 220))||
+                        ((value >= 223) && (value <= 223))||
+                        (value >= 253));
         if (bookAuthorContainsIllegalCharts) {
             CoreError error = new CoreError("bookAuthor", "Field bookAuthor contains illegal characters");
             errors.add(error);

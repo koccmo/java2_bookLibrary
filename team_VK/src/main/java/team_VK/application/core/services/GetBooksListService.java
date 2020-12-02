@@ -11,10 +11,10 @@ import java.util.List;
 public class GetBooksListService {
 
     private final Database database;
-    private final GetBookListServiceValidator validator;
+    private final GetBooksListServiceValidator validator;
 
 
-    public GetBooksListService(Database database, GetBookListServiceValidator validator) {
+    public GetBooksListService(Database database, GetBooksListServiceValidator validator) {
         this.database = database;
         this.validator = validator;
     }

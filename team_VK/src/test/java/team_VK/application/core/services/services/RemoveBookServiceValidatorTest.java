@@ -1,4 +1,4 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.services;
 
 //import junit.framework.TestCase;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.core.services.RemoveBookServiceValidator;
 import team_VK.application.database.DatabaseInMemory;
 
 import java.util.ArrayList;
@@ -15,17 +16,20 @@ import java.util.List;
 public class RemoveBookServiceValidatorTest {
 
 
-    RemoveBookServiceValidator subject = new RemoveBookServiceValidator();
+    RemoveBookServiceValidator service = new RemoveBookServiceValidator();
     List<Book> bookList = getBooks();
     DatabaseInMemory database = new DatabaseInMemory(bookList);
+
+
 
     @Test
     public void ShouldValidateCorrectBook() {
 // positive functional test
         RemoveBookRequest request = new RemoveBookRequest(1, "foobar");
 
-        List<CoreError> errorsActual = subject.validate(request, database);
+        List<CoreError> errorsActual = service.validate(request, database);
         Assert.assertEquals(0, errorsActual.size());
+
     }
 
 
@@ -34,7 +38,7 @@ public class RemoveBookServiceValidatorTest {
 
     public void ShouldntValidate_incorrect_outOfBound_ID() {
         RemoveBookRequest request = new RemoveBookRequest(3, "foobar");
-        List<CoreError> errorsActual = subject.validate(request, database);
+        List<CoreError> errorsActual = service.validate(request, database);
         CoreError error = new CoreError("Book ID", "Not existing book ID entered" );
         List<CoreError> errorsExpected = List.of(error);
 
@@ -47,7 +51,7 @@ public class RemoveBookServiceValidatorTest {
 
     public void ShouldntValidate_bookID_doesnt_consist_to_Title() {
         RemoveBookRequest request = new RemoveBookRequest(2, "foobar");
-        List<CoreError> errorsActual = subject.validate(request, database);
+        List<CoreError> errorsActual = service.validate(request, database);
         CoreError error = new CoreError("Book ID", "ID not consist to Book Title" );
         List<CoreError> errorsExpected = List.of(error);
 
