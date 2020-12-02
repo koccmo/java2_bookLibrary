@@ -1,5 +1,6 @@
 package estore.ui;
 
+import estore.core.requests.Ordering;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.PrintListService;
@@ -21,7 +22,13 @@ public class SearchProductByNameUI implements UIAction {
         System.out.println("Enter name of product to search: ");
         String productToSearch = sc.nextLine();
 
-        SearchProductByNameRequest request = new SearchProductByNameRequest(productToSearch);
+        System.out.println("Enter orderBy (name||price): ");
+        String orderBy = sc.nextLine();
+        System.out.println("Enter orderDirection (ASCENDING/asc||DESCENDING/desc): ");
+        String orderDirection = sc.nextLine();
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+
+        SearchProductByNameRequest request = new SearchProductByNameRequest(productToSearch, ordering);
         SearchProductByNameResponse response = searchProductByNameService.execute(request);
 
         if (response.getProductsFound() == -1) {
