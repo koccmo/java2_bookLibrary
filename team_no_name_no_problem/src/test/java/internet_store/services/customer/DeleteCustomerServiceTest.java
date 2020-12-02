@@ -27,7 +27,7 @@ public class DeleteCustomerServiceTest {
 
     @Test
     public void testNotValidIdInput(){
-        DeleteCustomerRequest request = new DeleteCustomerRequest(-1);
+        DeleteCustomerRequest request = new DeleteCustomerRequest(-1L);
         CoreError expectedError = new CoreError("id", "Not valid input for id");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
@@ -42,18 +42,19 @@ public class DeleteCustomerServiceTest {
     @Test
     public void testNoIdInDatabase(){
         DeleteCustomerRequest request = new DeleteCustomerRequest(10L);
-        CoreError expectedError = new CoreError("id", "Database doesn't contain customer with this id");
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(expectedError);
-        Mockito.when(deleteCustomerRequestValidator.validate(request)).thenReturn(errors);
+        CoreError expectedError = new CoreError("database", "database doesn't contain this customer 10");
+
+        Mockito.when(deleteCustomerRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(customerDatabase.containsId(request.getId())).thenReturn(false);
 
         DeleteCustomerResponse response = deleteCustomerService.execute(request);
         assertTrue(response.hasErrors());
         assertTrue(response.getErrors().contains(expectedError));
+        assertTrue(response.getErrors().size() == 1);
     }
 
     @Test
-    public void testAddedSuccessfully(){
+    public void testDeletedSuccessfully(){
         Customer customer = new Customer("name", "surname", "2987361", "address",
                 "brutaxa@gmail.com");
         customer.setId(1L);
@@ -61,6 +62,7 @@ public class DeleteCustomerServiceTest {
         customers.add(customer);
         DeleteCustomerRequest request = new DeleteCustomerRequest(1L);
         Mockito.when(deleteCustomerRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(customerDatabase.containsId(request.getId())).thenReturn(true);
         Mockito.when(customerDatabase.getCustomers()).thenReturn(customers);
 
         DeleteCustomerResponse response = deleteCustomerService.execute(request);
