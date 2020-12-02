@@ -23,12 +23,12 @@ public class AddProductAcceptanceTest {
 
     @Test
     public void shouldReturnNoErrorsWhenAddingBooks() {
-        AddProductRequest addProductRequest1 = new AddProductRequest("Name1",
-                "Description", new BigDecimal("399.99"));
+        AddProductRequest addProductRequest1 = new AddProductRequest("tv1",
+                "good tv1", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest1);
 
-        AddProductRequest addProductRequest2 = new AddProductRequest("Name2",
-                "Description", new BigDecimal("399.99"));
+        AddProductRequest addProductRequest2 = new AddProductRequest("tv2",
+                "good tv2", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest2);
 
         PrintProductsToConsoleResponse response = getProductListService().execute();
@@ -36,7 +36,27 @@ public class AddProductAcceptanceTest {
     }
 
     @Test
-    public void shouldNotAddBookWithWrongParameter() {
+    public void shouldNotAddBookWithWrongParameterName() {
+        AddProductRequest addProductRequest = new AddProductRequest(" ",
+                "good tv", new BigDecimal("399.99"));
+        getAddProductService().execute(addProductRequest);
+
+        PrintProductsToConsoleResponse response = getProductListService().execute();
+        assertEquals(0, response.getProductList().size());
+    }
+
+    @Test
+    public void shouldNotAddBookWithWrongParameterDescription() {
+        AddProductRequest addProductRequest = new AddProductRequest("tv",
+                null, new BigDecimal("399.99"));
+        getAddProductService().execute(addProductRequest);
+
+        PrintProductsToConsoleResponse response = getProductListService().execute();
+        assertEquals(0, response.getProductList().size());
+    }
+
+    @Test
+    public void shouldNotAddBookWithWrongParameterPrice() {
         AddProductRequest addProductRequest = new AddProductRequest("tv",
                 "good tv", null);
         getAddProductService().execute(addProductRequest);
