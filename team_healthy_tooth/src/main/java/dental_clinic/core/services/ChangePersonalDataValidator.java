@@ -32,7 +32,7 @@ public class ChangePersonalDataValidator {
     private List<CoreError> isValidUpdatedPhoneNumber(String phoneNumberToCheck) {
         List<CoreError> errors = new ArrayList<>();
         if (phoneNumberToCheck != null && !phoneNumberToCheck.isEmpty()) {
-            if (!phoneNumberToCheck.matches("\\d{8}")) {
+            if (!phoneNumberToCheck.matches("\\d{8}|\\d{11}|\\d{12}")) {
                 errors.add(new CoreError(
                         "Personal data : phone",
                         "Invalid input! Can only contain numbers!"));

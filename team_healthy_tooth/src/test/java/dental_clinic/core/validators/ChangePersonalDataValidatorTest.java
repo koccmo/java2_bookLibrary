@@ -43,7 +43,19 @@ public class ChangePersonalDataValidatorTest extends TestCase {
     @Test
     public void testInvalidNameAndValidPhone() {    //INVALID surname; valid phone
         String invalidSurname = "Surname99";  //has numbers
-        String validPhone = "12345678";
+        String validPhone = "12345678"; // has 8 digits
+        request = new ChangePersonalDataRequest(1L, invalidSurname, validPhone);
+
+        returnedErrorsList = validator.validate(request);
+        assertEquals(1, returnedErrorsList.size());
+
+        validPhone = "37112345678"; // has 11 digits
+        request = new ChangePersonalDataRequest(1L, invalidSurname, validPhone);
+
+        returnedErrorsList = validator.validate(request);
+        assertEquals(1, returnedErrorsList.size());
+
+        validPhone = "791137402888";// has 12 digits
         request = new ChangePersonalDataRequest(1L, invalidSurname, validPhone);
 
         returnedErrorsList = validator.validate(request);
