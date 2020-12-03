@@ -1,23 +1,26 @@
+package domain;
+
 import java.util.Comparator;
 import java.util.Objects;
 
 public class Product {
-    private static long count = 0;
-    private final long id;
+    private long id;
     private String name;
     private String description;
-    private double price;
+    private String price;
 
-    public Product(String name, String description, double price) {
+    public Product(String name, String description, String price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.count++;
-        this.id = count;
     }
 
     public long getId() {
         return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,6 +39,14 @@ public class Product {
         this.description = description;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,14 +54,6 @@ public class Product {
         Product product = (Product) o;
         return name.equals(product.name)
                 && description.equals(product.getDescription());
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     @Override

@@ -19,13 +19,13 @@ public class AddProductValidator {
     }
 
     private Optional<CoreError> validateProductName(AddProductRequest request) {
-        return (request.getProductName() == null || request.getProductName().isEmpty()
+        return (request.getProductName() == null || request.getProductName().isBlank()
                 ? Optional.of(new CoreError("Name", "must not be empty"))
                 : Optional.empty());
     }
 
     private Optional<CoreError> validateProductDescription(AddProductRequest request) {
-        return (request.getProductDescription() == null || request.getProductDescription().isEmpty()
+        return (request.getProductDescription() == null || request.getProductDescription().isBlank()
                 ? Optional.of(new CoreError("Description", "must not be empty"))
                 : Optional.empty());
     }

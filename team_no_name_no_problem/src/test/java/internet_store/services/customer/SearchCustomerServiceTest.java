@@ -1,6 +1,7 @@
 package internet_store.services.customer;
 
 import internet_store.core.domain.Customer;
+import internet_store.core.domain.Order;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
@@ -31,7 +32,7 @@ public class SearchCustomerServiceTest {
     private SearchCustomerService service;
 
     private Ordering ordering = new Ordering("surname", "ASC");
-    private Paging paging = new Paging(1, 2);
+    private Paging paging = new Paging(1, 3);
 
     @Test
     public void testEmptySearch() {
@@ -129,5 +130,133 @@ public class SearchCustomerServiceTest {
         assertTrue(response.getCustomers().size() == 1);
         assertTrue(response.getCustomers().contains(customer));
         assertTrue(response.getCustomers().get(0).equals(customer));
+    }
+
+    @Test
+    public void testSearchByName() {
+        Customer customer = new Customer("Jarik", "Brutaxa", "phone", "address",
+                "email");
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+
+        SearchCustomerRequest request = new SearchCustomerRequest("Jarik", null, ordering,
+                paging);
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAllCustomersByName(request.getName())).thenReturn(customers);
+
+        SearchCustomerResponse response = service.execute(request);
+
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomers().size() == 1);
+    }
+
+    @Test
+    public void testOrderingAscending() {
+        Customer customer = new Customer("Jarik", "Brutaxa", "phone", "address",
+                "email");
+        Customer customer1 = new Customer("Jarik", "Bratuxa", "phone", "address",
+                "email");
+        Customer customer2 = new Customer("Jarik", "Brat", "phone", "address",
+                "email");
+
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+        customers.add(customer1);
+        customers.add(customer2);
+
+        SearchCustomerRequest request = new SearchCustomerRequest("Jarik", null,
+                new Ordering("surname","ASC"), paging);
+
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAllCustomersByName(request.getName())).thenReturn(customers);
+
+        SearchCustomerResponse response = service.execute(request);
+
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomers().get(0).getSurname().equals("Brat"));
+        assertTrue(response.getCustomers().get(1).getSurname().equals("Bratuxa"));
+    }
+
+    @Test
+    public void testOrderingDescending(){
+        Customer customer = new Customer("Jarik", "Brutaxa", "phone", "address",
+                "email");
+        Customer customer1 = new Customer("Jarik", "Bratuxa", "phone", "address",
+                "email");
+        Customer customer2 = new Customer("Jarik", "Brat", "phone", "address",
+                "email");
+
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+        customers.add(customer1);
+        customers.add(customer2);
+
+        SearchCustomerRequest request = new SearchCustomerRequest("Jarik", null,
+                new Ordering("surname","DSC"), paging);
+
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAllCustomersByName(request.getName())).thenReturn(customers);
+
+        SearchCustomerResponse response = service.execute(request);
+
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomers().get(0).getSurname().equals("Brutaxa"));
+        assertTrue(response.getCustomers().get(1).getSurname().equals("Bratuxa"));
+    }
+
+    @Test
+    public void testPagingFirstPage() {
+        Customer customer = new Customer("Jarik", "Brutaxa", "phone", "address",
+                "email");
+        Customer customer1 = new Customer("Jarik", "Bratuxa", "phone", "address",
+                "email");
+        Customer customer2 = new Customer("Jarik", "Brat", "phone", "address",
+                "email");
+
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+        customers.add(customer1);
+        customers.add(customer2);
+
+        SearchCustomerRequest request = new SearchCustomerRequest("Jarik", null,
+                new Ordering("surname","ASC"), new Paging(1, 2));
+
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAllCustomersByName(request.getName())).thenReturn(customers);
+
+        SearchCustomerResponse response = service.execute(request);
+
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomers().size() == 2);
+        assertTrue(response.getCustomers().get(0).equals(customer2));
+
+    }
+
+    @Test
+    public void testPagingSecondPage(){
+        Customer customer = new Customer("Jarik", "Brutaxa", "phone", "address",
+                "email");
+        Customer customer1 = new Customer("Jarik", "Bratuxa", "phone", "address",
+                "email");
+        Customer customer2 = new Customer("Jarik", "Brat", "phone", "address",
+                "email");
+
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+        customers.add(customer1);
+        customers.add(customer2);
+
+        SearchCustomerRequest request = new SearchCustomerRequest("Jarik", null,
+                new Ordering("surname","ASC"), new Paging(2, 1));
+
+        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAllCustomersByName(request.getName())).thenReturn(customers);
+
+        SearchCustomerResponse response = service.execute(request);
+
+        assertFalse(response.hasErrors());
+        assertTrue(response.getCustomers().size() == 1);
+        assertTrue(response.getCustomers().get(0).equals(customer1));
+
     }
 }

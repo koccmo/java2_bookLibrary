@@ -26,7 +26,7 @@ public class ChangeProductService {
             return new ChangeProductResponse(errors);
         }
 
-        if (databaseContainsProductWithId(changeProductRequest.getId()).isEmpty()){
+        if (!productDatabase.containsId(changeProductRequest.getId())){
             errors.add(new CoreError("database", "Database doesn't contain product with id " +
                     changeProductRequest.getId()));
             return new ChangeProductResponse(errors);
