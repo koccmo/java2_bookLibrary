@@ -1,4 +1,4 @@
-package internet_store.acceptance_test;
+package internet_store.acceptance_test.customer;
 
 import internet_store.ApplicationContext;
 import internet_store.core.domain.Customer;
@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class AcceptanceTestFindCustomer {
+public class AcceptanceTestFindCustomerById {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
