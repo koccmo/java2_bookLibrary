@@ -1,6 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.Ordering;
+import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
 import org.junit.Test;
 
@@ -40,8 +41,9 @@ public class SearchProductByCategoryValidatorTest {
     @Test
     public void shouldReturnErrorIfOrderDirectionIsEmpty() {
         Ordering ordering = new Ordering("price", null);
+        Paging paging = new Paging("2", "10");
         SearchProductByCategoryRequest request =
-                new SearchProductByCategoryRequest("Category", ordering);
+                new SearchProductByCategoryRequest("Category", ordering, paging);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
@@ -51,8 +53,9 @@ public class SearchProductByCategoryValidatorTest {
     @Test
     public void shouldReturnErrorIfOrderByIsEmpty() {
         Ordering ordering = new Ordering(null, "ASCENDING");
+        Paging paging = new Paging("2", "10");
         SearchProductByCategoryRequest request =
-                new SearchProductByCategoryRequest("Category", ordering);
+                new SearchProductByCategoryRequest("Category", ordering, paging);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -62,8 +65,9 @@ public class SearchProductByCategoryValidatorTest {
     @Test
     public void shouldReturnErrorIfOrderByContainsInvalidValue() {
         Ordering ordering = new Ordering("invalidValue", "ASCENDING");
+        Paging paging = new Paging("2", "10");
         SearchProductByCategoryRequest request =
-                new SearchProductByCategoryRequest("Category", ordering);
+                new SearchProductByCategoryRequest("Category", ordering, paging);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -73,11 +77,36 @@ public class SearchProductByCategoryValidatorTest {
     @Test
     public void shouldReturnErrorIfOrderDirectionContainsInvalidValue() {
         Ordering ordering = new Ordering("price", "invalidValue");
+        Paging paging = new Paging("2", "10");
         SearchProductByCategoryRequest request =
-                new SearchProductByCategoryRequest("Category", ordering);
+                new SearchProductByCategoryRequest("Category", ordering, paging);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getMessage(), "Must contain 'ASCENDING/asc' or 'DESCENDING/desc' only!");
+    }
+
+    @Test
+    public void shouldReturnErrorIfPagingPageNumberContainsInvalidValue() {
+        Ordering ordering = new Ordering("price", "asc");
+        Paging paging = new Paging("Unalowed", "10");
+        SearchProductByCategoryRequest request =
+                new SearchProductByCategoryRequest("Category", ordering, paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Page Number");
+        assertEquals(errors.get(0).getMessage(), "Must be positive integer!");
+    }
+
+    @Test
+    public void shouldReturnErrorIfPagingPageSizeContainsInvalidValue() {
+        Ordering ordering = new Ordering("price", "asc");
+        Paging paging = new Paging("10", "");
+        SearchProductByCategoryRequest request =
+                new SearchProductByCategoryRequest("Category", ordering, paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Page Size");
+        assertEquals(errors.get(0).getMessage(), "Must be positive integer!");
     }
 }
