@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import lv.javaguru.java2.library.core.requests.RemoveBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
+@DIComponent
 public class RemoveBookRequestValidator {
 
 	public List<CoreError> validate(RemoveBookRequest request) {

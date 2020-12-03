@@ -28,8 +28,8 @@ public class DeleteByProductNameValidatorTest {
         DeleteByProductNameRequest request = new DeleteByProductNameRequest(null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(1, errors.size());
-        assertEquals("Product Name", errors.get(0).getField());
-        assertEquals("Product Name must not be empty.", errors.get(0).getMessage());
+        assertEquals("Product name", errors.get(0).getField());
+        assertEquals("must not be empty", errors.get(0).getMessage());
     }
 
 }

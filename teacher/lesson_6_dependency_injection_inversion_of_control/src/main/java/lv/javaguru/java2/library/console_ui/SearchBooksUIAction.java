@@ -8,14 +8,13 @@ import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
+import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
+@DIComponent
 public class SearchBooksUIAction implements UIAction {
 
-	private SearchBooksService searchBooksService;
-
-	public SearchBooksUIAction(SearchBooksService searchBooksService) {
-		this.searchBooksService = searchBooksService;
-	}
+	@DIDependency private SearchBooksService searchBooksService;
 
 	@Override
 	public void execute() {

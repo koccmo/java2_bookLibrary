@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
+@DIComponent
 public class AddBookRequestValidator {
 
 	public List<CoreError> validate(AddBookRequest request) {

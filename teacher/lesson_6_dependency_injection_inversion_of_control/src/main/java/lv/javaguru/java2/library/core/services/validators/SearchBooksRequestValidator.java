@@ -8,7 +8,9 @@ import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
+@DIComponent
 public class SearchBooksRequestValidator {
 
 	public List<CoreError> validate(SearchBooksRequest request) {

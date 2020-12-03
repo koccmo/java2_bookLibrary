@@ -10,10 +10,12 @@ import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
 import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.GetAllBooksService;
+import lv.javaguru.java2.library.dependency_injection.DIApplicationContextBuilder;
 
 public class AcceptanceTest1 {
 
-	private ApplicationContext appContext = new ApplicationContext();
+	private ApplicationContext appContext =
+			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
 
 	@Test
 	public void shouldReturnCorrectBookList() {

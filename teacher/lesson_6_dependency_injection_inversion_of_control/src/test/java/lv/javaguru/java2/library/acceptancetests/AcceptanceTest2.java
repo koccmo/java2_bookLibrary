@@ -12,10 +12,12 @@ import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
+import lv.javaguru.java2.library.dependency_injection.DIApplicationContextBuilder;
 
 public class AcceptanceTest2 {
 
-	private ApplicationContext appContext = new ApplicationContext();
+	private ApplicationContext appContext =
+			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
 
 	@Test
 	public void searchBooks() {

@@ -19,7 +19,7 @@ class ProductList {
         menuNumberToActionMap.put(5, applicationContext.getBean(FindByIdUIAction.class));
         menuNumberToActionMap.put(6, applicationContext.getBean(FindProductsUIAction.class));
         menuNumberToActionMap.put(7, applicationContext.getBean(ChangeProductNameUIAction.class));
-        menuNumberToActionMap.put(8, applicationContext.getBean(PrintProductsToConsoleUIAction.class));
+        menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 

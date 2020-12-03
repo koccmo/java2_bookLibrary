@@ -8,10 +8,12 @@ import lv.javaguru.java2.library.console_ui.GetAllBooksUIAction;
 import lv.javaguru.java2.library.console_ui.RemoveBookUIAction;
 import lv.javaguru.java2.library.console_ui.SearchBooksUIAction;
 import lv.javaguru.java2.library.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.library.dependency_injection.DIApplicationContextBuilder;
 
 public class BookListApplication {
 
-	private static ApplicationContext applicationContext = new ApplicationContext();
+	private static ApplicationContext applicationContext =
+			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
 
 	public static void main(String[] args) {
 		while (true) {

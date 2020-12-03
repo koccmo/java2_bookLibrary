@@ -5,14 +5,13 @@ import java.util.Scanner;
 import lv.javaguru.java2.library.core.requests.RemoveBookRequest;
 import lv.javaguru.java2.library.core.responses.RemoveBookResponse;
 import lv.javaguru.java2.library.core.services.RemoveBookService;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
+import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
+@DIComponent
 public class RemoveBookUIAction implements UIAction {
 
-	private RemoveBookService removeBookService;
-
-	public RemoveBookUIAction(RemoveBookService removeBookService) {
-		this.removeBookService = removeBookService;
-	}
+	@DIDependency private RemoveBookService removeBookService;
 
 	@Override
 	public void execute() {

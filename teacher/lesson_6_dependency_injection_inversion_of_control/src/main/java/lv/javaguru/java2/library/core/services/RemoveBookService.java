@@ -9,17 +9,14 @@ import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.RemoveBookResponse;
 import lv.javaguru.java2.library.core.services.validators.RemoveBookRequestValidator;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
+import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
+@DIComponent
 public class RemoveBookService {
 
-	private Database database;
-	private RemoveBookRequestValidator validator;
-
-	public RemoveBookService(Database database,
-							 RemoveBookRequestValidator validator) {
-		this.database = database;
-		this.validator = validator;
-	}
+	@DIDependency private Database database;
+	@DIDependency private RemoveBookRequestValidator validator;
 
 	public RemoveBookResponse execute(RemoveBookRequest request) {
 		List<CoreError> errors = validator.validate(request);

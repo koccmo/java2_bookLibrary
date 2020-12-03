@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lv.javaguru.java2.library.Book;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
+@DIComponent
 public class InMemoryDatabaseImpl implements Database {
 
 	private Long nextId = 1L;
