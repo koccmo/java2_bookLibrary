@@ -25,13 +25,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteProductByProductServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private DeleteByProductValidator validator;
-    @InjectMocks
-    private DeleteProductByProductService service;
-
+    @Mock private Database database;
+    @Mock private DeleteByProductValidator validator;
+    @InjectMocks private DeleteProductByProductService service;
 
     @Test
     public void shouldDeleteProductWithoutErrors() {
@@ -47,7 +43,6 @@ public class DeleteProductByProductServiceTest {
         Mockito.verify(database).delete(argThat(new ProductMatcher("tv",
                 "good tv", new BigDecimal("399.99"))));
     }
-
 
     @Test
     public void shouldReturnErrorWhenProductIsNull() {
@@ -82,6 +77,5 @@ public class DeleteProductByProductServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Description");
         assertEquals(response.getErrors().get(0).getMessage(), "must not be empty");
     }
-
 
 }
