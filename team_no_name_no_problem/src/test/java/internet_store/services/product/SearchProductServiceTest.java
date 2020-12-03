@@ -1,5 +1,6 @@
 package internet_store.services.product;
 
+import internet_store.core.domain.Product;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
@@ -48,5 +49,23 @@ public class SearchProductServiceTest {
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "search");
+    }
+
+    @Test
+    public void databaseDoesNotContainsSuchProductTitle() {
+
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                ordering, paging);
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("database", "There is no such product title"));
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitleAndDescription(request1.getTitle(),
+                                     request1.getDescription())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "database");
     }
 }
