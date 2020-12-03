@@ -6,14 +6,13 @@ import lv.javaguru.java2.library.Book;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
 import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
+import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
+@DIComponent
 public class GetAllBooksService {
 
-	private Database database;
-
-	public GetAllBooksService(Database database) {
-		this.database = database;
-	}
+	@DIDependency private Database database;
 
 	public GetAllBooksResponse execute(GetAllBooksRequest request) {
 		List<Book> books = database.getAllBooks();

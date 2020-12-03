@@ -13,17 +13,14 @@ import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestValidator;
+import lv.javaguru.java2.library.dependency_injection.DIComponent;
+import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
+@DIComponent
 public class SearchBooksService {
 
-	private Database database;
-	private SearchBooksRequestValidator validator;
-
-	public SearchBooksService(Database database,
-							  SearchBooksRequestValidator validator) {
-		this.database = database;
-		this.validator = validator;
-	}
+	@DIDependency private Database database;
+	@DIDependency private SearchBooksRequestValidator validator;
 
 	public SearchBooksResponse execute(SearchBooksRequest request) {
 		List<CoreError> errors = validator.validate(request);

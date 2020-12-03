@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-public class ClassFinder {
+class ClassFinder {
 
 	public List<Class> findClassesInsidePackage(String packageName)
 			throws ClassNotFoundException, IOException {
