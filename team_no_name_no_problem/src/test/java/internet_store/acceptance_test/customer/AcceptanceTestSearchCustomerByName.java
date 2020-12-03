@@ -1,4 +1,4 @@
-package internet_store.acceptance_test;
+package internet_store.acceptance_test.customer;
 
 import internet_store.ApplicationContext;
 import internet_store.core.domain.Customer;
@@ -29,7 +29,7 @@ public class AcceptanceTestSearchCustomerByName {
         Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
                 "Ukraina", "privetpoka@tikto.lv");
         Ordering ordering = new Ordering("name", "ASC");
-        Paging paging = new Paging(1,1);
+        Paging paging = new Paging(1,3);
 
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
@@ -50,6 +50,7 @@ public class AcceptanceTestSearchCustomerByName {
 
         assertTrue(getAllCustomersResponse.getCustomers().size() == 3);
         assertTrue(searchCustomerResponse.getCustomers().get(0).equals(customer));
+        assertTrue(searchCustomerResponse1.getCustomers().get(0).equals(customer2));
     }
 
     private AddCustomerService addCustomerService(){
