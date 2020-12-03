@@ -6,7 +6,7 @@ public class DIApplicationContextBuilder {
 
 	private ClassFinder classFinder = new ClassFinder();
 	private DIComponentFilter componentFilter = new DIComponentFilter();
-	private DIComponentsCreator componentsCreator = new DIComponentsCreator();
+	private DIComponentCreator componentsCreator = new DIComponentCreator();
 	private DIDependencyResolver dependencyResolver = new DIDependencyResolver();
 
 	public ApplicationContext build(String packageName) {
