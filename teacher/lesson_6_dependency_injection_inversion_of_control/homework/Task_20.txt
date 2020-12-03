@@ -1,5 +1,5 @@
 Над всеми классами, которые должны входить в аппликационный контекст
-расставбте аннотацию @DIComponent следующим образом:
+расставьте аннотацию @DIComponent следующим образом:
 
 @DIComponent
 public class InMemoryDatabaseImpl implements Database
