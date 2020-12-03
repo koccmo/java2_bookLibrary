@@ -1,0 +1,11 @@
+Над всеми классами, которые должны входить в аппликационный контекст
+расставбте аннотацию @DIComponent следующим образом:
+
+@DIComponent
+public class InMemoryDatabaseImpl implements Database
+
+@DIComponent
+public class AddBookService
+
+и так далее.
+
