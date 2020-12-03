@@ -1,5 +1,6 @@
 package application_target_list.console_ui;
 
+import application_target_list.ApplicationContext;
 import application_target_list.core.services.SearchTargetByNameService;
 import application_target_list.core.validators.*;
 import application_target_list.console_ui.actions.*;
@@ -11,57 +12,36 @@ import java.util.Scanner;
 
 public class Menu {
 
-    Database targetsDatabase = new TargetListImpl();
-
-    AddTargetValidator addTargetValidator = new AddTargetValidator();
-    DeleteTargetValidator deleteTargetValidator = new DeleteTargetValidator();
-    ChangeTargetNameValidator changeTargetNameValidator = new ChangeTargetNameValidator();
-    ChangeTargetDescriptionValidator changeTargetDescriptionValidator = new ChangeTargetDescriptionValidator();
-    ChangeTargetDeadlineValidator changeTargetDeadlineValidator = new ChangeTargetDeadlineValidator();
-    SearchTargetByNameValidator searchTargetByNameValidator = new SearchTargetByNameValidator();
-    SearchTargetByDescriptionValidator searchTargetByDescriptionValidator = new SearchTargetByDescriptionValidator();
-
-
-    GetAllTargetsService getAllTargetsService = new GetAllTargetsService(targetsDatabase);
-    AddTargetService addTargetService = new AddTargetService(targetsDatabase, addTargetValidator);
-    DeleteTargetService deleteTargetService = new DeleteTargetService(targetsDatabase, deleteTargetValidator);
-    ChangeTargetNameService changeTargetNameService = new ChangeTargetNameService(targetsDatabase, changeTargetNameValidator);
-    ChangeTargetDescriptionService changeTargetDescriptionService = new ChangeTargetDescriptionService(targetsDatabase, changeTargetDescriptionValidator);
-    ChangeTargetDeadlineService changeTargetDeadlineService = new ChangeTargetDeadlineService(targetsDatabase, changeTargetDeadlineValidator);
-    SearchTargetByNameService searchTargetByNameService = new SearchTargetByNameService(targetsDatabase, searchTargetByNameValidator);
-    SearchTargetByDescriptionService searchTargetByDescriptionService = new SearchTargetByDescriptionService(targetsDatabase, searchTargetByDescriptionValidator);
-
-    UIAction menuUiAction = new MenuUIAction();
-    UIAction targetChangesMenuUIAction = new TargetChangesMenuUIAction();
-    UIAction changeTargetDeadlineUIAction = new ChangeTargetDeadlineUIAction(changeTargetDeadlineService);
-    UIAction changeTargetDescriptionUIAction = new ChangeTargetDescriptionUIAction(changeTargetDescriptionService);
-    UIAction changeTargetNameUIAction = new ChangeTargetNameUIAction(changeTargetNameService);
-    UIAction deleteUIAction = new DeleteUIAction(deleteTargetService);
-    UIAction addTargetUIAction = new AddTargetUIAction(addTargetService);
-    UIAction exitUIAction = new ExitUIAction();
-    UIAction getAllTargetsUIAction = new GetAllTargetsUIAction(getAllTargetsService);
-    UIAction searchTargetByNameUIAction = new SearchTargetByNameUIAction(searchTargetByNameService);
-    UIAction searchTargetByDescriptionUIAction = new SearchTargetByDescriptionUIAction(searchTargetByDescriptionService);
-    UIAction searchTargetMenuUIAction = new SearchTargetMenuUIAction();
-
-
-    Scanner src = new Scanner(System.in);
-
+    private static final ApplicationContext applicationContext = new ApplicationContext();
+    private final Scanner src = new Scanner(System.in);
 
     public void start(){
         while (true) {
-        menuUiAction.execute();
+        MenuUIAction menuUIAction = applicationContext.getBean(MenuUIAction.class);
+        menuUIAction.execute();
             printText();
             switch (getNumberFromUser()) {
-                case 1 -> getAllTargetsUIAction.execute();
-                case 2 -> addTargetUIAction.execute();
-                case 3 -> {
+                case 1 -> {
+                    GetAllTargetsUIAction getAllTargetsUIAction = applicationContext.getBean(GetAllTargetsUIAction.class);
                     getAllTargetsUIAction.execute();
+                }
+
+                case 2 -> {
+                    AddTargetUIAction addTargetUIAction = applicationContext.getBean(AddTargetUIAction.class);
+                    addTargetUIAction.execute();
+                }
+                case 3 -> {
+                    GetAllTargetsUIAction getAllTargetsUIAction = applicationContext.getBean(GetAllTargetsUIAction.class);
+                    getAllTargetsUIAction.execute();
+                    DeleteUIAction deleteUIAction = applicationContext.getBean(DeleteUIAction.class);
                     deleteUIAction.execute();
                 }
                 case 4 -> changeTargetParametersActions();
                 case 5 -> searchTargetActions();
-                case 0 -> exitUIAction.execute();
+                case 0 -> {
+                    ExitUIAction exitUIAction = applicationContext.getBean(ExitUIAction.class);
+                    exitUIAction.execute();
+                }
             }
         }
     }
@@ -69,11 +49,18 @@ public class Menu {
     private void searchTargetActions(){
         boolean backToMenu = false;
         while (!backToMenu){
+            SearchTargetMenuUIAction searchTargetMenuUIAction = applicationContext.getBean(SearchTargetMenuUIAction.class);
             searchTargetMenuUIAction.execute();
             printText();
             switch (getNumberFromUser()){
-                case 1 -> searchTargetByNameUIAction.execute();
-                case 2 -> searchTargetByDescriptionUIAction.execute();
+                case 1 -> {
+                    SearchTargetByNameUIAction searchTargetByNameUIAction = applicationContext.getBean(SearchTargetByNameUIAction.class);
+                    searchTargetByNameUIAction.execute();
+                }
+                case 2 -> {
+                    SearchTargetByDescriptionUIAction searchTargetByDescriptionUIAction = applicationContext.getBean(SearchTargetByDescriptionUIAction.class);
+                    searchTargetByDescriptionUIAction.execute();
+                }
                 case 0 -> backToMenu = true;
             }
         }
@@ -83,19 +70,26 @@ public class Menu {
     private void changeTargetParametersActions(){
         boolean backToMenu = false;
         while (!backToMenu){
+            TargetChangesMenuUIAction targetChangesMenuUIAction = applicationContext.getBean(TargetChangesMenuUIAction.class);
             targetChangesMenuUIAction.execute();
             printText();
             switch (getNumberFromUser()) {
                 case 1 -> {
+                    GetAllTargetsUIAction getAllTargetsUIAction = applicationContext.getBean(GetAllTargetsUIAction.class);
                     getAllTargetsUIAction.execute();
+                    ChangeTargetNameUIAction changeTargetNameUIAction = applicationContext.getBean(ChangeTargetNameUIAction.class);
                     changeTargetNameUIAction.execute();
                 }
                 case 2 -> {
+                    GetAllTargetsUIAction getAllTargetsUIAction = applicationContext.getBean(GetAllTargetsUIAction.class);
                     getAllTargetsUIAction.execute();
+                    ChangeTargetDescriptionUIAction changeTargetDescriptionUIAction = applicationContext.getBean(ChangeTargetDescriptionUIAction.class);
                     changeTargetDescriptionUIAction.execute();
                 }
                 case 3 -> {
+                    GetAllTargetsUIAction getAllTargetsUIAction = applicationContext.getBean(GetAllTargetsUIAction.class);
                     getAllTargetsUIAction.execute();
+                    ChangeTargetDeadlineUIAction changeTargetDeadlineUIAction = applicationContext.getBean(ChangeTargetDeadlineUIAction.class);
                     changeTargetDeadlineUIAction.execute();
                 }
                 case 0 -> backToMenu = true;
