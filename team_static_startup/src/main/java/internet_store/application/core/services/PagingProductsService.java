@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class PagingProductsService {
 
     public List<Product> page (List<Product> products, Paging paging) {
-        if (paging != null) {
+        if (paging != null && bothPageSizeAndNumberAreProvided(paging)){
             int numberOfProductsToSkip = paging.getPageSize() * (paging.getPageNumber() - 1);
             return products.stream()
                     .skip(numberOfProductsToSkip)
@@ -18,6 +18,10 @@ public class PagingProductsService {
         } else {
             return products;
         }
+    }
+
+    private boolean bothPageSizeAndNumberAreProvided (Paging paging) {
+        return ((paging.getPageSize() != null) && (paging.getPageNumber() != null));
     }
 
 }
