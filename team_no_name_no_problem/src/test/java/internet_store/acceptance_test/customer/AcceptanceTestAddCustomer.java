@@ -1,4 +1,4 @@
-package internet_store.acceptance_test;
+package internet_store.acceptance_test.customer;
 
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;

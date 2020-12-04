@@ -175,7 +175,7 @@ public class FindProductsRequestValidatorTest {
     }
 
     @Test
-    public void ShouldReturnErrorWhenPageNumberIsLessThanZero() {
+    public void shouldReturnErrorWhenPageNumberIsLessThanZero() {
         paging = new Paging(-3, 3);
         FindProductsRequest request = new FindProductsRequest("ProductName"
                 , "ProductDescription"

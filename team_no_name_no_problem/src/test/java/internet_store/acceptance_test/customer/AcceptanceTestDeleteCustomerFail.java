@@ -1,4 +1,4 @@
-package internet_store.acceptance_test;
+package internet_store.acceptance_test.customer;
 
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class AcceptanceTestDeleteCustomer {
+public class AcceptanceTestDeleteCustomerFail {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
@@ -28,13 +28,13 @@ public class AcceptanceTestDeleteCustomer {
         addCustomerService().execute(addCustomerRequest);
         addCustomerService().execute(addCustomerRequest1);
 
-        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(2L);
+        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(4L);
         deleteCustomerService().execute(deleteCustomerRequest);
 
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 1);
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
     }
 
     private DeleteCustomerService deleteCustomerService(){

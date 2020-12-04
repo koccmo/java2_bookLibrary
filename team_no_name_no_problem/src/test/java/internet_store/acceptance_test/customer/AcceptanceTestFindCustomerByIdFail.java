@@ -1,5 +1,6 @@
-package internet_store.acceptance_test;
+package internet_store.acceptance_test.customer;
 
+import internet_store.ApplicationContext;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
@@ -9,23 +10,24 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
-import internet_store.dependency_injection.ApplicationContext;
 import org.junit.Test;
+import org.mockito.internal.matchers.Find;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class AcceptanceTestFindCustomer {
+public class AcceptanceTestFindCustomerByIdFail {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
     @Test
     public void test(){
-        Customer customer = new Customer("name", "surname", "number", "address",
+        Customer customer = new Customer("Anton", "Saveljev", "number", "address",
                 "email");
-        Customer customer1 = new Customer("name1", "surname20","phone", "Matisa",
+        Customer customer1 = new Customer("Sasha", "Gogin","phone", "Matisa",
                 "tr3vis@Inbox.lv");
         Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
                 "Ukraina", "privetpoka@tikto.lv");
+
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
         AddCustomerRequest addCustomerRequest2 = new AddCustomerRequest(customer2);
@@ -33,17 +35,18 @@ public class AcceptanceTestFindCustomer {
         addCustomerService().execute(addCustomerRequest1);
         addCustomerService().execute(addCustomerRequest2);
 
-        FindCustomerByIdRequest findCustomerByIdRequest = new FindCustomerByIdRequest(1L);
-        FindCustomerByIdRequest findCustomerByIdRequest1 = new FindCustomerByIdRequest(2L);
-        FindCustomerByIdResponse findCustomerByIdResponse =findCustomerByIdService().execute(findCustomerByIdRequest);
+
+        FindCustomerByIdRequest findCustomerByIdRequest = new FindCustomerByIdRequest(4L);
+        FindCustomerByIdRequest findCustomerByIdRequest1 = new FindCustomerByIdRequest(8L);
+        FindCustomerByIdRequest findCustomerByIdRequest2 = new FindCustomerByIdRequest(10L);
+        FindCustomerByIdResponse findCustomerByIdResponse = findCustomerByIdService().execute(findCustomerByIdRequest);
         FindCustomerByIdResponse findCustomerByIdResponse1 = findCustomerByIdService().execute(findCustomerByIdRequest1);
+        FindCustomerByIdResponse findCustomerByIdResponse2 = findCustomerByIdService().execute(findCustomerByIdRequest2);
 
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
         assertTrue(getAllCustomersResponse.getCustomers().size() == 3);
-        assertTrue(findCustomerByIdResponse.getCustomer().get().equals(customer));
-        assertTrue(findCustomerByIdResponse1.getCustomer().get().equals(customer1));
     }
 
     private AddCustomerService addCustomerService(){
