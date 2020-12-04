@@ -11,12 +11,14 @@ import internet_store.core.services.product.SearchProductRequestValidator;
 import internet_store.core.services.product.SearchProductService;
 import internet_store.database.product.ProductDatabase;
 import org.junit.Test;
+import org.junit.runner.Request;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +70,26 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "database");
     }
+/*
+    @Test
+    public void databaseContainsSuchProductTitleAndDescription() {
 
+        Product mobilePhone = new Product("Mobile phone","Nokia",40);
+        List<Product> products = new ArrayList<>();
+        products.add(mobilePhone);
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                                                                       ordering, paging);
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitleAndDescription(request1.getTitle(),
+                                     request1.getDescription())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertTrue(response.getProducts().contains(mobilePhone));
+       // assertTrue(response.getProducts().size() == 1);
+        //assertFalse(response.getProducts().size() == 0);
+    }
+*/
     @Test
     public void databaseContainsSuchProductTitle() {
 
@@ -76,7 +97,7 @@ public class SearchProductServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(pen);
         SearchProductRequest request = new SearchProductRequest("Pen", null,
-                                                                                ordering, paging);
+                                                                      ordering, paging);
 
         Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.findAllByTitle(request.getTitle())).thenReturn(products);
