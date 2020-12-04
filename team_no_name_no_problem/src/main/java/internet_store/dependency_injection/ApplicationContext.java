@@ -1,4 +1,4 @@
-package internet_store;
+package internet_store.dependency_injection;
 
 import internet_store.core.services.customer.*;
 import internet_store.core.services.product.*;
@@ -14,7 +14,7 @@ public class ApplicationContext {
 
     private Map<Class, Object> beans = new HashMap<>();
 
-    public ApplicationContext(){
+    public ApplicationContext() {
 
         beans.put(ProductDatabase.class, new ProductDatabaseImpl());
 

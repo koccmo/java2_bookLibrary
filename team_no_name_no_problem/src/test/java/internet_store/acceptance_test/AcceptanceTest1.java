@@ -1,12 +1,12 @@
 package internet_store.acceptance_test;
 
-import internet_store.ApplicationContext;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.GetProductsRequest;
 import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.AddProductService;
 import internet_store.core.services.product.GetAllProductsService;
+import internet_store.dependency_injection.ApplicationContext;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
