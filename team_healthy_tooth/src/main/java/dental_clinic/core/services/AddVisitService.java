@@ -3,15 +3,19 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.validators.AddVisitValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.Visit;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddVisitService {
 
-    private final PatientDatabase patientDatabase;
-    private final AddVisitValidator addVisitValidator;
+    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private final AddVisitValidator addVisitValidator;
 
     public AddVisitService(PatientDatabase patientDatabase, AddVisitValidator addVisitValidator) {
         this.patientDatabase = patientDatabase;

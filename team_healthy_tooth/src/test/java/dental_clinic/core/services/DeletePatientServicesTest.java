@@ -6,6 +6,7 @@ import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.DeletePatientResponse;
 import dental_clinic.core.services.matchers.IdMatcher;
+import dental_clinic.core.services.validators.DeletePatientValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

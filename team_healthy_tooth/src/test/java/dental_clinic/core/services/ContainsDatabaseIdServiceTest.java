@@ -3,6 +3,7 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.validators.ContainsDatabaseIdValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

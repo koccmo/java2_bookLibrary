@@ -3,14 +3,19 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.DeletePatientResponse;
+import dental_clinic.core.services.validators.DeletePatientValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.PersonalData;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
+
 import java.util.List;
 
+@DIComponent
 public class DeletePatientService {
 
-    private final PatientDatabase patientDatabase;
-    private DeletePatientValidator deletePatientValidator;
+    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private DeletePatientValidator deletePatientValidator;
 
     public DeletePatientService(PatientDatabase patientDatabase, DeletePatientValidator deletePatientValidator) {
         this.patientDatabase = patientDatabase;

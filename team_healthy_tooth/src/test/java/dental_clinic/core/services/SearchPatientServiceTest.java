@@ -7,6 +7,7 @@ import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.SearchPatientResponse;
+import dental_clinic.core.services.validators.SearchPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

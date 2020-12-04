@@ -4,16 +4,19 @@ import dental_clinic.core.domain.Patient;
 import dental_clinic.core.requests.GetAllPatientsRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetAllPatientsResponse;
+import dental_clinic.core.services.validators.GetAllPatientsRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@DIComponent
 public class GetAllPatientsService {
 
-    private PatientDatabase patientDatabase;
-    private GetAllPatientsRequestValidator getAllPatientsRequestValidator;
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private GetAllPatientsRequestValidator getAllPatientsRequestValidator;
 
     public GetAllPatientsService(PatientDatabase patientDatabase, GetAllPatientsRequestValidator getAllPatientsRequestValidator) {
         this.patientDatabase = patientDatabase;
