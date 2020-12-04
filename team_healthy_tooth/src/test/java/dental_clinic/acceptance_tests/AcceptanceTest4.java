@@ -1,6 +1,6 @@
 package dental_clinic.acceptance_tests;
 
-import dental_clinic.ApplicationContext;
+import dental_clinic.dependency_injection.ApplicationContext;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.*;
 import dental_clinic.core.responses.GetAllPatientsResponse;

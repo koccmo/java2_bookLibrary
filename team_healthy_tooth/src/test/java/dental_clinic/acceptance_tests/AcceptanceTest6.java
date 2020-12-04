@@ -1,16 +1,13 @@
 package dental_clinic.acceptance_tests;
 
-import dental_clinic.ApplicationContext;
+import dental_clinic.dependency_injection.ApplicationContext;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.requests.ChangePersonalDataRequest;
-import dental_clinic.core.requests.GetAllPatientsRequest;
 import dental_clinic.core.requests.GetPatientCardRequest;
-import dental_clinic.core.responses.GetAllPatientsResponse;
 import dental_clinic.core.responses.GetPatientCardResponse;
 import dental_clinic.core.services.AddPatientService;
 import dental_clinic.core.services.ChangePersonalDataService;
-import dental_clinic.core.services.GetAllPatientsService;
 import dental_clinic.core.services.GetPatientCardService;
 import org.junit.Test;
 
