@@ -126,4 +126,23 @@ public class SearchProductServiceTest {
         assertFalse(response.getProducts().size() == 0);
     }
 
+    @Test
+    public void databaseDoesNotContainsSuchProductDescription() {
+
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                ordering, paging);
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("database", "There is no such product Description"));
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(
+                request1.getDescription())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "database");
+    }
+
+
 }
