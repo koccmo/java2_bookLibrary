@@ -83,6 +83,8 @@ public class SearchProductServiceTest {
 
         SearchProductResponse response = searchProductService.execute(request);
         assertTrue(response.getProducts().contains(pen));
+        assertTrue(response.getProducts().size() == 1);
+        assertFalse(response.getProducts().size() == 0);
     }
 
     @Test
@@ -91,14 +93,16 @@ public class SearchProductServiceTest {
         Product pen = new Product("Pen","Parker",35);
         List<Product> products = new ArrayList<>();
         products.add(pen);
-        SearchProductRequest request = new SearchProductRequest("Pen", null,
+        SearchProductRequest request = new SearchProductRequest(null, "Parker",
                 ordering, paging);
 
         Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.findAllByTitle(request.getTitle())).thenReturn(products);
+        Mockito.when(productDatabase.findAllByDescription(request.getDescription())).thenReturn(products);
 
         SearchProductResponse response = searchProductService.execute(request);
         assertTrue(response.getProducts().contains(pen));
+        assertTrue(response.getProducts().size() == 1);
+        assertFalse(response.getProducts().size() == 0);
     }
 
 }
