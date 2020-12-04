@@ -1,6 +1,5 @@
 package internet_store.acceptance_test.customer;
 
-import internet_store.ApplicationContext;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
@@ -12,6 +11,7 @@ import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.GetAllCustomersService;
 import internet_store.core.services.customer.SearchCustomerService;
+import internet_store.dependency_injection.ApplicationContext;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

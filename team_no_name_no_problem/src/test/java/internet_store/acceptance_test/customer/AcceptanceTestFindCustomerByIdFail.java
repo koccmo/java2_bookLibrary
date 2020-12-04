@@ -1,6 +1,5 @@
 package internet_store.acceptance_test.customer;
 
-import internet_store.ApplicationContext;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
@@ -10,6 +9,7 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
+import internet_store.dependency_injection.ApplicationContext;
 import org.junit.Test;
 import org.mockito.internal.matchers.Find;
 
