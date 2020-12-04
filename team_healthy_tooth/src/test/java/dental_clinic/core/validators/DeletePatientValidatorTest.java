@@ -2,7 +2,7 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.DeletePatientValidator;
+import dental_clinic.core.services.validators.DeletePatientValidator;
 import org.junit.Test;
 
 import java.util.List;

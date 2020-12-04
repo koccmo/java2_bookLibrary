@@ -2,7 +2,7 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.ContainsDatabaseIdValidator;
+import dental_clinic.core.services.validators.ContainsDatabaseIdValidator;
 import org.junit.Test;
 
 import java.util.List;

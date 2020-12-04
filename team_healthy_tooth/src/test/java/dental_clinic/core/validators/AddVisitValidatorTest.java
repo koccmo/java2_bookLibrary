@@ -4,7 +4,7 @@ import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.AddVisitValidator;
+import dental_clinic.core.services.validators.AddVisitValidator;
 import org.junit.Test;
 
 import java.util.ArrayList;

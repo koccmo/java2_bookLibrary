@@ -1,12 +1,14 @@
-package dental_clinic.core.services;
+package dental_clinic.core.services.validators;
 
 import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@DIComponent
 public class SearchPatientByPersonalCodeRequestValidator {
 
     public List<CoreError> validate (SearchPatientByPersonalCodeRequest request) {

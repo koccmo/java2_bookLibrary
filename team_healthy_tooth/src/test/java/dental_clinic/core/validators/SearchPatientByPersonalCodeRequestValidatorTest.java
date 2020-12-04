@@ -2,7 +2,7 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.SearchPatientByPersonalCodeRequestValidator;
+import dental_clinic.core.services.validators.SearchPatientByPersonalCodeRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.ChangePersonalDataRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.ChangePersonalDataValidator;
+import dental_clinic.core.services.validators.ChangePersonalDataValidator;
 import junit.framework.TestCase;
 import org.junit.Test;
 

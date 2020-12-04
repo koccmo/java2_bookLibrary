@@ -2,7 +2,7 @@ package dental_clinic.core.validators;
 
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.GetSpecificPatientHistoryRequestValidator;
+import dental_clinic.core.services.validators.GetSpecificPatientHistoryRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
