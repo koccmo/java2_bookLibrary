@@ -38,21 +38,21 @@ public class SearchProductServiceTest {
     @Test
     public void notValidSearch() {
 
-        SearchProductRequest request1 = new SearchProductRequest("", "",
+        SearchProductRequest request = new SearchProductRequest("", "",
                                                                     ordering, paging);
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("search", "Invalid search"));
 
-        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(errors);
+        Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(errors);
 
-        SearchProductResponse response = searchProductService.execute(request1);
+        SearchProductResponse response = searchProductService.execute(request);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "search");
     }
 
     @Test
-    public void databaseDoesNotContainsSuchProductTitle() {
+    public void databaseDoesNotContainsSuchProductTitleAndDescription() {
 
         SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
                 ordering, paging);
@@ -68,4 +68,21 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "database");
     }
+
+    @Test
+    public void databaseContainsSuchProductTitle() {
+
+        Product pen = new Product("Pen","Parker",35);
+        List<Product> products = new ArrayList<>();
+        products.add(pen);
+        SearchProductRequest request = new SearchProductRequest("Pen", null,
+                                                                                ordering, paging);
+
+        Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitle(request.getTitle())).thenReturn(products);
+
+        SearchProductResponse response = searchProductService.execute(request);
+        assertTrue(response.getProducts().contains(pen));
+    }
+
 }
