@@ -1,4 +1,4 @@
-package dental_clinic;
+package dental_clinic.dependency_injection;
 
 import dental_clinic.core.services.*;
 import dental_clinic.database.PatientDatabase;

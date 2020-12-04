@@ -1,6 +1,6 @@
 package dental_clinic.console_ui;
 
-import dental_clinic.ApplicationContext;
+import dental_clinic.dependency_injection.ApplicationContext;
 import dental_clinic.core.services.*;
 
 import java.util.HashMap;
