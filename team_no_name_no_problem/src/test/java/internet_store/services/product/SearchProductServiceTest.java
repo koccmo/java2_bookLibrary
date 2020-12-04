@@ -144,5 +144,23 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "database");
     }
 
+    @Test
+    public void databaseDoesNotContainsSuchProductTitle() {
+
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                ordering, paging);
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("database", "There is no such product Title"));
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitle(
+                request1.getTitle())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "database");
+    }
+
 
 }
