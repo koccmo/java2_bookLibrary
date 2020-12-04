@@ -1,6 +1,6 @@
 package application_target_list.core.acceptancetests;
 
-import application_target_list.ApplicationContext;
+import application_target_list.dependency_injection.ApplicationContext;
 import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.requests.ChangeTargetNameRequest;
 import application_target_list.core.requests.GetAllTargetsRequest;
@@ -9,6 +9,7 @@ import application_target_list.core.responses.GetAllTargetsResponse;
 import application_target_list.core.services.AddTargetService;
 import application_target_list.core.services.ChangeTargetNameService;
 import application_target_list.core.services.GetAllTargetsService;
+import application_target_list.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +17,8 @@ import static org.junit.Assert.assertNull;
 
 public class ChangeTargetNameAcceptanceTests {
 
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private static final ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("application_target_list");
 
     @Test
     public void shouldChangeTargetName() {

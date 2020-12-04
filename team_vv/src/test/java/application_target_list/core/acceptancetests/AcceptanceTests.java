@@ -1,12 +1,13 @@
 package application_target_list.core.acceptancetests;
 
-import application_target_list.ApplicationContext;
+import application_target_list.dependency_injection.ApplicationContext;
 import application_target_list.core.requests.*;
 import application_target_list.core.responses.ChangeTargetDeadlineResponse;
 import application_target_list.core.responses.ChangeTargetDescriptionResponse;
 import application_target_list.core.responses.ChangeTargetNameResponse;
 import application_target_list.core.responses.SearchTargetByNameResponse;
 import application_target_list.core.services.*;
+import application_target_list.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -16,7 +17,10 @@ import static org.junit.Assert.assertNull;
 
 public class AcceptanceTests {
 
-    private final ApplicationContext applicationContext = new ApplicationContext();
+//    private final ApplicationContext applicationContext = new ApplicationContext();
+
+    private static final ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("application_target_list");
 
     @Test
     public void test() {

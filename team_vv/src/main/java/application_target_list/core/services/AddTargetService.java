@@ -6,18 +6,16 @@ import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.responses.AddTargetResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.validators.AddTargetValidator;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddTargetService {
 
-    private Database database;
-    private AddTargetValidator validator;
-
-    public AddTargetService(Database database, AddTargetValidator validator){
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private AddTargetValidator validator;
 
     public AddTargetResponse execute(AddTargetRequest request){
         List<CoreError> errors = validator.validate(request);

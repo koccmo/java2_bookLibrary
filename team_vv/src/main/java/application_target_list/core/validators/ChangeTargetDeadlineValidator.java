@@ -3,10 +3,12 @@ package application_target_list.core.validators;
 import application_target_list.core.database.Database;
 import application_target_list.core.requests.ChangeTargetDeadlineRequest;
 import application_target_list.core.responses.CoreError;
+import application_target_list.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class ChangeTargetDeadlineValidator {
 
     public List<CoreError> validate(ChangeTargetDeadlineRequest request, Database database) {

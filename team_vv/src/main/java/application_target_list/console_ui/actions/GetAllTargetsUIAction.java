@@ -5,14 +5,13 @@ import application_target_list.console_ui.UIAction;
 import application_target_list.core.requests.GetAllTargetsRequest;
 import application_target_list.core.responses.GetAllTargetsResponse;
 import application_target_list.core.services.GetAllTargetsService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
+@DIComponent
 public class GetAllTargetsUIAction implements UIAction {
 
-    private final GetAllTargetsService getAllTargetsService;
-
-    public GetAllTargetsUIAction(GetAllTargetsService getAllTargetsService) {
-        this.getAllTargetsService = getAllTargetsService;
-    }
+    @DIDependency private GetAllTargetsService getAllTargetsService;
 
     @Override
     public void execute() {

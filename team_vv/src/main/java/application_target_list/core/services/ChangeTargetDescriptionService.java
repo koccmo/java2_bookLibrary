@@ -5,17 +5,16 @@ import application_target_list.core.requests.ChangeTargetDescriptionRequest;
 import application_target_list.core.responses.ChangeTargetDescriptionResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.validators.ChangeTargetDescriptionValidator;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class ChangeTargetDescriptionService {
-    private Database database;
-    private ChangeTargetDescriptionValidator validator;
 
-    public ChangeTargetDescriptionService(Database database, ChangeTargetDescriptionValidator validator){
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private ChangeTargetDescriptionValidator validator;
 
     public ChangeTargetDescriptionResponse execute(ChangeTargetDescriptionRequest request){
         List<CoreError> errors = validator.validate(request, database);

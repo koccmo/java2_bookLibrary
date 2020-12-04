@@ -5,18 +5,18 @@ import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.responses.AddTargetResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.services.AddTargetService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddTargetUIAction implements UIAction {
 
-    private final AddTargetService addTargetService;
-    private final Scanner scr = new Scanner(System.in);
+   @DIDependency private AddTargetService addTargetService;
 
-    public  AddTargetUIAction(AddTargetService addTargetService) {
-        this.addTargetService = addTargetService;
-    }
+   private final Scanner scr = new Scanner(System.in);
 
     @Override
     public void execute() {
