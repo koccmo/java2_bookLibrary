@@ -5,17 +5,16 @@ import application_target_list.core.requests.ChangeTargetNameRequest;
 import application_target_list.core.responses.ChangeTargetNameResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.services.ChangeTargetNameService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
+
 import java.util.Scanner;
 
+@DIComponent
 public class ChangeTargetNameUIAction implements UIAction {
 
-    private final ChangeTargetNameService changeTargetNameService;
+    @DIDependency private ChangeTargetNameService changeTargetNameService;
     private final Scanner scr = new Scanner(System.in);
-
-
-    public ChangeTargetNameUIAction(ChangeTargetNameService changeTargetNameService){
-        this.changeTargetNameService = changeTargetNameService;
-    }
 
     @Override
     public void execute() {

@@ -1,12 +1,7 @@
 package application_target_list.console_ui;
 
-import application_target_list.ApplicationContext;
-import application_target_list.core.services.SearchTargetByNameService;
-import application_target_list.core.validators.*;
+import application_target_list.dependency_injection.ApplicationContext;
 import application_target_list.console_ui.actions.*;
-import application_target_list.core.database.Database;
-import application_target_list.core.database.TargetListImpl;
-import application_target_list.core.services.*;
 
 import java.util.Scanner;
 

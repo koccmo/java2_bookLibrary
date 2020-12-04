@@ -1,9 +1,12 @@
 package application_target_list.core.database;
 
 
+import application_target_list.dependency_injection.DIComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class TargetListImpl implements Database {
 
     List<Target> targetsList = new ArrayList<>();

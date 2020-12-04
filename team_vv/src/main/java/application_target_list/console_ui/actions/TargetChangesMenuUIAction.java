@@ -1,7 +1,9 @@
 package application_target_list.console_ui.actions;
 
 import application_target_list.console_ui.UIAction;
+import application_target_list.dependency_injection.DIComponent;
 
+@DIComponent
 public class TargetChangesMenuUIAction implements UIAction {
 
     @Override

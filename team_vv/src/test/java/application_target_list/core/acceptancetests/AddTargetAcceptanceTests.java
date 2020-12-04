@@ -3,17 +3,19 @@ package application_target_list.core.acceptancetests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import application_target_list.ApplicationContext;
+import application_target_list.dependency_injection.ApplicationContext;
 import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.requests.GetAllTargetsRequest;
 import application_target_list.core.responses.GetAllTargetsResponse;
 import application_target_list.core.services.AddTargetService;
 import application_target_list.core.services.GetAllTargetsService;
+import application_target_list.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 public class AddTargetAcceptanceTests {
 
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private static final ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("application_target_list");
 
     @Test
     public void shouldAddTargetsToList() {

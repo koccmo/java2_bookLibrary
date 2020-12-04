@@ -1,6 +1,6 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.ApplicationContext;
+import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
