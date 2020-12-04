@@ -85,4 +85,20 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(pen));
     }
 
+    @Test
+    public void databaseContainsSuchProductDescription() {
+
+        Product pen = new Product("Pen","Parker",35);
+        List<Product> products = new ArrayList<>();
+        products.add(pen);
+        SearchProductRequest request = new SearchProductRequest("Pen", null,
+                ordering, paging);
+
+        Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitle(request.getTitle())).thenReturn(products);
+
+        SearchProductResponse response = searchProductService.execute(request);
+        assertTrue(response.getProducts().contains(pen));
+    }
+
 }
