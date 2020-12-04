@@ -6,17 +6,21 @@ import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.SearchPatientResponse;
+import dental_clinic.core.services.validators.SearchPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchPatientService {
 
-    private final PatientDatabase patientDatabase;
-    private final SearchPatientRequestValidator searchPatientRequestValidator;
+    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private final SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientService(PatientDatabase patientDatabase, SearchPatientRequestValidator searchPatientRequestValidator) {
         this.patientDatabase = patientDatabase;

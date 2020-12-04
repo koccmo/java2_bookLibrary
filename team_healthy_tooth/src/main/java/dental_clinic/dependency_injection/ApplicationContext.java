@@ -1,6 +1,7 @@
 package dental_clinic.dependency_injection;
 
 import dental_clinic.core.services.*;
+import dental_clinic.core.services.validators.*;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.database.PatientDatabaseImpl;
 
@@ -72,4 +73,7 @@ public class ApplicationContext {
         return (T) beans.get(c);
     }
 
+    public Map<Class, Object> getBeans() {
+        return beans;
+    }
 }

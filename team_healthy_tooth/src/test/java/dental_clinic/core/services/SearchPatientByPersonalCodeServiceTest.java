@@ -5,6 +5,7 @@ import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
+import dental_clinic.core.services.validators.SearchPatientByPersonalCodeRequestValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

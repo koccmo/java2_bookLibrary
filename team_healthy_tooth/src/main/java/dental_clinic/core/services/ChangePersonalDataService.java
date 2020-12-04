@@ -3,15 +3,18 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.ChangePersonalDataRequest;
 import dental_clinic.core.responses.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.validators.ChangePersonalDataValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class ChangePersonalDataService {
 
-    private PatientDatabase patientDatabase;
-    private ChangePersonalDataValidator validator;
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private ChangePersonalDataValidator validator;
 
     public ChangePersonalDataService(PatientDatabase patientDatabase,
                                      ChangePersonalDataValidator validator) {

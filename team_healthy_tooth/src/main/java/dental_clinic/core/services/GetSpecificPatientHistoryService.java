@@ -3,15 +3,19 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
+import dental_clinic.core.services.validators.GetSpecificPatientHistoryRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class GetSpecificPatientHistoryService {
 
-    private final PatientDatabase patientDatabase;
-    private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
+    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
 
     public GetSpecificPatientHistoryService(PatientDatabase patientDatabase, GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator) {
         this.patientDatabase = patientDatabase;
