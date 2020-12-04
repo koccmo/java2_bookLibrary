@@ -1,6 +1,8 @@
 package internet_store.application;
 
 import internet_store.application.console_ui.*;
+import internet_store.application.dependency_injection.ApplicationContext;
+
 import java.util.*;
 
 class ProductList {
