@@ -36,8 +36,6 @@ public class AcceptanceTestDeleteProduct {
         GetProductsResponse getProductsResponse = getAllProductsService().execute(getProductsRequest);
 
         assertEquals(getProductsResponse.getProducts().size(),1);
-
-
     }
 
     private AddProductService addProductService() {

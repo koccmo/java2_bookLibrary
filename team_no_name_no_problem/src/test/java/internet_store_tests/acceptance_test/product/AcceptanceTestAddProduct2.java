@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class AcceptanceAddProduct2 {
+public class AcceptanceTestAddProduct2 {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
