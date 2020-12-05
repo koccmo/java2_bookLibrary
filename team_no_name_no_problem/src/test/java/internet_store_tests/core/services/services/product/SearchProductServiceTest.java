@@ -31,7 +31,7 @@ public class SearchProductServiceTest {
     @InjectMocks
     SearchProductService searchProductService;
 
-    private Ordering ordering = new Ordering("title", "Ascending");
+    private Ordering ordering = new Ordering("title", "ASC");
     private Paging paging = new Paging(1, 2);
 
     @Test
@@ -40,7 +40,7 @@ public class SearchProductServiceTest {
         SearchProductRequest request = new SearchProductRequest("", "",
                                                                     ordering, paging);
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("search", "Invalid search"));
+        errors.add(new CoreError("search", "Not valid input for search"));
 
         Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(errors);
 
@@ -56,7 +56,9 @@ public class SearchProductServiceTest {
         SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
                 ordering, paging);
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("database", "There is no such product title"));
+        CoreError expectedError =
+                new CoreError("database", "Database doesn't contain product with title: Mobile phone and description: Nokia");
+        errors.add(expectedError);
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.findAllByTitleAndDescription(request1.getTitle(),
@@ -65,7 +67,7 @@ public class SearchProductServiceTest {
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "database");
+        assertTrue(response.getErrors().contains(expectedError));
     }
 
     @Test
@@ -79,12 +81,11 @@ public class SearchProductServiceTest {
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.findAllByTitleAndDescription(request1.getTitle(),
-                                     request1.getDescription())).thenReturn(new ArrayList<>());
+                                     request1.getDescription())).thenReturn(products);
 
         SearchProductResponse response = searchProductService.execute(request1);
         assertTrue(response.getProducts().contains(mobilePhone));
-       // assertTrue(response.getProducts().size() == 1);
-        //assertFalse(response.getProducts().size() == 0);
+        assertTrue(response.getProducts().size() == 1);
     }
 
     @Test
@@ -102,7 +103,6 @@ public class SearchProductServiceTest {
         SearchProductResponse response = searchProductService.execute(request);
         assertTrue(response.getProducts().contains(pen));
         assertTrue(response.getProducts().size() == 1);
-        assertFalse(response.getProducts().size() == 0);
     }
 
     @Test
@@ -120,39 +120,41 @@ public class SearchProductServiceTest {
         SearchProductResponse response = searchProductService.execute(request);
         assertTrue(response.getProducts().contains(pen));
         assertTrue(response.getProducts().size() == 1);
-        assertFalse(response.getProducts().size() == 0);
     }
 
     @Test
     public void databaseDoesNotContainsSuchProductDescription() {
 
-        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+        SearchProductRequest request1 = new SearchProductRequest("", "Nokia",
                 ordering, paging);
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("database", "There is no such product Description"));
+        CoreError expectedError = new CoreError("database", "Database doesn't contain products wits description: Nokia");
+        errors.add(expectedError);
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(request1.getDescription())).thenReturn(new ArrayList<>());
 
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "database");
+        assertTrue(response.getErrors().contains(expectedError));
     }
 
     @Test
     public void databaseDoesNotContainsSuchProductTitle() {
 
-        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "",
                 ordering, paging);
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("database", "There is no such product Title"));
+        CoreError expectedError = new CoreError("database", "Database doesn't contain products wits title: Mobile phone");
+        errors.add(expectedError);
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
 
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "database");
+        assertTrue(response.getErrors().contains(expectedError));
     }
 
 
