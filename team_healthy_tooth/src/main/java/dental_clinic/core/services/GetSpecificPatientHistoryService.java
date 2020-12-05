@@ -14,13 +14,8 @@ import java.util.Optional;
 @DIComponent
 public class GetSpecificPatientHistoryService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private PatientDatabase patientDatabase;
     @DIDependency private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
-
-    public GetSpecificPatientHistoryService(PatientDatabase patientDatabase, GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.getSpecificPatientHistoryRequestValidator = getSpecificPatientHistoryRequestValidator;
-    }
 
     public GetSpecificPatientHistoryResponse execute(GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest){
 

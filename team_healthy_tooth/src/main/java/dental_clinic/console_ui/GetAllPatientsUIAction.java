@@ -3,14 +3,13 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetAllPatientsRequest;
 import dental_clinic.core.responses.GetAllPatientsResponse;
 import dental_clinic.core.services.GetAllPatientsService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
-class GetAllPatientsUIAction implements UIAction {
+@DIComponent
+public class GetAllPatientsUIAction implements UIAction {
 
-    private GetAllPatientsService getAllPatientsService;
-
-    public GetAllPatientsUIAction(GetAllPatientsService getAllPatientsService) {
-        this.getAllPatientsService = getAllPatientsService;
-    }
+    @DIDependency private GetAllPatientsService getAllPatientsService;
 
     public void execute(){
 

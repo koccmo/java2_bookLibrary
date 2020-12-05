@@ -3,16 +3,15 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.DeletePatientResponse;
 import dental_clinic.core.services.DeletePatientService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
-class DeletePatientUIAction implements UIAction {
+@DIComponent
+public class DeletePatientUIAction implements UIAction {
 
-    private DeletePatientService deletePatientService;
-
-    public DeletePatientUIAction(DeletePatientService deletePatientService) {
-        this.deletePatientService = deletePatientService;
-    }
+    @DIDependency private DeletePatientService deletePatientService;
 
     public void execute(){
 
