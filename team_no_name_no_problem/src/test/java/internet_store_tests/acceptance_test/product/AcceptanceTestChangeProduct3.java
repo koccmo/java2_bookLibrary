@@ -27,14 +27,15 @@ public class AcceptanceTestChangeProduct3 {
         AddProductRequest addMobilePhoneRequest = new AddProductRequest(mobilePhone);
         addProductService().execute(addMobilePhoneRequest);
 
-        ChangeProductRequest changeProductRequest = new ChangeProductRequest(1L,"Mobile phone",
-                "Nokia",20);
+        ChangeProductRequest changeProductRequest = new ChangeProductRequest(1L,"",
+                "",20);
         ChangeProductResponse changeProductResponse = changeProductService().execute(changeProductRequest);
 
         GetProductsRequest getProductsRequest = new GetProductsRequest();
         GetProductsResponse getProductsResponse = getAllProductsService().execute(getProductsRequest);
 
         assertEquals(getProductsResponse.getProducts().size(), 1);
+        assertEquals(getProductsResponse.getProducts().get(0).getPrice() == 20, true);
         assertTrue(!changeProductResponse.hasErrors());
     }
 
