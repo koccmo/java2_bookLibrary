@@ -2,6 +2,7 @@ package internet_store.dependency_injection;
 
 import internet_store.core.services.customer.*;
 import internet_store.core.services.product.*;
+import internet_store.core.services.product.validators.*;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.database.customer.CustomerDatabaseImpl;
 import internet_store.database.product.ProductDatabase;

@@ -6,6 +6,7 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.SearchProductResponse;
+import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 
 import java.util.ArrayList;
