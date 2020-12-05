@@ -59,4 +59,16 @@ public class ApplicationContext {
         return (T) beans.get(c);
     }
 
+    public void addBean(Class beanClass, Object beanInstance) {
+        beans.put(beanClass, beanInstance);
+        Class[] instanceInterfaces = beanClass.getInterfaces();
+        for (int i = 0; i < instanceInterfaces.length; i++) {
+            Class instanceInterface = instanceInterfaces[i];
+            Object instance = getBean(instanceInterface);
+            if (instance == null) {
+                beans.put(instanceInterface, beanInstance);
+            }
+        }
+    }
+
 }
