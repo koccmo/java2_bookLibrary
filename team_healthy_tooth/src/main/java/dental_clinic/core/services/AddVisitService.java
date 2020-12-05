@@ -14,13 +14,8 @@ import java.util.List;
 @DIComponent
 public class AddVisitService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
-    @DIDependency private final AddVisitValidator addVisitValidator;
-
-    public AddVisitService(PatientDatabase patientDatabase, AddVisitValidator addVisitValidator) {
-        this.patientDatabase = patientDatabase;
-        this.addVisitValidator = addVisitValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private AddVisitValidator addVisitValidator;
 
     public AddVisitResponse execute(AddVisitRequest addVisitRequest){
 

@@ -15,13 +15,7 @@ import java.util.List;
 public class AddPatientService {
 
     @DIDependency private PatientDatabase patientDatabase;
-
     @DIDependency private AddPatientRequestValidator validator;
-
-    public AddPatientService(PatientDatabase patientDatabase, AddPatientRequestValidator addPatientRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.validator = addPatientRequestValidator;
-    }
 
     public AddPatientResponse execute (AddPatientRequest addPatientRequest){
         List<CoreError> errors = validator.validate(addPatientRequest);

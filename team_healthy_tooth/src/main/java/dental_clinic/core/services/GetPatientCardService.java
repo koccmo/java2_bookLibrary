@@ -15,13 +15,8 @@ import java.util.*;
 @DIComponent
 public class GetPatientCardService {
     
-    @DIDependency private final PatientDatabase patientDatabase;
-    @DIDependency private final GetPatientCardRequestValidator getPatientCardRequestValidator;
-
-    public GetPatientCardService(PatientDatabase patientDatabase, GetPatientCardRequestValidator getPatientCardRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.getPatientCardRequestValidator = getPatientCardRequestValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private GetPatientCardRequestValidator getPatientCardRequestValidator;
     
     public GetPatientCardResponse execute (GetPatientCardRequest getPatientCardRequest){
         List<CoreError> errors = getPatientCardRequestValidator.validate(getPatientCardRequest);

@@ -15,13 +15,8 @@ import java.util.List;
 @DIComponent
 public class ContainsDatabaseIdService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private PatientDatabase patientDatabase;
     @DIDependency private ContainsDatabaseIdValidator containsDatabaseIdValidator;
-
-    public ContainsDatabaseIdService(PatientDatabase patientDatabase, ContainsDatabaseIdValidator containsDatabaseIdValidator) {
-        this.patientDatabase = patientDatabase;
-        this.containsDatabaseIdValidator = containsDatabaseIdValidator;
-    }
 
     public ContainsDatabaseIdResponse execute(ContainsDatabaseIdRequest containsDatabaseIdRequest){
 

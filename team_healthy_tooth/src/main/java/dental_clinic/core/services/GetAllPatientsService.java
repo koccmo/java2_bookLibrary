@@ -18,11 +18,6 @@ public class GetAllPatientsService {
     @DIDependency private PatientDatabase patientDatabase;
     @DIDependency private GetAllPatientsRequestValidator getAllPatientsRequestValidator;
 
-    public GetAllPatientsService(PatientDatabase patientDatabase, GetAllPatientsRequestValidator getAllPatientsRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.getAllPatientsRequestValidator = getAllPatientsRequestValidator;
-    }
-
     public GetAllPatientsResponse execute(GetAllPatientsRequest getAllPatientsRequest){
         List <CoreError> errors = getAllPatientsRequestValidator.validate(getAllPatientsRequest);
 

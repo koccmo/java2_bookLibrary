@@ -19,13 +19,8 @@ import java.util.stream.Collectors;
 @DIComponent
 public class SearchPatientService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
-    @DIDependency private final SearchPatientRequestValidator searchPatientRequestValidator;
-
-    public SearchPatientService(PatientDatabase patientDatabase, SearchPatientRequestValidator searchPatientRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.searchPatientRequestValidator = searchPatientRequestValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);

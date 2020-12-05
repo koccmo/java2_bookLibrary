@@ -14,13 +14,8 @@ import java.util.List;
 @DIComponent
 public class DeletePatientService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
+    @DIDependency private PatientDatabase patientDatabase;
     @DIDependency private DeletePatientValidator deletePatientValidator;
-
-    public DeletePatientService(PatientDatabase patientDatabase, DeletePatientValidator deletePatientValidator) {
-        this.patientDatabase = patientDatabase;
-        this.deletePatientValidator = deletePatientValidator;
-    }
 
     public DeletePatientResponse execute(DeletePatientRequest deletePatientRequest){
 
