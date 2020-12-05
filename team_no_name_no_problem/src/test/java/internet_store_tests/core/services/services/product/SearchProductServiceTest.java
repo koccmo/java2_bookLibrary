@@ -156,6 +156,102 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertTrue(response.getErrors().contains(expectedError));
     }
+/*
+    @Test
+    public void ascendingOrdering() {
 
+        List<Product> products = new ArrayList<>();
 
+        Product mobilePhone1 = new Product("Mobile phone", "SonyEricson",50);
+        products.add(mobilePhone1);
+
+        Product mobilePhone2 = new Product("Mobile phone","Sony",400);
+        products.add(mobilePhone2);
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("Mobile phone",
+                null, new Ordering("description","ASC"),paging);
+
+        Mockito.when(searchProductRequestValidator.validate(searchProductRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(searchProductRequest.getDescription())).thenReturn(products);
+
+        SearchProductResponse response  = searchProductService.execute(searchProductRequest);
+
+        assertTrue(!response.hasErrors());
+        assertEquals(response.getProducts().get(0).getDescription(),"Sony");
+        assertEquals(response.getProducts().get(1).getDescription(),"SonyEricson");
+    }
+
+    @Test
+    public void descendingOrdering() {
+
+        List<Product> products = new ArrayList<>();
+
+        Product mobilePhone1 = new Product("Mobile phone", "SonyEricson",50);
+        products.add(mobilePhone1);
+
+        Product mobilePhone2 = new Product("Mobile phone","Sony",400);
+        products.add(mobilePhone2);
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("Mobile phone",
+                null, new Ordering("description","DSC"),paging);
+
+        Mockito.when(searchProductRequestValidator.validate(searchProductRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(searchProductRequest.getDescription())).thenReturn(products);
+
+        SearchProductResponse response  = searchProductService.execute(searchProductRequest);
+
+        assertTrue(!response.hasErrors());
+        assertEquals(response.getProducts().get(0).getDescription(),"SonyEricson");
+        assertEquals(response.getProducts().get(1).getDescription(),"Sony");
+    }
+
+    @Test
+    public void pagingSecondPage() {
+
+        List<Product> products = new ArrayList<>();
+
+        Product mobilePhone1 = new Product("Mobile phone", "SonyEricson",50);
+        products.add(mobilePhone1);
+
+        Product mobilePhone2 = new Product("Mobile phone","Sony",400);
+        products.add(mobilePhone2);
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("Mobile phone",
+            null, new Ordering("description","ASC"), new Paging(2,1));
+
+        Mockito.when(searchProductRequestValidator.validate(searchProductRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(searchProductRequest.getDescription())).thenReturn(products);
+
+        SearchProductResponse response  = searchProductService.execute(searchProductRequest);
+
+        assertTrue(!response.hasErrors());
+        assertEquals(response.getProducts().size(),1);
+
+    }
+
+    @Test
+    public void pagingFirstPage() {
+
+        List<Product> products = new ArrayList<>();
+
+        Product mobilePhone1 = new Product("Mobile phone", "SonyEricson",50);
+        products.add(mobilePhone1);
+
+        Product mobilePhone2 = new Product("Mobile phone","Sony",400);
+        products.add(mobilePhone2);
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("Mobile phone",
+                null, new Ordering("description","ASC"),
+                          new Paging(1,2));
+
+        Mockito.when(searchProductRequestValidator.validate(searchProductRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByDescription(searchProductRequest.getDescription())).thenReturn(products);
+
+        SearchProductResponse response  = searchProductService.execute(searchProductRequest);
+
+        assertTrue(!response.hasErrors());
+        assertEquals(response.getProducts().size(),2);
+
+    }
+*/
 }
