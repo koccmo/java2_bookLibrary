@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AcceptanceTestDeleteProduct {
+public class AcceptanceTestDeleteProduct2 {
 
     ApplicationContext applicationContext = new ApplicationContext();
 
@@ -50,5 +50,3 @@ public class AcceptanceTestDeleteProduct {
         return applicationContext.getBean(DeleteByIdService.class);
     }
 }
-
-
