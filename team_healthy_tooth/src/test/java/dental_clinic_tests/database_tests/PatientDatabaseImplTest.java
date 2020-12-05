@@ -1,9 +1,11 @@
-package dental_clinic.database;
+package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
+import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.PatientDatabaseImpl;
 import org.junit.Before;
 import org.junit.Test;
 
