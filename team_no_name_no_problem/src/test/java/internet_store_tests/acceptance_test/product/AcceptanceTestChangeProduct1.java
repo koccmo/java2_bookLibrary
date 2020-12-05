@@ -28,7 +28,7 @@ public class AcceptanceTestChangeProduct1 {
         addProductService().execute(addMobilePhoneRequest);
 
         ChangeProductRequest changeProductRequest = new ChangeProductRequest(1L,"Cell phone",
-                                                                    "Nokia",45);
+                                                                    "",null);
         ChangeProductResponse changeProductResponse = changeProductService().execute(changeProductRequest);
 
         GetProductsRequest getProductsRequest = new GetProductsRequest();
@@ -36,6 +36,7 @@ public class AcceptanceTestChangeProduct1 {
 
         assertEquals(getProductsResponse.getProducts().size(), 1);
         assertTrue(!changeProductResponse.hasErrors());
+        assertTrue(getProductsResponse.getProducts().get(0).getTitle().equals("Cell phone"));
     }
 
     private AddProductService addProductService() {

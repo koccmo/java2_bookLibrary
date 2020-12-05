@@ -1,5 +1,5 @@
 package internet_store_tests.acceptance_test.product;
-/*
+
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.FindByIdRequest;
@@ -37,7 +37,7 @@ public class AcceptanceTestFindById {
         GetProductsRequest getProductsRequest = new GetProductsRequest();
         GetProductsResponse getProductsResponse = getAllProductsService().execute(getProductsRequest);
 
-        assertEquals(getProductsResponse.getProducts().size(), 1);
+        assertEquals(getProductsResponse.getProducts().size(), 2);
         assertTrue(findByIdResponse.getProduct().equals(mobilePhone));
     }
 
@@ -54,4 +54,3 @@ public class AcceptanceTestFindById {
     }
 }
 
- */
