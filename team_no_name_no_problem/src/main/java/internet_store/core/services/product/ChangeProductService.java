@@ -4,6 +4,7 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.ChangeProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.ChangeProductResponse;
+import internet_store.core.services.product.validators.ChangeProductValidator;
 import internet_store.database.product.ProductDatabase;
 
 import java.util.List;
