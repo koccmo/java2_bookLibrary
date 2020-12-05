@@ -22,60 +22,83 @@ public class LibraryApplication {
 
     public static void main(String[] args) throws ParseException {
 
-        Database database = new DatabaseInMemory();
-        DataBaseFiller DBFiller = new DataBaseFiller(database);
-        DBFiller.fill();
-
-        DatabaseClients databaseClient = new DatabaseClientsInMemory();
-        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller(databaseClient);
-        DBClientFiller.fill();
+        ApplicationContext context = new ApplicationContext();
 
 
-        AddBookServiceValidator validator = new AddBookServiceValidator();
-        AddBookService addBookService = new AddBookService(database, validator);
-        AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
-
-        RemoveBookServiceValidator removeBookServiceValidator = new RemoveBookServiceValidator();
-        RemoveBookService removeBookService = new RemoveBookService(database, removeBookServiceValidator);
-        RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
-
-        GetBooksListServiceValidator getBooksListServiceValidator = new GetBooksListServiceValidator();
-        GetBooksListService getBooksListService = new GetBooksListService(database, getBooksListServiceValidator);
-        GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
-
-        BookBookServiceValidator bookBookServiceValidator = new BookBookServiceValidator();
-        BookBookService bookBookService = new BookBookService(database,bookBookServiceValidator);
-        BookBookUIAction bookBookUIAction = new BookBookUIAction(bookBookService);
-
-        ShowBookService showBookService = new ShowBookService(database);
-        ShowBookUIActions showBookUIActions = new ShowBookUIActions(showBookService);
-
-        AddClientServiceValidator addClientServiceValidator = new AddClientServiceValidator();
-        AddClientService addClientService = new AddClientService(databaseClient, addClientServiceValidator);
-        AddClientUIActions addClientUIActions = new AddClientUIActions(addClientService);
-
-        ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
-
-
+//        Database database = new DatabaseInMemory();
+//        DataBaseFiller DBFiller = new DataBaseFiller(database);
+//        DBFiller.fill();
+//
+//        DatabaseClients databaseClient = new DatabaseClientsInMemory();
+//        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller(databaseClient);
+//        DBClientFiller.fill();
+//
+//
+//        AddBookServiceValidator validator = new AddBookServiceValidator();
+//        AddBookService addBookService = new AddBookService(database, validator);
+//        AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
+//
+//        RemoveBookServiceValidator removeBookServiceValidator = new RemoveBookServiceValidator();
+//        RemoveBookService removeBookService = new RemoveBookService(database, removeBookServiceValidator);
+//        RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
+//
+//        GetBooksListServiceValidator getBooksListServiceValidator = new GetBooksListServiceValidator();
+//        GetBooksListService getBooksListService = new GetBooksListService(database, getBooksListServiceValidator);
+//        GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
+//
+//        BookBookServiceValidator bookBookServiceValidator = new BookBookServiceValidator();
+//        BookBookService bookBookService = new BookBookService(database,bookBookServiceValidator);
+//        BookBookUIAction bookBookUIAction = new BookBookUIAction(bookBookService);
+//
+//        ShowBookService showBookService = new ShowBookService(database);
+//        ShowBookUIActions showBookUIActions = new ShowBookUIActions(showBookService);
+//
+//        AddClientServiceValidator addClientServiceValidator = new AddClientServiceValidator();
+//        AddClientService addClientService = new AddClientService(databaseClient, addClientServiceValidator);
+//        AddClientUIActions addClientUIActions = new AddClientUIActions(addClientService);
+//
+//        ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
 
 
         while (true) {
             showUserMenu();
             switch (userChoice()) {
-                case 1: { addBookUIAction.execute(); break; }
-                case 2: { removeBookUIAction.execute(); break; }
-                case 3: { getBooksListUIAction.execute(); break; }
-                case 4: showBookUIActions.execute(); break;
-                case 5: bookBookUIAction.execute(); break;
-                case 6: addClientUIActions.execute(); break;
-                case 7: { exitProgramUIAction.execute(); break;}
+                case 1: {
+                    AddBookUIAction addBookUIAction = context.getBean(AddBookUIAction.class);
+                    addBookUIAction.execute();
+                    break;
+                }
+
+                case 2: {
+                    RemoveBookUIAction removeBookUIAction = context.getBean(RemoveBookUIAction.class);
+                    removeBookUIAction.execute();
+                    break;
+                }
+                case 3: {
+                    GetBooksListUIAction getBooksListUIAction = context.getBean(GetBooksListUIAction.class);
+                    getBooksListUIAction.execute();
+                    break;
+                }
+                case 4:
+                    ShowBookUIActions showBookUIActions = context.getBean(ShowBookUIActions.class);
+                    showBookUIActions.execute();
+                    break;
+                case 5:
+                    BookBookUIAction bookBookUIAction = context.getBean(BookBookUIAction.class);
+                    bookBookUIAction.execute();
+                    break;
+                case 6:
+                    AddClientUIActions addClientUIActions = context.getBean(AddClientUIActions.class);
+                    addClientUIActions.execute();
+                    break;
+                case 7: {
+                    ExitProgramUIAction exitProgramUIAction = context.getBean(ExitProgramUIAction.class);
+                    exitProgramUIAction.execute();
+                    break;
                 }
             }
         }
-
-
-
-
+    }
 
 
     private static void showUserMenu() {
