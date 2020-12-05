@@ -1,5 +1,7 @@
-package dental_clinic.dependency_injection;
+package dental_clinic_tests.dependency_injection.acceptance_tests_di;
 
+import dental_clinic.dependency_injection.ClassFinder;
+import dental_clinic.dependency_injection.DIComponentFilter;
 import org.junit.Test;
 
 import java.io.IOException;
