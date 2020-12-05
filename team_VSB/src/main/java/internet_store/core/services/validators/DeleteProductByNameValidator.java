@@ -1,4 +1,4 @@
-package internet_store.core.services;
+package internet_store.core.services.validators;
 
 import internet_store.core.requests.DeleteProductByNameRequest;
 import internet_store.core.responses.CoreError;
