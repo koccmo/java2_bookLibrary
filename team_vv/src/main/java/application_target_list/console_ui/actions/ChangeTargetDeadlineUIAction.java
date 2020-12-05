@@ -5,17 +5,16 @@ import application_target_list.core.requests.ChangeTargetDeadlineRequest;
 import application_target_list.core.responses.ChangeTargetDeadlineResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.services.ChangeTargetDeadlineService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class ChangeTargetDeadlineUIAction implements UIAction {
 
-    private final ChangeTargetDeadlineService changeTargetDeadlineService;
+    @DIDependency private ChangeTargetDeadlineService changeTargetDeadlineService;
     private final Scanner scr = new Scanner(System.in);
-
-    public ChangeTargetDeadlineUIAction(ChangeTargetDeadlineService changeTargetDeadlineService){
-        this.changeTargetDeadlineService = changeTargetDeadlineService;
-    }
 
     @Override
     public void execute() {

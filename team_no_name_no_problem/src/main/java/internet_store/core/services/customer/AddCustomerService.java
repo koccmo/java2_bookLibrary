@@ -25,6 +25,11 @@ public class AddCustomerService {
         if (!errors.isEmpty()){
             return new AddCustomerResponse(errors);
         }
+
+        if (customerDatabase.containsCustomer(addCustomerRequest.getCustomer())){
+            errors.add(new CoreError("database", "Database contains the same customer"));
+            return new AddCustomerResponse(errors);
+        }
         customerDatabase.addCustomer(addCustomerRequest.getCustomer());
         return new AddCustomerResponse(addCustomerRequest.getCustomer());
     }

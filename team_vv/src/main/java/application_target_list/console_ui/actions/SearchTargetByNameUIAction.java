@@ -8,17 +8,16 @@ import application_target_list.console_ui.UIAction;
 import application_target_list.core.database.Target;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.responses.SearchTargetByNameResponse;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchTargetByNameUIAction implements UIAction {
 
-    private final SearchTargetByNameService searchTargetByNameService;
+    @DIDependency private SearchTargetByNameService searchTargetByNameService;
     private final Scanner scr = new Scanner(System.in);
-
-    public SearchTargetByNameUIAction(SearchTargetByNameService searchTargetByNameService) {
-        this.searchTargetByNameService = searchTargetByNameService;
-    }
 
     @Override
     public void execute() {

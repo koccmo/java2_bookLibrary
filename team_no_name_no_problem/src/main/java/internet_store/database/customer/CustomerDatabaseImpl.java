@@ -17,15 +17,10 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public boolean addCustomer(Customer customer){
-        if(customerList.contains(customer)){
-            return false;
-        } else {
+    public void addCustomer(Customer customer){
             customer.setId(id);
             customerList.add(customer);
             id++;
-        }
-        return true;
     }
 
     @Override

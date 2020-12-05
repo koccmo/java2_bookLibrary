@@ -41,8 +41,22 @@ public class FindByIdServiceTest {
     }
 
     @Test
-    public void shouldReturnResponseWithError_whenValidationFails() {
-        FindByIdRequest request = new FindByIdRequest("1");
+    public void shouldReturnResponseWithError_whenValidationFailsFromString() {
+        FindByIdRequest request = new FindByIdRequest("id");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Product ID", "Should be valid."));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        FindByIdResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(1, response.getErrors().size());
+        assertEquals("Product ID", response.getErrors().get(0).getField());
+        assertEquals("Should be valid.", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnResponseWithError_whenValidationFailsFromNull() {
+        FindByIdRequest request = new FindByIdRequest(null);
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Product ID", "Should not be empty."));
         Mockito.when(validator.validate(request)).thenReturn(errors);

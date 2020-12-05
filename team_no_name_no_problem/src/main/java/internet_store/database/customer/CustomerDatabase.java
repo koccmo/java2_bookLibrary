@@ -9,7 +9,7 @@ public interface CustomerDatabase {
 
     List <Customer> getCustomers();
 
-    boolean addCustomer(Customer customer);
+    void addCustomer(Customer customer);
 
     void deleteCustomer(long id);
 

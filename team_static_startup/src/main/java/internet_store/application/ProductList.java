@@ -1,6 +1,8 @@
 package internet_store.application;
 
 import internet_store.application.console_ui.*;
+import internet_store.application.dependency_injection.ApplicationContext;
+
 import java.util.*;
 
 class ProductList {
@@ -19,7 +21,7 @@ class ProductList {
         menuNumberToActionMap.put(5, applicationContext.getBean(FindByIdUIAction.class));
         menuNumberToActionMap.put(6, applicationContext.getBean(FindProductsUIAction.class));
         menuNumberToActionMap.put(7, applicationContext.getBean(ChangeProductNameUIAction.class));
-        menuNumberToActionMap.put(8, applicationContext.getBean(PrintProductsToConsoleUIAction.class));
+        menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 

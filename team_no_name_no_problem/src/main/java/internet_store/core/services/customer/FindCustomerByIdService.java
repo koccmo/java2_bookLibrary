@@ -29,7 +29,7 @@ public class FindCustomerByIdService {
         Optional<Customer> expectedCustomer = customerDatabase.findById(findCustomerByIdRequest.getId());
 
         if (expectedCustomer.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain customer with this id "
+            errors.add(new CoreError("database", "Database doesn't contain customer with id "
             + findCustomerByIdRequest.getId()));
             return new FindCustomerByIdResponse(errors);
         }

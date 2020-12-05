@@ -4,6 +4,7 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.ChangeProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.ChangeProductResponse;
+import internet_store.core.services.product.validators.ChangeProductValidator;
 import internet_store.database.product.ProductDatabase;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class ChangeProductService {
             return new ChangeProductResponse(errors);
         }
 
-        if (databaseContainsProductWithId(changeProductRequest.getId()).isEmpty()){
+        if (!productDatabase.containsId(changeProductRequest.getId())){
             errors.add(new CoreError("database", "Database doesn't contain product with id " +
                     changeProductRequest.getId()));
             return new ChangeProductResponse(errors);

@@ -8,19 +8,17 @@ import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.services.AddVisitService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Optional;
 import java.util.Scanner;
 
-class AddVisitUIAction implements UIAction {
+@DIComponent
+public class AddVisitUIAction implements UIAction {
 
-    private AddVisitService addVisitService;
-    private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public AddVisitUIAction(AddVisitService addVisitService, ContainsDatabaseIdService containsDatabaseIdService) {
-        this.addVisitService = addVisitService;
-        this.containsDatabaseIdService = containsDatabaseIdService;
-    }
+    @DIDependency private AddVisitService addVisitService;
+    @DIDependency private ContainsDatabaseIdService containsDatabaseIdService;
 
     public void execute(){
         Scanner in = new Scanner(System.in);

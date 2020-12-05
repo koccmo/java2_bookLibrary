@@ -2,9 +2,12 @@ package application_target_list.core.validators;
 
 import application_target_list.core.requests.SearchTargetByDescriptionRequest;
 import application_target_list.core.responses.CoreError;
+import application_target_list.dependency_injection.DIComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class SearchTargetByDescriptionValidator {
 
     public List<CoreError> validate(SearchTargetByDescriptionRequest request){

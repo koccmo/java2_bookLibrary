@@ -25,13 +25,17 @@ public class DeleteCustomerService {
         if (!errors.isEmpty()){
             return new DeleteCustomerResponse(errors);
         }
-        for (int i = 0; i < customerDatabase.getCustomers().size(); i++){
-            if (getCurrentCustomer(i).getId() == deleteCustomerRequest.getId()){
-                customerDatabase.deleteCustomer(deleteCustomerRequest.getId());
-                return new DeleteCustomerResponse(deleteCustomerRequest.getId());
+
+        if (customerDatabase.containsId(deleteCustomerRequest.getId())) {
+            for (int i = 0; i < customerDatabase.getCustomers().size(); i++) {
+                if (getCurrentCustomer(i).getId() == deleteCustomerRequest.getId()) {
+                    customerDatabase.deleteCustomer(deleteCustomerRequest.getId());
+                    return new DeleteCustomerResponse(deleteCustomerRequest.getId());
+                }
             }
         }
-        errors.add(new CoreError("database", "database doesn't contain this customer"
+
+        errors.add(new CoreError("database", "database doesn't contain this customer "
         + deleteCustomerRequest.getId()));
         return new DeleteCustomerResponse(errors);
     }

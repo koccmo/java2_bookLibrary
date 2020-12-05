@@ -1,6 +1,5 @@
 package internet_store.console_ui;
 
-import internet_store.ApplicationContext;
 import internet_store.console_ui.customer.*;
 import internet_store.console_ui.product.ExitUIAction;
 import internet_store.console_ui.product.GetAllProductsUIAction;
@@ -8,8 +7,7 @@ import internet_store.console_ui.product.SearchProductUIAction;
 import internet_store.core.services.customer.*;
 import internet_store.core.services.product.GetAllProductsService;
 import internet_store.core.services.product.SearchProductService;
-import internet_store.database.customer.CustomerDatabase;
-import internet_store.database.customer.CustomerDatabaseImpl;
+import internet_store.dependency_injection.ApplicationContext;
 
 
 import java.util.HashMap;

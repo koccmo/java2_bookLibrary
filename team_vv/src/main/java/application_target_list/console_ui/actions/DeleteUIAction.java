@@ -5,17 +5,16 @@ import application_target_list.core.requests.DeleteTargetRequest;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.responses.DeleteTargetResponse;
 import application_target_list.core.services.DeleteTargetService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class DeleteUIAction implements UIAction {
 
-    private final DeleteTargetService deleteTargetService;
+    @DIDependency private DeleteTargetService deleteTargetService;
     private final Scanner scr = new Scanner(System.in);
-
-    public DeleteUIAction(DeleteTargetService deleteTargetService){
-        this.deleteTargetService = deleteTargetService;
-    }
 
     @Override
     public void execute() {

@@ -1,6 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.Ordering;
+import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class SearchProductByCategoryValidator {
             validateOrderDirection(request.getOrdering()).ifPresent(errors::add);
             validateMandatoryOrderBy(request.getOrdering()).ifPresent(errors::add);
             validateMandatoryOrderDirection(request.getOrdering()).ifPresent(errors::add);
+            validatePagingPageNumberPattern(request.getPaging()).ifPresent(errors::add);
+            validatePagingPageSizePattern(request.getPaging()).ifPresent(errors::add);
         }
         return errors;
     }
@@ -67,6 +70,18 @@ public class SearchProductByCategoryValidator {
                 : Optional.empty();
     }
 
+    private Optional<CoreError> validatePagingPageNumberPattern(Paging paging) {
+        return (!validatePositiveInreger(paging.getPageNumber()))
+                ? Optional.of(new CoreError("Page Number", "Must be positive integer!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validatePagingPageSizePattern(Paging paging) {
+        return (!validatePositiveInreger(paging.getPageSize()))
+                ? Optional.of(new CoreError("Page Size", "Must be positive integer!"))
+                : Optional.empty();
+    }
+
     public Boolean validateString(String userInput) {
         Pattern pattern = Pattern.compile("[A-Za-z]*");
         Matcher m = pattern.matcher(userInput);
@@ -76,4 +91,16 @@ public class SearchProductByCategoryValidator {
         return false;
     }
 
+    public boolean validatePositiveInreger(String userStringInput) {
+        int choice;
+        try {
+            choice = Integer.valueOf(userStringInput);
+        } catch (Exception e) {
+            return false;
+        }
+        if (choice > 0) {
+            return true;
+        }
+        return false;
+    }
 }

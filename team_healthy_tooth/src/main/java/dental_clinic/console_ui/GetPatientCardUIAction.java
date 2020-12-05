@@ -3,16 +3,15 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetPatientCardRequest;
 import dental_clinic.core.responses.GetPatientCardResponse;
 import dental_clinic.core.services.GetPatientCardService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class GetPatientCardUIAction implements UIAction{
 
-    private final GetPatientCardService getPatientCardService;
-
-    public GetPatientCardUIAction(GetPatientCardService getPatientCardService) {
-        this.getPatientCardService = getPatientCardService;
-    }
+    @DIDependency private GetPatientCardService getPatientCardService;
 
     @Override
     public void execute(){

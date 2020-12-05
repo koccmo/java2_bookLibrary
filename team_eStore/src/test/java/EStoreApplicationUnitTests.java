@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+/*
 public class EStoreApplicationUnitTests {
 
     private static ProductRepository productRepository;
@@ -20,37 +21,41 @@ public class EStoreApplicationUnitTests {
         productRepository = ProductRepository.getProductRepository();
     }
 
-    /**
+*
      * Test for ProductRepository.getProductRepository return same instance.
-     */
+
+
     @Test
     public void testGetProductRepository() {
         assertSame("Failure in case of different ProductRepository instances",
                 ProductRepository.getProductRepository(), ProductRepository.getProductRepository());
     }
 
-    /**
+*
      * Test for private constructor.
-     */
+
+
     @Test
     public void testPrivateConstructor() throws NoSuchMethodException {
         Constructor<ProductRepository> constructor = ProductRepository.class.getDeclaredConstructor();
         assertTrue(Modifier.isPrivate(constructor.getModifiers()));
     }
 
-    /**
+*
      * Test if initialized productList contains records.
-     */
+
+
     @Test
     public void testInitializeProductList() {
         assertFalse("Failure in case of empty list",
                 productRepository.getProductList().isEmpty());
     }
 
-    /**
+*
      * Test to add new record should success.
      * If product with same info does not exist in the store, product should be added.
-     */
+
+
     @Test
     public void testAddProductSuccess() {
         final int productListSize = productRepository.getProductList().size();
@@ -63,10 +68,11 @@ public class EStoreApplicationUnitTests {
                         && (0 == Double.compare(11.11, product.getPrice()))));
     }
 
-    /**
+*
      * Test to add new record should fail.
      * If product with same info exists in the store, product should not be added.
-     */
+
+
     @Test
     public void testAddProductFail() {
         final int productListSize = productRepository.getProductList().size();
@@ -75,10 +81,11 @@ public class EStoreApplicationUnitTests {
                 productRepository.getProductList().size());
     }
 
-    /**
+*
      * Test to remove product by 'ID' success.
      * If product with particular ID exists, product should be removed.
-     */
+
+
     @Test
     public void testRemoveProductByIdSuccess() {
         final int productListSize = productRepository.getProductList().size();
@@ -91,10 +98,11 @@ public class EStoreApplicationUnitTests {
                 productRepository.getProductList().contains(productFound));
     }
 
-    /**
+*
      * Test to remove product by 'ID' fail.
      * If product with particular ID does not exist, product should not be found and removed.
-     */
+
+
     @Test
     public void testRemoveProductByIdFail() {
         final int productListSize = productRepository.getProductList().size();
@@ -103,10 +111,11 @@ public class EStoreApplicationUnitTests {
                 productRepository.getProductList().size());
     }
 
-    /**
+*
      * Test to remove product by 'name' success.
      * If product with particular 'name' exists, product should be removed.
-     */
+
+
     @Test
     public void testRemoveProductByNameSuccess() {
         final int currentSize = productRepository.getProductList().size();
@@ -118,10 +127,11 @@ public class EStoreApplicationUnitTests {
                 productRepository.getProductList().contains(productFound));
     }
 
-    /**
+*
      * Test to remove product by 'name' fail.
      * If product with particular 'name' does not exist, product should not be found and removed.
-     */
+
+
     @Test
     public void testRemoveProductByNameFail() {
         final int currentSize = productRepository.getProductList().size();
@@ -130,10 +140,11 @@ public class EStoreApplicationUnitTests {
                 productRepository.getProductList().size());
     }
 
-    /**
+*
      * Test to find product by 'ID' success.
      * If product with particular 'ID' exists, product should be found.
-     */
+
+
     @Test
     public void testFindProductByIdSuccess() {
         final Product product = productRepository.findProductById(1);
@@ -141,10 +152,11 @@ public class EStoreApplicationUnitTests {
                 product);
     }
 
-    /**
+*
      * Test to find product by 'ID' fail.
      * If product with particular 'ID' does not exist, product should not be found.
-     */
+
+
     @Test
     public void testFindProductByIdFail() {
         final Product product = productRepository.findProductById(999);
@@ -152,10 +164,11 @@ public class EStoreApplicationUnitTests {
                 product);
     }
 
-    /**
+*
      * Test to find product by 'name' success.
      * If product with particular 'name' exists, product should be found.
-     */
+
+
     @Test
     public void testFindProductByNameSuccess() {
         final Product product = productRepository.findProductByName("keyboard");
@@ -163,10 +176,11 @@ public class EStoreApplicationUnitTests {
                 product);
     }
 
-    /**
+*
      * Test to find product by 'name' fail.
      * If product with particular 'name' does not exist, product should not be found.
-     */
+
+
     @Test
     public void testFindProductByNameFail() {
         final Product product = productRepository.findProductByName("qwerty");
@@ -174,10 +188,11 @@ public class EStoreApplicationUnitTests {
                 product);
     }
 
-    /**
+*
      * Test to update product by 'ID' should success.
      * If product with particular 'ID' exists, product info should be updated.
-     */
+
+
     @Test
     public void testUpdateProductSuccess() {
         final Product product = productRepository.findProductById(1);
@@ -194,10 +209,11 @@ public class EStoreApplicationUnitTests {
                         && (0 == Double.compare(price, product.getPrice()))));
     }
 
-    /**
+*
      * Test to update product by 'ID' should fail.
      * After update, info of new product should not be found.
-     */
+
+
     @Test
     public void testUpdateProductFail() {
         final String name = "newProduct";
@@ -212,3 +228,4 @@ public class EStoreApplicationUnitTests {
                         && (0 == Double.compare(price, product.getPrice()))));
     }
 }
+*/

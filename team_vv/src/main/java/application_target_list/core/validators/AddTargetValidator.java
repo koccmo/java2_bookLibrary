@@ -2,10 +2,12 @@ package application_target_list.core.validators;
 
 import application_target_list.core.requests.AddTargetRequest;
 import application_target_list.core.responses.CoreError;
+import application_target_list.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class AddTargetValidator {
 
     public List<CoreError> validate(AddTargetRequest request) {
