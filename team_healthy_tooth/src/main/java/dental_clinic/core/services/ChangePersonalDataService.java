@@ -16,12 +16,6 @@ public class ChangePersonalDataService {
     @DIDependency private PatientDatabase patientDatabase;
     @DIDependency private ChangePersonalDataValidator validator;
 
-    public ChangePersonalDataService(PatientDatabase patientDatabase,
-                                     ChangePersonalDataValidator validator) {
-        this.patientDatabase = patientDatabase;
-        this.validator = validator;
-    }
-
     public ChangePersonalDataResponse execute (ChangePersonalDataRequest request) {
         List<CoreError> errors = validator.validate(request);
 

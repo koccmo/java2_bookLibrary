@@ -15,13 +15,8 @@ import java.util.Optional;
 @DIComponent
 public class SearchPatientsByPersonalCodeService {
 
-    @DIDependency private final PatientDatabase patientDatabase;
-    @DIDependency private final SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator;
-
-    public SearchPatientsByPersonalCodeService(PatientDatabase patientDatabase, SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.searchPatientByPersonalCodeRequestValidator = searchPatientByPersonalCodeRequestValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator;
 
     public SearchPatientByPersonalCodeResponse execute(SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest){
         List <CoreError> errors = searchPatientByPersonalCodeRequestValidator.validate(searchPatientByPersonalCodeRequest);
