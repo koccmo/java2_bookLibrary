@@ -1,5 +1,6 @@
-package dental_clinic.dependency_injection;
+package dental_clinic_tests.dependency_injection.acceptance_tests_di;
 
+import dental_clinic.dependency_injection.ClassFinder;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ClassFinderTest {
 
         List<Class> classList = classFinder.findClassesInsidePackage("dental_clinic.console_ui");
 
-        assertTrue(classList.size() == 14);
+        assertTrue(classList.size() == 12);
 
         assertTrue (classList.get(0).getName().equals("dental_clinic.console_ui.AddPatientUIAction"));
     }
@@ -26,8 +27,8 @@ public class ClassFinderTest {
 
         List<Class> classList = classFinder.findClassesInsidePackage("dental_clinic.database");
 
-        assertTrue(classList.size() == 3);
+        assertTrue(classList.size() == 2);
 
-        assertTrue (classList.get(2).getName().equals("dental_clinic.database.PatientDatabaseImpl"));
+        assertTrue (classList.get(1).getName().equals("dental_clinic.database.PatientDatabaseImpl"));
     }
 }

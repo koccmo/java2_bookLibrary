@@ -1,4 +1,4 @@
-package dental_clinic.core.services;
+package dental_clinic_tests.core.services_tests;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
@@ -7,6 +7,7 @@ import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.AddVisitService;
 import dental_clinic.core.services.validators.AddVisitValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
