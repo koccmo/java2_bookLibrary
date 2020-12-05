@@ -135,8 +135,6 @@ public class SearchProductServiceTest {
         errors.add(new CoreError("database", "There is no such product Description"));
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.findAllByDescription(
-                request1.getDescription())).thenReturn(new ArrayList<>());
 
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
@@ -153,8 +151,6 @@ public class SearchProductServiceTest {
         errors.add(new CoreError("database", "There is no such product Title"));
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.findAllByTitle(
-                request1.getTitle())).thenReturn(new ArrayList<>());
 
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
