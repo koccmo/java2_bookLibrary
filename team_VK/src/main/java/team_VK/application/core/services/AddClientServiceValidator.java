@@ -20,7 +20,7 @@ public class AddClientServiceValidator {
         }
 
         if (request.getClientFirstName().trim().equals("") && !request.getClientFirstName().equals("")) {
-            CoreError error = new CoreError("clientFirstName", "Field clientFirstName can't be Space");
+            CoreError error = new CoreError("clientFirstName", "Field clientFirstName can't Space");
             errors.add(error);
         }
 
@@ -35,14 +35,14 @@ public class AddClientServiceValidator {
                         ((value >= 33) && (value <= 44)) ||
                         ((value >= 46) && (value <= 64)) ||
                         ((value >= 91) && (value <= 96)) ||
-                        ((value >= 123) && (value <= 159)) ||
+                        ((value >= 123) && (value <= 157)) ||
                         ((value >= 174) && (value <= 180)) ||
                         ((value >= 185) && (value <= 207)) ||
                         ((value >= 217) && (value <= 220)) ||
                         (value == 223) ||
                         (value >= 253));
         if (clientFirstNameContainsIllegalCharts) {
-            CoreError error = new CoreError("clientLastName", "Field clientLastName contains illegal characters");
+            CoreError error = new CoreError("clientFirstName", "Field clientFirstName contains illegal characters");
             errors.add(error);
         }
 
