@@ -16,7 +16,8 @@ include 'teacher:lesson_5_testing_with_junit_and_mockito:step_1_mockito'
 include 'teacher:lesson_5_testing_with_junit_and_mockito:step_2_application_context'
 include 'teacher:lesson_5_testing_with_junit_and_mockito:step_3_acceptance_tests'
 
-include 'teacher:lesson_6_dependency_injection_inversion_of_control'
+include 'teacher:lesson_6_dependency_injection_inversion_of_control:step_1_dependency_injection'
+
 include 'teacher:lesson_7_spring_basics'
 include 'teacher:lesson_8_introduction_to_sql'
 include 'teacher:lesson_9_advanced_sql'
