@@ -4,6 +4,7 @@ import internet_store.core.database.Database;
 import internet_store.core.requests.DeleteProductByIdRequest;
 import internet_store.core.responses.CoreError;
 import internet_store.core.responses.DeleteProductByIdResponse;
+import internet_store.core.services.validators.DeleteByProductIdValidator;
 
 import java.util.List;
 
