@@ -46,7 +46,9 @@ public class SearchProductByCategoryService {
                     ordering.getOrderDirection().toLowerCase().equals("desc")) {
                 comparator = comparator.reversed();
             }
-            return products.stream().sorted(comparator).collect(Collectors.toList());
+            return products.stream()
+                    .sorted(comparator)
+                    .collect(Collectors.toList());
         } else {
             return products;
         }

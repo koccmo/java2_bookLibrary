@@ -20,9 +20,6 @@ public abstract class CoreResponse {
     }
 
     public boolean hasErrors() {
-        if (errors.size() > 0) {
-            return true;
-        }
-        return false;
+        return errors != null && !errors.isEmpty();
     }
 }
