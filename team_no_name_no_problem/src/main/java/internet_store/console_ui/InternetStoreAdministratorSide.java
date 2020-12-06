@@ -50,7 +50,7 @@ public class InternetStoreAdministratorSide {
                 "4   Find product by ID\n"+ //будет вызвать Шоппинг Карт
                 "5   Search product\n" +
                 "6   Change product\n" +
-                "0   Exit");
+                "0   Exit to the Main Menu");
     }
 
     private void executeUIAction (int userSelectedMenuNumber) {

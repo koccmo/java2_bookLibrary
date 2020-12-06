@@ -52,7 +52,7 @@ public class InternetStoreCustomerSide {
                 "3   Search product\n" +
                 "4   See product list\n" +
                 "5   Buy product\n"+ //будет вызвать Шоппинг Карт
-                "0   Exit");
+                "0   Exit to the Main Menu");
     }
 
     private void executeUIAction (int userSelectedMenuNumber) {
