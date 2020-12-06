@@ -6,6 +6,8 @@ import internet_store.core.response.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SearchCustomerRequestValidator {
@@ -16,6 +18,14 @@ public class SearchCustomerRequestValidator {
 
         if (isNameAndSurnameEmpty(searchCustomerRequest.getName(), searchCustomerRequest.getSurname())){
             errors.add(new CoreError("search", "Not valid input for search"));
+        }
+
+        if (!containsOnlyLetters(searchCustomerRequest.getName())){
+            errors.add(new CoreError("name", "Not valid input for name, should contain only letters"));
+        }
+
+        if (!containsOnlyLetters(searchCustomerRequest.getSurname())){
+            errors.add(new CoreError("surname", "Not valid input for surname, should contain only letters"));
         }
 
         if (isNotValidInputForOrdering(searchCustomerRequest)){
@@ -30,6 +40,28 @@ public class SearchCustomerRequestValidator {
 
     private boolean isNameAndSurnameEmpty(String name, String surname){
         return (name == null || name.isEmpty()) && (surname == null || surname.isEmpty());
+    }
+
+    private boolean numberContainsOnlyDigits(String input){
+        String regex = "[0-9]+";
+
+        Pattern pattern = Pattern.compile(regex);
+        if (input == null){
+            return false;
+        }
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
+
+    private boolean containsOnlyLetters(String input){
+        String regex = "[a-zA-Z]+";
+
+        Pattern pattern = Pattern.compile(regex);
+        if (input == null){
+            return false;
+        }
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 
     private boolean isNotValidInputForOrdering(SearchCustomerRequest searchCustomerRequest){
