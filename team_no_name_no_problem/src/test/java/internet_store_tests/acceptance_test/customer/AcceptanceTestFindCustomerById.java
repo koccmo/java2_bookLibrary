@@ -35,7 +35,7 @@ public class AcceptanceTestFindCustomerById {
 
         FindCustomerByIdRequest findCustomerByIdRequest = new FindCustomerByIdRequest(1L);
         FindCustomerByIdRequest findCustomerByIdRequest1 = new FindCustomerByIdRequest(2L);
-        FindCustomerByIdResponse findCustomerByIdResponse =findCustomerByIdService().execute(findCustomerByIdRequest);
+        FindCustomerByIdResponse findCustomerByIdResponse = findCustomerByIdService().execute(findCustomerByIdRequest);
         FindCustomerByIdResponse findCustomerByIdResponse1 = findCustomerByIdService().execute(findCustomerByIdRequest1);
 
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
