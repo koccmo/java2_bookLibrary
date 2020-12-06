@@ -22,9 +22,9 @@ public class AcceptanceTestSearchCustomerByName {
 
     @Test
     public void test(){
-        Customer customer = new Customer("name", "surname", "number", "address",
+        Customer customer = new Customer("name", "surname", "82938172", "address",
                 "email");
-        Customer customer1 = new Customer("name1", "surname20","phone", "Matisa",
+        Customer customer1 = new Customer("name", "surname","29876472", "Matisa",
                 "tr3vis@Inbox.lv");
         Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
                 "Ukraina", "privetpoka@tikto.lv");
