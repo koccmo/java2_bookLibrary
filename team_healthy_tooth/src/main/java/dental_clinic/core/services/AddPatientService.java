@@ -4,20 +4,18 @@ import dental_clinic.core.domain.Patient;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.responses.AddPatientResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.validators.AddPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddPatientService {
 
-    private PatientDatabase patientDatabase;
-
-    private AddPatientRequestValidator validator;
-
-    public AddPatientService(PatientDatabase patientDatabase, AddPatientRequestValidator addPatientRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.validator = addPatientRequestValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private AddPatientRequestValidator validator;
 
     public AddPatientResponse execute (AddPatientRequest addPatientRequest){
         List<CoreError> errors = validator.validate(addPatientRequest);

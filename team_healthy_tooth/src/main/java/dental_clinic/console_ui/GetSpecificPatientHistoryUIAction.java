@@ -3,16 +3,15 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.GetSpecificPatientHistoryService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
-class GetSpecificPatientHistoryUIAction implements UIAction {
+@DIComponent
+public class GetSpecificPatientHistoryUIAction implements UIAction {
 
-    private final GetSpecificPatientHistoryService printSpecificPatientHistory;
-
-    public GetSpecificPatientHistoryUIAction(GetSpecificPatientHistoryService printSpecificPatientHistory) {
-        this.printSpecificPatientHistory = printSpecificPatientHistory;
-    }
+    @DIDependency private GetSpecificPatientHistoryService printSpecificPatientHistory;
 
     public void execute(){
         Scanner in = new Scanner(System.in);

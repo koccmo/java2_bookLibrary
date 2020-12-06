@@ -4,10 +4,12 @@ package application_target_list.core.validators;
 import application_target_list.core.database.Database;
 import application_target_list.core.requests.DeleteTargetRequest;
 import application_target_list.core.responses.CoreError;
+import application_target_list.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class DeleteTargetValidator {
 
     public List<CoreError> validate(DeleteTargetRequest request, Database database) {

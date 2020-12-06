@@ -3,17 +3,15 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
 import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
-class SearchPatientByPersonalCodeUIAction implements UIAction {
+@DIComponent
+public class SearchPatientByPersonalCodeUIAction implements UIAction {
 
-    private SearchPatientsByPersonalCodeService findPatientByPersonalCode;
-
-
-    public SearchPatientByPersonalCodeUIAction(SearchPatientsByPersonalCodeService findPatientByPersonalCode) {
-        this.findPatientByPersonalCode = findPatientByPersonalCode;
-    }
+    @DIDependency private SearchPatientsByPersonalCodeService findPatientByPersonalCode;
 
     public void execute(){
         Scanner in = new Scanner(System.in);

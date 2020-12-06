@@ -8,19 +8,18 @@ import application_target_list.core.requests.SearchTargetByNameRequest;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.responses.SearchTargetByNameResponse;
 import application_target_list.core.validators.SearchTargetByNameValidator;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchTargetByNameService {
 
-   private final Database database;
-   private final SearchTargetByNameValidator validator;
-
-    public SearchTargetByNameService(Database database, SearchTargetByNameValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private SearchTargetByNameValidator validator;
 
     public SearchTargetByNameResponse execute(SearchTargetByNameRequest request){
         List<CoreError> errors = validator.validate(request);

@@ -41,7 +41,6 @@ public class FindProductsServiceTest {
         products.add(product2);
     }
 
-
     @Test
     public void shouldReturnListWithOneError () {
         FindProductsRequest request = new FindProductsRequest(null, null);
@@ -101,7 +100,6 @@ public class FindProductsServiceTest {
         assertEquals(expected.get(1), response.getProducts().get(1));
     }
 
-
     @Test
     public void shouldReturnByNameOrderedDescending () {
         Ordering ordering = new Ordering("Name", "Descending");
@@ -140,7 +138,6 @@ public class FindProductsServiceTest {
         assertEquals(expected.get(1), response.getProducts().get(1));
     }
 
-
     @Test
     public void shouldReturnPageOneWithOneProduct () {
         Paging paging = new Paging(1, 1);
@@ -170,7 +167,6 @@ public class FindProductsServiceTest {
         FindProductsResponse response = service.execute(request);
         assertEquals(expected.size(), response.getProducts().size());
     }
-
 
     @Test
     public void shouldApplyOrderingAndPaging () {

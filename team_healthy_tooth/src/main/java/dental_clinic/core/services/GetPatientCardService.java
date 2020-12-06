@@ -2,23 +2,21 @@ package dental_clinic.core.services;
 
 import dental_clinic.core.domain.Jowl;
 import dental_clinic.core.domain.Patient;
-import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.requests.GetPatientCardRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetPatientCardResponse;
+import dental_clinic.core.services.validators.GetPatientCardRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.*;
 
+@DIComponent
 public class GetPatientCardService {
     
-    private final PatientDatabase patientDatabase;
-    private final GetPatientCardRequestValidator getPatientCardRequestValidator;
-
-    public GetPatientCardService(PatientDatabase patientDatabase, GetPatientCardRequestValidator getPatientCardRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.getPatientCardRequestValidator = getPatientCardRequestValidator;
-    }
+    @DIDependency private PatientDatabase patientDatabase;
+    @DIDependency private GetPatientCardRequestValidator getPatientCardRequestValidator;
     
     public GetPatientCardResponse execute (GetPatientCardRequest getPatientCardRequest){
         List<CoreError> errors = getPatientCardRequestValidator.validate(getPatientCardRequest);

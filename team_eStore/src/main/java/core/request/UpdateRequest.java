@@ -32,4 +32,14 @@ public class UpdateRequest extends CoreRequest{
     public Long getId() {
         return this.id;
     }
+
+	@Override
+	public String getOrderBy() {
+		return null;
+	}
+
+	@Override
+	public String getOrderDirection() {
+		return null;
+	}
 }

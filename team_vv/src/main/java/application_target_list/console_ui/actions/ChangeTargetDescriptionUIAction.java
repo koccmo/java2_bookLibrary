@@ -5,16 +5,16 @@ import application_target_list.core.requests.ChangeTargetDescriptionRequest;
 import application_target_list.core.responses.ChangeTargetDescriptionResponse;
 import application_target_list.core.responses.CoreError;
 import application_target_list.core.services.ChangeTargetDescriptionService;
+import application_target_list.dependency_injection.DIComponent;
+import application_target_list.dependency_injection.DIDependency;
+
 import java.util.Scanner;
 
+@DIComponent
 public class ChangeTargetDescriptionUIAction implements UIAction {
 
-    private final ChangeTargetDescriptionService changeTargetDescriptionService;
+    @DIDependency private ChangeTargetDescriptionService changeTargetDescriptionService;
     private final Scanner scr = new Scanner(System.in);
-
-    public ChangeTargetDescriptionUIAction(ChangeTargetDescriptionService changeTargetDescriptionService){
-        this.changeTargetDescriptionService = changeTargetDescriptionService;
-    }
 
     @Override
     public void execute() {

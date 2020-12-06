@@ -1,10 +1,8 @@
 package internet_store.console_ui;
 
-import internet_store.ApplicationContext;
 import internet_store.console_ui.product.*;
 import internet_store.core.services.product.*;
-import internet_store.database.product.ProductDatabase;
-import internet_store.database.product.ProductDatabaseImpl;
+import internet_store.dependency_injection.ApplicationContext;
 
 
 import java.util.HashMap;

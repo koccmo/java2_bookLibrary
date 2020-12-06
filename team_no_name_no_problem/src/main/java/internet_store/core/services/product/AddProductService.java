@@ -3,6 +3,7 @@ package internet_store.core.services.product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.AddProductResponse;
+import internet_store.core.services.product.validators.AddProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 
 import java.util.List;

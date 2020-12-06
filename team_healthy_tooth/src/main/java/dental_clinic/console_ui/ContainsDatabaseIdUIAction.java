@@ -3,16 +3,15 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
-class ContainsDatabaseIdUIAction implements UIAction {
+@DIComponent
+public class ContainsDatabaseIdUIAction implements UIAction {
 
-    private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public ContainsDatabaseIdUIAction(ContainsDatabaseIdService checkPatientById) {
-        this.containsDatabaseIdService = checkPatientById;
-    }
+    @DIDependency private ContainsDatabaseIdService containsDatabaseIdService;
 
     public void execute(){
 

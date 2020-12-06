@@ -15,11 +15,11 @@ public class ShoppingCart {
 
     Map <Product, Integer> shoppingCart = new HashMap <>();
 
-    void addProduct(Product product, Integer quantity){
+    public void addProduct(Product product, Integer quantity){
         shoppingCart.put(product, quantity);
     }
 
-    void deleteProduct(Product product){
+    public void deleteProduct(Product product){
         if (shoppingCart.keySet().contains(product)){
             shoppingCart.remove(product);
         }

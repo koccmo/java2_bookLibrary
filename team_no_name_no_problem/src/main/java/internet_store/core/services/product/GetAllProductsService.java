@@ -3,6 +3,7 @@ package internet_store.core.services.product;
 import internet_store.core.requests.product.GetProductsRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.GetProductsResponse;
+import internet_store.core.services.product.validators.GetAllProductsValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
 

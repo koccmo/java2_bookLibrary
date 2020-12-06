@@ -1,6 +1,6 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.ApplicationContext;
+import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;

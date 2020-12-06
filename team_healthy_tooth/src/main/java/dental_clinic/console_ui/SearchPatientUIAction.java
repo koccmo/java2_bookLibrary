@@ -5,16 +5,15 @@ import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.SearchPatientResponse;
 import dental_clinic.core.services.SearchPatientService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchPatientUIAction implements UIAction{
 
-    private final SearchPatientService searchPatientService;
-
-    public SearchPatientUIAction(SearchPatientService searchPatientService) {
-        this.searchPatientService = searchPatientService;
-    }
+    @DIDependency private SearchPatientService searchPatientService;
 
     @Override
     public void execute() {

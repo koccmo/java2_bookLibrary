@@ -7,18 +7,16 @@ import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreResponse;
 import dental_clinic.core.services.ChangePersonalDataService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import dental_clinic.dependency_injection.DIComponent;
+import dental_clinic.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class ChangePersonalDataUiAction implements UIAction {
 
-    private final ChangePersonalDataService service;
-    private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public ChangePersonalDataUiAction(ChangePersonalDataService service, ContainsDatabaseIdService containsDatabaseIdService) {
-        this.service = service;
-        this.containsDatabaseIdService = containsDatabaseIdService;
-    }
+    @DIDependency private ChangePersonalDataService service;
+    @DIDependency private ContainsDatabaseIdService containsDatabaseIdService;
 
     public void execute() {
         Scanner in = new Scanner(System.in);
