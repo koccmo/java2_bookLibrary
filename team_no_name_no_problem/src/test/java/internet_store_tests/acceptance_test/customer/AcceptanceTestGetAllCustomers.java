@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.GetAllCustomersService;
