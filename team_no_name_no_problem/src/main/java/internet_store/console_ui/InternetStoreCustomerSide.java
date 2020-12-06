@@ -7,6 +7,7 @@ import internet_store.console_ui.product.SearchProductUIAction;
 import internet_store.core.services.customer.*;
 import internet_store.core.services.product.GetAllProductsService;
 import internet_store.core.services.product.SearchProductService;
+import internet_store.core.services.shopping_cart.AddToShoppingCartService;
 import internet_store.dependency_injection.ApplicationContext;
 
 
@@ -29,7 +30,7 @@ public class InternetStoreCustomerSide {
         menuNumberToAction.put(2, new DeleteCustomerUIAction(applicationContext.getBean(DeleteCustomerService.class)));
         menuNumberToAction.put(3, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
         menuNumberToAction.put(4, new GetAllProductsUIAction(applicationContext.getBean(GetAllProductsService.class)));
-        menuNumberToAction.put(5, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
+        menuNumberToAction.put(5, new AddProductToShoppingCartUIAction(applicationContext.getBean(AddToShoppingCartService.class)));
         menuNumberToAction.put(0, new ExitUIAction());
     }
 
