@@ -31,7 +31,7 @@ public class InternetStoreCustomerSide {
         menuNumberToAction.put(3, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
         menuNumberToAction.put(4, new GetAllProductsUIAction(applicationContext.getBean(GetAllProductsService.class)));
         menuNumberToAction.put(5, new AddProductToShoppingCartUIAction(applicationContext.getBean(AddToShoppingCartService.class)));
-        menuNumberToAction.put(0, new ExitUIAction());
+        menuNumberToAction.put(6, new ExitUIAction());
     }
 
     public void run() {
@@ -53,7 +53,7 @@ public class InternetStoreCustomerSide {
                 "3   Search product\n" +
                 "4   See product list\n" +
                 "5   Buy product\n"+ //будет вызвать Шоппинг Карт
-                "0   Exit to the Main Menu");
+                "6   Exit to the Main Menu");
     }
 
     private void executeUIAction (int userSelectedMenuNumber) {
