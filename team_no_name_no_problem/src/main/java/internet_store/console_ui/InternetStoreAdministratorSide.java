@@ -27,7 +27,7 @@ public class InternetStoreAdministratorSide {
         menuNumberToAction.put(4, new FindByIdUIAction(applicationContext.getBean(FindProductByIdService.class)));
         menuNumberToAction.put(5, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
         menuNumberToAction.put(6, new ChangeProductUIAction(applicationContext.getBean(ChangeProductService.class)));
-        menuNumberToAction.put(7, new ExitUIAction());
+        menuNumberToAction.put(7, new ExitToMainMenuUIAction());
     }
 
     public void run() {
