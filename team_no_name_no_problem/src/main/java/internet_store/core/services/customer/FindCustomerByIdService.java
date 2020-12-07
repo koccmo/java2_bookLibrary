@@ -4,10 +4,13 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
+import internet_store.core.services.customer.validators.FindCustomerByIdRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.List;
 import java.util.Optional;
+
 
 public class FindCustomerByIdService {
 

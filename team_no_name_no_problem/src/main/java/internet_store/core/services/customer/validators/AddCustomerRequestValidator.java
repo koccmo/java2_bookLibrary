@@ -1,12 +1,15 @@
-package internet_store.core.services.customer;
+package internet_store.core.services.customer.validators;
 
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
 
 public class AddCustomerRequestValidator {
 

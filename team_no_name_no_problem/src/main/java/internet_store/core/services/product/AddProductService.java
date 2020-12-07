@@ -5,8 +5,10 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.validators.AddProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.List;
+
 
 public class  AddProductService {
 

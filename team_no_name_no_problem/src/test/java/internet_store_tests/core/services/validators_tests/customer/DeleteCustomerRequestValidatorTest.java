@@ -2,7 +2,7 @@ package internet_store_tests.core.services.validators_tests.customer;
 
 import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.services.customer.DeleteCustomerRequestValidator;
+import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

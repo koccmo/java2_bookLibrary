@@ -6,7 +6,7 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.SearchCustomerResponse;
-import internet_store.core.services.customer.SearchCustomerRequestValidator;
+import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.core.services.customer.SearchCustomerService;
 import internet_store.database.customer.CustomerDatabase;
 import org.junit.Test;
