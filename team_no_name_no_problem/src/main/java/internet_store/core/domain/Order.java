@@ -2,9 +2,24 @@ package internet_store.core.domain;
 
 public class Order {
 
-    Customer customer;
+    private Long id;
 
-    ShoppingCart shoppingCart;
+    private Customer customer;
+
+    private ShoppingCart shoppingCart;
+
+    public Order (Customer customer, ShoppingCart shoppingCart){
+        this.customer = customer;
+        this.shoppingCart = shoppingCart;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -14,8 +29,5 @@ public class Order {
         return shoppingCart;
     }
 
-    public Order (Customer customer, ShoppingCart shoppingCart){
-        this.customer = customer;
-        this.shoppingCart = shoppingCart;
-    }
+
 }
