@@ -22,10 +22,6 @@ public class AddNewProductService {
     public AddNewProductResponse execute(AddNewProductRequest request) {
         List<CoreError> errors = validator.validate(request);
 
-//        if (errors.size() > 0) {
-//            return new AddNewProductResponse(errors);
-//        }
-
         if (!errors.isEmpty()) {
             return new AddNewProductResponse(errors);
         }
