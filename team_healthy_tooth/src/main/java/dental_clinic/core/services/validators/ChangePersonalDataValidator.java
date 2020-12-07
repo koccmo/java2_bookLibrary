@@ -38,7 +38,7 @@ public class ChangePersonalDataValidator {
             if (!phoneNumberToCheck.matches("\\d{8}|\\d{11}|\\d{12}")) {
                 errors.add(new CoreError(
                         "Personal data : phone",
-                        "Invalid input! Can only contain numbers!"));
+                        "Invalid input! Can only contain 8 numbers!"));
             }
         }
         return errors;
