@@ -19,7 +19,7 @@ public class SearchPatientRequestValidatorTest {
 
     @Test
     public void testEmptySearch(){
-        CoreError expectedError = new CoreError("search", "Not valid input for search");
+        CoreError expectedError = new CoreError("search", "Search request can't be empty");
 
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("", null, validOrdering, validPaging);
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);

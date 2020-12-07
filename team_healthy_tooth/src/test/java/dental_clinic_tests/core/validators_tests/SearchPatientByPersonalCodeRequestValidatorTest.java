@@ -31,7 +31,7 @@ public class SearchPatientByPersonalCodeRequestValidatorTest {
         CoreError expectedError = new CoreError("Personal data : personal code",
                 "Invalid input for personal code!");
 
-        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("121212123");
+        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("5056214569");
         List<CoreError> errors = searchPatientByPersonalCodeRequestValidator.validate(searchPatientByPersonalCodeRequest);
 
         assertTrue(errors.size() == 1);
