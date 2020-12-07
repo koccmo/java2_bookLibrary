@@ -4,9 +4,12 @@ package internet_store.core.services.customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.AddCustomerResponse;
+import internet_store.core.services.customer.validators.AddCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.List;
+
 
 public class AddCustomerService {
 
