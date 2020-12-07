@@ -13,9 +13,9 @@ public class SearchPatientRequestValidator {
     public List<CoreError> validate (SearchPatientRequest searchPatientRequest) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (searchRequestIsEmpty(searchPatientRequest)) {
-            errors.add(new CoreError("search", "Not valid input for search"));
-        }
+        errors.addAll(searchRequestIsEmptyError(searchPatientRequest));
+        errors.addAll(searchRequestIsNotValidErrors(searchPatientRequest));
+
         if (isNotValidInputForOrdering(searchPatientRequest)){
             errors.addAll(updateErrorsListForOrdering(searchPatientRequest));
         }
@@ -25,9 +25,28 @@ public class SearchPatientRequestValidator {
         return errors;
     }
 
-    private boolean searchRequestIsEmpty(SearchPatientRequest searchPatientRequest){
-        return (searchPatientRequest.getName() == null || searchPatientRequest.getName().isEmpty()) &&
-                (searchPatientRequest.getSurname() == null || searchPatientRequest.getSurname().isEmpty());
+    private List<CoreError> searchRequestIsEmptyError(SearchPatientRequest searchPatientRequest){
+        List<CoreError> errors = new ArrayList<>();
+        if ((searchPatientRequest.getName() == null || searchPatientRequest.getName().isEmpty()) &&
+                (searchPatientRequest.getSurname() == null || searchPatientRequest.getSurname().isEmpty())) {
+            errors.add(new CoreError("search", "Search request can't be empty"));
+        }
+        return  errors;
+    }
+
+    private List<CoreError> searchRequestIsNotValidErrors(SearchPatientRequest searchPatientRequest) {
+        List<CoreError> errors = new ArrayList<>();
+        if (searchPatientRequest.getName() != null && !searchPatientRequest.getName().isEmpty()) {
+            if (!searchPatientRequest.getName().matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")) {
+                errors.add(new CoreError("name", "Name can contain only letters"));
+            }
+        }
+        if (searchPatientRequest.getSurname() != null && !searchPatientRequest.getSurname().isEmpty()) {
+            if (!searchPatientRequest.getSurname().matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")) {
+                errors.add(new CoreError("surname", "Surname can contain only letters"));
+            }
+        }
+        return errors;
     }
 
     private boolean isNotValidInputForOrdering(SearchPatientRequest searchPatientRequest){
