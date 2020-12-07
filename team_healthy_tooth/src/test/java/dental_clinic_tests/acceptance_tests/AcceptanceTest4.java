@@ -18,7 +18,7 @@ public class AcceptanceTest4 {
     @Test
     public void test(){
         PersonalData personalData1 = new PersonalData("Name", "Surname", "12345678", "25038910523");
-        PersonalData personalData2 = new PersonalData("NameB", "SurnameA", "12345675", "12345668911");
+        PersonalData personalData2 = new PersonalData("NameB", "SurnameA", "12345675", "25038910528");
         AddPatientRequest addPatientRequest1 = new AddPatientRequest(personalData1);
         AddPatientRequest addPatientRequest2 = new AddPatientRequest(personalData2);
         addPatientService().execute(addPatientRequest1);
