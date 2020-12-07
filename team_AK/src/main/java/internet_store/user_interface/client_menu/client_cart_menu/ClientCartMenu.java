@@ -1,10 +1,12 @@
 package internet_store.user_interface.client_menu.client_cart_menu;
 
+import dependency.annotation.DIComponent;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@DIComponent
 public class ClientCartMenu {
     @Getter
     private int userInput;

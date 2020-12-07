@@ -1,6 +1,5 @@
 package internet_store.core.service.product;
 
-import internet_store.ProductListApplication;
 import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.AddProductRequest;
@@ -14,23 +13,23 @@ import internet_store.core.response.product.product_item.AddProductPriceResponse
 import internet_store.core.response.product.product_item.AddProductQuantityResponse;
 import internet_store.core.response.product.product_item.AddProductTitleResponse;
 import internet_store.database.product_database.InnerProductDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class AddProductService implements ProductUpdate {
-    private final InnerProductDatabase productDatabase;
-
-    public AddProductService(InnerProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
-    }
+    @DIDependency
+    InnerProductDatabase productDatabase;
+    AddProductTitleService titleService = new AddProductTitleService();
+    AddProductDescriptionService descriptionService = new AddProductDescriptionService();
+    AddProductQuantityService quantityService = new AddProductQuantityService();
+    AddProductPriceService priceService = new AddProductPriceService();
 
     public AddProductResponse execute(AddProductRequest addProductRequest) {
         List<CoreError> errors = new ArrayList<>();
-        AddProductTitleService titleService = ProductListApplication.applicationContext.getBean(AddProductTitleService.class);
-        AddProductDescriptionService descriptionService = ProductListApplication.applicationContext.getBean(AddProductDescriptionService.class);
-        AddProductQuantityService quantityService = ProductListApplication.applicationContext.getBean(AddProductQuantityService.class);
-        AddProductPriceService priceService = ProductListApplication.applicationContext.getBean(AddProductPriceService.class);
 
         AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
                 (addProductRequest.getProduct().getTitle()));

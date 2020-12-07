@@ -1,11 +1,13 @@
 package internet_store.database.telegram_database;
 
 import internet_store.core.domain.TelegramChatId;
+import dependency.annotation.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class InnerTelegramDatabaseImpl implements InnerTelegramDatabase {
     List<TelegramChatId> allChatId = new ArrayList<>();
 

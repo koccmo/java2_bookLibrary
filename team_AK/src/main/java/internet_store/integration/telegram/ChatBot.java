@@ -18,12 +18,10 @@ public class ChatBot extends TelegramLongPollingBot {
     private long chatId;
     private String chatMessage;
     private int orderNumber;
-    private final InnerTelegramDatabase telegramDatabase = ProductListApplication.applicationContext
-            .getBean(InnerTelegramDatabase.class);
-    private final FindByOrderNumberService findByOrderNumberService = ProductListApplication
-            .applicationContext.getBean(FindByOrderNumberService.class);
-    private final CheckTelegramChatIdService checkTelegramChatIdService = ProductListApplication
-            .applicationContext.getBean(CheckTelegramChatIdService.class);
+
+    InnerTelegramDatabase telegramDatabase = ProductListApplication.context.getBean(InnerTelegramDatabase.class);
+    FindByOrderNumberService findByOrderNumberService= ProductListApplication.context.getBean(FindByOrderNumberService.class);
+    CheckTelegramChatIdService checkTelegramChatIdService = ProductListApplication.context.getBean(CheckTelegramChatIdService.class);
 
     @Override
     public String getBotUsername() {

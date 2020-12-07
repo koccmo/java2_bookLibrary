@@ -7,15 +7,24 @@ import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.client_database.InnerClientDatabase;
 import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.date_formats.DateCreator;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class OrderCreator {
-    private final InnerClientDatabase clientDatabase;
-    private final InnerCartDatabase cartDatabase;
-    private final InnerOrderDatabase orderDatabase;
+    @DIDependency
+    InnerClientDatabase clientDatabase;
+    @DIDependency
+    InnerCartDatabase cartDatabase;
+    @DIDependency
+    InnerOrderDatabase orderDatabase;
+
+    public OrderCreator() {
+    }
 
     public OrderCreator(InnerClientDatabase clientDatabase, InnerCartDatabase cartDatabase, InnerOrderDatabase orderDatabase) {
         this.cartDatabase = cartDatabase;

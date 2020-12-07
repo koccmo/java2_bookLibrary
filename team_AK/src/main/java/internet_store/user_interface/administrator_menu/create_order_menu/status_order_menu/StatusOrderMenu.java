@@ -1,13 +1,18 @@
 package internet_store.user_interface.administrator_menu.create_order_menu.status_order_menu;
 
+import dependency.annotation.DIComponent;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@DIComponent
 public class StatusOrderMenu {
     @Getter
     private int userInput;
+
+    public StatusOrderMenu() {
+    }
 
     public void showStatusOrderMenu() {
         final int INCORRECT_USER_INPUT = -1;

@@ -6,11 +6,18 @@ import internet_store.core.request.ordering.DeleteOrderRequest;
 import internet_store.core.response.ordering.DeleteOrderResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.order_database.InnerOrderDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class DeleteOrderService {
-    private final InnerOrderDatabase orderDatabase;
+    @DIDependency
+    InnerOrderDatabase orderDatabase;
+
+    public DeleteOrderService() {
+    }
 
     public DeleteOrderService(InnerOrderDatabase orderDatabase) {
         this.orderDatabase = orderDatabase;

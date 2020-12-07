@@ -1,11 +1,12 @@
 package internet_store.database.cart_database;
 
 import internet_store.core.domain.Product;
+import dependency.annotation.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+@DIComponent
 public class InnerCartDatabaseImpl implements InnerCartDatabase {
     private final List<Product> productsInCart = new ArrayList<>();
     private final Product EMPTY_OBJECT = null;

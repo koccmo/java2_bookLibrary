@@ -1,13 +1,13 @@
 package internet_store.core.service.product;
 
 import internet_store.database.product_database.InnerProductDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
+@DIComponent
 public class PrintProductService {
-    final InnerProductDatabase productDatabase;
-
-    public PrintProductService(InnerProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
-    }
+    @DIDependency
+    InnerProductDatabase productDatabase;
 
     public void print() {
         if (productDatabase.isEmpty()) {

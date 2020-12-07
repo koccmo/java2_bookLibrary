@@ -4,12 +4,17 @@ import internet_store.ProductListApplication;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
 import internet_store.core.service.cart.DeleteProductFromCartService;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
+@DIComponent
 public class DeleteFromCartConsole {
+    @DIDependency
+    DeleteProductFromCartService deleteProductFromCartService;
 
     public void deleteFromCart() {
-        final DeleteProductFromCartService deleteProductFromCartService = ProductListApplication
-                .applicationContext.getBean(DeleteProductFromCartService.class);
+//        final DeleteProductFromCartService deleteProductFromCartService = ProductListApplication
+//                .applicationContext.getBean(DeleteProductFromCartService.class);
 
         DeleteFromCartMenu deleteFromCartMenu = new DeleteFromCartMenu();
         deleteFromCartMenu.showMenuDeleteProductFromCart();

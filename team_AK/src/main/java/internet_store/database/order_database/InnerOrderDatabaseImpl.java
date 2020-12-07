@@ -1,10 +1,11 @@
 package internet_store.database.order_database;
 
 import internet_store.core.domain.Order;
+import dependency.annotation.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DIComponent
 public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     private final List<Order> orders = new ArrayList<>();
 
