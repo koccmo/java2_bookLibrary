@@ -20,9 +20,9 @@ public class AcceptanceTestFindCustomerById {
 
     @Test
     public void test(){
-        Customer customer = new Customer("name", "surname", "number", "address",
+        Customer customer = new Customer("name", "surname", "28736278", "address",
                 "email");
-        Customer customer1 = new Customer("name1", "surname20","phone", "Matisa",
+        Customer customer1 = new Customer("name", "surname","20987423", "Matisa",
                 "tr3vis@Inbox.lv");
         Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
                 "Ukraina", "privetpoka@tikto.lv");
@@ -35,7 +35,7 @@ public class AcceptanceTestFindCustomerById {
 
         FindCustomerByIdRequest findCustomerByIdRequest = new FindCustomerByIdRequest(1L);
         FindCustomerByIdRequest findCustomerByIdRequest1 = new FindCustomerByIdRequest(2L);
-        FindCustomerByIdResponse findCustomerByIdResponse =findCustomerByIdService().execute(findCustomerByIdRequest);
+        FindCustomerByIdResponse findCustomerByIdResponse = findCustomerByIdService().execute(findCustomerByIdRequest);
         FindCustomerByIdResponse findCustomerByIdResponse1 = findCustomerByIdService().execute(findCustomerByIdRequest1);
 
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();

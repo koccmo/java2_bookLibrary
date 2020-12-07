@@ -5,15 +5,18 @@ import internet_store.core.request.client.UpdateClientRequest;
 import internet_store.core.response.client.UpdateClientResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.client_database.InnerClientDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
-
+@DIComponent
 public class UpdateClientService {
-    private final InnerClientDatabase clientDatabase;
-
-    public UpdateClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    @DIDependency
+    InnerClientDatabase clientDatabase;
+//
+//    public UpdateClientService(InnerClientDatabase clientDatabase) {
+//        this.clientDatabase = clientDatabase;
+//    }
 
     public UpdateClientResponse execute(UpdateClientRequest updateClientRequest) {
         NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(updateClientRequest.getId());

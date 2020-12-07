@@ -30,7 +30,7 @@ public class AddPatientServicesTest {
 
     @Test
     public void testNotValidSurnameRequest(){
-        PersonalData personalData = new PersonalData("Name", null, "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("Name", null, "12345678", "25052512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("Personal data : surname", "Not valid input for surname");
@@ -70,8 +70,8 @@ public class AddPatientServicesTest {
     }
 
     @Test
-    public void testNDatabaseContainsTheSamePatient(){
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
+    public void testDatabaseContainsTheSamePatient(){
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25052512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("database", "Database contains the same patient");
@@ -87,7 +87,7 @@ public class AddPatientServicesTest {
 
     @Test
     public void testPatientAddedSuccessfully(){
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25052512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         Mockito.when(addPatientRequestValidator.validate(addPatientRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsSpecificPersonalData(personalData)).thenReturn(false);
@@ -95,6 +95,6 @@ public class AddPatientServicesTest {
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
         assertTrue(!addPatientResponse.hasErrors());
         assertTrue(addPatientResponse.getNewPatient().getPersonalData().equals(personalData));
-        Mockito.verify(patientDatabase).addPatient(argThat(new PersonalDataMatcher("12345678900")));
+        Mockito.verify(patientDatabase).addPatient(argThat(new PersonalDataMatcher("25052512345")));
     }
 }

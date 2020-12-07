@@ -36,4 +36,34 @@ public class MainMenuApplication {
                 System.out.println("There is no such option. Please, choose number 1 or 2");
         }
     }
+
+    public void execute() {
+        rerunMainMenu();
+    }
+
+    private void rerunMainMenu() {
+        InternetStoreAdministratorSide internetStoreAdministratorSide = new InternetStoreAdministratorSide();
+        InternetStoreCustomerSide internetStoreCustomerSide = new InternetStoreCustomerSide();
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("1 - Administrator path");
+        System.out.println("2 - Customer path");
+        System.out.println();
+
+        System.out.println("Please enter you choice here: ");
+        int choice = in.nextInt();
+
+        switch (choice) {
+
+            case 1: internetStoreAdministratorSide.run();
+                break;
+
+            case 2: internetStoreCustomerSide.run();
+                break;
+
+            default:
+                System.out.println("There is no such option. Please, choose number 1 or 2");
+        }
+    }
 }

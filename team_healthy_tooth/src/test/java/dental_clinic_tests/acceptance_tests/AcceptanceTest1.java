@@ -19,7 +19,7 @@ public class AcceptanceTest1 {
 
     @Test
     public void test(){
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678911");
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25065612345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         addPatientService().execute(addPatientRequest);
         addPatientService().execute(addPatientRequest);

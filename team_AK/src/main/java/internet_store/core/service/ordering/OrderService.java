@@ -6,12 +6,20 @@ import internet_store.core.response.ordering.OrderResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.client_database.InnerClientDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class OrderService {
-    private final InnerClientDatabase clientDatabase;
-    private final InnerCartDatabase cartDatabase;
+    @DIDependency
+    InnerClientDatabase clientDatabase;
+    @DIDependency
+    InnerCartDatabase cartDatabase;
+
+    public OrderService() {
+    }
 
     public OrderService(InnerClientDatabase clientDatabase, InnerCartDatabase cartDatabase) {
         this.clientDatabase = clientDatabase;

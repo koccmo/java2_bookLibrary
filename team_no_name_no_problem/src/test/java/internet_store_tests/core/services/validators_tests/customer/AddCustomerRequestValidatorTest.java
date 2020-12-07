@@ -17,40 +17,46 @@ public class AddCustomerRequestValidatorTest {
     @Test
     public void testInvalidInputName(){
         CoreError expectedError = new CoreError("name", "Not valid input for name");
+        CoreError expectedError2 = new CoreError("name", "Not valid input for name, should contain only letters");
 
         Customer customer = new Customer("","Jablokov","28765291","Matisa 33-42",
                 "otvali@gmail.com");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         List<CoreError> errors = addCustomerRequestValidator.validate(addCustomerRequest);
 
-        assertTrue(errors.size() == 1);
+        assertTrue(errors.size() == 2);
         assertTrue(errors.contains(expectedError));
+        assertTrue(errors.contains(expectedError2));
     }
 
     @Test
     public void testInvalidInputSurname(){
         CoreError expectedError = new CoreError("surname", "Not valid input for surname");
+        CoreError expectedError2 = new CoreError("surname", "Not valid input for surname, should contain only letters");
 
         Customer customer = new Customer("Jarik","","28765291","Matisa 33-42",
                 "otvali@gmail.com");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         List<CoreError> errors = addCustomerRequestValidator.validate(addCustomerRequest);
 
-        assertTrue(errors.size() == 1);
+        assertTrue(errors.size() == 2);
         assertTrue(errors.contains(expectedError));
+        assertTrue(errors.contains(expectedError2));
     }
 
     @Test
     public void testInvalidInputPhoneNumber(){
         CoreError expectedError = new CoreError("phone number", "Not valid input for phone number");
+        CoreError expectedError2 = new CoreError("phone number", "Not valid input for phone number, should contain only digits");
 
         Customer customer = new Customer("Jarik","Jablokov",null,"Matisa 33-42",
                 "otvali@gmail.com");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         List<CoreError> errors = addCustomerRequestValidator.validate(addCustomerRequest);
 
-        assertTrue(errors.size() == 1);
+        assertTrue(errors.size() == 2);
         assertTrue(errors.contains(expectedError));
+        assertTrue(errors.contains(expectedError2));
     }
 
     @Test

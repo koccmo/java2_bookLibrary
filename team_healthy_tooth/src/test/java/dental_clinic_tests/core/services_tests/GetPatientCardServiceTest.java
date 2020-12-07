@@ -68,7 +68,7 @@ public class GetPatientCardServiceTest {
     @Test
     public void testSuccessfullyFound(){
         GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(5L);
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25052512345");
         Patient patientCard = new Patient(personalData);
 
         Mockito.when(getPatientCardRequestValidator.validate(getPatientCardRequest)).thenReturn(new ArrayList<>());

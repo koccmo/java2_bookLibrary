@@ -13,16 +13,16 @@ import internet_store.core.response.client.client_items.AddClientNameResponse;
 import internet_store.core.response.client.client_items.AddClientPhoneResponse;
 import internet_store.core.response.client.client_items.AddClientSurnameResponse;
 import internet_store.database.client_database.InnerClientDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class AddClientService implements ClientUpdate {
-    private final InnerClientDatabase clientDatabase;
-
-    public AddClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    @DIDependency
+    InnerClientDatabase clientDatabase;
 
     public AddClientResponse execute(AddClientRequest addClientRequest) {
         List<CoreError> errors = new ArrayList<>();

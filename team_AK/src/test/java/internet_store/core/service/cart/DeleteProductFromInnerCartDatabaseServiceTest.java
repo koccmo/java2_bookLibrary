@@ -3,12 +3,10 @@ package internet_store.core.service.cart;
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
-import internet_store.core.service.cart.DeleteProductFromCartService;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabase;
 import internet_store.database.product_database.InnerProductDatabaseImpl;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -16,18 +14,12 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteProductFromInnerCartDatabaseServiceTest {
-
-
-    @Before
-    public void startUp() {
-
-    }
-
     @Test
     public void shouldReturnNoErrors() {
         InnerCartDatabase cart = new InnerCartDatabaseImpl();
         DeleteProductFromCartService service = new DeleteProductFromCartService(cart);
         InnerProductDatabase productDatabase = new InnerProductDatabaseImpl();
+
         Product product = new Product();
         product.setId(1L);
         product.setTitle("Title");

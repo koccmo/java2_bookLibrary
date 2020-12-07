@@ -16,9 +16,9 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidName(){
-        CoreError coreError = new CoreError("Personal data : name", "Not valid input for name");
+        CoreError coreError = new CoreError("Personal data : name", "Name can't be empty");
 
-        PersonalData personalData = new PersonalData(null, "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData(null, "Surname", "12345678", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
         List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
@@ -28,9 +28,9 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidSurname(){
-        CoreError coreError = new CoreError("Personal data : surname", "Not valid input for surname");
+        CoreError coreError = new CoreError("Personal data : surname", "Surname can't be empty");
 
-        PersonalData personalData = new PersonalData("name", "", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("name", "", "12345678", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
         List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
@@ -40,9 +40,9 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhone(){
-        CoreError coreError = new CoreError("Personal data : phone", "Not valid input for phone");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
 
-        PersonalData personalData = new PersonalData("name", "Surname", "avbd4", "12345678900");
+        PersonalData personalData = new PersonalData("name", "Surname", "avbd4", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
         List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
@@ -52,9 +52,9 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhoneWrongLength(){
-        CoreError coreError = new CoreError("Personal data : phone", "Not valid input for phone");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
 
-        PersonalData personalData = new PersonalData("name", "Surname", "12546", "12345678900");
+        PersonalData personalData = new PersonalData("name", "Surname", "12546", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
 
         List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
@@ -64,7 +64,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPersonalCodeLetters(){
-        CoreError coreError = new CoreError("Personal data : personal code", "Not valid input for personal code");
+        CoreError coreError = new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "adfds");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -76,7 +76,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPersonalCodeWrongLength(){
-        CoreError coreError = new CoreError("Personal data : personal code", "Not valid input for personal code");
+        CoreError coreError = new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "1235");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -84,6 +84,15 @@ public class AddPatientRequestValidatorTest {
         List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
         assertTrue(errors.size() == 1);
         assertTrue(errors.contains(coreError));
+    }
+
+    @Test
+    public void validRequest(){
+        PersonalData personalData = new PersonalData("name", "Surname", "12345678", "25024512345");
+        AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
+
+        List<CoreError> errors = addPatientRequestValidator.validate(addPatientRequest);
+        assertTrue(errors.size() == 0);
     }
 
 }

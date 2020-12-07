@@ -34,7 +34,7 @@ public class AcceptanceTestDeleteCustomerFail {
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 1);
     }
 
     private DeleteCustomerService deleteCustomerService(){

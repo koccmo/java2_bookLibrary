@@ -7,14 +7,22 @@ import internet_store.core.response.cart.UpdateCartResponse;
 import internet_store.core.validate.ProductQuantityValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.product_database.InnerProductDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class UpdateCartService {
-    private final InnerProductDatabase productDatabase;
-    private final InnerCartDatabase cartDatabase;
+    @DIDependency
+    InnerProductDatabase productDatabase;
+    @DIDependency
+    InnerCartDatabase cartDatabase;
+
+    public UpdateCartService() {
+    }
 
     public UpdateCartService(InnerProductDatabase productDatabase, InnerCartDatabase cartDatabase) {
         this.productDatabase = productDatabase;

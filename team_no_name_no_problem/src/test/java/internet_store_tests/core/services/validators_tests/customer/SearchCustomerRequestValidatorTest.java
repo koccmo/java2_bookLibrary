@@ -20,13 +20,17 @@ public class SearchCustomerRequestValidatorTest {
     @Test
     public void testEmptyFieldSearch(){
         CoreError expectedError = new CoreError("search", "Not valid input for search");
+        CoreError expectedError2 = new CoreError("name", "Not valid input for name, should contain only letters");
+        CoreError expectedError3 = new CoreError("surname", "Not valid input for surname, should contain only letters");
 
         SearchCustomerRequest searchCustomerRequest = new SearchCustomerRequest
                 (null, "",validOrdering, validPaging);
         List<CoreError> errors = searchCustomerRequestValidator.validate(searchCustomerRequest);
 
-        assertTrue(errors.size() == 1);
+        assertTrue(errors.size() == 3);
         assertTrue(errors.contains(expectedError));
+        assertTrue(errors.contains(expectedError2));
+        assertTrue(errors.contains(expectedError3));
     }
 
     @Test
@@ -35,7 +39,7 @@ public class SearchCustomerRequestValidatorTest {
                 ("Jaroslav", "",validOrdering,validPaging);
         List<CoreError> errors = searchCustomerRequestValidator.validate(searchCustomerRequest);
 
-        assertTrue(errors.size() == 0);
+        assertTrue(errors.size() == 1);
 
     }
 
@@ -45,7 +49,7 @@ public class SearchCustomerRequestValidatorTest {
                 (null, "Antonov",validOrdering,validPaging);
         List<CoreError> errors = searchCustomerRequestValidator.validate(searchCustomerRequest);
 
-        assertTrue(errors.size() == 0);
+        assertTrue(errors.size() == 1);
     }
 
     @Test

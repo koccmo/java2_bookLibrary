@@ -1,11 +1,12 @@
 package internet_store.database.client_database;
 
 import internet_store.core.domain.Client;
+import dependency.annotation.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+@DIComponent
 public class InnerClientDatabaseImpl implements InnerClientDatabase {
     private final List<Client> clients = new ArrayList<>();
     private final Client EMPTY_OBJECT = null;

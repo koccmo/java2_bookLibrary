@@ -25,48 +25,55 @@ public class AddPatientRequestValidator {
     private List <CoreError> isValidPersonalData(PersonalData personalData){
         List <CoreError> errors = new ArrayList<>();
 
-        if (!isValidName(personalData.getName())){
-            errors.add(new CoreError("Personal data : name", "Not valid input for name"));
-        }
-        if (!isValidSurname(personalData.getSurname())){
-            errors.add(new CoreError("Personal data : surname", "Not valid input for surname"));
-        }
-        if (!isValidPhone(personalData.getPhone())){
-            errors.add(new CoreError("Personal data : phone", "Not valid input for phone"));
-        }
-        if (!isValidPersonalCode(personalData.getPersonalCode())){
-            errors.add(new CoreError("Personal data : personal code", "Not valid input for personal code"));
+        errors.addAll(nameValidationErrors(personalData.getName()));
+
+        errors.addAll(surnameValidationErrors(personalData.getSurname()));
+
+        errors.addAll(phoneValidationErrors(personalData.getPhone()));
+
+        errors.addAll(personalCodeValidationErrors(personalData.getPersonalCode()));
+
+        return errors;
+    }
+
+    private List<CoreError> nameValidationErrors(String name){
+        List <CoreError> errors = new ArrayList<>();
+        if (name == null || name.isEmpty()) {
+            errors.add(new CoreError("Personal data : name", "Name can't be empty"));
+        }else{
+            if (!name.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")){
+                errors.add(new CoreError("Personal data : name", "Name can contain only letters"));
+            }
         }
         return errors;
     }
 
-    private boolean isValidName(String name){
-        return name != null && !name.isEmpty();
-    }
-
-    private boolean isValidSurname(String surname){
-        return surname != null && !surname.isEmpty();
-    }
-
-    private boolean isValidPhone(String phone){
-        return containsOnlyDigits(phone) && phone.length() == 8;
-    }
-
-    private boolean isValidPersonalCode(String personalCode){
-        return containsOnlyDigits(personalCode) && personalCode.length() == 11;
-    }
-
-    private boolean containsOnlyDigits(String input){
-        String regex = "[0-9]+";
-
-        Pattern p = Pattern.compile(regex);
-        if (input == null) {
-            return false;
+    private List<CoreError> surnameValidationErrors(String surname){
+        List <CoreError> errors = new ArrayList<>();
+        if (surname == null || surname.isEmpty()){
+            errors.add(new CoreError("Personal data : surname", "Surname can't be empty"));
+        } else{
+            if (!surname.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")) {
+                errors.add(new CoreError("Personal data : surname", "Surname can contain only letters"));
+            }
         }
+        return errors;
+    }
 
-        Matcher m = p.matcher(input);
+    private List<CoreError> phoneValidationErrors(String phone){
+        List <CoreError> errors = new ArrayList<>();
+        if (!phone.matches("\\d{8}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 digits"));
+        }
+        return errors;
+    }
 
-        return m.matches();
+    private List<CoreError> personalCodeValidationErrors(String personalCode){
+        List <CoreError> errors = new ArrayList<>();
+        if (!Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode)) {
+            errors.add(new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
+        }
+        return errors;
     }
 
 }

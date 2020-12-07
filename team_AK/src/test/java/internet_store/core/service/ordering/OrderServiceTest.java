@@ -42,7 +42,7 @@ public class OrderServiceTest {
         clientDatabase.addClient(client);
         cartDatabase.addProductToCart(productInCart);
 
-        OrderService service = new OrderService(clientDatabase, cartDatabase);
+        OrderService service = new OrderService(clientDatabase,cartDatabase);
         OrderResponse response = service.execute(new OrderRequest(1L));
         assertEquals(1L, response.getId());
     }
@@ -55,7 +55,7 @@ public class OrderServiceTest {
         clientDatabase.addClient(client);
         cartDatabase.addProductToCart(productInCart);
 
-        OrderService service = new OrderService(clientDatabase, cartDatabase);
+        OrderService service = new OrderService(clientDatabase,cartDatabase);
         OrderResponse response = service.execute(new OrderRequest(5L));
 
         assertEquals("Id error ", response.getErrors().get(0).getField());
@@ -69,7 +69,7 @@ public class OrderServiceTest {
 
         clientDatabase.addClient(client);
 
-        OrderService service = new OrderService(clientDatabase, cartDatabase);
+        OrderService service = new OrderService(clientDatabase,cartDatabase);
         OrderResponse response = service.execute(new OrderRequest(1L));
 
         assertEquals("Cart error ", response.getErrors().get(0).getField());
@@ -81,7 +81,7 @@ public class OrderServiceTest {
         final InnerCartDatabase cartDatabase = new InnerCartDatabaseImpl();
         final InnerClientDatabase clientDatabase = new InnerClientDatabaseImpl();
 
-        OrderService service = new OrderService(clientDatabase, cartDatabase);
+        OrderService service = new OrderService(clientDatabase,cartDatabase);
         OrderResponse response = service.execute(new OrderRequest(1L));
 
         assertEquals("Cart error ", response.getErrors().get(0).getField());

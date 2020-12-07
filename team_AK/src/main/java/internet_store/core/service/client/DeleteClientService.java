@@ -6,11 +6,18 @@ import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.client_database.InnerClientDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class DeleteClientService {
-    private final InnerClientDatabase clientDatabase;
+    @DIDependency
+    InnerClientDatabase clientDatabase;
+
+    public DeleteClientService() {
+    }
 
     public DeleteClientService(InnerClientDatabase clientDatabase) {
         this.clientDatabase = clientDatabase;

@@ -61,7 +61,7 @@ public class DeletePatientServicesTest {
 
     @Test
     public void testAddedSuccessfully(){
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25052512345");
         Patient patient = new Patient(personalData);
         patient.getPersonalData().setId(8L);
         List <Patient> patients = new ArrayList<>();
