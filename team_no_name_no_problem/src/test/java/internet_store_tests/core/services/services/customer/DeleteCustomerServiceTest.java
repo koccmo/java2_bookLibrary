@@ -4,7 +4,7 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.DeleteCustomerResponse;
-import internet_store.core.services.customer.DeleteCustomerRequestValidator;
+import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.database.customer.CustomerDatabase;
 import org.junit.Test;
