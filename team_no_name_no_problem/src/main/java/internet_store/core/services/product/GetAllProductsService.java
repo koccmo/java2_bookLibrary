@@ -6,9 +6,11 @@ import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.validators.GetAllProductsValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class GetAllProductsService {
 
