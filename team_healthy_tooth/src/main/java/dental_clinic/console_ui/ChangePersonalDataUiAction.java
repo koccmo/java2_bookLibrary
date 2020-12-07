@@ -52,7 +52,7 @@ public class ChangePersonalDataUiAction implements UIAction {
     }
 
     private void printResult(String surname, String phone){
-        if (surname != null && !surname.isEmpty() && phone != null && !phone.isEmpty()) {
+        if ((surname != null && !surname.isEmpty()) || (phone != null && !phone.isEmpty())) {
             System.out.println("Patient's personal data updated!");
         }else{
             System.out.println("No input for update");
