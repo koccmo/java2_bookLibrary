@@ -5,7 +5,7 @@ import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.GetAllCustomersService;
-import internet_store.core.services.customer.GetAllCustomersValidator;
+import internet_store.core.services.customer.validators.GetAllCustomersValidator;
 import internet_store.database.customer.CustomerDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
