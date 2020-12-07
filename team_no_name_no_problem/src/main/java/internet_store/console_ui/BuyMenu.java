@@ -23,7 +23,8 @@ public class BuyMenu implements UIAction {
 
     }
 
-    public void run() {
+    @Override
+    public void execute() {
 
         while (true) {
 
@@ -48,10 +49,5 @@ public class BuyMenu implements UIAction {
         } else {
             System.out.println("Menu item does not exist: " + userSelectedMenuNumber);
         }
-    }
-
-    @Override
-    public void execute() {
-
     }
 }

@@ -26,6 +26,8 @@ public class InternetStoreCustomerSide {
 
         menuNumberToAction = new HashMap();
 
+
+
         menuNumberToAction.put(1, new AddCustomerUIAction(applicationContext.getBean(AddCustomerService.class)));
         menuNumberToAction.put(2, new DeleteCustomerUIAction(applicationContext.getBean(DeleteCustomerService.class)));
         menuNumberToAction.put(3, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
