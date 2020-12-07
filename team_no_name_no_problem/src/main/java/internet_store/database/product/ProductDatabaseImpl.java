@@ -1,12 +1,14 @@
 package internet_store.database.product;
 
 import internet_store.core.domain.Product;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class ProductDatabaseImpl implements ProductDatabase{
 
     private Long id= 1L;
