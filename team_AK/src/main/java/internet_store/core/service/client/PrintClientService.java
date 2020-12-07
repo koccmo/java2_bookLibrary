@@ -1,13 +1,19 @@
 package internet_store.core.service.client;
 
 import internet_store.database.client_database.InnerClientDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
+@DIComponent
 public class PrintClientService {
-    private final InnerClientDatabase clientDatabase;
+    @DIDependency
+    InnerClientDatabase clientDatabase;
 
-    public PrintClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+//    public PrintClientService() {}
+
+//    public PrintClientService(InnerClientDatabase clientDatabase) {
+//        this.clientDatabase = clientDatabase;
+//    }
 
     public void print() {
 

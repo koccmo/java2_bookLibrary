@@ -5,15 +5,14 @@ import internet_store.core.request.product.UpdateProductRequest;
 import internet_store.core.response.product.UpdateProductResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.product_database.InnerProductDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
-
+@DIComponent
 public class UpdateProductService {
-    private final InnerProductDatabase productDatabase;
-
-    public UpdateProductService(InnerProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
-    }
+    @DIDependency
+    InnerProductDatabase productDatabase;
 
     public UpdateProductResponse execute(UpdateProductRequest updateProductRequest) {
         NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(updateProductRequest.getId());

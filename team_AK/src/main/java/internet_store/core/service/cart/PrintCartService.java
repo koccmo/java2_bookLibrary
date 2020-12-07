@@ -2,15 +2,21 @@ package internet_store.core.service.cart;
 
 import internet_store.core.domain.Product;
 import internet_store.database.cart_database.InnerCartDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class PrintCartService {
-    private final InnerCartDatabase cartDatabase;
+    @DIDependency
+    InnerCartDatabase cartDatabase;
 
-    public PrintCartService(InnerCartDatabase cartDatabase) {
-        this.cartDatabase = cartDatabase;
-    }
+//    public PrintCartService() {}
+
+//    public PrintCartService(InnerCartDatabase cartDatabase) {
+//        this.cartDatabase = cartDatabase;
+//    }
 
     public void print() {
         List<Product> getAllProducts = cartDatabase.getCart();

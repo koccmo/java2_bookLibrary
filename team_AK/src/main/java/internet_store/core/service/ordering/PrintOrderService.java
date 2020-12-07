@@ -1,13 +1,13 @@
 package internet_store.core.service.ordering;
 
 import internet_store.database.order_database.InnerOrderDatabase;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
+@DIComponent
 public class PrintOrderService {
-    private final InnerOrderDatabase orderDatabase;
-
-    public PrintOrderService(InnerOrderDatabase orderDatabase) {
-        this.orderDatabase = orderDatabase;
-    }
+    @DIDependency
+    InnerOrderDatabase orderDatabase;
 
     public void print() {
         if (orderDatabase.isEmpty()) {

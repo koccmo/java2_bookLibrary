@@ -1,6 +1,5 @@
 package internet_store.user_interface.administrator_menu.create_order_menu.status_order_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.request.ordering.CheckOrderIdRequest;
 import internet_store.core.request.ordering.OrderStatusRequest;
 import internet_store.core.response.ordering.CheckOrderIdResponse;
@@ -8,22 +7,23 @@ import internet_store.core.service.ordering.CheckOrderService;
 import internet_store.core.service.ordering.OrderStatus;
 import internet_store.core.service.ordering.OrderStatusService;
 import internet_store.user_interface.administrator_menu.create_order_menu.OrderMenuConsole;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
+@DIComponent
 public class StatusOrderConsole {
-
-    private final OrderMenuConsole orderMenuConsole;
-
-    public StatusOrderConsole(OrderMenuConsole orderMenuConsole) {
-        this.orderMenuConsole = orderMenuConsole;
-    }
+    @DIDependency
+    StatusOrderMenu statusOrderMenu;
+    @DIDependency
+    OrderIdMenu orderIdMenu;
+    @DIDependency
+    OrderStatusService orderStatusService;
+    @DIDependency
+    OrderMenuConsole orderMenuConsole;
+    @DIDependency
+    CheckOrderService checkOrderService;
 
     public void startOrderStatusMenuConsole() {
-        final StatusOrderMenu statusOrderMenu = ProductListApplication.applicationContext
-                .getBean(StatusOrderMenu.class);
-        final OrderIdMenu orderIdMenu = ProductListApplication.applicationContext
-                .getBean(OrderIdMenu.class);
-        final OrderStatusService orderStatusService = ProductListApplication.applicationContext
-                .getBean(OrderStatusService.class);
         boolean returnOrderMenu = true;
 
         orderIdMenu.showMenuDeleteOrderId();
@@ -71,8 +71,6 @@ public class StatusOrderConsole {
     }
 
     private boolean isOrderIdValidate(long orderId) {
-        final CheckOrderService checkOrderService = ProductListApplication.applicationContext
-                .getBean(CheckOrderService.class);
 
         CheckOrderIdRequest request = new CheckOrderIdRequest(orderId);
         CheckOrderIdResponse response = checkOrderService.execute(request);

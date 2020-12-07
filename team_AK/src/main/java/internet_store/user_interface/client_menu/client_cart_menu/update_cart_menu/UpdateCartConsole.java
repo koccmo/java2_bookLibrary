@@ -4,14 +4,19 @@ import internet_store.ProductListApplication;
 import internet_store.core.request.cart.UpdateCartRequest;
 import internet_store.core.response.cart.UpdateCartResponse;
 import internet_store.core.service.cart.UpdateCartService;
+import dependency.annotation.DIComponent;
+import dependency.annotation.DIDependency;
 
 import java.math.BigDecimal;
 
+@DIComponent
 public class UpdateCartConsole {
+    @DIDependency
+    UpdateCartService updateCartService;
 
     public void updateCart() {
-        final UpdateCartService updateCartService = ProductListApplication.applicationContext
-                .getBean(UpdateCartService.class);
+//        final UpdateCartService updateCartService = ProductListApplication.applicationContext
+//                .getBean(UpdateCartService.class);
         UpdateCartIdMenu updateCartIdMenu = new UpdateCartIdMenu();
         UpdateCartQuantityMenu updateCartQuantityMenu = new UpdateCartQuantityMenu();
 

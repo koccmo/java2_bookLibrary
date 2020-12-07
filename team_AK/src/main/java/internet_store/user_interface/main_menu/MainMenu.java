@@ -1,13 +1,16 @@
 package internet_store.user_interface.main_menu;
 
+import dependency.annotation.DIComponent;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+@DIComponent
 public class MainMenu {
     @Getter
     private int userInput;
+
+    public MainMenu() {}
 
     public void showMainMenu() {
         final int INCORRECT_USER_INPUT = -1;
