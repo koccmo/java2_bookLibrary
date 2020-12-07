@@ -112,8 +112,8 @@ public class SearchPatientServiceTest {
 
     @Test
     public void testSearchByName(){
-        PersonalData personalData1 = new PersonalData("Bob", "Z", "12345678", "12345678900");
-        PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "12345678902");
+        PersonalData personalData1 = new PersonalData("Bob", "Z", "12345678", "25052512345");
+        PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "25052512345");
         Patient patient1 = new Patient(personalData1);
         Patient patient2 = new Patient(personalData2);
         List<Patient>patients = new ArrayList<>();
@@ -136,8 +136,8 @@ public class SearchPatientServiceTest {
 
     @Test
     public void testSearchByNamePageSize1(){
-        PersonalData personalData1 = new PersonalData("Bob", "Z", "12345678", "12345678900");
-        PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "12345678902");
+        PersonalData personalData1 = new PersonalData("Bob", "Z", "12345678", "25052512345");
+        PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "25052512345");
         Patient patient1 = new Patient(personalData1);
         Patient patient2 = new Patient(personalData2);
         List<Patient>patients = new ArrayList<>();

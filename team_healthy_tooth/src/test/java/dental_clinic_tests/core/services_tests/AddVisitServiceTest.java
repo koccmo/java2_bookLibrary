@@ -89,7 +89,7 @@ public class AddVisitServiceTest {
 
     @Test
     public void testVisitSuccessfullyAdded() {
-        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25052512345");
         Patient patient = new Patient(personalData);
         List<Patient> patients = new ArrayList<>();
         patient.getPersonalData().setId(1L);

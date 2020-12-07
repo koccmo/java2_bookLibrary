@@ -50,13 +50,13 @@ public class SearchPatientByPersonalCodeServiceTest {
 
     @Test
     public void testNoIdInDatabase(){
-        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("12345678900");
-        CoreError expectedError = new CoreError("database", "Database doesn't contain patient with personal code 12345678900");
+        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("25052512345");
+        CoreError expectedError = new CoreError("database", "Database doesn't contain patient with personal code 25052512345");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
         Mockito.when(searchPatientByPersonalCodeRequestValidator.validate(searchPatientByPersonalCodeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.findPatientsByPersonalCode("12345678900")).thenReturn(Optional.empty());
+        Mockito.when(patientDatabase.findPatientsByPersonalCode("25052512345")).thenReturn(Optional.empty());
         SearchPatientByPersonalCodeResponse searchPatientByPersonalCodeResponse = searchPatientsByPersonalCodeService.execute(searchPatientByPersonalCodeRequest);
 
         assertTrue(searchPatientByPersonalCodeResponse.hasErrors());
@@ -66,16 +66,16 @@ public class SearchPatientByPersonalCodeServiceTest {
 
     @Test
     public void testSuccessfullyFound(){
-        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("12345678900");
+        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("25052512345");
 
         Mockito.when(searchPatientByPersonalCodeRequestValidator.validate(searchPatientByPersonalCodeRequest)).thenReturn(new ArrayList<>());
-        Patient patient = new Patient(new PersonalData("Name", "Surname", "12345678", "12345678900"));
+        Patient patient = new Patient(new PersonalData("Name", "Surname", "12345678", "25052512345"));
         Optional<Patient> patientResult = Optional.of(patient);
-        Mockito.when(patientDatabase.findPatientsByPersonalCode("12345678900")).thenReturn(patientResult);
+        Mockito.when(patientDatabase.findPatientsByPersonalCode("25052512345")).thenReturn(patientResult);
         SearchPatientByPersonalCodeResponse searchPatientByPersonalCodeResponse = searchPatientsByPersonalCodeService.execute(searchPatientByPersonalCodeRequest);
 
         assertFalse(searchPatientByPersonalCodeResponse.hasErrors());
 
-        assertTrue(searchPatientByPersonalCodeResponse.getFoundPatient().getPersonalData().getPersonalCode().equals("12345678900"));
+        assertTrue(searchPatientByPersonalCodeResponse.getFoundPatient().getPersonalData().getPersonalCode().equals("25052512345"));
     }
 }

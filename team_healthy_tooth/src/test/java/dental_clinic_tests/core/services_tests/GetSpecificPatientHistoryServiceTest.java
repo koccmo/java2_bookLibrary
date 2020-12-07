@@ -68,7 +68,7 @@ public class GetSpecificPatientHistoryServiceTest {
 
     @Test
     public void testPatientFounded(){
-        PersonalData personalData = new PersonalData("NAme", "Surname", "12345678", "12345678900");
+        PersonalData personalData = new PersonalData("NAme", "Surname", "12345678", "25052512345");
         Patient patient = new Patient(personalData);
         List <Patient>patients = new ArrayList<>();
         patients.add(patient);
