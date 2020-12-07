@@ -3,7 +3,7 @@ package internet_store_tests.core.services.validators_tests.customer;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.services.customer.AddCustomerRequestValidator;
+import internet_store.core.services.customer.validators.AddCustomerRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
