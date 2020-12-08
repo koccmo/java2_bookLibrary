@@ -1,7 +1,7 @@
 package internet_store.console_ui;
 
 import internet_store.console_ui.product.BuyProductUIAction;
-import internet_store.core.services.product.validators.BuyProductService;
+import internet_store.core.services.product.BuyProductService;
 import internet_store.dependency_injection.ApplicationContext;
 
 import java.util.HashMap;
