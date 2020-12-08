@@ -1,21 +1,14 @@
 package team_VK.application;
 
-import team_VK.application.core.services.*;
-import team_VK.application.database.DataBaseFiller;
-import team_VK.application.database.Database;
-import team_VK.application.database.DatabaseInMemory;
-import team_VK.application.database.DataBaseClientFiller;
-import team_VK.application.database.DatabaseClients;
-import team_VK.application.database.DatabaseClientsInMemory;
+
 import team_VK.application.ui.AddBookUIAction;
 import team_VK.application.ui.ExitProgramUIAction;
-import team_VK.application.ui.GetBooksListUIAction;
 import team_VK.application.ui.RemoveBookUIAction;
 import team_VK.application.ui.AddClientUIActions;
 import team_VK.application.ui.BookBookUIAction;
-import team_VK.application.ui.ShowBookUIActions;
 
 import java.text.ParseException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class LibraryApplication {
@@ -23,7 +16,7 @@ public class LibraryApplication {
     public static void main(String[] args) throws ParseException {
 
         ApplicationContext context = new ApplicationContext();
-
+        BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = new BookSearchAndBookMenuUIAction(context);
 
 //        Database database = new DatabaseInMemory();
 //        DataBaseFiller DBFiller = new DataBaseFiller(database);
@@ -75,14 +68,13 @@ public class LibraryApplication {
                     break;
                 }
                 case 3: {
-                    GetBooksListUIAction getBooksListUIAction = context.getBean(GetBooksListUIAction.class);
-                    getBooksListUIAction.execute();
+                    bookSearchAndBookMenuUIAction.execute();
                     break;
                 }
-                case 4:
-                    ShowBookUIActions showBookUIActions = context.getBean(ShowBookUIActions.class);
-                    showBookUIActions.execute();
-                    break;
+//                case 4:
+//                    ShowBookUIActions showBookUIActions = context.getBean(ShowBookUIActions.class);
+//                    showBookUIActions.execute();
+//                    break;
                 case 5:
                     BookBookUIAction bookBookUIAction = context.getBean(BookBookUIAction.class);
                     bookBookUIAction.execute();
@@ -105,8 +97,8 @@ public class LibraryApplication {
         System.out.println("Please select your action.");
         System.out.println("1. Add new book.");
         System.out.println("2. Delete book.");
-        System.out.println("3. Get books list.");
-        System.out.println("4. Show book parameters by ID.");
+        System.out.println("3. Search book and make booking.");
+        //   System.out.println("4. Show book parameters by ID.");
         System.out.println("5. Book book.");
         System.out.println("6. Register new Client.");
         System.out.println("7. Exit program.");
@@ -115,8 +107,20 @@ public class LibraryApplication {
     }
 
     private static int userChoice() {
+        try {
+            return userChoiceWithPossibleException();
+        } catch (Exception e){
+            return 0;
+        }
+    }
+
+    private static int userChoiceWithPossibleException() throws NumberFormatException {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        String choiceString = scanner.nextLine();
+        Optional<Integer> choice = Optional.of(Integer.valueOf(choiceString));
+        if (choice.isPresent())
+            return choice.get();
+        else return 0;
     }
 
 

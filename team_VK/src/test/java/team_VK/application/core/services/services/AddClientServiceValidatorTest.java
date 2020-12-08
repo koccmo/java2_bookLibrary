@@ -1,10 +1,11 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.services;
 
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.core.services.AddClientServiceValidator;
 
 import java.util.List;
 
