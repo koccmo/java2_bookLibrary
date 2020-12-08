@@ -6,8 +6,10 @@ import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.List;
+
 
 public class DeleteByIdService {
 

@@ -4,7 +4,7 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
-import internet_store.core.services.customer.FindCustomerByIdRequestValidator;
+import internet_store.core.services.customer.validators.FindCustomerByIdRequestValidator;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.database.customer.CustomerDatabase;
 import org.junit.Test;

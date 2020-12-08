@@ -3,11 +3,14 @@ package internet_store.core.services.customer;
 import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.GetAllCustomersResponse;
+import internet_store.core.services.customer.validators.GetAllCustomersValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class GetAllCustomersService {
 

@@ -26,11 +26,13 @@ public class InternetStoreCustomerSide {
 
         menuNumberToAction = new HashMap();
 
+
+
         menuNumberToAction.put(1, new AddCustomerUIAction(applicationContext.getBean(AddCustomerService.class)));
         menuNumberToAction.put(2, new DeleteCustomerUIAction(applicationContext.getBean(DeleteCustomerService.class)));
         menuNumberToAction.put(3, new SearchProductUIAction(applicationContext.getBean(SearchProductService.class)));
         menuNumberToAction.put(4, new GetAllProductsUIAction(applicationContext.getBean(GetAllProductsService.class)));
-        menuNumberToAction.put(5, new AddProductToShoppingCartUIAction(applicationContext.getBean(AddToShoppingCartService.class)));
+        menuNumberToAction.put(5, new BuyMenu());
         menuNumberToAction.put(6, new ExitToMainMenuUIAction());
         menuNumberToAction.put(0, new ExitFromApplicationUIAction());
     }

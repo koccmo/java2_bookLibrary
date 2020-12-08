@@ -4,7 +4,7 @@ import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.services.customer.SearchCustomerRequestValidator;
+import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

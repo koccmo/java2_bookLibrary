@@ -1,10 +1,9 @@
 package internet_store.console_ui.product;
 
 import internet_store.console_ui.UIAction;
-import internet_store.core.domain.ShoppingCart;
 import internet_store.core.requests.product.BuyProductRequest;
 import internet_store.core.response.product.BuyProductResponse;
-import internet_store.core.services.product.validators.BuyProductService;
+import internet_store.core.services.product.BuyProductService;
 
 import java.util.Scanner;
 
