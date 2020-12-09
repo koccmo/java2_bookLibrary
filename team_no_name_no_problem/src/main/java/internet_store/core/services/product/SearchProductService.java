@@ -9,22 +9,18 @@ import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@DIComponent
 public class SearchProductService {
 
-    private final ProductDatabase productDatabase;
-    private final SearchProductRequestValidator searchProductRequestValidator;
-
-    public SearchProductService(ProductDatabase productDatabase, SearchProductRequestValidator searchProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.searchProductRequestValidator = searchProductRequestValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private SearchProductRequestValidator searchProductRequestValidator;
 
     public SearchProductResponse execute (SearchProductRequest searchProductRequest){
         List<CoreError> errors = searchProductRequestValidator.validate(searchProductRequest);
