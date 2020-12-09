@@ -18,7 +18,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestSearchCustomerBySurname {
-
+/*
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("internet_store");
     @Test
@@ -64,5 +64,5 @@ public class AcceptanceTestSearchCustomerBySurname {
 
     private SearchCustomerService searchCustomerService(){
         return applicationContext.getBean(SearchCustomerService.class);
-    }
+    }*/
 }

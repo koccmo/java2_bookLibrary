@@ -17,7 +17,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AcceptanceTestFindCustomerByIdFail {
-
+/*
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("internet_store");
     @Test
@@ -63,5 +63,5 @@ public class AcceptanceTestFindCustomerByIdFail {
 
     private GetAllCustomersService getAllCustomersService(){
         return applicationContext.getBean(GetAllCustomersService.class);
-    }
+    }*/
 }

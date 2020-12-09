@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTestDeleteProduct2 {
-
+/*
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("internet_store");
     @Test
@@ -49,5 +49,5 @@ public class AcceptanceTestDeleteProduct2 {
 
     private DeleteByIdService deleteProductByIdService(){
         return applicationContext.getBean(DeleteByIdService.class);
-    }
+    }*/
 }

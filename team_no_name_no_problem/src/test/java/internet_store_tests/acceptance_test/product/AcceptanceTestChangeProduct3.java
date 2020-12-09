@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestChangeProduct3 {
-
+/*
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("internet_store");
     @Test
@@ -50,6 +50,6 @@ public class AcceptanceTestChangeProduct3 {
 
     private GetAllProductsService getAllProductsService() {
         return applicationContext.getBean(GetAllProductsService.class);
-    }
+    }*/
 }
 

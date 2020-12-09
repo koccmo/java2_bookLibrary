@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class DIComponentCreatorTest {
-
+/*
     ApplicationContext applicationContext = new ApplicationContext();
     ClassFinder classFinder = new ClassFinder();
     DIComponentFiler diComponentFiler = new DIComponentFiler();
@@ -30,5 +30,5 @@ public class DIComponentCreatorTest {
 
         assertTrue(applicationContext.getBeans().size() == 0);
 
-    }
+    }*/
 }

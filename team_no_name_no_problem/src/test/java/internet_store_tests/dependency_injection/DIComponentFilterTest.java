@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class DIComponentFilterTest {
-
+/*
     ClassFinder classFinder = new ClassFinder();
     DIComponentFiler diComponentFiler = new DIComponentFiler();
 
@@ -21,5 +21,5 @@ public class DIComponentFilterTest {
 
         assertTrue(annotatedClasses.size() == 2);
         assertTrue(annotatedClasses.get(1).getName().equals("internet_store.database.product.ProductDatabaseImpl"));
-    }
+    }*/
 }

@@ -11,7 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestGetAllCustomers {
-
+/*
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("internet_store");
     @Test
@@ -24,5 +24,5 @@ public class AcceptanceTestGetAllCustomers {
 
     private GetAllCustomersService getAllCustomersService(){
         return applicationContext.getBean(GetAllCustomersService.class);
-    }
+    }*/
 }
