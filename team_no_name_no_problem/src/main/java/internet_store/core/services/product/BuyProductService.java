@@ -1,22 +1,24 @@
 package internet_store.core.services.product;
 
+import internet_store.core.domain.Product;
 import internet_store.core.requests.product.BuyProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.BuyProductResponse;
 import internet_store.core.services.product.validators.BuyProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@DIComponent
 public class BuyProductService {
 
-    private final ProductDatabase productDatabase;
-    private final BuyProductRequestValidator buyProductRequestValidator;
-
-    public BuyProductService(ProductDatabase productDatabase, BuyProductRequestValidator buyProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.buyProductRequestValidator = buyProductRequestValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private BuyProductRequestValidator buyProductRequestValidator;
+    private Map<Product, Integer> shoppingCart = new HashMap<>();
 
     public BuyProductResponse execute (BuyProductRequest buyProductRequest) {
         List<CoreError> errors = buyProductRequestValidator.validate(buyProductRequest);
@@ -31,6 +33,6 @@ public class BuyProductService {
             return new BuyProductResponse(errors);
         }
 
-        return new BuyProductResponse(buyProductRequest.getId(), buyProductRequest.getQuantity());
+        return new BuyProductResponse(productDatabase.findById(buyProductRequest.getId()).get(), buyProductRequest.getQuantity(), buyProductRequest.getEndOfShopping());
     }
 }

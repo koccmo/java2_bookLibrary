@@ -6,19 +6,15 @@ import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.validators.AddProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class  AddProductService {
 
-    private final ProductDatabase productDatabase;
-    private final AddProductRequestValidator addProductRequestValidator;
-
-    public AddProductService(ProductDatabase productDatabase, AddProductRequestValidator addProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.addProductRequestValidator = addProductRequestValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private AddProductRequestValidator addProductRequestValidator;
 
     public AddProductResponse execute(AddProductRequest addProductRequest){
 

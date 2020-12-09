@@ -7,19 +7,16 @@ import internet_store.core.response.product.ChangeProductResponse;
 import internet_store.core.services.product.validators.ChangeProductValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class ChangeProductService {
 
-    private final ProductDatabase productDatabase;
-    private final ChangeProductValidator changeProductValidator;
-
-    public ChangeProductService(ProductDatabase productDatabase, ChangeProductValidator changeProductValidator) {
-        this.productDatabase = productDatabase;
-        this.changeProductValidator = changeProductValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private ChangeProductValidator changeProductValidator;
 
     public ChangeProductResponse execute (ChangeProductRequest changeProductRequest){
         List<CoreError> errors = changeProductValidator.validate(changeProductRequest);

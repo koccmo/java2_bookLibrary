@@ -7,20 +7,16 @@ import internet_store.core.response.product.FindByIdResponse;
 import internet_store.core.services.product.validators.FindByIdRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@DIComponent
 public class FindProductByIdService {
 
-    private final ProductDatabase productDatabase;
-    private final FindByIdRequestValidator findByIdRequestValidator;
-
-    public FindProductByIdService(ProductDatabase productDatabase, FindByIdRequestValidator findByIdRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.findByIdRequestValidator = findByIdRequestValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private FindByIdRequestValidator findByIdRequestValidator;
 
     public FindByIdResponse execute (FindByIdRequest findByIdRequest){
 
