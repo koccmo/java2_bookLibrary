@@ -7,7 +7,7 @@ import internet_store.dependency_injection.DIComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@DIComponent
 public class GetAllProductsValidator {
 
     public List<CoreError> validate (GetProductsRequest getProductsRequest){
