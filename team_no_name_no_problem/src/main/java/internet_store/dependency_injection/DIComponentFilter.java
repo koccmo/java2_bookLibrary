@@ -3,7 +3,7 @@ package internet_store.dependency_injection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DIComponentFiler {
+public class DIComponentFilter {
 
     public List<Class> filter(List<Class> classes) {
         return classes.stream()
