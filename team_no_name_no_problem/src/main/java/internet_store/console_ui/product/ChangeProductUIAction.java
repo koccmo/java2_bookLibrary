@@ -4,16 +4,15 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.ChangeProductRequest;
 import internet_store.core.response.product.ChangeProductResponse;
 import internet_store.core.services.product.ChangeProductService;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class ChangeProductUIAction implements UIAction {
 
-    private final ChangeProductService changeProductService;
-
-    public ChangeProductUIAction(ChangeProductService changeProductService) {
-        this.changeProductService = changeProductService;
-    }
+    @DIDependency private ChangeProductService changeProductService;
 
     @Override
     public void execute() {

@@ -5,17 +5,17 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.AddProductService;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddProductUIAction implements UIAction {
 
-    private AddProductService addProductService;
+    @DIDependency private AddProductService addProductService;
 
-    public AddProductUIAction(AddProductService addProductService) {
-        this.addProductService = addProductService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);
