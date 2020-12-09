@@ -5,17 +5,17 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
 import internet_store.core.services.customer.FindCustomerByIdService;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class FindCustomerByIdUIAction implements UIAction {
 
-    private FindCustomerByIdService findCustomerByIdService;
+    @DIDependency private FindCustomerByIdService findCustomerByIdService;
 
-    public FindCustomerByIdUIAction(FindCustomerByIdService findCustomerByIdService){
-        this.findCustomerByIdService = findCustomerByIdService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

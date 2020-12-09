@@ -6,17 +6,17 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.services.customer.AddCustomerService;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddCustomerUIAction implements UIAction {
 
-    private AddCustomerService addCustomerService;
+    @DIDependency private AddCustomerService addCustomerService;
 
-    public AddCustomerUIAction(AddCustomerService addCustomerService){
-        this.addCustomerService = addCustomerService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

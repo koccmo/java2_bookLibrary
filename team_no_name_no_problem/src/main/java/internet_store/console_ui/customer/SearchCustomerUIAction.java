@@ -6,17 +6,17 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.SearchCustomerService;
+import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchCustomerUIAction implements UIAction {
 
-    private final SearchCustomerService searchCustomerService;
+    @DIDependency private SearchCustomerService searchCustomerService;
 
-    public SearchCustomerUIAction(SearchCustomerService searchCustomerService) {
-        this.searchCustomerService = searchCustomerService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);
