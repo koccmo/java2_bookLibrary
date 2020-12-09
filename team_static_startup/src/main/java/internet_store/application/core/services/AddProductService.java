@@ -6,18 +6,17 @@ import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.services.validators.AddProductValidator;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
+
 
 import java.util.List;
 
+@DIComponent
 public class AddProductService {
 
-    private final Database database;
-    private final AddProductValidator validator;
-
-    public AddProductService(Database database, AddProductValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private AddProductValidator validator;
 
     public AddProductResponse execute(AddProductRequest request) {
         List<CoreError> errors = validator.validate(request);

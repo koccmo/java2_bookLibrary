@@ -5,19 +5,16 @@ import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.validators.FindByIdValidator;
 import internet_store.application.core.database.Database;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class FindByIdService {
 
-    private final Database database;
-    private final FindByIdValidator validator;
-
-
-    public FindByIdService(Database database, FindByIdValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private FindByIdValidator validator;
 
     public FindByIdResponse execute(FindByIdRequest request) {
         List<CoreError> errors = validator.validate(request);

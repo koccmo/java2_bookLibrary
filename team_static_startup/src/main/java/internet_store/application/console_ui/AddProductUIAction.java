@@ -3,17 +3,16 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.AddProductResponse;
 import internet_store.application.core.services.AddProductService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@DIComponent
 public class AddProductUIAction implements UIAction {
 
-    private final AddProductService addProductService;
-
-    public AddProductUIAction(AddProductService addProductService) {
-        this.addProductService = addProductService;
-    }
+    @DIDependency private AddProductService addProductService;
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

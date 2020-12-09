@@ -6,6 +6,7 @@ import internet_store.application.core.requests.GetAllProductsRequest;
 import internet_store.application.core.responses.GetAllProductsResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.GetAllProductsService;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,11 +16,12 @@ import static org.junit.Assert.assertEquals;
 
 public class AddProductAcceptanceTest {
 
-    private ApplicationContext applicationContext;
+    /*private ApplicationContext applicationContext;
 
     @Before
     public void setUp(){
-        applicationContext = new ApplicationContext();
+        applicationContext =
+                new DIApplicationContextBuilder().build("internet_store.application");
     }
 
     @Test
@@ -76,6 +78,6 @@ public class AddProductAcceptanceTest {
 
     private GetAllProductsService getAllProductsService() {
         return applicationContext.getBean(GetAllProductsService.class);
-    }
+    }*/
 
 }

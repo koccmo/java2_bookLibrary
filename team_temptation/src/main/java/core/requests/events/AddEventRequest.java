@@ -1,4 +1,4 @@
-package core.requests;
+package core.requests.events;
 
 public class AddEventRequest {
 

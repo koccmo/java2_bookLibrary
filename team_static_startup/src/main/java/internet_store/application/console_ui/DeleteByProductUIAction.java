@@ -4,17 +4,16 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.DeleteProductByProductService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@DIComponent
 public class DeleteByProductUIAction implements UIAction {
 
-    private final DeleteProductByProductService deleteProductByProductService;
-
-    public DeleteByProductUIAction(DeleteProductByProductService deleteProductByProductService) {
-        this.deleteProductByProductService = deleteProductByProductService;
-    }
+    @DIDependency private DeleteProductByProductService deleteProductByProductService;
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

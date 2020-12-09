@@ -6,18 +6,16 @@ import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.validators.DeleteByProductValidator;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class DeleteProductByProductService {
 
-    private final Database database;
-    private DeleteByProductValidator deleteByProductValidator;
-
-    public DeleteProductByProductService(Database database, DeleteByProductValidator validator) {
-        this.database = database;
-        this.deleteByProductValidator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private DeleteByProductValidator deleteByProductValidator;
 
     public DeleteByProductResponse execute(DeleteByProductRequest request) {
         List<CoreError> errors = deleteByProductValidator.validate(request);

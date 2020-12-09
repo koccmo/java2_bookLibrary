@@ -1,4 +1,7 @@
-package core.responses;
+package core.responses.events;
+
+import core.responses.CoreError;
+import core.responses.CoreResponse;
 
 import java.util.List;
 

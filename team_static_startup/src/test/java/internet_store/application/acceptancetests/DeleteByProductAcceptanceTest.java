@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class DeleteByProductAcceptanceTest {
 
-    private ApplicationContext applicationContext;
+    /*private ApplicationContext applicationContext;
 
     @Before
     public void setUp() {
@@ -75,5 +75,5 @@ public class DeleteByProductAcceptanceTest {
 
     private AddProductService getAddProductService() {
         return applicationContext.getBean(AddProductService.class);
-    }
+    }*/
 }

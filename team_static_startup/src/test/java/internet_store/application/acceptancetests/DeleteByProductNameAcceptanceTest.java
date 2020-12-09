@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class DeleteByProductNameAcceptanceTest {
 
-    private final ApplicationContext appContext = new ApplicationContext();
+    /*private final ApplicationContext appContext = new ApplicationContext();
 
     @Test
     public void shouldDeleteProductCorrectly() {
@@ -56,6 +56,6 @@ public class DeleteByProductNameAcceptanceTest {
 
         private DeleteByProductNameService getDeleteByProductNameService () {
             return appContext.getBean(DeleteByProductNameService.class);
-        }
+        }*/
 
     }

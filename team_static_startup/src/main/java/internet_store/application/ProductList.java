@@ -2,13 +2,15 @@ package internet_store.application;
 
 import internet_store.application.console_ui.*;
 import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 
 import java.util.*;
 
 class ProductList {
 
-    private static final ApplicationContext applicationContext = new ApplicationContext();
-    private final Map<Integer, UIAction> menuNumberToActionMap;
+    private static ApplicationContext applicationContext
+            = new DIApplicationContextBuilder().build("internet_store.application");
+    private Map<Integer, UIAction> menuNumberToActionMap;
 
     public ProductList() {
 

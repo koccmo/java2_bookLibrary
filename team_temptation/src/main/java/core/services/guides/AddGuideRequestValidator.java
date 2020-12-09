@@ -1,12 +1,12 @@
-package core.services;
+package core.services.guides;
 
-import core.requests.AddEventRequest;
+import core.requests.events.AddEventRequest;
 import core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddEventRequestValidator {
+public class AddGuideRequestValidator {
 
     public List<CoreError> validate (AddEventRequest request) {
 
