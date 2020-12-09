@@ -1,14 +1,16 @@
-package core.responses;
+package core.responses.guides;
+
+import core.responses.CoreError;
 
 import java.util.List;
 
-public abstract class CoreResponse {
+public abstract class CoreResponseGuide {
 
     private List<CoreError> errors;
 
-    public CoreResponse() { }
+    public CoreResponseGuide() { }
 
-    public CoreResponse(List<CoreError> errors) {
+    public CoreResponseGuide(List<CoreError> errors) {
         this.errors = errors;
     }
 
@@ -20,4 +22,6 @@ public abstract class CoreResponse {
 
         return errors != null && !errors.isEmpty();
     }
+
+
 }

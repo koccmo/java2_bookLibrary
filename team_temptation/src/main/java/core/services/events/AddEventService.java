@@ -1,20 +1,20 @@
-package core.services;
+package core.services.events;
 
-import domain.Events;
-import database.Database;
-import core.requests.AddEventRequest;
-import core.responses.AddEventResponse;
+import core.requests.events.AddEventRequest;
 import core.responses.CoreError;
+import core.responses.events.AddEventResponse;
+import database.events.EventDatabase;
+import domain.Events;
 
 import java.util.List;
 
 public class AddEventService {
 
-    private final Database database;
+    private final EventDatabase databaseEvents;
     private AddEventRequestValidator validator;
 
-    public AddEventService(Database database, AddEventRequestValidator validator) {
-        this.database = database;
+    public AddEventService(EventDatabase databaseEvents, AddEventRequestValidator validator) {
+        this.databaseEvents = databaseEvents;
         this.validator = validator;
     }
 
@@ -30,9 +30,11 @@ public class AddEventService {
                 request.getDurationHours(), request.getMaxNumberParticipants(),
                 request.getMinNumberParticipants(), request.getRoute(),
                 request.getDetailsDescription());
-        database.add(event);
 
-        return new AddEventResponse();
+        if (databaseEvents.add(event)) return new AddEventResponse();
+
+        errors.add(new CoreError("eventName", "The event \"" + request.getEventName() + "\" already exists"));
+        return new AddEventResponse(errors);
 
     }
 }

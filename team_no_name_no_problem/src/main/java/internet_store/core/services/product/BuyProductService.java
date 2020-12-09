@@ -1,8 +1,9 @@
-package internet_store.core.services.product.validators;
+package internet_store.core.services.product;
 
 import internet_store.core.requests.product.BuyProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.BuyProductResponse;
+import internet_store.core.services.product.validators.BuyProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.dependency_injection.DIComponent;
 
