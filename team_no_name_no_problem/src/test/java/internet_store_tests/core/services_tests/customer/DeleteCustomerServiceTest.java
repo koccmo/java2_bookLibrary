@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.services.customer;
+package internet_store_tests.core.services_tests.customer;
 
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.DeleteCustomerRequest;

@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.validators_tests.product;
+package internet_store_tests.core.validators_tests.product;
 
 import internet_store.core.requests.product.ChangeProductRequest;
 import internet_store.core.response.CoreError;

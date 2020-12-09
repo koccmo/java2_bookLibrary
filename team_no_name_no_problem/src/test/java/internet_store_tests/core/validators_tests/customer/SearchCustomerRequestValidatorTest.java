@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.validators_tests.customer;
+package internet_store_tests.core.validators_tests.customer;
 
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;

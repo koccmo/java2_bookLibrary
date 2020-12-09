@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.validators_tests.customer;
+package internet_store_tests.core.validators_tests.customer;
 
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.CoreError;

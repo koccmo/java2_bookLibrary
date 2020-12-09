@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.services.product;
+package internet_store_tests.core.services_tests.product;
 
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
@@ -7,7 +7,7 @@ import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.validators.AddProductRequestValidator;
 import internet_store.core.services.product.AddProductService;
 import internet_store.database.product.ProductDatabase;
-import internet_store_tests.core.services.services.matchers.ProductMatcher;
+import internet_store_tests.core.services_tests.matchers.ProductMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

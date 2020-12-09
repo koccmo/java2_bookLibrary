@@ -1,4 +1,4 @@
-package internet_store_tests.core.services.services.matchers;
+package internet_store_tests.core.services_tests.matchers;
 
 import internet_store.core.domain.Customer;
 import org.mockito.ArgumentMatcher;
