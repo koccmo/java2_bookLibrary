@@ -9,13 +9,15 @@ import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.core.services.customer.GetAllCustomersService;
 import internet_store.dependency_injection.ApplicationContext;
+import internet_store.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestDeleteCustomerFail {
 
-    ApplicationContext applicationContext = new ApplicationContext();
+    private static  ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("internet_store");
 
     @Test
     public void test(){
