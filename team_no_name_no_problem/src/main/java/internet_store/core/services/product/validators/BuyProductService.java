@@ -4,9 +4,10 @@ import internet_store.core.requests.product.BuyProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.BuyProductResponse;
 import internet_store.database.product.ProductDatabase;
+import internet_store.dependency_injection.DIComponent;
 
 import java.util.List;
-
+@DIComponent
 public class BuyProductService {
 
     private final ProductDatabase productDatabase;

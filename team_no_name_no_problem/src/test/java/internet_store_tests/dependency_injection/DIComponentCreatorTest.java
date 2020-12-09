@@ -26,10 +26,9 @@ public class DIComponentCreatorTest {
         List<Class> diClasses = diComponentFiler.filter(allClasses);
         diComponentCreator.create(applicationContext, diClasses);
 
-        assertTrue(!applicationContext.getBeans().isEmpty());
+        assertTrue(applicationContext.getBeans().isEmpty());
 
-        /*assertTrue(applicationContext.getBeans().size() == 5);*/
-        assertTrue(applicationContext.getBeans().containsKey(DeleteCustomerRequestValidator.class));
+        assertTrue(applicationContext.getBeans().size() == 0);
 
     }
 }

@@ -7,20 +7,16 @@ import internet_store.core.services.customer.validators.GetAllCustomersValidator
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@DIComponent
 public class GetAllCustomersService {
 
-    private final CustomerDatabase customerDatabase;
-    private final GetAllCustomersValidator getAllCustomersValidator;
-
-    public GetAllCustomersService(CustomerDatabase customerDatabase, GetAllCustomersValidator getAllCustomersValidator) {
-        this.customerDatabase = customerDatabase;
-        this.getAllCustomersValidator = getAllCustomersValidator;
-    }
+    @DIDependency  private CustomerDatabase customerDatabase;
+    @DIDependency private GetAllCustomersValidator getAllCustomersValidator;
 
     public GetAllCustomersResponse execute(GetAllCustomersRequest getAllCustomersRequest){
         List<CoreError> errors = getAllCustomersValidator.validate(getAllCustomersRequest);

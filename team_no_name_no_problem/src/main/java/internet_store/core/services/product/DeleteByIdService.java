@@ -7,19 +7,15 @@ import internet_store.core.services.product.validators.DeleteProductRequestValid
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class DeleteByIdService {
 
-    private final ProductDatabase productDatabase;
-    private final DeleteProductRequestValidator deleteProductRequestValidator;
-
-    public DeleteByIdService(ProductDatabase productDatabase, DeleteProductRequestValidator deleteProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.deleteProductRequestValidator = deleteProductRequestValidator;
-    }
+    @DIDependency private ProductDatabase productDatabase;
+    @DIDependency private DeleteProductRequestValidator deleteProductRequestValidator;
 
     public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
 

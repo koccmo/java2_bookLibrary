@@ -7,20 +7,16 @@ import internet_store.core.response.customer.FindCustomerByIdResponse;
 import internet_store.core.services.customer.validators.FindCustomerByIdRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@DIComponent
 public class FindCustomerByIdService {
 
-    private final CustomerDatabase customerDatabase;
-    private final FindCustomerByIdRequestValidator findCustomerByIdRequestValidator;
-
-    public FindCustomerByIdService(CustomerDatabase customerDatabase, FindCustomerByIdRequestValidator findCustomerByIdRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.findCustomerByIdRequestValidator = findCustomerByIdRequestValidator;
-    }
+    @DIDependency  private CustomerDatabase customerDatabase;
+    @DIDependency private FindCustomerByIdRequestValidator findCustomerByIdRequestValidator;
 
     public FindCustomerByIdResponse execute(FindCustomerByIdRequest findCustomerByIdRequest){
 

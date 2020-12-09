@@ -10,6 +10,7 @@ import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
 import internet_store.dependency_injection.ApplicationContext;
+import internet_store.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 
@@ -17,8 +18,8 @@ import static org.junit.Assert.*;
 
 public class AcceptanceTestFindCustomerByIdFail {
 
-    ApplicationContext applicationContext = new ApplicationContext();
-
+    private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("internet_store");
     @Test
     public void test(){
         Customer customer = new Customer("Anton", "Saveljev", "29876472", "address",

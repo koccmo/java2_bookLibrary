@@ -2,10 +2,15 @@ package internet_store;
 
 import internet_store.console_ui.InternetStoreAdministratorSide;
 import internet_store.console_ui.InternetStoreCustomerSide;
+import internet_store.dependency_injection.ApplicationContext;
+import internet_store.dependency_injection.DIApplicationContextBuilder;
 
 import java.util.Scanner;
 
 public class MainMenuApplication {
+
+    private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("internet_store");
 
     public static void main(String[] args) {
 

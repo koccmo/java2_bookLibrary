@@ -7,20 +7,16 @@ import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class DeleteCustomerService {
 
-    private final CustomerDatabase customerDatabase;
-    private final DeleteCustomerRequestValidator deleteCustomerRequestValidator;
+    @DIDependency private CustomerDatabase customerDatabase;
+    @DIDependency private DeleteCustomerRequestValidator deleteCustomerRequestValidator;
 
-
-    public DeleteCustomerService(CustomerDatabase customerDatabase, DeleteCustomerRequestValidator deleteCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.deleteCustomerRequestValidator = deleteCustomerRequestValidator;
-    }
 
     public DeleteCustomerResponse execute (DeleteCustomerRequest deleteCustomerRequest){
         List<CoreError> errors = deleteCustomerRequestValidator.validate(deleteCustomerRequest);

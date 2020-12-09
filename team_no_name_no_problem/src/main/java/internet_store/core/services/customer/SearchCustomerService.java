@@ -10,23 +10,18 @@ import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@DIComponent
 public class SearchCustomerService {
 
-    private final CustomerDatabase customerDatabase;
-    private final SearchCustomerRequestValidator searchCustomerRequestValidator;
-
-    public SearchCustomerService(CustomerDatabase customerDatabase,
-                                 SearchCustomerRequestValidator searchCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.searchCustomerRequestValidator = searchCustomerRequestValidator;
-    }
+    @DIDependency private CustomerDatabase customerDatabase;
+    @DIDependency private SearchCustomerRequestValidator searchCustomerRequestValidator;
 
     public SearchCustomerResponse execute(SearchCustomerRequest searchCustomerRequest) {
 

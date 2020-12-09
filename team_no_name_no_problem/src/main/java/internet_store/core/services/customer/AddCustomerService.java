@@ -7,20 +7,16 @@ import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.services.customer.validators.AddCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.dependency_injection.DIComponent;
+import internet_store.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class AddCustomerService {
 
-    private final CustomerDatabase customerDatabase;
-    private final AddCustomerRequestValidator addCustomerRequestValidator;
+    @DIDependency  private CustomerDatabase customerDatabase;
+    @DIDependency  private AddCustomerRequestValidator addCustomerRequestValidator;
 
-
-    public AddCustomerService(CustomerDatabase customerDatabase, AddCustomerRequestValidator addCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.addCustomerRequestValidator = addCustomerRequestValidator;
-    }
 
     public AddCustomerResponse execute (AddCustomerRequest addCustomerRequest){
 

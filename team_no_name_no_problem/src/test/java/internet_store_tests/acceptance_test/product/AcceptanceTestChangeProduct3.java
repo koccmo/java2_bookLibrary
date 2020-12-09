@@ -10,6 +10,7 @@ import internet_store.core.services.product.AddProductService;
 import internet_store.core.services.product.ChangeProductService;
 import internet_store.core.services.product.GetAllProductsService;
 import internet_store.dependency_injection.ApplicationContext;
+import internet_store.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,8 +18,8 @@ import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestChangeProduct3 {
 
-    ApplicationContext applicationContext = new ApplicationContext();
-
+    private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("internet_store");
     @Test
     public void test() {
 
