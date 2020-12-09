@@ -24,6 +24,10 @@ public class GetOrdersService {
             return new GetOrdersResponse(errors, new ArrayList<>());
         }
 
+        if (orderDatabase.getOrders().isEmpty()) {
+            errors.add(new CoreError("order database", "Orders database is empty"));
+            return new GetOrdersResponse(errors, new ArrayList<>());
+        }
         return new GetOrdersResponse(orderDatabase.getOrders());
     }
 }
