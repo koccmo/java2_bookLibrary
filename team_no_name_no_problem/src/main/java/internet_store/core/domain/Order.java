@@ -47,9 +47,20 @@ public class Order {
 
     @Override
     public String toString() {
-        return  "Order: {" +
-                "\ncustomer=" + customer +
-                "\nshoppingCart=" + shoppingCart +
-                "}";
+        return "Order details:" +
+                customer + "\n" +
+                "product list:" +
+                shoppingCartToStringForPrint(shoppingCart);
+    }
+
+    private String shoppingCartToStringForPrint (Map<Product, Integer> shoppingCart) {
+        String result = "";
+        Integer sum = 0;
+        for (Product product : shoppingCart.keySet()) {
+            result += product + " " + shoppingCart.get(product) + "\n";
+            sum += shoppingCart.get(product) * product.getPrice();
+        }
+        result += "Sum = " + sum + " EUR\n";
+        return result;
     }
 }
