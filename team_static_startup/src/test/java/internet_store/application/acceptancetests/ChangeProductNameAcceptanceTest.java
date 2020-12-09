@@ -6,6 +6,7 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.ChangeProductNameRequest;
 import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.services.ChangeProductNameService;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 
 public class ChangeProductNameAcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+/*    private ApplicationContext appContext = new ApplicationContext();
     private Database database;
 
     @Before
@@ -60,5 +61,5 @@ public class ChangeProductNameAcceptanceTest {
 
     private ChangeProductNameService getChangeProductNameService() {
         return appContext.getBean(ChangeProductNameService.class);
-    }
+    }*/
 }

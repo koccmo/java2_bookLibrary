@@ -1,10 +1,12 @@
 package internet_store.application.core.database;
 
 import internet_store.application.core.domain.Product;
+import internet_store.application.dependency_injection.DIComponent;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class InMemoryDatabase implements Database {
     private Long id = 1L;
     private final List<Product> productList = new ArrayList<>();

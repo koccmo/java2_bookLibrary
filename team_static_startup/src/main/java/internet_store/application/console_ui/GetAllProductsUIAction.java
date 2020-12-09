@@ -4,16 +4,15 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.GetAllProductsRequest;
 import internet_store.application.core.responses.GetAllProductsResponse;
 import internet_store.application.core.services.GetAllProductsService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class GetAllProductsUIAction implements UIAction {
 
-    private final GetAllProductsService getAllProductsService;
-
-    public GetAllProductsUIAction(GetAllProductsService getAllProductsService) {
-        this.getAllProductsService = getAllProductsService;
-    }
+    @DIDependency private GetAllProductsService getAllProductsService;
 
     @Override
     public void execute() {

@@ -1,5 +1,8 @@
 package internet_store.application.console_ui;
 
+import internet_store.application.dependency_injection.DIComponent;
+
+@DIComponent
 public class ExitProgramUIAction implements UIAction{
 
     @Override

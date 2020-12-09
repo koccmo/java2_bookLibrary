@@ -5,19 +5,16 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.responses.*;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class FindProductsService {
 
-    private final Database database;
-    private final FindProductsRequestValidator validator;
-
-    public FindProductsService(Database database,
-                               FindProductsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);

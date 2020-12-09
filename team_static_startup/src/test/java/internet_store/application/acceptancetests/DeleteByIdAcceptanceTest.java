@@ -6,6 +6,7 @@ import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.DeleteByProductIdResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.DeleteByProductIdService;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class DeleteByIdAcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+   /* private ApplicationContext appContext = new DIApplicationContextBuilder().build("internet_store.application");
 
   private DeleteByProductIdService getDeleteByProductIdService() {
         return appContext.getBean(DeleteByProductIdService.class);
@@ -54,7 +55,7 @@ public class DeleteByIdAcceptanceTest {
         assertEquals(1, deleteResponse.getErrors().size());
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
-  }
+  }*/
 
 
 

@@ -2,10 +2,12 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class FindByIdValidator {
 
     public List<CoreError> validate(FindByIdRequest request) {

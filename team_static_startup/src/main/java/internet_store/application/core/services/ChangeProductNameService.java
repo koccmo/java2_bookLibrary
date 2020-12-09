@@ -5,19 +5,16 @@ import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.services.validators.ChangeProductNameValidator;
 import internet_store.application.core.database.Database;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class ChangeProductNameService {
 
-    private final Database database;
-    private final ChangeProductNameValidator validator;
-
-
-    public ChangeProductNameService(Database database, ChangeProductNameValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private ChangeProductNameValidator validator;
 
     public ChangeProductNameResponse execute(ChangeProductNameRequest request) {
         List<CoreError> errors = validator.validate(request);

@@ -5,16 +5,15 @@ import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class FindProductsUIAction implements UIAction {
 
-    private final FindProductsService findProductsService;
-
-    public FindProductsUIAction(FindProductsService findProductsService) {
-        this.findProductsService = findProductsService;
-    }
+    @DIDependency private FindProductsService findProductsService;
 
     @Override
     public void execute() {

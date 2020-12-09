@@ -7,20 +7,18 @@ import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.ChangeProductNameService;
 import internet_store.application.core.services.FindByIdService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.Optional;
 import java.util.Scanner;
 
+@DIComponent
 public class ChangeProductNameUIAction implements UIAction {
 
-    private final ChangeProductNameService changeProductNameService;
-    private final FindByIdService findByIdService;
+    @DIDependency private ChangeProductNameService changeProductNameService;
+    @DIDependency private FindByIdService findByIdService;
 
-    public ChangeProductNameUIAction(ChangeProductNameService changeProductNameService,
-                                     FindByIdService findByIdService) {
-        this.changeProductNameService = changeProductNameService;
-        this.findByIdService = findByIdService;
-    }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

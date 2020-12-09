@@ -3,16 +3,16 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
 import internet_store.application.core.services.DeleteByProductNameService;
+import internet_store.application.dependency_injection.DIComponent;
+import internet_store.application.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class DeleteByProductNameUIAction implements UIAction {
 
-    private final DeleteByProductNameService deleteProductByNameService;
+    @DIDependency private DeleteByProductNameService deleteProductByNameService;
 
-    public DeleteByProductNameUIAction(DeleteByProductNameService deleteProductByNameService) {
-        this.deleteProductByNameService = deleteProductByNameService;
-    }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
