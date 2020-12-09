@@ -17,10 +17,9 @@ public class ClassFinderTest {
 
         List<Class> listOfClasses = classFinder.findClassesInsidePackage("internet_store.console_ui");
 
-        assertTrue(listOfClasses.size() == 21);
+        assertTrue(listOfClasses.size() == 15);
 
-        System.out.println(listOfClasses.get(0).getName());
-        assertTrue(listOfClasses.get(0).getName().equals("internet_store.console_ui.BuyMenu"));
+        assertTrue(listOfClasses.get(0).getName().equals("internet_store.console_ui.customer.AddCustomerUIAction"));
     }
 
     @Test
@@ -28,7 +27,7 @@ public class ClassFinderTest {
 
         List<Class> listOfClasses2 = classFinder.findClassesInsidePackage("internet_store.core");
 
-        assertTrue(listOfClasses2.size() == 59);
+        assertTrue(listOfClasses2.size() == 60);
 
         assertTrue(listOfClasses2.get(2).getName().equals("internet_store.core.domain.Product"));
     }
