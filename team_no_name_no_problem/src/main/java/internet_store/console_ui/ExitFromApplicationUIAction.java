@@ -1,7 +1,8 @@
 package internet_store.console_ui;
 
-import internet_store.console_ui.UIAction;
+import internet_store.dependency_injection.DIComponent;
 
+@DIComponent
 public class ExitFromApplicationUIAction implements UIAction {
 
 
