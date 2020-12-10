@@ -19,5 +19,17 @@ public class ClassFinderTest {
     public void findClassesInsidePackage() throws IOException, ClassNotFoundException {
         List<Class> classes = classFinder.findClassesInsidePackage("internet_store.application");
         classes.forEach(System.out::println);
+    }
+*/
+
+/* Viktor's variant
+    @Test
+    public void test() throws IOException, ClassNotFoundException {
+        ClassFinder finder = new ClassFinder();
+        List<Class> classes = finder.findClassesInsidePackage("internet_store.application");
+        classes.forEach(aClass -> {
+            System.out.println(aClass.getName());
+        });
     }*/
+
 }
