@@ -8,8 +8,8 @@ import java.util.List;
 
 public class ClassFinderTest {
 
-  /*  private ClassFinder classFinder;
-
+    private ClassFinder classFinder;
+/*
     @Before
     public void setUp() {
         classFinder = new ClassFinder();
@@ -21,15 +21,4 @@ public class ClassFinderTest {
         classes.forEach(System.out::println);
     }
 */
-
-/* Viktor's variant
-    @Test
-    public void test() throws IOException, ClassNotFoundException {
-        ClassFinder finder = new ClassFinder();
-        List<Class> classes = finder.findClassesInsidePackage("internet_store.application");
-        classes.forEach(aClass -> {
-            System.out.println(aClass.getName());
-        });
-    }*/
-
 }
