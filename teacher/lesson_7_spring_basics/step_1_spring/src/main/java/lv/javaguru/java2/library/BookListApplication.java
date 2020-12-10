@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import lv.javaguru.java2.library.config.BookListConfiguration;
 import lv.javaguru.java2.library.console_ui.AddBookUIAction;
 import lv.javaguru.java2.library.console_ui.ExitUIAction;
 import lv.javaguru.java2.library.console_ui.GetAllBooksUIAction;
