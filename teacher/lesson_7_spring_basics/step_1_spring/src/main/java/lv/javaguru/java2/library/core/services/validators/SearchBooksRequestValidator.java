@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
-import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
-@DIComponent
+@Component
 public class SearchBooksRequestValidator {
 
 	public List<CoreError> validate(SearchBooksRequest request) {

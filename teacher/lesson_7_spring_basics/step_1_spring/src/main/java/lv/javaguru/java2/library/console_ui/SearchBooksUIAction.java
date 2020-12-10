@@ -2,19 +2,20 @@ package lv.javaguru.java2.library.console_ui;
 
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.library.Book;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
-import lv.javaguru.java2.library.dependency_injection.DIComponent;
-import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
-@DIComponent
+@Component
 public class SearchBooksUIAction implements UIAction {
 
-	@DIDependency private SearchBooksService searchBooksService;
+	@Autowired private SearchBooksService searchBooksService;
 
 	@Override
 	public void execute() {

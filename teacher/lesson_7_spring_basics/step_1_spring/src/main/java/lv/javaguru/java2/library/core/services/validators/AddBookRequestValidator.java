@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
-import lv.javaguru.java2.library.dependency_injection.DIComponent;
 
-@DIComponent
+@Component
 public class AddBookRequestValidator {
 
 	public List<CoreError> validate(AddBookRequest request) {

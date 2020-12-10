@@ -5,6 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.library.Book;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.Ordering;
@@ -13,14 +16,12 @@ import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestValidator;
-import lv.javaguru.java2.library.dependency_injection.DIComponent;
-import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
-@DIComponent
+@Component
 public class SearchBooksService {
 
-	@DIDependency private Database database;
-	@DIDependency private SearchBooksRequestValidator validator;
+	@Autowired private Database database;
+	@Autowired private SearchBooksRequestValidator validator;
 
 	public SearchBooksResponse execute(SearchBooksRequest request) {
 		List<CoreError> errors = validator.validate(request);
