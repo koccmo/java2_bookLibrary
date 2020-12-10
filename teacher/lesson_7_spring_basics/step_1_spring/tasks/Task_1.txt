@@ -1,0 +1,15 @@
+Подключить к проекту библиотеку spring-core.
+
+Maven dependency:
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.2.6.RELEASE</version>
+</dependency>
+
+Gradle dependency:
+
+// https://mvnrepository.com/artifact/org.springframework/spring-core
+compile('org.springframework:spring-core:5.2.6.RELEASE')
