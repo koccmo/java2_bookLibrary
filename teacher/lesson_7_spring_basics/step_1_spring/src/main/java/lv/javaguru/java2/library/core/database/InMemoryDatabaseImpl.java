@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import lv.javaguru.java2.library.Book;
+import lv.javaguru.java2.library.core.domain.Book;
 
 @Component
 public class InMemoryDatabaseImpl implements Database {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import lv.javaguru.java2.library.Book;
+import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;

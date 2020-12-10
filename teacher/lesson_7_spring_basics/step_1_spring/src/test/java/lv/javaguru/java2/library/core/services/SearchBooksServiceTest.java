@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import lv.javaguru.java2.library.Book;
+import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.library;
+package lv.javaguru.java2.library.core.domain;
 
 import java.util.Objects;
 
