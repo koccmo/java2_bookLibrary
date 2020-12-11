@@ -5,17 +5,18 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.validators.GetSpecificPatientHistoryRequestValidator;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class GetSpecificPatientHistoryService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
 
     public GetSpecificPatientHistoryResponse execute(GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest){
 

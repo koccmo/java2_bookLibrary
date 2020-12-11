@@ -6,16 +6,17 @@ import dental_clinic.core.responses.DeletePatientResponse;
 import dental_clinic.core.services.validators.DeletePatientValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeletePatientService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private DeletePatientValidator deletePatientValidator;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired
+    private DeletePatientValidator deletePatientValidator;
 
     public DeletePatientResponse execute(DeletePatientRequest deletePatientRequest){
 

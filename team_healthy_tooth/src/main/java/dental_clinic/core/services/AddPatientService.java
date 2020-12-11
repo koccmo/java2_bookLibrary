@@ -6,16 +6,17 @@ import dental_clinic.core.responses.AddPatientResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.validators.AddPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddPatientService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private AddPatientRequestValidator validator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private AddPatientRequestValidator validator;
 
     public AddPatientResponse execute (AddPatientRequest addPatientRequest){
         List<CoreError> errors = validator.validate(addPatientRequest);

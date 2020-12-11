@@ -7,16 +7,17 @@ import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.validators.ContainsDatabaseIdValidator;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class ContainsDatabaseIdService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private ContainsDatabaseIdValidator containsDatabaseIdValidator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private ContainsDatabaseIdValidator containsDatabaseIdValidator;
 
     public ContainsDatabaseIdResponse execute(ContainsDatabaseIdRequest containsDatabaseIdRequest){
 
