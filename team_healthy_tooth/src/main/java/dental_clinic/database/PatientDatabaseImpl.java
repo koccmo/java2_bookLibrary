@@ -3,14 +3,14 @@ package dental_clinic.database;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private Long id= 1L;
