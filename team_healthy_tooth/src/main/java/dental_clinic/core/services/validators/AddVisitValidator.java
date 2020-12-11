@@ -2,12 +2,12 @@ package dental_clinic.core.services.validators;
 
 import dental_clinic.core.requests.AddVisitRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddVisitValidator {
 
     public List<CoreError> validate (AddVisitRequest addVisitRequest){
