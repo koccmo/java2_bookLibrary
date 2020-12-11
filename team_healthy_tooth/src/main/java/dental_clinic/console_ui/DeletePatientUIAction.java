@@ -3,15 +3,16 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.DeletePatientResponse;
 import dental_clinic.core.services.DeletePatientService;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class DeletePatientUIAction implements UIAction {
 
-    @DIDependency private DeletePatientService deletePatientService;
+    @Autowired
+    private DeletePatientService deletePatientService;
 
     public void execute(){
 

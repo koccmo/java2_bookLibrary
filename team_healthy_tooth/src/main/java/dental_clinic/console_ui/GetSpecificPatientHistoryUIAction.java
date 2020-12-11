@@ -3,15 +3,16 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.GetSpecificPatientHistoryService;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class GetSpecificPatientHistoryUIAction implements UIAction {
 
-    @DIDependency private GetSpecificPatientHistoryService printSpecificPatientHistory;
+    @Autowired
+    private GetSpecificPatientHistoryService printSpecificPatientHistory;
 
     public void execute(){
         Scanner in = new Scanner(System.in);

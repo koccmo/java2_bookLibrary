@@ -1,8 +1,8 @@
 package dental_clinic.console_ui;
 
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitUIAction implements  UIAction{
 
     @Override

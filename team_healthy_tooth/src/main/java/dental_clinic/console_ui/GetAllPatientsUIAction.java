@@ -3,13 +3,14 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetAllPatientsRequest;
 import dental_clinic.core.responses.GetAllPatientsResponse;
 import dental_clinic.core.services.GetAllPatientsService;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class GetAllPatientsUIAction implements UIAction {
 
-    @DIDependency private GetAllPatientsService getAllPatientsService;
+    @Autowired
+    private GetAllPatientsService getAllPatientsService;
 
     public void execute(){
 

@@ -5,15 +5,16 @@ import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.SearchPatientResponse;
 import dental_clinic.core.services.SearchPatientService;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchPatientUIAction implements UIAction{
 
-    @DIDependency private SearchPatientService searchPatientService;
+    @Autowired
+    private SearchPatientService searchPatientService;
 
     @Override
     public void execute() {
