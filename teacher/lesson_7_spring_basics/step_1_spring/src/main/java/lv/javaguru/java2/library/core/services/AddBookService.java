@@ -3,7 +3,6 @@ package lv.javaguru.java2.library.core.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
@@ -18,7 +17,6 @@ public class AddBookService {
 
 	@Autowired private Database database;
 	@Autowired private AddBookRequestValidator validator;
-	@Autowired(required = false) EmailServer emailServer;
 
 	public AddBookResponse execute(AddBookRequest request) {
 		List<CoreError> errors = validator.validate(request);
@@ -28,10 +26,6 @@ public class AddBookService {
 
 		Book book = new Book(request.getTitle(), request.getAuthor());
 		database.save(book);
-
-		if (emailServer != null) {
-			emailServer.sendEmail();
-		}
 
 		return new AddBookResponse(book);
 	}

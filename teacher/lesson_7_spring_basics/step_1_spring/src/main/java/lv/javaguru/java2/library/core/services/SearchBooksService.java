@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
@@ -19,6 +20,12 @@ import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestVali
 
 @Component
 public class SearchBooksService {
+
+	@Value("${search.ordering.enabled}")
+	private boolean orderingEnabled;
+
+	@Value("${search.paging.enabled}")
+	private boolean pagingEnabled;
 
 	@Autowired private Database database;
 	@Autowired private SearchBooksRequestValidator validator;
@@ -36,20 +43,6 @@ public class SearchBooksService {
 		return new SearchBooksResponse(books, null);
 	}
 
-	private List<Book> order(List<Book> books, Ordering ordering) {
-		if (ordering != null) {
-			Comparator<Book> comparator = ordering.getOrderBy().equals("title")
-					? Comparator.comparing(Book::getTitle)
-					: Comparator.comparing(Book::getAuthor);
-			if (ordering.getOrderDirection().equals("DESCENDING")) {
-				comparator = comparator.reversed();
-			}
-			return books.stream().sorted(comparator).collect(Collectors.toList());
-		} else {
-			return books;
-		}
-	}
-
 	private List<Book> search(SearchBooksRequest request) {
 		List<Book> books = new ArrayList<>();
 		if (request.isTitleProvided() && !request.isAuthorProvided()) {
@@ -64,8 +57,22 @@ public class SearchBooksService {
 		return books;
 	}
 
+	private List<Book> order(List<Book> books, Ordering ordering) {
+		if (orderingEnabled && (ordering != null)) {
+			Comparator<Book> comparator = ordering.getOrderBy().equals("title")
+					? Comparator.comparing(Book::getTitle)
+					: Comparator.comparing(Book::getAuthor);
+			if (ordering.getOrderDirection().equals("DESCENDING")) {
+				comparator = comparator.reversed();
+			}
+			return books.stream().sorted(comparator).collect(Collectors.toList());
+		} else {
+			return books;
+		}
+	}
+
 	private List<Book> paging(List<Book> books, Paging paging) {
-		if (paging != null) {
+		if (pagingEnabled && (paging != null)) {
 			int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
 			return books.stream()
 					.skip(skip)

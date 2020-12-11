@@ -11,7 +11,8 @@ application.properties в котором можно будет
 
 Пример содержимого application.properties:
 
-emailserver.enabled=true
+search.ordering.enabled=true
+search.paging.enabled=false
 
 
 Свойства в конфигурационном файле указываются

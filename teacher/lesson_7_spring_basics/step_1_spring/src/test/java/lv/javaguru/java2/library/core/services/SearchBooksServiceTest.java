@@ -6,12 +6,14 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.Database;
@@ -28,6 +30,12 @@ public class SearchBooksServiceTest {
 	@Mock private Database database;
 	@Mock private SearchBooksRequestValidator validator;
 	@InjectMocks private SearchBooksService service;
+
+	@Before
+	public void setup() {
+		ReflectionTestUtils.setField(service, "orderingEnabled", true);
+		ReflectionTestUtils.setField(service, "pagingEnabled", true);
+	}
 
 	@Test
 	public void shouldReturnResponseWithErrorsWhenValidatorFails() {
