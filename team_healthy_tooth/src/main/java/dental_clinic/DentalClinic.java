@@ -1,8 +1,9 @@
 package dental_clinic;
 
+import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.console_ui.*;
-import dental_clinic.dependency_injection.ApplicationContext;
-import dental_clinic.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 import java.util.HashMap;
@@ -11,8 +12,8 @@ import java.util.Scanner;
 
 public class DentalClinic {
 
-    private static  ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("dental_clinic");
+    public static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
 
     public static void main(String [] args){
         while(true) {
@@ -86,3 +87,7 @@ public class DentalClinic {
     }
 
 }
+
+//Одним из способов поднятия аппликационного контекста в Spring является класс
+//AnnotationConfigApplicationContext, которому в качестве параметра конструктора
+//подаётся класс с конфигурацией.
