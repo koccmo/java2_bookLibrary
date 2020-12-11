@@ -19,8 +19,7 @@ public class DIComponentFilterTest {
         List<Class> classes = classFinder.findClassesInsidePackage("dental_clinic.database");
         List<Class> classesWithAnnotation = diComponentFilter.filter(classes);
 
-        assertTrue(classesWithAnnotation.size() == 1);
-        assertTrue(classesWithAnnotation.get(0).getName().equals("dental_clinic.database.PatientDatabaseImpl"));
+        assertTrue(classesWithAnnotation.size() == 0);
     }
 
 }
