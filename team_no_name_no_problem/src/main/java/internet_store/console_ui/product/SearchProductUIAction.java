@@ -7,14 +7,14 @@ import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
-public class SearchProductUIAction implements UIAction {
+@Component public class SearchProductUIAction implements UIAction {
 
-    @DIDependency private SearchProductService searchProductService;
+    @Autowired private SearchProductService searchProductService;
 
     @Override
     public void execute (){
