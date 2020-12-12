@@ -4,12 +4,12 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.DeleteCustomerService;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class DeleteCustomerUIAction implements UIAction {
 
     @DIDependency private DeleteCustomerService deleteCustomerService;

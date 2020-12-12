@@ -5,12 +5,12 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
 import internet_store.core.services.customer.FindCustomerByIdService;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class FindCustomerByIdUIAction implements UIAction {
 
     @DIDependency private FindCustomerByIdService findCustomerByIdService;
