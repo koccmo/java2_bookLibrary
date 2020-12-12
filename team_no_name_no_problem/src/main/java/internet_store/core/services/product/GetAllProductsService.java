@@ -6,7 +6,7 @@ import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.validators.GetAllProductsValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import java.util.List;
 @Component
 public class GetAllProductsService {
 
-    @DIDependency private ProductDatabase productDatabase;
-    @DIDependency private GetAllProductsValidator getAllProductsValidator;
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private GetAllProductsValidator getAllProductsValidator;
 
     public GetProductsResponse execute(GetProductsRequest getProductsRequest){
         List <CoreError> errors = getAllProductsValidator.validate(getProductsRequest);
