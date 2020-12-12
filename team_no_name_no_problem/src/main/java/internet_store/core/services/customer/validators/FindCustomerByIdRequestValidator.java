@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class FindCustomerByIdRequestValidator {
+@Component public class FindCustomerByIdRequestValidator {
 
     public List<CoreError> validate(FindCustomerByIdRequest findCustomerByIdRequest){
         List<CoreError> errors = new ArrayList<>();

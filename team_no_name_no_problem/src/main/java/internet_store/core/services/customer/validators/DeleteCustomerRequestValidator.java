@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class DeleteCustomerRequestValidator {
+@Component public class DeleteCustomerRequestValidator {
 
     public List<CoreError> validate (DeleteCustomerRequest deleteCustomerRequest){
         List<CoreError> errors = new ArrayList<>();

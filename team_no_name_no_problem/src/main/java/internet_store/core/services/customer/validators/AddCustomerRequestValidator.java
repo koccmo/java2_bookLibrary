@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component
-public class AddCustomerRequestValidator {
+@Component public class AddCustomerRequestValidator {
 
     public List<CoreError> validate (AddCustomerRequest addCustomerRequest) {
         List<CoreError> errors = new ArrayList<>();

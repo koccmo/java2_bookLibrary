@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component
-public class SearchCustomerRequestValidator {
+@Component public class SearchCustomerRequestValidator {
 
     public List<CoreError> validate(SearchCustomerRequest searchCustomerRequest){
 

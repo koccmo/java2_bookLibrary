@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class GetAllCustomersValidator {
+@Component public class GetAllCustomersValidator {
 
     public List<CoreError> validate (GetAllCustomersRequest getAllCustomersRequest){
 
