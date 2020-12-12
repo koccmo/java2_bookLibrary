@@ -1,5 +1,8 @@
 package internet_store.application.dependency_injection;
 
+import internet_store.application.dependency_injection.test_classes.TestClass1;
+import internet_store.application.dependency_injection.test_classes.TestClass2;
+import internet_store.application.dependency_injection.test_classes.TestClass3;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,18 +28,6 @@ public class DIComponentFilterTest {
         classList.add(TestClass3.class);
         List<Class> filtered = this.filter.filter(classList);
         assertEquals(filtered.size(), 2);
-    }
-
-
-    @DIComponent
-    private class TestClass1 {
-    }
-
-    @DIComponent
-    private class TestClass2 {
-    }
-
-    private class TestClass3 {
     }
 
 }
