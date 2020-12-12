@@ -4,7 +4,7 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.FindByIdService;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -13,7 +13,8 @@ import java.util.Scanner;
 @Component
 public class FindByIdUIAction implements UIAction {
 
-    @DIDependency private FindByIdService findByIdService;
+    @Autowired
+    private FindByIdService findByIdService;
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

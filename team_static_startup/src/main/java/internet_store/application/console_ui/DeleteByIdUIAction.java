@@ -3,7 +3,7 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.DeleteByProductIdResponse;
 import internet_store.application.core.services.DeleteByProductIdService;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,7 +11,8 @@ import java.util.Scanner;
 @Component
 public class DeleteByIdUIAction implements UIAction {
 
-    @DIDependency private DeleteByProductIdService deleteByProductIdService;
+    @Autowired
+    private DeleteByProductIdService deleteByProductIdService;
 
 
     public void execute() {

@@ -3,7 +3,7 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.AddProductResponse;
 import internet_store.application.core.services.AddProductService;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -12,7 +12,8 @@ import java.util.Scanner;
 @Component
 public class AddProductUIAction implements UIAction {
 
-    @DIDependency private AddProductService addProductService;
+    @Autowired
+    private AddProductService addProductService;
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

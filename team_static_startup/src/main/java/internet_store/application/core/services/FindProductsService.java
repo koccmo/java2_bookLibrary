@@ -6,7 +6,7 @@ import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,8 +14,10 @@ import java.util.List;
 @Component
 public class FindProductsService {
 
-    @DIDependency private Database database;
-    @DIDependency private FindProductsRequestValidator validator;
+    @Autowired
+    private Database database;
+    @Autowired
+    private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -26,7 +28,8 @@ public class FindProductsService {
         List<Product> products = search(request);
 
         if (request.getOrdering() != null) {
-            products = new OrderingProductsService().order(products, request.getOrdering());}
+            products = new OrderingProductsService().order(products, request.getOrdering());
+        }
         if (request.getPaging() != null) {
             products = new PagingProductsService().page(products, request.getPaging());
         }

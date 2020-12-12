@@ -6,7 +6,7 @@ import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.validators.DeleteByProductValidator;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,8 +14,10 @@ import java.util.List;
 @Component
 public class DeleteProductByProductService {
 
-    @DIDependency private Database database;
-    @DIDependency private DeleteByProductValidator deleteByProductValidator;
+    @Autowired
+    private Database database;
+    @Autowired
+    private DeleteByProductValidator deleteByProductValidator;
 
     public DeleteByProductResponse execute(DeleteByProductRequest request) {
         List<CoreError> errors = deleteByProductValidator.validate(request);

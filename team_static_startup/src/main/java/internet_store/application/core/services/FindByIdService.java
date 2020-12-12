@@ -5,7 +5,7 @@ import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.validators.FindByIdValidator;
-import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,8 +13,10 @@ import java.util.List;
 @Component
 public class FindByIdService {
 
-    @DIDependency private Database database;
-    @DIDependency private FindByIdValidator validator;
+    @Autowired
+    private Database database;
+    @Autowired
+    private FindByIdValidator validator;
 
     public FindByIdResponse execute(FindByIdRequest request) {
         List<CoreError> errors = validator.validate(request);
