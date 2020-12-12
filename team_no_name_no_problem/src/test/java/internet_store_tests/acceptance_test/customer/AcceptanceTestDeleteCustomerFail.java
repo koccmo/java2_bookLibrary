@@ -18,8 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestDeleteCustomerFail {
 
-    public class AcceptanceTestDeleteCustomer {
-
         private ApplicationContext appContext;
 
         @Before
@@ -58,5 +56,5 @@ public class AcceptanceTestDeleteCustomerFail {
         private GetAllCustomersService getAllCustomersService() {
             return appContext.getBean(GetAllCustomersService.class);
         }
-    }}
+    }
 
