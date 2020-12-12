@@ -6,13 +6,13 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.product.FindByIdResponse;
 import internet_store.core.services.product.validators.FindByIdRequestValidator;
 import internet_store.database.product.ProductDatabase;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class FindProductByIdService {
 
     @DIDependency private ProductDatabase productDatabase;

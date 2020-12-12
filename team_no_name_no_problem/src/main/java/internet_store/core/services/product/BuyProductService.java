@@ -6,14 +6,14 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.product.BuyProductResponse;
 import internet_store.core.services.product.validators.BuyProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@DIComponent
+@Component
 public class BuyProductService {
 
     @DIDependency private ProductDatabase productDatabase;
