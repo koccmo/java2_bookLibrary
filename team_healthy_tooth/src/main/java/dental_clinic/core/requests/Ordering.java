@@ -1,11 +1,13 @@
 package dental_clinic.core.requests;
 
+import dental_clinic.core.domain.OrderingDirection;
+
 public class Ordering {
 
     private String orderBy;
-    private String orderDirection;
+    private OrderingDirection orderDirection;
 
-    public Ordering(String orderBy, String orderDirection) {
+    public Ordering(String orderBy, OrderingDirection orderDirection) {
         this.orderBy = orderBy;
         this.orderDirection = orderDirection;
     }
@@ -14,15 +16,15 @@ public class Ordering {
         return orderBy;
     }
 
-    public String getOrderDirection() {
+    public OrderingDirection getOrderDirection() {
         return orderDirection;
     }
 
     public boolean emptyBothFields (){
-        return (orderBy == null || orderBy.isEmpty()) && (orderDirection == null || orderDirection.isEmpty());
+        return (orderBy == null || orderBy.isEmpty()) && (orderDirection == null);
     }
 
     public boolean filledBoth(){
-        return (orderBy != null && !orderBy.isEmpty()) && (orderDirection != null && !orderDirection.isEmpty());
+        return (orderBy != null && !orderBy.isEmpty()) && (orderDirection != null);
     }
 }

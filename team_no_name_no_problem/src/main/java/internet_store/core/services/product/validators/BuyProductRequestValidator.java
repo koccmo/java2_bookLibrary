@@ -17,7 +17,7 @@ public class BuyProductRequestValidator {
             errors.add(new CoreError("id", "Not valid input for id"));
         }
 
-        if (buyProductRequest.getQuantity() == null || buyProductRequest.getQuantity() < 0) {
+        if (buyProductRequest.getQuantity() == null || buyProductRequest.getQuantity() < 1) {
             errors.add(new CoreError("quantity", "Not valid input for quantity"));
         }
 

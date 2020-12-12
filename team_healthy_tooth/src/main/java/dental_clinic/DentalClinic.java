@@ -28,7 +28,7 @@ public class DentalClinic {
     }
 
     private static void printMenu(){
-        System.out.println("\n          Menu\n\n" +
+        System.out.println("\n                Menu\n\n" +
                 "       1   Add patient\n" +
                 "       2   Delete by id\n" +
                 "       3   Print patients database\n" +
@@ -93,7 +93,7 @@ public class DentalClinic {
                 "  ###  ###   ###      ######   ###        ##     ###  ###   ##  ##           ##      ######      ######      ##     ###  ###       ##  ##      \n" +
                 "  ########   #####   ##   ##   ###        ##     ########    ####            ##     ##    ##    ##    ##     ##     ########                \n" +
                 "  ###  ###   ###     #######   ###        ##     ###  ###     ##             ##      ######      ######      ##     ###  ###      ##   ##\n" +
-                "  ###  ###   #####   ##   ##   ######     ##     ###  ###     ##             ##       ####        ####       ##     ###  ###       #####\n");
+                "  ###  ###   #####   ##   ##   ######     ##     ###  ###     ##             ##       ####        ####       ##     ###  ###       #####");
     }
 
 }

@@ -1,5 +1,6 @@
 package dental_clinic.console_ui;
 
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
@@ -32,6 +33,7 @@ public class SearchPatientUIAction implements UIAction{
 
         System.out.println("Please enter order direction: ASC/DESC");
         String orderDirection = in.nextLine();
+        OrderingDirection orderingDirection = getOrderingDirection(orderDirection);
 
         System.out.println("Please enter page number");
         Integer pageNumber = in.nextInt();
@@ -39,7 +41,7 @@ public class SearchPatientUIAction implements UIAction{
         System.out.println("Please enter page size");
         Integer pageSize = in.nextInt();
 
-        Ordering ordering = new Ordering(orderBy, orderDirection);
+        Ordering ordering = new Ordering(orderBy, orderingDirection);
         Paging paging = new Paging(pageNumber, pageSize);
         SearchPatientRequest searchPatientRequest =
                 new SearchPatientRequest(name, surname, ordering, paging);
@@ -50,5 +52,19 @@ public class SearchPatientUIAction implements UIAction{
         }else{
             searchPatientResponse.getPatients().forEach(System.out::println);
         }
+    }
+
+    private OrderingDirection getOrderingDirection (String orderDirection) {
+    OrderingDirection orderingDirection;
+        if (orderDirection.equalsIgnoreCase("ASC")){
+            orderingDirection = OrderingDirection.ASC;
+        }else {
+            if (orderDirection.equalsIgnoreCase("DESC")) {
+                orderingDirection = OrderingDirection.DESC;
+            } else {
+                orderingDirection = OrderingDirection.NOT_VALID;
+            }
+        }
+        return orderingDirection;
     }
 }

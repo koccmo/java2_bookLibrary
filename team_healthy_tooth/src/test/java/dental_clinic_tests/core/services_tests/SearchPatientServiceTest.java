@@ -1,5 +1,6 @@
 package dental_clinic_tests.core.services_tests;
 
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
@@ -33,7 +34,7 @@ public class SearchPatientServiceTest {
     @InjectMocks
     private SearchPatientService searchPatientService;
 
-    private Ordering validOrdering = new Ordering("surname", "ASC");
+    private Ordering validOrdering = new Ordering("surname", OrderingDirection.ASC);
     private Paging validPaging = new Paging(1, 2);
 
     @Test
@@ -167,7 +168,7 @@ public class SearchPatientServiceTest {
     public void testOrderingDescending(){
         ReflectionTestUtils.setField(searchPatientService, "orderingEnabled", true);
         ReflectionTestUtils.setField(searchPatientService, "pagingEnabled", false);
-        Ordering ordering = new Ordering("name", "DESC");
+        Ordering ordering = new Ordering("name", OrderingDirection.DESC);
         PersonalData personalData1 = new PersonalData("Bobik", "A", "12345678", "25052512345");
         PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "25052712345");
         PersonalData personalData3 = new PersonalData("Robert", "A", "12345678", "25062712345");
@@ -198,7 +199,7 @@ public class SearchPatientServiceTest {
     public void testOrderingDescendingPagingTrue(){
         ReflectionTestUtils.setField(searchPatientService, "orderingEnabled", true);
         ReflectionTestUtils.setField(searchPatientService, "pagingEnabled", true);
-        Ordering ordering = new Ordering("name", "DESC");
+        Ordering ordering = new Ordering("name", OrderingDirection.DESC);
         PersonalData personalData1 = new PersonalData("Bobik", "A", "12345678", "25052512345");
         PersonalData personalData2 = new PersonalData("Bob", "A", "12345678", "25052712345");
         PersonalData personalData3 = new PersonalData("Robert", "A", "12345678", "25062712345");
@@ -268,7 +269,7 @@ public class SearchPatientServiceTest {
         patients.add(patient1);
         patients.add(patient2);
 
-        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Bob", null, new Ordering("surname", "DESC"), new Paging(1, 1));
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Bob", null, new Ordering("surname", OrderingDirection.DESC), new Paging(1, 1));
 
         Mockito.when(searchPatientRequestValidator.validate(searchPatientRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.findPatientByName(searchPatientRequest.getName())).thenReturn(patients);
