@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,7 +90,7 @@ public class PatientDatabaseImplTest {
 
     @Test
     public void testAddVisitJowlData(){
-        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         List <ToothStatus> expectedList = new ArrayList<>();
@@ -100,7 +101,7 @@ public class PatientDatabaseImplTest {
 
     @Test
     public void testAddVisitVisitData(){
-        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1);
+        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         assertTrue(patientDatabase.getPatients().get(0).getVisits().size() == 1);

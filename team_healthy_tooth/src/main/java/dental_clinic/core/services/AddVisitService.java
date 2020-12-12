@@ -27,7 +27,7 @@ public class AddVisitService {
         }
 
         Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
-                addVisitRequest.getToothStatus(), addVisitRequest.getDoctor());
+                addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
 
         if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getId())){
             for (int i = 0; i < patientDatabase.getPatients().size(); i++) {

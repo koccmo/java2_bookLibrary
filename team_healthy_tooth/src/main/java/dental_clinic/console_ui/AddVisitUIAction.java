@@ -11,6 +11,7 @@ import dental_clinic.core.services.ContainsDatabaseIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -51,7 +52,9 @@ public class AddVisitUIAction implements UIAction {
             String doctor = in.nextLine();
             doctor = in.nextLine();
 
-            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+            Date date = new Date();
+
+            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor, date);
             AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 

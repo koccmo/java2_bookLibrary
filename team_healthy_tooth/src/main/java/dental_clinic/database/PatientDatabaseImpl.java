@@ -82,7 +82,8 @@ public class PatientDatabaseImpl implements PatientDatabase {
         for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
                 Visit visit =
-                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(), newVisit.getDoctor());
+                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(),
+                                newVisit.getDoctor(), newVisit.getDate());
                 patientList.get(i).addVisit(visit);
                 patientList.get(i).updateJowl(newVisit.getToothNumber(), newVisit.getToothStatus());
             }
