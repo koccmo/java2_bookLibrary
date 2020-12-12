@@ -6,12 +6,12 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteCustomerService {
 
     @DIDependency private CustomerDatabase customerDatabase;

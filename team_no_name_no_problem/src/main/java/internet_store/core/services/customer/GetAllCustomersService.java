@@ -6,13 +6,13 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.validators.GetAllCustomersValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class GetAllCustomersService {
 
     @DIDependency private CustomerDatabase customerDatabase;
