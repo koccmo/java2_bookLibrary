@@ -4,10 +4,10 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.order.GetOrdersRequest;
 import internet_store.core.response.order.GetOrdersResponse;
 import internet_store.core.services.order.GetOrdersService;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class GetOrdersUIAction implements UIAction {
 
     @DIDependency private GetOrdersService getOrdersService;
