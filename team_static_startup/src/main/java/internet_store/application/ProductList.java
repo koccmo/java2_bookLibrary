@@ -1,15 +1,17 @@
 package internet_store.application;
 
 import internet_store.application.console_ui.*;
-import internet_store.application.dependency_injection.ApplicationContext;
-import internet_store.application.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 class ProductList {
 
     private static ApplicationContext applicationContext
-            = new DIApplicationContextBuilder().build("internet_store.application");
+            = new AnnotationConfigApplicationContext(ProductListConfiguration.class);
     private Map<Integer, UIAction> menuNumberToActionMap;
 
     public ProductList() {
