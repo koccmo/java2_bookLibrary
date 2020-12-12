@@ -1,11 +1,12 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.DeleteByProductNameService;
+import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -14,7 +15,8 @@ import static org.junit.Assert.*;
 
 public class DeleteByProductNameAcceptanceTest {
 
-    /*private final ApplicationContext appContext = new ApplicationContext();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("internet_store.application");
 
     @Test
     public void shouldDeleteProductCorrectly() {
@@ -56,6 +58,5 @@ public class DeleteByProductNameAcceptanceTest {
 
         private DeleteByProductNameService getDeleteByProductNameService () {
             return appContext.getBean(DeleteByProductNameService.class);
-        }*/
-
+        }
     }

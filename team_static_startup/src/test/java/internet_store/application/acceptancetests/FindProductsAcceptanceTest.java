@@ -1,19 +1,20 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
+import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
-
 
 import static org.junit.Assert.*;
 
 public class FindProductsAcceptanceTest {
 
-    /*private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("internet_store.application");
 
     private FindProductsService getFindProductsService() {
         return appContext.getBean(FindProductsService.class);
@@ -198,6 +199,6 @@ public class FindProductsAcceptanceTest {
         assertEquals(1, response.getErrors().size());
         assertEquals("Page size", response.getErrors().get(0).getField());
         assertEquals("Must be bigger than zero.", response.getErrors().get(0).getMessage());
-    }*/
+    }
 
 }

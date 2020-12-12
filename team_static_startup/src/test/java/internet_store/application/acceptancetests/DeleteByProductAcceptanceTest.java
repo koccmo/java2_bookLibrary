@@ -1,11 +1,12 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.DeleteProductByProductService;
+import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,11 +16,11 @@ import static org.junit.Assert.*;
 
 public class DeleteByProductAcceptanceTest {
 
-    /*private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     @Before
     public void setUp() {
-        applicationContext = new ApplicationContext();
+        applicationContext = new DIApplicationContextBuilder().build("internet_store.application");
     }
 
     @Test
@@ -75,5 +76,5 @@ public class DeleteByProductAcceptanceTest {
 
     private AddProductService getAddProductService() {
         return applicationContext.getBean(AddProductService.class);
-    }*/
+    }
 }

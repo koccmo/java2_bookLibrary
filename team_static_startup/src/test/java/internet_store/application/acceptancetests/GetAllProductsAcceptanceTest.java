@@ -1,20 +1,22 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.GetAllProductsRequest;
 import internet_store.application.core.responses.GetAllProductsResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.GetAllProductsService;
-
+import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
+
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
 public class GetAllProductsAcceptanceTest {
 
-    /*private final ApplicationContext appContext = new ApplicationContext();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("internet_store.application");
 
     @Test
     public void shouldReturnCorrectProductList() {
@@ -36,6 +38,6 @@ public class GetAllProductsAcceptanceTest {
 
     private GetAllProductsService getAllProductsService() {
         return appContext.getBean(GetAllProductsService.class);
-    }*/
+    }
 
 }

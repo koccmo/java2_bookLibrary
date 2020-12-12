@@ -1,11 +1,12 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.FindByIdService;
+import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +17,8 @@ import static org.junit.Assert.*;
 
 public class FindByIdAcceptanceTest {
 
-    /*private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("internet_store.application");
     private Database database;
 
     @Before
@@ -71,5 +73,5 @@ public class FindByIdAcceptanceTest {
 
     private FindByIdService getFindByIdService() {
         return appContext.getBean(FindByIdService.class);
-    }*/
+    }
 }
