@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
@@ -9,17 +10,21 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
-import internet_store.dependency_injection.ApplicationContext;
-import internet_store.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
+import org.springframework.context.ApplicationContext;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestFindCustomerById {
 
-    private static  ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("internet_store");
+    private ApplicationContext appContext;
 
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+    }
     @Test
     public void test(){
         Customer customer = new Customer("name", "surname", "28736278", "address",
@@ -49,14 +54,14 @@ public class AcceptanceTestFindCustomerById {
     }
 
     private AddCustomerService addCustomerService(){
-        return applicationContext.getBean(AddCustomerService.class);
+        return appContext.getBean(AddCustomerService.class);
     }
 
     private FindCustomerByIdService findCustomerByIdService(){
-        return applicationContext.getBean(FindCustomerByIdService.class);
+        return appContext.getBean(FindCustomerByIdService.class);
     }
 
     private GetAllCustomersService getAllCustomersService(){
-        return applicationContext.getBean(GetAllCustomersService.class);
+        return appContext.getBean(GetAllCustomersService.class);
     }
 }
