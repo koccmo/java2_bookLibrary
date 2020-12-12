@@ -10,36 +10,38 @@ import internet_store.application.dependency_injection.DIApplicationContextBuild
 import org.junit.Test;
 
 import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 public class DeleteByIdAcceptanceTest {
 
-    private ApplicationContext appContext = new DIApplicationContextBuilder().build("internet_store.application");
+    private ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("internet_store.application");
 
-  private DeleteByProductIdService getDeleteByProductIdService() {
+    private DeleteByProductIdService getDeleteByProductIdService() {
         return appContext.getBean(DeleteByProductIdService.class);
     }
 
     private AddProductService getAddProductService() {
-      return appContext.getBean(AddProductService.class);
+        return appContext.getBean(AddProductService.class);
     }
 
-  @Test
-    public void shouldDeleteWhenIdIsInDatabase () {
-      AddProductRequest addRequest = new AddProductRequest("A1",
-              "B1", new BigDecimal("1"));
-      getAddProductService().execute(addRequest);
-      DeleteByProductIdRequest deleteRequest= new DeleteByProductIdRequest(1L);
-      DeleteByProductIdResponse deleteResponse = getDeleteByProductIdService().execute(deleteRequest);
-      assertTrue(deleteResponse.isProductRemoved());
-      assertFalse(deleteResponse.hasErrors());
+    @Test
+    public void shouldDeleteWhenIdIsInDatabase() {
+        AddProductRequest addRequest = new AddProductRequest("A1",
+                "B1", new BigDecimal("1"));
+        getAddProductService().execute(addRequest);
+        DeleteByProductIdRequest deleteRequest = new DeleteByProductIdRequest(1L);
+        DeleteByProductIdResponse deleteResponse = getDeleteByProductIdService().execute(deleteRequest);
+        assertTrue(deleteResponse.isProductRemoved());
+        assertFalse(deleteResponse.hasErrors());
 
 
-  }
+    }
 
-  @Test
-    public void shouldNotDeleteWhenIdIsNotInDatabase () {
-       DeleteByProductIdRequest deleteRequest= new DeleteByProductIdRequest(2L);
+    @Test
+    public void shouldNotDeleteWhenIdIsNotInDatabase() {
+        DeleteByProductIdRequest deleteRequest = new DeleteByProductIdRequest(2L);
         DeleteByProductIdResponse deleteResponse = getDeleteByProductIdService().execute(deleteRequest);
         assertFalse(deleteResponse.isProductRemoved());
 
@@ -47,16 +49,15 @@ public class DeleteByIdAcceptanceTest {
     }
 
     @Test
-    public void shouldNotDeleteWhenIdIsNotProvided () {
-        DeleteByProductIdRequest deleteRequest= new DeleteByProductIdRequest(null);
+    public void shouldNotDeleteWhenIdIsNotProvided() {
+        DeleteByProductIdRequest deleteRequest = new DeleteByProductIdRequest(null);
         DeleteByProductIdResponse deleteResponse = getDeleteByProductIdService().execute(deleteRequest);
         assertFalse(deleteResponse.isProductRemoved());
         assertTrue(deleteResponse.hasErrors());
         assertEquals(1, deleteResponse.getErrors().size());
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
-  }
-
+    }
 
 
 }
