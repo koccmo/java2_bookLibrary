@@ -2,12 +2,12 @@ package internet_store.core.services.customer.validators;
 
 import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.response.CoreError;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteCustomerRequestValidator {
 
     public List<CoreError> validate (DeleteCustomerRequest deleteCustomerRequest){
