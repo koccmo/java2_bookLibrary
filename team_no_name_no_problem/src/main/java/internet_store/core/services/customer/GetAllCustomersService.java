@@ -6,17 +6,16 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.validators.GetAllCustomersValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class GetAllCustomersService {
+@Component public class GetAllCustomersService {
 
-    @DIDependency private CustomerDatabase customerDatabase;
-    @DIDependency private GetAllCustomersValidator getAllCustomersValidator;
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private GetAllCustomersValidator getAllCustomersValidator;
 
     public GetAllCustomersResponse execute(GetAllCustomersRequest getAllCustomersRequest){
         List<CoreError> errors = getAllCustomersValidator.validate(getAllCustomersRequest);
