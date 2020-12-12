@@ -2,12 +2,12 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteByProductIdValidator {
 
     public List<CoreError> validate (DeleteByProductIdRequest request){

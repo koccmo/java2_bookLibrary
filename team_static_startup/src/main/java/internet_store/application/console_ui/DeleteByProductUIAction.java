@@ -4,13 +4,13 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.DeleteProductByProductService;
-import internet_store.application.dependency_injection.DIComponent;
 import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class DeleteByProductUIAction implements UIAction {
 
     @DIDependency private DeleteProductByProductService deleteProductByProductService;

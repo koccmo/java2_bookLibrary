@@ -1,8 +1,8 @@
 package internet_store.application.console_ui;
 
-import internet_store.application.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitProgramUIAction implements UIAction{
 
     @Override

@@ -6,12 +6,12 @@ import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductResponse;
 import internet_store.application.core.services.validators.DeleteByProductValidator;
-import internet_store.application.dependency_injection.DIComponent;
 import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteProductByProductService {
 
     @DIDependency private Database database;

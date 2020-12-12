@@ -3,12 +3,12 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
 import internet_store.application.core.services.DeleteByProductNameService;
-import internet_store.application.dependency_injection.DIComponent;
 import internet_store.application.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class DeleteByProductNameUIAction implements UIAction {
 
     @DIDependency private DeleteByProductNameService deleteProductByNameService;

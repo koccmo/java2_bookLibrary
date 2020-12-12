@@ -1,12 +1,14 @@
 package internet_store.application.core.database;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class InMemoryDatabase implements Database {
     private Long id = 1L;
     private final List<Product> productList = new ArrayList<>();
