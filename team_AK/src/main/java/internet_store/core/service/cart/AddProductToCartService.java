@@ -7,22 +7,19 @@ import internet_store.core.response.cart.AddProductToCartResponse;
 import internet_store.core.validate.ProductQuantityValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.product_database.InnerProductDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddProductToCartService {
-    @DIDependency
+    @Autowired
     InnerProductDatabase productDatabase;
-    @DIDependency
+    @Autowired
     InnerCartDatabase cartDatabase;
-
-    public AddProductToCartService() {
-    }
 
     public AddProductToCartService(InnerProductDatabase productDatabase, InnerCartDatabase cartDatabase) {
         this.productDatabase = productDatabase;

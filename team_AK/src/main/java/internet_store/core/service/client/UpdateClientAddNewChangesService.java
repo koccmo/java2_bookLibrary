@@ -13,15 +13,15 @@ import internet_store.core.response.client.client_items.AddClientNameResponse;
 import internet_store.core.response.client.client_items.AddClientPhoneResponse;
 import internet_store.core.response.client.client_items.AddClientSurnameResponse;
 import internet_store.database.client_database.InnerClientDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class UpdateClientAddNewChangesService implements ClientUpdate {
-    @DIDependency
+    @Autowired
     InnerClientDatabase clientDatabase;
 
     public AddClientResponse execute(AddClientRequest addClientRequest) {

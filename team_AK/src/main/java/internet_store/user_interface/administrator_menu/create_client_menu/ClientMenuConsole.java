@@ -12,28 +12,28 @@ import internet_store.user_interface.administrator_menu.create_client_menu.add_c
 import internet_store.user_interface.administrator_menu.create_client_menu.delete_client_menu.DeleteClientMenu;
 import internet_store.user_interface.administrator_menu.create_client_menu.update_client_menu.UpdateClientMenu;
 import internet_store.user_interface.main_menu.MainMenuConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class ClientMenuConsole {
-    @DIDependency
+    @Autowired
     MainMenuConsole mainMenuConsole;
-    @DIDependency
+    @Autowired
     ClientMenu clientMenu;
-    @DIDependency
+    @Autowired
     DeleteClientMenu deleteClientMenu;
-    @DIDependency
+    @Autowired
     UpdateClientMenu updateClientMenu;
-    @DIDependency
+    @Autowired
     AddClientService addClientService;
-    @DIDependency
+    @Autowired
     DeleteClientService deleteClientService;
-    @DIDependency
+    @Autowired
     UpdateClientService updateClientService;
-    @DIDependency
+    @Autowired
     UpdateClientAddNewChangesService updateClientAddNewChangesService;
-    @DIDependency
+    @Autowired
     PrintClientService printClientService;
 
     public void startClientMenuConsole() {

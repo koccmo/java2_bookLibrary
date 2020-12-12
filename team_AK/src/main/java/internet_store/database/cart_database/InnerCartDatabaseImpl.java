@@ -1,12 +1,13 @@
 package internet_store.database.cart_database;
 
 import internet_store.core.domain.Product;
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-@DIComponent
+
+@Component
 public class InnerCartDatabaseImpl implements InnerCartDatabase {
     private final List<Product> productsInCart = new ArrayList<>();
     private final Product EMPTY_OBJECT = null;
@@ -52,6 +53,7 @@ public class InnerCartDatabaseImpl implements InnerCartDatabase {
 
     @Override
     public Product findById(long id) {
+        //noinspection ConstantConditions
         return productsInCart.stream().filter(pr -> pr.getId() == id).findFirst().orElse(EMPTY_OBJECT);
     }
 

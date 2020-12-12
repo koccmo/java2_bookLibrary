@@ -12,28 +12,28 @@ import internet_store.user_interface.administrator_menu.create_product_menu.add_
 import internet_store.user_interface.administrator_menu.create_product_menu.delete_product_menu.DeleteProductMenu;
 import internet_store.user_interface.administrator_menu.create_product_menu.update_product_menu.UpdateProductMenu;
 import internet_store.user_interface.main_menu.MainMenuConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class ProductMenuConsole {
-    @DIDependency
+    @Autowired
     MainMenuConsole mainMenuConsole;
-    @DIDependency
+    @Autowired
     ProductMenu productMenu;
-    @DIDependency
+    @Autowired
     DeleteProductMenu deleteProductMenu;
-    @DIDependency
+    @Autowired
     UpdateProductMenu updateProductMenu;
-    @DIDependency
+    @Autowired
     AddProductService addProductService;
-    @DIDependency
+    @Autowired
     DeleteProductService deleteProductService;
-    @DIDependency
+    @Autowired
     UpdateProductService updateProductService;
-    @DIDependency
+    @Autowired
     UpdateProductAddNewChangesService updateProductServiceNewChanges;
-    @DIDependency
+    @Autowired
     PrintProductService printProductService;
 
     public void startProductMenuConsole() {

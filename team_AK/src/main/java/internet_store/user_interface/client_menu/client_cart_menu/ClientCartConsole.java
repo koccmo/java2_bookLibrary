@@ -1,42 +1,26 @@
 package internet_store.user_interface.client_menu.client_cart_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.user_interface.client_menu.client_cart_menu.add_to_cart_menu.AddProductToCartConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.delete_from_cart_menu.DeleteFromCartConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.update_cart_menu.UpdateCartConsole;
 import internet_store.user_interface.main_menu.MainMenuConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class ClientCartConsole {
-    @DIDependency
+    @Autowired
     MainMenuConsole mainMenuConsole;
-    @DIDependency
+    @Autowired
     ClientCartMenu clientCartMenu;
-    @DIDependency
+    @Autowired
     AddProductToCartConsole addProductToCartConsole;
-    @DIDependency
+    @Autowired
     DeleteFromCartConsole deleteFromCartConsole;
-    @DIDependency
+    @Autowired
     UpdateCartConsole updateCartConsole;
 
-//    public ClientCartConsole() {}
-//
-//    public ClientCartConsole(MainMenuConsole mainMenuConsole) {
-//        this.mainMenuConsole = mainMenuConsole;
-//    }
-
     public void startCartMenuConsole() {
-//        final ClientCartMenu clientCartMenu = ProductListApplication.applicationContext
-//                .getBean(ClientCartMenu.class);
-//        final AddProductToCartConsole addProductToCartConsole = ProductListApplication.applicationContext
-//                .getBean(AddProductToCartConsole.class);
-//        final DeleteFromCartConsole deleteFromCartConsole = ProductListApplication.applicationContext
-//                .getBean(DeleteFromCartConsole.class);
-//        final UpdateCartConsole updateCartConsole = ProductListApplication.applicationContext
-//                .getBean(UpdateCartConsole.class);
-
         boolean returnMainMenu = true;
         do {
             clientCartMenu.showClientCartMenu();

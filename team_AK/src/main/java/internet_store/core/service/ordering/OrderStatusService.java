@@ -7,32 +7,23 @@ import internet_store.core.request.telegram.FindTelegramChatIdRequest;
 import internet_store.core.service.telegram.FindTelegramChatIdService;
 import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.integration.telegram.ChatBot;
-import internet_store.integration.telegram.InitTelegram;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class OrderStatusService {
-    @DIDependency
+    @Autowired
     InnerOrderDatabase orderDatabase;
-    @DIDependency
+    @Autowired
     FindTelegramChatIdService telegramChatIdService;
-    @DIDependency
-    InitTelegram initTelegram;
+    @Autowired
+    ChatBot chatBot;
     private Order order;
-
-    public OrderStatusService() {
-
-    }
-
-    public OrderStatusService(InnerOrderDatabase orderDatabase) {
-        this.orderDatabase = orderDatabase;
-    }
 
     public void execute(OrderStatusRequest orderStatusRequest) {
         long orderId = orderStatusRequest.getOrderId();
@@ -59,7 +50,6 @@ public class OrderStatusService {
                         + "Total sum: " + order.getTotalSum() + "\n"
                         + "Order status: " + order.getOrderStatus().toString())
                 .build();
-        ChatBot chatBot = initTelegram.getChatBot();
         chatBot.execute(sendMessage);
     }
 }
