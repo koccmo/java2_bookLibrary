@@ -70,7 +70,7 @@ public class AddPatientRequestValidator {
     private List<CoreError> personalCodeValidationErrors(String personalCode){
         List <CoreError> errors = new ArrayList<>();
         if (!Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode)) {
-            errors.add(new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
+            errors.add(new CoreError("Personal data : personal code", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
         }
         return errors;
     }
