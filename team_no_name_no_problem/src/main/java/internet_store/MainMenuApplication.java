@@ -1,18 +1,14 @@
 package internet_store;
 
+import internet_store.config.MainMenuConfiguration;
 import internet_store.console_ui.ExitFromApplicationUIAction;
 import internet_store.console_ui.UIAction;
 import internet_store.console_ui.customer.AddCustomerUIAction;
 import internet_store.console_ui.customer.DeleteCustomerUIAction;
 import internet_store.console_ui.order.GetOrdersUIAction;
 import internet_store.console_ui.product.*;
-import internet_store.core.services.customer.AddCustomerService;
-import internet_store.core.services.customer.DeleteCustomerService;
-import internet_store.core.services.order.GetOrdersService;
-import internet_store.core.services.product.*;
-import internet_store.database.order.OrderDatabase;
-import internet_store.dependency_injection.ApplicationContext;
-import internet_store.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +17,7 @@ import java.util.Scanner;
 public class MainMenuApplication {
 
     private static  ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("internet_store");
+            new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
 
     public static void main(String[] args) {
 
