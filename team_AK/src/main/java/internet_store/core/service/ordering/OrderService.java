@@ -6,20 +6,17 @@ import internet_store.core.response.ordering.OrderResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.client_database.InnerClientDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class OrderService {
-    @DIDependency
+    @Autowired
     InnerClientDatabase clientDatabase;
-    @DIDependency
+    @Autowired
     InnerCartDatabase cartDatabase;
-
-    public OrderService() {
-    }
 
     public OrderService(InnerClientDatabase clientDatabase, InnerCartDatabase cartDatabase) {
         this.clientDatabase = clientDatabase;

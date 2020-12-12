@@ -4,11 +4,11 @@ import internet_store.core.core_error.CoreError;
 import internet_store.core.request.product.product_items.AddProductDescriptionRequest;
 import internet_store.core.response.product.product_item.AddProductDescriptionResponse;
 import internet_store.core.validate.StringTypeValidator;
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddProductDescriptionService {
     public AddProductDescriptionResponse execute(AddProductDescriptionRequest addProductDescriptionRequest) {
         StringTypeValidator stringTypeValidator = new StringTypeValidator();

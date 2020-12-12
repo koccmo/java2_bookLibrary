@@ -4,20 +4,20 @@ import internet_store.core.service.ordering.PrintOrderService;
 import internet_store.user_interface.administrator_menu.create_order_menu.delete_order_menu.DeleteOrderConsole;
 import internet_store.user_interface.administrator_menu.create_order_menu.status_order_menu.StatusOrderConsole;
 import internet_store.user_interface.main_menu.MainMenuConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class OrderMenuConsole {
-    @DIDependency
+    @Autowired
     MainMenuConsole mainMenuConsole;
-    @DIDependency
+    @Autowired
     OrderMenu orderMenu;
-    @DIDependency
+    @Autowired
     DeleteOrderConsole deleteOrderConsole;
-    @DIDependency
+    @Autowired
     StatusOrderConsole statusOrderConsole;
-    @DIDependency
+    @Autowired
     PrintOrderService printOrderService;
 
     public void startOrderMenuConsole() {

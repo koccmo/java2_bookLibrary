@@ -1,12 +1,12 @@
 package internet_store.user_interface.client_menu.client_cart_menu;
 
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class ClientCartMenu {
     @Getter
     private int userInput;

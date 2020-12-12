@@ -7,24 +7,21 @@ import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.client_database.InnerClientDatabase;
 import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.date_formats.DateCreator;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class OrderCreator {
-    @DIDependency
+    @Autowired
     InnerClientDatabase clientDatabase;
-    @DIDependency
+    @Autowired
     InnerCartDatabase cartDatabase;
-    @DIDependency
+    @Autowired
     InnerOrderDatabase orderDatabase;
-
-    public OrderCreator() {
-    }
 
     public OrderCreator(InnerClientDatabase clientDatabase, InnerCartDatabase cartDatabase, InnerOrderDatabase orderDatabase) {
         this.cartDatabase = cartDatabase;
