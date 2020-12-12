@@ -6,12 +6,12 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchProductUIAction implements UIAction {
 
     @DIDependency private SearchProductService searchProductService;

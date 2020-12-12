@@ -5,12 +5,12 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.AddProductService;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class AddProductUIAction implements UIAction {
 
     @DIDependency private AddProductService addProductService;

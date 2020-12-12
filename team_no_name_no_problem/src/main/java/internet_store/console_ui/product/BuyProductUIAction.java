@@ -11,14 +11,14 @@ import internet_store.core.response.product.BuyProductResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.product.BuyProductService;
 import internet_store.database.order.OrderDatabase;
-import internet_store.dependency_injection.DIComponent;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class BuyProductUIAction implements UIAction {
 
     @DIDependency private BuyProductService buyProductService;
