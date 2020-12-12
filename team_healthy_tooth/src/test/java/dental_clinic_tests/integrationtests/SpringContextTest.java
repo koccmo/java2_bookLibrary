@@ -21,10 +21,3 @@ public class SpringContextTest {
         assertNotNull(applicationContext);
     }
 }
-
-//@RunWith(SpringJUnit4ClassRunner.class) - аннотация для запуска тестов под управлением
-//специального Spring JUnit Runner класса, который обеспечивает поднятие Spring контекста
-//при старте тестов.
-//
-//@ContextConfiguration(classes = {BookListConfiguration.class}) - эта аннотация
-//позволяет указать главный класс с конфигурацией приложения.
