@@ -6,7 +6,7 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.services.customer.AddCustomerService;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 @Component
 public class  AddCustomerUIAction implements UIAction {
 
-    @DIDependency private AddCustomerService addCustomerService;
+    @Autowired private AddCustomerService addCustomerService;
 
     @Override
     public void execute(){

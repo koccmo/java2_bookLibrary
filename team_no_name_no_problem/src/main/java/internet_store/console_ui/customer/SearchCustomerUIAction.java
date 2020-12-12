@@ -6,7 +6,7 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.SearchCustomerService;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 @Component
 public class SearchCustomerUIAction implements UIAction {
 
-    @DIDependency private SearchCustomerService searchCustomerService;
+    @Autowired private SearchCustomerService searchCustomerService;
 
     @Override
     public void execute(){

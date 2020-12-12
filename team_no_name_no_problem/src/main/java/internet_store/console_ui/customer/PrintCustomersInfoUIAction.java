@@ -5,12 +5,13 @@ import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.GetAllCustomersService;
 import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PrintCustomersInfoUIAction implements UIAction {
 
-    @DIDependency private GetAllCustomersService getAllCustomersService;
+    @Autowired private GetAllCustomersService getAllCustomersService;
 
     @Override
     public void execute(){
