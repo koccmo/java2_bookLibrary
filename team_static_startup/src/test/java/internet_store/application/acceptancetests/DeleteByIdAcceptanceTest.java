@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class DeleteByIdAcceptanceTest {
 
-   /* private ApplicationContext appContext = new DIApplicationContextBuilder().build("internet_store.application");
+    private ApplicationContext appContext = new DIApplicationContextBuilder().build("internet_store.application");
 
   private DeleteByProductIdService getDeleteByProductIdService() {
         return appContext.getBean(DeleteByProductIdService.class);
@@ -55,7 +55,7 @@ public class DeleteByIdAcceptanceTest {
         assertEquals(1, deleteResponse.getErrors().size());
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
-  }*/
+  }
 
 
 

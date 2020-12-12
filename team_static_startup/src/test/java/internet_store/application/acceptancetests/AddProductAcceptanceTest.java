@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AddProductAcceptanceTest {
 
-    /*private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     @Before
     public void setUp(){
@@ -78,6 +78,6 @@ public class AddProductAcceptanceTest {
 
     private GetAllProductsService getAllProductsService() {
         return applicationContext.getBean(GetAllProductsService.class);
-    }*/
+    }
 
 }
