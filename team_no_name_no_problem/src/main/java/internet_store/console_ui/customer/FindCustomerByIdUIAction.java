@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
-public class FindCustomerByIdUIAction implements UIAction {
+@Component public class FindCustomerByIdUIAction implements UIAction {
 
     @Autowired private FindCustomerByIdService findCustomerByIdService;
 
