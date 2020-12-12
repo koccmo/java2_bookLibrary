@@ -7,7 +7,6 @@ import internet_store.console_ui.customer.AddCustomerUIAction;
 import internet_store.console_ui.customer.DeleteCustomerUIAction;
 import internet_store.console_ui.order.GetOrdersUIAction;
 import internet_store.console_ui.product.*;
-import org.junit.Before;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -17,12 +16,9 @@ import java.util.Scanner;
 
 public class MainMenuApplication {
 
-    private static ApplicationContext appContext;
+    private static  ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
 
-    @Before
-    public void setup() {
-        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
-    }
     public static void main(String[] args) {
 
         System.out.println("\nWelcome to the No Name No Problem Internet Store  ¯\\_(ツ)_/¯");
@@ -63,19 +59,19 @@ public class MainMenuApplication {
         Map<Integer, UIAction> menuNumberToAction;
         menuNumberToAction = new HashMap();
 
-        menuNumberToAction.put(1, appContext.getBean(AddProductUIAction.class));
-        menuNumberToAction.put(2, appContext.getBean(DeleteByIdUIAction.class));
-        menuNumberToAction.put(3, appContext.getBean(GetAllProductsUIAction.class));
-        menuNumberToAction.put(4, appContext.getBean(FindByIdUIAction.class));
-        menuNumberToAction.put(5, appContext.getBean(SearchProductUIAction.class));
-        menuNumberToAction.put(6, appContext.getBean(ChangeProductUIAction.class));
-        menuNumberToAction.put(7, appContext.getBean(GetOrdersUIAction.class));
+        menuNumberToAction.put(1, applicationContext.getBean(AddProductUIAction.class));
+        menuNumberToAction.put(2, applicationContext.getBean(DeleteByIdUIAction.class));
+        menuNumberToAction.put(3, applicationContext.getBean(GetAllProductsUIAction.class));
+        menuNumberToAction.put(4, applicationContext.getBean(FindByIdUIAction.class));
+        menuNumberToAction.put(5, applicationContext.getBean(SearchProductUIAction.class));
+        menuNumberToAction.put(6, applicationContext.getBean(ChangeProductUIAction.class));
+        menuNumberToAction.put(7, applicationContext.getBean(GetOrdersUIAction.class));
 
-        menuNumberToAction.put(8, appContext.getBean(AddCustomerUIAction.class));
-        menuNumberToAction.put(9, appContext.getBean(DeleteCustomerUIAction.class));
-        menuNumberToAction.put(10, appContext.getBean(SearchProductUIAction.class));
-        menuNumberToAction.put(11, appContext.getBean(GetAllProductsUIAction.class));
-        menuNumberToAction.put(12, appContext.getBean(BuyProductUIAction.class));
+        menuNumberToAction.put(8, applicationContext.getBean(AddCustomerUIAction.class));
+        menuNumberToAction.put(9, applicationContext.getBean(DeleteCustomerUIAction.class));
+        menuNumberToAction.put(10, applicationContext.getBean(SearchProductUIAction.class));
+        menuNumberToAction.put(11, applicationContext.getBean(GetAllProductsUIAction.class));
+        menuNumberToAction.put(12, applicationContext.getBean(BuyProductUIAction.class));
 
         menuNumberToAction.put(0, new ExitFromApplicationUIAction());
 
