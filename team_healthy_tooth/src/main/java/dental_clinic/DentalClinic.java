@@ -16,6 +16,7 @@ public class DentalClinic {
             new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
 
     public static void main(String [] args){
+        printLogo();
         while(true) {
 
             printMenu();
@@ -27,17 +28,17 @@ public class DentalClinic {
     }
 
     private static void printMenu(){
-        System.out.println("\nMenu\n" +
-                "1   Add patient\n" +
-                "2   Delete by id\n" +
-                "3   Print patients database\n" +
-                "4   Print specific patient information\n" +
-                "5   Search by name / surname\n" +
-                "6   Find patient by personal code\n" +
-                "7   Add visit\n" +
-                "8   Print patients card\n" +
-                "9   Change patient's personal data\n" +
-                "0   Exit");
+        System.out.println("\n          Menu\n\n" +
+                "       1   Add patient\n" +
+                "       2   Delete by id\n" +
+                "       3   Print patients database\n" +
+                "       4   Print specific patient information\n" +
+                "       5   Search by name / surname\n" +
+                "       6   Find patient by personal code\n" +
+                "       7   Add visit\n" +
+                "       8   Print patients card\n" +
+                "       9   Change patient's personal data\n" +
+                "       0   Exit\n");
     }
 
     private static int inputValidInteger(){
@@ -84,6 +85,15 @@ public class DentalClinic {
         } else {
             System.out.println("Menu item does not exist: " + userSelectedMenuNumber);
         }
+    }
+
+    private static void printLogo(){
+        System.out.println("\n\n" +
+                "  ###  ###   ######     ##     ###      ######   ###  ###   ##  ##         ######     ####        ####     ######   ###  ###               \n" +
+                "  ###  ###   ###      ######   ###        ##     ###  ###   ##  ##           ##      ######      ######      ##     ###  ###       ##  ##      \n" +
+                "  ########   #####   ##   ##   ###        ##     ########    ####            ##     ##    ##    ##    ##     ##     ########                \n" +
+                "  ###  ###   ###     #######   ###        ##     ###  ###     ##             ##      ######      ######      ##     ###  ###      ##   ##\n" +
+                "  ###  ###   #####   ##   ##   ######     ##     ###  ###     ##             ##       ####        ####       ##     ###  ###       #####\n");
     }
 
 }
