@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static dental_clinic.DentalClinic.applicationContext;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -49,15 +48,15 @@ public class AcceptanceTest6 {
     }
 
     private AddPatientService addPatientService() {
-        return applicationContext.getBean(AddPatientService.class);
+        return appContext.getBean(AddPatientService.class);
     }
 
     private ChangePersonalDataService changePersonalDataService(){
-        return applicationContext.getBean(ChangePersonalDataService.class);
+        return appContext.getBean(ChangePersonalDataService.class);
     }
 
     private GetPatientCardService getPatientCardService() {
-        return applicationContext.getBean(GetPatientCardService.class);
+        return appContext.getBean(GetPatientCardService.class);
     }
 
 }

@@ -1,5 +1,10 @@
 package dental_clinic_tests.acceptance_tests;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
@@ -13,12 +18,7 @@ import dental_clinic.core.services.AddPatientService;
 import dental_clinic.core.services.DeletePatientService;
 import dental_clinic.core.services.GetAllPatientsService;
 import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static dental_clinic.DentalClinic.applicationContext;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest3 {
@@ -49,25 +49,25 @@ public class AcceptanceTest3 {
         SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("25038910523");
         SearchPatientByPersonalCodeResponse searchPatientByPersonalCodeResponse = searchPatientsByPersonalCodeService().execute(searchPatientByPersonalCodeRequest);
 
-        //assertTrue(getAllPatientsResponse.getPatients().size() == 1);
-        //assertTrue(searchPatientByPersonalCodeResponse.getFoundPatient().equals(patient));
+        assertTrue(getAllPatientsResponse.getPatients().size() == 1);
+        assertTrue(searchPatientByPersonalCodeResponse.getFoundPatient().equals(patient));
 
     }
 
     private AddPatientService addPatientService() {
-        return applicationContext.getBean(AddPatientService.class);
+        return appContext.getBean(AddPatientService.class);
     }
 
     private DeletePatientService deletePatientService(){
-        return applicationContext.getBean(DeletePatientService.class);
+        return appContext.getBean(DeletePatientService.class);
     }
 
     private GetAllPatientsService getAllPatientsService() {
-        return applicationContext.getBean(GetAllPatientsService.class);
+        return appContext.getBean(GetAllPatientsService.class);
     }
 
     private SearchPatientsByPersonalCodeService searchPatientsByPersonalCodeService(){
-        return applicationContext.getBean(SearchPatientsByPersonalCodeService.class);
+        return appContext.getBean(SearchPatientsByPersonalCodeService.class);
     }
 
 }

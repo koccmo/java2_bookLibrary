@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static dental_clinic.DentalClinic.applicationContext;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest4 {
@@ -37,7 +36,7 @@ public class AcceptanceTest4 {
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService().execute(getAllPatientsRequest);
 
-        //assertTrue(getAllPatientsResponse.getPatients().size() == 2);
+        assertTrue(getAllPatientsResponse.getPatients().size() == 2);
 
         assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getSurname().equals("SurnameB"));
         assertTrue(getAllPatientsResponse.getPatients().get(0).getPersonalData().getPhone().equals("12345678"));
@@ -45,15 +44,15 @@ public class AcceptanceTest4 {
     }
 
     private AddPatientService addPatientService() {
-        return applicationContext.getBean(AddPatientService.class);
+        return appContext.getBean(AddPatientService.class);
     }
 
     private ChangePersonalDataService changePersonalDataService(){
-        return applicationContext.getBean(ChangePersonalDataService.class);
+        return appContext.getBean(ChangePersonalDataService.class);
     }
 
     private GetAllPatientsService getAllPatientsService() {
-        return applicationContext.getBean(GetAllPatientsService.class);
+        return appContext.getBean(GetAllPatientsService.class);
     }
 
 }
