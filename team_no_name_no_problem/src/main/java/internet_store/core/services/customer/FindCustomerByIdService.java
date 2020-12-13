@@ -6,17 +6,16 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
 import internet_store.core.services.customer.validators.FindCustomerByIdRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
-public class FindCustomerByIdService {
+@Component public class FindCustomerByIdService {
 
-    @DIDependency private CustomerDatabase customerDatabase;
-    @DIDependency private FindCustomerByIdRequestValidator findCustomerByIdRequestValidator;
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private FindCustomerByIdRequestValidator findCustomerByIdRequestValidator;
 
     public FindCustomerByIdResponse execute(FindCustomerByIdRequest findCustomerByIdRequest){
 

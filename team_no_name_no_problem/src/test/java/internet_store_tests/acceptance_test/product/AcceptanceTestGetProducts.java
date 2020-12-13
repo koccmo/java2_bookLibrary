@@ -1,22 +1,27 @@
 package internet_store_tests.acceptance_test.product;
 
+import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.GetProductsRequest;
 import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.AddProductService;
 import internet_store.core.services.product.GetAllProductsService;
-import internet_store.dependency_injection.ApplicationContext;
-import internet_store.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTestGetProducts {
 
-    private static  ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("internet_store");
+    private ApplicationContext appContext;
 
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+    }
     @Test
     public void test() {
 
@@ -36,10 +41,10 @@ public class AcceptanceTestGetProducts {
     }
 
     private AddProductService addProductService() {
-        return applicationContext.getBean(AddProductService.class);
+        return appContext.getBean(AddProductService.class);
     }
 
     private GetAllProductsService getAllProductsService() {
-        return applicationContext.getBean(GetAllProductsService.class);
+        return appContext.getBean(GetAllProductsService.class);
     }
 }

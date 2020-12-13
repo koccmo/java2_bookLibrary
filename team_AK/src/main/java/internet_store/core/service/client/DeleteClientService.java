@@ -6,18 +6,15 @@ import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.client_database.InnerClientDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteClientService {
-    @DIDependency
+    @Autowired
     InnerClientDatabase clientDatabase;
-
-    public DeleteClientService() {
-    }
 
     public DeleteClientService(InnerClientDatabase clientDatabase) {
         this.clientDatabase = clientDatabase;

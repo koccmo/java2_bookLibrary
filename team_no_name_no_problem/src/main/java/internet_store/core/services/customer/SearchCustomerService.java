@@ -9,19 +9,18 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DIComponent
-public class SearchCustomerService {
+@Component public class SearchCustomerService {
 
-    @DIDependency private CustomerDatabase customerDatabase;
-    @DIDependency private SearchCustomerRequestValidator searchCustomerRequestValidator;
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private SearchCustomerRequestValidator searchCustomerRequestValidator;
 
     public SearchCustomerResponse execute(SearchCustomerRequest searchCustomerRequest) {
 

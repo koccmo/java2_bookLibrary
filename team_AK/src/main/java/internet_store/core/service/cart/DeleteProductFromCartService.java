@@ -6,18 +6,15 @@ import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class DeleteProductFromCartService {
-    @DIDependency
+    @Autowired
     InnerCartDatabase cartDatabase;
-
-    public DeleteProductFromCartService() {
-    }
 
     public DeleteProductFromCartService(InnerCartDatabase cartDatabase) {
         this.cartDatabase = cartDatabase;

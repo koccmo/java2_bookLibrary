@@ -1,11 +1,12 @@
 package internet_store.user_interface.administrator_menu.create_product_menu.delete_product_menu;
 
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-@DIComponent
+
+@Component
 public class DeleteProductMenu {
     @Getter
     private long userDeletedProductIdInput;

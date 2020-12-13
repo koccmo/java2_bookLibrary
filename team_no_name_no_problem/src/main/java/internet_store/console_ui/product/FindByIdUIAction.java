@@ -4,15 +4,15 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.FindByIdRequest;
 import internet_store.core.response.product.FindByIdResponse;
 import internet_store.core.services.product.FindProductByIdService;
-import internet_store.dependency_injection.DIComponent;
-import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class FindByIdUIAction implements UIAction {
 
-    @DIDependency private FindProductByIdService findProductByIdService;
+    @Autowired private FindProductByIdService findProductByIdService;
 
     @Override
     public void execute() {

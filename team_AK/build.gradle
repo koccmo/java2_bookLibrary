@@ -9,4 +9,5 @@ dependencies {
 	testCompile 'org.mockito:mockito-core:3.6.28'
 	compile 'commons-io:commons-io:2.8.0'
 	compile fileTree (dir: 'lib', include: 'dependency-0.0.1-SNAPSHOT.jar')
+	compile 'org.springframework:spring-context:5.2.12.RELEASE'
 }

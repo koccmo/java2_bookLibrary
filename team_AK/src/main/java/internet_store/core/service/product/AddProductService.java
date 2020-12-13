@@ -13,20 +13,20 @@ import internet_store.core.response.product.product_item.AddProductPriceResponse
 import internet_store.core.response.product.product_item.AddProductQuantityResponse;
 import internet_store.core.response.product.product_item.AddProductTitleResponse;
 import internet_store.database.product_database.InnerProductDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddProductService implements ProductUpdate {
-    @DIDependency
+    @Autowired
     InnerProductDatabase productDatabase;
-    AddProductTitleService titleService = new AddProductTitleService();
-    AddProductDescriptionService descriptionService = new AddProductDescriptionService();
-    AddProductQuantityService quantityService = new AddProductQuantityService();
-    AddProductPriceService priceService = new AddProductPriceService();
+    final AddProductTitleService titleService = new AddProductTitleService();
+    final AddProductDescriptionService descriptionService = new AddProductDescriptionService();
+    final AddProductQuantityService quantityService = new AddProductQuantityService();
+    final AddProductPriceService priceService = new AddProductPriceService();
 
     public AddProductResponse execute(AddProductRequest addProductRequest) {
         List<CoreError> errors = new ArrayList<>();

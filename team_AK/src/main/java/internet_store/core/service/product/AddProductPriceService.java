@@ -4,11 +4,11 @@ import internet_store.core.core_error.CoreError;
 import internet_store.core.request.product.product_items.AddProductPriceRequest;
 import internet_store.core.response.product.product_item.AddProductPriceResponse;
 import internet_store.core.validate.NegativeNumberValidator;
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddProductPriceService {
     public AddProductPriceResponse execute(AddProductPriceRequest addProductPriceRequest) {
         NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(addProductPriceRequest.getPrice());

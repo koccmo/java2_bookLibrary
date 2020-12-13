@@ -7,20 +7,20 @@ import internet_store.core.service.ordering.CheckOrderService;
 import internet_store.core.service.ordering.OrderStatus;
 import internet_store.core.service.ordering.OrderStatusService;
 import internet_store.user_interface.administrator_menu.create_order_menu.OrderMenuConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class StatusOrderConsole {
-    @DIDependency
+    @Autowired
     StatusOrderMenu statusOrderMenu;
-    @DIDependency
+    @Autowired
     OrderIdMenu orderIdMenu;
-    @DIDependency
+    @Autowired
     OrderStatusService orderStatusService;
-    @DIDependency
+    @Autowired
     OrderMenuConsole orderMenuConsole;
-    @DIDependency
+    @Autowired
     CheckOrderService checkOrderService;
 
     public void startOrderStatusMenuConsole() {

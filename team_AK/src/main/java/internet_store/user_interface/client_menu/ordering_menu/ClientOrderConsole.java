@@ -4,27 +4,20 @@ import internet_store.core.request.ordering.OrderRequest;
 import internet_store.core.response.ordering.OrderResponse;
 import internet_store.core.service.ordering.OrderCreator;
 import internet_store.core.service.ordering.OrderService;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class ClientOrderConsole {
-    @DIDependency
+    @Autowired
     ClientOrderMenu clientOrderMenu;
-    @DIDependency
+    @Autowired
     OrderService orderService;
-    @DIDependency
+    @Autowired
     OrderCreator orderCreator;
 
 
     public void startOrderMenu() {
-//        final ClientOrderMenu clientOrderMenu = ProductListApplication.applicationContext
-//                .getBean(ClientOrderMenu.class);
-//        final OrderService orderService = ProductListApplication.applicationContext
-//                .getBean(OrderService.class);
-//        final OrderCreator orderCreator = ProductListApplication.applicationContext
-//                .getBean(OrderCreator.class);
-
         clientOrderMenu.showMenuOrderClientId();
         long userInput = clientOrderMenu.getUserOrderClientIdInput();
 

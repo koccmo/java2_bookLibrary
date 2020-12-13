@@ -1,11 +1,12 @@
 package internet_store.database.order_database;
 
 import internet_store.core.domain.Order;
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+
+@Component
 public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     private final List<Order> orders = new ArrayList<>();
 
@@ -41,11 +42,13 @@ public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
         });
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public Order findById(long id) {
         return orders.stream().filter(pr -> pr.getId() == id).findFirst().orElse(EMPTY_OBJECT);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public Order findByOrderNumber(int orderNumber) {
         return orders.stream().filter(pr -> pr.getOrderNumber() == orderNumber)
