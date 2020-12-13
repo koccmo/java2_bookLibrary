@@ -9,6 +9,7 @@ import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,6 +18,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component public class SearchProductService {
+
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
     @Autowired private ProductDatabase productDatabase;
     @Autowired private SearchProductRequestValidator searchProductRequestValidator;

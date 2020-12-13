@@ -10,6 +10,7 @@ import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,6 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component public class SearchCustomerService {
+
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
     @Autowired private CustomerDatabase customerDatabase;
     @Autowired private SearchCustomerRequestValidator searchCustomerRequestValidator;

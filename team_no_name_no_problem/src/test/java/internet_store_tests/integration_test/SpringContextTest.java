@@ -1,3 +1,4 @@
+/*
 package internet_store_tests.integration_test;
 
 import internet_store.config.MainMenuConfiguration;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class SpringContextTest {
     
-    @Autowired ApplicationContext appContext;
+    @Autowired private ApplicationContext appContext;
     
     @Test
     public void start(){
@@ -23,3 +24,5 @@ public class SpringContextTest {
     }
 
 }
+
+*/

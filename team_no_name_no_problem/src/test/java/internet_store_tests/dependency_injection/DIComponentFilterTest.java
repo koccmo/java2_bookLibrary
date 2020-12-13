@@ -18,8 +18,6 @@ public class DIComponentFilterTest {
     public void testPackageDatabase() throws ClassNotFoundException, IOException {
         List<Class> classes = classFinder.findClassesInsidePackage("internet_store.database");
         List<Class> annotatedClasses = diComponentFilter.filter(classes);
-System.out.println(annotatedClasses.get(1).getName());
-        assertTrue(annotatedClasses.size() == 3);
-        assertTrue(annotatedClasses.get(1).getName().equals("internet_store.database.order.OrderDatabaseImpl"));
+        assertTrue(annotatedClasses.size() == 0);
     }
 }
