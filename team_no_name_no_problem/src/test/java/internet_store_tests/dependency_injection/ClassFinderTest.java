@@ -18,8 +18,6 @@ public class ClassFinderTest {
         List<Class> listOfClasses = classFinder.findClassesInsidePackage("internet_store.console_ui");
 
         assertTrue(listOfClasses.size() == 15);
-
-       // assertTrue(listOfClasses.get(0).getName().equals("internet_store.console_ui.customer.AddCustomerUIAction"));
     }
 
     @Test
@@ -29,6 +27,6 @@ public class ClassFinderTest {
 
         assertTrue(listOfClasses3.size() == 6);
 
-        assertTrue(listOfClasses3.get(0).getName().equals("internet_store.database.order.OrderDatabaseImpl"));
+        assertTrue(listOfClasses3.get(0).getName().equals("internet_store.database.customer.CustomerDatabase"));
     }
 }
