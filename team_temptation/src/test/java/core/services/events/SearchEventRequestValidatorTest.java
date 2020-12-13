@@ -77,17 +77,6 @@ class SearchEventRequestValidatorTest {
         assertEquals(errors.get(0).getErrorMessage(), "Must be above zero");
     }
 
-//    @Test
-//    void shouldReturnErrorsWhenPageSizeLessEight() {
-//
-//        Ordering order = new Ordering("", "");
-//        Paging paging = new Paging(1, 7);
-//        SearchEventRequest request = new SearchEventRequest("", "", 0, order, paging);
-//        List<CoreError> errors = validator.validate(request);
-//        assertEquals(errors.size(), 1);
-//        //assertEquals(errors.get(0).getErrorField(), "pageSize");
-//        //assertEquals(errors.get(0).getErrorMessage(), "Must be above zero");
-//    }
     @Test
     void shouldReturnErrorsWhenPageSizeLessThanEight() {
 
