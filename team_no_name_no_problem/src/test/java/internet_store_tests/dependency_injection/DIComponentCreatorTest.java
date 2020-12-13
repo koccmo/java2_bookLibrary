@@ -1,7 +1,6 @@
 package internet_store_tests.dependency_injection;
 
 
-import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import internet_store.dependency_injection.ApplicationContext;
 import internet_store.dependency_injection.ClassFinder;
 import internet_store.dependency_injection.DIComponentCreator;
