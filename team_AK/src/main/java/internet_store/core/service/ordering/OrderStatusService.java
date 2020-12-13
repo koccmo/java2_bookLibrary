@@ -6,6 +6,7 @@ import internet_store.core.request.ordering.OrderStatusRequest;
 import internet_store.core.request.telegram.FindTelegramChatIdRequest;
 import internet_store.core.service.telegram.FindTelegramChatIdService;
 import internet_store.database.order_database.InnerOrderDatabase;
+import internet_store.integration.mail.EmailServiceImpl;
 import internet_store.integration.telegram.ChatBot;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ import java.util.List;
 @Component
 public class OrderStatusService {
     @Autowired
-    InnerOrderDatabase orderDatabase;
+    private InnerOrderDatabase orderDatabase;
     @Autowired
-    FindTelegramChatIdService telegramChatIdService;
+    private FindTelegramChatIdService telegramChatIdService;
     @Autowired
-    ChatBot chatBot;
+    private ChatBot chatBot;
+    @Autowired
+    private EmailServiceImpl emailService;
     private Order order;
 
     public void execute(OrderStatusRequest orderStatusRequest) {
@@ -33,7 +36,10 @@ public class OrderStatusService {
         order.setOrderStatus(orderStatusRequest.getOrderStatus());
 
         List<TelegramChatId> clientChatId = tryFindClientChatId();
-        clientChatId.forEach(this::printNewInformation);
+        clientChatId.forEach(this::sendTelegramChatNewInformation);
+
+        emailService.sendSimpleMessage(order.getClient().getEmail(), "Order status changed",
+                createChangeOrderText());
     }
 
     private List<TelegramChatId> tryFindClientChatId() {
@@ -42,14 +48,18 @@ public class OrderStatusService {
     }
 
     @SneakyThrows(TelegramApiException.class)
-    private void printNewInformation(TelegramChatId clientChatId) {
+    private void sendTelegramChatNewInformation(TelegramChatId clientChatId) {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(String.valueOf(clientChatId.getChatId()))
-                .text("New information about order number: " + order.getOrderNumber()
-                        + "\n" + "Order date: " + order.getOrderDate() + "\n"
-                        + "Total sum: " + order.getTotalSum() + "\n"
-                        + "Order status: " + order.getOrderStatus().toString())
+                .text(createChangeOrderText())
                 .build();
         chatBot.execute(sendMessage);
+    }
+
+    private String createChangeOrderText() {
+        return "New information about order number: " + order.getOrderNumber() + "\n"
+                + "Order date: " + order.getOrderDate() + "\n"
+                + "Total sum: " + order.getTotalSum() + "\n"
+                + "Order status: " + order.getOrderStatus().toString();
     }
 }

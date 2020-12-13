@@ -83,8 +83,8 @@ public class ChatBot extends TelegramLongPollingBot {
     private void printOrder(Order clientOrder) {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(String.valueOf(chatId))
-                .text("Information about order number: " + clientOrder.getOrderNumber()
-                        + "\n" + "Order date: " + clientOrder.getOrderDate() + "\n"
+                .text("Information about order number: " + clientOrder.getOrderNumber() + "\n"
+                        + "Order date: " + clientOrder.getOrderDate() + "\n"
                         + "Total sum: " + clientOrder.getTotalSum() + "\n"
                         + "Order status: " + clientOrder.getOrderStatus().toString())
                 .build();
