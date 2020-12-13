@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class DIComponentCreatorTest {
-/*
+
     ApplicationContext applicationContext = new ApplicationContext();
     ClassFinder classFinder = new ClassFinder();
     DIComponentFilter diComponentFilter = new DIComponentFilter();
@@ -28,7 +28,5 @@ public class DIComponentCreatorTest {
 
         assertTrue(applicationContext.getBeans().isEmpty());
 
-        assertTrue(applicationContext.getBeans().size() == 0);
-
-    }*/
+    }
 }

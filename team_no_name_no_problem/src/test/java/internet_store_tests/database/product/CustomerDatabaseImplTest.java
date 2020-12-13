@@ -72,25 +72,24 @@ public class CustomerDatabaseImplTest {
         assertFalse(listOfAllCustomers.size() > 2);
     }
 
-    /*@Test
+    @Test
     public void findAnyCustomerByNameAndSurnameTest(){
-
         customerDatabase.addCustomer(thirdCustomer);
 
-        Optional<Customer> resultOfFinding1 = customerDatabase.findCustomersByNameAndSurname
+        List<Customer> resultOfFinding1 = customerDatabase.findCustomersByNameAndSurname
                 ("Mihail", "Galkin");
-        Optional<Customer> resultOfFinding2 = customerDatabase.findCustomersByNameAndSurname(
+        List<Customer> resultOfFinding2 = customerDatabase.findCustomersByNameAndSurname(
                 "Savva", "Jablokov");
-        Optional<Customer> resultOfFinding3 = customerDatabase.findCustomersByNameAndSurname(
+        List<Customer> resultOfFinding3 = customerDatabase.findCustomersByNameAndSurname(
                 "Anton", "Moiseev");
-        Optional<Customer> resultOfFinding4 = customerDatabase.findCustomersByNameAndSurname(
+        List<Customer> resultOfFinding4 = customerDatabase.findCustomersByNameAndSurname(
                 "Jaroslav", "Brutan");
 
-        assertTrue(resultOfFinding1.isPresent());
-        assertTrue(resultOfFinding2.isPresent());
-        assertTrue(resultOfFinding3.isPresent());
-        assertFalse(resultOfFinding4.isPresent());
-    }*/
+        assertTrue(resultOfFinding1.get(0).getName().equals("Mihail"));
+        assertTrue(resultOfFinding2.get(0).getSurname().equals("Jablokov"));
+        assertTrue(resultOfFinding3.size() == 1);
+        assertTrue(resultOfFinding4.isEmpty());
+    }
 
     @Test
     public void findAllCustomersByNameTest(){

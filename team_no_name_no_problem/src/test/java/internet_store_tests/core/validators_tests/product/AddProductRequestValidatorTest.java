@@ -61,12 +61,3 @@ public class AddProductRequestValidatorTest {
     }
 
 }
-// if (addProductRequest.getProduct().getTitle() == null || addProductRequest.getProduct().getTitle().isEmpty()){
-//            errors.add(new CoreError("title", "Not valid input for title"));
-//        }
-//        if (addProductRequest.getProduct().getDescription() == null || addProductRequest.getProduct().getDescription().isEmpty()){
-//            errors.add(new CoreError("description", "Not valid input for description"));
-//        }
-//        if (addProductRequest.getProduct().getPrice() < 0){
-//            errors.add(new CoreError("price", "Not valid input for price"));
-//        }
