@@ -31,7 +31,7 @@ public class AddEventUIAction implements UIAction {
             case "W" ->  "walking trip";
             case "M" ->  "motorcycle trip";
             case "U" ->  "bus trip";
-            default -> null;
+            default -> "undefined";
         };
 
         System.out.println("Enter a trip duration (in hours): ");
