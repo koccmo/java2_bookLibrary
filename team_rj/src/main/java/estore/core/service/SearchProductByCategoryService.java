@@ -54,16 +54,16 @@ public class SearchProductByCategoryService {
         }
     }
 
-    private List<Product> paging(List<Product> books, Paging paging) {
+    private List<Product> paging(List<Product> products, Paging paging) {
         if (paging != null) {
             int pageSize = Integer.valueOf(paging.getPageSize());
             int skip = (Integer.valueOf(paging.getPageNumber()) - 1) * pageSize;
-            return books.stream()
+            return products.stream()
                     .skip(skip)
                     .limit(pageSize)
                     .collect(Collectors.toList());
         } else {
-            return books;
+            return products;
         }
     }
 

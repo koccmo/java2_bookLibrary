@@ -1,6 +1,7 @@
 package estore.core.service;
 
 import estore.core.requests.Ordering;
+import estore.core.requests.Paging;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductDB;
@@ -31,6 +32,7 @@ public class SearchProductByNameService {
 
         List<Product> foundProducts = productDB.searchProductByName(request.getProductName());
         foundProducts = order(foundProducts, request.getOrdering());
+        foundProducts = paging(foundProducts, request.getPaging());
         return new SearchProductByNameResponse(foundProducts, foundProducts.size());
     }
 
@@ -44,6 +46,19 @@ public class SearchProductByNameService {
                 comparator = comparator.reversed();
             }
             return products.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return products;
+        }
+    }
+
+    private List<Product> paging(List<Product> products, Paging paging) {
+        if (paging != null) {
+            int pageSize = Integer.valueOf(paging.getPageSize());
+            int skip = (Integer.valueOf(paging.getPageNumber()) - 1) * pageSize;
+            return products.stream()
+                    .skip(skip)
+                    .limit(pageSize)
+                    .collect(Collectors.toList());
         } else {
             return products;
         }

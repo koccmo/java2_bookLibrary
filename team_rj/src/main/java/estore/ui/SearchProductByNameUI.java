@@ -1,6 +1,7 @@
 package estore.ui;
 
 import estore.core.requests.Ordering;
+import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.PrintListService;
@@ -28,7 +29,13 @@ public class SearchProductByNameUI implements UIAction {
         String orderDirection = sc.nextLine();
         Ordering ordering = new Ordering(orderBy, orderDirection);
 
-        SearchProductByNameRequest request = new SearchProductByNameRequest(productToSearch, ordering);
+        System.out.println("Enter pageNumber: ");
+        String pageNumber = sc.nextLine();
+        System.out.println("Enter pageSize: ");
+        String pageSize = sc.nextLine();
+        Paging paging = new Paging(pageNumber, pageSize);
+
+        SearchProductByNameRequest request = new SearchProductByNameRequest(productToSearch, ordering, paging);
         SearchProductByNameResponse response = searchProductByNameService.execute(request);
 
         if (response.getProductsFound() == -1) {
