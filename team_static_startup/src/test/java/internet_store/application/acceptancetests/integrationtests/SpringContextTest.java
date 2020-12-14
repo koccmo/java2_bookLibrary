@@ -1,4 +1,4 @@
-package internet_store.application.integrationtests;
+package internet_store.application.acceptancetests.integrationtests;
 
 import static org.junit.Assert.assertNotNull;
 
