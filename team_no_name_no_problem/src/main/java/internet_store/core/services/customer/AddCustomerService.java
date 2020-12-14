@@ -6,21 +6,15 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.services.customer.validators.AddCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component public class AddCustomerService {
 
-public class AddCustomerService {
-
-    private final CustomerDatabase customerDatabase;
-    private final AddCustomerRequestValidator addCustomerRequestValidator;
-
-
-    public AddCustomerService(CustomerDatabase customerDatabase, AddCustomerRequestValidator addCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.addCustomerRequestValidator = addCustomerRequestValidator;
-    }
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private AddCustomerRequestValidator addCustomerRequestValidator;
 
     public AddCustomerResponse execute (AddCustomerRequest addCustomerRequest){
 

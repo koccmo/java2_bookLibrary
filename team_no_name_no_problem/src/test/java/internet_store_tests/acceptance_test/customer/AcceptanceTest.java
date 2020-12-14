@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.DeleteCustomerRequest;
@@ -11,15 +12,21 @@ import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
-import internet_store.dependency_injection.ApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest {
 
-    ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext appContext;
 
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+    }
     @Test
     public void test() {
         Customer customer = new Customer("Johny", "Bravo", "28736810", "Queens",
@@ -52,18 +59,18 @@ public class AcceptanceTest {
     }
 
     private AddCustomerService addCustomerService() {
-        return applicationContext.getBean(AddCustomerService.class);
+        return appContext.getBean(AddCustomerService.class);
     }
 
     private GetAllCustomersService getAllCustomersService() {
-        return applicationContext.getBean(GetAllCustomersService.class);
+        return appContext.getBean(GetAllCustomersService.class);
     }
 
     private FindCustomerByIdService findCustomerByIdService() {
-        return applicationContext.getBean(FindCustomerByIdService.class);
+        return appContext.getBean(FindCustomerByIdService.class);
     }
 
     private DeleteCustomerService deleteCustomerService(){
-        return applicationContext.getBean(DeleteCustomerService.class);
+        return appContext.getBean(DeleteCustomerService.class);
     }
 }

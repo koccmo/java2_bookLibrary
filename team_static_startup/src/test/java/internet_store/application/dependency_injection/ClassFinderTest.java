@@ -9,7 +9,7 @@ import java.util.List;
 public class ClassFinderTest {
 
     private ClassFinder classFinder;
-
+/*
     @Before
     public void setUp() {
         classFinder = new ClassFinder();
@@ -20,4 +20,5 @@ public class ClassFinderTest {
         List<Class> classes = classFinder.findClassesInsidePackage("internet_store.application");
         classes.forEach(System.out::println);
     }
+*/
 }

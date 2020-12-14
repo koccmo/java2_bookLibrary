@@ -5,16 +5,17 @@ import dental_clinic.core.responses.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.validators.ChangePersonalDataValidator;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class ChangePersonalDataService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private ChangePersonalDataValidator validator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private ChangePersonalDataValidator validator;
 
     public ChangePersonalDataResponse execute (ChangePersonalDataRequest request) {
         List<CoreError> errors = validator.validate(request);

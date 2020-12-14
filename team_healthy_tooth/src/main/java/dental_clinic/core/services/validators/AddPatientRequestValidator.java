@@ -3,14 +3,13 @@ package dental_clinic.core.services.validators;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@DIComponent
+@Component
 public class AddPatientRequestValidator {
 
     public List <CoreError> validate (AddPatientRequest addPatientRequest){
@@ -62,8 +61,8 @@ public class AddPatientRequestValidator {
 
     private List<CoreError> phoneValidationErrors(String phone){
         List <CoreError> errors = new ArrayList<>();
-        if (!phone.matches("\\d{8}")) {
-            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 digits"));
+        if (!phone.matches("\\d{8}|\\d{11}|\\d{12}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
         }
         return errors;
     }
@@ -71,7 +70,7 @@ public class AddPatientRequestValidator {
     private List<CoreError> personalCodeValidationErrors(String personalCode){
         List <CoreError> errors = new ArrayList<>();
         if (!Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode)) {
-            errors.add(new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
+            errors.add(new CoreError("Personal data : personal code", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
         }
         return errors;
     }

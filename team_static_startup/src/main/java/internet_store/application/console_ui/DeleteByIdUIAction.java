@@ -3,16 +3,17 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.DeleteByProductIdResponse;
 import internet_store.application.core.services.DeleteByProductIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class DeleteByIdUIAction implements UIAction {
 
-    private final DeleteByProductIdService deleteByProductIdService;
+    @Autowired
+    private DeleteByProductIdService deleteByProductIdService;
 
-    public DeleteByIdUIAction(DeleteByProductIdService deleteByProductIdService) {
-        this.deleteByProductIdService = deleteByProductIdService;
-    }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);

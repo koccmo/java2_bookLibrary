@@ -3,12 +3,12 @@ package internet_store.user_interface.administrator_menu.create_order_menu.delet
 import internet_store.core.request.ordering.DeleteOrderRequest;
 import internet_store.core.response.ordering.DeleteOrderResponse;
 import internet_store.core.service.ordering.DeleteOrderService;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class DeleteOrderConsole {
-    @DIDependency
+    @Autowired
     DeleteOrderService deleteOrderService;
 
     public void deleteOrder() {

@@ -17,20 +17,7 @@ public class ClassFinderTest {
 
         List<Class> listOfClasses = classFinder.findClassesInsidePackage("internet_store.console_ui");
 
-        assertTrue(listOfClasses.size() == 21);
-
-        System.out.println(listOfClasses.get(0).getName());
-        assertTrue(listOfClasses.get(0).getName().equals("internet_store.console_ui.BuyMenu"));
-    }
-
-    @Test
-    public void testReceivedClasses2() throws IOException, ClassNotFoundException{
-
-        List<Class> listOfClasses2 = classFinder.findClassesInsidePackage("internet_store.core");
-
-        assertTrue(listOfClasses2.size() == 59);
-
-        assertTrue(listOfClasses2.get(2).getName().equals("internet_store.core.domain.Product"));
+        assertTrue(listOfClasses.size() == 15);
     }
 
     @Test
@@ -40,6 +27,6 @@ public class ClassFinderTest {
 
         assertTrue(listOfClasses3.size() == 6);
 
-        assertTrue(listOfClasses3.get(3).getName().equals("internet_store.database.order.OrderDatabaseImpl"));
+        assertTrue(listOfClasses3.get(0).getName().equals("internet_store.database.customer.CustomerDatabase"));
     }
 }

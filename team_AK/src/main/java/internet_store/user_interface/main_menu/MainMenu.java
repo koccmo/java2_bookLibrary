@@ -1,11 +1,11 @@
 package internet_store.user_interface.main_menu;
 
-import dependency.annotation.DIComponent;
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-@DIComponent
+@Component
 public class MainMenu {
     @Getter
     private int userInput;

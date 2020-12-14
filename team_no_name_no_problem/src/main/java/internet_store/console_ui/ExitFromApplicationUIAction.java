@@ -1,8 +1,8 @@
 package internet_store.console_ui;
 
-import internet_store.console_ui.UIAction;
+import org.springframework.stereotype.Component;
 
-public class ExitFromApplicationUIAction implements UIAction {
+@Component public class ExitFromApplicationUIAction implements UIAction {
 
 
     @Override

@@ -2,13 +2,12 @@ package internet_store.core.services.customer.validators;
 
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.CoreError;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class FindCustomerByIdRequestValidator {
+@Component public class FindCustomerByIdRequestValidator {
 
     public List<CoreError> validate(FindCustomerByIdRequest findCustomerByIdRequest){
         List<CoreError> errors = new ArrayList<>();

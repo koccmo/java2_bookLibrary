@@ -4,10 +4,12 @@ public class BuyProductRequest {
 
     private Long id;
     private Integer quantity;
+    private String endOfShopping;
 
-    public BuyProductRequest(Long id, Integer quantity) {
+    public BuyProductRequest(Long id, Integer quantity, String endOfShopping) {
         this.id = id;
         this.quantity = quantity;
+        this.endOfShopping = endOfShopping;
     }
 
     public Long getId() {
@@ -22,7 +24,7 @@ public class BuyProductRequest {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public String getEndOfShopping() {
+        return endOfShopping;
     }
 }

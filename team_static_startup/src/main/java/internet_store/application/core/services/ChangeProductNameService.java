@@ -1,30 +1,29 @@
 package internet_store.application.core.services;
 
+import internet_store.application.core.database.Database;
 import internet_store.application.core.requests.ChangeProductNameRequest;
 import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.services.validators.ChangeProductNameValidator;
-import internet_store.application.core.database.Database;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ChangeProductNameService {
 
-    private final Database database;
-    private final ChangeProductNameValidator validator;
-
-
-    public ChangeProductNameService(Database database, ChangeProductNameValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @Autowired
+    private Database database;
+    @Autowired
+    private ChangeProductNameValidator validator;
 
     public ChangeProductNameResponse execute(ChangeProductNameRequest request) {
         List<CoreError> errors = validator.validate(request);
         Long id = request.getProductId();
         String newName = request.getProductNewName();
 
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new ChangeProductNameResponse(errors);
         } else return new ChangeProductNameResponse(database.changeProductName(id, newName));
     }

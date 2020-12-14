@@ -1,8 +1,9 @@
 package dental_clinic;
 
+import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.console_ui.*;
-import dental_clinic.dependency_injection.ApplicationContext;
-import dental_clinic.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 import java.util.HashMap;
@@ -11,10 +12,11 @@ import java.util.Scanner;
 
 public class DentalClinic {
 
-    private static  ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("dental_clinic");
+    private static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
 
     public static void main(String [] args){
+        printLogo();
         while(true) {
 
             printMenu();
@@ -26,17 +28,17 @@ public class DentalClinic {
     }
 
     private static void printMenu(){
-        System.out.println("\nMenu\n" +
-                "1   Add patient\n" +
-                "2   Delete by id\n" +
-                "3   Print patients database\n" +
-                "4   Print specific patient information\n" +
-                "5   Search by name / surname\n" +
-                "6   Find patient by personal code\n" +
-                "7   Add visit\n" +
-                "8   Print patients card\n" +
-                "9   Change patient's personal data\n" +
-                "0   Exit");
+        System.out.println("\n                Menu\n\n" +
+                "       1   Add patient\n" +
+                "       2   Delete by id\n" +
+                "       3   Print patients database\n" +
+                "       4   Print specific patient information\n" +
+                "       5   Search by name / surname\n" +
+                "       6   Find patient by personal code\n" +
+                "       7   Add visit\n" +
+                "       8   Print patients card\n" +
+                "       9   Change patient's personal data\n" +
+                "       0   Exit\n");
     }
 
     private static int inputValidInteger(){
@@ -85,4 +87,17 @@ public class DentalClinic {
         }
     }
 
+    private static void printLogo(){
+        System.out.println("\n\n" +
+                "  ###  ###   ######     ##     ###      ######   ###  ###   ##  ##         ######     ####        ####     ######   ###  ###               \n" +
+                "  ###  ###   ###      ######   ###        ##     ###  ###   ##  ##           ##      ######      ######      ##     ###  ###       ##  ##      \n" +
+                "  ########   #####   ##   ##   ###        ##     ########    ####            ##     ##    ##    ##    ##     ##     ########                \n" +
+                "  ###  ###   ###     #######   ###        ##     ###  ###     ##             ##      ######      ######      ##     ###  ###      ##   ##\n" +
+                "  ###  ###   #####   ##   ##   ######     ##     ###  ###     ##             ##       ####        ####       ##     ###  ###       #####");
+    }
+
 }
+
+//Одним из способов поднятия аппликационного контекста в Spring является класс
+//AnnotationConfigApplicationContext, которому в качестве параметра конструктора
+//подаётся класс с конфигурацией.

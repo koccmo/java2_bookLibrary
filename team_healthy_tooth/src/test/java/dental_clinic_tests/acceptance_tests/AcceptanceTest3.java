@@ -1,6 +1,11 @@
 package dental_clinic_tests.acceptance_tests;
 
-import dental_clinic.dependency_injection.ApplicationContext;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
@@ -13,15 +18,17 @@ import dental_clinic.core.services.AddPatientService;
 import dental_clinic.core.services.DeletePatientService;
 import dental_clinic.core.services.GetAllPatientsService;
 import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
-import dental_clinic.dependency_injection.DIApplicationContextBuilder;
-import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest3 {
 
-    private ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("dental_clinic");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+    }
 
     @Test
     public void test(){
@@ -48,19 +55,19 @@ public class AcceptanceTest3 {
     }
 
     private AddPatientService addPatientService() {
-        return applicationContext.getBean(AddPatientService.class);
+        return appContext.getBean(AddPatientService.class);
     }
 
     private DeletePatientService deletePatientService(){
-        return applicationContext.getBean(DeletePatientService.class);
+        return appContext.getBean(DeletePatientService.class);
     }
 
     private GetAllPatientsService getAllPatientsService() {
-        return applicationContext.getBean(GetAllPatientsService.class);
+        return appContext.getBean(GetAllPatientsService.class);
     }
 
     private SearchPatientsByPersonalCodeService searchPatientsByPersonalCodeService(){
-        return applicationContext.getBean(SearchPatientsByPersonalCodeService.class);
+        return appContext.getBean(SearchPatientsByPersonalCodeService.class);
     }
 
 }

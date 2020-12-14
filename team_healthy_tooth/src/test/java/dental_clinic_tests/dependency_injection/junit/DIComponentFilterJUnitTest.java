@@ -28,9 +28,7 @@ public class DIComponentFilterJUnitTest {
 
         List<Class> expectedList = diComponentFilter.filter(classList);
 
-        assertTrue(expectedList.size() == 2);
-        assertTrue(expectedList.contains(AddPatientUIAction.class));
-        assertFalse(expectedList.contains(DeletePatientRequest.class));
+        assertTrue(expectedList.size() == 0);
     }
 
 }

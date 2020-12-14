@@ -4,17 +4,16 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.DeleteCustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class DeleteCustomerUIAction implements UIAction {
+@Component public class DeleteCustomerUIAction implements UIAction {
 
-    private DeleteCustomerService deleteCustomerService;
+    @Autowired private DeleteCustomerService deleteCustomerService;
 
-    public DeleteCustomerUIAction(DeleteCustomerService deleteCustomerService){
-        this.deleteCustomerService = deleteCustomerService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

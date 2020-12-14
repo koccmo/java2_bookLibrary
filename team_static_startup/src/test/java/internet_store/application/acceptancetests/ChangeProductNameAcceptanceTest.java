@@ -1,6 +1,6 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.ChangeProductNameRequest;
@@ -8,17 +8,22 @@ import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.services.ChangeProductNameService;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 
+import static org.junit.Assert.*;
+
 public class ChangeProductNameAcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext applicationContext;
     private Database database;
 
     @Before
     public void setUp() {
+        applicationContext =
+                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
         database = getDatabase();
         database.add(new Product("iPhone", "phone", new BigDecimal("900")));
         database.add(new Product("iMac", "pc", new BigDecimal("4000")));
@@ -55,10 +60,10 @@ public class ChangeProductNameAcceptanceTest {
     }
 
     private Database getDatabase() {
-        return appContext.getBean(Database.class);
+        return applicationContext.getBean(Database.class);
     }
 
     private ChangeProductNameService getChangeProductNameService() {
-        return appContext.getBean(ChangeProductNameService.class);
+        return applicationContext.getBean(ChangeProductNameService.class);
     }
 }

@@ -4,16 +4,14 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.ChangeProductRequest;
 import internet_store.core.response.product.ChangeProductResponse;
 import internet_store.core.services.product.ChangeProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class ChangeProductUIAction implements UIAction {
+@Component public class ChangeProductUIAction implements UIAction {
 
-    private final ChangeProductService changeProductService;
-
-    public ChangeProductUIAction(ChangeProductService changeProductService) {
-        this.changeProductService = changeProductService;
-    }
+    @Autowired private ChangeProductService changeProductService;
 
     @Override
     public void execute() {

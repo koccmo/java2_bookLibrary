@@ -5,14 +5,14 @@ import internet_store.core.request.ordering.CheckOrderIdRequest;
 import internet_store.core.response.ordering.CheckOrderIdResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.order_database.InnerOrderDatabase;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class CheckOrderService {
-    @DIDependency
+    @Autowired
     InnerOrderDatabase orderDatabase;
 
     public CheckOrderIdResponse execute(CheckOrderIdRequest checkOrderIdRequest) {

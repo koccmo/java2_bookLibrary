@@ -1,13 +1,14 @@
 package dental_clinic.core.services.validators;
 
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class SearchPatientRequestValidator {
 
     public List<CoreError> validate (SearchPatientRequest searchPatientRequest) {
@@ -69,8 +70,7 @@ public class SearchPatientRequestValidator {
     }
 
     private boolean isNotValidInputForOrderDirection(SearchPatientRequest searchPatientRequest){
-        return !searchPatientRequest.getOrdering().getOrderDirection().equals("ASC") &&
-                !searchPatientRequest.getOrdering().getOrderDirection().equals("DESC");
+        return searchPatientRequest.getOrdering().getOrderDirection().equals(OrderingDirection.NOT_VALID);
     }
 
     private boolean isNotValidInputForPageNumber(SearchPatientRequest searchPatientRequest){

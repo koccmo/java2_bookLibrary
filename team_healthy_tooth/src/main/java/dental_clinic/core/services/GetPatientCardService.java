@@ -7,16 +7,17 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.GetPatientCardResponse;
 import dental_clinic.core.services.validators.GetPatientCardRequestValidator;
 import dental_clinic.database.PatientDatabase;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@DIComponent
+@Component
 public class GetPatientCardService {
-    
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private GetPatientCardRequestValidator getPatientCardRequestValidator;
+
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired
+    private GetPatientCardRequestValidator getPatientCardRequestValidator;
     
     public GetPatientCardResponse execute (GetPatientCardRequest getPatientCardRequest){
         List<CoreError> errors = getPatientCardRequestValidator.validate(getPatientCardRequest);

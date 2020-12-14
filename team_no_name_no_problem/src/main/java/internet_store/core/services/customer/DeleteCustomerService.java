@@ -6,21 +6,15 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.DeleteCustomerResponse;
 import internet_store.core.services.customer.validators.DeleteCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component public class DeleteCustomerService {
 
-public class DeleteCustomerService {
-
-    private final CustomerDatabase customerDatabase;
-    private final DeleteCustomerRequestValidator deleteCustomerRequestValidator;
-
-
-    public DeleteCustomerService(CustomerDatabase customerDatabase, DeleteCustomerRequestValidator deleteCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.deleteCustomerRequestValidator = deleteCustomerRequestValidator;
-    }
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private DeleteCustomerRequestValidator deleteCustomerRequestValidator;
 
     public DeleteCustomerResponse execute (DeleteCustomerRequest deleteCustomerRequest){
         List<CoreError> errors = deleteCustomerRequestValidator.validate(deleteCustomerRequest);

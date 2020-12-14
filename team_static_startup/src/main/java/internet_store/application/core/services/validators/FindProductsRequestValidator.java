@@ -4,10 +4,12 @@ import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class FindProductsRequestValidator {
 
     public static final String ORDERING_NAME_1 = "Name";

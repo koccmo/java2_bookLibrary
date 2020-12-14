@@ -1,19 +1,27 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
+import org.junit.Before;
 import org.junit.Test;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.*;
 
 public class FindProductsAcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext;
+
+    @Before
+    public void before(){
+        appContext =
+                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
+    }
 
     private FindProductsService getFindProductsService() {
         return appContext.getBean(FindProductsService.class);

@@ -6,17 +6,16 @@ import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.services.customer.AddCustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class AddCustomerUIAction implements UIAction {
+@Component public class  AddCustomerUIAction implements UIAction {
 
-    private AddCustomerService addCustomerService;
+    @Autowired private AddCustomerService addCustomerService;
 
-    public AddCustomerUIAction(AddCustomerService addCustomerService){
-        this.addCustomerService = addCustomerService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

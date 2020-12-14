@@ -1,22 +1,19 @@
 package internet_store.user_interface.client_menu.client_cart_menu.update_cart_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.request.cart.UpdateCartRequest;
 import internet_store.core.response.cart.UpdateCartResponse;
 import internet_store.core.service.cart.UpdateCartService;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 
-@DIComponent
+@Component
 public class UpdateCartConsole {
-    @DIDependency
+    @Autowired
     UpdateCartService updateCartService;
 
     public void updateCart() {
-//        final UpdateCartService updateCartService = ProductListApplication.applicationContext
-//                .getBean(UpdateCartService.class);
         UpdateCartIdMenu updateCartIdMenu = new UpdateCartIdMenu();
         UpdateCartQuantityMenu updateCartQuantityMenu = new UpdateCartQuantityMenu();
 

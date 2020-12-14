@@ -3,15 +3,14 @@ package internet_store.core.services.customer.validators;
 
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.CoreError;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-public class SearchCustomerRequestValidator {
+@Component public class SearchCustomerRequestValidator {
 
     public List<CoreError> validate(SearchCustomerRequest searchCustomerRequest){
 

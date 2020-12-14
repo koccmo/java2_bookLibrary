@@ -1,6 +1,6 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
@@ -8,6 +8,8 @@ import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.FindByIdService;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -16,11 +18,13 @@ import static org.junit.Assert.*;
 
 public class FindByIdAcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext;
     private Database database;
 
     @Before
     public void setUp() {
+        appContext =
+                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
         database = getDatabase();
         database.add(new Product("iPhone", "phone", new BigDecimal("900")));
         database.add(new Product("iMac", "pc", new BigDecimal("4000")));

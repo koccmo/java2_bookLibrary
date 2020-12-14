@@ -8,23 +8,25 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component public class SearchProductService {
 
-public class SearchProductService {
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    private final ProductDatabase productDatabase;
-    private final SearchProductRequestValidator searchProductRequestValidator;
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
-    public SearchProductService(ProductDatabase productDatabase, SearchProductRequestValidator searchProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.searchProductRequestValidator = searchProductRequestValidator;
-    }
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private SearchProductRequestValidator searchProductRequestValidator;
 
     public SearchProductResponse execute (SearchProductRequest searchProductRequest){
         List<CoreError> errors = searchProductRequestValidator.validate(searchProductRequest);

@@ -7,20 +7,20 @@ import internet_store.application.core.responses.ChangeProductNameResponse;
 import internet_store.application.core.responses.FindByIdResponse;
 import internet_store.application.core.services.ChangeProductNameService;
 import internet_store.application.core.services.FindByIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.Scanner;
 
+@Component
 public class ChangeProductNameUIAction implements UIAction {
 
-    private final ChangeProductNameService changeProductNameService;
-    private final FindByIdService findByIdService;
+    @Autowired
+    private ChangeProductNameService changeProductNameService;
+    @Autowired
+    private FindByIdService findByIdService;
 
-    public ChangeProductNameUIAction(ChangeProductNameService changeProductNameService,
-                                     FindByIdService findByIdService) {
-        this.changeProductNameService = changeProductNameService;
-        this.findByIdService = findByIdService;
-    }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
@@ -35,19 +35,20 @@ public class ChangeProductNameUIAction implements UIAction {
         if (idResponse.hasErrors()) {
             idResponse.getErrors().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
-        } else { if (idResponse.getProductFoundById().isEmpty()) {
-            System.out.println("\nNo product with ID = " + id + " in the DataBase");
         } else {
-            Product product = foundProduct.get();
-            System.out.println("Found product in the database :");
-            System.out.print(product.toString() + "\n");
-        }
+            if (idResponse.getProductFoundById().isEmpty()) {
+                System.out.println("\nNo product with ID = " + id + " in the DataBase");
+            } else {
+                Product product = foundProduct.get();
+                System.out.println("Found product in the database :");
+                System.out.print(product.toString() + "\n");
+            }
         }
 
         System.out.print("Enter new name for product: ");
         String newName = myInput.nextLine();
-        ChangeProductNameRequest changeProductNameRequest = new ChangeProductNameRequest (foundProduct.get().getId(),
-                                                                                          newName);
+        ChangeProductNameRequest changeProductNameRequest = new ChangeProductNameRequest(foundProduct.get().getId(),
+                newName);
         ChangeProductNameResponse changeProductNameResponse = changeProductNameService.execute(changeProductNameRequest);
 
         //boolean productNameChange = changeProductNameService.changeProductName(foundProduct.get().getId(), newName);

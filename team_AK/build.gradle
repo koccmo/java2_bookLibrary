@@ -9,4 +9,8 @@ dependencies {
 	testCompile 'org.mockito:mockito-core:3.6.28'
 	compile 'commons-io:commons-io:2.8.0'
 	compile fileTree (dir: 'lib', include: 'dependency-0.0.1-SNAPSHOT.jar')
+	compile 'org.springframework:spring-context:5.2.12.RELEASE'
+	testCompile 'org.springframework:spring-test:5.2.12.RELEASE'
+	compile 'org.springframework:spring-context-support:5.2.12.RELEASE'
+	compile 'com.sun.mail:javax.mail:1.6.2'
 }

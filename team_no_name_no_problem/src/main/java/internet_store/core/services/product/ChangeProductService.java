@@ -6,20 +6,17 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.product.ChangeProductResponse;
 import internet_store.core.services.product.validators.ChangeProductValidator;
 import internet_store.database.product.ProductDatabase;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ChangeProductService {
 
-    private final ProductDatabase productDatabase;
-    private final ChangeProductValidator changeProductValidator;
-
-    public ChangeProductService(ProductDatabase productDatabase, ChangeProductValidator changeProductValidator) {
-        this.productDatabase = productDatabase;
-        this.changeProductValidator = changeProductValidator;
-    }
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private ChangeProductValidator changeProductValidator;
 
     public ChangeProductResponse execute (ChangeProductRequest changeProductRequest){
         List<CoreError> errors = changeProductValidator.validate(changeProductRequest);

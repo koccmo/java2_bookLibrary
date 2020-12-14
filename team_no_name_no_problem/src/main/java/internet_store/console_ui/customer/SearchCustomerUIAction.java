@@ -6,17 +6,16 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.SearchCustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class SearchCustomerUIAction implements UIAction {
+@Component public class SearchCustomerUIAction implements UIAction {
 
-    private final SearchCustomerService searchCustomerService;
+    @Autowired private SearchCustomerService searchCustomerService;
 
-    public SearchCustomerUIAction(SearchCustomerService searchCustomerService) {
-        this.searchCustomerService = searchCustomerService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

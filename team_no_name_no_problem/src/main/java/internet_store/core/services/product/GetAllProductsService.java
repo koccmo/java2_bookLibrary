@@ -6,21 +6,17 @@ import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.validators.GetAllProductsValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class GetAllProductsService {
 
-    private final ProductDatabase productDatabase;
-    private final GetAllProductsValidator getAllProductsValidator;
-
-    public GetAllProductsService(ProductDatabase productDatabase, GetAllProductsValidator getAllProductsValidator) {
-        this.productDatabase = productDatabase;
-        this.getAllProductsValidator = getAllProductsValidator;
-    }
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private GetAllProductsValidator getAllProductsValidator;
 
     public GetProductsResponse execute(GetProductsRequest getProductsRequest){
         List <CoreError> errors = getAllProductsValidator.validate(getProductsRequest);

@@ -6,17 +6,18 @@ import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
 import dental_clinic.core.services.validators.SearchPatientByPersonalCodeRequestValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.Patient;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class SearchPatientsByPersonalCodeService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private SearchPatientByPersonalCodeRequestValidator searchPatientByPersonalCodeRequestValidator;
 
     public SearchPatientByPersonalCodeResponse execute(SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest){
         List <CoreError> errors = searchPatientByPersonalCodeRequestValidator.validate(searchPatientByPersonalCodeRequest);

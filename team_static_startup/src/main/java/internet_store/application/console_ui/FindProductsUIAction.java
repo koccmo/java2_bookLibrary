@@ -5,16 +5,16 @@ import internet_store.application.core.requests.Ordering;
 import internet_store.application.core.requests.Paging;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.FindProductsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class FindProductsUIAction implements UIAction {
 
-    private final FindProductsService findProductsService;
-
-    public FindProductsUIAction(FindProductsService findProductsService) {
-        this.findProductsService = findProductsService;
-    }
+    @Autowired
+    private FindProductsService findProductsService;
 
     @Override
     public void execute() {

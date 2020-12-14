@@ -3,21 +3,21 @@ package internet_store.application.core.services;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.responses.*;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class FindProductsService {
 
-    private final Database database;
-    private final FindProductsRequestValidator validator;
-
-    public FindProductsService(Database database,
-                               FindProductsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @Autowired
+    private Database database;
+    @Autowired
+    private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -28,7 +28,8 @@ public class FindProductsService {
         List<Product> products = search(request);
 
         if (request.getOrdering() != null) {
-            products = new OrderingProductsService().order(products, request.getOrdering());}
+            products = new OrderingProductsService().order(products, request.getOrdering());
+        }
         if (request.getPaging() != null) {
             products = new PagingProductsService().page(products, request.getPaging());
         }

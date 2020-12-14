@@ -1,20 +1,29 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.GetAllProductsRequest;
 import internet_store.application.core.responses.GetAllProductsResponse;
 import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.GetAllProductsService;
-
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
 public class GetAllProductsAcceptanceTest {
 
-    private final ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext;
+
+    @Before
+    public void before() {
+        appContext =
+                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectProductList() {

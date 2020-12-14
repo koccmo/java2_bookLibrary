@@ -3,14 +3,14 @@ package dental_clinic.database;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private Long id= 1L;
@@ -82,7 +82,8 @@ public class PatientDatabaseImpl implements PatientDatabase {
         for (int i = 0; i < patientList.size(); i++){
             if (isSpecificPatient(i, id)){
                 Visit visit =
-                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(), newVisit.getDoctor());
+                        new Visit(newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(),
+                                newVisit.getDoctor(), newVisit.getDate());
                 patientList.get(i).addVisit(visit);
                 patientList.get(i).updateJowl(newVisit.getToothNumber(), newVisit.getToothStatus());
             }

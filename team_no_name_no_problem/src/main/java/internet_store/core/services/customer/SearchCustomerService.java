@@ -9,24 +9,25 @@ import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.SearchCustomerResponse;
 import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component public class SearchCustomerService {
 
-public class SearchCustomerService {
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    private final CustomerDatabase customerDatabase;
-    private final SearchCustomerRequestValidator searchCustomerRequestValidator;
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
-    public SearchCustomerService(CustomerDatabase customerDatabase,
-                                 SearchCustomerRequestValidator searchCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.searchCustomerRequestValidator = searchCustomerRequestValidator;
-    }
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private SearchCustomerRequestValidator searchCustomerRequestValidator;
 
     public SearchCustomerResponse execute(SearchCustomerRequest searchCustomerRequest) {
 

@@ -1,13 +1,12 @@
 package lv.javaguru.java2.library.dependency_injection;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class DIComponentFilterTest {
 
 	@Test

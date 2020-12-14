@@ -1,14 +1,14 @@
 package internet_store.database.customer;
 
 import internet_store.core.domain.Customer;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class CustomerDatabaseImpl implements CustomerDatabase{
 
     private Long id = 1L;

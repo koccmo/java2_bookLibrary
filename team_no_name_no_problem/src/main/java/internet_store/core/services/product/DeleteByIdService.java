@@ -6,20 +6,15 @@ import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
-import internet_store.dependency_injection.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component public class DeleteByIdService {
 
-public class DeleteByIdService {
-
-    private final ProductDatabase productDatabase;
-    private final DeleteProductRequestValidator deleteProductRequestValidator;
-
-    public DeleteByIdService(ProductDatabase productDatabase, DeleteProductRequestValidator deleteProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.deleteProductRequestValidator = deleteProductRequestValidator;
-    }
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private DeleteProductRequestValidator deleteProductRequestValidator;
 
     public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
 

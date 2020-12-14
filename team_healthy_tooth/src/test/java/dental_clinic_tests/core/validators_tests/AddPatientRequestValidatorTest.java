@@ -40,7 +40,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhone(){
-        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits");
 
         PersonalData personalData = new PersonalData("name", "Surname", "avbd4", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -52,7 +52,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhoneWrongLength(){
-        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12546", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -64,7 +64,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPersonalCodeLetters(){
-        CoreError coreError = new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
+        CoreError coreError = new CoreError("Personal data : personal code", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "adfds");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -76,7 +76,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPersonalCodeWrongLength(){
-        CoreError coreError = new CoreError("Personal data : phone", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
+        CoreError coreError = new CoreError("Personal data : personal code", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12345678", "1235");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);

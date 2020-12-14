@@ -2,12 +2,12 @@ package dental_clinic.core.services.validators;
 
 import dental_clinic.core.requests.ChangePersonalDataRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class ChangePersonalDataValidator {
 
     public List<CoreError> validate (ChangePersonalDataRequest request) {
@@ -38,7 +38,7 @@ public class ChangePersonalDataValidator {
             if (!phoneNumberToCheck.matches("\\d{8}|\\d{11}|\\d{12}")) {
                 errors.add(new CoreError(
                         "Personal data : phone",
-                        "Invalid input! Can only contain 8 digits!"));
+                        "Invalid input! Can only contain 8 or 11 or 12 digits!"));
             }
         }
         return errors;

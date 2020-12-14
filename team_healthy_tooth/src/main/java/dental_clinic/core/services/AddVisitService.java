@@ -6,16 +6,17 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.validators.AddVisitValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.dependency_injection.DIComponent;
-import dental_clinic.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddVisitService {
 
-    @DIDependency private PatientDatabase patientDatabase;
-    @DIDependency private AddVisitValidator addVisitValidator;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private AddVisitValidator addVisitValidator;
 
     public AddVisitResponse execute(AddVisitRequest addVisitRequest){
 
@@ -26,7 +27,7 @@ public class AddVisitService {
         }
 
         Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
-                addVisitRequest.getToothStatus(), addVisitRequest.getDoctor());
+                addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
 
         if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getId())){
             for (int i = 0; i < patientDatabase.getPatients().size(); i++) {

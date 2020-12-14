@@ -2,20 +2,26 @@ package lv.javaguru.java2.library.acceptancetests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import lv.javaguru.java2.library.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.library.config.BookListConfiguration;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
 import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.GetAllBooksService;
-import lv.javaguru.java2.library.dependency_injection.DIApplicationContextBuilder;
 
 public class AcceptanceTest1 {
 
-	private ApplicationContext appContext =
-			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
+	private ApplicationContext appContext;
+
+	@Before
+	public void setup() {
+		appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+	}
 
 	@Test
 	public void shouldReturnCorrectBookList() {

@@ -1,6 +1,6 @@
 package dental_clinic_tests.acceptance_tests;
 
-import dental_clinic.dependency_injection.ApplicationContext;
+import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.requests.ChangePersonalDataRequest;
@@ -9,16 +9,22 @@ import dental_clinic.core.responses.GetPatientCardResponse;
 import dental_clinic.core.services.AddPatientService;
 import dental_clinic.core.services.ChangePersonalDataService;
 import dental_clinic.core.services.GetPatientCardService;
-import dental_clinic.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest6 {
 
-    private ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("dental_clinic");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+    }
 
     @Test
     public void test(){
@@ -31,10 +37,10 @@ public class AcceptanceTest6 {
         AddPatientRequest addPatientRequest2 = new AddPatientRequest(personalData2);
         addPatientService().execute(addPatientRequest2);
 
-        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(1L, "SurnameB", "");
+        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(2L, "SurnameB", "");
         changePersonalDataService().execute(changePersonalDataRequest);
 
-        GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(1L);
+        GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(2L);
         GetPatientCardResponse getPatientCardResponse = getPatientCardService().execute(getPatientCardRequest);
 
         assertFalse(getPatientCardResponse.hasErrors());
@@ -42,15 +48,15 @@ public class AcceptanceTest6 {
     }
 
     private AddPatientService addPatientService() {
-        return applicationContext.getBean(AddPatientService.class);
+        return appContext.getBean(AddPatientService.class);
     }
 
     private ChangePersonalDataService changePersonalDataService(){
-        return applicationContext.getBean(ChangePersonalDataService.class);
+        return appContext.getBean(ChangePersonalDataService.class);
     }
 
     private GetPatientCardService getPatientCardService() {
-        return applicationContext.getBean(GetPatientCardService.class);
+        return appContext.getBean(GetPatientCardService.class);
     }
 
 }

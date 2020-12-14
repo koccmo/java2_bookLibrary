@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
@@ -9,16 +10,22 @@ import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
-import internet_store.dependency_injection.ApplicationContext;
+import org.junit.Before;
+import org.springframework.context.ApplicationContext;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 import static org.junit.Assert.*;
 
 public class AcceptanceTestFindCustomerByIdFail {
 
-    ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext appContext;
 
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+    }
     @Test
     public void test(){
         Customer customer = new Customer("Anton", "Saveljev", "29876472", "address",
@@ -53,14 +60,14 @@ public class AcceptanceTestFindCustomerByIdFail {
     }
 
     private AddCustomerService addCustomerService(){
-        return applicationContext.getBean(AddCustomerService.class);
+        return appContext.getBean(AddCustomerService.class);
     }
 
     private FindCustomerByIdService findCustomerByIdService(){
-        return applicationContext.getBean(FindCustomerByIdService.class);
+        return appContext.getBean(FindCustomerByIdService.class);
     }
 
     private GetAllCustomersService getAllCustomersService(){
-        return applicationContext.getBean(GetAllCustomersService.class);
+        return appContext.getBean(GetAllCustomersService.class);
     }
 }

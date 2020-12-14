@@ -1,22 +1,21 @@
 package lv.javaguru.java2.library.core.services;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.RemoveBookRequest;
-import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.RemoveBookResponse;
 import lv.javaguru.java2.library.core.services.validators.RemoveBookRequestValidator;
-import lv.javaguru.java2.library.dependency_injection.DIComponent;
-import lv.javaguru.java2.library.dependency_injection.DIDependency;
 
-@DIComponent
+@Component
 public class RemoveBookService {
 
-	@DIDependency private Database database;
-	@DIDependency private RemoveBookRequestValidator validator;
+	@Autowired private Database database;
+	@Autowired private RemoveBookRequestValidator validator;
 
 	public RemoveBookResponse execute(RemoveBookRequest request) {
 		List<CoreError> errors = validator.validate(request);

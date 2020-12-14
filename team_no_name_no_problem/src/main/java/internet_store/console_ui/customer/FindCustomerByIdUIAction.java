@@ -5,17 +5,16 @@ import internet_store.console_ui.UIAction;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
 import internet_store.core.services.customer.FindCustomerByIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class FindCustomerByIdUIAction implements UIAction {
+@Component public class FindCustomerByIdUIAction implements UIAction {
 
-    private FindCustomerByIdService findCustomerByIdService;
+    @Autowired private FindCustomerByIdService findCustomerByIdService;
 
-    public FindCustomerByIdUIAction(FindCustomerByIdService findCustomerByIdService){
-        this.findCustomerByIdService = findCustomerByIdService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

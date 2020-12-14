@@ -2,12 +2,14 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AddProductValidator {
 
     public List<CoreError> validate(AddProductRequest request) {

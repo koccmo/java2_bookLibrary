@@ -2,9 +2,12 @@ package lv.javaguru.java2.library.acceptancetests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import lv.javaguru.java2.library.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.library.config.BookListConfiguration;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
@@ -12,12 +15,15 @@ import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
 import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
-import lv.javaguru.java2.library.dependency_injection.DIApplicationContextBuilder;
 
 public class AcceptanceTest2 {
 
-	private ApplicationContext appContext =
-			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
+	private ApplicationContext appContext;
+
+	@Before
+	public void setup() {
+		appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+	}
 
 	@Test
 	public void searchBooks() {

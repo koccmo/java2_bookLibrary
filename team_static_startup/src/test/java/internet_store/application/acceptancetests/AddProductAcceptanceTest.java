@@ -1,6 +1,6 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.dependency_injection.ApplicationContext;
+import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.requests.GetAllProductsRequest;
 import internet_store.application.core.responses.GetAllProductsResponse;
@@ -8,6 +8,8 @@ import internet_store.application.core.services.AddProductService;
 import internet_store.application.core.services.GetAllProductsService;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.math.BigDecimal;
 
@@ -19,7 +21,8 @@ public class AddProductAcceptanceTest {
 
     @Before
     public void setUp(){
-        applicationContext = new ApplicationContext();
+        applicationContext =
+                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
     }
 
     @Test

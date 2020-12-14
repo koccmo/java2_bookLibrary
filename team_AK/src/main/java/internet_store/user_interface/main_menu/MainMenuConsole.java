@@ -8,28 +8,28 @@ import internet_store.user_interface.administrator_menu.create_order_menu.OrderM
 import internet_store.user_interface.administrator_menu.create_product_menu.ProductMenuConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.ClientCartConsole;
 import internet_store.user_interface.client_menu.ordering_menu.ClientOrderConsole;
-import dependency.annotation.DIComponent;
-import dependency.annotation.DIDependency;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@DIComponent
+@Component
 public class MainMenuConsole {
-    @DIDependency
+    @Autowired
     MainMenu mainMenu;
-    @DIDependency
+    @Autowired
     ClientMenuConsole clientMenuConsole;
-    @DIDependency
+    @Autowired
     ProductMenuConsole productMenuConsole;
-    @DIDependency
+    @Autowired
     OrderMenuConsole orderMenuConsole;
-    @DIDependency
+    @Autowired
     PrintClientService printClientService;
-    @DIDependency
+    @Autowired
     ClientCartConsole clientCartConsole;
-    @DIDependency
+    @Autowired
     PrintCartService printCartService;
-    @DIDependency
+    @Autowired
     PrintProductService printProductService;
-    @DIDependency
+    @Autowired
     ClientOrderConsole clientOrderConsole;
 
     public void startMainMenu() {

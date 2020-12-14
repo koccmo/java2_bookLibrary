@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringTypeValidator {
-    List<CoreError> errors = new ArrayList<>();
+    final List<CoreError> errors = new ArrayList<>();
 
     public List<CoreError> validate(String stringRequest) {
         if (stringRequest == null) {
