@@ -6,6 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan(basePackages = "internet_store.application")
-// @PropertySource(value = "classpath:application.properties")
+@PropertySource(value = "classpath:application.properties")
 public class ProductListConfiguration {
 }
