@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class DentalClinic {
 
-    public static ApplicationContext applicationContext =
+    private static ApplicationContext applicationContext =
             new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
 
     public static void main(String [] args){

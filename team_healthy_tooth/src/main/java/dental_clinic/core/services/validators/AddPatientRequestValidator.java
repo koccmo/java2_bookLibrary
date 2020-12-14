@@ -61,8 +61,8 @@ public class AddPatientRequestValidator {
 
     private List<CoreError> phoneValidationErrors(String phone){
         List <CoreError> errors = new ArrayList<>();
-        if (!phone.matches("\\d{8}")) {
-            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 digits"));
+        if (!phone.matches("\\d{8}|\\d{11}|\\d{12}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
         }
         return errors;
     }

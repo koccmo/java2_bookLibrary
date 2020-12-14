@@ -37,10 +37,10 @@ public class AcceptanceTest6 {
         AddPatientRequest addPatientRequest2 = new AddPatientRequest(personalData2);
         addPatientService().execute(addPatientRequest2);
 
-        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(1L, "SurnameB", "");
+        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(2L, "SurnameB", "");
         changePersonalDataService().execute(changePersonalDataRequest);
 
-        GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(1L);
+        GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(2L);
         GetPatientCardResponse getPatientCardResponse = getPatientCardService().execute(getPatientCardRequest);
 
         assertFalse(getPatientCardResponse.hasErrors());

@@ -40,7 +40,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhone(){
-        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits");
 
         PersonalData personalData = new PersonalData("name", "Surname", "avbd4", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
@@ -52,7 +52,7 @@ public class AddPatientRequestValidatorTest {
 
     @Test
     public void testNotValidPhoneWrongLength(){
-        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 digits");
+        CoreError coreError = new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits");
 
         PersonalData personalData = new PersonalData("name", "Surname", "12546", "25024512345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
