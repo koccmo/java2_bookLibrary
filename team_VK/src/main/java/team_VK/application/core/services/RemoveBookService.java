@@ -3,19 +3,20 @@ package team_VK.application.core.services;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.responses.RemoveBookResponse;
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.List;
-
+@DIComponent
 public class RemoveBookService {
 
-    private final Database database;
-    public RemoveBookServiceValidator validator;
+    @DIDependency private Database database;
+    @DIDependency public RemoveBookServiceValidator validator;
 
-    public RemoveBookService(Database database, RemoveBookServiceValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+//    public RemoveBookService(Database database, RemoveBookServiceValidator validator) {
+//        this.database = database;
+//        this.validator = validator;
+//    }
 
     public RemoveBookResponse removeBook(RemoveBookRequest request) {
 

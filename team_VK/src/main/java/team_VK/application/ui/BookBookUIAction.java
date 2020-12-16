@@ -3,18 +3,21 @@ package team_VK.application.ui;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
 import team_VK.application.core.services.BookBookService;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.database.DIComponent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+@DIComponent
 public class BookBookUIAction implements UIActions {
 
-    BookBookService bookBookService;
+    @DIDependency
+    private BookBookService bookBookService;
 
-    public BookBookUIAction(BookBookService bookBookService) {
-        this.bookBookService = bookBookService;
-    }
+//    public BookBookUIAction(BookBookService bookBookService) {
+//        this.bookBookService = bookBookService;
+//    }
 
     @Override
     public void execute() throws ParseException {

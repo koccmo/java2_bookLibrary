@@ -1,13 +1,18 @@
 package team_VK.application.database;
 
 import team_VK.application.core.domain.Book;
+import team_VK.application.core.services.DIDependency;
 
+@DIComponent
 public class DataBaseFiller {
-    private Database database;
 
-    public DataBaseFiller(Database database) {
-        this.database = database;
-    }
+ @DIDependency
+ private Database database;
+
+
+   // public DataBaseFiller(Database database) {
+//        this.database = database;
+//    }
 
     public void fill() {
 

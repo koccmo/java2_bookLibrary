@@ -3,17 +3,20 @@ package team_VK.application.ui;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.services.AddClientService;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.database.DIComponent;
 
 
 import java.util.Scanner;
-
+@DIComponent
 public class AddClientUIActions implements UIActions {
 
-    private final AddClientService service;
+    @DIDependency
+    private AddClientService service;
 
-    public AddClientUIActions(AddClientService service) {
-        this.service = service;
-    }
+//    public AddClientUIActions(AddClientService service) {
+//        this.service = service;
+//    }
 
 
     @Override

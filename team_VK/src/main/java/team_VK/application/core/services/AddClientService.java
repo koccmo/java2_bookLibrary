@@ -4,20 +4,21 @@ import team_VK.application.core.domain.Client;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.DatabaseClients;
 
 import java.util.List;
-
+@DIComponent
 public class AddClientService {
 
-    private final DatabaseClients databaseClient;
-    private AddClientServiceValidator validator;
+    @DIDependency private DatabaseClients databaseClient;
+    @DIDependency private AddClientServiceValidator validator;
 
 
 
-    public AddClientService(DatabaseClients databaseClient, AddClientServiceValidator validator) {
-        this.databaseClient = databaseClient;this.validator = validator;
-    }
+//    public AddClientService(DatabaseClients databaseClient, AddClientServiceValidator validator) {
+//        this.databaseClient = databaseClient;this.validator = validator;
+//    }
 
     public AddClientResponse addClient(AddClientRequest request){
 

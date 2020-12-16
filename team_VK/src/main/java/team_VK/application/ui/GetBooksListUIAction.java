@@ -2,17 +2,19 @@ package team_VK.application.ui;
 
 import team_VK.application.core.requests.GetBookListRequest;
 import team_VK.application.core.responses.GetBookListResponse;
+import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.GetBooksListService;
+import team_VK.application.database.DIComponent;
 
 import java.util.Scanner;
-
+@DIComponent
 public class GetBooksListUIAction implements UIActions {
 
-    private final GetBooksListService getBooksListService;
+    @DIDependency private GetBooksListService getBooksListService;
 
-    public GetBooksListUIAction(GetBooksListService getBooksListService) {
-        this.getBooksListService = getBooksListService;
-    }
+//    public GetBooksListUIAction(GetBooksListService getBooksListService) {
+//        this.getBooksListService = getBooksListService;
+//    }
 
     @Override
     public void execute() {

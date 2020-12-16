@@ -1,5 +1,6 @@
-package team_VK.application;
+package team_VK.application.ui;
 
+import team_VK.application.ApplicationContext;
 import team_VK.application.ui.GetBooksListUIAction;
 import team_VK.application.ui.UIActions;
 

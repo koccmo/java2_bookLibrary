@@ -5,19 +5,20 @@ import team_VK.application.core.domain.BookingPeriod;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.*;
-
+@DIComponent
 public class BookBookService {
 
-    private final Database database;
-    public BookBookServiceValidator validator;
+    @DIDependency private Database database;
+    @DIDependency public BookBookServiceValidator validator;
 
-    public BookBookService(Database database, BookBookServiceValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+//    public BookBookService(Database database, BookBookServiceValidator validator) {
+//        this.database = database;
+//        this.validator = validator;
+//    }
 
     public BookBookResponse bookBook(BookBookRequest request) {
 

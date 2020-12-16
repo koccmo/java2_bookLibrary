@@ -1,14 +1,16 @@
 package team_VK.application.core.services;
 
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
+@DIComponent
 public class ShowBookService {
 
-    final Database database;
+    @DIDependency Database database;
 
-    public ShowBookService(Database database) {
-        this.database = database;
-    }
+//    public ShowBookService(Database database) {
+//        this.database = database;
+//    }
 
     public void showBook(long showingBookID) {
         database.getListBooks().stream()

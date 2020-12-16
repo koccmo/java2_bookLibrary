@@ -3,11 +3,12 @@ package team_VK.application.core.services;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+@DIComponent
 public class AddClientServiceValidator {
 
     List<CoreError> errors = new ArrayList<>();

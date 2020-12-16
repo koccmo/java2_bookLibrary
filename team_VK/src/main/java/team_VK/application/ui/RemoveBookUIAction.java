@@ -2,21 +2,19 @@ package team_VK.application.ui;
 
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.RemoveBookResponse;
+import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.RemoveBookService;
+import team_VK.application.database.DIComponent;
 
 import java.util.Scanner;
-
+@DIComponent
 public class RemoveBookUIAction implements UIActions {
 
-    private final RemoveBookService removeBookService ;
+    @DIDependency private RemoveBookService removeBookService ;
 
-    public RemoveBookUIAction(RemoveBookService removeBookService) {
-        this.removeBookService = removeBookService;
-    }
-
-
-
-
+//    public RemoveBookUIAction(RemoveBookService removeBookService) {
+//        this.removeBookService = removeBookService;
+//    }
 
     @Override
     public void execute() {

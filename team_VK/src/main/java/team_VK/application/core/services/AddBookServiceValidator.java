@@ -2,11 +2,12 @@ package team_VK.application.core.services;
 
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+@DIComponent
 public class AddBookServiceValidator {
 
     List<CoreError> errors = new ArrayList<>();

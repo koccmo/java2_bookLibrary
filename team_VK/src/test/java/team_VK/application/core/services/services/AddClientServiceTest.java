@@ -12,6 +12,7 @@ import team_VK.application.core.services.AddClientService;
 import team_VK.application.core.services.AddClientServiceValidator;
 import team_VK.application.database.DatabaseClients;
 import team_VK.application.database.DatabaseClientsInMemory;
+import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class AddClientServiceTest  {
 
     @Before
     public void setup() {
-
+        DIApplicationContextBuilder diApplicationContextBuilder = new DIApplicationContextBuilder();
         databaseClient = new DatabaseClientsInMemory();
         validator = Mockito.mock(AddClientServiceValidator.class);
         errors = new ArrayList<>();
@@ -35,7 +36,7 @@ public class AddClientServiceTest  {
 
         AddClientRequest request = new AddClientRequest("FirstName", "LastName", "123456-78910");
         Mockito.when(validator.validate(request)).thenReturn(errors);
-        AddClientService service = new AddClientService(databaseClient, validator);
+        AddClientService service = new AddClientService();
 
         AddClientResponse response = service.addClient(request);
         Assert.assertFalse(response.havesError());
@@ -48,7 +49,7 @@ public class AddClientServiceTest  {
         AddClientRequest request = new AddClientRequest("FirstName", "LastName", "123456-78910");
         errors.add(new CoreError("clientLastName", "Field clientLastName contains illegal characters"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
-        AddClientService service = new AddClientService(databaseClient, validator);
+        AddClientService service = new AddClientService();
 
         AddClientResponse response = service.addClient(request);
         Assert.assertTrue(response.havesError());
@@ -61,7 +62,7 @@ public class AddClientServiceTest  {
 
         AddClientRequest request = new AddClientRequest("FirstName", "LastName", "123456-78910");
         Mockito.when(validator.validate(request)).thenReturn(errors);
-        AddClientService service = new AddClientService(databaseClient, validator);
+        AddClientService service = new AddClientService();
 
         AddClientResponse response = service.addClient(request);
 

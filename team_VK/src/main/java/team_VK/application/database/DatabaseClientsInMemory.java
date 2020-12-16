@@ -4,7 +4,7 @@ import team_VK.application.core.domain.Client;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DIComponent
 public class DatabaseClientsInMemory implements DatabaseClients {
 
     private long idClientsCounter = 1L;

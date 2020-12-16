@@ -18,7 +18,7 @@ public class RemoveBookServiceValidatorTest {
 
     RemoveBookServiceValidator subject = new RemoveBookServiceValidator();
     List<Book> bookList = getBooks();
-    DatabaseInMemory database = new DatabaseInMemory(bookList);
+    DatabaseInMemory database = new DatabaseInMemory();
 
 
 

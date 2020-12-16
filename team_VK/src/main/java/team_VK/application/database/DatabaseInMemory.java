@@ -4,18 +4,18 @@ import team_VK.application.core.domain.Book;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DIComponent
 public class DatabaseInMemory implements Database {
 
     private long idCounter = 1L;
     List<Book> books = new ArrayList<>();
 
-    public DatabaseInMemory() {
-    }
-
-    public DatabaseInMemory(List<Book> books) {
-        this.books = books;
-    }
+//    public DatabaseInMemory() {
+//    }
+//
+//    public DatabaseInMemory(List<Book> books) {
+//        this.books = books;
+//    }
 
     @Override
     public void addBook(Book book) {

@@ -1,12 +1,11 @@
 package team_VK.application;
 
 
-import team_VK.application.ui.AddBookUIAction;
-import team_VK.application.ui.ExitProgramUIAction;
-import team_VK.application.ui.RemoveBookUIAction;
-import team_VK.application.ui.AddClientUIActions;
-import team_VK.application.ui.BookBookUIAction;
+import team_VK.application.database.DataBaseFiller;
+import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
+import team_VK.application.ui.*;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -15,8 +14,51 @@ public class LibraryApplication {
 
     public static void main(String[] args) throws ParseException {
 
-        ApplicationContext context = new ApplicationContext();
-        BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = new BookSearchAndBookMenuUIAction(context);
+        try {
+            ApplicationContext context = new DIApplicationContextBuilder().build("team_VK.application");
+            DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
+            dataBaseFiller.fill();
+            BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = new BookSearchAndBookMenuUIAction(context);
+            while (true) {
+                showUserMenu();
+                switch (userChoice()) {
+                    case 1: {
+                        AddBookUIAction addBookUIAction = context.getBean(AddBookUIAction.class);
+                        addBookUIAction.execute();
+                        break;
+                    }
+
+                    case 2: {
+                        RemoveBookUIAction removeBookUIAction = context.getBean(RemoveBookUIAction.class);
+                        removeBookUIAction.execute();
+                        break;
+                    }
+                    case 3: {
+                        bookSearchAndBookMenuUIAction.execute();
+                        break;
+                    }
+//                case 4:
+//                    ShowBookUIActions showBookUIActions = context.getBean(ShowBookUIActions.class);
+//                    showBookUIActions.execute();
+//                    break;
+                    case 5:
+                        BookBookUIAction bookBookUIAction = context.getBean(BookBookUIAction.class);
+                        bookBookUIAction.execute();
+                        break;
+                    case 6:
+                        AddClientUIActions addClientUIActions = context.getBean(AddClientUIActions.class);
+                        addClientUIActions.execute();
+                        break;
+                    case 7: {
+                        ExitProgramUIAction exitProgramUIAction = context.getBean(ExitProgramUIAction.class);
+                        exitProgramUIAction.execute();
+                        break;
+                    }
+                }
+            }
+        }
+        catch (IOException e) {new RuntimeException("Classes not found");}
+        catch (ClassNotFoundException e) {new RuntimeException("Classes not found");}
 
 //        Database database = new DatabaseInMemory();
 //        DataBaseFiller DBFiller = new DataBaseFiller(database);
@@ -53,43 +95,6 @@ public class LibraryApplication {
 //        ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
 
 
-        while (true) {
-            showUserMenu();
-            switch (userChoice()) {
-                case 1: {
-                    AddBookUIAction addBookUIAction = context.getBean(AddBookUIAction.class);
-                    addBookUIAction.execute();
-                    break;
-                }
-
-                case 2: {
-                    RemoveBookUIAction removeBookUIAction = context.getBean(RemoveBookUIAction.class);
-                    removeBookUIAction.execute();
-                    break;
-                }
-                case 3: {
-                    bookSearchAndBookMenuUIAction.execute();
-                    break;
-                }
-//                case 4:
-//                    ShowBookUIActions showBookUIActions = context.getBean(ShowBookUIActions.class);
-//                    showBookUIActions.execute();
-//                    break;
-                case 5:
-                    BookBookUIAction bookBookUIAction = context.getBean(BookBookUIAction.class);
-                    bookBookUIAction.execute();
-                    break;
-                case 6:
-                    AddClientUIActions addClientUIActions = context.getBean(AddClientUIActions.class);
-                    addClientUIActions.execute();
-                    break;
-                case 7: {
-                    ExitProgramUIAction exitProgramUIAction = context.getBean(ExitProgramUIAction.class);
-                    exitProgramUIAction.execute();
-                    break;
-                }
-            }
-        }
     }
 
 

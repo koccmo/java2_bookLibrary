@@ -2,22 +2,24 @@ package team_VK.application.core.services;
 
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.domain.Book;
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.responses.CoreError;
 
 import java.util.List;
 
+@DIComponent
 public class AddBookService {
 
-    private final Database database;
-    public AddBookServiceValidator validator;
+    @DIDependency private Database database;
+    @DIDependency public AddBookServiceValidator validator;
 
 
-    public AddBookService(Database database, AddBookServiceValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+//    public AddBookService(Database database, AddBookServiceValidator validator) {
+//        this.database = database;
+//        this.validator = validator;
+//    }
 
     public AddBookResponse addBook(AddBookRequest request) {
 

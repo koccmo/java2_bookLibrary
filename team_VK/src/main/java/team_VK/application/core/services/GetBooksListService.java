@@ -4,21 +4,22 @@ import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.GetBookListRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.responses.GetBookListResponse;
+import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.Comparator;
 import java.util.List;
-
+@DIComponent
 public class GetBooksListService {
 
-    private final Database database;
-    private final GetBooksListServiceValidator validator;
+    @DIDependency private Database database;
+    @DIDependency private GetBooksListServiceValidator validator;
 
 
-    public GetBooksListService(Database database, GetBooksListServiceValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+//    public GetBooksListService(Database database, GetBooksListServiceValidator validator) {
+//        this.database = database;
+//        this.validator = validator;
+//    }
 
     public GetBookListResponse getBooksList(GetBookListRequest request) {
 

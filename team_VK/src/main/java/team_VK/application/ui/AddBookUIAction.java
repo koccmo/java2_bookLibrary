@@ -3,16 +3,19 @@ package team_VK.application.ui;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.services.AddBookService;
 import team_VK.application.core.requests.AddBookRequest;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.database.DIComponent;
+
 import java.util.Scanner;
 
-
+@DIComponent
 public class AddBookUIAction implements UIActions {
 
-    private final AddBookService addBookService;
+    @DIDependency private AddBookService addBookService;
 
-    public AddBookUIAction(AddBookService addBookService) {
-        this.addBookService = addBookService;
-    }
+//    public AddBookUIAction(AddBookService addBookService) {
+//        this.addBookService = addBookService;
+//    }
 
     @Override
     public void execute() {
