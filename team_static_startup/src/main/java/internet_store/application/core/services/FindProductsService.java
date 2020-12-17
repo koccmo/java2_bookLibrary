@@ -7,6 +7,7 @@ import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,10 +15,14 @@ import java.util.List;
 @Component
 public class FindProductsService {
 
-    @Autowired
-    private Database database;
-    @Autowired
-    private FindProductsRequestValidator validator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired private Database database;
+    @Autowired private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -27,10 +32,10 @@ public class FindProductsService {
 
         List<Product> products = search(request);
 
-        if (request.getOrdering() != null) {
+        if (orderingEnabled && request.getOrdering() != null) {
             products = new OrderingProductsService().order(products, request.getOrdering());
         }
-        if (request.getPaging() != null) {
+        if (pagingEnabled && request.getPaging() != null) {
             products = new PagingProductsService().page(products, request.getPaging());
         }
         return new FindProductsResponse(products, null);
