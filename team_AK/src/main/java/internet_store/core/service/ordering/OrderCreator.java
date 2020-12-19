@@ -46,7 +46,9 @@ public class OrderCreator {
 
         System.out.println("Order process finished");
 
-        emailService.sendSimpleMessage(client.getEmail(), "Order confirmed", createMailBodyText(order));
+        if (emailService != null) {
+            emailService.sendSimpleMessage(client.getEmail(), "Order confirmed", createMailBodyText(order));
+        }
 
         cartDatabase.clearCart();
     }
