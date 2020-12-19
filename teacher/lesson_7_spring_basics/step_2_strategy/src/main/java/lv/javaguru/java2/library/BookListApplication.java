@@ -9,14 +9,17 @@ import lv.javaguru.java2.library.console_ui.ProgramMenu;
 public class BookListApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext =
-				new AnnotationConfigApplicationContext(BookListConfiguration.class);
+		ApplicationContext applicationContext = createApplicationContext();
 		ProgramMenu programMenu = applicationContext.getBean(ProgramMenu.class);
 		while (true) {
 			programMenu.print();
 			int menuNumber = programMenu.getMenuNumberFromUser();
 			programMenu.executeSelectedMenuItem(menuNumber);
 		}
+	}
+
+	private static ApplicationContext createApplicationContext() {
+		return new AnnotationConfigApplicationContext(BookListConfiguration.class);
 	}
 
 }
