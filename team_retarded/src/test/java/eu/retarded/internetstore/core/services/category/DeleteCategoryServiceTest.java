@@ -50,7 +50,6 @@ public class DeleteCategoryServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         DeleteCategoryResponse response = subject.execute(new DeleteCategoryRequest(1L));
         assertThat(response.isDeleted()).isFalse();
-        //  Mockito.verify(database).removeCategory(assertThat(new ListProductCategoryMatcher()));  - не дает написать  string name ;/
     }
 
 
