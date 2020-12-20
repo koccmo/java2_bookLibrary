@@ -15,11 +15,6 @@ public class AddClientService {
     @DIDependency private AddClientServiceValidator validator;
 
 
-
-//    public AddClientService(DatabaseClients databaseClient, AddClientServiceValidator validator) {
-//        this.databaseClient = databaseClient;this.validator = validator;
-//    }
-
     public AddClientResponse addClient(AddClientRequest request){
 
         List<CoreError> errors = validator.validate(request);

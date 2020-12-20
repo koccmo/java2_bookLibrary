@@ -8,7 +8,6 @@ import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.responses.CoreError;
 
 import java.util.List;
-
 @DIComponent
 public class AddBookService {
 
@@ -16,15 +15,9 @@ public class AddBookService {
     @DIDependency public AddBookServiceValidator validator;
 
 
-//    public AddBookService(Database database, AddBookServiceValidator validator) {
-//        this.database = database;
-//        this.validator = validator;
-//    }
-
     public AddBookResponse addBook(AddBookRequest request) {
 
         List<CoreError> errors = validator.validate(request);
-
 
         if (errors.size() == 0) {
             Book book = new Book(request.bookTitle, request.bookAuthor, request.bookingDurationPermitted);
