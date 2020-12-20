@@ -22,19 +22,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
  public class ChangePersonalDataServiceTest {
-   /* @Mock private PatientDatabase patientDatabase;
+    @Mock private PatientDatabase patientDatabase;
     @Mock private ChangePersonalDataValidator changePersonalDataValidator;
     @InjectMocks private ChangePersonalDataService changePersonalDataService;
 
    @Test
    public void testChangeName()  {
-       PersonalData personalData = new PersonalData("Name", null, "12345678", "12345678900");
-       AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
-       AddPatientService addPatientService = new AddPatientService();
-       addPatientService.execute(addPatientRequest);
-       patientDatabase.addPatient(personalData);
 
        String updatedName = "NewName";
        CoreError expectedError = new CoreError("", "");
@@ -47,6 +42,22 @@ import java.util.List;
 
        assertTrue(changePersonalDataResponse.getErrors().equals(errors));
        Mockito.verifyNoInteractions(patientDatabase);
-    }*/
+    }
+
+   @Test
+   public void testChangePhone()  {
+
+    String updatedPhone = "NewPhone";
+    CoreError expectedError = new CoreError("", "");
+    List<CoreError> errors = new ArrayList<>();
+    errors.add(expectedError);;
+
+    ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(1L,"",updatedPhone);
+    Mockito.when(changePersonalDataValidator.validate(changePersonalDataRequest)).thenReturn(errors);
+    ChangePersonalDataResponse changePersonalDataResponse = changePersonalDataService.execute(changePersonalDataRequest);
+
+    assertTrue(changePersonalDataResponse.getErrors().equals(errors));
+    Mockito.verifyNoInteractions(patientDatabase);
+   }
 
  }

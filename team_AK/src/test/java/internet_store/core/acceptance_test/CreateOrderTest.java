@@ -4,16 +4,12 @@ import internet_store.core.domain.Client;
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.AddProductToCartRequest;
 import internet_store.core.request.ordering.OrderRequest;
-import internet_store.core.request.ordering.OrderStatusRequest;
-import internet_store.core.request.telegram.FindTelegramChatIdRequest;
 import internet_store.core.response.cart.AddProductToCartResponse;
 import internet_store.core.response.ordering.OrderResponse;
 import internet_store.core.service.cart.AddProductToCartService;
 import internet_store.core.service.ordering.OrderCreator;
 import internet_store.core.service.ordering.OrderService;
 import internet_store.core.service.ordering.OrderStatus;
-import internet_store.core.service.ordering.OrderStatusService;
-import internet_store.core.service.telegram.FindTelegramChatIdService;
 import internet_store.database.cart_database.InnerCartDatabase;
 import internet_store.database.cart_database.InnerCartDatabaseImpl;
 import internet_store.database.client_database.InnerClientDatabase;
@@ -22,16 +18,11 @@ import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.database.order_database.InnerOrderDatabaseImpl;
 import internet_store.database.product_database.InnerProductDatabase;
 import internet_store.database.product_database.InnerProductDatabaseImpl;
-import internet_store.database.telegram_database.InnerTelegramDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 

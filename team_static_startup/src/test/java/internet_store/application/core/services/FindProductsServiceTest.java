@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 
 public class FindProductsServiceTest {
-
     @Mock private Database database;
     @Mock private FindProductsRequestValidator validator;
     @InjectMocks FindProductsService service;
@@ -37,6 +37,8 @@ public class FindProductsServiceTest {
 
     @Before
     public void setUp() {
+        ReflectionTestUtils.setField(service, "orderingEnabled", true);
+        ReflectionTestUtils.setField(service, "pagingEnabled", true);
         products.add(product1);
         products.add(product2);
     }
