@@ -12,10 +12,6 @@ public class GetBooksListUIAction implements UIActions {
 
     @DIDependency private GetBooksListService getBooksListService;
 
-//    public GetBooksListUIAction(GetBooksListService getBooksListService) {
-//        this.getBooksListService = getBooksListService;
-//    }
-
     @Override
     public void execute() {
 
