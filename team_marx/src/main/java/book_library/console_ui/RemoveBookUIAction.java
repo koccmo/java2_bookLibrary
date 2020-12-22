@@ -1,6 +1,8 @@
 package book_library.console_ui;
 
-import book_library.services.RemoveBookService;
+import book_library.core.requests.RemoveBookRequest;
+import book_library.core.responses.RemoveBookResponse;
+import book_library.core.services.RemoveBookService;
 
 import java.util.Scanner;
 
@@ -17,7 +19,12 @@ public class RemoveBookUIAction implements UIAction{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter book id to remove:");
         Long bookId = Long.parseLong(scanner.nextLine());
-        removeBookService.execute(bookId);
-        System.out.println("Your book was removed from the list.");
+        RemoveBookRequest request = new RemoveBookRequest(bookId);
+        RemoveBookResponse response =  removeBookService.execute(request);
+        if (response.isBookRemoved()){
+            System.out.println("Your book was removed from the list.");
+        } else {
+            System.out.println("Your book was not removed from the list.");
+        }
     }
 }

@@ -1,4 +1,4 @@
-package book_library.database;
+package book_library.core.database;
 
 import book_library.Book;
 
@@ -8,7 +8,7 @@ public interface Database {
 
     void save(Book book);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     List<Book> getAllBooks();
 }

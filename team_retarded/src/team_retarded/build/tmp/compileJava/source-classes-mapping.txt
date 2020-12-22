@@ -14,8 +14,8 @@ application/core/requests/FilterProductsByPriceRequest.java
  application.core.requests.FilterProductsByPriceRequest
 application/core/services/SearchProductService.java
  application.core.services.SearchProductService
-application/core/services/validators/FilterProductsByNameValidator.java
- application.core.services.validators.FilterProductsByNameValidator
+application/core/services/book_library.core.validators/FilterProductsByNameValidator.java
+ application.core.services.book_library.core.validators.FilterProductsByNameValidator
 application/core/requests/Ordering.java
  application.core.requests.Ordering
 application/database/Database.java
@@ -44,10 +44,10 @@ application/core/requests/ShowAllProductsRequest.java
  application.core.requests.ShowAllProductsRequest
 application/core/responses/ClearAllProductsResponse.java
  application.core.responses.ClearAllProductsResponse
-application/core/services/validators/FilterProductsByPriceValidator.java
- application.core.services.validators.FilterProductsByPriceValidator
-application/core/services/validators/SearchProductValidator.java
- application.core.services.validators.SearchProductValidator
+application/core/services/book_library.core.validators/FilterProductsByPriceValidator.java
+ application.core.services.book_library.core.validators.FilterProductsByPriceValidator
+application/core/services/book_library.core.validators/SearchProductValidator.java
+ application.core.services.book_library.core.validators.SearchProductValidator
 application/core/responses/FilterProductsByPriceResponse.java
  application.core.responses.FilterProductsByPriceResponse
 application/core/services/AddProductService.java
@@ -70,8 +70,8 @@ application/ui/FilterProductsByNameUIAction.java
  application.ui.FilterProductsByNameUIAction
 application/core/services/ShowAllProductsService.java
  application.core.services.ShowAllProductsService
-application/core/services/validators/DeleteProductValidator.java
- application.core.services.validators.DeleteProductValidator
+application/core/services/book_library.core.validators/DeleteProductValidator.java
+ application.core.services.book_library.core.validators.DeleteProductValidator
 application/core/requests/FilterProductsByNameRequest.java
  application.core.requests.FilterProductsByNameRequest
 application/core/responses/AddProductResponse.java
@@ -88,9 +88,9 @@ application/core/services/FilterProductsByNameService.java
  application.core.services.FilterProductsByNameService
 application/core/responses/CoreError.java
  application.core.responses.CoreError
-application/core/services/validators/GetProductByIdValidator.java
- application.core.services.validators.GetProductByIdValidator
+application/core/services/book_library.core.validators/GetProductByIdValidator.java
+ application.core.services.book_library.core.validators.GetProductByIdValidator
 application/ui/FilterProductsByPriceUIAction.java
  application.ui.FilterProductsByPriceUIAction
-application/core/services/validators/AddProductValidator.java
- application.core.services.validators.AddProductValidator
+application/core/services/book_library.core.validators/AddProductValidator.java
+ application.core.services.book_library.core.validators.AddProductValidator

@@ -4,18 +4,20 @@ import book_library.console_ui.AddBookUIAction;
 import book_library.console_ui.ExitUIAction;
 import book_library.console_ui.GetAllBooksUIAction;
 import book_library.console_ui.RemoveBookUIAction;
-import book_library.database.Database;
-import book_library.database.InMemoryDataBaseImpl;
-import book_library.services.AddBookService;
-import book_library.services.GetAllBooksService;
-import book_library.services.RemoveBookService;
+import book_library.core.database.Database;
+import book_library.core.database.InMemoryDataBaseImpl;
+import book_library.core.services.AddBookService;
+import book_library.core.validators.AddBookValidator;
+import book_library.core.services.GetAllBooksService;
+import book_library.core.services.RemoveBookService;
 
 import java.util.Scanner;
 
 public class BookListApplication {
 
     private static Database database = new InMemoryDataBaseImpl();
-    private static AddBookService addBookService = new AddBookService(database);
+    private static AddBookValidator addBookValidator = new AddBookValidator();
+    private static AddBookService addBookService = new AddBookService(database, addBookValidator);
     private static RemoveBookService removeBookService = new RemoveBookService(database);
     private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
     private static AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
