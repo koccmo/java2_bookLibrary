@@ -43,9 +43,7 @@ public class ChangeTargetNameUIAction implements UIAction {
     }
 
     private void printResponseErrors(ChangeTargetNameResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private ChangeTargetNameResponse createResponse(ChangeTargetNameRequest request){

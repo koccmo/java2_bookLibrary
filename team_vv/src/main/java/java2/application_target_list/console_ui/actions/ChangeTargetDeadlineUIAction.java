@@ -43,9 +43,7 @@ public class ChangeTargetDeadlineUIAction implements UIAction {
     }
 
     private void printResponseErrors(ChangeTargetDeadlineResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private ChangeTargetDeadlineResponse createResponse(ChangeTargetDeadlineRequest request){

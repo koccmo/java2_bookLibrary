@@ -47,9 +47,7 @@ public class DeleteUIAction implements UIAction {
     }
 
     private void printResponseErrors(DeleteTargetResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private DeleteTargetResponse createResponse(DeleteTargetRequest request){

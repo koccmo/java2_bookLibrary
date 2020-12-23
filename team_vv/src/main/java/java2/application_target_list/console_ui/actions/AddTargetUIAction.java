@@ -47,9 +47,7 @@ public class AddTargetUIAction implements UIAction {
     }
 
     private void printResponseErrors(AddTargetResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private AddTargetResponse createResponse(AddTargetRequest request){

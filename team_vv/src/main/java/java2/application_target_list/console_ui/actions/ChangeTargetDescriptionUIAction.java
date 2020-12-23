@@ -44,9 +44,7 @@ public class ChangeTargetDescriptionUIAction implements UIAction {
     }
 
     private void printResponseErrors(ChangeTargetDescriptionResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private ChangeTargetDescriptionResponse createResponse(ChangeTargetDescriptionRequest request){

@@ -120,9 +120,7 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
     }
 
     private void printResponseErrors(SearchTargetByDescriptionResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private SearchTargetByDescriptionResponse createResponse(SearchTargetByDescriptionRequest request){

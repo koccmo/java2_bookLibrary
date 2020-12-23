@@ -130,9 +130,7 @@ public class SearchTargetByNameUIAction implements UIAction {
     }
 
     private void printResponseErrors(SearchTargetByNameResponse response){
-        for (CoreError error : response.getErrorList()) {
-            System.out.println("Error: " + error.getField() + " " + error.getMessage());
-        }
+        response.getErrorList().forEach(System.out::println);
     }
 
     private SearchTargetByNameResponse createResponse(SearchTargetByNameRequest request){
