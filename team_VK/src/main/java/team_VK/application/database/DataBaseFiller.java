@@ -9,27 +9,37 @@ public class DataBaseFiller {
  @DIDependency
  private Database database;
 
-
-   // public DataBaseFiller(Database database) {
-//        this.database = database;
-//    }
-
     public void fill() {
 
+        database.addBook(new Book("The Old Man and Sea", "Hemingway E.", 10));
+        database.addBook(new Book("Captain's doter", "Pushkin A.", 10));
+        database.addBook(new Book("Broken pines", "Rainis J.", 5));
+        database.addBook(new Book("Calm Don", "Shelohov M.", 15));
+        database.addBook(new Book("Don's stories", "Shelohov M.", 5));
 
-        Book book1 = new Book("The Old Man and Sea", "E. Hemingway", 10);
-        Book book2 = new Book("Captain's doter", "A. Pushkin", 10);
-        Book book3 = new Book("Broken pines", "J. Rainis", 5);
-        Book book4 = new Book("Calm Don", "M. Shelohov", 15);
-        Book book5 = new Book("Don's stories", "M. Shelohov", 5);
-        Book book6 = new Book("Good bay, weapon", "E. Hemingway",5);
+        database.addBook(new Book("Good bay, weapon", "Hemingway E.",5));
+        database.addBook(new Book("Krokhotki", "Solzhenitsyn A.", 10));
+        database.addBook(new Book("Read wheel", "Solzhenitsyn A.", 10));
+        database.addBook(new Book("Crime and punishment", "Dostoevsky F.", 5));
+        database.addBook(new Book("Idiot", "Dostoevsky F.", 15));
 
-        database.addBook(book1);
-        database.addBook(book2);
-        database.addBook(book3);
-        database.addBook(book4);
-        database.addBook(book5);
-        database.addBook(book6);
+        database.addBook(new Book("War and World", "Tolstoy L.", 5));
+        database.addBook(new Book("Three sisters", "Chekhov A.",5));
+        database.addBook(new Book("State and anarchism", "Kropotkin A.", 10));
+        database.addBook(new Book("In the first circle", "Solzhenitsyn A.", 10));
+        database.addBook(new Book("Requiem for caravan PQ-17", "Pikul V.", 5));
+
+        database.addBook(new Book("Moonsund", "Pikul V.", 15));
+        database.addBook(new Book("Kornilov", "Denikin A.", 5));
+        database.addBook(new Book("How to update the RABKRIN", "Lenin V.",5));
+        database.addBook(new Book("Courtesans glitter and poverty", "Balzac A.", 5));
+        database.addBook(new Book("93-rd", "Hugo V.",5));
+
+        database.addBook(new Book("Drama on a hunt", "Chekhov A.", 15));
+        database.addBook(new Book("Onegin", "Pushkin A.", 5));
+        database.addBook(new Book("Poetry", "Tsvetajeva M.",5));
+        database.addBook(new Book("Hamlet", "Shakespeare W.", 5));
+        database.addBook(new Book("Poetry", "Blok A.",5));
 
     }
 

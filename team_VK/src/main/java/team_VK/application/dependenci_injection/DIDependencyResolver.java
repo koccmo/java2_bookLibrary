@@ -28,7 +28,8 @@ public class DIDependencyResolver {
 
         Class fieldType = diField.getType();
         Object fieldInstance = applicationContext.getBean(fieldType);
-        if (fieldInstance == null) throw new RuntimeException("No dependency found");
+        if (fieldInstance == null)
+            throw new RuntimeException("No dependency found");
         else {
             setValueToPrivateField(diInstance, diField, fieldInstance);
         }

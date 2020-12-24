@@ -1,20 +1,25 @@
-package team_VK.application.ui;
+package team_VK.application.ui.main_menu;
 
-import team_VK.application.ApplicationContext;
-import team_VK.application.ui.GetBooksListUIAction;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.database.DIComponent;
+import team_VK.application.ui.search_book_and_make_booking_menu.GetBooksListUIAction;
+import team_VK.application.ui.search_book_and_make_booking_menu.SearchBookByManyCriteriaUIAction;
+import team_VK.application.ui.search_book_and_make_booking_menu.SearchBookByOneCriteriaUIAction;
 import team_VK.application.ui.UIActions;
 
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
+@DIComponent
 public class BookSearchAndBookMenuUIAction implements UIActions {
 
-    ApplicationContext context;
-
-    public BookSearchAndBookMenuUIAction(ApplicationContext context) {
-        this.context = context;
-    }
+    @DIDependency
+    GetBooksListUIAction getBooksListUIAction;
+    @DIDependency
+    SearchBookByManyCriteriaUIAction searchBookByManyCriteriaUIAction;
+    @DIDependency
+    SearchBookByOneCriteriaUIAction searchBookByOneCriteriaUIAction;
 
     private boolean contin;
 
@@ -26,14 +31,16 @@ public class BookSearchAndBookMenuUIAction implements UIActions {
             showSearchAndBookingMenu();
             switch (userChoiceInSearchAndBookingMenu()) {
                 case 1: {
-                    GetBooksListUIAction getBooksListUIAction = context.getBean(GetBooksListUIAction.class);
                     getBooksListUIAction.execute();
                     break;
                 }
 
                 case 2: {
-                    // book search
+                    searchBookByManyCriteriaUIAction.execute();
                     break;
+                }
+                case 3:{
+                    searchBookByOneCriteriaUIAction.execute();
                 }
 
                 case 7: {
@@ -47,9 +54,10 @@ public class BookSearchAndBookMenuUIAction implements UIActions {
     private void showSearchAndBookingMenu() {
         System.out.println("Please select your action.");
         System.out.println("1. Get books list.");
-        System.out.println("2. Search book by.");
+        System.out.println("2. Search book by many criteria.");
+        System.out.println("3. Search book by one criteria.");
 
-        System.out.println("7. Exit main menu.");
+        System.out.println("7. Exit to main menu.");
         System.out.println();
 
     }

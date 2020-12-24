@@ -1,10 +1,12 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.main_menu_services;
 
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.domain.BookingPeriod;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.core.services.validators.BookBookServiceValidator;
 import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
@@ -12,7 +14,8 @@ import java.util.*;
 @DIComponent
 public class BookBookService {
 
-    @DIDependency private Database database;
+    @DIDependency
+    private Database database;
     @DIDependency public BookBookServiceValidator validator;
 
 //    public BookBookService(Database database, BookBookServiceValidator validator) {

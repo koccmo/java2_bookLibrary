@@ -10,8 +10,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.responses.RemoveBookResponse;
-import team_VK.application.core.services.RemoveBookService;
-import team_VK.application.core.services.RemoveBookServiceValidator;
+import team_VK.application.core.services.main_menu_services.RemoveBookService;
+import team_VK.application.core.services.validators.RemoveBookServiceValidator;
 import team_VK.application.database.DatabaseInMemory;
 
 

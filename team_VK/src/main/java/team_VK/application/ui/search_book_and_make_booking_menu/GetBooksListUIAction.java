@@ -1,16 +1,19 @@
-package team_VK.application.ui;
+package team_VK.application.ui.search_book_and_make_booking_menu;
 
 import team_VK.application.core.requests.GetBookListRequest;
 import team_VK.application.core.responses.GetBookListResponse;
 import team_VK.application.core.services.DIDependency;
-import team_VK.application.core.services.GetBooksListService;
+import team_VK.application.core.services.search_book_and_make_booking_menu_services.GetBooksListService;
 import team_VK.application.database.DIComponent;
+import team_VK.application.ui.UIActions;
+import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 import java.util.Scanner;
 @DIComponent
 public class GetBooksListUIAction implements UIActions {
 
     @DIDependency private GetBooksListService getBooksListService;
+    @DIDependency private ErrorsPrinter errorsPrinter;
 
     @Override
     public void execute() {
@@ -29,7 +32,7 @@ public class GetBooksListUIAction implements UIActions {
         if (!response.havesError()) {
             System.out.println("Please see books list above");
         } else {
-            response.getErrorList().forEach(coreError -> System.out.println(coreError.toString()));
+            errorsPrinter.execute (response);
         }
 
 
