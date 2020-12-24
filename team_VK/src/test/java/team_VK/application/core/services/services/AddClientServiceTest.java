@@ -1,8 +1,6 @@
 package team_VK.application.core.services.services;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,12 +10,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.AddClientService;
-import team_VK.application.core.services.AddClientServiceValidator;
+import team_VK.application.core.services.main_menu_services.AddClientService;
+import team_VK.application.core.services.validators.AddClientServiceValidator;
 import team_VK.application.core.services.matchers.ClientMatcher;
 import team_VK.application.database.DatabaseClients;
-import team_VK.application.database.DatabaseClientsInMemory;
-import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

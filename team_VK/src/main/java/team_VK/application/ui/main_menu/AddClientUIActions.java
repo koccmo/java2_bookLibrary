@@ -1,10 +1,12 @@
-package team_VK.application.ui;
+package team_VK.application.ui.main_menu;
 
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
-import team_VK.application.core.services.AddClientService;
+import team_VK.application.core.services.main_menu_services.AddClientService;
 import team_VK.application.core.services.DIDependency;
 import team_VK.application.database.DIComponent;
+import team_VK.application.ui.UIActions;
+import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 
 import java.util.Scanner;
@@ -13,10 +15,7 @@ public class AddClientUIActions implements UIActions {
 
     @DIDependency
     private AddClientService service;
-
-//    public AddClientUIActions(AddClientService service) {
-//        this.service = service;
-//    }
+    @DIDependency private ErrorsPrinter errorsPrinter;
 
 
     @Override
@@ -38,8 +37,7 @@ public class AddClientUIActions implements UIActions {
             System.out.println("Your are registered in the Library.");
             System.out.println();
         } else {
-            System.out.println("Your request rejected. \n");
-            System.out.println(response.errorList.toString());
+            errorsPrinter.execute (response);
         }
     }
 }

@@ -1,25 +1,25 @@
-package team_VK.application.ui;
+package team_VK.application.ui.search_book_and_make_booking_menu;
 
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.BookSearchRequest;
 import team_VK.application.core.responses.BookSearchResponse;
-import team_VK.application.core.services.BookSearchService;
+import team_VK.application.core.services.search_book_and_make_booking_menu_services.SearchBookByONECriteriaService;
+import team_VK.application.core.services.DIDependency;
+import team_VK.application.database.DIComponent;
+import team_VK.application.ui.UIActions;
+import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-public class BookSearchUIAction implements UIActions {
+@DIComponent
+public class SearchBookByOneCriteriaUIAction implements UIActions {
 
-
-    private final BookSearchService bookSearchService;
-
-    public BookSearchUIAction(BookSearchService bookSearchService) {
-        this.bookSearchService = bookSearchService;
-    }
-
+    @DIDependency
+    private SearchBookByONECriteriaService searchBookByOneCriteriaService;
+    @DIDependency private ErrorsPrinter errorsPrinter;
 
     @Override
     public void execute() throws ParseException {
@@ -45,7 +45,12 @@ public class BookSearchUIAction implements UIActions {
                 break;
         }
         BookSearchRequest request = new BookSearchRequest(searchCriteria, criteriaValue);
-        BookSearchResponse response = bookSearchService.bookSearch(request);
+        BookSearchResponse response = searchBookByOneCriteriaService.bookSearch(request);
+
+        if (!response.havesError()) {System.out.println("Please see the book above");}
+        else {
+            errorsPrinter.execute (response);
+        }
     }
 
 

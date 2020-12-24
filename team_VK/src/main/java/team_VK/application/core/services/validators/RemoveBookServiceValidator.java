@@ -1,4 +1,4 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.validators;
 
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;

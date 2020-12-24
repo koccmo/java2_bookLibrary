@@ -7,7 +7,7 @@ import org.junit.Test;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.RemoveBookServiceValidator;
+import team_VK.application.core.services.validators.RemoveBookServiceValidator;
 import team_VK.application.database.DatabaseInMemory;
 
 import java.util.List;

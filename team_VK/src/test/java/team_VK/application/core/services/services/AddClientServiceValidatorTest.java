@@ -1,18 +1,33 @@
 package team_VK.application.core.services.services;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import team_VK.application.ApplicationContext;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.AddClientServiceValidator;
+import team_VK.application.core.services.validators.AddBookServiceValidator;
+import team_VK.application.core.services.validators.AddClientServiceValidator;
+import team_VK.application.database.DataBaseFiller;
+import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AddClientServiceValidatorTest  {
 
 
-    AddClientServiceValidator subject = new AddClientServiceValidator();
+    ApplicationContext context;
+    AddClientServiceValidator subject;
+
+    @Before
+    public void setup() throws IOException, ClassNotFoundException {
+
+        context = new DIApplicationContextBuilder().build("team_VK.application");
+        DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
+        dataBaseFiller.fill();
+        subject = context.getBean(AddClientServiceValidator.class);
+    }
 
     @Test
     public void ShouldReturnNoErrorsWhenCorrectData (){

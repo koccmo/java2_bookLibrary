@@ -3,7 +3,7 @@ package team_VK.application;
 
 import team_VK.application.database.DataBaseFiller;
 import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
-import team_VK.application.ui.*;
+import team_VK.application.ui.main_menu.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -18,7 +18,7 @@ public class LibraryApplication {
             ApplicationContext context = new DIApplicationContextBuilder().build("team_VK.application");
             DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
             dataBaseFiller.fill();
-            BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = new BookSearchAndBookMenuUIAction(context);
+         //   BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = new BookSearchAndBookMenuUIAction(context);
             while (true) {
                 showUserMenu();
                 switch (userChoice()) {
@@ -34,6 +34,7 @@ public class LibraryApplication {
                         break;
                     }
                     case 3: {
+                        BookSearchAndBookMenuUIAction bookSearchAndBookMenuUIAction = context.getBean(BookSearchAndBookMenuUIAction.class);
                         bookSearchAndBookMenuUIAction.execute();
                         break;
                     }
@@ -59,42 +60,6 @@ public class LibraryApplication {
         }
         catch (IOException e) {new RuntimeException("Classes not found");}
         catch (ClassNotFoundException e) {new RuntimeException("Classes not found");}
-
-//        Database database = new DatabaseInMemory();
-//        DataBaseFiller DBFiller = new DataBaseFiller(database);
-//        DBFiller.fill();
-//
-//        DatabaseClients databaseClient = new DatabaseClientsInMemory();
-//        DataBaseClientFiller DBClientFiller = new DataBaseClientFiller(databaseClient);
-//        DBClientFiller.fill();
-//
-//
-//        AddBookServiceValidator validator = new AddBookServiceValidator();
-//        AddBookService addBookService = new AddBookService(database, validator);
-//        AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
-//
-//        RemoveBookServiceValidator removeBookServiceValidator = new RemoveBookServiceValidator();
-//        RemoveBookService removeBookService = new RemoveBookService(database, removeBookServiceValidator);
-//        RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
-//
-//        GetBooksListServiceValidator getBooksListServiceValidator = new GetBooksListServiceValidator();
-//        GetBooksListService getBooksListService = new GetBooksListService(database, getBooksListServiceValidator);
-//        GetBooksListUIAction getBooksListUIAction = new GetBooksListUIAction(getBooksListService);
-//
-//        BookBookServiceValidator bookBookServiceValidator = new BookBookServiceValidator();
-//        BookBookService bookBookService = new BookBookService(database,bookBookServiceValidator);
-//        BookBookUIAction bookBookUIAction = new BookBookUIAction(bookBookService);
-//
-//        ShowBookService showBookService = new ShowBookService(database);
-//        ShowBookUIActions showBookUIActions = new ShowBookUIActions(showBookService);
-//
-//        AddClientServiceValidator addClientServiceValidator = new AddClientServiceValidator();
-//        AddClientService addClientService = new AddClientService(databaseClient, addClientServiceValidator);
-//        AddClientUIActions addClientUIActions = new AddClientUIActions(addClientService);
-//
-//        ExitProgramUIAction exitProgramUIAction = new ExitProgramUIAction();
-
-
     }
 
 

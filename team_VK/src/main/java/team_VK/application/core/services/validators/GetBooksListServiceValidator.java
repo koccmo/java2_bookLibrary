@@ -1,4 +1,4 @@
-package team_VK.application.core.services;
+package team_VK.application.core.services.validators;
 
 import team_VK.application.core.requests.GetBookListRequest;
 import team_VK.application.core.responses.CoreError;

@@ -1,10 +1,12 @@
-package team_VK.application.ui;
+package team_VK.application.ui.main_menu;
 
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
-import team_VK.application.core.services.BookBookService;
+import team_VK.application.core.services.main_menu_services.BookBookService;
 import team_VK.application.core.services.DIDependency;
 import team_VK.application.database.DIComponent;
+import team_VK.application.ui.UIActions;
+import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +16,7 @@ public class BookBookUIAction implements UIActions {
 
     @DIDependency
     private BookBookService bookBookService;
+    @DIDependency private ErrorsPrinter errorsPrinter;
 
 //    public BookBookUIAction(BookBookService bookBookService) {
 //        this.bookBookService = bookBookService;
@@ -45,6 +48,6 @@ public class BookBookUIAction implements UIActions {
 
         if (!response.havesError()) {
             System.out.println("The book You have chosen is successfully booked on your name.");
-        } else System.out.println(response.errorList.toString());
+        } else  errorsPrinter.execute (response);
     }
 }

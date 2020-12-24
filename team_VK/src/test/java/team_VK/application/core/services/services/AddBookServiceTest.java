@@ -1,30 +1,22 @@
 package team_VK.application.core.services.services;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import org.mockito.junit.MockitoJUnitRunner;
-import team_VK.application.ApplicationContext;
-import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.AddBookService;
-import team_VK.application.core.services.AddBookServiceValidator;
+import team_VK.application.core.services.main_menu_services.AddBookService;
+import team_VK.application.core.services.validators.AddBookServiceValidator;
 import team_VK.application.core.services.matchers.BookMatcher;
 import team_VK.application.database.Database;
-import team_VK.application.database.DatabaseInMemory;
-import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
 
-import javax.xml.validation.Validator;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

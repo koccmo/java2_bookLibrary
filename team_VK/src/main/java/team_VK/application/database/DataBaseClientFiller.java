@@ -1,14 +1,17 @@
 package team_VK.application.database;
 
 import team_VK.application.core.domain.Client;
+import team_VK.application.core.services.DIDependency;
 
+@DIComponent
 public class DataBaseClientFiller {
 
+    @DIDependency
     private DatabaseClients databaseClient;
 
-    public DataBaseClientFiller(DatabaseClients databaseClient) {
-        this.databaseClient = databaseClient;
-    }
+//    public DataBaseClientFiller(DatabaseClients databaseClient) {
+//        this.databaseClient = databaseClient;
+//    }
 
     public void fill() {
 
