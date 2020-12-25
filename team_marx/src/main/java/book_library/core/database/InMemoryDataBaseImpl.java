@@ -38,21 +38,10 @@ public class InMemoryDataBaseImpl implements Database {
         return books;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        InMemoryDataBaseImpl that = (InMemoryDataBaseImpl) o;
-        return Objects.equals(books, that.books);
-    }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(books);
-    }
+    public boolean hasTheSameBookInDatabase(Book bookToCompare){
 
-    private boolean hasTheSameBookInDatabase (Book bookToCompare){
-
-        return books.stream().equals(bookToCompare);
+        return books.contains(bookToCompare);
     }
 }

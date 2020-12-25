@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class BookListApplication {
 
     private static Database database = new InMemoryDataBaseImpl();
-    private static AddBookValidator addBookValidator = new AddBookValidator();
+    private static AddBookValidator addBookValidator = new AddBookValidator(database);
     private static AddBookService addBookService = new AddBookService(database, addBookValidator);
     private static RemoveBookService removeBookService = new RemoveBookService(database);
     private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);

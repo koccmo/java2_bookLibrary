@@ -25,9 +25,7 @@ public class AddBookUIAction implements UIAction{
         AddBookResponse response = addBookService.execute(request);
 
         if (response.hasErrors()){
-            response.getErrors().forEach(coreError ->
-                System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
-            );
+            response.getErrors().forEach(System.out::println);
         } else {
             System.out.println("New book id is: " + response.getNewBook().getId());
             System.out.println("Your book was added to list.");

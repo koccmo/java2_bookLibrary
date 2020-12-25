@@ -1,6 +1,7 @@
 package book_library.core.validators;
 
 import book_library.Book;
+import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
 
@@ -9,6 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class AddBookValidator {
+
+    private Database database;
+
+    public AddBookValidator(Database database) {
+        this.database = database;
+    }
 
     public List<CoreError> validate (AddBookRequest request){
         List<CoreError> errors = new ArrayList<>();
@@ -20,7 +27,9 @@ public class AddBookValidator {
 
     private Optional<CoreError> validatePresenceInDatabase(AddBookRequest request) {
         Book addBook = new Book(request.getTitle(), request.getAuthor());
-        return (Optional.empty());
+        return database.hasTheSameBookInDatabase(addBook)
+                ?Optional.of(new CoreError("Title and author", "Such book already exists!"))
+                :Optional.empty();
     }
 
     private Optional<CoreError> validateTitle (AddBookRequest request) {

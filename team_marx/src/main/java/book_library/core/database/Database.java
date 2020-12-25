@@ -11,4 +11,6 @@ public interface Database {
     boolean deleteById(Long id);
 
     List<Book> getAllBooks();
+
+    boolean hasTheSameBookInDatabase (Book bookToCompare);
 }
