@@ -6,22 +6,29 @@ import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.SearchPatientResponse;
+import dental_clinic.core.services.validators.SearchPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SearchPatientService {
 
-    private final PatientDatabase patientDatabase;
-    private final SearchPatientRequestValidator searchPatientRequestValidator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    public SearchPatientService(PatientDatabase patientDatabase, SearchPatientRequestValidator searchPatientRequestValidator) {
-        this.patientDatabase = patientDatabase;
-        this.searchPatientRequestValidator = searchPatientRequestValidator;
-    }
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
@@ -91,15 +98,15 @@ public class SearchPatientService {
     }
 
     private List<Patient> order(List<Patient> patients, Ordering ordering) {
+        if (orderingEnabled)
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
                 return sortByName(patients, ordering);
             }else{
                 return sortBySurname(patients, ordering);
             }
-        }else{
-            return patients;
         }
+        return patients;
     }
 
     private List<Patient> sortByName(List<Patient> patients, Ordering ordering){
@@ -127,14 +134,14 @@ public class SearchPatientService {
     }
 
     private List<Patient> paging(List<Patient> patients, Paging paging) {
+        if (pagingEnabled)
         if (paging != null) {
             Integer skip = (paging.getPageNumber() - 1) * paging.getPageSize();
             return patients.stream()
                     .skip(skip)
                     .limit(paging.getPageSize())
                     .collect(Collectors.toList());
-        } else {
-            return patients;
         }
+        return patients;
     }
 }

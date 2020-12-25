@@ -3,19 +3,17 @@ package internet_store.core.services.product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.AddProductResponse;
+import internet_store.core.services.product.validators.AddProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class AddProductService {
+@Component public class  AddProductService {
 
-    private final ProductDatabase productDatabase;
-    private final AddProductRequestValidator addProductRequestValidator;
-
-    public AddProductService(ProductDatabase productDatabase, AddProductRequestValidator addProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.addProductRequestValidator = addProductRequestValidator;
-    }
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private AddProductRequestValidator addProductRequestValidator;
 
     public AddProductResponse execute(AddProductRequest addProductRequest){
 
@@ -24,7 +22,7 @@ public class AddProductService {
             return new AddProductResponse(errors);
         }
 
-        if (productDatabase.getProducts().contains(addProductRequest.getProduct())){
+        if (productDatabase.containsProduct(addProductRequest.getProduct())){
             errors.add(new CoreError("database", "Database contains the same product"));
             return new AddProductResponse(errors);
         }

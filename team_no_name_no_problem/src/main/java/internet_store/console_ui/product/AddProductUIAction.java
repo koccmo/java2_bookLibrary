@@ -5,17 +5,16 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.services.product.AddProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class AddProductUIAction implements UIAction {
+@Component public class AddProductUIAction implements UIAction {
 
-    private AddProductService addProductService;
+    @Autowired private AddProductService addProductService;
 
-    public AddProductUIAction(AddProductService addProductService) {
-        this.addProductService = addProductService;
-    }
-
+    @Override
     public void execute(){
 
         Scanner in = new Scanner(System.in);

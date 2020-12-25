@@ -1,16 +1,18 @@
 package internet_store.database.product;
 
 import internet_store.core.domain.Product;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class ProductDatabaseImpl implements ProductDatabase{
 
     private Long id= 1L;
-    private List<Product> productList = new ArrayList<>();
+    private final List<Product> productList = new ArrayList<>();
 
     @Override
     public List <Product> getProducts(){
@@ -26,32 +28,32 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public void deleteById(Long id) {
-        productList.removeIf(product -> product.getId() == id);
+        productList.removeIf(product -> product.getId().equals(id));
     }
 
     @Override
     public void changeTitle(Long id, String newTitle) {
-        for (int i = 0; i < productList.size(); i++){
-            if (productList.get(i).getId() == id) {
-                productList.get(i).setTitle(newTitle);
+        for (Product product : productList) {
+            if (product.getId().equals(id)) {
+                product.setTitle(newTitle);
             }
         }
     }
 
     @Override
     public void changeDescription(Long id, String newDescription) {
-        for (int i = 0; i < productList.size(); i++){
-            if (id == productList.get(i).getId()){
-                productList.get(i).setDescription(newDescription);
+        for (Product product : productList) {
+            if (id.equals(product.getId())) {
+                product.setDescription(newDescription);
             }
         }
     }
 
     @Override
     public void changePrice(Long id, Integer newPrice) {
-        for (int i = 0; i < productList.size(); i++){
-            if (id == productList.get(i).getId()){
-                productList.get(i).setPrice(newPrice);
+        for (Product product : productList) {
+            if (id.equals(product.getId())) {
+                product.setPrice(newPrice);
             }
         }
     }
@@ -78,11 +80,22 @@ public class ProductDatabaseImpl implements ProductDatabase{
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public Optional<Product> findById(Long id) {
         return productList.stream()
-            .filter(product -> product.getId() == id)
+            .filter(product -> product.getId().equals(id))
                 .findAny();
+    }
+
+    @Override
+    public boolean containsProduct(Product product) {
+        return productList.stream()
+                .anyMatch(product1 -> product1.equals(product));
+    }
+
+    @Override
+    public boolean containsId(Long id) {
+        return productList.stream()
+                .anyMatch(product -> product.getId().equals(id));
     }
 }

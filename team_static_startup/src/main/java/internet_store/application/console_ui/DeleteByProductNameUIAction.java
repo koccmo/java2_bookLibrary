@@ -3,16 +3,17 @@ package internet_store.application.console_ui;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.DeleteByProductNameResponse;
 import internet_store.application.core.services.DeleteByProductNameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class DeleteByProductNameUIAction implements UIAction {
 
-    private final DeleteByProductNameService deleteProductByNameService;
+    @Autowired
+    private DeleteByProductNameService deleteProductByNameService;
 
-    public DeleteByProductNameUIAction(DeleteByProductNameService deleteProductByNameService) {
-        this.deleteProductByNameService = deleteProductByNameService;
-    }
 
     public void execute() {
         Scanner myInput = new Scanner(System.in);
@@ -24,7 +25,7 @@ public class DeleteByProductNameUIAction implements UIAction {
 
         if (response.hasErrors()){
             response.getErrors().forEach(coreError ->
-                    System.out.println("Error: " + coreError.getField() + " " + coreError.getField()));
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
             if (response.isProductRemoved()){
                 System.out.println("\nProduct with name = " + productName + " deleted");

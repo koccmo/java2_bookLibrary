@@ -1,21 +1,66 @@
 package internet_store.core.domain;
 
+import java.util.Map;
+import java.util.Objects;
+
 public class Order {
 
-    Customer customer;
+    private Long id;
 
-    ShoppingCart shoppingCart;
+    private Customer customer;
+
+    private Map<Product, Integer> shoppingCart;
+
+    public Order (Customer customer, Map <Product, Integer> shoppingCart){
+        this.customer = customer;
+        this.shoppingCart = shoppingCart;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public ShoppingCart getShoppingCart() {
+    public Map<Product, Integer> getShoppingCart() {
         return shoppingCart;
     }
 
-    public Order (Customer customer, ShoppingCart shoppingCart){
-        this.customer = customer;
-        this.shoppingCart = shoppingCart;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) && Objects.equals(customer, order.customer) && Objects.equals(shoppingCart, order.shoppingCart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, shoppingCart);
+    }
+
+    @Override
+    public String toString() {
+        return "Order details:" +
+                customer + "\n" +
+                "product list:" +
+                shoppingCartToStringForPrint(shoppingCart);
+    }
+
+    private String shoppingCartToStringForPrint (Map<Product, Integer> shoppingCart) {
+        String result = "";
+        Integer sum = 0;
+        for (Product product : shoppingCart.keySet()) {
+            result += product + " " + shoppingCart.get(product) + "\n";
+            sum += shoppingCart.get(product) * product.getPrice();
+        }
+        result += "Sum = " + sum + " EUR\n";
+        return result;
     }
 }

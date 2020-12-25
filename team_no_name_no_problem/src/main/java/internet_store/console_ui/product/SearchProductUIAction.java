@@ -6,17 +6,17 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
+import internet_store.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-public class SearchProductUIAction implements UIAction {
+@Component public class SearchProductUIAction implements UIAction {
 
-    private final SearchProductService searchProductService;
+    @Autowired private SearchProductService searchProductService;
 
-    public SearchProductUIAction(SearchProductService searchProductService) {
-        this.searchProductService = searchProductService;
-    }
-
+    @Override
     public void execute (){
 
         Scanner in = new Scanner(System.in);

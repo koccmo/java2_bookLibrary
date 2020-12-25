@@ -30,18 +30,11 @@ public class DeleteByProductIdValidatorTest {
 
     @Test
     public void shouldNotReturnErrorWhenIdIsNotNull() {
-        DeleteByProductIdRequest request = new DeleteByProductIdRequest("1");
+        DeleteByProductIdRequest request = new DeleteByProductIdRequest(1L);
         List<CoreError> errors = validator.validate(request);
         assertEquals(0, errors.size());
     }
 
-    @Test
-    public void shouldNotPassWhenIdIsEmpty() {
-        DeleteByProductIdRequest request = new DeleteByProductIdRequest(" ");
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(1, errors.size());
-        assertEquals("Product ID", errors.get(0).getField());
-        assertEquals("Should not be empty.", errors.get(0).getMessage());
-    }
+
 
 }

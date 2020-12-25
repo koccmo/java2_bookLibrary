@@ -2,11 +2,13 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class DeleteByProductValidator {
 
     public List<CoreError> validate(DeleteByProductRequest request) {
@@ -17,13 +19,13 @@ public class DeleteByProductValidator {
     }
 
     private Optional<CoreError> validateProductName(DeleteByProductRequest request) {
-        return (request.getProductName() == null || request.getProductName().isEmpty()
+        return (request.getProductName() == null || request.getProductName().isBlank()
                 ? Optional.of(new CoreError("Name", "must not be empty"))
                 : Optional.empty());
     }
 
     private Optional<CoreError> validateProductDescription(DeleteByProductRequest request) {
-        return (request.getProductDescription() == null || request.getProductDescription().isEmpty()
+        return (request.getProductDescription() == null || request.getProductDescription().isBlank()
                 ? Optional.of(new CoreError("Description", "must not be empty"))
                 : Optional.empty());
     }

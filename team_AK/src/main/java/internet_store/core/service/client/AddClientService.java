@@ -13,16 +13,16 @@ import internet_store.core.response.client.client_items.AddClientNameResponse;
 import internet_store.core.response.client.client_items.AddClientPhoneResponse;
 import internet_store.core.response.client.client_items.AddClientSurnameResponse;
 import internet_store.database.client_database.InnerClientDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AddClientService implements ClientUpdate {
-    private final InnerClientDatabase clientDatabase;
-
-    public AddClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    @Autowired
+    InnerClientDatabase clientDatabase;
 
     public AddClientResponse execute(AddClientRequest addClientRequest) {
         List<CoreError> errors = new ArrayList<>();

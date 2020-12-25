@@ -3,17 +3,16 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
 import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-class SearchPatientByPersonalCodeUIAction implements UIAction {
+@Component
+public class SearchPatientByPersonalCodeUIAction implements UIAction {
 
+    @Autowired
     private SearchPatientsByPersonalCodeService findPatientByPersonalCode;
-
-
-    public SearchPatientByPersonalCodeUIAction(SearchPatientsByPersonalCodeService findPatientByPersonalCode) {
-        this.findPatientByPersonalCode = findPatientByPersonalCode;
-    }
 
     public void execute(){
         Scanner in = new Scanner(System.in);

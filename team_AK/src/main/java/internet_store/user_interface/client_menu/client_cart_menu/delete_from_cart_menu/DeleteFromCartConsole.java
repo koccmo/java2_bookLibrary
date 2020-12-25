@@ -1,16 +1,17 @@
 package internet_store.user_interface.client_menu.client_cart_menu.delete_from_cart_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
 import internet_store.core.service.cart.DeleteProductFromCartService;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class DeleteFromCartConsole {
+    @Autowired
+    DeleteProductFromCartService deleteProductFromCartService;
 
     public void deleteFromCart() {
-        final DeleteProductFromCartService deleteProductFromCartService = ProductListApplication
-                .applicationContext.getBean(DeleteProductFromCartService.class);
-
         DeleteFromCartMenu deleteFromCartMenu = new DeleteFromCartMenu();
         deleteFromCartMenu.showMenuDeleteProductFromCart();
         long productId = deleteFromCartMenu.getUserDeletedFromCartIdInput();

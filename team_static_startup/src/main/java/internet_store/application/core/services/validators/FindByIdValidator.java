@@ -2,10 +2,12 @@ package internet_store.application.core.services.validators;
 
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class FindByIdValidator {
 
     public List<CoreError> validate(FindByIdRequest request) {

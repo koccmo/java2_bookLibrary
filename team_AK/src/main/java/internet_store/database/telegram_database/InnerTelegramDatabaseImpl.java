@@ -1,13 +1,15 @@
 package internet_store.database.telegram_database;
 
 import internet_store.core.domain.TelegramChatId;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class InnerTelegramDatabaseImpl implements InnerTelegramDatabase {
-    List<TelegramChatId> allChatId = new ArrayList<>();
+    final List<TelegramChatId> allChatId = new ArrayList<>();
 
     @Override
     public void addClientChatId(TelegramChatId telegramChatId) {

@@ -22,7 +22,7 @@ public class AddNewProductService {
     public AddNewProductResponse execute(AddNewProductRequest request) {
         List<CoreError> errors = validator.validate(request);
 
-        if (errors.size() > 0) {
+        if (!errors.isEmpty()) {
             return new AddNewProductResponse(errors);
         }
 

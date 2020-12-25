@@ -1,6 +1,7 @@
 package estore.core.service;
 
 import estore.core.requests.Ordering;
+import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
@@ -8,6 +9,7 @@ import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductDB;
 import estore.domain.Product;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +33,7 @@ public class SearchProductByCategoryService {
 
         List<Product> foundProducts = productDB.searchProductByCategory(request.getProductCategory());
         foundProducts = order(foundProducts, request.getOrdering());
+        foundProducts = paging(foundProducts, request.getPaging());
         return new SearchProductByCategoryResponse(foundProducts, foundProducts.size());
     }
 
@@ -43,7 +46,22 @@ public class SearchProductByCategoryService {
                     ordering.getOrderDirection().toLowerCase().equals("desc")) {
                 comparator = comparator.reversed();
             }
-            return products.stream().sorted(comparator).collect(Collectors.toList());
+            return products.stream()
+                    .sorted(comparator)
+                    .collect(Collectors.toList());
+        } else {
+            return products;
+        }
+    }
+
+    private List<Product> paging(List<Product> products, Paging paging) {
+        if (paging != null) {
+            int pageSize = Integer.valueOf(paging.getPageSize());
+            int skip = (Integer.valueOf(paging.getPageNumber()) - 1) * pageSize;
+            return products.stream()
+                    .skip(skip)
+                    .limit(pageSize)
+                    .collect(Collectors.toList());
         } else {
             return products;
         }

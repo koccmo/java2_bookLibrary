@@ -3,16 +3,16 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-class ContainsDatabaseIdUIAction implements UIAction {
+@Component
+public class ContainsDatabaseIdUIAction implements UIAction {
 
+    @Autowired
     private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public ContainsDatabaseIdUIAction(ContainsDatabaseIdService checkPatientById) {
-        this.containsDatabaseIdService = checkPatientById;
-    }
 
     public void execute(){
 

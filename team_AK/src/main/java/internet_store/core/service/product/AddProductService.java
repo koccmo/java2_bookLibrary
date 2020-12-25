@@ -13,23 +13,23 @@ import internet_store.core.response.product.product_item.AddProductPriceResponse
 import internet_store.core.response.product.product_item.AddProductQuantityResponse;
 import internet_store.core.response.product.product_item.AddProductTitleResponse;
 import internet_store.database.product_database.InnerProductDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AddProductService implements ProductUpdate {
-    private final InnerProductDatabase productDatabase;
-
-    public AddProductService(InnerProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
-    }
+    @Autowired
+    InnerProductDatabase productDatabase;
+    final AddProductTitleService titleService = new AddProductTitleService();
+    final AddProductDescriptionService descriptionService = new AddProductDescriptionService();
+    final AddProductQuantityService quantityService = new AddProductQuantityService();
+    final AddProductPriceService priceService = new AddProductPriceService();
 
     public AddProductResponse execute(AddProductRequest addProductRequest) {
         List<CoreError> errors = new ArrayList<>();
-        AddProductTitleService titleService = new AddProductTitleService();
-        AddProductDescriptionService descriptionService = new AddProductDescriptionService();
-        AddProductQuantityService quantityService = new AddProductQuantityService();
-        AddProductPriceService priceService = new AddProductPriceService();
 
         AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
                 (addProductRequest.getProduct().getTitle()));

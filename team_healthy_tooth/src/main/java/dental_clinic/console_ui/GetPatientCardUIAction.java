@@ -3,16 +3,16 @@ package dental_clinic.console_ui;
 import dental_clinic.core.requests.GetPatientCardRequest;
 import dental_clinic.core.responses.GetPatientCardResponse;
 import dental_clinic.core.services.GetPatientCardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class GetPatientCardUIAction implements UIAction{
 
-    private final GetPatientCardService getPatientCardService;
-
-    public GetPatientCardUIAction(GetPatientCardService getPatientCardService) {
-        this.getPatientCardService = getPatientCardService;
-    }
+    @Autowired
+    private GetPatientCardService getPatientCardService;
 
     @Override
     public void execute(){

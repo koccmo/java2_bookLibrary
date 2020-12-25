@@ -7,18 +7,17 @@ import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreResponse;
 import dental_clinic.core.services.ChangePersonalDataService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class ChangePersonalDataUiAction implements UIAction {
 
-    private final ChangePersonalDataService service;
-    private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public ChangePersonalDataUiAction(ChangePersonalDataService service, ContainsDatabaseIdService containsDatabaseIdService) {
-        this.service = service;
-        this.containsDatabaseIdService = containsDatabaseIdService;
-    }
+    @Autowired
+    private ChangePersonalDataService service;
+    @Autowired private ContainsDatabaseIdService containsDatabaseIdService;
 
     public void execute() {
         Scanner in = new Scanner(System.in);
@@ -54,7 +53,7 @@ public class ChangePersonalDataUiAction implements UIAction {
     }
 
     private void printResult(String surname, String phone){
-        if (surname != null && !surname.isEmpty() && phone != null && !phone.isEmpty()) {
+        if ((surname != null && !surname.isEmpty()) || (phone != null && !phone.isEmpty())) {
             System.out.println("Patient's personal data updated!");
         }else{
             System.out.println("No input for update");

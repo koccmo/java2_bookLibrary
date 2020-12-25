@@ -8,19 +8,19 @@ import dental_clinic.core.responses.AddVisitResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.services.AddVisitService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-class AddVisitUIAction implements UIAction {
+@Component
+public class AddVisitUIAction implements UIAction {
 
+    @Autowired
     private AddVisitService addVisitService;
-    private ContainsDatabaseIdService containsDatabaseIdService;
-
-    public AddVisitUIAction(AddVisitService addVisitService, ContainsDatabaseIdService containsDatabaseIdService) {
-        this.addVisitService = addVisitService;
-        this.containsDatabaseIdService = containsDatabaseIdService;
-    }
+    @Autowired private ContainsDatabaseIdService containsDatabaseIdService;
 
     public void execute(){
         Scanner in = new Scanner(System.in);
@@ -52,7 +52,9 @@ class AddVisitUIAction implements UIAction {
             String doctor = in.nextLine();
             doctor = in.nextLine();
 
-            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor);
+            Date date = new Date();
+
+            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor, date);
             AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 

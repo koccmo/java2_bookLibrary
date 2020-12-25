@@ -1,10 +1,11 @@
 package internet_store.user_interface.client_menu.ordering_menu;
 
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+@Component
 public class ClientOrderMenu {
     @Getter
     private long userOrderClientIdInput;

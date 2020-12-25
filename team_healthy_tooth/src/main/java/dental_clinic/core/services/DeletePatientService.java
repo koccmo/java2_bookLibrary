@@ -3,19 +3,20 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.DeletePatientResponse;
+import dental_clinic.core.services.validators.DeletePatientValidator;
 import dental_clinic.database.PatientDatabase;
 import dental_clinic.core.domain.PersonalData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class DeletePatientService {
 
-    private final PatientDatabase patientDatabase;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired
     private DeletePatientValidator deletePatientValidator;
-
-    public DeletePatientService(PatientDatabase patientDatabase, DeletePatientValidator deletePatientValidator) {
-        this.patientDatabase = patientDatabase;
-        this.deletePatientValidator = deletePatientValidator;
-    }
 
     public DeletePatientResponse execute(DeletePatientRequest deletePatientRequest){
 

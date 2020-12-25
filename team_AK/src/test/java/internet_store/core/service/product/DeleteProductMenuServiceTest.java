@@ -1,11 +1,11 @@
 package internet_store.core.service.product;
 
 
-import internet_store.ProductListApplication;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.DeleteProductRequest;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.database.product_database.InnerProductDatabase;
+import internet_store.database.product_database.InnerProductDatabaseImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -13,13 +13,11 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteProductMenuServiceTest {
-    DeleteProductService deleteService = new DeleteProductService(ProductListApplication.applicationContext
-            .getBean(InnerProductDatabase.class));
+    InnerProductDatabase productDatabase = new InnerProductDatabaseImpl();
+    DeleteProductService deleteService = new DeleteProductService(productDatabase);
 
     @Test
     public void shouldReturnNoErrors() {
-        InnerProductDatabase productDatabase = ProductListApplication.applicationContext
-                .getBean(InnerProductDatabase.class);
         Product product = new Product();
         product.setId(1L);
         product.setTitle("Title");

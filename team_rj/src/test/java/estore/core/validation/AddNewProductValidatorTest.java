@@ -1,7 +1,6 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.core.requests.SearchProductByCategoryRequest;
 import org.junit.Test;
 
 import java.util.List;

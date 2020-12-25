@@ -1,11 +1,14 @@
 package internet_store.database.customer;
 
 import internet_store.core.domain.Customer;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class CustomerDatabaseImpl implements CustomerDatabase{
 
     private Long id = 1L;
@@ -17,15 +20,10 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public boolean addCustomer(Customer customer){
-        if(customerList.contains(customer)){
-            return false;
-        } else {
+    public void addCustomer(Customer customer){
             customer.setId(id);
             customerList.add(customer);
             id++;
-        }
-        return true;
     }
 
     @Override
@@ -61,5 +59,17 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
         return customerList.stream()
                 .filter(customer -> customer.getSurname().equals(surname))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean containsCustomer(Customer customer){
+        return customerList.stream()
+                .anyMatch(customer1 -> customer1.equals(customer));
+    }
+
+    @Override
+    public boolean containsId(Long id){
+        return customerList.stream()
+                .anyMatch(customer -> customer.getId() == id);
     }
 }

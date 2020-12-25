@@ -1,10 +1,11 @@
 package internet_store.user_interface.administrator_menu.create_client_menu.delete_client_menu;
 
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+@Component
 public class DeleteClientMenu {
     @Getter
     private long userDeletedClientIdInput;

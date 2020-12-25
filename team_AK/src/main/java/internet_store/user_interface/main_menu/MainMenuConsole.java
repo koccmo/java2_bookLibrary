@@ -1,6 +1,5 @@
 package internet_store.user_interface.main_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.service.cart.PrintCartService;
 import internet_store.core.service.client.PrintClientService;
 import internet_store.core.service.product.PrintProductService;
@@ -9,30 +8,31 @@ import internet_store.user_interface.administrator_menu.create_order_menu.OrderM
 import internet_store.user_interface.administrator_menu.create_product_menu.ProductMenuConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.ClientCartConsole;
 import internet_store.user_interface.client_menu.ordering_menu.ClientOrderConsole;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class MainMenuConsole {
-
+    @Autowired
+    MainMenu mainMenu;
+    @Autowired
+    ClientMenuConsole clientMenuConsole;
+    @Autowired
+    ProductMenuConsole productMenuConsole;
+    @Autowired
+    OrderMenuConsole orderMenuConsole;
+    @Autowired
+    PrintClientService printClientService;
+    @Autowired
+    ClientCartConsole clientCartConsole;
+    @Autowired
+    PrintCartService printCartService;
+    @Autowired
+    PrintProductService printProductService;
+    @Autowired
+    ClientOrderConsole clientOrderConsole;
 
     public void startMainMenu() {
-        final MainMenu mainMenu = ProductListApplication.applicationContext
-                .getBean(MainMenu.class);
-        final ClientMenuConsole clientMenuConsole = ProductListApplication.applicationContext
-                .getBean(ClientMenuConsole.class);
-        final ProductMenuConsole productMenuConsole = ProductListApplication.applicationContext
-                .getBean(ProductMenuConsole.class);
-        final OrderMenuConsole orderMenuConsole = ProductListApplication.applicationContext
-                .getBean(OrderMenuConsole.class);
-        final PrintClientService printClientService = ProductListApplication.applicationContext
-                .getBean(PrintClientService.class);
-        final ClientCartConsole clientCartConsole = ProductListApplication.applicationContext
-                .getBean(ClientCartConsole.class);
-        final PrintCartService printCartService = ProductListApplication.applicationContext
-                .getBean(PrintCartService.class);
-        final PrintProductService printProductService = ProductListApplication.applicationContext
-                .getBean(PrintProductService.class);
-        final ClientOrderConsole clientOrderConsole = ProductListApplication.applicationContext
-                .getBean(ClientOrderConsole.class);
-
         do {
             mainMenu.showMainMenu();
             int userInput = mainMenu.getUserInput();

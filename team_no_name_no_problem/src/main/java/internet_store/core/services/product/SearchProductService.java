@@ -6,22 +6,27 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.SearchProductResponse;
+import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchProductService {
+@Component public class SearchProductService {
 
-    private final ProductDatabase productDatabase;
-    private final SearchProductRequestValidator searchProductRequestValidator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    public SearchProductService(ProductDatabase productDatabase, SearchProductRequestValidator searchProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.searchProductRequestValidator = searchProductRequestValidator;
-    }
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private SearchProductRequestValidator searchProductRequestValidator;
 
     public SearchProductResponse execute (SearchProductRequest searchProductRequest){
         List<CoreError> errors = searchProductRequestValidator.validate(searchProductRequest);
@@ -42,7 +47,7 @@ public class SearchProductService {
     }
 
     private boolean isTitleAndDescriptionNotEmpty(String title, String description){
-        return !title.isEmpty() && !description.isEmpty();
+        return title != null && !title.isEmpty() && description != null && !description.isEmpty();
     }
 
     private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
@@ -59,7 +64,7 @@ public class SearchProductService {
     }
 
     private boolean isTitleFilled(String title){
-        return !title.isEmpty();
+        return title != null && !title.isEmpty();
     }
 
     private SearchProductResponse searchByTitleIsProvided(SearchProductRequest searchProductRequest){

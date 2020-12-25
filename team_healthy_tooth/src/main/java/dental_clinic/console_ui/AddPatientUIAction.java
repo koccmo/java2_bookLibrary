@@ -4,16 +4,16 @@ import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.AddPatientRequest;
 import dental_clinic.core.responses.AddPatientResponse;
 import dental_clinic.core.services.AddPatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-class AddPatientUIAction implements UIAction {
+@Component
+public class AddPatientUIAction implements UIAction {
 
-    private final AddPatientService addPatientService;
-
-    public AddPatientUIAction(AddPatientService addPatientService) {
-        this.addPatientService = addPatientService;
-    }
+    @Autowired
+    private AddPatientService addPatientService;
 
     public void execute(){
         Scanner in  = new Scanner(System.in);

@@ -1,10 +1,11 @@
 package internet_store.user_interface.administrator_menu.create_product_menu;
 
+import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+@Component
 public class ProductMenu {
     @Getter
     private int userInput;

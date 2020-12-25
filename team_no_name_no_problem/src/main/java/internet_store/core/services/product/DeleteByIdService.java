@@ -3,34 +3,36 @@ package internet_store.core.services.product;
 import internet_store.core.requests.product.DeleteProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductResponse;
+import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class DeleteByIdService {
+@Component public class DeleteByIdService {
 
-    private final ProductDatabase productDatabase;
-    private final DeleteProductRequestValidator deleteProductRequestValidator;
+    @Autowired private ProductDatabase productDatabase;
+    @Autowired private DeleteProductRequestValidator deleteProductRequestValidator;
 
-    public DeleteByIdService(ProductDatabase productDatabase, DeleteProductRequestValidator deleteProductRequestValidator) {
-        this.productDatabase = productDatabase;
-        this.deleteProductRequestValidator = deleteProductRequestValidator;
-    }
+    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
 
-    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest){
+        List<CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
 
-        List <CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
-
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new DeleteProductResponse(errors);
         }
-        for (int i = 0; i < productDatabase.getProducts().size(); i++){
-            if (getCurrentProduct(i).getId() == deleteProductRequest.getId()){
-                productDatabase.deleteById(deleteProductRequest.getId());
-                return new DeleteProductResponse(deleteProductRequest.getId());
+
+        if (productDatabase.containsId(deleteProductRequest.getId())){
+            for (int i = 0; i < productDatabase.getProducts().size(); i++) {
+                if (getCurrentProduct(i).getId() == deleteProductRequest.getId()) {
+                    productDatabase.deleteById(deleteProductRequest.getId());
+                    return new DeleteProductResponse(deleteProductRequest.getId());
+                }
             }
         }
+
         errors.add(new CoreError("database", "database doesn't contain product with id "
                 + deleteProductRequest.getId()));
         return new DeleteProductResponse(errors);

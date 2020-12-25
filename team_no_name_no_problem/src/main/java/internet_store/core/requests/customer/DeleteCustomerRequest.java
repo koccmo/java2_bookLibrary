@@ -4,11 +4,11 @@ public class DeleteCustomerRequest {
 
     private Long id;
 
-    public DeleteCustomerRequest(long id){
+    public DeleteCustomerRequest(Long id){
         this.id = id;
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 

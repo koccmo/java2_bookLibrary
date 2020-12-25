@@ -4,20 +4,19 @@ import java.util.Objects;
 
 public class Events {
 
-    private long eventId;
-    private int eventRating;
+    private Long eventId;
     private String eventName;
     private String eventKind;
-//    private Guides guide;
-    private int durationHours;
-    private int maxNumberParticipants;
-    private int minNumberParticipants;
+    //    private Guides guide;
+    private Integer durationHours;
+    private Integer maxNumberParticipants;
+    private Integer minNumberParticipants;
     private String route; // List<StayPoint>
-
     private String detailsDescription;
 
-    public Events(String eventName, String eventKind, int durationHours,
-                  int maxNumberParticipants, int minNumberParticipants,
+
+    public Events(String eventName, String eventKind, Integer durationHours,
+                  Integer maxNumberParticipants, Integer minNumberParticipants,
                   String route, String detailsDescription) {
         this.eventName = eventName;
         this.eventKind = eventKind;
@@ -28,11 +27,11 @@ public class Events {
         this.detailsDescription = detailsDescription;
     }
 
-    public long getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public void setEventId(long eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
@@ -52,27 +51,27 @@ public class Events {
         this.eventKind = eventKind;
     }
 
-    public int getDurationHours() {
+    public Integer getDurationHours() {
         return durationHours;
     }
 
-    public void setDurationHours(int durationHours) {
+    public void setDurationHours(Integer durationHours) {
         this.durationHours = durationHours;
     }
 
-    public int getMaxNumberParticipants() {
+    public Integer getMaxNumberParticipants() {
         return maxNumberParticipants;
     }
 
-    public void setMaxNumberParticipants(int maxNumberParticipants) {
+    public void setMaxNumberParticipants(Integer maxNumberParticipants) {
         this.maxNumberParticipants = maxNumberParticipants;
     }
 
-    public int getMinNumberParticipants() {
+    public Integer getMinNumberParticipants() {
         return minNumberParticipants;
     }
 
-    public void setMinNumberParticipants(int minNumberParticipants) {
+    public void setMinNumberParticipants(Integer minNumberParticipants) {
         this.minNumberParticipants = minNumberParticipants;
     }
 
@@ -82,14 +81,6 @@ public class Events {
 
     public void setRoute(String route) {
         this.route = route;
-    }
-
-    public int getEventRating() {
-        return eventRating;
-    }
-
-    public void setEventRating(int eventRating) {
-        this.eventRating = eventRating;
     }
 
     public String getDetailsDescription() {
@@ -105,34 +96,32 @@ public class Events {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Events events = (Events) o;
-        return eventId == events.eventId &&
-                durationHours == events.durationHours &&
-                maxNumberParticipants == events.maxNumberParticipants &&
-                minNumberParticipants == events.minNumberParticipants &&
-                eventRating == events.eventRating &&
+        return Objects.equals(eventId, events.eventId) &&
                 Objects.equals(eventName, events.eventName) &&
                 Objects.equals(eventKind, events.eventKind) &&
+                Objects.equals(durationHours, events.durationHours) &&
+                Objects.equals(maxNumberParticipants, events.maxNumberParticipants) &&
+                Objects.equals(minNumberParticipants, events.minNumberParticipants) &&
                 Objects.equals(route, events.route) &&
                 Objects.equals(detailsDescription, events.detailsDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, eventName, eventKind, durationHours, maxNumberParticipants, minNumberParticipants, route, eventRating, detailsDescription);
+        return Objects.hash(eventId, eventName, eventKind, durationHours, maxNumberParticipants, minNumberParticipants, route, detailsDescription);
     }
 
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + eventId +
-                ", route='" + route +
-                ", event='" + eventName +
-                ", kind='" + eventKind +
-                ", duration=" + durationHours + " hours" +
-                ", maxNumber=" + maxNumberParticipants +
-                ", minNumber=" + minNumberParticipants +
-                ", rating=" + eventRating +
-                ", details='" + detailsDescription +
-                '}';
+        return "Event[" +
+                "Id=" + eventId +
+                ", kind='" + eventKind + '\'' +
+                ", duration=" + durationHours +
+                ", max=" + maxNumberParticipants +
+                ", min=" + minNumberParticipants +
+                ", route='" + route + '\'' +
+                ", name='" + eventName + '\'' +
+                ", details='" + detailsDescription + '\'' +
+                ']';
     }
 }

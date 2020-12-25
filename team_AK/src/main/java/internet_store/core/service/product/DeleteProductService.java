@@ -6,11 +6,15 @@ import internet_store.core.request.product.DeleteProductRequest;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.product_database.InnerProductDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Component
 public class DeleteProductService {
-    private final InnerProductDatabase productDatabase;
+    @Autowired
+    InnerProductDatabase productDatabase;
 
     public DeleteProductService(InnerProductDatabase productDatabase) {
         this.productDatabase = productDatabase;

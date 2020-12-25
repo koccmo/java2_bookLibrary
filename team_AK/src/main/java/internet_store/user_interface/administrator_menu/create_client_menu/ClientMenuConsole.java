@@ -1,6 +1,5 @@
 package internet_store.user_interface.administrator_menu.create_client_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.domain.Client;
 import internet_store.core.request.client.AddClientRequest;
 import internet_store.core.request.client.DeleteClientRequest;
@@ -13,31 +12,31 @@ import internet_store.user_interface.administrator_menu.create_client_menu.add_c
 import internet_store.user_interface.administrator_menu.create_client_menu.delete_client_menu.DeleteClientMenu;
 import internet_store.user_interface.administrator_menu.create_client_menu.update_client_menu.UpdateClientMenu;
 import internet_store.user_interface.main_menu.MainMenuConsole;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class ClientMenuConsole {
-    private final MainMenuConsole mainMenuConsole;
-
-    public ClientMenuConsole(MainMenuConsole mainMenuConsole) {
-        this.mainMenuConsole = mainMenuConsole;
-    }
+    @Autowired
+    MainMenuConsole mainMenuConsole;
+    @Autowired
+    ClientMenu clientMenu;
+    @Autowired
+    DeleteClientMenu deleteClientMenu;
+    @Autowired
+    UpdateClientMenu updateClientMenu;
+    @Autowired
+    AddClientService addClientService;
+    @Autowired
+    DeleteClientService deleteClientService;
+    @Autowired
+    UpdateClientService updateClientService;
+    @Autowired
+    UpdateClientAddNewChangesService updateClientAddNewChangesService;
+    @Autowired
+    PrintClientService printClientService;
 
     public void startClientMenuConsole() {
-        final ClientMenu clientMenu = ProductListApplication.applicationContext
-                .getBean(ClientMenu.class);
-        final DeleteClientMenu deleteClientMenu = ProductListApplication.applicationContext
-                .getBean(DeleteClientMenu.class);
-        final UpdateClientMenu updateClientMenu = ProductListApplication.applicationContext
-                .getBean(UpdateClientMenu.class);
-        final AddClientService addClientService = ProductListApplication.applicationContext
-                .getBean(AddClientService.class);
-        final DeleteClientService deleteClientService = ProductListApplication.applicationContext
-                .getBean(DeleteClientService.class);
-        final UpdateClientService updateClientService = ProductListApplication.applicationContext
-                .getBean(UpdateClientService.class);
-        final UpdateClientAddNewChangesService updateClientAddNewChangesService = ProductListApplication
-                .applicationContext.getBean(UpdateClientAddNewChangesService.class);
-        final PrintClientService printClientService = ProductListApplication.applicationContext
-                .getBean(PrintClientService.class);
         boolean returnMainMenu = true;
         do {
             clientMenu.showClientMenu();

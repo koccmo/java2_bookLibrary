@@ -3,21 +3,26 @@ package internet_store.application.core.services;
 import internet_store.application.core.database.Database;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.responses.*;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.FindProductsResponse;
 import internet_store.application.core.services.validators.FindProductsRequestValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class FindProductsService {
 
-    private final Database database;
-    private final FindProductsRequestValidator validator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    public FindProductsService(Database database,
-                               FindProductsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired private Database database;
+    @Autowired private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -27,8 +32,12 @@ public class FindProductsService {
 
         List<Product> products = search(request);
 
-        products = new OrderingProductsService().order(products, request.getOrdering());
-        products = new PagingProductsService().page(products, request.getPaging());
+        if (orderingEnabled && request.getOrdering() != null) {
+            products = new OrderingProductsService().order(products, request.getOrdering());
+        }
+        if (pagingEnabled && request.getPaging() != null) {
+            products = new PagingProductsService().page(products, request.getPaging());
+        }
         return new FindProductsResponse(products, null);
     }
 

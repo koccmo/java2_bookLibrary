@@ -7,23 +7,27 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.customer.SearchCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.SearchCustomerResponse;
+import internet_store.core.services.customer.validators.SearchCustomerRequestValidator;
 import internet_store.database.customer.CustomerDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchCustomerService {
+@Component public class SearchCustomerService {
 
-    private final CustomerDatabase customerDatabase;
-    private final SearchCustomerRequestValidator searchCustomerRequestValidator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    public SearchCustomerService(CustomerDatabase customerDatabase,
-                                 SearchCustomerRequestValidator searchCustomerRequestValidator) {
-        this.customerDatabase = customerDatabase;
-        this.searchCustomerRequestValidator = searchCustomerRequestValidator;
-    }
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private SearchCustomerRequestValidator searchCustomerRequestValidator;
 
     public SearchCustomerResponse execute(SearchCustomerRequest searchCustomerRequest) {
 
@@ -64,11 +68,11 @@ public class SearchCustomerService {
 
 
         private boolean isNameAndSurnameNotEmpty (String name, String surname){
-            return !name.isEmpty() && !surname.isEmpty();
+            return name!= null && !name.isEmpty() && surname != null && !surname.isEmpty();
         }
 
         private boolean isNameFilled (String name){
-            return !name.isEmpty();
+            return name!=null && !name.isEmpty();
         }
 
         private SearchCustomerResponse searchByNameIsProvided (SearchCustomerRequest searchCustomerRequest){

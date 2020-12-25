@@ -2,11 +2,13 @@ package internet_store.database.product_database;
 
 
 import internet_store.core.domain.Product;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+@SuppressWarnings("ALL")
+@Component
 public class InnerProductDatabaseImpl implements InnerProductDatabase {
     private final List<Product> products = new ArrayList<>();
     private final Product EMPTY_OBJECT = null;

@@ -1,22 +1,23 @@
 package internet_store.user_interface.client_menu.ordering_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.request.ordering.OrderRequest;
 import internet_store.core.response.ordering.OrderResponse;
 import internet_store.core.service.ordering.OrderCreator;
 import internet_store.core.service.ordering.OrderService;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class ClientOrderConsole {
+    @Autowired
+    ClientOrderMenu clientOrderMenu;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    OrderCreator orderCreator;
 
 
     public void startOrderMenu() {
-        final ClientOrderMenu clientOrderMenu = ProductListApplication.applicationContext
-                .getBean(ClientOrderMenu.class);
-        final OrderService orderService = ProductListApplication.applicationContext
-                .getBean(OrderService.class);
-        final OrderCreator orderCreator = ProductListApplication.applicationContext
-                .getBean(OrderCreator.class);
-
         clientOrderMenu.showMenuOrderClientId();
         long userInput = clientOrderMenu.getUserOrderClientIdInput();
 

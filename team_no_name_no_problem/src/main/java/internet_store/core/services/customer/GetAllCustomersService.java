@@ -3,21 +3,19 @@ package internet_store.core.services.customer;
 import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.GetAllCustomersResponse;
+import internet_store.core.services.customer.validators.GetAllCustomersValidator;
 import internet_store.database.customer.CustomerDatabase;
 import internet_store.core.domain.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetAllCustomersService {
+@Component public class GetAllCustomersService {
 
-    private final CustomerDatabase customerDatabase;
-    private final GetAllCustomersValidator getAllCustomersValidator;
-
-    public GetAllCustomersService(CustomerDatabase customerDatabase, GetAllCustomersValidator getAllCustomersValidator) {
-        this.customerDatabase = customerDatabase;
-        this.getAllCustomersValidator = getAllCustomersValidator;
-    }
+    @Autowired private CustomerDatabase customerDatabase;
+    @Autowired private GetAllCustomersValidator getAllCustomersValidator;
 
     public GetAllCustomersResponse execute(GetAllCustomersRequest getAllCustomersRequest){
         List<CoreError> errors = getAllCustomersValidator.validate(getAllCustomersRequest);

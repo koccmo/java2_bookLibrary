@@ -6,11 +6,15 @@ import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.cart_database.InnerCartDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Component
 public class DeleteProductFromCartService {
-    private final InnerCartDatabase cartDatabase;
+    @Autowired
+    InnerCartDatabase cartDatabase;
 
     public DeleteProductFromCartService(InnerCartDatabase cartDatabase) {
         this.cartDatabase = cartDatabase;

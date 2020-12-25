@@ -1,6 +1,5 @@
 package internet_store.user_interface.administrator_menu.create_product_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.AddProductRequest;
 import internet_store.core.request.product.DeleteProductRequest;
@@ -13,32 +12,31 @@ import internet_store.user_interface.administrator_menu.create_product_menu.add_
 import internet_store.user_interface.administrator_menu.create_product_menu.delete_product_menu.DeleteProductMenu;
 import internet_store.user_interface.administrator_menu.create_product_menu.update_product_menu.UpdateProductMenu;
 import internet_store.user_interface.main_menu.MainMenuConsole;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class ProductMenuConsole {
-    private final MainMenuConsole mainMenuConsole;
-
-
-    public ProductMenuConsole(MainMenuConsole mainMenuConsole) {
-        this.mainMenuConsole = mainMenuConsole;
-    }
+    @Autowired
+    MainMenuConsole mainMenuConsole;
+    @Autowired
+    ProductMenu productMenu;
+    @Autowired
+    DeleteProductMenu deleteProductMenu;
+    @Autowired
+    UpdateProductMenu updateProductMenu;
+    @Autowired
+    AddProductService addProductService;
+    @Autowired
+    DeleteProductService deleteProductService;
+    @Autowired
+    UpdateProductService updateProductService;
+    @Autowired
+    UpdateProductAddNewChangesService updateProductServiceNewChanges;
+    @Autowired
+    PrintProductService printProductService;
 
     public void startProductMenuConsole() {
-        final ProductMenu productMenu = ProductListApplication.applicationContext
-                .getBean(ProductMenu.class);
-        final DeleteProductMenu deleteProductMenu = ProductListApplication.applicationContext
-                .getBean(DeleteProductMenu.class);
-        final UpdateProductMenu updateProductMenu = ProductListApplication.applicationContext
-                .getBean(UpdateProductMenu.class);
-        final AddProductService addProductService = ProductListApplication.applicationContext
-                .getBean(AddProductService.class);
-        final DeleteProductService deleteProductService = ProductListApplication.applicationContext
-                .getBean(DeleteProductService.class);
-        final UpdateProductService updateProductService = ProductListApplication.applicationContext
-                .getBean(UpdateProductService.class);
-        final UpdateProductAddNewChangesService updateProductServiceNewChanges = ProductListApplication.applicationContext
-                .getBean(UpdateProductAddNewChangesService.class);
-        final PrintProductService printProductService = ProductListApplication.applicationContext
-                .getBean(PrintProductService.class);
         boolean returnMainMenu = true;
         do {
             productMenu.showMainMenu();

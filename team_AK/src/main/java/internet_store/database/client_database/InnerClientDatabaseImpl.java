@@ -1,11 +1,13 @@
 package internet_store.database.client_database;
 
 import internet_store.core.domain.Client;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Component
 public class InnerClientDatabaseImpl implements InnerClientDatabase {
     private final List<Client> clients = new ArrayList<>();
     private final Client EMPTY_OBJECT = null;
@@ -50,6 +52,7 @@ public class InnerClientDatabaseImpl implements InnerClientDatabase {
 
     @Override
     public Client findById(long id) {
+        //noinspection ConstantConditions
         return clients.stream().filter(pr -> pr.getId() == id).findFirst().orElse(EMPTY_OBJECT);
     }
 

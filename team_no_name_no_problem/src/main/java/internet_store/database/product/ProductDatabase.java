@@ -26,4 +26,8 @@ public interface ProductDatabase {
     List<Product> findAllByDescription (String description);
 
     List<Product> findAllByTitleAndDescription (String title, String description);
+
+    boolean containsProduct (Product product);
+
+    boolean containsId (Long id);
 }

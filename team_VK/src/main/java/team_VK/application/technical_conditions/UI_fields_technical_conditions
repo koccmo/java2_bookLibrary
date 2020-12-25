@@ -13,3 +13,6 @@ Can't be ""     ->     reject if not                    "Field bookAuthor must b
 Can't be one ore more Space     ->     reject if not    "Field bookAuthor can't be Space"
 Can't be shorter then 3 characters     ->     reject if not     "Field bookAuthor is too short"
 Can contain letter,  characters     ->      reject if not   "Field bookAuthor contains illegal characters"
+
+dfgdfgdfg
+

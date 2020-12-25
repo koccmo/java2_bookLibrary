@@ -20,6 +20,4 @@ public abstract class CoreResponse {
 
         return errors != null && !errors.isEmpty();
     }
-
-
 }

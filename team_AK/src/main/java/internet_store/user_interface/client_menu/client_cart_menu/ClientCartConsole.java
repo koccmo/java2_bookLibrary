@@ -1,29 +1,26 @@
 package internet_store.user_interface.client_menu.client_cart_menu;
 
-import internet_store.ProductListApplication;
 import internet_store.user_interface.client_menu.client_cart_menu.add_to_cart_menu.AddProductToCartConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.delete_from_cart_menu.DeleteFromCartConsole;
 import internet_store.user_interface.client_menu.client_cart_menu.update_cart_menu.UpdateCartConsole;
 import internet_store.user_interface.main_menu.MainMenuConsole;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class ClientCartConsole {
-    private final MainMenuConsole mainMenuConsole;
-
-
-    public ClientCartConsole(MainMenuConsole mainMenuConsole) {
-        this.mainMenuConsole = mainMenuConsole;
-    }
+    @Autowired
+    MainMenuConsole mainMenuConsole;
+    @Autowired
+    ClientCartMenu clientCartMenu;
+    @Autowired
+    AddProductToCartConsole addProductToCartConsole;
+    @Autowired
+    DeleteFromCartConsole deleteFromCartConsole;
+    @Autowired
+    UpdateCartConsole updateCartConsole;
 
     public void startCartMenuConsole() {
-        final ClientCartMenu clientCartMenu = ProductListApplication.applicationContext
-                .getBean(ClientCartMenu.class);
-        final AddProductToCartConsole addProductToCartConsole = ProductListApplication.applicationContext
-                .getBean(AddProductToCartConsole.class);
-        final DeleteFromCartConsole deleteFromCartConsole = ProductListApplication.applicationContext
-                .getBean(DeleteFromCartConsole.class);
-        final UpdateCartConsole updateCartConsole = ProductListApplication.applicationContext
-                .getBean(UpdateCartConsole.class);
-
         boolean returnMainMenu = true;
         do {
             clientCartMenu.showClientCartMenu();

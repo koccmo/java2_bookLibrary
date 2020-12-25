@@ -5,15 +5,15 @@ import internet_store.core.request.client.UpdateClientRequest;
 import internet_store.core.response.client.UpdateClientResponse;
 import internet_store.core.validate.NegativeNumberValidator;
 import internet_store.database.client_database.InnerClientDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Component
 public class UpdateClientService {
-    private final InnerClientDatabase clientDatabase;
-
-    public UpdateClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    @Autowired
+    InnerClientDatabase clientDatabase;
 
     public UpdateClientResponse execute(UpdateClientRequest updateClientRequest) {
         NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(updateClientRequest.getId());

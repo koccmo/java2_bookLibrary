@@ -54,6 +54,21 @@ public class DatabaseMemory implements  Database {
     }
 
     @Override
+    public List<Product> findByProductDescription(String productDescription) {
+        return productsList.stream()
+                .filter(product -> product.getDescription().equalsIgnoreCase(productDescription))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findByProductNameAndDescription(String prodcutName, String productDescription) {
+        return productsList.stream()
+                .filter(product -> product.getName().equals(prodcutName))
+                .filter(product -> product.getDescription().equals(productDescription))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Product> getProductList() {
         return new ArrayList<>(productsList);
     }

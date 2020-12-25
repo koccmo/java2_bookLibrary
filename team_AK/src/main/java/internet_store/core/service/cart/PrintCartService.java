@@ -2,15 +2,15 @@ package internet_store.core.service.cart;
 
 import internet_store.core.domain.Product;
 import internet_store.database.cart_database.InnerCartDatabase;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Component
 public class PrintCartService {
-    private final InnerCartDatabase cartDatabase;
-
-    public PrintCartService(InnerCartDatabase cartDatabase) {
-        this.cartDatabase = cartDatabase;
-    }
+    @Autowired
+    InnerCartDatabase cartDatabase;
 
     public void print() {
         List<Product> getAllProducts = cartDatabase.getCart();

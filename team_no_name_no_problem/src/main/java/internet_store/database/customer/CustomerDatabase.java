@@ -9,7 +9,7 @@ public interface CustomerDatabase {
 
     List <Customer> getCustomers();
 
-    boolean addCustomer(Customer customer);
+    void addCustomer(Customer customer);
 
     void deleteCustomer(long id);
 
@@ -20,4 +20,8 @@ public interface CustomerDatabase {
     List<Customer> findAllCustomersByName(String name);
 
     List<Customer> findAllCustomersBySurname(String surname);
+
+    boolean containsCustomer (Customer customer);
+
+    boolean containsId (Long id);
 }

@@ -3,21 +3,19 @@ package dental_clinic.core.services;
 import dental_clinic.core.requests.ChangePersonalDataRequest;
 import dental_clinic.core.responses.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.services.validators.ChangePersonalDataValidator;
 import dental_clinic.database.PatientDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class ChangePersonalDataService {
 
+    @Autowired
     private PatientDatabase patientDatabase;
-    private ChangePersonalDataValidator validator;
-
-    public ChangePersonalDataService(PatientDatabase patientDatabase,
-                                     ChangePersonalDataValidator validator) {
-        this.patientDatabase = patientDatabase;
-        this.validator = validator;
-    }
+    @Autowired private ChangePersonalDataValidator validator;
 
     public ChangePersonalDataResponse execute (ChangePersonalDataRequest request) {
         List<CoreError> errors = validator.validate(request);
