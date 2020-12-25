@@ -21,10 +21,14 @@ public class RemoveBookUIAction implements UIAction{
         Long bookId = Long.parseLong(scanner.nextLine());
         RemoveBookRequest request = new RemoveBookRequest(bookId);
         RemoveBookResponse response =  removeBookService.execute(request);
-        if (response.isBookRemoved()){
-            System.out.println("Your book was removed from the list.");
+        if (response.hasErrors()){
+            response.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Your book was not removed from the list.");
+            if (response.isBookRemoved()) {
+                System.out.println("Your book was removed from the list.");
+            } else {
+                System.out.println("Your book was not removed from the list.");
+            }
         }
     }
 }

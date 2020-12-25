@@ -10,6 +10,7 @@ import book_library.core.services.AddBookService;
 import book_library.core.validators.AddBookValidator;
 import book_library.core.services.GetAllBooksService;
 import book_library.core.services.RemoveBookService;
+import book_library.core.validators.RemoveBookValidator;
 
 import java.util.Scanner;
 
@@ -17,8 +18,9 @@ public class BookListApplication {
 
     private static Database database = new InMemoryDataBaseImpl();
     private static AddBookValidator addBookValidator = new AddBookValidator(database);
+    private static RemoveBookValidator removeBookValidator = new RemoveBookValidator(database);
     private static AddBookService addBookService = new AddBookService(database, addBookValidator);
-    private static RemoveBookService removeBookService = new RemoveBookService(database);
+    private static RemoveBookService removeBookService = new RemoveBookService(database,removeBookValidator);
     private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
     private static AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
     private static RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);

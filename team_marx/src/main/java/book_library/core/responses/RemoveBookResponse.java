@@ -1,5 +1,7 @@
 package book_library.core.responses;
 
+import java.util.List;
+
 public class RemoveBookResponse extends CoreResponse {
 
     private boolean bookRemoved;
@@ -10,5 +12,9 @@ public class RemoveBookResponse extends CoreResponse {
 
     public boolean isBookRemoved() {
         return bookRemoved;
+    }
+
+    public RemoveBookResponse(List<CoreError> errors) {
+        super(errors);
     }
 }
