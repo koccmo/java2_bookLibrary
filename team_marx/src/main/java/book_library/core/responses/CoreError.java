@@ -20,10 +20,7 @@ public class CoreError {
 
     @Override
     public String toString() {
-        return "CoreError{" +
-                "field='" + field + '\'' +
-                ", message='" + message + '\'' +
-                '}';
+        return "Error:" + field + " " + message;
     }
 }
 
