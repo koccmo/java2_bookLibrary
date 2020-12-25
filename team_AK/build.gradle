@@ -13,4 +13,5 @@ dependencies {
 	testCompile 'org.springframework:spring-test:5.2.12.RELEASE'
 	compile 'org.springframework:spring-context-support:5.2.12.RELEASE'
 	compile 'com.sun.mail:javax.mail:1.6.2'
+	compile 'mysql:mysql-connector-java:8.0.22'
 }
