@@ -1,5 +1,6 @@
 package dental_clinic.core.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,12 +60,13 @@ public class Visit {
 
     @Override
     public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         return "\nVisit{" +
-                "toothNumber=" + toothNumber +
-                ", comment=" + comment +
-                ", toothStatus=" + toothStatus +
-                ", doctor='" + doctor + '\'' +
-                ", date=" + date +
+                "toothNumber: " + toothNumber +
+                ", comment: " + comment +
+                ", toothStatus:" + toothStatus +
+                ", doctor: '" + doctor + '\'' +
+                ", date: " + simpleDateFormat.format(date) +
                 '}';
     }
 }
