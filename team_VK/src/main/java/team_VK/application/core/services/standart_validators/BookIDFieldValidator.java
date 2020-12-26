@@ -13,10 +13,10 @@ public class BookIDFieldValidator {
 
         List<CoreError> errors = new ArrayList<>();
 
-        IntStream clientPersonalCodeLeftSide = bookIdString.chars();
-        boolean     IsNumeric = clientPersonalCodeLeftSide
-                .anyMatch(value -> (value >= 48) && (value <= 57));
-        if(!IsNumeric) { CoreError error = new CoreError("bookID", "Field bookID must be numeric");
+        IntStream bookIdStringStream = bookIdString.chars();
+        boolean     IsNumeric = bookIdStringStream
+                .allMatch(value -> (value >= 48) && (value <= 57));
+        if(!IsNumeric || bookIdString.equals(null) || bookIdString.equals("")) { CoreError error = new CoreError("bookID", "Field bookID must be numeric");
             errors.add(error);}
         return errors;
     }
