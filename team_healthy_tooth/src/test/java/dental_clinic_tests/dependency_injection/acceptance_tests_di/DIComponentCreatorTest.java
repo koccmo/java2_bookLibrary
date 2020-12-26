@@ -1,8 +1,5 @@
 package dental_clinic_tests.dependency_injection.acceptance_tests_di;
 
-import dental_clinic.core.services.validators.DeletePatientValidator;
-import dental_clinic.core.services.validators.SearchPatientRequestValidator;
-import dental_clinic.core.services.validators.ContainsDatabaseIdValidator;
 import dental_clinic.dependency_injection.ApplicationContext;
 import dental_clinic.dependency_injection.ClassFinder;
 import dental_clinic.dependency_injection.DIComponentCreator;
