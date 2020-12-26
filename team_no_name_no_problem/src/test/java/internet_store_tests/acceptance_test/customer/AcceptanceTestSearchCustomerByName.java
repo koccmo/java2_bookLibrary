@@ -30,10 +30,10 @@ public class AcceptanceTestSearchCustomerByName {
     @Test
     public void test(){
         Customer customer = new Customer("name", "surname", "82938172", "address",
-                "email");
+                "email@email.lv");
         Customer customer1 = new Customer("name", "surname","29876472", "Matisa",
                 "tr3vis@Inbox.lv");
-        Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
+        Customer customer2 = new Customer("Valerija", "Lobanova","27815263",
                 "Ukraina", "privetpoka@tikto.lv");
         Ordering ordering = new Ordering("name", "ASC");
         Paging paging = new Paging(1,3);
