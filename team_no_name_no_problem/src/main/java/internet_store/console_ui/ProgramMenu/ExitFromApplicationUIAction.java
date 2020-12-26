@@ -1,5 +1,6 @@
-package internet_store.console_ui;
+package internet_store.console_ui.ProgramMenu;
 
+import internet_store.console_ui.UIAction;
 import org.springframework.stereotype.Component;
 
 @Component public class ExitFromApplicationUIAction implements UIAction {

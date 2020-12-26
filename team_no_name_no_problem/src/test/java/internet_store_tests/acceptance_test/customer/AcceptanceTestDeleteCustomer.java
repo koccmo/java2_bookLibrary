@@ -26,9 +26,9 @@ public class AcceptanceTestDeleteCustomer {
     }
     @Test
     public void test(){
-        Customer customer = new Customer("Anvar", "Papawa", "1188","Egypt street",
+        Customer customer = new Customer("Anvar", "Papawa", "11882222","Egypt street",
                 "vozmimenyazaruku@gmail.com");
-        Customer customer1 = new Customer("Jarka", "Zazigalo4ka", "102",
+        Customer customer1 = new Customer("Jarka", "Zazigalo4ka", "1022222",
                 "AppalonSaturn", "Jazhematj@inbox.lv");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);

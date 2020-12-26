@@ -16,7 +16,7 @@ public class AddCustomerRequestValidatorTest {
 
     @Test
     public void testInvalidInputName(){
-        CoreError expectedError = new CoreError("name", "Not valid input for name");
+        CoreError expectedError = new CoreError("name", "Name can't be empty");
         CoreError expectedError2 = new CoreError("name", "Not valid input for name, should contain only letters");
 
         Customer customer = new Customer("","Jablokov","28765291","Matisa 33-42",
@@ -31,7 +31,7 @@ public class AddCustomerRequestValidatorTest {
 
     @Test
     public void testInvalidInputSurname(){
-        CoreError expectedError = new CoreError("surname", "Not valid input for surname");
+        CoreError expectedError = new CoreError("surname", "Surname can't be empty");
         CoreError expectedError2 = new CoreError("surname", "Not valid input for surname, should contain only letters");
 
         Customer customer = new Customer("Jarik","","28765291","Matisa 33-42",
@@ -46,8 +46,8 @@ public class AddCustomerRequestValidatorTest {
 
     @Test
     public void testInvalidInputPhoneNumber(){
-        CoreError expectedError = new CoreError("phone number", "Not valid input for phone number");
-        CoreError expectedError2 = new CoreError("phone number", "Not valid input for phone number, should contain only digits");
+        CoreError expectedError = new CoreError("phone number", "Phone can't be empty");
+        CoreError expectedError2 = new CoreError("phone number", "Not valid input for phone number, should contain only 8 or 11 digits");
 
         Customer customer = new Customer("Jarik","Jablokov",null,"Matisa 33-42",
                 "otvali@gmail.com");
@@ -74,7 +74,7 @@ public class AddCustomerRequestValidatorTest {
 
     @Test
     public void testInvalidInputEmail(){
-        CoreError expectedError = new CoreError("e-mail", "Not valid input for e-mail");
+        CoreError expectedError = new CoreError("e-mail", "E-mail can't be empty");
 
         Customer customer = new Customer("Jarik","Jablokov","28765291","Matisa 33-42",
                 "");

@@ -14,36 +14,76 @@ import java.util.regex.Pattern;
     public List<CoreError> validate (AddCustomerRequest addCustomerRequest) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (addCustomerRequest.getCustomer().getName() == null || addCustomerRequest.getCustomer().getName()
-                .isEmpty()) {
-            errors.add(new CoreError("name", "Not valid input for name"));
+        errors.addAll(nameValidationErrors(addCustomerRequest.getCustomer().getName()));
+        errors.addAll(surnameValidationErrors(addCustomerRequest.getCustomer().getSurname()));
+        errors.addAll(phoneValidationErrors(addCustomerRequest.getCustomer().getPhoneNumber()));
+        errors.addAll(addressValidationErrors(addCustomerRequest.getCustomer().getAddress()));
+        errors.addAll(emailValidationErrors(addCustomerRequest.getCustomer().getEmail()));
+
+        return errors;
+    }
+
+    private List<CoreError> nameValidationErrors(String name) {
+        List <CoreError> errors = new ArrayList<>();
+        if (name == null || name.isEmpty()) {
+            errors.add(new CoreError("name", "Name can't be empty"));
         }
-        if (!containsOnlyLetters(addCustomerRequest.getCustomer().getName())){
+        if (!containsOnlyLetters(name)){
             errors.add(new CoreError("name","Not valid input for name, should contain only letters"));
         }
-        if (addCustomerRequest.getCustomer().getSurname() == null || addCustomerRequest.getCustomer().getSurname()
-                .isEmpty()) {
-            errors.add(new CoreError("surname", "Not valid input for surname"));
+        return errors;
+    }
+
+    private List<CoreError> surnameValidationErrors(String surname) {
+        List<CoreError> errors = new ArrayList<>();
+        if (surname == null || surname.isEmpty()) {
+            errors.add(new CoreError("surname", "Surname can't be empty"));
         }
-        if (!containsOnlyLetters(addCustomerRequest.getCustomer().getSurname())){
+        if (!containsOnlyLetters(surname)){
             errors.add(new CoreError("surname", "Not valid input for surname, should contain only letters"));
         }
-        if (addCustomerRequest.getCustomer().getPhoneNumber() == null || addCustomerRequest.getCustomer().getPhoneNumber()
-                .isEmpty()) {
-            errors.add(new CoreError("phone number", "Not valid input for phone number"));
+        return errors;
+    }
+
+    private List<CoreError> phoneValidationErrors(String phone) {
+        List<CoreError> errors = new ArrayList<>();
+        if (phone == null || phone.isEmpty()) {
+            errors.add(new CoreError("phone number", "Phone can't be empty"));
         }
-        if (!numberContainsOnlyDigits(addCustomerRequest.getCustomer().getPhoneNumber())){
-            errors.add(new CoreError("phone number", "Not valid input for phone number, should contain only digits"));
-        }
-        if (addCustomerRequest.getCustomer().getAddress() == null || addCustomerRequest.getCustomer().getAddress()
-                .isEmpty()) {
-            errors.add(new CoreError("address", "Not valid input for address"));
-        }
-        if (addCustomerRequest.getCustomer().getEmail() == null || addCustomerRequest.getCustomer().getEmail()
-                .isEmpty()) {
-            errors.add(new CoreError("e-mail", "Not valid input for e-mail"));
+        if (!numberContainsOnlyDigits(phone) || ((phone.length() != 8) && (phone.length() != 11))){
+            errors.add(new CoreError("phone number", "Not valid input for phone number, should contain only 8 or 11 digits"));
         }
         return errors;
+    }
+
+    private List<CoreError> addressValidationErrors (String address) {
+        List<CoreError> errors = new ArrayList<>();
+        if (address == null || address.isEmpty()) {
+            errors.add(new CoreError("address", "Not valid input for address"));
+        }
+        return errors;
+    }
+
+    private List<CoreError> emailValidationErrors (String email) {
+        List <CoreError> errors = new ArrayList<>();
+        if (email == null || email.isEmpty()) {
+            errors.add(new CoreError("e-mail", "E-mail can't be empty"));
+        } else
+        if (notValidEmailFormat(email)) {
+            errors.add(new CoreError("e-mail", "Not valid e-mail format"));
+        }
+        return errors;
+    }
+
+    private boolean notValidEmailFormat(String email) {
+        String regex = "^(.+)@(.+)$";
+
+        Pattern pattern = Pattern.compile(regex);
+        if (email == null){
+            return false;
+        }
+        Matcher matcher = pattern.matcher(email);
+        return !matcher.matches();
     }
 
     private boolean numberContainsOnlyDigits(String input){

@@ -28,10 +28,10 @@ public class AcceptanceTestFindCustomerById {
     @Test
     public void test(){
         Customer customer = new Customer("name", "surname", "28736278", "address",
-                "email");
+                "email@mail.lv");
         Customer customer1 = new Customer("name", "surname","20987423", "Matisa",
                 "tr3vis@Inbox.lv");
-        Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
+        Customer customer2 = new Customer("Valerija", "Lobanova","27812623",
                 "Ukraina", "privetpoka@tikto.lv");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
