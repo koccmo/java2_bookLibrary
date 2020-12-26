@@ -1,6 +1,5 @@
 package internet_store.console_ui.ProgramMenu;
 
-import internet_store.console_ui.ExitFromApplicationUIAction;
 import internet_store.console_ui.UIAction;
 import internet_store.console_ui.customer.AddCustomerUIAction;
 import internet_store.console_ui.customer.DeleteCustomerUIAction;
@@ -65,7 +64,7 @@ public class ProgramMenu {
                 "9   Delete account by id\n" +
                 "10  Search product\n" +
                 "11  See product list\n" +
-                "12  Buy product\n"+
+                "12  Buy product\n\n"+
 
                 "0   Exit\n");
     }
