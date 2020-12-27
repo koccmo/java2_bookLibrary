@@ -42,6 +42,7 @@ public class DemoDatabase {
         /* Insert record to table decimal_col and float_col with default value */
         List<String> columns = Arrays.asList("text_col", "double_col");
         records.insertRecord("new_table", columns, "'TEXT'", "155");
+        System.out.println((records.isRecordInserted() ? "Record inserted" : "Record error"));
 
         print(records, "[ Data from database ]");
 
@@ -52,6 +53,7 @@ public class DemoDatabase {
 
         records.deleteRecord("new_table", 1);
         System.out.println((records.isRecordDeleted() ? "Record deleted" : "Record error"));
+        print(records, "[ After deleting ]");
 
         database.closeConnection();
         System.out.println((database.isDatabaseConnected() ? "Database close connection" : "Database error"));
@@ -61,6 +63,10 @@ public class DemoDatabase {
         List<String> allColumns = Arrays.asList("id", "text_col", "double_col", "decimal_col", "float_col");
         List<String> res = records.readRecord("new_table", allColumns, "1");
         System.out.println(title);
+        if (res.size() == 0) {
+            System.out.println("No found record");
+            return;
+        }
         System.out.print("id=" + res.get(0) + " text_col=" + res.get(1) + " double_col=" + res.get(2)
                 + " decimal_col=" + res.get(3) + " float_col=" + res.get(4) + "\n");
     }
