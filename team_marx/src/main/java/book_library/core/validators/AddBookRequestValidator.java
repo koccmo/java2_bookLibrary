@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AddBookValidator {
+public class AddBookRequestValidator {
 
     private Database database;
 
-    public AddBookValidator(Database database) {
+    public AddBookRequestValidator(Database database) {
         this.database = database;
     }
 

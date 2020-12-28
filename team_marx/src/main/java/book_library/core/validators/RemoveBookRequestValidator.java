@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RemoveBookValidator {
+public class RemoveBookRequestValidator {
 
     private Database database;
 
-    public RemoveBookValidator(Database database) {
+    public RemoveBookRequestValidator(Database database) {
         this.database = database;
     }
 

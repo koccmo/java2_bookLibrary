@@ -1,11 +1,9 @@
 package book_library.core.validators;
 
 import book_library.Book;
-import book_library.core.database.Database;
 import book_library.core.database.InMemoryDataBaseImpl;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
-import book_library.core.validators.AddBookValidator;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class AddBookValidatorTest {
     private InMemoryDataBaseImpl database = new InMemoryDataBaseImpl();
-    private AddBookValidator validator = new AddBookValidator(database);
+    private AddBookRequestValidator validator = new AddBookRequestValidator(database);
 
     @Test
     public void success() {

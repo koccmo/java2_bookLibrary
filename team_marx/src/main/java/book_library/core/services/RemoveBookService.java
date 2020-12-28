@@ -2,19 +2,18 @@ package book_library.core.services;
 
 import book_library.core.database.Database;
 import book_library.core.requests.RemoveBookRequest;
-import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.RemoveBookResponse;
-import book_library.core.validators.RemoveBookValidator;
+import book_library.core.validators.RemoveBookRequestValidator;
 
 import java.util.List;
 
 public class RemoveBookService {
 
     private Database database;
-    private RemoveBookValidator validator;
+    private RemoveBookRequestValidator validator;
 
-    public RemoveBookService(Database database, RemoveBookValidator validator) {
+    public RemoveBookService(Database database, RemoveBookRequestValidator validator) {
         this.database = database;
         this.validator = validator;
     }

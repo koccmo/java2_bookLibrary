@@ -10,7 +10,16 @@ public interface Database {
 
     boolean deleteById(Long id);
 
+    boolean hasTheSameBookInDatabase (Book bookToCompare);
+
     List<Book> getAllBooks();
 
-    boolean hasTheSameBookInDatabase (Book bookToCompare);
+    List<Book> findByTitle(String title);
+
+    List<Book> findByAuthor(String author);
+
+    List<Book> findByTitleAndAuthor(String title, String author);
+
+
+
 }

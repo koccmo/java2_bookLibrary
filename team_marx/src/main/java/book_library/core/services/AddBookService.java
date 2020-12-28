@@ -5,16 +5,16 @@ import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
-import book_library.core.validators.AddBookValidator;
+import book_library.core.validators.AddBookRequestValidator;
 
 import java.util.List;
 
 public class AddBookService {
 
     private Database database;
-    private AddBookValidator validator;
+    private AddBookRequestValidator validator;
 
-    public AddBookService(Database database, AddBookValidator validator) {
+    public AddBookService(Database database, AddBookRequestValidator validator) {
         this.database = database;
         this.validator = validator;
     }
