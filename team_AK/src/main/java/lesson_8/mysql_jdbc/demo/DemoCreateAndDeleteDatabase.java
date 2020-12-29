@@ -1,4 +1,4 @@
-package lesson_8;
+package lesson_8.mysql_jdbc.demo;
 
 import lesson_8.mysql_jdbc.ConfigDatabaseParams;
 import lesson_8.mysql_jdbc.Database;

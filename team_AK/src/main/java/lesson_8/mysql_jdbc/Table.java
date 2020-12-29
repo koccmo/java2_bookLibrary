@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Table {
     private final Database database;
     @Getter
-    private boolean tableCreated;
+    private boolean isTableCreated;
 
     public Table(Database database) {
         this.database = database;
@@ -22,10 +22,10 @@ public class Table {
                 .substring(0, allColumns.length() - 1) + ")";
         try {
             database.getDbConnection().createStatement().executeUpdate(columns);
-            tableCreated = true;
+            isTableCreated = true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            tableCreated = false;
+            isTableCreated = false;
         }
     }
 }
