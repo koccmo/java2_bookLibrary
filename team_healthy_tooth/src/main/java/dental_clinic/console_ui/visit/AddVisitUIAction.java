@@ -1,12 +1,14 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.visit;
 
+import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.core.requests.AddVisitRequest;
+import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
-import dental_clinic.core.responses.AddVisitResponse;
+import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
-import dental_clinic.core.services.AddVisitService;
+import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,8 +51,13 @@ public class AddVisitUIAction implements UIAction {
             ToothStatus toothStatus = inputToothStatus(variant);
 
             System.out.println("Please enter doctor's name");
-            String doctor = in.nextLine();
-            doctor = in.nextLine();
+            String doctorsName = in.nextLine();
+            doctorsName = in.nextLine();
+
+            System.out.println("Please enter doctor's surname");
+            String doctorSurname = in.nextLine();
+
+            Doctor doctor = new Doctor(doctorsName, doctorSurname);
 
             Date date = new Date();
 
