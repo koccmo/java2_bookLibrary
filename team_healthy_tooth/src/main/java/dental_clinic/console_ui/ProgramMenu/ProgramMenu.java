@@ -1,6 +1,10 @@
 package dental_clinic.console_ui.ProgramMenu;
 
 import dental_clinic.console_ui.*;
+import dental_clinic.console_ui.doctor.AddDoctorUIAction;
+import dental_clinic.console_ui.doctor.DeleteDoctorUIAction;
+import dental_clinic.console_ui.patient.*;
+import dental_clinic.console_ui.visit.AddVisitUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +21,20 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu(List<UIAction> uiActions) {
         menuNumberToActionMap.put(1, findUIAction(uiActions, AddPatientUIAction.class));
-        menuNumberToActionMap.put(2, findUIAction(uiActions, DeletePatientUIAction.class));
-        menuNumberToActionMap.put(3, findUIAction(uiActions, GetAllPatientsUIAction.class));
-        menuNumberToActionMap.put(4, findUIAction(uiActions, GetSpecificPatientHistoryUIAction.class));
-        menuNumberToActionMap.put(5, findUIAction(uiActions, SearchPatientUIAction.class));
-        menuNumberToActionMap.put(6, findUIAction(uiActions, SearchPatientByPersonalCodeUIAction.class));
-        menuNumberToActionMap.put(7, findUIAction(uiActions, AddVisitUIAction.class));
+        menuNumberToActionMap.put(2, findUIAction(uiActions, ChangePersonalDataUiAction.class));
+        menuNumberToActionMap.put(3, findUIAction(uiActions, SearchPatientByPersonalCodeUIAction.class));
+        menuNumberToActionMap.put(4, findUIAction(uiActions, SearchPatientUIAction.class));
+        menuNumberToActionMap.put(5, findUIAction(uiActions, DeletePatientUIAction.class));
+
+        menuNumberToActionMap.put(6, findUIAction(uiActions, GetAllPatientsUIAction.class));
+        menuNumberToActionMap.put(7, findUIAction(uiActions, GetSpecificPatientHistoryUIAction.class));
+
         menuNumberToActionMap.put(8, findUIAction(uiActions, GetPatientCardUIAction.class));
-        menuNumberToActionMap.put(9, findUIAction(uiActions, ChangePersonalDataUiAction.class));
+        menuNumberToActionMap.put(9, findUIAction(uiActions, AddVisitUIAction.class));
+
+        menuNumberToActionMap.put(10, findUIAction(uiActions, AddDoctorUIAction.class));
+        menuNumberToActionMap.put(11, findUIAction(uiActions, DeleteDoctorUIAction.class));
+
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
 
@@ -64,14 +74,20 @@ public class ProgramMenu {
     public void print(){
         System.out.println("\n                Menu\n\n" +
                 "       1   Add patient\n" +
-                "       2   Delete by id\n" +
-                "       3   Print patients database\n" +
-                "       4   Print specific patient information\n" +
-                "       5   Search by name / surname\n" +
-                "       6   Find patient by personal code\n" +
-                "       7   Add visit\n" +
+                "       2   Change patient's personal data\n" +
+                "       3   Search patient by personal code\n" +
+                "       4   Search by name / surname\n" +
+                "       5   Delete by id\n\n" +
+
+                "       6   Print patients database\n" +
+                "       7   Print specific patient information\n\n" +
+
                 "       8   Print patients card\n" +
-                "       9   Change patient's personal data\n" +
+                "       9   Add visit\n\n" +
+
+                "       10   Add doctor\n" +
+                "       11   Delete doctor\n\n" +
+
                 "       0   Exit\n");
     }
 
