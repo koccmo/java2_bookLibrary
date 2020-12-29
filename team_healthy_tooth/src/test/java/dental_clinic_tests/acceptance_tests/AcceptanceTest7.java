@@ -30,9 +30,7 @@ public class AcceptanceTest7 {
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         addPatientService().execute(addPatientRequest);
 
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Doctor", "Haus"));
-        addDoctorService().execute(addDoctorRequest);
-
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Doctor", "Hausss"));
 
         AddDoctorResponse addDoctorResponse = addDoctorService().execute(addDoctorRequest);
         assertTrue(addDoctorResponse.getDoctor().getName().equals("Doctor"));
