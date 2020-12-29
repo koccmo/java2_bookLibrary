@@ -31,6 +31,7 @@ public class AddDoctorService {
             return new AddDoctorResponse(errors);
         }
 
+        doctorDatabase.addDoctor(addDoctorRequest.getDoctor());
         return new AddDoctorResponse(addDoctorRequest.getDoctor());
     }
 

@@ -32,6 +32,7 @@ public class DeleteDoctorService {
             return new DeleteDoctorResponse(errorList);
         }
 
+        doctorDatabase.deleteDoctorById(deleteDoctorRequest.getId());
         return new DeleteDoctorResponse(deleteDoctorRequest.getId());
     }
 
