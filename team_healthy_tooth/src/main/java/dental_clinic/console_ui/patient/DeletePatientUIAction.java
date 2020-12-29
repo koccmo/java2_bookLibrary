@@ -1,8 +1,9 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
-import dental_clinic.core.requests.DeletePatientRequest;
-import dental_clinic.core.responses.DeletePatientResponse;
-import dental_clinic.core.services.DeletePatientService;
+import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.requests.patient.DeletePatientRequest;
+import dental_clinic.core.responses.patient.DeletePatientResponse;
+import dental_clinic.core.services.patient.DeletePatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

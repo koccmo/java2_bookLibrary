@@ -1,8 +1,9 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
-import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
-import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
-import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
+import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.requests.patient.SearchPatientByPersonalCodeRequest;
+import dental_clinic.core.responses.patient.SearchPatientByPersonalCodeResponse;
+import dental_clinic.core.services.patient.SearchPatientsByPersonalCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

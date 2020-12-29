@@ -1,18 +1,19 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
+import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
-import dental_clinic.core.requests.SearchPatientRequest;
-import dental_clinic.core.responses.SearchPatientResponse;
-import dental_clinic.core.services.SearchPatientService;
+import dental_clinic.core.requests.patient.SearchPatientRequest;
+import dental_clinic.core.responses.patient.SearchPatientResponse;
+import dental_clinic.core.services.patient.SearchPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
-public class SearchPatientUIAction implements UIAction{
+public class SearchPatientUIAction implements UIAction {
 
     @Autowired
     private SearchPatientService searchPatientService;

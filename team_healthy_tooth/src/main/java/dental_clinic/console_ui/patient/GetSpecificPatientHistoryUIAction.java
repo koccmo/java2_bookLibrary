@@ -1,8 +1,9 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
-import dental_clinic.core.requests.GetSpecificPatientHistoryRequest;
-import dental_clinic.core.responses.GetSpecificPatientHistoryResponse;
-import dental_clinic.core.services.GetSpecificPatientHistoryService;
+import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.requests.patient.GetSpecificPatientHistoryRequest;
+import dental_clinic.core.responses.patient.GetSpecificPatientHistoryResponse;
+import dental_clinic.core.services.patient.GetSpecificPatientHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

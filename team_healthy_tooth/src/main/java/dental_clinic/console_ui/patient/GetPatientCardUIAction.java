@@ -1,15 +1,16 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
-import dental_clinic.core.requests.GetPatientCardRequest;
-import dental_clinic.core.responses.GetPatientCardResponse;
-import dental_clinic.core.services.GetPatientCardService;
+import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.requests.patient.GetPatientCardRequest;
+import dental_clinic.core.responses.patient.GetPatientCardResponse;
+import dental_clinic.core.services.patient.GetPatientCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
-public class GetPatientCardUIAction implements UIAction{
+public class GetPatientCardUIAction implements UIAction {
 
     @Autowired
     private GetPatientCardService getPatientCardService;

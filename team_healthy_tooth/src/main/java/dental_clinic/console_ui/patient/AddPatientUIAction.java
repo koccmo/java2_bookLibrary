@@ -1,9 +1,10 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
+import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.AddPatientRequest;
-import dental_clinic.core.responses.AddPatientResponse;
-import dental_clinic.core.services.AddPatientService;
+import dental_clinic.core.requests.patient.AddPatientRequest;
+import dental_clinic.core.responses.patient.AddPatientResponse;
+import dental_clinic.core.services.patient.AddPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
