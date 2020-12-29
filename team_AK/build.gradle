@@ -14,4 +14,7 @@ dependencies {
 	compile 'org.springframework:spring-context-support:5.2.12.RELEASE'
 	compile 'com.sun.mail:javax.mail:1.6.2'
 	compile 'mysql:mysql-connector-java:8.0.22'
+	compile ('org.springframework.boot:spring-boot-starter-data-jpa:2.4.1') {
+		exclude group: 'ch.qos.logback', module: 'logback-classic'
+	}
 }
