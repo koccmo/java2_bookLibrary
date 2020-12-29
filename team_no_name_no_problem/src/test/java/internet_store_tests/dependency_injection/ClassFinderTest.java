@@ -17,7 +17,7 @@ public class ClassFinderTest {
 
         List<Class> listOfClasses = classFinder.findClassesInsidePackage("internet_store.console_ui");
 
-        assertTrue(listOfClasses.size() == 15);
+        assertTrue(listOfClasses.size() == 16);
     }
 
     @Test

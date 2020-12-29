@@ -2,11 +2,11 @@ package dental_clinic_tests.core.services_tests;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
+import dental_clinic.core.requests.patient.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
-import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
-import dental_clinic.core.services.validators.SearchPatientByPersonalCodeRequestValidator;
+import dental_clinic.core.responses.patient.SearchPatientByPersonalCodeResponse;
+import dental_clinic.core.services.patient.SearchPatientsByPersonalCodeService;
+import dental_clinic.core.validators.patient.SearchPatientByPersonalCodeRequestValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

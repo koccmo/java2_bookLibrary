@@ -17,9 +17,7 @@ public class ClassFinderTest {
 
         List<Class> classList = classFinder.findClassesInsidePackage("dental_clinic.console_ui");
 
-        assertTrue(classList.size() == 12);
-
-        assertTrue (classList.get(0).getName().equals("dental_clinic.console_ui.AddPatientUIAction"));
+        assertTrue(classList.size() == 15);
     }
 
     @Test
@@ -27,8 +25,6 @@ public class ClassFinderTest {
 
         List<Class> classList = classFinder.findClassesInsidePackage("dental_clinic.database");
 
-        assertTrue(classList.size() == 2);
-
-        assertTrue (classList.get(1).getName().equals("dental_clinic.database.PatientDatabaseImpl"));
+        assertTrue(classList.size() == 4);
     }
 }

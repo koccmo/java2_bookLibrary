@@ -1,11 +1,11 @@
 package dental_clinic.console_ui;
 
-import dental_clinic.core.requests.ChangePersonalDataRequest;
+import dental_clinic.core.requests.patient.ChangePersonalDataRequest;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
-import dental_clinic.core.responses.ChangePersonalDataResponse;
+import dental_clinic.core.responses.patient.ChangePersonalDataResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreResponse;
-import dental_clinic.core.services.ChangePersonalDataService;
+import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

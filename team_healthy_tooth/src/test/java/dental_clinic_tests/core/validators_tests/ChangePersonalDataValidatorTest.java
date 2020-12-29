@@ -1,8 +1,8 @@
 package dental_clinic_tests.core.validators_tests;
 
-import dental_clinic.core.requests.ChangePersonalDataRequest;
+import dental_clinic.core.requests.patient.ChangePersonalDataRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.validators.ChangePersonalDataValidator;
+import dental_clinic.core.validators.patient.ChangePersonalDataValidator;
 import junit.framework.TestCase;
 import org.junit.Test;
 

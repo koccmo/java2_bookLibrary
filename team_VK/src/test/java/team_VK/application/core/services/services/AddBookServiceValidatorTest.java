@@ -3,131 +3,65 @@ package team_VK.application.core.services.services;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import team_VK.application.ApplicationContext;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
+import team_VK.application.core.services.standart_validators.AuthorFieldValidator;
+import team_VK.application.core.services.standart_validators.TitleFieldValidator;
 import team_VK.application.core.services.validators.AddBookServiceValidator;
 import team_VK.application.database.DataBaseFiller;
 import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddBookServiceValidatorTest {
 
     ApplicationContext context;
+    @Mock
+    private TitleFieldValidator titleFieldValidator;
+    @Mock
+    private AuthorFieldValidator authorFieldValidator;
+    @InjectMocks
     AddBookServiceValidator subject;
+
+
     @Before
     public void setup() throws IOException, ClassNotFoundException {
-
         context = new DIApplicationContextBuilder().build("team_VK.application");
         DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
         dataBaseFiller.fill();
-        subject = context.getBean(AddBookServiceValidator.class);
     }
 
     @Test
-    public void ShouldValidateCorrectBookAuthor() {
-// positive functional test
+    public void ShouldMergeTwoErrorsLists() {
 
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and Sea", "Ernest Hemingway", 10);
+        List<CoreError> errorsTitle = Arrays.asList(new CoreError("bookTitle", "Field bookTitle must be not empty"),
+                new CoreError("bookTitle", "Field bookTitle can't be Space"));
+        List<CoreError> errorsAuthor = Arrays.asList(new CoreError("bookAuthor", "Field bookAuthor contains illegal characters"),
+                new CoreError("bookAuthor", "Field bookAuthor can't be Space"));
 
-        List<CoreError>  errors = subject.validate(addBookRequest);
-        Assert.assertEquals(0, errors.size());
-    }
+        List<CoreError> errorsScope = Stream.concat(
+                errorsTitle.stream(),
+                errorsAuthor.stream())
+                .collect(Collectors.toList());
+        AddBookRequest request = new AddBookRequest("Title", "Author", 1);
 
-    @Test
-    public void ShouldntValidate_too_short_BookAuthor() {
-// negative. bookAuthor less then 3 letter // boundary test
+        Mockito.when(titleFieldValidator.validate(request.getBookTitle())).thenReturn(errorsTitle);
+        Mockito.when(authorFieldValidator.validate(request.getBookAuthor())).thenReturn(errorsAuthor);
 
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and Sea", "Er", 10);
+        List<CoreError> actualErrors = subject.validate(request);
 
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookAuthor", "Field bookAuthor is too short");
-        errorsExpected.add(error);
-
-        List<CoreError>  errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
-    }
-
-    @Test
-    public void ShouldntValidate_space_BookAuthor() {
-        // negative. bookAuthor contains only Spaces // boundary test
-
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and Sea", "  ", 10);
-
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookAuthor", "Field bookAuthor can't be Space");
-        errorsExpected.add(error);
-
-        List<CoreError> errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
-    }
-
-    @Test
-    public void ShouldntValidate_illegalCharacters_BookAuthor() {
-// negative. bookAuthor contains illegal character with code 31 // boundary test
-
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and Sea", "Ernest Hemingway!", 10);
-
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookAuthor", "Field bookAuthor contains illegal characters");
-        errorsExpected.add(error);
-
-        List<CoreError> errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
-    }
-
-
-    @Test
-    public void ShouldValidateCorrectBookTitle() {
-// positive functional test
-
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and Sea", "Ernest Hemingway", 10);
-        List<CoreError> errors = subject.validate(addBookRequest);
-        Assert.assertEquals(0, errors.size());
-    }
-
-    @Test
-    public void ShouldntValidate_too_short_BookTitle() {
-// negative. bookTitle contains less then 3 letter // boundary test
-
-        AddBookRequest addBookRequest = new AddBookRequest("Th", "Ernest Hemingway", 10);
-
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookTitle", "Field bookTitle is too short");
-        errorsExpected.add(error);
-
-        List<CoreError> errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
-    }
-
-    @Test
-    public void ShouldntValidate_space_BookTitle() {
-        // negative. bookTitle contains only Spaces // boundary test
-
-        AddBookRequest addBookRequest = new AddBookRequest("  ", "Ernest Hemingway", 10);
-
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookTitle", "Field bookTitle can't be Space");
-        errorsExpected.add(error);
-
-        List<CoreError> errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
-    }
-
-    @Test
-    public void ShouldntValidate_illegalCharacters_BookTitle() {
-// negative. bookAuthor contains illegal character with code 35 // boundary test
-
-        AddBookRequest addBookRequest = new AddBookRequest("The Old Mann and S#ea", "Ernest Hemingway", 10);
-
-        List<CoreError> errorsExpected = new ArrayList<>();
-        CoreError error = new CoreError("bookTitle", "Field bookTitle contains illegal characters");
-        errorsExpected.add(error);
-
-        List<CoreError> errorsActual = subject.validate(addBookRequest);
-        Assert.assertEquals(errorsExpected, errorsActual);
+        Assert.assertEquals(actualErrors, errorsScope);
     }
 }

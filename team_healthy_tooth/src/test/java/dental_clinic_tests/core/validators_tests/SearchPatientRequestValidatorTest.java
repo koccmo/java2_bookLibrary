@@ -3,9 +3,9 @@ package dental_clinic_tests.core.validators_tests;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
-import dental_clinic.core.requests.SearchPatientRequest;
+import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.validators.SearchPatientRequestValidator;
+import dental_clinic.core.validators.patient.SearchPatientRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

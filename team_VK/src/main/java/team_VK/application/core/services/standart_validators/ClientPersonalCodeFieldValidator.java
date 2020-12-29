@@ -16,11 +16,11 @@ public class ClientPersonalCodeFieldValidator {
 
             IntStream clientPersonalCodeLeftSide = clientPersonalCode.substring(0, 5).chars();
             boolean clientPersonalCodeLeftSideIsNumeric = clientPersonalCodeLeftSide
-                    .anyMatch(value -> (value >= 48) && (value <= 57));
+                    .allMatch(value -> (value >= 48) && (value <= 57));
 
             IntStream clientPersonalCodeRightSide = clientPersonalCode.substring(7, 11).chars();
             boolean clientPersonalCodeRightSideIsNumeric = clientPersonalCodeRightSide
-                    .anyMatch(value -> (value >= 48) && (value <= 57));
+                    .allMatch(value -> (value >= 48) && (value <= 57));
 
             if (!(clientPersonalCodeLeftSideIsNumeric && clientPersonalCodeRightSideIsNumeric)) {
                 CoreError error = new CoreError("clientPersonalCode", "Field clientPersonalCode haves illegal format. Should be 999999-99999");

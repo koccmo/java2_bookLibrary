@@ -16,6 +16,7 @@ public class ClientLastNameFieldValidator {
         if (clientLastName == null || clientLastName.equals("")) {
             CoreError error = new CoreError("clientLastName", "Field clientLastName must be not empty");
             errors.add(error);
+            return errors;
         }
 
         if (clientLastName.trim().equals("") && !clientLastName.equals("")) {
@@ -34,12 +35,7 @@ public class ClientLastNameFieldValidator {
                         ((value >= 33) && (value <= 44)) ||
                         ((value >= 46) && (value <= 64)) ||
                         ((value >= 91) && (value <= 96)) ||
-                        ((value >= 123) && (value <= 159)) ||
-                        ((value >= 174) && (value <= 180)) ||
-                        ((value >= 185) && (value <= 207)) ||
-                        ((value >= 217) && (value <= 220)) ||
-                        (value == 223) ||
-                        (value >= 253));
+                        (value >= 123));
         if (clientLastNameContainsIllegalCharts) {
             CoreError error = new CoreError("clientLastName", "Field clientLastName contains illegal characters");
             errors.add(error);

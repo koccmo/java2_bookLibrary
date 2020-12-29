@@ -1,14 +1,12 @@
 package dental_clinic_tests.core.services_tests;
 
-import dental_clinic.core.domain.Patient;
-import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.domain.ToothStatus;
-import dental_clinic.core.domain.Visit;
-import dental_clinic.core.requests.AddVisitRequest;
-import dental_clinic.core.responses.AddVisitResponse;
+import dental_clinic.core.domain.*;
+import dental_clinic.core.requests.visit.AddVisitRequest;
+import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.AddVisitService;
-import dental_clinic.core.services.validators.AddVisitValidator;
+import dental_clinic.core.services.visit.AddVisitService;
+import dental_clinic.core.validators.visit.AddVisitValidator;
+import dental_clinic.database.DoctorDatabase;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,12 +29,16 @@ public class AddVisitServiceTest {
     private AddVisitValidator addVisitValidator;
     @Mock
     private PatientDatabase patientDatabase;
+    @Mock
+    private DoctorDatabase doctorDatabase;
     @InjectMocks
     AddVisitService addVisitService;
 
+    Doctor doctor = new Doctor("Name", "Surname");
+
     @Test
     public void testNotCorrectToothNumber() {
-        Visit visit = new Visit(2, Optional.empty(), ToothStatus.FASETE, "Doctor", new Date());
+        Visit visit = new Visit(2, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("tooth number", "Not valid input for tooth number");
@@ -48,11 +50,12 @@ public class AddVisitServiceTest {
         assertTrue(addVisitResponse.getErrors().size() == 1);
         assertTrue(errors.contains(expectedError));
         Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(doctorDatabase);
     }
 
     @Test
     public void testEmptyRequest() {
-        Visit visit = new Visit(null, null, null, "", new Date());
+        Visit visit = new Visit(null, null, null, null, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(null, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError1 = new CoreError("id", "Not valid input of id");
@@ -70,17 +73,35 @@ public class AddVisitServiceTest {
         assertTrue(errors.contains(expectedError2));
         assertTrue(errors.contains(expectedError3));
         Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(doctorDatabase);
     }
 
     @Test
-    public void testDatabaseDoesNTContainRequestedId() {
-        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, "Doctor", new Date());
+    public void testDatabaseDoesNotContainRequestedId() {
+        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(5L, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("id", "Database doesnt't contain patient with id 5");
         errors.add(expectedError);
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsPatientWithSpecificId(5L)).thenReturn(false);
+        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(true);
+
+        AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
+        assertTrue(addVisitResponse.hasErrors());
+        assertTrue(addVisitResponse.getErrors().size() == 1);
+        assertTrue(errors.contains(expectedError));
+    }
+
+    @Test
+    public void testNotValidInputForDoctor() {
+        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
+        AddVisitRequest addVisitRequest = new AddVisitRequest(5L, visit);
+        List<CoreError> errors = new ArrayList<>();
+        CoreError expectedError = new CoreError("doctor", "Database doesn't contains specific doctor");
+        errors.add(expectedError);
+        Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(false);
 
         AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
         assertTrue(addVisitResponse.hasErrors());
@@ -95,11 +116,12 @@ public class AddVisitServiceTest {
         List<Patient> patients = new ArrayList<>();
         patient.getPersonalData().setId(1L);
         patients.add(patient);
-        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, "Doctor", new Date());
+        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsPatientWithSpecificId(1L)).thenReturn(true);
         Mockito.when(patientDatabase.getPatients()).thenReturn(patients);
+        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(true);
 
         AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
         assertFalse(addVisitResponse.hasErrors());

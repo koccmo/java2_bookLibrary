@@ -1,17 +1,16 @@
 package team_VK.application.core.services.standart_validators;
 
-
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
 @DIComponent
 public class AuthorFieldValidator {
 
     public List<CoreError> validate(String bookAuthor) {
+
         List<CoreError> errors = new ArrayList<>();
 
         if (bookAuthor == null || bookAuthor.equals("")) {

@@ -14,7 +14,8 @@ public class ClientFirstNameFieldValidator {
         List<CoreError> errors = new ArrayList<>();
         if (clientFirstName == null || clientFirstName.equals("")) {
             CoreError error = new CoreError("clientFirstName", "Field clientFirstName must be not empty");
-            errors.add(error);
+             errors.add(error);
+            return errors;
         }
 
         if (clientFirstName.trim().equals("") && !clientFirstName.equals("")) {
@@ -33,12 +34,8 @@ public class ClientFirstNameFieldValidator {
                         ((value >= 33) && (value <= 44)) ||
                         ((value >= 46) && (value <= 64)) ||
                         ((value >= 91) && (value <= 96)) ||
-                        ((value >= 123) && (value <= 157)) ||
-                        ((value >= 174) && (value <= 180)) ||
-                        ((value >= 185) && (value <= 207)) ||
-                        ((value >= 217) && (value <= 220)) ||
-                        (value == 223) ||
-                        (value >= 253));
+
+                        (value >= 123));
         if (clientFirstNameContainsIllegalCharts) {
             CoreError error = new CoreError("clientFirstName", "Field clientFirstName contains illegal characters");
             errors.add(error);

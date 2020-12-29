@@ -29,10 +29,10 @@ public class AcceptanceTestFindCustomerByIdFail {
     @Test
     public void test(){
         Customer customer = new Customer("Anton", "Saveljev", "29876472", "address",
-                "email");
+                "email@email.lv");
         Customer customer1 = new Customer("Sasha", "Gogin","29384901", "Matisa",
                 "tr3vis@Inbox.lv");
-        Customer customer2 = new Customer("Valerija", "Lobanova","2781263",
+        Customer customer2 = new Customer("Valerija", "Lobanova","27817263",
                 "Ukraina", "privetpoka@tikto.lv");
 
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);

@@ -19,7 +19,7 @@ public class TitleFieldValidator {
             errors.add(error);
         }
 
-        if (bookTitle.trim().equals("") && !bookTitle.equals("")) {
+            if (bookTitle.trim().equals("") && !bookTitle.equals("")) {
             CoreError error = new CoreError("bookTitle", "Field bookTitle can't be Space");
             errors.add(error);
         }
