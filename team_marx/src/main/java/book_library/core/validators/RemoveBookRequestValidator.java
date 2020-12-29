@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RemoveBookValidator {
+public class RemoveBookRequestValidator {
 
     private Database database;
 
-    public RemoveBookValidator(Database database) {
+    public RemoveBookRequestValidator(Database database) {
         this.database = database;
     }
 
@@ -25,7 +25,7 @@ public class RemoveBookValidator {
 
     private Optional<CoreError> validateId(RemoveBookRequest request) {
         return (request.getBookIdToRemove() == null)
-                ? Optional.of (new CoreError("id", "Must not be empty"))
+                ? Optional.of(new CoreError("id", "Must not be empty"))
                 : Optional.empty();
     }
 
@@ -33,7 +33,7 @@ public class RemoveBookValidator {
         return (database.getAllBooks().stream()
                 .filter(book -> book.getId().equals(request.getBookIdToRemove()))
                 .findFirst()).isEmpty()
-                ? Optional.of (new CoreError("id", "No book with such id found!"))
+                ? Optional.of(new CoreError("id", "No book with such id found!"))
                 : Optional.empty();
     }
 }

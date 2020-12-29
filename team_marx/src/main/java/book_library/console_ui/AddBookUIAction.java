@@ -6,7 +6,7 @@ import book_library.core.services.AddBookService;
 
 import java.util.Scanner;
 
-public class AddBookUIAction implements UIAction{
+public class AddBookUIAction implements UIAction {
 
     private AddBookService addBookService;
 
@@ -21,10 +21,10 @@ public class AddBookUIAction implements UIAction{
         String bookTitle = scanner.nextLine();
         System.out.println("Enter book author:");
         String bookAuthor = scanner.nextLine();
-        AddBookRequest request = new AddBookRequest(bookTitle,bookAuthor);
+        AddBookRequest request = new AddBookRequest(bookTitle, bookAuthor);
         AddBookResponse response = addBookService.execute(request);
 
-        if (response.hasErrors()){
+        if (response.hasErrors()) {
             response.getErrors().forEach(System.out::println);
         } else {
             System.out.println("New book id is: " + response.getNewBook().getId());
