@@ -43,9 +43,15 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
 
     private List<Doctor> addSomeDoctors(){
         List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Doctor", "Zlo"));
-        doctors.add(new Doctor("Doctor", "Haos"));
-        doctors.add(new Doctor("Doc", "Incognito"));
+        Doctor doctor1 = new Doctor("Doctor", "Zlo");
+        doctor1.setId(1L);
+        doctors.add(doctor1);
+        Doctor doctor2 = new Doctor("Doctor", "Haos");
+        doctor2.setId(2L);
+        doctors.add(doctor2);
+        Doctor doctor3 = new Doctor("Doc", "Incognito");
+        doctor3.setId(3L);
+        doctors.add(doctor3);
         return doctors;
     }
 }
