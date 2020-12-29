@@ -1,5 +1,6 @@
 package book_library.core.validators;
 
+import book_library.core.requests.Ordering;
 import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.CoreError;
 import org.junit.Test;
@@ -74,6 +75,70 @@ public class SearchBooksRequestValidatorTest {
         assertEquals( "Must not be empty", errors.get(0).getMessage());
         assertEquals("author", errors.get(1).getField());
         assertEquals("Must not be empty", errors.get(1).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByIsEmptyAndOrderDirectionContainValidValue() {
+        Ordering ordering = new Ordering(null,"ASCENDING");
+        SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals( 1, errors.size());
+        assertEquals("orderBy", errors.get(0).getField());
+        assertEquals( "Must not be empty!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByIsEmptyAndOrderDirectionContainNotValidValue() {
+        Ordering ordering = new Ordering(null,"notValidValue");
+        SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals( 2, errors.size());
+        assertEquals("orderDirection", errors.get(0).getField());
+        assertEquals( "Must contain 'ASCENDING' or 'DESCENDING' only!", errors.get(0).getMessage());
+        assertEquals("orderBy", errors.get(1).getField());
+        assertEquals( "Must not be empty!", errors.get(1).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByContainValidValueAndOrderDirectionIsEmpty() {
+        Ordering ordering = new Ordering("title",null);
+        SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals( 1, errors.size());
+        assertEquals("orderDirection", errors.get(0).getField());
+        assertEquals( "Must not be empty!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByIsContainNotValidValueAndOrderDirectionIsEmpty() {
+        Ordering ordering = new Ordering("notValidValue",null);
+        SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals( 2, errors.size());
+        assertEquals("orderBy", errors.get(0).getField());
+        assertEquals( "Must contain 'author' or 'title' only!", errors.get(0).getMessage());
+        assertEquals("orderDirection", errors.get(1).getField());
+        assertEquals( "Must not be empty!", errors.get(1).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderDirectionContainNotValidValue() {
+        Ordering ordering = new Ordering("title", "noValidValue");
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("orderDirection", errors.get(0).getField());
+        assertEquals("Must contain 'ASCENDING' or 'DESCENDING' only!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByContainNotValidValue() {
+        Ordering ordering = new Ordering("noValidValue","ASCENDING");
+        SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals( 1, errors.size());
+        assertEquals("orderBy", errors.get(0).getField());
+        assertEquals( "Must contain 'author' or 'title' only!", errors.get(0).getMessage());
     }
 
 
