@@ -19,7 +19,7 @@ public class ClassFinderTest {
 
         assertTrue(classList.size() == 13);
 
-        assertTrue (classList.get(0).getName().equals("dental_clinic.console_ui.AddPatientUIAction"));
+        assertTrue (classList.get(0).getName().equals("dental_clinic.console_ui.patient.AddPatientUIAction"));
     }
 
     @Test

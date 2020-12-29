@@ -1,12 +1,12 @@
 package dental_clinic_tests.core.services_tests;
 
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.AddPatientRequest;
-import dental_clinic.core.responses.AddPatientResponse;
+import dental_clinic.core.requests.patient.AddPatientRequest;
+import dental_clinic.core.responses.patient.AddPatientResponse;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.services.AddPatientService;
+import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic_tests.core.services_tests.matchers.PersonalDataMatcher;
-import dental_clinic.core.services.validators.AddPatientRequestValidator;
+import dental_clinic.core.validators.patient.AddPatientRequestValidator;
 import dental_clinic.database.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
