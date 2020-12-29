@@ -8,16 +8,26 @@ public class Sorter<E extends Product> {
         this.data = data;
     }
 
-    public E[] sort() {
+    public E[] sortByPriceDesc() {
         for (int i = data.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 Product first = data[j];
                 Product second = data[j+1];
                 if (second.getPrice() > first.getPrice()) {
                     swapElements(j);
-                    if (second.getTitle().compareTo(first.getTitle()) < 0) {
-                        swapElements(j);
-                    }
+                }
+            }
+        }
+        return data;
+    }
+
+    public E[] sortByPriceAsc() {
+        for (int i = data.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                Product first = data[j];
+                Product second = data[j+1];
+                if (second.getPrice() < first.getPrice()) {
+                    swapElements(j);
                 }
             }
         }
@@ -29,5 +39,4 @@ public class Sorter<E extends Product> {
         data[j] = data[j + 1];
         data[j + 1] = tmp;
     }
-
 }
