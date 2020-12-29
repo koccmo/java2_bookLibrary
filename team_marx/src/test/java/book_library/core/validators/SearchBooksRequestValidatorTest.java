@@ -1,6 +1,7 @@
 package book_library.core.validators;
 
 import book_library.core.requests.Ordering;
+import book_library.core.requests.Paging;
 import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.CoreError;
 import org.junit.Test;
@@ -78,7 +79,15 @@ public class SearchBooksRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByIsEmptyAndOrderDirectionContainValidValue() {
+    public void successWithOrdering() {
+        Ordering ordering = new Ordering("title", "ASCENDING");
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByIsNullAndOrderDirectionContainValidValue() {
         Ordering ordering = new Ordering(null,"ASCENDING");
         SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
         List<CoreError> errors = validator.validate(request);
@@ -88,7 +97,7 @@ public class SearchBooksRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByIsEmptyAndOrderDirectionContainNotValidValue() {
+    public void shouldReturnErrorWhenOrderByIsNullAndOrderDirectionContainNotValidValue() {
         Ordering ordering = new Ordering(null,"notValidValue");
         SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
         List<CoreError> errors = validator.validate(request);
@@ -100,7 +109,7 @@ public class SearchBooksRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByContainValidValueAndOrderDirectionIsEmpty() {
+    public void shouldReturnErrorWhenOrderByContainValidValueAndOrderDirectionIsNull() {
         Ordering ordering = new Ordering("title",null);
         SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
         List<CoreError> errors = validator.validate(request);
@@ -110,7 +119,7 @@ public class SearchBooksRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByIsContainNotValidValueAndOrderDirectionIsEmpty() {
+    public void shouldReturnErrorWhenOrderByIsContainNotValidValueAndOrderDirectionIsNull() {
         Ordering ordering = new Ordering("notValidValue",null);
         SearchBooksRequest request = new SearchBooksRequest( "title", "author", ordering);
         List<CoreError> errors = validator.validate(request);
@@ -139,6 +148,54 @@ public class SearchBooksRequestValidatorTest {
         assertEquals( 1, errors.size());
         assertEquals("orderBy", errors.get(0).getField());
         assertEquals( "Must contain 'author' or 'title' only!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void successWithPaging() {
+        Paging paging = new Paging(1, 1);
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(0, errors.size());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberContainNotValidValueAndPageSizeContainValidValue() {
+        Paging paging = new Paging(0, 1);
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("pageNumber", errors.get(0).getField());
+        assertEquals( "Must be greater then 0!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberContainValidValueAndPageSizeContainNotValidValue() {
+        Paging paging = new Paging(1, 0);
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("pageSize", errors.get(0).getField());
+        assertEquals( "Must be greater then 0!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberIsNullAndPageSizeContainValidValue() {
+        Paging paging = new Paging(null, 1);
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("pageNumber", errors.get(0).getField());
+        assertEquals( "Must not be empty!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberContainValidValueAndPageSizeIsNull() {
+        Paging paging = new Paging(1, null);
+        SearchBooksRequest request = new SearchBooksRequest("title", "author", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("pageSize", errors.get(0).getField());
+        assertEquals( "Must not be empty!", errors.get(0).getMessage());
     }
 
 

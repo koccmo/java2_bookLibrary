@@ -4,7 +4,7 @@ import book_library.Book;
 
 import java.util.List;
 
-public class SearchBooksResponse extends CoreResponse{
+public class SearchBooksResponse extends CoreResponse {
 
     private List<Book> books;
 

@@ -19,9 +19,9 @@ public class AddBookService {
         this.validator = validator;
     }
 
-    public AddBookResponse execute (AddBookRequest request){
+    public AddBookResponse execute(AddBookRequest request) {
         List<CoreError> errors = validator.validate(request);
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new AddBookResponse(errors);
         }
         Book book = new Book(request.getTitle(), request.getAuthor());

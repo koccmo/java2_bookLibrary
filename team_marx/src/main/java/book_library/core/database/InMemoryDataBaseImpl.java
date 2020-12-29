@@ -26,7 +26,7 @@ public class InMemoryDataBaseImpl implements Database {
         Optional<Book> bookToDeleteOPT = books.stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst();
-        if (bookToDeleteOPT.isPresent()){
+        if (bookToDeleteOPT.isPresent()) {
             Book bookToRemove = bookToDeleteOPT.get();
             isBookDeleted = books.remove(bookToRemove);
         }
@@ -41,7 +41,7 @@ public class InMemoryDataBaseImpl implements Database {
 
 
     @Override
-    public boolean hasTheSameBookInDatabase(Book bookToCompare){
+    public boolean hasTheSameBookInDatabase(Book bookToCompare) {
 
         return books.contains(bookToCompare);
     }

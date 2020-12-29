@@ -22,9 +22,9 @@ public class BookListApplication {
     private static SearchBooksRequestValidator searchBooksRequestValidator = new SearchBooksRequestValidator();
 
     private static AddBookService addBookService = new AddBookService(database, addBookValidator);
-    private static RemoveBookService removeBookService = new RemoveBookService(database,removeBookValidator);
+    private static RemoveBookService removeBookService = new RemoveBookService(database, removeBookValidator);
     private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
-    private static SearchBooksService searchBooksService = new SearchBooksService(database,searchBooksRequestValidator);
+    private static SearchBooksService searchBooksService = new SearchBooksService(database, searchBooksRequestValidator);
 
     private static AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
     private static RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
@@ -34,7 +34,7 @@ public class BookListApplication {
 
     public static void main(String[] args) {
 
-        while (true){
+        while (true) {
             printProgramMenu();
 
             int userChoice = getMenuNumberFromUser();
@@ -44,24 +44,24 @@ public class BookListApplication {
     }
 
     private static void executeSelectedMenuItem(int userChoice) {
-        switch (userChoice){
-            case 1:{
+        switch (userChoice) {
+            case 1: {
                 addBookUIAction.execute();
                 break;
             }
-            case 2:{
+            case 2: {
                 removeBookUIAction.execute();
                 break;
             }
-            case 3:{
+            case 3: {
                 getAllBooksUIAction.execute();
                 break;
             }
-            case 4:{
+            case 4: {
                 searchBooksUIAction.execute();
                 break;
             }
-            case 5:{
+            case 5: {
                 exitUIAction.execute();
                 break;
             }

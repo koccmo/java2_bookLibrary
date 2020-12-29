@@ -18,9 +18,9 @@ public class RemoveBookService {
         this.validator = validator;
     }
 
-    public RemoveBookResponse execute (RemoveBookRequest request){
+    public RemoveBookResponse execute(RemoveBookRequest request) {
         List<CoreError> errors = validator.validate(request);
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new RemoveBookResponse(errors);
         }
         boolean isBookRemoved = database.deleteById(request.getBookIdToRemove());
