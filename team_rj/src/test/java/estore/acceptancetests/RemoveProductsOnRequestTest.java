@@ -1,6 +1,6 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.requests.RemoveProductByNameRequest;

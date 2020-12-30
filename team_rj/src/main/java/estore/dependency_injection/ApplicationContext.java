@@ -1,4 +1,4 @@
-package estore;
+package estore.dependency_injection;
 
 import estore.core.service.*;
 import estore.core.validation.*;

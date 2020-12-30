@@ -1,12 +1,11 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.requests.ShowAllProductsRequest;
 import estore.core.responses.ShowAllProductsResponse;
 import estore.core.service.AddNewProductService;
 import estore.core.service.ShowAllProductsService;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

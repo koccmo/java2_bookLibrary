@@ -1,12 +1,10 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByCategoryResponse;
-import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.AddNewProductService;
 import estore.core.service.SearchProductByCategoryService;
-import estore.core.service.SearchProductByNameService;
 import estore.database.ProductDB;
 import org.junit.Test;
 

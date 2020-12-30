@@ -1,6 +1,6 @@
 package estore.ui;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 
 public class UserAction {
 

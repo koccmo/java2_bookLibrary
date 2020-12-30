@@ -1,6 +1,6 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.*;
