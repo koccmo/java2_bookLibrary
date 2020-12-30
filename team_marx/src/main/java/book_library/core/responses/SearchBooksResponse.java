@@ -4,11 +4,12 @@ import book_library.Book;
 
 import java.util.List;
 
-public class GetAllBooksResponse extends CoreResponse {
+public class SearchBooksResponse extends CoreResponse {
 
     private List<Book> books;
 
-    public GetAllBooksResponse(List<Book> books) {
+    public SearchBooksResponse(List<Book> books, List<CoreError> errors) {
+        super(errors);
         this.books = books;
     }
 
