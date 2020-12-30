@@ -3,6 +3,7 @@ package dental_clinic.console_ui.ProgramMenu;
 import dental_clinic.console_ui.*;
 import dental_clinic.console_ui.doctor.AddDoctorUIAction;
 import dental_clinic.console_ui.doctor.DeleteDoctorUIAction;
+import dental_clinic.console_ui.doctor.GetDoctorListUIAction;
 import dental_clinic.console_ui.patient.*;
 import dental_clinic.console_ui.visit.AddVisitUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class ProgramMenu {
 
         menuNumberToActionMap.put(10, findUIAction(uiActions, AddDoctorUIAction.class));
         menuNumberToActionMap.put(11, findUIAction(uiActions, DeleteDoctorUIAction.class));
+        menuNumberToActionMap.put(12, findUIAction(uiActions, GetDoctorListUIAction.class));
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
@@ -86,7 +88,8 @@ public class ProgramMenu {
                 "       9   Add visit\n\n" +
 
                 "       10   Add doctor\n" +
-                "       11   Delete doctor\n\n" +
+                "       11   Delete doctor\n" +
+                "       12   Print doctor's database\n\n" +
 
                 "       0   Exit\n");
     }
