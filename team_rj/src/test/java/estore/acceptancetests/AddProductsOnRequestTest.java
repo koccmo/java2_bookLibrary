@@ -1,19 +1,20 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.requests.ShowAllProductsRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.responses.ShowAllProductsResponse;
 import estore.core.service.AddNewProductService;
 import estore.core.service.ShowAllProductsService;
+import estore.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddProductsOnRequestTest {
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");
 
     @Test
     public void shouldAddValidProduct() {

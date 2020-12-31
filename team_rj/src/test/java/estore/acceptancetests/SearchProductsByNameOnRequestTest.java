@@ -1,16 +1,17 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.*;
 import estore.database.ProductDB;
+import estore.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class SearchProductsByNameOnRequestTest {
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");
 
     @Test
     public void shouldSearchProductByName() {

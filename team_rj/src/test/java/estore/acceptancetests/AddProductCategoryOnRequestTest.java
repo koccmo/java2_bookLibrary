@@ -1,17 +1,18 @@
 package estore.acceptancetests;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
 import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.service.AddNewProductCategoryService;
 import estore.database.ProductCategoryDB;
+import estore.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddProductCategoryOnRequestTest {
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");;
 
     @Test
     public void shouldAddValidProductCategory() {

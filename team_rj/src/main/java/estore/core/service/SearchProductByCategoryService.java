@@ -7,6 +7,8 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductDB;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
 
 import java.util.ArrayList;
@@ -14,15 +16,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchProductByCategoryService {
 
+    @DIDependency
     private ProductDB productDB;
+    @DIDependency
     private SearchProductByCategoryValidator validator;
 
-    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
-        this.productDB = productDB;
-        this.validator = validator;
-    }
+//    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
+//        this.productDB = productDB;
+//        this.validator = validator;
+//    }
 
     public SearchProductByCategoryResponse execute(SearchProductByCategoryRequest request) {
         List<CoreError> errors = validator.validate(request);

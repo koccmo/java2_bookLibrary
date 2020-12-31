@@ -1,10 +1,12 @@
 package estore.ui;
 
-import estore.ApplicationContext;
+import estore.dependency_injection.ApplicationContext;
+import estore.dependency_injection.DIApplicationContextBuilder;
 
 public class UserAction {
 
-    private static ApplicationContext applicationContext = new ApplicationContext();
+    private static ApplicationContext applicationContext =
+        new DIApplicationContextBuilder().build("estore");
 
     public void run() {
         UserMenu userMenu = new UserMenu();
@@ -67,4 +69,5 @@ public class UserAction {
             }
         }
     }
+
 }

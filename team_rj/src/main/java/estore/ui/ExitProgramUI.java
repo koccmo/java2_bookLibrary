@@ -1,5 +1,8 @@
 package estore.ui;
 
+import estore.dependency_injection.DIComponent;
+
+@DIComponent
 public class ExitProgramUI implements UIAction {
 
     @Override

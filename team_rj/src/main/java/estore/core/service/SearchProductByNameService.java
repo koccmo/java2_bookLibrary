@@ -5,6 +5,8 @@ import estore.core.requests.Paging;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductDB;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
@@ -13,15 +15,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchProductByNameService {
 
+    @DIDependency
     private ProductDB productDB;
+    @DIDependency
     private SearchProductByNameValidator validator;
 
-    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {
-        this.productDB = productDB;
-        this.validator = validator;
-    }
+//    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {
+//        this.productDB = productDB;
+//        this.validator = validator;
+//    }
 
     public SearchProductByNameResponse execute(SearchProductByNameRequest request) {
         List<CoreError> errors = validator.validate(request);

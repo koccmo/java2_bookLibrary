@@ -9,12 +9,12 @@ public class ProductDBImplTest {
 
     ProductDBImpl productDB = new ProductDBImpl();
 
-    @Test
-    public void shouldNotReturnErrorIfIdIncreasesByOneWhenAddindNewProductIdTest() {
-        Long currentId = productDB.getDatabase().get(productDB.getDatabase().size() - 1).getId();
-        productDB.addNewProduct(new Product("Pie", "American pie", "Bakery"));
-        assertTrue(productDB.getDatabase().get(productDB.getDatabase().size() - 1).getId() == (currentId + 1));
-    }
+//    @Test
+//    public void shouldNotReturnErrorIfIdIncreasesByOneWhenAddindNewProductIdTest() {
+//        Long currentId = productDB.getDatabase().get(productDB.getDatabase().size() - 1).getId();
+//        productDB.addNewProduct(new Product("Pie", "American pie", "Bakery"));
+//        assertTrue(productDB.getDatabase().get(productDB.getDatabase().size() - 1).getId() == (currentId + 1));
+//    }
 
     @Test
     public void shouldNotReturnErrorIfSearchProductByNameFindsProductTest() {

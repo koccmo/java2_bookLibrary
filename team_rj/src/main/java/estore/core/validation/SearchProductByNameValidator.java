@@ -2,6 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.Ordering;
 import estore.core.requests.SearchProductByNameRequest;
+import estore.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@DIComponent
 public class SearchProductByNameValidator {
 
     public List<CoreError> validate(SearchProductByNameRequest request) {
