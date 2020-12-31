@@ -4,9 +4,6 @@ import lesson_8.mysql_spring.ClientDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 @Component
 public class DeleteRecordConsole {
     @Autowired
