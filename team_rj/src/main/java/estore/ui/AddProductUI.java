@@ -3,16 +3,16 @@ package estore.ui;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.service.AddNewProductService;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class AddProductUI implements UIAction {
 
-    @DIDependency
+    @Autowired
     private AddNewProductService addNewProductService;
 
 //    public AddProductUI(AddNewProductService addNewProductService) {

@@ -4,13 +4,13 @@ import estore.core.requests.ShowAllProductsRequest;
 import estore.core.responses.ShowAllProductsResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.ShowAllProductsService;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ShowAllProductsUI implements UIAction {
 
-    @DIDependency
+    @Autowired
     private ShowAllProductsService showAllProductsService;
 
 //    public ShowAllProductsUI(ShowAllProductsService showAllProductsService) {

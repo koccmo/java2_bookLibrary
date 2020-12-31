@@ -1,19 +1,27 @@
-package estore.acceptancetests;
+package estore.acceptance_tests;
 
-import estore.dependency_injection.ApplicationContext;
+import estore.config.ProductConfiguration;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.AddNewProductService;
 import estore.core.service.SearchProductByCategoryService;
 import estore.database.ProductDB;
-import estore.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SearchProductsByCategoryOnRequestTest {
-    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");
+
+    private static ApplicationContext applicationContext;
+
+    @Before
+    public void setup() {
+        applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+    }
 
     @Test
     public void shouldSearchProductByCategoryDescendingAndPaging() {

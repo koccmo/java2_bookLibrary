@@ -3,20 +3,20 @@ package estore.core.service;
 import estore.core.validation.CoreError;
 import estore.core.validation.AddNewProductValidator;
 import estore.database.ProductDB;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddNewProductService {
 
-    @DIDependency
+    @Autowired
     private ProductDB productDB;
-    @DIDependency
+    @Autowired
     private AddNewProductValidator validator;
 
 //    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {

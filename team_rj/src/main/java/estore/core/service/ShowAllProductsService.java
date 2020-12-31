@@ -1,18 +1,18 @@
 package estore.core.service;
 
 import estore.database.ProductDB;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
 import estore.core.requests.ShowAllProductsRequest;
 import estore.core.responses.ShowAllProductsResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class ShowAllProductsService {
 
-    @DIDependency
+    @Autowired
     private ProductDB productDB;
 
 //    public ShowAllProductsService(ProductDB productDB) {

@@ -1,8 +1,8 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.dependency_injection.DIComponent;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@DIComponent
+@Component
 public class AddNewProductValidator {
 
     public List<CoreError> validate(AddNewProductRequest request) {

@@ -5,18 +5,18 @@ import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryDB;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.ProductCategory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddNewProductCategoryService {
 
-    @DIDependency
+    @Autowired
     private ProductCategoryDB productCategoryDB;
-    @DIDependency
+    @Autowired
     private AddNewProductCategoryValidator validator;
 
 //    public AddNewProductCategoryService(ProductCategoryDB productCategoryDB, AddNewProductCategoryValidator validator) {

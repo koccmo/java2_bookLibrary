@@ -5,22 +5,22 @@ import estore.core.requests.Paging;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductDB;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class SearchProductByNameService {
 
-    @DIDependency
+    @Autowired
     private ProductDB productDB;
-    @DIDependency
+    @Autowired
     private SearchProductByNameValidator validator;
 
 //    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {

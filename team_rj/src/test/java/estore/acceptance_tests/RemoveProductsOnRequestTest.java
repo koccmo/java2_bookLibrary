@@ -1,6 +1,6 @@
-package estore.acceptancetests;
+package estore.acceptance_tests;
 
-import estore.dependency_injection.ApplicationContext;
+import estore.config.ProductConfiguration;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.requests.RemoveProductByNameRequest;
@@ -12,14 +12,22 @@ import estore.core.service.AddNewProductService;
 import estore.core.service.RemoveProductByIdService;
 import estore.core.service.RemoveProductByNameService;
 import estore.core.service.ShowAllProductsService;
-import estore.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RemoveProductsOnRequestTest {
-    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");
+
+    private static ApplicationContext applicationContext;
+
+    @Before
+    public void setup() {
+        applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+    }
 
     @Test
     public void shouldRemoveProductByNameAndId() {

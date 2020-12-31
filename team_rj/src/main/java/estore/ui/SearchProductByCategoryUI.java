@@ -6,16 +6,16 @@ import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByCategoryService;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchProductByCategoryUI implements UIAction {
 
-    @DIDependency
+    @Autowired
     private SearchProductByCategoryService searchProductByCategoryService;
 
 //    public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {

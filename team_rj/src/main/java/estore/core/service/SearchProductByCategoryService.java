@@ -7,21 +7,20 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductDB;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
 import estore.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class SearchProductByCategoryService {
 
-    @DIDependency
+    @Autowired
     private ProductDB productDB;
-    @DIDependency
+    @Autowired
     private SearchProductByCategoryValidator validator;
 
 //    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {

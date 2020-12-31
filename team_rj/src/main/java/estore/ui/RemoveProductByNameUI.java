@@ -3,15 +3,15 @@ package estore.ui;
 import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
 import estore.core.service.RemoveProductByNameService;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class RemoveProductByNameUI implements UIAction {
 
-    @DIDependency
+    @Autowired
     private RemoveProductByNameService removeProductByNameService;
 
 //    public RemoveProductByNameUI(RemoveProductByNameService removeProductByNameService) {

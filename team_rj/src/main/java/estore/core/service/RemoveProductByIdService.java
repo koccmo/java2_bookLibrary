@@ -5,17 +5,17 @@ import estore.core.validation.RemoveProductByIdValidator;
 import estore.database.ProductDB;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class RemoveProductByIdService {
 
-    @DIDependency
+    @Autowired
     private ProductDB productDB;
-    @DIDependency
+    @Autowired
     private RemoveProductByIdValidator validator;
 
 //    public RemoveProductByIdService(ProductDB productDB, RemoveProductByIdValidator validator) {

@@ -1,8 +1,8 @@
 package estore.ui;
 
-import estore.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitProgramUI implements UIAction {
 
     @Override

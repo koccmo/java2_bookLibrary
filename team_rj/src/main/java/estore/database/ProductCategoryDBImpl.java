@@ -1,12 +1,12 @@
 package estore.database;
 
-import estore.dependency_injection.DIComponent;
 import estore.domain.ProductCategory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class ProductCategoryDBImpl implements ProductCategoryDB {
 
     private Long nextCategoryId = 1L;

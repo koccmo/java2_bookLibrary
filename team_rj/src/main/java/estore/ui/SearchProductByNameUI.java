@@ -6,15 +6,15 @@ import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByNameService;
-import estore.dependency_injection.DIComponent;
-import estore.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchProductByNameUI implements UIAction {
 
-    @DIDependency
+    @Autowired
     private SearchProductByNameService searchProductByNameService;
 
 //    public SearchProductByNameUI(SearchProductByNameService searchProductByNameService) {

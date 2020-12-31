@@ -3,10 +3,10 @@ package estore.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import estore.dependency_injection.DIComponent;
 import estore.domain.Product;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ProductDBImpl implements ProductDB {
 
 //    private Long nextProductId;

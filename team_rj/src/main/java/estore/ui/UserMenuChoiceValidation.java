@@ -1,10 +1,10 @@
 package estore.ui;
 
-import estore.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class UserMenuChoiceValidation {
     public int validateUserMenuChoice(String userStringInput, int menuSize) {
         int choice;

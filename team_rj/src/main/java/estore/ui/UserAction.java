@@ -1,12 +1,13 @@
 package estore.ui;
 
-import estore.dependency_injection.ApplicationContext;
-import estore.dependency_injection.DIApplicationContextBuilder;
+import estore.config.ProductConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class UserAction {
 
     private static ApplicationContext applicationContext =
-        new DIApplicationContextBuilder().build("estore");
+            new AnnotationConfigApplicationContext(ProductConfiguration.class);
 
     public void run() {
         UserMenu userMenu = new UserMenu();

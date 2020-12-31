@@ -1,13 +1,13 @@
 package estore.core.validation;
 
 import estore.core.requests.RemoveProductByIdRequest;
-import estore.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class RemoveProductByIdValidator {
 
     public List<CoreError> validate(RemoveProductByIdRequest request) {
