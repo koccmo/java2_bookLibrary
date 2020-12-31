@@ -1,7 +1,10 @@
 package estore.ui;
 
+import estore.dependency_injection.DIComponent;
+
 import java.util.Scanner;
 
+@DIComponent
 public class UserMenuChoiceValidation {
     public int validateUserMenuChoice(String userStringInput, int menuSize) {
         int choice;

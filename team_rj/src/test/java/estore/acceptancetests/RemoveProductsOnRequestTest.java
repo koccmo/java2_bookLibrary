@@ -12,13 +12,14 @@ import estore.core.service.AddNewProductService;
 import estore.core.service.RemoveProductByIdService;
 import estore.core.service.RemoveProductByNameService;
 import estore.core.service.ShowAllProductsService;
+import estore.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RemoveProductsOnRequestTest {
-    private ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext applicationContext = new DIApplicationContextBuilder().build("estore");
 
     @Test
     public void shouldRemoveProductByNameAndId() {

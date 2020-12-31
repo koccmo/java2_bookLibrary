@@ -7,14 +7,18 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class ClassFinderTest {
+public class DIComponentFilterTest {
+
+    DIComponentFilter DIfilter = new DIComponentFilter();
     ClassFinder classFinder = new ClassFinder();
 
     @Test
-    public void ShouldReturnListWithFilesInGivenFolder() throws IOException, ClassNotFoundException{
+    public void ShouldReturnListWithAnnotatedFiles() throws IOException, ClassNotFoundException {
         List<Class> classList = classFinder.findClassesInsidePackage("estore.domain");
+        List<Class> annotatedList = DIfilter.filter(classList);
         assertTrue(classList.size() == 3);
-        classList.forEach(aClass -> {
+        assertTrue(annotatedList.size() == 0);
+        annotatedList.forEach(aClass -> {
             System.out.println(aClass.getName());
         });
     }

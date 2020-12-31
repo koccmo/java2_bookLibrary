@@ -3,6 +3,7 @@ package estore.core.validation;
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
+import estore.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@DIComponent
 public class SearchProductByCategoryValidator {
 
     public List<CoreError> validate(SearchProductByCategoryRequest request) {

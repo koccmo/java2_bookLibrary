@@ -3,16 +3,20 @@ package estore.ui;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.service.RemoveProductByIdService;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class RemoveProductByIdUI implements UIAction {
 
+    @DIDependency
     private RemoveProductByIdService removeProductByIdService;
 
-    public RemoveProductByIdUI(RemoveProductByIdService removeProductByIdService) {
-        this.removeProductByIdService = removeProductByIdService;
-    }
+//    public RemoveProductByIdUI(RemoveProductByIdService removeProductByIdService) {
+//        this.removeProductByIdService = removeProductByIdService;
+//    }
 
     @Override
     public void execute() {

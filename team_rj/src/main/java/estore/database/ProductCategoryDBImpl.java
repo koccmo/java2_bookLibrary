@@ -1,19 +1,23 @@
 package estore.database;
 
+import estore.dependency_injection.DIComponent;
 import estore.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class ProductCategoryDBImpl implements ProductCategoryDB {
 
-    private Long nextCategoryId;
-    private List<ProductCategory> categories;
+    private Long nextCategoryId = 1L;
+    private List<ProductCategory> categories = new ArrayList<>();
 
-    public ProductCategoryDBImpl() {
-        initializeListOfCategories();
-        setNextCategoryId();
-    }
+//    private Long nextCategoryId;
+//    private List<ProductCategory> categories;
+//    public ProductCategoryDBImpl() {
+//        initializeListOfCategories();
+//        setNextCategoryId();
+//    }
 
     private void initializeListOfCategories() {
         this.categories = new ArrayList<>();

@@ -6,17 +6,21 @@ import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByCategoryService;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 import estore.domain.ProductCategoryEnum;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchProductByCategoryUI implements UIAction {
 
+    @DIDependency
     private SearchProductByCategoryService searchProductByCategoryService;
 
-    public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {
-        this.searchProductByCategoryService = searchProductByCategoryService;
-    }
+//    public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {
+//        this.searchProductByCategoryService = searchProductByCategoryService;
+//    }
 
     @Override
     public void execute() {

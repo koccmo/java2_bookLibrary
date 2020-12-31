@@ -6,16 +6,20 @@ import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByNameService;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchProductByNameUI implements UIAction {
 
+    @DIDependency
     private SearchProductByNameService searchProductByNameService;
 
-    public SearchProductByNameUI(SearchProductByNameService searchProductByNameService) {
-        this.searchProductByNameService = searchProductByNameService;
-    }
+//    public SearchProductByNameUI(SearchProductByNameService searchProductByNameService) {
+//        this.searchProductByNameService = searchProductByNameService;
+//    }
 
     @Override
     public void execute() {

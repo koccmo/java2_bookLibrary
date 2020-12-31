@@ -2,17 +2,23 @@ package estore.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import estore.dependency_injection.DIComponent;
 import estore.domain.Product;
 
+@DIComponent
 public class ProductDBImpl implements ProductDB {
 
-    private Long nextProductId;
-    private List<Product> products;
+//    private Long nextProductId;
+//    private List<Product> products;
 
-    public ProductDBImpl() {
-        initializeListOfProducts();
-        setNextProductId();
-    }
+//    public ProductDBImpl() {
+//        initializeListOfProducts();
+//        setNextProductId();
+//    }
+
+    private Long nextProductId = 1L;
+    private List<Product> products = new ArrayList<>();
 
     @Override
     public List<Product> getDatabase() {

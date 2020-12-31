@@ -3,17 +3,21 @@ package estore.ui;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.service.AddNewProductService;
+import estore.dependency_injection.DIComponent;
+import estore.dependency_injection.DIDependency;
 import estore.domain.ProductCategoryEnum;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddProductUI implements UIAction {
 
+    @DIDependency
     private AddNewProductService addNewProductService;
 
-    public AddProductUI(AddNewProductService addNewProductService) {
-        this.addNewProductService = addNewProductService;
-    }
+//    public AddProductUI(AddNewProductService addNewProductService) {
+//        this.addNewProductService = addNewProductService;
+//    }
 
     @Override
     public void execute() {

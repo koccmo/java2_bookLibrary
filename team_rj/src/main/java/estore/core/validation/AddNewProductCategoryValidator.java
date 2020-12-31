@@ -1,6 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
+import estore.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@DIComponent
 public class AddNewProductCategoryValidator {
 
     public List<CoreError> validate(AddNewProductCategoryRequest request) {
