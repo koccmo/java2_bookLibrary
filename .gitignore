@@ -65,6 +65,7 @@
 /team_rj/build/
 /team_temptation/build/
 /team_VSB/build/
+/team_marx/build/
 
 /teacher/lesson_1_introduction/out/
 /teacher/lesson_2_single_responsibility_principle/out/
@@ -101,3 +102,4 @@
 /team_rj/out/
 /team_temptation/out/
 /team_VSB/out/
+/team_marx/out/
