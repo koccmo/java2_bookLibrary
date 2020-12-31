@@ -6,7 +6,6 @@ import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryDB;
 import estore.domain.ProductCategory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,15 +13,13 @@ import java.util.List;
 @Component
 public class AddNewProductCategoryService {
 
-    @Autowired
     private ProductCategoryDB productCategoryDB;
-    @Autowired
     private AddNewProductCategoryValidator validator;
 
-//    public AddNewProductCategoryService(ProductCategoryDB productCategoryDB, AddNewProductCategoryValidator validator) {
-//        this.productCategoryDB = productCategoryDB;
-//        this.validator = validator;
-//    }
+    public AddNewProductCategoryService(ProductCategoryDB productCategoryDB, AddNewProductCategoryValidator validator) {
+        this.productCategoryDB = productCategoryDB;
+        this.validator = validator;
+    }
 
     public AddNewProductCategoryResponse execute(AddNewProductCategoryRequest request) {
         List<CoreError> errors = validator.validate(request);

@@ -5,7 +5,6 @@ import estore.core.validation.RemoveProductByNameValidator;
 import estore.database.ProductDB;
 import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,15 +12,13 @@ import java.util.List;
 @Component
 public class RemoveProductByNameService {
 
-    @Autowired
     private ProductDB productDB;
-    @Autowired
     private RemoveProductByNameValidator validator;
 
-//    public RemoveProductByNameService(ProductDB productDB, RemoveProductByNameValidator validator) {
-//        this.productDB = productDB;
-//        this.validator = validator;
-//    }
+    public RemoveProductByNameService(ProductDB productDB, RemoveProductByNameValidator validator) {
+        this.productDB = productDB;
+        this.validator = validator;
+    }
 
     public RemoveProductByNameResponse execute(RemoveProductByNameRequest request) {
         List<CoreError> errors = validator.validate(request);

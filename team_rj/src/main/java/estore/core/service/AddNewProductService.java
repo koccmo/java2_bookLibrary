@@ -6,7 +6,6 @@ import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,15 +13,13 @@ import java.util.List;
 @Component
 public class AddNewProductService {
 
-    @Autowired
     private ProductDB productDB;
-    @Autowired
     private AddNewProductValidator validator;
 
-//    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {
-//        this.productDB = productDB;
-//        this.validator = validator;
-//    }
+    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {
+        this.productDB = productDB;
+        this.validator = validator;
+    }
 
     public AddNewProductResponse execute(AddNewProductRequest request) {
         List<CoreError> errors = validator.validate(request);

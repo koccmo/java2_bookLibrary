@@ -9,16 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductDBImpl implements ProductDB {
 
-//    private Long nextProductId;
-//    private List<Product> products;
+    private Long nextProductId;
+    private List<Product> products;
 
-//    public ProductDBImpl() {
-//        initializeListOfProducts();
-//        setNextProductId();
-//    }
-
-    private Long nextProductId = 1L;
-    private List<Product> products = new ArrayList<>();
+    public ProductDBImpl() {
+        initializeListOfProducts();
+        setNextProductId();
+    }
 
     @Override
     public List<Product> getDatabase() {

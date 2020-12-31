@@ -3,7 +3,6 @@ package estore.ui;
 import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
 import estore.core.service.RemoveProductByNameService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,12 +10,11 @@ import java.util.Scanner;
 @Component
 public class RemoveProductByNameUI implements UIAction {
 
-    @Autowired
     private RemoveProductByNameService removeProductByNameService;
 
-//    public RemoveProductByNameUI(RemoveProductByNameService removeProductByNameService) {
-//        this.removeProductByNameService = removeProductByNameService;
-//    }
+    public RemoveProductByNameUI(RemoveProductByNameService removeProductByNameService) {
+        this.removeProductByNameService = removeProductByNameService;
+    }
 
     @Override
     public void execute() {

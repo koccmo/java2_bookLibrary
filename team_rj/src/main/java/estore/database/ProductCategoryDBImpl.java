@@ -9,15 +9,12 @@ import java.util.List;
 @Component
 public class ProductCategoryDBImpl implements ProductCategoryDB {
 
-    private Long nextCategoryId = 1L;
-    private List<ProductCategory> categories = new ArrayList<>();
-
-//    private Long nextCategoryId;
-//    private List<ProductCategory> categories;
-//    public ProductCategoryDBImpl() {
-//        initializeListOfCategories();
-//        setNextCategoryId();
-//    }
+    private Long nextCategoryId;
+    private List<ProductCategory> categories;
+    public ProductCategoryDBImpl() {
+        initializeListOfCategories();
+        setNextCategoryId();
+    }
 
     private void initializeListOfCategories() {
         this.categories = new ArrayList<>();

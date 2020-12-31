@@ -8,7 +8,6 @@ import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductDB;
 import estore.domain.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -18,15 +17,13 @@ import java.util.stream.Collectors;
 @Component
 public class SearchProductByCategoryService {
 
-    @Autowired
     private ProductDB productDB;
-    @Autowired
     private SearchProductByCategoryValidator validator;
 
-//    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
-//        this.productDB = productDB;
-//        this.validator = validator;
-//    }
+    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
+        this.productDB = productDB;
+        this.validator = validator;
+    }
 
     public SearchProductByCategoryResponse execute(SearchProductByCategoryRequest request) {
         List<CoreError> errors = validator.validate(request);

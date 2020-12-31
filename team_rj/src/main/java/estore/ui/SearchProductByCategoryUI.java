@@ -7,7 +7,6 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByCategoryService;
 import estore.domain.ProductCategoryEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -15,12 +14,11 @@ import java.util.Scanner;
 @Component
 public class SearchProductByCategoryUI implements UIAction {
 
-    @Autowired
     private SearchProductByCategoryService searchProductByCategoryService;
 
-//    public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {
-//        this.searchProductByCategoryService = searchProductByCategoryService;
-//    }
+    public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {
+        this.searchProductByCategoryService = searchProductByCategoryService;
+    }
 
     @Override
     public void execute() {

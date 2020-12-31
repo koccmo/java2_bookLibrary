@@ -3,7 +3,6 @@ package estore.ui;
 import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.service.AddNewProductCategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,12 +10,11 @@ import java.util.Scanner;
 @Component
 public class AddProductCategoryUI implements UIAction {
 
-    @Autowired
     private AddNewProductCategoryService addNewProductCategoryService;
 
-//    public AddProductCategoryUI(AddNewProductCategoryService addNewProductCategoryService) {
-//        this.addNewProductCategoryService = addNewProductCategoryService;
-//    }
+    public AddProductCategoryUI(AddNewProductCategoryService addNewProductCategoryService) {
+        this.addNewProductCategoryService = addNewProductCategoryService;
+    }
 
     @Override
     public void execute() {
