@@ -49,7 +49,7 @@ public class AddVisitService {
             }
         }
 
-        errors.add(new CoreError("id", "Database doesnt't contain patient with id " + addVisitRequest.getId()));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
         return new AddVisitResponse(errors);
 
     }
