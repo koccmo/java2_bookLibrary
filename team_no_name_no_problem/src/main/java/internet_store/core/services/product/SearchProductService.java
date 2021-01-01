@@ -117,6 +117,18 @@ import java.util.stream.Collectors;
         }
     }
 
+    private List<Product> sortByPrice(List<Product> products, Ordering ordering){
+        if (ordering.getOrderDirection().equals("ASC")){
+            return products.stream()
+                    .sorted(Comparator.comparingInt(Product::getPrice))
+                    .collect(Collectors.toList());
+        }else{
+            return products.stream()
+                    .sorted((o1,o2) -> o2.getPrice() - o1.getPrice())
+                    .collect(Collectors.toList());
+        }
+    }
+
     private List<Product> sortByDescription(List<Product> products, Ordering ordering){
         if (ordering.getOrderDirection().equals("ASC")){
             return products.stream()
