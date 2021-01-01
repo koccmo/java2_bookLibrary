@@ -1,13 +1,13 @@
 package team_VK.application.core.services.main_menu_services;
 
-import team_VK.application.core.services.DIDependency;
-import team_VK.application.database.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.database.Database;
 
-@DIComponent
+@Component
 public class ShowBookService {
 
-    @DIDependency
+    @Autowired
     Database database;
 
     public void showBook(long showingBookID) {

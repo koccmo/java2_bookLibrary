@@ -1,24 +1,24 @@
 package team_VK.application.ui.main_menu;
 
-import team_VK.application.core.services.DIDependency;
-import team_VK.application.database.DIComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import team_VK.application.ui.UIActions;
 import team_VK.application.ui.search_book_and_make_booking_menu.GetBooksListUIAction;
 import team_VK.application.ui.search_book_and_make_booking_menu.SearchBookByManyCriteriaUIAction;
 import team_VK.application.ui.search_book_and_make_booking_menu.SearchBookByOneCriteriaUIAction;
-import team_VK.application.ui.UIActions;
 
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class BookSearchAndBookMenuUIAction implements UIActions {
 
-    @DIDependency
+    @Autowired
     GetBooksListUIAction getBooksListUIAction;
-    @DIDependency
+    @Autowired
     SearchBookByManyCriteriaUIAction searchBookByManyCriteriaUIAction;
-    @DIDependency
+    @Autowired
     SearchBookByOneCriteriaUIAction searchBookByOneCriteriaUIAction;
 
     private boolean contin;

@@ -1,9 +1,9 @@
 package team_VK.application.ui.additional_function;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.responses.CoreResponse;
-import team_VK.application.database.DIComponent;
 
-@DIComponent
+@Component
 public class ErrorsPrinter {
 
     public void execute(CoreResponse response) {

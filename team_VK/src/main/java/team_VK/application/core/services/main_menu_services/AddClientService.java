@@ -1,21 +1,21 @@
 package team_VK.application.core.services.main_menu_services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Client;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.validators.AddClientServiceValidator;
-import team_VK.application.database.DIComponent;
 import team_VK.application.database.DatabaseClients;
 
 import java.util.List;
-@DIComponent
+@Component
 public class AddClientService {
 
-    @DIDependency
+    @Autowired
     private DatabaseClients databaseClient;
-    @DIDependency private AddClientServiceValidator validator;
+    @Autowired private AddClientServiceValidator validator;
 
 
     public AddClientResponse addClient(AddClientRequest request){
