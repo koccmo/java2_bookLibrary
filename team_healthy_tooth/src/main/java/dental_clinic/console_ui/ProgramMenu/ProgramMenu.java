@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 @Component
 public class ProgramMenu {
@@ -39,6 +38,8 @@ public class ProgramMenu {
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
         return uiActions.stream()
@@ -51,26 +52,10 @@ public class ProgramMenu {
         menuNumberToActionMap.get(selectedMenuNumber).execute();
     }
 
-    public static int inputValidInteger(){
-        Integer input;
-        Scanner in = new Scanner(System.in);
-        while (true){
-            System.out.println("Please enter menu number: ");
-            while (true){
-                try {
-                    input = Integer.parseInt(in.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("It's not valid number! Please input valid number!");
-                }
-            }
-            if (input >= 0){
-                break;
-            }else{
-                System.out.println("Please enter valid value!");
-            }
-        }
-        return input;
+
+
+    public int inputValidInteger(){
+        return inputFormatsValidator.inputInteger("Please enter menu number: ");
     }
 
     public void print(){
