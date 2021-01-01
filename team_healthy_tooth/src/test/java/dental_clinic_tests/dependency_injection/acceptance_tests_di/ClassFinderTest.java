@@ -17,7 +17,7 @@ public class ClassFinderTest {
 
         List<Class> classList = classFinder.findClassesInsidePackage("dental_clinic.console_ui");
 
-        assertTrue(classList.size() == 16);
+        assertTrue(classList.size() == 17);
     }
 
     @Test
