@@ -31,7 +31,7 @@ public class ContainsDatabaseIdService {
             return new ContainsDatabaseIdResponse(containsDatabaseIdRequest.getId());
         }
 
-        errors.add(new CoreError("id = ", "Database doesn't contain patient with id"));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id"));
         return new ContainsDatabaseIdResponse(errors);
     }
 
