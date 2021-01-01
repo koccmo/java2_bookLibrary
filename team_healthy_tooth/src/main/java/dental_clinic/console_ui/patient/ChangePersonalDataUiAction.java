@@ -1,5 +1,7 @@
-package dental_clinic.console_ui;
+package dental_clinic.console_ui.patient;
 
+import dental_clinic.console_ui.InputFormatsValidator;
+import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.requests.patient.ChangePersonalDataRequest;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.patient.ChangePersonalDataResponse;
@@ -17,14 +19,15 @@ public class ChangePersonalDataUiAction implements UIAction {
 
     @Autowired
     private ChangePersonalDataService service;
-    @Autowired private ContainsDatabaseIdService containsDatabaseIdService;
+    @Autowired
+    private ContainsDatabaseIdService containsDatabaseIdService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     public void execute() {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Enter patient's id number : ");
-        long id = in.nextLong();
-        in.nextLine();
+        Long id = inputFormatsValidator.inputLong("Enter patient's id number: ");
 
         if (notExistingId(id).hasErrors()){
             notExistingId(id).getErrors().forEach(System.out::println);
