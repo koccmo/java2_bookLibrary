@@ -36,13 +36,12 @@ public class AddVisitUIAction implements UIAction {
         if (containsDatabaseIdResponse.hasErrors()){
             containsDatabaseIdResponse.getErrors().forEach(System.out::println);
         } else {
-
             System.out.println("Please input tooth number");
             Integer toothNumber = in.nextInt();
 
             System.out.println("Please input comment if necessary or press enter");
+            in.nextLine();
             String commentIn = in.nextLine();
-            commentIn = in.nextLine();
             Optional<String> comment = Optional.of(commentIn);
 
             System.out.println("Please enter tooth status");
@@ -51,8 +50,8 @@ public class AddVisitUIAction implements UIAction {
             ToothStatus toothStatus = inputToothStatus(variant);
 
             System.out.println("Please enter doctor's name");
+            in.nextLine();
             String doctorsName = in.nextLine();
-            doctorsName = in.nextLine();
 
             System.out.println("Please enter doctor's surname");
             String doctorSurname = in.nextLine();
@@ -90,7 +89,6 @@ public class AddVisitUIAction implements UIAction {
                         "12  HEALTHY\n");
     }
 
-    //I don't know how to validate it :((
     ToothStatus inputToothStatus(int variant){
 
         switch (variant) {
@@ -107,7 +105,7 @@ public class AddVisitUIAction implements UIAction {
             case 11: return ToothStatus.TILTINI;
             case 12: return ToothStatus.HEALTHY;
         }
-        return ToothStatus.HEALTHY;
+        return ToothStatus.OTHER;
     }
 
 }
