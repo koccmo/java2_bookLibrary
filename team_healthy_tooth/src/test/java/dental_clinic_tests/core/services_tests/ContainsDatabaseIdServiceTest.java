@@ -32,7 +32,7 @@ public class ContainsDatabaseIdServiceTest {
     public void testNotValidId(){
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(-7L);
 
-        CoreError expectedError = new CoreError("id = ", "Invalid input patient ID!");
+        CoreError expectedError = new CoreError("id", "Invalid input patient ID!");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
@@ -48,7 +48,7 @@ public class ContainsDatabaseIdServiceTest {
     public void testNoIdInDatabase(){
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(7L);
 
-        CoreError expectedError = new CoreError("id = ", "Database doesn't contain patient with id");
+        CoreError expectedError = new CoreError("id", "Database doesn't contain patient with id");
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
 
