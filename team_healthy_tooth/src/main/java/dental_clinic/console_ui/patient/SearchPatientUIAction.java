@@ -1,5 +1,6 @@
 package dental_clinic.console_ui.patient;
 
+import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
@@ -17,6 +18,8 @@ public class SearchPatientUIAction implements UIAction {
 
     @Autowired
     private SearchPatientService searchPatientService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     @Override
     public void execute() {
@@ -36,11 +39,9 @@ public class SearchPatientUIAction implements UIAction {
         String orderDirection = in.nextLine();
         OrderingDirection orderingDirection = getOrderingDirection(orderDirection);
 
-        System.out.println("Please enter page number");
-        Integer pageNumber = in.nextInt();
+        Integer pageNumber = inputFormatsValidator.inputInteger("Please enter page number");
 
-        System.out.println("Please enter page size");
-        Integer pageSize = in.nextInt();
+        Integer pageSize = inputFormatsValidator.inputInteger("Please enter page size");
 
         Ordering ordering = new Ordering(orderBy, orderingDirection);
         Paging paging = new Paging(pageNumber, pageSize);
