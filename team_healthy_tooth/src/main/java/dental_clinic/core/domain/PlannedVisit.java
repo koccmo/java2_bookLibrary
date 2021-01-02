@@ -1,6 +1,6 @@
 package dental_clinic.core.domain;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -40,20 +40,18 @@ public class PlannedVisit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlannedVisit that = (PlannedVisit) o;
-        return Objects.equals(id, that.id) && Objects.equals(visitTime, that.visitTime) && Objects.equals(personalData, that.personalData);
+        return Objects.equals(visitTime, that.visitTime) && Objects.equals(personalData, that.personalData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, visitTime, personalData);
+        return Objects.hash(visitTime, personalData);
     }
 
     @Override
     public String toString() {
-        return "Planned visit:\n" +
-                "visitTime: " + visitTime.get(Calendar.DAY_OF_MONTH) + " "
-                + visitTime.get(Calendar.MONTH) + " " + visitTime.get(Calendar.YEAR)+
-                visitTime.get(Calendar.HOUR_OF_DAY) + visitTime.get(Calendar.MINUTE) + "\n"
-                + personalData;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        return  "Planned visit:\n" + simpleDateFormat.format(visitTime.getTime()) + " "
+                + personalData.getName() + " " + personalData.getSurname();
     }
 }
