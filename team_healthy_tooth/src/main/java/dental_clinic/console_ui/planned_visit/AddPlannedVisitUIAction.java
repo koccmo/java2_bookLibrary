@@ -41,10 +41,8 @@ public class AddPlannedVisitUIAction implements UIAction {
         if (addPlannedVisitResponse.hasErrors()) {
             addPlannedVisitResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Visit registration successful\n" +
-                    addPlannedVisitResponse.getPlannedVisit().getVisitTime() + "\n" +
-                    addPlannedVisitResponse.getPlannedVisit().getPersonalData());
-            ;
+            System.out.println("Visit added successfully:\n" +
+               addPlannedVisitResponse.getPlannedVisit().toString());
         }
     }
 }
