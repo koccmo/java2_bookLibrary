@@ -19,19 +19,19 @@ public class CancelPlannedVisitService {
     private CancelPlannedVisitValidator cancelPlannedVisitValidator;
 
     public CancelPlannedVisitResponse execute (CancelPlannedVisitRequest cancelPlannedVisitRequest) {
+
         List<CoreError> errorList = cancelPlannedVisitValidator.validate(cancelPlannedVisitRequest);
 
         if (!errorList.isEmpty()) {
             return new CancelPlannedVisitResponse(errorList);
         }
 
-        if (!plannedVisitsInMemoryDatabase.containsId(cancelPlannedVisitRequest.getId())) {
-            errorList.add(new CoreError("database",
-                    "Database doesn't contain id " + cancelPlannedVisitRequest.getId()));
-            return new CancelPlannedVisitResponse(errorList);
+        if (plannedVisitsInMemoryDatabase.containsId(cancelPlannedVisitRequest.getId())) {
+            plannedVisitsInMemoryDatabase.cancelPlannedVisit(cancelPlannedVisitRequest.getId());
+            return new CancelPlannedVisitResponse(cancelPlannedVisitRequest.getId());
         }
 
-        plannedVisitsInMemoryDatabase.cancelPlannedVisit(cancelPlannedVisitRequest.getId());
-        return new CancelPlannedVisitResponse(cancelPlannedVisitRequest.getId());
+        errorList.add(new CoreError("database", "Database doesn't contain id " + cancelPlannedVisitRequest.getId()));
+        return new CancelPlannedVisitResponse(errorList);
     }
 }

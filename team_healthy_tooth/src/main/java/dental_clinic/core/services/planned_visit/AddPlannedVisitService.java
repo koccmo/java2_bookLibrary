@@ -24,13 +24,14 @@ public class AddPlannedVisitService {
     @Autowired
     private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
 
-    public AddPlannedVisitResponse execute(AddPlannedVisitRequest addPlannedVisitRequest) {
+    public AddPlannedVisitResponse execute (AddPlannedVisitRequest addPlannedVisitRequest) {
+
         List<CoreError> errorList = addPlannedVisitRequestValidator.validate(addPlannedVisitRequest);
         if (!errorList.isEmpty()) {
             return new AddPlannedVisitResponse(errorList);
         }
 
-        GregorianCalendar visitDate = getVisitDate(addPlannedVisitRequest.getVisitData());
+        GregorianCalendar visitDate = getVisitDate(addPlannedVisitRequest.getVisitDataText());
         errorList.addAll(dateInFuture(visitDate));
         if (!errorList.isEmpty()) {
             return new AddPlannedVisitResponse(errorList);
@@ -41,17 +42,17 @@ public class AddPlannedVisitService {
         return new AddPlannedVisitResponse(plannedVisit);
     }
 
-    private GregorianCalendar getVisitDate (String visitDate) {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    private GregorianCalendar getVisitDate (String visitDateText) {
+        GregorianCalendar visitDateDateFormat = new GregorianCalendar();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         try {
-            Date date = simpleDateFormat.parse(visitDate);
-            gregorianCalendar.setTime(date);
+            Date date = simpleDateFormat.parse(visitDateText);
+            visitDateDateFormat.setTime(date);
         }
         catch (ParseException e) {
-
+            System.out.println("Unexpected error!");
         }
-        return gregorianCalendar;
+        return visitDateDateFormat;
     }
 
     private List<CoreError> dateInFuture (GregorianCalendar visitDate) {

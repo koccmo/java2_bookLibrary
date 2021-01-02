@@ -14,12 +14,14 @@ import java.util.List;
 
 @Component
 public class GetPlannedVisitsService {
+
     @Autowired
     private GetPlannedVisitsRequestValidator getPlannedVisitsRequestValidator;
     @Autowired
     private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
 
     public GetPlannedVisitsResponse execute (GetPlannedVisitsRequest getPlannedVisitsRequest) {
+
         List<CoreError> errors = getPlannedVisitsRequestValidator.validate(getPlannedVisitsRequest);
 
         if (!errors.isEmpty()) {
@@ -28,8 +30,8 @@ public class GetPlannedVisitsService {
 
         List<PlannedVisit> plannedVisits = plannedVisitsInMemoryDatabase.getPlannedVisits();
 
-        errors.add(new CoreError("database", "Database is empty"));
         if (plannedVisits.isEmpty()) {
+            errors.add(new CoreError("database", "Database is empty"));
             return new GetPlannedVisitsResponse(errors, new ArrayList<>());
         }
 
