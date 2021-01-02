@@ -5,8 +5,9 @@ import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
 import dental_clinic.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -14,26 +15,28 @@ import java.util.regex.Pattern;
 @Component
 public class AddPlannedVisitRequestValidator {
 
-    public List<CoreError> validate (AddPlannedVisitRequest addPlannedVisitRequest) {
-        List<CoreError> errors = new ArrayList<>();
-        errors.addAll(visitTimeErrors(addPlannedVisitRequest.getVisitData()));
+    public List <CoreError> validate (AddPlannedVisitRequest addPlannedVisitRequest) {
+
+        List <CoreError> errors = new ArrayList<>();
+        errors.addAll(visitTimeValidationErrors(addPlannedVisitRequest.getVisitDataText()));
         errors.addAll(personalDataValidationErrors(addPlannedVisitRequest.getPersonalData()));
         return errors;
     }
 
-    private List<CoreError> visitTimeErrors (String visitTime) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> visitTimeValidationErrors(String visitTime) {
+        List <CoreError> errors = new ArrayList<>();
         errors.addAll(visitTimeFormatErrors(visitTime));
         return errors;
     }
 
-    private List<CoreError> visitTimeFormatErrors(String visitTime) {
-        List<CoreError> errors = new ArrayList<>();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private List <CoreError> visitTimeFormatErrors(String visitTime) {
+        List <CoreError> errors = new ArrayList<>();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
-            simpleDateFormat.parse(visitTime);
+            dateTimeFormatter.parse(visitTime);
         }
-        catch (ParseException e) {
+        catch (DateTimeParseException e) {
             errors.add(new CoreError("date", "Not valid input for date"));
         }
         return errors;
