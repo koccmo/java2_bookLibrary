@@ -4,16 +4,16 @@ import dental_clinic.core.domain.PersonalData;
 
 public class AddPlannedVisitRequest {
 
-    private String visitData;
+    private String visitDataText;
     private PersonalData personalData;
 
-    public AddPlannedVisitRequest(String visitData, PersonalData personalData) {
-        this.visitData = visitData;
+    public AddPlannedVisitRequest(String visitDataText, PersonalData personalData) {
+        this.visitDataText = visitDataText;
         this.personalData = personalData;
     }
 
-    public String getVisitData() {
-        return visitData;
+    public String getVisitDataText() {
+        return visitDataText;
     }
 
     public PersonalData getPersonalData() {
