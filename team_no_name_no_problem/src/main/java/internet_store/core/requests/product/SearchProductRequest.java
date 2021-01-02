@@ -27,6 +27,8 @@ public class SearchProductRequest {
         return description;
     }
 
+    public int getPrice() {return price; }
+
     public Ordering getOrdering(){
         return ordering;
     }
