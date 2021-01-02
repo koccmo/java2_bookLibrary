@@ -14,7 +14,8 @@ import java.util.List;
 @Component
 public class DeletePatientService {
 
-    @Autowired private PatientDatabase patientDatabase;
+    @Autowired
+    private PatientDatabase patientDatabase;
     @Autowired
     private DeletePatientValidator deletePatientValidator;
 
@@ -27,19 +28,11 @@ public class DeletePatientService {
         }
 
         if (patientDatabase.containsPatientWithSpecificId(deletePatientRequest.getId())){
-            for (int i = 0; i < patientDatabase.getPatients().size(); i++){
-                if (getCurrentPatientPersonalData(i).getId() == deletePatientRequest.getId()){
-                    patientDatabase.deletePatient(deletePatientRequest.getId());
-                    return new DeletePatientResponse(deletePatientRequest.getId());
-                }
-            }
+            patientDatabase.deletePatient(deletePatientRequest.getId());
+            return new DeletePatientResponse(deletePatientRequest.getId());
         }
 
         errors.add(new CoreError("id", "Database doesn't contain patient with id"));
         return new DeletePatientResponse(errors);
-    }
-
-    private PersonalData getCurrentPatientPersonalData(int index){
-        return patientDatabase.getPatients().get(index).getPersonalData();
     }
 }
