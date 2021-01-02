@@ -1,5 +1,5 @@
 package internet_store_tests.core.validators_tests.product;
-
+/*
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
@@ -57,3 +57,5 @@ public class SearchProductRequestValidatorTest {
     }
 
 }
+
+ */
