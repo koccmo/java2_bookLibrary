@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlannedVisitsInMemoryDatabase {
 
-    List<PlannedVisit> getPlannedVisits();
+    List <PlannedVisit> getPlannedVisits();
 
     void addPlannedVisit(PlannedVisit plannedVisit);
 
