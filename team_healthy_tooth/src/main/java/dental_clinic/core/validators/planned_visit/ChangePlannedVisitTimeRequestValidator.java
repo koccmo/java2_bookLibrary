@@ -4,10 +4,10 @@ import dental_clinic.core.requests.plannedVisit.ChangePlannedVisitTimeRequest;
 import dental_clinic.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -29,14 +29,13 @@ public class ChangePlannedVisitTimeRequestValidator {
     }
 
     private List<CoreError> visitTimeFormatErrors(String visitTime) {
-        List<CoreError> errors = new ArrayList<>();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        List <CoreError> errors = new ArrayList<>();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);;
         try {
-            Date date = simpleDateFormat.parse(visitTime);
-            //GregorianCalendar gregorianCalendar = new GregorianCalendar();
-            //gregorianCalendar.setTime(date);
+            dateTimeFormatter.parse(visitTime);
         }
-        catch (ParseException e) {
+        catch (DateTimeParseException e) {
             errors.add(new CoreError("date", "Not valid input for date"));
         }
         return errors;
