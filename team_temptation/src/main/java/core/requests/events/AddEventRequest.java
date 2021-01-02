@@ -5,15 +5,15 @@ public class AddEventRequest {
     private String eventName;
     private String eventKind;
     //    private Guides guide;
-    private int durationHours;
-    private int maxNumberParticipants;
-    private int minNumberParticipants;
+    private Integer durationHours;
+    private Integer maxNumberParticipants;
+    private Integer minNumberParticipants;
     private String route; // List<StayPoint>
 
     private String detailsDescription;
 
-    public AddEventRequest(String eventName, String eventKind, int durationHours,
-                           int maxNumberParticipants, int minNumberParticipants,
+    public AddEventRequest(String eventName, String eventKind, Integer durationHours,
+                           Integer maxNumberParticipants, Integer minNumberParticipants,
                            String route, String detailsDescription) {
         this.eventName = eventName;
         this.eventKind = eventKind;
@@ -32,15 +32,15 @@ public class AddEventRequest {
         return eventKind;
     }
 
-    public int getDurationHours() {
+    public Integer getDurationHours() {
         return durationHours;
     }
 
-    public int getMaxNumberParticipants() {
+    public Integer getMaxNumberParticipants() {
         return maxNumberParticipants;
     }
 
-    public int getMinNumberParticipants() {
+    public Integer getMinNumberParticipants() {
         return minNumberParticipants;
     }
 

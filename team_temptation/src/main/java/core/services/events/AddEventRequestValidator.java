@@ -9,6 +9,11 @@ import java.util.List;
 
 public class AddEventRequestValidator {
 
+    private static final int MIN_ROUTE = 3;
+    private static final int MIN_EVENT_NAME = 3;
+    private static final int MIN_DESCRIPTION = 3;
+
+
     public List<CoreError> validate (AddEventRequest request) {
 
         // Validation
@@ -18,7 +23,7 @@ public class AddEventRequestValidator {
             CoreError error = new CoreError("eventName", "Must be not empty");
             errors.add(error);
         }
-        if (!(request.getEventName() == null || request.getEventName().isEmpty()) && request.getEventName().length() <= 3) {
+        if (!(request.getEventName() == null || request.getEventName().isEmpty()) && request.getEventName().length() <= MIN_EVENT_NAME) {
             // error
             CoreError error = new CoreError("eventName", "Must contain more than 3 symbols");
             errors.add(error);
@@ -61,7 +66,7 @@ public class AddEventRequestValidator {
             CoreError error = new CoreError("route", "Must be not empty");
             errors.add(error);
         }
-        if (!(request.getRoute() == null || request.getRoute().isEmpty()) && request.getRoute().length() <= 3) {
+        if (!(request.getRoute() == null || request.getRoute().isEmpty()) && request.getRoute().length() <= MIN_ROUTE) {
             // error
             CoreError error = new CoreError("route", "Must contain more than 3 symbols");
             errors.add(error);
@@ -71,7 +76,7 @@ public class AddEventRequestValidator {
             CoreError error = new CoreError("detailDescription", "Must be not empty");
             errors.add(error);
         }
-        if (!(request.getDetailsDescription() == null || request.getDetailsDescription().isEmpty()) && request.getDetailsDescription().length() <= 3) {
+        if (!(request.getDetailsDescription() == null || request.getDetailsDescription().isEmpty()) && request.getDetailsDescription().length() <= MIN_DESCRIPTION) {
             // error
             CoreError error = new CoreError("detailDescription", "Must contain more than 3 symbols");
             errors.add(error);

@@ -35,7 +35,7 @@ public class AddEventUIAction implements UIAction {
         };
 
         System.out.println("Enter a trip duration (in hours): ");
-        Integer durationHours = parseInt(scanner.nextLine());
+        Integer durationHours = parseInt((scanner.nextLine()));
 
         System.out.println("Enter a max number of participant: ");
         Integer maxNumberParticipants = parseInt(scanner.nextLine());
