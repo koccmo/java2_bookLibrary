@@ -8,15 +8,14 @@ import java.util.List;
 
 public class GetPlannedVisitsResponse extends CoreResponse {
 
-    private List<PlannedVisit> plannedVisits;
+    private List <PlannedVisit> plannedVisits;
 
-    public GetPlannedVisitsResponse(List<PlannedVisit> plannedVisits) {
+    public GetPlannedVisitsResponse(List <PlannedVisit> plannedVisits) {
         this.plannedVisits = plannedVisits;
     }
 
-    public GetPlannedVisitsResponse(List<CoreError> errors, List<PlannedVisit> plannedVisits) {
+    public GetPlannedVisitsResponse(List<CoreError> errors, List <PlannedVisit> plannedVisits) {
         super(errors);
-        this.plannedVisits = plannedVisits;
     }
 
     public List<PlannedVisit> getPlannedVisits() {
