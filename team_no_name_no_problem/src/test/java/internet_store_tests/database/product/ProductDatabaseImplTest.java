@@ -152,5 +152,8 @@ public class ProductDatabaseImplTest {
         assertTrue(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(refrigerator));
         assertTrue(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(laptopAcer));
         assertTrue(resultOfFindingLaptopDell.contains(laptopDell));
+
+        assertFalse(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(laptopDell));
+        assertFalse(resultOfFindingLaptopDell.contains(laptopAcer));
     }
 }
