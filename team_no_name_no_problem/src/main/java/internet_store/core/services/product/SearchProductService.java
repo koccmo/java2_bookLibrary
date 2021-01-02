@@ -37,8 +37,9 @@ import java.util.stream.Collectors;
     }
 
     private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest){
-        if (isTitleAndDescriptionNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
-            return searchByTitleAndDescriptionIsProvided(searchProductRequest);
+        if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                                                  searchProductRequest.getPrice())){
+            return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
         }
         if (isTitleFilled(searchProductRequest.getTitle())){
             return searchByTitleIsProvided(searchProductRequest);
@@ -46,11 +47,11 @@ import java.util.stream.Collectors;
         return searchByDescriptionIsProvided (searchProductRequest);
     }
 
-    private boolean isTitleAndDescriptionNotEmpty(String title, String description){
+    private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description, int price){
         return title != null && !title.isEmpty() && description != null && !description.isEmpty();
     }
 
-    private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
+    private SearchProductResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
         List <Product> products = productDatabase.findAllByTitleAndDescription(searchProductRequest.getTitle(), searchProductRequest.getDescription());
         if (products.isEmpty()){
