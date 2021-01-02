@@ -69,7 +69,6 @@ public class DeletePatientServicesTest {
         DeletePatientRequest deletePatientRequest = new DeletePatientRequest(8L);
         Mockito.when(deletePatientValidator.validate(deletePatientRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsPatientWithSpecificId(8L)).thenReturn(true);
-        Mockito.when(patientDatabase.getPatients()).thenReturn(patients);
 
         DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);
 
