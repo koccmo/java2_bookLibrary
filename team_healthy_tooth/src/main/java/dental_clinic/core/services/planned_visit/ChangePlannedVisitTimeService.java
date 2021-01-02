@@ -2,7 +2,6 @@ package dental_clinic.core.services.planned_visit;
 
 import dental_clinic.core.requests.plannedVisit.ChangePlannedVisitTimeRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
 import dental_clinic.core.responses.planned_visit.ChangePlannedVisitTimeResponse;
 import dental_clinic.core.validators.planned_visit.ChangePlannedVisitTimeRequestValidator;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
@@ -31,16 +30,19 @@ public class ChangePlannedVisitTimeService {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        if (plannedVisitsInMemoryDatabase.containsId(changePlannedVisitTimeRequest.getId())) {
-            errorList.add(new CoreError("database", "Database doesn't contain id " + changePlannedVisitTimeRequest.getId()));
+        if (!plannedVisitsInMemoryDatabase.containsId(changePlannedVisitTimeRequest.getId())) {
+            errorList.add(new CoreError("database", "Database doesn't contain id "
+                    + changePlannedVisitTimeRequest.getId()));
+            return new ChangePlannedVisitTimeResponse(errorList);
         }
 
         GregorianCalendar visitDate = getVisitDate(changePlannedVisitTimeRequest.getVisitTime());
-        errorList.addAll(dateInFuture(visitDate));
+        errorList.addAll(dateNotInFuture(visitDate));
         if (!errorList.isEmpty()) {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
+        plannedVisitsInMemoryDatabase.changePlannedVisitTime(changePlannedVisitTimeRequest.getId(), visitDate);
         return new ChangePlannedVisitTimeResponse(changePlannedVisitTimeRequest.getId(), visitDate);
     }
 
@@ -57,7 +59,7 @@ public class ChangePlannedVisitTimeService {
         return gregorianCalendar;
     }
 
-    private List<CoreError> dateInFuture (GregorianCalendar visitDate) {
+    private List<CoreError> dateNotInFuture(GregorianCalendar visitDate) {
         List<CoreError> errors = new ArrayList<>();
         GregorianCalendar currentDate = new GregorianCalendar();
         if (visitDate.before(currentDate)) {
