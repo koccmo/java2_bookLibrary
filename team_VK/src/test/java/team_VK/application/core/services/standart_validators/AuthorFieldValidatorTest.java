@@ -1,33 +1,17 @@
 package team_VK.application.core.services.standart_validators;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import team_VK.application.configuration.LibraryConfig;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorFieldValidatorTest  {
 
-    ApplicationContext context;
-    AuthorFieldValidator subject;
-    @Before
-    public void setup() throws IOException, ClassNotFoundException {
+   private AuthorFieldValidator subject = new AuthorFieldValidator();
 
-        //context = new DIApplicationContextBuilder().build("team_VK.application");
-
-        context = new AnnotationConfigApplicationContext(LibraryConfig.class);
-
-//        DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
-//        dataBaseFiller.fill();
-//        subject = context.getBean(AuthorFieldValidator.class);
-    }
 
     @Test
     public void ShouldValidateCorrectBookAuthor() {

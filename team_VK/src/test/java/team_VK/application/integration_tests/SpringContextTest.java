@@ -20,6 +20,7 @@ public class SpringContextTest {
 
     @Test
     public void applicationContextTest() {
+
         assertNotNull(context);
     }
 }

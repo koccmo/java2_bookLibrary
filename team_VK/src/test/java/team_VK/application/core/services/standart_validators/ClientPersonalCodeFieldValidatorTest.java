@@ -1,32 +1,14 @@
 package team_VK.application.core.services.standart_validators;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import team_VK.application.ApplicationContext;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.DataBaseFiller;
-import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ClientPersonalCodeFieldValidatorTest {
 
-
-
-    ApplicationContext context;
-    ClientPersonalCodeFieldValidator subject;
-
-    @Before
-    public void setup() throws IOException, ClassNotFoundException {
-
-        context = new DIApplicationContextBuilder().build("team_VK.application");
-        DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
-        dataBaseFiller.fill();
-        subject = context.getBean(ClientPersonalCodeFieldValidator.class);
-    }
+    ClientPersonalCodeFieldValidator subject = new ClientPersonalCodeFieldValidator();
 
     @Test
     public void ShouldReturnEmptyListWhenPcIsCorrect() {

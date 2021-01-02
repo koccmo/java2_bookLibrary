@@ -1,8 +1,10 @@
 package team_VK.application;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
-
+@Component
 public class ApplicationContext {
 
     private Map<Class, Object> beans = new HashMap<>();
