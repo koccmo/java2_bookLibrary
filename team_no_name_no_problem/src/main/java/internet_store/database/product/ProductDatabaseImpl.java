@@ -88,6 +88,13 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public List<Product> findAllByPrice(int price) {
+        return productList.stream()
+                .filter(product -> product.getPrice() == price)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean containsProduct(Product product) {
         return productList.stream()
                 .anyMatch(product1 -> product1.equals(product));
