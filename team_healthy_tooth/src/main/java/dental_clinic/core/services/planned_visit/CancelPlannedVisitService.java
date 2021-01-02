@@ -31,6 +31,7 @@ public class CancelPlannedVisitService {
             return new CancelPlannedVisitResponse(errorList);
         }
 
+        plannedVisitsInMemoryDatabase.cancelPlannedVisit(cancelPlannedVisitRequest.getId());
         return new CancelPlannedVisitResponse(cancelPlannedVisitRequest.getId());
     }
 }
