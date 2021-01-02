@@ -5,14 +5,16 @@ import internet_store.core.requests.Paging;
 
 public class SearchProductRequest {
 
+    private int price;
     private String title;
     private String description;
     private Ordering ordering;
     private Paging paging;
 
-    public SearchProductRequest(String title, String description, Ordering ordering, Paging paging){
+    public SearchProductRequest(String title, String description, int price, Ordering ordering, Paging paging){
         this.title = title;
         this.description = description;
+        this.price = price;
         this.ordering = ordering;
         this.paging = paging;
     }
