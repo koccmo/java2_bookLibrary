@@ -5,7 +5,7 @@ import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.ContainsDatabaseIdService;
 import dental_clinic.core.validators.ContainsDatabaseIdValidator;
-import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

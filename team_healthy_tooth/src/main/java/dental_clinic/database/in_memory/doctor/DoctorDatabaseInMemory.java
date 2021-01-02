@@ -1,4 +1,4 @@
-package dental_clinic.database;
+package dental_clinic.database.in_memory.doctor;
 
 import dental_clinic.core.domain.Doctor;
 import org.springframework.stereotype.Component;

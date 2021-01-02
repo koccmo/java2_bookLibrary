@@ -1,4 +1,4 @@
-package dental_clinic.database;
+package dental_clinic.database.in_memory.patient;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;

@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.DeleteDoctorResponse;
 import dental_clinic.core.services.doctor.DeleteDoctorService;
 import dental_clinic.core.validators.doctor.DeleteDoctorRequestValidator;
-import dental_clinic.database.DoctorDatabase;
+import dental_clinic.database.in_memory.doctor.DoctorDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

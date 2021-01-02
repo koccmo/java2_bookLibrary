@@ -6,7 +6,7 @@ import dental_clinic.core.responses.patient.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.validators.patient.ChangePersonalDataValidator;
-import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
