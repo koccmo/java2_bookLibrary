@@ -29,7 +29,7 @@ import java.util.Scanner;
         System.out.println("Please enter price to search by price");
         int price = in.nextInt();
 
-        System.out.println("Please enter order by: title / description");
+        System.out.println("Please enter order by: title / description / price");
         String orderBy = in.nextLine();
 
         System.out.println("Please enter order direction");
