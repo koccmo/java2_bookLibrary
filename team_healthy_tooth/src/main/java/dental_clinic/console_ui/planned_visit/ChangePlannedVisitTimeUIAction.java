@@ -8,6 +8,7 @@ import dental_clinic.core.services.planned_visit.ChangePlannedVisitTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 @Component
@@ -33,8 +34,9 @@ public class ChangePlannedVisitTimeUIAction implements UIAction {
         if (changePlannedVisitTimeResponse.hasErrors()) {
             changePlannedVisitTimeResponse.getErrors().forEach(System.out::println);
         } else {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY HH:mm");
             System.out.println("Visit with id " + changePlannedVisitTimeResponse.getId() + " is changed,\n" +
-                    "visit time: " + changePlannedVisitTimeResponse.getVisitTime().toString());
+                    "visit time: " + simpleDateFormat.format(changePlannedVisitTimeResponse.getVisitTime().getTime()));
         }
     }
 }

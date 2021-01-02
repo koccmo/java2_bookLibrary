@@ -21,7 +21,7 @@ public class AddPlannedVisitUIAction implements UIAction {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter visit date in format dd-MM-yyyy HH:mm");
+        System.out.println("Please enter visit date in format DD-MM-YYYY HH:MM");
         String visitDate = in.nextLine();
 
         System.out.println("Please enter name");
@@ -42,7 +42,7 @@ public class AddPlannedVisitUIAction implements UIAction {
             addPlannedVisitResponse.getErrors().forEach(System.out::println);
         } else {
             System.out.println("Visit added successfully:\n" +
-               addPlannedVisitResponse.getPlannedVisit().toString());
+               addPlannedVisitResponse.getPlannedVisit());
         }
     }
 }
