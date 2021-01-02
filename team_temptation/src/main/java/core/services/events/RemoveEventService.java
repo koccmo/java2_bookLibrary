@@ -24,13 +24,14 @@ public class RemoveEventService {
             return new RemoveEventResponse(errors);
         }
 
+        boolean isSuccessRemoval;
         if (request.getDeletionWay().equals("byName")) {
-            if (databaseEvents.removeByName(request.getEventName())) return new RemoveEventResponse();
+            isSuccessRemoval = databaseEvents.removeByName(request.getEventName());
         } else {
-            if (databaseEvents.removeById(request.getEventId()) ) return new RemoveEventResponse();
+            isSuccessRemoval = databaseEvents.removeById(request.getEventId());
         }
 
-        errors.add(new CoreError("eventName", "An event \"" + request.getEventName() + "\" not found."));
-        return new RemoveEventResponse(errors);
+        return new RemoveEventResponse(isSuccessRemoval);
+
     }
 }

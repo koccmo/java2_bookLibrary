@@ -3,6 +3,8 @@ package core.requests.events;
 import core.requests.Ordering;
 import core.requests.Paging;
 
+import java.util.Objects;
+
 public class SearchEventRequest {
 
     private String eventKind;
@@ -65,4 +67,21 @@ public class SearchEventRequest {
     public boolean isNoOne() {
         return (getEventKind().equals("")) && (getDurationHours().equals(0)) && (getRoute().equals(""));
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchEventRequest that = (SearchEventRequest) o;
+        return Objects.equals(eventKind, that.eventKind) &&
+                Objects.equals(route, that.route) &&
+                Objects.equals(durationHours, that.durationHours) &&
+                Objects.equals(ordering, that.ordering) &&
+                Objects.equals(paging, that.paging);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventKind, route, durationHours, ordering, paging);
+    }
+
 }
