@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest) {
         if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
-                searchProductRequest.getPrice())) {
+                searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
             return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
         }
         if (isTitleFilled(searchProductRequest.getTitle())) {
@@ -50,9 +50,10 @@ import java.util.stream.Collectors;
         return searchByPriceIsProvided(searchProductRequest);
     }
 
-    private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description, int price){
+    private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description,
+                                                          Integer startPrice, Integer endPrice){
         return title != null && !title.isEmpty() && description != null && !description.isEmpty() &&
-                price != 0;
+                startPrice != null && endPrice != null;
     }
 
     private SearchProductResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductRequest searchProductRequest){
@@ -104,10 +105,12 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse searchByPriceIsProvided (SearchProductRequest searchProductRequest) {
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByPrice(searchProductRequest.getPrice());
+        List<Product> products = productDatabase.findAllByPrice(searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice());
         if (products.isEmpty()) {
-            errors.add (new CoreError("database","Database doesn't contain products with price: " +
-                    searchProductRequest.getPrice()));
+            errors.add (new CoreError("database","Database doesn't contain products with price" +
+                                            " range starting from: " + searchProductRequest.getStartPrice() +
+                                            " end ending with " + searchProductRequest.getEndPrice()));
             return new SearchProductResponse(errors, new ArrayList<>());
         }
         products = order(products, searchProductRequest.getOrdering());

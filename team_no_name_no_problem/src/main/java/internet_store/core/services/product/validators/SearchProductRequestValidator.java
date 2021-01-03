@@ -14,7 +14,8 @@ public class SearchProductRequestValidator {
 
         List <CoreError> errors = new ArrayList<>();
 
-        if (isTitleAndDescriptionEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
+        if (isTitleAndDescriptionEmptyAndBothPricesEntered(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                                                           searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice())){
             errors.add(new CoreError("search", "Not valid input for search"));
         }
 
@@ -29,8 +30,10 @@ public class SearchProductRequestValidator {
         return errors;
     }
 
-    private boolean isTitleAndDescriptionEmpty(String title, String description){
-        return (title == null || title.isEmpty()) && (description == null || description.isEmpty());
+    private boolean isTitleAndDescriptionEmptyAndBothPricesEntered(String title, String description,
+                                                                   Integer startPrice, Integer endPrice){
+        return (title == null || title.isEmpty()) && (description == null || description.isEmpty() &&
+                startPrice == null || endPrice == null);
     }
 
     private boolean isNotValidInputForOrdering(SearchProductRequest searchProductRequest){
@@ -42,7 +45,8 @@ public class SearchProductRequestValidator {
 
     private boolean isNotValidInputForOrderBy(SearchProductRequest searchProductRequest){
         return !searchProductRequest.getOrdering().getOrderBy().equals("title") &&
-                !searchProductRequest.getOrdering().getOrderBy().equals("description");
+                !searchProductRequest.getOrdering().getOrderBy().equals("description") &&
+                !searchProductRequest.getOrdering().getOrderBy().equals("price");
     }
 
     private boolean isNotValidInputForOrderDirection(SearchProductRequest searchProductRequest){
