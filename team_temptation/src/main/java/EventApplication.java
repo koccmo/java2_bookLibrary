@@ -1,34 +1,12 @@
-import core.services.events.*;
-import database.events.EventDatabase;
-import database.events.InMemoryEvents;
 import ui.events.*;
 
 import java.util.Scanner;
 
 public class EventApplication {
 
-    public static void main(String[] args) {
+    private static ApplicationContext eventsApplication = new ApplicationContext();
 
-        EventDatabase databaseEvents = new InMemoryEvents();
-
-        StartUpEventUIAction startUp = new StartUpEventUIAction(databaseEvents);
-
-        AddEventRequestValidator validatorAdd = new AddEventRequestValidator();
-        AddEventService addEventService = new AddEventService(databaseEvents, validatorAdd);
-        AddEventUIAction addEventUIAction = new AddEventUIAction(addEventService);
-
-        RemoveEventRequestValidator validatorRemove = new RemoveEventRequestValidator();
-        RemoveEventService removeEventService = new RemoveEventService(databaseEvents, validatorRemove);
-        RemoveEventUIAction removeEventUIAction = new RemoveEventUIAction(removeEventService);
-
-        SearchEventRequestValidator validatorSearch = new SearchEventRequestValidator();
-        SearchEventService searchEventService = new SearchEventService(databaseEvents, validatorSearch);
-        SearchEventUIAction searchEventUIAction = new SearchEventUIAction(searchEventService);
-
-        DisplayEventListService displayEventListService = new DisplayEventListService(databaseEvents);
-        DisplayEventUIAction displayEventUIAction = new DisplayEventUIAction(displayEventListService);
-
-        ExitEventUIAction exitEventUIAction = new ExitEventUIAction();
+    private static void eventsWork() {
         while (true) {
             menuOnDisplay();
 
@@ -36,28 +14,27 @@ public class EventApplication {
 
             switch (userChoice) {
                 case 0 -> {
-                    startUp.execute();
+                    ((StartUpEventUIAction) eventsApplication.getBean(StartUpEventUIAction.class)).execute();
                 }
                 case 1 -> {
-                    addEventUIAction.execute();
+                    ((AddEventUIAction) eventsApplication.getBean(AddEventUIAction.class)).execute();
                 }
                 case 2 -> {
-                    removeEventUIAction.execute();
+                    ((RemoveEventUIAction) eventsApplication.getBean(RemoveEventUIAction.class)).execute();
                 }
                 case 3 -> {
-                    searchEventUIAction.execute();
+                    ((SearchEventUIAction) eventsApplication.getBean(SearchEventUIAction.class)).execute();
                 }
                 case 4 -> {
-                    displayEventUIAction.execute();
+                    ((DisplayEventUIAction) eventsApplication.getBean(DisplayEventUIAction.class)).execute();
                 }
                 case 5 -> {
-                    exitEventUIAction.execute();
+                    ((ExitEventUIAction) eventsApplication.getBean(ExitEventUIAction.class)).execute();
                 }
             }
             System.out.println();
         }
     }
-
 
     private static int getUserChoice() {
         System.out.println("Enter menu item number to execute:");
@@ -73,7 +50,11 @@ public class EventApplication {
         System.out.println("3. Search events");
         System.out.println("4. Show all events");
         System.out.println("5. Exit");
-
         System.out.println();
+    }
+
+    public static void main(String[] args) {
+        eventsWork();
+        return;
     }
 }
