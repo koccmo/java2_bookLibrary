@@ -5,10 +5,7 @@ import dental_clinic.console_ui.doctor.AddDoctorUIAction;
 import dental_clinic.console_ui.doctor.DeleteDoctorUIAction;
 import dental_clinic.console_ui.doctor.GetDoctorListUIAction;
 import dental_clinic.console_ui.patient.*;
-import dental_clinic.console_ui.planned_visit.AddPlannedVisitUIAction;
-import dental_clinic.console_ui.planned_visit.CancelPlannedVisitUIAction;
-import dental_clinic.console_ui.planned_visit.ChangePlannedVisitTimeUIAction;
-import dental_clinic.console_ui.planned_visit.GetPlannedVisitsUIAction;
+import dental_clinic.console_ui.planned_visit.*;
 import dental_clinic.console_ui.visit.AddVisitUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,6 +41,7 @@ public class ProgramMenu {
         menuNumberToActionMap.put(14, findUIAction(uiActions, ChangePlannedVisitTimeUIAction.class));
         menuNumberToActionMap.put(15, findUIAction(uiActions, GetPlannedVisitsUIAction.class));
         menuNumberToActionMap.put(16, findUIAction(uiActions, CancelPlannedVisitUIAction.class));
+        menuNumberToActionMap.put(17, findUIAction(uiActions, SearchPlannedVisitsByPersonalCodeUIAction.class));
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
@@ -88,7 +86,9 @@ public class ProgramMenu {
                 "       13   Add planned visit\n" +
                 "       14   Change planned visit\n" +
                 "       15   Print planned visits\n" +
-                "       16   Cancel planned visit\n\n" +
+                "       16   Cancel planned visit\n" +
+                "       17   Search planned visit by personal code\n" +
+                "       18   Search planned visit by date\n\n" +
 
                 "       0   Exit\n");
     }
