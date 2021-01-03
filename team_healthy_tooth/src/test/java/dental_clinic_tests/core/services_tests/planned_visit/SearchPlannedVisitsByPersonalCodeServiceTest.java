@@ -1,10 +1,11 @@
-package dental_clinic.core.services.planned_visit;
+package dental_clinic_tests.core.services_tests.planned_visit;
 
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
 import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByPersonalCodeRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByPersonalCodeResponse;
+import dental_clinic.core.services.planned_visit.SearchPlannedVisitsByPersonalCodeService;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByPersonalCodeRequestValidator;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.junit.Test;

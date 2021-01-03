@@ -1,10 +1,11 @@
-package dental_clinic.core.services.planned_visit;
+package dental_clinic_tests.core.services_tests.planned_visit;
 
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
 import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByDateRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByDateResponse;
+import dental_clinic.core.services.planned_visit.SearchPlannedVisitsByDateService;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByDateRequestValidator;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class SearchPlannedVisitsByDateServiceTest {
         errorList.add(expectedError);
 
         Mockito.when(searchPlannedVisitsByDateRequestValidator.validate(searchPlannedVisitsByDateRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(1, 2, 11, 12)).thenReturn(new ArrayList<>());
+        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(1, 2, 11, 11)).thenReturn(new ArrayList<>());
 
         SearchPlannedVisitsByDateResponse searchPlannedVisitsByDateResponse = searchPlannedVisitsByDateService.execute(searchPlannedVisitsByDateRequest);
 
