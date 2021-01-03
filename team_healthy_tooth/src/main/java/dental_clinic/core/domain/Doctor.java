@@ -29,7 +29,7 @@ public class Doctor {
         return surname;
     }
 
-    public boolean filledCorrect() {
+    public boolean filledNameAndSurname() {
         return name != null && !name.isEmpty() && surname != null && !surname.isEmpty();
     }
 

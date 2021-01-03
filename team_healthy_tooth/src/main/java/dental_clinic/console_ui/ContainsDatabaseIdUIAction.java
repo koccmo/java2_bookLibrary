@@ -13,12 +13,11 @@ public class ContainsDatabaseIdUIAction implements UIAction {
 
     @Autowired
     private ContainsDatabaseIdService containsDatabaseIdService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     public void execute(){
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Please enter patients id");
-        long id = in.nextLong();
+        Long id = inputFormatsValidator.inputLong("Please enter patients id");
 
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(id);
         ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);

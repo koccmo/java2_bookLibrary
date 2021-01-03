@@ -3,9 +3,11 @@ package estore.ui;
 import estore.core.requests.RemoveProductByNameRequest;
 import estore.core.responses.RemoveProductByNameResponse;
 import estore.core.service.RemoveProductByNameService;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class RemoveProductByNameUI implements UIAction {
 
     private RemoveProductByNameService removeProductByNameService;

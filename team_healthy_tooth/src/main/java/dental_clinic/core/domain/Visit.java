@@ -61,12 +61,11 @@ public class Visit {
     @Override
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        return "\nVisit{" +
-                "toothNumber: " + toothNumber +
-                ", comment: " + comment +
-                ", toothStatus:" + toothStatus +
-                ", doctor: '" + doctor + '\'' +
-                ", date: " + simpleDateFormat.format(date) +
-                '}';
+        return "\nVisit: " +
+                " Tooth number: " + toothNumber +
+                ", Comment: " + comment +
+                ", Tooth status: " + toothStatus +
+                ", Dr." + doctor.getSurname() +
+                ", Date: " + simpleDateFormat.format(date);
     }
 }

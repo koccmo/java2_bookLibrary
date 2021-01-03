@@ -1,5 +1,7 @@
 package core.requests.events;
 
+import java.util.Objects;
+
 public class RemoveEventRequest {
 
     private final String eventName;
@@ -29,5 +31,20 @@ public class RemoveEventRequest {
 
     public Long getEventId() {
         return eventId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RemoveEventRequest request = (RemoveEventRequest) o;
+        return Objects.equals(eventName, request.eventName) &&
+                Objects.equals(eventId, request.eventId) &&
+                Objects.equals(deletionWay, request.deletionWay);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventName, eventId, deletionWay);
     }
 }

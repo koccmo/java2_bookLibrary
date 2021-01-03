@@ -8,6 +8,9 @@ import java.util.List;
 
 public class SearchEventRequestValidator {
 
+    private final static int MIN_PAGE_SIZE = 8;
+    private final static int MAX_PAGE_SIZE = 30;
+
     public List<CoreError> validate (SearchEventRequest request) {
 
         // Validation
@@ -35,7 +38,7 @@ public class SearchEventRequestValidator {
             errors.add(error);
         }
 
-        if (request.getPaging().getPageSize() < 8 || request.getPaging().getPageSize() > 30) {
+        if (request.getPaging().getPageSize() < MIN_PAGE_SIZE || request.getPaging().getPageSize() > MAX_PAGE_SIZE) {
             // error
             CoreError error = new CoreError("pageSize", "Must be between 8 and 30");
             errors.add(error);

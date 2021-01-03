@@ -5,9 +5,11 @@ import estore.core.validation.RemoveProductByIdValidator;
 import estore.database.ProductDB;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class RemoveProductByIdService {
 
     private ProductDB productDB;

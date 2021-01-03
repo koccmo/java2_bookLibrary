@@ -5,8 +5,8 @@ import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.visit.AddVisitValidator;
-import dental_clinic.database.DoctorDatabase;
-import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
 import dental_clinic.core.domain.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,7 +49,7 @@ public class AddVisitService {
             }
         }
 
-        errors.add(new CoreError("id", "Database doesnt't contain patient with id " + addVisitRequest.getId()));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
         return new AddVisitResponse(errors);
 
     }

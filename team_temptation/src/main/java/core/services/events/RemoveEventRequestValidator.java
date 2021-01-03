@@ -13,17 +13,16 @@ public class RemoveEventRequestValidator {
         // Validation
         List<CoreError> errors = new ArrayList<>();
 
+        // In case of deletionWay error definition
         if (request.getDeletionWay() == null || request.getDeletionWay().isBlank()) {
-            // error
             CoreError error = new CoreError("deletionWay", "Must be defined");
             errors.add(error);
-        }
+        } else {
 
-        if ((!request.getDeletionWay().equals("byName") && !request.getDeletionWay().equals("byId"))
-                && !request.getDeletionWay().isBlank()) {
-            // error
-            CoreError error = new CoreError("deletionWay", "Must be \"by name\" or \"by ID-number\"");
-            errors.add(error);
+            if (!request.getDeletionWay().equals("byName") && !request.getDeletionWay().equals("byId")) {
+                CoreError error = new CoreError("deletionWay", "Must be \"by name\" or \"by ID-number\"");
+                errors.add(error);
+            }
         }
 
         if (request.getDeletionWay().equals("byName")
@@ -44,8 +43,6 @@ public class RemoveEventRequestValidator {
             CoreError error = new CoreError("eventId", "Must be above zero");
             errors.add(error);
         }
-
-
 
         return errors;
     }

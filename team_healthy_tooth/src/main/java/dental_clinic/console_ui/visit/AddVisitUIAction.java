@@ -1,5 +1,6 @@
 package dental_clinic.console_ui.visit;
 
+import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.ToothStatus;
@@ -22,13 +23,15 @@ public class AddVisitUIAction implements UIAction {
 
     @Autowired
     private AddVisitService addVisitService;
-    @Autowired private ContainsDatabaseIdService containsDatabaseIdService;
+    @Autowired
+    private ContainsDatabaseIdService containsDatabaseIdService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     public void execute(){
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter patient's id");
-        Long id = in.nextLong();
+        Long id = inputFormatsValidator.inputLong("Please enter patient's id");
 
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(id);
         ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);
@@ -36,23 +39,18 @@ public class AddVisitUIAction implements UIAction {
         if (containsDatabaseIdResponse.hasErrors()){
             containsDatabaseIdResponse.getErrors().forEach(System.out::println);
         } else {
-
-            System.out.println("Please input tooth number");
-            Integer toothNumber = in.nextInt();
+            Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
 
             System.out.println("Please input comment if necessary or press enter");
             String commentIn = in.nextLine();
-            commentIn = in.nextLine();
             Optional<String> comment = Optional.of(commentIn);
 
-            System.out.println("Please enter tooth status");
             printToothStatuses();
-            Integer variant = in.nextInt();
+            Integer variant = inputFormatsValidator.inputInteger("Please enter tooth status");
             ToothStatus toothStatus = inputToothStatus(variant);
 
             System.out.println("Please enter doctor's name");
             String doctorsName = in.nextLine();
-            doctorsName = in.nextLine();
 
             System.out.println("Please enter doctor's surname");
             String doctorSurname = in.nextLine();
@@ -76,7 +74,8 @@ public class AddVisitUIAction implements UIAction {
 
     private void printToothStatuses(){
         System.out.println(
-                "1   KARIES\n" +
+                "Tooth statuses:\n" +
+                        "1   KARIES\n" +
                         "2   PLOMBA\n" +
                         "3   SAKNE\n" +
                         "4   KRONITIS\n" +
@@ -90,7 +89,6 @@ public class AddVisitUIAction implements UIAction {
                         "12  HEALTHY\n");
     }
 
-    //I don't know how to validate it :((
     ToothStatus inputToothStatus(int variant){
 
         switch (variant) {
@@ -107,7 +105,7 @@ public class AddVisitUIAction implements UIAction {
             case 11: return ToothStatus.TILTINI;
             case 12: return ToothStatus.HEALTHY;
         }
-        return ToothStatus.HEALTHY;
+        return ToothStatus.OTHER;
     }
 
 }

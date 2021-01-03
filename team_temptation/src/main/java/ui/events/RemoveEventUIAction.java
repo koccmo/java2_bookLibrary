@@ -37,8 +37,15 @@ public class RemoveEventUIAction implements UIAction {
         if (response.hasError()) {
             response.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("The event \"" + whatIsTheValueOFThisWay(request) + "\" removed from  list.");
+            System.out.print("The event \"" + whatIsTheValueOFThisWay(request));
+            System.out.println(endOfMessage(response));
         }
+    }
+
+    private String endOfMessage(RemoveEventResponse response) {
+        return response.isSuccessRemoval()
+                ? "\" removed from list."
+                : "\" not found.";
     }
 
     private static String whatIsTheValueOFThisWay(RemoveEventRequest request) {
@@ -49,7 +56,7 @@ public class RemoveEventUIAction implements UIAction {
 
     private Long toLong (String byId) {
         return byId.isBlank()
-                ? Long.valueOf(0)
+                ? 0L
                 : Long.parseLong(byId);
     }
 }

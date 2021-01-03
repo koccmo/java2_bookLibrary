@@ -1,10 +1,13 @@
 package estore.ui;
 
-import estore.ApplicationContext;
+import estore.config.ProductConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class UserAction {
 
-    private static ApplicationContext applicationContext = new ApplicationContext();
+    private static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(ProductConfiguration.class);
 
     public void run() {
         UserMenu userMenu = new UserMenu();
@@ -67,4 +70,5 @@ public class UserAction {
             }
         }
     }
+
 }

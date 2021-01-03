@@ -63,12 +63,14 @@ public class SearchEventService {
         return events;
     }
 
-    //TODO consider implementing this as a static-method in Paging-class m.b. or new class like an "Utilities" to make it available/reachable
+    //TODO consider implementing this as a static-method in Paging-class m.b. or new class like
+    // an "Utilities" to make it available/reachable for further usage in DisplayEventUIAction
     private List<Events> paging(List<Events> events, Paging paging) {
 
-        int lastPageNumber = events.size()/paging.getPageSize() + 1;
+//        int lastPageNumber = events.size()/paging.getPageSize();
+//        if (events.size() % paging.getPageSize() > 0) lastPageNumber++;
         int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
-        if (lastPageNumber < paging.getPageSize()) skip = (lastPageNumber - 1) * paging.getPageSize();;
+//        if (lastPageNumber < paging.getPageSize()) skip = (lastPageNumber - 1) * paging.getPageSize();
         return events.stream()
                 .skip(skip)
                 .limit(paging.getPageSize())
