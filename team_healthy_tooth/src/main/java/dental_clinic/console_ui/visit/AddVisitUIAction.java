@@ -39,7 +39,6 @@ public class AddVisitUIAction implements UIAction {
         if (containsDatabaseIdResponse.hasErrors()){
             containsDatabaseIdResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Please input tooth number");
             Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
 
             System.out.println("Please input comment if necessary or press enter");
@@ -51,7 +50,6 @@ public class AddVisitUIAction implements UIAction {
             ToothStatus toothStatus = inputToothStatus(variant);
 
             System.out.println("Please enter doctor's name");
-            in.nextLine();
             String doctorsName = in.nextLine();
 
             System.out.println("Please enter doctor's surname");
