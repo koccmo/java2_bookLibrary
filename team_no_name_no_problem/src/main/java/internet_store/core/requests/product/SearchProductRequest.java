@@ -5,16 +5,19 @@ import internet_store.core.requests.Paging;
 
 public class SearchProductRequest {
 
-    private int price;
+    private Integer startPrice;
+    private Integer endPrice;
     private String title;
     private String description;
     private Ordering ordering;
     private Paging paging;
 
-    public SearchProductRequest(String title, String description, int price, Ordering ordering, Paging paging){
+    public SearchProductRequest(String title, String description, Integer startPrice,
+                                Integer endPrice, Ordering ordering, Paging paging){
         this.title = title;
         this.description = description;
-        this.price = price;
+        this.startPrice = startPrice;
+        this.endPrice = endPrice;
         this.ordering = ordering;
         this.paging = paging;
     }
@@ -27,7 +30,9 @@ public class SearchProductRequest {
         return description;
     }
 
-    public int getPrice() {return price; }
+    public Integer getStartPrice() {return startPrice; }
+
+    public Integer getEndPrice() {return endPrice; }
 
     public Ordering getOrdering(){
         return ordering;

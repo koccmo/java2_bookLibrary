@@ -23,7 +23,7 @@ public interface ProductDatabase {
 
     List<Product> findAllByTitle (String title);
 
-    List<Product> findAllByPrice (int price);
+    List<Product> findAllByPrice (Integer startPrice, Integer endPrice);
 
     List<Product> findAllByDescription (String description);
 
