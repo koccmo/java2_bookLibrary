@@ -38,6 +38,12 @@ public class AddPlannedVisitService {
         }
 
         PlannedVisit plannedVisit = new PlannedVisit(visitDate, addPlannedVisitRequest.getPersonalData());
+
+        if (plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit)) {
+            errorList.add(new CoreError("database", "Not empty time"));
+            return new AddPlannedVisitResponse(errorList);
+        }
+
         plannedVisitsInMemoryDatabase.addPlannedVisit(plannedVisit);
         return new AddPlannedVisitResponse(plannedVisit);
     }
