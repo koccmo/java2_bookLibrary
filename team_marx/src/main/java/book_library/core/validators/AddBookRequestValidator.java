@@ -21,7 +21,9 @@ public class AddBookRequestValidator {
         List<CoreError> errors = new ArrayList<>();
         validateTitle(request).ifPresent(errors::add);
         validateAuthor(request).ifPresent(errors::add);
-        validatePresenceInDatabase(request).ifPresent(errors::add);
+        if(errors.isEmpty()) {
+            validatePresenceInDatabase(request).ifPresent(errors::add);
+        }
         return errors;
     }
 

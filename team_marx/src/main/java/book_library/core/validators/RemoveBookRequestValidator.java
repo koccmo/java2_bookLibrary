@@ -19,7 +19,9 @@ public class RemoveBookRequestValidator {
     public List<CoreError> validate(RemoveBookRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
-        validateIdPresentsInDatabase(request).ifPresent(errors::add);
+        if (errors.isEmpty()) {
+            validateIdPresentsInDatabase(request).ifPresent(errors::add);
+        }
         return errors;
     }
 
