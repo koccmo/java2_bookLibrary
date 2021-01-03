@@ -146,14 +146,13 @@ public class ProductDatabaseImplTest {
     public void findAllProductsByPriceTest() {
         productDatabase.add(laptopAcer);
 
-        List<Product> resultOfFindingRefrigeratorAndLaptopByOnePrice = productDatabase.findAllByPrice(300,400);
-        List<Product> resultOfFindingLaptopDell = productDatabase.findAllByPrice(300,400);
+        List<Product> resultOfFindingRefrigeratorAndLaptopBySamePriceRange = productDatabase.findAllByPrice(299,401);
+        List<Product> resultOfFindingLaptopDell = productDatabase.findAllByPrice(301,401);
 
-        assertTrue(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(refrigerator));
-        assertTrue(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(laptopAcer));
+        assertTrue(resultOfFindingRefrigeratorAndLaptopBySamePriceRange.contains(refrigerator));
+        assertTrue(resultOfFindingRefrigeratorAndLaptopBySamePriceRange.contains(laptopAcer));
         assertTrue(resultOfFindingLaptopDell.contains(laptopDell));
 
-        assertFalse(resultOfFindingRefrigeratorAndLaptopByOnePrice.contains(laptopDell));
         assertFalse(resultOfFindingLaptopDell.contains(laptopAcer));
     }
 }
