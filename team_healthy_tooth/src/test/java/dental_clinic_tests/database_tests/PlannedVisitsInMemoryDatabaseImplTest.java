@@ -82,19 +82,20 @@ public class PlannedVisitsInMemoryDatabaseImplTest {
 
     @Test
     public void testByPersonalCode() {
-        assertTrue(plannedVisitsInMemoryDatabase.searchByPersonalCode("14018578963").isEmpty());
-        assertTrue(plannedVisitsInMemoryDatabase.searchByPersonalCode("01012087412").size() == 1);
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByPersonalCode("14018578963").isEmpty());
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByPersonalCode("01012087412").size() == 1);
     }
 
     @Test
     public void testSearchByDate() {
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(24, 26,03, 04).size() == 1);
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(14, 15,03, 04).size() == 1);
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(01, 15,01, 04).size() == 1);
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(25, 25,03, 03).size() == 1);
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(24, 26,03, 04).size() == 1);
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(14, 15,03, 04).size() == 1);
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(01, 15,01, 04).size() == 1);
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(25, 25,03, 03).size() == 1);
 
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(14, 16, 03, 03).isEmpty());
-        assertTrue(plannedVisitsInMemoryDatabase.searchByDate(14, 12, 03, 03).isEmpty());
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(14, 16, 03, 03).isEmpty());
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(14, 12, 03, 03).isEmpty());
+        assertTrue(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(0, 0, 0, 0).isEmpty());
     }
 
 }
