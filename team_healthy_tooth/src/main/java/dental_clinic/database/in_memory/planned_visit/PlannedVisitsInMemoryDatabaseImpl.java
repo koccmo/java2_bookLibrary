@@ -44,4 +44,10 @@ public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryD
         return plannedVisitsList.stream()
                 .anyMatch(plannedVisit -> plannedVisit.getId().equals(id));
     }
+
+    @Override
+    public boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit) {
+        return plannedVisitsList.stream()
+                .anyMatch(plannedVisit1 -> plannedVisit1.getVisitTime().equals(plannedVisit.getVisitTime()));
+    }
 }

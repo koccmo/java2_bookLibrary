@@ -16,4 +16,6 @@ public interface PlannedVisitsInMemoryDatabase {
     void changePlannedVisitTime(Long id, GregorianCalendar visitTime);
 
     boolean containsId(Long id);
+
+    boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit);
 }
