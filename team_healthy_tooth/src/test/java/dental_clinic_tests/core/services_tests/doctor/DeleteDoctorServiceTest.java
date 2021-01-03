@@ -1,4 +1,4 @@
-package dental_clinic_tests.core.services_tests;
+package dental_clinic_tests.core.services_tests.doctor;
 
 import dental_clinic.core.requests.doctor.DeleteDoctorRequest;
 import dental_clinic.core.responses.CoreError;

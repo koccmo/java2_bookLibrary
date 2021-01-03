@@ -1,4 +1,4 @@
-package dental_clinic_tests.core.validators_tests;
+package dental_clinic_tests.core.validators_tests.patient;
 
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.CoreError;

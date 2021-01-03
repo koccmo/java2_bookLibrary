@@ -1,4 +1,4 @@
-package dental_clinic_tests.core.services_tests;
+package dental_clinic_tests.core.services_tests.visit;
 
 import dental_clinic.core.domain.*;
 import dental_clinic.core.requests.visit.AddVisitRequest;

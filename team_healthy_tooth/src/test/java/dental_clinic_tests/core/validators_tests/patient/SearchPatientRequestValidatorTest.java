@@ -1,4 +1,4 @@
-package dental_clinic_tests.core.validators_tests;
+package dental_clinic_tests.core.validators_tests.patient;
 
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
