@@ -24,7 +24,7 @@ public class CancelPlannedVisitUIAction implements UIAction {
         Long id = inputFormatsValidator.inputLong("Please enter id");
 
         CancelPlannedVisitRequest cancelPlannedVisitRequest = new CancelPlannedVisitRequest(id);
-        CancelPlannedVisitResponse cancelPlannedVisitResponse = new CancelPlannedVisitResponse(cancelPlannedVisitRequest.getId());
+        CancelPlannedVisitResponse cancelPlannedVisitResponse = cancelPlannedVisitService.execute(cancelPlannedVisitRequest);
 
         if (cancelPlannedVisitResponse.hasErrors()) {
             cancelPlannedVisitResponse.getErrors().forEach(System.out::println);
