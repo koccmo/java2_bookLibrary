@@ -66,11 +66,11 @@ public class PersonalData {
 
     @Override
     public String toString() {
-        return "\nPersonal data:{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", personalCode='" + personalCode + "\n";
+        return "\nPersonal data: " +
+                "id: " + id +
+                ", name: " + name +
+                ", surname: " + surname +
+                ", phone: " + phone +
+                ", personalCode: " + personalCode + "\n";
     }
 }
