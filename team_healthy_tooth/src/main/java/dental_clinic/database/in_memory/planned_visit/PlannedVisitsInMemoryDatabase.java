@@ -19,7 +19,7 @@ public interface PlannedVisitsInMemoryDatabase {
 
     boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit);
 
-    List <PlannedVisit> searchByPersonalCode (String personalCode);
+    List <PlannedVisit> searchPlannedVisitsByPersonalCode(String personalCode);
 
-    List<PlannedVisit> searchByDate (int dayFrom, int dayTo, int monthFrom, int monthTo);
+    List<PlannedVisit> searchPlannedVisitsByDate(int dayFrom, int dayTo, int monthFrom, int monthTo);
 }

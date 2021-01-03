@@ -54,14 +54,14 @@ public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryD
     }
 
     @Override
-    public List<PlannedVisit> searchByPersonalCode(String personalCode) {
+    public List<PlannedVisit> searchPlannedVisitsByPersonalCode(String personalCode) {
         return plannedVisitsList.stream()
                 .filter(plannedVisit -> plannedVisit.getPersonalData().getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PlannedVisit> searchByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
+    public List<PlannedVisit> searchPlannedVisitsByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
         GregorianCalendar dateFrom = new GregorianCalendar(2021, monthFrom-1, dayFrom, 00, 00);
         GregorianCalendar dateTo = new GregorianCalendar(2021, monthTo-1, dayTo, 23, 59);
         return plannedVisitsList.stream()
