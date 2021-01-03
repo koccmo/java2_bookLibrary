@@ -4,8 +4,10 @@ import dental_clinic.core.domain.PlannedVisit;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryDatabase {
@@ -49,5 +51,24 @@ public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryD
     public boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit) {
         return plannedVisitsList.stream()
                 .anyMatch(plannedVisit1 -> plannedVisit1.getVisitTime().equals(plannedVisit.getVisitTime()));
+    }
+
+    @Override
+    public List<PlannedVisit> searchByPersonalCode(String personalCode) {
+        return plannedVisitsList.stream()
+                .filter(plannedVisit -> plannedVisit.getPersonalData().getPersonalCode().equals(personalCode))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PlannedVisit> searchByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
+        GregorianCalendar dateFrom = new GregorianCalendar(2021, monthFrom-1, dayFrom, 00, 00);
+        GregorianCalendar dateTo = new GregorianCalendar(2021, monthTo-1, dayTo, 23, 59);
+        return plannedVisitsList.stream()
+                .filter(plannedVisit -> (plannedVisit.getVisitTime().after(dateFrom)
+                        && plannedVisit.getVisitTime().before(dateTo)) ||
+                        (plannedVisit.getVisitTime().equals(dateFrom) ||
+                        plannedVisit.getVisitTime().equals(dateTo)))
+                .collect(Collectors.toList());
     }
 }

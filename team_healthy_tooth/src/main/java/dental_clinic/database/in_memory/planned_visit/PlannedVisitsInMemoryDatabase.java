@@ -18,4 +18,8 @@ public interface PlannedVisitsInMemoryDatabase {
     boolean containsId(Long id);
 
     boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit);
+
+    List <PlannedVisit> searchByPersonalCode (String personalCode);
+
+    List<PlannedVisit> searchByDate (int dayFrom, int dayTo, int monthFrom, int monthTo);
 }
