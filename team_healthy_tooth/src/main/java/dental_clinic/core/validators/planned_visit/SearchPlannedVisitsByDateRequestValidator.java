@@ -2,10 +2,12 @@ package dental_clinic.core.validators.planned_visit;
 
 import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByDateRequest;
 import dental_clinic.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class SearchPlannedVisitsByDateRequestValidator {
 
     public List<CoreError> validate (SearchPlannedVisitsByDateRequest searchPlannedVisitsByDateRequest) {
