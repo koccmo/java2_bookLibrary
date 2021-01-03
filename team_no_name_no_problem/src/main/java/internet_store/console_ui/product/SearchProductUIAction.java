@@ -26,10 +26,13 @@ import java.util.Scanner;
         System.out.println("Please enter description to search by description");
         String description = in.nextLine();
 
-        System.out.println("Please enter price to search by price");
-        int price = in.nextInt();
+        System.out.println("Please enter start price to search by price");
+        Integer startPrice = in.nextInt();
 
-        System.out.println("Please enter order by: title / description / price");
+        System.out.println("Please enter end price to search by price");
+        Integer endPrice = in.nextInt();
+
+        System.out.println("Please enter order by: title / description / start price, end price");
         String orderBy = in.nextLine();
 
         System.out.println("Please enter order direction");
@@ -43,7 +46,8 @@ import java.util.Scanner;
 
         Ordering ordering = new Ordering(orderBy, orderDirection);
         Paging paging = new Paging(pageNumber, pageSize);
-        SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, price, ordering, paging);
+        SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, startPrice,
+                                                                             endPrice,ordering, paging);
         SearchProductResponse searchProductResponse = searchProductService.execute(searchProductRequest);
 
         if (searchProductResponse.hasErrors()){
