@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class PlannedVisitsInMemoryDatabaseImplTest {
 
     PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase = new PlannedVisitsInMemoryDatabaseImpl();
-    GregorianCalendar visitTime = new GregorianCalendar(2021, Calendar.MARCH, 25);
+    GregorianCalendar visitTime = new GregorianCalendar(2021, Calendar.MARCH, 25, 15, 30);
     PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "01012087412");
     PlannedVisit plannedVisit = new PlannedVisit(visitTime, personalData);
 
@@ -61,6 +61,23 @@ public class PlannedVisitsInMemoryDatabaseImplTest {
     public void testContainsId() {
         assertTrue(plannedVisitsInMemoryDatabase.containsId(1L));
         assertFalse(plannedVisitsInMemoryDatabase.containsId(2L));
+    }
+
+    @Test
+    public void containsPlannedVisitInTheSameTimeAndDateTrue() {
+        PersonalData personalData1 = new PersonalData("Bob", "Surname", "12345678", "01032087412");
+        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime, personalData1);
+
+        assertTrue(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit1));
+    }
+
+    @Test
+    public void containsPlannedVisitInTheSameTimeFalse() {
+        PersonalData personalData1 = new PersonalData("Bob", "Surname", "12345678", "01032087412");
+        GregorianCalendar visitTime1 = new GregorianCalendar(2021, Calendar.MARCH, 26, 15, 30);
+        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime1, personalData1);
+
+        assertFalse(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit1));
     }
 
 }
