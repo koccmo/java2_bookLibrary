@@ -1,10 +1,14 @@
 package dental_clinic.core.services.planned_visit;
 
+import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
+import dental_clinic.core.requests.patient.AddPatientRequest;
 import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
+import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +27,19 @@ public class AddPlannedVisitService {
     private AddPlannedVisitRequestValidator addPlannedVisitRequestValidator;
     @Autowired
     private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired
+    private AddPatientService addPatientService;
 
     public AddPlannedVisitResponse execute (AddPlannedVisitRequest addPlannedVisitRequest) {
+
+        if (!addPlannedVisitRequest.getIsNewPatient()) {
+            addPlannedVisitRequest = fillPersonalData(addPlannedVisitRequest);
+        } else {
+            AddPatientRequest addPatientRequest = new AddPatientRequest(addPlannedVisitRequest.getPersonalData());
+            addPatientService.execute(addPatientRequest);
+        }
 
         List<CoreError> errorList = addPlannedVisitRequestValidator.validate(addPlannedVisitRequest);
         if (!errorList.isEmpty()) {
@@ -68,5 +83,10 @@ public class AddPlannedVisitService {
             errors.add(new CoreError("date", "Visit date must be in future"));
         }
         return errors;
+    }
+
+    private AddPlannedVisitRequest fillPersonalData (AddPlannedVisitRequest addPlannedVisitRequest1) {
+        PersonalData personalData = patientDatabase.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get().getPersonalData();
+        return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData);
     }
 }
