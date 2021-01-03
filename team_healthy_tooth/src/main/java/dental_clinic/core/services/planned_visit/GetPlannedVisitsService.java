@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class GetPlannedVisitsService {
@@ -35,6 +37,10 @@ public class GetPlannedVisitsService {
             return new GetPlannedVisitsResponse(errors, new ArrayList<>());
         }
 
-        return new GetPlannedVisitsResponse(plannedVisits);
+        List <PlannedVisit> result
+                = plannedVisits.stream()
+                                .sorted(Comparator.comparing(plannedVisit -> plannedVisit.getVisitTime()))
+                                .collect(Collectors.toList());
+        return new GetPlannedVisitsResponse(result);
     }
 }
