@@ -42,6 +42,7 @@ public class ProgramMenu {
         menuNumberToActionMap.put(15, findUIAction(uiActions, GetPlannedVisitsUIAction.class));
         menuNumberToActionMap.put(16, findUIAction(uiActions, CancelPlannedVisitUIAction.class));
         menuNumberToActionMap.put(17, findUIAction(uiActions, SearchPlannedVisitsByPersonalCodeUIAction.class));
+        menuNumberToActionMap.put(18, findUIAction(uiActions, SearchPlannedVisitsByDateUIAction.class));
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
