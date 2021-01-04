@@ -65,5 +65,22 @@ public class SearchProductRequestValidatorTest {
         assertTrue(errors.size() == 0);
     }
 
+    @Test
+    public void testNotValidSearchStartPriceIsNotEntered() {
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("", "",null,400, validOrdering, validPaging);
+        List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
+
+        assertTrue(errors.size() == 1);
+    }
+
+    @Test
+    public void testNotValidSearchEndPriceIsNotEntered() {
+
+        SearchProductRequest searchProductRequest = new SearchProductRequest("", "",300,null, validOrdering, validPaging);
+        List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
+
+        assertTrue(errors.size() == 1);
+    }
 }
 

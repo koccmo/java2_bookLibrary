@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
         if (isDescriptionFilled(searchProductRequest.getDescription())) {
             return searchByDescriptionIsProvided(searchProductRequest);
         }
-        return searchByPriceIsProvided(searchProductRequest);
+        return searchByPriceRangeIsProvided(searchProductRequest);
     }
 
     private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description,
@@ -103,7 +103,7 @@ import java.util.stream.Collectors;
         return new SearchProductResponse(products);
     }
 
-    private SearchProductResponse searchByPriceIsProvided (SearchProductRequest searchProductRequest) {
+    private SearchProductResponse searchByPriceRangeIsProvided(SearchProductRequest searchProductRequest) {
         List <CoreError>errors = new ArrayList<>();
         List<Product> products = productDatabase.findAllByPriceRange(searchProductRequest.getStartPrice(),
                 searchProductRequest.getEndPrice());
