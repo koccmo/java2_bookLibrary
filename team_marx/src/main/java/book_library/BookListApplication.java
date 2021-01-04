@@ -1,36 +1,12 @@
 package book_library;
 
 import book_library.console_ui.*;
-import book_library.core.database.Database;
-import book_library.core.database.InMemoryDataBaseImpl;
-import book_library.core.services.AddBookService;
-import book_library.core.services.SearchBooksService;
-import book_library.core.validators.AddBookRequestValidator;
-import book_library.core.services.GetAllBooksService;
-import book_library.core.services.RemoveBookService;
-import book_library.core.validators.RemoveBookRequestValidator;
-import book_library.core.validators.SearchBooksRequestValidator;
 
 import java.util.Scanner;
 
 public class BookListApplication {
 
-    private static Database database = new InMemoryDataBaseImpl();
-
-    private static AddBookRequestValidator addBookValidator = new AddBookRequestValidator(database);
-    private static RemoveBookRequestValidator removeBookValidator = new RemoveBookRequestValidator(database);
-    private static SearchBooksRequestValidator searchBooksRequestValidator = new SearchBooksRequestValidator();
-
-    private static AddBookService addBookService = new AddBookService(database, addBookValidator);
-    private static RemoveBookService removeBookService = new RemoveBookService(database, removeBookValidator);
-    private static GetAllBooksService getAllBooksService = new GetAllBooksService(database);
-    private static SearchBooksService searchBooksService = new SearchBooksService(database, searchBooksRequestValidator);
-
-    private static AddBookUIAction addBookUIAction = new AddBookUIAction(addBookService);
-    private static RemoveBookUIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
-    private static GetAllBooksUIAction getAllBooksUIAction = new GetAllBooksUIAction(getAllBooksService);
-    private static ExitUIAction exitUIAction = new ExitUIAction();
-    private static SearchBooksUIAction searchBooksUIAction = new SearchBooksUIAction(searchBooksService);
+    private static ApplicationContext applicationContext = new ApplicationContext();
 
     public static void main(String[] args) {
 
@@ -46,23 +22,28 @@ public class BookListApplication {
     private static void executeSelectedMenuItem(int userChoice) {
         switch (userChoice) {
             case 1: {
-                addBookUIAction.execute();
+                AddBookUIAction uiAction = applicationContext.getBean(AddBookUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 2: {
-                removeBookUIAction.execute();
+                RemoveBookUIAction uiAction = applicationContext.getBean(RemoveBookUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 3: {
-                getAllBooksUIAction.execute();
+                GetAllBooksUIAction uiAction = applicationContext.getBean(GetAllBooksUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 4: {
-                searchBooksUIAction.execute();
+                SearchBooksUIAction uiAction = applicationContext.getBean(SearchBooksUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 5: {
-                exitUIAction.execute();
+                ExitUIAction uiAction = applicationContext.getBean(ExitUIAction.class);
+                uiAction.execute();
                 break;
             }
         }

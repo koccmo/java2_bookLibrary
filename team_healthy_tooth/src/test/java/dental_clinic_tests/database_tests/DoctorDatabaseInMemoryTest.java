@@ -1,8 +1,8 @@
 package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.Doctor;
-import dental_clinic.database.DoctorDatabase;
-import dental_clinic.database.DoctorDatabaseInMemory;
+import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.database.in_memory.doctor.DoctorDatabaseInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
