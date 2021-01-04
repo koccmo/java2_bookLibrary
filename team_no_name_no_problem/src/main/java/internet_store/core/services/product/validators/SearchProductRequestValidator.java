@@ -14,7 +14,7 @@ public class SearchProductRequestValidator {
 
         List <CoreError> errors = new ArrayList<>();
 
-        if (isTitleAndDescriptionEmptyAndBothPricesEntered(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+        if (isTitleAndDescriptionEmptyAndPriceRangeMissing(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
                                                            searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice())){
             errors.add(new CoreError("search", "Not valid input for search"));
         }
@@ -30,7 +30,7 @@ public class SearchProductRequestValidator {
         return errors;
     }
 
-    private boolean isTitleAndDescriptionEmptyAndBothPricesEntered(String title, String description,
+    private boolean isTitleAndDescriptionEmptyAndPriceRangeMissing(String title, String description,
                                                                    Integer startPrice, Integer endPrice){
         return (title == null || title.isEmpty()) && (description == null || description.isEmpty() &&
                 startPrice == null || endPrice == null);
