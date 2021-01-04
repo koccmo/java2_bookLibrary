@@ -37,7 +37,7 @@ public class SearchProductRequestValidatorTest {
 
         assertTrue(errors.size() == 0);
     }
-
+/*
     @Test
     public void testValidSearchDescriptionFilled(){
 
@@ -46,7 +46,7 @@ public class SearchProductRequestValidatorTest {
 
         assertTrue(errors.size() == 0);
     }
-
+*/
     @Test
     public void testValidSearchTitleAndDescriptionFilled(){
 

@@ -105,7 +105,7 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse searchByPriceIsProvided (SearchProductRequest searchProductRequest) {
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByPrice(searchProductRequest.getStartPrice(),
+        List<Product> products = productDatabase.findAllByPriceRange(searchProductRequest.getStartPrice(),
                 searchProductRequest.getEndPrice());
         if (products.isEmpty()) {
             errors.add (new CoreError("database","Database doesn't contain products with price" +
