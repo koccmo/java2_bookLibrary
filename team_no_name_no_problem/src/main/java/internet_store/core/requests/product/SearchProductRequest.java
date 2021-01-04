@@ -5,10 +5,10 @@ import internet_store.core.requests.Paging;
 
 public class SearchProductRequest {
 
-    private Integer startPrice;
-    private Integer endPrice;
     private String title;
     private String description;
+    private Integer startPrice;
+    private Integer endPrice;
     private Ordering ordering;
     private Paging paging;
 

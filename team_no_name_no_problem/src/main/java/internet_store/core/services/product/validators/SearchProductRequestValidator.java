@@ -46,7 +46,8 @@ public class SearchProductRequestValidator {
     private boolean isNotValidInputForOrderBy(SearchProductRequest searchProductRequest){
         return !searchProductRequest.getOrdering().getOrderBy().equals("title") &&
                 !searchProductRequest.getOrdering().getOrderBy().equals("description") &&
-                !searchProductRequest.getOrdering().getOrderBy().equals("price");
+                !searchProductRequest.getOrdering().getOrderBy().equals("start price") &&
+                !searchProductRequest.getOrdering().getOrderBy().equals("end price");
     }
 
     private boolean isNotValidInputForOrderDirection(SearchProductRequest searchProductRequest){

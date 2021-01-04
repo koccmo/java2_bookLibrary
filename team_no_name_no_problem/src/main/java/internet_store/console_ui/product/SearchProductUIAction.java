@@ -26,13 +26,13 @@ import java.util.Scanner;
         System.out.println("Please enter description to search by description");
         String description = in.nextLine();
 
-        System.out.println("Please enter start price to search by price");
+        System.out.println("Please enter start price to search by start price");
         Integer startPrice = in.nextInt();
 
-        System.out.println("Please enter end price to search by price");
+        System.out.println("Please enter end price to search by end price");
         Integer endPrice = in.nextInt();
 
-        System.out.println("Please enter order by: title / description / start price, end price");
+        System.out.println("Please enter order by: title / description / start price / end price");
         String orderBy = in.nextLine();
 
         System.out.println("Please enter order direction");
@@ -55,6 +55,5 @@ import java.util.Scanner;
         }else{
             searchProductResponse.getProducts().forEach(System.out::println);
         }
-
     }
 }
