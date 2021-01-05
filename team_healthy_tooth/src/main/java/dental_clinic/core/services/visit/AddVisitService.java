@@ -11,6 +11,7 @@ import dental_clinic.core.domain.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.print.Doc;
 import java.util.List;
 
 @Component
@@ -36,12 +37,17 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
+        if (!doctorIsEmployed(addVisitRequest.getDoctor())) {
+            errors.add(new CoreError("doctor", "Doctor must be employed"));
+            return new AddVisitResponse(errors);
+        }
+
         Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
                 addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
 
-        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getId())){
+        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
             for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
-                if (isSpecificPatient(i, addVisitRequest.getId())) {
+                if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
                     patientDatabase.getPatients().get(i).addVisit(visit);
                     patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
                     return new AddVisitResponse();
@@ -49,7 +55,7 @@ public class AddVisitService {
             }
         }
 
-        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
         return new AddVisitResponse(errors);
 
     }
@@ -60,6 +66,10 @@ public class AddVisitService {
 
     private boolean notValidInputForDoctor(Doctor doctor) {
         return !doctorDatabase.containsDoctor(doctor);
+    }
+
+    private boolean doctorIsEmployed(Doctor doctor) {
+        return doctorDatabase.specificDoctorIsEmployed(doctor);
     }
 
 }
