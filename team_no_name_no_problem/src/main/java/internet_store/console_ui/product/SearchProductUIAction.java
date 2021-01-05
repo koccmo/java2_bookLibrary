@@ -32,11 +32,10 @@ import java.util.Scanner;
         System.out.println("Please enter end price to search by end price");
         Integer endPrice = in.nextInt();
 
-        //TODO Anvar, podumaj :D
-        System.out.println("Please enter order by: title / description / start price / end price");
+        System.out.println("Please enter order by: title / description / price");
         String orderBy = in.nextLine();
 
-        System.out.println("Please enter order direction");
+        System.out.println("Please enter order direction: ASC / DSC");
         String orderDirection = in.nextLine();
 
         System.out.println("Please enter page number");

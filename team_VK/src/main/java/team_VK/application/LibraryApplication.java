@@ -19,8 +19,8 @@ public class LibraryApplication {
 
         DataBaseFillAdditionalFunction   dataBaseFillAdditionalFunction =
                 context.getBean(DataBaseFillAdditionalFunction.class);
-
         dataBaseFillAdditionalFunction.execute();
+
         ProgramMenu programMenu = context.getBean(ProgramMenu.class);
         while (true) {
             programMenu.print();
