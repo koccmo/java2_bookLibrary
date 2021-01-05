@@ -70,7 +70,7 @@ public class Doctor {
     public String toString() {
         return "Doctor: " +
                 "id: " + id + "\n" +
-                "name: '" + name + "\n" +
-                "surname: '" + surname + "\n";
+                "Dr: '" + name + " " + surname + "\n"
+                +"Visits: " + visits + "\n\n";
     }
 }
