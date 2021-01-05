@@ -35,8 +35,8 @@ public class DoctorDatabaseInMemoryTest {
     @Test
     public void testDeleteDoctorById() {
         doctorDatabase.deleteDoctorById(4L);
-        assertTrue(doctorDatabase.getDoctorList().size() == 3);
-        assertTrue(!doctorDatabase.getDoctorList().contains(new Doctor("Dok", "Dokis")));
+        assertTrue(doctorDatabase.getDoctorList().size() == 4);
+        assertFalse(doctorDatabase.getDoctorList().get(3).getIsEmployed());
     }
 
     @Test
