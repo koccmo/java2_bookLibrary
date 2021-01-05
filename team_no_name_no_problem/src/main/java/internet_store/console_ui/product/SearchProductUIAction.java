@@ -32,6 +32,7 @@ import java.util.Scanner;
         System.out.println("Please enter end price to search by end price");
         Integer endPrice = in.nextInt();
 
+        //TODO Anvar, podumaj :D
         System.out.println("Please enter order by: title / description / start price / end price");
         String orderBy = in.nextLine();
 
@@ -47,7 +48,7 @@ import java.util.Scanner;
         Ordering ordering = new Ordering(orderBy, orderDirection);
         Paging paging = new Paging(pageNumber, pageSize);
         SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, startPrice,
-                                                                             endPrice,ordering, paging);
+                                                                             endPrice, ordering, paging);
         SearchProductResponse searchProductResponse = searchProductService.execute(searchProductRequest);
 
         if (searchProductResponse.hasErrors()){
