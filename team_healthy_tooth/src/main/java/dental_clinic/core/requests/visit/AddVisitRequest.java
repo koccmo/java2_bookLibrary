@@ -5,22 +5,21 @@ import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 
 import java.util.Date;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AddVisitRequest {
 
-    private Long id;
+    private Long patientsId;
     private Visit visit;
 
 
-    public AddVisitRequest(Long id, Visit visit){
-        this.id = id;
+    public AddVisitRequest(Long patientsId, Visit visit){
+        this.patientsId = patientsId;
         this.visit = visit;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPatientsId() {
+        return patientsId;
     }
 
     public Integer getToothNumber() {

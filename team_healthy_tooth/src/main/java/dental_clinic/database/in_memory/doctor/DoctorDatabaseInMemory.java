@@ -45,6 +45,15 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
                 .anyMatch(doctor -> doctor.getId().equals(id));
     }
 
+    @Override
+    public boolean specificDoctorIsEmployed(Doctor doctor) {
+        return doctors.stream()
+                .filter(doctor1 -> doctor1.getName().equals(doctor.getName())
+                && doctor1.getSurname().equals(doctor.getSurname())
+                && doctor1.getIsEmployed())
+                .findAny().isPresent();
+    }
+
     private List<Doctor> addSomeDoctors(){
         List<Doctor> doctors = new ArrayList<>();
         Doctor doctor1 = new Doctor("Doctor", "Zlo");

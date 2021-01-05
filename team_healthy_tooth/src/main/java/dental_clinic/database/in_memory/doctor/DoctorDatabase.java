@@ -16,4 +16,6 @@ public interface DoctorDatabase {
 
     boolean containsId(Long id);
 
+    boolean specificDoctorIsEmployed(Doctor doctor);
+
 }
