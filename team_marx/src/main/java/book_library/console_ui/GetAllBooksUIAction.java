@@ -17,7 +17,7 @@ public class GetAllBooksUIAction implements UIAction {
         System.out.println("Book list:");
         System.out.println("***************************************************************************");
         GetAllBooksRequest request = new GetAllBooksRequest();
-        GetAllBooksResponse response =  getAllBooksService.execute(request);
+        GetAllBooksResponse response = getAllBooksService.execute(request);
         response.getBooks().forEach(System.out::println);
         System.out.println("***************************************************************************");
         System.out.println("Book list end.");

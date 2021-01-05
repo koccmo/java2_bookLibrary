@@ -8,16 +8,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.AddPatientRequest;
-import dental_clinic.core.requests.DeletePatientRequest;
-import dental_clinic.core.requests.GetAllPatientsRequest;
-import dental_clinic.core.requests.SearchPatientByPersonalCodeRequest;
-import dental_clinic.core.responses.GetAllPatientsResponse;
-import dental_clinic.core.responses.SearchPatientByPersonalCodeResponse;
-import dental_clinic.core.services.AddPatientService;
-import dental_clinic.core.services.DeletePatientService;
-import dental_clinic.core.services.GetAllPatientsService;
-import dental_clinic.core.services.SearchPatientsByPersonalCodeService;
+import dental_clinic.core.requests.patient.AddPatientRequest;
+import dental_clinic.core.requests.patient.DeletePatientRequest;
+import dental_clinic.core.requests.patient.GetAllPatientsRequest;
+import dental_clinic.core.requests.patient.SearchPatientByPersonalCodeRequest;
+import dental_clinic.core.responses.patient.GetAllPatientsResponse;
+import dental_clinic.core.responses.patient.SearchPatientByPersonalCodeResponse;
+import dental_clinic.core.services.patient.AddPatientService;
+import dental_clinic.core.services.patient.DeletePatientService;
+import dental_clinic.core.services.patient.GetAllPatientsService;
+import dental_clinic.core.services.patient.SearchPatientsByPersonalCodeService;
 
 import static org.junit.Assert.assertTrue;
 

@@ -6,7 +6,7 @@ import book_library.core.services.RemoveBookService;
 
 import java.util.Scanner;
 
-public class RemoveBookUIAction implements UIAction{
+public class RemoveBookUIAction implements UIAction {
 
     private RemoveBookService removeBookService;
 
@@ -20,8 +20,8 @@ public class RemoveBookUIAction implements UIAction{
         System.out.println("Enter book id to remove:");
         Long bookId = Long.parseLong(scanner.nextLine());
         RemoveBookRequest request = new RemoveBookRequest(bookId);
-        RemoveBookResponse response =  removeBookService.execute(request);
-        if (response.hasErrors()){
+        RemoveBookResponse response = removeBookService.execute(request);
+        if (response.hasErrors()) {
             response.getErrors().forEach(System.out::println);
         } else {
             if (response.isBookRemoved()) {

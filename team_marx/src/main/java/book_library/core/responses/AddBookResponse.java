@@ -4,7 +4,7 @@ import book_library.Book;
 
 import java.util.List;
 
-public class AddBookResponse extends CoreResponse{
+public class AddBookResponse extends CoreResponse {
 
     private Book newBook;
 

@@ -8,11 +8,13 @@ import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SearchProductByNameService {
 
     private ProductDB productDB;
@@ -37,7 +39,7 @@ public class SearchProductByNameService {
     }
 
     private List<Product> order(List<Product> products, Ordering ordering) {
-        if (ordering != null) {
+        if ((ordering != null)) {
             Comparator<Product> comparator = ordering.getOrderBy().toLowerCase().equals("name")
                     ? Comparator.comparing(Product::getName)
                     : Comparator.comparing(Product::getPrice);
@@ -52,7 +54,7 @@ public class SearchProductByNameService {
     }
 
     private List<Product> paging(List<Product> products, Paging paging) {
-        if (paging != null) {
+        if ((paging != null)) {
             int pageSize = Integer.valueOf(paging.getPageSize());
             int skip = (Integer.valueOf(paging.getPageNumber()) - 1) * pageSize;
             return products.stream()

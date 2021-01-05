@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InMemoryDataBaseImpl implements Database {
 
@@ -25,7 +26,7 @@ public class InMemoryDataBaseImpl implements Database {
         Optional<Book> bookToDeleteOPT = books.stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst();
-        if (bookToDeleteOPT.isPresent()){
+        if (bookToDeleteOPT.isPresent()) {
             Book bookToRemove = bookToDeleteOPT.get();
             isBookDeleted = books.remove(bookToRemove);
         }
@@ -40,8 +41,30 @@ public class InMemoryDataBaseImpl implements Database {
 
 
     @Override
-    public boolean hasTheSameBookInDatabase(Book bookToCompare){
+    public boolean hasTheSameBookInDatabase(Book bookToCompare) {
 
         return books.contains(bookToCompare);
+    }
+
+    @Override
+    public List<Book> findByTitle(String title) {
+        return books.stream()
+                .filter(book -> book.getTitle().equals(title))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Book> findByAuthor(String author) {
+        return books.stream()
+                .filter(book -> book.getAuthor().equals(author))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Book> findByTitleAndAuthor(String title, String author) {
+        return books.stream()
+                .filter(book -> book.getAuthor().equals(author))
+                .filter(book -> book.getTitle().equals(title))
+                .collect(Collectors.toList());
     }
 }

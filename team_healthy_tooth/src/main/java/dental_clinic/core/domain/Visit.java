@@ -10,10 +10,10 @@ public class Visit {
     private Integer toothNumber;
     private Optional<String> comment;
     ToothStatus toothStatus;
-    private String doctor;
+    private Doctor doctor;
     private Date date;
 
-    public Visit (Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, String doctor, Date date){
+    public Visit (Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, Doctor doctor, Date date){
         this.toothNumber = toothNumber;
         this.comment = comment;
         this.toothStatus = toothStatus;
@@ -33,7 +33,7 @@ public class Visit {
         return toothStatus;
     }
 
-    public String getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
@@ -61,12 +61,11 @@ public class Visit {
     @Override
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        return "\nVisit{" +
-                "toothNumber: " + toothNumber +
-                ", comment: " + comment +
-                ", toothStatus:" + toothStatus +
-                ", doctor: '" + doctor + '\'' +
-                ", date: " + simpleDateFormat.format(date) +
-                '}';
+        return "\nVisit: " +
+                " Tooth number: " + toothNumber +
+                ", Comment: " + comment +
+                ", Tooth status: " + toothStatus +
+                ", Dr." + doctor.getSurname() +
+                ", Date: " + simpleDateFormat.format(date);
     }
 }

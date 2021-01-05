@@ -1,5 +1,8 @@
 package estore.ui;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ExitProgramUI implements UIAction {
 
     @Override

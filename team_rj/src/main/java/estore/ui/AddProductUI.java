@@ -4,9 +4,11 @@ import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.service.AddNewProductService;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AddProductUI implements UIAction {
 
     private AddNewProductService addNewProductService;
