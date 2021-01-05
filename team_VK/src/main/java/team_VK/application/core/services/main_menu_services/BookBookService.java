@@ -1,27 +1,25 @@
 package team_VK.application.core.services.main_menu_services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.domain.BookingPeriod;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.validators.BookBookServiceValidator;
-import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
-import java.util.*;
-@DIComponent
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+@Component
 public class BookBookService {
 
-    @DIDependency
+    @Autowired
     private Database database;
-    @DIDependency public BookBookServiceValidator validator;
-
-//    public BookBookService(Database database, BookBookServiceValidator validator) {
-//        this.database = database;
-//        this.validator = validator;
-//    }
+    @Autowired public BookBookServiceValidator validator;
 
     public BookBookResponse bookBook(BookBookRequest request) {
 

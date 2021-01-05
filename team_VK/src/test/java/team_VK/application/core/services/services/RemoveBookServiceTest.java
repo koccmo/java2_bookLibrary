@@ -23,7 +23,7 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class RemoveBookServiceTest {
 
-    @Mock private RemoveBookServiceValidator validator;
+    @Mock private RemoveBookServiceValidator subject;
     @Mock private DatabaseInMemory database ;
     @InjectMocks    private RemoveBookService service;
 
@@ -34,7 +34,7 @@ public class RemoveBookServiceTest {
 
         List<CoreError> errors = new ArrayList<>();
         RemoveBookRequest request = new RemoveBookRequest(1, "The Old Man and Sea");
-        Mockito.when(validator.validate(request, database)).thenReturn(errors);
+        Mockito.when(subject.validate(request, database)).thenReturn(errors);
 
 
         RemoveBookResponse response = service.removeBook(request);
@@ -48,7 +48,7 @@ public class RemoveBookServiceTest {
         RemoveBookRequest request = new RemoveBookRequest(1, "The Old Man and Sea1");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Book ID", "ID not consist to Book Title"));
-        Mockito.when(validator.validate(request, database)).thenReturn(errors);
+        Mockito.when(subject.validate(request, database)).thenReturn(errors);
 
         RemoveBookResponse response = service.removeBook(request);
 

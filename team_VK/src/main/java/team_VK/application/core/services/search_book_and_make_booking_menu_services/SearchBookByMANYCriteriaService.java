@@ -1,24 +1,24 @@
 package team_VK.application.core.services.search_book_and_make_booking_menu_services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.SearchBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.responses.SearchBookResponse;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.additional_functions.ResultBookListPrinter;
 import team_VK.application.core.services.validators.SearchBookServiceValidator;
-import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class SearchBookByMANYCriteriaService {
-    @DIDependency
+    @Autowired
     private Database database;
-    @DIDependency public SearchBookServiceValidator validator;
-    @DIDependency public ResultBookListPrinter resultBookListPrinter;
+    @Autowired public SearchBookServiceValidator validator;
+    @Autowired public ResultBookListPrinter resultBookListPrinter;
 
 
     public SearchBookResponse searchBook(SearchBookRequest request) {

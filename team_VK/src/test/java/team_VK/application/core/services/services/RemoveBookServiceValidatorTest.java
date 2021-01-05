@@ -15,11 +15,11 @@ import java.util.List;
 public class RemoveBookServiceValidatorTest {
 
     DatabaseInMemory database;
-    RemoveBookServiceValidator validator;
+    RemoveBookServiceValidator subject;
 
     @Before
     public void setup() {
-        validator = new RemoveBookServiceValidator();
+        subject = new RemoveBookServiceValidator();
         database = new DatabaseInMemory();
         getBooks();
     }
@@ -30,7 +30,7 @@ public class RemoveBookServiceValidatorTest {
 // positive functional test
         RemoveBookRequest request = new RemoveBookRequest(1, "foobar");
 
-        List<CoreError> errorsActual = validator.validate(request, database);
+        List<CoreError> errorsActual = subject.validate(request, database);
         Assert.assertEquals(0, errorsActual.size());
 
     }
@@ -41,7 +41,7 @@ public class RemoveBookServiceValidatorTest {
 
     public void ShouldntValidate_incorrect_outOfBound_ID() {
         RemoveBookRequest request = new RemoveBookRequest(3, "foobar");
-        List<CoreError> errorsActual = validator.validate(request, database);
+        List<CoreError> errorsActual = subject.validate(request, database);
         CoreError error = new CoreError("Book ID", "Not existing book ID entered");
         List<CoreError> errorsExpected = List.of(error);
 
@@ -54,7 +54,7 @@ public class RemoveBookServiceValidatorTest {
 
     public void ShouldntValidate_bookID_doesnt_consist_to_Title() {
         RemoveBookRequest request = new RemoveBookRequest(2, "foobar");
-        List<CoreError> errors = validator.validate(request, database);
+        List<CoreError> errors = subject.validate(request, database);
 
         Assert.assertEquals(errors.size(), 1);
         Assert.assertEquals(errors.get(0).getErrorMessage(), "ID not consist to Book Title");

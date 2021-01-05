@@ -1,12 +1,12 @@
 package team_VK.application.database;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import team_VK.application.core.domain.Book;
-import team_VK.application.core.services.DIDependency;
 
-@DIComponent
+//@Component
 public class DataBaseFiller {
 
- @DIDependency
+ @Autowired
  private Database database;
 
     public void fill() {

@@ -1,21 +1,16 @@
 package team_VK.application.ui.main_menu;
 
-import team_VK.application.core.services.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.services.main_menu_services.ShowBookService;
-import team_VK.application.database.DIComponent;
 import team_VK.application.ui.UIActions;
 
-
 import java.util.Scanner;
-@DIComponent
+@Component
 public class ShowBookUIActions implements UIActions {
 
-    @DIDependency private ShowBookService showBookService;
-
-//    public ShowBookUIActions(ShowBookService showBookService) {
-//        this.showBookService = showBookService;
-//    }
-
+    @Autowired
+    private ShowBookService showBookService;
 
     @Override
     public void execute() {

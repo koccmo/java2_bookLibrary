@@ -1,11 +1,11 @@
 package team_VK.application.core.services.additional_functions;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
-import team_VK.application.database.DIComponent;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class ResultBookListPrinter {
 
     public void execute (List<Book> resultList){
