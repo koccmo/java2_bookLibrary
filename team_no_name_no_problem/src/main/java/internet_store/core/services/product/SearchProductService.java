@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
     }
 
     private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest) {
+        //TODO Anvar, zdesj ne propisani vse kombinacii, teperj ih mnogo
         if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
                 searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
             return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
@@ -119,6 +120,7 @@ import java.util.stream.Collectors;
     }
 
     private List<Product> order(List<Product> products, Ordering ordering) {
+        //TODO zdesj ne propisan novij variant sortirovki
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
                 return sortByTitle(products, ordering);
