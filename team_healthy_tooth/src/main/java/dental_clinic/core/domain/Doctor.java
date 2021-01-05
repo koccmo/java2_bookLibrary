@@ -7,6 +7,7 @@ public class Doctor {
     private Long id;
     private String name;
     private String surname;
+    private boolean isEmployed = true;
 
     public Doctor(String name, String surname) {
         this.name = name;
@@ -27,6 +28,14 @@ public class Doctor {
 
     public String getSurname() {
         return surname;
+    }
+
+    public boolean getIsEmployed() {
+        return isEmployed;
+    }
+
+    public void setEmployed(boolean employed) {
+        isEmployed = employed;
     }
 
     public boolean filledNameAndSurname() {
