@@ -11,7 +11,6 @@ import dental_clinic.core.domain.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.print.Doc;
 import java.util.List;
 
 @Component
@@ -46,18 +45,33 @@ public class AddVisitService {
                 addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
 
         if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
-            for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
-                if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
-                    patientDatabase.getPatients().get(i).addVisit(visit);
-                    patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
-                    return new AddVisitResponse();
-                }
-            }
+            addVisitToDoctor(addVisitRequest.getDoctor(), visit);
+            return addVisitToPatient(addVisitRequest, visit);
         }
 
         errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
         return new AddVisitResponse(errors);
 
+    }
+
+    private void addVisitToDoctor (Doctor doctor, Visit visit) {
+        for (Doctor d : doctorDatabase.getDoctorList()) {
+            if (d.getName().equals(doctor.getName())
+            &&d.getSurname().equals(doctor.getSurname())) {
+                d.addVisit(visit);
+            }
+        }
+    }
+
+    private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
+        for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
+            if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
+                patientDatabase.getPatients().get(i).addVisit(visit);
+                patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
+                return new AddVisitResponse();
+            }
+        }
+        return new AddVisitResponse();
     }
 
     private boolean isSpecificPatient (int index, long id) {
