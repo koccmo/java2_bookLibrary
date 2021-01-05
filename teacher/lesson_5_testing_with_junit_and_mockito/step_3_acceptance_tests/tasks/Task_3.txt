@@ -4,7 +4,7 @@
 
 Типичный acceptance тест может выглядеть следующим образом:
 
-private dependency.EventApplicationContext appContext = new dependency.EventApplicationContext();
+private ApplicationContext appContext = new ApplicationContext();
 
 @Test
 public void shouldReturnCorrectBookList() {

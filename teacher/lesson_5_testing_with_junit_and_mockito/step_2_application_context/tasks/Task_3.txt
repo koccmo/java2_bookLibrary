@@ -1,4 +1,4 @@
-Создайте в классе dependency.EventApplicationContext следующее свойство:
+Создайте в классе ApplicationContext следующее свойство:
 
     private Map<Class, Object> beans = new HashMap<>();
 

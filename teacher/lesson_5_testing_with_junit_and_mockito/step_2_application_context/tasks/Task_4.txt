@@ -1,4 +1,4 @@
-Создайте в классе dependency.EventApplicationContext следующий метод:
+Создайте в классе ApplicationContext следующий метод:
 
 	public <T extends Object> T getBean(Class c) {
 		return (T) beans.get(c);

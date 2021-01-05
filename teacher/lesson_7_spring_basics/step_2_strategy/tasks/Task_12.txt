@@ -3,7 +3,7 @@
 
 public class BookListApplication {
 
-    private static dependency.EventApplicationContext applicationContext =
+    private static ApplicationContext applicationContext =
        new AnnotationConfigApplicationContext(BookListConfiguration.class);
 
 	public static void main(String[] args) {

@@ -2,13 +2,13 @@
 
 замените код:
 
-	private dependency.EventApplicationContext appContext =
+	private ApplicationContext appContext =
 			new DIApplicationContextBuilder().build("lv.javaguru.java2.library");
 
 
 на код:
 
-	private dependency.EventApplicationContext appContext;
+	private ApplicationContext appContext;
 
 	@Before
 	public void setup() {
