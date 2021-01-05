@@ -1,7 +1,7 @@
-Создайте в классе ApplicationContext конструктор без
+Создайте в классе dependency.EventApplicationContext конструктор без
 параметров и перенесите логику создания всех классов
 из BookListApplication класса в конструктор класса
-ApplicationContext следующим образом:
+dependency.EventApplicationContext следующим образом:
 
     beans.put(Database.class, new InMemoryDatabaseImpl());
 

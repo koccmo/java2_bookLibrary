@@ -6,7 +6,7 @@
 public class BookListApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = createApplicationContext();
+		dependency.EventApplicationContext applicationContext = createApplicationContext();
 		ProgramMenu programMenu = applicationContext.getBean(ProgramMenu.class);
 		while (true) {
 			programMenu.print();
@@ -15,7 +15,7 @@ public class BookListApplication {
 		}
 	}
 
-	private static ApplicationContext createApplicationContext() {
+	private static dependency.EventApplicationContext createApplicationContext() {
 		return new AnnotationConfigApplicationContext(BookListConfiguration.class);
 	}
 

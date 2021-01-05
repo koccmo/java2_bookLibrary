@@ -1,20 +1,21 @@
 package core.services.events;
 
-import core.requests.Ordering;
-import core.requests.Paging;
-import core.requests.events.SearchEventRequest;
-import core.responses.CoreError;
-import core.responses.events.SearchEventResponse;
-import database.events.EventDatabase;
-import domain.Events;
-import org.junit.jupiter.api.Assertions;
+import adventure_time.core.services.events.SearchEventRequestValidator;
+import adventure_time.core.requests.Ordering;
+import adventure_time.core.services.events.SearchEventService;
+import adventure_time.core.requests.Paging;
+import adventure_time.core.requests.events.SearchEventRequest;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.responses.events.SearchEventResponse;
+import adventure_time.database.events.EventDatabase;
+import adventure_time.domain.Events;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +25,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
-//@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class SearchEventServiceTest {
 
-     private SearchEventRequestValidator validator;
-     private SearchEventService service;
-     private EventDatabase database;
+//     private SearchEventRequestValidator validator;
+//     private SearchEventService service;
+//     private EventDatabase database;
 
-//    @Mock private SearchEventRequestValidator validator;
-//    @Mock private SearchEventService service;
-//    @InjectMocks private EventDatabase database;
+    @Mock private SearchEventRequestValidator validator;
+    @Mock private EventDatabase database;
+    @InjectMocks private SearchEventService service;
 
-    @BeforeEach
-    void setUp() {
-        validator = Mockito.mock(SearchEventRequestValidator.class);
-        database = Mockito.mock(EventDatabase.class);
-        service = new SearchEventService(database, validator);
-    }
+
+//    @BeforeEach
+//    void setUp() {
+//        validator = Mockito.mock(SearchEventRequestValidator.class);
+//        database = Mockito.mock(EventDatabase.class);
+//        service = new SearchEventService(database, validator);
+//    }
 
     @Test
     void shouldReturnResponseWithErrorWhenValidatorFailed() {
@@ -51,7 +53,6 @@ class SearchEventServiceTest {
         errors.add(new CoreError("orderDirect", "Must be specified as the sort criteria is specified"));
 
         Mockito.when(validator.validate(any())).thenReturn(errors);
-        // TODO Here is the error (null pointer exception) when using  @InjectMocks & @Mock. Is the problem related to junit.jupiter???
 
         SearchEventResponse response = service.searchEvent(request);
         assertTrue(response.hasError());
