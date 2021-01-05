@@ -26,7 +26,11 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
 
     @Override
     public void deleteDoctorById(Long id) {
-        doctors.removeIf(doctor -> doctor.getId().equals(id));
+        for (Doctor doctor : doctors) {
+            if (doctor.getId().equals(id)) {
+                doctor.setEmployed(false);
+            }
+        }
     }
 
     @Override
