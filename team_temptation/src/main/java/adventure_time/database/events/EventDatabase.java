@@ -1,7 +1,7 @@
 package adventure_time.database.events;
 
 import adventure_time.core.requests.events.SearchEventRequest;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
 
 import java.util.List;
 

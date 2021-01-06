@@ -1,7 +1,7 @@
 package adventure_time.database.discounts;
 
-import adventure_time.domain.Discounts;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Discounts;
+import adventure_time.core.domain.Events;
 
 import java.util.ArrayList;
 import java.util.List;

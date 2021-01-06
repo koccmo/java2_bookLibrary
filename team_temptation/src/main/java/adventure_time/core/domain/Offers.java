@@ -1,4 +1,4 @@
-package adventure_time.domain;
+package adventure_time.core.domain;
 
 import java.util.Date;
 import java.util.Objects;

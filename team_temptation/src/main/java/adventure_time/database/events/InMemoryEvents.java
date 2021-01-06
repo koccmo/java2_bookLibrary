@@ -1,13 +1,15 @@
 package adventure_time.database.events;
 
 import adventure_time.core.requests.events.SearchEventRequest;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 
-@DIComponent
+//@DIComponent
+@Component
 public class InMemoryEvents implements EventDatabase {
 
     private Long idCounter = 1L;

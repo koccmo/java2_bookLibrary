@@ -3,11 +3,13 @@ package adventure_time.core.services.events;
 import adventure_time.core.requests.events.SearchEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.dependencies.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+//@DIComponent
+@Component
 public class SearchEventRequestValidator {
 
     private final static int MIN_PAGE_SIZE = 8;

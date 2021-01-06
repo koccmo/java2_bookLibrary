@@ -6,14 +6,12 @@ import adventure_time.core.requests.events.RemoveEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.RemoveEventResponse;
 import adventure_time.database.events.EventDatabase;
-import adventure_time.domain.Events;
-import org.junit.jupiter.api.BeforeEach;
+import adventure_time.core.domain.Events;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;

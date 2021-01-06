@@ -1,17 +1,19 @@
 package adventure_time.ui.events;
 
 import adventure_time.database.events.EventDatabase;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.dependencies.DIDependency;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
 import adventure_time.ui.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static java.lang.Integer.parseInt;
 
-@DIComponent
+//@DIComponent
+@Component
 public class StartUpEventUIAction implements UIAction {
 
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private EventDatabase databaseEvents;
 
 //    public StartUpEventUIAction(EventDatabase databaseEvents) {

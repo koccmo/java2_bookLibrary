@@ -4,17 +4,23 @@ import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.AddEventResponse;
 import adventure_time.database.events.EventDatabase;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.dependencies.DIDependency;
-import adventure_time.domain.Events;
+//import adventure_time.dependencies.DIComponent;
+//import adventure_time.dependencies.DIDependency;
+import adventure_time.core.domain.Events;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+//@DIComponent
+@Component
 public class AddEventService {
 
-    @DIDependency private EventDatabase databaseEvents;
-    @DIDependency private AddEventRequestValidator validator;
+//    @DIDependency
+    @Autowired
+    private EventDatabase databaseEvents;
+//    @DIDependency
+    @Autowired private AddEventRequestValidator validator;
 
 //    public AddEventService(EventDatabase databaseEvents, AddEventRequestValidator validator) {
 //        this.databaseEvents = databaseEvents;
