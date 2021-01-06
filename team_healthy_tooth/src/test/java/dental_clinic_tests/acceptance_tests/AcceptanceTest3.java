@@ -1,5 +1,6 @@
 package dental_clinic_tests.acceptance_tests;
 
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.patient.SearchPatientRequest;
@@ -48,7 +49,7 @@ public class AcceptanceTest3 {
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService().execute(getAllPatientsRequest);
 
-        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("25038910523", new Ordering(null, null), new Paging(1, 100));
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("25038910523", new Ordering("name", OrderingDirection.ASC), new Paging(1, 100));
         SearchPatientResponse searchPatientResponse = searchPatientService().execute(searchPatientRequest);
 
         assertTrue(getAllPatientsResponse.getPatients().size() == 1);
