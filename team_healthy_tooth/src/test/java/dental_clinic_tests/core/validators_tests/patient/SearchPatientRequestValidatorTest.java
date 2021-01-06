@@ -1,10 +1,11 @@
-package dental_clinic.core.validators.patient;
+package dental_clinic_tests.core.validators_tests.patient;
 
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.validators.patient.SearchPatientRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class SearchPatientRequestValidatorTest {
 
     @Test
     public void testNotValidInputForOrderingDirection1() {
-        Ordering ordering = new Ordering("name", null);
+        Ordering ordering = new Ordering("name", OrderingDirection.NULL);
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", ordering, validPaging);
         CoreError expectedError = new CoreError("search", "Not valid input for ordering parameters");
         List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
@@ -82,7 +83,7 @@ public class SearchPatientRequestValidatorTest {
 
     @Test
     public void testOrderingBothNull() {
-        Ordering ordering = new Ordering(null, null);
+        Ordering ordering = new Ordering(null, OrderingDirection.NULL);
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", ordering, validPaging);
 
         List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
