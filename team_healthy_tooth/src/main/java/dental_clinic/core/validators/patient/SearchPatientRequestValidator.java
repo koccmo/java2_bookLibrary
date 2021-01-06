@@ -17,7 +17,10 @@ public class SearchPatientRequestValidator {
         List<CoreError> errors = new ArrayList<>();
 
         errors.addAll(searchRequestIsEmptyError(searchPatientRequest));
-        errors.addAll(searchRequestIsNotValidErrors(searchPatientRequest));
+
+        if (errors.isEmpty()) {
+            errors.addAll(searchRequestIsNotValidErrors(searchPatientRequest));
+        }
 
         if (isNotValidInputForOrdering(searchPatientRequest)){
             errors.addAll(updateErrorsListForOrdering(searchPatientRequest));
@@ -29,7 +32,7 @@ public class SearchPatientRequestValidator {
     }
 
     private List<CoreError> searchRequestIsEmptyError(SearchPatientRequest searchPatientRequest){
-        List<CoreError> errors = new ArrayList<>();
+        List <CoreError> errors = new ArrayList<>();
         if (searchPatientRequest.getInputForSearch() == null || searchPatientRequest.getInputForSearch().isEmpty()) {
             errors.add(new CoreError("search", "Search request can't be empty"));
         }
@@ -71,10 +74,14 @@ public class SearchPatientRequestValidator {
     }
 
     private boolean isNotValidInputForOrdering(SearchPatientRequest searchPatientRequest){
-        return (!searchPatientRequest.getOrdering().filledBoth() &&
-                !searchPatientRequest.getOrdering().emptyBothFields()) ||
-                (isNotValidInputForOrderBy(searchPatientRequest)) ||
-                (isNotValidInputForOrderDirection(searchPatientRequest));
+        if (searchPatientRequest.getOrdering().emptyBothFields()) {
+            return false;
+        } else if (searchPatientRequest.getOrdering().filledBoth()) {
+            return isNotValidInputForOrderBy(searchPatientRequest)
+                    || isNotValidInputForOrderDirection(searchPatientRequest);
+        } else {
+            return true;
+        }
     }
 
     private boolean isNotValidRequestForPaging(SearchPatientRequest searchPatientRequest){
