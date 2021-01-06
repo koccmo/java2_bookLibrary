@@ -36,9 +36,9 @@ public class SearchPatientUIAction implements UIAction {
         String orderDirection = in.nextLine();
         OrderingDirection orderingDirection = getOrderingDirection(orderDirection);
 
-        Integer pageNumber = inputFormatsValidator.inputInteger("Please enter page number");
+        Integer pageNumber = inputFormatsValidator.inputIntegerOrNull("Please enter page number");
 
-        Integer pageSize = inputFormatsValidator.inputInteger("Please enter page size");
+        Integer pageSize = inputFormatsValidator.inputIntegerOrNull("Please enter page size");
 
         Ordering ordering = new Ordering(orderBy, orderingDirection);
         Paging paging = new Paging(pageNumber, pageSize);
@@ -60,8 +60,11 @@ public class SearchPatientUIAction implements UIAction {
         }else {
             if (orderDirection.equalsIgnoreCase("DESC")) {
                 orderingDirection = OrderingDirection.DESC;
+            } else { if (orderDirection == null || orderDirection.isEmpty()) {
+                orderingDirection = OrderingDirection.NULL;
             } else {
                 orderingDirection = OrderingDirection.NOT_VALID;
+            }
             }
         }
         return orderingDirection;
