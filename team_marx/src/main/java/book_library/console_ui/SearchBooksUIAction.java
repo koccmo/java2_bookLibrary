@@ -6,16 +6,15 @@ import book_library.core.requests.Paging;
 import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.SearchBooksResponse;
 import book_library.core.services.SearchBooksService;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchBooksUIAction implements UIAction {
 
-    private SearchBooksService searchBooksService;
-
-    public SearchBooksUIAction(SearchBooksService searchBooksService) {
-        this.searchBooksService = searchBooksService;
-    }
+    @DIDependency private SearchBooksService searchBooksService;
 
     @Override
     public void execute() {

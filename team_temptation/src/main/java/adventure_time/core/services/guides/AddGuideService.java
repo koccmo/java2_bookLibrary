@@ -4,7 +4,7 @@ import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.responses.events.AddEventResponse;
 import adventure_time.core.responses.CoreError;
 import adventure_time.database.events.EventDatabase;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
 
 import java.util.List;
 

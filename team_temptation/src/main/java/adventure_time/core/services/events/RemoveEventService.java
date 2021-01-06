@@ -6,14 +6,19 @@ import adventure_time.core.responses.events.RemoveEventResponse;
 import adventure_time.database.events.EventDatabase;
 import adventure_time.dependencies.DIComponent;
 import adventure_time.dependencies.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+//@DIComponent
+@Component
 public class RemoveEventService {
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private EventDatabase databaseEvents;
-    @DIDependency private RemoveEventRequestValidator validator;
+//    @DIDependency
+    @Autowired private RemoveEventRequestValidator validator;
 
 //    public RemoveEventService(EventDatabase databaseEvents, RemoveEventRequestValidator validator) {
 //        this.databaseEvents = databaseEvents;

@@ -8,15 +8,19 @@ import adventure_time.core.services.events.SearchEventService;
 import adventure_time.dependencies.DIComponent;
 import adventure_time.dependencies.DIDependency;
 import adventure_time.ui.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 import static java.lang.Integer.valueOf;
 
-@DIComponent
+//@DIComponent
+@Component
 public class SearchEventUIAction implements UIAction {
 
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private SearchEventService searchEventService;
 
 //    public SearchEventUIAction(SearchEventService searchEventService) {

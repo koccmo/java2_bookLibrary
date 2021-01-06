@@ -2,8 +2,10 @@ package adventure_time.ui.events;
 
 import adventure_time.dependencies.DIComponent;
 import adventure_time.ui.UIAction;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+//@DIComponent
+@Component
 public class ExitEventUIAction implements UIAction {
 
     @Override

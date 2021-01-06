@@ -3,14 +3,13 @@ package book_library.console_ui;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
 import book_library.core.services.GetAllBooksService;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
+@DIComponent
 public class GetAllBooksUIAction implements UIAction {
 
-    GetAllBooksService getAllBooksService;
-
-    public GetAllBooksUIAction(GetAllBooksService getAllBooksService) {
-        this.getAllBooksService = getAllBooksService;
-    }
+    @DIDependency GetAllBooksService getAllBooksService;
 
     @Override
     public void execute() {

@@ -4,18 +4,17 @@ import book_library.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class AddBookRequestValidator {
 
-    private Database database;
-
-    public AddBookRequestValidator(Database database) {
-        this.database = database;
-    }
+    @DIDependency private Database database;
 
     public List<CoreError> validate(AddBookRequest request) {
         List<CoreError> errors = new ArrayList<>();

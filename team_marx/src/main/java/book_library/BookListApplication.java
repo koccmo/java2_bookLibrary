@@ -1,12 +1,14 @@
 package book_library;
 
 import book_library.console_ui.*;
+import book_library.dependency_injection.ApplicationContext;
+import book_library.dependency_injection.DIApplicationContextBuilder;
 
 import java.util.Scanner;
 
 public class BookListApplication {
 
-    private static ApplicationContext applicationContext = new ApplicationContext();
+    private static ApplicationContext applicationContext = new DIApplicationContextBuilder().build("book_library");
 
     public static void main(String[] args) {
 

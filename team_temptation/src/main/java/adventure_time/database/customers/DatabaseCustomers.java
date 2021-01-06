@@ -1,6 +1,6 @@
 package adventure_time.database.customers;
 
-import adventure_time.domain.Customers;
+import adventure_time.core.domain.Customers;
 
 import java.util.List;
 

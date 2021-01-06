@@ -1,16 +1,18 @@
 package adventure_time.ui.events;
 
 import adventure_time.core.services.events.DisplayEventListService;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.dependencies.DIDependency;
 
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
 import adventure_time.ui.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+//@DIComponent
+@Component
 public class DisplayEventUIAction implements UIAction {
 
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private DisplayEventListService displayEventListService;
 
 //    public DisplayEventUIAction(DisplayEventListService displayEventListService) {

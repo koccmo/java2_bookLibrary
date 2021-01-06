@@ -6,13 +6,17 @@ import adventure_time.core.services.events.RemoveEventService;
 import adventure_time.dependencies.DIComponent;
 import adventure_time.dependencies.DIDependency;
 import adventure_time.ui.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+//@DIComponent
+@Component
 public class RemoveEventUIAction implements UIAction {
 
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private RemoveEventService removeEventService;
 
 //    public RemoveEventUIAction(RemoveEventService removeEventService) {
