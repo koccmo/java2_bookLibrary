@@ -90,4 +90,46 @@ public class SearchPatientRequestValidatorTest {
         assertTrue(errorList.isEmpty());
     }
 
+    @Test
+    public void testNotValidInputForPagingOneFilled() {
+        Paging paging = new Paging(1, null);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", validOrdering, paging);
+        CoreError expectedError = new CoreError("search", "Not valid input for paging parameters");
+        List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertTrue(errorList.size() == 1);
+        assertTrue(errorList.contains(expectedError));
+    }
+
+    @Test
+    public void testPagingNull() {
+        Paging paging = new Paging(null, null);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", validOrdering, paging);
+        List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertTrue(errorList.isEmpty());
+    }
+
+    @Test
+    public void testNotValidInputForPageNumber() {
+        Paging paging = new Paging(-1, 10);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", validOrdering, paging);
+        CoreError expectedError = new CoreError("pageNumber", "Not valid input for page number");
+        List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertTrue(errorList.size() == 1);
+        assertTrue(errorList.contains(expectedError));
+    }
+
+    @Test
+    public void testNotValidInputForPageSize() {
+        Paging paging = new Paging(1, 0);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Mister", validOrdering, paging);
+        CoreError expectedError = new CoreError("pageSize", "Not valid input for page size");
+        List<CoreError> errorList = searchPatientRequestValidator.validate(searchPatientRequest);
+
+        assertTrue(errorList.size() == 1);
+        assertTrue(errorList.contains(expectedError));
+    }
+
 }
