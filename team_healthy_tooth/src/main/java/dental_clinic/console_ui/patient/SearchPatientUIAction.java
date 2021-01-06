@@ -54,19 +54,15 @@ public class SearchPatientUIAction implements UIAction {
     }
 
     private OrderingDirection getOrderingDirection (String orderDirection) {
-    OrderingDirection orderingDirection;
         if (orderDirection.equalsIgnoreCase("ASC")){
-            orderingDirection = OrderingDirection.ASC;
-        }else {
-            if (orderDirection.equalsIgnoreCase("DESC")) {
-                orderingDirection = OrderingDirection.DESC;
-            } else { if (orderDirection == null || orderDirection.isEmpty()) {
-                orderingDirection = OrderingDirection.NULL;
-            } else {
-                orderingDirection = OrderingDirection.NOT_VALID;
-            }
-            }
+            return OrderingDirection.ASC;
         }
-        return orderingDirection;
+        if (orderDirection.equalsIgnoreCase("DESC")) {
+            return OrderingDirection.DESC;
+        }
+        if (orderDirection == null || orderDirection.isEmpty()) {
+            return OrderingDirection.NULL;
+        }
+        return OrderingDirection.NOT_VALID;
     }
 }
