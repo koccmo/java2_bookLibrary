@@ -85,10 +85,14 @@ public class SearchPatientRequestValidator {
     }
 
     private boolean isNotValidRequestForPaging(SearchPatientRequest searchPatientRequest){
-        return (!searchPatientRequest.getPaging().isFilledBoth() &&
-                !searchPatientRequest.getPaging().isEmptyBoth()) ||
-                (isNotValidInputForPageNumber(searchPatientRequest)) ||
-                isNotValidInputForPageSize(searchPatientRequest);
+        if (searchPatientRequest.getPaging().isEmptyBoth()) {
+            return false;
+        } else if (searchPatientRequest.getPaging().isFilledBoth()) {
+            return (isNotValidInputForPageNumber(searchPatientRequest)) ||
+                    isNotValidInputForPageSize(searchPatientRequest);
+        } else {
+            return true;
+        }
     }
 
     private boolean isNotValidInputForOrderBy(SearchPatientRequest searchPatientRequest){
@@ -130,8 +134,7 @@ public class SearchPatientRequestValidator {
 
         List<CoreError>errors = new ArrayList<>();
 
-        if (!searchPatientRequest.getPaging().isFilledBoth() &&
-                !searchPatientRequest.getPaging().isEmptyBoth()) {
+        if (searchPatientRequest.getPaging().isFilledOne()) {
             errors.add(new CoreError("search", "Not valid input for paging parameters"));
         }else {
             if (isNotValidInputForPageNumber(searchPatientRequest)) {
