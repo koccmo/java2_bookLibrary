@@ -3,18 +3,17 @@ package book_library.core.validators;
 import book_library.core.database.Database;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class RemoveBookRequestValidator {
 
-    private Database database;
-
-    public RemoveBookRequestValidator(Database database) {
-        this.database = database;
-    }
+    @DIDependency private Database database;
 
     public List<CoreError> validate(RemoveBookRequest request) {
         List<CoreError> errors = new ArrayList<>();

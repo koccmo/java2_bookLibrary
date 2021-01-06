@@ -3,16 +3,15 @@ package book_library.console_ui;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.services.AddBookService;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddBookUIAction implements UIAction {
 
-    private AddBookService addBookService;
-
-    public AddBookUIAction(AddBookService addBookService) {
-        this.addBookService = addBookService;
-    }
+    @DIDependency private AddBookService addBookService;
 
     @Override
     public void execute() {

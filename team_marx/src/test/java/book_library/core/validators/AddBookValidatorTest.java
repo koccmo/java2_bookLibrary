@@ -4,15 +4,30 @@ import book_library.Book;
 import book_library.core.database.InMemoryDataBaseImpl;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
+import book_library.dependency_injection.ApplicationContext;
+import book_library.dependency_injection.DIApplicationContextBuilder;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
+import book_library.matchers.BookMatcher;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddBookValidatorTest {
-    private InMemoryDataBaseImpl database = new InMemoryDataBaseImpl();
-    private AddBookRequestValidator validator = new AddBookRequestValidator(database);
+
+    @Mock private InMemoryDataBaseImpl database;
+    @InjectMocks private AddBookRequestValidator validator;
 
     @Test
     public void success() {
@@ -70,10 +85,15 @@ public class AddBookValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenSuchBookIsInDatabase() {
-        Book book = new Book("Title", "Author");
-        database.save(book);
         AddBookRequest request = new AddBookRequest("Title", "Author");
+
+        List<CoreError> validationErrors = new ArrayList<>();
+        validationErrors.add(new CoreError("Title and author", "Such book already exists!"));
+        Mockito.when(database.hasTheSameBookInDatabase(any())).thenReturn(true);
+
         List<CoreError> errors = validator.validate(request);
+        Mockito.verify(database).hasTheSameBookInDatabase(
+                argThat(new BookMatcher("Title", "Author")));
         assertEquals(1,errors.size());
         assertEquals("Title and author" , errors.get(0).getField());
         assertEquals("Such book already exists!", errors.get(0).getMessage());

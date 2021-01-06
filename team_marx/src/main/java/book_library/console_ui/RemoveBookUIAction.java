@@ -3,16 +3,15 @@ package book_library.console_ui;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.RemoveBookResponse;
 import book_library.core.services.RemoveBookService;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class RemoveBookUIAction implements UIAction {
 
-    private RemoveBookService removeBookService;
-
-    public RemoveBookUIAction(RemoveBookService removeBookService) {
-        this.removeBookService = removeBookService;
-    }
+    @DIDependency private RemoveBookService removeBookService;
 
     @Override
     public void execute() {

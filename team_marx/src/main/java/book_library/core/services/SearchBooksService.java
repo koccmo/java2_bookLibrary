@@ -8,21 +8,19 @@ import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.SearchBooksResponse;
 import book_library.core.validators.SearchBooksRequestValidator;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchBooksService {
 
-    private Database database;
-    private SearchBooksRequestValidator validator;
-
-    public SearchBooksService(Database database, SearchBooksRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private SearchBooksRequestValidator validator;
 
     public SearchBooksResponse execute(SearchBooksRequest request) {
         List<CoreError> errors = validator.validate(request);

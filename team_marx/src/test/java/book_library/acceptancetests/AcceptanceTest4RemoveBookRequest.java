@@ -1,6 +1,6 @@
 package book_library.acceptancetests;
 
-import book_library.ApplicationContext;
+import book_library.dependency_injection.ApplicationContext;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.requests.RemoveBookRequest;
@@ -9,13 +9,14 @@ import book_library.core.responses.RemoveBookResponse;
 import book_library.core.services.AddBookService;
 import book_library.core.services.GetAllBooksService;
 import book_library.core.services.RemoveBookService;
+import book_library.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest4RemoveBookRequest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext = new DIApplicationContextBuilder().build("book_library");
 
     @Test
     public void shouldRemoveBook() {

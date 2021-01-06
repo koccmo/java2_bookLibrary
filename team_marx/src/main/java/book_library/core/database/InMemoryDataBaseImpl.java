@@ -1,6 +1,7 @@
 package book_library.core.database;
 
 import book_library.Book;
+import book_library.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class InMemoryDataBaseImpl implements Database {
 
     private Long nexId = 1L;

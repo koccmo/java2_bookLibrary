@@ -1,16 +1,17 @@
 package book_library.acceptancetests;
 
-import book_library.ApplicationContext;
+import book_library.dependency_injection.ApplicationContext;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.services.AddBookService;
+import book_library.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest2AddBookRequestValidation {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContext appContext = new DIApplicationContextBuilder().build("book_library");
 
     @Test
     public void shouldPasseValidation() {
