@@ -2,11 +2,13 @@ package dental_clinic.console_ui.planned_visit;
 
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.patient.SearchPatientByPersonalCodeRequest;
+import dental_clinic.core.requests.Ordering;
+import dental_clinic.core.requests.Paging;
+import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
-import dental_clinic.core.responses.patient.SearchPatientByPersonalCodeResponse;
+import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
-import dental_clinic.core.services.patient.SearchPatientsByPersonalCodeService;
+import dental_clinic.core.services.patient.SearchPatientService;
 import dental_clinic.core.services.planned_visit.AddPlannedVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,7 @@ public class AddPlannedVisitUIAction implements UIAction {
     @Autowired
     private AddPlannedVisitService addPlannedVisitService;
     @Autowired
-    private SearchPatientsByPersonalCodeService searchPatientsByPersonalCodeService;
+    private SearchPatientService searchPatientService;
 
     @Override
     public void execute() {
@@ -32,13 +34,13 @@ public class AddPlannedVisitUIAction implements UIAction {
         System.out.println("Please enter personal code");
         String personalCode = in.nextLine();
 
-        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest(personalCode);
-        SearchPatientByPersonalCodeResponse searchPatientByPersonalCodeResponse = searchPatientsByPersonalCodeService.execute(searchPatientByPersonalCodeRequest);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest(personalCode, new Ordering(null, null), new Paging(1, 100));
+        SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         PersonalData personalData = new PersonalData(null, null, null, personalCode);
         Boolean isNewPatient = false;
 
-        if (searchPatientByPersonalCodeResponse.hasErrors()) {
+        if (searchPatientResponse.hasErrors()) {
             System.out.println("Please enter name");
             String name = in.nextLine();
             System.out.println("Please enter surname");
