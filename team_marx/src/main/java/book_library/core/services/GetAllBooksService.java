@@ -1,18 +1,19 @@
 package book_library.core.services;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class GetAllBooksService {
 
-    @DIDependency private Database database;
+    @Autowired
+    private Database database;
 
     public GetAllBooksResponse execute(GetAllBooksRequest request) {
         List<Book> books = database.getAllBooks();

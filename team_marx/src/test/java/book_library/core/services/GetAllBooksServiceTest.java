@@ -1,6 +1,6 @@
 package book_library.core.services;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllBooksServiceTest {

@@ -3,17 +3,18 @@ package book_library.core.validators;
 import book_library.core.database.Database;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class RemoveBookRequestValidator {
 
-    @DIDependency private Database database;
+    @Autowired
+    private Database database;
 
     public List<CoreError> validate(RemoveBookRequest request) {
         List<CoreError> errors = new ArrayList<>();

@@ -1,6 +1,6 @@
 package book_library.acceptancetests;
 
-import book_library.dependency_injection.ApplicationContext;
+import book_library.config.BookListConfiguration;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
@@ -8,14 +8,24 @@ import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.SearchBooksResponse;
 import book_library.core.services.AddBookService;
 import book_library.core.services.SearchBooksService;
-import book_library.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest6SearchBooksRequest {
 
-    private ApplicationContext appContext = new DIApplicationContextBuilder().build("book_library");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup(){
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        ReflectionTestUtils.setField(appContext.getBean(SearchBooksService.class),"orderingEnabled", true);
+        ReflectionTestUtils.setField(appContext.getBean(SearchBooksService.class),"pagingEnabled", true);
+    }
 
     @Test
     public void searchBooksByAuthor() {

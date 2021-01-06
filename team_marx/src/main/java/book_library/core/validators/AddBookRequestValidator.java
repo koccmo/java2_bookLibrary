@@ -1,26 +1,27 @@
 package book_library.core.validators;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class AddBookRequestValidator {
 
-    @DIDependency private Database database;
+    @Autowired
+    private Database database;
 
     public List<CoreError> validate(AddBookRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateTitle(request).ifPresent(errors::add);
         validateAuthor(request).ifPresent(errors::add);
-        if(errors.isEmpty()) {
+        if (errors.isEmpty()) {
             validatePresenceInDatabase(request).ifPresent(errors::add);
         }
         return errors;

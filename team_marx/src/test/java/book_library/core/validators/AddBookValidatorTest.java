@@ -1,13 +1,8 @@
 package book_library.core.validators;
 
-import book_library.Book;
 import book_library.core.database.InMemoryDataBaseImpl;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
-import book_library.dependency_injection.ApplicationContext;
-import book_library.dependency_injection.DIApplicationContextBuilder;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
 import book_library.matchers.BookMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;

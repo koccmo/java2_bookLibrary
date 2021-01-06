@@ -1,8 +1,8 @@
 package book_library.console_ui;
 
-import book_library.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitUIAction implements UIAction {
 
     @Override

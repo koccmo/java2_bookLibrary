@@ -1,21 +1,22 @@
 package book_library.core.services;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
 import book_library.core.validators.AddBookRequestValidator;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddBookService {
 
-    @DIDependency private Database database;
-    @DIDependency private AddBookRequestValidator validator;
+    @Autowired
+    private Database database;
+    @Autowired private AddBookRequestValidator validator;
 
     public AddBookResponse execute(AddBookRequest request) {
         List<CoreError> errors = validator.validate(request);

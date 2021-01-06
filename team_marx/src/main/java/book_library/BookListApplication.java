@@ -1,14 +1,17 @@
 package book_library;
 
+import book_library.config.BookListConfiguration;
 import book_library.console_ui.*;
-import book_library.dependency_injection.ApplicationContext;
-import book_library.dependency_injection.DIApplicationContextBuilder;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Scanner;
 
 public class BookListApplication {
 
-    private static ApplicationContext applicationContext = new DIApplicationContextBuilder().build("book_library");
+    private static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(BookListConfiguration.class);
 
     public static void main(String[] args) {
 

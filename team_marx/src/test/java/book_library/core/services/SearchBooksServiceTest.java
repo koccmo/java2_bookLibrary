@@ -1,6 +1,6 @@
 package book_library.core.services;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 import book_library.core.database.Database;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
@@ -8,16 +8,14 @@ import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.SearchBooksResponse;
 import book_library.core.validators.SearchBooksRequestValidator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Incubating;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Or;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import javax.xml.validation.Validator;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,12 @@ public class SearchBooksServiceTest {
     private SearchBooksRequestValidator validator;
     @InjectMocks
     private SearchBooksService service;
+
+    @Before
+    public void setup(){
+        ReflectionTestUtils.setField(service,"orderingEnabled", true);
+        ReflectionTestUtils.setField(service,"pagingEnabled", true);
+    }
 
     @Test
     public void shouldReturnResponseWithErrorWhenValidatorFails() {

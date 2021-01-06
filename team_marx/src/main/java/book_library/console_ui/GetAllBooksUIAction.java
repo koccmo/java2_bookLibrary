@@ -3,13 +3,14 @@ package book_library.console_ui;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
 import book_library.core.services.GetAllBooksService;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class GetAllBooksUIAction implements UIAction {
 
-    @DIDependency GetAllBooksService getAllBooksService;
+    @Autowired
+    GetAllBooksService getAllBooksService;
 
     @Override
     public void execute() {

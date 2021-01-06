@@ -3,15 +3,16 @@ package book_library.console_ui;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.services.AddBookService;
-import book_library.dependency_injection.DIComponent;
-import book_library.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class AddBookUIAction implements UIAction {
 
-    @DIDependency private AddBookService addBookService;
+    @Autowired
+    private AddBookService addBookService;
 
     @Override
     public void execute() {

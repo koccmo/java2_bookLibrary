@@ -1,17 +1,25 @@
 package book_library.acceptancetests;
 
-import book_library.dependency_injection.ApplicationContext;
+import book_library.config.BookListConfiguration;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.services.AddBookService;
-import book_library.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest2AddBookRequestValidation {
 
-    private ApplicationContext appContext = new DIApplicationContextBuilder().build("book_library");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup(){
+
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Test
     public void shouldPasseValidation() {

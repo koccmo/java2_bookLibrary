@@ -4,14 +4,13 @@ import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
 import book_library.core.requests.SearchBooksRequest;
 import book_library.core.responses.CoreError;
-import book_library.core.services.SearchBooksService;
-import book_library.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class SearchBooksRequestValidator {
 
     public List<CoreError> validate(SearchBooksRequest request) {
