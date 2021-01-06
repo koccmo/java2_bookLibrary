@@ -116,8 +116,7 @@ public class SearchPatientRequestValidator {
 
         List<CoreError>errors = new ArrayList<>();
 
-        if (!searchPatientRequest.getOrdering().filledBoth() &&
-                !searchPatientRequest.getOrdering().emptyBothFields()) {
+        if (searchPatientRequest.getOrdering().filledOne()) {
             errors.add(new CoreError("search", "Not valid input for ordering parameters"));
         }else {
             if (isNotValidInputForOrderBy(searchPatientRequest) && searchPatientRequest.getOrdering().filledBoth()) {
