@@ -26,11 +26,8 @@ public class SearchPatientUIAction implements UIAction {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter name for search");
-        String name = in.nextLine();
-
-        System.out.println("Please enter surname for search");
-        String surname = in.nextLine();
+        System.out.println("Please enter surname or personal code for search");
+        String inputForSearch = in.nextLine();
 
         System.out.println("Please enter orderBy: name/surname");
         String orderBy = in.nextLine();
@@ -46,7 +43,7 @@ public class SearchPatientUIAction implements UIAction {
         Ordering ordering = new Ordering(orderBy, orderingDirection);
         Paging paging = new Paging(pageNumber, pageSize);
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest(name, surname, ordering, paging);
+                new SearchPatientRequest(inputForSearch, ordering, paging);
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         if (searchPatientResponse.hasErrors()){
