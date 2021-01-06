@@ -1,17 +1,14 @@
 package team_VK.application.database;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Client;
-import team_VK.application.core.services.DIDependency;
 
-@DIComponent
+@Component
 public class DataBaseClientFiller {
 
-    @DIDependency
+    @Autowired
     private DatabaseClients databaseClient;
-
-//    public DataBaseClientFiller(DatabaseClients databaseClient) {
-//        this.databaseClient = databaseClient;
-//    }
 
     public void fill() {
 

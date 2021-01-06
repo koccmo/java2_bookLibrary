@@ -1,34 +1,16 @@
 package team_VK.application.core.services.standart_validators;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import team_VK.application.ApplicationContext;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.validators.AddBookServiceValidator;
-import team_VK.application.database.DataBaseFiller;
-import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TitleFieldValidatorTest {
 
-
-    ApplicationContext context;
-    TitleFieldValidator subject;
-    @Before
-    public void setup() throws IOException, ClassNotFoundException {
-
-        context = new DIApplicationContextBuilder().build("team_VK.application");
-        DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
-        dataBaseFiller.fill();
-        subject = context.getBean(TitleFieldValidator.class);
-    }
-
+    private TitleFieldValidator subject = new TitleFieldValidator();
 
     @Test
     public void ShouldValidateCorrectBookTitle() {

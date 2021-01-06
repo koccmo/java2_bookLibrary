@@ -1,12 +1,17 @@
 package core.services.events;
 
-import core.requests.events.AddEventRequest;
-import core.responses.CoreError;
-import core.responses.events.AddEventResponse;
-import database.events.EventDatabase;
-import domain.Events;
+import adventure_time.core.requests.events.AddEventRequest;
+import adventure_time.core.services.events.AddEventRequestValidator;
+import adventure_time.core.services.events.AddEventService;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.responses.events.AddEventResponse;
+import adventure_time.database.events.EventDatabase;
+import adventure_time.domain.Events;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -14,19 +19,25 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
+//@RunWith(MockitoJUnitRunner.class)
 class AddEventServiceTest {
 
-    private AddEventService service;
-    private AddEventRequestValidator validator;
-    private EventDatabase database;
 
-    @BeforeEach
-    void setUp() {
-        validator = Mockito.mock(AddEventRequestValidator.class);
-        database = Mockito.mock(EventDatabase.class);
-        service = new AddEventService(database, validator);
-    }
+    @Mock
+    private AddEventRequestValidator validator;
+    @Mock private EventDatabase database;
+    @InjectMocks
+    private AddEventService service;
+
+//    @BeforeEach
+//    void setUp() {
+//        validator = Mockito.mock(AddEventRequestValidator.class);
+//        database = Mockito.mock(EventDatabase.class);
+//        service = new AddEventService(database, validator);
+//    }
 
     @Test
     void shouldReturnErrorWhenValidatorFailed () {
@@ -38,7 +49,7 @@ class AddEventServiceTest {
                 12, 10, 2, "Riga Jurmala",
                 "Bike trip. Lunch. Dinner");
 
-        Mockito.when(validator.validate(request)).thenReturn(errors);
+        Mockito.when(validator.validate(any())).thenReturn(errors);
 
         AddEventResponse response = service.addEvent(request);
         assertTrue(response.hasError());

@@ -6,7 +6,6 @@ import internet_store.core.requests.Paging;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
-import internet_store.dependency_injection.DIDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +26,16 @@ import java.util.Scanner;
         System.out.println("Please enter description to search by description");
         String description = in.nextLine();
 
-        System.out.println("Please enter order by: title / description");
+        System.out.println("Please enter start price to search by start price");
+        Integer startPrice = in.nextInt();
+
+        System.out.println("Please enter end price to search by end price");
+        Integer endPrice = in.nextInt();
+
+        System.out.println("Please enter order by: title / description / price");
         String orderBy = in.nextLine();
 
-        System.out.println("Please enter order direction");
+        System.out.println("Please enter order direction: ASC / DSC");
         String orderDirection = in.nextLine();
 
         System.out.println("Please enter page number");
@@ -41,7 +46,8 @@ import java.util.Scanner;
 
         Ordering ordering = new Ordering(orderBy, orderDirection);
         Paging paging = new Paging(pageNumber, pageSize);
-        SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, ordering, paging);
+        SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, startPrice,
+                                                                             endPrice, ordering, paging);
         SearchProductResponse searchProductResponse = searchProductService.execute(searchProductRequest);
 
         if (searchProductResponse.hasErrors()){
@@ -49,6 +55,5 @@ import java.util.Scanner;
         }else{
             searchProductResponse.getProducts().forEach(System.out::println);
         }
-
     }
 }

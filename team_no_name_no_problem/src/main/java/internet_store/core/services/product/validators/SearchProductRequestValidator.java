@@ -14,8 +14,13 @@ public class SearchProductRequestValidator {
 
         List <CoreError> errors = new ArrayList<>();
 
-        if (isTitleAndDescriptionEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
+        if (isTitleAndDescriptionEmptyAndPriceRangeMissing(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                                                           searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())){
             errors.add(new CoreError("search", "Not valid input for search"));
+        }
+
+        if (isNotValidInputForPriceSearch(searchProductRequest)) {
+            errors.add(new CoreError("price", "Not valid input for prices"));
         }
 
         if (isNotValidInputForOrdering(searchProductRequest)){
@@ -29,9 +34,29 @@ public class SearchProductRequestValidator {
         return errors;
     }
 
-    private boolean isTitleAndDescriptionEmpty(String title, String description){
-        return (title == null || title.isEmpty()) && (description == null || description.isEmpty());
+    private boolean isTitleAndDescriptionEmptyAndPriceRangeMissing(String title, String description,
+                                                                   Integer startPrice, Integer endPrice){
+        return (title == null || title.isEmpty()) && (description == null || description.isEmpty()) &&
+                startPrice == null && endPrice == null;
     }
+
+    private boolean isNotValidInputForPriceSearch(SearchProductRequest searchProductRequest) {
+        if (searchProductRequest.getEndPrice() != null && searchProductRequest.getStartPrice() != null) {
+            return pricesNegative(searchProductRequest) || !fieldsFilledCorrect(searchProductRequest);
+        } else
+        return !fieldsFilledCorrect(searchProductRequest);
+    }
+
+    private boolean pricesNegative(SearchProductRequest searchProductRequest) {
+        return searchProductRequest.getStartPrice() < 0
+                || searchProductRequest.getEndPrice() < 0;
+    }
+
+    private boolean fieldsFilledCorrect(SearchProductRequest searchProductRequest) {
+        return (searchProductRequest.getStartPrice() != null && searchProductRequest.getEndPrice() != null)
+                || (searchProductRequest.getStartPrice() == null && searchProductRequest.getEndPrice() == null);
+    }
+
 
     private boolean isNotValidInputForOrdering(SearchProductRequest searchProductRequest){
         return (!searchProductRequest.getOrdering().filledBoth() &&
@@ -41,8 +66,11 @@ public class SearchProductRequestValidator {
     }
 
     private boolean isNotValidInputForOrderBy(SearchProductRequest searchProductRequest){
+        //TODO Anvar, podumaj chto tut ne tak :D
         return !searchProductRequest.getOrdering().getOrderBy().equals("title") &&
-                !searchProductRequest.getOrdering().getOrderBy().equals("description");
+                !searchProductRequest.getOrdering().getOrderBy().equals("description") &&
+                !searchProductRequest.getOrdering().getOrderBy().equals("start price") &&
+                !searchProductRequest.getOrdering().getOrderBy().equals("end price");
     }
 
     private boolean isNotValidInputForOrderDirection(SearchProductRequest searchProductRequest){

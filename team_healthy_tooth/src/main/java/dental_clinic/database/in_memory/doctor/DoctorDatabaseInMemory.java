@@ -26,7 +26,11 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
 
     @Override
     public void deleteDoctorById(Long id) {
-        doctors.removeIf(doctor -> doctor.getId().equals(id));
+        for (Doctor doctor : doctors) {
+            if (doctor.getId().equals(id)) {
+                doctor.setEmployed(false);
+            }
+        }
     }
 
     @Override
@@ -39,6 +43,15 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
     public boolean containsId(Long id) {
         return doctors.stream()
                 .anyMatch(doctor -> doctor.getId().equals(id));
+    }
+
+    @Override
+    public boolean specificDoctorIsEmployed(Doctor doctor) {
+        return doctors.stream()
+                .filter(doctor1 -> doctor1.getName().equals(doctor.getName())
+                && doctor1.getSurname().equals(doctor.getSurname())
+                && doctor1.getIsEmployed())
+                .findAny().isPresent();
     }
 
     private List<Doctor> addSomeDoctors(){

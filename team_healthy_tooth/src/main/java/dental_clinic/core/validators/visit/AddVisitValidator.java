@@ -15,7 +15,7 @@ public class AddVisitValidator {
 
         List <CoreError> coreErrors = new ArrayList<>();
 
-        coreErrors.addAll(idValidationErrors(addVisitRequest.getId()));
+        coreErrors.addAll(idValidationErrors(addVisitRequest.getPatientsId()));
 
         coreErrors.addAll(toothNumberValidationErrors(addVisitRequest.getToothNumber()));
 

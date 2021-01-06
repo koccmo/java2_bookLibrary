@@ -36,22 +36,42 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
+        if (!doctorIsEmployed(addVisitRequest.getDoctor())) {
+            errors.add(new CoreError("doctor", "Doctor must be employed"));
+            return new AddVisitResponse(errors);
+        }
+
         Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
                 addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
 
-        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getId())){
-            for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
-                if (isSpecificPatient(i, addVisitRequest.getId())) {
-                    patientDatabase.getPatients().get(i).addVisit(visit);
-                    patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
-                    return new AddVisitResponse();
-                }
-            }
+        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
+            addVisitToDoctor(addVisitRequest.getDoctor(), visit);
+            return addVisitToPatient(addVisitRequest, visit);
         }
 
-        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
         return new AddVisitResponse(errors);
 
+    }
+
+    private void addVisitToDoctor (Doctor doctor, Visit visit) {
+        for (Doctor d : doctorDatabase.getDoctorList()) {
+            if (d.getName().equals(doctor.getName())
+            &&d.getSurname().equals(doctor.getSurname())) {
+                d.addVisit(visit);
+            }
+        }
+    }
+
+    private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
+        for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
+            if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
+                patientDatabase.getPatients().get(i).addVisit(visit);
+                patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
+                return new AddVisitResponse();
+            }
+        }
+        return new AddVisitResponse();
     }
 
     private boolean isSpecificPatient (int index, long id) {
@@ -60,6 +80,10 @@ public class AddVisitService {
 
     private boolean notValidInputForDoctor(Doctor doctor) {
         return !doctorDatabase.containsDoctor(doctor);
+    }
+
+    private boolean doctorIsEmployed(Doctor doctor) {
+        return doctorDatabase.specificDoctorIsEmployed(doctor);
     }
 
 }

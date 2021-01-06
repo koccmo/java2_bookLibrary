@@ -1,9 +1,9 @@
 package team_VK.application.ui.main_menu;
 
-import team_VK.application.database.DIComponent;
+import org.springframework.stereotype.Component;
 import team_VK.application.ui.UIActions;
 
-@DIComponent
+@Component
 public class ExitProgramUIAction implements UIActions {
 
     @Override

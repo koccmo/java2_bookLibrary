@@ -1,12 +1,20 @@
 package core.services.events;
 
-import core.requests.events.RemoveEventRequest;
-import core.responses.CoreError;
-import core.responses.events.RemoveEventResponse;
-import database.events.EventDatabase;
+import adventure_time.core.services.events.RemoveEventRequestValidator;
+import adventure_time.core.services.events.RemoveEventService;
+import adventure_time.core.requests.events.RemoveEventRequest;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.responses.events.RemoveEventResponse;
+import adventure_time.database.events.EventDatabase;
+import adventure_time.domain.Events;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +22,27 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
 class RemoveEventServiceTest {
 
+    @Mock
     private EventDatabase database;
-    private RemoveEventRequestValidator validator;
+    @Mock private RemoveEventRequestValidator validator;
+    @InjectMocks
     private RemoveEventService service;
 
-    @BeforeEach
-    void setUp() {
-        validator = Mockito.mock(RemoveEventRequestValidator.class);
-        database = Mockito.mock(EventDatabase.class);
-        service = new RemoveEventService(database,validator);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        validator = Mockito.mock(RemoveEventRequestValidator.class);
+//        database = Mockito.mock(EventDatabase.class);
+//        service = new RemoveEventService(database,validator);
+//    }
 
     @Test
     void shouldReturnErrorWhenValidatorFailed () {
 
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("deletionWay", "Must be defined"));
-
-        //RemoveEventRequest request = new RemoveEventRequest("","");
 
         Mockito.when(validator.validate(any())).thenReturn(errors);
 
@@ -53,7 +62,7 @@ class RemoveEventServiceTest {
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.removeById(any())).thenReturn(false);
+//        Mockito.when(database.removeById(any())).thenReturn(false);
         Mockito.when(database.removeByName(any())).thenReturn(true);
 
         RemoveEventResponse response = service.removeEvent(request);
@@ -69,7 +78,7 @@ class RemoveEventServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         Mockito.when(database.removeById(request.getEventId())).thenReturn(true);
-        Mockito.when(database.removeByName(request.getEventName())).thenReturn(false);
+//        Mockito.when(database.removeByName(request.getEventName())).thenReturn(false);
 
         RemoveEventResponse response = service.removeEvent(request);
         assertFalse(response.hasError());
@@ -83,7 +92,7 @@ class RemoveEventServiceTest {
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.removeById(any())).thenReturn(false);
+//        Mockito.when(database.removeById(any())).thenReturn(false);
         Mockito.when(database.removeByName(any())).thenReturn(false);
 
         RemoveEventResponse response = service.removeEvent(request);

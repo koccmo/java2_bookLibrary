@@ -1,9 +1,10 @@
 package core.services.events;
 
-import core.requests.Ordering;
-import core.requests.Paging;
-import core.requests.events.SearchEventRequest;
-import core.responses.CoreError;
+import adventure_time.core.services.events.SearchEventRequestValidator;
+import adventure_time.core.requests.Ordering;
+import adventure_time.core.requests.Paging;
+import adventure_time.core.requests.events.SearchEventRequest;
+import adventure_time.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

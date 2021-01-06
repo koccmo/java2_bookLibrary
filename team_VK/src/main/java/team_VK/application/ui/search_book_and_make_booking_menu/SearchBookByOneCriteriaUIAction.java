@@ -1,11 +1,11 @@
 package team_VK.application.ui.search_book_and_make_booking_menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.BookSearchRequest;
 import team_VK.application.core.responses.BookSearchResponse;
 import team_VK.application.core.services.search_book_and_make_booking_menu_services.SearchBookByONECriteriaService;
-import team_VK.application.core.services.DIDependency;
-import team_VK.application.database.DIComponent;
 import team_VK.application.ui.UIActions;
 import team_VK.application.ui.additional_function.ErrorsPrinter;
 
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchBookByOneCriteriaUIAction implements UIActions {
 
-    @DIDependency
+    @Autowired
     private SearchBookByONECriteriaService searchBookByOneCriteriaService;
-    @DIDependency private ErrorsPrinter errorsPrinter;
+    @Autowired private ErrorsPrinter errorsPrinter;
 
     @Override
     public void execute() throws ParseException {
@@ -81,26 +81,5 @@ public class SearchBookByOneCriteriaUIAction implements UIActions {
             return choice.get();
         else return 0;
     }
-
-//
-//    private Long inputID() {
-//        try {
-//            return inputIdWithPossibleException();
-//        } catch (Exception e) {
-//            return 0L;
-//        }
-//    }
-//
-//    private static Long inputIdWithPossibleException() throws NumberFormatException {
-//        Scanner scanner = new Scanner(System.in);
-//        String choiceString = scanner.nextLine();
-//        Optional<Long> choice = Optional.of(Long.valueOf(choiceString));
-//        if (choice.isPresent())
-//            return choice.get();
-//        else return 0L;
-//    }
-//
-
-
 }
 
