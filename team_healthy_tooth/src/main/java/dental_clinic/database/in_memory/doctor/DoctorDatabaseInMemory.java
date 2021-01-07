@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DoctorDatabaseInMemory implements DoctorDatabase{
@@ -52,6 +53,13 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
                 && doctor1.getSurname().equals(doctor.getSurname())
                 && doctor1.getIsEmployed())
                 .findAny().isPresent();
+    }
+
+    @Override
+    public Optional<Doctor> getDoctorById(Long id) {
+        return doctors.stream()
+                .filter(doctor -> doctor.getId().equals(id))
+                .findAny();
     }
 
     private List<Doctor> addSomeDoctors(){
