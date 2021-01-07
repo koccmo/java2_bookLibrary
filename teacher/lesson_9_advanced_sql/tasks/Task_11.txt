@@ -1,3 +1,8 @@
+После того как структура базы данных создана её можно заполнить данными.
+Напишите в dbDataInsertScript.sql SQL команды вставки тестовых данных
+в созданную вами базу данных.
+
+
 insert into books(title, author)
 values ("Title 1", "Author 1");
 
