@@ -34,7 +34,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
 
-CREATE TABLE IF NOT EXISTS `reader_journal` (
+CREATE TABLE IF NOT EXISTS `reader_books` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `reader_id` BIGINT NOT NULL,
   `book_id` BIGINT NOT NULL,
@@ -46,10 +46,10 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
 
-ALTER TABLE `reader_journal`
+ALTER TABLE `reader_books`
 ADD FOREIGN KEY (`book_id`) REFERENCES `books`(`id`);
 
-ALTER TABLE `reader_journal`
+ALTER TABLE `reader_books`
 ADD FOREIGN KEY (`reader_id`) REFERENCES `readers`(`id`);
 
 
