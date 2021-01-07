@@ -10,11 +10,14 @@ CREATE TABLE IF NOT EXISTS `books` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(200) NOT NULL,
   `author` VARCHAR(100) NOT NULL,
-  `page_count` INT,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
+
+
+ALTER TABLE `books`
+  ADD `page_count` INT;
 
 
 ALTER TABLE `books`
