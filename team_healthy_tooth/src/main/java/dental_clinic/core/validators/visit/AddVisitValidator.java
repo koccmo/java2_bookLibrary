@@ -19,7 +19,8 @@ public class AddVisitValidator {
 
         coreErrors.addAll(toothNumberValidationErrors(addVisitRequest.getToothNumber()));
 
-        coreErrors.addAll(doctorValidationErrors(addVisitRequest.getDoctor().getName()));
+        coreErrors.addAll(doctorValidationErrors(addVisitRequest));
+
 
         return coreErrors;
     }
@@ -51,8 +52,13 @@ public class AddVisitValidator {
                 (number >= 81 && number <= 85);
     }
 
-    private List<CoreError> doctorValidationErrors (String text) {
+    private List<CoreError> doctorValidationErrors (AddVisitRequest addVisitRequest) {
         List<CoreError> coreErrors = new ArrayList<>();
+        if (addVisitRequest.getDoctor() == null) {
+            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
+            return coreErrors;
+        }
+        String text = addVisitRequest.getDoctor().getName();
         if (text == null || text.isEmpty()){
             coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
             return coreErrors;
