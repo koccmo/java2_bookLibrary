@@ -1,17 +1,17 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.core.services.GetAllReservationsService;
+import lv.javaguru.app.core.services.ShowReservationsService;
 
 public class ShowReservationsAction implements UIActions {
 
-    private final GetAllReservationsService getAllReservationsService;
+    private final ShowReservationsService showReservationsService;
 
-    public ShowReservationsAction(GetAllReservationsService getAllReservationsService) {
-        this.getAllReservationsService = getAllReservationsService;
+    public ShowReservationsAction(ShowReservationsService showReservationsService) {
+        this.showReservationsService = showReservationsService;
     }
 
     @Override
     public void execute() {
-        getAllReservationsService.getAll();
+        showReservationsService.getAll();
     }
 }

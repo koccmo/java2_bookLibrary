@@ -4,12 +4,11 @@ import lv.javaguru.app.core.domain.Person;
 import lv.javaguru.app.core.domain.Reservation;
 import lv.javaguru.app.core.domain.Ticket;
 
-public class AddReservationRequest {
-
+public class DeleteReservationRequest {
 
     private final Reservation reservation;
 
-    public AddReservationRequest(Reservation reservation) {
+    public DeleteReservationRequest(Reservation reservation) {
         this.reservation = reservation;
     }
 
