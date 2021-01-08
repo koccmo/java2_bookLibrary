@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import static java.util.stream.Collectors.toList;
 
-//@DIComponent
 @Component
 public class InMemoryEvents implements EventDatabase {
 
@@ -24,24 +25,35 @@ public class InMemoryEvents implements EventDatabase {
             }
         }
         event.setEventId(idCounter);
-        events.add(event);
         idCounter++;
-        return true;
+        return events.add(event);
     }
 
     @Override
     public boolean removeByName(String eventName) {
-        return getEventsList().removeIf(items -> items.getEventName().equals(eventName));
+        return events.removeIf(items -> items.getEventName().equals(eventName));
     }
 
     @Override
     public boolean removeById(Long id) {
-        return getEventsList().removeIf(items -> items.getEventId().equals(id));
+        return events.removeIf(items -> items.getEventId().equals(id));
     }
 
     @Override
     public List<Events> getEventsList() {
         return events;
+    }
+
+    @Override
+    public Optional<Events> findById(Long id) {
+        return events.stream().filter(items -> items.getEventId().equals(id)).findFirst();
+    }
+
+    @Override
+    public boolean updateEvent(Events event) {
+        removeById(event.getEventId());
+        System.out.println(event);
+        return events.add(event);
     }
 
     @Override

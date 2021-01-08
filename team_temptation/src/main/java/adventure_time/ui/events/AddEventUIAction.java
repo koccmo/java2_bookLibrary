@@ -19,7 +19,7 @@ public class AddEventUIAction implements UIAction {
 
 //    @DIDependency
     @Autowired
-    private AddEventService addEventService;
+    private AddEventService service;
 
 //    public AddEventUIAction(AddEventService addEventService) {
 //        this.addEventService = addEventService;
@@ -60,7 +60,7 @@ public class AddEventUIAction implements UIAction {
         AddEventRequest request = new AddEventRequest(  eventName, eventKind, durationHours,
                 maxNumberParticipants, minNumberParticipants,
                 route, detailDescription);
-        AddEventResponse response = addEventService.addEvent(request);
+        AddEventResponse response = service.addEvent(request);
 
         if (response.hasError()) {
             response.getErrors().forEach(System.out::println);
