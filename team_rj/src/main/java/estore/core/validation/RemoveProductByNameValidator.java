@@ -1,6 +1,7 @@
 package estore.core.validation;
 
 import estore.core.requests.RemoveProductByNameRequest;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class RemoveProductByNameValidator {
 
     public List<CoreError> validate(RemoveProductByNameRequest request) {

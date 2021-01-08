@@ -11,12 +11,14 @@ import estore.core.validation.SearchProductByCategoryValidator;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductDB;
 import estore.domain.Product;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;

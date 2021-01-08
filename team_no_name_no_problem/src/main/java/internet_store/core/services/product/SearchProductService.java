@@ -36,21 +36,28 @@ import java.util.stream.Collectors;
         return provideSearchResultAccordingToRequest(searchProductRequest);
     }
 
-    private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest){
-        if (isTitleAndDescriptionNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription())){
-            return searchByTitleAndDescriptionIsProvided(searchProductRequest);
+    private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest) {
+        //TODO Anvar, zdesj ne propisani vse kombinacii, teperj ih mnogo
+        if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
+            return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
         }
-        if (isTitleFilled(searchProductRequest.getTitle())){
+        if (isTitleFilled(searchProductRequest.getTitle())) {
             return searchByTitleIsProvided(searchProductRequest);
         }
-        return searchByDescriptionIsProvided (searchProductRequest);
+        if (isDescriptionFilled(searchProductRequest.getDescription())) {
+            return searchByDescriptionIsProvided(searchProductRequest);
+        }
+        return searchByPriceRangeIsProvided(searchProductRequest);
     }
 
-    private boolean isTitleAndDescriptionNotEmpty(String title, String description){
-        return title != null && !title.isEmpty() && description != null && !description.isEmpty();
+    private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description,
+                                                          Integer startPrice, Integer endPrice){
+        return title != null && !title.isEmpty() && description != null && !description.isEmpty() &&
+                startPrice != null && endPrice != null;
     }
 
-    private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
+    private SearchProductResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
         List <Product> products = productDatabase.findAllByTitleAndDescription(searchProductRequest.getTitle(), searchProductRequest.getDescription());
         if (products.isEmpty()){
@@ -67,11 +74,15 @@ import java.util.stream.Collectors;
         return title != null && !title.isEmpty();
     }
 
+    private boolean isDescriptionFilled(String description) {
+        return description != null && !description.isEmpty();
+    }
+
     private SearchProductResponse searchByTitleIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
         List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
         if (products.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain products wits title: " +
+            errors.add(new CoreError("database", "Database doesn't contain products with title: " +
                     searchProductRequest.getTitle()));
             return new SearchProductResponse(errors, new ArrayList<>());
         }
@@ -84,7 +95,7 @@ import java.util.stream.Collectors;
         List <CoreError>errors = new ArrayList<>();
         List<Product>products = productDatabase.findAllByDescription(searchProductRequest.getDescription());
         if (products.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain products wits description: " +
+            errors.add(new CoreError("database", "Database doesn't contain products with description: " +
                     searchProductRequest.getDescription()));
             return new SearchProductResponse(errors, new ArrayList<>());
         }
@@ -93,7 +104,23 @@ import java.util.stream.Collectors;
         return new SearchProductResponse(products);
     }
 
+    private SearchProductResponse searchByPriceRangeIsProvided(SearchProductRequest searchProductRequest) {
+        List <CoreError>errors = new ArrayList<>();
+        List<Product> products = productDatabase.findAllByPriceRange(searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice());
+        if (products.isEmpty()) {
+            errors.add (new CoreError("database","Database doesn't contain products with price" +
+                                            " range starting from: " + searchProductRequest.getStartPrice() +
+                                            " end ending with " + searchProductRequest.getEndPrice()));
+            return new SearchProductResponse(errors, new ArrayList<>());
+        }
+        products = order(products, searchProductRequest.getOrdering());
+        products = paging(products, searchProductRequest.getPaging());
+        return new SearchProductResponse(products);
+    }
+
     private List<Product> order(List<Product> products, Ordering ordering) {
+        //TODO zdesj ne propisan novij variant sortirovki
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
                 return sortByTitle(products, ordering);
@@ -113,6 +140,18 @@ import java.util.stream.Collectors;
         }else{
             return products.stream()
                     .sorted((o1,o2) -> o2.getTitle().compareTo(o1.getTitle()))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    private List<Product> sortByPrice(List<Product> products, Ordering ordering){
+        if (ordering.getOrderDirection().equals("ASC")){
+            return products.stream()
+                    .sorted(Comparator.comparingInt(Product::getPrice))
+                    .collect(Collectors.toList());
+        }else{
+            return products.stream()
+                    .sorted((o1,o2) -> o2.getPrice() - o1.getPrice())
                     .collect(Collectors.toList());
         }
     }

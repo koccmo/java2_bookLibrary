@@ -2,7 +2,7 @@ package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.core.request.AddReservationRequest;
-import lv.javaguru.app.core.request.AddReservationRequestValidator;
+import lv.javaguru.app.core.validators.AddReservationRequestValidator;
 import lv.javaguru.app.core.response.AddReservationResponse;
 import lv.javaguru.app.core.response.CodeError;
 

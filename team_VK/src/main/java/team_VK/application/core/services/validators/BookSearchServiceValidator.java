@@ -1,23 +1,23 @@
 package team_VK.application.core.services.validators;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.requests.BookSearchRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.standart_validators.AuthorFieldValidator;
 import team_VK.application.core.services.standart_validators.BookIDFieldValidator;
 import team_VK.application.core.services.standart_validators.TitleFieldValidator;
-import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class BookSearchServiceValidator {
-    @DIDependency
+    @Autowired
     public TitleFieldValidator titleFieldValidator;
-    @DIDependency
+    @Autowired
     public AuthorFieldValidator authorFieldValidator;
-    @DIDependency
+    @Autowired
     public BookIDFieldValidator bookIDFieldValidator;
 
     public List<CoreError> validate(BookSearchRequest request) {

@@ -1,26 +1,26 @@
 package team_VK.application.core.services.validators;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.standart_validators.ClientFirstNameFieldValidator;
 import team_VK.application.core.services.standart_validators.ClientLastNameFieldValidator;
 import team_VK.application.core.services.standart_validators.ClientPersonalCodeFieldValidator;
-import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@DIComponent
+@Component
 public class AddClientServiceValidator {
 
-    @DIDependency
+    @Autowired
     ClientFirstNameFieldValidator clientFirstNameFieldValidator;
-    @DIDependency
+    @Autowired
     ClientLastNameFieldValidator clientLastNameFieldValidator;
-    @DIDependency
+    @Autowired
     ClientPersonalCodeFieldValidator clientPersonalCodeFieldValidator;
 
     List<CoreError> errors1 = new ArrayList<>();

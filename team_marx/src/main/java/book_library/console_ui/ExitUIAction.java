@@ -1,5 +1,8 @@
 package book_library.console_ui;
 
+import book_library.dependency_injection.DIComponent;
+
+@DIComponent
 public class ExitUIAction implements UIAction {
 
     @Override

@@ -5,23 +5,21 @@ import book_library.core.database.Database;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
-import book_library.core.validators.AddBookValidator;
+import book_library.core.validators.AddBookRequestValidator;
+import book_library.dependency_injection.DIComponent;
+import book_library.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddBookService {
 
-    private Database database;
-    private AddBookValidator validator;
+    @DIDependency private Database database;
+    @DIDependency private AddBookRequestValidator validator;
 
-    public AddBookService(Database database, AddBookValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
-
-    public AddBookResponse execute (AddBookRequest request){
+    public AddBookResponse execute(AddBookRequest request) {
         List<CoreError> errors = validator.validate(request);
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new AddBookResponse(errors);
         }
         Book book = new Book(request.getTitle(), request.getAuthor());

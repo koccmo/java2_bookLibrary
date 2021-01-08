@@ -11,9 +11,12 @@ public class Order {
 
     private Map<Product, Integer> shoppingCart;
 
-    public Order (Customer customer, Map <Product, Integer> shoppingCart){
+    private Integer sumTotal;
+
+    public Order (Customer customer, Map <Product, Integer> shoppingCart, Integer sumTotal){
         this.customer = customer;
         this.shoppingCart = shoppingCart;
+        this.sumTotal = sumTotal;
     }
 
     public void setId(Long id) {
@@ -30,6 +33,10 @@ public class Order {
 
     public Map<Product, Integer> getShoppingCart() {
         return shoppingCart;
+    }
+
+    public Integer getSumTotal() {
+        return sumTotal;
     }
 
     @Override

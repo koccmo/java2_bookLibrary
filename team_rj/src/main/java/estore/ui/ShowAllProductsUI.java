@@ -4,7 +4,9 @@ import estore.core.requests.ShowAllProductsRequest;
 import estore.core.responses.ShowAllProductsResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.ShowAllProductsService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ShowAllProductsUI implements UIAction {
 
     private ShowAllProductsService showAllProductsService;

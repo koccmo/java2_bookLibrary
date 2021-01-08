@@ -2,8 +2,11 @@ package estore.database;
 
 import java.util.ArrayList;
 import java.util.List;
-import estore.domain.Product;
 
+import estore.domain.Product;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProductDBImpl implements ProductDB {
 
     private Long nextProductId;

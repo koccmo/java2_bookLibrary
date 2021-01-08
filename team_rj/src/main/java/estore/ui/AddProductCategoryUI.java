@@ -3,9 +3,11 @@ package estore.ui;
 import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.service.AddNewProductCategoryService;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AddProductCategoryUI implements UIAction {
 
     private AddNewProductCategoryService addNewProductCategoryService;

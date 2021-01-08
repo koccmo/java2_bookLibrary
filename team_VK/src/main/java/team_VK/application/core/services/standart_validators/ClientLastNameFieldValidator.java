@@ -1,12 +1,12 @@
 package team_VK.application.core.services.standart_validators;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-@DIComponent
+@Component
 public class ClientLastNameFieldValidator {
 
     public List<CoreError> validate (String clientLastName){

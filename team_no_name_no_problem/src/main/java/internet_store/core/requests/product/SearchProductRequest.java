@@ -7,12 +7,17 @@ public class SearchProductRequest {
 
     private String title;
     private String description;
+    private Integer startPrice;
+    private Integer endPrice;
     private Ordering ordering;
     private Paging paging;
 
-    public SearchProductRequest(String title, String description, Ordering ordering, Paging paging){
+    public SearchProductRequest(String title, String description, Integer startPrice,
+                                Integer endPrice, Ordering ordering, Paging paging){
         this.title = title;
         this.description = description;
+        this.startPrice = startPrice;
+        this.endPrice = endPrice;
         this.ordering = ordering;
         this.paging = paging;
     }
@@ -24,6 +29,10 @@ public class SearchProductRequest {
     public String getDescription(){
         return description;
     }
+
+    public Integer getStartPrice() {return startPrice; }
+
+    public Integer getEndPrice() {return endPrice; }
 
     public Ordering getOrdering(){
         return ordering;

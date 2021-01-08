@@ -1,19 +1,20 @@
 package team_VK.application.ui.search_book_and_make_booking_menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.requests.GetBookListRequest;
 import team_VK.application.core.responses.GetBookListResponse;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.search_book_and_make_booking_menu_services.GetBooksListService;
-import team_VK.application.database.DIComponent;
 import team_VK.application.ui.UIActions;
 import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 import java.util.Scanner;
-@DIComponent
+@Component
 public class GetBooksListUIAction implements UIActions {
 
-    @DIDependency private GetBooksListService getBooksListService;
-    @DIDependency private ErrorsPrinter errorsPrinter;
+    @Autowired
+    private GetBooksListService getBooksListService;
+    @Autowired private ErrorsPrinter errorsPrinter;
 
     @Override
     public void execute() {

@@ -1,15 +1,16 @@
 package estore.database;
 
 import estore.domain.ProductCategory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductCategoryDBImpl implements ProductCategoryDB {
 
     private Long nextCategoryId;
     private List<ProductCategory> categories;
-
     public ProductCategoryDBImpl() {
         initializeListOfCategories();
         setNextCategoryId();

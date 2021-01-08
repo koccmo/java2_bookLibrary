@@ -1,7 +1,8 @@
 package core.services.events;
 
-import core.requests.events.RemoveEventRequest;
-import core.responses.CoreError;
+import adventure_time.core.requests.events.RemoveEventRequest;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.services.events.RemoveEventRequestValidator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

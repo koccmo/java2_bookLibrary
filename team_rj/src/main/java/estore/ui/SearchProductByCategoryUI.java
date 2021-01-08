@@ -7,9 +7,11 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByCategoryService;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class SearchProductByCategoryUI implements UIAction {
 
     private SearchProductByCategoryService searchProductByCategoryService;

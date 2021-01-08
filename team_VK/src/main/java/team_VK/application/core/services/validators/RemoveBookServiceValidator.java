@@ -1,15 +1,15 @@
 package team_VK.application.core.services.validators;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-@DIComponent
+@Component
 public class RemoveBookServiceValidator {
 
 
