@@ -6,9 +6,10 @@ import adventure_time.core.requests.events.SearchEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.SearchEventResponse;
 import adventure_time.database.events.EventDatabase;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.dependencies.DIDependency;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,12 +17,15 @@ import java.util.stream.Collectors;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-@DIComponent
+//@DIComponent
+@Component
 public class SearchEventService {
 
-    @DIDependency
+//    @DIDependency
+    @Autowired
     private EventDatabase database;
-    @DIDependency private SearchEventRequestValidator validator;
+//    @DIDependency
+    @Autowired private SearchEventRequestValidator validator;
 
 //    public SearchEventService(EventDatabase database, SearchEventRequestValidator validator) {
 //        this.database = database;

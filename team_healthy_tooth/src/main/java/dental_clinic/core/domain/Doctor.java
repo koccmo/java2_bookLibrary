@@ -9,12 +9,13 @@ public class Doctor {
     private Long id;
     private String name;
     private String surname;
-    private boolean isEmployed = true;
+    private boolean isEmployed;
     private List<Visit> visits = new ArrayList<>();
 
     public Doctor(String name, String surname) {
         this.name = name;
         this.surname = surname;
+        isEmployed = true;
     }
 
     public void setId(Long id) {

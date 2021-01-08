@@ -4,11 +4,13 @@ package adventure_time.core.services.events;
 import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.dependencies.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+//@DIComponent
+@Component
 public class AddEventRequestValidator {
 
     private static final int MIN_ROUTE = 3;

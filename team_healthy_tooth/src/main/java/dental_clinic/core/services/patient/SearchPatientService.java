@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,7 +32,9 @@ public class SearchPatientService {
     @Autowired private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
+
         List<CoreError> errors = searchPatientRequestValidator.validate(searchPatientRequest);
+
         if (!errors.isEmpty()){
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
@@ -39,44 +42,22 @@ public class SearchPatientService {
     }
 
     private SearchPatientResponse provideSearchResultAccordingToRequest(SearchPatientRequest searchPatientRequest){
-        if (isNameAndSurnameFilled(searchPatientRequest.getName(), searchPatientRequest.getSurname())){
-            return searchByNameAndSurnameIsProvided(searchPatientRequest);
-        }
-        if (isNameFilled(searchPatientRequest.getName())){
-            return searchByNameIsProvided(searchPatientRequest);
+        if (searchByPersonalCode(searchPatientRequest.getInputForSearch())){
+            return searchByPersonalCodeIsProvided(searchPatientRequest);
         }
         return searchBySurnameIsProvided(searchPatientRequest);
     }
 
-    private boolean isNameAndSurnameFilled(String name, String surname){
-        return name != null && !name.isEmpty() &&
-                surname != null && !surname.isEmpty();
+    private boolean searchByPersonalCode(String inputForSearch){
+        return Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", inputForSearch);
     }
 
-    private SearchPatientResponse searchByNameAndSurnameIsProvided(SearchPatientRequest searchPatientRequest){
+    private SearchPatientResponse searchByPersonalCodeIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = patientDatabase.findPatientsByNameAndSurname(searchPatientRequest.getName(),
-                searchPatientRequest.getSurname());
+        List <Patient> patients = patientDatabase.findPatientsByPersonalCode(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain patient with name " +
-                    searchPatientRequest.getName() + " and surname " + searchPatientRequest.getSurname()));
-            return new SearchPatientResponse(errors, new ArrayList<>());
-        }
-        patients = order(patients, searchPatientRequest.getOrdering());
-        patients = paging(patients, searchPatientRequest.getPaging());
-        return new SearchPatientResponse(patients);
-    }
-
-    private boolean isNameFilled(String name){
-        return name != null && !name.isEmpty();
-    }
-
-    private SearchPatientResponse searchByNameIsProvided(SearchPatientRequest searchPatientRequest){
-        List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = patientDatabase.findPatientByName(searchPatientRequest.getName());
-        if (patients.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain patient with name " +
-                    searchPatientRequest.getName()));
+            errors.add(new CoreError("database", "Database doesn't contain patient with personal code " +
+                    searchPatientRequest.getInputForSearch()));
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
         patients = order(patients, searchPatientRequest.getOrdering());
@@ -86,10 +67,10 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchBySurnameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List<Patient>patients = patientDatabase.findPatientsBySurname(searchPatientRequest.getSurname());
+        List<Patient>patients = patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with surname " +
-                    searchPatientRequest.getSurname()));
+                    searchPatientRequest.getInputForSearch()));
             return new SearchPatientResponse(errors, new ArrayList<>());
         }
         patients = order(patients, searchPatientRequest.getOrdering());

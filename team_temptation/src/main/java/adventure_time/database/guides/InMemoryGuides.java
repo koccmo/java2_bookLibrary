@@ -1,6 +1,6 @@
 package adventure_time.database.guides;
 
-import adventure_time.domain.Guides;
+import adventure_time.core.domain.Guides;
 
 import java.util.ArrayList;
 import java.util.List;

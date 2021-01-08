@@ -5,14 +5,32 @@ import java.util.Objects;
 public class Person {
     private String name;
     private String surname;
+    private boolean isRegistered;
+    private Long id = 1L;
 
     public Person() {
-
-
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = id++;
+    }
+
     public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
+
+    }
+
+    public boolean isRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(boolean registered) {
+        isRegistered = registered;
     }
 
     @Override
@@ -31,10 +49,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return "" + name + " " + surname;
     }
 
     public String getName() {

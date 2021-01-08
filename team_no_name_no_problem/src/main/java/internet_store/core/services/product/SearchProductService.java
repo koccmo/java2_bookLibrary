@@ -25,19 +25,20 @@ import java.util.stream.Collectors;
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private ProductDatabase productDatabase;
-    @Autowired private SearchProductRequestValidator searchProductRequestValidator;
+    @Autowired
+    private ProductDatabase productDatabase;
+    @Autowired
+    private SearchProductRequestValidator searchProductRequestValidator;
 
-    public SearchProductResponse execute (SearchProductRequest searchProductRequest){
+    public SearchProductResponse execute(SearchProductRequest searchProductRequest) {
         List<CoreError> errors = searchProductRequestValidator.validate(searchProductRequest);
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new SearchProductResponse(errors, new ArrayList<>());
         }
         return provideSearchResultAccordingToRequest(searchProductRequest);
     }
 
     private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest) {
-        //TODO Anvar, zdesj ne propisani vse kombinacii, teperj ih mnogo
         if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
                 searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
             return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
@@ -120,12 +121,13 @@ import java.util.stream.Collectors;
     }
 
     private List<Product> order(List<Product> products, Ordering ordering) {
-        //TODO zdesj ne propisan novij variant sortirovki
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
                 return sortByTitle(products, ordering);
-            }else{
+            }else if(ordering.getOrderBy().equals("description")){
                 return sortByDescription(products, ordering);
+            }else{
+                return sortByPrice(products,ordering);
             }
         }else{
             return products;

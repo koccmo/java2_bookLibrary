@@ -86,7 +86,7 @@ public class AddPlannedVisitService {
     }
 
     private AddPlannedVisitRequest fillPersonalData (AddPlannedVisitRequest addPlannedVisitRequest1) {
-        PersonalData personalData = patientDatabase.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get().getPersonalData();
+        PersonalData personalData = patientDatabase.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get(0).getPersonalData();
         return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData);
     }
 }

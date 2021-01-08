@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AddVisitService {
@@ -31,27 +32,54 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
-        if (notValidInputForDoctor(addVisitRequest.getDoctor())){
-            errors.add(new CoreError("doctor", "Database doesn't contains specific doctor"));
-            return new AddVisitResponse(errors);
+        Doctor doctor;
+
+        if (isIdAdded(addVisitRequest.getDoctor().getName())) {
+            Optional<Doctor> doctorOptional = doctorDatabase.getDoctorById(Long.parseLong(addVisitRequest.getDoctor().getName()));
+            if (!doctorOptional.isPresent()) {
+                errors.add(new CoreError("id", "Database doesn't contain doctor with id "
+                        + addVisitRequest.getDoctor().getName() + " in database"));
+                return new AddVisitResponse(errors);
+            }
+            doctor = doctorOptional.get();
+        } else {
+            doctor = new Doctor(addVisitRequest.getDoctor().getName().split(" ")[0],
+                    addVisitRequest.getDoctor().getName().split(" ")[1]);
+            doctor.setEmployed(true);
         }
 
-        if (!doctorIsEmployed(addVisitRequest.getDoctor())) {
+        if (isNewDoctor(doctor)){
+            doctorDatabase.addDoctor(addVisitRequest.getDoctor());
+        }
+
+        if (!doctor.getIsEmployed()) {
+            System.out.println(doctor.getName());
+            System.out.println(doctor.getSurname());
+            System.out.println(doctor.getIsEmployed());
             errors.add(new CoreError("doctor", "Doctor must be employed"));
             return new AddVisitResponse(errors);
         }
 
         Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
-                addVisitRequest.getToothStatus(), addVisitRequest.getDoctor(), addVisitRequest.getDate());
+                addVisitRequest.getToothStatus(), doctor, addVisitRequest.getDate());
 
         if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
-            addVisitToDoctor(addVisitRequest.getDoctor(), visit);
+            addVisitToDoctor(doctor, visit);
             return addVisitToPatient(addVisitRequest, visit);
         }
 
         errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
         return new AddVisitResponse(errors);
 
+    }
+
+    private boolean isIdAdded(String text) {
+        try {
+            Long.parseLong(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void addVisitToDoctor (Doctor doctor, Visit visit) {
@@ -78,12 +106,8 @@ public class AddVisitService {
         return patientDatabase.getPatients().get(index).getPersonalData().getId().equals(id);
     }
 
-    private boolean notValidInputForDoctor(Doctor doctor) {
+    private boolean isNewDoctor(Doctor doctor) {
         return !doctorDatabase.containsDoctor(doctor);
-    }
-
-    private boolean doctorIsEmployed(Doctor doctor) {
-        return doctorDatabase.specificDoctorIsEmployed(doctor);
     }
 
 }

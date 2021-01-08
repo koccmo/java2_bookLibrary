@@ -6,16 +6,20 @@ import adventure_time.core.services.events.AddEventService;
 import adventure_time.dependencies.DIComponent;
 import adventure_time.dependencies.DIDependency;
 import adventure_time.ui.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 import static java.lang.Integer.*;
 
-@DIComponent
+//@DIComponent
+@Component
 public class AddEventUIAction implements UIAction {
 
-    @DIDependency
-    private AddEventService addEventService;
+//    @DIDependency
+    @Autowired
+    private AddEventService service;
 
 //    public AddEventUIAction(AddEventService addEventService) {
 //        this.addEventService = addEventService;
@@ -56,7 +60,7 @@ public class AddEventUIAction implements UIAction {
         AddEventRequest request = new AddEventRequest(  eventName, eventKind, durationHours,
                 maxNumberParticipants, minNumberParticipants,
                 route, detailDescription);
-        AddEventResponse response = addEventService.addEvent(request);
+        AddEventResponse response = service.addEvent(request);
 
         if (response.hasError()) {
             response.getErrors().forEach(System.out::println);

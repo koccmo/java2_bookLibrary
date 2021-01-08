@@ -1,7 +1,7 @@
 package adventure_time.core.services.guides;
 
 import adventure_time.database.events.EventDatabase;
-import adventure_time.domain.Events;
+import adventure_time.core.domain.Events;
 
 import java.util.List;
 

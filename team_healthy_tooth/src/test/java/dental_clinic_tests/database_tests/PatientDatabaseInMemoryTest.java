@@ -80,9 +80,9 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testFindPatientByPersonalCode(){
-        Optional <Patient> expectedPatient = Optional.of(new Patient(personalData1));
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").equals(expectedPatient));
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").equals(Optional.empty()));
+        Patient expectedPatient = new Patient(personalData1);
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").get(0).equals(expectedPatient));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").isEmpty());
     }
 
     @Test

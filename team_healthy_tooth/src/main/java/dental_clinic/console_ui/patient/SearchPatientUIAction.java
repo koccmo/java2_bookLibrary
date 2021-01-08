@@ -26,11 +26,8 @@ public class SearchPatientUIAction implements UIAction {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter name for search");
-        String name = in.nextLine();
-
-        System.out.println("Please enter surname for search");
-        String surname = in.nextLine();
+        System.out.println("Please enter surname or personal code for search");
+        String inputForSearch = in.nextLine();
 
         System.out.println("Please enter orderBy: name/surname");
         String orderBy = in.nextLine();
@@ -39,14 +36,14 @@ public class SearchPatientUIAction implements UIAction {
         String orderDirection = in.nextLine();
         OrderingDirection orderingDirection = getOrderingDirection(orderDirection);
 
-        Integer pageNumber = inputFormatsValidator.inputInteger("Please enter page number");
+        Integer pageNumber = inputFormatsValidator.inputIntegerOrNull("Please enter page number");
 
-        Integer pageSize = inputFormatsValidator.inputInteger("Please enter page size");
+        Integer pageSize = inputFormatsValidator.inputIntegerOrNull("Please enter page size");
 
         Ordering ordering = new Ordering(orderBy, orderingDirection);
         Paging paging = new Paging(pageNumber, pageSize);
         SearchPatientRequest searchPatientRequest =
-                new SearchPatientRequest(name, surname, ordering, paging);
+                new SearchPatientRequest(inputForSearch, ordering, paging);
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         if (searchPatientResponse.hasErrors()){
@@ -57,16 +54,15 @@ public class SearchPatientUIAction implements UIAction {
     }
 
     private OrderingDirection getOrderingDirection (String orderDirection) {
-    OrderingDirection orderingDirection;
         if (orderDirection.equalsIgnoreCase("ASC")){
-            orderingDirection = OrderingDirection.ASC;
-        }else {
-            if (orderDirection.equalsIgnoreCase("DESC")) {
-                orderingDirection = OrderingDirection.DESC;
-            } else {
-                orderingDirection = OrderingDirection.NOT_VALID;
-            }
+            return OrderingDirection.ASC;
         }
-        return orderingDirection;
+        if (orderDirection.equalsIgnoreCase("DESC")) {
+            return OrderingDirection.DESC;
+        }
+        if (orderDirection == null || orderDirection.isEmpty()) {
+            return OrderingDirection.NULL;
+        }
+        return OrderingDirection.NOT_VALID;
     }
 }

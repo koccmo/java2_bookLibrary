@@ -10,11 +10,25 @@ public class InMemoryDatabase implements Database {
 
     private final Map<Person, Ticket> reservations = new HashMap<>();
     private Long nextId = 1L;
+    private Person currentPerson;
+
+    public Person getCurrentPerson() {
+        return currentPerson;
+    }
+
+    public void setCurrentPerson(Person currentPerson) {
+        this.currentPerson = currentPerson;
+    }
+
+    @Override
+    public boolean containsPerson(Person person) {
+        return reservations.containsKey(person);
+    }
 
     @Override
     public void add(Person person, Ticket ticket) {
-        ticket.setId(nextId);
-        nextId++;
+        //  ticket.setId(nextId);
+        // nextId++;
         reservations.put(person, ticket);
     }
 

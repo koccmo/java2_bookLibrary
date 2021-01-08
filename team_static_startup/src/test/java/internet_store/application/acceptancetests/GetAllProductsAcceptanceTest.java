@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class GetAllProductsAcceptanceTest {
 
-    private ApplicationContext appContext;
+/*    private ApplicationContext appContext;
 
     @Before
     public void before() {
@@ -45,6 +45,6 @@ public class GetAllProductsAcceptanceTest {
 
     private GetAllProductsService getAllProductsService() {
         return appContext.getBean(GetAllProductsService.class);
-    }
+    }*/
 
 }
