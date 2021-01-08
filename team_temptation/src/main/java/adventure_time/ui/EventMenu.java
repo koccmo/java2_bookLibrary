@@ -21,9 +21,10 @@ public class EventMenu {
         menuItemsMap.put(1, findUIAction(uiActionList, AddEventUIAction.class));
         menuItemsMap.put(2, findUIAction(uiActionList, RemoveEventUIAction.class));
         menuItemsMap.put(3, findUIAction(uiActionList, SearchEventUIAction.class));
-        menuItemsMap.put(4, findUIAction(uiActionList, DisplayEventUIAction.class));
-        menuItemsMap.put(5, findUIAction(uiActionList, ExitEventUIAction.class));
-        menuItemsMap.put(6, findUIAction(uiActionList, StartUpEventUIAction.class));
+        menuItemsMap.put(4, findUIAction(uiActionList, UpdateUIAction.class));
+        menuItemsMap.put(5, findUIAction(uiActionList, DisplayEventUIAction.class));
+        menuItemsMap.put(6, findUIAction(uiActionList, ExitEventUIAction.class));
+        menuItemsMap.put(7, findUIAction(uiActionList, StartUpEventUIAction.class));
     // Сюда добавлять новые пункты меню, ну и, конечно же, в menuForEvents()
     }
 
@@ -43,9 +44,10 @@ public class EventMenu {
         System.out.println("1. Add new event");
         System.out.println("2. Delete an event");
         System.out.println("3. Search events");
-        System.out.println("4. Show all events");
-        System.out.println("5. Exit");
-        System.out.println("6. Start with the defined DB");
+        System.out.println("4. Update an event");
+        System.out.println("5. Show all events");
+        System.out.println("6. Exit");
+        System.out.println("7. Start with the defined DB");
         System.out.println();
     }
 
