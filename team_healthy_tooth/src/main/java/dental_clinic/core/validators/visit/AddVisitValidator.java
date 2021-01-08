@@ -19,7 +19,8 @@ public class AddVisitValidator {
 
         coreErrors.addAll(toothNumberValidationErrors(addVisitRequest.getToothNumber()));
 
-        coreErrors.addAll(doctorValidationErrors(addVisitRequest.getDoctor()));
+        coreErrors.addAll(doctorValidationErrors(addVisitRequest));
+
 
         return coreErrors;
     }
@@ -51,14 +52,38 @@ public class AddVisitValidator {
                 (number >= 81 && number <= 85);
     }
 
-    private List<CoreError> doctorValidationErrors (Doctor doctor) {
+    private List<CoreError> doctorValidationErrors (AddVisitRequest addVisitRequest) {
         List<CoreError> coreErrors = new ArrayList<>();
-        if (doctor == null || !doctor.filledNameAndSurname()){
-            coreErrors.add(new CoreError("doctor", "Not valid input for doctor"));
-        } else {
-            coreErrors.addAll(validateDoctorsPersonalData(doctor));
+        if (addVisitRequest.getDoctor() == null) {
+            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
+            return coreErrors;
         }
+        String text = addVisitRequest.getDoctor().getName();
+        if (text == null || text.isEmpty()){
+            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
+            return coreErrors;
+        }
+        if (isIdAdded(text)) {
+            if (Long.parseLong(text) < 0)
+            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
+            return coreErrors;
+        }
+        if (areTwoWordsEntered(text)) {
+            Doctor doctor = new Doctor(text.split(" ")[0], text.split(" ")[1]);
+            coreErrors.addAll(validateDoctorsPersonalData(doctor));
+            return coreErrors;
+        }
+        coreErrors.add(new CoreError("doctor", "Not id, not name surname"));
         return coreErrors;
+    }
+
+    private boolean isIdAdded(String text) {
+        try {
+            Long.parseLong(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private List<CoreError> validateDoctorsPersonalData(Doctor doctor) {
@@ -70,5 +95,9 @@ public class AddVisitValidator {
             errors.add(new CoreError("doctor's surname", "Surname can contain only letters"));
         }
         return errors;
+    }
+
+    private boolean areTwoWordsEntered(String text) {
+        return text.split(" ").length == 2;
     }
 }

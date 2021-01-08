@@ -54,13 +54,21 @@ import java.util.Scanner;
 
             if (endOfShopping.equalsIgnoreCase("CHECKOUT")) {
                 Customer newCustomer = getNewCustomer();
-                Order order = new Order(newCustomer, shoppingCart);
+                Order order = new Order(newCustomer, shoppingCart, sumForOrder(shoppingCart));
                 orderDatabase.addOrder(order);
                 System.out.println("Thank you for the order!\n");
                 System.out.println(order.toString());
                 break;
             }
         }
+    }
+
+    private Integer sumForOrder(Map<Product, Integer> shoppingCart) {
+        Integer sum = 0;
+        for (Product product : shoppingCart.keySet()) {
+            sum += shoppingCart.get(product) * product.getPrice();
+        }
+        return sum;
     }
 
     private Customer getNewCustomer () {

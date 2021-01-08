@@ -17,13 +17,9 @@ public interface PatientDatabase {
 
     Optional <Patient> getSpecificPatientHistory(Long id);
 
-    List<Patient> findPatientByName(String name);
-
     List<Patient> findPatientsBySurname(String surname);
 
-    List<Patient> findPatientsByNameAndSurname(String name, String surname);
-
-    Optional<Patient> findPatientsByPersonalCode(String personalCode);
+    List<Patient> findPatientsByPersonalCode(String personalCode);
 
     void addVisit(Long id, Visit newVisit);
 

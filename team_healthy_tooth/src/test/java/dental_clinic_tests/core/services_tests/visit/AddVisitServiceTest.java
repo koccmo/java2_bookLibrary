@@ -34,7 +34,7 @@ public class AddVisitServiceTest {
     @InjectMocks
     AddVisitService addVisitService;
 
-    Doctor doctor = new Doctor("Name", "Surname");
+    Doctor doctor = new Doctor("Name Surname", "Surname");
 
     @Test
     public void testNotCorrectToothNumber() {
@@ -84,8 +84,6 @@ public class AddVisitServiceTest {
         CoreError expectedError = new CoreError("id", "Database doesnt't contain patient with id 5");
         errors.add(expectedError);
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(true);
-        Mockito.when(doctorDatabase.specificDoctorIsEmployed(doctor)).thenReturn(true);
         Mockito.when(patientDatabase.containsPatientWithSpecificId(5L)).thenReturn(false);
 
 
@@ -103,7 +101,6 @@ public class AddVisitServiceTest {
         CoreError expectedError = new CoreError("doctor", "Database doesn't contains specific doctor");
         errors.add(expectedError);
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(false);
 
         AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
         assertTrue(addVisitResponse.hasErrors());
@@ -123,8 +120,6 @@ public class AddVisitServiceTest {
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsPatientWithSpecificId(1L)).thenReturn(true);
         Mockito.when(patientDatabase.getPatients()).thenReturn(patients);
-        Mockito.when(doctorDatabase.containsDoctor(doctor)).thenReturn(true);
-        Mockito.when(doctorDatabase.specificDoctorIsEmployed(doctor)).thenReturn(true);
 
         AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
         assertFalse(addVisitResponse.hasErrors());

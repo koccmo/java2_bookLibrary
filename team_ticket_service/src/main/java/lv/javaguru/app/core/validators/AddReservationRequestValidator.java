@@ -1,4 +1,4 @@
-package lv.javaguru.app.core.request;
+package lv.javaguru.app.core.validators;
 
 import lv.javaguru.app.core.request.AddReservationRequest;
 import lv.javaguru.app.core.response.CodeError;

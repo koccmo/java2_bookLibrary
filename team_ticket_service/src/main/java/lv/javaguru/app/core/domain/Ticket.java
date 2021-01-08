@@ -8,7 +8,11 @@ public class Ticket {
     private String departDate;
     private String returnDate;
     private String seat;
-    private Long id ;
+    private Long id;
+
+    public Ticket() {
+
+    }
 
     public Ticket(String departure, String destination, String departDate, String returnDate, String seat) {
         this.departure = departure;

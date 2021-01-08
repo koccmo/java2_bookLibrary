@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 public class FindByIdAcceptanceTest {
 
-    private ApplicationContext appContext;
+/*    private ApplicationContext appContext;
     private Database database;
 
     @Before
@@ -75,5 +75,5 @@ public class FindByIdAcceptanceTest {
 
     private FindByIdService getFindByIdService() {
         return appContext.getBean(FindByIdService.class);
-    }
+    }*/
 }

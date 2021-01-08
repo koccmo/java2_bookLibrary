@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class ChangeProductNameAcceptanceTest {
 
-    private ApplicationContext applicationContext;
+/*    private ApplicationContext applicationContext;
     private Database database;
 
     @Before
@@ -65,5 +65,5 @@ public class ChangeProductNameAcceptanceTest {
 
     private ChangeProductNameService getChangeProductNameService() {
         return applicationContext.getBean(ChangeProductNameService.class);
-    }
+    }*/
 }

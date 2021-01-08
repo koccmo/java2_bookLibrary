@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class FindProductsAcceptanceTest {
 
-    private ApplicationContext appContext;
+/*    private ApplicationContext appContext;
 
     @Before
     public void before(){
@@ -206,6 +206,6 @@ public class FindProductsAcceptanceTest {
         assertEquals(1, response.getErrors().size());
         assertEquals("Page size", response.getErrors().get(0).getField());
         assertEquals("Must be bigger than zero.", response.getErrors().get(0).getMessage());
-    }
+    }*/
 
 }

@@ -48,13 +48,6 @@ public class PatientDatabaseInMemory implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientByName(String name) {
-        return patientList.stream()
-                .filter(patient -> patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Patient> findPatientsBySurname(String surname) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
@@ -62,19 +55,10 @@ public class PatientDatabaseInMemory implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
-        return patientList.stream()
-                .filter(patient ->
-                        patient.getPersonalData().getName().toLowerCase().startsWith(name.toLowerCase()) &&
-                                patient.getPersonalData().getSurname().toLowerCase().startsWith(surname.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<Patient> findPatientsByPersonalCode(String personalCode) {
+    public List<Patient> findPatientsByPersonalCode(String personalCode) {
         return patientList.stream()
                 .filter(patient -> patient.getPersonalData().getPersonalCode().equals(personalCode))
-                .findAny();
+                .collect(Collectors.toList());
     }
 
     @Override

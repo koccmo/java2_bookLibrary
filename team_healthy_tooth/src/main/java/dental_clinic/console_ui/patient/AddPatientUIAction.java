@@ -25,7 +25,7 @@ public class AddPatientUIAction implements UIAction {
         System.out.println("Please enter phone");
         String phone = in.nextLine();
         System.out.println("Please enter personal code");
-        String personalCode = in.nextLine();
+        String personalCode = in.nextLine().replace("-", "");
 
         PersonalData personalData = new PersonalData(name, surname, phone, personalCode);
 
