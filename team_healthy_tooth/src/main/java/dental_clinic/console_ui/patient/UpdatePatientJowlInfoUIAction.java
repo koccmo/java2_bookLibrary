@@ -3,8 +3,11 @@ package dental_clinic.console_ui.patient;
 import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.ToothStatus;
+import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.requests.patient.UpdatePatientsJowlInfoRequest;
+import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.patient.UpdatePatientJowlInfoResponse;
+import dental_clinic.core.services.ContainsDatabaseIdService;
 import dental_clinic.core.services.patient.UpdatePatientJowlInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,15 +23,28 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
     private InputFormatsValidator inputFormatsValidator;
     @Autowired
     private UpdatePatientJowlInfoService updatePatientJowlInfoService;
+    @Autowired
+    private ContainsDatabaseIdService containsDatabaseIdService;
 
     @Override
     public void execute() {
 
         Long id = inputFormatsValidator.inputLong("Please input id");
 
-        Map<Integer, ToothStatus> toothInfo = new HashMap<>();
+        ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(id);
+        ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);
 
-        fillJowlInfo(toothInfo);
+        if (containsDatabaseIdResponse.hasErrors()){
+            containsDatabaseIdResponse.getErrors().forEach(System.out::println);
+        } else {
+            inputJowlData(id);
+        }
+    }
+
+    private void inputJowlData(Long id) {
+        Map<Integer, ToothStatus> toothInfo;
+
+        toothInfo = fillJowlInfo();
 
         UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest = new UpdatePatientsJowlInfoRequest(id, toothInfo);
         UpdatePatientJowlInfoResponse updatePatientJowlInfoResponse = updatePatientJowlInfoService.execute(updatePatientsJowlInfoRequest);
@@ -41,7 +57,8 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
         }
     }
 
-    private void fillJowlInfo(Map<Integer, ToothStatus> toothInfo) {
+    private Map<Integer, ToothStatus> fillJowlInfo() {
+        Map<Integer, ToothStatus> toothInfo = new HashMap<>();
         while (true) {
             Scanner in = new Scanner(System.in);
             Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
@@ -57,6 +74,7 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
                 break;
             }
         }
+        return toothInfo;
     }
 
     private void printToothStatuses(){
