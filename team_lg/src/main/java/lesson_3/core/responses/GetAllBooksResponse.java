@@ -1,10 +1,10 @@
-package book_library.core.responses;
+package lesson_3.core.responses;
 
-import book_library.core.domain.Book;
+import lesson_3.core.domain.Book;
 
 import java.util.List;
 
-public class GetAllBooksResponse extends CoreResponse {
+public class GetAllBooksResponse {
 
     private List<Book> books;
 

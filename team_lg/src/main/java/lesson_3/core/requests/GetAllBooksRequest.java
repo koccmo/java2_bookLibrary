@@ -1,4 +1,4 @@
-package book_library.core.requests;
+package lesson_3.core.requests;
 
 public class GetAllBooksRequest {
 }
