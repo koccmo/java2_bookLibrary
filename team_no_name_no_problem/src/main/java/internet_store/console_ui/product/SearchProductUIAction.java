@@ -31,6 +31,7 @@ import java.util.Scanner;
 
         System.out.println("Please enter end price to search by end price");
         Integer endPrice = in.nextInt();
+        in.nextLine();
 
         System.out.println("Please enter order by: title / description / price");
         String orderBy = in.nextLine();
