@@ -3,6 +3,7 @@ package internet_store.application.core.database;
 import internet_store.application.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @Profile("mysql")
-public class MySQLDatabase implements Database{
+public class MySQLDatabase implements Database {
 
     @Autowired
     private final JdbcTemplate jdbcTemplate;
@@ -51,22 +52,45 @@ public class MySQLDatabase implements Database{
 
     @Override
     public boolean delete(Product product) {
-        return false;
+        String query = "DELETE FROM products WHERE name=? AND description=?";
+        int affectedRows = jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getDescription());
+            return preparedStatement;
+        });
+        return affectedRows > 0;
     }
 
     @Override
     public boolean deleteByProductName(String product) {
-        return false;
+        String query = "DELETE FROM products WHERE name=?";
+        int affectedRows = jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product);
+            return preparedStatement;
+        });
+        return affectedRows > 0;
     }
 
     @Override
     public List<Product> findByProductName(String productName) {
-        return null;
+        String query = "SELECT * FROM products WHERE name LIKE ?";
+        return jdbcTemplate.query(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productName);
+            return preparedStatement;
+        }, new BeanPropertyRowMapper<>(Product.class));
     }
 
     @Override
     public List<Product> findByProductDescription(String productDescription) {
-        return null;
+        String query = "SELECT * FROM products WHERE description LIKE ?";
+        return jdbcTemplate.query(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productDescription);
+            return preparedStatement;
+        }, new BeanPropertyRowMapper<>(Product.class));
     }
 
     @Override
