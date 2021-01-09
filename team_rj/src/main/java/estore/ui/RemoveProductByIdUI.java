@@ -3,9 +3,11 @@ package estore.ui;
 import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.service.RemoveProductByIdService;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class RemoveProductByIdUI implements UIAction {
 
     private RemoveProductByIdService removeProductByIdService;

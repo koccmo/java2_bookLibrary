@@ -23,9 +23,14 @@ public interface ProductDatabase {
 
     List<Product> findAllByTitle (String title);
 
+    List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice);
+
     List<Product> findAllByDescription (String description);
 
     List<Product> findAllByTitleAndDescription (String title, String description);
+
+    //TODO
+    //TODO tut nado esjo 3 metoda dobavitj
 
     boolean containsProduct (Product product);
 

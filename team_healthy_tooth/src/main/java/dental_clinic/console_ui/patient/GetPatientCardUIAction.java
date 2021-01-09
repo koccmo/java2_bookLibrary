@@ -1,5 +1,6 @@
 package dental_clinic.console_ui.patient;
 
+import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.requests.patient.GetPatientCardRequest;
 import dental_clinic.core.responses.patient.GetPatientCardResponse;
@@ -14,14 +15,13 @@ public class GetPatientCardUIAction implements UIAction {
 
     @Autowired
     private GetPatientCardService getPatientCardService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     @Override
     public void execute(){
 
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("Please enter patient id");
-        Long id = in.nextLong();
+        Long id = inputFormatsValidator.inputLong("Please enter patient id");
 
         GetPatientCardRequest getPatientCardRequest = new GetPatientCardRequest(id);
         GetPatientCardResponse getPatientCardResponse = getPatientCardService.execute(getPatientCardRequest);

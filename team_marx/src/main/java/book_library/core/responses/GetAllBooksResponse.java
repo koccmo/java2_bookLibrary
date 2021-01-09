@@ -1,10 +1,10 @@
 package book_library.core.responses;
 
-import book_library.Book;
+import book_library.core.domain.Book;
 
 import java.util.List;
 
-public class GetAllBooksResponse extends CoreResponse {
+public class GetAllBooksResponse extends CoreResponse{
 
     private List<Book> books;
 
@@ -15,4 +15,5 @@ public class GetAllBooksResponse extends CoreResponse {
     public List<Book> getBooks() {
         return books;
     }
+
 }

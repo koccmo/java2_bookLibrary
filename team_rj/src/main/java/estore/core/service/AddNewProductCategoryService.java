@@ -6,9 +6,11 @@ import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryDB;
 import estore.domain.ProductCategory;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AddNewProductCategoryService {
 
     private ProductCategoryDB productCategoryDB;

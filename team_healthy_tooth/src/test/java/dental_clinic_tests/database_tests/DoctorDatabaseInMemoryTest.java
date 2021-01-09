@@ -1,8 +1,8 @@
 package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.Doctor;
-import dental_clinic.database.DoctorDatabase;
-import dental_clinic.database.DoctorDatabaseInMemory;
+import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.database.in_memory.doctor.DoctorDatabaseInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,8 +35,8 @@ public class DoctorDatabaseInMemoryTest {
     @Test
     public void testDeleteDoctorById() {
         doctorDatabase.deleteDoctorById(4L);
-        assertTrue(doctorDatabase.getDoctorList().size() == 3);
-        assertTrue(!doctorDatabase.getDoctorList().contains(new Doctor("Dok", "Dokis")));
+        assertTrue(doctorDatabase.getDoctorList().size() == 4);
+        assertFalse(doctorDatabase.getDoctorList().get(3).getIsEmployed());
     }
 
     @Test

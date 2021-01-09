@@ -53,10 +53,9 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "\nPatient{" +
+        return "\nPatient:" +
                 personalData +
-                ", jowl=" + jowl +
-                ", visits=" + visits +
-                '}';
+                jowl +
+                "Visits: " + visits;
     }
 }

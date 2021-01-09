@@ -21,10 +21,15 @@ public class Ordering {
     }
 
     public boolean emptyBothFields (){
-        return (orderBy == null || orderBy.isEmpty()) && (orderDirection == null);
+        return (orderBy == null || orderBy.isEmpty()) && (orderDirection == OrderingDirection.NULL);
     }
 
     public boolean filledBoth(){
-        return (orderBy != null && !orderBy.isEmpty()) && (orderDirection != null);
+        return (orderBy != null && !orderBy.isEmpty()) && (orderDirection != OrderingDirection.NULL);
+    }
+
+    public boolean filledOne() {
+        return ((orderBy == null || orderBy.isEmpty()) && (orderDirection != OrderingDirection.NULL)) ||
+                ((orderBy != null) && (orderDirection == OrderingDirection.NULL));
     }
 }

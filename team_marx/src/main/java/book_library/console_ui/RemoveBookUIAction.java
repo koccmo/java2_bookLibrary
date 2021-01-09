@@ -4,15 +4,16 @@ import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.RemoveBookResponse;
 import book_library.core.services.RemoveBookService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class RemoveBookUIAction implements UIAction {
 
+    @Autowired
     private RemoveBookService removeBookService;
-
-    public RemoveBookUIAction(RemoveBookService removeBookService) {
-        this.removeBookService = removeBookService;
-    }
 
     @Override
     public void execute() {

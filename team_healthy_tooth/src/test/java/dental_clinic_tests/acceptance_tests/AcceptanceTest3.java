@@ -1,5 +1,11 @@
 package dental_clinic_tests.acceptance_tests;
 
+import dental_clinic.core.domain.OrderingDirection;
+import dental_clinic.core.requests.Ordering;
+import dental_clinic.core.requests.Paging;
+import dental_clinic.core.requests.patient.SearchPatientRequest;
+import dental_clinic.core.responses.patient.SearchPatientResponse;
+import dental_clinic.core.services.patient.SearchPatientService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,13 +17,10 @@ import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.patient.AddPatientRequest;
 import dental_clinic.core.requests.patient.DeletePatientRequest;
 import dental_clinic.core.requests.patient.GetAllPatientsRequest;
-import dental_clinic.core.requests.patient.SearchPatientByPersonalCodeRequest;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
-import dental_clinic.core.responses.patient.SearchPatientByPersonalCodeResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.DeletePatientService;
 import dental_clinic.core.services.patient.GetAllPatientsService;
-import dental_clinic.core.services.patient.SearchPatientsByPersonalCodeService;
 
 import static org.junit.Assert.assertTrue;
 
@@ -46,11 +49,11 @@ public class AcceptanceTest3 {
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService().execute(getAllPatientsRequest);
 
-        SearchPatientByPersonalCodeRequest searchPatientByPersonalCodeRequest = new SearchPatientByPersonalCodeRequest("25038910523");
-        SearchPatientByPersonalCodeResponse searchPatientByPersonalCodeResponse = searchPatientsByPersonalCodeService().execute(searchPatientByPersonalCodeRequest);
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest("25038910523", new Ordering("name", OrderingDirection.ASC), new Paging(1, 100));
+        SearchPatientResponse searchPatientResponse = searchPatientService().execute(searchPatientRequest);
 
         assertTrue(getAllPatientsResponse.getPatients().size() == 1);
-        assertTrue(searchPatientByPersonalCodeResponse.getFoundPatient().equals(patient));
+        assertTrue(searchPatientResponse.getPatients().get(0).equals(patient));
 
     }
 
@@ -66,8 +69,8 @@ public class AcceptanceTest3 {
         return appContext.getBean(GetAllPatientsService.class);
     }
 
-    private SearchPatientsByPersonalCodeService searchPatientsByPersonalCodeService(){
-        return appContext.getBean(SearchPatientsByPersonalCodeService.class);
+    private SearchPatientService searchPatientService(){
+        return appContext.getBean(SearchPatientService.class);
     }
 
 }

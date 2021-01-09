@@ -3,23 +3,25 @@ package book_library.core.validators;
 import book_library.core.database.Database;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class RemoveBookRequestValidator {
 
+    @Autowired
     private Database database;
-
-    public RemoveBookRequestValidator(Database database) {
-        this.database = database;
-    }
 
     public List<CoreError> validate(RemoveBookRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
-        validateIdPresentsInDatabase(request).ifPresent(errors::add);
+        if (errors.isEmpty()) {
+            validateIdPresentsInDatabase(request).ifPresent(errors::add);
+        }
         return errors;
     }
 

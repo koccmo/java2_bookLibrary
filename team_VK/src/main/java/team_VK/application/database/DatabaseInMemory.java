@@ -1,10 +1,11 @@
 package team_VK.application.database;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+@Component
 public class DatabaseInMemory implements Database {
 
     private long idCounter = 1L;

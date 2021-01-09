@@ -1,8 +1,8 @@
 package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.*;
-import dental_clinic.database.PatientDatabase;
-import dental_clinic.database.PatientDatabaseInMemory;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.database.in_memory.patient.PatientDatabaseInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -80,9 +80,9 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testFindPatientByPersonalCode(){
-        Optional <Patient> expectedPatient = Optional.of(new Patient(personalData1));
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").equals(expectedPatient));
-        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").equals(Optional.empty()));
+        Patient expectedPatient = new Patient(personalData1);
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678900").get(0).equals(expectedPatient));
+        assertTrue(patientDatabase.findPatientsByPersonalCode("12345678907").isEmpty());
     }
 
     @Test

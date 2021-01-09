@@ -1,14 +1,14 @@
 package team_VK.application.core.services.validators;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.domain.BookingPeriod;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.DIComponent;
 import team_VK.application.database.Database;
 
 import java.util.*;
-@DIComponent
+@Component
 public class BookBookServiceValidator {
 
     public List<CoreError> validate(BookBookRequest request, Database database) {

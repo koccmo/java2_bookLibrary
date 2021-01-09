@@ -6,7 +6,7 @@ import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.ContainsDatabaseIdValidator;
-import dental_clinic.database.PatientDatabase;
+import dental_clinic.database.in_memory.patient.PatientDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ public class ContainsDatabaseIdService {
             return new ContainsDatabaseIdResponse(containsDatabaseIdRequest.getId());
         }
 
-        errors.add(new CoreError("id = ", "Database doesn't contain patient with id"));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id"));
         return new ContainsDatabaseIdResponse(errors);
     }
 

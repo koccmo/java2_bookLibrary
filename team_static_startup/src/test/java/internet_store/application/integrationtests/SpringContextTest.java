@@ -13,6 +13,7 @@ import internet_store.application.config.ProductListConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ProductListConfiguration.class})
+
 public class SpringContextTest {
 
     @Autowired

@@ -1,24 +1,18 @@
 package team_VK.application.core.services.services;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import team_VK.application.ApplicationContext;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.standart_validators.AuthorFieldValidator;
 import team_VK.application.core.services.standart_validators.TitleFieldValidator;
 import team_VK.application.core.services.validators.AddBookServiceValidator;
-import team_VK.application.database.DataBaseFiller;
-import team_VK.application.dependenci_injection.DIApplicationContextBuilder;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +21,7 @@ import java.util.stream.Stream;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBookServiceValidatorTest {
 
-    ApplicationContext context;
+
     @Mock
     private TitleFieldValidator titleFieldValidator;
     @Mock
@@ -35,13 +29,6 @@ public class AddBookServiceValidatorTest {
     @InjectMocks
     AddBookServiceValidator subject;
 
-
-    @Before
-    public void setup() throws IOException, ClassNotFoundException {
-        context = new DIApplicationContextBuilder().build("team_VK.application");
-        DataBaseFiller dataBaseFiller = context.getBean(DataBaseFiller.class);
-        dataBaseFiller.fill();
-    }
 
     @Test
     public void ShouldMergeTwoErrorsLists() {

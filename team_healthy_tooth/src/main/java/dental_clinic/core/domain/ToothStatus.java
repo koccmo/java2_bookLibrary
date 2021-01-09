@@ -13,5 +13,6 @@ public enum ToothStatus {
     KRONITIS_AR_FAS,
     PLAST_KRONITIS,
     TILTINI,
-    HEALTHY
+    HEALTHY,
+    OTHER
 }

@@ -1,23 +1,23 @@
 package lv.javaguru.app.core.request;
 
 import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.Reservation;
 import lv.javaguru.app.core.domain.Ticket;
 
 public class AddReservationRequest {
 
-    private final Person person;
-    private final Ticket ticket;
 
-    public AddReservationRequest(Person person, Ticket ticket) {
-        this.person = person;
-        this.ticket = ticket;
+    private final Reservation reservation;
+
+    public AddReservationRequest(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     public Person getPerson() {
-        return person;
+        return reservation.getPerson();
     }
 
     public Ticket getTicket() {
-        return ticket;
+        return reservation.getTicket();
     }
 }

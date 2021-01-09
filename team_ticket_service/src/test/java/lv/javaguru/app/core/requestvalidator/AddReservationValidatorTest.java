@@ -1,9 +1,10 @@
 package lv.javaguru.app.core.requestvalidator;
 
 import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.Reservation;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddReservationRequest;
-import lv.javaguru.app.core.request.AddReservationRequestValidator;
+import lv.javaguru.app.core.validators.AddReservationRequestValidator;
 import lv.javaguru.app.core.response.CodeError;
 
 import org.junit.Ignore;
@@ -22,7 +23,8 @@ public class AddReservationValidatorTest {
         validator = new AddReservationRequestValidator();
         Person person = new Person("Sergejs", "Aleksejevs");
         Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
-        AddReservationRequest request = new AddReservationRequest(person, ticket);
+        Reservation reservation = new Reservation(person, ticket);
+        AddReservationRequest request = new AddReservationRequest(reservation);
 
         List<CodeError> errors = validator.validate(request);
         assertEquals("Failed!", 0, errors.size());
@@ -33,19 +35,25 @@ public class AddReservationValidatorTest {
         validator = new AddReservationRequestValidator();
         Person person = new Person("", "Aleksejevs");
         Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
-        AddReservationRequest request = new AddReservationRequest(person, ticket);
+
+        Reservation reservation = new Reservation(person, ticket);
+
+        AddReservationRequest request = new AddReservationRequest(reservation);
 
         List<CodeError> errors = validator.validate(request);
         assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());
     }
 
     @Test
-	@Ignore
+    @Ignore
     public void noSurnameTest() {
         validator = new AddReservationRequestValidator();
         Person person = new Person("Sergejs", "");
         Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
-        AddReservationRequest request = new AddReservationRequest(person, ticket);
+
+        Reservation reservation = new Reservation(person, ticket);
+
+        AddReservationRequest request = new AddReservationRequest(reservation);
 
         List<CodeError> errors = validator.validate(request);
         assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());

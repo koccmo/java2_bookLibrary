@@ -1,5 +1,7 @@
 package dental_clinic.core.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Doctor {
@@ -7,10 +9,13 @@ public class Doctor {
     private Long id;
     private String name;
     private String surname;
+    private boolean isEmployed;
+    private List<Visit> visits = new ArrayList<>();
 
     public Doctor(String name, String surname) {
         this.name = name;
         this.surname = surname;
+        isEmployed = true;
     }
 
     public void setId(Long id) {
@@ -29,7 +34,23 @@ public class Doctor {
         return surname;
     }
 
-    public boolean filledCorrect() {
+    public boolean getIsEmployed() {
+        return isEmployed;
+    }
+
+    public void setEmployed(boolean employed) {
+        isEmployed = employed;
+    }
+
+    public List<Visit> getVisits() {
+        return visits;
+    }
+
+    public void addVisit(Visit visit){
+        visits.add(visit);
+    }
+
+    public boolean filledNameAndSurname() {
         return name != null && !name.isEmpty() && surname != null && !surname.isEmpty();
     }
 
@@ -50,7 +71,7 @@ public class Doctor {
     public String toString() {
         return "Doctor: " +
                 "id: " + id + "\n" +
-                "name: '" + name + "\n" +
-                "surname: '" + surname + "\n";
+                "Dr: '" + name + " " + surname + "\n"
+                +"Visits: " + visits + "\n\n";
     }
 }

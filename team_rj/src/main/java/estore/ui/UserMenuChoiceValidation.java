@@ -1,7 +1,10 @@
 package estore.ui;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class UserMenuChoiceValidation {
     public int validateUserMenuChoice(String userStringInput, int menuSize) {
         int choice;

@@ -88,6 +88,16 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
+        return productList.stream()
+                .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
+                .collect(Collectors.toList());
+    }
+
+    //TODO
+    //TODO tut nado esjo 3 metoda dobavitj
+
+    @Override
     public boolean containsProduct(Product product) {
         return productList.stream()
                 .anyMatch(product1 -> product1.equals(product));

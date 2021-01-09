@@ -9,6 +9,8 @@ public class Product {
     private String productDescription;
     private BigDecimal price;
 
+    public Product() {}
+
     public Product(String productName, String productDescription, BigDecimal price) {
         this.productName = productName;
         this.productDescription = productDescription;

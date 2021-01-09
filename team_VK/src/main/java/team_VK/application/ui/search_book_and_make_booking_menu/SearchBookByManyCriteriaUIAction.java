@@ -1,20 +1,21 @@
 package team_VK.application.ui.search_book_and_make_booking_menu;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import team_VK.application.core.requests.SearchBookRequest;
 import team_VK.application.core.responses.SearchBookResponse;
-import team_VK.application.core.services.DIDependency;
 import team_VK.application.core.services.search_book_and_make_booking_menu_services.SearchBookByMANYCriteriaService;
-import team_VK.application.database.DIComponent;
 import team_VK.application.ui.UIActions;
 import team_VK.application.ui.additional_function.ErrorsPrinter;
 
 import java.text.ParseException;
 import java.util.Scanner;
-@DIComponent
+@Component
 public class SearchBookByManyCriteriaUIAction implements UIActions {
-    @DIDependency private SearchBookByMANYCriteriaService service;
-    @DIDependency private ErrorsPrinter errorsPrinter;
+    @Autowired
+    private SearchBookByMANYCriteriaService service;
+    @Autowired private ErrorsPrinter errorsPrinter;
 
     @Override
     public void execute() throws ParseException {

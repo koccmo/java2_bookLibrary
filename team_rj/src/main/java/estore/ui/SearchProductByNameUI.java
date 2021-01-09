@@ -6,9 +6,11 @@ import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByNameService;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class SearchProductByNameUI implements UIAction {
 
     private SearchProductByNameService searchProductByNameService;

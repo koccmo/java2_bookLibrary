@@ -5,24 +5,18 @@ import dental_clinic.core.requests.Paging;
 
 public class SearchPatientRequest {
 
-    private String name;
-    private String surname;
+    private String inputForSearch;
     private Ordering ordering;
     private Paging paging;
 
-    public SearchPatientRequest(String name, String surname, Ordering ordering, Paging paging) {
-        this.name = name;
-        this.surname = surname;
+    public SearchPatientRequest(String inputForSearch, Ordering ordering, Paging paging) {
+        this.inputForSearch = inputForSearch;
         this.ordering = ordering;
         this.paging = paging;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
+    public String getInputForSearch() {
+        return inputForSearch;
     }
 
     public Ordering getOrdering(){

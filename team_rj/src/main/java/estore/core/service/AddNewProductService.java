@@ -6,9 +6,11 @@ import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AddNewProductService {
 
     private ProductDB productDB;

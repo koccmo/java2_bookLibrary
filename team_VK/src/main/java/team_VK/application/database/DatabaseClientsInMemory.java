@@ -1,10 +1,11 @@
 package team_VK.application.database;
 
+import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Client;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+@Component
 public class DatabaseClientsInMemory implements DatabaseClients {
 
     private long idClientsCounter = 1L;
