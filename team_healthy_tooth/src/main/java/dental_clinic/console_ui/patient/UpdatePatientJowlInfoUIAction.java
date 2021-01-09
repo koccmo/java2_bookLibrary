@@ -23,7 +23,6 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
 
     @Override
     public void execute() {
-        Scanner in = new Scanner(System.in);
 
         Long id = inputFormatsValidator.inputLong("Please input id");
 
