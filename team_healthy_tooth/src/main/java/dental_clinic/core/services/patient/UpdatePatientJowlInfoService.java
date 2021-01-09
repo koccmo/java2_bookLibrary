@@ -33,8 +33,7 @@ public class UpdatePatientJowlInfoService {
         }
 
         updatePatientsJowl(updatePatientsJowlInfoRequest);
-        return new UpdatePatientJowlInfoResponse(updatePatientsJowlInfoRequest.getId(),
-                updatePatientsJowlInfoRequest.getJowlInfo());
+        return new UpdatePatientJowlInfoResponse(updatePatientsJowlInfoRequest.getId());
     }
 
     private void updatePatientsJowl (UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest) {
