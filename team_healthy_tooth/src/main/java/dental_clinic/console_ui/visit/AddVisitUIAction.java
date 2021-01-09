@@ -62,8 +62,8 @@ public class AddVisitUIAction implements UIAction {
 
             GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
             GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
+            System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:");
             if (!getDoctorListResponse.hasErrors()) {
-                System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:");
                 getDoctorListResponse.getDoctors().forEach(System.out::println);
             }
 
@@ -88,19 +88,19 @@ public class AddVisitUIAction implements UIAction {
 
     private void printToothStatuses(){
         System.out.println(
-                "Tooth statuses:\n" +
-                        "1   KARIES\n" +
-                        "2   PLOMBA\n" +
-                        "3   SAKNE\n" +
-                        "4   KRONITIS\n" +
-                        "5   KLAMERS\n" +
-                        "6   NAV_ZOBA\n" +
-                        "7   FASETE\n" +
-                        "8   NONEMAMA_PROTEZE\n" +
-                        "9   KRONITIS_AR_FAS\n" +
-                        "10  PLAST_KRONITIS\n" +
-                        "11  TILTINI\n" +
-                        "12  HEALTHY\n");
+            "Tooth statuses:\n" +
+                "1   KARIES\n" +
+                "2   PLOMBA\n" +
+                "3   SAKNE\n" +
+                "4   KRONITIS\n" +
+                "5   KLAMERS\n" +
+                "6   NAV_ZOBA\n" +
+                "7   FASETE\n" +
+                "8   NONEMAMA_PROTEZE\n" +
+                "9   KRONITIS_AR_FAS\n" +
+                "10  PLAST_KRONITIS\n" +
+                "11  TILTINI\n" +
+                "12  HEALTHY\n");
     }
 
     ToothStatus inputToothStatus(int variant){
