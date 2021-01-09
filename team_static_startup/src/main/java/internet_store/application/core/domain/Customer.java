@@ -12,6 +12,8 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
 
+    public Customer() {}
+
     public Customer(String customerFirstName, String customerSecondName) {
         this.customerFirstName = customerFirstName;
         this.customerSecondName = customerSecondName;
