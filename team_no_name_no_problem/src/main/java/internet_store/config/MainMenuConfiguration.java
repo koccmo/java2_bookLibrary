@@ -18,16 +18,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
-
-
 @Configuration
 @ComponentScan(basePackages = "internet_store")
 @PropertySource(value = "classpath:application.properties")
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class MainMenuConfiguration {
-
+/*
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
         return new PropertySourcesPlaceholderConfigurer();
@@ -79,5 +76,5 @@ public class MainMenuConfiguration {
     @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory){
         return new HibernateTransactionManager(sessionFactory);
-    }
+    }*/
 }
