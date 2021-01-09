@@ -90,7 +90,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
         return productList.stream()
-                .filter(product -> product.getPrice() > startPrice && product.getPrice() < endPrice)
+                .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
                 .collect(Collectors.toList());
     }
 
