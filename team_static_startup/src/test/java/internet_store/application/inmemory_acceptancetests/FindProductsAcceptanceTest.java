@@ -1,21 +1,23 @@
-package internet_store.application.acceptancetests;
+package internet_store.application.inmemory_acceptancetests;
 
-import internet_store.application.config.ProductListConfiguration;
-import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.requests.Ordering;
-import internet_store.application.core.requests.Paging;
-import internet_store.application.core.responses.FindProductsResponse;
-import internet_store.application.core.services.FindProductsService;
+import internet_store.lesson_6.config.ProductListConfiguration;
+import internet_store.lesson_6.core.requests.FindProductsRequest;
+import internet_store.lesson_6.core.requests.Ordering;
+import internet_store.lesson_6.core.requests.Paging;
+import internet_store.lesson_6.core.responses.FindProductsResponse;
+import internet_store.lesson_6.core.services.FindProductsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import static org.junit.Assert.*;
 
+@Profile("inmemory")
 public class FindProductsAcceptanceTest {
 
-/*    private ApplicationContext appContext;
+    private ApplicationContext appContext;
 
     @Before
     public void before(){
@@ -206,6 +208,6 @@ public class FindProductsAcceptanceTest {
         assertEquals(1, response.getErrors().size());
         assertEquals("Page size", response.getErrors().get(0).getField());
         assertEquals("Must be bigger than zero.", response.getErrors().get(0).getMessage());
-    }*/
+    }
 
 }

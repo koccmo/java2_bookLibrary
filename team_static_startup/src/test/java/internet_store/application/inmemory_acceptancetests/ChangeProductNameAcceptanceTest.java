@@ -1,4 +1,4 @@
-package internet_store.application.acceptancetests;
+package internet_store.application.inmemory_acceptancetests;
 
 import internet_store.application.config.ProductListConfiguration;
 import internet_store.application.core.database.Database;
@@ -10,14 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
+@Profile("inmemory")
 public class ChangeProductNameAcceptanceTest {
 
-/*    private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
     private Database database;
 
     @Before
@@ -65,5 +67,5 @@ public class ChangeProductNameAcceptanceTest {
 
     private ChangeProductNameService getChangeProductNameService() {
         return applicationContext.getBean(ChangeProductNameService.class);
-    }*/
+    }
 }

@@ -1,23 +1,25 @@
-package internet_store.application.acceptancetests;
+package internet_store.application.inmemory_acceptancetests;
 
-import internet_store.application.config.ProductListConfiguration;
-import internet_store.application.core.requests.AddProductRequest;
-import internet_store.application.core.requests.DeleteByProductRequest;
-import internet_store.application.core.responses.DeleteByProductResponse;
-import internet_store.application.core.services.AddProductService;
-import internet_store.application.core.services.DeleteProductByProductService;
+import internet_store.lesson_6.config.ProductListConfiguration;
+import internet_store.lesson_6.core.requests.AddProductRequest;
+import internet_store.lesson_6.core.requests.DeleteByProductRequest;
+import internet_store.lesson_6.core.responses.DeleteByProductResponse;
+import internet_store.lesson_6.core.services.AddProductService;
+import internet_store.lesson_6.core.services.DeleteProductByProductService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
+@Profile("inmemory")
 public class DeleteByProductAcceptanceTest {
 
-/*    private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     @Before
     public void setUp() {
@@ -78,5 +80,5 @@ public class DeleteByProductAcceptanceTest {
 
     private AddProductService getAddProductService() {
         return applicationContext.getBean(AddProductService.class);
-    }*/
+    }
 }

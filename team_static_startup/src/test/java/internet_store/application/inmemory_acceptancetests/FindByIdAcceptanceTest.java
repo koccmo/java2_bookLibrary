@@ -1,11 +1,11 @@
-package internet_store.application.acceptancetests;
+package internet_store.application.inmemory_acceptancetests;
 
-import internet_store.application.config.ProductListConfiguration;
-import internet_store.application.core.database.Database;
-import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.FindByIdRequest;
-import internet_store.application.core.responses.FindByIdResponse;
-import internet_store.application.core.services.FindByIdService;
+import internet_store.lesson_6.config.ProductListConfiguration;
+import internet_store.lesson_6.core.database.Database;
+import internet_store.lesson_6.core.domain.Product;
+import internet_store.lesson_6.core.requests.FindByIdRequest;
+import internet_store.lesson_6.core.responses.FindByIdResponse;
+import internet_store.lesson_6.core.services.FindByIdService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -13,12 +13,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
 import static org.junit.Assert.*;
+import org.springframework.context.annotation.Profile;
 
+@Profile("inmemory")
 public class FindByIdAcceptanceTest {
 
-/*    private ApplicationContext appContext;
+    private ApplicationContext appContext;
     private Database database;
 
     @Before
@@ -75,5 +76,5 @@ public class FindByIdAcceptanceTest {
 
     private FindByIdService getFindByIdService() {
         return appContext.getBean(FindByIdService.class);
-    }*/
+    }
 }

@@ -3,6 +3,7 @@ package internet_store.application.core.database;
 import internet_store.application.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -95,23 +96,42 @@ public class MySQLDatabase implements Database {
 
     @Override
     public List<Product> findByNameAndDescription(String name, String description) {
-        return null;
+        String query = "SELECT * FROM products WHERE name LIKE ? AND description LIKE ?";
+        return jdbcTemplate.query(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            return preparedStatement;
+        }, new BeanPropertyRowMapper<>(Product.class));
     }
 
     @Override
     public List<Product> getProductList() {
-        return null;
+        String query = "SELECT * FROM products";
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Product.class));
     }
 
     @Override
     public Optional<Product> findById(Long id) {
-        return Optional.empty();
+        try {
+            String query = "SELECT * FROM products WHERE id = ?";
+            Product foundProduct = jdbcTemplate.queryForObject(query, new Object[]{id}, new BeanPropertyRowMapper<>(Product.class));
+            return Optional.ofNullable(foundProduct);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
     public boolean changeProductName(Long id, String newName) {
-        return false;
+        String query = "UPDATE products SET name = ? WHERE id = ?";
+        int affectedRows = jdbcTemplate.update(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newName);
+            preparedStatement.setLong(2, id);
+            return preparedStatement;
+        });
+        return affectedRows > 0;
     }
-
 
 }
