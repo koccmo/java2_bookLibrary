@@ -17,6 +17,7 @@ public class SearchProductRequestValidator {
         if (isTitleAndDescriptionEmptyAndPriceRangeMissing(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
                                                            searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())){
             errors.add(new CoreError("search", "Not valid input for search"));
+            return errors;
         }
 
         if (isNotValidInputForPriceSearch(searchProductRequest)) {
@@ -66,11 +67,9 @@ public class SearchProductRequestValidator {
     }
 
     private boolean isNotValidInputForOrderBy(SearchProductRequest searchProductRequest){
-        //TODO Anvar, podumaj chto tut ne tak :D
         return !searchProductRequest.getOrdering().getOrderBy().equals("title") &&
                 !searchProductRequest.getOrdering().getOrderBy().equals("description") &&
-                !searchProductRequest.getOrdering().getOrderBy().equals("start price") &&
-                !searchProductRequest.getOrdering().getOrderBy().equals("end price");
+                !searchProductRequest.getOrdering().getOrderBy().equals("price");
     }
 
     private boolean isNotValidInputForOrderDirection(SearchProductRequest searchProductRequest){
@@ -85,13 +84,13 @@ public class SearchProductRequestValidator {
         if (!searchProductRequest.getOrdering().filledBoth() &&
                 !searchProductRequest.getOrdering().emptyBothFields()) {
             errors.add(new CoreError("search", "Not valid input for ordering parameters"));
-        }else {
-            if (isNotValidInputForOrderBy(searchProductRequest) && searchProductRequest.getOrdering().filledBoth()) {
-                errors.add(new CoreError("orderBy", "Not valid input for orderBy"));
-            }
-            if (isNotValidInputForOrderDirection(searchProductRequest) && searchProductRequest.getOrdering().filledBoth()) {
-                errors.add(new CoreError("orderDirection", "Not valid input for orderDirection"));
-            }
+            return errors;
+        }
+        if (isNotValidInputForOrderBy(searchProductRequest) && searchProductRequest.getOrdering().filledBoth()) {
+            errors.add(new CoreError("orderBy", "Not valid input for orderBy"));
+        }
+        if (isNotValidInputForOrderDirection(searchProductRequest) && searchProductRequest.getOrdering().filledBoth()) {
+            errors.add(new CoreError("orderDirection", "Not valid input for orderDirection"));
         }
         return  errors;
     }

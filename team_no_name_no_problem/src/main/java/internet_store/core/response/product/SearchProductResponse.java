@@ -16,7 +16,6 @@ public class SearchProductResponse extends CoreResponse {
 
     public SearchProductResponse(List<CoreError> errors, List<Product> products) {
         super(errors);
-        this.products = products;
     }
 
     public List<Product> getProducts(){

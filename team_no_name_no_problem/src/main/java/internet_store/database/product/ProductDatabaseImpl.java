@@ -94,6 +94,9 @@ public class ProductDatabaseImpl implements ProductDatabase{
                 .collect(Collectors.toList());
     }
 
+    //TODO
+    //TODO tut nado esjo 3 metoda dobavitj
+
     @Override
     public boolean containsProduct(Product product) {
         return productList.stream()

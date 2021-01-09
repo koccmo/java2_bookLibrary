@@ -29,6 +29,9 @@ public interface ProductDatabase {
 
     List<Product> findAllByTitleAndDescription (String title, String description);
 
+    //TODO
+    //TODO tut nado esjo 3 metoda dobavitj
+
     boolean containsProduct (Product product);
 
     boolean containsId (Long id);
