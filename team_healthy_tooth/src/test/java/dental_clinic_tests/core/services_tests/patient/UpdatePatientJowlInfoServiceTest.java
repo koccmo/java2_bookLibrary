@@ -72,12 +72,10 @@ public class UpdatePatientJowlInfoServiceTest {
     public void testSuccessfulUpdate() {
         Map<Integer, ToothStatus> jowlInfo = new HashMap<>();
         jowlInfo.put(11, ToothStatus.FASETE);
-        CoreError error = new CoreError("database", "Database doesn't contain patient with id 2");
-        List<CoreError> errorList = new ArrayList<>();
-        errorList.add(error);
 
         PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "01010114789");
         Patient patient = new Patient(personalData);
+        patient.getPersonalData().setId(1L);
         List <Patient> patientList = new ArrayList<>();
         patientList.add(patient);
 
