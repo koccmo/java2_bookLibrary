@@ -39,10 +39,7 @@ import java.util.stream.Collectors;
     }
 
     private SearchProductResponse provideSearchResultAccordingToRequest(SearchProductRequest searchProductRequest) {
-        //TODO Anvar, tut vsjo esjo net vseh variantov
-        //TODO Anvar, podumaj
-        //TODO I napishi vse, raz ho4esh delatj poisk po 3 poljam, variantov boljshe!!
-        //TODO 3 + 3 + 1 != 4
+
         if (isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
                 searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
             return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
