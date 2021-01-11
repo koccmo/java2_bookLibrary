@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `personalData`(
   `name` VARCHAR(30) NOT NULL,
   `surname` VARCHAR(30) NOT NULL,
   `phone` VARCHAR(30) NOT NULL,
-  `personalcode` VARCHAR(30) NOT NULL,
+  `personalCode` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -44,7 +44,7 @@ AUTO_INCREMENT = 1;
 CREATE TABLE IF NOT EXISTS `service`(
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `service_type` VARCHAR(30) NOT NULL,
-  `price` VARCHAR(30) NOT NULL,
+  `price` BIGINT NOT NULL,
   `isActive` boolean NOT NULL,
   PRIMARY KEY (`id`)
 )
@@ -107,18 +107,18 @@ CREATE TABLE IF NOT EXISTS `jowl`(
   `d74` VARCHAR(20) NOT NULL,
   `d75` VARCHAR(20) NOT NULL,
   `isMost` boolean NOT null,
-  `m01s` bigint NOT NULL,
-  `m01e` bigint NOT NULL,
-  `m02s` bigint NOT NULL,
-  `m02e` bigint NOT NULL,
-  `m03s` bigint NOT NULL,
-  `m03e` bigint NOT NULL,
-  `m04s` bigint NOT NULL,
-  `m04e` bigint NOT NULL,
-  `m05s` bigint NOT NULL,
-  `m05e` bigint NOT NULL,
-  `m06s` bigint NOT NULL,
-  `m06e` bigint NOT NULL,
+  `m01s` bigint,
+  `m01e` bigint,
+  `m02s` bigint,
+  `m02e` bigint,
+  `m03s` bigint,
+  `m03e` bigint,
+  `m04s` bigint,
+  `m04e` bigint,
+  `m05s` bigint,
+  `m05e` bigint,
+  `m06s` bigint,
+  `m06e` bigint,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`patient_id`) REFERENCES `personalData`(`id`)
 )
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `visit`(
   `service_id` BIGINT NOT NULL,
   `discount` BIGINT,
   `date` DATETIME NOT NULL,
-  `time` DATETIME,
+  `time` DATETIME NOT NULL,
   `time_end` DATETIME,
   `calculate_sum` BIGINT NOT NULL,
   `cash_sum` BIGINT NOT NULL,
