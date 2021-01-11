@@ -21,10 +21,10 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu (List<UIAction> uiActionList) {
         menuNumberToActionMap.put(1, findUIAction(uiActionList, AddProductUIAction.class));
-        menuNumberToActionMap.put(2, findUIAction(uiActionList, DeleteByIdUIAction.class));
+        menuNumberToActionMap.put(2, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(3, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(4, findUIAction(uiActionList, FindByIdUIAction.class));
-        menuNumberToActionMap.put(5, findUIAction(uiActionList, SearchProductUIAction.class));
+        menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
         menuNumberToActionMap.put(6, findUIAction(uiActionList, ChangeProductUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetOrdersUIAction.class));
 
@@ -52,12 +52,13 @@ public class ProgramMenu {
 
         System.out.println("\nAdministrator Menu\n\n" +
                 "1   Add product\n" +
-                "2   Delete account by id\n" +
+                "2   Search product\n" +
                 "3   Get list of products\n" +
                 "4   Find product by ID\n"+
-                "5   Search product\n" +
+                "5   Delete account by id\n" +
                 "6   Change product\n" +
-                "7   Get order list");
+                "7   Get order list\n" +
+                "*****************************");
 
         System.out.println("\nCustomer Menu\n\n" +
                 "8   Sign in\n" +
@@ -65,8 +66,9 @@ public class ProgramMenu {
                 "10  Search product\n" +
                 "11  See product list\n" +
                 "12  Buy product\n\n"+
+                "*****************************\n");
 
-                "0   Exit\n");
+        System.out.println("0   Exit\n");
     }
 
     public int inputValidInteger(String message) {

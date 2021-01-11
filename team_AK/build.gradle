@@ -20,8 +20,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web:2.4.1') {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
-    compile ('org.springframework.boot:spring-boot-starter-thymeleaf:2.4.1') {
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf:2.4.1') {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
     }
     compile 'org.reactivestreams:reactive-streams:1.0.3'
+    compile 'org.liquibase:liquibase-core:4.2.2'
 }
