@@ -10,6 +10,7 @@ public class Doctor {
     private String name;
     private String surname;
     private boolean isEmployed;
+    private WorkGraphic workGraphic = new WorkGraphic();
     private List<Visit> visits = new ArrayList<>();
 
     public Doctor(String name, String surname) {
@@ -40,6 +41,14 @@ public class Doctor {
 
     public void setEmployed(boolean employed) {
         isEmployed = employed;
+    }
+
+    public WorkGraphic getWorkGraphic() {
+        return workGraphic;
+    }
+
+    public void setWorkGraphic(WorkGraphic workGraphic) {
+        this.workGraphic = workGraphic;
     }
 
     public List<Visit> getVisits() {
