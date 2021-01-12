@@ -1,10 +1,11 @@
 package adventure_time.core.responses.guides;
 
-import adventure_time.core.responses.CoreError;
+import core.responses.CoreError;
+import core.responses.CoreResponse;
 
 import java.util.List;
 
-public class AddGuideResponse extends CoreResponseGuide {
+public class AddGuideResponse extends CoreResponse {
 
     public AddGuideResponse() {}
 

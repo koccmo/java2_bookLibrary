@@ -8,54 +8,45 @@ public class Guides {
     private String guideName;
     private String guideEmail;
     private String guidePhone;
-    private int guideRating;
+    private boolean activity;
 
-    public Guides(long guideID, String guideName, String guideEmail, String guidePhone, int guideRating) {
-        this.guideID = guideID;
+    public Guides(String guideName, String guideEmail, String guidePhone) {
+
         this.guideName = guideName;
         this.guideEmail = guideEmail;
         this.guidePhone = guidePhone;
-        this.guideRating = guideRating;
+        this.activity = true;
     }
 
-    public long getguideID() {
+    public long getGuideID() {
         return guideID;
     }
 
-    public void setguideID(long guideID) {
-        this.guideID = guideID;
-    }
-
-    public String getguideName() {
+    public String getGuideName() {
         return guideName;
-    }
-
-    public void setguideName(String guideName) {
-        this.guideName = guideName;
     }
 
     public String getGuideEmail() {
         return guideEmail;
     }
 
-    public void setGuideEmail(String guideEmail) {
-        this.guideEmail = guideEmail;
-    }
-
     public String getGuidePhone() {
         return guidePhone;
     }
 
-    public void setGuidePhone(String guidePhone) {
-        this.guidePhone = guidePhone;
+    public void setGuideID(long guideID) {
+        this.guideID = guideID;
     }
 
-    public int getGuideRating() {
-        return guideRating;
+    public boolean isActivity() {
+        return activity;
     }
 
-    public void setGuideRating(int guideRating) {
-        this.guideRating = guideRating;
+    public void activityOn(boolean activity) {
+        this.activity = true;
+    }
+    public void activityOff(boolean activity) {
+        this.activity = false;
     }
 
     @Override
@@ -63,26 +54,22 @@ public class Guides {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Guides guides = (Guides) o;
-        return guideID == guides.guideID &&
-                guideRating == guides.guideRating &&
-                Objects.equals(guideName, guides.guideName) &&
-                Objects.equals(guideEmail, guides.guideEmail) &&
-                Objects.equals(guidePhone, guides.guidePhone);
+        return guideID == guides.guideID && activity == guides.activity && Objects.equals(guideName, guides.guideName) && Objects.equals(guideEmail, guides.guideEmail) && Objects.equals(guidePhone, guides.guidePhone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guideID, guideName, guideEmail, guidePhone, guideRating);
+        return Objects.hash(guideID, guideName, guideEmail, guidePhone, activity);
     }
 
     @Override
     public String toString() {
-        return "Guide{" +
+        return "Guides{" +
                 "guideID=" + guideID +
                 ", guideName='" + guideName + '\'' +
                 ", guideEmail='" + guideEmail + '\'' +
                 ", guidePhone='" + guidePhone + '\'' +
-                ", guideRating=" + guideRating +
+                ", activity=" + activity +
                 '}';
     }
 }
