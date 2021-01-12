@@ -4,6 +4,7 @@ import dental_clinic.core.domain.Doctor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,17 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
                 .findAny();
     }
 
+    @Override
+    public void updateWorkGraphicForSpecificDate(Long id, Integer day, String timeFrom, String timeTo) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getId().equals(id)) {
+                doctor.getWorkGraphic().getTimesStart()[day-1] = timeFrom;
+                doctor.getWorkGraphic().getTimesEnd()[day-1] = timeTo;
+                break;
+            }
+        }
+    }
+
     private List<Doctor> addSomeDoctors(){
         List<Doctor> doctors = new ArrayList<>();
         Doctor doctor1 = new Doctor("Doctor", "Zlo");
@@ -75,4 +87,6 @@ public class DoctorDatabaseInMemory implements DoctorDatabase{
         doctors.add(doctor3);
         return doctors;
     }
+
+
 }
