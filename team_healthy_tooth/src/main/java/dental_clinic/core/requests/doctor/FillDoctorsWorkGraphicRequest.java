@@ -1,24 +1,32 @@
 package dental_clinic.core.requests.doctor;
 
-import dental_clinic.core.domain.WorkGraphic;
-
-import java.util.GregorianCalendar;
-
 public class FillDoctorsWorkGraphicRequest {
 
     private Long id;
-    private WorkGraphic workGraphic;
+    private Integer day;
+    private String start;
+    private String end;
 
-    public FillDoctorsWorkGraphicRequest(Long id, WorkGraphic workGraphic) {
+    public FillDoctorsWorkGraphicRequest(Long id, Integer day, String start, String end) {
         this.id = id;
-        this.workGraphic = workGraphic;
+        this.day = day;
+        this.start = start;
+        this.end = end;
     }
 
     public Long getId() {
         return id;
     }
 
-    public WorkGraphic getWorkGraphic() {
-        return workGraphic;
+    public Integer getDay() {
+        return day;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getEnd() {
+        return end;
     }
 }
