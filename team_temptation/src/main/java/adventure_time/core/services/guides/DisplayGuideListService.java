@@ -1,7 +1,7 @@
 package adventure_time.core.services.guides;
 
-import database.guides.DatabaseGuides;
-import domain.Guides;
+import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.domain.Guides;
 
 import java.util.List;
 

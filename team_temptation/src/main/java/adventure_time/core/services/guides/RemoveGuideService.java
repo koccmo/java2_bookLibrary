@@ -1,9 +1,9 @@
 package adventure_time.core.services.guides;
 
-import core.requests.guides.RemoveGuideRequest;
-import core.responses.CoreError;
-import core.responses.guides.RemoveGuideResponse;
-import database.guides.DatabaseGuides;
+import adventure_time.core.requests.guides.RemoveGuideRequest;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.responses.guides.RemoveGuideResponse;
+import adventure_time.database.guides.DatabaseGuides;
 
 import java.util.List;
 

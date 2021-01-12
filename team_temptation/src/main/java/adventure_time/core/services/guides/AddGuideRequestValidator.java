@@ -1,7 +1,7 @@
 package adventure_time.core.services.guides;
 
-import core.requests.guides.AddGuideRequest;
-import core.responses.CoreError;
+import adventure_time.core.requests.guides.AddGuideRequest;
+import adventure_time.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
