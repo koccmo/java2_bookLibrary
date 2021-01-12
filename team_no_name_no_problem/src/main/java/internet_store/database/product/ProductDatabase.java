@@ -13,6 +13,12 @@ public interface ProductDatabase {
 
     void deleteById(Long id);
 
+    void deleteAllByTitle(String title);
+
+    void deleteAllByDescription(String description);
+
+    void deleteAllByPriceRange(Integer startPrice, Integer endPrice);
+
     Optional<Product> findById(Long id);
 
     void changeTitle(Long id, String newTitle);
@@ -28,9 +34,6 @@ public interface ProductDatabase {
     List<Product> findAllByDescription (String description);
 
     List<Product> findAllByTitleAndDescription (String title, String description);
-
-    //TODO
-    //TODO tut nado esjo 3 metoda dobavitj
 
     boolean containsProduct (Product product);
 
