@@ -155,4 +155,22 @@ public class ProductDatabaseImplTest {
 
         assertFalse(resultOfFindingLaptopDell.contains(laptopAcer));
     }
+
+    @Test
+    public void deleteAllByTitleTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+
+        productDatabase.deleteAllByTitle("Refrigerator");
+
+        assertFalse(productDatabase.containsProduct(refrigerator));
+        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+
+        productDatabase.deleteAllByTitle("Laptop");
+
+        assertFalse(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+    }
 }

@@ -32,17 +32,17 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void deleteByTitle(String title) {
+    public void deleteAllByTitle(String title) {
         productList.removeIf(product -> product.getTitle().equals(title));
     }
 
     @Override
-    public void deleteByDescription(String description) {
+    public void deleteAllByDescription(String description) {
         productList.removeIf(product -> product.getDescription().equals(description));
     }
 
     @Override
-    public void deleteByPriceRange(Integer startPrice, Integer endPrice) {
+    public void deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
         productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice);
     }
 
