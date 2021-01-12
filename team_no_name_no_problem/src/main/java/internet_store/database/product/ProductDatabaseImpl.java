@@ -32,6 +32,21 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public void deleteByTitle(String title) {
+        productList.removeIf(product -> product.getTitle().equals(title));
+    }
+
+    @Override
+    public void deleteByDescription(String description) {
+        productList.removeIf(product -> product.getDescription().equals(description));
+    }
+
+    @Override
+    public void deleteByPriceRange(Integer startPrice, Integer endPrice) {
+        productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice);
+    }
+
+    @Override
     public void changeTitle(Long id, String newTitle) {
         for (Product product : productList) {
             if (product.getId().equals(id)) {
@@ -93,9 +108,6 @@ public class ProductDatabaseImpl implements ProductDatabase{
                 .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
                 .collect(Collectors.toList());
     }
-
-    //TODO
-    //TODO tut nado esjo 3 metoda dobavitj
 
     @Override
     public boolean containsProduct(Product product) {
