@@ -1,15 +1,15 @@
 package adventure_time;
 
-import core.services.guides.*;
-import database.guides.*;
-import ui.guides.*;
+import adventure_time.core.services.guides.*;
+import adventure_time.database.guides.*;
+import adventure_time.ui.guides.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ApplicationContextGuide {
 
-    private Map<Class, Object> bean = new HashMap<>();
+    private final Map<Class, Object> bean = new HashMap<>();
 
     public <T extends Object> T getBean(Class c) {
         return (T) bean.get(c);

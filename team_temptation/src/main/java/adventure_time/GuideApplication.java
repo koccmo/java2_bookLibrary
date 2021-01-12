@@ -1,6 +1,6 @@
 package adventure_time;
 
-import ui.guides.*;
+import adventure_time.ui.guides.*;
 
 import java.util.Scanner;
 

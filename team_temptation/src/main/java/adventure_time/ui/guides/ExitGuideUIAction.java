@@ -1,6 +1,6 @@
 package adventure_time.ui.guides;
 
-import ui.UIAction;
+import adventure_time.ui.UIAction;
 
 public class ExitGuideUIAction implements UIAction {
 

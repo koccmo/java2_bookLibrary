@@ -1,8 +1,8 @@
 package adventure_time.ui.guides;
 
-import database.guides.DatabaseGuides;
-import domain.Guides;
-import ui.UIAction;
+import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.domain.Guides;
+import adventure_time.ui.UIAction;
 
 public class StartUpGuideUIAction implements UIAction {
 

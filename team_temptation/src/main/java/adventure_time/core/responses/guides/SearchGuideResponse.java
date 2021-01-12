@@ -1,8 +1,8 @@
 package adventure_time.core.responses.guides;
 
-import core.responses.CoreError;
-import core.responses.CoreResponse;
-import domain.Guides;
+import adventure_time.core.responses.CoreError;
+import adventure_time.core.responses.CoreResponse;
+import adventure_time.core.domain.Guides;
 
 import java.util.List;
 
