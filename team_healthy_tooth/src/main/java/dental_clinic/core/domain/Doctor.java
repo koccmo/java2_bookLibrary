@@ -81,6 +81,7 @@ public class Doctor {
         return "Doctor: " +
                 "id: " + id + "\n" +
                 "Dr: '" + name + " " + surname + "\n"
+                +workGraphic
                 +"Visits: " + visits + "\n\n";
     }
 }
