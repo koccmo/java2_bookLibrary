@@ -19,6 +19,8 @@ public class ProductDatabaseImplTest {
     Product tv = new Product("TV", "Radiotehnika", 3);
     Product gpsNavigator = new Product("GPS Navigator", "Car accessories", 45);
     Product laptopAcer = new Product("Laptop","Acer",300);
+    Product headphones = new Product("Headphones","Beats",350);
+    Product tabletPc = new Product("Tablet PC","Ipad",600);
 
     @Before
     public void init() {
@@ -172,5 +174,43 @@ public class ProductDatabaseImplTest {
 
         assertFalse(productDatabase.containsProduct(laptopDell));
         assertFalse(productDatabase.containsProduct(laptopAcer));
+    }
+
+    @Test
+    public void deleteAllByDescriptionTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        productDatabase.deleteAllByDescription("Acer");
+        productDatabase.deleteAllByDescription("Dell");
+
+        assertTrue(productDatabase.containsProduct(refrigerator));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+        assertFalse(productDatabase.containsProduct(laptopDell));
+
+        productDatabase.deleteAllByDescription("Beats");
+
+        assertFalse(productDatabase.containsProduct(headphones));
+    }
+
+    @Test
+    public void deleteAllByPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        productDatabase.deleteAllByPriceRange(4,400);
+
+        assertTrue(productDatabase.containsProduct(tv));
+        assertFalse(productDatabase.containsProduct(tabletPc));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+        assertFalse(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+        assertFalse(productDatabase.containsProduct(refrigerator));
     }
 }
