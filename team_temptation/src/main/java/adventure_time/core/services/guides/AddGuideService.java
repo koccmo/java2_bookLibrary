@@ -1,40 +1,37 @@
 package adventure_time.core.services.guides;
 
-import adventure_time.core.requests.events.AddEventRequest;
-import adventure_time.core.responses.events.AddEventResponse;
+import adventure_time.core.requests.guides.AddGuideRequest;
 import adventure_time.core.responses.CoreError;
-import adventure_time.database.events.EventDatabase;
-import adventure_time.core.domain.Events;
+import adventure_time.core.responses.guides.AddGuideResponse;
+import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.domain.Guides;
 
 import java.util.List;
 
 public class AddGuideService {
 
-    private final EventDatabase databaseEvents;
-    private AddGuideRequestValidator validator;
+    private final DatabaseGuides databaseGuides;
+    private final AddGuideRequestValidator validator;
 
-    public AddGuideService(EventDatabase databaseEvents, AddGuideRequestValidator validator) {
-        this.databaseEvents = databaseEvents;
+    public AddGuideService(DatabaseGuides databaseGuides, AddGuideRequestValidator validator) {
+        this.databaseGuides = databaseGuides;
         this.validator = validator;
     }
 
-    public AddEventResponse addEvent (AddEventRequest request) {
+    public AddGuideResponse addGuide(AddGuideRequest request) {
         // Validation
         List<CoreError> errors = validator.validate(request);
 
         if (!errors.isEmpty()) {
-            return new AddEventResponse(errors);
+            return new AddGuideResponse(errors);
         }
+        Guides guide = new Guides(request.getGuideName(), request.getGuideEmail(),
+                request.getGuidePhone());
 
-        Events event = new Events(request.getEventName(), request.getEventKind(),
-                request.getDurationHours(), request.getMaxNumberParticipants(),
-                request.getMinNumberParticipants(), request.getRoute(),
-                request.getDetailsDescription());
+        if (databaseGuides.add(guide)) return new AddGuideResponse();
 
-        if (databaseEvents.add(event)) return new AddEventResponse();
-
-        errors.add(new CoreError("eventName", "The event \"" + request.getEventName() + "\" already exists"));
-        return new AddEventResponse(errors);
+        errors.add(new CoreError("guideName", "Guide \"" + request.getGuideName() + "\" already exists"));
+        return new AddGuideResponse(errors);
 
     }
 }

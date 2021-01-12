@@ -13,17 +13,17 @@ public class InMemoryGuides {
     public boolean add(Guides guides) {
         if (!this.guides.isEmpty()) {
             for (Guides item : this.guides) {
-                if (item.getguideName().equals(guides.getguideName())) return false;
+                if (item.getGuideName().equals(guides.getGuideName())) return false;
             }
         }
-        guides.setguideID(idCounter);
+        guides.setGuideID(idCounter);
         this.guides.add(guides);
         idCounter++;
         return true;
     }
 
     public boolean remove (String guideName) {
-        return getGuidesList().removeIf(items -> items.getguideName().equals(guideName));
+        return getGuidesList().removeIf(items -> items.getGuideName().equals(guideName));
     }
 
     public List<Guides> getGuidesList() {

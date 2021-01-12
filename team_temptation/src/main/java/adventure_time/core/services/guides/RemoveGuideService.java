@@ -1,33 +1,32 @@
 package adventure_time.core.services.guides;
 
-import adventure_time.core.requests.events.RemoveEventRequest;
+import adventure_time.core.requests.guides.RemoveGuideRequest;
 import adventure_time.core.responses.CoreError;
-import adventure_time.core.responses.events.RemoveEventResponse;
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.responses.guides.RemoveGuideResponse;
+import adventure_time.database.guides.DatabaseGuides;
 
 import java.util.List;
 
 public class RemoveGuideService {
-    private final EventDatabase databaseEvents;
-    private RemoveGuideRequestValidator validator;
+    private final DatabaseGuides databaseGuides;
+    private final RemoveGuideRequestValidator validator;
 
-    public RemoveGuideService(EventDatabase databaseEvents, RemoveGuideRequestValidator validator) {
-        this.databaseEvents = databaseEvents;
+    public RemoveGuideService(DatabaseGuides databaseGuides, RemoveGuideRequestValidator validator) {
+        this.databaseGuides = databaseGuides;
         this.validator = validator;
     }
 
+    public RemoveGuideResponse removeGuide(RemoveGuideRequest request) {
 
-//    public RemoveEventResponse removeEvent(RemoveEventRequest request) {
-//
-//        List<CoreError> errors = validator.validate(request);
-//
-//        if (!errors.isEmpty()) {
-//            return new RemoveEventResponse(errors);
-//        }
-//
-//        if (databaseEvents.removeByName(request.getEventName())) return new RemoveEventResponse();
-//
-//        errors.add(new CoreError("eventName", "An event \"" + request.getEventName() + "\" was not found."));
-//        return new RemoveEventResponse(errors);
-//    }
+        List<CoreError> errors = validator.validate(request);
+
+        if (!errors.isEmpty()) {
+            return new RemoveGuideResponse(errors);
+        }
+
+        if (databaseGuides.remove(request.getGuideName())) return new RemoveGuideResponse();
+
+        errors.add(new CoreError("guideName", "Guide \"" + request.getGuideName() + "\" was not found."));
+        return new RemoveGuideResponse(errors);
+    }
 }

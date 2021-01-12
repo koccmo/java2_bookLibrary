@@ -1,19 +1,19 @@
 package adventure_time.core.services.guides;
 
-import adventure_time.database.events.EventDatabase;
-import adventure_time.core.domain.Events;
+import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.domain.Guides;
 
 import java.util.List;
 
 public class DisplayGuideListService {
-    private final EventDatabase databaseEvents;
+    private final DatabaseGuides databaseGuides;
 
-    public DisplayGuideListService(EventDatabase databaseEvents) {
-        this.databaseEvents = databaseEvents;
+    public DisplayGuideListService(DatabaseGuides databaseGuides) {
+        this.databaseGuides = databaseGuides;
     }
 
-    public List<Events> getEventsList() {
-        return databaseEvents.getEventsList();
+    public List<Guides> getGuidesList() {
+        return databaseGuides.getGuidesList();
     }
 
 }
