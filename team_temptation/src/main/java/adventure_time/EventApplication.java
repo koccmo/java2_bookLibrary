@@ -11,6 +11,8 @@ public class EventApplication {
 
         while (true) {
 
+            //eventMenu.mainMenu();
+
             eventMenu.menuForEvents();
             eventMenu.executeSelectedMenuItem(eventMenu.getUserChoice());
         }

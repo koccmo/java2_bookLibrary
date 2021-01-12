@@ -3,79 +3,85 @@ package adventure_time.core.domain;
 import java.util.Date;
 import java.util.Objects;
 
+import static java.lang.Long.valueOf;
+
 public class Offers {
 
-    private long offerId;
-    private Events event;
-    private int eventRating;
-    private Date startDate;
-    private double eventCoast;
-    private Discounts discount;
-    private boolean isComplete;
+    private final static Long TWELVE_HOURS = 43200000L;
 
-    public Offers(long offerId, Events event, int eventRating, Date startDate, double eventCoast, Discounts discount, boolean isComplete) {
+    private Long offerId;
+    private Date creationDate;
+    private Events event;       // foreign key
+    private Date eventDate;
+    private Double eventCoast;
+    private Integer ticketAmount;
+
+    public Offers(Events event, Date eventDate, Double eventCoast) {
         this.event = event;
-        this.eventRating = eventRating;
-        this.startDate = startDate;
+        this.eventDate = eventDate;
         this.eventCoast = eventCoast;
-        this.discount = discount;
-        this.isComplete = isComplete;
+        this.ticketAmount = 0;
     }
 
-    public long getOfferId() {
+    public boolean isComplete() {
+        return event.getMaxNumberParticipants().equals(ticketAmount);
+    }
+
+    public boolean isComing() {
+        Date now = new Date();
+        return (eventDate.getTime() - now.getTime()) < TWELVE_HOURS;
+    }
+
+    public void incTicketAmount() {
+        this.ticketAmount++;
+    }
+
+
+
+    //*******************************************
+
+    public void setOfferId(Long offerId) {
+        this.offerId = offerId;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Long getOfferId() {
         return offerId;
     }
 
-    public void setOfferId(long offerId) {
-        this.offerId = offerId;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
     public Events getEvent() {
         return event;
     }
 
-    public void setEvent(Events event) {
-        this.event = event;
+    public Date getEventDate() {
+        return eventDate;
     }
 
-    public int getEventRating() {
-        return eventRating;
-    }
-
-    public void setEventRating(int eventRating) {
-        this.eventRating = eventRating;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public double getEventCoast() {
+    public Double getEventCoast() {
         return eventCoast;
     }
 
-    public void setEventCoast(double eventCoast) {
-        this.eventCoast = eventCoast;
+    public Integer getTicketAmount() {
+        return ticketAmount;
     }
 
-    public Discounts getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Discounts discount) {
-        this.discount = discount;
-    }
-
-    public boolean isComplete() {
-        return isComplete;
-    }
-
-    public void setComplete(boolean complete) {
-        isComplete = complete;
+    @Override
+    public String toString() {
+        return "Offers{" +
+                "offerId=" + offerId +
+                ", creationDate=" + creationDate +
+                ", event=" + event +
+                ", eventDate=" + eventDate +
+                ", eventCoast=" + eventCoast +
+                ", ticketAmount=" + ticketAmount +
+                '}';
     }
 
     @Override
@@ -83,30 +89,16 @@ public class Offers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Offers offers = (Offers) o;
-        return offerId == offers.offerId &&
-                eventRating == offers.eventRating &&
-                Double.compare(offers.eventCoast, eventCoast) == 0 &&
-                isComplete == offers.isComplete &&
+        return Objects.equals(offerId, offers.offerId) &&
+                Objects.equals(creationDate, offers.creationDate) &&
                 Objects.equals(event, offers.event) &&
-                Objects.equals(startDate, offers.startDate) &&
-                Objects.equals(discount, offers.discount);
+                Objects.equals(eventDate, offers.eventDate) &&
+                Objects.equals(eventCoast, offers.eventCoast) &&
+                Objects.equals(ticketAmount, offers.ticketAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(offerId, event, eventRating, startDate, eventCoast, discount, isComplete);
-    }
-
-    @Override
-    public String toString() {
-        return "Offers{" +
-                "id=" + offerId +
-                ", event=" + event.getEventName() +
-                ", rating=" + eventRating +
-                ", date=" + startDate +
-                ", coast=" + eventCoast +
-                ", discount=" + discount +
-                ", complete=" + isComplete +
-                '}';
+        return Objects.hash(offerId, creationDate, event, eventDate, eventCoast, ticketAmount);
     }
 }

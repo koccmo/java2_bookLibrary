@@ -4,58 +4,52 @@ import java.util.Objects;
 
 public class Customers {
 
-    private long customerID;
+    private Long customerID;
     private String customerName;
     private String customerEmail;
     private String customerPhone;
-    private int customerRating;
+    private boolean activity;
 
-    public Customers(long customerID, String customerName, String customerEmail, String customerPhone, int customerRating) {
-        this.customerID = customerID;
+    public Customers(String customerName, String customerEmail, String customerPhone) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
-        this.customerRating = customerRating;
+        this.activity = true;
     }
 
-    public long getcustomerID() {
-        return customerID;
-    }
-
-    public void setcustomerID(long customerID) {
+    public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
 
-    public String getcustomerName() {
+    public Long getCustomerID() {
+        return customerID;
+    }
+    public String getCustomerName() {
         return customerName;
     }
-
-    public void setcustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getcustomerEmail() {
+    public String getCustomerEmail() {
         return customerEmail;
     }
-
-    public void setcustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getcustomerPhone() {
+    public String getCustomerPhone() {
         return customerPhone;
     }
 
-    public void setcustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public boolean isActivity() {
+        return activity;
     }
-
-    public int getcustomerRating() {
-        return customerRating;
+    public void activityOn () { this.activity = true;
     }
+    public void activityOff () { this.activity = false; }
 
-    public void setcustomerRating(int customerRating) {
-        this.customerRating = customerRating;
+    @Override
+    public String toString() {
+        return "Customers{" +
+                "customerID=" + customerID +
+                ", customerName='" + customerName + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", activity=" + activity +
+                '}';
     }
 
     @Override
@@ -63,8 +57,8 @@ public class Customers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customers customers = (Customers) o;
-        return customerID == customers.customerID &&
-                customerRating == customers.customerRating &&
+        return activity == customers.activity &&
+                Objects.equals(customerID, customers.customerID) &&
                 Objects.equals(customerName, customers.customerName) &&
                 Objects.equals(customerEmail, customers.customerEmail) &&
                 Objects.equals(customerPhone, customers.customerPhone);
@@ -72,17 +66,6 @@ public class Customers {
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerRating);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerID=" + customerID +
-                ", customerName='" + customerName + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", customerPhone='" + customerPhone + '\'' +
-                ", customerRating=" + customerRating +
-                '}';
+        return Objects.hash(customerID, customerName, customerEmail, customerPhone, activity);
     }
 }
