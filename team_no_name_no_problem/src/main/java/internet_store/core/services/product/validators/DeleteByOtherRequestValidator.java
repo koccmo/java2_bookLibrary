@@ -14,40 +14,16 @@ public class DeleteByOtherRequestValidator {
 
         List<CoreError> errors = new ArrayList<>();
 
-        if (isTitleAndDescriptionEmptyAndPriceRangeMissingToDeleteProduct(deleteProductByOtherRequest.getTitle(), deleteProductByOtherRequest.getDescription(),
-                deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice())){
-            errors.add(new CoreError("search", "Not valid input for search"));
-            return errors;
+        if ((deleteProductByOtherRequest.getTitle() == null) || (deleteProductByOtherRequest.getTitle().isEmpty())){
+            errors.add(new CoreError("title", "Not valid input for title"));
         }
-
-        if (isNotValidInputForPriceSearchToDelete(deleteProductByOtherRequest)) {
-            errors.add(new CoreError("price", "Not valid input for prices"));
+        if((deleteProductByOtherRequest.getDescription() == null) || (deleteProductByOtherRequest.getTitle().isEmpty())){
+            errors.add(new CoreError("title", "Not valid input for description"));
         }
-
+        if((deleteProductByOtherRequest.getStartPrice() == null) && (deleteProductByOtherRequest.getEndPrice() == null)){
+            errors.add(new CoreError("title", "Not valid input for start price and end price"));
+        }
         return errors;
-    }
-
-    private boolean isTitleAndDescriptionEmptyAndPriceRangeMissingToDeleteProduct(String title, String description,
-                                                                                  Integer startPrice, Integer endPrice){
-        return (title == null || title.isEmpty()) && (description == null || description.isEmpty()) &&
-                startPrice == null && endPrice == null;
-    }
-
-    private boolean isNotValidInputForPriceSearchToDelete(DeleteProductByOtherRequest deleteProductByOtherRequest) {
-        if (deleteProductByOtherRequest.getEndPrice() != null && deleteProductByOtherRequest.getStartPrice() != null) {
-            return pricesNegative(deleteProductByOtherRequest) || !fieldsFilledCorrect(deleteProductByOtherRequest);
-        } else
-            return !fieldsFilledCorrect(deleteProductByOtherRequest);
-    }
-
-    private boolean pricesNegative(DeleteProductByOtherRequest deleteProductByOtherRequest) {
-        return deleteProductByOtherRequest.getStartPrice() < 0
-                || deleteProductByOtherRequest.getEndPrice() < 0;
-    }
-
-    private boolean fieldsFilledCorrect(DeleteProductByOtherRequest deleteProductByOtherRequest) {
-        return (deleteProductByOtherRequest.getStartPrice() != null && deleteProductByOtherRequest.getEndPrice() != null)
-                || (deleteProductByOtherRequest.getStartPrice() == null && deleteProductByOtherRequest.getEndPrice() == null);
     }
 
 }
