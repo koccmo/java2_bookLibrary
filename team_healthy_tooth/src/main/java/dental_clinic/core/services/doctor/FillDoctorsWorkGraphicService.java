@@ -32,23 +32,15 @@ public class FillDoctorsWorkGraphicService {
         }
 
         if (!doctorDatabase.containsId(fillDoctorsWorkGraphicRequest.getId())) {
-            errorList.add(new CoreError("database", "Database doesn't contain id " +
-                    fillDoctorsWorkGraphicRequest.getId()));
+            return notExistingIdResponse(fillDoctorsWorkGraphicRequest);
+        }
+
+        if (notValidTimeLogic(fillDoctorsWorkGraphicRequest)) {
+            errorList.add(new CoreError("time", "Not valid time"));
             return new FillDoctorsWorkGraphicResponse(errorList);
         }
 
-        GregorianCalendar timeFrom = getWorkGraphicTime(fillDoctorsWorkGraphicRequest.getStart());
-        GregorianCalendar timeTo = getWorkGraphicTime(fillDoctorsWorkGraphicRequest.getEnd());
-
-        errorList.addAll(timeLogicErrors(timeFrom, timeTo));
-        if (!errorList.isEmpty()) {
-            return new FillDoctorsWorkGraphicResponse(errorList);
-        }
-
-        doctorDatabase.updateWorkGraphicForSpecificDate(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
-                fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());
-        return new FillDoctorsWorkGraphicResponse(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
-                fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());
+        return workGraphicUpdated(fillDoctorsWorkGraphicRequest);
     }
 
     private GregorianCalendar getWorkGraphicTime(String time) {
@@ -64,13 +56,24 @@ public class FillDoctorsWorkGraphicService {
         return workTime;
     }
 
-    private List <CoreError> timeLogicErrors (GregorianCalendar dateStart, GregorianCalendar dateEnd) {
-        List <CoreError> errorList = new ArrayList<>();
+    private boolean notValidTimeLogic (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
+        GregorianCalendar timeFrom = getWorkGraphicTime(fillDoctorsWorkGraphicRequest.getStart());
+        GregorianCalendar timeTo = getWorkGraphicTime(fillDoctorsWorkGraphicRequest.getEnd());
+        return timeFrom.after(timeTo);
+    }
 
-        if (dateStart.after(dateEnd)) {
-            errorList.add(new CoreError("time", "Not valid time"));
-        }
-        return errorList;
+    private FillDoctorsWorkGraphicResponse notExistingIdResponse (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
+        List <CoreError> errorList = new ArrayList<>();
+        errorList.add(new CoreError("database", "Database doesn't contain id " +
+                fillDoctorsWorkGraphicRequest.getId()));
+        return new FillDoctorsWorkGraphicResponse(errorList);
+    }
+
+    private FillDoctorsWorkGraphicResponse workGraphicUpdated (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
+        doctorDatabase.updateWorkGraphicForSpecificDate(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
+                fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());
+        return new FillDoctorsWorkGraphicResponse(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
+                fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());
     }
 
 }
