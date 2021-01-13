@@ -13,8 +13,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.logging.Logger;
-
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest2 {
@@ -95,12 +93,10 @@ public class AcceptanceTest2 {
         getAddService().execute(request2);
 
         Ordering ordering = new Ordering("price", "ASCENDING");
-        Logger.getAnonymousLogger("Is ok");
         Paging paging = new Paging(1, 1);
         SearchRequest request3 = new SearchRequest("name", null, ordering, paging);
         SearchResponse response = getSearchService().execute(request3);
 
-        response.getProducts().stream().forEach(System.out::println);
         assertEquals(1, response.getProducts().size());
         assertEquals("name", response.getProducts().get(0).getName());
         assertEquals("description1", response.getProducts().get(0).getDescription());
