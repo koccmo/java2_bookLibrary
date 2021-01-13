@@ -14,8 +14,12 @@ public class DeleteProductByOtherRequest {
         this.endPrice = endPrice;
     }
 
-    public String getTitle;
-    public String getDescription;
+    public String getTitle() {
+        return title;
+    }
+    public String getDescription() {
+        return description;
+    }
 
     public Integer getStartPrice () {
         return startPrice;
