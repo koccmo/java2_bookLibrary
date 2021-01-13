@@ -1,24 +1,24 @@
 package lv.javaguru.app;
 
 import lv.javaguru.app.console_ui.*;
+import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.services.*;
+import lv.javaguru.app.core.validators.EditTicketRequestValidator;
 import lv.javaguru.app.core.validators.LoginRequestValidator;
 import lv.javaguru.app.core.validators.RegisterRequestValidator;
-import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.InMemoryDatabase;
 import lv.javaguru.app.core.validators.AddReservationRequestValidator;
 
-
-import java.util.*;
-
 public class Main {
-    private static final Database database = new InMemoryDatabase();
+    private static final InMemoryDatabase database = new InMemoryDatabase();
     private static AddReservationRequestValidator validator = new AddReservationRequestValidator();
     private static AddReservationService addReservationService = new AddReservationService(database, validator);
 
     private static LoginRequestValidator loginRequestValidator = new LoginRequestValidator();
-    private static LoginService loginService = new LoginService(database, loginRequestValidator);
-    private static UIActions loginAction = new LoginAction(loginService);
+    private static LogInService loginService = new LogInService(database, loginRequestValidator);
+    private static UIActions logInAction = new LogInAction(loginService);
 
     private static RegisterRequestValidator registerRequestValidator = new RegisterRequestValidator();
     private static RegisterService registerService = new RegisterService(database, registerRequestValidator);
@@ -28,96 +28,129 @@ public class Main {
     private static DeleteReservationService deleteReservationService = new DeleteReservationService(database);
     private static ShowReservationsService showReservationsService = new ShowReservationsService(database);
 
+    private static final EditTicketRequestValidator editTicketRequestValidator = new EditTicketRequestValidator();
+    private static final EditTicketService editTicketService = new EditTicketService(database, editTicketRequestValidator);
+
+    private static UIActions editTicketAction = new EditTicketAction(editTicketService);
 
     private static UIActions addReservationAction = new AddReservationAction(addReservationService);
     private static UIActions deleteReservationAction = new DeleteReservationAction(deleteReservationService);
     private static UIActions showReservationsAction = new ShowReservationsAction(showReservationsService);
     private static UIActions exitAction = new ExitAction();
 
-    public static void main(String[] args) {
+    private static final LogOutService logOutService = new LogOutService(database);
+    private static final UIActions logOutAction = new LogOutAction(logOutService);
 
+
+    public static void main(String[] args) {
+        Person admin = new Person("ADMIN", "ADMIN");
+        admin.setPersonType(PersonType.ADMIN);
+
+        Person user = new Person("s", "a");
+        user.setPersonType(PersonType.CLIENT);
+
+        database.addPerson(admin);
+        database.addPerson(user);
 
         while (true) {
-            printProgramMenu();
-            int menuNumber = getMenuNumberFromUser();
+            printInitMenu();
+            int menuNumber = BaseFunc.getMenuNumberFromUser();
             switch (menuNumber) {
                 case 1 -> {
-                    loginAction.execute();
-                    getSubMenu();
-
-                }
+                    logInAction.execute();                }
                 case 2 -> {
                     registerAction.execute();
                 }
                 case 0 -> exitAction.execute();
-                default -> System.out.println("Wrong input" + lineSeparator());
+                default -> {
+                    BaseFunc.printLineSeparator();
+                }
             }
         }
-
-
-        /*  */
     }
 
-    private static void printProgramMenu() {
-        System.out.println("MENU:" + lineSeparator() + "\n" +
+    private static void printInitMenu() {
+        BaseFunc.printHeader("LOGIN");
+        BaseFunc.printLineSeparator();
+        System.out.println(
                 "[1] Login\n" +
-                "[2] Register\n" +
-                "[0] Exit");
+                        "[2] Register\n" +
+                        "[0] Exit");
     }
 
-    private static void getSubMenu() {
+
+    public static void userMode_mainMenu(Person currentUser) {
         while (true) {
-            printProgramMenu2();
-            int menuNumber = getMenuNumberFromUser();
+            printUserMode_MainMenu(currentUser);
+            int menuNumber = BaseFunc.getMenuNumberFromUser();
+            switch (menuNumber) {
+                case 1 -> addReservationAction.execute();
+                case 2 -> showReservationsAction.execute();
+                case 3 -> editTicketAction.execute();
+                case 4 -> deleteReservationAction.execute();
+                case 0 -> {
+                    logOutAction.execute();
+                    return;
+                }
+                default -> {
+                    System.out.println("Wrong input");
+                    BaseFunc.printLineSeparator();
+                }
+            }
+        }
+    }
+
+    public static void adminMode_mainMenu (Person currentUser) {
+        while (true) {
+            printAdminMode_MainMenu(currentUser);
+            int menuNumber = BaseFunc.getMenuNumberFromUser();
             switch (menuNumber) {
                 case 1 -> addReservationAction.execute();
                 case 2 -> deleteReservationAction.execute();
                 case 3 -> showReservationsAction.execute();
-                case 0 -> exitAction.execute();
-                default -> System.out.println("Wrong input" + lineSeparator());
+                case 0 -> {
+                    logOutAction.execute();
+                    return;
+                }
+                default -> {
+                    System.out.println("Wrong input");
+                    BaseFunc.printLineSeparator();
+                }
             }
         }
     }
 
-    private static void printProgramMenu2() {
-        printHeader("MENU");
-        System.out.println(lineSeparator() + "\n" +
-                "[1] Add reservation to list\n" +
-                "[2] Delete reservation from list\n" +
-                "[3] Show all reservations in the list\n" +
-                "[0] Exit");
+
+
+    private static void printAdminMode_MainMenu(Person currentUser) {
+        BaseFunc.printHeader("MENU", currentUser);
+        BaseFunc.printLineSeparator();
+        System.out.println(
+                "[1] Add person\n" +
+                        "[2] Select person\n" +
+                        "[3] Show all reservations\n" +
+                        "[0] Log out");
     }
 
-    private static void printHeader(String header) {
-        String userName = database.getCurrentPerson().toString();
-        int spaceCount = 50 - header.length() - userName.length();
-
-        System.out.print(header + multipleChar(spaceCount, ' ') + userName);
+    private static void printUserMode_MainMenu(Person currentUser) {
+        BaseFunc.printHeader("MENU", currentUser);
+        BaseFunc.printLineSeparator();
+        System.out.println(
+                "[1] Add ticket to list\n" +
+                        "[2] Show all reservations\n" +
+                        "[3] Edit ticket\n" +
+                        "[4] Delete ticket\n" +
+                        "[0] Log out");
     }
 
-    public static int getMenuNumberFromUser() {
-        System.out.println("Enter menu number:");
-        Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
-        input = input.replaceAll("[^\\d]", "");
-        if (!input.trim().isEmpty())
-            try {
-                return Integer.parseInt(input);
-            } catch (Exception exception) {
-                System.out.println("Wrong input!");
-            }
-        return -1;
-    }
 
-    private static String lineSeparator() {
-        String newLine = "\n";
-        return newLine.concat(new String(new char[50]).replaceAll("", "="));
-    }
 
-    private static String multipleChar(int count, char ch) {
-        return "".concat(new String(new char[count]).replaceAll("", String.valueOf(ch)));
-    }
+
+
+
+
+
 
 }
 
