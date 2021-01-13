@@ -21,7 +21,7 @@ public class Customers {
         this.customerID = customerID;
     }
 
-    public Long getCustomerID() {
+    public Long getCustomerId() {
         return customerID;
     }
     public String getCustomerName() {

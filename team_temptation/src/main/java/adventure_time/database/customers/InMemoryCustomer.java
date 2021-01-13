@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class InMemoryCustomer implements DatabaseCustomers {
@@ -27,19 +28,23 @@ public class InMemoryCustomer implements DatabaseCustomers {
 
     @Override
     public boolean activate(Long id) {
-        if (!customers.isEmpty() && findById(id).isPresent()) {
-
-
-
-            return true;
-
-        } else {
-            return false;
+        for (Customers customer : customers) {
+            if (customer.getCustomerId().equals(id)) {
+                customer.activityOn();
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
     public boolean deactivate(Long id) {
+        for (Customers customer : customers) {
+            if (customer.getCustomerId().equals(id)) {
+                customer.activityOff();
+                return true;
+            }
+        }
         return false;
     }
 
@@ -49,7 +54,7 @@ public class InMemoryCustomer implements DatabaseCustomers {
 
     @Override
     public Optional<Customers> findById(Long id) {
-        return customers.stream().filter(items -> items.getCustomerID().equals(id)).findFirst();
+        return customers.stream().filter(items -> items.getCustomerId().equals(id)).findFirst();
     }
 
     @Override
@@ -64,12 +69,16 @@ public class InMemoryCustomer implements DatabaseCustomers {
 
     @Override
     public List<Customers> findAllActiveCustomers() {
-        return null;
+        return customers.stream()
+                .filter(Customers::isActivity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Customers> findAllInactiveCustomers() {
-        return null;
+        return customers.stream()
+                .filter(item -> !item.isActivity())
+                .collect(Collectors.toList());
     }
 
 }
