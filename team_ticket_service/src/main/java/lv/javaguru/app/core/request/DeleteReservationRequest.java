@@ -6,17 +6,13 @@ import lv.javaguru.app.core.domain.Ticket;
 
 public class DeleteReservationRequest {
 
-    private final Reservation reservation;
+    private final Long id;
 
-    public DeleteReservationRequest(Reservation reservation) {
-        this.reservation = reservation;
+    public DeleteReservationRequest(Long id) {
+        this.id = id;
     }
 
-    public Person getPerson() {
-        return reservation.getPerson();
-    }
-
-    public Ticket getTicket() {
-        return reservation.getTicket();
+    public Long getId () {
+        return id;
     }
 }

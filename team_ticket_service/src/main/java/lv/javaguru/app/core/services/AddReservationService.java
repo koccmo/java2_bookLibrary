@@ -1,9 +1,9 @@
 package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.core.request.AddReservationRequest;
+import lv.javaguru.app.core.request.AddTicketRequest;
 import lv.javaguru.app.core.validators.AddReservationRequestValidator;
-import lv.javaguru.app.core.response.AddReservationResponse;
+import lv.javaguru.app.core.response.AddTicketResponse;
 import lv.javaguru.app.core.response.CodeError;
 
 import java.util.List;
@@ -19,14 +19,14 @@ public class AddReservationService {
     }
 
 
-    public AddReservationResponse execute(AddReservationRequest request) {
+    public AddTicketResponse execute(AddTicketRequest request) {
         List<CodeError> errors = validator.validate(request);
 
         if (!errors.isEmpty())
-            return new AddReservationResponse(errors);
+            return new AddTicketResponse(errors);
 
-        database.add(request.getPerson(), request.getTicket());
+        database.addTicket(request.getCurrUser(), request.getTicket());
 
-        return new AddReservationResponse();
+        return new AddTicketResponse();
     }
 }

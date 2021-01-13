@@ -1,9 +1,7 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.request.AddReservationRequest;
 import lv.javaguru.app.core.request.RegistrationRequest;
-import lv.javaguru.app.core.response.AddReservationResponse;
 import lv.javaguru.app.core.response.RegistrationResponse;
 import lv.javaguru.app.core.services.RegisterService;
 

@@ -4,10 +4,17 @@ import java.util.List;
 
 public class DeleteReservationResponse extends Response {
 
-    public DeleteReservationResponse() {
-    }
+	private String message;
 
-    public DeleteReservationResponse(List<CodeError> errorList) {
-        super(errorList);
-    }
+	public DeleteReservationResponse (String message) {
+		this.message = message;
+	}
+
+	public DeleteReservationResponse (List<CodeError> errorList) {
+		super(errorList);
+	}
+
+	public String getMessage () {
+		return message;
+	}
 }
