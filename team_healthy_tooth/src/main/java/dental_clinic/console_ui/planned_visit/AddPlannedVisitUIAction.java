@@ -1,6 +1,7 @@
 package dental_clinic.console_ui.planned_visit;
 
 import dental_clinic.console_ui.UIAction;
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
@@ -34,7 +35,7 @@ public class AddPlannedVisitUIAction implements UIAction {
         System.out.println("Please enter personal code");
         String personalCode = in.nextLine();
 
-        SearchPatientRequest searchPatientRequest = new SearchPatientRequest(personalCode, new Ordering(null, null), new Paging(1, 100));
+        SearchPatientRequest searchPatientRequest = new SearchPatientRequest(personalCode, new Ordering("name", OrderingDirection.ASC), new Paging(1, 100));
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
         PersonalData personalData = new PersonalData(null, null, null, personalCode);
