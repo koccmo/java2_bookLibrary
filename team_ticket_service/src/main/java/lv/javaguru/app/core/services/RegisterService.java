@@ -1,11 +1,9 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.core.request.AddReservationRequest;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.request.RegistrationRequest;
-import lv.javaguru.app.core.response.AddReservationResponse;
 import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.RegistrationResponse;
-import lv.javaguru.app.core.validators.LoginRequestValidator;
 import lv.javaguru.app.core.validators.RegisterRequestValidator;
 import lv.javaguru.app.database.Database;
 
@@ -26,7 +24,8 @@ public class RegisterService {
         if (!errors.isEmpty())
             return new RegistrationResponse(errors);
 
-        database.add(request.getPerson(), null);
+        request.getPerson().setPersonType(PersonType.CLIENT);
+        database.addPerson(request.getPerson());
 
         return new RegistrationResponse();
     }

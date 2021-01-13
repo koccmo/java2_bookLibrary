@@ -6,7 +6,16 @@ public class Person {
     private String name;
     private String surname;
     private boolean isRegistered;
-    private Long id = 1L;
+    private Long id = 0L;
+    private PersonType personType;
+
+    public PersonType getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(PersonType personType) {
+        this.personType = personType;
+    }
 
     public Person() {
     }
@@ -20,6 +29,7 @@ public class Person {
     }
 
     public Person(String name, String surname) {
+        this.id = id++;
         this.name = name;
         this.surname = surname;
 

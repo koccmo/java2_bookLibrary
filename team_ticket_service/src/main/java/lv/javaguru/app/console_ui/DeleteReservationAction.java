@@ -1,6 +1,9 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.Main;
+import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.request.DeleteReservationRequest;
+import lv.javaguru.app.core.response.DeleteReservationResponse;
 import lv.javaguru.app.core.services.DeleteReservationService;
 import lv.javaguru.app.core.domain.Person;
 
@@ -16,42 +19,25 @@ public class DeleteReservationAction implements UIActions {
 
     @Override
     public void execute() {
-        deleteReservationBy();
-    }
+        System.out.println("Enter ticket ID: ");
+        long id = BaseFunc.getMenuNumberFromUser();
 
-    private void deleteReservationBy() {
-        Scanner scanner = new Scanner(System.in);
+        DeleteReservationRequest request = new DeleteReservationRequest(id);
+        DeleteReservationResponse response = deleteReservationService.execute(request);
 
-        while (true) {
-            printSubmenu();
-            int selected = Main.getMenuNumberFromUser();
-            switch (selected) {
-                case 1 -> {
-                    System.out.println("Enter Id: ");
-                    Long id = Long.parseLong(scanner.nextLine());
-                    deleteReservationService.deleteReservation(id);
-                }
-                case 2 -> {
-                    System.out.println("Enter name: ");
-                    String name = scanner.nextLine();
-
-                    System.out.println("Enter surname: ");
-                    String surname = scanner.nextLine();
-
-                    deleteReservationService.deleteReservation(new Person(name, surname));
-                }
-                case 0 -> {
-                    return;
-                }
-                default -> System.out.println("Wrong input" );
-            }
+        if (response.hasErrors()) {
+            response.getErrorList().forEach(r -> System.out.println(r.getField() +
+                    r.getMessage()));
         }
+        else{
+
+
+            System.out.println(response.getMessage());
+        }
+
     }
 
-    private void printSubmenu() {
-        System.out.println("Delete by:\n" +
-                "[1] Reservation Id\n" +
-                "[2] Full name \n" +
-                "[0] Back to menu");
-    }
+
+
+
 }
