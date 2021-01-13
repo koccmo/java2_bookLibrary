@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class UpdateUIAction implements UIAction {
+public class UpdateByIdUIAction implements UIAction {
 
     @Autowired
     UpdateByIdService updateByIdService;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class RemoveByIdUIAction {
+public class RemoveByIdUIAction implements UIAction {
 
     @Autowired
     RemoveByIdService removeByIdService;
