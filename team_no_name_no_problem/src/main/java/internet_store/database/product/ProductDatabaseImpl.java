@@ -120,4 +120,16 @@ public class ProductDatabaseImpl implements ProductDatabase{
         return productList.stream()
                 .anyMatch(product -> product.getId().equals(id));
     }
+
+    @Override
+    public boolean containsTitle(String title) {
+        return productList.stream()
+                .anyMatch(product -> product.getTitle().equals(title));
+    }
+
+    @Override
+    public boolean containsDescription(String description) {
+        return productList.stream()
+                .anyMatch(product -> product.getDescription().equals(description));
+    }
 }

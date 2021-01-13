@@ -1,5 +1,6 @@
 /*package internet_store.core.services.product;
 
+import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteByOtherResponse;
@@ -27,6 +28,22 @@ public class DeleteByOtherService {
             return new DeleteByOtherResponse(errors);
         }
 
+        if (productDatabase.containsTitle(deleteProductByOtherRequest.getTitle())){
+            for (int i = 0; i < productDatabase.getProducts().size(); i++) {
+                if (getCurrentProduct(i).getTitle() == deleteProductByOtherRequest.getTitle()) {
+                    productDatabase.deleteAllByTitle(deleteProductByOtherRequest.getTitle());
+                    return new DeleteByOtherResponse(deleteProductByOtherRequest.getTitle());
+                }
+            }
+        }
 
+        errors.add(new CoreError("database", "database doesn't contain product with id "
+                + deleteProductByOtherRequest.getTitle()));
+        return new DeleteByOtherResponse(errors);
     }
+
+    private Product getCurrentProduct (int index){
+        return productDatabase.getProducts().get(index);
+    }
+}
 */
