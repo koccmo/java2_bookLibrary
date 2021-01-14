@@ -1,4 +1,4 @@
-package lv.javaguru.app.core.validators;
+package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.EditTicketRequest;
 import lv.javaguru.app.core.response.CodeError;

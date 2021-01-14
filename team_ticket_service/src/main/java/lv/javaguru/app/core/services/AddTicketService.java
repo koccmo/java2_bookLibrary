@@ -2,18 +2,18 @@ package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.core.request.AddTicketRequest;
-import lv.javaguru.app.core.validators.AddReservationRequestValidator;
+import lv.javaguru.app.core.services.validators.AddTicketRequestValidator;
 import lv.javaguru.app.core.response.AddTicketResponse;
 import lv.javaguru.app.core.response.CodeError;
 
 import java.util.List;
 
-public class AddReservationService {
+public class AddTicketService {
 
     private final Database database;
-    private final AddReservationRequestValidator validator;
+    private final AddTicketRequestValidator validator;
 
-    public AddReservationService(Database database, AddReservationRequestValidator validator) {
+    public AddTicketService (Database database, AddTicketRequestValidator validator) {
         this.database = database;
         this.validator = validator;
     }

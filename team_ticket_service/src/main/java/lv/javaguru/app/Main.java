@@ -5,16 +5,16 @@ import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.Person;
 import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.services.*;
-import lv.javaguru.app.core.validators.EditTicketRequestValidator;
-import lv.javaguru.app.core.validators.LoginRequestValidator;
-import lv.javaguru.app.core.validators.RegisterRequestValidator;
+import lv.javaguru.app.core.services.validators.EditTicketRequestValidator;
+import lv.javaguru.app.core.services.validators.LoginRequestValidator;
+import lv.javaguru.app.core.services.validators.RegisterRequestValidator;
 import lv.javaguru.app.database.InMemoryDatabase;
-import lv.javaguru.app.core.validators.AddReservationRequestValidator;
+import lv.javaguru.app.core.services.validators.AddTicketRequestValidator;
 
 public class Main {
     private static final InMemoryDatabase database = new InMemoryDatabase();
-    private static AddReservationRequestValidator validator = new AddReservationRequestValidator();
-    private static AddReservationService addReservationService = new AddReservationService(database, validator);
+    private static AddTicketRequestValidator validator = new AddTicketRequestValidator();
+    private static AddTicketService addTicketService = new AddTicketService(database, validator);
 
     private static LoginRequestValidator loginRequestValidator = new LoginRequestValidator();
     private static LogInService loginService = new LogInService(database, loginRequestValidator);
@@ -33,7 +33,7 @@ public class Main {
 
     private static UIActions editTicketAction = new EditTicketAction(editTicketService);
 
-    private static UIActions addReservationAction = new AddReservationAction(addReservationService);
+    private static UIActions addReservationAction = new AddReservationAction(addTicketService);
     private static UIActions deleteReservationAction = new DeleteReservationAction(deleteReservationService);
     private static UIActions showReservationsAction = new ShowReservationsAction(showReservationsService);
     private static UIActions exitAction = new ExitAction();
