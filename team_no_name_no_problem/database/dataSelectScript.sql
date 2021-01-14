@@ -22,3 +22,12 @@ SELECT title
 FROM products
 WHERE price = 900
 
+SELECT surname
+FROM customers
+WHERE surname LIKE %o%
+ORDER BY surname DESC;
+
+SELECT name, surname
+FROM customer_order
+JOIN customers
+WHERE email = "ragu@inbox.lv"

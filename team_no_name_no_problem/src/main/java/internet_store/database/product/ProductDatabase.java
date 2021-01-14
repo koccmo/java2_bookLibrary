@@ -38,4 +38,9 @@ public interface ProductDatabase {
     boolean containsProduct (Product product);
 
     boolean containsId (Long id);
+
+    boolean containsTitle (String title);
+
+    boolean containsDescription (String description);
+
 }
