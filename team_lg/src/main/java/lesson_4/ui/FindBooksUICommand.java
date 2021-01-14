@@ -1,10 +1,10 @@
 package lesson_4.ui;
 
 import lesson_4.core.requests.FindBooksRequest;
-import lesson_4.core.requests.Ordering;
-import lesson_4.core.requests.Paging;
 import lesson_4.core.responses.FindBooksResponse;
 import lesson_4.core.services.FindBooksService;
+import lesson_4.core.services.validators.Ordering;
+import lesson_4.core.services.validators.Paging;
 
 import java.util.Scanner;
 
