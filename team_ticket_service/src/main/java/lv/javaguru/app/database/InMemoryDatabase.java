@@ -38,18 +38,6 @@ public class InMemoryDatabase implements Database {
 	public boolean containsPerson (Person person) {
 		return reservations.containsKey(person);
 	}
-	//@Override
-	//public void addReservation(Person person, Reservation reservation) {
-	//    if (reservations.containsKey(person))
-	//        reservations.get(person).add(reservation);
-	//    else {
-	//        List<Reservation> reservationList = new ArrayList<>();
-	//        reservationList.add(reservation);
-	//
-	//        reservations.put(person, reservationList);
-	//    }
-
-	//}
 
 	@Override
 	public void addTicket (Person person, Ticket ticket) {
@@ -60,13 +48,16 @@ public class InMemoryDatabase implements Database {
 	}
 
 	public Person getPerson (Person person) {
-		return reservations.keySet().stream().filter(person::equals).findFirst().orElse(null);
+		return reservations.keySet().stream()
+				.filter(person::equals)
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
 	public Person getPerson (String name, String secondName) {
 		return reservations.keySet().stream()
-				.filter(person -> person.getName().equals(name) && person.getSurname().equals(secondName) )
+				.filter(person -> person.getName().equals(name) && person.getSurname().equals(secondName))
 				.findFirst()
 				.orElse(null);
 	}
@@ -77,28 +68,25 @@ public class InMemoryDatabase implements Database {
 			reservations.put(person, new ArrayList<>());
 	}
 
-	// @Override
-	// public void removeByPerson(Person person) {
-	//     reservations.remove(person);
-	// }
+
 
 	@Override
 	public void removeTicketById (Long id) {
 		reservations.get(currentPerson).removeIf(ticket -> ticket.getId().equals(id));
 	}
 
+
 	@Override
 	public List<Ticket> getAllTickets (Person user) {
 		if (reservations.containsKey(user) && user.getPersonType() != PersonType.ADMIN)
 			return reservations.get(user);
 		else {
-			List<Ticket> ticketList = new ArrayList<>();
-			for (List<Ticket> tickets : reservations.values()) {
-				ticketList.addAll(tickets);
-			}
-			return ticketList;
+			return reservations.values().stream()
+					.flatMap(List::stream)
+					.collect(Collectors.toList());
 		}
 	}
+
 
 	@Override
 	public Ticket getTicketById (Person person, Long id) {
@@ -108,21 +96,11 @@ public class InMemoryDatabase implements Database {
 				.orElse(null);
 	}
 
+
 	@Override
 	public boolean isContainTicketWithId (long id) {
-		List<Ticket> allTickets = new ArrayList<>();
-
-		for (List<Ticket> list : reservations.values())
-			allTickets.addAll(list);
-
-		return allTickets.stream().anyMatch(ticket -> ticket.getId().equals(id));
+		return reservations.values().stream()
+				.flatMap(List::stream)
+				.anyMatch(ticket -> ticket.getId().equals(id));
 	}
-
-
-	@Override
-	public List<Ticket> getTicketListByPersonId (Long id) {
-		return null;
-	}
-
-
 }

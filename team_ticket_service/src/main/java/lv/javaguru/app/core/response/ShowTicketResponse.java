@@ -1,19 +1,35 @@
 package lv.javaguru.app.core.response;
 
-import lv.javaguru.app.core.domain.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ShowTicketResponse<P> {
+public class ShowTicketResponse<T> extends ArrayList<T> {
 
-	private final List<P> response;
+	private final List<T> response;
+	private Class<T> responseClass;
 
 
-	public ShowTicketResponse (List<P> response) {
+	public ShowTicketResponse (List<T> response) {
 		this.response = response;
 	}
 
-	public List<P> getResponse () {
+	public Class<T> getResponseClass () {
+		return responseClass;
+	}
+
+	public List<T> getResponse () {
 		return response;
+	}
+
+	public boolean hasErrors () {
+		if (responseClass == CodeError.class)
+			return response.isEmpty();
+		return false;
+	}
+
+	public void printResponse () {
+		if (!response.isEmpty())
+			response.forEach(System.out::println);
 	}
 }
