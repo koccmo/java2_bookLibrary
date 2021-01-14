@@ -4,3 +4,4 @@ Lesson 10 plan:
 2. Connection
 3. Statement
 4. Result Set
+5. Spring JDBC Template
