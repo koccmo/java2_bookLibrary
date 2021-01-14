@@ -1,0 +1,57 @@
+package java2.application_target_list.console_ui.actions.user;
+
+import java2.application_target_list.console_ui.UIAction;
+import java2.application_target_list.core.domain.User;
+import java2.application_target_list.core.requests.user.GetAllUsersRequest;
+import java2.application_target_list.core.responses.user.GetAllUsersResponse;
+import java2.application_target_list.core.services.user.GetAllUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class GetAllUsersUIAction implements UIAction {
+
+    @Autowired GetAllUserService getAllUserService;
+
+    @Override
+    public void execute() {
+
+        GetAllUsersRequest getAllUserRequest = createRequest();
+        GetAllUsersResponse getAllUsersResponse = createResponse(getAllUserRequest);
+
+        if (isUsersListEmpty(getAllUsersResponse)) {
+            printResponseMessage();
+        } else {
+            printUsersList(getAllUsersResponse);
+        }
+
+    }
+
+    private void printUsersList(GetAllUsersResponse getAllUsersResponse){
+        for (User user : getAllUsersResponse.getUsersList()){
+            System.out.println(user.getId() + ". " +
+                    user.getFirstName() + " " + user.getLastName());
+        }
+        System.out.println("----------");
+    }
+
+    private void printResponseMessage(){
+        System.out.println("----------");
+        System.out.println("Users list is empty");
+        System.out.println("----------");
+    }
+
+    private boolean isUsersListEmpty(GetAllUsersResponse getAllUsersResponse){
+        return getAllUsersResponse.getUsersList().size() == 0;
+    }
+
+    private GetAllUsersResponse createResponse(GetAllUsersRequest getAllUserRequest){
+        return getAllUserService.execute(getAllUserRequest);
+    }
+
+    private GetAllUsersRequest createRequest(){
+        return new GetAllUsersRequest();
+    }
+
+
+}

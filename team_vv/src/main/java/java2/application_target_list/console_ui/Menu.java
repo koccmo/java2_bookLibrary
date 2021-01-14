@@ -2,6 +2,8 @@ package java2.application_target_list.console_ui;
 
 import java2.application_target_list.console_ui.actions.*;
 import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.console_ui.actions.target.*;
+import java2.application_target_list.console_ui.actions.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -35,6 +37,10 @@ public class Menu {
                 executeSelectedMenuItem(1);
             }
 
+            if(needToPrintUsersList(selectedMenuNumberToUIAction)){
+                executeSelectedMenuItem(11);
+            }
+
             executeSelectedMenuItem(selectedMenuNumberToUIAction);
         }
     }
@@ -43,6 +49,9 @@ public class Menu {
         return selectedMenuNumber > 2 && selectedMenuNumber < 7;
     }
 
+    private boolean needToPrintUsersList(int selectedMenuNumber){
+        return selectedMenuNumber > 12 && selectedMenuNumber < 16;
+    }
 
     private Map<Integer, UIAction> createMenuUIActionsMap(List<UIAction> uiActions){
         Map<Integer, UIAction> menuUIActionsMap = new HashMap<>();
@@ -54,6 +63,13 @@ public class Menu {
         menuUIActionsMap.put(6, findUIAction(uiActions, ChangeTargetDeadlineUIAction.class));
         menuUIActionsMap.put(7, findUIAction(uiActions, SearchTargetByNameUIAction.class));
         menuUIActionsMap.put(8, findUIAction(uiActions, SearchTargetByDescriptionUIAction.class));
+        menuUIActionsMap.put(11, findUIAction(uiActions, GetAllUsersUIAction.class));
+        menuUIActionsMap.put(12, findUIAction(uiActions, AddUserUIAction.class));
+        menuUIActionsMap.put(13, findUIAction(uiActions, DeleteUserUIAction.class));
+        menuUIActionsMap.put(14, findUIAction(uiActions, ChangeUserFirstNameUIAction.class));
+        menuUIActionsMap.put(15, findUIAction(uiActions, ChangeUserLastNameUIAction.class));
+        menuUIActionsMap.put(16, findUIAction(uiActions, SearchUserByFirstNameUIAction.class));
+        menuUIActionsMap.put(17, findUIAction(uiActions, SearchUserByLastNameUIAction.class));
         menuUIActionsMap.put(0, findUIAction(uiActions, ExitUIAction.class));
         return menuUIActionsMap;
     }
@@ -76,8 +92,7 @@ public class Menu {
     }
 
     private int getNumberFromUser(){
-        Scanner scr = new Scanner(System.in);
-        return Integer.parseInt(scr.nextLine());
+        return Integer.parseInt(new Scanner(System.in).nextLine());
     }
 
 }
