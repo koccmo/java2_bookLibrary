@@ -1,7 +1,8 @@
-package dental_clinic.core.validators.doctor;
+package dental_clinic_tests.core.validators_tests.doctor;
 
 import dental_clinic.core.requests.doctor.FillDoctorsWorkGraphicRequest;
 import dental_clinic.core.responses.CoreError;
+import dental_clinic.core.validators.doctor.FillDoctorsWorkGraphicRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
