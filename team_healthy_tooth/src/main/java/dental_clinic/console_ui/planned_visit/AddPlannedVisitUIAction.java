@@ -1,14 +1,18 @@
 package dental_clinic.console_ui.planned_visit;
 
+import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
+import dental_clinic.core.requests.doctor.GetDoctorListRequest;
 import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
+import dental_clinic.core.responses.doctor.GetDoctorListResponse;
 import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
+import dental_clinic.core.services.doctor.GetDoctorListService;
 import dental_clinic.core.services.patient.SearchPatientService;
 import dental_clinic.core.services.planned_visit.AddPlannedVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,10 @@ public class AddPlannedVisitUIAction implements UIAction {
     private AddPlannedVisitService addPlannedVisitService;
     @Autowired
     private SearchPatientService searchPatientService;
+    @Autowired
+    private GetDoctorListService getDoctorListService;
+    @Autowired
+    private InputFormatsValidator inputFormatsValidator;
 
     @Override
     public void execute() {
@@ -53,14 +61,25 @@ public class AddPlannedVisitUIAction implements UIAction {
             isNewPatient = true;
         }
 
-        AddPlannedVisitRequest addPlannedVisitRequest = new AddPlannedVisitRequest(isNewPatient, visitDate, personalData);
-        AddPlannedVisitResponse addPlannedVisitResponse = addPlannedVisitService.execute(addPlannedVisitRequest);
+        GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
+        GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
 
-        if (addPlannedVisitResponse.hasErrors()) {
-            addPlannedVisitResponse.getErrors().forEach(System.out::println);
+        if (getDoctorListResponse.hasErrors()) {
+            System.out.println("Planned visit canned be registered");
         } else {
-            System.out.println("Visit added successfully:\n" +
-               addPlannedVisitResponse.getPlannedVisit());
+            getDoctorListResponse.getDoctors().forEach(System.out::println);
+
+            Long id = inputFormatsValidator.inputLong("Please input doctor's id");
+
+            AddPlannedVisitRequest addPlannedVisitRequest = new AddPlannedVisitRequest(isNewPatient, visitDate, personalData, id);
+            AddPlannedVisitResponse addPlannedVisitResponse = addPlannedVisitService.execute(addPlannedVisitRequest);
+
+            if (addPlannedVisitResponse.hasErrors()) {
+                addPlannedVisitResponse.getErrors().forEach(System.out::println);
+            } else {
+                System.out.println("Visit added successfully:\n" +
+                        addPlannedVisitResponse.getPlannedVisit());
+            }
         }
     }
 }
