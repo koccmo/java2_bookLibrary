@@ -1,32 +1,84 @@
 package adventure_time.database.customers;
 
 import adventure_time.core.domain.Customers;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class InMemoryCustomer {
-    private long idCounter =1L;
+@Component
+public class InMemoryCustomer implements DatabaseCustomers {
+
+    private Long idCounter =1L;
     private final List<Customers> customers = new ArrayList<>();
 
-    public boolean add(Customers customers) {
-        if (!this.customers.isEmpty()){
-            for (Customers item : this.customers) {
-                if (item.getcustomerName().equals(customers.getcustomerName())) return false;
-
+    @Override
+    public boolean add(Customers customer) {
+        if (!customers.isEmpty()) {
+            for (Customers item : customers) {
+                if (item.getCustomerName().equals(customer.getCustomerName())) return false;
             }
         }
-        customers.setcustomerID(idCounter);
-        this.customers.add(customers);
+        customer.setCustomerID(idCounter);
         idCounter++;
-        return true;
+        return customers.add(customer);
+    }
 
+    @Override
+    public boolean activate(Long id) {
+        for (Customers customer : customers) {
+            if (customer.getCustomerId().equals(id)) {
+                customer.activityOn();
+                return true;
+            }
+        }
+        return false;
     }
-    public boolean remove (String customerName) {
-        return getCustomersList().removeIf(items -> items.getcustomerName().equals(customerName));
+
+    @Override
+    public boolean deactivate(Long id) {
+        for (Customers customer : customers) {
+            if (customer.getCustomerId().equals(id)) {
+                customer.activityOff();
+                return true;
+            }
+        }
+        return false;
     }
+
     public List<Customers> getCustomersList() {
         return customers;
+    }
+
+    @Override
+    public Optional<Customers> findById(Long id) {
+        return customers.stream().filter(items -> items.getCustomerId().equals(id)).findFirst();
+    }
+
+    @Override
+    public Optional<Customers> findByName(String name) {
+        return customers.stream().filter(items -> items.getCustomerName().equals(name)).findFirst();
+    }
+
+    @Override
+    public boolean updateCustomer(Customers customer) {
+        return false;
+    }
+
+    @Override
+    public List<Customers> findAllActiveCustomers() {
+        return customers.stream()
+                .filter(Customers::isActivity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Customers> findAllInactiveCustomers() {
+        return customers.stream()
+                .filter(item -> !item.isActivity())
+                .collect(Collectors.toList());
     }
 
 }

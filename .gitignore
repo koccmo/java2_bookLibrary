@@ -2,7 +2,7 @@
 *.class
 *.jar
 
-
+### Gradle ###
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -18,18 +18,11 @@
 ### IntelliJ IDEA ###
 .idea
 /.idea/
-/.idea/
 *.iws
 *.iml
 *.ipr
 
-### Gradle ###
-.gradle
-/build/
-
-
 /teacher/build/
-
 /teacher/lesson_1_introduction/build/
 /teacher/lesson_2_single_responsibility_principle/build/
 /teacher/lesson_3_request_response_input_data_validation/build/
@@ -56,8 +49,7 @@
 /team_vv/build/
 /team_dog/build/
 /team_triple_force/build/
-/team_dog/build/
-/team_vv/build/
+/team_lg/build/
 /team_healthy_tooth/build/
 /team_eStore/build/
 /team_AK/build/
@@ -66,6 +58,7 @@
 /team_temptation/build/
 /team_VSB/build/
 /team_marx/build/
+
 
 /teacher/lesson_1_introduction/out/
 /teacher/lesson_2_single_responsibility_principle/out/
@@ -93,8 +86,7 @@
 /team_vv/out/
 /team_dog/out/
 /team_triple_force/out/
-/team_dog/out/
-/team_vv/out/
+/team_lg/out/
 /team_healthy_tooth/out/
 /team_eStore/out/
 /team_AK/out/

@@ -40,14 +40,25 @@ public class EventMenu {
     }
 
     public void menuForEvents() {
-        System.out.println("Program menu:");
+        System.out.println("EVENTS:");
         System.out.println("1. Add new event");
         System.out.println("2. Delete an event");
         System.out.println("3. Search events");
         System.out.println("4. Update an event");
         System.out.println("5. Show all events");
-        System.out.println("6. Exit");
+        System.out.println("6. Return to Main menu");
         System.out.println("7. Start with the defined DB");
+        System.out.println();
+    }
+
+    public void mainMenu() {
+        System.out.println("PROGRAM MENU:");
+        System.out.println("1. CUSTOMERS");
+        System.out.println("2. GUIDES");
+        System.out.println("3. EVENTS");
+        System.out.println("4. TOURS");
+        System.out.println("5. TICKETS");
+        System.out.println("6. EXIT");
         System.out.println();
     }
 

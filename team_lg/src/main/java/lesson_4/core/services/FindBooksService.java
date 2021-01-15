@@ -3,11 +3,11 @@ package lesson_4.core.services;
 import lesson_4.core.database.ElectronicLibrary;
 import lesson_4.core.domain.Book;
 import lesson_4.core.requests.FindBooksRequest;
-import lesson_4.core.requests.Ordering;
-import lesson_4.core.requests.Paging;
 import lesson_4.core.responses.CoreError;
 import lesson_4.core.responses.FindBooksResponse;
 import lesson_4.core.services.validators.FindBooksRequestValidator;
+import lesson_4.core.services.validators.Ordering;
+import lesson_4.core.services.validators.Paging;
 
 import java.util.ArrayList;
 import java.util.Comparator;

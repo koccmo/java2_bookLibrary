@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class TargetListImpl implements Database {
+public class TargetListImpl implements TargetDatabase {
 
     List<Target> targetsList = new ArrayList<>();
     Long targetId = 0L;
