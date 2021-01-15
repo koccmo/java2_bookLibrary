@@ -21,6 +21,14 @@ public class WorkGraphic {
         return timesEnd;
     }
 
+    public void setTimesStart(String[] timesStart) {
+        this.timesStart = timesStart;
+    }
+
+    public void setTimesEnd(String[] timesEnd) {
+        this.timesEnd = timesEnd;
+    }
+
     @Override
     public String toString() {
         return "WorkGraphic:\n" +
