@@ -51,7 +51,7 @@ public class FillDoctorsWorkGraphicService {
             workTime.setTime(date);
         }
         catch (ParseException e) {
-            System.out.println("Unexpected error!");
+            System.out.println("Unexpected error1!");
         }
         return workTime;
     }
