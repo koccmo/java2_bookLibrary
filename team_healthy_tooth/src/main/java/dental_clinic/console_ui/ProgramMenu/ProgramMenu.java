@@ -5,6 +5,8 @@ import dental_clinic.console_ui.doctor.AddDoctorUIAction;
 import dental_clinic.console_ui.doctor.DeleteDoctorUIAction;
 import dental_clinic.console_ui.doctor.FillDoctorsWorkGraphicUIAction;
 import dental_clinic.console_ui.doctor.GetDoctorListUIAction;
+import dental_clinic.console_ui.manipulation.AddManipulationUIAction;
+import dental_clinic.console_ui.manipulation.GetManipulationsUIAction;
 import dental_clinic.console_ui.patient.*;
 import dental_clinic.console_ui.planned_visit.*;
 import dental_clinic.console_ui.visit.AddVisitUIAction;
@@ -45,6 +47,9 @@ public class ProgramMenu {
         menuNumberToActionMap.put(17, findUIAction(uiActions, CancelPlannedVisitUIAction.class));
         menuNumberToActionMap.put(18, findUIAction(uiActions, SearchPlannedVisitsByPersonalCodeUIAction.class));
         menuNumberToActionMap.put(19, findUIAction(uiActions, SearchPlannedVisitsByDateUIAction.class));
+
+        menuNumberToActionMap.put(20, findUIAction(uiActions, AddManipulationUIAction.class));
+        menuNumberToActionMap.put(21, findUIAction(uiActions, GetManipulationsUIAction.class));
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
@@ -93,6 +98,9 @@ public class ProgramMenu {
                 "       17  Cancel planned visit\n" +
                 "       18  Search planned visit by personal code\n" +
                 "       19  Search planned visit by date\n\n" +
+
+                "       20  Add manipulation\n" +
+                "       21  Get manipulations list\n\n" +
 
                 "       0   Exit\n");
     }
