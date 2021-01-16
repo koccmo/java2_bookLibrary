@@ -38,7 +38,7 @@ public class AddVisitServiceTest {
 
     @Test
     public void testNotCorrectToothNumber() {
-        Visit visit = new Visit(2, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
+        Visit visit = new Visit(1L, 2, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("tooth number", "Not valid input for tooth number");
@@ -55,7 +55,7 @@ public class AddVisitServiceTest {
 
     @Test
     public void testEmptyRequest() {
-        Visit visit = new Visit(null, null, null, null, new Date());
+        Visit visit = new Visit(1L, null, null, null, null, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(null, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError1 = new CoreError("id", "Not valid input of id");
@@ -78,7 +78,7 @@ public class AddVisitServiceTest {
 
     @Test
     public void testDatabaseDoesNotContainRequestedId() {
-        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
+        Visit visit = new Visit(1L, 11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(5L, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("id", "Database doesnt't contain patient with id 5");
@@ -95,7 +95,7 @@ public class AddVisitServiceTest {
 
     @Test
     public void testNotValidInputForDoctor() {
-        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
+        Visit visit = new Visit(1L, 11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(5L, visit);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("doctor", "Database doesn't contains specific doctor");
@@ -115,7 +115,7 @@ public class AddVisitServiceTest {
         List<Patient> patients = new ArrayList<>();
         patient.getPersonalData().setId(1L);
         patients.add(patient);
-        Visit visit = new Visit(11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
+        Visit visit = new Visit(1L, 11, Optional.empty(), ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
         Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(new ArrayList<>());
         Mockito.when(patientDatabase.containsPatientWithSpecificId(1L)).thenReturn(true);
