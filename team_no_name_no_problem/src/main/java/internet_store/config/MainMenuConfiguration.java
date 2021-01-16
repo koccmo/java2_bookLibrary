@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -21,9 +22,30 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = "internet_store")
 @PropertySource(value = "classpath:application.properties")
-@PropertySource("classpath:database.properties")
+@PropertySource(value = "classpath:database.properties")
 @EnableTransactionManagement
 public class MainMenuConfiguration {
+
+    @Value("${jdbc.url}") private String jdbcUrl;
+    @Value("${driverClass}") private String driverClass;
+    @Value("${database.user.name}") private String userName;
+    @Value("${database.user.password}") private String userPassword;
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl(jdbcUrl);
+        dataSource.setDriverClassName(driverClass);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(userPassword);
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(){
+        return new JdbcTemplate(dataSource());
+    }
+
 /*
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
