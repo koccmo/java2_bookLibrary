@@ -37,4 +37,10 @@ public class ManipulationInMemoryDatabaseImpl implements ManipulationInMemoryDat
         return manipulations.stream()
                 .anyMatch(manipulation1 -> manipulation1.equals(manipulation));
     }
+
+    @Override
+    public boolean containsId(Long id) {
+        return manipulations.stream()
+                .anyMatch(manipulation -> manipulation.getId().equals(id));
+    }
 }
