@@ -29,6 +29,7 @@ public class GetAllTargetsUIAction implements UIAction {
     }
 
     private void printTargetList(GetAllTargetsResponse response){
+        System.out.println("Target: ");
         for (Target target : response.getTargetList()){
             System.out.println(target.getId() + ". " +
                     target.getName() + " [" + target.getDescription() + "] " +
@@ -44,7 +45,7 @@ public class GetAllTargetsUIAction implements UIAction {
     }
 
     private boolean isTargetListEmpty(GetAllTargetsResponse response){
-        return response.getTargetList().size() == 0;
+        return response.getTargetList().isEmpty();
     }
 
     private GetAllTargetsResponse createResponse(GetAllTargetsRequest request){

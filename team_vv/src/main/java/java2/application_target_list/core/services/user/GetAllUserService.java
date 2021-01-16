@@ -15,7 +15,6 @@ public class GetAllUserService {
     @Autowired private UserDatabase userDatabase;
 
     public GetAllUsersResponse execute(GetAllUsersRequest request){
-        List<User> usersList = userDatabase.getUsersList();
-        return new GetAllUsersResponse(usersList);
+        return new GetAllUsersResponse(userDatabase.getUsersList());
     }
 }
