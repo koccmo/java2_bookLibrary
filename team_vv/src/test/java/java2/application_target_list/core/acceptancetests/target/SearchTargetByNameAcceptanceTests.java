@@ -19,12 +19,11 @@ import static org.junit.Assert.assertNull;
 
 public class SearchTargetByNameAcceptanceTests {
 
-    private ApplicationContext applicationContext;
     private SearchTargetByNameService searchTargetByNameService;
 
     @Before
     public void setup(){
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
         searchTargetByNameService = applicationContext.getBean(SearchTargetByNameService.class);
         AddTargetService addTargetService = applicationContext.getBean(AddTargetService.class);
 
@@ -271,8 +270,4 @@ public class SearchTargetByNameAcceptanceTests {
         assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
         assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6));
     }
-
-
-
-
 }

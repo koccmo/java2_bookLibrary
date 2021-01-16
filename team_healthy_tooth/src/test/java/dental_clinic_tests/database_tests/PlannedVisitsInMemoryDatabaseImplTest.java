@@ -1,5 +1,6 @@
 package dental_clinic_tests.database_tests;
 
+import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
@@ -18,7 +19,8 @@ public class PlannedVisitsInMemoryDatabaseImplTest {
     PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase = new PlannedVisitsInMemoryDatabaseImpl();
     GregorianCalendar visitTime = new GregorianCalendar(2021, Calendar.MARCH, 25, 15, 30);
     PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "01012087412");
-    PlannedVisit plannedVisit = new PlannedVisit(visitTime, personalData);
+    Doctor doctor = new Doctor("Bob", "Doki");
+    PlannedVisit plannedVisit = new PlannedVisit(visitTime, personalData, doctor);
 
     @Before
     public void init(){
@@ -37,7 +39,7 @@ public class PlannedVisitsInMemoryDatabaseImplTest {
     public void testAddPlannedVisit() {
         GregorianCalendar visitTime1 = new GregorianCalendar(2021, Calendar.FEBRUARY, 25);
         PersonalData personalData1 = new PersonalData("Nameeee", "Surname", "12345668", "01012687412");
-        PlannedVisit newPlannedVisit = new PlannedVisit(visitTime1, personalData1);
+        PlannedVisit newPlannedVisit = new PlannedVisit(visitTime1, personalData1, doctor);
         plannedVisitsInMemoryDatabase.addPlannedVisit(newPlannedVisit);
 
         assertTrue(plannedVisitsInMemoryDatabase.getPlannedVisits().size() == 2);
@@ -66,18 +68,18 @@ public class PlannedVisitsInMemoryDatabaseImplTest {
     @Test
     public void containsPlannedVisitInTheSameTimeAndDateTrue() {
         PersonalData personalData1 = new PersonalData("Bob", "Surname", "12345678", "01032087412");
-        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime, personalData1);
+        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime, personalData1, doctor);
 
-        assertTrue(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit1));
+        assertTrue(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTimeTheSameDoctor(plannedVisit1));
     }
 
     @Test
     public void containsPlannedVisitInTheSameTimeFalse() {
         PersonalData personalData1 = new PersonalData("Bob", "Surname", "12345678", "01032087412");
         GregorianCalendar visitTime1 = new GregorianCalendar(2021, Calendar.MARCH, 26, 15, 30);
-        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime1, personalData1);
+        PlannedVisit plannedVisit1 = new PlannedVisit(visitTime1, personalData1, doctor );
 
-        assertFalse(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit1));
+        assertFalse(plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTimeTheSameDoctor(plannedVisit1));
     }
 
     @Test

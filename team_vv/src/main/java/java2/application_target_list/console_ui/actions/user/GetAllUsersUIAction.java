@@ -28,6 +28,7 @@ public class GetAllUsersUIAction implements UIAction {
     }
 
     private void printUsersList(GetAllUsersResponse getAllUsersResponse){
+        System.out.println("Users: ");
         for (User user : getAllUsersResponse.getUsersList()){
             System.out.println(user.getId() + ". " +
                     user.getFirstName() + " " + user.getLastName());
@@ -42,7 +43,7 @@ public class GetAllUsersUIAction implements UIAction {
     }
 
     private boolean isUsersListEmpty(GetAllUsersResponse getAllUsersResponse){
-        return getAllUsersResponse.getUsersList().size() == 0;
+        return getAllUsersResponse.getUsersList().isEmpty();
     }
 
     private GetAllUsersResponse createResponse(GetAllUsersRequest getAllUserRequest){

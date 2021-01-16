@@ -45,7 +45,7 @@ public class DeleteUserUIAction implements UIAction {
     }
 
     private Long getIdFromUser(){
-        System.out.print("Enter target ID: ");
+        System.out.print("Enter user ID: ");
         return Long.parseLong(scr.nextLine());
     }
 

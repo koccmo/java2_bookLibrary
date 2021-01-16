@@ -1,8 +1,6 @@
 package lesson_4.core.services.validators;
 
 import lesson_4.core.requests.FindBooksRequest;
-import lesson_4.core.requests.Ordering;
-import lesson_4.core.requests.Paging;
 import lesson_4.core.responses.CoreError;
 
 import java.util.ArrayList;

@@ -20,7 +20,7 @@ public class DeleteUserValidator {
             errors.add(new CoreError("User ID;","no user with that ID"));
         }
 
-        if (isuserIdEmpty(request)){
+        if (isUserIdEmpty(request)){
             errors.add(new CoreError("User ID","must not be empty!"));
         }
         if (isUserIdNegative(request)){
@@ -30,8 +30,7 @@ public class DeleteUserValidator {
         return errors;
     }
 
-
-    private boolean isuserIdEmpty(DeleteUserRequest request) {
+    private boolean isUserIdEmpty(DeleteUserRequest request) {
         return request.getUserIdToDelete() == null;
     }
 

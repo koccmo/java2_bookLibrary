@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class AddUserUIAction implements UIAction {
 
     @Autowired AddUserService addUserService;
-
     private final Scanner scr = new Scanner(System.in);
 
     @Override
