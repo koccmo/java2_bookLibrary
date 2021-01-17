@@ -44,6 +44,7 @@ VALUES (11, "FirstName 11", "LastName 11");
 INSERT INTO readers (id, first_name, last_name)
 VALUES (12, "FirstName 12", "LastName 12");
 
+
 INSERT INTO reader_books (reader_id, book_id, book_out_date)
 VALUES (1, 1, "2021-01-01 09:00:00");
 
@@ -61,3 +62,12 @@ VALUES (11, 11, 11, "2021-01-11 09:00:00");
 
 INSERT INTO reader_books (id, reader_id, book_id, book_out_date)
 VALUES (12, 12, 12, "2021-01-12 09:00:00");
+
+INSERT INTO reader_books (id, reader_id, book_id, book_out_date, book_return_date)
+VALUES (20, 10, 20, "2021-01-10 09:00:00", "2021-01-20 09:00:00");
+
+INSERT INTO reader_books (id, reader_id, book_id, book_out_date, book_return_date)
+VALUES (21, 11, 21, "2021-01-11 09:00:00", "2021-01-21 09:00:00");
+
+INSERT INTO reader_books (id, reader_id, book_id, book_out_date, book_return_date)
+VALUES (22, 12, 22, "2021-01-12 09:00:00", "2021-01-22 09:00:00");
