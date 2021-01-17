@@ -16,6 +16,7 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public List<Customer> getCustomers() {
+        jdbcTemplate.queryForObject("SELECT * FROM customers", Integer.class);
         return null;
     }
 
@@ -29,7 +30,8 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public void deleteCustomer(long id) {
-
+        /*jdbcTemplate.update("DELETE FROM customers WHERE id = ?" + "VALUES (?)",
+                id);*/
     }
 
     @Override
