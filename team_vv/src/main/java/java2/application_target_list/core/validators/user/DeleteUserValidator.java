@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.user;
 
 
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;

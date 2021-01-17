@@ -1,10 +1,10 @@
 package java2.application_target_list.core.acceptancetests.board;
 
 import java2.application_target_list.config.TargetListConfiguration;
-import java2.application_target_list.core.database.TargetDatabase;
-import java2.application_target_list.core.database.TargetListImpl;
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.database.UserListImpl;
+import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetListImpl;
+import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserListImpl;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.board.AddRecordRequest;

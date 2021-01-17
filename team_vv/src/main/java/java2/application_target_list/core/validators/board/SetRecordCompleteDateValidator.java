@@ -1,6 +1,6 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardDatabase;
 
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;

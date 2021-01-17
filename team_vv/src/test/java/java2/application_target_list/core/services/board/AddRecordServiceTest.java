@@ -1,10 +1,8 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.BoardDatabase;
-import java2.application_target_list.core.database.TargetDatabase;
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.domain.Target;
-import java2.application_target_list.core.domain.User;
+import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.matchers.RecordMatcher;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -17,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;

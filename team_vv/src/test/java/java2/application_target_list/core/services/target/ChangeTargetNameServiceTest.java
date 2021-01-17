@@ -1,11 +1,9 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
-import java2.application_target_list.core.database.TargetDatabase;
-import java2.application_target_list.core.domain.Target;
+import java2.application_target_list.core.database.target.TargetDatabase;
 import java2.application_target_list.core.responses.target.ChangeTargetNameResponse;
 import java2.application_target_list.core.responses.CoreError;
-import java2.application_target_list.core.services.target.ChangeTargetNameService;
 import java2.application_target_list.core.validators.target.ChangeTargetNameValidator;
 import junit.framework.TestCase;
 import org.junit.Before;

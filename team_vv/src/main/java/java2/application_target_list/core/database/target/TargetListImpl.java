@@ -1,5 +1,6 @@
-package java2.application_target_list.core.database;
+package java2.application_target_list.core.database.target;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 
@@ -10,16 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Profile("inmemory")
 public class TargetListImpl implements TargetDatabase {
 
     List<Target> targetsList = new ArrayList<>();
     Long targetId = 0L;
 
     @Override
-    public Long addTarget(Target target) {
+    public void addTarget(Target target) {
         target.setId(targetId += 1);
         targetsList.add(target);
-        return target.getId();
+//        return target.getId();
     }
 
     @Override

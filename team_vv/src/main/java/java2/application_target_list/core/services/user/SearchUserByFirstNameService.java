@@ -1,7 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.domain.Target;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;

@@ -1,19 +1,5 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.TargetDatabase;
-import java2.application_target_list.core.database.TargetListImpl;
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.database.UserListImpl;
-import java2.application_target_list.core.domain.Target;
-import java2.application_target_list.core.domain.User;
-import java2.application_target_list.core.requests.board.AddRecordRequest;
-import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.List;
-
 public class AddRecordValidatorTest {
 
 //    private AddRecordValidator addRecordValidator;

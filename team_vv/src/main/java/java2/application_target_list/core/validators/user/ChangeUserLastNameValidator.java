@@ -1,6 +1,6 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 
 import java2.application_target_list.core.requests.user.ChangeUserLastNameRequest;
 import java2.application_target_list.core.responses.CoreError;

@@ -1,10 +1,9 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardDatabase;
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
-import java2.application_target_list.core.services.user.GetAllUserService;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;

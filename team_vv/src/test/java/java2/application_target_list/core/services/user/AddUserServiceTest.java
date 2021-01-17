@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.matchers.UserMatcher;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
