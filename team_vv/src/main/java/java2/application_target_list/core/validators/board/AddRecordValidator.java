@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.TargetDatabase;
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;

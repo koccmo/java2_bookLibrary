@@ -1,11 +1,10 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.database.UserListImpl;
+import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserListImpl;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.ChangeUserFirstNameRequest;
 import java2.application_target_list.core.responses.CoreError;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

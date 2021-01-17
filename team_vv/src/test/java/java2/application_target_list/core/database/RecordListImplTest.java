@@ -1,5 +1,7 @@
 package java2.application_target_list.core.database;
 
+import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardListImpl;
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;

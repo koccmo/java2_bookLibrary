@@ -1,5 +1,6 @@
 package java2.application_target_list.console_ui.actions.target;
 
+import java2.application_target_list.core.database.target.TargetDatabase;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
 import java2.application_target_list.config.TargetListConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,21 @@ import java.util.Scanner;
 public class DeleteUIAction implements UIAction {
 
     @Autowired DeleteTargetService deleteTargetService;
+    @Autowired TargetDatabase targetDatabase;
     private final Scanner scr = new Scanner(System.in);
 
 
     @Override
     public void execute() {
         while (true) {
+
+            if (targetListIsEmpty()){
+                printBreakMessage();
+                break;
+            }
+
             Long targetId = getIdFromUser();
+
 
             DeleteTargetRequest request = createRequest(targetId);
             DeleteTargetResponse response = createResponse(request);
@@ -60,6 +69,16 @@ public class DeleteUIAction implements UIAction {
     private Long getIdFromUser(){
         System.out.print("Enter target ID: ");
         return Long.parseLong(scr.nextLine());
+    }
+
+    private void printBreakMessage(){
+        System.out.println("----------");
+        System.out.println("Targets list is empty!");
+        System.out.println("----------");
+    }
+
+    private boolean targetListIsEmpty(){
+        return targetDatabase.getTargetsList().isEmpty();
     }
 
 }

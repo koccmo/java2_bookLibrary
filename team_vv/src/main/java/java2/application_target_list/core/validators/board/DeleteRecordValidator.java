@@ -1,7 +1,6 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.BoardDatabase;
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.board.BoardDatabase;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
