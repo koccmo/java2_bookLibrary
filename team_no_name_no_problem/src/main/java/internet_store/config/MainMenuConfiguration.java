@@ -42,7 +42,7 @@ public class MainMenuConfiguration {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate(DataSource dataSource){
         return new JdbcTemplate(dataSource());
     }
 
