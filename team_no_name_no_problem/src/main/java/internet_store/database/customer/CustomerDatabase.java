@@ -11,7 +11,7 @@ public interface CustomerDatabase {
 
     void addCustomer(Customer customer);
 
-    void deleteCustomer(long id);
+    void deleteCustomerById(Long id);
 
     Optional<Customer> findById(Long id);
 

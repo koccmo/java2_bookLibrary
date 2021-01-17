@@ -26,7 +26,7 @@ import java.util.List;
         if (customerDatabase.containsId(deleteCustomerRequest.getId())) {
             for (int i = 0; i < customerDatabase.getCustomers().size(); i++) {
                 if (getCurrentCustomer(i).getId() == deleteCustomerRequest.getId()) {
-                    customerDatabase.deleteCustomer(deleteCustomerRequest.getId());
+                    customerDatabase.deleteCustomerById(deleteCustomerRequest.getId());
                     return new DeleteCustomerResponse(deleteCustomerRequest.getId());
                 }
             }

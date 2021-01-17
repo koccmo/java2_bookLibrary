@@ -29,9 +29,9 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public void deleteCustomer(long id) {
-        /*jdbcTemplate.update("DELETE FROM customers WHERE id = ?" + "VALUES (?)",
-                id);*/
+    public void deleteCustomerById(Long id) {
+        jdbcTemplate.update("DELETE FROM customers WHERE id = ?" + "VALUES (?)",
+                id);
     }
 
     @Override
