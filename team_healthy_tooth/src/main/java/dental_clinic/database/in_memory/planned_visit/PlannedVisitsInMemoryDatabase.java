@@ -17,7 +17,7 @@ public interface PlannedVisitsInMemoryDatabase {
 
     boolean containsId(Long id);
 
-    boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit);
+    boolean containsPlannedVisitInTheSameTimeTheSameDoctor(PlannedVisit plannedVisit);
 
     List <PlannedVisit> searchPlannedVisitsByPersonalCode(String personalCode);
 

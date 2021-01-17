@@ -22,12 +22,14 @@ public class ShowReservationsAction extends Action implements UIActions {
 		Person currUser = getLoggedInUser();
 
 		ShowTicketsRequest request = new ShowTicketsRequest(currUser);
-		ShowTicketResponse response = showReservationsService.execute(request);
+		ShowTicketResponse<?> response = showReservationsService.execute(request);
 
-		//response.getResponse().getClass();
-		if (!response.getResponse().isEmpty())
-			response.getResponse().forEach(System.out::println);
-		//else
-		//	System.out.println(response.getTicketsAsString());
+		if (response.hasErrors()) {
+			System.out.println("Error list:");
+		}
+		else {
+			System.out.println("Ticket list:");
+		}
+		response.printResponse();
 	}
 }

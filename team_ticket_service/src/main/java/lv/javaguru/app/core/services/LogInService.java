@@ -4,7 +4,7 @@ import lv.javaguru.app.core.domain.Person;
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
-import lv.javaguru.app.core.validators.LoginRequestValidator;
+import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
 
 import java.util.List;

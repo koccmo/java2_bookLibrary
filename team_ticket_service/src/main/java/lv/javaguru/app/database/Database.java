@@ -33,5 +33,4 @@ public interface Database {
 
     Ticket getTicketById(Person person, Long id);
 
-    List<Ticket> getTicketListByPersonId(Long id);
 }

@@ -45,7 +45,9 @@ public class Jowl {
         return newJowl;
     }
 
-
+    public void setJowl(Map<Integer, List<ToothStatus>> jowl) {
+        this.jowl = jowl;
+    }
 
     public boolean updateJowl(int toothNumber, ToothStatus toothStatus) {
         if (jowl.containsKey(toothNumber)) {

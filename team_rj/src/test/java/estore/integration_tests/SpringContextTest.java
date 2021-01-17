@@ -10,12 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertNotNull;
 
-//аннотация для запуска тестов под управлением
-//специального Spring JUnit Runner класса, который обеспечивает поднятие Spring контекста
-//при старте тестов
 @RunWith(SpringJUnit4ClassRunner.class)
-//аннотация
-//позволяет указать главный класс с конфигурацией приложения
 @ContextConfiguration(classes = {ProductConfiguration.class})
 public class SpringContextTest {
 

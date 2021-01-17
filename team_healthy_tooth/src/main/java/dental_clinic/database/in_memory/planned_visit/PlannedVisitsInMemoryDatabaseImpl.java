@@ -48,9 +48,10 @@ public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryD
     }
 
     @Override
-    public boolean containsPlannedVisitInTheSameTime(PlannedVisit plannedVisit) {
+    public boolean containsPlannedVisitInTheSameTimeTheSameDoctor(PlannedVisit plannedVisit) {
         return plannedVisitsList.stream()
-                .anyMatch(plannedVisit1 -> plannedVisit1.getVisitTime().equals(plannedVisit.getVisitTime()));
+                .anyMatch(plannedVisit1 -> plannedVisit1.getVisitTime().equals(plannedVisit.getVisitTime()) &&
+                        plannedVisit1.getDoctor().equals(plannedVisit.getDoctor()));
     }
 
     @Override

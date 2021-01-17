@@ -1,5 +1,8 @@
 package lesson_4.core.requests;
 
+import lesson_4.core.services.validators.Ordering;
+import lesson_4.core.services.validators.Paging;
+
 public class FindBooksRequest {
 
     public String bookTitle;

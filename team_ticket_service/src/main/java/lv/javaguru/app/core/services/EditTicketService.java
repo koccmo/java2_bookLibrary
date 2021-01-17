@@ -5,7 +5,7 @@ import lv.javaguru.app.core.request.edit.*;
 import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.EditTicketResponse;
 import lv.javaguru.app.core.response.edit.*;
-import lv.javaguru.app.core.validators.EditTicketRequestValidator;
+import lv.javaguru.app.core.services.validators.EditTicketRequestValidator;
 import lv.javaguru.app.database.Database;
 
 import java.util.ArrayList;

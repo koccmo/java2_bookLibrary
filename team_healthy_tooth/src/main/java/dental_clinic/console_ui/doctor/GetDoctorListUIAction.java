@@ -22,7 +22,7 @@ public class GetDoctorListUIAction implements UIAction {
         if (getDoctorListResponse.hasErrors()) {
             getDoctorListResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Doctor's database:");
+            System.out.println("Doctor's database:\n");
             getDoctorListResponse.getDoctors().forEach(System.out::println);
         }
     }
