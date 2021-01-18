@@ -46,7 +46,7 @@ public class DeleteByOtherUIAction implements UIAction {
         if (deleteByOtherResponse.hasErrors()){
             deleteByOtherResponse.getErrors().forEach(System.out::println);
         }else{
-            deleteByOtherResponse.getProducts().forEach(System.out::println);
+            System.out.println("Product is deleted");
         }
     }
 }
