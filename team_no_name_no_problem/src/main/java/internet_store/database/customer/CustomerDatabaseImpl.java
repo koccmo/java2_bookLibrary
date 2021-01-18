@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CustomerDatabaseImpl implements CustomerDatabase{
 
     private Long id = 1L;
-    private List<Customer> customerList = new ArrayList<>();
+    private final List<Customer> customerList = new ArrayList<>();
 
     @Override
     public List<Customer> getCustomers() {
@@ -27,9 +27,9 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public void deleteCustomerById(Long id){
-        customerList.removeIf(customer -> customer.getId() == id);
-
+    public boolean deleteCustomerById(Long id){
+        customerList.removeIf(customer -> customer.getId().equals(id));
+        return false;
     }
 
     @Override
