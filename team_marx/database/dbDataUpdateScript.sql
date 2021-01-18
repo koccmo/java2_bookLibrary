@@ -1,5 +1,3 @@
-SET SQL_SAFE_UPDATES = 0;
-
 UPDATE books SET title = "Title for all", author = "Author for all", page_count = 100, description = "Description for all" WHERE id > 0;
 UPDATE readers SET first_name = "FirstName for all", last_name = "LastName for all" WHERE id > 0;
 UPDATE reader_books SET reader_id = 1, book_id = 1, book_out_date = "2021-01-01 01:01:01", book_return_date = "2021-11-11 11:11:11" WHERE id > 0;

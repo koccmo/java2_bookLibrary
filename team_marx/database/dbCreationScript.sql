@@ -46,6 +46,21 @@ ADD FOREIGN KEY (book_id) REFERENCES books(id);
 ALTER TABLE reader_books
 ADD FOREIGN KEY (reader_id) REFERENCES readers(id);
 
+SET SQL_SAFE_UPDATES = 0;
+
+CREATE INDEX books_title_idx ON books (title);
+CREATE INDEX books_author_idx ON books (author);
+CREATE INDEX books_title_author_idx ON books (title, author);
+
+CREATE INDEX reader_books_reader_id_idx ON reader_books (reader_id);
+CREATE INDEX reader_books_book_id_idx ON reader_books (book_id);
+CREATE INDEX reader_books_book_out_date_idx ON reader_books (book_out_date);
+CREATE INDEX reader_books_book_return_date_idx ON reader_books (book_return_date);
+
+CREATE INDEX readers_first_name_idx ON readers (first_name);
+CREATE INDEX readers_last_name_idx ON readers (last_name);
+CREATE INDEX readers_first_name_last_name_idx ON readers (first_name, last_name);
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
