@@ -1,5 +1,5 @@
 Добавьте в класс BookListConfiguration Java код для
-создания объекта DataSource и квлючения его в Spring IoC контейнер:
+создания объекта DataSource и влючения его в Spring IoC контейнер:
 
 		@Bean
     	public DataSource dataSource() {
