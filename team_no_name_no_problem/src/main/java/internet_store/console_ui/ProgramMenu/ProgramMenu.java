@@ -22,8 +22,8 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu (List<UIAction> uiActionList) {
         menuNumberToActionMap.put(1, findUIAction(uiActionList, AddProductUIAction.class));
-        menuNumberToActionMap.put(2, findUIAction(uiActionList, SearchProductUIAction.class));
-        menuNumberToActionMap.put(3, findUIAction(uiActionList, FindByIdUIAction.class));
+        menuNumberToActionMap.put(2, findUIAction(uiActionList, FindByIdUIAction.class));
+        menuNumberToActionMap.put(3, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(4, findUIAction(uiActionList, ChangeProductUIAction.class));
         menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
         menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
@@ -54,8 +54,8 @@ public class ProgramMenu {
 
         System.out.println("\nAdministrator Menu\n\n" +
                 "1   Add product\n" +
-                "2   Search product\n" +
-                "3   Search product by ID\n"+
+                "2   Search product by ID\n" +
+                "3   Search product by other criteria\n"+
                 "4   Change product\n" +
                 "5   Delete product by ID\n" +
                 "6   Delete product by other criteria\n" +

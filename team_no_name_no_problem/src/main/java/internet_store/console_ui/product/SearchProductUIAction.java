@@ -20,6 +20,11 @@ import java.util.Scanner;
 
         Scanner in = new Scanner(System.in);
 
+        System.out.println("In order to find the product by one of the criteria");
+        System.out.println("it is not necessary to enter all of them. However, if one price type");
+        System.out.println("is entered, another also should be entered. If one is skipped, other should be as well.");
+        System.out.println();
+
         System.out.println("Please enter title to search by title");
         String title = in.nextLine();
 
