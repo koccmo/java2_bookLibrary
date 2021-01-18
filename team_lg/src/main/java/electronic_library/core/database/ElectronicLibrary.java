@@ -11,7 +11,7 @@ public interface ElectronicLibrary {
 
     boolean deleteBook(Book book);
 
-    boolean deleteBookById(Long BookId);
+    boolean deleteBookById(Long id);
 
     boolean deleteBookByTitle(String bookTitle);
 
