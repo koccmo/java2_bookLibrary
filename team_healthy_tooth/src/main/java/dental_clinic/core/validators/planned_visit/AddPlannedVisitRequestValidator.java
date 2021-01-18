@@ -20,6 +20,7 @@ public class AddPlannedVisitRequestValidator {
         List <CoreError> errors = new ArrayList<>();
         errors.addAll(visitTimeValidationErrors(addPlannedVisitRequest.getVisitDataText()));
         errors.addAll(personalDataValidationErrors(addPlannedVisitRequest.getPersonalData()));
+        errors.addAll(doctorIdValidationErrors(addPlannedVisitRequest));
         return errors;
     }
 
@@ -87,6 +88,14 @@ public class AddPlannedVisitRequestValidator {
         List <CoreError> errors = new ArrayList<>();
         if (!Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode)) {
             errors.add(new CoreError("Personal data : personal code", "Valid personal format is DDMMYYNNNNN or DDMMYY-NNNNN, where N is digit"));
+        }
+        return errors;
+    }
+
+    private List <CoreError> doctorIdValidationErrors (AddPlannedVisitRequest addPlannedVisitRequest) {
+        List <CoreError> errors = new ArrayList<>();
+        if (addPlannedVisitRequest.getId() == null || addPlannedVisitRequest.getId() < 1) {
+            errors.add(new CoreError("id", "Not valid input for id"));
         }
         return errors;
     }

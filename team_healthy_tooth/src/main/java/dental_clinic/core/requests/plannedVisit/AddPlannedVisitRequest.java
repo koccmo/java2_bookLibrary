@@ -7,11 +7,13 @@ public class AddPlannedVisitRequest {
     private boolean isNewPatient;
     private String visitDataText;
     private PersonalData personalData;
+    private Long doctorsId;
 
-    public AddPlannedVisitRequest(boolean isNewPatient, String visitDataText, PersonalData personalData) {
+    public AddPlannedVisitRequest(boolean isNewPatient, String visitDataText, PersonalData personalData, Long doctorsId) {
         this.isNewPatient = isNewPatient;
         this.visitDataText = visitDataText;
         this.personalData = personalData;
+        this.doctorsId = doctorsId;
     }
 
     public boolean getIsNewPatient() {
@@ -24,5 +26,9 @@ public class AddPlannedVisitRequest {
 
     public PersonalData getPersonalData() {
         return personalData;
+    }
+
+    public Long getId() {
+        return doctorsId;
     }
 }

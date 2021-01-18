@@ -25,7 +25,7 @@ public class AddVisitValidatorTest {
     public void testNotValidInputId(){
         CoreError expectedError = new CoreError("id", "Not valid input of id");
 
-        Visit newVisit = new Visit( 11, comment, ToothStatus.FASETE, doctor, new Date());
+        Visit newVisit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(-1L, newVisit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
@@ -37,7 +37,7 @@ public class AddVisitValidatorTest {
     public void testNotValidInputToothNumber(){
         CoreError expectedError = new CoreError("tooth number", "Not valid input for tooth number");
 
-        Visit newVisit = new Visit(2, comment, ToothStatus.FASETE, doctor, new Date());
+        Visit newVisit = new Visit(1L, 2, comment, ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, newVisit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
@@ -49,7 +49,7 @@ public class AddVisitValidatorTest {
     public void testNotValidInputDoctor(){
         CoreError expectedError = new CoreError("doctor", "Doctor can't be empty");
 
-        Visit visit = new Visit(11, comment, ToothStatus.FASETE, null, new Date());
+        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, null, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
@@ -60,7 +60,7 @@ public class AddVisitValidatorTest {
     @Test
     public void testValidInput(){
 
-        Visit visit = new Visit(11, comment, ToothStatus.FASETE, doctor, new Date());
+        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, new Date());
         AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);

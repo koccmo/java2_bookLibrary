@@ -1,12 +1,14 @@
-package java2.application_target_list.core.database;
+package java2.application_target_list.core.database.user;
 
 import java2.application_target_list.core.domain.User;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Profile("inmemory")
 public class UserListImpl implements UserDatabase {
 
     List<User> userList = new ArrayList<>();
@@ -14,10 +16,10 @@ public class UserListImpl implements UserDatabase {
 
 
     @Override
-    public Long addUser(User user) {
+    public void addUser(User user) {
         user.setId(userId += 1);
         userList.add(user);
-        return user.getId();
+//        return user.getId();
     }
 
     @Override

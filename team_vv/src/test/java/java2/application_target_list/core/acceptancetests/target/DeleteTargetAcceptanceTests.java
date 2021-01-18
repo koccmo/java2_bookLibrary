@@ -20,16 +20,14 @@ import static org.junit.Assert.assertNull;
 
 public class DeleteTargetAcceptanceTests {
 
-    private ApplicationContext applicationContext;
-    private AddTargetService addTargetService;
     private GetAllTargetsService getAllTargetsService;
     private DeleteTargetService deleteTargetService;
 
     @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
         getAllTargetsService = applicationContext.getBean(GetAllTargetsService.class);
-        addTargetService = applicationContext.getBean(AddTargetService.class);
+        AddTargetService addTargetService = applicationContext.getBean(AddTargetService.class);
         deleteTargetService = applicationContext.getBean(DeleteTargetService.class);
         AddTargetRequest addTargetRequest1 = new AddTargetRequest("name", "description", 1);
         AddTargetRequest addTargetRequest2 = new AddTargetRequest("name2", "description2", 4);

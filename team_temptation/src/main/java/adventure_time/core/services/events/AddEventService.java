@@ -12,14 +12,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//@DIComponent
 @Component
 public class AddEventService {
 
-//    @DIDependency
     @Autowired
     private EventDatabase databaseEvents;
-//    @DIDependency
     @Autowired private AddEventRequestValidator validator;
 
 //    public AddEventService(EventDatabase databaseEvents, AddEventRequestValidator validator) {

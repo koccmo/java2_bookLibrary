@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class CustomerDatabaseImpl implements CustomerDatabase{
 
     private Long id = 1L;
@@ -27,7 +27,7 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public void deleteCustomer(long id){
+    public void deleteCustomerById(Long id){
         customerList.removeIf(customer -> customer.getId() == id);
 
     }

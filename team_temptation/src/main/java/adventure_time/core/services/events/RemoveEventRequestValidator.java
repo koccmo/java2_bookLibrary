@@ -2,13 +2,11 @@ package adventure_time.core.services.events;
 
 import adventure_time.core.requests.events.RemoveEventRequest;
 import adventure_time.core.responses.CoreError;
-import adventure_time.dependencies.DIComponent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@DIComponent
 @Component
 public class RemoveEventRequestValidator {
 

@@ -2,11 +2,9 @@ package java2.application_target_list.core.acceptancetests.target;
 
 import java2.application_target_list.core.requests.target.*;
 import java2.application_target_list.config.TargetListConfiguration;
-import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
-import java2.application_target_list.core.responses.target.ChangeTargetDescriptionResponse;
-import java2.application_target_list.core.responses.target.ChangeTargetNameResponse;
-import java2.application_target_list.core.responses.target.SearchTargetByNameResponse;
+import java2.application_target_list.core.responses.target.*;
 import java2.application_target_list.core.services.target.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -20,16 +18,16 @@ import static org.junit.Assert.assertNull;
 public class AcceptanceTests {
 
 
-    private ApplicationContext applicationContext;
     private ChangeTargetNameService changeTargetNameService;
     private AddTargetService addTargetService;
     private ChangeTargetDescriptionService changeTargetDescriptionService;
     private ChangeTargetDeadlineService changeTargetDeadlineService;
     private SearchTargetByNameService searchTargetByNameService;
+    private AddTargetResponse addTargetResponse;
 
     @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
         changeTargetNameService = applicationContext.getBean(ChangeTargetNameService.class);
         addTargetService = applicationContext.getBean(AddTargetService.class);
         changeTargetDescriptionService = applicationContext.getBean(ChangeTargetDescriptionService.class);
@@ -44,10 +42,14 @@ public class AcceptanceTests {
         AddTargetRequest addTargetRequest2 = new AddTargetRequest("name2", "description2", 4);
         AddTargetRequest addTargetRequest3 = new AddTargetRequest("name3", "description3", 6);
         AddTargetRequest addTargetRequest4 = new AddTargetRequest("wdc", "sda", 156);
-        addTargetService.execute(addTargetRequest1);
-        addTargetService.execute(addTargetRequest2);
-        addTargetService.execute(addTargetRequest3);
-        addTargetService.execute(addTargetRequest4);
+        addTargetResponse = addTargetService.execute(addTargetRequest1);
+        Assert.assertFalse(addTargetResponse.hasErrors());
+        addTargetResponse = addTargetService.execute(addTargetRequest2);
+        Assert.assertFalse(addTargetResponse.hasErrors());
+        addTargetResponse = addTargetService.execute(addTargetRequest3);
+        Assert.assertFalse(addTargetResponse.hasErrors());
+        addTargetResponse = addTargetService.execute(addTargetRequest4);
+        Assert.assertFalse(addTargetResponse.hasErrors());
 
         ChangeTargetNameRequest changeTargetNameRequest = new ChangeTargetNameRequest(4L, "New name");
         ChangeTargetNameResponse changeTargetNameResponse = changeTargetNameService.execute(changeTargetNameRequest);
@@ -68,6 +70,5 @@ public class AcceptanceTests {
         assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "New name");
         assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "New description");
         assertEquals(java.util.Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(100));
-
     }
 }

@@ -19,12 +19,11 @@ import static org.junit.Assert.assertNull;
 
 public class SearchByDescriptionAcceptanceTests {
 
-    private ApplicationContext applicationContext;
     private SearchTargetByDescriptionService searchTargetByDescriptionService;
 
     @Before
     public void setup(){
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
         searchTargetByDescriptionService = applicationContext.getBean(SearchTargetByDescriptionService.class);
         AddTargetService addTargetService = applicationContext.getBean(AddTargetService.class);
 

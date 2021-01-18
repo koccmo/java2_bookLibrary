@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
 
-@Component
-public class InMemoryDatabaseImpl implements Database {
+//@Component
+class InMemoryDatabaseImpl implements Database {
 
 	private Long nextId = 1L;
 	private List<Book> books = new ArrayList<>();

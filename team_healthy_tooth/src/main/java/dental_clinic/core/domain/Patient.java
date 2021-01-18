@@ -12,8 +12,14 @@ public class Patient {
         this.personalData = personalData;
     }
 
+    public Patient() {};
+
     public PersonalData getPersonalData() {
         return personalData;
+    }
+
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
     }
 
     public Jowl getJowl() {
