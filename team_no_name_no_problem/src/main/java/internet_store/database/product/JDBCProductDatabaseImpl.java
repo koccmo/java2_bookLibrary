@@ -16,7 +16,8 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        String sql = "SELECT* FROM products";
+        return jdbcTemplate.query(sql, new ProductRowMapper());
     }
 
     @Override
@@ -28,17 +29,23 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public void deleteById(Long id) {
-
+        /*String sql = "DELETE FROM products WHERE id = ?";
+        Object[] args = new Object[]{id};
+        return jdbcTemplate.update(sql, args) == 1;*/
     }
 
     @Override
     public void deleteAllByTitle(String title) {
-
+        /*String sql = "DELETE FROM products WHERE title = ?";
+        Object[] args = new Object[]{title};
+        return jdbcTemplate.update(sql, args) == 1;*/
     }
 
     @Override
     public void deleteAllByDescription(String description) {
-
+        /*String sql = "DELETE FROM products WHERE description = ?";
+        Object[] args = new Object[]{description};
+        return jdbcTemplate.update(sql, args) == 1;*/
     }
 
     @Override
@@ -68,7 +75,9 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public List<Product> findAllByTitle(String title) {
-        return null;
+        String sql = "SELECT * FROM products WHERE title = ?";
+        Object[] args = new Object[]{title};
+        return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
@@ -78,12 +87,16 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public List<Product> findAllByDescription(String description) {
-        return null;
+        String sql = "SELECT * FROM products WHERE description = ?";
+        Object[] args = new Object[]{description};
+        return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
     public List<Product> findAllByTitleAndDescription(String title, String description) {
-        return null;
+        String sql = "SELECT * FROM products WHERE title = ? AND description = ?";
+        Object[] args = new Object[]{title, description};
+        return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
