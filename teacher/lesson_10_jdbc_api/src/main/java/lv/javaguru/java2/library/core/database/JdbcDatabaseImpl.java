@@ -31,7 +31,8 @@ class JdbcDatabaseImpl implements Database {
 
 	@Override
 	public List<Book> getAllBooks() {
-		return null;
+		String sql = "SELECT * FROM books";
+		return jdbcTemplate.query(sql, new BookRowMapper());
 	}
 
 	@Override
