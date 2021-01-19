@@ -2,10 +2,7 @@ package java2.application_target_list.console_ui;
 
 import java2.application_target_list.console_ui.actions.*;
 import java2.application_target_list.config.TargetListConfiguration;
-import java2.application_target_list.console_ui.actions.board.AddRecordUIAction;
-import java2.application_target_list.console_ui.actions.board.DeleteRecordUIAction;
-import java2.application_target_list.console_ui.actions.board.GetAllRecordsUIActions;
-import java2.application_target_list.console_ui.actions.board.SetRecordCompleteDateUIAction;
+import java2.application_target_list.console_ui.actions.board.*;
 import java2.application_target_list.console_ui.actions.target.*;
 import java2.application_target_list.console_ui.actions.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +83,7 @@ public class Menu {
         menuUIActionsMap.put(22, findUIAction(uiActions, AddRecordUIAction.class));
         menuUIActionsMap.put(23, findUIAction(uiActions, DeleteRecordUIAction.class));
         menuUIActionsMap.put(24, findUIAction(uiActions, SetRecordCompleteDateUIAction.class));
+        menuUIActionsMap.put(25, findUIAction(uiActions, GetFullInfoAboutRecordsUIAction.class));
         menuUIActionsMap.put(0, findUIAction(uiActions, ExitUIAction.class));
         return menuUIActionsMap;
     }

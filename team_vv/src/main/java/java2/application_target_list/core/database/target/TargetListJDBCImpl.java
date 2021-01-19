@@ -19,7 +19,7 @@ public class TargetListJDBCImpl implements TargetDatabase{
     @Override
     public void addTarget(Target target) {
         jdbcTemplate.update(
-                "INSERT INTO targets (name, description, deadline ) " +
+                "INSERT INTO targets (target_name, target_description, target_deadline ) " +
                         "VALUES (?, ?, ?)", target.getName(), target.getDescription(), target.getDeadline());
     }
 
@@ -31,19 +31,19 @@ public class TargetListJDBCImpl implements TargetDatabase{
 
     @Override
     public boolean changeTargetName(Long targetId, String newName) {
-        jdbcTemplate.update("UPDATE targets SET name = ? WHERE id = ?", newName, targetId);
+        jdbcTemplate.update("UPDATE targets SET target_name = ? WHERE id = ?", newName, targetId);
         return true;
     }
 
     @Override
     public boolean changeTargetDescription(Long targetId, String newDescription) {
-        jdbcTemplate.update("UPDATE targets SET description = ? WHERE id = ?", newDescription, targetId);
+        jdbcTemplate.update("UPDATE targets SET target_description = ? WHERE id = ?", newDescription, targetId);
         return true;
     }
 
     @Override
     public boolean changeTargetDeadline(Long targetId, int newDeadline) {
-        jdbcTemplate.update("UPDATE targets SET deadline = ? WHERE id = ?", newDeadline, targetId);
+        jdbcTemplate.update("UPDATE targets SET target_deadline = ? WHERE id = ?", newDeadline, targetId);
         return true;
     }
 
@@ -66,18 +66,20 @@ public class TargetListJDBCImpl implements TargetDatabase{
 
     @Override
     public List<Target> findByTargetName(String targetName) {
-        return jdbcTemplate.query("SELECT * FROM targets WHERE name = ?", new Object[]{targetName} , new TargetsMapper());
+        return jdbcTemplate.query("SELECT * FROM targets WHERE target_name = ?", new Object[]{targetName} , new TargetsMapper());
     }
 
     @Override
     public List<Target> findByTargetDescription(String targetDescription) {
-        return jdbcTemplate.query("SELECT * FROM targets WHERE description = ?", new Object[]{targetDescription},
+        return jdbcTemplate.query("SELECT * FROM targets WHERE target_description = ?", new Object[]{targetDescription},
                 new TargetsMapper());
     }
 
     private class TargetsMapper implements RowMapper<Target> {
         public Target mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Target target = new Target(rs.getString("name"), rs.getString("description"), rs.getInt("deadline"));
+            Target target = new Target(rs.getString("target_name"),
+                    rs.getString("target_description"),
+                    rs.getInt("target_deadline"));
             target.setId(rs.getLong("id"));
             return target;
         }
