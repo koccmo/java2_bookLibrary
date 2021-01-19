@@ -51,6 +51,8 @@ class JdbcDatabaseImpl implements Database {
 
 	@Override
 	public List<Book> findByTitleAndAuthor(String title, String author) {
-		return null;
+		String sql = "SELECT * FROM books WHERE title = ? AND author = ? ";
+		Object[] args = new Object[] {title, author};
+		return jdbcTemplate.query(sql, args, new BookRowMapper());
 	}
 }
