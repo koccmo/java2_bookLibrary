@@ -1,15 +1,15 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
-public abstract class Action {
-	private static Person loggedInUser;
+public class Action {
+	private static User loggedInUser;
 
-	public void setLoggedInUser (Person loggedInUser) {
+	public void setLoggedInUser (User loggedInUser) {
 		Action.loggedInUser = loggedInUser;
 	}
 
-	public Person getLoggedInUser () {
+	public User getLoggedInUser () {
 		return loggedInUser;
 	}
 }

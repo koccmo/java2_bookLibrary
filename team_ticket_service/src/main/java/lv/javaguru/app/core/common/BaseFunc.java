@@ -1,6 +1,6 @@
 package lv.javaguru.app.core.common;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class BaseFunc {
     }
 
 
-    public static void printHeader(String header, Person user) {
+    public static void printHeader(String header, User user) {
         String userName;
         if (user != null)
             userName = user.getName();

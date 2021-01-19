@@ -1,24 +1,25 @@
-package lv.javaguru.app.console_ui;
+package lv.javaguru.app.console_ui.admin_side;
 
+import lv.javaguru.app.console_ui.Action;
+import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.ShowTicketsRequest;
 import lv.javaguru.app.core.response.ShowTicketResponse;
 import lv.javaguru.app.core.services.ShowReservationsService;
 
-
-public class ShowReservationsAction extends Action implements UIActions {
-
+public class ShowTicketsAction extends Action implements UIActions {
+	//private final ShowTicketsService showTicketsService;
 	private final ShowReservationsService showReservationsService;
 
-	public ShowReservationsAction (ShowReservationsService showReservationsService) {
+	public ShowTicketsAction (ShowReservationsService showReservationsService) {
 		this.showReservationsService = showReservationsService;
 	}
 
 	@Override
 	public void execute () {
-		User currUser = getLoggedInUser();
+		User admin = getLoggedInUser();
 
-		ShowTicketsRequest request = new ShowTicketsRequest(currUser);
+		ShowTicketsRequest request = new ShowTicketsRequest(admin);
 		ShowTicketResponse<?> response = showReservationsService.execute(request);
 
 		if (response.hasErrors()) {
@@ -29,5 +30,6 @@ public class ShowReservationsAction extends Action implements UIActions {
 		}
 
 		response.printResponse();
+
 	}
 }

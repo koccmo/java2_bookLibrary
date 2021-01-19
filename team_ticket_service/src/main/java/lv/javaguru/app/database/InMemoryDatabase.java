@@ -1,106 +1,123 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.PersonType;
-import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InMemoryDatabase implements Database {
 
-	private final Map<Person, List<Ticket>> reservations = new HashMap<>();
+	private final Map<User, List<Ticket>> reservations = new HashMap<>();
 	private static Long nextId = 1L;
-	private Person currentPerson;
-	private Person selectedPerson;
+	private static Long nextPersonId = 1L;
+	private User currentUser;
 
-	public Person getSelectedPerson () {
-		return selectedPerson;
+
+	public User getCurrentPerson () {
+		return currentUser;
 	}
 
-	public void setSelectedPerson (Person selectedPerson) {
-		this.selectedPerson = selectedPerson;
+	public void setCurrentUser (User currentUser) {
+		this.currentUser = currentUser;
 	}
 
-	public Person getCurrentPerson () {
-		return currentPerson;
-	}
 
-	public void setCurrentPerson (Person currentPerson) {
-		this.currentPerson = currentPerson;
+	@Override
+	public User getUserById (Long id) {
+		return reservations.keySet().stream()
+				.filter(person -> person.getId().equals(id))
+				.findFirst()
+				.orElseGet(null);
 	}
 
 	@Override
-	public boolean containsPerson (Person person) {
-		return reservations.containsKey(person);
+	public boolean isContainUserWithId (Long id) {
+		return reservations.keySet().stream()
+				.anyMatch(person -> person.getId().equals(id));
 	}
 
 	@Override
-	public void addTicket (Person person, Ticket ticket) {
-		if (reservations.containsKey(person)) {
-			ticket.setId(nextId++);
-			reservations.get(person).add(ticket);
+	public void addUser (User user) {
+		if (!reservations.containsKey(user)) {
+			//user.setId(nextPersonId++);
+			reservations.put(user, new ArrayList<>());
 		}
 	}
 
-	public Person getPerson (Person person) {
-		return reservations.keySet().stream()
-				.filter(person::equals)
-				.findFirst()
-				.orElse(null);
+
+	@Override
+	public void removeUserById (Long id) {
+		if (isContainUserWithId(id)) {
+			User user = getUserById(id);
+
+			reservations.remove(user);
+		}
 	}
 
 	@Override
-	public Person getPerson (String name, String secondName) {
+	public Optional<User> getUser (User user) {
 		return reservations.keySet().stream()
-				.filter(person -> person.getName().equals(name) && person.getSurname().equals(secondName))
-				.findFirst()
-				.orElse(null);
+				.filter(user1 -> user1.equals(user))
+				.findFirst();
+
+		//	return reservations.keySet().stream()
+		//			.filter(person -> person.equals(user))
+		//			.findFirst()
+		//			.orElse(null);
 	}
 
 	@Override
-	public void addPerson (Person person) {
-		if (!reservations.containsKey(person))
-			reservations.put(person, new ArrayList<>());
+	public List<User> getAllUsers () {
+		return reservations.keySet().stream().map(user -> user).collect(Collectors.toList());
 	}
 
+
+	@Override
+	public void addTicket (User user, Ticket ticket) {
+		if (reservations.containsKey(user)) {
+			ticket.setId(nextId++);
+			reservations.get(user).add(ticket);
+		}
+	}
 
 
 	@Override
 	public void removeTicketById (Long id) {
-		reservations.get(currentPerson).removeIf(ticket -> ticket.getId().equals(id));
+		reservations.get(currentUser).removeIf(ticket -> ticket.getId().equals(id));
 	}
 
 
 	@Override
-	public List<Ticket> getAllTickets (Person user) {
-		if (reservations.containsKey(user) && user.getPersonType() != PersonType.ADMIN)
-			return reservations.get(user);
-		else {
-			return reservations.values().stream()
-					.flatMap(List::stream)
-					.collect(Collectors.toList());
-		}
+	public List<Ticket> getAllUserTickets (User user) {
+		return reservations.get(user);
+	}
+
+	@Override
+	public List<Ticket> getAllTickets () {
+		return reservations.values().stream()
+				.flatMap(List::stream)
+				.collect(Collectors.toList());
 	}
 
 
 	@Override
-	public Ticket getTicketById (Person person, Long id) {
-		return reservations.get(person).stream()
+	public Ticket getTicketById (Long id) {
+		return getAllTickets().stream()
 				.filter(ticket -> ticket.getId().equals(id))
 				.findFirst()
 				.orElse(null);
 	}
 
+	@Override
+	public boolean isUserHaveTicketWithId (Long id) {
+		return reservations.get(currentUser).stream().anyMatch(ticket -> ticket.getId().equals(id));
+	}
+
 
 	@Override
-	public boolean isContainTicketWithId (long id) {
-		return reservations.values().stream()
-				.flatMap(List::stream)
+	public boolean isContainTicketWithId (Long id) {
+		return getAllTickets().stream()
 				.anyMatch(ticket -> ticket.getId().equals(id));
 	}
 }
