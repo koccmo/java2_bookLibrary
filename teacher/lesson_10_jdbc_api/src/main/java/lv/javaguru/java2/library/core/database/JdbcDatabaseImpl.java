@@ -24,7 +24,9 @@ class JdbcDatabaseImpl implements Database {
 
 	@Override
 	public boolean deleteById(Long id) {
-		return false;
+		String sql = "DELETE FROM books WHERE id = ?";
+		Object[] args = new Object[] {id};
+		return jdbcTemplate.update(sql, args) == 1;
 	}
 
 	@Override
