@@ -29,7 +29,7 @@ public class GetAllTargetsUIAction implements UIAction {
     }
 
     private void printTargetList(GetAllTargetsResponse response){
-        System.out.println("Target: ");
+        System.out.println("Targets: ");
         for (Target target : response.getTargetList()){
             System.out.println(target.getId() + ". " +
                     target.getName() + " [" + target.getDescription() + "] " +

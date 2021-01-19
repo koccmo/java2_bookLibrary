@@ -1,11 +1,10 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.core.domain.User;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.request.ShowTicketsRequest;
 import lv.javaguru.app.core.response.CodeError;
-import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.core.response.ShowTicketResponse;
 import lv.javaguru.app.database.Database;
 
@@ -20,25 +19,23 @@ public class ShowReservationsService {
 		this.database = database;
 	}
 
+
 	public ShowTicketResponse<?> execute (ShowTicketsRequest request) {
-		List<CodeError> errors = validate(request.getCurrUser());
+		List<?> responseList = validate(request.getCurrUser());
 
+		if (!responseList.isEmpty()) {
+			return new ShowTicketResponse<>(responseList);
+		}
+		else if (database.getCurrentPerson() == request.getCurrUser() && request.getCurrUser().getPersonType() != PersonType.ADMIN)
+			responseList = database.getAllUserTickets(request.getCurrUser());
+		else {
+			responseList = database.getAllTickets();
+		}
 
-		if (!errors.isEmpty())
-			return new ShowTicketResponse<>(errors);
-
-		else
-			return new ShowTicketResponse<>(database.getAllTickets(request.getCurrUser()));
-
+		return new ShowTicketResponse<>(responseList);
 	}
 
-	private List<CodeError> validate (Person user) {
-
-		//if (database.containsPerson(user) && user.getName().equals("Mike"))
+	private List<CodeError> validate (User user) {
 		return new ArrayList<>();
-		//else
-		//	return new ArrayList<>() {{
-		//		add(new CodeError("", "fuck"));
-		//	}};
 	}
 }

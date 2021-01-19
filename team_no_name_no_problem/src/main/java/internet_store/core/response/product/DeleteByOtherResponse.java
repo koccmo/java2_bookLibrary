@@ -8,10 +8,10 @@ import java.util.List;
 
 public class DeleteByOtherResponse extends CoreResponse {
 
-    List<Product> products;
+    private List<Product> products;
 
-    public DeleteByOtherResponse(List<CoreError> errors) {
-        super(errors);
+    public DeleteByOtherResponse(List<Product> products) {
+        this.products = products;
     }
 
     public DeleteByOtherResponse(List<CoreError> errors, List<Product> products) {
@@ -21,5 +21,4 @@ public class DeleteByOtherResponse extends CoreResponse {
     public List<Product> getProducts(){
         return products;
     }
-
 }

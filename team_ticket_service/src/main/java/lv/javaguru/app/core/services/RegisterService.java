@@ -25,7 +25,7 @@ public class RegisterService {
             return new RegistrationResponse(errors);
 
         request.getPerson().setPersonType(PersonType.CLIENT);
-        database.addPerson(request.getPerson());
+        database.addUser(request.getPerson());
 
         return new RegistrationResponse();
     }

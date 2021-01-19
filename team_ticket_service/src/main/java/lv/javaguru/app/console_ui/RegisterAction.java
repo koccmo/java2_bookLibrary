@@ -1,6 +1,6 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.RegistrationRequest;
 import lv.javaguru.app.core.response.RegistrationResponse;
 import lv.javaguru.app.core.services.RegisterService;
@@ -17,7 +17,7 @@ public class RegisterAction implements UIActions {
     @Override
     public void execute() {
         System.out.println("REGISTRATION:" + lineSeparator());
-        Person newUser = fillPerson();
+        User newUser = fillPerson();
 
         RegistrationRequest request = new RegistrationRequest(newUser);
         RegistrationResponse response = registerService.execute(request);
@@ -28,7 +28,7 @@ public class RegisterAction implements UIActions {
             System.out.println("Hooray! You have been registered");
     }
 
-    private Person fillPerson() {
+    private User fillPerson() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter name: ");
@@ -37,7 +37,7 @@ public class RegisterAction implements UIActions {
         System.out.println("Enter surname: ");
         String surname = scanner.nextLine();
 
-        return new Person(name, surname);
+        return new User(name, surname);
     }
 
 

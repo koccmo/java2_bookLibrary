@@ -2,7 +2,7 @@ package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.services.AddTicketService;
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddTicketRequest;
 import lv.javaguru.app.core.response.AddTicketResponse;
@@ -19,14 +19,49 @@ public class AddReservationAction extends Action implements UIActions {
 		this.addTicketService = addTicketService;
 	}
 
+	private static final Map<String, List<String>> cityOrigin = new HashMap<>() {{
+		put("Latvia", new ArrayList<>() {{
+			add("Riga");
+		}});
+		put("Lithuania", new ArrayList<>() {{
+			add("Kaunas");
+			add("Palanga");
+			add("Vilnius");
+		}});
+	}};
+
+	private static final Map<Integer, String> countryOrigin = new HashMap<>() {{
+		put(1, "Latvia");
+		put(2, "Lithuania");
+	}};
+
+	private static final Map<String, List<String>> destinationCity = new HashMap<>() {{
+		put("Malta", new ArrayList<>() {{
+			add("Malta");
+		}});
+		put("Cyprus", new ArrayList<>() {{
+			add("Paphos");
+		}});
+	}};
+
+	private static final Map<Integer, String> destinationCountry = new HashMap<>() {{
+		put(1, "Cyprus");
+		put(2, "Malta");
+	}};
+
 
 	@Override
 	public void execute () {
-		Ticket ticket = fillTicket();
-		if (ticket == null)
+		Ticket ticket = new Ticket();
+		fillTicket(ticket);
+
+		if (ticket.isCanceled())
 			return;
 
-		Person currUser = getLoggedInUser();
+		if (ticket.isFinished())
+			System.out.println(ticket.toString());
+
+		User currUser = getLoggedInUser();
 
 		AddTicketRequest request = new AddTicketRequest(currUser, ticket);
 		AddTicketResponse response = addTicketService.execute(request);
@@ -53,88 +88,32 @@ public class AddReservationAction extends Action implements UIActions {
 	}
 
 
-	private Ticket fillTicket () {
+	private void fillTicket (Ticket ticket) {
 		Scanner scanner = new Scanner(System.in);
 
-		try {
-			String originCountry = selectOriginCountry();
-			String originCity = selectOriginCity(originCountry);
+		acquireOriginCountryAndCity(ticket);
+		if (ticket.isCanceled())
+			return;
+		acquireDestinationCountryAndCity(ticket);
 
-			String destinationCountry = selectDestinationCountry();
-			String destinationCity = selectDestinationCity(destinationCountry);
+		if (ticket.isCanceled())
+			return;
 
+		System.out.println("Enter departure date (format: dd-MM-yyyy):");
+		String departureDate = scanner.nextLine();
+		departureDate = departureDate.trim();
+		ticket.setDepartDate(departureDate);
 
-			System.out.println("Enter departure date (format: dd-MM-yyyy):");
-			String departureDate = scanner.nextLine();
-			departureDate = departureDate.trim();
+		System.out.println("Enter return date (format: dd-MM-yyyy):");
+		String returnDate = scanner.nextLine();
+		returnDate = returnDate.trim();
+		ticket.setReturnDate(returnDate);
 
-			System.out.println("Enter return date (format: dd-MM-yyyy):");
-			String returnDate = scanner.nextLine();
-			returnDate = returnDate.trim();
+		System.out.println("Enter seat: ");
+		String seat = scanner.nextLine();
+		seat = seat.trim();
+		ticket.setSeat(seat);
 
-			System.out.println("Enter seat: ");
-			String seat = scanner.nextLine();
-			seat = seat.trim();
-
-			return new Ticket(originCity, destinationCity, departureDate, returnDate, seat);
-
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-
-	private String selectOriginCountry () throws Exception {
-		Map<Integer, String> originCountry = new HashMap<>() {{
-			put(0, "Back");
-			put(1, "Latvia");
-		}};
-
-		return getSelection("Select origin country:", originCountry);
-	}
-
-
-	private String selectOriginCity (String originCountry) throws Exception {
-		Map<String, List<String>> countryCities = new HashMap<>() {{
-			put("Latvia", new ArrayList<>() {{
-				add("Riga");
-			}});
-		}};
-
-		List<String> cities = countryCities.get(originCountry);
-		Map<Integer, String> citiesToSelect = listToMapConverter(cities);
-
-		return getSelection("Select origin city:", citiesToSelect);
-	}
-
-
-	private String selectDestinationCountry () throws Exception {
-		Map<Integer, String> destinationCountry = new HashMap<>() {{
-			put(0, "Back");
-			put(1, "Cyprus");
-		}};
-
-		String selection = getSelection("Select destination country:", destinationCountry);
-
-		if (selection.equals("Back"))
-			throw new Exception("Exiting...");
-
-		return selection;
-
-	}
-
-
-	private String selectDestinationCity (String destinationCountry) throws Exception {
-		Map<String, List<String>> destination = new HashMap<>() {{
-			put("Cyprus", new ArrayList<>() {{
-				add("Paphos");
-			}});
-		}};
-
-		List<String> destinationCities = destination.get(destinationCountry);
-		Map<Integer, String> citiesToSelect = listToMapConverter(destinationCities);
-
-		return getSelection("Select destination city:", citiesToSelect);
 	}
 
 
@@ -153,17 +132,6 @@ public class AddReservationAction extends Action implements UIActions {
 		return map;
 	}
 
-
-	private void printMap (Map<Integer, String> map) {
-		if (map == null)
-			return;
-
-		for (Map.Entry<Integer, String> entry : map.entrySet()) {
-			System.out.println("[" + entry.getKey() + "] " + entry.getValue());
-		}
-	}
-
-
 	private String getSelection (String message, Map<Integer, String> map) throws Exception {
 		while (true) {
 			System.out.println(message);
@@ -176,6 +144,157 @@ public class AddReservationAction extends Action implements UIActions {
 			if (map.get(menuNumber) != null)
 				return map.get(menuNumber);
 		}
+	}
+
+
+	private static String getUserInput () {
+		Scanner scanner = new Scanner(System.in);
+
+		return scanner.nextLine();
+	}
+
+	private static void acquireDestinationCountryAndCity (Ticket ticket) {
+		String input;
+
+		ticket.setFinished(false);
+		ticket.setCanceled(false);
+
+		while (!ticket.isCanceled() && !ticket.isFinished()) {
+			System.out.println("Select destination country:");
+			BaseFunc.printLineSeparator();
+
+			printMap(destinationCountry);
+
+			input = getUserInput();
+
+			if (isInputValid(input)) {
+				if (input.equalsIgnoreCase("0"))
+					break;
+
+				else if (input.equalsIgnoreCase("X"))
+					ticket.setCanceled(true);
+
+				else if (destinationCountry.get(Integer.valueOf(input)) != null) {
+					String country = destinationCountry.get(Integer.valueOf(input));
+					ticket.setDestinationCountry(country);
+
+					acquireDestinationCity(ticket);
+				}
+			}
+		}
+		BaseFunc.printLineSeparator();
+	}
+
+	private static void acquireDestinationCity (Ticket ticket) {
+		List<String> cities = destinationCity.get(ticket.getDestinationCountry());
+
+		String newInput;
+
+		while (true) {
+			printList(cities);
+
+			newInput = getUserInput();
+
+			if (isInputValid(newInput)) {
+				if (newInput.equalsIgnoreCase("0")) {
+					return;
+				}
+				else if (newInput.equalsIgnoreCase("X")) {
+					ticket.setCanceled(true);
+					return;
+				}
+				else {
+					try {
+						int i = Integer.parseInt(newInput) - 1;
+						ticket.setDestinationCity(cities.get(i));
+						ticket.setFinished(true);
+						return;
+					} catch (Exception ignore) {
+					}
+				}
+			}
+		}
+	}
+
+	private static void acquireOriginCountryAndCity (Ticket ticket) {
+		String input;
+
+		ticket.setFinished(false);
+		ticket.setCanceled(false);
+
+		while (!ticket.isCanceled() && !ticket.isFinished()) {
+			printMap(countryOrigin);
+
+			input = getUserInput();
+
+			if (isInputValid(input)) {
+				if (input.equalsIgnoreCase("0"))
+					break;
+
+				else if (input.equalsIgnoreCase("X"))
+					ticket.setCanceled(true);
+
+				else if (countryOrigin.get(Integer.valueOf(input)) != null) {
+					String country = countryOrigin.get(Integer.valueOf(input));
+					ticket.setOriginCountry(country);
+
+					acquireOriginCity(ticket);
+				}
+			}
+		}
+		BaseFunc.printLineSeparator();
+	}
+
+	private static void acquireOriginCity (Ticket ticket) {
+		List<String> cities = cityOrigin.get(ticket.getOriginCountry());
+
+		String newInput;
+
+		while (true) {
+			printList(cities);
+
+			newInput = getUserInput();
+
+			if (isInputValid(newInput)) {
+				if (newInput.equalsIgnoreCase("0")) {
+					return;
+				}
+				else if (newInput.equalsIgnoreCase("X")) {
+					ticket.setCanceled(true);
+					return;
+				}
+				else {
+					try {
+						int i = Integer.parseInt(newInput) - 1;
+						ticket.setOriginCity(cities.get(i));
+						ticket.setFinished(true);
+						return;
+					} catch (Exception ignore) {
+					}
+				}
+			}
+		}
+	}
+
+
+	private static boolean isInputValid (String input) {
+		return !input.isEmpty() && input.matches("(?i)[<x]{1}|^\\d{1,2}$");
+	}
+
+	private static void printList (List<String> list) {
+		for (int i = 1; i <= list.size(); i++)
+			System.out.println("[" + i + "] " + list.get(i - 1));
+		System.out.println("[0] Back");
+		System.out.println("\n[X] Cancel");
+	}
+
+	private static void printMap (Map<Integer, String> map) {
+		if (map.size() == 0)
+			return;
+
+		for (int i = 1; i <= map.size(); i++)
+			System.out.println("[" + i + "] " + map.get(i));
+		System.out.println("\n[X] Cancel");
 	}
 }
 

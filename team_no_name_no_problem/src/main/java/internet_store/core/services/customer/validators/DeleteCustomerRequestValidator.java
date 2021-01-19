@@ -12,7 +12,7 @@ import java.util.List;
     public List<CoreError> validate (DeleteCustomerRequest deleteCustomerRequest){
         List<CoreError> errors = new ArrayList<>();
 
-        if (deleteCustomerRequest.getId() < 1){
+        if ((deleteCustomerRequest.getId() < 1) || (deleteCustomerRequest.getId() == null)){
             errors.add(new CoreError("id", "Not valid input for id"));
         }
         return errors;

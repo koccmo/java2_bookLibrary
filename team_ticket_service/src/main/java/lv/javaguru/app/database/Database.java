@@ -1,36 +1,41 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 public interface Database {
-    // void register(Person person);
-    Person getCurrentPerson();
+	User getCurrentPerson ();
 
-    //void addReservation(Person person , Reservation reservation);
-    Person getPerson(Person person);
-    Person getPerson(String name, String secondName);
+	void setCurrentUser (User currentUser);
 
-    void setCurrentPerson(Person currentPerson);
 
-    boolean containsPerson(Person person);
+	void addUser (User user);
 
-    void addPerson(Person person);
+	void removeUserById (Long id);
 
-    void addTicket(Person person, Ticket ticket);
+	Optional<User> getUser (User user);
 
-    //void removeByPerson(Person person);
+	List<User> getAllUsers ();
 
-    void removeTicketById(Long id);
+	User getUserById (Long id);
 
-    List<Ticket> getAllTickets(Person user);
+	boolean isContainUserWithId (Long id);
 
-    boolean isContainTicketWithId(long id);
 
-    Ticket getTicketById(Person person, Long id);
+	void addTicket (User user, Ticket ticket);
 
+	void removeTicketById (Long id);
+
+	List<Ticket> getAllUserTickets (User user);
+
+	List<Ticket> getAllTickets ();
+
+	Ticket getTicketById (Long id);
+
+	boolean isUserHaveTicketWithId (Long id);
+
+	boolean isContainTicketWithId (Long id);
 }

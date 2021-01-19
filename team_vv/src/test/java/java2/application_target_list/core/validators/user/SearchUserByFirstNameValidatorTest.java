@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.UserDatabase;
-import java2.application_target_list.core.database.UserListImpl;
+import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserListImpl;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;

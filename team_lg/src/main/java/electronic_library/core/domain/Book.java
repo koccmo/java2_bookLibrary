@@ -18,7 +18,10 @@ public class Book {
         this.yearOfBookIssue = yearOfBookIssue;
     }
 
-     public String getBookTitle() {
+    public Book() {
+    }
+
+    public String getBookTitle() {
         return bookTitle;
     }
 
@@ -67,7 +70,7 @@ public class Book {
                 Objects.equals(bookAuthor, book.bookAuthor) &&
                 Objects.equals(id, book.id) &&
                 Objects.equals(bookPrice, book.bookPrice) &&
-                Objects.equals(yearOfBookIssue,book.yearOfBookIssue);
+                Objects.equals(yearOfBookIssue, book.yearOfBookIssue);
     }
 
     @Override
@@ -77,7 +80,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book Id="+id+" {" +
+        return "Book Id=" + id + " {" +
                 "bookTitle='" + bookTitle + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
                 ", bookPrice=" + bookPrice + '\'' +

@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS clients (
 
 CREATE TABLE IF NOT EXISTS orders (
 	id bigint PRIMARY KEY AUTO_INCREMENT,
-    order_details_id bigint NOT NULL,
     client_id bigint NOT NULL,
     orderDate DATETIME NOT NULL,
     orderStatus varchar(30) NOT NULL,
@@ -44,7 +43,6 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 CREATE TABLE IF NOT EXISTS order_details (
-	id bigint PRIMARY KEY AUTO_INCREMENT,
     order_id bigint NOT NULL,
     product_id bigint NOT NULL,
     amount int NOT NULL,
@@ -52,3 +50,6 @@ CREATE TABLE IF NOT EXISTS order_details (
     FOREIGN KEY (product_id) references products(id),
     FOREIGN KEY (order_id) references orders(id)
 );
+
+ALTER TABLE products
+ADD COLUMN image LONGBLOB;

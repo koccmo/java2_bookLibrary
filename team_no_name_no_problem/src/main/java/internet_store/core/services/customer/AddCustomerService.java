@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component public class AddCustomerService {
+@Component
+public class AddCustomerService {
 
     @Autowired private CustomerDatabase customerDatabase;
     @Autowired private AddCustomerRequestValidator addCustomerRequestValidator;

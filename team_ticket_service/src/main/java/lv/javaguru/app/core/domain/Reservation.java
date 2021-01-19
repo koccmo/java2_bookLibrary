@@ -1,7 +1,7 @@
 package lv.javaguru.app.core.domain;
 
 public class Reservation {
-    private Person person;
+    private User user;
     private Ticket ticket;
     private Long id;
 
@@ -9,8 +9,8 @@ public class Reservation {
   //      this.ticket = ticket;
   //  }
 
-    public Reservation(Person person, Ticket ticket) {
-        this.person = person;
+    public Reservation(User user, Ticket ticket) {
+        this.user = user;
         this.ticket = ticket;
     }
 
@@ -22,12 +22,12 @@ public class Reservation {
         this.id = id;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getPerson() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(User user) {
+        this.user = user;
     }
 
     public Ticket getTicket() {

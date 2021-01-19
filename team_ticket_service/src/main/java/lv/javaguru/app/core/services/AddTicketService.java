@@ -10,23 +10,23 @@ import java.util.List;
 
 public class AddTicketService {
 
-    private final Database database;
-    private final AddTicketRequestValidator validator;
+	private final Database database;
+	private final AddTicketRequestValidator validator;
 
-    public AddTicketService (Database database, AddTicketRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+	public AddTicketService (Database database, AddTicketRequestValidator validator) {
+		this.database = database;
+		this.validator = validator;
+	}
 
 
-    public AddTicketResponse execute(AddTicketRequest request) {
-        List<CodeError> errors = validator.validate(request);
+	public AddTicketResponse execute (AddTicketRequest request) {
+		List<CodeError> errors = validator.validate(request);
 
-        if (!errors.isEmpty())
-            return new AddTicketResponse(errors);
+		if (!errors.isEmpty())
+			return new AddTicketResponse(errors);
 
-        database.addTicket(request.getCurrUser(), request.getTicket());
+		database.addTicket(request.getCurrUser(), request.getTicket());
 
-        return new AddTicketResponse();
-    }
+		return new AddTicketResponse();
+	}
 }

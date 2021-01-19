@@ -1,9 +1,7 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.core.domain.Person;
 import lv.javaguru.app.core.request.LogOutRequest;
 import lv.javaguru.app.core.response.CodeError;
-import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.database.Database;
 
@@ -28,7 +26,7 @@ public class LogOutService {
 			return new LogOutResponse(errors);
 
 		else {
-			database.setCurrentPerson(null);
+			database.setCurrentUser(null);
 
 			return new LogOutResponse(null, "Successfully! Logged out!");
 		}

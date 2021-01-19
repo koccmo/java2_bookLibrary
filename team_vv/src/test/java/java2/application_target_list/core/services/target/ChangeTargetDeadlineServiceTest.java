@@ -1,11 +1,10 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetDatabase;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
 import java2.application_target_list.core.responses.CoreError;
-import java2.application_target_list.core.services.target.ChangeTargetDeadlineService;
 import java2.application_target_list.core.validators.target.ChangeTargetDeadlineValidator;
 import junit.framework.TestCase;
 import org.junit.Before;

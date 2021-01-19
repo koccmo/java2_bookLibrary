@@ -1,11 +1,10 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.requests.target.ChangeTargetDescriptionRequest;
-import java2.application_target_list.core.database.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetDatabase;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.responses.target.ChangeTargetDescriptionResponse;
 import java2.application_target_list.core.responses.CoreError;
-import java2.application_target_list.core.services.target.ChangeTargetDescriptionService;
 import java2.application_target_list.core.validators.target.ChangeTargetDescriptionValidator;
 import junit.framework.TestCase;
 import org.junit.Before;
