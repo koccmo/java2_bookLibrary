@@ -1,5 +1,6 @@
 package dental_clinic.core.services.planned_visit;
 
+import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
 import dental_clinic.core.requests.patient.AddPatientRequest;
@@ -8,6 +9,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
+import dental_clinic.database.in_memory.doctor.DoctorDatabase;
 import dental_clinic.database.in_memory.patient.PatientDatabase;
 import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,8 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.time.LocalTime;
+import java.util.*;
 
 @Component
 public class AddPlannedVisitService {
@@ -31,15 +31,12 @@ public class AddPlannedVisitService {
     private PatientDatabase patientDatabase;
     @Autowired
     private AddPatientService addPatientService;
+    @Autowired
+    private DoctorDatabase doctorDatabase;
 
     public AddPlannedVisitResponse execute (AddPlannedVisitRequest addPlannedVisitRequest) {
 
-        if (!addPlannedVisitRequest.getIsNewPatient()) {
-            addPlannedVisitRequest = fillPersonalData(addPlannedVisitRequest);
-        } else {
-            AddPatientRequest addPatientRequest = new AddPatientRequest(addPlannedVisitRequest.getPersonalData());
-            addPatientService.execute(addPatientRequest);
-        }
+        addPlannedVisitRequest = getAddPlannedVisitRequest(addPlannedVisitRequest);
 
         List<CoreError> errorList = addPlannedVisitRequestValidator.validate(addPlannedVisitRequest);
         if (!errorList.isEmpty()) {
@@ -52,15 +49,57 @@ public class AddPlannedVisitService {
             return new AddPlannedVisitResponse(errorList);
         }
 
-        PlannedVisit plannedVisit = new PlannedVisit(visitDate, addPlannedVisitRequest.getPersonalData());
+        if (!doctorDatabase.containsId(addPlannedVisitRequest.getId())) {
+            errorList.add(new CoreError("database", "Database doesn't contain doctor with id " +
+                    addPlannedVisitRequest.getId()));
+            return new AddPlannedVisitResponse(errorList);
+        }
 
-        if (plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTime(plannedVisit)) {
+        Doctor doctor = doctorDatabase.getDoctorById(addPlannedVisitRequest.getId()).get();
+
+        PlannedVisit plannedVisit = new PlannedVisit(visitDate, addPlannedVisitRequest.getPersonalData(), doctor);
+
+        if (doctorDoesNotWorksInThisTime(plannedVisit, addPlannedVisitRequest)) {
+            errorList.add(new CoreError("work graphic", "Doctor doesn't work at this time"));
+            return new AddPlannedVisitResponse(errorList);
+        }
+
+        if (plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTimeTheSameDoctor(plannedVisit)) {
             errorList.add(new CoreError("database", "Not empty time"));
             return new AddPlannedVisitResponse(errorList);
         }
 
         plannedVisitsInMemoryDatabase.addPlannedVisit(plannedVisit);
         return new AddPlannedVisitResponse(plannedVisit);
+    }
+
+    private AddPlannedVisitRequest getAddPlannedVisitRequest(AddPlannedVisitRequest addPlannedVisitRequest) {
+        if (!addPlannedVisitRequest.getIsNewPatient()) {
+            addPlannedVisitRequest = fillPersonalData(addPlannedVisitRequest);
+        } else {
+            AddPatientRequest addPatientRequest = new AddPatientRequest(addPlannedVisitRequest.getPersonalData());
+            addPatientService.execute(addPatientRequest);
+        }
+        return addPlannedVisitRequest;
+    }
+
+    private boolean doctorDoesNotWorksInThisTime (PlannedVisit plannedVisit, AddPlannedVisitRequest addPlannedVisitRequest) {
+        Integer day = plannedVisit.getVisitTime().get(Calendar.DAY_OF_WEEK);
+        int index = (day == 6) ? 1 : day-2;
+        if (doctorDoesNotWorkThisDay(plannedVisit, index)) {
+            return true;
+        }
+        LocalTime timeFrom = LocalTime.parse(plannedVisit.getDoctor().getWorkGraphic().getTimesStart()[index]);
+        LocalTime timeTo = LocalTime.parse(plannedVisit.getDoctor().getWorkGraphic().getTimesEnd()[index]);
+        LocalTime visitTime = LocalTime.parse(addPlannedVisitRequest.getVisitDataText().split(" ")[1]);
+        return !((visitTime.isAfter(timeFrom) && visitTime.isBefore(timeTo)));
+    }
+
+    private boolean doctorDoesNotWorkThisDay (PlannedVisit plannedVisit, int index) {
+        return ((plannedVisit.getDoctor().getWorkGraphic().getTimesStart()[index] == null ||
+                plannedVisit.getDoctor().getWorkGraphic().getTimesStart()[index].isEmpty())
+                || (plannedVisit.getDoctor().getWorkGraphic().getTimesEnd()[index] == null ||
+                plannedVisit.getDoctor().getWorkGraphic().getTimesEnd()[index].isEmpty()));
     }
 
     private GregorianCalendar getVisitDate (String visitDateText) {
@@ -87,6 +126,6 @@ public class AddPlannedVisitService {
 
     private AddPlannedVisitRequest fillPersonalData (AddPlannedVisitRequest addPlannedVisitRequest1) {
         PersonalData personalData = patientDatabase.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get(0).getPersonalData();
-        return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData);
+        return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData, addPlannedVisitRequest1.getId());
     }
 }

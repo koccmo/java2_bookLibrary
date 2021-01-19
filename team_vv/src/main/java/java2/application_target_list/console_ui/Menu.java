@@ -2,6 +2,7 @@ package java2.application_target_list.console_ui;
 
 import java2.application_target_list.console_ui.actions.*;
 import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.console_ui.actions.board.*;
 import java2.application_target_list.console_ui.actions.target.*;
 import java2.application_target_list.console_ui.actions.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,24 @@ public class Menu {
                 executeSelectedMenuItem(11);
             }
 
+            if(needToPrintRecordList(selectedMenuNumberToUIAction)){
+                executeSelectedMenuItem(21);
+            }
+
             executeSelectedMenuItem(selectedMenuNumberToUIAction);
         }
     }
 
     private boolean needToPrintTargetsList(int selectedMenuNumber){
-        return selectedMenuNumber > 2 && selectedMenuNumber < 7;
+        return (selectedMenuNumber > 2 && selectedMenuNumber < 7) || selectedMenuNumber == 22;
     }
 
     private boolean needToPrintUsersList(int selectedMenuNumber){
-        return selectedMenuNumber > 12 && selectedMenuNumber < 16;
+        return (selectedMenuNumber > 12 && selectedMenuNumber < 16) || selectedMenuNumber == 22;
+    }
+
+    private boolean needToPrintRecordList(int selectedMenuNumber){
+        return selectedMenuNumber > 22 && selectedMenuNumber < 25;
     }
 
     private Map<Integer, UIAction> createMenuUIActionsMap(List<UIAction> uiActions){
@@ -70,6 +79,11 @@ public class Menu {
         menuUIActionsMap.put(15, findUIAction(uiActions, ChangeUserLastNameUIAction.class));
         menuUIActionsMap.put(16, findUIAction(uiActions, SearchUserByFirstNameUIAction.class));
         menuUIActionsMap.put(17, findUIAction(uiActions, SearchUserByLastNameUIAction.class));
+        menuUIActionsMap.put(21, findUIAction(uiActions, GetAllRecordsUIActions.class));
+        menuUIActionsMap.put(22, findUIAction(uiActions, AddRecordUIAction.class));
+        menuUIActionsMap.put(23, findUIAction(uiActions, DeleteRecordUIAction.class));
+        menuUIActionsMap.put(24, findUIAction(uiActions, SetRecordCompleteDateUIAction.class));
+        menuUIActionsMap.put(25, findUIAction(uiActions, GetFullInfoAboutRecordsUIAction.class));
         menuUIActionsMap.put(0, findUIAction(uiActions, ExitUIAction.class));
         return menuUIActionsMap;
     }

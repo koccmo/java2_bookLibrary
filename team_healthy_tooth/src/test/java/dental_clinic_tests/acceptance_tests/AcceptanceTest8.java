@@ -28,9 +28,9 @@ public class AcceptanceTest8 {
         PersonalData personalData1 = new PersonalData("Name", "Surname", "12345678", "25024512348");
         PersonalData personalData2 = new PersonalData("NameM", "SurnameM", "12345675", "25024512345");
 
-        AddPlannedVisitRequest addPlannedVisitRequest1 = new AddPlannedVisitRequest(true, "25-08-2021 15:30", personalData1);
-        AddPlannedVisitRequest addPlannedVisitRequest2 = new AddPlannedVisitRequest(true,"25-09-2021 15:30", personalData2);
-        AddPlannedVisitRequest addPlannedVisitRequest3 = new AddPlannedVisitRequest(false,"25-08-2021 15:30", personalData2);
+        AddPlannedVisitRequest addPlannedVisitRequest1 = new AddPlannedVisitRequest(true, "25-08-2021 14:30", personalData1, 1L);
+        AddPlannedVisitRequest addPlannedVisitRequest2 = new AddPlannedVisitRequest(true,"25-09-2021 15:30", personalData2, 1L);
+        AddPlannedVisitRequest addPlannedVisitRequest3 = new AddPlannedVisitRequest(false,"25-08-2021 14:30", personalData2, 1L);
 
         addPlannedVisitService().execute(addPlannedVisitRequest1);
         addPlannedVisitService().execute(addPlannedVisitRequest2);
@@ -38,7 +38,7 @@ public class AcceptanceTest8 {
 
         GetPlannedVisitsRequest getPlannedVisitsRequest = new GetPlannedVisitsRequest();
         GetPlannedVisitsResponse getPlannedVisitsResponse = getPlannedVisitsService().execute(getPlannedVisitsRequest);
-
+System.out.println();
         assertTrue(getPlannedVisitsResponse.getPlannedVisits().size() == 2);
     }
 

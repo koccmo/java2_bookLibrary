@@ -16,13 +16,12 @@ import static org.junit.Assert.assertNull;
 
 public class GetAllTargetsListAcceptanceTests {
 
-    private ApplicationContext applicationContext;
     private AddTargetService addTargetService;
     private GetAllTargetsService getAllTargetsService;
 
     @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
         addTargetService = applicationContext.getBean(AddTargetService.class);
         getAllTargetsService = applicationContext.getBean(GetAllTargetsService.class);
     }

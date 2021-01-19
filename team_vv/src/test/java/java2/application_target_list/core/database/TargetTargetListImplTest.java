@@ -1,5 +1,7 @@
 package java2.application_target_list.core.database;
 
+import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetListImpl;
 import java2.application_target_list.core.domain.Target;
 import java.util.List;
 import java.util.Optional;

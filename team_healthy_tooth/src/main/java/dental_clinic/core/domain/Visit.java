@@ -7,13 +7,15 @@ import java.util.Optional;
 
 public class Visit {
 
+    private Long patientsId;
     private Integer toothNumber;
     private Optional<String> comment;
     ToothStatus toothStatus;
     private Doctor doctor;
     private Date date;
 
-    public Visit (Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, Doctor doctor, Date date){
+    public Visit (Long id, Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, Doctor doctor, Date date){
+        this.patientsId = id;
         this.toothNumber = toothNumber;
         this.comment = comment;
         this.toothStatus = toothStatus;
@@ -62,7 +64,8 @@ public class Visit {
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         return "\nVisit: " +
-                " Tooth number: " + toothNumber +
+                "Patient's id: " + patientsId +
+                ", Tooth number: " + toothNumber +
                 ", Comment: " + comment +
                 ", Tooth status: " + toothStatus +
                 ", Dr." + doctor.getSurname() +

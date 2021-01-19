@@ -9,10 +9,12 @@ public class PlannedVisit {
     private Long id;
     private GregorianCalendar visitTime;
     private PersonalData personalData;
+    private Doctor doctor;
 
-    public PlannedVisit(GregorianCalendar visitTime, PersonalData personalData) {
+    public PlannedVisit(GregorianCalendar visitTime, PersonalData personalData, Doctor doctor) {
         this.visitTime = visitTime;
         this.personalData = personalData;
+        this.doctor = doctor;
     }
 
     public void setId(Long id) {
@@ -35,6 +37,10 @@ public class PlannedVisit {
         return personalData;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,13 +51,14 @@ public class PlannedVisit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitTime, personalData);
+        return Objects.hash(visitTime, personalData, doctor);
     }
 
     @Override
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY HH:mm");
         return  "Planned visit:\n" + simpleDateFormat.format(visitTime.getTime()) + " "
-                + personalData.getName() + " " + personalData.getSurname();
+                + personalData.getName() + " " + personalData.getSurname() + "\n"
+                + "Dr." + doctor.getSurname();
     }
 }

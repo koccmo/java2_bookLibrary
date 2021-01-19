@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.user;
 
 
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class DeleteUserValidator {
             errors.add(new CoreError("User ID;","no user with that ID"));
         }
 
-        if (isuserIdEmpty(request)){
+        if (isUserIdEmpty(request)){
             errors.add(new CoreError("User ID","must not be empty!"));
         }
         if (isUserIdNegative(request)){
@@ -30,8 +30,7 @@ public class DeleteUserValidator {
         return errors;
     }
 
-
-    private boolean isuserIdEmpty(DeleteUserRequest request) {
+    private boolean isUserIdEmpty(DeleteUserRequest request) {
         return request.getUserIdToDelete() == null;
     }
 

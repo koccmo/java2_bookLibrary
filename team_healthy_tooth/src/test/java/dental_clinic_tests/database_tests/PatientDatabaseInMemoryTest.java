@@ -87,7 +87,7 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testAddVisitJowlData(){
-        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
+        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         List <ToothStatus> expectedList = new ArrayList<>();
@@ -98,7 +98,7 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testAddVisitVisitData(){
-        Visit newVisit = new Visit(11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
+        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         assertTrue(patientDatabase.getPatients().get(0).getVisits().size() == 1);

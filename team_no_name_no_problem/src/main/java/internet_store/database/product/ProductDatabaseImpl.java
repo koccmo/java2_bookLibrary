@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class ProductDatabaseImpl implements ProductDatabase{
 
     private Long id= 1L;

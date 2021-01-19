@@ -1,14 +1,12 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.UserDatabase;
+import java2.application_target_list.core.database.user.UserDatabase;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.requests.user.SearchUsersByLastNameRequest;
 import java2.application_target_list.core.responses.CoreError;
-import java2.application_target_list.core.responses.user.SearchUserByFirstNameResponse;
 import java2.application_target_list.core.responses.user.SearchUserByLastNameResponse;
-import java2.application_target_list.core.validators.user.SearchUserByFirstNameValidator;
 import java2.application_target_list.core.validators.user.SearchUserByLastNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

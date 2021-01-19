@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetDatabase;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

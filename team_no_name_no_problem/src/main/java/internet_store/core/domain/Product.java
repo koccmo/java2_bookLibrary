@@ -1,25 +1,13 @@
 package internet_store.core.domain;
 
-//import javax.persistence.*;
 import java.util.Objects;
 
 
-//@Entity
-//@Table(name="products")
 public class Product {
 
- //   @Id
-   // @Column(name ="id")
-   // @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-   // @Column(name ="title", nullable = false)
     private String title;
-
-  //  @Column(name ="description", nullable = false)
     private String description;
-
-   // @Column(name ="price", nullable = false)
     private int price;
 
     public Product (String title, String description, int price){

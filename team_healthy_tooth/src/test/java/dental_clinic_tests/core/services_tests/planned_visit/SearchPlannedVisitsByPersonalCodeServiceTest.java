@@ -1,5 +1,6 @@
 package dental_clinic_tests.core.services_tests.planned_visit;
 
+import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
 import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByPersonalCodeRequest;
@@ -74,7 +75,8 @@ public class SearchPlannedVisitsByPersonalCodeServiceTest {
 
         PersonalData validPersonalData = new PersonalData("Name", "Surname", "12345678", "01012547896");
         GregorianCalendar gregorianCalendar = new GregorianCalendar(2021, Calendar.MAY, 03, 15, 30);
-        PlannedVisit plannedVisit = new PlannedVisit(gregorianCalendar, validPersonalData);
+        Doctor doctor = new Doctor("Doki", "Shpric");
+        PlannedVisit plannedVisit = new PlannedVisit(gregorianCalendar, validPersonalData, doctor);
         plannedVisitList.add(plannedVisit);
 
         Mockito.when(searchPlannedVisitsByPersonalCodeRequestValidator.validate(searchPlannedVisitsByPersonalCodeRequest)).thenReturn(new ArrayList<>());

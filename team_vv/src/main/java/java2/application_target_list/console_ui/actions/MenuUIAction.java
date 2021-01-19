@@ -11,7 +11,7 @@ public class MenuUIAction implements UIAction {
     @Override
     public void execute() {
         System.out.println("Actions: ");
-        System.out.println("----------Target Menu----------");
+        System.out.println("---------Target Menu---------");
         System.out.println("[1] Show targets list");
         System.out.println("[2] Add target");
         System.out.println("[3] Delete target");
@@ -26,8 +26,14 @@ public class MenuUIAction implements UIAction {
         System.out.println("[13] Delete user");
         System.out.println("[14] Change user first name");
         System.out.println("[15] Change user last name");
-        System.out.println("[16] Search target by first name");
-        System.out.println("[17] Search target by last name");
+        System.out.println("[16] Search user by first name");
+        System.out.println("[17] Search user by last name");
+        System.out.println("----------Board Menu----------");
+        System.out.println("[21] Show records list ID format");
+        System.out.println("[22] Add record to board");
+        System.out.println("[23] Delete record");
+        System.out.println("[24] Set record complete date");
+        System.out.println("[25] Show records full info");
         System.out.println("------------------------------");
         System.out.println("[0] Quit");
     }

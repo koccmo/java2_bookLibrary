@@ -62,7 +62,7 @@ public class AddVisitUIAction implements UIAction {
 
             GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
             GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
-            System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:");
+            System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:\n");
             if (!getDoctorListResponse.hasErrors()) {
                 getDoctorListResponse.getDoctors().forEach(System.out::println);
             }
@@ -73,7 +73,7 @@ public class AddVisitUIAction implements UIAction {
 
             Doctor doctor = new Doctor(inputForDoctor, "");
 
-            Visit visit = new Visit(toothNumber, comment, toothStatus, doctor, date);
+            Visit visit = new Visit(id, toothNumber, comment, toothStatus, doctor, date);
             AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 

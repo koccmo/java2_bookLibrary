@@ -48,20 +48,17 @@ public class AddVisitService {
             doctor.setEmployed(true);
         }
 
-        if (isNewDoctor(doctor)){
-            doctorDatabase.addDoctor(addVisitRequest.getDoctor());
-        }
-
         if (!doctor.getIsEmployed()) {
-            System.out.println(doctor.getName());
-            System.out.println(doctor.getSurname());
-            System.out.println(doctor.getIsEmployed());
             errors.add(new CoreError("doctor", "Doctor must be employed"));
             return new AddVisitResponse(errors);
         }
 
-        Visit visit = new Visit(addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
+        Visit visit = new Visit(addVisitRequest.getPatientsId(), addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
                 addVisitRequest.getToothStatus(), doctor, addVisitRequest.getDate());
+
+        if (isNewDoctor(doctor)){
+            doctorDatabase.addDoctor(doctor);
+        }
 
         if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
             addVisitToDoctor(doctor, visit);
@@ -85,7 +82,7 @@ public class AddVisitService {
     private void addVisitToDoctor (Doctor doctor, Visit visit) {
         for (Doctor d : doctorDatabase.getDoctorList()) {
             if (d.getName().equals(doctor.getName())
-            &&d.getSurname().equals(doctor.getSurname())) {
+            && d.getSurname().equals(doctor.getSurname())) {
                 d.addVisit(visit);
             }
         }

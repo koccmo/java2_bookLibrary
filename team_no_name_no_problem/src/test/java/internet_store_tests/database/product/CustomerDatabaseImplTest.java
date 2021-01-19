@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -48,7 +47,7 @@ public class CustomerDatabaseImplTest {
     @Test
     public void deleteCustomerTest(){
 
-        customerDatabase.deleteCustomer(1L);
+        customerDatabase.deleteCustomerById(1L);
         assertFalse(customerDatabase.getCustomers().contains(firstCustomer));
         assertTrue(customerDatabase.getCustomers().contains(secondCustomer));
     }
@@ -58,7 +57,7 @@ public class CustomerDatabaseImplTest {
     public void deleteCustomerTestNoCustomerInDatabase(){
 
         customerDatabase.getCustomers().size();
-        customerDatabase.deleteCustomer(3);
+        customerDatabase.deleteCustomerById(3L);
         customerDatabase.getCustomers().size();
     }
 
