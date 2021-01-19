@@ -19,7 +19,8 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public List<Customer> getCustomers() {
-        return jdbcTemplate.query("SELECT * FROM customers", new BeanPropertyRowMapper<>(Customer.class));
+        String sql = "SELECT * FROM customers";
+        return jdbcTemplate.query(sql, new CustomerRowMapper());
     }
 
     @Override
@@ -32,12 +33,9 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public boolean deleteCustomerById(Long id) {
-        return jdbcTemplate.update(connection -> {
-                    PreparedStatement statement = connection.prepareStatement(
-                            "DELETE FROM customers WHERE ID = ?");
-                    statement.setLong(1, id);
-                    return statement;
-                }) == 1;
+        String sql = "DELETE FROM customers WHERE id = ?";
+        Object[] args = new Object[]{id};
+        return jdbcTemplate.update(sql,args) == 1;
     }
 
     @Override
@@ -53,30 +51,23 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public List<Customer> findCustomersByNameAndSurname(String name, String surname) {
-        return jdbcTemplate.query(connection -> {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE name LIKE ? AND surname LIKE ?");
-            statement.setString(1, name);
-            statement.setString(2, surname);
-            return statement;
-        }, new BeanPropertyRowMapper<>(Customer.class));
+        String sql = "SELECT * FROM customers WHERE name = ? AND surname = ?";
+        Object[] args = new Object[]{name, surname};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
     public List<Customer> findAllCustomersByName(String name) {
-        return jdbcTemplate.query(connection -> {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE name LIKE ?");
-            statement.setString(1, name);
-            return statement;
-        }, new BeanPropertyRowMapper<>(Customer.class));
+        String sql = "SELECT * FROM customers WHERE name = ?";
+        Object[] args = new Object[]{name};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
     public List<Customer> findAllCustomersBySurname(String surname) {
-        return jdbcTemplate.query(connection -> {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE surname LIKE ?");
-            statement.setString(1, surname);
-            return statement;
-        }, new BeanPropertyRowMapper<>(Customer.class));
+        String sql = "SELECT * FROM customers WHERE surname = ?";
+        Object[] args = new Object[]{surname};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
