@@ -25,19 +25,19 @@ public class AddTicketRequestValidator {
 	private List<CodeError> validateTicketDepartureCity (AddTicketRequest request) {
 		List<CodeError> depCityError = new ArrayList<>();
 
-		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getTicket().getOriginCity(), "departure city");
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getReservation().getTicket().getOriginCity(), "departure city");
 		if (codeError.isPresent()) {
 			depCityError.add(codeError.get());
 			return depCityError;
 		}
 
-		strIsNotContainingDigits(request.getTicket().getOriginCity(), "departure city").ifPresent(depCityError::add);
+		strIsNotContainingDigits(request.getReservation().getTicket().getOriginCity(), "departure city").ifPresent(depCityError::add);
 
 		return depCityError;
 	}
 
 	private List<CodeError> validateTicketDestinationCity (AddTicketRequest request) {
-		String destinationCity = request.getTicket().getDestinationCountry();
+		String destinationCity = request.getReservation().getTicket().getDestinationCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class AddTicketRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDepartureDate (AddTicketRequest request) {
-		String departDate = request.getTicket().getDepartDate();
+		String departDate = request.getReservation().getTicket().getDepartDate();
 
 		List<CodeError> errors = new ArrayList<>();
 		strIsDateFormat(departDate, "departure date").ifPresent(errors::add);
@@ -58,7 +58,7 @@ public class AddTicketRequestValidator {
 	}
 
 	private List<CodeError> validateTicketReturnDate (AddTicketRequest request) {
-		String returnDate = request.getTicket().getReturnDate();
+		String returnDate = request.getReservation().getTicket().getReturnDate();
 
 		List<CodeError> errors = new ArrayList<>();
 		strIsDateFormat(returnDate, "Return date").ifPresent(errors::add);

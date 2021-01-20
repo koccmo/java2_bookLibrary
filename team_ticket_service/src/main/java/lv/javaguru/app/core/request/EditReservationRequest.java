@@ -1,11 +1,11 @@
 package lv.javaguru.app.core.request;
 
 
-public class EditTicketRequest {
+public class EditReservationRequest {
 
     private final Long id;
 
-    public EditTicketRequest(Long id) {
+    public EditReservationRequest (Long id) {
         this.id = id;
     }
 

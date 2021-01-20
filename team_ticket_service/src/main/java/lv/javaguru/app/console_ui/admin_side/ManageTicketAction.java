@@ -4,9 +4,7 @@ import lv.javaguru.app.console_ui.Action;
 import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.AddTicketService;
 import lv.javaguru.app.core.services.admin_side.ManageTicketService;
-import lv.javaguru.app.core.services.admin_side.ManageUserService;
 
 public class ManageTicketAction extends Action implements UIActions {
 

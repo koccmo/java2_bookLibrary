@@ -10,7 +10,6 @@ public class Ticket {
 	private String departDate;
 	private String returnDate;
 	private String seat;
-	private Long id;
 	private boolean isCanceled;
 	private boolean isFinished;
 
@@ -58,24 +57,13 @@ public class Ticket {
 		this.seat = seat;
 	}
 
-	public void setId (Long id) {
-		this.id = id;
-	}
-
-	public Long getId () {
-		return id;
-	}
-
 	@Override
 	public String toString () {
-		return "Ticket{" +
-				"departure='" + originCity + '\'' +
-				", destination='" + destinationCountry + '\'' +
-				", departDate='" + departDate + '\'' +
-				", returnDate='" + returnDate + '\'' +
-				", seat='" + seat + '\'' +
-				", id=" + id +
-				'}';
+		return originCity + ", " +
+				destinationCountry +
+				", departure date: " + departDate +
+				", return date: " + returnDate +
+				", seat no: " + seat;
 	}
 
 	@Override
@@ -87,13 +75,12 @@ public class Ticket {
 				Objects.equals(destinationCountry, ticket.destinationCountry) &&
 				Objects.equals(departDate, ticket.departDate) &&
 				Objects.equals(returnDate, ticket.returnDate) &&
-				Objects.equals(seat, ticket.seat) &&
-				Objects.equals(id, ticket.id);
+				Objects.equals(seat, ticket.seat);
 	}
 
 	@Override
 	public int hashCode () {
-		return Objects.hash(originCity, destinationCountry, departDate, returnDate, seat, id);
+		return Objects.hash(originCity, destinationCountry, departDate, returnDate, seat);
 	}
 
 	public String getOriginCity () {
