@@ -13,6 +13,8 @@ public class Order {
 
     private Integer sumTotal;
 
+    public Order() {}
+
     public Order (Customer customer, Map <Product, Integer> shoppingCart, Integer sumTotal){
         this.customer = customer;
         this.shoppingCart = shoppingCart;
