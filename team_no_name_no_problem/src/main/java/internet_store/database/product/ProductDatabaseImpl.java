@@ -29,9 +29,13 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         //session().remove(id);
-        productList.removeIf(product -> product.getId().equals(id));
+        if (productList.removeIf(product -> product.getId().equals(id))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

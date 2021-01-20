@@ -11,7 +11,7 @@ public interface ProductDatabase {
 
     void add(Product product);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     boolean deleteAllByTitle(String title);
 
