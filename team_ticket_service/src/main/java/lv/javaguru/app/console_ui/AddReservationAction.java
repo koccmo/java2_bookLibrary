@@ -1,7 +1,8 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
-import lv.javaguru.app.core.services.AddTicketService;
+import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.services.AddReservationService;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddTicketRequest;
@@ -13,10 +14,10 @@ import java.util.regex.Pattern;
 
 public class AddReservationAction extends Action implements UIActions {
 
-	private final AddTicketService addTicketService;
+	private final AddReservationService addReservationService;
 
-	public AddReservationAction (AddTicketService addTicketService) {
-		this.addTicketService = addTicketService;
+	public AddReservationAction (AddReservationService addReservationService) {
+		this.addReservationService = addReservationService;
 	}
 
 	private static final Map<String, List<String>> cityOrigin = new HashMap<>() {{
@@ -62,9 +63,10 @@ public class AddReservationAction extends Action implements UIActions {
 			System.out.println(ticket.toString());
 
 		User currUser = getLoggedInUser();
+		Reservation reservation = new Reservation(currUser, ticket);
 
-		AddTicketRequest request = new AddTicketRequest(currUser, ticket);
-		AddTicketResponse response = addTicketService.execute(request);
+		AddTicketRequest request = new AddTicketRequest(reservation);
+		AddTicketResponse response = addReservationService.execute(request);
 
 		if (response.hasErrors())
 			response.getErrorList().forEach(System.out::println);

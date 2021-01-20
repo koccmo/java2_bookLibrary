@@ -9,15 +9,18 @@ import lv.javaguru.app.core.response.admin.EditUserNameResponse;
 import lv.javaguru.app.core.response.admin.EditUserSurnameResponse;
 import lv.javaguru.app.core.response.admin.ManageUserResponse;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ManageUserService {
-	private final Database database;
+	//private final Database database;
+	private final UserDatabase userDatabase;
 
-	public ManageUserService (Database database) {
-		this.database = database;
+	public ManageUserService (UserDatabase userDatabase) {
+		this.userDatabase = userDatabase;
 	}
 
 	public ManageUserResponse execute (ManageUserRequest request) {
@@ -26,7 +29,7 @@ public class ManageUserService {
 		if (!responseList.isEmpty()) {
 			return new ManageUserResponse(responseList);
 		}
-		User user = database.getUserById(request.getId());
+		User user = userDatabase.getUserById(request.getId());
 
 		return new ManageUserResponse(user);
 
@@ -40,8 +43,8 @@ public class ManageUserService {
 			return new EditUserNameResponse(responseList);
 		}
 
-		if (database.getUser(request.getUser()).isPresent())
-			database.getUser(request.getUser()).get().setName(request.getNewName());
+		Optional<User> optionalUser = userDatabase.getUser(request.getUser());
+		optionalUser.ifPresent(user -> user.setName(request.getNewName()));
 
 		return new EditUserNameResponse("Name changed!");
 
@@ -54,9 +57,9 @@ public class ManageUserService {
 		if (!responseList.isEmpty()) {
 			return new EditUserSurnameResponse(responseList);
 		}
+		Optional<User> optionalUser = userDatabase.getUser(request.getUser());
+		optionalUser.ifPresent(user -> user.setSurname(request.getNewSurname()));
 
-		if (database.getUser(request.getUser()).isPresent())
-			database.getUser(request.getUser()).get().setSurname(request.getNewSurname());
 
 		return new EditUserSurnameResponse("Surname changed!");
 
@@ -64,7 +67,7 @@ public class ManageUserService {
 	private List<CodeError> validateId (Long id) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		if (!database.isContainUserWithId(id))
+		if (!userDatabase.containsUser(id))
 				errorList.add(new CodeError("id","no user with such id"));
 		return errorList;
 	}

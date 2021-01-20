@@ -9,7 +9,7 @@ public class RegistrationRequest {
         this.user = user;
     }
 
-    public User getPerson() {
+    public User getUser () {
         return user;
     }
 }

@@ -4,46 +4,46 @@ import lv.javaguru.app.console_ui.EditTicketAction;
 import lv.javaguru.app.console_ui.LogOutAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.EditTicketService;
+import lv.javaguru.app.core.services.EditReservationService;
 import lv.javaguru.app.core.services.LogOutService;
 import lv.javaguru.app.core.services.ShowReservationsService;
-import lv.javaguru.app.core.services.admin_side.ManageTicketService;
 import lv.javaguru.app.core.services.admin_side.ManageUserService;
 import lv.javaguru.app.core.services.admin_side.ShowUsersService;
 import lv.javaguru.app.core.services.validators.EditTicketRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 public class AdminMode {
 
 	//private final ManageTicketAction manageTicketAction;
 	private final ManageUserAction manageUserAction;
 
-private final EditTicketAction editTicketAction;
+	private final EditTicketAction editTicketAction;
 
-	private final ShowTicketsAction showTicketsAction;
+	private final ShowReservationsAction showReservationsAction;
 	private final ShowUsersAction showUsersAction;
 
 	private final LogOutAction logOutAction;
 
 
-	public AdminMode (Database database) {
-		ManageUserService manageUserService = new ManageUserService(database);
+	public AdminMode (UserDatabase userDatabase, Database database) {
+		ManageUserService manageUserService = new ManageUserService(userDatabase);
 		this.manageUserAction = new ManageUserAction(manageUserService);
 
 		EditTicketRequestValidator editTicketRequestValidator = new EditTicketRequestValidator();
-		EditTicketService editTicketService = new EditTicketService(database , editTicketRequestValidator);
+		EditReservationService editReservationService = new EditReservationService(userDatabase, database, editTicketRequestValidator);
 
 		//ManageTicketService manageTicketService = new ManageTicketService(database);
-		this.editTicketAction = new EditTicketAction (editTicketService);
+		this.editTicketAction = new EditTicketAction(editReservationService);
 
-		ShowReservationsService showReservationsService = new ShowReservationsService(database);
+		ShowReservationsService showReservationsService = new ShowReservationsService(userDatabase,database);
 		// ShowTicketsService showTicketsService = new ShowTicketsService(database);
-		this.showTicketsAction = new ShowTicketsAction(showReservationsService);
+		this.showReservationsAction = new ShowReservationsAction(showReservationsService);
 
-		ShowUsersService showUsersService = new ShowUsersService(database);
+		ShowUsersService showUsersService = new ShowUsersService(userDatabase);
 		this.showUsersAction = new ShowUsersAction(showUsersService);
 
-		LogOutService logOutService = new LogOutService(database);
+		LogOutService logOutService = new LogOutService(userDatabase);
 		this.logOutAction = new LogOutAction(logOutService);
 	}
 
@@ -60,7 +60,7 @@ private final EditTicketAction editTicketAction;
 				case 2 -> editTicketAction.execute();
 
 				case 3 -> showUsersAction.execute();
-				case 4 -> showTicketsAction.execute();
+				case 4 -> showReservationsAction.execute();
 
 				case 0 -> {
 					logOutAction.execute();

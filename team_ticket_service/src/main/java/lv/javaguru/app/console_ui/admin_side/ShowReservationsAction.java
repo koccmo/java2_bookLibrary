@@ -7,11 +7,11 @@ import lv.javaguru.app.core.request.ShowTicketsRequest;
 import lv.javaguru.app.core.response.ShowTicketResponse;
 import lv.javaguru.app.core.services.ShowReservationsService;
 
-public class ShowTicketsAction extends Action implements UIActions {
+public class ShowReservationsAction extends Action implements UIActions {
 	//private final ShowTicketsService showTicketsService;
 	private final ShowReservationsService showReservationsService;
 
-	public ShowTicketsAction (ShowReservationsService showReservationsService) {
+	public ShowReservationsAction (ShowReservationsService showReservationsService) {
 		this.showReservationsService = showReservationsService;
 	}
 
