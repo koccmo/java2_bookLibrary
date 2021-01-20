@@ -57,6 +57,47 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public boolean deleteAllByTitleAndDescription(String title, String description) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product -> product.getDescription().equals(description))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getTitle().equals(description)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product -> product.getDescription().equals(description)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
         if (productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
             return true;
