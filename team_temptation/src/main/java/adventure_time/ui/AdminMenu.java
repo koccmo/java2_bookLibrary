@@ -1,5 +1,8 @@
 package adventure_time.ui;
 
+import adventure_time.menus.CustomerMenu;
+import adventure_time.menus.EventMenu;
+import adventure_time.menus.SubjectMenu;
 import adventure_time.ui.events.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,12 +14,12 @@ import java.util.Scanner;
 
 
 @Component
-public class EventMenu {
+public class AdminMenu {
 
-    private Map<Integer, UIAction> menuItemsMap;
+    private final Map<Integer, UIAction> menuItemsMap;
 
     @Autowired
-    public EventMenu (List<UIAction> uiActionList) {
+    public AdminMenu(List<UIAction> uiActionList) {
         menuItemsMap = new HashMap<>();
         menuItemsMap.put(1, findUIAction(uiActionList, AddEventUIAction.class));
         menuItemsMap.put(2, findUIAction(uiActionList, RemoveEventUIAction.class));
@@ -41,7 +44,7 @@ public class EventMenu {
 
     public void menuForEvents() {
         System.out.println("EVENTS:");
-        System.out.println("1. Add new event");
+        System.out.println("1. Add new event"); // return to mainMenu
         System.out.println("2. Delete an event");
         System.out.println("3. Search events");
         System.out.println("4. Update an event");
@@ -62,10 +65,19 @@ public class EventMenu {
         System.out.println();
     }
 
-    public int getUserChoice() {
+    public Integer getUserChoice() {
         System.out.println("Enter menu item number to execute:");
         Scanner scanner = new Scanner(System.in);
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    public void subjectMenuShow (Integer subjectChoice) {
+
+        Map<Integer, SubjectMenu> menuMap = new HashMap<>();
+        menuMap.put(1, new EventMenu());
+        menuMap.put(2, new CustomerMenu());
+
+
     }
 
 }

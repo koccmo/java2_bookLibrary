@@ -5,25 +5,27 @@ import adventure_time.ui.AdminMenu;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class EventApplication {
+public class AdminApplication {
 
-    private static void alwaysOnDesktop(AdminMenu adminMenu) {
+    private static void regularAppWorks(AdminMenu adminMenu) {
 
         while (true) {
 
-            //eventMenu.mainMenu();
-
-            adminMenu.menuForEvents();
+            adminMenu.mainMenu();
+            int subjectChoice = adminMenu.getUserChoice();
             adminMenu.executeSelectedMenuItem(adminMenu.getUserChoice());
         }
     }
 
     public static void main(String[] args) {
 
-        ApplicationContext eventsApp = new AnnotationConfigApplicationContext(AdminConfiguration.class);
-        AdminMenu adminMenu = eventsApp.getBean(AdminMenu.class);
+        ApplicationContext adminApp = new AnnotationConfigApplicationContext(AdminConfiguration.class);
+        AdminMenu adminMenu = adminApp.getBean(AdminMenu.class);
 
-        alwaysOnDesktop(adminMenu);
+        regularAppWorks(adminMenu);
 
     }
+
+
+
 }
