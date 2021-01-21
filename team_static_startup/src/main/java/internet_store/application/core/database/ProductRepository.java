@@ -2,6 +2,7 @@ package internet_store.application.core.database;
 
 import internet_store.application.core.domain.Product;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,11 @@ public class ProductRepository implements Database{
 
     @Override
     public List<Product> findByNameAndDescription(String name, String description) {
-        return null;
+        Query query = (Query) sessionFactory.getCurrentSession().createQuery(
+                "select p FROM Product p where name = : name AND description = : description");
+        query.setParameter("name", name);
+        query.setParameter("description", description);
+        return query.getResultList();
     }
 
     @Override
