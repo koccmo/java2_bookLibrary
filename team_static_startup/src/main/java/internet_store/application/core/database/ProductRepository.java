@@ -12,11 +12,11 @@ import java.util.Optional;
 @Component
 @Profile("hibernate")
 @Transactional
-public class HibernateDatabase implements Database{
+public class ProductRepository implements Database{
 
     private final SessionFactory sessionFactory;
 
-    public HibernateDatabase(SessionFactory sessionFactory) {
+    public ProductRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
