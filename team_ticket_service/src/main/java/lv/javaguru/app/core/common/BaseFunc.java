@@ -30,6 +30,8 @@ public class BaseFunc {
         int spaceCount = 50 - header.length() - userName.length();
 
         System.out.println(header + multiplyChar(spaceCount, ' ') + userName);
+
+        printLineSeparator();
     }
 
 

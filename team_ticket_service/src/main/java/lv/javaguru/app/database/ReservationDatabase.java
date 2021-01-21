@@ -1,6 +1,6 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
@@ -9,23 +9,23 @@ import java.util.stream.Collectors;
 
 public class ReservationDatabase implements Database {
 
-	private final Map<Long, Reservation> reservations = new HashMap<>();
+	private final Map<Long, Flight> reservations = new HashMap<>();
 
 	private static Long nextId = 1L;
 
 
 	@Override
-	public void addReservation (Reservation reservation) {
-		if (!reservations.containsValue(reservation)) {
-			reservation.setId(nextId++);
-			reservations.put(reservation.getId(), reservation);
+	public void addReservation (Flight flight) {
+		if (!reservations.containsValue(flight)) {
+			flight.setId(nextId++);
+			reservations.put(flight.getId(), flight);
 		}
 	}
 
 	@Override
-	public void removeReservation (Reservation reservation) {
-		if (reservations.containsValue(reservation))
-			reservations.values().removeIf(res -> res.equals(reservation));
+	public void removeReservation (Flight flight) {
+		if (reservations.containsValue(flight))
+			reservations.values().removeIf(res -> res.equals(flight));
 	}
 
 	@Override
@@ -34,17 +34,17 @@ public class ReservationDatabase implements Database {
 	}
 
 	@Override
-	public Reservation getReservationById (Long id) {
-		return null;
+	public Flight getFlightById (Long id) {
+		return reservations.get(id);
 	}
 
 	@Override
-	public List<Reservation> getAllReservations () {
+	public List<Flight> getAllReservations () {
 		return new ArrayList<>(reservations.values());
 	}
 
 	@Override
-	public List<Reservation> getAllUserReservations (User user) {
+	public List<Flight> getAllUserReservations (User user) {
 		return reservations.values().stream()
 				.filter(reservation -> reservation.getUser().equals(user))
 				.collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class ReservationDatabase implements Database {
 		return reservations.containsKey(id);
 	}
 
-	public Ticket getReservationTicket (Long id) {
+	public Ticket getTicketByFlightId (Long id) {
 		return reservations.get(id).getTicket();
 	}
 

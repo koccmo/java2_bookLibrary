@@ -1,28 +1,26 @@
 package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.RegistrationRequest;
-import lv.javaguru.app.core.response.CodeError;
+import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterRequestValidator {
-    public RegisterRequestValidator() {
-    }
+public class RegisterRequestValidator extends Validator {
+	public RegisterRequestValidator () {
+	}
 
-    public List<CodeError> validate(RegistrationRequest request) {
-        List<CodeError> errorList = new ArrayList<>();
+	public List<CodeError> validate (RegistrationRequest request) {
+		List<CodeError> errorList = new ArrayList<>();
 
-        if (request.getUser().getName() == null || request.getUser().getName().equals("")) {
-            CodeError error = new CodeError("personsName", "Wrong name!");
-            errorList.add(error);
-        }
+		verifyNameAndSurname(request.getUser().getName(), "first name", errorList);
+		verifyNameAndSurname(request.getUser().getSurname(), "second name", errorList);
 
-        if (request.getUser().getSurname() == null || request.getUser().getSurname().equals("")) {
-            CodeError error = new CodeError("personsSurname", "Wrong surname!");
-            errorList.add(error);
-        }
+		return errorList;
+	}
 
-        return errorList;
-    }
+
+
+
+
 }

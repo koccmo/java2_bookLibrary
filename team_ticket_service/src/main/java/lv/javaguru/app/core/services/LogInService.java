@@ -1,12 +1,11 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.console_ui.Action;
-import lv.javaguru.app.console_ui.admin_side.AdminMode;
-import lv.javaguru.app.console_ui.user_side.UserMode;
+import lv.javaguru.app.console_ui.modes.AdminMode;
+import lv.javaguru.app.console_ui.modes.UserMode;
 import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.LogInRequest;
-import lv.javaguru.app.core.response.CodeError;
+import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
@@ -21,7 +20,7 @@ public class LogInService {
 	private final UserDatabase userDatabase;
 	private final LoginRequestValidator validator;
 
-	public LogInService (UserDatabase userDatabase , Database database, LoginRequestValidator validator) {
+	public LogInService (UserDatabase userDatabase, Database database, LoginRequestValidator validator) {
 		this.userDatabase = userDatabase;
 		this.database = database;
 		this.validator = validator;
@@ -41,7 +40,7 @@ public class LogInService {
 			userDatabase.setCurrentUser(user);
 		}
 		else {
-			errors.add(new CodeError("", "No such user"));
+			errors.add(new CodeError("database", "No such user"));
 			return new LogInResponse(errors);
 		}
 
@@ -51,6 +50,7 @@ public class LogInService {
 				new LogInResponse(new UserMode(userDatabase, database));
 
 		logInResponse.setCurrUser(user);
+		logInResponse.setMessage("Successfully logged in!");
 
 		return logInResponse;
 
