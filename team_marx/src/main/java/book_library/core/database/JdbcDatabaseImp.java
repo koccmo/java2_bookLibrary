@@ -1,15 +1,24 @@
 package book_library.core.database;
 
 import book_library.core.domain.Book;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class JdbcDatabaseImp implements Database{
+
+    @Autowired private JdbcTemplate jdbcTemplate;
+
     @Override
     public void save(Book book) {
-
+        jdbcTemplate.update(
+                "INSERT INTO books (title, author)"
+                + "VALUES (?, ?)",
+                book.getTitle(), book.getAuthor()
+        );
     }
 
     @Override
