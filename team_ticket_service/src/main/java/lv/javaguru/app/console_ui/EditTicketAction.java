@@ -4,20 +4,20 @@ import lv.javaguru.app.console_ui.edit_ticket.EditTicket_Departure;
 import lv.javaguru.app.console_ui.edit_ticket.EditTicket_Destination;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.Ticket;
-import lv.javaguru.app.core.request.EditTicketRequest;
+import lv.javaguru.app.core.request.EditReservationRequest;
 import lv.javaguru.app.core.request.edit.*;
 import lv.javaguru.app.core.response.EditTicketResponse;
 import lv.javaguru.app.core.response.edit.*;
-import lv.javaguru.app.core.services.EditTicketService;
+import lv.javaguru.app.core.services.EditReservationService;
 
 import java.util.Scanner;
 
 public class EditTicketAction implements UIActions {
 
-	private final EditTicketService editTicketService;
+	private final EditReservationService editReservationService;
 
-	public EditTicketAction (EditTicketService editTicketService) {
-		this.editTicketService = editTicketService;
+	public EditTicketAction (EditReservationService editReservationService) {
+		this.editReservationService = editReservationService;
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class EditTicketAction implements UIActions {
 		System.out.println("Enter ticket ID: ");
 		long id = BaseFunc.getMenuNumberFromUser();
 
-		EditTicketRequest request = new EditTicketRequest(id);
-		EditTicketResponse response = editTicketService.execute(request);
+		EditReservationRequest request = new EditReservationRequest(id);
+		EditTicketResponse response = editReservationService.execute(request);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -43,11 +43,11 @@ public class EditTicketAction implements UIActions {
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 			switch (menuNumber) {
 				case 1 -> {
-					EditTicket_Departure editTicket_departure = new EditTicket_Departure(id, editTicketService);
+					EditTicket_Departure editTicket_departure = new EditTicket_Departure(id, editReservationService);
 					editTicket_departure.execute();
 				}
 				case 2 -> {
-					EditTicket_Destination editTicket_destination = new EditTicket_Destination(id, editTicketService);
+					EditTicket_Destination editTicket_destination = new EditTicket_Destination(id, editReservationService);
 					editTicket_destination.execute();
 				}
 				case 3 -> {
@@ -56,7 +56,7 @@ public class EditTicketAction implements UIActions {
 					String departureDate = scanner.nextLine();
 
 					EditTicketDepartureDateRequest editTicketDepartureDateRequest = new EditTicketDepartureDateRequest(id, departureDate);
-					EditTicketDepartureDateResponse editTicketDepartureDateResponse = editTicketService.execute(editTicketDepartureDateRequest);
+					EditTicketDepartureDateResponse editTicketDepartureDateResponse = editReservationService.execute(editTicketDepartureDateRequest);
 
 					if (editTicketDepartureDateResponse.hasErrors()) {
 						editTicketDepartureDateResponse.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -70,7 +70,7 @@ public class EditTicketAction implements UIActions {
 					String returnDate = scanner.nextLine();
 
 					EditTicketArrivalDateRequest editTicketArrivalDateRequest = new EditTicketArrivalDateRequest(id, returnDate);
-					EditTicketReturnDateResponse editTicketReturnDateResponse = editTicketService.execute(editTicketArrivalDateRequest);
+					EditTicketReturnDateResponse editTicketReturnDateResponse = editReservationService.execute(editTicketArrivalDateRequest);
 
 					if (editTicketReturnDateResponse.hasErrors()) {
 						editTicketReturnDateResponse.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -84,7 +84,7 @@ public class EditTicketAction implements UIActions {
 					String seat = scanner.nextLine();
 
 					EditTicketSeatRequest editTicketSeatRequest = new EditTicketSeatRequest(id, seat);
-					EditTicketSeatResponse editTicketSeatResponse = editTicketService.execute(editTicketSeatRequest);
+					EditTicketSeatResponse editTicketSeatResponse = editReservationService.execute(editTicketSeatRequest);
 
 					if (editTicketSeatResponse.hasErrors()) {
 						editTicketSeatResponse.getErrorList().forEach(r -> System.out.println(r.getField() +

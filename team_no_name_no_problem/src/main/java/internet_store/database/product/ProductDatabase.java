@@ -11,13 +11,21 @@ public interface ProductDatabase {
 
     void add(Product product);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
-    void deleteAllByTitle(String title);
+    boolean deleteAllByTitle(String title);
 
-    void deleteAllByDescription(String description);
+    boolean deleteAllByDescription(String description);
 
-    void deleteAllByPriceRange(Integer startPrice, Integer endPrice);
+    boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndDescription(String title, String description);
+
+    boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
     Optional<Product> findById(Long id);
 

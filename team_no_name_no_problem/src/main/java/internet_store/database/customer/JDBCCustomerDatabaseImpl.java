@@ -2,6 +2,8 @@ package internet_store.database.customer;
 
 import internet_store.core.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +18,8 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public List<Customer> getCustomers() {
-        jdbcTemplate.queryForObject("SELECT * FROM customers", Integer.class);
-        return null;
+        String sql = "SELECT * FROM customers";
+        return jdbcTemplate.query(sql, new CustomerRowMapper());
     }
 
     @Override
@@ -29,38 +31,51 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public void deleteCustomerById(Long id) {
-        jdbcTemplate.update("DELETE FROM customers WHERE id = ?" + "VALUES (?)",
-                id);
+    public boolean deleteCustomerById(Long id) {
+        String sql = "DELETE FROM customers WHERE id = ?";
+        Object[] args = new Object[]{id};
+        return jdbcTemplate.update(sql,args) == 1;
     }
 
     @Override
     public Optional<Customer> findById(Long id) {
-        return Optional.empty();
+        try{
+            Customer customer = jdbcTemplate.queryForObject("SELECT * FROM customers WHERE id = ?",
+                    new Object[]{id}, new BeanPropertyRowMapper<>(Customer.class));
+            return Optional.ofNullable(customer);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
     public List<Customer> findCustomersByNameAndSurname(String name, String surname) {
-        return null;
+        String sql = "SELECT * FROM customers WHERE name = ? AND surname = ?";
+        Object[] args = new Object[]{name, surname};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
     public List<Customer> findAllCustomersByName(String name) {
-        return null;
+        String sql = "SELECT * FROM customers WHERE name = ?";
+        Object[] args = new Object[]{name};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
     public List<Customer> findAllCustomersBySurname(String surname) {
-        return null;
+        String sql = "SELECT * FROM customers WHERE surname = ?";
+        Object[] args = new Object[]{surname};
+        return jdbcTemplate.query(sql, args, new CustomerRowMapper());
     }
 
     @Override
     public boolean containsCustomer(Customer customer) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean containsId(Long id) {
-        return false;
+        return true;
     }
 }

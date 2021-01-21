@@ -1,25 +1,25 @@
 package lv.javaguru.app.core.response;
 
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
 import java.util.List;
 
 public class LogOutResponse extends Response {
 	private String message;
-	private Person currUser;
+	private User currUser;
 
 	public LogOutResponse (List<CodeError> errorList) {
 		super(errorList);
 	}
 
 
-	public LogOutResponse (Person currUser, String message) {
+	public LogOutResponse (User currUser, String message) {
 		this.currUser = currUser;
 		this.message = message;
 	}
 
-	public Person getCurrUser () {
+	public User getCurrUser () {
 		return currUser;
 	}
 

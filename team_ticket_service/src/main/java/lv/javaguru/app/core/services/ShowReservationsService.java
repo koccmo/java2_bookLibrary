@@ -1,44 +1,43 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.PersonType;
-import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.ShowTicketsRequest;
 import lv.javaguru.app.core.response.CodeError;
-import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.core.response.ShowTicketResponse;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowReservationsService {
 
-	private final Database database;
+	private final Database reservations;
+	private final UserDatabase userDatabase;
 
-	public ShowReservationsService (Database database) {
-		this.database = database;
+	public ShowReservationsService (UserDatabase userDatabase, Database reservations) {
+		this.userDatabase = userDatabase;
+		this.reservations = reservations;
 	}
+
 
 	public ShowTicketResponse<?> execute (ShowTicketsRequest request) {
-		List<CodeError> errors = validate(request.getCurrUser());
+		List<?> responseList = validate(request.getCurrUser());
 
+		if (!responseList.isEmpty()) {
+			return new ShowTicketResponse<>(responseList);
+		}
+		else if (userDatabase.getCurrentUser() == request.getCurrUser() && request.getCurrUser().getPersonType() != PersonType.ADMIN)
+			responseList = reservations.getAllUserReservations(request.getCurrUser());
+		else {
+			responseList = reservations.getAllReservations();
+		}
 
-		if (!errors.isEmpty())
-			return new ShowTicketResponse<>(errors);
-
-		else
-			return new ShowTicketResponse<>(database.getAllTickets(request.getCurrUser()));
-
+		return new ShowTicketResponse<>(responseList);
 	}
 
-	private List<CodeError> validate (Person user) {
-
-		//if (database.containsPerson(user) && user.getName().equals("Mike"))
+	private List<CodeError> validate (User user) {
 		return new ArrayList<>();
-		//else
-		//	return new ArrayList<>() {{
-		//		add(new CodeError("", "fuck"));
-		//	}};
 	}
 }

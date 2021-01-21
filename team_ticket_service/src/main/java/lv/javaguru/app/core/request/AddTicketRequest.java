@@ -1,22 +1,30 @@
 package lv.javaguru.app.core.request;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
 public class AddTicketRequest {
-    private final Person currUser;
-    private final Ticket ticket;
+	//private final User currUser;
+	//private final Ticket ticket;
+	private final Reservation Reservation;
 
-    public AddTicketRequest(Person currUser, Ticket ticket) {
-        this.currUser = currUser;
-        this.ticket = ticket;
-    }
+	public AddTicketRequest (Reservation reservation) {
+		Reservation = reservation;
+	}
 
-    public Person getCurrUser () {
-        return currUser;
-    }
+	public Reservation getReservation () {
+		return Reservation;
+	}
+	//public AddTicketRequest(User currUser, Ticket ticket) {
+	//    this.currUser = currUser;
+	//    this.ticket = ticket;
+	//}
 
-    public Ticket getTicket() {
-        return ticket;
-    }
+	//public User getCurrUser () {
+	//    return currUser;
+	//}
+
+	//public Ticket getTicket() {
+
 }

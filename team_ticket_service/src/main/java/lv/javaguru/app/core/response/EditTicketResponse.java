@@ -1,6 +1,6 @@
 package lv.javaguru.app.core.response;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class EditTicketResponse extends Response {
 		this.id = id;
 	}
 
-	public EditTicketResponse (long id, Person person) {
+	public EditTicketResponse (long id, User user) {
 		this.id = id;
 	}
 

@@ -3,6 +3,8 @@ package internet_store.console_ui.ProgramMenu;
 import internet_store.console_ui.UIAction;
 import internet_store.console_ui.customer.AddCustomerUIAction;
 import internet_store.console_ui.customer.DeleteCustomerUIAction;
+import internet_store.console_ui.customer.FindCustomerByIdUIAction;
+import internet_store.console_ui.customer.SearchCustomerUIAction;
 import internet_store.console_ui.order.GetOrdersUIAction;
 import internet_store.console_ui.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,12 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu (List<UIAction> uiActionList) {
         menuNumberToActionMap.put(1, findUIAction(uiActionList, AddProductUIAction.class));
-        menuNumberToActionMap.put(2, findUIAction(uiActionList, SearchProductUIAction.class));
-        menuNumberToActionMap.put(3, findUIAction(uiActionList, DeleteByIdUIAction.class));
-        menuNumberToActionMap.put(4, findUIAction(uiActionList,DeleteByOtherUIAction.class));
-        menuNumberToActionMap.put(5, findUIAction(uiActionList, GetAllProductsUIAction.class));
-        menuNumberToActionMap.put(6, findUIAction(uiActionList, FindByIdUIAction.class));
-        menuNumberToActionMap.put(7, findUIAction(uiActionList, ChangeProductUIAction.class));
+        menuNumberToActionMap.put(2, findUIAction(uiActionList, FindByIdUIAction.class));
+        menuNumberToActionMap.put(3, findUIAction(uiActionList, SearchProductUIAction.class));
+        menuNumberToActionMap.put(4, findUIAction(uiActionList, ChangeProductUIAction.class));
+        menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
+       // menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
+        menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
 
         menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
@@ -34,6 +36,9 @@ public class ProgramMenu {
         menuNumberToActionMap.put(11, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(12, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(13, findUIAction(uiActionList, BuyProductUIAction.class));
+
+        menuNumberToActionMap.put(14, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
+        menuNumberToActionMap.put(15, findUIAction(uiActionList, SearchCustomerUIAction.class));
 
         menuNumberToActionMap.put(0, new ExitFromApplicationUIAction());
     }
@@ -53,22 +58,24 @@ public class ProgramMenu {
 
         System.out.println("\nAdministrator Menu\n\n" +
                 "1   Add product\n" +
-                "2   Search product\n" +
-                "3   Delete product by ID\n" +
-                "4   Delete product by other criteria\n" +
+                "2   Search product by ID\n" +
+                "3   Search product by other criteria\n"+
+                "4   Change product\n" +
+                "5   Delete product by ID\n" +
+                "6   Delete product by other criteria\n" +
                 "                                    \n" +
-                "5   Get list of products\n" +
-                "6   Find product by ID\n"+
-                "7   Change product\n" +
+                "7   Get list of products\n" +
                 "8   Get order list\n" +
                 "*****************************");
 
         System.out.println("\nCustomer Menu\n\n" +
                 "9   Sign in\n" +
-                "10   Delete account by id\n" +
+                "10  Delete account by id\n" +
                 "11  Search product\n" +
                 "12  See product list\n" +
                 "13  Buy product\n\n"+
+                "14  Search customer by ID\n" +
+                "15  Search customer by other criteria\n" +
                 "*****************************\n");
 
         System.out.println("0   Exit\n");

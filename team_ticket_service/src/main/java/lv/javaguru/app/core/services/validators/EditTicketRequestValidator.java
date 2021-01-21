@@ -1,6 +1,6 @@
 package lv.javaguru.app.core.services.validators;
 
-import lv.javaguru.app.core.request.EditTicketRequest;
+import lv.javaguru.app.core.request.EditReservationRequest;
 import lv.javaguru.app.core.response.CodeError;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class EditTicketRequestValidator {
     public EditTicketRequestValidator() {
     }
 
-    public List<CodeError> validate(EditTicketRequest request) {
+    public List<CodeError> validate(EditReservationRequest request) {
         List<CodeError> errorList = new ArrayList<>();
 
 

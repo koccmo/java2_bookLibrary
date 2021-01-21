@@ -7,17 +7,17 @@ import java.util.List;
 
 public class DeleteCustomerResponse extends CoreResponse {
 
-        private long id;
+        private Long id;
 
         public DeleteCustomerResponse(List<CoreError> errors){
             super(errors);
         }
 
-        public DeleteCustomerResponse(long id){
+        public DeleteCustomerResponse(Long id){
             this.id = id;
         }
 
-        public long getId(){
+        public Long getId(){
             return id;
         }
 }

@@ -13,4 +13,5 @@ public interface BoardDatabase {
     List<Record> getAllRecordsList();
     boolean setRecordCompleteDate(Long id);
     public boolean isIdInBoardList(Long boardId);
+    List<Record> getFullInfoAboutRecords();
 }

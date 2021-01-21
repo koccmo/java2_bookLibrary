@@ -29,10 +29,11 @@ public class MenuUIAction implements UIAction {
         System.out.println("[16] Search user by first name");
         System.out.println("[17] Search user by last name");
         System.out.println("----------Board Menu----------");
-        System.out.println("[21] Show records list");
+        System.out.println("[21] Show records list ID format");
         System.out.println("[22] Add record to board");
         System.out.println("[23] Delete record");
         System.out.println("[24] Set record complete date");
+        System.out.println("[25] Show records full info");
         System.out.println("------------------------------");
         System.out.println("[0] Quit");
     }

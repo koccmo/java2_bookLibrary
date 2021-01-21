@@ -19,7 +19,7 @@ import java.util.Scanner;
         Scanner in = new Scanner(System.in);
 
         System.out.println("Please enter customer's id you want ot delete");
-        long id = in.nextLong();
+        Long id = in.nextLong();
 
         DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(id);
         DeleteCustomerResponse deleteCustomerResponse = deleteCustomerService.execute(deleteCustomerRequest);

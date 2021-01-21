@@ -66,6 +66,11 @@ public class BoardListImpl implements BoardDatabase{
         return false;
     }
 
+    @Override
+    public List<Record> getFullInfoAboutRecords(){
+        return null;
+    }
+
     private int getBoardIndexFromListById(Long boardId) {
         for (int i = 0; i < recordsList.size(); i++) {
             if (recordsList.get(i).getRecordId().equals(boardId)) {

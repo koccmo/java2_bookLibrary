@@ -4,12 +4,14 @@ import java.util.Objects;
 
 public class Customer {
 
-    private long id;
+    private Long id;
     private String name;
     private String surname;
     private String phoneNumber;
     private String address;
     private String email;
+
+    public Customer() { }
 
     public Customer(String name, String surname, String phoneNumber, String address, String email) {
         this.name = name;
@@ -19,11 +21,11 @@ public class Customer {
         this.email = email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -87,7 +89,8 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", address='" + address + '\'' +

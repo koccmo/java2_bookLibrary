@@ -1,13 +1,10 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.ShowTicketsRequest;
-import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.ShowTicketResponse;
 import lv.javaguru.app.core.services.ShowReservationsService;
 
-import java.util.List;
 
 public class ShowReservationsAction extends Action implements UIActions {
 
@@ -19,7 +16,7 @@ public class ShowReservationsAction extends Action implements UIActions {
 
 	@Override
 	public void execute () {
-		Person currUser = getLoggedInUser();
+		User currUser = getLoggedInUser();
 
 		ShowTicketsRequest request = new ShowTicketsRequest(currUser);
 		ShowTicketResponse<?> response = showReservationsService.execute(request);
@@ -30,6 +27,7 @@ public class ShowReservationsAction extends Action implements UIActions {
 		else {
 			System.out.println("Ticket list:");
 		}
+
 		response.printResponse();
 	}
 }

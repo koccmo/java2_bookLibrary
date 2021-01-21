@@ -3,100 +3,123 @@ package lv.javaguru.app.core.domain;
 import java.util.Objects;
 
 public class Ticket {
-    private String departure;
-    private String destination;
-    private String departDate;
-    private String returnDate;
-    private String seat;
-    private Long id;
+	private String originCountry;
+	private String originCity;
+	private String destinationCountry;
+	private String destinationCity;
+	private String departDate;
+	private String returnDate;
+	private String seat;
+	private boolean isCanceled;
+	private boolean isFinished;
 
-    public Ticket() {
+	public String getOriginCountry () {
+		return originCountry;
+	}
 
-    }
+	public void setOriginCountry (String originCountry) {
+		this.originCountry = originCountry;
+	}
 
-    public Ticket(String departure, String destination, String departDate, String returnDate, String seat) {
-        this.departure = departure;
-        this.destination = destination;
-        this.departDate = departDate;
-        this.returnDate = returnDate;
-        this.seat = seat;
-    }
+	public String getDestinationCity () {
+		return destinationCity;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setDestinationCity (String destinationCity) {
+		this.destinationCity = destinationCity;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public boolean isCanceled () {
+		return isCanceled;
+	}
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "departure='" + departure + '\'' +
-                ", destination='" + destination + '\'' +
-                ", departDate='" + departDate + '\'' +
-                ", returnDate='" + returnDate + '\'' +
-                ", seat='" + seat + '\'' +
-                ", id=" + id +
-                '}';
-    }
+	public void setCanceled (boolean canceled) {
+		isCanceled = canceled;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return Objects.equals(departure, ticket.departure) &&
-                Objects.equals(destination, ticket.destination) &&
-                Objects.equals(departDate, ticket.departDate) &&
-                Objects.equals(returnDate, ticket.returnDate) &&
-                Objects.equals(seat, ticket.seat) &&
-                Objects.equals(id, ticket.id);
-    }
+	public boolean isFinished () {
+		return isFinished;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(departure, destination, departDate, returnDate, seat, id);
-    }
+	public void setFinished (boolean finished) {
+		isFinished = finished;
+	}
 
-    public String getDeparture() {
-        return departure;
-    }
+	public Ticket () {
 
-    public void setDeparture(String departure) {
-        this.departure = departure;
-    }
+	}
 
-    public String getDestination() {
-        return destination;
-    }
+	public Ticket (String originCity, String destinationCountry, String departDate, String returnDate, String seat) {
+		this.originCity = originCity;
+		this.destinationCountry = destinationCountry;
+		this.departDate = departDate;
+		this.returnDate = returnDate;
+		this.seat = seat;
+	}
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+	@Override
+	public String toString () {
+		return originCity + ", " +
+				destinationCountry +
+				", departure date: " + departDate +
+				", return date: " + returnDate +
+				", seat no: " + seat;
+	}
 
-    public String getDepartDate() {
-        return departDate;
-    }
+	@Override
+	public boolean equals (Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Ticket ticket = (Ticket) o;
+		return Objects.equals(originCity, ticket.originCity) &&
+				Objects.equals(destinationCountry, ticket.destinationCountry) &&
+				Objects.equals(departDate, ticket.departDate) &&
+				Objects.equals(returnDate, ticket.returnDate) &&
+				Objects.equals(seat, ticket.seat);
+	}
 
-    public void setDepartDate(String departDate) {
-        this.departDate = departDate;
-    }
+	@Override
+	public int hashCode () {
+		return Objects.hash(originCity, destinationCountry, departDate, returnDate, seat);
+	}
 
-    public String getReturnDate() {
-        return returnDate;
-    }
+	public String getOriginCity () {
+		return originCity;
+	}
 
-    public void setReturnDate(String returnDate) {
-        this.returnDate = returnDate;
-    }
+	public void setOriginCity (String originCity) {
+		this.originCity = originCity;
+	}
 
-    public String getSeat() {
-        return seat;
-    }
+	public String getDestinationCountry () {
+		return destinationCountry;
+	}
 
-    public void setSeat(String seat) {
-        this.seat = seat;
-    }
+	public void setDestinationCountry (String destinationCountry) {
+		this.destinationCountry = destinationCountry;
+	}
+
+	public String getDepartDate () {
+		return departDate;
+	}
+
+	public void setDepartDate (String departDate) {
+		this.departDate = departDate;
+	}
+
+	public String getReturnDate () {
+		return returnDate;
+	}
+
+	public void setReturnDate (String returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public String getSeat () {
+		return seat;
+	}
+
+	public void setSeat (String seat) {
+		this.seat = seat;
+	}
 }

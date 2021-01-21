@@ -13,12 +13,12 @@ public class RegisterRequestValidator {
     public List<CodeError> validate(RegistrationRequest request) {
         List<CodeError> errorList = new ArrayList<>();
 
-        if (request.getPerson().getName() == null || request.getPerson().getName().equals("")) {
+        if (request.getUser().getName() == null || request.getUser().getName().equals("")) {
             CodeError error = new CodeError("personsName", "Wrong name!");
             errorList.add(error);
         }
 
-        if (request.getPerson().getSurname() == null || request.getPerson().getSurname().equals("")) {
+        if (request.getUser().getSurname() == null || request.getUser().getSurname().equals("")) {
             CodeError error = new CodeError("personsSurname", "Wrong surname!");
             errorList.add(error);
         }

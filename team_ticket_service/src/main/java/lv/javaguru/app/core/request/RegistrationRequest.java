@@ -1,15 +1,15 @@
 package lv.javaguru.app.core.request;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
 public class RegistrationRequest {
-    private final Person person;
+    private final User user;
 
-    public RegistrationRequest(Person person) {
-        this.person = person;
+    public RegistrationRequest(User user) {
+        this.user = user;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getUser () {
+        return user;
     }
 }
