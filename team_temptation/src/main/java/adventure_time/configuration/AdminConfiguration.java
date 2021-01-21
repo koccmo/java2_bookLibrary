@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "adventure_time")
 
-public class EventConfiguration {
+public class AdminConfiguration {
 
 
 }
