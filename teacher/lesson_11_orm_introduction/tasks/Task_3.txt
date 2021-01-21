@@ -1,4 +1,4 @@
-Подключите к своему приложению библиотеку Hibernate:
+Подключите к своему приложению следующий модуль из библиотеки Spring:
 
 compile('org.springframework:spring-orm:5.2.6.RELEASE')
 
