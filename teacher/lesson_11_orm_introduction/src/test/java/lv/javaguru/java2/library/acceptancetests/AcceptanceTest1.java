@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import lv.javaguru.java2.library.DatabaseCleaner;
 import lv.javaguru.java2.library.config.BookListConfiguration;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
@@ -21,6 +22,7 @@ public class AcceptanceTest1 {
 	@Before
 	public void setup() {
 		appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+		getDatabaseCleaner().clean();
 	}
 
 	@Test
@@ -41,6 +43,10 @@ public class AcceptanceTest1 {
 
 	private GetAllBooksService getAllBooksService() {
 		return appContext.getBean(GetAllBooksService.class);
+	}
+
+	private DatabaseCleaner getDatabaseCleaner() {
+		return appContext.getBean(DatabaseCleaner.class);
 	}
 
 }
