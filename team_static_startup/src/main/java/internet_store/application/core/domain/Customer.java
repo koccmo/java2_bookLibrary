@@ -1,15 +1,22 @@
 package internet_store.application.core.domain;
 
-//import lombok.Data;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-//@Data
+// @Entity
+// @Table(name = "customers")
 public class Customer {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
     private Long customerId;
+//    @Column(name = "first_name")
     private String customerFirstName;
+//    @Column(name = "second_name")
     private String customerSecondName;
+//    @Column(name = "phone")
     private String customerPhone;
+//    @Column(name = "email")
     private String customerEmail;
 
     public Customer() {}
