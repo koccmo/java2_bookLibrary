@@ -2,6 +2,6 @@
 
 compile('org.springframework:spring-orm:5.2.6.RELEASE')
 
-Это строку надо добавить в build.gradle файл вашего проекта.
+Эту строку надо добавить в build.gradle файл вашего проекта.
 
 Этот модуль Spring реализует поддержку ORM в экосистеме Spring.
