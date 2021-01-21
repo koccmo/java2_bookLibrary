@@ -10,24 +10,24 @@ import java.util.List;
 
 public class DeleteReservationService {
 
-	private final Database database;
+	private final Database reservations;
 
-	public DeleteReservationService (Database database) {
-		this.database = database;
+	public DeleteReservationService (Database reservations) {
+		this.reservations = reservations;
 	}
 
 	public DeleteReservationResponse execute (DeleteReservationRequest request) {
 		List<CodeError> errors = new ArrayList<>();//validator.validate(request);
 
-		if (!database.isContainTicketWithId(request.getId()))
+		if (!reservations.containsKey(request.getId()))
 			errors.add(new CodeError("Id error", "wrong ID"));
 
 		if (!errors.isEmpty())
 			return new DeleteReservationResponse(errors);
 
-		database.removeTicketById(request.getId());
+		reservations.removeReservationById(request.getId());
 
-		return new DeleteReservationResponse("Ticket '" + request.getId() + "' deleted!");
+		return new DeleteReservationResponse("Reservation '" + request.getId() + "' was deleted!");
 	}
 
 

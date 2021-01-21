@@ -3,17 +3,17 @@ package lv.javaguru.app.console_ui.edit_ticket;
 import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.core.request.edit.EditTicketDestinationRequest;
 import lv.javaguru.app.core.response.edit.EditTicketDestinationResponse;
-import lv.javaguru.app.core.services.EditTicketService;
+import lv.javaguru.app.core.services.EditReservationService;
 
 import java.util.Scanner;
 
 public class EditTicket_Destination implements UIActions {
-    private final EditTicketService editTicketService;
+    private final EditReservationService editReservationService;
     private final Long id;
 
-    public EditTicket_Destination(Long id, EditTicketService editTicketService) {
+    public EditTicket_Destination(Long id, EditReservationService editReservationService) {
         this.id = id;
-        this.editTicketService = editTicketService;
+        this.editReservationService = editReservationService;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class EditTicket_Destination implements UIActions {
         String destination = scanner.nextLine();
 
         EditTicketDestinationRequest editTicketDestinationRequest = new EditTicketDestinationRequest(id, destination);
-        EditTicketDestinationResponse editTicketDestinationResponse = editTicketService.execute(editTicketDestinationRequest);
+        EditTicketDestinationResponse editTicketDestinationResponse = editReservationService.execute(editTicketDestinationRequest);
 
         if (editTicketDestinationResponse.hasErrors()) {
             editTicketDestinationResponse.getErrorList().forEach(r -> System.out.println(r.getField() +

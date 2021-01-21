@@ -18,7 +18,4 @@ public class DeleteByOtherResponse extends CoreResponse {
         super(errors);
     }
 
-    public List<Product> getProducts(){
-        return products;
-    }
 }

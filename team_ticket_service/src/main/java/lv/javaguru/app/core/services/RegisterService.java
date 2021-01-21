@@ -6,15 +6,17 @@ import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.RegistrationResponse;
 import lv.javaguru.app.core.services.validators.RegisterRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 import java.util.List;
 
 public class RegisterService {
-    private final Database database;
+    private final UserDatabase userDatabase;
+
     private final RegisterRequestValidator validator;
 
-    public RegisterService(Database database, RegisterRequestValidator validator) {
-        this.database = database;
+    public RegisterService(UserDatabase userDatabase, RegisterRequestValidator validator) {
+        this.userDatabase = userDatabase;
         this.validator = validator;
     }
 
@@ -24,8 +26,8 @@ public class RegisterService {
         if (!errors.isEmpty())
             return new RegistrationResponse(errors);
 
-        request.getPerson().setPersonType(PersonType.CLIENT);
-        database.addUser(request.getPerson());
+        request.getUser().setPersonType(PersonType.CLIENT);
+        userDatabase.addUser(request.getUser());
 
         return new RegistrationResponse();
     }

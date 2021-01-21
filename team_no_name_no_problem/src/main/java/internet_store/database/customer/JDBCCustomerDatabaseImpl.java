@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,11 +71,11 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public boolean containsCustomer(Customer customer) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean containsId(Long id) {
-        return false;
+        return true;
     }
 }

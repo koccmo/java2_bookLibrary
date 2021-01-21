@@ -1,5 +1,5 @@
 package internet_store.core.services.product;
-
+/*
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
@@ -106,9 +106,9 @@ public class DeleteByOtherService {
         return new DeleteByOtherResponse(products);
     }
 
-    private DeleteByOtherResponse deleteByDescriptionIsProvided(DeleteProductByOtherRequest searchProductRequest){
+    private DeleteByOtherResponse deleteByDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product>products = productDatabase.findAllByDescription(searchProductRequest.getDescription());
+        productDatabase.deleteAllByDescription(deleteProductByOtherRequest.getDescription());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with description: " +
                     searchProductRequest.getDescription()));
@@ -130,3 +130,5 @@ public class DeleteByOtherService {
         return new DeleteByOtherResponse(products);
     }
 }
+
+ */

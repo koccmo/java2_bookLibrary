@@ -10,6 +10,7 @@ import lv.javaguru.app.core.response.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +18,11 @@ import java.util.Optional;
 public class LogInService {
 
 	private final Database database;
+	private final UserDatabase userDatabase;
 	private final LoginRequestValidator validator;
 
-	public LogInService (Database database, LoginRequestValidator validator) {
+	public LogInService (UserDatabase userDatabase , Database database, LoginRequestValidator validator) {
+		this.userDatabase = userDatabase;
 		this.database = database;
 		this.validator = validator;
 	}
@@ -31,11 +34,11 @@ public class LogInService {
 			return new LogInResponse(errors);
 
 
-		Optional<User> optionalUser = database.getUser(request.getUser());
+		Optional<User> optionalUser = userDatabase.getUser(request.getUser());
 		User user;
 		if (optionalUser.isPresent()) {
 			user = optionalUser.get();
-			database.setCurrentUser(user);
+			userDatabase.setCurrentUser(user);
 		}
 		else {
 			errors.add(new CodeError("", "No such user"));
@@ -44,8 +47,8 @@ public class LogInService {
 
 
 		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(new AdminMode(database)) :
-				new LogInResponse(new UserMode(database));
+				new LogInResponse(new AdminMode(userDatabase, database)) :
+				new LogInResponse(new UserMode(userDatabase, database));
 
 		logInResponse.setCurrUser(user);
 

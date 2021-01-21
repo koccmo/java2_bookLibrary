@@ -4,23 +4,11 @@ import lv.javaguru.app.console_ui.Action;
 import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.console_ui.admin_side.edit_user.EditUser_Name;
 import lv.javaguru.app.console_ui.admin_side.edit_user.EditUser_SecondName;
-import lv.javaguru.app.console_ui.edit_ticket.EditTicket_Departure;
-import lv.javaguru.app.console_ui.edit_ticket.EditTicket_Destination;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.request.EditTicketRequest;
 import lv.javaguru.app.core.request.admin.ManageUserRequest;
-import lv.javaguru.app.core.request.edit.EditTicketArrivalDateRequest;
-import lv.javaguru.app.core.request.edit.EditTicketDepartureDateRequest;
-import lv.javaguru.app.core.request.edit.EditTicketSeatRequest;
-import lv.javaguru.app.core.response.EditTicketResponse;
 import lv.javaguru.app.core.response.admin.ManageUserResponse;
-import lv.javaguru.app.core.response.edit.EditTicketDepartureDateResponse;
-import lv.javaguru.app.core.response.edit.EditTicketReturnDateResponse;
-import lv.javaguru.app.core.response.edit.EditTicketSeatResponse;
 import lv.javaguru.app.core.services.admin_side.ManageUserService;
-
-import java.util.Scanner;
 
 public class ManageUserAction extends Action implements UIActions {
 

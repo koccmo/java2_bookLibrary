@@ -7,6 +7,7 @@ import lv.javaguru.app.core.services.*;
 import lv.javaguru.app.core.services.validators.AddTicketRequestValidator;
 import lv.javaguru.app.core.services.validators.EditTicketRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
 
 
 public class UserMode {
@@ -21,15 +22,17 @@ public class UserMode {
 
 	private final UIActions logOutAction;// = new LogOutAction(logOutService);
 
-	public UserMode (Database database) {
-		AddTicketService addTicketService = new AddTicketService(database, validator);
-		DeleteReservationService deleteReservationService = new DeleteReservationService(database);
-		ShowReservationsService showReservationsService = new ShowReservationsService(database);
-		EditTicketService editTicketService = new EditTicketService(database, editTicketRequestValidator);
-		LogOutService logOutService = new LogOutService(database);
+	public UserMode (UserDatabase userDatabase, Database reservationDatabase) {
 
-		this.editTicketAction = new EditTicketAction(editTicketService);
-		this.addReservationAction = new AddReservationAction(addTicketService);
+		AddReservationService addReservationService = new AddReservationService(reservationDatabase, validator);
+		DeleteReservationService deleteReservationService = new DeleteReservationService(reservationDatabase);
+		ShowReservationsService showReservationsService = new ShowReservationsService(userDatabase, reservationDatabase);
+		EditReservationService editReservationService = new EditReservationService(userDatabase, reservationDatabase, editTicketRequestValidator);
+
+		LogOutService logOutService = new LogOutService(userDatabase);
+
+		this.editTicketAction = new EditTicketAction(editReservationService);
+		this.addReservationAction = new AddReservationAction(addReservationService);
 		this.deleteReservationAction = new DeleteReservationAction(deleteReservationService);
 		this.showReservationsAction = new ShowReservationsAction(showReservationsService);
 		this.logOutAction = new LogOutAction(logOutService);

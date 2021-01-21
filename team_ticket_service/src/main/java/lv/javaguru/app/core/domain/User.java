@@ -3,13 +3,24 @@ package lv.javaguru.app.core.domain;
 import java.util.Objects;
 
 public class User {
+
+	private Long id;
 	private String name;
 	private String surname;
-	private boolean isRegistered;
-	private Long id;
-	private static Long nextId = 100L;
-
 	private PersonType personType;
+
+
+	public User (String name, String surname) {
+		this.name = name;
+		this.surname = surname;
+		this.personType = PersonType.CLIENT;
+	}
+
+	public User (String name, String surname, PersonType personType) {
+		this(name, surname);
+		this.personType = personType;
+	}
+
 
 	public PersonType getPersonType () {
 		return personType;
@@ -17,10 +28,6 @@ public class User {
 
 	public void setPersonType (PersonType personType) {
 		this.personType = personType;
-	}
-
-	public User () {
-		this.id = nextId++;
 	}
 
 	public Long getId () {
@@ -31,20 +38,6 @@ public class User {
 		this.id = id;
 	}
 
-	public User (String name, String surname) {
-		this.id = nextId++;
-
-		this.name = name;
-		this.surname = surname;
-	}
-
-	public boolean isRegistered () {
-		return isRegistered;
-	}
-
-	public void setRegistered (boolean registered) {
-		isRegistered = registered;
-	}
 
 	@Override
 	public boolean equals (Object o) {
@@ -62,7 +55,7 @@ public class User {
 
 	@Override
 	public String toString () {
-		return id + " " + name + " " + surname;
+		return name + ", " + surname;
 	}
 
 	public String getName () {
