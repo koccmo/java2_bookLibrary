@@ -1,11 +1,27 @@
 package lv.javaguru.java2.library.core.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.util.Objects;
 
+@Entity
+@Table(name="books")
 public class Book {
 
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
+	@Column(name="title", nullable = false)
 	private String title;
+
+	@Column(name="author", nullable = false)
 	private String author;
 
 	public Book() { }
