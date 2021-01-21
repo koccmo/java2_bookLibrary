@@ -1,4 +1,4 @@
-package electronic_library.acceptance_tests;
+package electronic_library.acceptance_tests.lesson_5;
 
 import lesson_5.ApplicationContext;
 import lesson_5.core.requests.AddBookRequest;

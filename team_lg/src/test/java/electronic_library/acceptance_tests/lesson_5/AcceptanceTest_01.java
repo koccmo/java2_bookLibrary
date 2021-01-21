@@ -1,11 +1,11 @@
-package electronic_library.acceptance_tests;
+package electronic_library.acceptance_tests.lesson_5;
 
+import lesson_5.ApplicationContext;
 import lesson_5.core.requests.AddBookRequest;
 import lesson_5.core.requests.GetAllBooksRequest;
 import lesson_5.core.responses.GetAllBooksResponse;
 import lesson_5.core.services.AddBookService;
 import lesson_5.core.services.GetAllBooksService;
-import lesson_5.ApplicationContext;
 import org.junit.Test;
 
 import java.math.BigDecimal;
