@@ -7,7 +7,7 @@ Java Beans Specification
 
   JPA (ORM Frameworks API) - JSR 338
 
-  ORM Frameowrks  (Hibernate)
+  ORM Frameworks  (Hibernate)
 
   JDBC API
 
