@@ -1,78 +1,30 @@
 package internet_store.application.core.database;
 
 import internet_store.application.core.domain.Product;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
-@Profile("hibernate")
-@Transactional
-public class ProductRepository implements Database{
+public interface ProductRepository {
 
-    private final SessionFactory sessionFactory;
+    Long add(Product product);
 
-    public ProductRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    boolean deleteByProductId(Long productId);
 
-    @Override
-    public Long add(Product product) {
-        return (Long) sessionFactory.getCurrentSession().save(product);
-    }
+    boolean delete(Product product);
 
-    @Override
-    public boolean deleteByProductId(Long id) {
-        return true;
-    }
+    boolean deleteByProductName(String product);
 
-    @Override
-    public boolean delete(Product product) {
-        return false;
-    }
+    List<Product> findByProductName(String productName);
 
-    @Override
-    public boolean deleteByProductName(String product) {
-        return false;
-    }
+    List<Product> findByProductDescription(String productDescription);
 
-    @Override
-    public List<Product> findByProductName(String name) {
-        return null;
-    }
+    List<Product> findByNameAndDescription(String name, String description);
 
-    @Override
-    public List<Product> findByProductDescription(String description) {
-        return null;
-    }
+    List<Product> getProductList();
 
-    @Override
-    public List<Product> findByNameAndDescription(String name, String description) {
-        Query query = (Query) sessionFactory.getCurrentSession().createQuery(
-                "select p FROM Product p where name = : name AND description = : description");
-        query.setParameter("name", name);
-        query.setParameter("description", description);
-        return query.getResultList();
-    }
+    Optional<Product> findById(Long id);
 
-    @Override
-    public List<Product> getProductList() {
-        return null;
-    }
-
-    @Override
-    public Optional<Product> findById(Long id) {
-        return null;
-    }
-
-    @Override
-    public boolean changeProductName(Long id, String newName) {
-        return false;
-    }
+    boolean changeProductName(Long id, String newName);
 
 }

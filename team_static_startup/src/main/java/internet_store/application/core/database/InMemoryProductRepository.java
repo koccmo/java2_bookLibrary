@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Profile("inmemory")
-public class InMemoryDatabase implements Database {
+public class InMemoryProductRepository implements ProductRepository {
     private Long id = 1L;
     private final List<Product> productList = new ArrayList<>();
 

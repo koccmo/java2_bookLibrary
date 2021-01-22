@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DeleteProductByProductService {
 
     @Autowired
-    private Database database;
+    private ProductRepository productRepository;
     @Autowired
     private DeleteByProductValidator deleteByProductValidator;
 
@@ -25,12 +25,12 @@ public class DeleteProductByProductService {
             return new DeleteByProductResponse(errors);
         }
         Product productToDelete = new Product(request.getProductName(), request.getProductDescription(), request.getProductPrice());
-        database.delete(productToDelete);
+        productRepository.delete(productToDelete);
         return new DeleteByProductResponse(productToDelete);
     }
 
     public boolean delete(Product product) {
-        return database.delete(product);
+        return productRepository.delete(product);
     }
 
 

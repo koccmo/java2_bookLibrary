@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindProductsRequest;
 import internet_store.application.core.responses.CoreError;
@@ -21,7 +21,7 @@ public class FindProductsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private Database database;
+    @Autowired private ProductRepository productRepository;
     @Autowired private FindProductsRequestValidator validator;
 
     public FindProductsResponse execute(FindProductsRequest request) {
@@ -44,13 +44,13 @@ public class FindProductsService {
     private List<Product> search(FindProductsRequest request) {
         List<Product> products = null;
         if (request.isNameProvided() && !request.isDescriptionProvided()) {
-            products = database.findByProductName(request.getName());
+            products = productRepository.findByProductName(request.getName());
         }
         if (!request.isNameProvided() && request.isDescriptionProvided()) {
-            products = database.findByProductDescription(request.getDescription());
+            products = productRepository.findByProductDescription(request.getDescription());
         }
         if (request.isNameProvided() && request.isDescriptionProvided()) {
-            products = database.findByNameAndDescription(request.getName(), request.getDescription());
+            products = productRepository.findByNameAndDescription(request.getName(), request.getDescription());
         }
         return products;
     }

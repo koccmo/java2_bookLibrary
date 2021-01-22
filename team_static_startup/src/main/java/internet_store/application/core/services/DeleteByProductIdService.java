@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.ProductRepository;
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductIdResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DeleteByProductIdService {
 
     @Autowired
-    private Database database;
+    private ProductRepository productRepository;
     @Autowired
     private DeleteByProductIdValidator validator;
 
@@ -24,7 +24,7 @@ public class DeleteByProductIdService {
 
         if (!errors.isEmpty()) {
             return new DeleteByProductIdResponse(errors);
-        } else return new DeleteByProductIdResponse(database.deleteByProductId(id));
+        } else return new DeleteByProductIdResponse(productRepository.deleteByProductId(id));
     }
 
 }

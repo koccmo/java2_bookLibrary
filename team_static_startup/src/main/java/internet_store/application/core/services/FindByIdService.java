@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.ProductRepository;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.FindByIdResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class FindByIdService {
 
     @Autowired
-    private Database database;
+    private ProductRepository productRepository;
     @Autowired
     private FindByIdValidator validator;
 
@@ -25,7 +25,7 @@ public class FindByIdService {
         }
 
         Long id = Long.parseLong(request.getProductId());
-        return new FindByIdResponse(database.findById(id));
+        return new FindByIdResponse(productRepository.findById(id));
     }
 }
 

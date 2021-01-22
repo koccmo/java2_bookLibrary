@@ -18,12 +18,12 @@ import java.util.Optional;
 
 @Component
 @Profile("mysql")
-public class MySQLDatabase implements Database {
+public class JdbcProductRepository implements ProductRepository {
 
     @Autowired
     private final JdbcTemplate jdbcTemplate;
 
-    public MySQLDatabase(JdbcTemplate jdbcTemplate) {
+    public JdbcProductRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

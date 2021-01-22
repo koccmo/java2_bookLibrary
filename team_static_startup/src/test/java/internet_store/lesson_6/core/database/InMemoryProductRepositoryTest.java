@@ -1,6 +1,7 @@
-package internet_store.lesson_4.core.database;
+package internet_store.lesson_6.core.database;
 
-import internet_store.lesson_4.core.domain.Product;
+import internet_store.lesson_6.core.database.InMemoryDatabase;
+import internet_store.lesson_6.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class InMemoryDatabaseTest {
+public class InMemoryProductRepositoryTest {
     InMemoryDatabase productDatabase;
 
     @Before

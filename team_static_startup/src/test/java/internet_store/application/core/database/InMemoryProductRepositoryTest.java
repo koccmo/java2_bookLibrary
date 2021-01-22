@@ -10,12 +10,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @Profile("inmemory")
-public class InMemoryDatabaseTest {
-    InMemoryDatabase productDatabase;
+public class InMemoryProductRepositoryTest {
+    InMemoryProductRepository productDatabase;
 
     @Before
     public void setUp() {
-        productDatabase = new InMemoryDatabase();
+        productDatabase = new InMemoryProductRepository();
     }
 
     @Test
