@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import lv.javaguru.java2.library.core.database.Database;
+import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
@@ -24,7 +24,7 @@ import lv.javaguru.java2.library.matchers.BookMatcher;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBookServiceTest {
 
-	@Mock private Database database;
+	@Mock private BookRepository bookRepository;
 	@Mock private AddBookRequestValidator validator;
 	@InjectMocks private AddBookService service;
 
@@ -41,7 +41,7 @@ public class AddBookServiceTest {
 		assertEquals(response.getErrors().get(0).getField(), "title");
 		assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-		Mockito.verifyNoInteractions(database);
+		Mockito.verifyNoInteractions(bookRepository);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class AddBookServiceTest {
 		AddBookRequest request = new AddBookRequest("Title", "Author");
 		AddBookResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
-		Mockito.verify(database).save(
+		Mockito.verify(bookRepository).save(
 				argThat(new BookMatcher("Title", "Author")));
 	}
 

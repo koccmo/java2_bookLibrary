@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import lv.javaguru.java2.library.core.domain.Book;
-import lv.javaguru.java2.library.core.database.Database;
+import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
@@ -27,7 +27,7 @@ import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestVali
 @RunWith(MockitoJUnitRunner.class)
 public class SearchBooksServiceTest {
 
-	@Mock private Database database;
+	@Mock private BookRepository bookRepository;
 	@Mock private SearchBooksRequestValidator validator;
 	@InjectMocks private SearchBooksService service;
 
@@ -51,7 +51,7 @@ public class SearchBooksServiceTest {
 
 		Mockito.verify(validator).validate(request);
 		Mockito.verify(validator).validate(any());
-		Mockito.verifyNoInteractions(database);
+		Mockito.verifyNoInteractions(bookRepository);
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class SearchBooksServiceTest {
 
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author"));
-		Mockito.when(database.findByTitle("Title")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitle("Title")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -77,7 +77,7 @@ public class SearchBooksServiceTest {
 
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author"));
-		Mockito.when(database.findByAuthor("Author")).thenReturn(books);
+		Mockito.when(bookRepository.findByAuthor("Author")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -93,7 +93,7 @@ public class SearchBooksServiceTest {
 
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author"));
-		Mockito.when(database.findByTitleAndAuthor("Title", "Author")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitleAndAuthor("Title", "Author")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -111,7 +111,7 @@ public class SearchBooksServiceTest {
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author2"));
 		books.add(new Book("Title", "Author1"));
-		Mockito.when(database.findByTitle("Title")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitle("Title")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -129,7 +129,7 @@ public class SearchBooksServiceTest {
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author1"));
 		books.add(new Book("Title", "Author2"));
-		Mockito.when(database.findByTitle("Title")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitle("Title")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -147,7 +147,7 @@ public class SearchBooksServiceTest {
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author1"));
 		books.add(new Book("Title", "Author2"));
-		Mockito.when(database.findByTitle("Title")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitle("Title")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());
@@ -165,7 +165,7 @@ public class SearchBooksServiceTest {
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author1"));
 		books.add(new Book("Title", "Author2"));
-		Mockito.when(database.findByTitle("Title")).thenReturn(books);
+		Mockito.when(bookRepository.findByTitle("Title")).thenReturn(books);
 
 		SearchBooksResponse response = service.execute(request);
 		assertFalse(response.hasErrors());

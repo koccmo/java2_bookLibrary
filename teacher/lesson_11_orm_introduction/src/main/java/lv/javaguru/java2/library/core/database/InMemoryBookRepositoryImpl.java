@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
-
 import lv.javaguru.java2.library.core.domain.Book;
 
 //@Component
-class InMemoryDatabaseImpl implements Database {
+class InMemoryBookRepositoryImpl implements BookRepository {
 
 	private Long nextId = 1L;
 	private List<Book> books = new ArrayList<>();

@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
 
 //@Component
-class JdbcDatabaseImpl implements Database {
+class JdbcBookRepositoryImpl implements BookRepository {
 
 	@Autowired private JdbcTemplate jdbcTemplate;
 
