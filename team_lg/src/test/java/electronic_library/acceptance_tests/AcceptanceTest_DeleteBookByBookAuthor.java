@@ -2,13 +2,11 @@ package electronic_library.acceptance_tests;
 
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
-
-import electronic_library.core.requests.DeleteBookByTitleRequest;
+import electronic_library.core.requests.DeleteBookByAuthorRequest;
 import electronic_library.core.requests.GetAllBooksRequest;
 import electronic_library.core.responses.GetAllBooksResponse;
 import electronic_library.core.services.AddBookService;
-
-import electronic_library.core.services.DeleteBookByTitleService;
+import electronic_library.core.services.DeleteBookByAuthorService;
 import electronic_library.core.services.GetAllBooksService;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +18,9 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 @Profile("noJdbc")
-public class AcceptanceTest_DeleteBookByBookTitle {
+public class AcceptanceTest_DeleteBookByBookAuthor {
 
     private AnnotationConfigApplicationContext applicationContext;
-
 
     @Before
     public void setUp() {
@@ -35,10 +32,10 @@ public class AcceptanceTest_DeleteBookByBookTitle {
     }
 
     @Test
-    public void deleteByBookTitleWithoutErrors() {
+    public void deleteByBookAuthorWithoutErrors() {
 
-        DeleteBookByTitleRequest deleteRequest = new DeleteBookByTitleRequest("aaa");
-        getDeleteBookByTitleService().deleteBookByTitleResponse(deleteRequest);
+        DeleteBookByAuthorRequest deleteRequest = new DeleteBookByAuthorRequest("aaa");
+        getDeleteBookByAuthorService().deleteBookByAuthorResponse(deleteRequest);
 
         GetAllBooksRequest request = new GetAllBooksRequest();
         GetAllBooksResponse response = getAllBooksService().execute(request);
@@ -50,10 +47,10 @@ public class AcceptanceTest_DeleteBookByBookTitle {
     }
 
     @Test
-    public void deleteByBookTitleWithError() {
+    public void deleteByBookAuthorWithError() {
 
-        DeleteBookByTitleRequest deleteRequest = new DeleteBookByTitleRequest("");
-        getDeleteBookByTitleService().deleteBookByTitleResponse(deleteRequest);
+        DeleteBookByAuthorRequest deleteRequest = new DeleteBookByAuthorRequest("");
+        getDeleteBookByAuthorService().deleteBookByAuthorResponse(deleteRequest);
 
         GetAllBooksRequest request = new GetAllBooksRequest();
         GetAllBooksResponse response = getAllBooksService().execute(request);
@@ -71,5 +68,6 @@ public class AcceptanceTest_DeleteBookByBookTitle {
     private GetAllBooksService getAllBooksService() {
         return applicationContext.getBean(GetAllBooksService.class);
     }
-    private DeleteBookByTitleService getDeleteBookByTitleService() { return applicationContext.getBean(DeleteBookByTitleService.class); }
+    private DeleteBookByAuthorService getDeleteBookByAuthorService() { return applicationContext.getBean(DeleteBookByAuthorService.class); }
 }
+

@@ -2,13 +2,12 @@ package electronic_library.acceptance_tests;
 
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
-
-import electronic_library.core.requests.DeleteBookByTitleRequest;
+import electronic_library.core.requests.DeleteBookByIdRequest;
 import electronic_library.core.requests.GetAllBooksRequest;
+import electronic_library.core.responses.DeleteBookByIdResponse;
 import electronic_library.core.responses.GetAllBooksResponse;
 import electronic_library.core.services.AddBookService;
-
-import electronic_library.core.services.DeleteBookByTitleService;
+import electronic_library.core.services.DeleteBookByIdService;
 import electronic_library.core.services.GetAllBooksService;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +16,12 @@ import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @Profile("noJdbc")
-public class AcceptanceTest_DeleteBookByBookTitle {
+public class AcceptanceTest_DeleteBookById {
 
     private AnnotationConfigApplicationContext applicationContext;
-
 
     @Before
     public void setUp() {
@@ -35,41 +33,31 @@ public class AcceptanceTest_DeleteBookByBookTitle {
     }
 
     @Test
-    public void deleteByBookTitleWithoutErrors() {
+    public void deleteByBookIdWithoutErrors() {
 
-        DeleteBookByTitleRequest deleteRequest = new DeleteBookByTitleRequest("aaa");
-        getDeleteBookByTitleService().deleteBookByTitleResponse(deleteRequest);
+        DeleteBookByIdRequest deleteRequest = new DeleteBookByIdRequest(2L);
+        DeleteBookByIdResponse deleteResponse = getDeleteBookByIdService().deleteBookByIdResponse(deleteRequest);
 
         GetAllBooksRequest request = new GetAllBooksRequest();
         GetAllBooksResponse response = getAllBooksService().execute(request);
         assertEquals(1, response.getBooks().size());
 
-        assertEquals(response.getBooks().get(0).getBookTitle(), "bbb");
-        assertEquals(response.getBooks().get(0).getBookAuthor(), "bbb");
-
+        assertTrue(deleteResponse.isBookRemoved());
+        assertFalse(deleteResponse.hasErrors());
     }
 
     @Test
-    public void deleteByBookTitleWithError() {
-
-        DeleteBookByTitleRequest deleteRequest = new DeleteBookByTitleRequest("");
-        getDeleteBookByTitleService().deleteBookByTitleResponse(deleteRequest);
+    public void deleteByBookIdWhenNotBookWithThisId() {
+        DeleteBookByIdRequest deleteRequest = new DeleteBookByIdRequest(3L);
+        DeleteBookByIdResponse deleteResponse = getDeleteBookByIdService().deleteBookByIdResponse(deleteRequest);
 
         GetAllBooksRequest request = new GetAllBooksRequest();
         GetAllBooksResponse response = getAllBooksService().execute(request);
         assertEquals(2, response.getBooks().size());
+        assertFalse(deleteResponse.isBookRemoved());
 
-        assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
-        assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
-        assertEquals(response.getBooks().get(1).getBookTitle(), "bbb");
-        assertEquals(response.getBooks().get(1).getBookAuthor(), "bbb");
     }
-
-    private AddBookService getAddBookService() {
-        return applicationContext.getBean(AddBookService.class);
-    }
-    private GetAllBooksService getAllBooksService() {
-        return applicationContext.getBean(GetAllBooksService.class);
-    }
-    private DeleteBookByTitleService getDeleteBookByTitleService() { return applicationContext.getBean(DeleteBookByTitleService.class); }
+    private AddBookService getAddBookService() { return applicationContext.getBean(AddBookService.class); }
+    private GetAllBooksService getAllBooksService() { return applicationContext.getBean(GetAllBooksService.class); }
+    private DeleteBookByIdService getDeleteBookByIdService() { return applicationContext.getBean(DeleteBookByIdService.class); }
 }

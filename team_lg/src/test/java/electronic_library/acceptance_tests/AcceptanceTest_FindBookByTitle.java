@@ -1,25 +1,39 @@
-package electronic_library.acceptance_tests.lesson_5;
+package electronic_library.acceptance_tests;
 
-import lesson_5.ApplicationContext;
-import lesson_5.core.requests.AddBookRequest;
-import lesson_5.core.requests.FindBooksRequest;
-import lesson_5.core.requests.Ordering;
-import lesson_5.core.requests.Paging;
-import lesson_5.core.responses.FindBooksResponse;
-import lesson_5.core.services.AddBookService;
-import lesson_5.core.services.FindBooksService;
+import electronic_library.config.BookListConfiguration;
+import electronic_library.core.requests.AddBookRequest;
+import electronic_library.core.requests.FindBooksRequest;
+import electronic_library.core.requests.Ordering;
+import electronic_library.core.requests.Paging;
+import electronic_library.core.responses.FindBooksResponse;
+import electronic_library.core.services.AddBookService;
+import electronic_library.core.services.FindBooksService;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-public class AcceptanceTest_02 {
+@Profile("noJdbc")
+public class AcceptanceTest_FindBookByTitle {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private AnnotationConfigApplicationContext applicationContext;
+
+    @Before
+    public void setUp() {
+        applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        AddBookRequest addBookRequestOne = new AddBookRequest("aaa", "aaa", new BigDecimal("10.00"), 2010);
+        getAddBookService().execute(addBookRequestOne);
+        AddBookRequest addBookRequestTwo = new AddBookRequest("bbb", "bbb", new BigDecimal("11.00"), 2011);
+        getAddBookService().execute(addBookRequestTwo);
+    }
 
     @Test
-    public void findBooks() {
+    public void findBooksByTitleWithoutErrors() {
+
         AddBookRequest requestOne = new AddBookRequest("aaa", "aaa", new BigDecimal(10.00),2001);
         getAddBookService().execute(requestOne);
 
@@ -29,15 +43,18 @@ public class AcceptanceTest_02 {
         FindBooksRequest requestThree = new FindBooksRequest("aaa", null);
         FindBooksResponse response = getFindBooksService().execute(requestThree);
 
-        assertEquals(response.getBooks().size(), 2);
+        assertEquals(response.getBooks().size(), 3);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
         assertEquals(response.getBooks().get(1).getBookTitle(), "aaa");
-        assertEquals(response.getBooks().get(1).getBookAuthor(), "bbb");
+        assertEquals(response.getBooks().get(1).getBookAuthor(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookTitle(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookAuthor(), "bbb");
     }
 
     @Test
-    public void findBooksOrderingDescending() {
+    public void findBooksByTitleOrderingByAuthorDescending() {
+
         AddBookRequest requestOne = new AddBookRequest("aaa", "aaa", new BigDecimal(10.00),2001);
         getAddBookService().execute(requestOne);
 
@@ -48,15 +65,18 @@ public class AcceptanceTest_02 {
         FindBooksRequest requestThree = new FindBooksRequest("aaa", null, ordering);
         FindBooksResponse response = getFindBooksService().execute(requestThree);
 
-        assertEquals(response.getBooks().size(), 2);
+        assertEquals(response.getBooks().size(), 3);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(0).getBookAuthor(), "bbb");
         assertEquals(response.getBooks().get(1).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(1).getBookAuthor(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookTitle(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookAuthor(), "aaa");
     }
 
     @Test
-    public void findBooksOrderingAscending() {
+    public void findBooksByTitleOrderingByAuthorAscending() {
+
         AddBookRequest requestOne = new AddBookRequest("aaa", "aaa", new BigDecimal(10.00),2001);
         getAddBookService().execute(requestOne);
 
@@ -67,15 +87,18 @@ public class AcceptanceTest_02 {
         FindBooksRequest requestThree = new FindBooksRequest("aaa", null, ordering);
         FindBooksResponse response = getFindBooksService().execute(requestThree);
 
-        assertEquals(response.getBooks().size(), 2);
+        assertEquals(response.getBooks().size(), 3);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
         assertEquals(response.getBooks().get(1).getBookTitle(), "aaa");
-        assertEquals(response.getBooks().get(1).getBookAuthor(), "bbb");
+        assertEquals(response.getBooks().get(1).getBookAuthor(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookTitle(), "aaa");
+        assertEquals(response.getBooks().get(2).getBookAuthor(), "bbb");
     }
 
     @Test
-    public void findBooksOrderingPaging() {
+    public void findBooksByTitleByAuthorAscendingWithPaging() {
+
         AddBookRequest requestOne = new AddBookRequest("aaa", "aaa", new BigDecimal(10.00),2001);
         getAddBookService().execute(requestOne);
 
@@ -92,10 +115,6 @@ public class AcceptanceTest_02 {
         assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
     }
 
-    private AddBookService getAddBookService() {
-        return appContext.getBean(AddBookService.class);
-    }
-    private FindBooksService getFindBooksService() {
-        return appContext.getBean(FindBooksService.class);
-    }
+    private AddBookService getAddBookService() { return applicationContext.getBean(AddBookService.class); }
+    private FindBooksService getFindBooksService() { return applicationContext.getBean(FindBooksService.class); }
 }
