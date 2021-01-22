@@ -1,4 +1,4 @@
-package internet_store.application.core.database;
+package internet_store.application.core.database.product;
 
 import internet_store.application.core.domain.Product;
 import org.springframework.context.annotation.Profile;

@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.ProductRepository;
+import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.DeleteByProductNameRequest;
 import internet_store.application.core.responses.*;
 import internet_store.application.core.services.validators.DeleteByProductNameValidator;

@@ -1,5 +1,6 @@
 package internet_store.application.core.database;
 
+import internet_store.application.core.database.product.InMemoryProductRepository;
 import internet_store.application.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
