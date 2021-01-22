@@ -13,4 +13,8 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.27.Final'
 
 	compile group: 'org.apache.maven.plugins', name: 'maven-javadoc-plugin', version: '3.2.0'
+
+	//SLF4J Bridge -> error messages correction
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
 }
