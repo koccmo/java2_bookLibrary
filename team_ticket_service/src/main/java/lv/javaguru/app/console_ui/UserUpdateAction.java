@@ -1,21 +1,19 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.console_ui.Action;
-import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.request.admin.EditUserRequest;
+import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.response.admin.EditUserResponse;
-import lv.javaguru.app.core.services.EditUserService;
+import lv.javaguru.app.core.services.UserEditService;
 
 import java.util.Scanner;
 
-public class EditUserAction extends Action implements UIActions {
+public class UserUpdateAction extends Action implements UIActions {
 
-	private final EditUserService editUserService;
+	private final UserEditService userEditService;
 
-	public EditUserAction (EditUserService editUserService) {
-		this.editUserService = editUserService;
+	public UserUpdateAction (UserEditService userEditService) {
+		this.userEditService = userEditService;
 	}
 
 	private static void adminMode_printEditUser (User currentUser) {
@@ -24,7 +22,7 @@ public class EditUserAction extends Action implements UIActions {
 				"[1] Edit first name\n" +
 						"[2] Edit second name\n" +
 
-						"[0] Back");
+						"[0] Cancel");
 	}
 
 	@Override
@@ -32,8 +30,8 @@ public class EditUserAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter user ID:");
 		long id = BaseFunc.getMenuNumberFromUser();
 
-		EditUserRequest request = new EditUserRequest(id);
-		EditUserResponse response = editUserService.execute(request);
+		UserEditRequest request = new UserEditRequest(id);
+		EditUserResponse response = userEditService.execute(request);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -62,13 +60,15 @@ public class EditUserAction extends Action implements UIActions {
 		}
 	}
 
+
 	private void editSurnameAction (User user, Scanner scanner) {
 		BaseFunc.printHeader("Enter new surname:");
 		String input = scanner.nextLine();
 
-		EditUserRequest request = new EditUserRequest(user.getId());
-		request.setSurname(input);
-		EditUserResponse response = editUserService.executeSurnameEdit(request);
+		UserEditRequest request = new UserEditRequest(user.getId());
+		UserEditRequest.Surname surname = request.new Surname(input);
+
+		EditUserResponse response = userEditService.execute(surname);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -82,8 +82,10 @@ public class EditUserAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter new name:");
 		String input = scanner.nextLine();
 
-		EditUserRequest request = new EditUserRequest(user.getId(), input);
-		EditUserResponse response = editUserService.updateUserName(request);
+		UserEditRequest request = new UserEditRequest(user.getId());
+		UserEditRequest.Name name = request.new Name(input);
+
+		EditUserResponse response = userEditService.execute(name);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +

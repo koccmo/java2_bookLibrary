@@ -1,16 +1,16 @@
 package lv.javaguru.app.core.services.validators;
 
-import lv.javaguru.app.core.request.RegistrationRequest;
+import lv.javaguru.app.core.request.UserAddRequest;
 import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterRequestValidator extends Validator {
-	public RegisterRequestValidator () {
+public class AddUserRequestValidator extends Validator {
+	public AddUserRequestValidator () {
 	}
 
-	public List<CodeError> validate (RegistrationRequest request) {
+	public List<CodeError> validate (UserAddRequest request) {
 		List<CodeError> errorList = new ArrayList<>();
 
 		verifyNameAndSurname(request.getUser().getName(), "first name", errorList);

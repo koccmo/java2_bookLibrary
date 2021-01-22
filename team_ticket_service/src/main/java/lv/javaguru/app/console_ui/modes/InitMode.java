@@ -2,7 +2,7 @@ package lv.javaguru.app.console_ui.modes;
 
 import lv.javaguru.app.console_ui.ExitAction;
 import lv.javaguru.app.console_ui.LogInAction;
-import lv.javaguru.app.console_ui.RegisterAction;
+import lv.javaguru.app.console_ui.UserAddAction;
 import lv.javaguru.app.console_ui.UIActions;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.PersonType;
@@ -10,11 +10,13 @@ import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.services.LogInService;
-import lv.javaguru.app.core.services.RegisterService;
+import lv.javaguru.app.core.services.UserAddService;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
-import lv.javaguru.app.core.services.validators.RegisterRequestValidator;
+import lv.javaguru.app.core.services.validators.AddUserRequestValidator;
 import lv.javaguru.app.database.ReservationDatabase;
 import lv.javaguru.app.database.UserDatabase;
+
+import java.time.LocalDate;
 
 public class InitMode {
 	private static final ReservationDatabase RESERVATION_DATABASE = new ReservationDatabase();
@@ -24,9 +26,9 @@ public class InitMode {
 	private static final LogInService loginService = new LogInService(USER_DATABASE, RESERVATION_DATABASE, loginRequestValidator);
 	private static final UIActions logInAction = new LogInAction(loginService);
 
-	private static final RegisterRequestValidator registerRequestValidator = new RegisterRequestValidator();
-	private static final RegisterService registerService = new RegisterService(USER_DATABASE, registerRequestValidator);
-	private static final UIActions registerAction = new RegisterAction(registerService);
+	private static final AddUserRequestValidator ADD_USER_REQUEST_VALIDATOR = new AddUserRequestValidator();
+	private static final UserAddService ADD_USER_SERVICE = new UserAddService(USER_DATABASE, ADD_USER_REQUEST_VALIDATOR);
+	private static final UIActions registerAction = new UserAddAction(ADD_USER_SERVICE);
 
 	private static final UIActions exitAction = new ExitAction();
 
@@ -34,9 +36,10 @@ public class InitMode {
 		User admin = new User("admin", "admin", PersonType.ADMIN);
 		User user1 = new User("Sergejs", "Aleksejevs");
 		User user2 = new User("Bill", "Johnson");
+		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
-		Ticket ticket1 = new Ticket("Riga", "Paphos", "29-01-2021", "03-02-2021", "55");
-		Ticket ticket2 = new Ticket("London", "Paphos", "29-01-2021", "03-02-2021", "55");
+		Ticket ticket1 = new Ticket("Riga", "Paphos", flightDate, "55");
+		Ticket ticket2 = new Ticket("London", "Paphos", flightDate, "55");
 		Flight flight1 = new Flight(user1, ticket1);
 		Flight flight2 = new Flight(user2, ticket2);
 

@@ -23,7 +23,7 @@ public interface Database {
 
 	Ticket getTicketByFlightId (Long id);
 
-	User getReservationUser (Long id);
+	User getUserByFlightId (Long id);
 
 	boolean isUsersReservation (Long id, User user);
 

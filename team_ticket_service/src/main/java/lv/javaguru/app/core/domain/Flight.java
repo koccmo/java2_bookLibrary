@@ -43,7 +43,7 @@ public class Flight {
 	@Override
 	public String toString () {
 		return "id: " + id +
-				", " + user +
-				", " + ticket;
+				",\n\t" + user +
+				", \n\t" + ticket;
 	}
 }

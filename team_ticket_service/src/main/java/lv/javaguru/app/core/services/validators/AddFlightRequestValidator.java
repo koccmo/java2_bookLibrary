@@ -17,7 +17,6 @@ public class AddFlightRequestValidator {
 		errorList.addAll(validateTicketDepartureCity(request));
 		errorList.addAll(validateTicketDestinationCity(request));
 		errorList.addAll(validateTicketDepartureDate(request));
-		errorList.addAll(validateTicketReturnDate(request));
 
 		return errorList;
 	}
@@ -25,19 +24,19 @@ public class AddFlightRequestValidator {
 	private List<CodeError> validateTicketDepartureCity (AddFlightRequest request) {
 		List<CodeError> depCityError = new ArrayList<>();
 
-		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getFlight().getTicket().getOriginCity(), "departure city");
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getFlight().getTicket().getFromCity(), "departure city");
 		if (codeError.isPresent()) {
 			depCityError.add(codeError.get());
 			return depCityError;
 		}
 
-		strIsNotContainingDigits(request.getFlight().getTicket().getOriginCity(), "departure city").ifPresent(depCityError::add);
+		strIsNotContainingDigits(request.getFlight().getTicket().getFromCity(), "departure city").ifPresent(depCityError::add);
 
 		return depCityError;
 	}
 
 	private List<CodeError> validateTicketDestinationCity (AddFlightRequest request) {
-		String destinationCity = request.getFlight().getTicket().getDestinationCountry();
+		String destinationCity = request.getFlight().getTicket().getToCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -48,24 +47,15 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDepartureDate (AddFlightRequest request) {
-		String departDate = request.getFlight().getTicket().getDepartDate();
+		LocalDate date = request.getFlight().getTicket().getDate();
 
 		List<CodeError> errors = new ArrayList<>();
-		strIsDateFormat(departDate, "departure date").ifPresent(errors::add);
-		strIsDateAfter(departDate, "departure date").ifPresent(errors::add);
+
+		isDateAfter(date, "departure date").ifPresent(errors::add);
 
 		return errors;
 	}
 
-	private List<CodeError> validateTicketReturnDate (AddFlightRequest request) {
-		String returnDate = request.getFlight().getTicket().getReturnDate();
-
-		List<CodeError> errors = new ArrayList<>();
-		strIsDateFormat(returnDate, "Return date").ifPresent(errors::add);
-		strIsDateAfter(returnDate, "Return date").ifPresent(errors::add);
-
-		return errors;
-	}
 
 	private Optional<CodeError> strIsNotNullOrEmpty (String request, String field) {
 		return (isNullOrEmpty(request))
@@ -85,7 +75,7 @@ public class AddFlightRequestValidator {
 				: Optional.empty();
 	}
 
-	private Optional<CodeError> strIsDateAfter (String request, String field) {
+	private Optional<CodeError> isDateAfter (LocalDate request, String field) {
 		return (!isDateAfter(request))
 				? Optional.of(new CodeError(field, "Date shouldn't be in past!"))
 				: Optional.empty();
@@ -103,7 +93,8 @@ public class AddFlightRequestValidator {
 		try {
 			parseStrToDate(str);
 			return true;
-		} catch (Exception ignore) {
+		}
+		catch (Exception ignore) {
 			return false;
 		}
 	}
@@ -113,9 +104,7 @@ public class AddFlightRequestValidator {
 		return LocalDate.parse(str, formatter);
 	}
 
-	private boolean isDateAfter (String str) {
-		if (isRightDateFormat(str))
-			return parseStrToDate(str).isAfter(LocalDate.now());
-		return true;
+	private boolean isDateAfter (LocalDate date) {
+		return date.isAfter(LocalDate.now());
 	}
 }

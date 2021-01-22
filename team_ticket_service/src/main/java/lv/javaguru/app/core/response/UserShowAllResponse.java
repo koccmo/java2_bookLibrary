@@ -1,18 +1,17 @@
 package lv.javaguru.app.core.response;
 
-
 import lv.javaguru.app.core.domain.CodeError;
+import lv.javaguru.app.core.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowFlightResponse<T> extends ArrayList<T> {
+public class UserShowAllResponse<T> extends ArrayList<T> {
 
-	private final List<T> response;
+	private List<T> response;
 	private Class<T> responseClass;
 
-
-	public ShowFlightResponse (List<T> response) {
+	public UserShowAllResponse (List<T> response) {
 		this.response = response;
 	}
 

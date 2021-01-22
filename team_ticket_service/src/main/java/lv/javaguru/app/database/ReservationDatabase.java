@@ -59,7 +59,7 @@ public class ReservationDatabase implements Database {
 		return reservations.get(id).getTicket();
 	}
 
-	public User getReservationUser (Long id) {
+	public User getUserByFlightId (Long id) {
 		return reservations.get(id).getUser();
 	}
 

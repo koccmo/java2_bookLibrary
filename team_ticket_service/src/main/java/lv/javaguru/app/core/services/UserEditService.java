@@ -1,7 +1,7 @@
 package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.request.admin.EditUserRequest;
+import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.admin.EditUserResponse;
 import lv.javaguru.app.core.services.validators.EditUserValidator;
@@ -10,16 +10,16 @@ import lv.javaguru.app.database.UserDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditUserService {
+public class UserEditService {
 	private final UserDatabase userDatabase;
 	private final EditUserValidator validator;
 
-	public EditUserService (UserDatabase userDatabase, EditUserValidator validator) {
+	public UserEditService (UserDatabase userDatabase, EditUserValidator validator) {
 		this.userDatabase = userDatabase;
 		this.validator = validator;
 	}
 
-	public EditUserResponse execute (EditUserRequest request) {
+	public EditUserResponse execute (UserEditRequest request) {
 		List<CodeError> responseList = validateId(request.getId());
 
 		if (!responseList.isEmpty()) {
@@ -30,13 +30,14 @@ public class EditUserService {
 		return new EditUserResponse(user);
 	}
 
-	public EditUserResponse updateUserName (EditUserRequest request) {
-		List<CodeError> responseList = validator.validateName(request.getNewName());
+
+	public EditUserResponse execute (UserEditRequest.Name request) {
+		List<CodeError> responseList = validator.validateName(request.getName());
 
 		if (!responseList.isEmpty()) {
 			return new EditUserResponse(responseList);
 		}
-		userDatabase.getUserById(request.getId()).setName(request.getNewName());
+		userDatabase.getUserById(request.getId()).setName(request.getName());
 
 		return new EditUserResponse("Hoorray! name changed");
 	}
@@ -44,7 +45,7 @@ public class EditUserService {
 
 
 
-	public EditUserResponse executeSurnameEdit (EditUserRequest request) {
+	public EditUserResponse execute (UserEditRequest.Surname request) {
 		String surname = request.getSurname();
 
 		List<CodeError> errorList = validator.validateName(surname);

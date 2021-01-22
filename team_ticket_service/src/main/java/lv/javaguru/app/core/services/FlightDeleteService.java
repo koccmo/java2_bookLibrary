@@ -8,11 +8,11 @@ import lv.javaguru.app.database.Database;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteFlightService {
+public class FlightDeleteService {
 
 	private final Database reservations;
 
-	public DeleteFlightService (Database reservations) {
+	public FlightDeleteService (Database reservations) {
 		this.reservations = reservations;
 	}
 

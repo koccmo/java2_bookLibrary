@@ -15,13 +15,13 @@ import lv.javaguru.app.database.UserDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditFlightService {
+public class FlightEditService {
 	private final Database flightDatabase;
 	private final UserDatabase userDatabase;
 	private final EditFlightRequestValidator validator;
 
 
-	public EditFlightService (UserDatabase userDatabase, Database flightDatabase, EditFlightRequestValidator validator) {
+	public FlightEditService (UserDatabase userDatabase, Database flightDatabase, EditFlightRequestValidator validator) {
 		this.userDatabase = userDatabase;
 		this.flightDatabase = flightDatabase;
 		this.validator = validator;
@@ -49,6 +49,37 @@ public class EditFlightService {
 		return new EditFlightResponse(flight);
 	}
 
+	public EditFlightResponse executeUserNameUpdate (EditFlightRequest request) {
+		String name = request.getNewValue();
+
+		List<CodeError> errors = validator.validate(name);
+
+		if (!errors.isEmpty())
+			return new EditFlightResponse(errors);
+
+		flightDatabase.getUserByFlightId(request.getFlightId())
+				.setName(name);
+
+		String message = "Name was updated!";
+
+		return new EditFlightResponse(message);
+	}
+
+	public EditFlightResponse executeUserSurnameUpdate (EditFlightRequest request) {
+		String surname = request.getNewValue();
+
+		List<CodeError> errors = validator.validate(surname);
+
+		if (!errors.isEmpty())
+			return new EditFlightResponse(errors);
+
+		flightDatabase.getUserByFlightId(request.getFlightId())
+				.setSurname(surname);
+
+		String message = "Name was updated!";
+
+		return new EditFlightResponse(message);
+	}
 
 	public EditFlightResponse executeOriginCityUpdate (EditFlightRequest request) {
 		String originCity = request.getNewValue();
@@ -59,7 +90,7 @@ public class EditFlightService {
 			return new EditFlightResponse(errors);
 
 		flightDatabase.getTicketByFlightId(request.getFlightId())
-				.setOriginCity(originCity);
+				.setFromCity(originCity);
 
 		String message = "Origin city was updated!";
 
@@ -75,7 +106,7 @@ public class EditFlightService {
 			return new EditFlightResponse(errors);
 
 		flightDatabase.getTicketByFlightId(request.getId())
-				.setDestinationCity(destinationCity);
+				.setToCity(destinationCity);
 
 		String message = "Destination city was updated!";
 
@@ -86,18 +117,11 @@ public class EditFlightService {
 	public EditTicketDepartureDateResponse execute (EditTicketDepartureDateRequest request) {
 		List<CodeError> errors = new ArrayList<>();
 
-		flightDatabase.getTicketByFlightId(request.getId()).setDepartDate(request.getDepartureDate());
+		flightDatabase.getTicketByFlightId(request.getId()).setDate(request.getDepartureDate());
 
 		return new EditTicketDepartureDateResponse(errors);
 	}
 
-	public EditTicketReturnDateResponse execute (EditTicketArrivalDateRequest request) {
-		List<CodeError> errors = new ArrayList<>();
-
-		flightDatabase.getTicketByFlightId(request.getId()).setReturnDate(request.getReturnDate());
-
-		return new EditTicketReturnDateResponse(errors);
-	}
 
 	public EditTicketSeatResponse execute (EditTicketSeatRequest request) {
 		List<CodeError> errors = new ArrayList<>();

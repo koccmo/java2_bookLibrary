@@ -3,14 +3,14 @@ package lv.javaguru.app.console_ui;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.request.DeleteFlightRequest;
 import lv.javaguru.app.core.response.DeleteFlightResponse;
-import lv.javaguru.app.core.services.DeleteFlightService;
+import lv.javaguru.app.core.services.FlightDeleteService;
 
-public class DeleteFlightAction implements UIActions {
+public class FlightDeleteAction implements UIActions {
 
-    private final DeleteFlightService deleteFlightService;
+    private final FlightDeleteService flightDeleteService;
 
-    public DeleteFlightAction (DeleteFlightService deleteFlightService) {
-        this.deleteFlightService = deleteFlightService;
+    public FlightDeleteAction (FlightDeleteService flightDeleteService) {
+        this.flightDeleteService = flightDeleteService;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class DeleteFlightAction implements UIActions {
         long id = BaseFunc.getMenuNumberFromUser();
 
         DeleteFlightRequest request = new DeleteFlightRequest(id);
-        DeleteFlightResponse response = deleteFlightService.execute(request);
+        DeleteFlightResponse response = flightDeleteService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrorList().forEach(r -> System.out.println(r.getField() +

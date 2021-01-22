@@ -1,7 +1,7 @@
 package lv.javaguru.app.console_ui.modes;
 
 import lv.javaguru.app.console_ui.*;
-import lv.javaguru.app.console_ui.EditFlightAction;
+import lv.javaguru.app.console_ui.FlightUpdateAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.services.*;
@@ -24,17 +24,17 @@ public class UserMode {
 
 	public UserMode (UserDatabase userDatabase, Database flightDatabase) {
 
-		AddFlightService addFlightService = new AddFlightService(flightDatabase, validator);
-		DeleteFlightService deleteFlightService = new DeleteFlightService(flightDatabase);
-		ShowFlightService showFlightService = new ShowFlightService(userDatabase, flightDatabase);
-		EditFlightService editFlightService = new EditFlightService(userDatabase, flightDatabase, EDIT_FLIGHT_REQUEST_VALIDATOR);
+		FlightAddService flightAddService = new FlightAddService(flightDatabase, validator);
+		FlightDeleteService flightDeleteService = new FlightDeleteService(flightDatabase);
+		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, flightDatabase);
+		FlightEditService flightEditService = new FlightEditService(userDatabase, flightDatabase, EDIT_FLIGHT_REQUEST_VALIDATOR);
 
 		LogOutService logOutService = new LogOutService(userDatabase);
 
-		this.addFlightAction = new AddFlightAction(addFlightService);
-		this.showFlightAction = new ShowFlightsAction(showFlightService);
-		this.editFlightAction = new EditFlightAction(editFlightService);
-		this.deleteFlight = new DeleteFlightAction(deleteFlightService);
+		this.addFlightAction = new FlightAddAction(flightAddService);
+		this.showFlightAction = new FlightShowAllAction(flightShowAllService);
+		this.editFlightAction = new FlightUpdateAction(flightEditService);
+		this.deleteFlight = new FlightDeleteAction(flightDeleteService);
 		this.logOutAction = new LogOutAction(logOutService);
 	}
 
@@ -69,7 +69,7 @@ public class UserMode {
 	private static void userMode_printMainMenu (User currentUser) {
 		BaseFunc.printHeader("MENU", currentUser);
 		System.out.println(
-				"[1] Add flight to list\n" +
+				"[1] Add flight\n" +
 						"[2] Show all flights\n" +
 						"[3] Update flight\n" +
 						"[4] Delete flight\n" +

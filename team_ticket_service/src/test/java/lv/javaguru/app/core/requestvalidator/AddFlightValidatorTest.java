@@ -1,5 +1,6 @@
 package lv.javaguru.app.core.requestvalidator;
 
+import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
@@ -7,48 +8,57 @@ import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class AddFlightValidatorTest {
 
-    private AddFlightRequestValidator validator;
+	private AddFlightRequestValidator validator;
 
-    @Test
-    public void validPerson() {
-        validator = new AddFlightRequestValidator();
-        User user = new User("Sergejs", "Aleksejevs");
-        Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
-     //   Reservation reservation = new Reservation(person, ticket);
-     //   AddTicketRequest request = new AddTicketRequest(reservation);
+	@Test
+	public void validPerson () {
+		validator = new AddFlightRequestValidator();
+		User user = new User("Sergejs", "Aleksejevs");
+		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
-       /// List<CodeError> errors = validator.validate(request);
-    //    assertEquals("Failed!", 0, errors.size());
-    }
+		Ticket ticket = new Ticket("Riga", "London", flightDate, "11A");
+		//   Reservation reservation = new Reservation(person, ticket);
+		//   AddTicketRequest request = new AddTicketRequest(reservation);
 
-    @Test
-    public void noNameTest() {
-        validator = new AddFlightRequestValidator();
-        User user = new User("", "Aleksejevs");
-        Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
+		/// List<CodeError> errors = validator.validate(request);
+		//    assertEquals("Failed!", 0, errors.size());
+	}
 
-     //   Reservation reservation = new Reservation(person, ticket);
+	@Test
+	public void noNameTest () {
+		validator = new AddFlightRequestValidator();
+		User user = new User("", "Aleksejevs");
+		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
-      //  AddTicketRequest request = new AddTicketRequest(reservation);
+		Ticket ticket = new Ticket("Riga", "London", flightDate, "11A");
 
-    //    List<CodeError> errors = validator.validate(request);
-   //     assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());
-    }
+		//   Reservation reservation = new Reservation(person, ticket);
 
-    @Test
-    @Ignore
-    public void noSurnameTest() {
-        validator = new AddFlightRequestValidator();
-        User user = new User("Sergejs", "");
-        Ticket ticket = new Ticket("Riga", "London", "12.11.2020", "22.11.2020", "11A");
+		//  AddTicketRequest request = new AddTicketRequest(reservation);
 
-   //  Reservation reservation = new Reservation(person, ticket);
+		//    List<CodeError> errors = validator.validate(request);
+		//     assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());
+	}
 
-   //  AddTicketRequest request = new AddTicketRequest(reservation);
+	@Test
+	@Ignore
+	public void noSurnameTest () {
+		validator = new AddFlightRequestValidator();
+		User user = new User("Sergejs", "");
+		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
-   //  List<CodeError> errors = validator.validate(request);
-   //  assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());
-    }
+		Ticket ticket = new Ticket("Riga", "London", flightDate, "11A");
+
+		//  Reservation reservation = new Reservation(person, ticket);
+
+		//  AddTicketRequest request = new AddTicketRequest(reservation);
+
+		//  List<CodeError> errors = validator.validate(request);
+		//  assertEquals("Failed!", "[CodeError{field='personsName', message='Wrong name!'}]", errors.toString());
+	}
 }

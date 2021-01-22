@@ -8,12 +8,12 @@ import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.List;
 
-public class AddFlightService {
+public class FlightAddService {
 
 	private final Database flightDatabase;
 	private final AddFlightRequestValidator validator;
 
-	public AddFlightService (Database flightDatabase, AddFlightRequestValidator validator) {
+	public FlightAddService (Database flightDatabase, AddFlightRequestValidator validator) {
 		this.flightDatabase = flightDatabase;
 		this.validator = validator;
 	}

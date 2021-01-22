@@ -46,5 +46,8 @@ public class UserDatabase {
 		return userDatabase.containsKey(id);
 	}
 
-
+	public boolean deleteUserById (Long id) {
+		User user = userDatabase.get(id);
+		return userDatabase.remove(id, user);
+	}
 }

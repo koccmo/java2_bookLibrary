@@ -2,22 +2,25 @@ package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.Flight;
-import lv.javaguru.app.core.services.AddFlightService;
+import lv.javaguru.app.core.services.FlightAddService;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.response.AddFlightResponse;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddFlightAction extends Action implements UIActions {
+public class FlightAddAction extends Action implements UIActions {
 
-	private final AddFlightService addFlightService;
+	private final FlightAddService flightAddService;
 
-	public AddFlightAction (AddFlightService addFlightService) {
-		this.addFlightService = addFlightService;
+	public FlightAddAction (FlightAddService flightAddService) {
+		this.flightAddService = flightAddService;
 	}
 
 	private static final Map<String, List<String>> cityOrigin = new HashMap<>() {{
@@ -66,7 +69,7 @@ public class AddFlightAction extends Action implements UIActions {
 		Flight flight = new Flight(currUser, ticket);
 
 		AddFlightRequest request = new AddFlightRequest(flight);
-		AddFlightResponse response = addFlightService.execute(request);
+		AddFlightResponse response = flightAddService.execute(request);
 
 		if (response.hasErrors())
 			response.getErrorList().forEach(System.out::println);
@@ -93,29 +96,49 @@ public class AddFlightAction extends Action implements UIActions {
 	private void fillTicket (Ticket ticket) {
 		Scanner scanner = new Scanner(System.in);
 
+	/*	acquireOriginCountry(ticket);
+		if (ticket.isCanceled())
+			return;
+		acquireOriginCity(ticket);*/
 		acquireOriginCountryAndCity(ticket);
 		if (ticket.isCanceled())
 			return;
-		acquireDestinationCountryAndCity(ticket);
 
+		acquireDestinationCountry(ticket);
+		if (ticket.isCanceled())
+			return;
+		acquireDestinationCity(ticket);
 		if (ticket.isCanceled())
 			return;
 
-		System.out.println("Enter departure date (format: dd-MM-yyyy):");
-		String departureDate = scanner.nextLine();
-		departureDate = departureDate.trim();
-		ticket.setDepartDate(departureDate);
+		acquireDepartureDate(ticket);
+		if (ticket.isCanceled())
+			return;
 
-		System.out.println("Enter return date (format: dd-MM-yyyy):");
-		String returnDate = scanner.nextLine();
-		returnDate = returnDate.trim();
-		ticket.setReturnDate(returnDate);
 
 		System.out.println("Enter seat: ");
 		String seat = scanner.nextLine();
 		seat = seat.trim();
 		ticket.setSeat(seat);
 
+	}
+
+	private static List<LocalDate> departEvery (int[] dayOfWeek) {
+		LocalDate now = LocalDate.now();
+		LocalDate next;
+		int k = 0;
+
+		List<LocalDate> dates = new ArrayList<>();
+
+		for (int i = 0; i < 8; i++) {
+			int day = dayOfWeek[k++];
+			if (k == dayOfWeek.length)
+				k = 0;
+			next = now.with(TemporalAdjusters.next(DayOfWeek.of(day)));
+			now = next;
+			dates.add(next);
+		}
+		return dates;
 	}
 
 
@@ -155,50 +178,115 @@ public class AddFlightAction extends Action implements UIActions {
 		return scanner.nextLine();
 	}
 
-	private static void acquireDestinationCountryAndCity (Ticket ticket) {
+	private static void acquireOriginCountryAndCity (Ticket ticket) {
+		while (!ticket.isOriginSelected()) {
+			acquireOriginCountry(ticket);
+			acquireOriginCity(ticket);
+		}
+	}
+
+
+	private static void acquireOriginCountry (Ticket ticket) {
+		String input;
+		ticket.setFromCountry(null);
+
+		while (!ticket.isCanceled()) {
+			BaseFunc.printHeader("SELECT ORIGIN COUNTRY:");
+			printMap(countryOrigin);
+
+			input = getUserInput();
+
+			if (isInputValid(input)) {
+				if (input.equalsIgnoreCase("X"))
+					ticket.setCanceled(true);
+
+				int index = Integer.parseInt(input);
+
+				if (index != 0 && countryOrigin.get(index) != null) {
+					String country = countryOrigin.get(index);
+					ticket.setFromCountry(country);
+
+					return;
+				}
+			}
+		}
+	}
+
+	private static void acquireOriginCity (Ticket ticket) {
+		List<String> cities = cityOrigin.get(ticket.getFromCountry());
+
+		String newInput;
+
+		ticket.setFromCity(null);
+
+		while (!ticket.isCanceled()) {
+			BaseFunc.printHeader("SELECT ORIGIN CITY:");
+			printList(cities);
+
+			newInput = getUserInput();
+
+			if (isInputValid(newInput)) {
+				if (newInput.equalsIgnoreCase("0")) {
+					break;
+				}
+				else if (newInput.equalsIgnoreCase("X")) {
+					ticket.setCanceled(true);
+					return;
+				}
+				else {
+					try {
+						int i = Integer.parseInt(newInput) - 1;
+						ticket.setFromCity(cities.get(i));
+
+						return;
+					}
+					catch (Exception ignore) {
+					}
+				}
+			}
+		}
+	}
+
+	private static void acquireDestinationCountry (Ticket ticket) {
 		String input;
 
-		ticket.setFinished(false);
-		ticket.setCanceled(false);
-
-		while (!ticket.isCanceled() && !ticket.isFinished()) {
-			BaseFunc.printHeader("Select destination country:");
+		while (!ticket.isCanceled()) {
+			BaseFunc.printHeader("SELECT DESTINATION COUNTRY:");
 
 			printMap(destinationCountry);
 
 			input = getUserInput();
 
 			if (isInputValid(input)) {
-				if (input.equalsIgnoreCase("0"))
-					break;
-
-				else if (input.equalsIgnoreCase("X"))
+				if (input.equalsIgnoreCase("X"))
 					ticket.setCanceled(true);
 
-				else if (destinationCountry.get(Integer.valueOf(input)) != null) {
-					String country = destinationCountry.get(Integer.valueOf(input));
-					ticket.setDestinationCountry(country);
+				int index = Integer.parseInt(input);
 
-					acquireDestinationCity(ticket);
+				if (index != 0 && destinationCountry.get(index) != null) {
+					String country = destinationCountry.get(index);
+					ticket.setToCountry(country);
+
+					return;
 				}
 			}
 		}
-		BaseFunc.printLineSeparator();
 	}
 
 	private static void acquireDestinationCity (Ticket ticket) {
-		List<String> cities = destinationCity.get(ticket.getDestinationCountry());
+		List<String> cities = destinationCity.get(ticket.getToCountry());
 
 		String newInput;
 
-		while (true) {
+		while (!ticket.isCanceled()) {
+			BaseFunc.printHeader("SELECT DESTINATION CITY:");
 			printList(cities);
 
 			newInput = getUserInput();
 
 			if (isInputValid(newInput)) {
 				if (newInput.equalsIgnoreCase("0")) {
-					return;
+					break;
 				}
 				else if (newInput.equalsIgnoreCase("X")) {
 					ticket.setCanceled(true);
@@ -207,71 +295,44 @@ public class AddFlightAction extends Action implements UIActions {
 				else {
 					try {
 						int i = Integer.parseInt(newInput) - 1;
-						ticket.setDestinationCity(cities.get(i));
-						ticket.setFinished(true);
+						ticket.setToCity(cities.get(i));
+
 						return;
-					} catch (Exception ignore) {
+					}
+					catch (Exception ignore) {
 					}
 				}
 			}
 		}
 	}
 
-	private static void acquireOriginCountryAndCity (Ticket ticket) {
+	private static void acquireDepartureDate (Ticket ticket) {
 		String input;
 
-		ticket.setFinished(false);
-		ticket.setCanceled(false);
+		while (!ticket.isCanceled()) {
+			BaseFunc.printHeader("SELECT DATE:");
+			List<LocalDate> dates = new ArrayList<>();
 
-		while (!ticket.isCanceled() && !ticket.isFinished()) {
-			printMap(countryOrigin);
+			if (ticket.getToCity().equals("Paphos"))
+				dates.addAll(departEvery(new int[]{2, 6}));
+			else if (ticket.getToCity().equals("Malta"))
+				dates.addAll(departEvery(new int[]{4, 7}));
+
+			printDates(dates);
 
 			input = getUserInput();
 
 			if (isInputValid(input)) {
-				if (input.equalsIgnoreCase("0"))
-					break;
-
-				else if (input.equalsIgnoreCase("X"))
+				if (input.equalsIgnoreCase("X"))
 					ticket.setCanceled(true);
 
-				else if (countryOrigin.get(Integer.valueOf(input)) != null) {
-					String country = countryOrigin.get(Integer.valueOf(input));
-					ticket.setOriginCountry(country);
+				int index = Integer.parseInt(input);
 
-					acquireOriginCity(ticket);
-				}
-			}
-		}
-		BaseFunc.printLineSeparator();
-	}
+				if (index != 0 && dates.get(index - 1) != null) {
+					LocalDate date = dates.get(index - 1);
+					ticket.setDate(date);
 
-	private static void acquireOriginCity (Ticket ticket) {
-		List<String> cities = cityOrigin.get(ticket.getOriginCountry());
-
-		String newInput;
-
-		while (true) {
-			printList(cities);
-
-			newInput = getUserInput();
-
-			if (isInputValid(newInput)) {
-				if (newInput.equalsIgnoreCase("0")) {
 					return;
-				}
-				else if (newInput.equalsIgnoreCase("X")) {
-					ticket.setCanceled(true);
-					return;
-				}
-				else {
-					try {
-						int i = Integer.parseInt(newInput) - 1;
-						ticket.setOriginCity(cities.get(i));
-						ticket.setFinished(true);
-						return;
-					} catch (Exception ignore) {
-					}
 				}
 			}
 		}
@@ -286,6 +347,12 @@ public class AddFlightAction extends Action implements UIActions {
 		for (int i = 1; i <= list.size(); i++)
 			System.out.println("[" + i + "] " + list.get(i - 1));
 		System.out.println("[0] Back");
+		System.out.println("\n[X] Cancel");
+	}
+
+	private static void printDates (List<LocalDate> list) {
+		for (int i = 1; i <= list.size(); i++)
+			System.out.println("[" + i + "] " + list.get(i - 1));
 		System.out.println("\n[X] Cancel");
 	}
 

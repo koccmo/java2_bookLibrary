@@ -31,7 +31,7 @@ public class EditFlightResponse extends Response {
 		return id;
 	}
 
-	public Flight getReservation () {
+	public Flight getFlight () {
 		return flight;
 	}
 
