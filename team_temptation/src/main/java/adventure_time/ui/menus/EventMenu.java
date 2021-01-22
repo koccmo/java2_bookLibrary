@@ -1,4 +1,4 @@
-package adventure_time.menus;
+package adventure_time.ui.menus;
 
 public class EventMenu implements SubjectMenu {
 
