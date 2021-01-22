@@ -1,9 +1,8 @@
 package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.core.request.LogOutRequest;
-import lv.javaguru.app.core.response.CodeError;
+import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogOutResponse;
-import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
 
 import java.util.ArrayList;

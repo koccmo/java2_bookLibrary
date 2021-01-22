@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
-import lv.javaguru.java2.library.core.database.Database;
+import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
@@ -15,7 +15,7 @@ import lv.javaguru.java2.library.core.services.validators.AddBookRequestValidato
 @Component
 public class AddBookService {
 
-	@Autowired private Database database;
+	@Autowired private BookRepository bookRepository;
 	@Autowired private AddBookRequestValidator validator;
 
 	public AddBookResponse execute(AddBookRequest request) {
@@ -25,7 +25,7 @@ public class AddBookService {
 		}
 
 		Book book = new Book(request.getTitle(), request.getAuthor());
-		database.save(book);
+		bookRepository.save(book);
 
 		return new AddBookResponse(book);
 	}

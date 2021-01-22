@@ -1,30 +1,29 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface Database {
-	void addReservation (Reservation reservation);
+	void addReservation (Flight flight);
 
-	void removeReservation (Reservation reservation);
+	void removeReservation (Flight flight);
 
 	void removeReservationById (Long id);
 
-	Reservation getReservationById (Long id);
+	Flight getFlightById (Long id);
 
-	List<Reservation> getAllReservations ();
+	List<Flight> getAllReservations ();
 
-	List<Reservation> getAllUserReservations (User user);
+	List<Flight> getAllUserReservations (User user);
 
 	boolean containsKey (Long id);
 
-	Ticket getReservationTicket (Long id);
+	Ticket getTicketByFlightId (Long id);
 
-	User getReservationUser (Long id);
+	User getUserByFlightId (Long id);
 
 	boolean isUsersReservation (Long id, User user);
 
