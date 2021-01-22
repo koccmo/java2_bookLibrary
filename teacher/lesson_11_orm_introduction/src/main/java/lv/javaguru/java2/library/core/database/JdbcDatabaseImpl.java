@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
 
-@Component
+//@Component
 class JdbcDatabaseImpl implements Database {
 
 	@Autowired private JdbcTemplate jdbcTemplate;

@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name="books")
+@Table(name = "books")
 public class Book {
 
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name="title", nullable = false)
