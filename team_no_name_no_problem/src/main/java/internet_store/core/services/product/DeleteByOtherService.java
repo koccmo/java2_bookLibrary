@@ -42,7 +42,8 @@ public class DeleteByOtherService {
                 deleteProductByOtherRequest.getEndPrice())) {
             return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
-        if (isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice())){
+        if (isDescriptionFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getDescription(),deleteProductByOtherRequest.getStartPrice(),
+                deleteProductByOtherRequest.getEndPrice())){
             return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
         }
         if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
