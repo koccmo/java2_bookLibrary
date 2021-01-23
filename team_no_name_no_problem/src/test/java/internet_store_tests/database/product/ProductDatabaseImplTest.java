@@ -164,14 +164,16 @@ public class ProductDatabaseImplTest {
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
 
-        productDatabase.deleteAllByTitle("Refrigerator");
+        boolean resultOfDeletingRefrigerator = productDatabase.deleteAllByTitle("Refrigerator");
 
+        assertTrue(resultOfDeletingRefrigerator);
         assertFalse(productDatabase.containsProduct(refrigerator));
         assertTrue(productDatabase.containsProduct(laptopAcer));
         assertTrue(productDatabase.containsProduct(laptopDell));
 
-        productDatabase.deleteAllByTitle("Laptop");
+        boolean resultOfDeletingLaptop = productDatabase.deleteAllByTitle("Laptop");
 
+        assertTrue(resultOfDeletingLaptop);
         assertFalse(productDatabase.containsProduct(laptopDell));
         assertFalse(productDatabase.containsProduct(laptopAcer));
     }
@@ -184,9 +186,11 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        productDatabase.deleteAllByDescription("Acer");
-        productDatabase.deleteAllByDescription("Dell");
+       boolean resultOfDeletingAcer = productDatabase.deleteAllByDescription("Acer");
+       boolean resultOfDeletingDell = productDatabase.deleteAllByDescription("Dell");
 
+       assertTrue(resultOfDeletingAcer);
+        assertTrue(resultOfDeletingDell);
         assertTrue(productDatabase.containsProduct(refrigerator));
         assertFalse(productDatabase.containsProduct(laptopAcer));
         assertFalse(productDatabase.containsProduct(laptopDell));
@@ -204,13 +208,36 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        productDatabase.deleteAllByPriceRange(4,400);
+        boolean resultOfDeletingByPrice = productDatabase.deleteAllByPriceRange(4,400);
 
+        assertTrue(resultOfDeletingByPrice);
         assertTrue(productDatabase.containsProduct(tv));
         assertFalse(productDatabase.containsProduct(tabletPc));
         assertFalse(productDatabase.containsProduct(laptopAcer));
         assertFalse(productDatabase.containsProduct(laptopDell));
         assertFalse(productDatabase.containsProduct(laptopAcer));
         assertFalse(productDatabase.containsProduct(refrigerator));
+    }
+
+    @Test
+    public void deleteAllByTitleAndDescriptionTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
+
+        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertFalse(productDatabase.containsProduct(refrigerator));
+        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+
+        boolean resultOfDeletingLaptop = productDatabase.deleteAllByTitle("Laptop");
+
+        assertTrue(resultOfDeletingLaptop);
+        assertFalse(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
     }
 }

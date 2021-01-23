@@ -13,6 +13,8 @@ public class Order {
 
     private Integer sumTotal;
 
+    public Order() {}
+
     public Order (Customer customer, Map <Product, Integer> shoppingCart, Integer sumTotal){
         this.customer = customer;
         this.shoppingCart = shoppingCart;
@@ -36,7 +38,11 @@ public class Order {
     }
 
     public Integer getSumTotal() {
-        return sumTotal;
+        Integer sum = 0;
+        for (Product product : shoppingCart.keySet()) {
+            sum += shoppingCart.get(product) * product.getPrice();
+        }
+        return sum;
     }
 
     @Override
@@ -62,12 +68,10 @@ public class Order {
 
     private String shoppingCartToStringForPrint (Map<Product, Integer> shoppingCart) {
         String result = "";
-        Integer sum = 0;
         for (Product product : shoppingCart.keySet()) {
             result += product + " " + shoppingCart.get(product) + "\n";
-            sum += shoppingCart.get(product) * product.getPrice();
         }
-        result += "Sum = " + sum + " EUR\n";
+        result += "Sum = " + sumTotal + " EUR\n";
         return result;
     }
 }

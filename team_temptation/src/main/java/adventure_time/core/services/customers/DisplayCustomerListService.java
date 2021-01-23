@@ -11,8 +11,12 @@ public class DisplayCustomerListService {
 
     private DatabaseCustomers databaseCustomers;
 
-    public List<Customers> getCustomersList () {
-        return databaseCustomers.getCustomersList();
+    public List<Customers> getActiveCustomersList () {
+        return databaseCustomers.findAllActiveCustomers();
+    }
+
+    public List<Customers> getInactiveCustomersList () {
+        return databaseCustomers.findAllInactiveCustomers();
     }
 
 }

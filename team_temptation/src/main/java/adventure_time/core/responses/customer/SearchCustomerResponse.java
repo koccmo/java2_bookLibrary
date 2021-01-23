@@ -8,15 +8,15 @@ import java.util.List;
 
 public class SearchCustomerResponse extends CoreResponse {
 
-    private List<Customers> customers;
+    private Customers customer;
 
-    public SearchCustomerResponse(List<Customers> customers, List<CoreError> errors) {
+    public SearchCustomerResponse(Customers customer, List<CoreError> errors) {
         super(errors);
-        this.customers = customers;
+        this.customer = customer;
     }
 
-    public List<Customers> getCustomers() {
-        return customers;
+    public Customers getCustomer () {
+        return customer;
     }
 
 }

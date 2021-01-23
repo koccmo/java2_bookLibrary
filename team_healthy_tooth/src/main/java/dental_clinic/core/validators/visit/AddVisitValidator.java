@@ -21,6 +21,7 @@ public class AddVisitValidator {
 
         coreErrors.addAll(doctorValidationErrors(addVisitRequest));
 
+        coreErrors.addAll(manipulationIdsValidationErrors(addVisitRequest.getManipulationsIds()));
 
         return coreErrors;
     }
@@ -75,6 +76,14 @@ public class AddVisitValidator {
         }
         coreErrors.add(new CoreError("doctor", "Not id, not name surname"));
         return coreErrors;
+    }
+
+    private List<CoreError> manipulationIdsValidationErrors(List<Long> ids) {
+        List<CoreError> errors = new ArrayList<>();
+        for (Long id : ids) {
+            errors.addAll(idValidationErrors(id));
+        }
+        return errors;
     }
 
     private boolean isIdAdded(String text) {

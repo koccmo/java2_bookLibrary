@@ -1,0 +1,45 @@
+package lv.javaguru.app.console_ui;
+
+import lv.javaguru.app.console_ui.utility.TicketFiller;
+import lv.javaguru.app.core.domain.Flight;
+import lv.javaguru.app.core.services.FlightAddService;
+import lv.javaguru.app.core.domain.User;
+import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.core.request.AddFlightRequest;
+import lv.javaguru.app.core.response.AddFlightResponse;
+
+public class FlightAddAction extends Action implements UIActions {
+
+	private final FlightAddService flightAddService;
+
+	public FlightAddAction (FlightAddService flightAddService) {
+		this.flightAddService = flightAddService;
+	}
+
+
+	@Override
+	public void execute () {
+		Ticket ticket = new Ticket();
+
+		TicketFiller filler = new TicketFiller(ticket);
+
+		if (!filler.fill()) {
+			System.out.println("Canceled!");
+			return;
+		}
+
+		User currUser = getLoggedInUser();
+		Flight flight = new Flight(currUser, ticket);
+
+		AddFlightRequest request = new AddFlightRequest(flight);
+		AddFlightResponse response = flightAddService.execute(request);
+
+		if (response.hasErrors())
+			response.getErrorList().forEach(System.out::println);
+		else
+			System.out.println("Your reservation was added to list.");
+	}
+
+
+}
+

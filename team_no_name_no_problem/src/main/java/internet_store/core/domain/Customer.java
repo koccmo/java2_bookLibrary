@@ -11,6 +11,8 @@ public class Customer {
     private String address;
     private String email;
 
+    public Customer() { }
+
     public Customer(String name, String surname, String phoneNumber, String address, String email) {
         this.name = name;
         this.surname = surname;
