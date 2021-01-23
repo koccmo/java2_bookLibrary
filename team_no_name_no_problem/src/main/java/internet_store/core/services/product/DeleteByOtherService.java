@@ -55,13 +55,28 @@ public class DeleteByOtherService {
         if (isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice())) {
             return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
         }
-        if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
+        if (!isTitleAndDescriptionAndPriceNotEmptyForDelete(deleteProductByOtherRequest.getTitle(), deleteProductByOtherRequest.getDescription(),
+                deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice())) {
+            return deleteByTitleAndDescriptionIsProvided(deleteProductByOtherRequest);
+        }
+        if (!isTitleAndDescriptionFilledForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getDescription())) {
+            return deleteByTitleAndDescriptionIsProvided(deleteProductByOtherRequest);
+        }
+        if (!isTitleFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getStartPrice(),
+                deleteProductByOtherRequest.getEndPrice())) {
             return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
         }
-        if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getDescription()) &&
-                (!isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice()))) {
+        if (isDescriptionFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getDescription(),deleteProductByOtherRequest.getStartPrice(),
+                deleteProductByOtherRequest.getEndPrice())){
+            return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
+        }
+        if (isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
+            return deleteByTitleIsProvidedForDelete(deleteProductByOtherRequest);
+        }
+        if (isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
             return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
         }
+
         return deleteByTitleAndDescriptionAndPriceIsProvided(deleteProductByOtherRequest);
     }
 
