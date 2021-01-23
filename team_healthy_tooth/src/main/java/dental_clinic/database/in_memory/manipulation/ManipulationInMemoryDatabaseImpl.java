@@ -9,8 +9,8 @@ import java.util.List;
 @Component
 public class ManipulationInMemoryDatabaseImpl implements ManipulationInMemoryDatabase{
 
-    private List<Manipulation> manipulations = new ArrayList<>();
-    private Long id = 1L;
+    private List<Manipulation> manipulations = createSomeManipulations();
+    private Long id = 4L;
 
 
     @Override
@@ -39,8 +39,29 @@ public class ManipulationInMemoryDatabaseImpl implements ManipulationInMemoryDat
     }
 
     @Override
+    public boolean manipulationIsActive(Long id) {
+        return manipulations.stream()
+                .filter(manipulation -> manipulation.getId().equals(id))
+                .anyMatch(manipulation -> manipulation.getIsActive());
+    }
+
+    @Override
     public boolean containsId(Long id) {
         return manipulations.stream()
                 .anyMatch(manipulation -> manipulation.getId().equals(id));
+    }
+
+    private List<Manipulation> createSomeManipulations() {
+        Manipulation manipulation1 = new Manipulation("Zoba izraušana", 5);
+        manipulation1.setId(1L);
+        Manipulation manipulation2 = new Manipulation("Morālais atbalsts", 55);
+        manipulation2.setId(2L);
+        Manipulation manipulation3 = new Manipulation("Universāla arstēšana", 500);
+        manipulation3.setId(3L);
+        List<Manipulation>manipulations = new ArrayList<>();
+        manipulations.add(manipulation1);
+        manipulations.add(manipulation2);
+        manipulations.add(manipulation3);
+        return manipulations;
     }
 }
