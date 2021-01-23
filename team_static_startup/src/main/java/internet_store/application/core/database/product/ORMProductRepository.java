@@ -33,7 +33,13 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public boolean delete(Product product) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Product where name = : name AND description = : description" +
+                        " AND price = : price");
+        query.setParameter("name", product.getName());
+        query.setParameter("description", product.getDescription());
+        query.setParameter("price", product.getPrice());
+        return query.executeUpdate() == 0;
     }
 
     @Override
