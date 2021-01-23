@@ -40,24 +40,24 @@ public class DeleteByOtherService {
         }
         if (isTitleFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getStartPrice(),
                 deleteProductByOtherRequest.getEndPrice())) {
-            return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
+            return deleteByTitleAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
         if (isDescriptionFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getDescription(),deleteProductByOtherRequest.getStartPrice(),
                 deleteProductByOtherRequest.getEndPrice())){
-            return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
+            return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
-        if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
+        if (isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
+            return deleteByTitleIsProvidedForDelete(deleteProductByOtherRequest);
+        }
+        if (isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
             return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
         }
-        if (!isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
+        if (isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice())) {
             return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
         }
-        if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle()) && (!isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription()))) {
-            return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
-        }
-        if (!isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription()) &&
-                (!isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice()))) {
-            return deleteByTitleIsProvidedForDelete(deleteProductByOtherRequest);
+        if (!isTitleAndDescriptionAndPriceNotEmptyForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getDescription(),
+                deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice())) {
+            return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
         }
         if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getDescription()) &&
                 (!isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice()))) {
