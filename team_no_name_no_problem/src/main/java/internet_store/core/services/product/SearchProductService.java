@@ -44,30 +44,13 @@ import java.util.stream.Collectors;
                 searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
             return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
         }
+        if (isTitleAndDescriptionFilled(searchProductRequest.getTitle(),searchProductRequest.getDescription())) {
+            return searchByTitleAndDescriptionIsProvided(searchProductRequest);
+        }
         if (isTitleFilled(searchProductRequest.getTitle())) {
             return searchByTitleIsProvided(searchProductRequest);
         }
         if (isDescriptionFilled(searchProductRequest.getDescription())) {
-            return searchByDescriptionIsProvided(searchProductRequest);
-        }
-        if (isPriceRangeFilled(searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice())){
-            return searchByPriceRangeIsProvided(searchProductRequest);
-        }
-        if (!isTitleFilled(searchProductRequest.getTitle())) {
-            return searchByDescriptionIsProvided(searchProductRequest);
-        }
-        if (!isDescriptionFilled(searchProductRequest.getDescription())) {
-            return searchByPriceRangeIsProvided(searchProductRequest);
-        }
-        if (!isTitleFilled(searchProductRequest.getTitle()) && (!isDescriptionFilled(searchProductRequest.getDescription()))) {
-            return searchByPriceRangeIsProvided(searchProductRequest);
-        }
-        if (!isDescriptionFilled(searchProductRequest.getDescription()) &&
-           (!isPriceRangeFilled(searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice()))) {
-            return searchByTitleIsProvided(searchProductRequest);
-        }
-        if (!isTitleFilled(searchProductRequest.getDescription()) &&
-                (!isPriceRangeFilled(searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice()))) {
             return searchByDescriptionIsProvided(searchProductRequest);
         }
         return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
@@ -151,6 +134,19 @@ import java.util.stream.Collectors;
             errors.add (new CoreError("database","Database doesn't contain products with price" +
                                             " range starting from: " + searchProductRequest.getStartPrice() +
                                             " end ending with " + searchProductRequest.getEndPrice()));
+            return new SearchProductResponse(errors, new ArrayList<>());
+        }
+        products = order(products, searchProductRequest.getOrdering());
+        products = paging(products, searchProductRequest.getPaging());
+        return new SearchProductResponse(products);
+    }
+
+    private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
+        List <CoreError>errors = new ArrayList<>();
+        List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
+        if (products.isEmpty()){
+            errors.add(new CoreError("database", "Database doesn't contain products with title: " +
+                    searchProductRequest.getTitle() +  ", description: " + searchProductRequest.getDescription()));
             return new SearchProductResponse(errors, new ArrayList<>());
         }
         products = order(products, searchProductRequest.getOrdering());
