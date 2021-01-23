@@ -52,7 +52,9 @@ public class JdbcDatabaseImp implements Database{
 
     @Override
     public List<Book> findByAuthor(String author) {
-        return null;
+        String sql = "SELECT * FROM books WHERE author = ? ";
+        Object[] args = new Object[] {author};
+        return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
 
     @Override
