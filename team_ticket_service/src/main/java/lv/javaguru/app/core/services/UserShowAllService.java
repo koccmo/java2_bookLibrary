@@ -1,5 +1,6 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserShowAllService {
-	//private final Database database;
 	private final UserDatabase userDatabase;
 
 	public UserShowAllService (UserDatabase userDatabase) {
@@ -18,20 +18,28 @@ public class UserShowAllService {
 	}
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
-		List<?> responseList = new ArrayList<>();
+		List<?> errorList = validate(request.getUser());
 
 
-		if (!responseList.isEmpty()) {
-			return new UserShowAllResponse<>(responseList);
+		if (!errorList.isEmpty()) {
+			return new UserShowAllResponse<>(errorList);
 		}
 
 		if (request.getId() == null)
 			return new UserShowAllResponse<>(userDatabase.getAllUsers());
 
-		return new UserShowAllResponse<>(responseList);
+		return new UserShowAllResponse<>(errorList);
 	}
 
+
 	private List<CodeError> validate (User user) {
-		return new ArrayList<>();
+		List<CodeError> errorList = new ArrayList<>();
+
+		if (!userDatabase.containsUser(user.getId()))
+			errorList.add(new CodeError("User", "no user in database"));
+		if (user.getPersonType() != PersonType.ADMIN)
+			errorList.add(new CodeError("User", "User don't have required permission!"));
+
+		return errorList;
 	}
 }

@@ -4,10 +4,9 @@ import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.EditFlightRequest;
-import lv.javaguru.app.core.request.edit.*;
+import lv.javaguru.app.core.request.EditFlightValueRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.EditFlightResponse;
-import lv.javaguru.app.core.response.edit.*;
 import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
@@ -29,7 +28,7 @@ public class FlightEditService {
 
 
 	public EditFlightResponse execute (EditFlightRequest request) {
-		List<CodeError> errors = validator.validateId(request.getId());
+		List<CodeError> errors = validator.validate(request.getId());
 
 		if (!flightDatabase.containsKey(request.getId())) {
 			errors.add(new CodeError("Id error ", "wrong ID"));
@@ -81,15 +80,15 @@ public class FlightEditService {
 		return new EditFlightResponse(message);
 	}
 
-	public EditFlightResponse executeOriginCityUpdate (EditFlightRequest request) {
-		String originCity = request.getNewValue();
+	public EditFlightResponse updateOriginCity (EditFlightValueRequest request) {
+		String originCity = request.getValue();
 
 		List<CodeError> errors = validator.validate(originCity);
 
 		if (!errors.isEmpty())
 			return new EditFlightResponse(errors);
 
-		flightDatabase.getTicketByFlightId(request.getFlightId())
+		flightDatabase.getTicketByFlightId(request.getFlight().getId())
 				.setFromCity(originCity);
 
 		String message = "Origin city was updated!";
@@ -97,15 +96,15 @@ public class FlightEditService {
 		return new EditFlightResponse(message);
 	}
 
-	public EditFlightResponse executeDestination (EditFlightRequest request) {
-		String destinationCity = request.getNewValue();
+	public EditFlightResponse updateDestinationCity (EditFlightValueRequest request) {
+		String destinationCity = request.getValue();
 
 		List<CodeError> errors = validator.validate(destinationCity);
 
 		if (!errors.isEmpty())
 			return new EditFlightResponse(errors);
 
-		flightDatabase.getTicketByFlightId(request.getId())
+		flightDatabase.getTicketByFlightId(request.getFlight().getId())
 				.setToCity(destinationCity);
 
 		String message = "Destination city was updated!";
@@ -114,21 +113,42 @@ public class FlightEditService {
 	}
 
 
-	public EditTicketDepartureDateResponse execute (EditTicketDepartureDateRequest request) {
+	public EditFlightResponse updateDate (EditFlightValueRequest request) {
 		List<CodeError> errors = new ArrayList<>();
 
-		flightDatabase.getTicketByFlightId(request.getId()).setDate(request.getDepartureDate());
+		if (errors.size() != 0)
+			return new EditFlightResponse(errors);
 
-		return new EditTicketDepartureDateResponse(errors);
+		flightDatabase.getTicketByFlightId(request.getFlight().getId())
+				.setDate(request.getNewDate());
+
+		return new EditFlightResponse("Date updated!");
 	}
 
 
-	public EditTicketSeatResponse execute (EditTicketSeatRequest request) {
-		List<CodeError> errors = new ArrayList<>();
+	public EditFlightResponse updateSeat (EditFlightValueRequest request) {
+		List<CodeError> errors = validateSeat(request.getValue());
 
-		flightDatabase.getTicketByFlightId(request.getId()).setSeat(request.getSeat());
+		if (errors.size() != 0)
+			return new EditFlightResponse(errors);
 
-		return new EditTicketSeatResponse(errors);
+		flightDatabase.getTicketByFlightId(request.getFlight().getId())
+				.setSeat(request.getValue());
+
+		return new EditFlightResponse("Seat updated!");
 	}
 
+	private List<CodeError> validateSeat (String seat) {
+		List<CodeError> errors = new ArrayList<>();
+
+		if (seat == null || seat.isEmpty()) {
+			errors.add(new CodeError("Seat", "Null or empty"));
+			return errors;
+		}
+		else if (seat.split(" ").length != 1)
+			errors.add(new CodeError("Seat", "two words"));
+
+		return errors;
+
+	}
 }

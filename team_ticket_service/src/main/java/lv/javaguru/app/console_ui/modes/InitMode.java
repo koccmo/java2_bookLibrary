@@ -39,7 +39,13 @@ public class InitMode {
 		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
 		Ticket ticket1 = new Ticket("Riga", "Paphos", flightDate, "55");
+		ticket1.setFromCountry("Latvia");
+		ticket1.setToCountry("Cyprus");
+
 		Ticket ticket2 = new Ticket("London", "Paphos", flightDate, "55");
+		ticket2.setFromCountry("Great Britain");
+		ticket2.setToCountry("Cyprus");
+
 		Flight flight1 = new Flight(user1, ticket1);
 		Flight flight2 = new Flight(user2, ticket2);
 

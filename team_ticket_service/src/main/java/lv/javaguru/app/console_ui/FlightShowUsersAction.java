@@ -10,11 +10,11 @@ import lv.javaguru.app.core.services.FlightShowAllService;
 import lv.javaguru.app.core.services.FlightShowOneService;
 
 
-public class FlightShowOneAction extends Action implements UIActions {
+public class FlightShowUsersAction extends Action implements UIActions {
 
 	private final FlightShowOneService flightShowOneService;
 
-	public FlightShowOneAction (FlightShowOneService flightShowOneService) {
+	public FlightShowUsersAction (FlightShowOneService flightShowOneService) {
 		this.flightShowOneService = flightShowOneService;
 	}
 

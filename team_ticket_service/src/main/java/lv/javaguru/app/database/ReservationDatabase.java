@@ -56,7 +56,8 @@ public class ReservationDatabase implements Database {
 	}
 
 	public Ticket getTicketByFlightId (Long id) {
-		return reservations.get(id).getTicket();
+		Flight flight = reservations.get(id);
+		return flight.getTicket();
 	}
 
 	public User getUserByFlightId (Long id) {
@@ -68,6 +69,14 @@ public class ReservationDatabase implements Database {
 			return reservations.get(id).getUser().equals(user);
 		return false;
 	}
+
+	@Override
+	public boolean isContainTicket (Ticket ticket) {
+		return reservations.values().stream()
+				.anyMatch(flight -> flight.getTicket().equals(ticket));
+	}
+
+
 /*
 	@Override
 	public void addTicket (User user, Ticket ticket) {

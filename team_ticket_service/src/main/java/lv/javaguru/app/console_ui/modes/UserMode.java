@@ -16,7 +16,7 @@ public class UserMode {
 	private static final EditFlightRequestValidator EDIT_FLIGHT_REQUEST_VALIDATOR = new EditFlightRequestValidator();
 
 	private final UIActions addFlightAction;
-	private final UIActions showFlightAction;
+	private final UIActions flightShowAllAction;
 	private final UIActions editFlightAction;
 	private final UIActions deleteFlight;
 	private final UIActions logOutAction;
@@ -25,20 +25,18 @@ public class UserMode {
 	public UserMode (UserDatabase userDatabase, Database flightDatabase) {
 
 		FlightAddService flightAddService = new FlightAddService(flightDatabase, validator);
-		FlightDeleteService flightDeleteService = new FlightDeleteService(flightDatabase);
+		FlightDeleteService flightDeleteService = new FlightDeleteService(userDatabase, flightDatabase);
 		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, flightDatabase);
 		FlightEditService flightEditService = new FlightEditService(userDatabase, flightDatabase, EDIT_FLIGHT_REQUEST_VALIDATOR);
 
 		LogOutService logOutService = new LogOutService(userDatabase);
 
 		this.addFlightAction = new FlightAddAction(flightAddService);
-		this.showFlightAction = new FlightShowAllAction(flightShowAllService);
+		this.flightShowAllAction = new FlightShowAllAction(flightShowAllService);
 		this.editFlightAction = new FlightUpdateAction(flightEditService);
 		this.deleteFlight = new FlightDeleteAction(flightDeleteService);
 		this.logOutAction = new LogOutAction(logOutService);
 	}
-
-
 
 
 	public void printMainMenu (User currentUser) {
@@ -50,7 +48,7 @@ public class UserMode {
 
 			switch (menuNumber) {
 				case 1 -> addFlightAction.execute();
-				case 2 -> showFlightAction.execute();
+				case 2 -> flightShowAllAction.execute();
 				case 3 -> editFlightAction.execute();
 				case 4 -> deleteFlight.execute();
 				case 0 -> {

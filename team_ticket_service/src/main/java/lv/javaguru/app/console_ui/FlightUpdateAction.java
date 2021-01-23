@@ -1,7 +1,10 @@
 package lv.javaguru.app.console_ui;
 
+import lv.javaguru.app.console_ui.utility.TicketFiller;
 import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.EditFlightRequest;
+import lv.javaguru.app.core.request.EditFlightValueRequest;
 import lv.javaguru.app.core.request.edit.*;
 import lv.javaguru.app.core.response.EditFlightResponse;
 import lv.javaguru.app.core.response.edit.*;
@@ -35,8 +38,6 @@ public class FlightUpdateAction implements UIActions {
 	}
 
 	private void c (EditFlightResponse response) {
-		Scanner scanner = new Scanner(System.in);
-
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
 			System.out.println("[1] Edit flight's ticket\n" +
@@ -68,51 +69,17 @@ public class FlightUpdateAction implements UIActions {
 
 			switch (menuNumber) {
 				case 1 -> {
-					editReservation_originCity(response, scanner);
+					editFlight_originCity(response);
 				}
 				case 2 -> {
-					System.out.println("Enter new destination city: ");
-					String destination = scanner.nextLine();
-
-					EditFlightRequest request = new EditFlightRequest(response.getId());
-					request.getTicket().setToCity(destination);
-					EditFlightResponse responseEdit = flightEditService.executeDestination(request);
-
-
-					if (responseEdit.hasErrors()) {
-						responseEdit.getErrorList().forEach(r -> System.out.println(r.getField() +
-								r.getMessage()));
-					}
-					else
-						System.out.println("Tickets destination city updated");
+					editFlight_destinationCity(response);
 				}
 				case 3 -> {
-					System.out.println("Enter new departure date (2014-02-14): ");
-					String departureDate = scanner.nextLine();
-					LocalDate date = LocalDate.parse(departureDate);
-
-					EditTicketDepartureDateRequest editTicketDepartureDateRequest = new EditTicketDepartureDateRequest(response.getId(), date);
-					EditTicketDepartureDateResponse editTicketDepartureDateResponse = flightEditService.execute(editTicketDepartureDateRequest);
-
-					if (editTicketDepartureDateResponse.hasErrors()) {
-						editTicketDepartureDateResponse.getErrorList().forEach(r -> System.out.println(r.getField() +
-								r.getMessage()));
-					}
-					System.out.println("Ticket's departure date updated!");
+					editFlight_departureDate(response, scanner);
 				}
 
 				case 4 -> {
-					System.out.println("Enter new seat date: ");
-					String seat = scanner.nextLine();
-
-					EditTicketSeatRequest editTicketSeatRequest = new EditTicketSeatRequest(response.getId(), seat);
-					EditTicketSeatResponse editTicketSeatResponse = flightEditService.execute(editTicketSeatRequest);
-
-					if (editTicketSeatResponse.hasErrors()) {
-						editTicketSeatResponse.getErrorList().forEach(r -> System.out.println(r.getField() +
-								r.getMessage()));
-					}
-					System.out.println("seat updated");
+					editFlight_seat(response, scanner);
 				}
 				case 0 -> {
 					return;
@@ -122,10 +89,74 @@ public class FlightUpdateAction implements UIActions {
 		}
 	}
 
+	private void editFlight_originCity (EditFlightResponse response) {
+		TicketFiller filler = new TicketFiller();
+		String[] cc = filler.acquireOriginCountryAndCity();
+	//Scanner scanner = new Scanner(System.in);
 
-	private void executeUserEditMenu (EditFlightResponse response) {
+	//BaseFunc.printHeader("Enter new departure city: ");
+	//String originCity = scanner.nextLine();
+
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), cc[1]);
+		EditFlightResponse responseEdit = flightEditService.updateOriginCity(request);
+
+
+		if (responseEdit.hasErrors()) {
+			responseEdit.getErrorList().forEach(r -> System.out.println(r.getField() +
+					r.getMessage()));
+		}
+		else
+			System.out.println("Tickets departure city updated");
+	}
+
+	private void editFlight_destinationCity (EditFlightResponse response) {
 		Scanner scanner = new Scanner(System.in);
 
+		System.out.println("Enter new destination city: ");
+		String destinationCity = scanner.nextLine();
+
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), destinationCity);
+		EditFlightResponse responseEdit = flightEditService.updateDestinationCity(request);
+
+
+		if (responseEdit.hasErrors()) {
+			responseEdit.getErrorList().forEach(r -> System.out.println(r.getField() +
+					r.getMessage()));
+		}
+		else
+			System.out.println("Tickets destination city updated");
+	}
+
+	private void editFlight_departureDate (EditFlightResponse response, Scanner scanner) {
+		System.out.println("Enter new departure date (2014-02-14): ");
+		String departureDate = scanner.nextLine();
+		LocalDate date = LocalDate.parse(departureDate);
+
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), date);
+		EditFlightResponse responseEdit = flightEditService.updateDate(request);
+
+		if (responseEdit.hasErrors()) {
+			responseEdit.getErrorList().forEach(r -> System.out.println(r.getField() +
+					r.getMessage()));
+		}
+		System.out.println("Ticket's departure date updated!");
+	}
+
+	private void editFlight_seat (EditFlightResponse response, Scanner scanner) {
+		System.out.println("Enter new seat date: ");
+		String seat = scanner.nextLine();
+
+		EditFlightValueRequest editRequest = new EditFlightValueRequest(response.getFlight(), seat);
+		EditFlightResponse editResponse = flightEditService.updateSeat(editRequest);
+
+		if (editResponse.hasErrors()) {
+			editResponse.getErrorList().forEach(r -> System.out.println(r.getField() +
+					r.getMessage()));
+		}
+		System.out.println("seat updated");
+	}
+
+	private void executeUserEditMenu (EditFlightResponse response) {
 		while (true) {
 			System.out.println("[1] Edit name\n" +
 					"[2] Edit surname\n" +
@@ -134,10 +165,10 @@ public class FlightUpdateAction implements UIActions {
 
 			switch (menuNumber) {
 				case 1 -> {
-					editUser_name(response, scanner);
+					editUser_name(response);
 				}
 				case 2 -> {
-					editUser_surname(response, scanner);
+					editUser_surname(response);
 				}
 				case 0 -> {
 					return;
@@ -147,7 +178,9 @@ public class FlightUpdateAction implements UIActions {
 		}
 	}
 
-	private void editUser_name (EditFlightResponse response, Scanner scanner) {
+	private void editUser_name (EditFlightResponse response) {
+		Scanner scanner = new Scanner(System.in);
+
 		BaseFunc.printHeader("Enter user name:");
 		String name = scanner.nextLine();
 
@@ -163,7 +196,9 @@ public class FlightUpdateAction implements UIActions {
 			System.out.println("User's name updated");
 	}
 
-	private void editUser_surname (EditFlightResponse response, Scanner scanner) {
+	private void editUser_surname (EditFlightResponse response) {
+		Scanner scanner = new Scanner(System.in);
+
 		BaseFunc.printHeader("Enter user surname:");
 		String surname = scanner.nextLine();
 
@@ -177,22 +212,6 @@ public class FlightUpdateAction implements UIActions {
 		}
 		else
 			System.out.println("User's surname updated");
-	}
-
-	private void editReservation_originCity (EditFlightResponse response, Scanner scanner) {
-		BaseFunc.printHeader("Enter new departure city: ");
-		String originCity = scanner.nextLine();
-
-		EditFlightRequest request = new EditFlightRequest(response.getFlight(), originCity);
-		EditFlightResponse responseEdit = flightEditService.executeOriginCityUpdate(request);
-
-
-		if (responseEdit.hasErrors()) {
-			responseEdit.getErrorList().forEach(r -> System.out.println(r.getField() +
-					r.getMessage()));
-		}
-		else
-			System.out.println("Tickets departure city updated");
 	}
 
 	public static void flightEdit_printEditMenu (long id) {
