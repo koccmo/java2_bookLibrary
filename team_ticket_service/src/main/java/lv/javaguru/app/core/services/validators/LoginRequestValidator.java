@@ -1,28 +1,21 @@
 package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.LogInRequest;
-import lv.javaguru.app.core.response.CodeError;
+import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginRequestValidator {
-    public LoginRequestValidator() {
-    }
+public class LoginRequestValidator extends Validator {
+	public LoginRequestValidator () {
+	}
 
-    public List<CodeError> validate(LogInRequest request) {
-        List<CodeError> errorList = new ArrayList<>();
+	public List<CodeError> validate (LogInRequest request) {
+		List<CodeError> errorList = new ArrayList<>();
 
-     //  if (request.getPerson().getName() == null || request.getPerson().getName().equals("")) {
-     //      CodeError error = new CodeError("personsName", "Wrong name!");
-     //      errorList.add(error);
-     //  }
+		verifyNameAndSurname(request.getUser().getName(), "User name", errorList);
+		verifyNameAndSurname(request.getUser().getSurname(), "User surname", errorList);
 
-     //  if (request.getPerson().getSurname() == null || request.getPerson().getSurname().equals("")) {
-     //      CodeError error = new CodeError("personsSurname", "Wrong surname!");
-     //      errorList.add(error);
-     //  }
-
-        return errorList;
-    }
+		return errorList;
+	}
 }

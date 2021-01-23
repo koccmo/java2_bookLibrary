@@ -1,5 +1,5 @@
 package internet_store.database.product;
-
+/*
 import internet_store.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,21 +31,21 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     public void deleteById(Long id) {
         /*String sql = "DELETE FROM products WHERE id = ?";
         Object[] args = new Object[]{id};
-        return jdbcTemplate.update(sql, args) == 1;*/
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public void deleteAllByTitle(String title) {
         /*String sql = "DELETE FROM products WHERE title = ?";
         Object[] args = new Object[]{title};
-        return jdbcTemplate.update(sql, args) == 1;*/
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public void deleteAllByDescription(String description) {
         /*String sql = "DELETE FROM products WHERE description = ?";
         Object[] args = new Object[]{description};
-        return jdbcTemplate.update(sql, args) == 1;*/
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
@@ -119,3 +119,4 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
         return false;
     }
 }
+*/

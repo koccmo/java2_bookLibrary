@@ -29,8 +29,8 @@ public class InMemoryCustomer implements DatabaseCustomers {
     @Override
     public boolean activate(Long id) {
         for (Customers customer : customers) {
-            if (customer.getCustomerId().equals(id)) {
-                customer.activityOn();
+            if (customer.getCustomerID().equals(id)) {
+                customer.setActivity(true);
                 return true;
             }
         }
@@ -40,8 +40,8 @@ public class InMemoryCustomer implements DatabaseCustomers {
     @Override
     public boolean deactivate(Long id) {
         for (Customers customer : customers) {
-            if (customer.getCustomerId().equals(id)) {
-                customer.activityOff();
+            if (customer.getCustomerID().equals(id)) {
+                customer.setActivity(true);
                 return true;
             }
         }
@@ -54,7 +54,7 @@ public class InMemoryCustomer implements DatabaseCustomers {
 
     @Override
     public Optional<Customers> findById(Long id) {
-        return customers.stream().filter(items -> items.getCustomerId().equals(id)).findFirst();
+        return customers.stream().filter(items -> items.getCustomerID().equals(id)).findFirst();
     }
 
     @Override
@@ -70,14 +70,14 @@ public class InMemoryCustomer implements DatabaseCustomers {
     @Override
     public List<Customers> findAllActiveCustomers() {
         return customers.stream()
-                .filter(Customers::isActivity)
+                .filter(Customers::getActivity)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Customers> findAllInactiveCustomers() {
         return customers.stream()
-                .filter(item -> !item.isActivity())
+                .filter(item -> !item.getActivity())
                 .collect(Collectors.toList());
     }
 

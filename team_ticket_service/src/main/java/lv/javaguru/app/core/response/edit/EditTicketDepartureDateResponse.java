@@ -1,6 +1,6 @@
 package lv.javaguru.app.core.response.edit;
 
-import lv.javaguru.app.core.response.CodeError;
+import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.Response;
 
 import java.util.List;

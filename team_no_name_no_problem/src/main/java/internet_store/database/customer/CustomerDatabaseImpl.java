@@ -27,9 +27,12 @@ public class CustomerDatabaseImpl implements CustomerDatabase{
     }
 
     @Override
-    public boolean deleteCustomerById(Long id){
-        customerList.removeIf(customer -> customer.getId().equals(id));
-        return false;
+    public boolean deleteCustomerById(Long id) {
+        if (customerList.removeIf(customer -> customer.getId().equals(id))) {
+            return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

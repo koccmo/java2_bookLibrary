@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
@@ -23,7 +23,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FindByIdServiceTest {
 
-    @Mock Database database;
+    @Mock
+    ProductRepository productRepository;
     @Mock FindByIdValidator validator;
     @InjectMocks FindByIdService service;
 
@@ -31,7 +32,7 @@ public class FindByIdServiceTest {
     public void shouldReturnResponseWithoutErrors() {
         FindByIdRequest request = new FindByIdRequest("1");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(database.findById(1L)).thenReturn(Optional.of(
+        Mockito.when(productRepository.findById(1L)).thenReturn(Optional.of(
                 new Product("product", "desc", new BigDecimal("1"))));
 
         FindByIdResponse response = service.execute(request);

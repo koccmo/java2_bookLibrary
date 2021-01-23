@@ -1,15 +1,17 @@
 package lv.javaguru.app.core.request.edit;
 
+import java.time.LocalDate;
+
 public class EditTicketDepartureDateRequest {
-    private final String departureDate;
+    private final LocalDate departureDate;
     private final Long id;
 
-    public EditTicketDepartureDateRequest(Long id, String departureDate) {
+    public EditTicketDepartureDateRequest(Long id, LocalDate departureDate) {
         this.id = id;
         this.departureDate = departureDate;
     }
 
-    public String getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 

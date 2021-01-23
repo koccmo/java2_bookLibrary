@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.DeleteByProductIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.DeleteByProductIdResponse;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteByProductIdServiceTest {
 
-    @Mock private Database database;
+    @Mock private ProductRepository productRepository;
     @Mock private DeleteByProductIdValidator validator;
     @InjectMocks DeleteByProductIdService service;
 
@@ -46,13 +46,13 @@ public class DeleteByProductIdServiceTest {
         errors.add(new CoreError("Product ID", "Should not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         DeleteByProductIdResponse response = service.execute(request);
-        Mockito.verifyNoInteractions(database);
+        Mockito.verifyNoInteractions(productRepository);
     }
 
 @Test
    public void shouldDeleteProductByIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.deleteByProductId(1L)).thenReturn(true);
+        Mockito.when(productRepository.deleteByProductId(1L)).thenReturn(true);
         DeleteByProductIdRequest request = new DeleteByProductIdRequest(1L);
         DeleteByProductIdResponse response = service.execute(request);
         assertFalse(response.hasErrors());

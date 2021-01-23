@@ -1,16 +1,25 @@
 package internet_store.application.core.domain;
 
-//import lombok.Data;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-//@Data
+@Entity
+@Table(name = "customers")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long customerId;
+    @Column(name = "first_name")
     private String customerFirstName;
+    @Column(name = "second_name")
     private String customerSecondName;
+    @Column(name = "phone")
     private String customerPhone;
+    @Column(name = "email")
     private String customerEmail;
+    @Column(name = "address")
+    private String customerAddress;
 
     public Customer() {}
 
@@ -39,6 +48,10 @@ public class Customer {
         return customerEmail;
     }
 
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
@@ -59,21 +72,21 @@ public class Customer {
         this.customerEmail = customerEmail;
     }
 
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) &&
-                Objects.equals(customerFirstName, customer.customerFirstName) &&
-                Objects.equals(customerSecondName, customer.customerSecondName) &&
-                Objects.equals(customerPhone, customer.customerPhone) &&
-                Objects.equals(customerEmail, customer.customerEmail);
+        return Objects.equals(customerId, customer.customerId) && Objects.equals(customerFirstName, customer.customerFirstName) && Objects.equals(customerSecondName, customer.customerSecondName) && Objects.equals(customerPhone, customer.customerPhone) && Objects.equals(customerEmail, customer.customerEmail) && Objects.equals(customerAddress, customer.customerAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, customerFirstName, customerSecondName, customerPhone, customerEmail);
+        return Objects.hash(customerId, customerFirstName, customerSecondName, customerPhone, customerEmail, customerAddress);
     }
 
     @Override
@@ -84,6 +97,7 @@ public class Customer {
                 ", customerSecondName='" + customerSecondName + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
                 '}';
     }
 
