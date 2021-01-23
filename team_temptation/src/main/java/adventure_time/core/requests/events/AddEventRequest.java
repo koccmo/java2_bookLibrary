@@ -51,4 +51,32 @@ public class AddEventRequest {
     public String getDetailsDescription() {
         return detailsDescription;
     }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setEventKind(String eventKind) {
+        this.eventKind = eventKind;
+    }
+
+    public void setDurationHours(Integer durationHours) {
+        this.durationHours = durationHours;
+    }
+
+    public void setMaxNumberParticipants(Integer maxNumberParticipants) {
+        this.maxNumberParticipants = maxNumberParticipants;
+    }
+
+    public void setMinNumberParticipants(Integer minNumberParticipants) {
+        this.minNumberParticipants = minNumberParticipants;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
+
+    public void setDetailsDescription(String detailsDescription) {
+        this.detailsDescription = detailsDescription;
+    }
 }

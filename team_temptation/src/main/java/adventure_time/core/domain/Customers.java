@@ -8,12 +8,14 @@ public class Customers {
     private String customerName;
     private String customerEmail;
     private String customerPhone;
+    private String customerPassword;
     private Boolean activity;
 
-    public Customers(String customerName, String customerEmail, String customerPhone) {
+    public Customers(String customerName, String customerEmail, String customerPhone, String customerPassword) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
+        this.customerPassword = customerPhone;
         this.activity = true;
     }
 
@@ -57,6 +59,14 @@ public class Customers {
         this.activity = activity;
     }
 
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
+
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,12 +76,13 @@ public class Customers {
                 Objects.equals(customerName, customers.customerName) &&
                 Objects.equals(customerEmail, customers.customerEmail) &&
                 Objects.equals(customerPhone, customers.customerPhone) &&
+                Objects.equals(customerPassword, customers.customerPassword) &&
                 Objects.equals(activity, customers.activity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerID, customerName, customerEmail, customerPhone, activity);
+        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerPassword, activity);
     }
 
     @Override
@@ -81,6 +92,7 @@ public class Customers {
                 ", customerName='" + customerName + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
+                ", customerPassword='" + customerPassword + '\'' +
                 ", activity=" + activity +
                 '}';
     }

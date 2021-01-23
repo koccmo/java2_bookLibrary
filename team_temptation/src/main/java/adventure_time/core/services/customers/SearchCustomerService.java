@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SearchCustomerService {
@@ -26,14 +27,30 @@ public class SearchCustomerService {
             return new SearchCustomerResponse(null, errors);
         }
 
-        List<Customers> customers = new ArrayList<>();
+        Optional<Customers> customer;
+        if (request.getCustomerID() == null) {
+            customer = database.findByEmail(request.getCustomerEmail());
+        } else {
+            customer = database.findById(request.getCustomerID());
+        }
 
+        if (customer.isPresent()) {
+            return new SearchCustomerResponse(customer.get(), null);
+        } else {
+            String field;
+            String criteria;
+            if (request.getCustomerID() == null) {
+                field = "customerEmail";
+                criteria = request.getCustomerEmail();
+            } else {
+                field = "customerID";
+                criteria = request.getCustomerID().toString();
+            }
 
-
-
-
-
-        return new SearchCustomerResponse(null, errors);
+            CoreError error = new CoreError(field, "The customer with " + field + " \"" + criteria + "\" is not present in DB");
+            errors.add(error);
+            return new SearchCustomerResponse(null, errors);
+        }
     }
 
 }

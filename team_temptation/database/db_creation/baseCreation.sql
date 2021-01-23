@@ -21,6 +21,7 @@ create table customers (
     name varchar(50) not null,
     email varchar(30) not null unique,
     phone varchar(12) not null unique,
+    password varchar(20) not null,
     activity boolean default TRUE
 );
 

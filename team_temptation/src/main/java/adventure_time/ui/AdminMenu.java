@@ -1,5 +1,6 @@
 package adventure_time.ui;
 
+import adventure_time.ui.customers.*;
 import adventure_time.ui.menus.*;
 import adventure_time.ui.events.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,20 @@ public class AdminMenu {
     @Autowired
     public AdminMenu(List<UIAction> uiActionList) {
         menuFunctionMap = new HashMap<>();
+        menuFunctionMap.put(11, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(12, findUIAction(uiActionList, AddCustomerUIAction.class));
+        menuFunctionMap.put(13, findUIAction(uiActionList, RemoveCustomerUIAction.class));
+        menuFunctionMap.put(14, findUIAction(uiActionList, SearchCustomerUIAction.class));
+        menuFunctionMap.put(15, findUIAction(uiActionList, DisplayCustomerUIAction.class));
+        menuFunctionMap.put(16, findUIAction(uiActionList, ToMainMenuUIAction.class));
+
+        menuFunctionMap.put(21, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(22, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(23, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(24, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(25, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(26, findUIAction(uiActionList, ToMainMenuUIAction.class));
+
         menuFunctionMap.put(31, findUIAction(uiActionList, AddEventUIAction.class));
         menuFunctionMap.put(32, findUIAction(uiActionList, RemoveEventUIAction.class));
         menuFunctionMap.put(33, findUIAction(uiActionList, SearchEventUIAction.class));
@@ -26,6 +41,7 @@ public class AdminMenu {
         menuFunctionMap.put(35, findUIAction(uiActionList, DisplayEventUIAction.class));
         menuFunctionMap.put(36, findUIAction(uiActionList, ToMainMenuUIAction.class));
         menuFunctionMap.put(37, findUIAction(uiActionList, StartUpEventUIAction.class));
+
         menuFunctionMap.put(61, findUIAction(uiActionList, ToMainMenuUIAction.class));
         menuFunctionMap.put(62, findUIAction(uiActionList, ExitEventUIAction.class));
     }
@@ -61,10 +77,10 @@ public class AdminMenu {
     public Map<Integer, SubjectMenu> subjectMenuSelect () {
         Map<Integer, SubjectMenu> menuMap = new HashMap<>();
         menuMap.put(1, new CustomerMenu());
-        menuMap.put(2, new EventMenu());
+        menuMap.put(2, new GuideMenu());
         menuMap.put(3, new EventMenu());
         menuMap.put(4, new TourMenu());
-        menuMap.put(5, new EventMenu());
+        menuMap.put(5, new ExitMenu());
         menuMap.put(6, new ExitMenu());
         return menuMap;
 

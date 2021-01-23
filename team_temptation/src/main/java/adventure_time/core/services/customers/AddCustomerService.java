@@ -26,10 +26,10 @@ public class AddCustomerService {
             return new AddCustomerResponse (errors);
         }
 
-        Customers customer = new Customers(request.getCustomerName(), request.getCustomerEmail(), request.getCustomerPhone());
+        Customers customer = new Customers(request.getCustomerName(), request.getCustomerEmail(), request.getCustomerPhone(), request.getPasswordOne());
         if (database.add(customer)) return new AddCustomerResponse();
 
-        errors.add(new CoreError("customerName", "The event \"" + request.getCustomerName() + "\" already exists"));
+        errors.add(new CoreError("customerEmail", "The user under login \"" + request.getCustomerEmail() + "\" already exist."));
         return new AddCustomerResponse (errors);
     }
 }

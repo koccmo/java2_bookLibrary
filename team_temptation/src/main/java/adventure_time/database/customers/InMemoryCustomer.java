@@ -18,11 +18,10 @@ public class InMemoryCustomer implements DatabaseCustomers {
     public boolean add(Customers customer) {
         if (!customers.isEmpty()) {
             for (Customers item : customers) {
-                if (item.getCustomerName().equals(customer.getCustomerName())) return false;
+                if (item.getCustomerEmail().equals(customer.getCustomerEmail())) return false;
             }
         }
-        customer.setCustomerID(idCounter);
-        idCounter++;
+        customer.setCustomerID(idCounter++);
         return customers.add(customer);
     }
 
@@ -58,8 +57,8 @@ public class InMemoryCustomer implements DatabaseCustomers {
     }
 
     @Override
-    public Optional<Customers> findByName(String name) {
-        return customers.stream().filter(items -> items.getCustomerName().equals(name)).findFirst();
+    public Optional<Customers> findByEmail(String email) {
+        return customers.stream().filter(items -> items.getCustomerEmail().equals(email)).findFirst();
     }
 
     @Override

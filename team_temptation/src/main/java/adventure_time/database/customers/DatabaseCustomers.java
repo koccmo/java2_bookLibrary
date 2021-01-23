@@ -18,7 +18,7 @@ public interface DatabaseCustomers {
 
     Optional<Customers> findById (Long id);
 
-    Optional<Customers> findByName (String customerName);
+    Optional<Customers> findByEmail (String customerEmail);
 
     boolean updateCustomer (Customers customer);
 
