@@ -8,6 +8,7 @@ import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.validators.visit.AddVisitValidator;
 import dental_clinic.database.in_memory.doctor.DoctorDatabase;
 import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.database.in_memory.visit.VisitDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,8 @@ public class AddVisitServiceTest {
     private PatientDatabase patientDatabase;
     @Mock
     private DoctorDatabase doctorDatabase;
+    @Mock
+    private VisitDatabase visitDatabase;
     @InjectMocks
     AddVisitService addVisitService;
 
