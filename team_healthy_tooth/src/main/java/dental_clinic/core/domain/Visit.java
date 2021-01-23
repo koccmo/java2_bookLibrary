@@ -2,25 +2,38 @@ package dental_clinic.core.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 public class Visit {
 
+    private Long id;
     private Long patientsId;
     private Integer toothNumber;
     private Optional<String> comment;
     ToothStatus toothStatus;
     private Doctor doctor;
+    private List<Manipulation> manipulations;
     private Date date;
 
-    public Visit (Long id, Integer toothNumber, Optional<String> comment, ToothStatus toothStatus, Doctor doctor, Date date){
+    public Visit (Long id, Integer toothNumber, Optional<String> comment, ToothStatus toothStatus,
+                  Doctor doctor, List<Manipulation> manipulations, Date date){
         this.patientsId = id;
         this.toothNumber = toothNumber;
         this.comment = comment;
         this.toothStatus = toothStatus;
         this.doctor = doctor;
+        this.manipulations = manipulations;
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getToothNumber() {
@@ -37,6 +50,10 @@ public class Visit {
 
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public List<Manipulation> getManipulations() {
+        return manipulations;
     }
 
     public Date getDate() {
