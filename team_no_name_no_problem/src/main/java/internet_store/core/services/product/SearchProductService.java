@@ -47,6 +47,14 @@ import java.util.stream.Collectors;
         if (isTitleAndDescriptionFilled(searchProductRequest.getTitle(),searchProductRequest.getDescription())) {
             return searchByTitleAndDescriptionIsProvided(searchProductRequest);
         }
+        if(isTitleFilledAndPriceRangeNotEmpty(searchProductRequest.getTitle(),searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice())) {
+            return searchByTitleAndPriceRangeIsProvided(searchProductRequest);
+        }
+        if (isDescriptionFilledPriceRangeNotEmpty(searchProductRequest.getDescription(),searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice())) {
+            return searchByDescriptionAndPriceRangeIsProvided(searchProductRequest);
+        }
         if (isTitleFilled(searchProductRequest.getTitle())) {
             return searchByTitleIsProvided(searchProductRequest);
         }
