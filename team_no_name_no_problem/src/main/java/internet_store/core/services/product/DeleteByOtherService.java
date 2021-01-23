@@ -1,6 +1,5 @@
 package internet_store.core.services.product;
 
-import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.CoreResponse;
@@ -36,11 +35,12 @@ public class DeleteByOtherService {
                 deleteProductByOtherRequest.getStartPrice(), deleteProductByOtherRequest.getEndPrice())) {
             return deleteByTitleAndDescriptionAndPriceIsProvided(deleteProductByOtherRequest);
         }
-        if (isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
-            return deleteByTitleIsProvidedForDelete(deleteProductByOtherRequest);
+        if (isTitleAndDescriptionFilledForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getDescription())) {
+            return deleteByTitleAndDescriptionIsProvided(deleteProductByOtherRequest);
         }
-        if (isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
-            return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
+        if (isTitleFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getStartPrice(),
+                deleteProductByOtherRequest.getEndPrice())) {
+            return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
         if (isPriceRangeFilledForDelete(deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice())){
             return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
@@ -71,15 +71,15 @@ public class DeleteByOtherService {
                 startPrice != null && endPrice != null;
     }
 
-    private boolean isTitleAndDescriptionFilled(String title, String description) {
+    private boolean isTitleAndDescriptionFilledForDelete(String title, String description) {
         return title != null && !title.isEmpty() && description != null && !description.isEmpty();
     }
 
-    private boolean isTitleFilledAndPriceRangeNotEmpty(String title, Integer startPrice, Integer endPrice) {
+    private boolean isTitleFilledAndPriceRangeNotEmptyForDelete(String title, Integer startPrice, Integer endPrice) {
         return title != null && !title.isEmpty() && startPrice != null && endPrice != null;
     }
 
-    private boolean isDescriptionFilledAndPriceRangeNotEmpty(String description, Integer startPrice, Integer endPrice) {
+    private boolean isDescriptionFilledAndPriceRangeNotEmptyForDelete(String description, Integer startPrice, Integer endPrice) {
         return description != null && !description.isEmpty() && startPrice != null && endPrice != null;
     }
 
