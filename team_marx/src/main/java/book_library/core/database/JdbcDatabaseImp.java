@@ -30,12 +30,17 @@ public class JdbcDatabaseImp implements Database{
 
     @Override
     public boolean hasTheSameBookInDatabase(Book bookToCompare) {
-        return false;
+        String sql = "SELECT * FROM books WHERE title = ? AND author = ?";
+        Object[] args = new Object[] {bookToCompare.getTitle(), bookToCompare.getAuthor()};
+        return (jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty())
+                ?false
+                :true;
     }
 
     @Override
     public List<Book> getAllBooks() {
-        return null;
+        String sql = "SELECT * FROM books";
+        return jdbcTemplate.query(sql, new BookRowMapper());
     }
 
     @Override
