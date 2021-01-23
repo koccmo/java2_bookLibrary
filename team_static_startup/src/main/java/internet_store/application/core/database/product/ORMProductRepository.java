@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,12 +34,19 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public boolean delete(Product product) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Product where name = : name AND description = : description");
+        query.setParameter("name", product.getName());
+        query.setParameter("description", product.getDescription());
+        return query.executeUpdate() >= 0;
     }
 
     @Override
     public boolean deleteByProductName(String product) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Product WHERE name = : name");
+        query.setParameter("name", product);
+        return query.executeUpdate() > 0;
     }
 
     @Override
@@ -62,7 +70,9 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getProductList() {
-        return null;
+        CriteriaQuery<Product> query = sessionFactory.getCriteriaBuilder().createQuery(Product.class);
+        query.from(Product.class);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
     }
 
     @Override

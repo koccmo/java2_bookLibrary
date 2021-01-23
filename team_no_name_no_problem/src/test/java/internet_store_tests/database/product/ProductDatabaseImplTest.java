@@ -218,4 +218,26 @@ public class ProductDatabaseImplTest {
         assertFalse(productDatabase.containsProduct(laptopAcer));
         assertFalse(productDatabase.containsProduct(refrigerator));
     }
+
+    @Test
+    public void deleteAllByTitleAndDescriptionTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
+
+        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertFalse(productDatabase.containsProduct(refrigerator));
+        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+
+        boolean resultOfDeletingLaptop = productDatabase.deleteAllByTitle("Laptop");
+
+        assertTrue(resultOfDeletingLaptop);
+        assertFalse(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+    }
 }

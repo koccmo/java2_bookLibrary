@@ -17,7 +17,7 @@ public class AdminMode {
 
 	private final FlightUpdateAction flightUpdateAction;
 	private final FlightDeleteAction flightDeleteAction;
-	private final FlightShowOneAction flightShowOneAction;
+	private final FlightShowUsersAction flightShowUsersAction;
 	private final FlightShowAllAction flightShowAllAction;
 
 	private final LogOutAction logOutAction;
@@ -36,14 +36,14 @@ public class AdminMode {
 		FlightEditService flightEditService = new FlightEditService(userDatabase, database, editFlightRequestValidator);
 		this.flightUpdateAction = new FlightUpdateAction(flightEditService);
 
-		FlightDeleteService flightDeleteService = new FlightDeleteService(database);
+		FlightDeleteService flightDeleteService = new FlightDeleteService(userDatabase, database);
 		this.flightDeleteAction = new FlightDeleteAction(flightDeleteService);
 
 		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, database);
 		this.flightShowAllAction = new FlightShowAllAction(flightShowAllService);
 
 		FlightShowOneService flightShowOneService = new FlightShowOneService(userDatabase, database);
-		this.flightShowOneAction = new FlightShowOneAction(flightShowOneService);
+		this.flightShowUsersAction = new FlightShowUsersAction(flightShowOneService);
 
 		UserShowAllService userShowAllService = new UserShowAllService(userDatabase);
 		this.userShowAllAction = new UserShowAllAction(userShowAllService);
@@ -139,7 +139,7 @@ public class AdminMode {
 			switch (menuNumber) {
 				case 1 -> flightUpdateAction.execute();
 				case 2 -> flightDeleteAction.execute();
-				case 3 -> flightShowOneAction.execute();
+				case 3 -> flightShowUsersAction.execute();
 
 				case 0 -> {
 					return;

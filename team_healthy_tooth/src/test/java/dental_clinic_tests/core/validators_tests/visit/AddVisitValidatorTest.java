@@ -1,6 +1,7 @@
 package dental_clinic_tests.core.validators_tests.visit;
 
 import dental_clinic.core.domain.Doctor;
+import dental_clinic.core.domain.Manipulation;
 import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.visit.AddVisitRequest;
@@ -17,16 +18,18 @@ import static org.junit.Assert.*;
 
 public class AddVisitValidatorTest {
 
-    AddVisitValidator addVisitValidator = new AddVisitValidator();
-    Optional<String> comment = Optional.empty();
-    Doctor doctor = new Doctor("Name Surname", "");
+    private AddVisitValidator addVisitValidator = new AddVisitValidator();
+    private Optional<String> comment = Optional.empty();
+    private Doctor doctor = new Doctor("Name Surname", "");
+    private List<Manipulation>manipulations = new ArrayList<>();
+    private List<Long> manipulationIds = new ArrayList<>();
 
     @Test
     public void testNotValidInputId(){
         CoreError expectedError = new CoreError("id", "Not valid input of id");
 
-        Visit newVisit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, new Date());
-        AddVisitRequest addVisitRequest = new AddVisitRequest(-1L, newVisit);
+        Visit newVisit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, manipulations, new Date());
+        AddVisitRequest addVisitRequest = new AddVisitRequest(-1L, newVisit, manipulationIds);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 
@@ -37,8 +40,8 @@ public class AddVisitValidatorTest {
     public void testNotValidInputToothNumber(){
         CoreError expectedError = new CoreError("tooth number", "Not valid input for tooth number");
 
-        Visit newVisit = new Visit(1L, 2, comment, ToothStatus.FASETE, doctor, new Date());
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, newVisit);
+        Visit newVisit = new Visit(1L, 2, comment, ToothStatus.FASETE, doctor, manipulations, new Date());
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, newVisit, manipulationIds);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 
@@ -49,8 +52,8 @@ public class AddVisitValidatorTest {
     public void testNotValidInputDoctor(){
         CoreError expectedError = new CoreError("doctor", "Doctor can't be empty");
 
-        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, null, new Date());
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
+        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, null, manipulations, new Date());
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit, manipulationIds);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
         coreErrors.forEach(System.out::println);
@@ -60,8 +63,8 @@ public class AddVisitValidatorTest {
     @Test
     public void testValidInput(){
 
-        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, new Date());
-        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit);
+        Visit visit = new Visit(1L, 11, comment, ToothStatus.FASETE, doctor, manipulations, new Date());
+        AddVisitRequest addVisitRequest = new AddVisitRequest(1L, visit, manipulationIds);
 
         List <CoreError> coreErrors = addVisitValidator.validate(addVisitRequest);
 

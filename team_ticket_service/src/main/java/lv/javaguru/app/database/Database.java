@@ -27,6 +27,8 @@ public interface Database {
 
 	boolean isUsersReservation (Long id, User user);
 
+	boolean isContainTicket (Ticket ticket);
+
 
 	/*
 	void addTicket (User user, Ticket ticket);

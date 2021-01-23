@@ -40,8 +40,13 @@ public class AddFlightRequestValidator {
 
 		List<CodeError> errors = new ArrayList<>();
 
-		strIsNotNullOrEmpty(destinationCity, "destination city").ifPresent(errors::add);
-		strIsNotContainingDigits(destinationCity, "destination city").ifPresent(errors::add);
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getFlight().getTicket().getFromCity(), "Destination city");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+			return errors;
+		}
+
+		strIsNotContainingDigits(destinationCity, "Destination city").ifPresent(errors::add);
 
 		return errors;
 	}
@@ -51,11 +56,20 @@ public class AddFlightRequestValidator {
 
 		List<CodeError> errors = new ArrayList<>();
 
+		Optional<CodeError> codeError = dateIsNotNullOrEmpty(request.getFlight().getTicket().getDate(), "date");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+			return errors;
+		}
 		isDateAfter(date, "departure date").ifPresent(errors::add);
 
 		return errors;
 	}
-
+	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
+		return (isNullOrEmpty(dateRequest))
+				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
+				: Optional.empty();
+	}
 
 	private Optional<CodeError> strIsNotNullOrEmpty (String request, String field) {
 		return (isNullOrEmpty(request))
@@ -85,6 +99,9 @@ public class AddFlightRequestValidator {
 		return str.chars().anyMatch(Character::isDigit);
 	}
 
+	private boolean isNullOrEmpty (LocalDate date) {
+		return (date == null );
+	}
 	private boolean isNullOrEmpty (String str) {
 		return (str == null || str.isEmpty());
 	}
@@ -93,8 +110,7 @@ public class AddFlightRequestValidator {
 		try {
 			parseStrToDate(str);
 			return true;
-		}
-		catch (Exception ignore) {
+		} catch (Exception ignore) {
 			return false;
 		}
 	}

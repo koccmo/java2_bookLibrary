@@ -1,21 +1,32 @@
 package lv.javaguru.app.core.request.edit;
 
+import lv.javaguru.app.core.domain.Ticket;
+
 import java.time.LocalDate;
 
 public class EditTicketDepartureDateRequest {
-    private final LocalDate departureDate;
-    private final Long id;
+	private LocalDate departureDate;
+	private Long id;
+	private Ticket ticket;
 
-    public EditTicketDepartureDateRequest(Long id, LocalDate departureDate) {
-        this.id = id;
-        this.departureDate = departureDate;
-    }
+	public EditTicketDepartureDateRequest (Ticket ticket, LocalDate departureDate) {
+		this.ticket = ticket;
+	}
 
-    public LocalDate getDepartureDate() {
-        return departureDate;
-    }
+	public EditTicketDepartureDateRequest (Long id, LocalDate departureDate) {
+		this.id = id;
+		this.departureDate = departureDate;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public LocalDate getDepartureDate () {
+		return departureDate;
+	}
+
+	public Long getId () {
+		return id;
+	}
+
+	public Ticket getTicket () {
+		return ticket;
+	}
 }

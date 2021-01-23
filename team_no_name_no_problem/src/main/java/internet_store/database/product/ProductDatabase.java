@@ -35,20 +35,26 @@ public interface ProductDatabase {
 
     void changePrice(Long id, Integer newPrice);
 
-    List<Product> findAllByTitle (String title);
+    List<Product> findAllByTitle(String title);
+
+    List<Product> findAllByDescription(String description);
 
     List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByDescription (String description);
+    List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByTitleAndDescription (String title, String description);
+    List<Product> findAllByTitleAndDescription(String title, String description);
+
+    List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
+
+    List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
 
     boolean containsProduct (Product product);
 
-    boolean containsId (Long id);
+    boolean containsId(Long id);
 
-    boolean containsTitle (String title);
+    boolean containsTitle(String title);
 
-    boolean containsDescription (String description);
+    boolean containsDescription(String description);
 
 }

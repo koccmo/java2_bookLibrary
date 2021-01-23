@@ -12,7 +12,15 @@ public class Ticket {
 	private String seat;
 	private boolean isCanceled;
 	private boolean isFinished;
+	private boolean isEditing;
 
+	public boolean isEditing () {
+		return isEditing;
+	}
+
+	public void setEditing (boolean editing) {
+		isEditing = editing;
+	}
 
 	public boolean isOriginSelected () {
 		return fromCountry != null && fromCity != null;

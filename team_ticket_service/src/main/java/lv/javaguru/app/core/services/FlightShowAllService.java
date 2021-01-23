@@ -38,6 +38,11 @@ public class FlightShowAllService {
 	}
 
 	private List<CodeError> validate (User user) {
-		return new ArrayList<>();
+		List<CodeError> errorList = new ArrayList<>();
+
+		if (!userDatabase.containsUser(user.getId()))
+			errorList.add(new CodeError("User", "no user in database"));
+
+		return errorList;
 	}
 }

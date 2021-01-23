@@ -22,8 +22,7 @@ public class FlightDeleteAction implements UIActions {
         DeleteFlightResponse response = flightDeleteService.execute(request);
 
         if (response.hasErrors()) {
-            response.getErrorList().forEach(r -> System.out.println(r.getField() +
-                    r.getMessage()));
+            response.getErrorList().forEach(System.out::println);
         }
         else{
             System.out.println(response.getMessage());

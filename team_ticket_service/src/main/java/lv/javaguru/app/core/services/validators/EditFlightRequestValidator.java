@@ -7,13 +7,14 @@ import java.util.List;
 
 public class EditFlightRequestValidator extends Validator {
 	public EditFlightRequestValidator () {
+
 	}
 
-	public List<CodeError> validateId (Long id) {
+	public List<CodeError> validate (Long id) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		// verifyCityAndCountry(name, "User name", errorList);
-
+		if (id == null)
+			errorList.add(new CodeError("Id", "Null"));
 		return errorList;
 	}
 
