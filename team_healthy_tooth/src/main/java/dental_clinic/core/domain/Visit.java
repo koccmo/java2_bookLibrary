@@ -36,6 +36,10 @@ public class Visit {
         this.id = id;
     }
 
+    public Long getPatientsId() {
+        return patientsId;
+    }
+
     public Integer getToothNumber() {
         return toothNumber;
     }
