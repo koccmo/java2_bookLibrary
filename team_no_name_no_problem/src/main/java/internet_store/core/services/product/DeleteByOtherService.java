@@ -141,8 +141,8 @@ public class DeleteByOtherService {
                 deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
         if (!resultOfDeleteByTitleAndPriceRange){
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
-                    deleteProductByOtherRequest.getDescription() +
-                    ", price range: from " + deleteProductByOtherRequest.getStartPrice() + " till " + deleteProductByOtherRequest.getEndPrice()));
+                    deleteProductByOtherRequest.getTitle() + ", price range: from " + deleteProductByOtherRequest.getStartPrice() +
+                    " till " + deleteProductByOtherRequest.getEndPrice()));
             return new DeleteByOtherResponse(errors);
         }
         return new DeleteByOtherResponse(resultOfDeleteByTitleAndPriceRange);
@@ -154,8 +154,8 @@ public class DeleteByOtherService {
                 deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
         if (!resultOfDeleteByDescriptionAndPriceRange){
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with description: " +
-                    deleteProductByOtherRequest.getDescription() +
-                    ", price range: from " + deleteProductByOtherRequest.getStartPrice() + " till " + deleteProductByOtherRequest.getEndPrice()));
+                    deleteProductByOtherRequest.getDescription() + ", price range: from " + deleteProductByOtherRequest.getStartPrice() +
+                    " till " + deleteProductByOtherRequest.getEndPrice()));
             return new DeleteByOtherResponse(errors);
         }
         return new DeleteByOtherResponse(resultOfDeleteByDescriptionAndPriceRange);
