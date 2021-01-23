@@ -61,6 +61,33 @@ import java.util.stream.Collectors;
         if (isDescriptionFilled(searchProductRequest.getDescription())) {
             return searchByDescriptionIsProvided(searchProductRequest);
         }
+        if (isPriceRangeFilled(searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice())) {
+            return searchByPriceRangeIsProvided(searchProductRequest);
+        }
+        if (!isTitleAndDescriptionAndPriceNotEmpty(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                searchProductRequest.getStartPrice(), searchProductRequest.getEndPrice())) {
+            return searchByTitleAndDescriptionIsProvided(searchProductRequest);
+        }
+        if (!isTitleAndDescriptionFilled(searchProductRequest.getTitle(),searchProductRequest.getDescription())) {
+            return searchByTitleAndPriceRangeIsProvided(searchProductRequest);
+        }
+        if(!isTitleFilledAndPriceRangeNotEmpty(searchProductRequest.getTitle(),searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice())) {
+            return searchByDescriptionAndPriceRangeIsProvided(searchProductRequest);
+        }
+        if (!isDescriptionFilledPriceRangeNotEmpty(searchProductRequest.getDescription(),searchProductRequest.getStartPrice(),
+                searchProductRequest.getEndPrice())) {
+            return searchByTitleIsProvided(searchProductRequest);
+        }
+        if (!isTitleFilled(searchProductRequest.getTitle())) {
+            return searchByDescriptionIsProvided(searchProductRequest);
+        }
+        if (!isDescriptionFilled(searchProductRequest.getDescription())) {
+            return searchByPriceRangeIsProvided(searchProductRequest);
+        }
+        if (!isPriceRangeFilled(searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice())) {
+            return searchByPriceRangeIsProvided(searchProductRequest);
+        }
         return searchByTitleAndDescriptionAndPriceIsProvided(searchProductRequest);
     }
 
