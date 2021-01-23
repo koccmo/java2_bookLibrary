@@ -8,15 +8,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JdbcDatabaseImp implements Database{
+public class JdbcDatabaseImp implements Database {
 
-    @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void save(Book book) {
         jdbcTemplate.update(
                 "INSERT INTO books (title, author)"
-                + "VALUES (?, ?)",
+                        + "VALUES (?, ?)",
                 book.getTitle(), book.getAuthor()
         );
     }
@@ -24,17 +25,17 @@ public class JdbcDatabaseImp implements Database{
     @Override
     public boolean deleteById(Long id) {
         String sql = "DELETE FROM books WHERE id = ?";
-        Object[] args = new Object[] {id};
+        Object[] args = new Object[]{id};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public boolean hasTheSameBookInDatabase(Book bookToCompare) {
         String sql = "SELECT * FROM books WHERE title = ? AND author = ?";
-        Object[] args = new Object[] {bookToCompare.getTitle(), bookToCompare.getAuthor()};
+        Object[] args = new Object[]{bookToCompare.getTitle(), bookToCompare.getAuthor()};
         return (jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty())
-                ?false
-                :true;
+                ? false
+                : true;
     }
 
     @Override
@@ -46,19 +47,21 @@ public class JdbcDatabaseImp implements Database{
     @Override
     public List<Book> findByTitle(String title) {
         String sql = "SELECT * FROM books WHERE title = ?";
-        Object[] args = new Object[] {title};
+        Object[] args = new Object[]{title};
         return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
 
     @Override
     public List<Book> findByAuthor(String author) {
         String sql = "SELECT * FROM books WHERE author = ? ";
-        Object[] args = new Object[] {author};
+        Object[] args = new Object[]{author};
         return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
 
     @Override
     public List<Book> findByTitleAndAuthor(String title, String author) {
-        return null;
+        String sql = "SELECT * FROM books WHERE title = ? AND author = ?";
+        Object[] args = new Object[] {title, author};
+        return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
 }
