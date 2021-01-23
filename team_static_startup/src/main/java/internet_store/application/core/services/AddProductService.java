@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.AddProductRequest;
 import internet_store.application.core.responses.AddProductResponse;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AddProductService {
 
     @Autowired
-    private Database database;
+    private ProductRepository productRepository;
     @Autowired
     private AddProductValidator validator;
 
@@ -26,7 +26,7 @@ public class AddProductService {
         }
 
         Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductPrice());
-        database.add(product);
+        productRepository.add(product);
         return new AddProductResponse(product);
     }
 }

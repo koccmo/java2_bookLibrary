@@ -4,11 +4,30 @@ import java.util.Objects;
 
 public class User {
 
-	private Long id;
+	protected Long id;
+	//private final String login;
+	//private String password;
 	private String name;
 	private String surname;
 	private PersonType personType;
 
+//private User (String login, String password) {
+//	this.login = login;
+//	this.password = password;
+//	this.personType = PersonType.CLIENT;
+//}
+
+	//public User (String login, String password, String name, String surname) {
+//	this(login, password);
+//	this.name = name;
+//	this.surname = surname;
+//}
+	public User () {
+	}
+
+	public User (String name) {
+		this.name = name;
+	}
 
 	public User (String name, String surname) {
 		this.name = name;
@@ -16,6 +35,7 @@ public class User {
 		this.personType = PersonType.CLIENT;
 	}
 
+	//
 	public User (String name, String surname, PersonType personType) {
 		this(name, surname);
 		this.personType = personType;

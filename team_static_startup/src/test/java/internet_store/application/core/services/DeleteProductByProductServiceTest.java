@@ -1,6 +1,6 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
+import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteProductByProductServiceTest {
 
-    @Mock private Database database;
+    @Mock private ProductRepository productRepository;
     @Mock private DeleteByProductValidator validator;
     @InjectMocks private DeleteProductByProductService service;
 
@@ -33,14 +33,14 @@ public class DeleteProductByProductServiceTest {
     public void shouldDeleteProductWithoutErrors() {
         Product product = new Product("tv", "good tv", new BigDecimal("399.99"));
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.delete(product)).thenReturn(true);
+        Mockito.when(productRepository.delete(product)).thenReturn(true);
 
         DeleteByProductRequest request = new DeleteByProductRequest(product.getName(), product.getDescription(),
                 product.getPrice());
         DeleteByProductResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
-        Mockito.verify(database).delete(argThat(new ProductMatcher("tv",
+        Mockito.verify(productRepository).delete(argThat(new ProductMatcher("tv",
                 "good tv", new BigDecimal("399.99"))));
     }
 

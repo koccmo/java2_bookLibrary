@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.library.core.domain.Book;
-import lv.javaguru.java2.library.core.database.Database;
+import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.Ordering;
 import lv.javaguru.java2.library.core.requests.Paging;
 import lv.javaguru.java2.library.core.requests.SearchBooksRequest;
@@ -27,7 +27,7 @@ public class SearchBooksService {
 	@Value("${search.paging.enabled}")
 	private boolean pagingEnabled;
 
-	@Autowired private Database database;
+	@Autowired private BookRepository bookRepository;
 	@Autowired private SearchBooksRequestValidator validator;
 
 	public SearchBooksResponse execute(SearchBooksRequest request) {
@@ -46,13 +46,13 @@ public class SearchBooksService {
 	private List<Book> search(SearchBooksRequest request) {
 		List<Book> books = new ArrayList<>();
 		if (request.isTitleProvided() && !request.isAuthorProvided()) {
-			books = database.findByTitle(request.getTitle());
+			books = bookRepository.findByTitle(request.getTitle());
 		}
 		if (!request.isTitleProvided() && request.isAuthorProvided()) {
-			books = database.findByAuthor(request.getAuthor());
+			books = bookRepository.findByAuthor(request.getAuthor());
 		}
 		if (request.isTitleProvided() && request.isAuthorProvided()) {
-			books = database.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
+			books = bookRepository.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
 		}
 		return books;
 	}

@@ -1,32 +1,48 @@
 package lv.javaguru.app.core.domain;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Ticket {
-	private String originCountry;
-	private String originCity;
-	private String destinationCountry;
-	private String destinationCity;
-	private String departDate;
-	private String returnDate;
+	private String fromCountry;
+	private String fromCity;
+	private String toCountry;
+	private String toCity;
+	private LocalDate date;
 	private String seat;
 	private boolean isCanceled;
 	private boolean isFinished;
 
-	public String getOriginCountry () {
-		return originCountry;
+
+	public boolean isOriginSelected () {
+		return fromCountry != null && fromCity != null;
 	}
 
-	public void setOriginCountry (String originCountry) {
-		this.originCountry = originCountry;
+
+	public Ticket () {
 	}
 
-	public String getDestinationCity () {
-		return destinationCity;
+	public Ticket (String fromCity, String toCity, LocalDate date, String seat) {
+		this.fromCity = fromCity;
+		this.toCity = toCity;
+		this.date = date;
+		this.seat = seat;
 	}
 
-	public void setDestinationCity (String destinationCity) {
-		this.destinationCity = destinationCity;
+	public String getFromCountry () {
+		return fromCountry;
+	}
+
+	public void setFromCountry (String fromCountry) {
+		this.fromCountry = fromCountry;
+	}
+
+	public String getToCity () {
+		return toCity;
+	}
+
+	public void setToCity (String toCity) {
+		this.toCity = toCity;
 	}
 
 	public boolean isCanceled () {
@@ -45,25 +61,13 @@ public class Ticket {
 		isFinished = finished;
 	}
 
-	public Ticket () {
-
-	}
-
-	public Ticket (String originCity, String destinationCountry, String departDate, String returnDate, String seat) {
-		this.originCity = originCity;
-		this.destinationCountry = destinationCountry;
-		this.departDate = departDate;
-		this.returnDate = returnDate;
-		this.seat = seat;
-	}
 
 	@Override
 	public String toString () {
-		return originCity + ", " +
-				destinationCountry +
-				", departure date: " + departDate +
-				", return date: " + returnDate +
-				", seat no: " + seat;
+		return "FROM: " + fromCity + ", " + fromCountry +
+				", TO: " + toCity + ", " + toCountry +
+				", DATE: " + date +
+				", SEAT: " + seat;
 	}
 
 	@Override
@@ -71,48 +75,39 @@ public class Ticket {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Ticket ticket = (Ticket) o;
-		return Objects.equals(originCity, ticket.originCity) &&
-				Objects.equals(destinationCountry, ticket.destinationCountry) &&
-				Objects.equals(departDate, ticket.departDate) &&
-				Objects.equals(returnDate, ticket.returnDate) &&
+		return Objects.equals(fromCity, ticket.fromCity) &&
+				Objects.equals(toCountry, ticket.toCountry) &&
+				Objects.equals(date, ticket.date) &&
 				Objects.equals(seat, ticket.seat);
 	}
 
 	@Override
 	public int hashCode () {
-		return Objects.hash(originCity, destinationCountry, departDate, returnDate, seat);
+		return Objects.hash(fromCity, toCountry, date, seat);
 	}
 
-	public String getOriginCity () {
-		return originCity;
+	public String getFromCity () {
+		return fromCity;
 	}
 
-	public void setOriginCity (String originCity) {
-		this.originCity = originCity;
+	public void setFromCity (String fromCity) {
+		this.fromCity = fromCity;
 	}
 
-	public String getDestinationCountry () {
-		return destinationCountry;
+	public String getToCountry () {
+		return toCountry;
 	}
 
-	public void setDestinationCountry (String destinationCountry) {
-		this.destinationCountry = destinationCountry;
+	public void setToCountry (String toCountry) {
+		this.toCountry = toCountry;
 	}
 
-	public String getDepartDate () {
-		return departDate;
+	public LocalDate getDate () {
+		return date;
 	}
 
-	public void setDepartDate (String departDate) {
-		this.departDate = departDate;
-	}
-
-	public String getReturnDate () {
-		return returnDate;
-	}
-
-	public void setReturnDate (String returnDate) {
-		this.returnDate = returnDate;
+	public void setDate (LocalDate date) {
+		this.date = date;
 	}
 
 	public String getSeat () {

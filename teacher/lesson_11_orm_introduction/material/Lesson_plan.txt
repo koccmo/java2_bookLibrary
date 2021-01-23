@@ -1,3 +1,16 @@
 Lesson 11 plan:
 
-1.
+Java Beans Specification
+
+
+  Java Application
+
+  JPA (ORM Frameworks API) - JSR 338
+
+  ORM Frameworks  (Hibernate)
+
+  JDBC API
+
+  JDBC API Driver
+
+  Database

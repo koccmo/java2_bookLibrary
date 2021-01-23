@@ -3,73 +3,96 @@ package adventure_time.core.domain;
 import java.util.Date;
 import java.util.Objects;
 
-import static java.lang.Long.valueOf;
-
 public class Tours {
 
     private final static Long TWELVE_HOURS = 43200000L;
 
     private Long id;
-    private Date creationDate;
     private Events event;       // foreign key
-    private Date eventDate;
-    private Double eventCoast;
-    private Integer ticketAmount;
+    private Date releaseDate;
+    private Date startingDate;
+    private Double ticketCoast;
+    private Boolean completed;
+    private Integer soldTickets;
 
-    public Tours(Events event, Date eventDate, Double eventCoast) {
+    public Tours(Events event, Date releaseDate, Date startingDate, Double ticketCoast) {
         this.event = event;
-        this.eventDate = eventDate;
-        this.eventCoast = eventCoast;
-        this.ticketAmount = 0;
+        this.releaseDate = releaseDate;
+        this.startingDate = startingDate;
+        this.ticketCoast = ticketCoast;
     }
 
-    public boolean isComplete() {
-        return event.getMaxNumberParticipants().equals(ticketAmount);
+    public Boolean isCompleted() {
+        return event.getMaxNumberParticipants().equals(soldTickets);
     }
 
-    public boolean isComing() {
+    public Boolean isComing() {
         Date now = new Date();
-        return (eventDate.getTime() - now.getTime()) < TWELVE_HOURS;
+        return (startingDate.getTime() - now.getTime()) < TWELVE_HOURS;
     }
 
-    public void incTicketAmount() {
-        this.ticketAmount++;
+    public Boolean incTicketAmount() {
+        if (this.soldTickets >= event.getMaxNumberParticipants()) return false;
+        this.soldTickets++;
+        return true;
     }
-
-
 
     //*******************************************
 
-    public void setTourId(Long id) {
-        this.id = id;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Long getTourId() {
+    public Long getId() {
         return id;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Events getLinkedEvent() {
+    public Events getEvent() {
         return event;
     }
 
-    public Date getLinkedEventDate() {
-        return eventDate;
+    public void setEvent(Events event) {
+        this.event = event;
     }
 
-    public Double getLinkedEventCoast() {
-        return eventCoast;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public Integer getTicketAmount() {
-        return ticketAmount;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public Date getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(Date startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public Double getTicketCoast() {
+        return ticketCoast;
+    }
+
+    public void setTicketCoast(Double ticketCoast) {
+        this.ticketCoast = ticketCoast;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public Integer getSoldTickets() {
+        return soldTickets;
+    }
+
+    public void setSoldTickets(Integer soldTickets) {
+        this.soldTickets = soldTickets;
     }
 
     @Override
@@ -78,27 +101,29 @@ public class Tours {
         if (o == null || getClass() != o.getClass()) return false;
         Tours tours = (Tours) o;
         return Objects.equals(id, tours.id) &&
-                Objects.equals(creationDate, tours.creationDate) &&
                 Objects.equals(event, tours.event) &&
-                Objects.equals(eventDate, tours.eventDate) &&
-                Objects.equals(eventCoast, tours.eventCoast) &&
-                Objects.equals(ticketAmount, tours.ticketAmount);
+                Objects.equals(releaseDate, tours.releaseDate) &&
+                Objects.equals(startingDate, tours.startingDate) &&
+                Objects.equals(ticketCoast, tours.ticketCoast) &&
+                Objects.equals(completed, tours.completed) &&
+                Objects.equals(soldTickets, tours.soldTickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, creationDate, event, eventDate, eventCoast, ticketAmount);
+        return Objects.hash(id, event, releaseDate, startingDate, ticketCoast, completed, soldTickets);
     }
 
     @Override
     public String toString() {
         return "Tours{" +
                 "id=" + id +
-                ", creationDate=" + creationDate +
                 ", event=" + event +
-                ", eventDate=" + eventDate +
-                ", eventCoast=" + eventCoast +
-                ", ticketAmount=" + ticketAmount +
+                ", releaseDate=" + releaseDate +
+                ", startingDate=" + startingDate +
+                ", ticketCoast=" + ticketCoast +
+                ", completed=" + completed +
+                ", soldTickets=" + soldTickets +
                 '}';
     }
 }
