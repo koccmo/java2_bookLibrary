@@ -60,21 +60,17 @@ public class DeleteByOtherService {
             return deleteByTitleAndDescriptionIsProvided(deleteProductByOtherRequest);
         }
         if (!isTitleAndDescriptionFilledForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getDescription())) {
-            return deleteByTitleAndDescriptionIsProvided(deleteProductByOtherRequest);
+            return deleteByTitleAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
         if (!isTitleFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getTitle(),deleteProductByOtherRequest.getStartPrice(),
                 deleteProductByOtherRequest.getEndPrice())) {
-            return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
-        }
-        if (isDescriptionFilledAndPriceRangeNotEmptyForDelete(deleteProductByOtherRequest.getDescription(),deleteProductByOtherRequest.getStartPrice(),
-                deleteProductByOtherRequest.getEndPrice())){
             return deleteByDescriptionAndPriceRangeIsProvided(deleteProductByOtherRequest);
         }
-        if (isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
-            return deleteByTitleIsProvidedForDelete(deleteProductByOtherRequest);
-        }
-        if (isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
+        if (!isTitleFilledToForDelete(deleteProductByOtherRequest.getTitle())) {
             return deleteByDescriptionIsProvided(deleteProductByOtherRequest);
+        }
+        if (!isDescriptionFilledForDelete(deleteProductByOtherRequest.getDescription())) {
+            return deleteByPriceRangeIsProvided(deleteProductByOtherRequest);
         }
 
         return deleteByTitleAndDescriptionAndPriceIsProvided(deleteProductByOtherRequest);
