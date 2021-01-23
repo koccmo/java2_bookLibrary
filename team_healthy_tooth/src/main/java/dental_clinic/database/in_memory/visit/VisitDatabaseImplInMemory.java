@@ -4,7 +4,9 @@ import dental_clinic.core.domain.Visit;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class VisitDatabaseImplInMemory implements VisitDatabase{
@@ -17,5 +19,24 @@ public class VisitDatabaseImplInMemory implements VisitDatabase{
         visit.setId(id);
         id++;
         visitList.add(visit);
+    }
+
+    @Override
+    public List<Visit> searchVisitByPatientId(Long patientsId) {
+        return visitList.stream()
+                .filter(visit -> visit.getPatientsId().equals(patientsId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> searchVisitByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
+        Date dateFrom = new Date(2021, monthFrom-1, dayFrom, 00, 00);
+        Date dateTo = new Date(2021, monthTo-1, dayTo, 23, 59);
+        return visitList.stream()
+            .filter(visit -> (visit.getDate().after(dateFrom)
+                && visit.getDate().before(dateTo)) ||
+                (visit.getDate().equals(dateFrom) ||
+                visit.getDate().equals(dateTo)))
+               .collect(Collectors.toList());
     }
 }
