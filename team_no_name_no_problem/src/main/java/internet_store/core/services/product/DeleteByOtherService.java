@@ -108,6 +108,44 @@ public class DeleteByOtherService {
         return new DeleteByOtherResponse(resultOfDeleteByTitleDescriptionAndPriceRange);
     }
 
+    private DeleteByOtherResponse deleteByTitleAndDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+        List <CoreError>errors = new ArrayList<>();
+        boolean resultOfDeleteByTitleDescription = productDatabase.deleteAllByTitleAndDescription(deleteProductByOtherRequest.getTitle(),
+                deleteProductByOtherRequest.getDescription());
+        if (!resultOfDeleteByTitleDescription){
+            errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
+                    deleteProductByOtherRequest.getTitle() + ", description: " + deleteProductByOtherRequest.getDescription()));
+            return new DeleteByOtherResponse(errors);
+        }
+        return new DeleteByOtherResponse(resultOfDeleteByTitleDescription);
+    }
+
+    private DeleteByOtherResponse deleteByTitleAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+        List <CoreError>errors = new ArrayList<>();
+        boolean resultOfDeleteByTitleAndPriceRange = productDatabase.deleteAllByTitleAndPriceRange(deleteProductByOtherRequest.getTitle(),
+                deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
+        if (!resultOfDeleteByTitleAndPriceRange){
+            errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
+                    deleteProductByOtherRequest.getDescription() +
+                    ", price range: from " + deleteProductByOtherRequest.getStartPrice() + " till " + deleteProductByOtherRequest.getEndPrice()));
+            return new DeleteByOtherResponse(errors);
+        }
+        return new DeleteByOtherResponse(resultOfDeleteByTitleAndPriceRange);
+    }
+
+    private DeleteByOtherResponse deleteByDescriptionAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+        List <CoreError>errors = new ArrayList<>();
+        boolean resultOfDeleteByDescriptionAndPriceRange = productDatabase.deleteAllByDescriptionAndPriceRange(deleteProductByOtherRequest.getDescription(),
+                deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
+        if (!resultOfDeleteByDescriptionAndPriceRange){
+            errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with description: " +
+                    deleteProductByOtherRequest.getDescription() +
+                    ", price range: from " + deleteProductByOtherRequest.getStartPrice() + " till " + deleteProductByOtherRequest.getEndPrice()));
+            return new DeleteByOtherResponse(errors);
+        }
+        return new DeleteByOtherResponse(resultOfDeleteByDescriptionAndPriceRange);
+    }
+
 
     private DeleteByOtherResponse deleteByTitleIsProvidedForDelete(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
