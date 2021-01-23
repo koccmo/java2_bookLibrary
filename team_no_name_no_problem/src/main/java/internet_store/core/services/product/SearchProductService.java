@@ -143,7 +143,8 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
+        List<Product> products = productDatabase.findAllByTitleAndDescription(searchProductRequest.getTitle(),
+                searchProductRequest.getDescription());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " +
                     searchProductRequest.getTitle() +  ", description: " + searchProductRequest.getDescription()));
@@ -156,7 +157,8 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse searchByTitleAndPriceRangeIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
+        List<Product> products = productDatabase.findAllByTitleAndPriceRange(searchProductRequest.getTitle(),
+                searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " + searchProductRequest.getTitle() +
                     ", price range: from " + searchProductRequest.getStartPrice() + " till " + searchProductRequest.getEndPrice()));
@@ -169,7 +171,8 @@ import java.util.stream.Collectors;
 
     private SearchProductResponse searchByDescriptionAndPriceRangeIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
+        List<Product> products = productDatabase.findAllByDescriptionAndPriceRange(searchProductRequest.getDescription(),
+                searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with description: " + searchProductRequest.getDescription() +
                     ", price range: from " + searchProductRequest.getStartPrice() + " till " + searchProductRequest.getEndPrice()));
@@ -185,8 +188,9 @@ import java.util.stream.Collectors;
         List<Product> products = productDatabase.findAllByTitleAndDescriptionAndPriceRange(searchProductRequest.getTitle(),
                 searchProductRequest.getDescription(),searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
-            errors.add(new CoreError("database", "Database doesn't contain products with title: " + searchProductRequest.getDescription() +
-                    ", price range: from " + searchProductRequest.getStartPrice() + " till " + searchProductRequest.getEndPrice()));
+            errors.add(new CoreError("database", "Database doesn't contain products with title: " + searchProductRequest.getTitle() +
+                    ", description" + searchProductRequest.getDescription() + ", price range: from " + searchProductRequest.getStartPrice() + " till "
+                    + searchProductRequest.getEndPrice()));
             return new SearchProductResponse(errors, new ArrayList<>());
         }
         products = order(products, searchProductRequest.getOrdering());
