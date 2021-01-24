@@ -1,15 +1,14 @@
 package lv.javaguru.app.console_ui.modes;
 
+import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.*;
-import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
-import lv.javaguru.app.core.services.validators.EditUserValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
+
 
 public class AdminMode {
+	private static final ApplicationContext context = ApplicationContext.getInstance();
+
 	private final UserUpdateAction userUpdateAction;
 	private final UserDeleteAction userDeleteAction;
 	private final UserShowOneAction userShowOneAction;
@@ -23,36 +22,16 @@ public class AdminMode {
 	private final LogOutAction logOutAction;
 
 
-	public AdminMode (UserDatabase userDatabase, Database database) {
-		EditUserValidator editUserValidator = new EditUserValidator();
-		UserEditService userEditService = new UserEditService(userDatabase, editUserValidator);
-		this.userUpdateAction = new UserUpdateAction(userEditService);
-
-		UserDeleteService userDeleteService = new UserDeleteService(userDatabase);
-		this.userDeleteAction = new UserDeleteAction(userDeleteService);
-
-
-		EditFlightRequestValidator editFlightRequestValidator = new EditFlightRequestValidator();
-		FlightEditService flightEditService = new FlightEditService(userDatabase, database, editFlightRequestValidator);
-		this.flightUpdateAction = new FlightUpdateAction(flightEditService);
-
-		FlightDeleteService flightDeleteService = new FlightDeleteService(userDatabase, database);
-		this.flightDeleteAction = new FlightDeleteAction(flightDeleteService);
-
-		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, database);
-		this.flightShowAllAction = new FlightShowAllAction(flightShowAllService);
-
-		FlightShowOneService flightShowOneService = new FlightShowOneService(userDatabase, database);
-		this.flightShowUsersAction = new FlightShowUsersAction(flightShowOneService);
-
-		UserShowAllService userShowAllService = new UserShowAllService(userDatabase);
-		this.userShowAllAction = new UserShowAllAction(userShowAllService);
-
-		UserShowSingleService showSingle = new UserShowSingleService(userDatabase);
-		this.userShowOneAction = new UserShowOneAction(showSingle);
-
-		LogOutService logOutService = new LogOutService(userDatabase);
-		this.logOutAction = new LogOutAction(logOutService);
+	public AdminMode () {
+		this.userUpdateAction = context.getBean(UserUpdateAction.class);
+		this.userDeleteAction = context.getBean(UserDeleteAction.class);
+		this.flightUpdateAction = context.getBean(FlightUpdateAction.class);
+		this.flightDeleteAction = context.getBean(FlightDeleteAction.class);
+		this.flightShowAllAction = context.getBean(FlightShowAllAction.class);
+		this.flightShowUsersAction = context.getBean(FlightShowUsersAction.class);
+		this.userShowAllAction = context.getBean(UserShowAllAction.class);
+		this.userShowOneAction = context.getBean(UserShowOneAction.class);
+		this.logOutAction = context.getBean(LogOutAction.class);
 	}
 
 
@@ -86,9 +65,7 @@ public class AdminMode {
 		BaseFunc.printHeader("MENU", currentUser);
 		System.out.println(
 				"[1] Manage user\n" +
-						"[2] Manage ticket\n" +
-
-						System.lineSeparator() +
+						"[2] Manage ticket\n\n" +
 
 						"[3] Show all users\n" +
 						"[4] Show all flights\n" +

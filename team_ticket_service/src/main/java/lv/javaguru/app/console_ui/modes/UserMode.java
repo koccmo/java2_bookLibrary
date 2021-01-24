@@ -1,5 +1,6 @@
 package lv.javaguru.app.console_ui.modes;
 
+import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.console_ui.FlightUpdateAction;
 import lv.javaguru.app.core.common.BaseFunc;
@@ -12,8 +13,7 @@ import lv.javaguru.app.database.UserDatabase;
 
 
 public class UserMode {
-	private static final AddFlightRequestValidator validator = new AddFlightRequestValidator();
-	private static final EditFlightRequestValidator EDIT_FLIGHT_REQUEST_VALIDATOR = new EditFlightRequestValidator();
+	private static final ApplicationContext context = ApplicationContext.getInstance();
 
 	private final UIActions addFlightAction;
 	private final UIActions flightShowAllAction;
@@ -22,20 +22,12 @@ public class UserMode {
 	private final UIActions logOutAction;
 
 
-	public UserMode (UserDatabase userDatabase, Database flightDatabase) {
-
-		FlightAddService flightAddService = new FlightAddService(flightDatabase, validator);
-		FlightDeleteService flightDeleteService = new FlightDeleteService(userDatabase, flightDatabase);
-		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, flightDatabase);
-		FlightEditService flightEditService = new FlightEditService(userDatabase, flightDatabase, EDIT_FLIGHT_REQUEST_VALIDATOR);
-
-		LogOutService logOutService = new LogOutService(userDatabase);
-
-		this.addFlightAction = new FlightAddAction(flightAddService);
-		this.flightShowAllAction = new FlightShowAllAction(flightShowAllService);
-		this.editFlightAction = new FlightUpdateAction(flightEditService);
-		this.deleteFlight = new FlightDeleteAction(flightDeleteService);
-		this.logOutAction = new LogOutAction(logOutService);
+	public UserMode () {
+		this.addFlightAction = context.getBean(FlightAddAction.class);
+		this.flightShowAllAction = context.getBean(FlightShowAllAction.class);
+		this.editFlightAction = context.getBean(FlightUpdateAction.class);
+		this.deleteFlight = context.getBean(FlightDeleteAction.class);
+		this.logOutAction = context.getBean(LogOutAction.class);
 	}
 
 

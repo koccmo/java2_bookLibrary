@@ -1,36 +1,34 @@
 package lv.javaguru.app.console_ui.modes;
 
+import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.ExitAction;
 import lv.javaguru.app.console_ui.LogInAction;
-import lv.javaguru.app.console_ui.UserAddAction;
 import lv.javaguru.app.console_ui.UIActions;
+import lv.javaguru.app.console_ui.UserAddAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.LogInService;
-import lv.javaguru.app.core.services.UserAddService;
-import lv.javaguru.app.core.services.validators.LoginRequestValidator;
-import lv.javaguru.app.core.services.validators.AddUserRequestValidator;
-import lv.javaguru.app.database.ReservationDatabase;
+import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
 
 import java.time.LocalDate;
 
 public class InitMode {
-	private static final ReservationDatabase RESERVATION_DATABASE = new ReservationDatabase();
-	private static final UserDatabase USER_DATABASE = new UserDatabase();
+	private static final ApplicationContext context = ApplicationContext.getInstance();
 
-	private static final LoginRequestValidator loginRequestValidator = new LoginRequestValidator();
-	private static final LogInService loginService = new LogInService(USER_DATABASE, RESERVATION_DATABASE, loginRequestValidator);
-	private static final UIActions logInAction = new LogInAction(loginService);
+	private final UIActions logInAction;
+	private final UIActions userAddAction;
+	private final UIActions exitAction;
 
-	private static final AddUserRequestValidator ADD_USER_REQUEST_VALIDATOR = new AddUserRequestValidator();
-	private static final UserAddService ADD_USER_SERVICE = new UserAddService(USER_DATABASE, ADD_USER_REQUEST_VALIDATOR);
-	private static final UIActions registerAction = new UserAddAction(ADD_USER_SERVICE);
 
-	private static final UIActions exitAction = new ExitAction();
+	public InitMode () {
+		this.logInAction = context.getBean(LogInAction.class);
+		this.userAddAction = context.getBean(UserAddAction.class);
+		this.exitAction = context.getBean(ExitAction.class);
+	}
+
 
 	public void fillDb () {
 		User admin = new User("admin", "admin", PersonType.ADMIN);
@@ -49,28 +47,37 @@ public class InitMode {
 		Flight flight1 = new Flight(user1, ticket1);
 		Flight flight2 = new Flight(user2, ticket2);
 
-		USER_DATABASE.addUser(admin);
-		USER_DATABASE.addUser(user1);
-		USER_DATABASE.addUser(user2);
 
-		RESERVATION_DATABASE.addReservation(flight1);
-		RESERVATION_DATABASE.addReservation(flight2);
+		UserDatabase database = context.getBean(UserDatabase.class);
+		database.addUser(admin);
+		database.addUser(user1);
+		database.addUser(user2);
+
+		Database flightDB = context.getBean(Database.class);
+
+		flightDB.addReservation(flight1);
+		flightDB.addReservation(flight2);
 	}
 
-	public void execInitMode () {
+	public void execute () {
 		while (true) {
 			printInitMenu();
+
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
+
 			switch (menuNumber) {
 				case 1 -> {
 					logInAction.execute();
 				}
 				case 2 -> {
-					registerAction.execute();
+					userAddAction.execute();
 				}
-				case 0 -> exitAction.execute();
+				case 0 -> {
+					exitAction.execute();
+					return;
+				}
 				default -> {
-					BaseFunc.printLineSeparator();
+					System.out.println("\nWrong input!\n");
 				}
 			}
 		}
@@ -80,7 +87,7 @@ public class InitMode {
 		BaseFunc.printHeader("LOGIN");
 		System.out.println(
 				"[1] Login\n" +
-						"[2] Register\n" +
+						"[2] Register\n\n" +
 						"[0] Exit");
 	}
 }

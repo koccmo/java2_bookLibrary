@@ -1,5 +1,6 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.modes.AdminMode;
 import lv.javaguru.app.console_ui.modes.UserMode;
 import lv.javaguru.app.core.domain.PersonType;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class LogInService {
-
 	private final Database database;
 	private final UserDatabase userDatabase;
 	private final LoginRequestValidator validator;
@@ -46,8 +46,8 @@ public class LogInService {
 
 
 		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(new AdminMode(userDatabase, database)) :
-				new LogInResponse(new UserMode(userDatabase, database));
+				new LogInResponse(new AdminMode()) :
+				new LogInResponse(new UserMode());
 
 		logInResponse.setCurrUser(user);
 		logInResponse.setMessage("Successfully logged in!");

@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main (String[] args) {
 		initMode.fillDb();
-		initMode.execInitMode();
+		initMode.execute();
 	}
 
 

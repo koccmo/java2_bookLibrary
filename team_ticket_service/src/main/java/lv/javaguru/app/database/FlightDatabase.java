@@ -7,7 +7,7 @@ import lv.javaguru.app.core.domain.Ticket;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ReservationDatabase implements Database {
+public class FlightDatabase implements Database {
 
 	private final Map<Long, Flight> reservations = new HashMap<>();
 

@@ -76,7 +76,7 @@ public class TicketFiller {
 	}
 
 	public String[] acquireOriginCountryAndCity () {
-		String country;0
+		String country;
 		String city;
 
 		while (true) {
