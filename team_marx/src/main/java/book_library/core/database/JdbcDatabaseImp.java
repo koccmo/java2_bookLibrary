@@ -33,9 +33,14 @@ public class JdbcDatabaseImp implements Database {
     public boolean hasTheSameBookInDatabase(Book bookToCompare) {
         String sql = "SELECT * FROM books WHERE title = ? AND author = ?";
         Object[] args = new Object[]{bookToCompare.getTitle(), bookToCompare.getAuthor()};
-        return (jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty())
-                ? false
-                : true;
+        return !jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty();
+    }
+
+    @Override
+    public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
+        String sql = "SELECT * FROM books WHERE id = ?";
+        Object[] args = new Object[] {idToCheck};
+        return !jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty();
     }
 
     @Override

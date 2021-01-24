@@ -2,10 +2,12 @@ package book_library;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DatabaseCleaner {
 
     @Autowired
@@ -13,7 +15,7 @@ public class DatabaseCleaner {
 
     public void clean() {
         for (String tableName: getTableNames()) {
-            String sql = "delete from " + tableName;
+            String sql = "DELETE FROM " + tableName;
             jdbcTemplate.execute(sql);
         }
 
