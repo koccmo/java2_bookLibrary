@@ -3,18 +3,19 @@ package lv.javaguru.app.console_ui;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserEditRequest;
-import lv.javaguru.app.core.response.admin.EditUserResponse;
+import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.UserEditService;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class UserUpdateAction extends Action implements UIActions {
 
-	private final UserEditService userEditService;
+	@DIDependency
+	private UserEditService userEditService;
 
-	public UserUpdateAction (UserEditService userEditService) {
-		this.userEditService = userEditService;
-	}
 
 	private static void adminMode_printEditUser (User currentUser) {
 		BaseFunc.printHeader("EDIT USER:", currentUser);
@@ -31,7 +32,7 @@ public class UserUpdateAction extends Action implements UIActions {
 		long id = BaseFunc.getMenuNumberFromUser();
 
 		UserEditRequest request = new UserEditRequest(id);
-		EditUserResponse response = userEditService.execute(request);
+		UserEditResponse response = userEditService.execute(request);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -68,7 +69,7 @@ public class UserUpdateAction extends Action implements UIActions {
 		UserEditRequest request = new UserEditRequest(user.getId());
 		UserEditRequest.Surname surname = request.new Surname(input);
 
-		EditUserResponse response = userEditService.execute(surname);
+		UserEditResponse response = userEditService.execute(surname);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -85,7 +86,7 @@ public class UserUpdateAction extends Action implements UIActions {
 		UserEditRequest request = new UserEditRequest(user.getId());
 		UserEditRequest.Name name = request.new Name(input);
 
-		EditUserResponse response = userEditService.execute(name);
+		UserEditResponse response = userEditService.execute(name);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +

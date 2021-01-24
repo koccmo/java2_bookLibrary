@@ -7,19 +7,19 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class FlightShowAllService {
 
-	private final Database reservations;
-	private final UserDatabase userDatabase;
-
-	public FlightShowAllService (UserDatabase userDatabase, Database reservations) {
-		this.userDatabase = userDatabase;
-		this.reservations = reservations;
-	}
+	@DIDependency
+	private Database reservations;
+	@DIDependency
+	private UserDatabase userDatabase;
 
 
 	public FlightShowAllResponse<?> execute (FlightShowAllRequest request) {

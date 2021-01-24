@@ -4,13 +4,14 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.core.services.UserShowAllService;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
-public class UserShowAllAction extends Action implements UIActions{
-	private final UserShowAllService userShowAllService;
+@DIComponent
+public class UserShowAllAction extends Action implements UIActions {
 
-	public UserShowAllAction (UserShowAllService userShowAllService) {
-		this.userShowAllService = userShowAllService;
-	}
+	@DIDependency
+	private UserShowAllService userShowAllService;
 
 
 	@Override

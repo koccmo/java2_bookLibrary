@@ -6,16 +6,17 @@ import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class UserShowAllService {
-	private final UserDatabase userDatabase;
+	@DIDependency
+	private UserDatabase userDatabase;
 
-	public UserShowAllService (UserDatabase userDatabase) {
-		this.userDatabase = userDatabase;
-	}
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
 		List<?> errorList = validate(request.getUser());

@@ -3,6 +3,7 @@ package lv.javaguru.app.core.response;
 import lv.javaguru.app.core.domain.CodeError;
 
 public class UserDeleteResponse {
+
 	private CodeError error;
 	private boolean isDeleted;
 

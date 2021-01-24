@@ -7,6 +7,7 @@ import lv.javaguru.app.core.domain.Ticket;
 import java.util.List;
 
 public interface Database {
+
 	void addReservation (Flight flight);
 
 	void removeReservation (Flight flight);

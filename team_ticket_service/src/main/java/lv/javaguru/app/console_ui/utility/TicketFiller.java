@@ -12,9 +12,11 @@ import java.util.regex.Pattern;
 
 public class TicketFiller {
 
-	private  Ticket ticket;
+	private Ticket ticket;
+
 	public TicketFiller () {
 	}
+
 	public TicketFiller (Ticket ticket) {
 		this.ticket = ticket;
 	}
@@ -76,7 +78,7 @@ public class TicketFiller {
 	}
 
 	public String[] acquireOriginCountryAndCity () {
-		String country;0
+		String country;
 		String city;
 
 		while (true) {

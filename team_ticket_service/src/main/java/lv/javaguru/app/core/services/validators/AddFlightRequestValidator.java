@@ -2,6 +2,7 @@ package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.domain.CodeError;
+import lv.javaguru.app.dependency_injection.DIComponent;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class AddFlightRequestValidator {
 
 	public List<CodeError> validate (AddFlightRequest request) {
@@ -65,6 +67,7 @@ public class AddFlightRequestValidator {
 
 		return errors;
 	}
+
 	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
 		return (isNullOrEmpty(dateRequest))
 				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
@@ -100,8 +103,9 @@ public class AddFlightRequestValidator {
 	}
 
 	private boolean isNullOrEmpty (LocalDate date) {
-		return (date == null );
+		return (date == null);
 	}
+
 	private boolean isNullOrEmpty (String str) {
 		return (str == null || str.isEmpty());
 	}

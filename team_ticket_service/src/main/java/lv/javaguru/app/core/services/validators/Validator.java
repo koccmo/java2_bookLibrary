@@ -7,6 +7,7 @@ import java.util.List;
 public abstract class Validator {
 
 	void verifyNameAndSurname (String strToVerify, String fieldName, List<CodeError> errorList) {
+
 		if (isEmpty(strToVerify)) {
 			CodeError error = new CodeError(fieldName, "Null or empty string!");
 			errorList.add(error);

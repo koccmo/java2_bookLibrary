@@ -6,15 +6,15 @@ import lv.javaguru.app.core.services.FlightAddService;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddFlightRequest;
-import lv.javaguru.app.core.response.AddFlightResponse;
+import lv.javaguru.app.core.response.FlightAddResponse;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
+@DIComponent
 public class FlightAddAction extends Action implements UIActions {
 
-	private final FlightAddService flightAddService;
-
-	public FlightAddAction (FlightAddService flightAddService) {
-		this.flightAddService = flightAddService;
-	}
+	@DIDependency
+	private FlightAddService flightAddService;
 
 
 	@Override
@@ -32,7 +32,7 @@ public class FlightAddAction extends Action implements UIActions {
 		Flight flight = new Flight(currUser, ticket);
 
 		AddFlightRequest request = new AddFlightRequest(flight);
-		AddFlightResponse response = flightAddService.execute(request);
+		FlightAddResponse response = flightAddService.execute(request);
 
 		if (response.hasErrors())
 			response.getErrorList().forEach(System.out::println);
