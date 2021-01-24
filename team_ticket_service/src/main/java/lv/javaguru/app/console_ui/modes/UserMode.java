@@ -4,38 +4,24 @@ import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.console_ui.FlightUpdateAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.*;
-import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
-import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
-
+import lv.javaguru.app.dependency_injection.ApplicationContext;
 
 public class UserMode {
-	private static final AddFlightRequestValidator validator = new AddFlightRequestValidator();
-	private static final EditFlightRequestValidator EDIT_FLIGHT_REQUEST_VALIDATOR = new EditFlightRequestValidator();
 
-	private final UIActions addFlightAction;
-	private final UIActions flightShowAllAction;
-	private final UIActions editFlightAction;
-	private final UIActions deleteFlight;
-	private final UIActions logOutAction;
+	private final ApplicationContext context;
+	private static UserMode instance;
 
+	private UserMode (ApplicationContext context) {
+		this.context = context;
+	}
 
-	public UserMode (UserDatabase userDatabase, Database flightDatabase) {
+	public static UserMode getInstance () {
+		return instance;
+	}
 
-		FlightAddService flightAddService = new FlightAddService(flightDatabase, validator);
-		FlightDeleteService flightDeleteService = new FlightDeleteService(userDatabase, flightDatabase);
-		FlightShowAllService flightShowAllService = new FlightShowAllService(userDatabase, flightDatabase);
-		FlightEditService flightEditService = new FlightEditService(userDatabase, flightDatabase, EDIT_FLIGHT_REQUEST_VALIDATOR);
-
-		LogOutService logOutService = new LogOutService(userDatabase);
-
-		this.addFlightAction = new FlightAddAction(flightAddService);
-		this.flightShowAllAction = new FlightShowAllAction(flightShowAllService);
-		this.editFlightAction = new FlightUpdateAction(flightEditService);
-		this.deleteFlight = new FlightDeleteAction(flightDeleteService);
-		this.logOutAction = new LogOutAction(logOutService);
+	public static void setInstance (ApplicationContext context) {
+		if (instance == null)
+			instance = new UserMode(context);
 	}
 
 
@@ -47,11 +33,24 @@ public class UserMode {
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
 			switch (menuNumber) {
-				case 1 -> addFlightAction.execute();
-				case 2 -> flightShowAllAction.execute();
-				case 3 -> editFlightAction.execute();
-				case 4 -> deleteFlight.execute();
+				case 1 -> {
+					FlightAddAction addFlightAction = context.getBean(FlightAddAction.class);
+					addFlightAction.execute();
+				}
+				case 2 -> {
+					FlightShowAllAction flightShowAllAction = context.getBean(FlightShowAllAction.class);
+					flightShowAllAction.execute();
+				}
+				case 3 -> {
+					FlightUpdateAction editFlightAction = context.getBean(FlightUpdateAction.class);
+					editFlightAction.execute();
+				}
+				case 4 -> {
+					FlightDeleteAction deleteFlight = context.getBean(FlightDeleteAction.class);
+					deleteFlight.execute();
+				}
 				case 0 -> {
+					LogOutAction logOutAction = context.getBean(LogOutAction.class);
 					logOutAction.execute();
 					return;
 				}

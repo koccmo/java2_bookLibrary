@@ -8,15 +8,15 @@ import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.core.response.FlightShowOneResponse;
 import lv.javaguru.app.core.services.FlightShowAllService;
 import lv.javaguru.app.core.services.FlightShowOneService;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
-
+@DIComponent
 public class FlightShowUsersAction extends Action implements UIActions {
 
-	private final FlightShowOneService flightShowOneService;
+	@DIDependency
+	private FlightShowOneService flightShowOneService;
 
-	public FlightShowUsersAction (FlightShowOneService flightShowOneService) {
-		this.flightShowOneService = flightShowOneService;
-	}
 
 	@Override
 	public void execute () {

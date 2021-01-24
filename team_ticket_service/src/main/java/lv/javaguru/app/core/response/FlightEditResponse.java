@@ -5,20 +5,21 @@ import lv.javaguru.app.core.domain.Flight;
 
 import java.util.List;
 
-public class EditFlightResponse extends Response {
+public class FlightEditResponse extends Response {
+
 	private Flight flight;
 	private String message;
 
 
-	public EditFlightResponse (Flight flight) {
+	public FlightEditResponse (Flight flight) {
 		this.flight = flight;
 	}
 
-	public EditFlightResponse (String message) {
+	public FlightEditResponse (String message) {
 		this.message = message;
 	}
 
-	public EditFlightResponse (List<CodeError> errorList) {
+	public FlightEditResponse (List<CodeError> errorList) {
 		super(errorList);
 	}
 

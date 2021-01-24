@@ -1,17 +1,24 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.domain.ProductCategoryEnum;
+import estore.database.ProductCategoryDB;
+import estore.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class AddNewProductValidator {
+
+    private ProductCategoryDB categoryDB;
+    private ValidationRules validationRules;
+
+    public AddNewProductValidator(ProductCategoryDB categoryDB, ValidationRules validationRules) {
+        this.categoryDB = categoryDB;
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(AddNewProductRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
@@ -45,20 +52,20 @@ public class AddNewProductValidator {
     }
 
     private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
-        return (!validateString(request.getProductName()))
+        return (!validationRules.validateString(request.getProductName()))
                 ? Optional.of(new CoreError("Product name", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddNewProductRequest request) {
-        return (!validateLine(request.getProductDescription()))
+        return (!validationRules.validateLineWithDigits(request.getProductDescription()))
                 ? Optional.of(new CoreError("Product description", "Must contain only english letters and digits!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductRequest request) {
-        return (!validateString(request.getProductCategory()))
-                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
+        return (!validationRules.validatePositiveInteger(request.getProductCategory()))
+                ? Optional.of(new CoreError("Product category", "Must contain only digits!"))
                 : Optional.empty();
     }
 
@@ -68,31 +75,12 @@ public class AddNewProductValidator {
                 : Optional.empty();
     }
 
-    private boolean validateCategoryExistence(String category) {
-        for (ProductCategoryEnum pc : ProductCategoryEnum.values()) {
-            if (pc.name().equals(category)) {
+    private boolean validateCategoryExistence(String categoryId) {
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var category : categories) {
+            if (category.getId().toString().equals(categoryId)) {
                 return true;
             }
-        }
-        return false;
-    }
-
-    public Boolean validateString(String userInput) {
-        Pattern pattern = Pattern.compile("[A-Za-z]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
-        }
-        return false;
-    }
-
-    public Boolean validateLine(String userInput) {
-        userInput = userInput.replaceAll("\\s+","");
-
-        Pattern pattern = Pattern.compile("[A-Za-z_0-9]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
         }
         return false;
     }

@@ -1,25 +1,25 @@
-package lv.javaguru.app.core.response.admin;
+package lv.javaguru.app.core.response;
 
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.CodeError;
-import lv.javaguru.app.core.response.Response;
 
 import java.util.List;
 
-public class EditUserResponse extends Response {
+public class UserEditResponse extends Response {
+
 	private User user;
 	private String message;
 
-	public EditUserResponse (List<CodeError> errorList) {
+	public UserEditResponse (List<CodeError> errorList) {
 		super(errorList);
 
 	}
 
-	public EditUserResponse (String message) {
+	public UserEditResponse (String message) {
 		this.message = message;
 	}
 
-	public EditUserResponse (User user) {
+	public UserEditResponse (User user) {
 		this.user = user;
 	}
 

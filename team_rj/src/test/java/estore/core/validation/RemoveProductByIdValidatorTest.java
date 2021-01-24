@@ -9,7 +9,8 @@ import static org.junit.Assert.assertEquals;
 
 public class RemoveProductByIdValidatorTest {
 
-    private RemoveProductByIdValidator validator = new RemoveProductByIdValidator();
+    private ValidationRules validationRules = new ValidationRules();
+    private RemoveProductByIdValidator validator = new RemoveProductByIdValidator(validationRules);
 
     @Test
     public void shouldReturnErrorIfProductIdIsNull() {
