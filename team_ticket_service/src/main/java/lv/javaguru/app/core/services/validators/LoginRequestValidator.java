@@ -2,13 +2,12 @@ package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.domain.CodeError;
+import lv.javaguru.app.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DIComponent
 public class LoginRequestValidator extends Validator {
-	public LoginRequestValidator () {
-	}
 
 	public List<CodeError> validate (LogInRequest request) {
 		List<CodeError> errorList = new ArrayList<>();

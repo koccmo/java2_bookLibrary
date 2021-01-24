@@ -4,14 +4,15 @@ import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.request.UserDeleteRequest;
 import lv.javaguru.app.core.response.UserDeleteResponse;
 import lv.javaguru.app.core.services.UserDeleteService;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
+@DIComponent
 public class UserDeleteAction {
 
-	private final UserDeleteService userDeleteService;
+	@DIDependency
+	private UserDeleteService userDeleteService;
 
-	public UserDeleteAction (UserDeleteService userDeleteService) {
-		this.userDeleteService = userDeleteService;
-	}
 
 	public void execute () {
 		BaseFunc.printHeader("Enter user ID:");

@@ -3,10 +3,12 @@ package lv.javaguru.app.database;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.dependency_injection.DIComponent;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class FlightDatabase implements Database {
 
 	private final Map<Long, Flight> reservations = new HashMap<>();

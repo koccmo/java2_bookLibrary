@@ -1,6 +1,5 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.modes.AdminMode;
 import lv.javaguru.app.console_ui.modes.UserMode;
 import lv.javaguru.app.core.domain.PersonType;
@@ -11,20 +10,22 @@ import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.ApplicationContext;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class LogInService {
-	private final Database database;
-	private final UserDatabase userDatabase;
-	private final LoginRequestValidator validator;
+	@DIDependency
+	private Database database;
+	@DIDependency
+	private UserDatabase userDatabase;
+	@DIDependency
+	private LoginRequestValidator validator;
 
-	public LogInService (UserDatabase userDatabase, Database database, LoginRequestValidator validator) {
-		this.userDatabase = userDatabase;
-		this.database = database;
-		this.validator = validator;
-	}
 
 	public LogInResponse execute (LogInRequest request) {
 		List<CodeError> errors = validator.validate(request);
@@ -46,8 +47,8 @@ public class LogInService {
 
 
 		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(new AdminMode()) :
-				new LogInResponse(new UserMode());
+				new LogInResponse(AdminMode.getInstance()) :
+				new LogInResponse(UserMode.getInstance());
 
 		logInResponse.setCurrUser(user);
 		logInResponse.setMessage("Successfully logged in!");

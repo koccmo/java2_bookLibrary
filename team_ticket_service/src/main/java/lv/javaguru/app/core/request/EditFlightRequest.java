@@ -1,9 +1,7 @@
 package lv.javaguru.app.core.request;
 
-
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
-import lv.javaguru.app.core.domain.User;
 
 public class EditFlightRequest {
 

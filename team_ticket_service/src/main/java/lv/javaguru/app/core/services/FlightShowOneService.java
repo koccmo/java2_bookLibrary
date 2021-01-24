@@ -7,19 +7,19 @@ import lv.javaguru.app.core.request.FlightShowOneRequest;
 import lv.javaguru.app.core.response.FlightShowOneResponse;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class FlightShowOneService {
 
-	private final Database flightDatabase;
-	private final UserDatabase userDatabase;
-
-	public FlightShowOneService (UserDatabase userDatabase, Database flightDatabase) {
-		this.userDatabase = userDatabase;
-		this.flightDatabase = flightDatabase;
-	}
+	@DIDependency
+	private Database flightDatabase;
+	@DIDependency
+	private UserDatabase userDatabase;
 
 
 	public FlightShowOneResponse execute (FlightShowOneRequest request) {

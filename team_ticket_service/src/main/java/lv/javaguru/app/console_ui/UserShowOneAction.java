@@ -7,14 +7,15 @@ import lv.javaguru.app.core.request.UserShowSingleRequest;
 import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.core.response.UserShowSingleResponse;
 import lv.javaguru.app.core.services.UserShowSingleService;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
 
+@DIComponent
 public class UserShowOneAction {
 
-	private final UserShowSingleService userShowSingleService;
+	@DIDependency
+	private UserShowSingleService userShowSingleService;
 
-	public UserShowOneAction (UserShowSingleService userShowSingleService) {
-		this.userShowSingleService = userShowSingleService;
-	}
 
 	public void execute () {
 		System.out.println("Enter user ID:");

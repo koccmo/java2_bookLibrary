@@ -1,33 +1,27 @@
 package lv.javaguru.app.console_ui.modes;
 
-import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.console_ui.FlightUpdateAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.services.*;
-import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
-import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
-
+import lv.javaguru.app.dependency_injection.ApplicationContext;
 
 public class UserMode {
-	private static final ApplicationContext context = ApplicationContext.getInstance();
 
-	private final UIActions addFlightAction;
-	private final UIActions flightShowAllAction;
-	private final UIActions editFlightAction;
-	private final UIActions deleteFlight;
-	private final UIActions logOutAction;
+	private final ApplicationContext context;
+	private static UserMode instance;
 
+	private UserMode (ApplicationContext context) {
+		this.context = context;
+	}
 
-	public UserMode () {
-		this.addFlightAction = context.getBean(FlightAddAction.class);
-		this.flightShowAllAction = context.getBean(FlightShowAllAction.class);
-		this.editFlightAction = context.getBean(FlightUpdateAction.class);
-		this.deleteFlight = context.getBean(FlightDeleteAction.class);
-		this.logOutAction = context.getBean(LogOutAction.class);
+	public static UserMode getInstance () {
+		return instance;
+	}
+
+	public static void setInstance (ApplicationContext context) {
+		if (instance == null)
+			instance = new UserMode(context);
 	}
 
 
@@ -39,11 +33,24 @@ public class UserMode {
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
 			switch (menuNumber) {
-				case 1 -> addFlightAction.execute();
-				case 2 -> flightShowAllAction.execute();
-				case 3 -> editFlightAction.execute();
-				case 4 -> deleteFlight.execute();
+				case 1 -> {
+					FlightAddAction addFlightAction = context.getBean(FlightAddAction.class);
+					addFlightAction.execute();
+				}
+				case 2 -> {
+					FlightShowAllAction flightShowAllAction = context.getBean(FlightShowAllAction.class);
+					flightShowAllAction.execute();
+				}
+				case 3 -> {
+					FlightUpdateAction editFlightAction = context.getBean(FlightUpdateAction.class);
+					editFlightAction.execute();
+				}
+				case 4 -> {
+					FlightDeleteAction deleteFlight = context.getBean(FlightDeleteAction.class);
+					deleteFlight.execute();
+				}
 				case 0 -> {
+					LogOutAction logOutAction = context.getBean(LogOutAction.class);
 					logOutAction.execute();
 					return;
 				}

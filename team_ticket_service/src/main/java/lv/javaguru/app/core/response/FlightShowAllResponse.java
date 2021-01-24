@@ -1,6 +1,5 @@
 package lv.javaguru.app.core.response;
 
-
 import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.ArrayList;

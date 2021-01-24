@@ -4,15 +4,15 @@ import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.List;
 
-public class DeleteFlightResponse extends Response {
+public class FlightDeleteResponse extends Response {
 
 	private String message;
 
-	public DeleteFlightResponse (String message) {
+	public FlightDeleteResponse (String message) {
 		this.message = message;
 	}
 
-	public DeleteFlightResponse (List<CodeError> errorList) {
+	public FlightDeleteResponse (List<CodeError> errorList) {
 		super(errorList);
 	}
 
