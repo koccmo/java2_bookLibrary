@@ -20,8 +20,6 @@ public class SearchPlannedVisitsByDateUIAction implements UIAction {
 
     @Override
     public void execute() {
-        Scanner in = new Scanner(System.in);
-
         System.out.println("Search is provided in format DD MM to DD MM");
         int dayFrom = inputFormatsValidator.inputInteger("Please input day from");
         int monthFrom = inputFormatsValidator.inputInteger("Please input month from");
