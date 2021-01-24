@@ -47,7 +47,12 @@ public class JdbcProductDbImpl implements ProductDB {
 
     @Override
     public int removeProductById(Long id) {
-        return 0;
+        jdbcTemplate.update(
+                "DELETE FROM products " +
+                        "WHERE products.id = ?",
+                id
+        );
+        return 1;
     }
 
     @Override

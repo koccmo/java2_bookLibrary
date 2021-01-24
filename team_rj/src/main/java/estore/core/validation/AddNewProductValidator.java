@@ -21,8 +21,8 @@ public class AddNewProductValidator {
         validateProductDescriptionIfEmpty(request).ifPresent(errors::add);
         validateProductDescriptionUnallowedPattern(request).ifPresent(errors::add);
         validateProductCategoryIfEmpty(request).ifPresent(errors::add);
-        validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
-        validateProductCategoryExistence(request).ifPresent(errors::add);
+//        validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
+//        validateProductCategoryExistence(request).ifPresent(errors::add);
         return errors;
     }
 
