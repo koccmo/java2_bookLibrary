@@ -9,6 +9,9 @@ public class ProductCategory {
         this.category = category;
     }
 
+    public ProductCategory() {
+    }
+
     public Long getId() {
         return id;
     }

@@ -2,6 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.Ordering;
 import estore.core.requests.SearchProductByNameRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.regex.Pattern;
 
 @Component
 public class SearchProductByNameValidator {
+
+    @Autowired
+    private ValidationRules validationRules;
 
     public List<CoreError> validate(SearchProductByNameRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
@@ -34,7 +38,7 @@ public class SearchProductByNameValidator {
     }
 
     private Optional<CoreError> validateProductNameUnallowedPattern(SearchProductByNameRequest request) {
-        return (!validateString(request.getProductName()))
+        return (!validationRules.validateString(request.getProductName()))
                 ? Optional.of(new CoreError("Product Name", "Must contain only english letters!"))
                 : Optional.empty();
     }
@@ -68,14 +72,4 @@ public class SearchProductByNameValidator {
                 ? Optional.of(new CoreError("orderDirection", "Must not be empty!"))
                 : Optional.empty();
     }
-
-    public Boolean validateString(String userInput) {
-        Pattern pattern = Pattern.compile("[A-Za-z]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
-        }
-        return false;
-    }
-
 }

@@ -17,12 +17,27 @@ public class JdbcProductDbImpl implements ProductDB {
 
     @Override
     public List<Product> searchProductByName(String name) {
-        return null;
+        Object[] args = new Object[] { name };
+        return jdbcTemplate.query(
+                "SELECT * FROM products " +
+                        "WHERE products.prodName = ?",
+                args,
+                new ProductRowMapper()
+        );
     }
 
     @Override
     public List<Product> searchProductByCategory(String category) {
-        return null;
+        Object[] args = new Object[] { category };
+        return jdbcTemplate.query(
+                "SELECT products.id, products.prodName, products.prodDescription, " +
+                "products.category_Id, products.quantity, products.price " +
+                " FROM products, productCategory " +
+                " WHERE productCategory.category = ? " +
+                "AND productCategory.id = products.category_Id",
+                args,
+                new ProductRowMapper()
+        );
     }
 
     @Override
@@ -42,7 +57,12 @@ public class JdbcProductDbImpl implements ProductDB {
 
     @Override
     public int removeProductByName(String name) {
-        return 0;
+        jdbcTemplate.update(
+                "DELETE FROM products " +
+                        "WHERE products.prodName = ?",
+                name
+        );
+        return 1;
     }
 
     @Override
@@ -57,7 +77,10 @@ public class JdbcProductDbImpl implements ProductDB {
 
     @Override
     public List<Product> getDatabase() {
-        return null;
+        return jdbcTemplate.query(
+                "SELECT * FROM products",
+                new ProductRowMapper()
+        );
     }
 
     @Override

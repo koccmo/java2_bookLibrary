@@ -1,7 +1,7 @@
 package estore.core.service;
 
-import estore.core.requests.ShowAllProductsRequest;
-import estore.core.responses.ShowAllProductsResponse;
+import estore.core.requests.GetAllProductsRequest;
+import estore.core.responses.GetAllProductsResponse;
 import estore.database.ProductDB;
 import estore.domain.Product;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class ShowAllProductsServiceTest {
     private ProductDB database;
 
     @InjectMocks
-    private ShowAllProductsService service;
+    private GetAllProductsService service;
 
     @Test
     public void shouldReturnAllProductsFromDatabase() {
@@ -33,8 +33,8 @@ public class ShowAllProductsServiceTest {
         products.add(new Product("Product_2", "Good product 2", "Category"));
         Mockito.when(database.getDatabase()).thenReturn(products);
 
-        ShowAllProductsRequest request = new ShowAllProductsRequest();
-        ShowAllProductsResponse response = service.execute(request);
+        GetAllProductsRequest request = new GetAllProductsRequest();
+        GetAllProductsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getProducts().size(), 2);
         assertEquals(response.getProducts().get(0).getName(), "Product_1");

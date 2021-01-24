@@ -1,6 +1,10 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
+import estore.core.requests.AddNewProductRequest;
+import estore.database.ProductCategoryDB;
+import estore.domain.ProductCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,12 +16,17 @@ import java.util.regex.Pattern;
 @Component
 public class AddNewProductCategoryValidator {
 
+    @Autowired
+    private ProductCategoryDB categoryDB;
+    @Autowired
+    private ValidationRules validationRules;
+
     public List<CoreError> validate(AddNewProductCategoryRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
 
         validateProductCategoryIfEmpty(request).ifPresent(errors::add);
         validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
-        //validateProductCategoryDuplication(request).ifPresent(errors::add);
+        validateProductCategoryDuplication(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -28,16 +37,23 @@ public class AddNewProductCategoryValidator {
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductCategoryRequest request) {
-        return (!validateString(request.getProductCategory()))
+        return (!validationRules.validateLineWithWhitespaces(request.getProductCategory()))
                 ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
-    public Boolean validateString(String userInput) {
-        Pattern pattern = Pattern.compile("[A-Za-z]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
+    private Optional<CoreError> validateProductCategoryDuplication(AddNewProductCategoryRequest request) {
+        return (!validateCategoryExistence(request.getProductCategory()))
+                ? Optional.empty()
+                : Optional.of(new CoreError("Product category", "exists!"));
+    }
+
+    private boolean validateCategoryExistence(String categoryName) {
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var category : categories) {
+            if (category.getCategory().equalsIgnoreCase(categoryName)) {
+                return true;
+            }
         }
         return false;
     }

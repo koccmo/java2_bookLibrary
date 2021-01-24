@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -17,7 +15,10 @@ public class JdbcProductCategoryDbImpl implements ProductCategoryDB {
 
     @Override
     public List<ProductCategory> getDatabase() {
-        return null;
+        return jdbcTemplate.query(
+                "SELECT * FROM productCategory",
+                new ProductCategoryRowMapper()
+        );
     }
 
     @Override

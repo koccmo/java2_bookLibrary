@@ -1,7 +1,6 @@
 package estore.database;
 
 import estore.domain.Product;
-import estore.domain.ProductCategory;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

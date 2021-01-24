@@ -2,6 +2,7 @@ package estore.core.service;
 
 import estore.core.validation.CoreError;
 import estore.core.validation.AddNewProductValidator;
+import estore.database.ProductCategoryDB;
 import estore.database.ProductDB;
 import estore.domain.Product;
 import estore.core.requests.AddNewProductRequest;
@@ -16,7 +17,8 @@ public class AddNewProductService {
     private ProductDB productDB;
     private AddNewProductValidator validator;
 
-    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {
+    public AddNewProductService(ProductDB productDB,
+                                AddNewProductValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

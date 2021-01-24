@@ -1,7 +1,10 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
+import estore.database.ProductCategoryDB;
+import estore.domain.ProductCategory;
 import estore.domain.ProductCategoryEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,6 +16,11 @@ import java.util.regex.Pattern;
 @Component
 public class AddNewProductValidator {
 
+    @Autowired
+    private ProductCategoryDB categoryDB;
+    @Autowired
+    private ValidationRules validationRules;
+
     public List<CoreError> validate(AddNewProductRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
 
@@ -21,8 +29,8 @@ public class AddNewProductValidator {
         validateProductDescriptionIfEmpty(request).ifPresent(errors::add);
         validateProductDescriptionUnallowedPattern(request).ifPresent(errors::add);
         validateProductCategoryIfEmpty(request).ifPresent(errors::add);
-//        validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
-//        validateProductCategoryExistence(request).ifPresent(errors::add);
+        validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
+        validateProductCategoryExistence(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -45,20 +53,20 @@ public class AddNewProductValidator {
     }
 
     private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
-        return (!validateString(request.getProductName()))
+        return (!validationRules.validateString(request.getProductName()))
                 ? Optional.of(new CoreError("Product name", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddNewProductRequest request) {
-        return (!validateLine(request.getProductDescription()))
+        return (!validationRules.validateLineWithDigits(request.getProductDescription()))
                 ? Optional.of(new CoreError("Product description", "Must contain only english letters and digits!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductRequest request) {
-        return (!validateString(request.getProductCategory()))
-                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
+        return (!validationRules.validatePositiveInteger(request.getProductCategory()))
+                ? Optional.of(new CoreError("Product category", "Must contain only digits!"))
                 : Optional.empty();
     }
 
@@ -68,31 +76,12 @@ public class AddNewProductValidator {
                 : Optional.empty();
     }
 
-    private boolean validateCategoryExistence(String category) {
-        for (ProductCategoryEnum pc : ProductCategoryEnum.values()) {
-            if (pc.name().equals(category)) {
+    private boolean validateCategoryExistence(String categoryId) {
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var category : categories) {
+            if (category.getId().toString().equals(categoryId)) {
                 return true;
             }
-        }
-        return false;
-    }
-
-    public Boolean validateString(String userInput) {
-        Pattern pattern = Pattern.compile("[A-Za-z]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
-        }
-        return false;
-    }
-
-    public Boolean validateLine(String userInput) {
-        userInput = userInput.replaceAll("\\s+","");
-
-        Pattern pattern = Pattern.compile("[A-Za-z_0-9]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
         }
         return false;
     }

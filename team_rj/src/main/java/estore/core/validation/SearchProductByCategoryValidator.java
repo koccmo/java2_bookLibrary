@@ -73,13 +73,13 @@ public class SearchProductByCategoryValidator {
     }
 
     private Optional<CoreError> validatePagingPageNumberPattern(Paging paging) {
-        return (!validatePositiveInreger(paging.getPageNumber()))
+        return (!validatePositiveInteger(paging.getPageNumber()))
                 ? Optional.of(new CoreError("Page Number", "Must be positive integer!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validatePagingPageSizePattern(Paging paging) {
-        return (!validatePositiveInreger(paging.getPageSize()))
+        return (!validatePositiveInteger(paging.getPageSize()))
                 ? Optional.of(new CoreError("Page Size", "Must be positive integer!"))
                 : Optional.empty();
     }
@@ -93,7 +93,7 @@ public class SearchProductByCategoryValidator {
         return false;
     }
 
-    public boolean validatePositiveInreger(String userStringInput) {
+    public boolean validatePositiveInteger(String userStringInput) {
         int choice;
         try {
             choice = Integer.valueOf(userStringInput);
