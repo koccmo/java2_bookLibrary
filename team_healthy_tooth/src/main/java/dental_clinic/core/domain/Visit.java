@@ -1,5 +1,6 @@
 package dental_clinic.core.domain;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,12 +11,17 @@ public class Visit {
 
     private Long id;
     private Long patientsId;
-    private Integer toothNumber;
-    private Optional<String> comment;
-    ToothStatus toothStatus;
     private Doctor doctor;
     private List<Manipulation> manipulations;
+    private double discount; //TODO
     private Date date;
+    private Date timeEnd; //TODO
+    private Integer toothNumber;
+    private ToothStatus toothStatus;
+    private BigDecimal calculateSum; //TODO
+    private BigDecimal cashSum; //TODO
+    private boolean completeVisit; //TODO
+    private Optional<String> comment;
 
     public Visit (Long id, Integer toothNumber, Optional<String> comment, ToothStatus toothStatus,
                   Doctor doctor, List<Manipulation> manipulations, Date date){

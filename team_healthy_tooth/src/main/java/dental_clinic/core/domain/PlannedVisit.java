@@ -7,8 +7,8 @@ import java.util.Objects;
 public class PlannedVisit {
 
     private Long id;
-    private GregorianCalendar visitTime;
     private PersonalData personalData;
+    private GregorianCalendar visitTime;
     private Doctor doctor;
 
     public PlannedVisit(GregorianCalendar visitTime, PersonalData personalData, Doctor doctor) {
