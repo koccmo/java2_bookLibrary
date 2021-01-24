@@ -16,10 +16,13 @@ import java.util.regex.Pattern;
 @Component
 public class AddNewProductCategoryValidator {
 
-    @Autowired
     private ProductCategoryDB categoryDB;
-    @Autowired
     private ValidationRules validationRules;
+
+    public AddNewProductCategoryValidator(ProductCategoryDB categoryDB, ValidationRules validationRules) {
+        this.categoryDB = categoryDB;
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(AddNewProductCategoryRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();

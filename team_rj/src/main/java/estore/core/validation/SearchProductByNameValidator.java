@@ -2,20 +2,20 @@ package estore.core.validation;
 
 import estore.core.requests.Ordering;
 import estore.core.requests.SearchProductByNameRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class SearchProductByNameValidator {
 
-    @Autowired
     private ValidationRules validationRules;
+
+    public SearchProductByNameValidator(ValidationRules validationRules) {
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(SearchProductByNameRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();

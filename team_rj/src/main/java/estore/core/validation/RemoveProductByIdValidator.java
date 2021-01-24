@@ -11,8 +11,11 @@ import java.util.Optional;
 @Component
 public class RemoveProductByIdValidator {
 
-    @Autowired
     private ValidationRules validationRules;
+
+    public RemoveProductByIdValidator(ValidationRules validationRules) {
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(RemoveProductByIdRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();

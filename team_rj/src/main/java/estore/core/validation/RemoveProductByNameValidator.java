@@ -13,8 +13,11 @@ import java.util.regex.Pattern;
 @Component
 public class RemoveProductByNameValidator {
 
-    @Autowired
     private ValidationRules validationRules;
+
+    public RemoveProductByNameValidator(ValidationRules validationRules) {
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(RemoveProductByNameRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();

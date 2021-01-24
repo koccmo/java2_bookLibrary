@@ -3,23 +3,22 @@ package estore.core.validation;
 import estore.core.requests.AddNewProductRequest;
 import estore.database.ProductCategoryDB;
 import estore.domain.ProductCategory;
-import estore.domain.ProductCategoryEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class AddNewProductValidator {
 
-    @Autowired
     private ProductCategoryDB categoryDB;
-    @Autowired
     private ValidationRules validationRules;
+
+    public AddNewProductValidator(ProductCategoryDB categoryDB, ValidationRules validationRules) {
+        this.categoryDB = categoryDB;
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(AddNewProductRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();

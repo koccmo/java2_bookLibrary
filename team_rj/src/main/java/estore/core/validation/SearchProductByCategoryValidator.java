@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class SearchProductByCategoryValidator {
+
+    private ValidationRules validationRules;
+
+    public SearchProductByCategoryValidator(ValidationRules validationRules) {
+        this.validationRules = validationRules;
+    }
 
     public List<CoreError> validate(SearchProductByCategoryRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
@@ -37,7 +41,7 @@ public class SearchProductByCategoryValidator {
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(SearchProductByCategoryRequest request) {
-        return (!validateString(request.getProductCategory()))
+        return (!validationRules.validateString(request.getProductCategory()))
                 ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
@@ -73,36 +77,14 @@ public class SearchProductByCategoryValidator {
     }
 
     private Optional<CoreError> validatePagingPageNumberPattern(Paging paging) {
-        return (!validatePositiveInteger(paging.getPageNumber()))
+        return (!validationRules.validatePositiveInteger(paging.getPageNumber()))
                 ? Optional.of(new CoreError("Page Number", "Must be positive integer!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validatePagingPageSizePattern(Paging paging) {
-        return (!validatePositiveInteger(paging.getPageSize()))
+        return (!validationRules.validatePositiveInteger(paging.getPageSize()))
                 ? Optional.of(new CoreError("Page Size", "Must be positive integer!"))
                 : Optional.empty();
-    }
-
-    public Boolean validateString(String userInput) {
-        Pattern pattern = Pattern.compile("[A-Za-z]*");
-        Matcher m = pattern.matcher(userInput);
-        if (m.matches()) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validatePositiveInteger(String userStringInput) {
-        int choice;
-        try {
-            choice = Integer.valueOf(userStringInput);
-        } catch (Exception e) {
-            return false;
-        }
-        if (choice > 0) {
-            return true;
-        }
-        return false;
     }
 }

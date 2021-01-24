@@ -11,7 +11,8 @@ import static org.junit.Assert.*;
 
 public class SearchProductByCategoryValidatorTest {
 
-    private SearchProductByCategoryValidator validator = new SearchProductByCategoryValidator();
+    private ValidationRules validationRules = new ValidationRules();
+    private SearchProductByCategoryValidator validator = new SearchProductByCategoryValidator(validationRules);
 
     @Test
     public void shouldNotReturnErrorIfProductCategoryIsProvided() {
