@@ -6,7 +6,7 @@ import java.util.List;
 import estore.domain.Product;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ProductDBImpl implements ProductDB {
 
     private Long nextProductId;

@@ -1,16 +1,49 @@
 package estore.config;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "estore")
 //value = "classpath:application.properties" - означает, что приложение будет искать файл application.properties
 //в своём classpath. В структуре проекта директория src/main/resources входит в classpath приложения при
-// тарте, поэтому файл application.properties будет прочитан приложением в момент запуска.
+// старте, поэтому файл application.properties будет прочитан приложением в момент запуска.
 @PropertySource(value = "classpath:application.properties")
 public class ProductConfiguration {
+
+    @Value("${database.url}")
+    private String jdbcUrl;
+
+    @Value("${database.driver.class}")
+    private String driverClass;
+
+    @Value("${database.user.name}")
+    private String userName;
+
+    @Value("${database.user.password}")
+    private String password;
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(jdbcUrl);
+        basicDataSource.setDriverClassName(driverClass);
+        basicDataSource.setUsername(userName);
+        basicDataSource.setPassword(password);
+        return basicDataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
 }
 
 //Для того, чтобы получить доступ к прочитанным Spring свойствам конфирации нужно воспользоваться аннотацией @Value
