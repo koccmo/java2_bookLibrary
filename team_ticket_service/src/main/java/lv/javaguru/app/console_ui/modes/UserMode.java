@@ -4,24 +4,16 @@ import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.console_ui.FlightUpdateAction;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.dependency_injection.ApplicationContext;
+import org.springframework.context.ApplicationContext;
+
 
 public class UserMode {
 
 	private final ApplicationContext context;
-	private static UserMode instance;
 
-	private UserMode (ApplicationContext context) {
+
+	public UserMode (ApplicationContext context) {
 		this.context = context;
-	}
-
-	public static UserMode getInstance () {
-		return instance;
-	}
-
-	public static void setInstance (ApplicationContext context) {
-		if (instance == null)
-			instance = new UserMode(context);
 	}
 
 

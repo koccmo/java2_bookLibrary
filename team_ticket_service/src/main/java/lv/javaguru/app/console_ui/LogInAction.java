@@ -6,13 +6,13 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.LogInService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class LogInAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private LogInService loginService;
 
 

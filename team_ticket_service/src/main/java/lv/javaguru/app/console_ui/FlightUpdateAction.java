@@ -2,20 +2,21 @@ package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.console_ui.utility.TicketFiller;
 import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.request.EditFlightRequest;
 import lv.javaguru.app.core.request.EditFlightValueRequest;
 import lv.javaguru.app.core.response.FlightEditResponse;
 import lv.javaguru.app.core.services.FlightEditService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-@DIComponent
-public class FlightUpdateAction implements UIActions {
+@Component
+public class FlightUpdateAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private FlightEditService flightEditService;
 
 
@@ -34,20 +35,36 @@ public class FlightUpdateAction implements UIActions {
 	}
 
 	private void adminMode_initManageTicket (FlightEditResponse response) {
+
+		int menuNumber;
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
-			System.out.println("[1] Edit flight's ticket\n" +
-					"[2] Edit flight's user\n" +
-					"[0] Cancel");
 
-			int menuNumber = BaseFunc.getMenuNumberFromUser();
+			if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
+				System.out.println("[1] Edit flight's ticket\n" +
+						"[2] Edit flight's user\n\n" +
+						"[0] Cancel");
 
-			switch (menuNumber) {
-				case 1 -> executeTicketEditMenu(response);
-				case 2 -> executeUserEditMenu(response);
+				menuNumber = BaseFunc.getMenuNumberFromUser();
 
-				case 0 -> {
-					return;
+				switch (menuNumber) {
+					case 1 -> executeTicketEditMenu(response);
+					case 2 -> executeUserEditMenu(response);
+
+					case 0 -> {
+						return;
+					}
+				}
+			}
+			else {
+				System.out.println("[1] Edit flight's ticket\n\n" +
+						"[0] Cancel");
+
+				switch (BaseFunc.getMenuNumberFromUser()) {
+					case 1 -> executeTicketEditMenu(response);
+					case 0 -> {
+						return;
+					}
 				}
 			}
 		}

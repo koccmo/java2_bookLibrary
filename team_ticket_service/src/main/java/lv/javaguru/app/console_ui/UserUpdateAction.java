@@ -5,15 +5,15 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.UserEditService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class UserUpdateAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private UserEditService userEditService;
 
 

@@ -1,8 +1,8 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitAction implements UIActions {
 
     @Override

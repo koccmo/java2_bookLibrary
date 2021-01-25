@@ -4,13 +4,13 @@ import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.request.UserDeleteRequest;
 import lv.javaguru.app.core.response.UserDeleteResponse;
 import lv.javaguru.app.core.services.UserDeleteService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class UserDeleteAction {
 
-	@DIDependency
+	@Autowired
 	private UserDeleteService userDeleteService;
 
 
