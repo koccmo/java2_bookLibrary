@@ -17,6 +17,7 @@ public class ProductDatabaseImplTest {
     Product laptopDell = new Product("Laptop", "Dell", 400);
     Product refrigerator = new Product("Refrigerator", "Electrolux", 300);
     Product tv = new Product("TV", "Radiotehnika", 3);
+    Product junkLaptop = new Product("Laptop","junks",3);
     Product gpsNavigator = new Product("GPS Navigator", "Car accessories", 45);
     Product laptopAcer = new Product("Laptop","Acer",300);
     Product headphones = new Product("Headphones","Beats",350);
@@ -262,20 +263,17 @@ public class ProductDatabaseImplTest {
     public void findAllProductsByTitleAndPriceRangeTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
-        productDatabase.add(refrigerator);
+        productDatabase.add(junkLaptop);
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        List<Product> resultOfFindingRefrigeratorAndTV = productDatabase.findAllByTitleAndPriceRange("Refrigerator",1,5);
-        List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitleAndDescription("Laptop","");
+        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByTitleAndPriceRange("Laptop",1,5);
 
-        assertTrue(resultOfFindingRefrigeratorAndTV.contains(refrigerator));
-        assertTrue(resultOfFindingRefrigeratorAndTV.contains(tv));
-        assertTrue(resultOfFindingAllLaptops.contains(laptopAcer));
-        assertTrue(resultOfFindingAllLaptops.contains(laptopDell));
-        assertFalse(resultOfFindingRefrigeratorAndTV.contains(tv));
-        assertFalse(resultOfFindingRefrigeratorAndTV.contains(headphones));
-        assertFalse(resultOfFindingRefrigeratorAndTV.contains(laptopDell));
+        assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(headphones));
+        assertFalse(resultOfFindingJunkLaptop.contains(laptopDell));
 
     }
 
