@@ -17,4 +17,6 @@ public interface CustomerRepository {
 
     List<Customer> findAll();
 
+    boolean changeFirstName(Long id, String newFirstName);
+
 }
