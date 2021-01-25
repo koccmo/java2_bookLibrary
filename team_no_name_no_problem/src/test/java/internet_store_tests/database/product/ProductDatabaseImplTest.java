@@ -227,9 +227,9 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
+        boolean resultOfDeletingRefrigeratorAndLaptopAcer = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
 
-        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertTrue(resultOfDeletingRefrigeratorAndLaptopAcer);
         assertFalse(productDatabase.containsProduct(refrigerator));
         assertFalse(productDatabase.containsProduct(laptopAcer));
         assertTrue(productDatabase.containsProduct(laptopDell));
