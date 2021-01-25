@@ -7,28 +7,14 @@ import java.util.Optional;
 
 public interface CustomerRepository {
 
-    Long addCustomer(Customer customer);
+    Long add(Customer customer);
 
-    boolean deleteByCustomerId(Long customerId);
+    boolean deleteById(Long id);
 
-    boolean deleteCustomer(Customer customer);
+    List<Customer> findByFirstName(String customerName);
 
-    boolean deleteByCustomerFirstName(String customer);
+    Optional<Customer> findById(Long id);
 
-    boolean deleteByCustomerSecondName(String customer);
-
-    List<Customer> findByCustomerFirstName(String customerName);
-
-    List<Customer> findByCustomerSecondName(String customerName);
-
-    List<Customer> findByFirstNameAndSecondName(String firstName, String secondName);
-
-    List<Customer> getCustomerList();
-
-    Optional<Customer> findByCustomerId(Long id);
-
-    boolean changeCustomerFirstName(Long id, String newFirstName);
-
-    boolean changeCustomerSecondName(Long id, String newSecondName);
+    List<Customer> findAll();
 
 }
