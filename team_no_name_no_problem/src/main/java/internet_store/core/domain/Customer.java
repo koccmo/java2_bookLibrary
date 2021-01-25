@@ -1,14 +1,31 @@
 package internet_store.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
+@Table(name = "customers")
 public class Customer {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "phone")
     private String phoneNumber;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "email")
     private String email;
 
     public Customer() { }
