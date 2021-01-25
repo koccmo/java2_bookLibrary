@@ -239,7 +239,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByTitleAndDescriptionTest() {
+    public void deleteAllProductsByTitleAndDescriptionTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
@@ -256,7 +256,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByTitleAndPriceRangeTest() {
+    public void deleteAllProductsByTitleAndPriceRangeTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
