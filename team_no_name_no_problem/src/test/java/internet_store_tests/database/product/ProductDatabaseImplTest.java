@@ -259,6 +259,27 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
+    public void findAllProductsByTitleAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        List<Product> resultOfFindingRefrigeratorAndTV = productDatabase.findAllByTitleAndPriceRange("Refrigerator",1,5);
+        List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitleAndDescription("Laptop","");
+
+        assertTrue(resultOfFindingRefrigeratorAndTV.contains(refrigerator));
+        assertTrue(resultOfFindingRefrigeratorAndTV.contains(tv));
+        assertTrue(resultOfFindingAllLaptops.contains(laptopAcer));
+        assertTrue(resultOfFindingAllLaptops.contains(laptopDell));
+        assertFalse(resultOfFindingRefrigeratorAndTV.contains(tv));
+        assertFalse(resultOfFindingRefrigeratorAndTV.contains(headphones));
+        assertFalse(resultOfFindingRefrigeratorAndTV.contains(laptopDell));
+
+    }
+
+    @Test
     public void deleteAllProductsByTitleAndDescriptionTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
