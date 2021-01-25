@@ -80,8 +80,7 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public Optional<Product> findById(Long id) {
-        Product product = sessionFactory.getCurrentSession().find(Product.class, id);
-        return Optional.ofNullable(product);
+        return Optional.ofNullable(sessionFactory.getCurrentSession().find(Product.class, id));
     }
 
     @Override
