@@ -128,6 +128,25 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
+    public void findAllProductsByDescriptionTest() {
+        productDatabase.add(tv);
+        productDatabase.add(laptopAcer);
+
+        List<Product> resultOfFindingAllLaptopAcer = productDatabase.findAllByDescription("Acer");
+        List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
+        List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
+
+        assertTrue(resultOfFindingAllLaptopAcer.contains(laptopAcer));
+        assertEquals(resultOfFindingAllLaptopAcer.size(), 1);
+
+        assertFalse(resultOfFindingAllTV.contains(laptopAcer));
+        assertFalse(resultOfFindingAllTV.contains(refrigerator));
+        assertEquals(resultOfFindingAllTV.size(), 1);
+
+        assertEquals(0, resultOfFindingAllPC.size());
+    }
+
+    @Test
     public void findProductByIdTest() {
         productDatabase.add(tv);
         productDatabase.add(gpsNavigator);
