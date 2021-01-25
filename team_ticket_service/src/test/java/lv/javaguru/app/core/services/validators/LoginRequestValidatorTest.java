@@ -1,10 +1,8 @@
 package lv.javaguru.app.core.services.validators;
 
-import junit.framework.TestCase;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.LogInRequest;
-import lv.javaguru.app.core.request.UserAddRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
