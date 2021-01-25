@@ -20,20 +20,25 @@ public class AddProductCategoryOnRequestTest {
     @Before
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 
     @Test
     public void shouldAddValidProductCategory() {
-//        int dbInitialSize = getCategoryDb().getDatabase().size();
-//        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("CategoryA");
-//        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("CategoryB");
-//
-//        addNewProductCategoryService().execute(addProductCategoryRequest1);
-//        AddNewProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
-//
-//        assertTrue(response.isSuccessfullyAdded());
-//        assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
-//        assertEquals(getCategoryDb().getDatabase().get(dbInitialSize + 1).getCategory(), "CategoryB");
+        int dbInitialSize = getCategoryDb().getDatabase().size();
+        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("CategoryA");
+        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("CategoryB");
+
+        addNewProductCategoryService().execute(addProductCategoryRequest1);
+        AddNewProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
+
+        assertTrue(response.isSuccessfullyAdded());
+        assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
+        assertEquals(getCategoryDb().getDatabase().get(dbInitialSize + 1).getCategory(), "CategoryB");
     }
 
     @Test
