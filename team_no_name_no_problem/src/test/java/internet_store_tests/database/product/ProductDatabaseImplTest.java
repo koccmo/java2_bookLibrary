@@ -231,13 +231,8 @@ public class ProductDatabaseImplTest {
 
         assertTrue(resultOfDeletingRefrigeratorAndLaptop);
         assertFalse(productDatabase.containsProduct(refrigerator));
-        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
         assertTrue(productDatabase.containsProduct(laptopDell));
 
-        boolean resultOfDeletingLaptop = productDatabase.deleteAllByTitle("Laptop");
-
-        assertTrue(resultOfDeletingLaptop);
-        assertFalse(productDatabase.containsProduct(laptopDell));
-        assertFalse(productDatabase.containsProduct(laptopAcer));
     }
 }
