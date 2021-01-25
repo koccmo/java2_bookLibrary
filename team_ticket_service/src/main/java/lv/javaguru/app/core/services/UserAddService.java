@@ -8,14 +8,16 @@ import lv.javaguru.app.core.services.validators.AddUserRequestValidator;
 import lv.javaguru.app.database.UserDatabase;
 import lv.javaguru.app.dependency_injection.DIComponent;
 import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class UserAddService {
-	@DIDependency
+	@Autowired
 	private UserDatabase userDatabase;
-	@DIDependency
+	@Autowired
 	private AddUserRequestValidator validator;
 
 

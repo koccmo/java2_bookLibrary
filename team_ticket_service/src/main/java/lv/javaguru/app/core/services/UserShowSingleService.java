@@ -7,12 +7,14 @@ import lv.javaguru.app.core.response.UserShowSingleResponse;
 import lv.javaguru.app.database.UserDatabase;
 import lv.javaguru.app.dependency_injection.DIComponent;
 import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class UserShowSingleService {
-	@DIDependency
+	@Autowired
 	private UserDatabase userDatabase;
 
 

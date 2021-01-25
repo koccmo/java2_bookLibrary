@@ -10,7 +10,7 @@ import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.ApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
 
@@ -65,7 +65,10 @@ public class InitMode {
 		ticket2.setFromCountry("Great Britain");
 		ticket2.setToCountry("Cyprus");
 
-		Flight flight1 = new Flight(user1, ticket1);
+		Flight flight1 = new Flight();
+		flight1.setUser(user1);
+		flight1.setTicket(ticket1);
+
 		Flight flight2 = new Flight(user2, ticket2);
 
 
@@ -75,9 +78,9 @@ public class InitMode {
 		database.addUser(user2);
 
 		Database flightDB = context.getBean(Database.class);
-//
-		flightDB.addReservation(flight1);
-		flightDB.addReservation(flight2);
+
+		flightDB.addFlight(flight1);
+		flightDB.addFlight(flight2);
 	}
 
 	private static void printInitMenu () {

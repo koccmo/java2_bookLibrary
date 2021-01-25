@@ -3,12 +3,13 @@ package lv.javaguru.app.core.services.validators;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class EditUserRequestValidator extends Validator {
 
 	public List<CodeError> validate (UserEditRequest request) {

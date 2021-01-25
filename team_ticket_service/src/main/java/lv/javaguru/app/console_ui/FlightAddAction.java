@@ -7,13 +7,13 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.response.FlightAddResponse;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FlightAddAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private FlightAddService flightAddService;
 
 

@@ -3,12 +3,12 @@ package lv.javaguru.app.console_ui;
 import lv.javaguru.app.core.request.LogOutRequest;
 import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.core.services.LogOutService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class LogOutAction extends Action implements UIActions {
-	@DIDependency
+	@Autowired
 	private LogOutService logoutService;
 
 

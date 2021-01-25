@@ -2,10 +2,11 @@ package lv.javaguru.app.database;
 
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@DIComponent
+@Component
 public class UserDatabase {
 
 	private final Map<Long, User> userDatabase = new HashMap<>();

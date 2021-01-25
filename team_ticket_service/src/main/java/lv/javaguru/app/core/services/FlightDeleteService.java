@@ -6,18 +6,19 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightDeleteResponse;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.DIComponent;
 import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class FlightDeleteService {
 
-	@DIDependency
+	@Autowired
 	private Database reservations;
-	@DIDependency
+	@Autowired
 	private UserDatabase userDatabase;
 
 
@@ -27,7 +28,7 @@ public class FlightDeleteService {
 		if (!errors.isEmpty())
 			return new FlightDeleteResponse(errors);
 
-		reservations.removeReservationById(request.getId());
+		reservations.removeFlightById(request.getId());
 
 		return new FlightDeleteResponse("Reservation '" + request.getId() + "' was deleted!");
 	}
