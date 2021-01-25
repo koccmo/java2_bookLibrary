@@ -6,6 +6,7 @@ import lv.javaguru.app.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @DIComponent
 public class LoginRequestValidator extends Validator {
 

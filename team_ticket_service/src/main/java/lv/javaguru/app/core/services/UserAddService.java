@@ -1,5 +1,6 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserAddRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserAddResponse;
@@ -20,13 +21,20 @@ public class UserAddService {
 
 	public UserAddResponse execute (UserAddRequest request) {
 		List<CodeError> errors = validator.validate(request);
+		User user = request.getUser();
 
 		if (!errors.isEmpty())
 			return new UserAddResponse(errors);
 
-		userDatabase.addUser(request.getUser());
+		if (userDatabase.getAllUsers().contains(user)) {
+			errors.add(new CodeError("User", "User with same credential already registered!"));
 
-		String message = "Hooray! You have been registered!";
+			return new UserAddResponse(errors);
+		}
+
+		userDatabase.addUser(user);
+
+		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getSurname());
 
 		return new UserAddResponse(message);
 	}

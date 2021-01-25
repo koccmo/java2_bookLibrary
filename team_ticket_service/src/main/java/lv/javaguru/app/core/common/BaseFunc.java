@@ -5,6 +5,7 @@ import lv.javaguru.app.core.domain.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class BaseFunc {
@@ -37,6 +38,9 @@ public class BaseFunc {
 		printLineSeparator();
 	}
 
+	public static Long getMenuNumberFromUserAsLong () {
+		return (long) getMenuNumberFromUser();
+	}
 
 	public static int getMenuNumberFromUser () {
 		Scanner scanner = new Scanner(System.in);
@@ -56,8 +60,19 @@ public class BaseFunc {
 	public static Date getDateInFormat (String date, String format) {
 		try {
 			return new SimpleDateFormat(format).parse(date);
-		} catch (ParseException e) {
+		}
+		catch (ParseException e) {
 			return null;
 		}
+	}
+
+
+	public static String capitalize (String str) {
+		if (Character.isLowerCase(str.charAt(0)) && str.length() > 1)
+			str = str.substring(0, 1).toUpperCase() + str.substring(1);
+		else
+			str = str.toUpperCase();
+
+		return str;
 	}
 }

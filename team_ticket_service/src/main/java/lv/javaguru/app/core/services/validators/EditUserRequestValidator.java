@@ -7,22 +7,17 @@ import lv.javaguru.app.dependency_injection.DIComponent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @DIComponent
-public class EditUserValidator extends Validator {
+public class EditUserRequestValidator extends Validator {
 
 	public List<CodeError> validate (UserEditRequest request) {
 		List<CodeError> errors = new ArrayList<>();
+
 		validateId(request).ifPresent(errors::add);
 
 		return errors;
-	}
 
-	public List<CodeError> validate (UserEditRequest.Name request) {
-		return validateName(request.getName());
-	}
-
-	public List<CodeError> validate (UserEditRequest.Surname request) {
-		return validateSurname(request.getSurname());
 	}
 
 	private Optional<CodeError> validateId (UserEditRequest request) {
@@ -32,7 +27,7 @@ public class EditUserValidator extends Validator {
 	}
 
 
-	private List<CodeError> validateName (String name) {
+	public List<CodeError> validateName (String name) {
 		List<CodeError> errorList = new ArrayList<>();
 
 		verifyNameAndSurname(name, "User name", errorList);
@@ -40,7 +35,7 @@ public class EditUserValidator extends Validator {
 		return errorList;
 	}
 
-	private List<CodeError> validateSurname (String surname) {
+	public List<CodeError> validateSurname (String surname) {
 		List<CodeError> errorList = new ArrayList<>();
 
 		verifyNameAndSurname(surname, "User surname", errorList);
