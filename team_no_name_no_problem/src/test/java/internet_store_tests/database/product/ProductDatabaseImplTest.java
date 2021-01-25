@@ -220,7 +220,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByPriceRangeTest() {
+    public void deleteAllProductsByPriceRangeTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
