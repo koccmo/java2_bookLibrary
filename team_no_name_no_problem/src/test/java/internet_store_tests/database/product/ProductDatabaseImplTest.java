@@ -17,6 +17,7 @@ public class ProductDatabaseImplTest {
     Product laptopDell = new Product("Laptop", "Dell", 400);
     Product refrigerator = new Product("Refrigerator", "Electrolux", 300);
     Product tv = new Product("TV", "Radiotehnika", 3);
+    Product junkLaptop = new Product("Laptop","junks",3);
     Product gpsNavigator = new Product("GPS Navigator", "Car accessories", 45);
     Product laptopAcer = new Product("Laptop","Acer",300);
     Product headphones = new Product("Headphones","Beats",350);
@@ -128,6 +129,25 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
+    public void findAllProductsByDescriptionTest() {
+        productDatabase.add(tv);
+        productDatabase.add(laptopAcer);
+
+        List<Product> resultOfFindingAllLaptopAcer = productDatabase.findAllByDescription("Acer");
+        List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
+        List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
+
+        assertTrue(resultOfFindingAllLaptopAcer.contains(laptopAcer));
+        assertEquals(resultOfFindingAllLaptopAcer.size(), 1);
+
+        assertFalse(resultOfFindingAllTV.contains(laptopAcer));
+        assertFalse(resultOfFindingAllTV.contains(refrigerator));
+        assertEquals(resultOfFindingAllTV.size(), 1);
+
+        assertEquals(0, resultOfFindingAllPC.size());
+    }
+
+    @Test
     public void findProductByIdTest() {
         productDatabase.add(tv);
         productDatabase.add(gpsNavigator);
@@ -159,7 +179,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByTitleTest() {
+    public void deleteAllProductsByTitleTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
@@ -179,7 +199,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByDescriptionTest() {
+    public void deleteAllProductsByDescriptionTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
@@ -201,7 +221,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByPriceRangeTest() {
+    public void deleteAllProductsByPriceRangeTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
@@ -220,24 +240,149 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByTitleAndDescriptionTest() {
+    public void findAllProductsByTitleAndDescriptionTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
+        List<Product> resultOfFindingRefrigerator = productDatabase.findAllByTitleAndDescription("","Electrolux");
+        List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitleAndDescription("Laptop","");
 
-        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertTrue(resultOfFindingRefrigerator.contains(refrigerator));
+        assertTrue(resultOfFindingAllLaptops.contains(laptopAcer));
+        assertTrue(resultOfFindingAllLaptops.contains(laptopDell));
+        assertFalse(resultOfFindingRefrigerator.contains(tv));
+        assertFalse(resultOfFindingRefrigerator.contains(headphones));
+        assertFalse(resultOfFindingRefrigerator.contains(laptopDell));
+
+    }
+
+    @Test
+    public void findAllProductsByTitleAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(junkLaptop);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByTitleAndPriceRange("Laptop",1,5);
+
+        assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(headphones));
+        assertFalse(resultOfFindingJunkLaptop.contains(laptopDell));
+
+    }
+
+    @Test
+    public void findAllProductsByDescriptionAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(junkLaptop);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByDescriptionAndPriceRange("Junk",1,5);
+
+        assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(headphones));
+        assertFalse(resultOfFindingJunkLaptop.contains(laptopDell));
+
+    }
+
+    @Test
+    public void findAllProductsByTitleAndDescriptionAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(junkLaptop);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByTitleAndDescriptionAndPriceRange("Laptop","Junks",1,5);
+
+        assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(tv));
+        assertFalse(resultOfFindingJunkLaptop.contains(headphones));
+        assertFalse(resultOfFindingJunkLaptop.contains(laptopDell));
+
+    }
+
+    @Test
+    public void deleteAllProductsByTitleAndDescriptionTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv);
+        productDatabase.add(headphones);
+
+        boolean resultOfDeletingRefrigeratorAndLaptopAcer = productDatabase.deleteAllByTitleAndDescription("Refrigerator","Acer");
+
+        assertTrue(resultOfDeletingRefrigeratorAndLaptopAcer);
+        assertFalse(productDatabase.containsProduct(refrigerator));
+        assertFalse(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+
+    }
+
+    @Test
+    public void deleteAllProductsByTitleAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv); // price 3
+        productDatabase.add(headphones);
+
+        boolean resultOfDeletingRefrigeratorAndTV = productDatabase.deleteAllByTitleAndPriceRange("Refrigerator",
+                1,5);
+
+        assertTrue(resultOfDeletingRefrigeratorAndTV);
         assertFalse(productDatabase.containsProduct(refrigerator));
         assertTrue(productDatabase.containsProduct(laptopAcer));
         assertTrue(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(tv));
+    }
 
-        boolean resultOfDeletingLaptop = productDatabase.deleteAllByTitle("Laptop");
+    @Test
+    public void deleteAllProductsByDescriptionAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv); // price 3
+        productDatabase.add(headphones);
 
-        assertTrue(resultOfDeletingLaptop);
-        assertFalse(productDatabase.containsProduct(laptopDell));
+        boolean resultOfDeletingRefrigeratorAndHeadphones = productDatabase.deleteAllByDescriptionAndPriceRange("Beats",
+                1,5);
+
+        assertTrue(resultOfDeletingRefrigeratorAndHeadphones);
+        assertFalse(productDatabase.containsProduct(headphones));
+        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(tv));
+    }
+
+    @Test
+    public void deleteAllProductsByTitleAndDescriptionAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tabletPc); //price 350
+        productDatabase.add(headphones); // price 600
+
+        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescriptionAndPriceRange("Refrigerator",
+                "Acer",349,601);
+
+        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertFalse(productDatabase.containsProduct(refrigerator));
         assertFalse(productDatabase.containsProduct(laptopAcer));
+        assertFalse(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(tabletPc));
+        assertFalse(productDatabase.containsProduct(headphones));
+
     }
 }
