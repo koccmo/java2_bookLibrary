@@ -198,7 +198,7 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
-    public void deleteAllByDescriptionTest() {
+    public void deleteAllProductsByDescriptionTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
