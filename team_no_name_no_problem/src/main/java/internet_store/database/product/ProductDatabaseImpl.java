@@ -78,7 +78,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
-        if (productList.removeIf(product -> product.getTitle().equals(description)) &&
+        if (productList.removeIf(product -> product.getDescription().equals(description)) &&
                 productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
             return true;
         } else {
