@@ -237,14 +237,34 @@ public class ProductDatabaseImplTest {
     }
 
     @Test
+    public void deleteAllByTitleAndPriceRangeTest() {
+        productDatabase.add(laptopAcer);
+        productDatabase.add(laptopDell);
+        productDatabase.add(refrigerator);
+        productDatabase.add(tv); // price 3
+        productDatabase.add(headphones);
+
+        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndPriceRange("Refrigerator",
+                1,5);
+
+        assertTrue(resultOfDeletingRefrigeratorAndLaptop);
+        assertFalse(productDatabase.containsProduct(refrigerator));
+        assertTrue(productDatabase.containsProduct(laptopAcer));
+        assertTrue(productDatabase.containsProduct(laptopDell));
+        assertFalse(productDatabase.containsProduct(tv));
+
+    }
+
+    @Test
     public void deleteAllByTitleAndDescriptionAndPriceRangeTest() {
         productDatabase.add(laptopAcer);
         productDatabase.add(laptopDell);
         productDatabase.add(refrigerator);
-        productDatabase.add(tabletPc);
-        productDatabase.add(headphones);
+        productDatabase.add(tabletPc); //price 350
+        productDatabase.add(headphones); // price 600
 
-        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescriptionAndPriceRange("Refrigerator","Acer",349,601);
+        boolean resultOfDeletingRefrigeratorAndLaptop = productDatabase.deleteAllByTitleAndDescriptionAndPriceRange("Refrigerator",
+                "Acer",349,601);
 
         assertTrue(resultOfDeletingRefrigeratorAndLaptop);
         assertFalse(productDatabase.containsProduct(refrigerator));
