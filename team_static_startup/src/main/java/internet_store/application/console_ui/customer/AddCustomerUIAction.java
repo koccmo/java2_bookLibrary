@@ -36,7 +36,7 @@ public class AddCustomerUIAction implements UIAction {
                 System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
             );
         } else {
-            System.out.println("\nCustomer added\n" + customerFirstName + "\n" + customerSecondName);
+            System.out.println("\nCustomer added : " + customerFirstName + " " + customerSecondName);
         }
     }
 

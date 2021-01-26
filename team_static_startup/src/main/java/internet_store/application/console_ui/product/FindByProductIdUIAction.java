@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 @Component
-public class FindByIdUIAction implements UIAction {
+public class FindByProductIdUIAction implements UIAction {
 
     @Autowired
     private FindByProductIdService findByIdService;
