@@ -3,7 +3,7 @@ package internet_store.application.core.services.validators;
 import internet_store.application.core.requests.product.FindProductsRequest;
 import internet_store.application.core.requests.product.Ordering;
 import internet_store.application.core.requests.product.Paging;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.services.product.validators.FindProductsRequestValidator;
 import org.junit.Before;
 import org.junit.Test;

@@ -2,7 +2,7 @@ package internet_store.application.core.services.product;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.product.FindByIdRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.FindByProductIdResponse;
 import internet_store.application.core.services.product.validators.FindByProductIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;

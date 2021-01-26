@@ -2,8 +2,8 @@ package internet_store.application.core.services.product;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.product.ChangeProductNameRequest;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.ChangeProductNameResponse;
-import internet_store.application.core.responses.product.CoreError;
 import internet_store.application.core.services.product.validators.ChangeProductNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

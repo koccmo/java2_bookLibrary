@@ -2,7 +2,7 @@ package internet_store.application.core.services.validators;
 
 
 import internet_store.application.core.requests.product.FindByIdRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.services.product.validators.FindByProductIdValidator;
 import org.junit.Before;
 import org.junit.Test;

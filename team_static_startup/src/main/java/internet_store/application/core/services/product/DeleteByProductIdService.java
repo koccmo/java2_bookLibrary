@@ -2,7 +2,7 @@ package internet_store.application.core.services.product;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.DeleteByProductIdResponse;
 import internet_store.application.core.services.product.validators.DeleteByProductIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;

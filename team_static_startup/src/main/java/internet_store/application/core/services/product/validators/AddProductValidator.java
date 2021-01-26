@@ -1,7 +1,7 @@
 package internet_store.application.core.services.product.validators;
 
 import internet_store.application.core.requests.product.AddProductRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

@@ -3,7 +3,7 @@ package internet_store.application.core.services;
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.DeleteByProductRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.DeleteByProductResponse;
 import internet_store.application.core.services.matchers.ProductMatcher;
 import internet_store.application.core.services.product.DeleteProductByProductService;

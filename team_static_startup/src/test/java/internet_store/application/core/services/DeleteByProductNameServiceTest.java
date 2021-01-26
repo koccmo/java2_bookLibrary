@@ -2,7 +2,7 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.product.DeleteByProductNameRequest;
-import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.DeleteByProductNameResponse;
 import internet_store.application.core.services.product.DeleteByProductNameService;
 import internet_store.application.core.services.product.validators.DeleteByProductNameValidator;
