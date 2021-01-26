@@ -8,7 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -69,6 +71,11 @@ public class BookListConfiguration {
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
         sessionFactoryBean.afterPropertiesSet();
         return sessionFactoryBean.getObject();
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager (SessionFactory sessionFactory){
+        return new HibernateTransactionManager(sessionFactory);
     }
 
 }
