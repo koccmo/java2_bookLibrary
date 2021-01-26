@@ -13,9 +13,8 @@ public class ChangeCustomerFirstNameResponse extends CoreResponse {
         this.nameChanged = nameChanged;
     }
 
-    public ChangeCustomerFirstNameResponse(List<CoreError> errors, boolean nameChanged) {
+    public ChangeCustomerFirstNameResponse(List<CoreError> errors) {
         super(errors);
-        this.nameChanged = nameChanged;
     }
 
     public boolean isNameChanged() {
