@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.GetAllBooksRequest;
 import electronic_library.core.responses.GetAllBooksResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class GetAllBooksService {
 
     @Autowired
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @Autowired
     private GetAllBooksValidator getAllBooksValidator;

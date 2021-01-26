@@ -11,11 +11,11 @@ import static org.junit.Assert.assertEquals;
 
 public class ElectronicLibraryImplTest {
 
-    ElectronicLibraryImpl electronicLibrary;
+    ElectronicLibraryRepositoryImpl electronicLibrary;
 
     @Before
     public void setUp() {
-        electronicLibrary = new ElectronicLibraryImpl();
+        electronicLibrary = new ElectronicLibraryRepositoryImpl();
         electronicLibrary.saveBook(new Book("aaa", "aaa", new BigDecimal("10.00"), 2001));
         electronicLibrary.saveBook(new Book("bbb", "bbb", new BigDecimal("20.00"), 2002));
         electronicLibrary.saveBook(new Book("ccc", "ccc", new BigDecimal("30.00"), 2003));

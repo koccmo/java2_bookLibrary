@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.GetAllBooksRequest;
 import electronic_library.core.responses.GetAllBooksResponse;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertFalse;
 public class GetAllBooksServiceTest {
 
     @Mock
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @InjectMocks
     GetAllBooksService service;

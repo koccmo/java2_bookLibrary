@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.matchers.BookMatcher;
 import electronic_library.core.requests.AddBookRequest;
 import electronic_library.core.responses.AddBookResponse;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBookServiceTest {
     @Mock
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @Mock
     private AddBookValidator validator;

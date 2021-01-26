@@ -1,5 +1,6 @@
 package electronic_library.acceptance_tests;
 
+import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
 import electronic_library.core.requests.FindBooksRequest;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-@Profile("noJdbc")
+@Profile("orm")
 public class AcceptanceTest_FindBookByTitle {
 
     private AnnotationConfigApplicationContext applicationContext;
@@ -25,6 +26,7 @@ public class AcceptanceTest_FindBookByTitle {
     @Before
     public void setUp() {
         applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
         AddBookRequest addBookRequestOne = new AddBookRequest("aaa", "aaa", new BigDecimal("10.00"), 2010);
         getAddBookService().execute(addBookRequestOne);
         AddBookRequest addBookRequestTwo = new AddBookRequest("bbb", "bbb", new BigDecimal("11.00"), 2011);
@@ -40,10 +42,11 @@ public class AcceptanceTest_FindBookByTitle {
         AddBookRequest requestTwo = new AddBookRequest("aaa", "bbb", new BigDecimal(20.00),2002);
         getAddBookService().execute(requestTwo);
 
-        FindBooksRequest requestThree = new FindBooksRequest("aaa", null);
-        FindBooksResponse response = getFindBooksService().execute(requestThree);
+        FindBooksRequest request = new FindBooksRequest("aaa",null);
+        FindBooksResponse response = getFindBooksService().execute(request);
 
         assertEquals(response.getBooks().size(), 3);
+
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
         assertEquals(response.getBooks().get(1).getBookTitle(), "aaa");
@@ -51,6 +54,7 @@ public class AcceptanceTest_FindBookByTitle {
         assertEquals(response.getBooks().get(2).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(2).getBookAuthor(), "bbb");
     }
+
 
     @Test
     public void findBooksByTitleOrderingByAuthorDescending() {
@@ -62,8 +66,8 @@ public class AcceptanceTest_FindBookByTitle {
         getAddBookService().execute(requestTwo);
 
         Ordering ordering = new Ordering("author", "DESC");
-        FindBooksRequest requestThree = new FindBooksRequest("aaa", null, ordering);
-        FindBooksResponse response = getFindBooksService().execute(requestThree);
+        FindBooksRequest request = new FindBooksRequest("aaa", null, ordering);
+        FindBooksResponse response = getFindBooksService().execute(request);
 
         assertEquals(response.getBooks().size(), 3);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
@@ -84,8 +88,8 @@ public class AcceptanceTest_FindBookByTitle {
         getAddBookService().execute(requestTwo);
 
         Ordering ordering = new Ordering("author", "ASC");
-        FindBooksRequest requestThree = new FindBooksRequest("aaa", null, ordering);
-        FindBooksResponse response = getFindBooksService().execute(requestThree);
+        FindBooksRequest request = new FindBooksRequest("aaa", null, ordering);
+        FindBooksResponse response = getFindBooksService().execute(request);
 
         assertEquals(response.getBooks().size(), 3);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
@@ -97,7 +101,7 @@ public class AcceptanceTest_FindBookByTitle {
     }
 
     @Test
-    public void findBooksByTitleByAuthorAscendingWithPaging() {
+    public void findBooksByTitleAscendingByAuthorWithPaging() {
 
         AddBookRequest requestOne = new AddBookRequest("aaa", "aaa", new BigDecimal(10.00),2001);
         getAddBookService().execute(requestOne);
@@ -107,14 +111,16 @@ public class AcceptanceTest_FindBookByTitle {
 
         Ordering ordering = new Ordering("author", "ASC");
         Paging paging = new Paging(1, 1);
-        FindBooksRequest requestThree = new FindBooksRequest("aaa", null, ordering, paging);
-        FindBooksResponse response = getFindBooksService().execute(requestThree);
+        FindBooksRequest request = new FindBooksRequest("aaa", null, ordering, paging);
+        FindBooksResponse response = getFindBooksService().execute(request);
 
         assertEquals(response.getBooks().size(), 1);
         assertEquals(response.getBooks().get(0).getBookTitle(), "aaa");
         assertEquals(response.getBooks().get(0).getBookAuthor(), "aaa");
     }
-
     private AddBookService getAddBookService() { return applicationContext.getBean(AddBookService.class); }
     private FindBooksService getFindBooksService() { return applicationContext.getBean(FindBooksService.class); }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
 }

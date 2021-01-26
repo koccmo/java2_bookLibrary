@@ -1,14 +1,28 @@
 package electronic_library.core.domain;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name="book")
 public class Book {
 
+    @Column(name="bookTitle")
     private String bookTitle;
+
+    @Column(name="bookAuthor")
     private String bookAuthor;
+
+    @Column(name="bookPrice")
     private BigDecimal bookPrice;
+
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="yearOfBookIssue")
     private int yearOfBookIssue;
 
     public Book(String bookTitle, String bookAuthor, BigDecimal bookPrice, int yearOfBookIssue) {

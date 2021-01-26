@@ -5,7 +5,7 @@ import electronic_library.core.domain.Book;
 import java.util.List;
 import java.util.Optional;
 
-public interface ElectronicLibrary {
+public interface ElectronicLibraryRepository {
 
     void saveBook(Book book);
 

@@ -1,5 +1,6 @@
 package electronic_library.acceptance_tests;
 
+import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
 import electronic_library.core.requests.GetAllBooksRequest;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-@Profile("noJdbc")
+@Profile("orm")
 public class AcceptanceTest_AddBook {
 
     private AnnotationConfigApplicationContext applicationContext;
@@ -23,6 +24,7 @@ public class AcceptanceTest_AddBook {
     @Before
     public void setUp() {
         applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -71,12 +73,15 @@ public class AcceptanceTest_AddBook {
         GetAllBooksResponse response = getAllBooksService().execute(request);
         assertEquals(0, response.getBooks().size());
     }
+
     private AddBookService getAddBookService() {
         return applicationContext.getBean(AddBookService.class);
     }
-
     private GetAllBooksService getAllBooksService() {
         return applicationContext.getBean(GetAllBooksService.class);
+    }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 }
 

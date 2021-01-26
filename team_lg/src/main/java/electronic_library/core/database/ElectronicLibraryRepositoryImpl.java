@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Profile("noJdbc")
-class ElectronicLibraryImpl implements ElectronicLibrary {
+class ElectronicLibraryRepositoryImpl implements ElectronicLibraryRepository {
 
     private final List<Book> bookList = new ArrayList<>();
     private Long bookId = 1L;

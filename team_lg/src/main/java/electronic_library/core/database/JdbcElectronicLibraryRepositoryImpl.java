@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Component
 @Profile("jdbc")
-class JdbcElectronicLibraryImpl implements ElectronicLibrary {
+class JdbcElectronicLibraryRepositoryImpl implements ElectronicLibraryRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -48,8 +48,8 @@ class JdbcElectronicLibraryImpl implements ElectronicLibrary {
     @Override
     public Optional<Book> findBookById(Long id) {
         try {
-            Book books = jdbcTemplate.queryForObject("SELECT * FROM book WHERE id = ?", new Object[]{id}, new BookRowMapper());
-            return Optional.ofNullable(books);
+            Book book = jdbcTemplate.queryForObject("SELECT * FROM book WHERE id = ?", new Object[]{id}, new BookRowMapper());
+            return Optional.ofNullable(book);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
