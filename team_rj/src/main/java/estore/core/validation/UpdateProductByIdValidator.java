@@ -1,8 +1,8 @@
 package estore.core.validation;
 
 import estore.core.requests.UpdateProductByIdRequest;
-import estore.database.ProductCategoryDB;
-import estore.domain.ProductCategory;
+import estore.database.ProductCategoryRepository;
+import estore.core.model.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.Optional;
 @Component
 public class UpdateProductByIdValidator {
 
-    private ProductCategoryDB categoryDB;
+    private ProductCategoryRepository categoryDB;
     private ValidationRules validationRules;
 
-    public UpdateProductByIdValidator(ProductCategoryDB categoryDB, ValidationRules validationRules) {
+    public UpdateProductByIdValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
         this.categoryDB = categoryDB;
         this.validationRules = validationRules;
     }

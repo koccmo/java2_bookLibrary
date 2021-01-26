@@ -1,14 +1,14 @@
 package estore.database;
 
-import estore.database.inMemoryDB.ProductDBImpl;
-import estore.domain.Product;
+import estore.database.inmemoryrepo.ProductRepositoryImpl;
+import estore.core.model.Product;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ProductDBImplTest {
 
-    ProductDBImpl productDB = new ProductDBImpl();
+    ProductRepositoryImpl productDB = new ProductRepositoryImpl();
 
 //    @Test
 //    public void shouldNotReturnErrorIfIdIncreasesByOneWhenAddindNewProductIdTest() {

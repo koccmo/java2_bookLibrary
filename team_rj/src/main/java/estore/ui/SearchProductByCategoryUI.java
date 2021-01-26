@@ -1,12 +1,15 @@
 package estore.ui;
 
+import estore.core.requests.GetAllProductCategoriesRequest;
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
+import estore.core.responses.GetAllProductCategoriesResponse;
 import estore.core.responses.SearchProductByCategoryResponse;
+import estore.core.service.GetAllProductCategoriesService;
 import estore.core.service.PrintListService;
 import estore.core.service.SearchProductByCategoryService;
-import estore.domain.ProductCategoryEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -15,6 +18,8 @@ import java.util.Scanner;
 public class SearchProductByCategoryUI implements UIAction {
 
     private SearchProductByCategoryService searchProductByCategoryService;
+    @Autowired
+    private GetAllProductCategoriesService getAllProductCategoriesService;
 
     public SearchProductByCategoryUI(SearchProductByCategoryService searchProductByCategoryService) {
         this.searchProductByCategoryService = searchProductByCategoryService;
@@ -23,11 +28,15 @@ public class SearchProductByCategoryUI implements UIAction {
     @Override
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter category of the product to search: ");
-        for (ProductCategoryEnum pc: ProductCategoryEnum.values()) {
-            System.out.print(pc + "   ");
+
+        GetAllProductCategoriesRequest getAllProductCategoriesRequest = new GetAllProductCategoriesRequest();
+        GetAllProductCategoriesResponse getAllProductCategoriesResponse = getAllProductCategoriesService.execute(getAllProductCategoriesRequest);
+
+        for (var category: getAllProductCategoriesResponse.getCategories()) {
+            System.out.print(category.getCategory() + "   ");
         }
         System.out.println();
+        System.out.println("Enter category of the product to search: ");
         String categoryToSearch = sc.nextLine();
 
         System.out.println("Enter orderBy (name||price): ");

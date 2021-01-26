@@ -2,8 +2,8 @@ package estore.core.service;
 
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 public class ShowAllProductsServiceTest {
 
     @Mock
-    private ProductDB database;
+    private ProductRepository database;
 
     @InjectMocks
     private GetAllProductsService service;

@@ -1,6 +1,8 @@
-package estore.database;
+package estore.database.jdbcrepo;
 
-import estore.domain.ProductCategory;
+import estore.core.model.ProductCategory;
+import estore.database.ProductCategoryRepository;
+import estore.database.ProductCategoryRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JdbcProductCategoryDbImpl implements ProductCategoryDB {
+public class JdbcProductCategoryRepositoryImpl implements ProductCategoryRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

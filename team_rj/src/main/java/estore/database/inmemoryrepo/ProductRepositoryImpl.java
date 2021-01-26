@@ -1,19 +1,18 @@
-package estore.database.inMemoryDB;
+package estore.database.inmemoryrepo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import estore.database.ProductDB;
-import estore.domain.Product;
-import org.springframework.stereotype.Component;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 
 //@Component
-public class ProductDBImpl implements ProductDB {
+public class ProductRepositoryImpl implements ProductRepository {
 
     private Long nextProductId;
     private List<Product> products;
 
-    public ProductDBImpl() {
+    public ProductRepositoryImpl() {
         initializeListOfProducts();
         setNextProductId();
     }

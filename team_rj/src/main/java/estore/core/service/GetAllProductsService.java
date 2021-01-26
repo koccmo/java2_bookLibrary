@@ -1,7 +1,7 @@
 package estore.core.service;
 
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class GetAllProductsService {
 
     @Autowired
-    private ProductDB productDB;
+    private ProductRepository productDB;
 
 //    public ShowAllProductsService(ProductDB productDB) {
 //        this.productDB = productDB;

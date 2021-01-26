@@ -1,18 +1,17 @@
-package estore.database.inMemoryDB;
+package estore.database.inmemoryrepo;
 
-import estore.database.ProductCategoryDB;
-import estore.domain.ProductCategory;
-import org.springframework.stereotype.Component;
+import estore.database.ProductCategoryRepository;
+import estore.core.model.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //@Component
-public class ProductCategoryDBImpl implements ProductCategoryDB {
+public class ProductCategoryRepositoryImpl implements ProductCategoryRepository {
 
     private Long nextCategoryId;
     private List<ProductCategory> categories;
-    public ProductCategoryDBImpl() {
+    public ProductCategoryRepositoryImpl() {
         initializeListOfCategories();
         setNextCategoryId();
     }

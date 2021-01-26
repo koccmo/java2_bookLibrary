@@ -4,8 +4,8 @@ import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
-import estore.database.ProductCategoryDB;
-import estore.domain.ProductCategory;
+import estore.database.ProductCategoryRepository;
+import estore.core.model.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
 @Component
 public class AddNewProductCategoryService {
 
-    private ProductCategoryDB productCategoryDB;
+    private ProductCategoryRepository productCategoryDB;
     private AddNewProductCategoryValidator validator;
 
-    public AddNewProductCategoryService(ProductCategoryDB productCategoryDB, AddNewProductCategoryValidator validator) {
+    public AddNewProductCategoryService(ProductCategoryRepository productCategoryDB, AddNewProductCategoryValidator validator) {
         this.productCategoryDB = productCategoryDB;
         this.validator = validator;
     }

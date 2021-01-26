@@ -4,8 +4,7 @@ import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
-import estore.database.ProductCategoryDB;
-import estore.matchers.ProductCategoryMatcher;
+import estore.database.ProductCategoryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,13 +17,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddNewProductCategoryServiceTest {
 
     @Mock
-    private ProductCategoryDB database;
+    private ProductCategoryRepository database;
     @Mock
     private AddNewProductCategoryValidator validator;
 

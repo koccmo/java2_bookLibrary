@@ -1,4 +1,4 @@
-package estore.domain;
+package estore.core.model;
 
 import java.util.Objects;
 

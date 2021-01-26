@@ -1,7 +1,7 @@
 package estore.core.responses;
 
 import estore.core.validation.CoreError;
-import estore.domain.Product;
+import estore.core.model.Product;
 
 import java.util.List;
 

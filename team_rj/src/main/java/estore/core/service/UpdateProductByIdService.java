@@ -4,8 +4,8 @@ import estore.core.requests.UpdateProductByIdRequest;
 import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.UpdateProductByIdValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
 @Component
 public class UpdateProductByIdService {
 
-    private ProductDB productDB;
+    private ProductRepository productDB;
     private UpdateProductByIdValidator validator;
 
-    public UpdateProductByIdService(ProductDB productDB, UpdateProductByIdValidator validator) {
+    public UpdateProductByIdService(ProductRepository productDB, UpdateProductByIdValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

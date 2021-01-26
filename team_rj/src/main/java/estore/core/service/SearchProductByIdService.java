@@ -4,8 +4,8 @@ import estore.core.requests.SearchProductByIdRequest;
 import estore.core.responses.SearchProductByIdResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByIdValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
 @Component
 public class SearchProductByIdService {
 
-    private ProductDB productDB;
+    private ProductRepository productDB;
     private SearchProductByIdValidator validator;
 
-    public SearchProductByIdService(ProductDB productDB, SearchProductByIdValidator validator) {
+    public SearchProductByIdService(ProductRepository productDB, SearchProductByIdValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

@@ -1,25 +1,21 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.requests.AddNewProductRequest;
-import estore.database.ProductCategoryDB;
-import estore.domain.ProductCategory;
-import org.springframework.beans.factory.annotation.Autowired;
+import estore.database.ProductCategoryRepository;
+import estore.core.model.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Component
 public class AddNewProductCategoryValidator {
 
-    private ProductCategoryDB categoryDB;
+    private ProductCategoryRepository categoryDB;
     private ValidationRules validationRules;
 
-    public AddNewProductCategoryValidator(ProductCategoryDB categoryDB, ValidationRules validationRules) {
+    public AddNewProductCategoryValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
         this.categoryDB = categoryDB;
         this.validationRules = validationRules;
     }
