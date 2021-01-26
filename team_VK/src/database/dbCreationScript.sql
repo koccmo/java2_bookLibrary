@@ -60,3 +60,10 @@ AUTO_INCREMENT = 1;
 
 ALTER TABLE `bookings`
 ADD FOREIGN KEY (`book_id`) REFERENCES `books`(`id`);
+
+create index title_author
+on books (title, author);
+
+create index lastName_pk
+on clients (last_name, personalCode);
+
