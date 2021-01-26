@@ -2,10 +2,12 @@ package book_library.core.database;
 
 import book_library.core.domain.Book;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Component
@@ -22,7 +24,11 @@ public class OrmBookRepositoryImp implements BookRepository {
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Book where id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class OrmBookRepositoryImp implements BookRepository {
 
     @Override
     public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
-        return false;
+        return true;
     }
 
     @Override
