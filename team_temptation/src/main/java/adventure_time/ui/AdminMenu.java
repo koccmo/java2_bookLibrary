@@ -25,7 +25,7 @@ public class AdminMenu {
         menuFunctionMap.put(13, findUIAction(uiActionList, RemoveCustomerUIAction.class));
         menuFunctionMap.put(14, findUIAction(uiActionList, SearchCustomerUIAction.class));
         menuFunctionMap.put(15, findUIAction(uiActionList, DisplayCustomerUIAction.class));
-        menuFunctionMap.put(16, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(16, findUIAction(uiActionList, UpdateCustomerUIAction.class));
 
         menuFunctionMap.put(21, findUIAction(uiActionList, ToMainMenuUIAction.class));
         menuFunctionMap.put(22, findUIAction(uiActionList, ToMainMenuUIAction.class));
@@ -41,6 +41,13 @@ public class AdminMenu {
         menuFunctionMap.put(35, findUIAction(uiActionList, DisplayEventUIAction.class));
         menuFunctionMap.put(36, findUIAction(uiActionList, ToMainMenuUIAction.class));
         menuFunctionMap.put(37, findUIAction(uiActionList, StartUpEventUIAction.class));
+
+        menuFunctionMap.put(41, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(42, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(43, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(44, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(45, findUIAction(uiActionList, ToMainMenuUIAction.class));
+        menuFunctionMap.put(46, findUIAction(uiActionList, ToMainMenuUIAction.class));
 
         menuFunctionMap.put(61, findUIAction(uiActionList, ToMainMenuUIAction.class));
         menuFunctionMap.put(62, findUIAction(uiActionList, ExitEventUIAction.class));

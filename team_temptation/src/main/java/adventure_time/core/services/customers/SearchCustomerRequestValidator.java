@@ -42,7 +42,7 @@ public class SearchCustomerRequestValidator {
         }
 
         if (id && !PATTERN_ID.matcher(request.getCustomerID().toString()).matches()) {
-            CoreError error = new CoreError("customerEmail", "ID is incorrect.");
+            CoreError error = new CoreError("customerID", "ID is incorrect.");
             errors.add(error);
         }
 
