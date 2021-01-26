@@ -1,6 +1,6 @@
 package book_library.core.validators;
 
-import book_library.core.database.InMemoryDataBaseImpl;
+import book_library.core.database.InMemoryBookRepositoryImpl;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
 import book_library.matchers.BookMatcher;
@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBookValidatorTest {
 
-    @Mock private InMemoryDataBaseImpl database;
+    @Mock private InMemoryBookRepositoryImpl database;
     @InjectMocks private AddBookRequestValidator validator;
 
     @Test

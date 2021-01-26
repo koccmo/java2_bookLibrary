@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class InMemoryDataBaseImpl implements BookRepository {
+public class InMemoryBookRepositoryImpl implements BookRepository {
 
     private Long nexId = 1L;
     private List<Book> books = new ArrayList<>();
