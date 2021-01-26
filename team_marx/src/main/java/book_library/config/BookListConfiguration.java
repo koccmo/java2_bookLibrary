@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = "book_library")
 @PropertySource(value = "classpath:application.properties")
+@EnableTransactionManagement
 public class BookListConfiguration {
 
     @Value("${jdbc.url}")
