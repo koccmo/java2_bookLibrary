@@ -17,4 +17,6 @@ public class SearchCustomerRequest {
     public String getCustomerEmail() {
         return customerEmail;
     }
+
+
 }

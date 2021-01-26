@@ -18,7 +18,7 @@ public class AddCustomerUIAction implements UIAction {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please enter your name (max 50 characters): ");
+        System.out.println("Please enter your name (min 5, max 50 characters): ");
         String name = scanner.nextLine();
 
         System.out.println("Please enter an actual email (max 30 characters): ");
