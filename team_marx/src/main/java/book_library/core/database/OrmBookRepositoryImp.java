@@ -25,7 +25,7 @@ public class OrmBookRepositoryImp implements BookRepository {
     @Override
     public boolean deleteById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Book where id = :id");
+                "DELETE Book WHERE id = :id");
         query.setParameter("id", id);
         int result = query.executeUpdate();
         return result == 1;
@@ -43,7 +43,9 @@ public class OrmBookRepositoryImp implements BookRepository {
 
     @Override
     public List<Book> getAllBooks() {
-        return null;
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT b FROM Book b", Book.class)
+                .getResultList();
     }
 
     @Override
