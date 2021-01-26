@@ -63,6 +63,11 @@ public class UserAction {
                 ui.execute();
                 break;
             }
+            case 8: {
+                UpdateProductByIdUI ui = applicationContext.getBean(UpdateProductByIdUI.class);
+                ui.execute();
+                break;
+            }
             case 0: {
                 ExitProgramUI ui = applicationContext.getBean(ExitProgramUI.class);
                 ui.execute();

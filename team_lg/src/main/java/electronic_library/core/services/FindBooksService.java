@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class FindBooksService {
 
     @Autowired
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @Autowired
     private FindBooksRequestValidator validator;

@@ -4,13 +4,13 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserAddRequest;
 import lv.javaguru.app.core.response.UserAddResponse;
 import lv.javaguru.app.core.services.UserAddService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class UserAddAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private UserAddService userAddService;
 
 

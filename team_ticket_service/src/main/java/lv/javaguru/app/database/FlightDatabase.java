@@ -3,128 +3,79 @@ package lv.javaguru.app.database;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
-import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class FlightDatabase implements Database {
 
-	private final Map<Long, Flight> reservations = new HashMap<>();
+	private final Map<Long, Flight> flights = new HashMap<>();
 
 	private static Long nextId = 1L;
 
 
 	@Override
-	public void addReservation (Flight flight) {
-		if (!reservations.containsValue(flight)) {
+	public void addFlight (Flight flight) {
+		if (!flights.containsValue(flight)) {
 			flight.setId(nextId++);
-			reservations.put(flight.getId(), flight);
+			flights.put(flight.getId(), flight);
 		}
 	}
 
 	@Override
-	public void removeReservation (Flight flight) {
-		if (reservations.containsValue(flight))
-			reservations.values().removeIf(res -> res.equals(flight));
+	public void removeFlight (Flight flight) {
+		if (flights.containsValue(flight))
+			flights.values().removeIf(res -> res.equals(flight));
 	}
 
 	@Override
-	public void removeReservationById (Long id) {
-		reservations.remove(id);
+	public void removeFlightById (Long id) {
+		flights.remove(id);
 	}
 
 	@Override
 	public Flight getFlightById (Long id) {
-		return reservations.get(id);
+		return flights.get(id);
 	}
 
 	@Override
-	public List<Flight> getAllReservations () {
-		return new ArrayList<>(reservations.values());
+	public List<Flight> getAllFlights () {
+		return new ArrayList<>(flights.values());
 	}
 
 	@Override
-	public List<Flight> getAllUserReservations (User user) {
-		return reservations.values().stream()
-				.filter(reservation -> reservation.getUser().equals(user))
+	public List<Flight> getAllUserFlights (User user) {
+		return flights.values().stream()
+				.filter(flight -> flight.getUser().equals(user))
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public boolean containsKey (Long id) {
-		return reservations.containsKey(id);
+		return flights.containsKey(id);
 	}
 
 	public Ticket getTicketByFlightId (Long id) {
-		Flight flight = reservations.get(id);
-		return flight.getTicket();
+		return flights.get(id).getTicket();
 	}
 
 	public User getUserByFlightId (Long id) {
-		return reservations.get(id).getUser();
+		return flights.get(id).getUser();
 	}
 
-	public boolean isUsersReservation (Long id, User user) {
-		if (reservations.containsKey(id))
-			return reservations.get(id).getUser().equals(user);
+	public boolean isUsersFlight (Long id, User user) {
+		if (flights.containsKey(id))
+			return flights.get(id).getUser().equals(user);
 		return false;
 	}
 
 	@Override
 	public boolean isContainTicket (Ticket ticket) {
-		return reservations.values().stream()
+		return flights.values().stream()
 				.anyMatch(flight -> flight.getTicket().equals(ticket));
 	}
 
-
-/*
-	@Override
-	public void addTicket (User user, Ticket ticket) {
-		if (reservations.containsKey(user)) {
-			ticket.setId(nextId++);
-			reservations.get(user).add(ticket);
-		}
-	}
-
-
-	@Override
-	public void removeTicketById (Long id) {
-		reservations.get(currentUser).removeIf(ticket -> ticket.getId().equals(id));
-	}
-
-
-	@Override
-	public List<Ticket> getAllUserTickets (User user) {
-		return reservations.get(user);
-	}
-
-	@Override
-	public List<Ticket> getAllTickets () {
-		return reservations.values().stream()
-				.flatMap(List::stream)
-				.collect(Collectors.toList());
-	}
-
-
-	@Override
-	public Ticket getTicketById (Long id) {
-		return getAllTickets().stream()
-				.filter(ticket -> ticket.getId().equals(id))
-				.findFirst()
-				.orElse(null);
-	}
-
-	@Override
-	public boolean isUserHaveTicketWithId (Long id) {
-		return reservations.get(currentUser).stream().anyMatch(ticket -> ticket.getId().equals(id));
-	}
-
-
-	@Override
-	public boolean isContainTicketWithId (Long id) {
-		return getAllTickets().stream()
-				.anyMatch(ticket -> ticket.getId().equals(id));
-	}*/
 }

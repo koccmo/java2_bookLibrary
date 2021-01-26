@@ -5,15 +5,15 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.UserEditService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class UserUpdateAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private UserEditService userEditService;
 
 
@@ -34,10 +34,8 @@ public class UserUpdateAction extends Action implements UIActions {
 		UserEditRequest request = new UserEditRequest(id);
 		UserEditResponse response = userEditService.execute(request);
 
-		if (response.hasErrors()) {
-			response.getErrorList().forEach(r -> System.out.println(r.getField() +
-					r.getMessage()));
-		}
+		if (response.hasErrors())
+			response.getErrorList().forEach(System.out::println);
 		else
 			adminMode_UserEditMenu(response.getUser());
 	}
@@ -64,12 +62,10 @@ public class UserUpdateAction extends Action implements UIActions {
 
 	private void editSurnameAction (User user, Scanner scanner) {
 		BaseFunc.printHeader("Enter new surname:");
-		String input = scanner.nextLine();
+		String surname = scanner.nextLine();
 
-		UserEditRequest request = new UserEditRequest(user.getId());
-		UserEditRequest.Surname surname = request.new Surname(input);
-
-		UserEditResponse response = userEditService.execute(surname);
+		UserEditRequest request = new UserEditRequest(user.getId(), surname);
+		UserEditResponse response = userEditService.executeSurnameUpdate(request);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +
@@ -79,14 +75,13 @@ public class UserUpdateAction extends Action implements UIActions {
 			System.out.println(response.getMessage());
 	}
 
+
 	private void editNameAction (User user, Scanner scanner) {
 		BaseFunc.printHeader("Enter new name:");
-		String input = scanner.nextLine();
+		String name = scanner.nextLine();
 
-		UserEditRequest request = new UserEditRequest(user.getId());
-		UserEditRequest.Name name = request.new Name(input);
-
-		UserEditResponse response = userEditService.execute(name);
+		UserEditRequest request = new UserEditRequest(user.getId(), name);
+		UserEditResponse response = userEditService.executeNameUpdate(request);
 
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(r -> System.out.println(r.getField() +

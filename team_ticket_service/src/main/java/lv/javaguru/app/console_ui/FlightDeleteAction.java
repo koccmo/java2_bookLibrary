@@ -4,13 +4,13 @@ import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.request.DeleteFlightRequest;
 import lv.javaguru.app.core.response.FlightDeleteResponse;
 import lv.javaguru.app.core.services.FlightDeleteService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FlightDeleteAction implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private FlightDeleteService flightDeleteService;
 
 

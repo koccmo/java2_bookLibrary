@@ -6,7 +6,7 @@ import internet_store.lesson_6.core.requests.Ordering;
 import java.util.Comparator;
 import java.util.List;
 
-import static internet_store.application.core.services.validators.FindProductsRequestValidator.*;
+import static internet_store.application.core.services.product.validators.FindProductsRequestValidator.*;
 
 public class OrderingProductsService {
 

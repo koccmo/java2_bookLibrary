@@ -20,6 +20,7 @@ public class UserMenu {
         menuItems.add("5 - add new product category");
         menuItems.add("6 - remove product by name");
         menuItems.add("7 - remove product by id");
+        menuItems.add("8 - update product");
         menuItems.add("0 - exit");
     }
 

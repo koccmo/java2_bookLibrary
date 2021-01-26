@@ -6,7 +6,7 @@ import estore.core.responses.AddNewProductResponse;
 import estore.core.responses.GetAllProductCategoriesResponse;
 import estore.core.service.AddNewProductService;
 import estore.core.service.GetAllProductCategoriesService;
-import estore.domain.ProductCategory;
+import estore.core.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

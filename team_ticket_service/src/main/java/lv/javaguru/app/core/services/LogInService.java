@@ -10,20 +10,22 @@ import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.ApplicationContext;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class LogInService {
-	@DIDependency
+	@Autowired
+	private ApplicationContext applicationContext;
+	@Autowired
 	private Database database;
-	@DIDependency
+	@Autowired
 	private UserDatabase userDatabase;
-	@DIDependency
+	@Autowired
 	private LoginRequestValidator validator;
 
 
@@ -47,8 +49,8 @@ public class LogInService {
 
 
 		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(AdminMode.getInstance()) :
-				new LogInResponse(UserMode.getInstance());
+				new LogInResponse(new AdminMode(applicationContext)) :
+				new LogInResponse(new UserMode(applicationContext));
 
 		logInResponse.setCurrUser(user);
 		logInResponse.setMessage("Successfully logged in!");

@@ -4,13 +4,13 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.core.services.FlightShowAllService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FlightShowAllAction extends Action implements UIActions {
 
-	@DIDependency
+	@Autowired
 	private FlightShowAllService flightShowAllService;
 
 

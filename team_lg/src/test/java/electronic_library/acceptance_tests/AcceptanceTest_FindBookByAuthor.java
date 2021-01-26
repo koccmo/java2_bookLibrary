@@ -1,5 +1,6 @@
 package electronic_library.acceptance_tests;
 
+import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
 import electronic_library.core.requests.FindBooksRequest;
@@ -11,17 +12,20 @@ import electronic_library.core.services.FindBooksService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
+@Profile("orm")
 public class AcceptanceTest_FindBookByAuthor {
     private AnnotationConfigApplicationContext applicationContext;
 
     @Before
     public void setUp() {
         applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
         AddBookRequest addBookRequestOne = new AddBookRequest("aaa", "aaa", new BigDecimal("10.00"), 2010);
         getAddBookService().execute(addBookRequestOne);
         AddBookRequest addBookRequestTwo = new AddBookRequest("bbb", "bbb", new BigDecimal("11.00"), 2011);
@@ -110,4 +114,7 @@ public class AcceptanceTest_FindBookByAuthor {
 
     private AddBookService getAddBookService() { return applicationContext.getBean(AddBookService.class); }
     private FindBooksService getFindBooksService() { return applicationContext.getBean(FindBooksService.class); }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
 }

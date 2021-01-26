@@ -2,7 +2,7 @@ package internet_store.application.core.responses;
 
 import java.util.List;
 
-abstract class CoreResponse {
+public abstract class CoreResponse {
 
     List<CoreError> errors;
 

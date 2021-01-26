@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.requests.DeleteBookByAuthorRequest;
 import electronic_library.core.responses.CoreError;
 import electronic_library.core.responses.DeleteBookByAuthorResponse;
@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class DeleteBookByAuthorServiceTest {
 
     @Mock
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @Mock
     private DeleteBookByAuthorValidator validator;

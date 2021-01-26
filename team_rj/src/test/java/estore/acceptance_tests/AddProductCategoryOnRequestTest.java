@@ -4,7 +4,7 @@ import estore.config.ProductConfiguration;
 import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.service.AddNewProductCategoryService;
-import estore.database.ProductCategoryDB;
+import estore.database.ProductCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -20,20 +20,25 @@ public class AddProductCategoryOnRequestTest {
     @Before
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 
     @Test
     public void shouldAddValidProductCategory() {
-//        int dbInitialSize = getCategoryDb().getDatabase().size();
-//        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("CategoryA");
-//        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("CategoryB");
-//
-//        addNewProductCategoryService().execute(addProductCategoryRequest1);
-//        AddNewProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
-//
-//        assertTrue(response.isSuccessfullyAdded());
-//        assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
-//        assertEquals(getCategoryDb().getDatabase().get(dbInitialSize + 1).getCategory(), "CategoryB");
+        int dbInitialSize = getCategoryDb().getDatabase().size();
+        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("CategoryA");
+        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("CategoryB");
+
+        addNewProductCategoryService().execute(addProductCategoryRequest1);
+        AddNewProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
+
+        assertTrue(response.isSuccessfullyAdded());
+        assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
+        assertEquals(getCategoryDb().getDatabase().get(dbInitialSize + 1).getCategory(), "CategoryB");
     }
 
     @Test
@@ -58,7 +63,7 @@ public class AddProductCategoryOnRequestTest {
         return applicationContext.getBean(AddNewProductCategoryService.class);
     }
 
-    private ProductCategoryDB getCategoryDb() {
-        return applicationContext.getBean(ProductCategoryDB.class);
+    private ProductCategoryRepository getCategoryDb() {
+        return applicationContext.getBean(ProductCategoryRepository.class);
     }
 }

@@ -7,8 +7,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TicketFiller {
 
@@ -33,13 +31,19 @@ public class TicketFiller {
 			return false;
 		}
 
-		acquireDestinationCountryAndCity(ticket);
-		if (ticket.isCanceled())
+		String[] destination = acquireDestinationCountryAndCity();
+		if (destination != null) {
+			ticket.setToCountry(destination[0]);
+			ticket.setToCity(destination[1]);
+		}
+		else {
 			return false;
+		}
 
-
-		acquireDepartureDate(ticket);
-		if (ticket.isCanceled())
+		LocalDate date = acquireDate(ticket);
+		if (date != null)
+			ticket.setDate(date);
+		else
 			return false;
 
 
@@ -78,14 +82,23 @@ public class TicketFiller {
 	}
 
 	public String[] acquireOriginCountryAndCity () {
+		return acquireCountryAndCity(countryOrigin, cityOrigin);
+	}
+
+	public String[] acquireDestinationCountryAndCity () {
+		return acquireCountryAndCity(destinationCountry, destinationCity);
+	}
+
+	private String[] acquireCountryAndCity (Map<Integer, String> countryMap, Map<String, List<String>> citiesMap) {
 		String country;
 		String city;
 
 		while (true) {
-			country = acquireOriginCountry();
+			country = acquireCountry(countryMap);
 
 			if (!country.equals("CANCELED")) {
-				city = acquireOriginCity(country);
+				List<String> cities = citiesMap.get(country);
+				city = acquireCity(cities);
 
 				if (city != null && !city.equals("CANCELED")) {
 					return new String[]{country, city};
@@ -96,44 +109,26 @@ public class TicketFiller {
 		return null;
 	}
 
-	public void acquireDestinationCountryAndCity (Ticket ticket) {
-		ticket.setCanceled(false);
 
-		boolean editing = true;
-
-		while (editing && !ticket.isCanceled()) {
-			String country = acquireDestinationCountry(ticket);
-			String city = acquireDestinationCity(ticket, country);
-
-			if (country != null && city != null) {
-				ticket.setToCountry(country);
-				ticket.setToCity(city);
-				editing = false;
-			}
-		}
-	}
-
-
-	private String acquireOriginCountry () {
+	private String acquireCountry (Map<Integer, String> countryMap) {
 		String input;
 
 		String country;
 
 		while (true) {
-			BaseFunc.printHeader("SELECT ORIGIN COUNTRY:");
-			printMap(countryOrigin);
+			BaseFunc.printHeader("SELECT COUNTRY:");
+			printMap(countryMap);
 
 			if (isInputValid(input = getUserInput())) {
 				if ("x".equals(input)) {
 					country = "CANCELED";
-					//ticket.setCanceled(true);
 					break;
 				}
 
 				int key = Integer.parseInt(input);
 
-				if (countryOrigin.get(key) != null) {
-					country = countryOrigin.get(key);
+				if (countryMap.get(key) != null) {
+					country = countryMap.get(key);
 					break;
 				}
 
@@ -142,15 +137,13 @@ public class TicketFiller {
 		return country;
 	}
 
-	private String acquireOriginCity (String country) {
-		List<String> cities = cityOrigin.get(country);
-
+	private String acquireCity (List<String> cities) {
 		String input;
 
 		String city = null;
 
 		while (true) {
-			BaseFunc.printHeader("SELECT ORIGIN CITY:");
+			BaseFunc.printHeader("SELECT CITY:");
 			printList(cities);
 
 			if (isInputValid(input = getUserInput())) {
@@ -173,70 +166,11 @@ public class TicketFiller {
 		return city;
 	}
 
-
-	private String acquireDestinationCountry (Ticket ticket) {
+	public LocalDate acquireDate (Ticket ticket) {
 		String input;
+		LocalDate date;
 
-		String country = null;
-
-		while (!ticket.isCanceled()) {
-			BaseFunc.printHeader("SELECT DESTINATION COUNTRY:");
-			printMap(destinationCountry);
-
-			if (isInputValid(input = getUserInput())) {
-				if ("x".equals(input)) {
-					ticket.setCanceled(true);
-					break;
-				}
-
-				int key = Integer.parseInt(input);
-
-				if (destinationCountry.get(key) != null) {
-					country = destinationCountry.get(key);
-					break;
-				}
-			}
-		}
-		return country;
-	}
-
-	private String acquireDestinationCity (Ticket ticket, String country) {
-		if (country == null)
-			return null;
-		List<String> cities = destinationCity.get(country);
-
-		String input;
-		String city = null;
-
-		while (!ticket.isCanceled()) {
-			BaseFunc.printHeader("SELECT DESTINATION CITY:");
-			printList(cities);
-
-			if (isInputValid(input = getUserInput())) {
-				if (input.equals("x")) {
-					ticket.setCanceled(true);
-					break;
-				}
-				if (input.equals("0")) {
-					break;
-				}
-				int i = Integer.parseInt(input) - 1;
-				if (i >= 0 && i < cities.size()) {
-
-					city = cities.get(i);
-					break;
-				}
-
-			}
-
-		}
-		return city;
-	}
-
-	private void acquireDepartureDate (Ticket ticket) {
-		String input;
-
-		while (!ticket.isCanceled()) {
+		while (true) {
 			BaseFunc.printHeader("SELECT DATE:");
 			List<LocalDate> dates = new ArrayList<>();
 
@@ -247,22 +181,20 @@ public class TicketFiller {
 
 			printDates(dates);
 
-			input = getUserInput();
-
-			if (isInputValid(input)) {
-				if (input.equalsIgnoreCase("X"))
-					ticket.setCanceled(true);
+			if (isInputValid(input = getUserInput())) {
+				if (input.equalsIgnoreCase("X")) {
+					return null;
+				}
 
 				int index = Integer.parseInt(input);
 
 				if (index != 0 && dates.get(index - 1) != null) {
-					LocalDate date = dates.get(index - 1);
-					ticket.setDate(date);
-
-					return;
+					date = dates.get(index - 1);
+					break;
 				}
 			}
 		}
+		return date;
 	}
 
 	private boolean isInputValid (String input) {

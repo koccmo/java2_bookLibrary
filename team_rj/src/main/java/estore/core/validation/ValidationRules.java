@@ -64,4 +64,17 @@ public class ValidationRules {
         }
         return false;
     }
+
+    public boolean validatePositiveDouble(String userStringInput) {
+        double choice;
+        try {
+            choice = Double.valueOf(userStringInput);
+        } catch (Exception e) {
+            return false;
+        }
+        if (choice >= 0) {
+            return true;
+        }
+        return false;
+    }
 }

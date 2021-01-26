@@ -2,9 +2,12 @@ package lv.javaguru.app.core.request;
 
 
 public class UserEditRequest {
-	private Long id;
+	private final Long id;
+	private String newValue;
 
-	public UserEditRequest () {
+	public UserEditRequest (Long id, String newValue) {
+		this.id = id;
+		this.newValue = newValue;
 	}
 
 	public UserEditRequest (Long id) {
@@ -15,36 +18,8 @@ public class UserEditRequest {
 		return id;
 	}
 
-
-	public class Name {
-		private final String name;
-
-		public Name (String name) {
-			this.name = name;
-		}
-
-		public String getName () {
-			return name;
-		}
-
-		public Long getId () {
-			return id;
-		}
+	public String getNewValue () {
+		return newValue;
 	}
 
-	public class Surname {
-		private final String surname;
-
-		public Surname (String surname) {
-			this.surname = surname;
-		}
-
-		public String getSurname () {
-			return surname;
-		}
-
-		public Long getId () {
-			return id;
-		}
-	}
 }

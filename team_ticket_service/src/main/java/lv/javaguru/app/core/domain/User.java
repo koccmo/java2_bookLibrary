@@ -30,8 +30,8 @@ public class User {
 	}
 
 	public User (String name, String surname) {
-		this.name = name;
-		this.surname = surname;
+		this.name = name.trim();
+		this.surname = surname.trim();
 		this.personType = PersonType.CLIENT;
 	}
 
@@ -75,7 +75,8 @@ public class User {
 
 	@Override
 	public String toString () {
-		return name + ", " + surname;
+		return "Id: " + id
+				+ ", " + name + ", " + surname;
 	}
 
 	public String getName () {

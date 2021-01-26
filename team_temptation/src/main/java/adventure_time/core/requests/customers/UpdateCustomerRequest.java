@@ -1,29 +1,44 @@
 package adventure_time.core.requests.customers;
 
-import java.util.Objects;
-
 public class UpdateCustomerRequest {
 
-    private final Long customerID;
+    private String name;
+    private String email;
+    private String phone;
+    private String passwordOne;
+    private String passwordTwo;
+    private Long id;
 
-    public UpdateCustomerRequest(Long customerID) {
-        this.customerID = customerID;
+    public UpdateCustomerRequest(String name, String email, String phone, String passwordOne, String passwordTwo, Long id) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.passwordOne = passwordOne;
+        this.passwordTwo = passwordTwo;
+        this.id = id;
     }
 
-    public Long getCustomerID() {
-        return customerID;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UpdateCustomerRequest that = (UpdateCustomerRequest) o;
-        return Objects.equals(customerID, that.customerID);
+    public String getEmail() {
+        return email;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerID);
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getPasswordOne() {
+        return passwordOne;
+    }
+
+    public String getPasswordTwo() {
+        return passwordTwo;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

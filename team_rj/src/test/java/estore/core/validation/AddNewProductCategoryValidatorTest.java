@@ -1,8 +1,8 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
-import estore.database.ProductCategoryDB;
-import estore.database.ProductCategoryDBImpl;
+import estore.database.ProductCategoryRepository;
+import estore.database.inmemoryrepo.ProductCategoryRepositoryImpl;
 import org.junit.Test;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AddNewProductCategoryValidatorTest {
 
-    private ProductCategoryDB categoryDB = new ProductCategoryDBImpl();
+    private ProductCategoryRepository categoryDB = new ProductCategoryRepositoryImpl();
     private ValidationRules validationRules = new ValidationRules();
     private AddNewProductCategoryValidator validator = new AddNewProductCategoryValidator(categoryDB, validationRules);
 

@@ -2,8 +2,9 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.database.product.ProductRepository;
-import internet_store.application.core.requests.GetAllProductsRequest;
-import internet_store.application.core.responses.GetAllProductsResponse;
+import internet_store.application.core.requests.product.GetAllProductsRequest;
+import internet_store.application.core.responses.product.GetAllProductsResponse;
+import internet_store.application.core.services.product.GetAllProductsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

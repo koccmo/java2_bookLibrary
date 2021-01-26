@@ -5,13 +5,19 @@ import lv.javaguru.app.core.domain.Flight;
 import java.time.LocalDate;
 
 public class EditFlightValueRequest {
-	private Flight flight;
+	private final Flight flight;
 	private String newValue;
+	private String[] newValues;
 	private LocalDate newDate;
 
 	public EditFlightValueRequest (Flight flight, String newValue) {
 		this.flight = flight;
 		this.newValue = newValue;
+	}
+
+	public EditFlightValueRequest (Flight flight, String[] newValues) {
+		this.flight = flight;
+		this.newValues = newValues;
 	}
 
 	public EditFlightValueRequest (Flight flight, LocalDate newDate) {
@@ -29,5 +35,9 @@ public class EditFlightValueRequest {
 
 	public LocalDate getNewDate () {
 		return newDate;
+	}
+
+	public String[] getNewValues () {
+		return newValues;
 	}
 }

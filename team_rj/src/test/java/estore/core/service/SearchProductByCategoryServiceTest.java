@@ -6,8 +6,8 @@ import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class SearchProductByCategoryServiceTest {
 
     @Mock
-    private ProductDB database;
+    private ProductRepository database;
     @Mock
     private SearchProductByCategoryValidator validator;
 

@@ -1,6 +1,7 @@
 package lv.javaguru.app.core.request;
 
 public class UserDeleteRequest {
+
 	private final Long id;
 
 	public UserDeleteRequest (Long id) {

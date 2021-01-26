@@ -7,15 +7,11 @@ import java.util.List;
 
 public class UserShowAllResponse<T> extends ArrayList<T> {
 
-	private List<T> response;
+	private final List<T> response;
 	private Class<T> responseClass;
 
 	public UserShowAllResponse (List<T> response) {
 		this.response = response;
-	}
-
-	public Class<T> getResponseClass () {
-		return responseClass;
 	}
 
 	public List<T> getResponse () {
