@@ -1,5 +1,6 @@
-package estore.database;
+package estore.database.inMemoryDB;
 
+import estore.database.ProductCategoryDB;
 import estore.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 

@@ -84,6 +84,15 @@ public class JdbcProductDbImpl implements ProductDB {
     }
 
     @Override
+    public void updateProductPrice(Long id, Double price) {
+        jdbcTemplate.update("UPDATE eStore_test.products " +
+                "SET products.price = ? " +
+                "WHERE products.id = ?",
+                price,
+                id);
+    }
+
+    @Override
     public int getDatabaseSize() {
         return 0;
     }

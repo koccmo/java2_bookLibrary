@@ -1,5 +1,6 @@
 package estore.database;
 
+import estore.database.inMemoryDB.ProductDBImpl;
 import estore.domain.Product;
 import org.junit.Test;
 

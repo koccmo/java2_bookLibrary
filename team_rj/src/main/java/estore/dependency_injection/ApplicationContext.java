@@ -1,13 +1,5 @@
 package estore.dependency_injection;
 
-import estore.core.service.*;
-import estore.core.validation.*;
-import estore.database.ProductCategoryDB;
-import estore.database.ProductCategoryDBImpl;
-import estore.database.ProductDB;
-import estore.database.ProductDBImpl;
-import estore.ui.*;
-
 import java.util.HashMap;
 import java.util.Map;
 

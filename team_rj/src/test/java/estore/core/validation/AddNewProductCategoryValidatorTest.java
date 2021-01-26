@@ -2,7 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
 import estore.database.ProductCategoryDB;
-import estore.database.ProductCategoryDBImpl;
+import estore.database.inMemoryDB.ProductCategoryDBImpl;
 import org.junit.Test;
 
 import java.util.List;

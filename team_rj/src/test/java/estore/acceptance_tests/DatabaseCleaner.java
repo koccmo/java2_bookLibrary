@@ -18,6 +18,8 @@ public class DatabaseCleaner {
             String sql = "delete from " + tableName;
             jdbcTemplate.execute(sql);
         }
+        jdbcTemplate.execute("ALTER TABLE eStore_test.productCategory AUTO_INCREMENT=1");
+        jdbcTemplate.execute("ALTER TABLE eStore_test.products AUTO_INCREMENT=1");
     }
 
     private List<String> getTableNames() {

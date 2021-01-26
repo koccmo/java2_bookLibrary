@@ -1,8 +1,9 @@
-package estore.database;
+package estore.database.inMemoryDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import estore.database.ProductDB;
 import estore.domain.Product;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,11 @@ public class ProductDBImpl implements ProductDB {
     @Override
     public List<Product> getDatabase() {
         return products;
+    }
+
+    @Override
+    public void updateProductPrice(Long id, Double price) {
+
     }
 
     @Override

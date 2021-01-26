@@ -17,6 +17,8 @@ public interface ProductDB {
 
     List<Product> getDatabase();
 
+    void updateProductPrice(Long id, Double price);
+
     int getDatabaseSize();
 
 }
