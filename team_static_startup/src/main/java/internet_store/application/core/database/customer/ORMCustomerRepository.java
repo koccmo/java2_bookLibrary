@@ -2,11 +2,11 @@ package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +37,10 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> findByFirstName(String customerName) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT Customer WHERE name = : name");
+        query.setParameter("name", customerName);
+        return query.getResultList();
     }
 
     @Override
