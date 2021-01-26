@@ -6,13 +6,15 @@ import lv.javaguru.app.core.response.UserDeleteResponse;
 import lv.javaguru.app.database.UserDatabase;
 import lv.javaguru.app.dependency_injection.DIComponent;
 import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class UserDeleteService {
-	@DIDependency
+	@Autowired
 	private UserDatabase userDatabase;
 
 

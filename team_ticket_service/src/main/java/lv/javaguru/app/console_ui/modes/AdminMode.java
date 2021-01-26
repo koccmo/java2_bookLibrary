@@ -3,25 +3,15 @@ package lv.javaguru.app.console_ui.modes;
 import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.dependency_injection.ApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 public class AdminMode {
 
 	private final ApplicationContext context;
-	private static AdminMode instance;
 
 
-	private AdminMode (ApplicationContext context) {
+	public AdminMode (ApplicationContext context) {
 		this.context = context;
-	}
-
-	public static AdminMode getInstance () {
-		return instance;
-	}
-
-	public static void setInstance (ApplicationContext context) {
-		if (instance == null)
-			instance = new AdminMode(context);
 	}
 
 

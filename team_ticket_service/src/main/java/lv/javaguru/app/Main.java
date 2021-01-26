@@ -1,20 +1,17 @@
 package lv.javaguru.app;
 
-import lv.javaguru.app.console_ui.modes.AdminMode;
+import lv.javaguru.app.config.TicketServiceConfiguration;
 import lv.javaguru.app.console_ui.modes.InitMode;
-import lv.javaguru.app.console_ui.modes.UserMode;
-import lv.javaguru.app.dependency_injection.ApplicationContext;
-import lv.javaguru.app.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 public class Main {
-	private static final ApplicationContext context = new DIApplicationContextBuilder().build("lv.javaguru.app");
+	private static final ApplicationContext applicationContext =
+			new AnnotationConfigApplicationContext(TicketServiceConfiguration.class);
 
 	public static void main (String[] args) {
-		AdminMode.setInstance(context);
-		UserMode.setInstance(context);
-
-		InitMode initMode = new InitMode(context);
+		InitMode initMode = new InitMode(applicationContext);
 		initMode.fillDb();
 		initMode.execute();
 	}

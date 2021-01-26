@@ -12,6 +12,7 @@ import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
+import internet_store_tests.DatabaseCleaner;
 import org.springframework.context.ApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class AcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test() {
@@ -52,7 +54,7 @@ public class AcceptanceTest {
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
+        assertTrue(getAllCustomersResponse.getCustomers().size() != 2);
         assertTrue(findCustomerByIdResponse.getCustomer().get().equals(customer));
 
 
@@ -72,5 +74,9 @@ public class AcceptanceTest {
 
     private DeleteCustomerService deleteCustomerService(){
         return appContext.getBean(DeleteCustomerService.class);
+    }
+
+   private DatabaseCleaner getDatabaseCleaner(){
+       return appContext.getBean(DatabaseCleaner.class);
     }
 }

@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
@@ -28,7 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class FindBooksServiceTest {
 
     @Mock
-    private ElectronicLibrary electronicLibrary;
+    private ElectronicLibraryRepository electronicLibrary;
 
     @Mock
     private FindBooksRequestValidator validator;

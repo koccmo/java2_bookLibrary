@@ -30,12 +30,14 @@ public class ProgramMenu {
        // menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
+        // Deletecustomer ui
 
         menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
         menuNumberToActionMap.put(10, findUIAction(uiActionList, DeleteCustomerUIAction.class));
         menuNumberToActionMap.put(11, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(12, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(13, findUIAction(uiActionList, BuyProductUIAction.class));
+        // Get my order list
 
         menuNumberToActionMap.put(14, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
         menuNumberToActionMap.put(15, findUIAction(uiActionList, SearchCustomerUIAction.class));

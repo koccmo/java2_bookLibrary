@@ -1,19 +1,16 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
-import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.request.UserShowSingleRequest;
-import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.core.response.UserShowSingleResponse;
 import lv.javaguru.app.core.services.UserShowSingleService;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class UserShowOneAction {
 
-	@DIDependency
+	@Autowired
 	private UserShowSingleService userShowSingleService;
 
 

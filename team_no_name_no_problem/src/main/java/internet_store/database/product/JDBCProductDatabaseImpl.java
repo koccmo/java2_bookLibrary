@@ -1,5 +1,5 @@
 package internet_store.database.product;
-/*
+
 import internet_store.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Autowired
@@ -28,29 +28,49 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void deleteById(Long id) {
-        /*String sql = "DELETE FROM products WHERE id = ?";
+    public boolean deleteById(Long id) {
+        String sql = "DELETE FROM products WHERE id = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public void deleteAllByTitle(String title) {
-        /*String sql = "DELETE FROM products WHERE title = ?";
+    public boolean deleteAllByTitle(String title) {
+        String sql = "DELETE FROM products WHERE title = ?";
         Object[] args = new Object[]{title};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public void deleteAllByDescription(String description) {
-        /*String sql = "DELETE FROM products WHERE description = ?";
+    public boolean deleteAllByDescription(String description) {
+        String sql = "DELETE FROM products WHERE description = ?";
         Object[] args = new Object[]{description};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public void deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
+    public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
+        return false;
+    }
 
+    @Override
+    public boolean deleteAllByTitleAndDescription(String title, String description){
+        return false;
+    }
+
+    @Override
+    public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice){
+        return false;
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice){
+        return false;
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice){
+        return false;
     }
 
     @Override
@@ -86,6 +106,11 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+        return null;
+    }
+
+    @Override
     public List<Product> findAllByDescription(String description) {
         String sql = "SELECT * FROM products WHERE description = ?";
         Object[] args = new Object[]{description};
@@ -97,6 +122,16 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
         String sql = "SELECT * FROM products WHERE title = ? AND description = ?";
         Object[] args = new Object[]{title, description};
         return jdbcTemplate.query(sql, args, new ProductRowMapper());
+    }
+
+    @Override
+    public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+        return null;
     }
 
     @Override
@@ -119,4 +154,3 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
         return false;
     }
 }
-*/

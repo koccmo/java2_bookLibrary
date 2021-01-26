@@ -29,6 +29,7 @@ public class ApplicationMenu {
     public int getMenuNumberFromUser() {
         System.out.println("Please enter menu item number:");
         Scanner scanner = new Scanner(System.in);
+
         return Integer.parseInt(scanner.nextLine());
     }
 
@@ -49,7 +50,12 @@ public class ApplicationMenu {
     }
 
     public void executeSelectedMenuItem(int selectedMenu) {
-        menuNumberToUICommandMap.get(selectedMenu).execute();
+        UICommand uiCommand = menuNumberToUICommandMap.get(selectedMenu);
+        if (uiCommand != null) {
+            uiCommand.execute();
+        } else {
+            System.out.println("\nMenu item " + selectedMenu + " don't exist, please enter menu item number:\"");
+        }
     }
 
     private UICommand findUICommand(List<UICommand> uiCommands, Class uiCommandClass) {

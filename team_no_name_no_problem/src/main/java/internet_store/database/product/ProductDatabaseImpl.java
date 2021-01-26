@@ -78,7 +78,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
-        if (productList.removeIf(product -> product.getTitle().equals(description)) &&
+        if (productList.removeIf(product -> product.getDescription().equals(description)) &&
                 productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
             return true;
         } else {
@@ -211,7 +211,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         return productList.stream()
-                .filter(product -> product.getDescription().toLowerCase().startsWith(title.toLowerCase()) &&
+                .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
                         product.getPrice() >= startPrice && product.getPrice() <= endPrice)
                 .collect(Collectors.toList());
     }

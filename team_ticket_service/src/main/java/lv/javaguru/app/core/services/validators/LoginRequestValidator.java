@@ -3,10 +3,12 @@ package lv.javaguru.app.core.services.validators;
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+
+@Component
 public class LoginRequestValidator extends Validator {
 
 	public List<CodeError> validate (LogInRequest request) {

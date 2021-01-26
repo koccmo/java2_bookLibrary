@@ -15,8 +15,10 @@ public class DatabaseCleaner {
 
     public void clean() {
         for(String tableName : getTableNames()) {
-            String sql = "DELETE FROM " + tableName;
-            jdbcTemplate.execute(sql);
+            String sql0 = "DELETE FROM " + tableName;
+            jdbcTemplate.execute(sql0);
+            String sql1 = "ALTER TABLE " + tableName + " AUTO_INCREMENT = 1";
+            jdbcTemplate.execute(sql1);
         }
     }
 

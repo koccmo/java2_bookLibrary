@@ -18,7 +18,7 @@ public class BookListApplication {
                 int menuValue = applicationMenu.getMenuNumberFromUser();
                 applicationMenu.executeSelectedMenuItem(menuValue);
             } catch (NumberFormatException e) {
-                System.out.println("\nIncorrect input, please enter number");
+                System.out.println("\nIncorrect input, please enter menu item number:");
             }
         }
     }

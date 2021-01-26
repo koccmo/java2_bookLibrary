@@ -51,7 +51,10 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public List<Product> findByProductName(String name) {
-        return null;
+        Query query = (Query) sessionFactory.getCurrentSession().createQuery(
+                "select p FROM Product p where name = : name");
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
@@ -77,7 +80,7 @@ public class ORMProductRepository implements ProductRepository {
 
     @Override
     public Optional<Product> findById(Long id) {
-        return null;
+        return Optional.ofNullable(sessionFactory.getCurrentSession().find(Product.class, id));
     }
 
     @Override
