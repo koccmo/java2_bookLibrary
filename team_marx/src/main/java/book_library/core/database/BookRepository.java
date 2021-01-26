@@ -4,7 +4,7 @@ import book_library.core.domain.Book;
 
 import java.util.List;
 
-public interface Database {
+public interface BookRepository {
 
     void save(Book book);
 

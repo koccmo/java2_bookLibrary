@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JdbcDatabaseImp implements Database {
+public class JdbcBookRepositoryImp implements BookRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
