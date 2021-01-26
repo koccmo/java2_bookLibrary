@@ -82,6 +82,11 @@ public class ProductDBImpl implements ProductDB {
     }
 
     @Override
+    public Product searchProductById(Long id) {
+        return null;
+    }
+
+    @Override
     public boolean addNewProduct(Product product) {
         product.setId(nextProductId);
         this.nextProductId++;

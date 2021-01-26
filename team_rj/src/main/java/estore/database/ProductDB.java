@@ -9,6 +9,8 @@ public interface ProductDB {
 
     List<Product> searchProductByCategory(String category);
 
+    Product searchProductById(Long id);
+
     boolean addNewProduct(Product product);
 
     int removeProductByName(String name);

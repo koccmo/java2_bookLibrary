@@ -76,6 +76,23 @@ public class JdbcProductDbImpl implements ProductDB {
     }
 
     @Override
+    public Product searchProductById(Long id) {
+        List<Product> productList = jdbcTemplate.query(
+                "SELECT * FROM products " +
+                "WHERE products.id = ?",
+                new Object[]{id},
+                new ProductRowMapper()
+        );
+        Product product;
+        if (productList.size() == 0) {
+            product = null;
+        } else {
+            product = productList.get(0);
+        }
+        return product;
+    }
+
+    @Override
     public List<Product> getDatabase() {
         return jdbcTemplate.query(
                 "SELECT * FROM products",
