@@ -1,7 +1,11 @@
 package book_library.core.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name="books")
 public class Book {
 
     private Long id;
