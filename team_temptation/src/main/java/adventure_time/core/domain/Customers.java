@@ -8,38 +8,82 @@ public class Customers {
     private String customerName;
     private String customerEmail;
     private String customerPhone;
-    private boolean activity;
+    private String customerPassword;
+    private Boolean activity;
 
-    public Customers(String customerName, String customerEmail, String customerPhone) {
+    public Customers(String customerName, String customerEmail, String customerPhone, String customerPassword) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
+        this.customerPassword = customerPassword;
         this.activity = true;
+    }
+
+    public Long getCustomerID() {
+        return customerID;
     }
 
     public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
 
-    public Long getCustomerId() {
-        return customerID;
-    }
     public String getCustomerName() {
         return customerName;
     }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public String getCustomerEmail() {
         return customerEmail;
     }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
     public String getCustomerPhone() {
         return customerPhone;
     }
 
-    public boolean isActivity() {
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public Boolean getActivity() {
         return activity;
     }
-    public void activityOn () { this.activity = true;
+
+    public void setActivity(Boolean activity) {
+        this.activity = activity;
     }
-    public void activityOff () { this.activity = false; }
+
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
+
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customers customers = (Customers) o;
+        return Objects.equals(customerID, customers.customerID) &&
+                Objects.equals(customerName, customers.customerName) &&
+                Objects.equals(customerEmail, customers.customerEmail) &&
+                Objects.equals(customerPhone, customers.customerPhone) &&
+                Objects.equals(customerPassword, customers.customerPassword) &&
+                Objects.equals(activity, customers.activity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerPassword, activity);
+    }
 
     @Override
     public String toString() {
@@ -48,24 +92,8 @@ public class Customers {
                 ", customerName='" + customerName + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
+                ", customerPassword='" + customerPassword + '\'' +
                 ", activity=" + activity +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customers customers = (Customers) o;
-        return activity == customers.activity &&
-                Objects.equals(customerID, customers.customerID) &&
-                Objects.equals(customerName, customers.customerName) &&
-                Objects.equals(customerEmail, customers.customerEmail) &&
-                Objects.equals(customerPhone, customers.customerPhone);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerID, customerName, customerEmail, customerPhone, activity);
     }
 }

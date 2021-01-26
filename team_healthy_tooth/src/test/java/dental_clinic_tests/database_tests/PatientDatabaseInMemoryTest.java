@@ -19,6 +19,8 @@ public class PatientDatabaseInMemoryTest {
     Doctor doctor1 = new Doctor("Doctor", "Zlo");
     Doctor doctor2 = new Doctor("Doctor", "Haus");
     PatientDatabase patientDatabase = new PatientDatabaseInMemory();
+    private List<Manipulation>manipulations = new ArrayList<>();
+    private List<Long> manipulationIds = new ArrayList<>();
     @Before
     public void init(){
         patientDatabase.addPatient(personalData1);
@@ -87,7 +89,7 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testAddVisitJowlData(){
-        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
+        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, manipulations, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         List <ToothStatus> expectedList = new ArrayList<>();
@@ -98,7 +100,7 @@ public class PatientDatabaseInMemoryTest {
 
     @Test
     public void testAddVisitVisitData(){
-        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, new Date());
+        Visit newVisit = new Visit(1L, 11, Optional.of("bolit"), ToothStatus.FASETE, doctor1, manipulations, new Date());
         patientDatabase.addVisit(1L, newVisit);
 
         assertTrue(patientDatabase.getPatients().get(0).getVisits().size() == 1);

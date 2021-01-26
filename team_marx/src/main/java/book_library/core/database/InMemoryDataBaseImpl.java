@@ -1,6 +1,7 @@
 package book_library.core.database;
 
 import book_library.core.domain.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,11 +9,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class InMemoryDataBaseImpl implements Database {
 
     private Long nexId = 1L;
     private List<Book> books = new ArrayList<>();
+
+    @Autowired private Database database;
 
     @Override
     public void save(Book book) {
@@ -45,6 +48,12 @@ public class InMemoryDataBaseImpl implements Database {
     public boolean hasTheSameBookInDatabase(Book bookToCompare) {
 
         return books.contains(bookToCompare);
+    }
+
+    @Override
+    public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
+        return !database.getAllBooks().stream()
+                .filter(book -> book.getId().equals(idToCheck)).findFirst().isEmpty();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package book_library.acceptancetests;
 
+import book_library.DatabaseCleaner;
 import book_library.config.BookListConfiguration;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.requests.Ordering;
@@ -25,6 +26,11 @@ public class AcceptanceTest6SearchBooksRequest {
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
         ReflectionTestUtils.setField(appContext.getBean(SearchBooksService.class),"orderingEnabled", true);
         ReflectionTestUtils.setField(appContext.getBean(SearchBooksService.class),"pagingEnabled", true);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
     }
 
     @Test

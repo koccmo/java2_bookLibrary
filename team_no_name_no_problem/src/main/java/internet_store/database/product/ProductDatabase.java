@@ -11,13 +11,21 @@ public interface ProductDatabase {
 
     void add(Product product);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
-    void deleteAllByTitle(String title);
+    boolean deleteAllByTitle(String title);
 
-    void deleteAllByDescription(String description);
+    boolean deleteAllByDescription(String description);
 
-    void deleteAllByPriceRange(Integer startPrice, Integer endPrice);
+    boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndDescription(String title, String description);
+
+    boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
+
+    boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
     Optional<Product> findById(Long id);
 
@@ -27,20 +35,26 @@ public interface ProductDatabase {
 
     void changePrice(Long id, Integer newPrice);
 
-    List<Product> findAllByTitle (String title);
+    List<Product> findAllByTitle(String title);
+
+    List<Product> findAllByDescription(String description);
 
     List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByDescription (String description);
+    List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByTitleAndDescription (String title, String description);
+    List<Product> findAllByTitleAndDescription(String title, String description);
+
+    List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
+
+    List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
 
     boolean containsProduct (Product product);
 
-    boolean containsId (Long id);
+    boolean containsId(Long id);
 
-    boolean containsTitle (String title);
+    boolean containsTitle(String title);
 
-    boolean containsDescription (String description);
+    boolean containsDescription(String description);
 
 }

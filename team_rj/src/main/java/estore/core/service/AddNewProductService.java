@@ -2,8 +2,8 @@ package estore.core.service;
 
 import estore.core.validation.CoreError;
 import estore.core.validation.AddNewProductValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import org.springframework.stereotype.Component;
@@ -13,10 +13,11 @@ import java.util.List;
 @Component
 public class AddNewProductService {
 
-    private ProductDB productDB;
+    private ProductRepository productDB;
     private AddNewProductValidator validator;
 
-    public AddNewProductService(ProductDB productDB, AddNewProductValidator validator) {
+    public AddNewProductService(ProductRepository productDB,
+                                AddNewProductValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

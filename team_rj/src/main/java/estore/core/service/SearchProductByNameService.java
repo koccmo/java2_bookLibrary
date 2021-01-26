@@ -4,8 +4,8 @@ import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import org.springframework.stereotype.Component;
@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @Component
 public class SearchProductByNameService {
 
-    private ProductDB productDB;
+    private ProductRepository productDB;
     private SearchProductByNameValidator validator;
 
-    public SearchProductByNameService(ProductDB productDB, SearchProductByNameValidator validator) {
+    public SearchProductByNameService(ProductRepository productDB, SearchProductByNameValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

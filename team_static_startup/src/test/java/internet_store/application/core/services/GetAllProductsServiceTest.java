@@ -1,9 +1,10 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.database.Database;
-import internet_store.application.core.requests.GetAllProductsRequest;
-import internet_store.application.core.responses.GetAllProductsResponse;
+import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.requests.product.GetAllProductsRequest;
+import internet_store.application.core.responses.product.GetAllProductsResponse;
+import internet_store.application.core.services.product.GetAllProductsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,14 +21,14 @@ import static org.junit.Assert.assertFalse;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllProductsServiceTest {
 
-    @Mock private Database database;
+    @Mock private ProductRepository productRepository;
     @InjectMocks private GetAllProductsService service;
 
     @Test
     public void shouldGetProductsFromDb() {
         List<Product> products = new ArrayList<>();
         products.add(new Product("TV", "SONY", new BigDecimal("1000")));
-        Mockito.when(database.getProductList()).thenReturn(products);
+        Mockito.when(productRepository.getProductList()).thenReturn(products);
         GetAllProductsRequest request = new GetAllProductsRequest();
         GetAllProductsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

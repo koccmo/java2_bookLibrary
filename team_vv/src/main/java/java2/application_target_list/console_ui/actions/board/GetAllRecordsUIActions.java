@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetAllRecordsUIActions implements UIAction {
 
-    @Autowired GetAllRecordsService getAllRecordsService;
+    @Autowired
+    GetAllRecordsService getAllRecordsService;
 
     @Override
     public void execute() {

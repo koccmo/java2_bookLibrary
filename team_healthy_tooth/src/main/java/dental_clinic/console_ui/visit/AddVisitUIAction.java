@@ -8,23 +8,24 @@ import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 import dental_clinic.core.requests.doctor.AddDoctorRequest;
 import dental_clinic.core.requests.doctor.GetDoctorListRequest;
+import dental_clinic.core.requests.manipulation.GetManipulationsListRequest;
 import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.responses.doctor.GetDoctorListResponse;
+import dental_clinic.core.responses.manipulation.GetManipulationsListResponse;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.services.doctor.AddDoctorService;
 import dental_clinic.core.services.doctor.GetDoctorListService;
+import dental_clinic.core.services.manipulation.GetManipulationsListService;
 import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
 import dental_clinic.database.in_memory.doctor.DoctorDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 @Component
 public class AddVisitUIAction implements UIAction {
@@ -37,6 +38,8 @@ public class AddVisitUIAction implements UIAction {
     private InputFormatsValidator inputFormatsValidator;
     @Autowired
     private GetDoctorListService getDoctorListService;
+    @Autowired
+    private GetManipulationsListService getManipulationsListService;
 
 
     public void execute(){
@@ -52,29 +55,18 @@ public class AddVisitUIAction implements UIAction {
         } else {
             Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
 
-            System.out.println("Please input comment if necessary or press enter");
-            String commentIn = in.nextLine();
-            Optional<String> comment = Optional.of(commentIn);
+            Optional<String> comment = enterComment();
 
-            printToothStatuses();
-            Integer variant = inputFormatsValidator.inputInteger("Please enter tooth status");
-            ToothStatus toothStatus = inputToothStatus(variant);
+            ToothStatus toothStatus = enterToothStatus();
 
-            GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
-            GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
-            System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:\n");
-            if (!getDoctorListResponse.hasErrors()) {
-                getDoctorListResponse.getDoctors().forEach(System.out::println);
-            }
+            Doctor doctor = new Doctor(enterDoctor(), "");
 
-            String inputForDoctor = in.nextLine();
+            List<Long>manipulationsIds = enterManipulationsIds();
 
             Date date = new Date();
 
-            Doctor doctor = new Doctor(inputForDoctor, "");
-
-            Visit visit = new Visit(id, toothNumber, comment, toothStatus, doctor, date);
-            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit);
+            Visit visit = new Visit(id, toothNumber, comment, toothStatus, doctor, new ArrayList<>(), date);
+            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit, manipulationsIds);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 
             if (addVisitResponse.hasErrors()) {
@@ -84,6 +76,12 @@ public class AddVisitUIAction implements UIAction {
             }
         }
 
+    }
+
+    private ToothStatus enterToothStatus() {
+        printToothStatuses();
+        Integer variant = inputFormatsValidator.inputInteger("Please enter tooth status");
+        return convertToToothStatus(variant);
     }
 
     private void printToothStatuses(){
@@ -103,7 +101,7 @@ public class AddVisitUIAction implements UIAction {
                 "12  HEALTHY\n");
     }
 
-    ToothStatus inputToothStatus(int variant){
+    private ToothStatus convertToToothStatus(int variant){
 
         switch (variant) {
             case 1: return ToothStatus.KARIES;
@@ -120,6 +118,42 @@ public class AddVisitUIAction implements UIAction {
             case 12: return ToothStatus.HEALTHY;
         }
         return ToothStatus.OTHER;
+    }
+
+    private Optional<String> enterComment () {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please input comment if necessary or press enter");
+        String commentIn = in.nextLine();
+        return Optional.of(commentIn);
+    }
+
+    private String enterDoctor() {
+        Scanner in = new Scanner(System.in);
+        GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
+        GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
+        System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:\n");
+        if (!getDoctorListResponse.hasErrors()) {
+            getDoctorListResponse.getDoctors().forEach(System.out::println);
+        }
+        return in.nextLine();
+    }
+
+    private List<Long> enterManipulationsIds() {
+        GetManipulationsListRequest getManipulationsListRequest = new GetManipulationsListRequest();
+        GetManipulationsListResponse getManipulationsListResponse = getManipulationsListService.execute(getManipulationsListRequest);
+        List<Long>manipulationsIds = new ArrayList<>();
+        if (!getManipulationsListResponse.hasErrors()) {
+            while (true) {
+                getManipulationsListResponse.getManipulationList().forEach(System.out::println);
+                Long manipulationsId = inputFormatsValidator.inputLong("Please input manipulation's id or press 0 to exit");
+                if (manipulationsId != 0) {
+                    manipulationsIds.add(manipulationsId);
+                } else {
+                    break;
+                }
+            }
+        }
+        return manipulationsIds;
     }
 
 }

@@ -7,6 +7,11 @@ public class Record {
     private Long userId;
     private String dateAdded;
     private String dateComplete;
+    private String targetName;
+    private String targetDescription;
+    private Integer targetDeadline;
+    private String userFirstName;
+    private String userLastName;
 
     public Record(Long targetId, Long userId) {
         this.targetId = targetId;
@@ -54,4 +59,45 @@ public class Record {
     public String getDateAdded() {
         return dateAdded;
     }
+
+    public String getTargetName() {
+        return targetName;
+    }
+
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
+
+    public String getTargetDescription() {
+        return targetDescription;
+    }
+
+    public void setTargetDescription(String targetDescription) {
+        this.targetDescription = targetDescription;
+    }
+
+    public Integer getTargetDeadline() {
+        return targetDeadline;
+    }
+
+    public void setTargetDeadline(Integer targetDeadline) {
+        this.targetDeadline = targetDeadline;
+    }
+
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
 }
+

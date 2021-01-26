@@ -1,22 +1,23 @@
 package lv.javaguru.app.core.services;
 
-import lv.javaguru.app.core.domain.Person;
 import lv.javaguru.app.core.request.LogOutRequest;
-import lv.javaguru.app.core.response.CodeError;
-import lv.javaguru.app.core.response.LogInResponse;
+import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogOutResponse;
-import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class LogOutService {
 
-	private final Database database;
+	@Autowired
+	private UserDatabase userDatabase;
 
-	public LogOutService (Database database) {
-		this.database = database;
-	}
 
 	public LogOutResponse execute (LogOutRequest request) {
 		List<CodeError> errors = new ArrayList<>();
@@ -28,7 +29,7 @@ public class LogOutService {
 			return new LogOutResponse(errors);
 
 		else {
-			database.setCurrentPerson(null);
+			userDatabase.setCurrentUser(null);
 
 			return new LogOutResponse(null, "Successfully! Logged out!");
 		}

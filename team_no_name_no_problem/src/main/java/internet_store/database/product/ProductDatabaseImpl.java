@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class ProductDatabaseImpl implements ProductDatabase{
 
     private Long id= 1L;
@@ -29,24 +29,81 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         //session().remove(id);
-        productList.removeIf(product -> product.getId().equals(id));
+        if (productList.removeIf(product -> product.getId().equals(id))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void deleteAllByTitle(String title) {
-        productList.removeIf(product -> product.getTitle().equals(title));
+    public boolean deleteAllByTitle(String title) {
+        if (productList.removeIf(product -> product.getTitle().equals(title))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void deleteAllByDescription(String description) {
-        productList.removeIf(product -> product.getDescription().equals(description));
+    public boolean deleteAllByDescription(String description) {
+        if (productList.removeIf(product -> product.getDescription().equals(description))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
-        productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice);
+    public boolean deleteAllByTitleAndDescription(String title, String description) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product -> product.getDescription().equals(description))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getDescription().equals(description)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product -> product.getTitle().equals(title)) &&
+                productList.removeIf(product -> product.getDescription().equals(description)) &&
+                productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
+        if (productList.removeIf(product ->product.getPrice() >= startPrice && product.getPrice() <= endPrice)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -113,6 +170,13 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
+        return productList.stream()
+                .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Product> findAllByTitleAndDescription(String title, String description) {
         //Criteria criteria = session().createCriteria(Product.class);
         //        Criterion productTitle = Restrictions.eq(title, title);
@@ -128,6 +192,32 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
+    public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+        return productList.stream()
+                .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
+                        product.getDescription().toLowerCase().startsWith(description.toLowerCase()) &&
+                        product.getPrice() >= startPrice && product.getPrice() <= endPrice)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+        return productList.stream()
+                .filter(product -> product.getDescription().toLowerCase().startsWith(description.toLowerCase()) &&
+                        product.getPrice() >= startPrice && product.getPrice() <= endPrice)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+        return productList.stream()
+                .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
+                        product.getPrice() >= startPrice && product.getPrice() <= endPrice)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public Optional<Product> findById(Long id) {
         //Product product = (Product) session().createCriteria(Product.class)
         //                .add(Restrictions.eq(id, id))
@@ -136,13 +226,6 @@ public class ProductDatabaseImpl implements ProductDatabase{
         return productList.stream()
             .filter(product -> product.getId().equals(id))
                 .findAny();
-    }
-
-    @Override
-    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
-        return productList.stream()
-                .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
-                .collect(Collectors.toList());
     }
 
     @Override

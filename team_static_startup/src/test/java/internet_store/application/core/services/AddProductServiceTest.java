@@ -1,11 +1,12 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
-import internet_store.application.core.requests.AddProductRequest;
-import internet_store.application.core.responses.AddProductResponse;
+import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.product.AddProductResponse;
 import internet_store.application.core.services.matchers.ProductMatcher;
-import internet_store.application.core.services.validators.AddProductValidator;
+import internet_store.application.core.services.product.AddProductService;
+import internet_store.application.core.services.product.validators.AddProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +27,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddProductServiceTest {
 
-    @Mock private Database database;
+    @Mock private ProductRepository productRepository;
     @Mock private AddProductValidator validator;
     @InjectMocks private AddProductService service;
 
@@ -37,7 +38,7 @@ public class AddProductServiceTest {
                 new BigDecimal("399.99"));
         AddProductResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(database).add(argThat(new ProductMatcher("tv", "nice tv",
+        Mockito.verify(productRepository).add(argThat(new ProductMatcher("tv", "nice tv",
                 new BigDecimal("399.99"))));
     }
 
@@ -55,7 +56,7 @@ public class AddProductServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Name");
         assertEquals(response.getErrors().get(0).getMessage(), "must not be empty");
 
-        Mockito.verifyNoInteractions(database);
+        Mockito.verifyNoInteractions(productRepository);
     }
 
 

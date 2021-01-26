@@ -1,5 +1,6 @@
 package book_library.acceptancetests;
 
+import book_library.TestDatabaseRestorer;
 import book_library.config.BookListConfiguration;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.requests.GetAllBooksRequest;
@@ -27,6 +28,11 @@ public class AcceptanceTest3RemoveBookRequestValidation {
     public void setup(){
 
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseRestorer().execute();
+    }
+
+    private TestDatabaseRestorer getDatabaseRestorer() {
+        return appContext.getBean(TestDatabaseRestorer.class);
     }
 
     @Test

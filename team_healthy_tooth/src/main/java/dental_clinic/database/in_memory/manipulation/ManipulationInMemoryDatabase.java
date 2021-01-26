@@ -14,6 +14,8 @@ public interface ManipulationInMemoryDatabase {
 
     boolean containsTheSameManipulation (Manipulation manipulation);
 
+    boolean manipulationIsActive(Long id);
+
     boolean containsId (Long id);
 
 }

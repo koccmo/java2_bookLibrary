@@ -8,17 +8,16 @@ import java.util.List;
 
 public class DeleteByOtherResponse extends CoreResponse {
 
-    private List<Product> products;
+    private boolean responseOfRequestToDelete;
 
-    public DeleteByOtherResponse(List<Product> products) {
-        this.products = products;
-    }
-
-    public DeleteByOtherResponse(List<CoreError> errors, List<Product> products) {
+    public DeleteByOtherResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public List<Product> getProducts(){
-        return products;
+    public DeleteByOtherResponse(boolean responseOfRequestToDelete) {
+    }
+
+    public boolean getResponseOfRequestToDelete() {
+        return responseOfRequestToDelete;
     }
 }

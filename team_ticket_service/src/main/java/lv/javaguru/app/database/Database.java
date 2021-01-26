@@ -1,36 +1,48 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.Reservation;
+import lv.javaguru.app.core.domain.Flight;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 
 import java.util.List;
-import java.util.Map;
 
 public interface Database {
-    // void register(Person person);
-    Person getCurrentPerson();
 
-    //void addReservation(Person person , Reservation reservation);
-    Person getPerson(Person person);
-    Person getPerson(String name, String secondName);
+	void addFlight (Flight flight);
 
-    void setCurrentPerson(Person currentPerson);
+	void removeFlight (Flight flight);
 
-    boolean containsPerson(Person person);
+	void removeFlightById (Long id);
 
-    void addPerson(Person person);
+	Flight getFlightById (Long id);
 
-    void addTicket(Person person, Ticket ticket);
+	List<Flight> getAllFlights ();
 
-    //void removeByPerson(Person person);
+	List<Flight> getAllUserFlights (User user);
 
-    void removeTicketById(Long id);
+	boolean containsKey (Long id);
 
-    List<Ticket> getAllTickets(Person user);
+	Ticket getTicketByFlightId (Long id);
 
-    boolean isContainTicketWithId(long id);
+	User getUserByFlightId (Long id);
 
-    Ticket getTicketById(Person person, Long id);
+	boolean isUsersFlight (Long id, User user);
 
+	boolean isContainTicket (Ticket ticket);
+
+
+	/*
+	void addTicket (User user, Ticket ticket);
+
+	void removeTicketById (Long id);
+
+	List<Ticket> getAllUserTickets (User user);
+
+	List<Ticket> getAllTickets ();
+
+	Ticket getTicketById (Long id);
+
+	boolean isUserHaveTicketWithId (Long id);
+
+	boolean isContainTicketWithId (Long id);*/
 }

@@ -1,21 +1,18 @@
 package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
-import estore.core.requests.AddNewProductRequest;
-import estore.core.requests.RemoveProductByIdRequest;
-import estore.core.requests.RemoveProductByNameRequest;
-import estore.core.requests.ShowAllProductsRequest;
+import estore.core.requests.*;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.responses.RemoveProductByNameResponse;
-import estore.core.responses.ShowAllProductsResponse;
-import estore.core.service.AddNewProductService;
-import estore.core.service.RemoveProductByIdService;
-import estore.core.service.RemoveProductByNameService;
-import estore.core.service.ShowAllProductsService;
+import estore.core.responses.GetAllProductsResponse;
+import estore.core.service.*;
+import estore.core.model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,68 +24,92 @@ public class RemoveProductsOnRequestTest {
     @Before
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 
     @Test
     public void shouldRemoveProductByNameAndId() {
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "Fruits");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "Fruits");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductC", "Description ProductC", "Fruits");
+        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+
+        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "1");
+        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductC", "Description ProductC", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
         addNewProductService().execute(addProductRequest3);
 
         int dbInitialSize = getAllProductsService()
-                .execute(new ShowAllProductsRequest())
+                .execute(new GetAllProductsRequest())
                 .getProducts()
                 .size();
 
         RemoveProductByNameRequest removeByNameRequest = new RemoveProductByNameRequest("ProductA");
         RemoveProductByNameResponse removeByNameResponse = removeProductByNameService().execute(removeByNameRequest);
-        assertEquals(removeByNameResponse.getProductsRemoved(), 1);
 
-        ShowAllProductsResponse response = getAllProductsService().execute(new ShowAllProductsRequest());
-        assertEquals(response.getProducts().size(), dbInitialSize - 1);
+        int currentSize = getAllProductsService()
+                .execute(new GetAllProductsRequest())
+                .getProducts()
+                .size();
+        assertEquals(3, dbInitialSize);
+        assertEquals(2, currentSize);
 
-        RemoveProductByIdRequest removeByIdRequest = new RemoveProductByIdRequest(response.getProducts().size() + "");
+        RemoveProductByIdRequest removeByIdRequest = new RemoveProductByIdRequest("3");
         RemoveProductByIdResponse removeByIdResponse = removeProductByIdService().execute(removeByIdRequest);
-        assertEquals(removeByIdResponse.getProductsRemoved(), 1);
+
+        List<Product> productList = getAllProductsService()
+                .execute(new GetAllProductsRequest())
+                .getProducts();
+        assertEquals(1, productList.size());
+        assertEquals("ProductB", productList.get(0).getName());
     }
 
     @Test
     public void shouldFailToRemoveProductByNameAndIdIfDoesNotExist() {
         int dbInitialSize = getAllProductsService()
-                .execute(new ShowAllProductsRequest())
+                .execute(new GetAllProductsRequest())
                 .getProducts()
                 .size();
 
         RemoveProductByNameRequest removeByNameRequest = new RemoveProductByNameRequest("NoSuchProduct");
         RemoveProductByNameResponse removeByNameResponse = removeProductByNameService().execute(removeByNameRequest);
-        assertEquals(removeByNameResponse.getProductsRemoved(), 0);
+        int currentSize = getAllProductsService()
+                .execute(new GetAllProductsRequest())
+                .getProducts()
+                .size();
+        assertEquals(dbInitialSize, currentSize);
 
-        ShowAllProductsResponse response = getAllProductsService().execute(new ShowAllProductsRequest());
+        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
         assertEquals(response.getProducts().size(), dbInitialSize);
 
         RemoveProductByIdRequest removeByIdRequest = new RemoveProductByIdRequest(response.getProducts().size() + 1 + "");
         RemoveProductByIdResponse removeByIdResponse = removeProductByIdService().execute(removeByIdRequest);
-        assertEquals(removeByIdResponse.getProductsRemoved(), 0);
+        currentSize = getAllProductsService()
+                .execute(new GetAllProductsRequest())
+                .getProducts()
+                .size();
+        assertEquals(dbInitialSize, currentSize);
 
-        response = getAllProductsService().execute(new ShowAllProductsRequest());
+        response = getAllProductsService().execute(new GetAllProductsRequest());
         assertEquals(response.getProducts().size(), dbInitialSize);
     }
 
     @Test
     public void shouldFailToRemoveProductByNameAndIdIfInvalid() {
         int dbInitialSize = getAllProductsService()
-                .execute(new ShowAllProductsRequest())
+                .execute(new GetAllProductsRequest())
                 .getProducts()
                 .size();
 
         RemoveProductByNameRequest removeByNameRequest1 = new RemoveProductByNameRequest("");
         RemoveProductByNameResponse removeByNameResponse = removeProductByNameService().execute(removeByNameRequest1);
 
-        ShowAllProductsResponse response = getAllProductsService().execute(new ShowAllProductsRequest());
+        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
         assertEquals(response.getProducts().size(), dbInitialSize);
         assertTrue(removeByNameResponse.hasErrors());
         assertEquals(removeByNameResponse.getErrors().get(0).getMessage(), "Must not be empty!");
@@ -118,7 +139,11 @@ public class RemoveProductsOnRequestTest {
         return applicationContext.getBean(RemoveProductByIdService.class);
     }
 
-    private ShowAllProductsService getAllProductsService() {
-        return applicationContext.getBean(ShowAllProductsService.class);
+    private GetAllProductsService getAllProductsService() {
+        return applicationContext.getBean(GetAllProductsService.class);
+    }
+
+    private AddNewProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddNewProductCategoryService.class);
     }
 }

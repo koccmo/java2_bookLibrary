@@ -9,7 +9,8 @@ import static org.junit.Assert.assertEquals;
 
 public class SearchProductByNameValidatorTest {
 
-    private SearchProductByNameValidator validator = new SearchProductByNameValidator();
+    private ValidationRules validationRules = new ValidationRules();
+    private SearchProductByNameValidator validator = new SearchProductByNameValidator(validationRules);
 
     @Test
     public void shouldNotReturnErrorIfProductNameIsProvided() {

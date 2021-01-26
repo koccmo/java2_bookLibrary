@@ -32,10 +32,8 @@ public class RemoveBookRequestValidator {
     }
 
     private Optional<CoreError> validateIdPresentsInDatabase(RemoveBookRequest request) {
-        return (database.getAllBooks().stream()
-                .filter(book -> book.getId().equals(request.getBookIdToRemove()))
-                .findFirst()).isEmpty()
-                ? Optional.of(new CoreError("id", "No book with such id found!"))
-                : Optional.empty();
+        return (database.isSuchIdPresentsInDatabase(request.getBookIdToRemove()))
+                ? Optional.empty()
+                : Optional.of(new CoreError("id", "No book with such id found!"));
     }
 }

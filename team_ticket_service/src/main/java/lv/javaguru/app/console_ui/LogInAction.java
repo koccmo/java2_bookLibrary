@@ -1,29 +1,24 @@
 package lv.javaguru.app.console_ui;
 
-import lv.javaguru.app.Main;
-import lv.javaguru.app.core.common.BaseFunc;
-import lv.javaguru.app.core.domain.Person;
-import lv.javaguru.app.core.domain.PersonType;
+import lv.javaguru.app.console_ui.modes.AdminMode;
+import lv.javaguru.app.console_ui.modes.UserMode;
+import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.LogInService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-
+@Component
 public class LogInAction extends Action implements UIActions {
-	private final LogInService loginService;
 
-	public LogInAction (LogInService loginService) {
-		this.loginService = loginService;
-	}
+	@Autowired
+	private LogInService loginService;
 
 
 	@Override
 	public void execute () {
-		BaseFunc.printHeader("LOGIN:");
-		BaseFunc.printLineSeparator();
-
-		Person user = fillPerson();
+		User user = fillLoginForm();
 
 		LogInRequest request = new LogInRequest(user);
 		LogInResponse response = loginService.execute(request);
@@ -31,31 +26,22 @@ public class LogInAction extends Action implements UIActions {
 		if (response.hasErrors()) {
 			response.getErrorList().forEach(System.out::println);
 		}
-		else if (response.getUser() == null)
-			System.out.println("No such user!");
 		else {
-			System.out.println("Hooray! You have logged in!");
-
-			setLoggedInUser(response.getUser());
-
-			if (response.getUser().getPersonType() == PersonType.ADMIN)
-				Main.adminMode_mainMenu(response.getUser());
-			else
-
-				Main.userMode_mainMenu(response.getUser());
+			setLoggedInUser(response.getCurrUser());
+			System.out.println(response.getMessage());
 		}
+
+		if (response.isAdminMode()) {
+			AdminMode adminMode = response.getAdminMode();
+			adminMode.printMainMenu(response.getCurrUser());
+		}
+		else if (response.isUserMode()) {
+			UserMode userMode = response.getUserMode();
+			userMode.printMainMenu(response.getCurrUser());
+		}
+
+
 	}
 
 
-	private Person fillPerson () {
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("Enter name: ");
-		String name = scanner.nextLine();
-
-		System.out.println("Enter surname: ");
-		String surname = scanner.nextLine();
-
-		return new Person(name, surname);
-	}
 }

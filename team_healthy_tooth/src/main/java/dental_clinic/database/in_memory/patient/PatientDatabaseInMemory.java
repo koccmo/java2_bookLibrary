@@ -67,7 +67,7 @@ public class PatientDatabaseInMemory implements PatientDatabase {
             if (isSpecificPatient(i, id)){
                 Visit visit =
                         new Visit(id, newVisit.getToothNumber(), newVisit.getComment(), newVisit.getToothStatus(),
-                                newVisit.getDoctor(), newVisit.getDate());
+                                newVisit.getDoctor(), newVisit.getManipulations(), newVisit.getDate());
                 patientList.get(i).addVisit(visit);
                 patientList.get(i).updateJowl(newVisit.getToothNumber(), newVisit.getToothStatus());
             }

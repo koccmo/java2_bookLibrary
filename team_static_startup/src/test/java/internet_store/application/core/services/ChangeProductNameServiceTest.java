@@ -1,11 +1,11 @@
 package internet_store.application.core.services;
 
-import internet_store.application.core.database.Database;
-import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.ChangeProductNameRequest;
-import internet_store.application.core.responses.ChangeProductNameResponse;
+import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.requests.product.ChangeProductNameRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.services.validators.ChangeProductNameValidator;
+import internet_store.application.core.responses.product.ChangeProductNameResponse;
+import internet_store.application.core.services.product.ChangeProductNameService;
+import internet_store.application.core.services.product.validators.ChangeProductNameValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ChangeProductNameServiceTest {
 
-    @Mock private Database database;
+    @Mock private ProductRepository productRepository;
     @Mock private ChangeProductNameValidator validator;
     @InjectMocks private ChangeProductNameService service;
 
@@ -30,7 +29,7 @@ public class ChangeProductNameServiceTest {
     public void shouldReturnResponseWithoutErrors() {
         ChangeProductNameRequest request = new ChangeProductNameRequest(1L, "newName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(database.changeProductName(1L, "newName")).thenReturn(true);
+        Mockito.when(productRepository.changeProductName(1L, "newName")).thenReturn(true);
 
         ChangeProductNameResponse response = service.execute(request);
 

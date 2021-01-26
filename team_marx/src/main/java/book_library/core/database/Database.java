@@ -12,6 +12,8 @@ public interface Database {
 
     boolean hasTheSameBookInDatabase(Book bookToCompare);
 
+    boolean isSuchIdPresentsInDatabase(Long idToCheck);
+
     List<Book> getAllBooks();
 
     List<Book> findByTitle(String title);

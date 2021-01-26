@@ -1,7 +1,8 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.requests.SearchProductByCategoryRequest;
+import estore.database.ProductCategoryRepository;
+import estore.database.inmemoryrepo.ProductCategoryRepositoryImpl;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +11,9 @@ import static org.junit.Assert.assertEquals;
 
 public class AddNewProductCategoryValidatorTest {
 
-    private AddNewProductCategoryValidator validator = new AddNewProductCategoryValidator();
+    private ProductCategoryRepository categoryDB = new ProductCategoryRepositoryImpl();
+    private ValidationRules validationRules = new ValidationRules();
+    private AddNewProductCategoryValidator validator = new AddNewProductCategoryValidator(categoryDB, validationRules);
 
     @Test
     public void shouldNotReturnErrorIfProductCategoryIsProvided() {
@@ -29,8 +32,8 @@ public class AddNewProductCategoryValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorIfProductCategoryHasWhiteSpaces() {
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("Category one");
+    public void shouldReturnErrorIfProductCategoryHasSpecualSymbols() {
+        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("Category one$");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Product category");

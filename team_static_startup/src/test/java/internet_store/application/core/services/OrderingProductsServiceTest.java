@@ -1,7 +1,8 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.Ordering;
+import internet_store.application.core.requests.product.Ordering;
+import internet_store.application.core.services.product.OrderingProductsService;
 import org.junit.Before;
 import org.junit.Test;
 

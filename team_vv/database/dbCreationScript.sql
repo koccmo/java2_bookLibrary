@@ -7,9 +7,9 @@ USE `Targets list` ;
 
 CREATE TABLE IF NOT EXISTS `targets` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(200) NOT NULL,
-  `description` VARCHAR(100) NOT NULL,
-  `deadline` BIGINT NOT NULL,
+  `target_name` VARCHAR(200) NOT NULL,
+  `target_description` VARCHAR(100) NOT NULL,
+  `target_deadline` BIGINT NOT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -17,8 +17,8 @@ AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(200) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
+  `user_first_name` VARCHAR(200) NOT NULL,
+  `user_last_name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB

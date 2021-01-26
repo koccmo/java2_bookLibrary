@@ -34,15 +34,12 @@ public class FindBooksRequest {
     public String getBookTitle() {
         return bookTitle;
     }
-
     public String getBookAuthor() {
         return bookAuthor;
     }
-
     public Ordering getOrdering() {
         return ordering;
     }
-
     public Paging getPaging() {
         return paging;
     }
@@ -50,7 +47,6 @@ public class FindBooksRequest {
     public boolean isBookTitleProvided() {
         return this.bookTitle != null && !this.bookTitle.isEmpty();
     }
-
     public boolean isBookAuthorProvided() {
         return this.bookAuthor != null && !this.bookAuthor.isEmpty();
     }

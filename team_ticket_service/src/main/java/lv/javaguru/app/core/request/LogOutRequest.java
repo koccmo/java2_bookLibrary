@@ -1,15 +1,15 @@
 package lv.javaguru.app.core.request;
 
-import lv.javaguru.app.core.domain.Person;
+import lv.javaguru.app.core.domain.User;
 
 public class LogOutRequest {
-	private final Person person;
+	private final User user;
 
-	public LogOutRequest (Person person) {
-		this.person = person;
+	public LogOutRequest (User user) {
+		this.user = user;
 	}
 
-	public Person getPerson() {
-		return person;
+	public User getPerson() {
+		return user;
 	}
 }

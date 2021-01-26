@@ -1,5 +1,5 @@
 package internet_store.console_ui.product;
-
+/*
 import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.product.DeleteByOtherResponse;
@@ -46,7 +46,7 @@ public class DeleteByOtherUIAction implements UIAction {
         if (deleteByOtherResponse.hasErrors()){
             deleteByOtherResponse.getErrors().forEach(System.out::println);
         }else{
-            deleteByOtherResponse.getProducts().forEach(System.out::println);
+            System.out.println("Product is deleted");
         }
     }
-}
+}*/
