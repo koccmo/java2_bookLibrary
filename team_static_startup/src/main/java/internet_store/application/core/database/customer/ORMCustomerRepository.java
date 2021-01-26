@@ -38,7 +38,7 @@ public class ORMCustomerRepository implements CustomerRepository {
     @Override
     public List<Customer> findByFirstName(String customerName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT Customer WHERE name = : name");
+                "SELECT Customer WHERE name = :name");
         query.setParameter("name", customerName);
         return query.getResultList();
     }
@@ -55,7 +55,11 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public boolean changeFirstName(Long id, String newFirstName) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "UPDATE Customer SET first_name = :newFirstName WHERE id = :id");
+        query.setParameter("newFirstName", newFirstName);
+        query.setParameter("id", id);
+        return query.executeUpdate() > 1;
     }
 
 }
