@@ -1,10 +1,16 @@
 package book_library.core.database;
 
 import book_library.core.domain.Book;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class OrmBookRepositoryImp implements BookRepository{
+
+    @Autowired private SessionFactory sessionFactory;
 
     @Override
     public void save(Book book) {
