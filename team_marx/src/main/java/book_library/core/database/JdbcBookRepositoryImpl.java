@@ -39,7 +39,7 @@ public class JdbcBookRepositoryImpl implements BookRepository {
     @Override
     public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
         String sql = "SELECT * FROM books WHERE id = ?";
-        Object[] args = new Object[] {idToCheck};
+        Object[] args = new Object[]{idToCheck};
         return !jdbcTemplate.query(sql, args, new BookRowMapper()).isEmpty();
     }
 
@@ -66,7 +66,7 @@ public class JdbcBookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> findByTitleAndAuthor(String title, String author) {
         String sql = "SELECT * FROM books WHERE title = ? AND author = ?";
-        Object[] args = new Object[] {title, author};
+        Object[] args = new Object[]{title, author};
         return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
 }
