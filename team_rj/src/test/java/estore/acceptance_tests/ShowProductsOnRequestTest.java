@@ -1,9 +1,11 @@
 package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
+import estore.core.requests.AddNewProductCategoryRequest;
 import estore.core.requests.AddNewProductRequest;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
+import estore.core.service.AddNewProductCategoryService;
 import estore.core.service.AddNewProductService;
 import estore.core.service.GetAllProductsService;
 import org.junit.Before;
@@ -20,22 +22,26 @@ public class ShowProductsOnRequestTest {
     @Before
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 
     @Test
     public void shouldReturnCorrectProductList() {
-//        int dbInitialSize = getAllProductsService()
-//                .execute(new GetAllProductsRequest())
-//                .getProducts()
-//                .size();
-//        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "Fruits");
-//        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "Fruits");
-//
-//        addNewProductService().execute(addProductRequest1);
-//        addNewProductService().execute(addProductRequest2);
-//        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
-//
-//        assertEquals(response.getProducts().size(), dbInitialSize + 2);
+        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+
+        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "1");
+        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+
+        addNewProductService().execute(addProductRequest1);
+        addNewProductService().execute(addProductRequest2);
+        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
+
+        assertEquals(response.getProducts().size(), 2);
     }
 
     private AddNewProductService addNewProductService() {
@@ -44,5 +50,9 @@ public class ShowProductsOnRequestTest {
 
     private GetAllProductsService getAllProductsService() {
         return applicationContext.getBean(GetAllProductsService.class);
+    }
+
+    private AddNewProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddNewProductCategoryService.class);
     }
 }
