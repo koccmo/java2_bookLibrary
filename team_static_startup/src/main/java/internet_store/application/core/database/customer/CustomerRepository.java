@@ -9,14 +9,14 @@ public interface CustomerRepository {
 
     Long addCustomer(Customer customer);
 
-/*    boolean deleteByCustomerId(Long id);
+    boolean deleteByCustomerId(Long id);
 
     List<Customer> findByFirstName(String customerName);
 
-    Optional<Customer> findById(Long id);
+    Optional<Customer> findByCustomerId(Long id);
 
     List<Customer> findAll();
 
-    boolean changeFirstName(Long id, String newFirstName);*/
+    boolean changeFirstName(Long id, String newFirstName);
 
 }

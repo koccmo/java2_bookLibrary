@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Component
 @Profile("hibernate")
 @Transactional
@@ -21,4 +24,30 @@ public class ORMCustomerRepository implements CustomerRepository {
     public Long addCustomer(Customer customer) {
         return (Long) sessionFactory.getCurrentSession().save(customer);
     }
+
+    @Override
+    public boolean deleteByCustomerId(Long id) {
+        return false;
+    }
+
+    @Override
+    public List<Customer> findByFirstName(String customerName) {
+        return null;
+    }
+
+    @Override
+    public Optional<Customer> findByCustomerId(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return null;
+    }
+
+    @Override
+    public boolean changeFirstName(Long id, String newFirstName) {
+        return false;
+    }
+
 }
