@@ -1,36 +1,24 @@
 package estore.ui;
 
-import estore.core.requests.AddNewProductRequest;
-import estore.core.requests.GetAllProductCategoriesRequest;
-import estore.core.requests.GetAllProductsRequest;
 import estore.core.requests.SearchProductByIdRequest;
-import estore.core.responses.*;
-import estore.core.service.AddNewProductService;
-import estore.core.service.GetAllProductCategoriesService;
-import estore.core.service.GetAllProductsService;
+import estore.core.requests.UpdateProductByIdRequest;
+import estore.core.responses.SearchProductByIdResponse;
+import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.service.SearchProductByIdService;
-import estore.database.ProductDB;
+import estore.core.service.UpdateProductByIdService;
 import estore.domain.Product;
-import estore.domain.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 @Component
 public class UpdateProductByIdUI implements UIAction {
 
-//    private UpdateProductByIdService updateProductByIdService;
-    @Autowired
-    private GetAllProductsService getAllProductsService;
     @Autowired
     private SearchProductByIdService searchProductByIdService;
-
-//    public UpdateProductByIdUI(UpdateProductByIdService updateProductByIdService) {
-//        this.updateProductByIdService = updateProductByIdService;
-//    }
+    @Autowired
+    private UpdateProductByIdService updateProductByIdService;
 
     @Override
     public void execute() {
@@ -38,58 +26,74 @@ public class UpdateProductByIdUI implements UIAction {
         System.out.println("Enter id of the product");
         String productId = sc.nextLine();
 
-        SearchProductByIdRequest request = new SearchProductByIdRequest(productId);
-        SearchProductByIdResponse response = searchProductByIdService.execute(request);
+        SearchProductByIdRequest searchProductByIdRequest = new SearchProductByIdRequest(productId);
+        SearchProductByIdResponse searchProductByIdResponse = searchProductByIdService.execute(searchProductByIdRequest);
 
-//        List<Product> products = getProducts();
-//        Optional<Product> optProductToUpdate = products
-//                .stream()
-//                .filter(product -> product.getId().toString().equals(productId))
-//                .findFirst();
-//
-//        Product productToUpdate;
-//        if (optProductToUpdate.isPresent()) {
-//            productToUpdate = optProductToUpdate.get();
-//        } else {
-//            productToUpdate = null;
-//        }
-//
-//        for (var category : products) {
-//            System.out.print(category.getId() + "." + category.getName() + "   ");
-//        }
-        System.out.println();
-        System.out.println("Found product: " + response.getProduct());
+        if (searchProductByIdResponse.hasErrors()) {
+            for (int i = 0; i < searchProductByIdResponse.getErrors().size(); i++) {
+                System.out.print("ERROR! ");
+                System.out.print(searchProductByIdResponse.getErrors().get(i).getField() + " ");
+                System.out.println(searchProductByIdResponse.getErrors().get(i).getMessage());
+            }
+            return;
+        }
 
-//        String productName = sc.nextLine();
-//        System.out.println("Enter description of the product");
-//        String productDescription = sc.nextLine();
-//        System.out.println("Enter category of the product:");
+        if (searchProductByIdResponse.getProductsFound() == 0) {
+            System.out.println("No products found");
+            return;
+        }
 
-//        List<ProductCategory> categories = getCategories();
-//        for (var category : categories) {
-//            System.out.print(category.getId() + "." + category.getCategory() + "   ");
-//        }
-//        System.out.println();
-//        System.out.println("Category No: ");
-//        String productCategoryNo = sc.nextLine();
-//
-//        AddNewProductRequest request = new AddNewProductRequest(productName, productDescription, productCategoryNo);
-//        AddNewProductResponse response = addNewProductService.execute(request);
-//
-//        if (!response.isSuccessfullyAdded()) {
-//            for (int i = 0; i < response.getErrors().size(); i++) {
-//                System.out.print("ERROR! ");
-//                System.out.print(response.getErrors().get(i).getField() + " ");
-//                System.out.println(response.getErrors().get(i).getMessage());
-//            }
-//        } else {
-//            System.out.println("New product with id #" + response.getProduct().getId() + " successfully added.");
-//        }
+        Product productToUpdate = searchProductByIdResponse.getProduct();
+        System.out.println("Found product: " + productToUpdate);
+        UpdateProductByIdRequest request = makeRequest(productToUpdate, sc);
+
+        UpdateProductByIdResponse response = updateProductByIdService.execute(request);
+        if (response.hasErrors()) {
+            for (int i = 0; i < response.getErrors().size(); i++) {
+                System.out.print("ERROR! ");
+                System.out.print(response.getErrors().get(i).getField() + " ");
+                System.out.println(response.getErrors().get(i).getMessage());
+            }
+            return;
+        } else{
+            System.out.println("Successfully updated!");
+            System.out.println(response.getProduct());
+        }
     }
 
-    private List<Product> getProducts() {
-        GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService.execute(request);
-        return response.getProducts();
+    private UpdateProductByIdRequest makeRequest(Product productToUpdate, Scanner sc) {
+        System.out.println("Enter updated name of the product, enter to skip:");
+        String productName = sc.nextLine();
+        if (productName == "") {
+            productName = productToUpdate.getName();
+        }
+        System.out.println("Enter updated description of the product, enter to skip:");
+        String productDescription = sc.nextLine();
+        if (productDescription == "") {
+            productDescription = productToUpdate.getDescription();
+        }
+        System.out.println("Enter updated category number of the product, enter to skip:");
+        String productCategoryNo= sc.nextLine();
+        if (productCategoryNo == "") {
+            productCategoryNo = productToUpdate.getCategory();
+        }
+        System.out.println("Enter updated quantity of the product, enter to skip:");
+        String productQuantity= sc.nextLine();
+        if (productQuantity == "") {
+            productQuantity = productToUpdate.getQuantity() + "";
+        }
+        System.out.println("Enter updated price of the product, enter to skip:");
+        String productPrice= sc.nextLine();
+        if (productPrice == "") {
+            productPrice = productToUpdate.getPrice() + "";
+        }
+        UpdateProductByIdRequest request = new UpdateProductByIdRequest(
+                productToUpdate.getId(),
+                productName,
+                productDescription,
+                productCategoryNo,
+                productQuantity,
+                productPrice);
+        return request;
     }
 }

@@ -1,49 +1,43 @@
 package estore.core.service;
 
-import estore.core.requests.Ordering;
-import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByIdRequest;
-import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByIdResponse;
-import estore.core.responses.SearchProductByNameResponse;
 import estore.core.validation.CoreError;
-import estore.core.validation.SearchProductByNameValidator;
+import estore.core.validation.SearchProductByIdValidator;
 import estore.database.ProductDB;
 import estore.domain.Product;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class SearchProductByIdService {
 
     private ProductDB productDB;
-//    private SearchProductByIdValidator validator;
+    private SearchProductByIdValidator validator;
 
-//    public SearchProductByIdService(ProductDB productDB, SearchProductByIdValidator validator) {
-//        this.productDB = productDB;
-//        this.validator = validator;
-//    }
-
-
-    public SearchProductByIdService(ProductDB productDB) {
+    public SearchProductByIdService(ProductDB productDB, SearchProductByIdValidator validator) {
         this.productDB = productDB;
+        this.validator = validator;
     }
 
     public SearchProductByIdResponse execute(SearchProductByIdRequest request) {
-//        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request);
 
-//        if (!errors.isEmpty()) {
-//            return new SearchProductByNameResponse(errors);
-//        }
+        if (!errors.isEmpty()) {
+            return new SearchProductByIdResponse(errors);
+        }
 
-        Product foundProduct = productDB.searchProductById(Long.valueOf(request.getProductId()));
-        return new SearchProductByIdResponse(foundProduct, 1);
-//        List<Product> foundProducts = productDB.searchProductByName(request.getProductName());
-//        foundProducts = order(foundProducts, request.getOrdering());
-//        foundProducts = paging(foundProducts, request.getPaging());
-//        return new SearchProductByNameResponse(foundProducts, foundProducts.size());
+        List<Product> productList = productDB.searchProductById(Long.valueOf(request.getProductId()));
+        Product foundProduct;
+        int productsFound;
+        if (productList.size() == 0) {
+            foundProduct = null;
+            productsFound = 0;
+        } else {
+            foundProduct = productList.get(0);
+            productsFound = 1;
+        }
+        return new SearchProductByIdResponse(foundProduct, productsFound);
     }
 }

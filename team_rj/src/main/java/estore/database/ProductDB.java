@@ -9,7 +9,7 @@ public interface ProductDB {
 
     List<Product> searchProductByCategory(String category);
 
-    Product searchProductById(Long id);
+    List<Product> searchProductById(Long id);
 
     boolean addNewProduct(Product product);
 
@@ -19,7 +19,7 @@ public interface ProductDB {
 
     List<Product> getDatabase();
 
-    void updateProductPrice(Long id, Double price);
+    void updateProduct(Product product);
 
     int getDatabaseSize();
 

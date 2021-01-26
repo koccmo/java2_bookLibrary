@@ -76,20 +76,14 @@ public class JdbcProductDbImpl implements ProductDB {
     }
 
     @Override
-    public Product searchProductById(Long id) {
+    public List<Product> searchProductById(Long id) {
         List<Product> productList = jdbcTemplate.query(
                 "SELECT * FROM products " +
                 "WHERE products.id = ?",
                 new Object[]{id},
                 new ProductRowMapper()
         );
-        Product product;
-        if (productList.size() == 0) {
-            product = null;
-        } else {
-            product = productList.get(0);
-        }
-        return product;
+        return productList;
     }
 
     @Override
@@ -101,12 +95,17 @@ public class JdbcProductDbImpl implements ProductDB {
     }
 
     @Override
-    public void updateProductPrice(Long id, Double price) {
-        jdbcTemplate.update("UPDATE eStore_test.products " +
-                "SET products.price = ? " +
+    public void updateProduct(Product product) {
+        jdbcTemplate.update("UPDATE products " +
+                "SET products.prodName = ?, products.prodDescription = ?, " +
+                        "products.category_Id = ?, products.quantity = ?, products.price = ? " +
                 "WHERE products.id = ?",
-                price,
-                id);
+                product.getName(),
+                product.getDescription(),
+                product.getCategory(),
+                product.getQuantity(),
+                product.getPrice(),
+                product.getId());
     }
 
     @Override

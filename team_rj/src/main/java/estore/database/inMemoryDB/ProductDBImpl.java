@@ -24,7 +24,7 @@ public class ProductDBImpl implements ProductDB {
     }
 
     @Override
-    public void updateProductPrice(Long id, Double price) {
+    public void updateProduct(Product product) {
 
     }
 
@@ -82,7 +82,7 @@ public class ProductDBImpl implements ProductDB {
     }
 
     @Override
-    public Product searchProductById(Long id) {
+    public List<Product> searchProductById(Long id) {
         return null;
     }
 
