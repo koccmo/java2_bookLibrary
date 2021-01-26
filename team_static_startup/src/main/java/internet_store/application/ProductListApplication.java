@@ -2,7 +2,7 @@ package internet_store.application;
 
 import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.*;
-import internet_store.application.console_ui.customer.AddCustomerUIAction;
+import internet_store.application.console_ui.customer.*;
 import internet_store.application.console_ui.product.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -24,12 +24,12 @@ class ProductListApplication {
         menuNumberToActionMap.put(2, applicationContext.getBean(DeleteByProductIdUIAction.class));
         menuNumberToActionMap.put(3, applicationContext.getBean(DeleteByProductUIAction.class));
         menuNumberToActionMap.put(4, applicationContext.getBean(DeleteByProductNameUIAction.class));
-        menuNumberToActionMap.put(5, applicationContext.getBean(FindByIdUIAction.class));
+        menuNumberToActionMap.put(5, applicationContext.getBean(FindByProductIdUIAction.class));
         menuNumberToActionMap.put(6, applicationContext.getBean(FindProductsUIAction.class));
         menuNumberToActionMap.put(7, applicationContext.getBean(ChangeProductNameUIAction.class));
         menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(10, applicationContext.getBean(AddCustomerUIAction.class));
-        //menuNumberToActionMap.put(11, applicationContext.getBean(DeleteByCustomerIdUIAction.class));
+        menuNumberToActionMap.put(11, applicationContext.getBean(DeleteByCustomerIdUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
@@ -45,7 +45,6 @@ class ProductListApplication {
         while (true) {
             printOutMenu();
             try {
-                //int userSelectedMenuNumber = Integer.parseInt(sc.nextLine());
                 executeUIAction(Integer.parseInt(sc.nextLine()));
             } catch (NumberFormatException e) {
                 System.out.println("\nIncorrect input, please enter number");

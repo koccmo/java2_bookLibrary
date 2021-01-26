@@ -2,6 +2,7 @@ package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,11 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public boolean deleteByCustomerId(Long id) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Customer where id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
