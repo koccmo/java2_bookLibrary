@@ -50,16 +50,26 @@ public class OrmBookRepositoryImp implements BookRepository {
 
     @Override
     public List<Book> findByTitle(String title) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT b FROM Book b where title = :title");
+        query.setParameter("title", title);
+        return query.getResultList();
     }
 
     @Override
     public List<Book> findByAuthor(String author) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT b FROM Book b where author = :author");
+        query.setParameter("author", author);
+        return query.getResultList();
     }
 
     @Override
     public List<Book> findByTitleAndAuthor(String title, String author) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT b FROM Book b where title = :title AND author = :author");
+        query.setParameter("title", title);
+        query.setParameter("author", author);
+        return query.getResultList();
     }
 }
