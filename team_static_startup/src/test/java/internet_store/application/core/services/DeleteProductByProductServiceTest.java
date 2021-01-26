@@ -2,11 +2,12 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.DeleteByProductRequest;
-import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.DeleteByProductResponse;
+import internet_store.application.core.requests.product.DeleteByProductRequest;
+import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.product.DeleteByProductResponse;
 import internet_store.application.core.services.matchers.ProductMatcher;
-import internet_store.application.core.services.validators.DeleteByProductValidator;
+import internet_store.application.core.services.product.DeleteProductByProductService;
+import internet_store.application.core.services.product.validators.DeleteByProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

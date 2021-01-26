@@ -1,7 +1,8 @@
 package internet_store.application.core.services.validators;
 
-import internet_store.application.core.requests.AddProductRequest;
-import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.requests.product.AddProductRequest;
+import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.services.product.validators.AddProductValidator;
 import org.junit.Before;
 import org.junit.Test;
 import java.math.BigDecimal;

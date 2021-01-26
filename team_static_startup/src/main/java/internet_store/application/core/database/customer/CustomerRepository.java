@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface CustomerRepository {
 
-    Long add(Customer customer);
+    Long addCustomer(Customer customer);
 
-    boolean deleteById(Long id);
+/*    boolean deleteByCustomerId(Long id);
 
     List<Customer> findByFirstName(String customerName);
 
@@ -17,6 +17,6 @@ public interface CustomerRepository {
 
     List<Customer> findAll();
 
-    boolean changeFirstName(Long id, String newFirstName);
+    boolean changeFirstName(Long id, String newFirstName);*/
 
 }

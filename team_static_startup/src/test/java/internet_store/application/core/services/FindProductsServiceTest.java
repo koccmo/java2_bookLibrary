@@ -2,12 +2,13 @@ package internet_store.application.core.services;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
-import internet_store.application.core.requests.FindProductsRequest;
-import internet_store.application.core.requests.Ordering;
-import internet_store.application.core.requests.Paging;
-import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.FindProductsResponse;
-import internet_store.application.core.services.validators.FindProductsRequestValidator;
+import internet_store.application.core.requests.product.FindProductsRequest;
+import internet_store.application.core.requests.product.Ordering;
+import internet_store.application.core.requests.product.Paging;
+import internet_store.application.core.responses.product.CoreError;
+import internet_store.application.core.responses.product.FindProductsResponse;
+import internet_store.application.core.services.product.FindProductsService;
+import internet_store.application.core.services.product.validators.FindProductsRequestValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,8 @@ import static org.mockito.ArgumentMatchers.any;
 public class FindProductsServiceTest {
     @Mock private ProductRepository productRepository;
     @Mock private FindProductsRequestValidator validator;
-    @InjectMocks FindProductsService service;
+    @InjectMocks
+    FindProductsService service;
     private List<Product> products = new ArrayList<>();
     private List<Product> expected = new ArrayList<>();
     Product product1 = new Product("A1", "B1", new BigDecimal("1"));
