@@ -1,10 +1,11 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.database.product.ProductRepository;
-import internet_store.application.core.requests.DeleteByProductIdRequest;
+import internet_store.application.core.requests.product.DeleteByProductIdRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.responses.DeleteByProductIdResponse;
-import internet_store.application.core.services.validators.DeleteByProductIdValidator;
+import internet_store.application.core.responses.product.DeleteByProductIdResponse;
+import internet_store.application.core.services.product.DeleteByProductIdService;
+import internet_store.application.core.services.product.validators.DeleteByProductIdValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,8 @@ public class DeleteByProductIdServiceTest {
 
     @Mock private ProductRepository productRepository;
     @Mock private DeleteByProductIdValidator validator;
-    @InjectMocks DeleteByProductIdService service;
+    @InjectMocks
+    DeleteByProductIdService service;
 
     @Test
     public void shouldReturnListWithOneError () {
