@@ -1,13 +1,15 @@
 package book_library.core.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name="books")
 public class Book {
 
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String author;
