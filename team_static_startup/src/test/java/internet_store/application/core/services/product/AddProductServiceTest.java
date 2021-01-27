@@ -1,11 +1,10 @@
-package internet_store.application.core.services;
+package internet_store.application.core.services.product;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.AddProductResponse;
 import internet_store.application.core.services.matchers.ProductMatcher;
-import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.validators.AddProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;

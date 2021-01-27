@@ -1,8 +1,7 @@
-package internet_store.application.core.services.validators;
+package internet_store.application.core.services.product.validators;
 
 import internet_store.application.core.requests.product.DeleteByProductNameRequest;
 import internet_store.application.core.responses.CoreError;
-import internet_store.application.core.services.product.validators.DeleteByProductNameValidator;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.List;
