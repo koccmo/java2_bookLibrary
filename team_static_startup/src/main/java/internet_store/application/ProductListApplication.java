@@ -4,6 +4,7 @@ import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.*;
 import internet_store.application.console_ui.customer.*;
 import internet_store.application.console_ui.product.*;
+import internet_store.application.core.services.customer.ChangeCustomerFirstNameService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -30,6 +31,8 @@ class ProductListApplication {
         menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(10, applicationContext.getBean(AddCustomerUIAction.class));
         menuNumberToActionMap.put(11, applicationContext.getBean(DeleteByCustomerIdUIAction.class));
+        // menuNumberToActionMap.put(12, applicationContext.getBean(FindByCustomerIdUIAction.class));
+        // menuNumberToActionMap.put(13, applicationContext.getBean(ChangeCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
@@ -59,11 +62,13 @@ class ProductListApplication {
         System.out.println("4. Delete product from database by name");
         System.out.println("5. Find product(s) from database by ID");
         System.out.println("6. Find product(s) from database by name and(or) description");
-        System.out.println("7. Find product(s) from database by ID and change name");
+        System.out.println("7. Find product from database by ID and change name");
         System.out.println("8. Print out all database products");
         System.out.println("------------------------------------------------------------");
         System.out.println("10. Add customer to database");
         System.out.println("11. Delete customer from database by ID");
+        System.out.println("12. Find customer from database by ID");
+        System.out.println("13. Find customer from database by ID and change FirstName");
         System.out.println("------------------------------------------------------------");
         System.out.println("0. Exit the program");
         System.out.println("------------------------------------------------------------");

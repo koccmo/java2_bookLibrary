@@ -13,10 +13,8 @@ import java.util.List;
 @Component
 public class DeleteByCustomerIdService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private DeleteByCustomerIdValidator validator;
+    @Autowired private CustomerRepository customerRepository;
+    @Autowired private DeleteByCustomerIdValidator validator;
 
     public DeleteByCustomerIdResponse execute(DeleteByCustomerIdRequest customerIdRequest) {
         List<CoreError> errors = validator.validate(customerIdRequest);
