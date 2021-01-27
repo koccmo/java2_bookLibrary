@@ -40,7 +40,7 @@ public class ORMCustomerRepository implements CustomerRepository {
     @Override
     public List<Customer> findByFirstName(String customerName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT Customer WHERE name = :name");
+                "FROM Customer WHERE customerFirstName = :name");
         query.setParameter("name", customerName);
         return query.getResultList();
     }

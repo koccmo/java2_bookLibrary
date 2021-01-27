@@ -1,10 +1,11 @@
 package internet_store.application.core.responses.customer;
 
 import internet_store.application.core.domain.Customer;
+import internet_store.application.core.responses.CoreResponse;
 
 import java.util.List;
 
-public class GetAllCustomersResponse {
+public class GetAllCustomersResponse extends CoreResponse {
 
     private List<Customer> customerList;
 
