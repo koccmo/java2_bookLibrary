@@ -5,7 +5,7 @@ import dental_clinic.core.requests.patient.GetAllPatientsRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
 import dental_clinic.core.validators.patient.GetAllPatientsRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

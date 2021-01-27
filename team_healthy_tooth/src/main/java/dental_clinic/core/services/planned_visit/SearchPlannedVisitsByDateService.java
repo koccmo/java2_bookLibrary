@@ -5,7 +5,7 @@ import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByDateRequest
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByDateResponse;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByDateRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -6,11 +6,11 @@ import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.visit.AddVisitValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
-import dental_clinic.database.in_memory.manipulation.ManipulationInMemoryDatabase;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.manipulation.ManipulationDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.database.in_memory.visit.VisitDatabase;
+import dental_clinic.core.database.visit.VisitDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +28,7 @@ public class AddVisitService {
     @Autowired
     private DoctorDatabase doctorDatabase;
     @Autowired
-    private ManipulationInMemoryDatabase manipulationDatabase;
+    private ManipulationDatabase manipulationDatabase;
     @Autowired
     private VisitDatabase visitDatabase;
 
@@ -52,7 +52,8 @@ public class AddVisitService {
             doctor = doctorOptional.get();
         } else {
             doctor = new Doctor(addVisitRequest.getDoctor().getName().split(" ")[0],
-                    addVisitRequest.getDoctor().getName().split(" ")[1]);
+                    addVisitRequest.getDoctor().getName().split(" ")[1],
+                    addVisitRequest.getDoctor().getName().split(" ")[2]);
             doctor.setEmployed(true);
         }
 

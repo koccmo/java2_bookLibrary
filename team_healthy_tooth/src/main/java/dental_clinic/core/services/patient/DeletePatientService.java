@@ -4,8 +4,7 @@ import dental_clinic.core.requests.patient.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.DeletePatientResponse;
 import dental_clinic.core.validators.patient.DeletePatientValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
-import dental_clinic.core.domain.PersonalData;
+import dental_clinic.core.database.patient.PatientDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

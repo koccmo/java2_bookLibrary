@@ -4,7 +4,7 @@ import dental_clinic.core.requests.manipulation.DeactivateManipulationRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.manipulation.DeactivateManipulationResponse;
 import dental_clinic.core.validators.manipulation.DeactivateManipulationRequestValidator;
-import dental_clinic.database.in_memory.manipulation.ManipulationInMemoryDatabase;
+import dental_clinic.core.database.manipulation.ManipulationDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class DeactivateManipulationService {
     @Autowired
     private DeactivateManipulationRequestValidator deactivateManipulationRequestValidator;
     @Autowired
-    private ManipulationInMemoryDatabase manipulationInMemoryDatabase;
+    private ManipulationDatabase manipulationDatabase;
 
     public DeactivateManipulationResponse execute (DeactivateManipulationRequest deactivateManipulationRequest) {
 
@@ -26,13 +26,13 @@ public class DeactivateManipulationService {
             return new DeactivateManipulationResponse(coreErrorList);
         }
 
-        if (!manipulationInMemoryDatabase.containsId(deactivateManipulationRequest.getId())) {
+        if (!manipulationDatabase.containsId(deactivateManipulationRequest.getId())) {
             coreErrorList.add(new CoreError("database", "Database doesn't contain id " +
                     deactivateManipulationRequest.getId()));
             return new DeactivateManipulationResponse(coreErrorList);
         }
 
-        manipulationInMemoryDatabase.deactivateManipulation(deactivateManipulationRequest.getId());
+        manipulationDatabase.deactivateManipulation(deactivateManipulationRequest.getId());
         return new DeactivateManipulationResponse(deactivateManipulationRequest.getId());
     }
 }
