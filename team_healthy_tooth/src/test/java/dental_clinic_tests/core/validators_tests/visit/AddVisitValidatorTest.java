@@ -20,7 +20,7 @@ public class AddVisitValidatorTest {
 
     private AddVisitValidator addVisitValidator = new AddVisitValidator();
     private Optional<String> comment = Optional.empty();
-    private Doctor doctor = new Doctor("Name Surname", "");
+    private Doctor doctor = new Doctor("Name Surname", "", "12345678");
     private List<Manipulation>manipulations = new ArrayList<>();
     private List<Long> manipulationIds = new ArrayList<>();
 

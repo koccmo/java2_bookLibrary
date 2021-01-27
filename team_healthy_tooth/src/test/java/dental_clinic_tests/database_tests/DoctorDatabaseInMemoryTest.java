@@ -1,8 +1,8 @@
 package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.Doctor;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
-import dental_clinic.database.in_memory.doctor.DoctorDatabaseInMemory;
+import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorDatabaseInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class DoctorDatabaseInMemoryTest {
 
     @Before
     public void init(){
-        doctorDatabase.addDoctor(new Doctor("Dok", "Dokis"));
+        doctorDatabase.addDoctor(new Doctor("Dok", "Dokis", "12345678"));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class DoctorDatabaseInMemoryTest {
 
     @Test
     public void addDoctor() {
-        doctorDatabase.addDoctor(new Doctor("Name", "Surname"));
+        doctorDatabase.addDoctor(new Doctor("Name", "Surname", "12345678"));
         assertTrue(doctorDatabase.getDoctorList().size() == 5);
         assertTrue((doctorDatabase.getDoctorList().get(4).getName().equals("Name")));
         assertTrue(doctorDatabase.getDoctorList().get(4).getId().equals(5L));
@@ -41,8 +41,8 @@ public class DoctorDatabaseInMemoryTest {
 
     @Test
     public void testContainsDoctor() {
-        assertTrue(doctorDatabase.containsDoctor(new Doctor("Dok", "Dokis")));
-        assertFalse(doctorDatabase.containsDoctor(new Doctor("Dokis", "Dokiss")));
+        assertTrue(doctorDatabase.containsDoctor(new Doctor("Dok", "Dokis", "12345678")));
+        assertFalse(doctorDatabase.containsDoctor(new Doctor("Dokis", "Dokiss", "12345678")));
     }
 
     @Test

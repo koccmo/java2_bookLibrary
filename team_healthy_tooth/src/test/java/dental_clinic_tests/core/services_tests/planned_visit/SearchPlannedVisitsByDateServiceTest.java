@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByDateResponse;
 import dental_clinic.core.services.planned_visit.SearchPlannedVisitsByDateService;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByDateRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -75,7 +75,7 @@ public class SearchPlannedVisitsByDateServiceTest {
         List<PlannedVisit> plannedVisitList = new ArrayList<>();
         PersonalData validPersonalData = new PersonalData("Name", "Surname", "12345678", "01012547896");
         GregorianCalendar gregorianCalendar = new GregorianCalendar(2021, Calendar.DECEMBER, 03, 15, 30);
-        Doctor doctor = new Doctor("Bobik", "Shpric");
+        Doctor doctor = new Doctor("Bobik", "Shpric", "12345678");
         PlannedVisit plannedVisit = new PlannedVisit(gregorianCalendar, validPersonalData, doctor);
         plannedVisitList.add(plannedVisit);
 

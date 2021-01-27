@@ -6,7 +6,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.services.doctor.AddDoctorService;
 import dental_clinic.core.validators.doctor.AddDoctorRequestValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ public class AddDoctorServiceTest {
         List<CoreError> errorList = new ArrayList<>();
         errorList.add(expectedError);
 
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("", null));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("", null, "12345678"));
         Mockito.when(addDoctorRequestValidator.validate(addDoctorRequest)).thenReturn(errorList);
 
         AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);
@@ -52,9 +52,9 @@ public class AddDoctorServiceTest {
         List<CoreError> errorList = new ArrayList<>();
         errorList.add(expectedError);
 
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname"));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname", "12345678"));
         Mockito.when(addDoctorRequestValidator.validate(addDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname"))).thenReturn(true);
+        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(true);
 
 
         AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);
@@ -66,9 +66,9 @@ public class AddDoctorServiceTest {
 
     @Test
     public void testDoctorAddedSuccessfully(){
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname"));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname", "12345678"));
         Mockito.when(addDoctorRequestValidator.validate(addDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname"))).thenReturn(false);
+        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(false);
 
 
         AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);

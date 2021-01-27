@@ -9,6 +9,7 @@ import dental_clinic.core.responses.patient.GetPatientCardResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.services.patient.GetPatientCardService;
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +25,7 @@ public class AcceptanceTest6 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -59,4 +61,7 @@ public class AcceptanceTest6 {
         return appContext.getBean(GetPatientCardService.class);
     }
 
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
+    }
 }

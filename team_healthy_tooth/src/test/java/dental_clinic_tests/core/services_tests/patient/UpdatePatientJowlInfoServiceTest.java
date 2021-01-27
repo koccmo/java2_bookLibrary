@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.UpdatePatientJowlInfoResponse;
 import dental_clinic.core.services.patient.UpdatePatientJowlInfoService;
 import dental_clinic.core.validators.patient.UpdatePatientJowlInfoRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

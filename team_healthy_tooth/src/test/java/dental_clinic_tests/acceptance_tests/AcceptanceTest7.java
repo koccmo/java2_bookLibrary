@@ -8,6 +8,7 @@ import dental_clinic.core.requests.patient.AddPatientRequest;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.services.doctor.AddDoctorService;
 import dental_clinic.core.services.patient.AddPatientService;
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +23,7 @@ public class AcceptanceTest7 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -30,7 +32,7 @@ public class AcceptanceTest7 {
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         addPatientService().execute(addPatientRequest);
 
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Doctor", "Hausss"));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Doctor", "Hausss", "12345678"));
 
         AddDoctorResponse addDoctorResponse = addDoctorService().execute(addDoctorRequest);
         assertTrue(addDoctorResponse.getDoctor().getName().equals("Doctor"));
@@ -42,5 +44,9 @@ public class AcceptanceTest7 {
 
     private AddDoctorService addDoctorService() {
         return appContext.getBean(AddDoctorService.class);
+    }
+
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
     }
 }

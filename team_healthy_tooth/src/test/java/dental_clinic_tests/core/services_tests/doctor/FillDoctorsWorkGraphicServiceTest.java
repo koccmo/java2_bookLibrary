@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.FillDoctorsWorkGraphicResponse;
 import dental_clinic.core.services.doctor.FillDoctorsWorkGraphicService;
 import dental_clinic.core.validators.doctor.FillDoctorsWorkGraphicRequestValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

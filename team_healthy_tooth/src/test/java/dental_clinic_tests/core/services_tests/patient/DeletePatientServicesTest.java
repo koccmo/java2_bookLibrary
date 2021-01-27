@@ -8,7 +8,7 @@ import dental_clinic.core.responses.patient.DeletePatientResponse;
 import dental_clinic.core.services.patient.DeletePatientService;
 import dental_clinic_tests.core.services_tests.matchers.IdMatcher;
 import dental_clinic.core.validators.patient.DeletePatientValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

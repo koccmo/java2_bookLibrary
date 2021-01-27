@@ -6,9 +6,9 @@ import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.validators.visit.AddVisitValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
-import dental_clinic.database.in_memory.visit.VisitDatabase;
+import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.visit.VisitDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ public class AddVisitServiceTest {
     @InjectMocks
     AddVisitService addVisitService;
 
-    Doctor doctor = new Doctor("Name Surname", "Surname");
+    Doctor doctor = new Doctor("Name Surname", "Surname", "12345678");
     List <Manipulation> manipulationList = new ArrayList<>();
     List<Long> manipulationIds = new ArrayList<>();
 

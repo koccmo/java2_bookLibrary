@@ -1,8 +1,8 @@
 package dental_clinic_tests.database_tests;
 
 import dental_clinic.core.domain.*;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
-import dental_clinic.database.in_memory.patient.PatientDatabaseInMemory;
+import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientDatabaseInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
 public class PatientDatabaseInMemoryTest {
     PersonalData personalData1 = new PersonalData("Bob", "Bobbins", "12345678", "12345678900");
     PersonalData personalData2 = new PersonalData("John", "Joninns", "12345670", "12345678999");
-    Doctor doctor1 = new Doctor("Doctor", "Zlo");
-    Doctor doctor2 = new Doctor("Doctor", "Haus");
+    Doctor doctor1 = new Doctor("Doctor", "Zlo", "12345678");
+    Doctor doctor2 = new Doctor("Doctor", "Haus", "12345678");
     PatientDatabase patientDatabase = new PatientDatabaseInMemory();
     private List<Manipulation>manipulations = new ArrayList<>();
     private List<Long> manipulationIds = new ArrayList<>();

@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.CancelPlannedVisitResponse;
 import dental_clinic.core.services.planned_visit.CancelPlannedVisitService;
 import dental_clinic.core.validators.planned_visit.CancelPlannedVisitValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

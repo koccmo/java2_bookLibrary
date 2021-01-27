@@ -7,7 +7,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.patient.GetSpecificPatientHistoryService;
 import dental_clinic.core.validators.patient.GetSpecificPatientHistoryRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

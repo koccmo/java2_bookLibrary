@@ -1,5 +1,6 @@
 package dental_clinic_tests.acceptance_tests;
 
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +25,7 @@ public class AcceptanceTest2 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -54,5 +56,9 @@ public class AcceptanceTest2 {
 
     private GetAllPatientsService getAllPatientsService() {
         return appContext.getBean(GetAllPatientsService.class);
+    }
+
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
     }
 }
