@@ -1,7 +1,6 @@
 package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
-import internet_store.application.core.domain.Product;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -47,7 +46,8 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public Optional<Customer> findByCustomerId(Long id) {
-        return Optional.empty();
+        Customer customer = sessionFactory.getCurrentSession().find(Customer.class, id);
+        return Optional.ofNullable(customer);
     }
 
     @Override
