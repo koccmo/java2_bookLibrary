@@ -1,5 +1,6 @@
 package electronic_library.acceptance_tests;
 
+import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.AddBookRequest;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-@Profile("noJdbc")
+@Profile("orm")
 public class AcceptanceTest_FindBookById {
 
     private AnnotationConfigApplicationContext applicationContext;
@@ -25,6 +26,7 @@ public class AcceptanceTest_FindBookById {
     @Before
     public void setUp() {
         applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
         AddBookRequest addBookRequestOne = new AddBookRequest("aaa", "aaa", new BigDecimal("10.00"), 2010);
         getAddBookService().execute(addBookRequestOne);
         AddBookRequest addBookRequestTwo = new AddBookRequest("bbb", "bbb", new BigDecimal("11.00"), 2011);
@@ -75,5 +77,8 @@ public class AcceptanceTest_FindBookById {
 
     private AddBookService getAddBookService() { return applicationContext.getBean(AddBookService.class); }
     private FindBookByIdService getFindBookByIdService() { return applicationContext.getBean(FindBookByIdService.class); }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
 
 }

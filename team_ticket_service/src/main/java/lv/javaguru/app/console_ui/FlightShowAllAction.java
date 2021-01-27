@@ -4,15 +4,15 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.core.services.FlightShowAllService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class FlightShowAllAction extends Action implements UIActions {
 
-	private final FlightShowAllService flightShowAllService;
+	@Autowired
+	private FlightShowAllService flightShowAllService;
 
-	public FlightShowAllAction (FlightShowAllService flightShowAllService) {
-		this.flightShowAllService = flightShowAllService;
-	}
 
 	@Override
 	public void execute () {

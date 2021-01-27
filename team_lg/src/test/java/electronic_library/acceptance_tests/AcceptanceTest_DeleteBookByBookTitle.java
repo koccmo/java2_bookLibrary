@@ -1,5 +1,6 @@
 package electronic_library.acceptance_tests;
 
+import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
 import electronic_library.core.requests.AddBookRequest;
 
@@ -19,7 +20,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-@Profile("noJdbc")
+@Profile("orm")
 public class AcceptanceTest_DeleteBookByBookTitle {
 
     private AnnotationConfigApplicationContext applicationContext;
@@ -28,6 +29,7 @@ public class AcceptanceTest_DeleteBookByBookTitle {
     @Before
     public void setUp() {
         applicationContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
         AddBookRequest addBookRequestOne = new AddBookRequest("aaa", "aaa", new BigDecimal("10.00"), 2010);
         getAddBookService().execute(addBookRequestOne);
         AddBookRequest addBookRequestTwo = new AddBookRequest("bbb", "bbb", new BigDecimal("11.00"), 2011);
@@ -72,4 +74,8 @@ public class AcceptanceTest_DeleteBookByBookTitle {
         return applicationContext.getBean(GetAllBooksService.class);
     }
     private DeleteBookByTitleService getDeleteBookByTitleService() { return applicationContext.getBean(DeleteBookByTitleService.class); }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
+
 }

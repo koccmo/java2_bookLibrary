@@ -1,37 +1,17 @@
 package lv.javaguru.app.console_ui.modes;
 
-import lv.javaguru.app.ApplicationContext;
 import lv.javaguru.app.console_ui.*;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
-
+import org.springframework.context.ApplicationContext;
 
 public class AdminMode {
-	private static final ApplicationContext context = ApplicationContext.getInstance();
 
-	private final UserUpdateAction userUpdateAction;
-	private final UserDeleteAction userDeleteAction;
-	private final UserShowOneAction userShowOneAction;
-	private final UserShowAllAction userShowAllAction;
-
-	private final FlightUpdateAction flightUpdateAction;
-	private final FlightDeleteAction flightDeleteAction;
-	private final FlightShowUsersAction flightShowUsersAction;
-	private final FlightShowAllAction flightShowAllAction;
-
-	private final LogOutAction logOutAction;
+	private final ApplicationContext context;
 
 
-	public AdminMode () {
-		this.userUpdateAction = context.getBean(UserUpdateAction.class);
-		this.userDeleteAction = context.getBean(UserDeleteAction.class);
-		this.flightUpdateAction = context.getBean(FlightUpdateAction.class);
-		this.flightDeleteAction = context.getBean(FlightDeleteAction.class);
-		this.flightShowAllAction = context.getBean(FlightShowAllAction.class);
-		this.flightShowUsersAction = context.getBean(FlightShowUsersAction.class);
-		this.userShowAllAction = context.getBean(UserShowAllAction.class);
-		this.userShowOneAction = context.getBean(UserShowOneAction.class);
-		this.logOutAction = context.getBean(LogOutAction.class);
+	public AdminMode (ApplicationContext context) {
+		this.context = context;
 	}
 
 
@@ -45,11 +25,19 @@ public class AdminMode {
 			switch (menuNumber) {
 				case 1 -> adminMode_printManageUser();
 				case 2 -> adminMode_printManageFlights();
-				case 3 -> userShowAllAction.execute();
-				case 4 -> flightShowAllAction.execute();
+				case 3 -> {
+					UserShowAllAction userShowAllAction = context.getBean(UserShowAllAction.class);
+					userShowAllAction.execute();
+				}
+				case 4 -> {
+					FlightShowAllAction flightShowAllAction = context.getBean(FlightShowAllAction.class);
+					flightShowAllAction.execute();
+				}
 
 				case 0 -> {
+					LogOutAction logOutAction = context.getBean(LogOutAction.class);
 					logOutAction.execute();
+
 					return;
 				}
 				default -> {
@@ -59,7 +47,6 @@ public class AdminMode {
 			}
 		}
 	}
-
 
 	private static void printAdminMode_MainMenu (User currentUser) {
 		BaseFunc.printHeader("MENU", currentUser);
@@ -86,9 +73,18 @@ public class AdminMode {
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
 			switch (menuNumber) {
-				case 1 -> userUpdateAction.execute();
-				case 2 -> userDeleteAction.execute();
-				case 3 -> userShowOneAction.execute();
+				case 1 -> {
+					UserUpdateAction userUpdateAction = context.getBean(UserUpdateAction.class);
+					userUpdateAction.execute();
+				}
+				case 2 -> {
+					UserDeleteAction userDeleteAction = context.getBean(UserDeleteAction.class);
+					userDeleteAction.execute();
+				}
+				case 3 -> {
+					UserShowOneAction userShowOneAction = context.getBean(UserShowOneAction.class);
+					userShowOneAction.execute();
+				}
 
 				case 0 -> {
 					return;
@@ -113,10 +109,20 @@ public class AdminMode {
 
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
+
 			switch (menuNumber) {
-				case 1 -> flightUpdateAction.execute();
-				case 2 -> flightDeleteAction.execute();
-				case 3 -> flightShowUsersAction.execute();
+				case 1 -> {
+					FlightUpdateAction flightUpdateAction = context.getBean(FlightUpdateAction.class);
+					flightUpdateAction.execute();
+				}
+				case 2 -> {
+					FlightDeleteAction flightDeleteAction = context.getBean(FlightDeleteAction.class);
+					flightDeleteAction.execute();
+				}
+				case 3 -> {
+					FlightShowUsersAction flightShowUsersAction = context.getBean(FlightShowUsersAction.class);
+					flightShowUsersAction.execute();
+				}
 
 				case 0 -> {
 					return;

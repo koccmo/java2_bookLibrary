@@ -49,7 +49,12 @@ public class ApplicationMenu {
     }
 
     public void executeSelectedMenuItem(int selectedMenu) {
-        menuNumberToUICommandMap.get(selectedMenu).execute();
+        UICommand uiCommand = menuNumberToUICommandMap.get(selectedMenu);
+        if (uiCommand != null) {
+            uiCommand.execute();
+        } else {
+            System.out.println("\nMenu item " + selectedMenu + " don't exist, please enter menu item number:");
+        }
     }
 
     private UICommand findUICommand(List<UICommand> uiCommands, Class uiCommandClass) {

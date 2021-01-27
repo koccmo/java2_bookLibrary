@@ -2,6 +2,8 @@ package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.domain.CodeError;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,44 +11,124 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AddFlightRequestValidator {
 
 	public List<CodeError> validate (AddFlightRequest request) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		errorList.addAll(validateTicketDepartureCity(request));
+		errorList.addAll(validateTicketUserName(request));
+		errorList.addAll(validateTicketUserSurname(request));
+
+		errorList.addAll(validateTicketOriginCountry(request));
+		errorList.addAll(validateTicketOriginCity(request));
+		errorList.addAll(validateTicketDestinationCountry(request));
 		errorList.addAll(validateTicketDestinationCity(request));
 		errorList.addAll(validateTicketDepartureDate(request));
 
 		return errorList;
 	}
 
-	private List<CodeError> validateTicketDepartureCity (AddFlightRequest request) {
-		List<CodeError> depCityError = new ArrayList<>();
-
-		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getFlight().getTicket().getFromCity(), "departure city");
-		if (codeError.isPresent()) {
-			depCityError.add(codeError.get());
-			return depCityError;
-		}
-
-		strIsNotContainingDigits(request.getFlight().getTicket().getFromCity(), "departure city").ifPresent(depCityError::add);
-
-		return depCityError;
-	}
-
-	private List<CodeError> validateTicketDestinationCity (AddFlightRequest request) {
-		String destinationCity = request.getFlight().getTicket().getToCountry();
+	private List<CodeError> validateTicketUserName (AddFlightRequest request) {
+		String userName = request.getFlight().getUser().getName();
 
 		List<CodeError> errors = new ArrayList<>();
 
-		Optional<CodeError> codeError = strIsNotNullOrEmpty(request.getFlight().getTicket().getFromCity(), "Destination city");
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(userName, "User name");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+
+			return errors;
+		}
+
+		strIsNotContainingDigits(userName, "User name").ifPresent(errors::add);
+		strIsNotContainingSymbols(userName, "User name").ifPresent(errors::add);
+
+		return errors;
+	}
+
+	private List<CodeError> validateTicketUserSurname (AddFlightRequest request) {
+		String userSurname = request.getFlight().getUser().getSurname();
+
+		List<CodeError> errors = new ArrayList<>();
+
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(userSurname, "User surname");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+
+			return errors;
+		}
+
+		strIsNotContainingDigits(userSurname, "User surname").ifPresent(errors::add);
+		strIsNotContainingSymbols(userSurname, "User surname").ifPresent(errors::add);
+
+		return errors;
+	}
+
+	private List<CodeError> validateTicketOriginCountry (AddFlightRequest request) {
+		String originCountry = request.getFlight().getTicket().getFromCountry();
+
+		List<CodeError> errors = new ArrayList<>();
+
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(originCountry, "Origin country");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+			return errors;
+		}
+
+		strIsNotContainingDigits(originCountry, "Origin country").ifPresent(errors::add);
+		strIsNotContainingSymbols(originCountry, "Origin country").ifPresent(errors::add);
+
+		return errors;
+	}
+
+	private List<CodeError> validateTicketOriginCity (AddFlightRequest request) {
+		String originCity = request.getFlight().getTicket().getFromCity();
+
+		List<CodeError> errors = new ArrayList<>();
+
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(originCity, "Origin city");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+			return errors;
+		}
+
+		strIsNotContainingDigits(originCity, "Origin city").ifPresent(errors::add);
+		strIsNotContainingSymbols(originCity, "Origin city").ifPresent(errors::add);
+
+		return errors;
+	}
+
+	private List<CodeError> validateTicketDestinationCountry (AddFlightRequest request) {
+		String destinationCountry = request.getFlight().getTicket().getToCountry();
+
+		List<CodeError> errors = new ArrayList<>();
+
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(destinationCountry, "Destination country");
+		if (codeError.isPresent()) {
+			errors.add(codeError.get());
+			return errors;
+		}
+
+		strIsNotContainingDigits(destinationCountry, "Destination country").ifPresent(errors::add);
+		strIsNotContainingSymbols(destinationCountry, "Destination country").ifPresent(errors::add);
+
+		return errors;
+	}
+
+	private List<CodeError> validateTicketDestinationCity (AddFlightRequest request) {
+		String destinationCity = request.getFlight().getTicket().getToCity();
+
+		List<CodeError> errors = new ArrayList<>();
+
+		Optional<CodeError> codeError = strIsNotNullOrEmpty(destinationCity, "Destination city");
 		if (codeError.isPresent()) {
 			errors.add(codeError.get());
 			return errors;
 		}
 
 		strIsNotContainingDigits(destinationCity, "Destination city").ifPresent(errors::add);
+		strIsNotContainingSymbols(destinationCity, "Destination city").ifPresent(errors::add);
 
 		return errors;
 	}
@@ -56,15 +138,18 @@ public class AddFlightRequestValidator {
 
 		List<CodeError> errors = new ArrayList<>();
 
-		Optional<CodeError> codeError = dateIsNotNullOrEmpty(request.getFlight().getTicket().getDate(), "date");
+		Optional<CodeError> codeError = dateIsNotNullOrEmpty(date, "Departure date");
 		if (codeError.isPresent()) {
 			errors.add(codeError.get());
 			return errors;
 		}
-		isDateAfter(date, "departure date").ifPresent(errors::add);
+
+		isDateAfter(date, "Departure date").ifPresent(errors::add);
 
 		return errors;
 	}
+
+
 	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
 		return (isNullOrEmpty(dateRequest))
 				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
@@ -83,9 +168,9 @@ public class AddFlightRequestValidator {
 				: Optional.empty();
 	}
 
-	private Optional<CodeError> strIsDateFormat (String request, String field) {
-		return (!isRightDateFormat(request))
-				? Optional.of(new CodeError(field, "Wrong date format!"))
+	private Optional<CodeError> strIsNotContainingSymbols (String request, String field) {
+		return (containsSymbols(request))
+				? Optional.of(new CodeError(field, "The string shouldn't contain symbols!"))
 				: Optional.empty();
 	}
 
@@ -96,28 +181,23 @@ public class AddFlightRequestValidator {
 	}
 
 	private boolean containsDigit (String str) {
+		if (str == null)
+			return false;
 		return str.chars().anyMatch(Character::isDigit);
 	}
 
-	private boolean isNullOrEmpty (LocalDate date) {
-		return (date == null );
+	private boolean containsSymbols (String str) {
+		if (str == null)
+			return false;
+		return str.length() - str.replaceAll("(?i)[^a-z-\\s\\d]", "").length() != 0;
 	}
+
+	private boolean isNullOrEmpty (LocalDate date) {
+		return (date == null);
+	}
+
 	private boolean isNullOrEmpty (String str) {
 		return (str == null || str.isEmpty());
-	}
-
-	private boolean isRightDateFormat (String str) {
-		try {
-			parseStrToDate(str);
-			return true;
-		} catch (Exception ignore) {
-			return false;
-		}
-	}
-
-	private LocalDate parseStrToDate (String str) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		return LocalDate.parse(str, formatter);
 	}
 
 	private boolean isDateAfter (LocalDate date) {

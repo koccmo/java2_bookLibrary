@@ -1,5 +1,6 @@
 package java2.application_target_list.core.acceptancetests.target;
 
+import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.ChangeTargetDescriptionRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
@@ -20,26 +21,28 @@ import static org.junit.Assert.*;
 
 public class ChangeTargetDescriptionAcceptanceTests {
 
-    private ApplicationContext applicationContext;
     private ChangeTargetDescriptionService changeTargetDescriptionService;
     private GetAllTargetsService getAllTargetsService;
+    private ApplicationContext applicationContext;
+    private DatabaseCleaner databaseCleaner;
     private AddTargetService addTargetService;
+    private Long targetId;
 
     @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
-        addTargetService = applicationContext.getBean(AddTargetService.class);
-        getAllTargetsService = applicationContext.getBean(GetAllTargetsService.class);
-        changeTargetDescriptionService = applicationContext.getBean(ChangeTargetDescriptionService.class);
-        AddTargetRequest addTargetRequest1 = new AddTargetRequest("name", "description", 1);
-        addTargetService.execute(addTargetRequest1);
-
+        createServices();
+        databaseCleaner.clean();
+        addTargetToDB();
     }
+
     @Test
     public void shouldChangeTargetDescription() {
-        ChangeTargetDescriptionRequest changeTargetNameRequest = new ChangeTargetDescriptionRequest(1L, "New Description");
+        targetId = getAllTargetsService.execute(new GetAllTargetsRequest()).getTargetList().get(0).getId();
+
+        ChangeTargetDescriptionRequest changeTargetNameRequest = new ChangeTargetDescriptionRequest(targetId, "New Description");
         ChangeTargetDescriptionResponse changeTargetDescriptionResponse = changeTargetDescriptionService.execute(changeTargetNameRequest);
         GetAllTargetsResponse getAllTargetsResponse = getAllTargetsService.execute(new GetAllTargetsRequest());
+
         assertNull(changeTargetDescriptionResponse.getErrorList());
         assertEquals(getAllTargetsResponse.getTargetList().size(), 1);
         assertEquals(getAllTargetsResponse.getTargetList().get(0).getName(), "name");
@@ -48,15 +51,51 @@ public class ChangeTargetDescriptionAcceptanceTests {
 
     @Test
     public void shouldReturnErrorList() {
-        ChangeTargetDescriptionRequest changeTargetDescriptionRequest = new ChangeTargetDescriptionRequest(1L, null);
+        targetId = getAllTargetsService.execute(new GetAllTargetsRequest()).getTargetList().get(0).getId();
+
+        ChangeTargetDescriptionRequest changeTargetDescriptionRequest = new ChangeTargetDescriptionRequest(targetId, null);
         ChangeTargetDescriptionResponse changeTargetDescriptionResponse = changeTargetDescriptionService.execute(changeTargetDescriptionRequest);
         GetAllTargetsResponse getAllTargetsResponse = getAllTargetsService.execute(new GetAllTargetsRequest());
+
         assertTrue(changeTargetDescriptionResponse.hasErrors());
         assertEquals(changeTargetDescriptionResponse.getErrorList().size(), 1);
         assertEquals(changeTargetDescriptionResponse.getErrorList().get(0).getField(), "Target new description");
         assertEquals(changeTargetDescriptionResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         assertEquals(getAllTargetsResponse.getTargetList().get(0).getName(), "name");
-        assertEquals(Optional.ofNullable(getAllTargetsResponse.getTargetList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(getAllTargetsResponse.getTargetList().get(0).getDeadline()), Optional.of(1L));
         assertEquals(getAllTargetsResponse.getTargetList().get(0).getDescription(), "description");
+    }
+
+    private void createServices() {
+        applicationContext = createApplicationContext();
+        addTargetService = createAddTargetService();
+        getAllTargetsService = createGetAllTargetService();
+        databaseCleaner = createDatabaseCleaner();
+        changeTargetDescriptionService = createChangeTargetDescriptionService();
+    }
+
+    private void addTargetToDB() {
+        AddTargetRequest addTargetRequest1 = new AddTargetRequest("name", "description", 1L);
+        addTargetService.execute(addTargetRequest1);
+    }
+
+    private ChangeTargetDescriptionService createChangeTargetDescriptionService() {
+        return applicationContext.getBean(ChangeTargetDescriptionService.class);
+    }
+
+    private DatabaseCleaner createDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
+
+    private GetAllTargetsService createGetAllTargetService() {
+        return applicationContext.getBean(GetAllTargetsService.class);
+    }
+
+    private AddTargetService createAddTargetService() {
+        return applicationContext.getBean(AddTargetService.class);
+    }
+
+    private ApplicationContext createApplicationContext() {
+        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
     }
 }

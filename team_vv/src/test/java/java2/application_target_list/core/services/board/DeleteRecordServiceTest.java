@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.DeleteRecordResponse;
@@ -22,7 +22,8 @@ public class DeleteRecordServiceTest extends TestCase {
 
     private List<CoreError> errors;
     @Mock DeleteRecordValidator deleteRecordValidator;
-    @Mock BoardDatabase boardDatabase;
+    @Mock
+    BoardRepository boardRepository;
     @InjectMocks DeleteRecordService deleteRecordService;
 
     @Before
@@ -32,7 +33,7 @@ public class DeleteRecordServiceTest extends TestCase {
 
     @Test
     public void shouldDeleteRecordFromDatabase() {
-        Mockito.when(boardDatabase.isIdInBoardList(1L)).thenReturn(true);
+        Mockito.when(boardRepository.isIdInBoardList(1L)).thenReturn(true);
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         assertFalse(deleteRecordResponse.hasErrors());
@@ -42,7 +43,7 @@ public class DeleteRecordServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v1() {
         errors.add(new CoreError("Record ID","no record with that ID"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
-        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         assertTrue(deleteRecordResponse.hasErrors());
         assertEquals(deleteRecordResponse.getErrorList().size(), 1);
@@ -54,7 +55,7 @@ public class DeleteRecordServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v2() {
         errors.add(new CoreError("Record ID","must not be empty!"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(null);
-        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         assertTrue(deleteRecordResponse.hasErrors());
         assertEquals(deleteRecordResponse.getErrorList().size(), 1);
@@ -66,7 +67,7 @@ public class DeleteRecordServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v3() {
         errors.add(new CoreError("Record ID","must not be negative!"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(-2L);
-        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         assertTrue(deleteRecordResponse.hasErrors());
         assertEquals(deleteRecordResponse.getErrorList().size(), 1);

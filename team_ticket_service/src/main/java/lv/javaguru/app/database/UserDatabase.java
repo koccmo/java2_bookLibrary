@@ -1,12 +1,14 @@
 package lv.javaguru.app.database;
 
-import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
+@Component
 public class UserDatabase {
+
 	private final Map<Long, User> userDatabase = new HashMap<>();
 
 	private static Long nextId = 1L;

@@ -6,15 +6,14 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.LogInService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LogInAction extends Action implements UIActions {
 
-	private final LogInService loginService;
-
-
-	public LogInAction (LogInService loginService) {
-		this.loginService = loginService;
-	}
+	@Autowired
+	private LogInService loginService;
 
 
 	@Override

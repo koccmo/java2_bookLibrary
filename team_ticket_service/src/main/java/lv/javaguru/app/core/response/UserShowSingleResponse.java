@@ -1,10 +1,7 @@
 package lv.javaguru.app.core.response;
 
-import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.domain.User;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserShowSingleResponse {
 

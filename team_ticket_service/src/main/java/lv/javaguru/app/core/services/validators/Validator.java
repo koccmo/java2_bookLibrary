@@ -7,6 +7,7 @@ import java.util.List;
 public abstract class Validator {
 
 	void verifyNameAndSurname (String strToVerify, String fieldName, List<CodeError> errorList) {
+
 		if (isEmpty(strToVerify)) {
 			CodeError error = new CodeError(fieldName, "Null or empty string!");
 			errorList.add(error);
@@ -41,20 +42,24 @@ public abstract class Validator {
 	}
 
 	boolean isEmpty (String str) {
-		if (str == null)
-			return false;
-		return str.isEmpty();
+		return str == null || str.isEmpty();
 	}
 
 	boolean containSpaces (String str) {
+		if (str == null)
+			return false;
 		return str.length() - str.replaceAll("\\s", "").length() != 0;
 	}
 
 	boolean containDigits (String str) {
+		if (str == null)
+			return false;
 		return str.length() - str.replaceAll("\\d", "").length() != 0;
 	}
 
 	boolean containsSymbols (String str) {
+		if (str == null)
+			return false;
 		return str.length() - str.replaceAll("(?i)[^a-z-]+", "").length() != 0;
 	}
 }

@@ -5,15 +5,18 @@ import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.request.UserShowSingleRequest;
 import lv.javaguru.app.core.response.UserShowSingleResponse;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class UserShowSingleService {
-	private final UserDatabase userDatabase;
+	@Autowired
+	private UserDatabase userDatabase;
 
-	public UserShowSingleService (UserDatabase userDatabase) {
-		this.userDatabase = userDatabase;
-	}
 
 	public UserShowSingleResponse execute (UserShowSingleRequest request) {
 

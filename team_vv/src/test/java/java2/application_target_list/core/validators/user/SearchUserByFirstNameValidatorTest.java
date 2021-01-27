@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
-import java2.application_target_list.core.database.user.UserListImpl;
+import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.user.InMemoryUserRepositoryImpl;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -16,13 +16,13 @@ import java.util.List;
 public class SearchUserByFirstNameValidatorTest {
 
     private SearchUserByFirstNameValidator searchUserByFirstNameValidator;
-    private UserDatabase userDatabase;
+    private UserRepository userRepository;
 
     @Before
     public void setup() {
         searchUserByFirstNameValidator = new SearchUserByFirstNameValidator();
-        userDatabase = new UserListImpl();
-        userDatabase.addUser(new User("name", "surname"));
+        userRepository = new InMemoryUserRepositoryImpl();
+        userRepository.addUser(new User("name", "surname"));
     }
 
     @Test

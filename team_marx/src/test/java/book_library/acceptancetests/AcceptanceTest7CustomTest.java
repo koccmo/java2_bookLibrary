@@ -1,5 +1,6 @@
 package book_library.acceptancetests;
 
+import book_library.TestDatabaseRestorer;
 import book_library.config.BookListConfiguration;
 import book_library.core.requests.*;
 import book_library.core.responses.SearchBooksResponse;
@@ -21,6 +22,11 @@ public class AcceptanceTest7CustomTest {
     public void setup(){
 
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseRestorer().execute();
+    }
+
+    private TestDatabaseRestorer getDatabaseRestorer() {
+        return appContext.getBean(TestDatabaseRestorer.class);
     }
 
     @Test

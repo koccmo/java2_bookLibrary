@@ -4,18 +4,20 @@ import lv.javaguru.app.core.request.LogOutRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIComponent;
+import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class LogOutService {
 
-	private final UserDatabase userDatabase;
+	@Autowired
+	private UserDatabase userDatabase;
 
-	public LogOutService (UserDatabase userDatabase) {
-		this.userDatabase = userDatabase;
-
-	}
 
 	public LogOutResponse execute (LogOutRequest request) {
 		List<CodeError> errors = new ArrayList<>();

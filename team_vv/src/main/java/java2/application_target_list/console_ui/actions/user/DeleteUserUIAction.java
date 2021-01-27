@@ -1,7 +1,7 @@
 package java2.application_target_list.console_ui.actions.user;
 
 import java2.application_target_list.console_ui.UIAction;
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
 import java2.application_target_list.core.responses.user.DeleteUserResponse;
 import java2.application_target_list.core.services.user.DeleteUserService;
@@ -14,7 +14,8 @@ import java.util.Scanner;
 public class DeleteUserUIAction implements UIAction {
 
     @Autowired DeleteUserService deleteUserService;
-    @Autowired UserDatabase userDatabase;
+    @Autowired
+    UserRepository userRepository;
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -64,7 +65,7 @@ public class DeleteUserUIAction implements UIAction {
     }
 
     private boolean userListIsEmpty(){
-        return userDatabase.getUsersList().isEmpty();
+        return userRepository.getUsersList().isEmpty();
     }
 
     private void printBreakMessage(){

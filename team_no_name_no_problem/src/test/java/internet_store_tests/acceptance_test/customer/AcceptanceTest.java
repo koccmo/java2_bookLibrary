@@ -12,10 +12,12 @@ import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import internet_store.core.services.customer.GetAllCustomersService;
+import internet_store_tests.DatabaseCleaner;
 import org.springframework.context.ApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,6 +28,8 @@ public class AcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        databaseCleaner().clean();
+
     }
     @Test
     public void test() {
@@ -73,4 +77,6 @@ public class AcceptanceTest {
     private DeleteCustomerService deleteCustomerService(){
         return appContext.getBean(DeleteCustomerService.class);
     }
+
+    private DatabaseCleaner databaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }

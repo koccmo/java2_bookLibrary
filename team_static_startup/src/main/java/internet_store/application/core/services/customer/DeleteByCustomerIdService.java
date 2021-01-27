@@ -1,0 +1,28 @@
+package internet_store.application.core.services.customer;
+
+import internet_store.application.core.database.customer.CustomerRepository;
+import internet_store.application.core.requests.customer.DeleteByCustomerIdRequest;
+import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.customer.DeleteByCustomerIdResponse;
+import internet_store.application.core.services.customer.validators.DeleteByCustomerIdValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class DeleteByCustomerIdService {
+
+    @Autowired private CustomerRepository customerRepository;
+    @Autowired private DeleteByCustomerIdValidator validator;
+
+    public DeleteByCustomerIdResponse execute(DeleteByCustomerIdRequest customerIdRequest) {
+        List<CoreError> errors = validator.validate(customerIdRequest);
+        Long id = customerIdRequest.getCustomerId();
+
+        if (!errors.isEmpty()) {
+            return new DeleteByCustomerIdResponse(errors);
+        } else return new DeleteByCustomerIdResponse(customerRepository.deleteByCustomerId(id));
+    }
+
+}

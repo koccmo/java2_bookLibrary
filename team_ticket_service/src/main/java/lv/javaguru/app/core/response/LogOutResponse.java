@@ -1,12 +1,12 @@
 package lv.javaguru.app.core.response;
 
-
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.domain.User;
 
 import java.util.List;
 
 public class LogOutResponse extends Response {
+
 	private String message;
 	private User currUser;
 

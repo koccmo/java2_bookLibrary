@@ -76,11 +76,11 @@ insert into events (name, kind, duration, max_num_guys, min_num_guys, route, det
 insert into events (name, kind, duration, max_num_guys, min_num_guys, route, detail) values
     ('Walking trip to the Riga center', 'walking trip', 4, 8, 6, 'Riga Center', '"Walking trip to the Riga center. Brunch');
 
-insert into customers (name, email, phone, activity) values ('Wilbur Soot', 'will_weel@yandex.com', '+37100700700', true);
-insert into customers (name, email, phone, activity) values ('Tommy Innit', 'tomcat@yahoo.com', '+37137137111', true);
-insert into customers (name, email, phone, activity) values ('Tubbo Bee', 'ilikethebee@hotmail.com', '+37176395027', true);
-insert into customers (name, email, phone, activity) values ('Its Fundy', 'furry@inbox.lt', '+37140982648', true);
-insert into customers (name, email, phone, activity) values ('Niki Nihachu', 'apch_huu@inbox.lv', '+37122288800', true);
+insert into customers (name, email, phone, password, activity) values ('Wilbur Soot', 'will_weel@yandex.com', '+37100700700', '12345@Asdfg', true);
+insert into customers (name, email, phone, password, activity) values ('Tommy Innit', 'tomcat@yahoo.com', '+37137137111', '12345@Asdfg', true);
+insert into customers (name, email, phone, password, activity) values ('Tubbo Bee', 'ilikethebee@hotmail.com', '+37176395027', '12345@Asdfg', true);
+insert into customers (name, email, phone, password, activity) values ('Its Fundy', 'furry@inbox.lt', '+37140982648', '12345@Asdfg', true);
+insert into customers (name, email, phone, password, activity) values ('Niki Nihachu', 'apch_huu@inbox.lv', '+37122288800', '12345@Asdfg', true);
 
 insert into guides (name, email, phone, activity) values ('Janis Veiksmils', 'triple_janis@inbox.lv', '+37113131313', true);
 insert into guides (name, email, phone, activity) values ('Amphilohii Zaberimenjadomoi', 'woolf@mail.lv', '+37112123345', true);

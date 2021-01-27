@@ -1,6 +1,6 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibrary;
+import electronic_library.core.database.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
 import electronic_library.core.requests.FindBookByIdRequest;
 import electronic_library.core.responses.CoreError;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class FindBookByIdServiceTest {
     @Mock
-    ElectronicLibrary electronicLibrary;
+    ElectronicLibraryRepository electronicLibrary;
     @Mock
     FindBookByIdValidator validator;
     @InjectMocks

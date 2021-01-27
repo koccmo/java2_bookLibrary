@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ import java.util.List;
 public class GetAllTargetsService {
 
     @Autowired
-    private TargetDatabase targetDatabase;
+    private TargetRepository targetRepository;
 
     public GetAllTargetsResponse execute(GetAllTargetsRequest request) {
-        List<Target> targetList = targetDatabase.getTargetsList();
+        List<Target> targetList = targetRepository.getTargetsList();
         return new GetAllTargetsResponse(targetList);
     }
 }

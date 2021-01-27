@@ -1,6 +1,6 @@
 package book_library.core.validators;
 
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class RemoveBookRequestValidator {
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
 
     public List<CoreError> validate(RemoveBookRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -32,10 +32,8 @@ public class RemoveBookRequestValidator {
     }
 
     private Optional<CoreError> validateIdPresentsInDatabase(RemoveBookRequest request) {
-        return (database.getAllBooks().stream()
-                .filter(book -> book.getId().equals(request.getBookIdToRemove()))
-                .findFirst()).isEmpty()
-                ? Optional.of(new CoreError("id", "No book with such id found!"))
-                : Optional.empty();
+        return (bookRepository.isSuchIdPresentsInDatabase(request.getBookIdToRemove()))
+                ? Optional.empty()
+                : Optional.of(new CoreError("id", "No book with such id found!"));
     }
 }

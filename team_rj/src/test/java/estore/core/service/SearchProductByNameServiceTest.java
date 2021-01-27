@@ -2,23 +2,18 @@ package estore.core.service;
 
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
-import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.requests.SearchProductByNameRequest;
-import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.responses.SearchProductByNameResponse;
 import estore.core.validation.CoreError;
-import estore.core.validation.SearchProductByCategoryValidator;
 import estore.core.validation.SearchProductByNameValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
-import org.junit.Before;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class SearchProductByNameServiceTest {
 
     @Mock
-    private ProductDB database;
+    private ProductRepository database;
     @Mock
     private SearchProductByNameValidator validator;
 

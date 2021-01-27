@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AddUserService {
 
-    @Autowired private UserDatabase userDatabase;
+    @Autowired private UserRepository userRepository;
     @Autowired private AddUserValidator addUserValidator;
 
     public AddUserResponse execute(AddUserRequest request){
@@ -25,7 +25,7 @@ public class AddUserService {
         }
 
         User user = new User(request.getFirstName(), request.getLastName());
-        userDatabase.addUser(user);
+        userRepository.addUser(user);
         return new AddUserResponse(user);
 
     }

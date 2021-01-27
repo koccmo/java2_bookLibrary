@@ -7,17 +7,18 @@ import lv.javaguru.app.core.domain.Ticket;
 import java.util.List;
 
 public interface Database {
-	void addReservation (Flight flight);
 
-	void removeReservation (Flight flight);
+	void addFlight (Flight flight);
 
-	void removeReservationById (Long id);
+	void removeFlight (Flight flight);
+
+	void removeFlightById (Long id);
 
 	Flight getFlightById (Long id);
 
-	List<Flight> getAllReservations ();
+	List<Flight> getAllFlights ();
 
-	List<Flight> getAllUserReservations (User user);
+	List<Flight> getAllUserFlights (User user);
 
 	boolean containsKey (Long id);
 
@@ -25,7 +26,7 @@ public interface Database {
 
 	User getUserByFlightId (Long id);
 
-	boolean isUsersReservation (Long id, User user);
+	boolean isUsersFlight (Long id, User user);
 
 	boolean isContainTicket (Ticket ticket);
 

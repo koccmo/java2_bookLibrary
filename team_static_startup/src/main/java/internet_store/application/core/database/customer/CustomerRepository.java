@@ -9,26 +9,14 @@ public interface CustomerRepository {
 
     Long addCustomer(Customer customer);
 
-    boolean deleteByCustomerId(Long customerId);
+    boolean deleteByCustomerId(Long id);
 
-    boolean deleteCustomer(Customer customer);
-
-    boolean deleteByCustomerFirstName(String customer);
-
-    boolean deleteByCustomerSecondName(String customer);
-
-    List<Customer> findByCustomerFirstName(String customerName);
-
-    List<Customer> findByCustomerSecondName(String customerName);
-
-    List<Customer> findByFirstNameAndSecondName(String firstName, String secondName);
-
-    List<Customer> getCustomerList();
+    List<Customer> findByFirstName(String customerName);
 
     Optional<Customer> findByCustomerId(Long id);
 
-    boolean changeCustomerFirstName(Long id, String newFirstName);
+    List<Customer> findAll();
 
-    boolean changeCustomerSecondName(Long id, String newSecondName);
+    boolean changeFirstName(Long id, String newFirstName);
 
 }

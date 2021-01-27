@@ -4,13 +4,14 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.core.services.UserShowAllService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class UserShowAllAction extends Action implements UIActions{
-	private final UserShowAllService userShowAllService;
+@Component
+public class UserShowAllAction extends Action implements UIActions {
 
-	public UserShowAllAction (UserShowAllService userShowAllService) {
-		this.userShowAllService = userShowAllService;
-	}
+	@Autowired
+	private UserShowAllService userShowAllService;
 
 
 	@Override

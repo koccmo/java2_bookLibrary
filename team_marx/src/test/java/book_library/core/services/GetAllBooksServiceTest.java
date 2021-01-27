@@ -1,7 +1,7 @@
 package book_library.core.services;
 
 import book_library.core.domain.Book;
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class GetAllBooksServiceTest {
 
     @Mock
-    private Database database;
+    private BookRepository bookRepository;
     @InjectMocks
     private GetAllBooksService service;
 
@@ -28,11 +28,11 @@ public class GetAllBooksServiceTest {
     public void shouldGetAllBooksFromDb() {
         List<Book> books = new ArrayList<>();
         books.add(new Book("Title", "Author"));
-        Mockito.when(database.getAllBooks()).thenReturn(books);
+        Mockito.when(bookRepository.getAllBooks()).thenReturn(books);
 
         GetAllBooksRequest request = new GetAllBooksRequest();
         GetAllBooksResponse response = service.execute(request);
-        Mockito.verify(database).getAllBooks();
+        Mockito.verify(bookRepository).getAllBooks();
         assertFalse(response.hasErrors());
         assertEquals(1, response.getBooks().size());
         assertEquals("Title", response.getBooks().get(0).getTitle());

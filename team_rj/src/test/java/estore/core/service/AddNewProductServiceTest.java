@@ -4,7 +4,7 @@ import estore.core.requests.AddNewProductRequest;
 import estore.core.responses.AddNewProductResponse;
 import estore.core.validation.AddNewProductValidator;
 import estore.core.validation.CoreError;
-import estore.database.ProductDB;
+import estore.database.ProductRepository;
 import estore.matchers.ProductMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddNewProductServiceTest {
 
     @Mock
-    private ProductDB database;
+    private ProductRepository database;
     @Mock
     private AddNewProductValidator validator;
 

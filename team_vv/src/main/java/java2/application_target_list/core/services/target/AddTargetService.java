@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.responses.target.AddTargetResponse;
@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class AddTargetService {
 
-    @Autowired private TargetDatabase targetDatabase;
+    @Autowired private TargetRepository targetRepository;
     @Autowired private AddTargetValidator validator;
 
     public AddTargetResponse execute(AddTargetRequest request){
@@ -26,7 +26,7 @@ public class AddTargetService {
         }
 
         Target target = new Target(request.getName(), request.getDescription(), request.getDeadline());
-        targetDatabase.addTarget(target);
+        targetRepository.addTarget(target);
         return new AddTargetResponse(target);
     }
 

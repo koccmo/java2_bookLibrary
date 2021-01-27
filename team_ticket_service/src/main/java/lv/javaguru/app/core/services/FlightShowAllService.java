@@ -7,19 +7,20 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class FlightShowAllService {
 
-	private final Database reservations;
-	private final UserDatabase userDatabase;
-
-	public FlightShowAllService (UserDatabase userDatabase, Database reservations) {
-		this.userDatabase = userDatabase;
-		this.reservations = reservations;
-	}
+	@Autowired
+	private Database reservations;
+	@Autowired
+	private UserDatabase userDatabase;
 
 
 	public FlightShowAllResponse<?> execute (FlightShowAllRequest request) {
@@ -29,9 +30,9 @@ public class FlightShowAllService {
 			return new FlightShowAllResponse<>(responseList);
 		}
 		else if (userDatabase.getCurrentUser() == request.getCurrUser() && request.getCurrUser().getPersonType() != PersonType.ADMIN)
-			responseList = reservations.getAllUserReservations(request.getCurrUser());
+			responseList = reservations.getAllUserFlights(request.getCurrUser());
 		else {
-			responseList = reservations.getAllReservations();
+			responseList = reservations.getAllFlights();
 		}
 
 		return new FlightShowAllResponse<>(responseList);

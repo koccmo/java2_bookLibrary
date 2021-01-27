@@ -3,8 +3,10 @@ package estore.acceptance_tests;
 import estore.config.ProductConfiguration;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByNameResponse;
-import estore.core.service.*;
-import estore.database.ProductDB;
+import estore.core.service.AddNewProductCategoryService;
+import estore.core.service.AddNewProductService;
+import estore.core.service.SearchProductByNameService;
+import estore.core.service.UpdateProductByIdService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,13 +21,21 @@ public class SearchProductsByNameOnRequestTest {
     @Before
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(ProductConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
     }
 
     @Test
     public void shouldSearchProductByName() {
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "Fruits");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "Fruits");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "Fruits");
+        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+
+        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
+        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
@@ -34,7 +44,6 @@ public class SearchProductsByNameOnRequestTest {
         SearchProductByNameRequest request = new SearchProductByNameRequest("ProductA");
         SearchProductByNameResponse response = searchProductByNameService().execute(request);
 
-        assertEquals(response.getProductsFound(), 2);
         assertEquals(response.getProducts().size(), 2);
         assertEquals(response.getProducts().get(0).getName(), "ProductA");
         assertEquals(response.getProducts().get(0).getDescription(), "Description ProductA1");
@@ -43,18 +52,27 @@ public class SearchProductsByNameOnRequestTest {
 
     @Test
     public void shouldSearchProductByNameDescending() {
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "Fruits");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "Fruits");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "Fruits");
+        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+
+        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
+        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
         addNewProductService().execute(addProductRequest3);
 
-        int dbSize = getProductDb().getDatabaseSize();
-        getProductDb().getDatabase().get(dbSize-1).setPrice(3);
-        getProductDb().getDatabase().get(dbSize-2).setPrice(2);
-        getProductDb().getDatabase().get(dbSize-3).setPrice(1);
+        UpdateProductByIdRequest updateProductByIdRequest1 = new UpdateProductByIdRequest(
+                1L, "ProductA", "Description ProductA1", "1", "0", "1");
+        UpdateProductByIdRequest updateProductByIdRequest2 = new UpdateProductByIdRequest(
+                2L, "ProductB", "Description ProductB", "1", "0", "2");
+        UpdateProductByIdRequest updateProductByIdRequest3 = new UpdateProductByIdRequest(
+                3L, "ProductA", "Description ProductA2", "1", "0", "3");
+
+        updateProductByIdService().execute(updateProductByIdRequest1);
+        updateProductByIdService().execute(updateProductByIdRequest2);
+        updateProductByIdService().execute(updateProductByIdRequest3);
 
         Ordering ordering = new Ordering("price", "desc");
         SearchProductByNameRequest request = new SearchProductByNameRequest("ProductA", ordering);
@@ -68,18 +86,27 @@ public class SearchProductsByNameOnRequestTest {
 
     @Test
     public void shouldSearchProductByNameAscendingAndPaging() {
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "Fruits");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "Fruits");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "Fruits");
+        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+
+        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
+        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
         addNewProductService().execute(addProductRequest3);
 
-        int dbSize = getProductDb().getDatabaseSize();
-        getProductDb().getDatabase().get(dbSize-1).setPrice(1);
-        getProductDb().getDatabase().get(dbSize-2).setPrice(2);
-        getProductDb().getDatabase().get(dbSize-3).setPrice(3);
+        UpdateProductByIdRequest updateProductByIdRequest1 = new UpdateProductByIdRequest(
+                1L, "ProductA", "Description ProductA1", "1", "0", "3");
+        UpdateProductByIdRequest updateProductByIdRequest2 = new UpdateProductByIdRequest(
+                2L, "ProductB", "Description ProductB", "1", "0", "2");
+        UpdateProductByIdRequest updateProductByIdRequest3 = new UpdateProductByIdRequest(
+                3L, "ProductA", "Description ProductA2", "1", "0", "1");
+
+        updateProductByIdService().execute(updateProductByIdRequest1);
+        updateProductByIdService().execute(updateProductByIdRequest2);
+        updateProductByIdService().execute(updateProductByIdRequest3);
 
         Ordering ordering = new Ordering("price", "asc");
         Paging paging = new Paging("1", "1");
@@ -99,7 +126,11 @@ public class SearchProductsByNameOnRequestTest {
         return applicationContext.getBean(SearchProductByNameService.class);
     }
 
-    private ProductDB getProductDb() {
-        return applicationContext.getBean(ProductDB.class);
+    private AddNewProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddNewProductCategoryService.class);
+    }
+
+    private UpdateProductByIdService updateProductByIdService() {
+        return applicationContext.getBean(UpdateProductByIdService.class);
     }
 }
