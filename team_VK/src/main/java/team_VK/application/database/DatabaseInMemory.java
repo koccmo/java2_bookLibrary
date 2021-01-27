@@ -18,12 +18,13 @@ public class DatabaseInMemory implements Database {
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public boolean deleteBook(Book book) {
         books.remove(book);
+        return true;
     }
 
     @Override
-    public void getListBooks() {
-
+    public List<Book> getListBooks() {
+        return null;
     }
 }

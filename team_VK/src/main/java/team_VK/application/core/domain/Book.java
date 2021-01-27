@@ -19,6 +19,9 @@ public class Book {
         bookings = new ArrayList<>();
     }
 
+    public Book() {
+    }
+
     public List<BookingPeriod> getBookings() {
         return bookings;
     }
@@ -49,6 +52,14 @@ public class Book {
 
     public void setID(long ID) {
         this.ID = ID;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 
     @Override

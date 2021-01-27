@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 
+import java.util.List;
+
 @Component
 public class JdbcDatabaseImpl implements Database {
 
@@ -15,22 +17,24 @@ public class JdbcDatabaseImpl implements Database {
     public void addBook(Book book) {
 
         jdbcTemplate.update(
-                "INSERT INTO books (title, author) "
-                        + "VALUES (?, ?)",
-                book.getBookTitle(), book.getBookAuthor()
+                "INSERT INTO books (title, author, bookingPeriod) "
+                        + "VALUES (?, ?, ?)",
+                book.getBookTitle(), book.getBookAuthor(), book.getBookingDurationPermitted()
         );
     }
 
     @Override
-    public void deleteBook(Book book) {
-
+    public boolean deleteBook(Book book) {
+        String sql = "DELETE FROM books WHERE id = ?";
+        Object[] args = new Object[] {book.getID()};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public void getListBooks() {
+    public List<Book> getListBooks() {
 
-        jdbcTemplate.update(
-                "select * from books order by author;" );
+        String sql = "SELECT * FROM books";
+        return jdbcTemplate.query(sql, new BookRowMapper());
 
     }
 

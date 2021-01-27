@@ -28,6 +28,7 @@ public class GetBooksListService {
 
 
         if (errors.size() == 0) {
+            database.getListBooks();
             List<Book> resultList = switch (request.getSortingCriteria()) {
                 case 1 -> database.getListBooks().stream()
                         .sorted(Comparator.comparing(Book::getBookTitle))
