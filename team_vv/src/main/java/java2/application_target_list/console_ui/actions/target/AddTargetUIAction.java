@@ -9,7 +9,7 @@ import java2.application_target_list.core.responses.target.AddTargetResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
 
 
-
+import java.math.BigInteger;
 import java.util.Scanner;
 
 @Component
@@ -25,7 +25,7 @@ public class AddTargetUIAction implements UIAction {
         while (true){
             String targetName = getNameFromUser();
             String targetDescription = getDescriptionFromUser();
-            Integer targetDeadline = getDeadlineFromUser();
+            Long targetDeadline = getDeadlineFromUser();
 
             AddTargetRequest request = createRequest(targetName,targetDescription,targetDeadline);
             AddTargetResponse response = createResponse(request);
@@ -53,7 +53,7 @@ public class AddTargetUIAction implements UIAction {
         return addTargetService.execute(request);
     }
 
-    private AddTargetRequest createRequest(String targetName, String targetDescription, Integer targetDeadline){
+    private AddTargetRequest createRequest(String targetName, String targetDescription, Long targetDeadline){
         return new AddTargetRequest(targetName,targetDescription,targetDeadline);
     }
 
@@ -67,8 +67,10 @@ public class AddTargetUIAction implements UIAction {
         return scr.nextLine();
     }
 
-    private Integer getDeadlineFromUser(){
+    private Long getDeadlineFromUser(){
         System.out.print("Enter target deadline(days): ");
-        return Integer.parseInt(scr.nextLine());
+//        return Integer.parseInt(scr.nextLine());
+        return Long.parseLong(scr.nextLine());
+
     }
 }

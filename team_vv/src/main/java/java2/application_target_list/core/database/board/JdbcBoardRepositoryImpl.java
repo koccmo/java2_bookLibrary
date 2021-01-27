@@ -4,18 +4,14 @@ import java2.application_target_list.core.domain.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@Component
-@Profile("mysql")
-public class BoardListJDBCImpl implements BoardDatabase{
+//@Component
+public class JdbcBoardRepositoryImpl implements BoardRepository {
 
     @Autowired JdbcTemplate jdbcTemplate;
 
@@ -35,7 +31,7 @@ public class BoardListJDBCImpl implements BoardDatabase{
 
     @Override
     public List<Record> getAllRecordsList() {
-        return jdbcTemplate.query("SELECT * FROM targets_board", new BoardListJDBCImpl.RecordsMapper());
+        return jdbcTemplate.query("SELECT * FROM targets_board", new RecordsMapper());
     }
 
     @Override
@@ -64,34 +60,10 @@ public class BoardListJDBCImpl implements BoardDatabase{
                 "JOIN users ON users.id = targets_board.user_id", new RecordsInfoMapper());
     }
 
-    private class RecordsMapper implements RowMapper<Record> {
-        public Record mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Record record = new Record(rs.getLong("target_id"), rs.getLong("user_id"));
-            record.setRecordId(rs.getLong("id"));
-            record.setDateAdded(rs.getString("target_added_date"));
-            record.setDateComplete(rs.getString("target_date_of_completion"));
-            return record;
-        }
-    }
-
     private String getDate() {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter myFormatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return localDateTime.format(myFormatDate);
     }
 
-    private class RecordsInfoMapper implements RowMapper<Record> {
-        public Record mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Record record = new Record(rs.getLong("target_id"), rs.getLong("user_id"));
-            record.setRecordId(rs.getLong("id"));
-            record.setDateAdded(rs.getString("target_added_date"));
-            record.setDateComplete(rs.getString("target_date_of_completion"));
-            record.setTargetName(rs.getString("target_name"));
-            record.setTargetDescription(rs.getString("target_description"));
-            record.setTargetDeadline(rs.getInt("target_deadline"));
-            record.setUserFirstName(rs.getString("user_first_name"));
-            record.setUserLastName(rs.getString("user_last_name"));
-            return record;
-        }
-    }
 }

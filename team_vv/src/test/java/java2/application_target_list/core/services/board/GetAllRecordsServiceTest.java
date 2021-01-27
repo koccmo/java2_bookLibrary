@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
@@ -21,7 +21,8 @@ import java.util.Optional;
 public class GetAllRecordsServiceTest extends TestCase {
 
     private List<Record> recordList;
-    @Mock BoardDatabase boardDatabase;
+    @Mock
+    BoardRepository boardRepository;
     @InjectMocks GetAllRecordsService getAllRecordsService;
 
     @Before
@@ -32,7 +33,7 @@ public class GetAllRecordsServiceTest extends TestCase {
     @Test
     public void shouldReturnDB_v1() {
         recordList.add(new Record(1L, 1L));
-        Mockito.when(boardDatabase.getAllRecordsList()).thenReturn(recordList);
+        Mockito.when(boardRepository.getAllRecordsList()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
         assertFalse(getAllRecordsResponse.hasErrors());
@@ -45,7 +46,7 @@ public class GetAllRecordsServiceTest extends TestCase {
     public void shouldReturnDB_v2() {
         recordList.add(new Record(1L, 1L));
         recordList.add(new Record(2L, 1L));
-        Mockito.when(boardDatabase.getAllRecordsList()).thenReturn(recordList);
+        Mockito.when(boardRepository.getAllRecordsList()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
         assertFalse(getAllRecordsResponse.hasErrors());
@@ -61,7 +62,7 @@ public class GetAllRecordsServiceTest extends TestCase {
         recordList.add(new Record(1L, 1L));
         recordList.add(new Record(2L, 1L));
         recordList.add(new Record(3L, 2L));
-        Mockito.when(boardDatabase.getAllRecordsList()).thenReturn(recordList);
+        Mockito.when(boardRepository.getAllRecordsList()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
         assertFalse(getAllRecordsResponse.hasErrors());

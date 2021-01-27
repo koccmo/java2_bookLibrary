@@ -7,13 +7,13 @@ import java.util.List;
 public class ChangeTargetDeadlineResponse extends TargetCoreResponse {
 
     private Long targetIdToChange;
-    private int newTargetDeadline;
+    private Long newTargetDeadline;
 
     public ChangeTargetDeadlineResponse(List<CoreError> errorList) {
         super(errorList);
     }
 
-    public ChangeTargetDeadlineResponse(Long targetIdToChange, int newTargetDeadline) {
+    public ChangeTargetDeadlineResponse(Long targetIdToChange, Long newTargetDeadline) {
         this.targetIdToChange = targetIdToChange;
         this.newTargetDeadline = newTargetDeadline;
     }
@@ -22,7 +22,7 @@ public class ChangeTargetDeadlineResponse extends TargetCoreResponse {
         return targetIdToChange;
     }
 
-    public int getNewTargetDeadline() {
+    public Long getNewTargetDeadline() {
         return newTargetDeadline;
     }
 }

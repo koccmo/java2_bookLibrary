@@ -1,7 +1,7 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.responses.target.ChangeTargetNameResponse;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.validators.target.ChangeTargetNameValidator;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ChangeTargetNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private TargetDatabase targetDatabase;
+    @Mock private TargetRepository targetRepository;
     @Mock private ChangeTargetNameValidator validator;
     @InjectMocks
     ChangeTargetNameService service;
@@ -33,7 +33,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
 
     @Test
     public void shouldChangeTargetName() {
-        Mockito.when(targetDatabase.changeTargetName(1L, "new name")).thenReturn(true);
+        Mockito.when(targetRepository.changeTargetName(1L, "new name")).thenReturn(true);
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "new name");
         ChangeTargetNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -43,7 +43,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
     public void invalidChangeTargetNameRequest_v1() {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "new name");
         errors.add(new CoreError("Target ID;","no target with that ID"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 1);
@@ -56,7 +56,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(null, "new name");
         errors.add(new CoreError("Target ID;","no target with that ID"));
         errors.add(new CoreError("Target ID;","must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -71,7 +71,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(-2L, "new name");
         errors.add(new CoreError("Target ID;","no target with that ID"));
         errors.add(new CoreError("Target ID;","must not be negative!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -87,7 +87,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
         errors.add(new CoreError("Target ID;","no target with that ID"));
         errors.add(new CoreError("Target ID;","must not be negative!"));
         errors.add(new CoreError("Target new name","must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 3);
@@ -104,7 +104,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(2L, "");
         errors.add(new CoreError("Target ID;","no target with that ID"));
         errors.add(new CoreError("Target new name","must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);

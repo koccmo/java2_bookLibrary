@@ -1,11 +1,13 @@
 package java2.application_target_list.core.requests.target;
 
+import java.math.BigInteger;
+
 public class ChangeTargetDeadlineRequest {
 
     private Long targetIdToChange;
-    private Integer newTargetDeadline;
+    private Long newTargetDeadline;
 
-    public ChangeTargetDeadlineRequest(Long targetIdToChange, Integer newTargetDeadline) {
+    public ChangeTargetDeadlineRequest(Long targetIdToChange, Long newTargetDeadline) {
         this.targetIdToChange = targetIdToChange;
         this.newTargetDeadline = newTargetDeadline;
     }
@@ -14,7 +16,7 @@ public class ChangeTargetDeadlineRequest {
         return targetIdToChange;
     }
 
-    public Integer getNewTargetDeadline() {
+    public Long getNewTargetDeadline() {
         return newTargetDeadline;
     }
 }

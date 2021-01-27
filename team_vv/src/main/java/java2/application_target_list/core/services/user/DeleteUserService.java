@@ -1,7 +1,7 @@
 package java2.application_target_list.core.services.user;
 
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.DeleteUserResponse;
@@ -14,17 +14,17 @@ import java.util.List;
 @Component
 public class DeleteUserService {
 
-    @Autowired private UserDatabase userDatabase;
+    @Autowired private UserRepository userRepository;
     @Autowired private DeleteUserValidator deleteuserValidator;
 
     public DeleteUserResponse execute(DeleteUserRequest request){
-        List<CoreError> errors = deleteuserValidator.validate(request, userDatabase);
+        List<CoreError> errors = deleteuserValidator.validate(request, userRepository);
 
         if(!errors.isEmpty()){
             return new DeleteUserResponse(errors);
         }
 
-        userDatabase.deleteUser(request.getUserIdToDelete());
+        userRepository.deleteUser(request.getUserIdToDelete());
         return new DeleteUserResponse(request.getUserIdToDelete());
 
     }

@@ -1,16 +1,31 @@
 package java2.application_target_list.core.domain;
 
+import java.math.BigInteger;
 import java.util.Objects;
+import javax.persistence.*;
 
+@Entity
+@Table(name="targets")
 public class Target {
 
-    private String name;
-    private String description;
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer deadline;
 
+    @Column(name="target_name", nullable = false)
+    private String name;
 
-    public Target(String name, String description, Integer deadline) {
+    @Column(name="target_description", nullable = false)
+    private String description;
+
+    @Column(name="target_deadline", nullable = false)
+    private Long deadline;
+
+    public Target() {
+    }
+
+    public Target(String name, String description, Long deadline) {
         this.name = name;
         this.description = description;
         this.deadline = deadline;
@@ -41,11 +56,11 @@ public class Target {
         return id;
     }
 
-    public void setDeadline(Integer deadline) {
+    public void setDeadline(Long deadline) {
         this.deadline = deadline;
     }
 
-    public Integer getDeadline() {
+    public Long getDeadline() {
         return deadline;
     }
 
