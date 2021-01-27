@@ -5,7 +5,7 @@ import estore.core.responses.AddNewProductCategoryResponse;
 import estore.core.validation.AddNewProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

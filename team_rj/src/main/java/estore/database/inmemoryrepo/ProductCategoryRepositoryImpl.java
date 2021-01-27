@@ -1,7 +1,7 @@
 package estore.database.inmemoryrepo;
 
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;

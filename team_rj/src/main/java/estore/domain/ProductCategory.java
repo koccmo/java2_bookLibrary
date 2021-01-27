@@ -1,4 +1,4 @@
-package estore.core.model;
+package estore.domain;
 
 import javax.persistence.*;
 

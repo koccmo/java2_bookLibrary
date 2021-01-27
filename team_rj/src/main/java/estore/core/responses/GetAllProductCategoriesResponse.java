@@ -1,6 +1,6 @@
 package estore.core.responses;
 
-import estore.core.model.ProductCategory;
+import estore.domain.ProductCategory;
 
 import java.util.List;
 
