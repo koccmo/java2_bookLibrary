@@ -16,6 +16,8 @@ public class AddCustomerValidator {
         validateCustomerFirstName(request).ifPresent(errors::add);
         validateCustomerSecondName(request).ifPresent(errors::add);
         validateCustomerPhone(request).ifPresent(errors::add);
+        validateCustomerEMail(request).ifPresent(errors::add);
+        validateCustomerAddress(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -34,6 +36,18 @@ public class AddCustomerValidator {
     private Optional<CoreError> validateCustomerPhone(AddCustomerRequest request) {
         return (request.getCustomerPhone() == null || request.getCustomerPhone().isBlank()
                 ? Optional.of(new CoreError("Phone", "must not be empty"))
+                : Optional.empty());
+    }
+
+    private Optional<CoreError> validateCustomerEMail(AddCustomerRequest request) {
+        return (request.getCustomerEMail() == null || request.getCustomerEMail().isBlank()
+                ? Optional.of(new CoreError("e-mail", "must not be empty"))
+                : Optional.empty());
+    }
+
+    private Optional<CoreError> validateCustomerAddress(AddCustomerRequest request) {
+        return (request.getCustomerAddress() == null || request.getCustomerAddress().isBlank()
+                ? Optional.of(new CoreError("Address", "must not be empty"))
                 : Optional.empty());
     }
 

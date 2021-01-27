@@ -22,8 +22,8 @@ public class AddCustomerService {
         if (!errors.isEmpty()) {
             return new AddCustomerResponse(errors);
         }
-        Customer customer = new Customer(request.getCustomerFirstName(), request.getCustomerSecondName(),
-                request.getCustomerPhone());
+        Customer customer = new Customer(request.getCustomerFirstName(), request.getCustomerSecondName());
+        customer.setCustomerPhone(request.getCustomerPhone());
         customer.setCustomerEmail(request.getCustomerEMail());
         customer.setCustomerAddress(request.getCustomerAddress());
 
