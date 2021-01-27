@@ -4,7 +4,6 @@ import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.*;
 import internet_store.application.console_ui.customer.*;
 import internet_store.application.console_ui.product.*;
-import internet_store.application.core.services.customer.ChangeCustomerFirstNameService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,14 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-class ProductListApplication {
+class StartApplication {
 
     private static final ApplicationContext applicationContext
             = new AnnotationConfigApplicationContext(AppConfig.class);
 
     private final Map<Integer, UIAction> menuNumberToActionMap;
 
-    public ProductListApplication() {
+    public StartApplication() {
         menuNumberToActionMap = new HashMap<>();
         menuNumberToActionMap.put(1, applicationContext.getBean(AddProductUIAction.class));
         menuNumberToActionMap.put(2, applicationContext.getBean(DeleteByProductIdUIAction.class));
@@ -37,8 +36,8 @@ class ProductListApplication {
     }
 
     public static void main(String[] args) {
-        ProductListApplication productListApplication = new ProductListApplication();
-        productListApplication.run();
+        StartApplication startApplication = new StartApplication();
+        startApplication.run();
     }
 
     @SuppressWarnings("InfiniteLoopStatement")
