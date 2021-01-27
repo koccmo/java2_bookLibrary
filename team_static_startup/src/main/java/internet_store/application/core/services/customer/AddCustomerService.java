@@ -14,10 +14,8 @@ import java.util.List;
 @Component
 public class AddCustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private AddCustomerValidator validator;
+    @Autowired private CustomerRepository customerRepository;
+    @Autowired private AddCustomerValidator validator;
 
     public AddCustomerResponse execute(AddCustomerRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -25,7 +23,9 @@ public class AddCustomerService {
             return new AddCustomerResponse(errors);
         }
 
-        Customer customer = new Customer(request.getCustomerFirstName(), request.getCustomerSecondName());
+        Customer customer = new Customer(request.getCustomerFirstName(), request.getCustomerSecondName(),
+                request.getCustomerPhone());
+
         customerRepository.addCustomer(customer);
         return new AddCustomerResponse(customer);
     }

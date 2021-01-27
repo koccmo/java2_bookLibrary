@@ -23,9 +23,10 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(String customerFirstName, String customerSecondName) {
+    public Customer(String customerFirstName, String customerSecondName, String customerPhone) {
         this.customerFirstName = customerFirstName;
         this.customerSecondName = customerSecondName;
+        this.customerPhone = customerPhone;
     }
 
     public Long getCustomerId() {

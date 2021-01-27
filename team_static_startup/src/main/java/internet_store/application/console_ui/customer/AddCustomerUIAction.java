@@ -22,13 +22,14 @@ public class AddCustomerUIAction implements UIAction {
         String customerFirstName = myInput.nextLine();
         System.out.print("Enter Customer Second Name : ");
         String customerSecondName = myInput.nextLine();
-        /*System.out.print("Enter Customer Phone : ");
+        System.out.print("Enter Customer Phone : ");
         String customerPhone = myInput.nextLine();
-        System.out.print("Enter Customer e-mail : ");
+        /*System.out.print("Enter Customer e-mail : ");
         String customerEMail = myInput.nextLine();
         System.out.print("Enter Customer Address : ");
         String customerAddress = myInput.nextLine();*/
-        AddCustomerRequest request = new AddCustomerRequest(customerFirstName, customerSecondName);
+        AddCustomerRequest request = new AddCustomerRequest(customerFirstName, customerSecondName,
+                customerPhone);
         AddCustomerResponse response = addCustomerService.execute(request);
 
         if (response.hasErrors()) {
@@ -36,7 +37,7 @@ public class AddCustomerUIAction implements UIAction {
                 System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
             );
         } else {
-            System.out.println("\nCustomer added : " + customerFirstName + " " + customerSecondName);
+            System.out.println("\nCustomer added -> " + customerFirstName + " " + customerSecondName + " " + customerPhone);
         }
     }
 
