@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.product;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
@@ -19,12 +20,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestFindById {
-
+/*
     private ApplicationContext appContext;
 
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test() {
@@ -59,5 +61,9 @@ public class AcceptanceTestFindById {
     private GetAllProductsService getAllProductsService() {
         return appContext.getBean(GetAllProductsService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
+
+ */
 }
 
