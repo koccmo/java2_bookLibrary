@@ -1,8 +1,7 @@
-package internet_store.application.core.services;
+package internet_store.application.core.services.product;
 
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.Ordering;
-import internet_store.application.core.services.product.OrderingProductsService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class OrderingProductsServiceTest {
 

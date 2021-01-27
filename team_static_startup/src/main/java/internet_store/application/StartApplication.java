@@ -30,9 +30,10 @@ class StartApplication {
         menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(10, applicationContext.getBean(AddCustomerUIAction.class));
         menuNumberToActionMap.put(11, applicationContext.getBean(DeleteByCustomerIdUIAction.class));
-        // menuNumberToActionMap.put(12, applicationContext.getBean(FindByCustomerIdUIAction.class));
-        // menuNumberToActionMap.put(13, applicationContext.getBean(ChangeCustomerFirstNameUIAction.class));
+        menuNumberToActionMap.put(12, applicationContext.getBean(FindByCustomerIdUIAction.class));
+        menuNumberToActionMap.put(13, applicationContext.getBean(ChangeCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(14, applicationContext.getBean(GetAllCustomersUIAction.class));
+        menuNumberToActionMap.put(15, applicationContext.getBean(FindByCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
@@ -70,6 +71,7 @@ class StartApplication {
         System.out.println("12. Find customer from database by ID");
         System.out.println("13. Find customer from database by ID and change FirstName");
         System.out.println("14. Print out all customers");
+        System.out.println("15. Find customer(s) by first name: ");
         System.out.println("------------------------------------------------------------");
         System.out.println("0. Exit the program");
         System.out.println("------------------------------------------------------------");
