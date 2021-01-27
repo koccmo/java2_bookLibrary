@@ -30,7 +30,7 @@ class StartApplication {
         menuNumberToActionMap.put(8, applicationContext.getBean(GetAllProductsUIAction.class));
         menuNumberToActionMap.put(10, applicationContext.getBean(AddCustomerUIAction.class));
         menuNumberToActionMap.put(11, applicationContext.getBean(DeleteByCustomerIdUIAction.class));
-        // menuNumberToActionMap.put(12, applicationContext.getBean(FindByCustomerIdUIAction.class));
+        menuNumberToActionMap.put(12, applicationContext.getBean(FindByCustomerIdUIAction.class));
         // menuNumberToActionMap.put(13, applicationContext.getBean(ChangeCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(14, applicationContext.getBean(GetAllCustomersUIAction.class));
         menuNumberToActionMap.put(15, applicationContext.getBean(FindByCustomerFirstNameUIAction.class));
