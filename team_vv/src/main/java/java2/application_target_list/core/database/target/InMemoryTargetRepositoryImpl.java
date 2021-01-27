@@ -5,14 +5,15 @@ import org.springframework.stereotype.Component;
 
 
 import java2.application_target_list.core.domain.Target;
+import org.springframework.transaction.annotation.Transactional;
 
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Profile("inmemory")
-public class TargetListImpl implements TargetDatabase {
+//@Component
+public class InMemoryTargetRepositoryImpl implements TargetRepository {
 
     List<Target> targetsList = new ArrayList<>();
     Long targetId = 0L;
@@ -52,7 +53,7 @@ public class TargetListImpl implements TargetDatabase {
     }
 
     @Override
-    public boolean changeTargetDeadline(Long targetId, int newDeadline) {
+    public boolean changeTargetDeadline(Long targetId, Long newDeadline) {
         if (isIdInTargetList(targetId)){
             targetsList.get(getTargetIndexFromListById(targetId)).setDeadline(newDeadline);
             return true;

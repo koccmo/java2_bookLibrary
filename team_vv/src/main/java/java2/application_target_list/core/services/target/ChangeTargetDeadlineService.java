@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,17 +16,17 @@ import java.util.List;
 @Component
 public class ChangeTargetDeadlineService {
 
-    @Autowired private TargetDatabase targetDatabase;
+    @Autowired private TargetRepository targetRepository;
     @Autowired private ChangeTargetDeadlineValidator validator;
 
     public ChangeTargetDeadlineResponse execute(ChangeTargetDeadlineRequest request){
-        List<CoreError> errors = validator.validate(request, targetDatabase);
+        List<CoreError> errors = validator.validate(request, targetRepository);
 
         if (!errors.isEmpty()) {
             return new ChangeTargetDeadlineResponse(errors);
         }
 
-        targetDatabase.changeTargetDeadline(request.getTargetIdToChange(), request.getNewTargetDeadline());
+        targetRepository.changeTargetDeadline(request.getTargetIdToChange(), request.getNewTargetDeadline());
         return new ChangeTargetDeadlineResponse(request.getTargetIdToChange(), request.getNewTargetDeadline());
     }
 }

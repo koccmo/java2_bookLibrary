@@ -1,6 +1,6 @@
 package java2.application_target_list.core.validators.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,10 @@ import java.util.List;
 @Component
 public class ChangeTargetNameValidator {
 
-    public List<CoreError> validate(ChangeTargetNameRequest request, TargetDatabase targetDatabase) {
+    public List<CoreError> validate(ChangeTargetNameRequest request, TargetRepository targetRepository) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (!targetDatabase.isIdInTargetList(request.getTargetIdToChange())){
+        if (!targetRepository.isIdInTargetList(request.getTargetIdToChange())){
             errors.add(new CoreError("Target ID;","no target with that ID"));
         }
 

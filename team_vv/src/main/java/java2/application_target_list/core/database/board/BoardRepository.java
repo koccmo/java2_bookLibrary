@@ -6,12 +6,12 @@ import java2.application_target_list.core.domain.User;
 
 import java.util.List;
 
-public interface BoardDatabase {
+public interface BoardRepository {
 
     void addToBoard(Record record);
     boolean deleteFromBoard(Long id);
     List<Record> getAllRecordsList();
     boolean setRecordCompleteDate(Long id);
-    public boolean isIdInBoardList(Long boardId);
+    boolean isIdInBoardList(Long boardId);
     List<Record> getFullInfoAboutRecords();
 }

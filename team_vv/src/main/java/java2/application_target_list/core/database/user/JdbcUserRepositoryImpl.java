@@ -5,16 +5,12 @@ import java2.application_target_list.core.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-@Component
-@Profile("mysql")
-public class UserListJDBCImpl implements UserDatabase{
+//@Component
+public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Autowired JdbcTemplate jdbcTemplate;
 
@@ -45,17 +41,17 @@ public class UserListJDBCImpl implements UserDatabase{
 
     @Override
     public List<User> getUsersList() {
-        return jdbcTemplate.query("SELECT * FROM users", new UserListJDBCImpl.UsersMapper());
+        return jdbcTemplate.query("SELECT * FROM users", new UsersMapper());
     }
 
     @Override
     public List<User> findUserByFirstName(String userFirstName) {
-        return jdbcTemplate.query("SELECT * FROM users WHERE user_first_name = ?", new Object[]{userFirstName} , new UserListJDBCImpl.UsersMapper());
+        return jdbcTemplate.query("SELECT * FROM users WHERE user_first_name = ?", new Object[]{userFirstName} , new UsersMapper());
     }
 
     @Override
     public List<User> findUserByLastName(String userLastName) {
-        return jdbcTemplate.query("SELECT * FROM users WHERE user_last_name = ?", new Object[]{userLastName} , new UserListJDBCImpl.UsersMapper());
+        return jdbcTemplate.query("SELECT * FROM users WHERE user_last_name = ?", new Object[]{userLastName} , new UsersMapper());
     }
 
     @Override
@@ -70,12 +66,4 @@ public class UserListJDBCImpl implements UserDatabase{
         return false;
     }
 
-    private class UsersMapper implements RowMapper<User> {
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-            User user = new User(rs.getString("user_first_name"),
-                    rs.getString("user_last_name"));
-            user.setId(rs.getLong("id"));
-            return user;
-        }
-    }
 }

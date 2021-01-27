@@ -1,8 +1,8 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.matchers.RecordMatcher;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -28,9 +28,12 @@ public class AddRecordServiceTest extends TestCase {
 
     private List<CoreError> errorList;
     @Mock AddRecordValidator addRecordValidator;
-    @Mock BoardDatabase boardDatabase;
-    @Mock UserDatabase userDatabase;
-    @Mock TargetDatabase targetDatabase;
+    @Mock
+    BoardRepository boardRepository;
+    @Mock
+    UserRepository userRepository;
+    @Mock
+    TargetRepository targetRepository;
     @InjectMocks AddRecordService addRecordService;
 
     @Before
@@ -44,7 +47,7 @@ public class AddRecordServiceTest extends TestCase {
         AddRecordRequest recordRequest = new AddRecordRequest(1L, 1L);
         AddRecordResponse addRecordResponse = addRecordService.execute(recordRequest);
         assertFalse(addRecordResponse.hasErrors());
-        Mockito.verify(boardDatabase).addToBoard(argThat(new RecordMatcher(1L, 1L)));
+        Mockito.verify(boardRepository).addToBoard(argThat(new RecordMatcher(1L, 1L)));
     }
 
     @Test

@@ -1,11 +1,8 @@
 package java2.application_target_list.console_ui.actions.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
-import java2.application_target_list.config.TargetListConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 
@@ -20,7 +17,8 @@ import java.util.Scanner;
 public class DeleteUIAction implements UIAction {
 
     @Autowired DeleteTargetService deleteTargetService;
-    @Autowired TargetDatabase targetDatabase;
+    @Autowired
+    TargetRepository targetRepository;
     private final Scanner scr = new Scanner(System.in);
 
 
@@ -78,7 +76,7 @@ public class DeleteUIAction implements UIAction {
     }
 
     private boolean targetListIsEmpty(){
-        return targetDatabase.getTargetsList().isEmpty();
+        return targetRepository.getTargetsList().isEmpty();
     }
 
 }

@@ -1,8 +1,8 @@
 package java2.application_target_list.console_ui.actions.board;
 
 import java2.application_target_list.console_ui.UIAction;
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.board.AddRecordResponse;
 import java2.application_target_list.core.services.board.AddRecordService;
@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class AddRecordUIAction implements UIAction {
 
     @Autowired AddRecordService addRecordService;
-    @Autowired UserDatabase userDatabase;
-    @Autowired TargetDatabase targetDatabase;
+    @Autowired UserRepository userRepository;
+    @Autowired TargetRepository targetRepository;
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -51,7 +51,7 @@ public class AddRecordUIAction implements UIAction {
     }
 
     private boolean isTargetOrUserListEmpty(){
-        return userDatabase.getUsersList().isEmpty() || targetDatabase.getTargetsList().isEmpty();
+        return userRepository.getUsersList().isEmpty() || targetRepository.getTargetsList().isEmpty();
     }
 
     private Long getTargetIdFromUser(){

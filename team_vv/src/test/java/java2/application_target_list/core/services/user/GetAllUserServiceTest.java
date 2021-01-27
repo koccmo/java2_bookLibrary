@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
@@ -20,7 +20,7 @@ import java.util.List;
 public class GetAllUserServiceTest extends TestCase {
 
     private List<User> userList;
-    @Mock private UserDatabase userDatabase;
+    @Mock private UserRepository userRepository;
     @InjectMocks private GetAllUserService getAllUserService;
 
     @Before
@@ -31,7 +31,7 @@ public class GetAllUserServiceTest extends TestCase {
     @Test
     public void shouldReturnDB_v1() {
         userList.add(new User("name", "surname"));
-        Mockito.when(userDatabase.getUsersList()).thenReturn(userList);
+        Mockito.when(userRepository.getUsersList()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
         assertFalse(getAllUsersResponse.getUsersList().isEmpty());
@@ -45,7 +45,7 @@ public class GetAllUserServiceTest extends TestCase {
     public void shouldReturnDB_v2() {
         userList.add(new User("name", "surname"));
         userList.add(new User("name1", "surname2"));
-        Mockito.when(userDatabase.getUsersList()).thenReturn(userList);
+        Mockito.when(userRepository.getUsersList()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
         assertFalse(getAllUsersResponse.getUsersList().isEmpty());
@@ -57,7 +57,7 @@ public class GetAllUserServiceTest extends TestCase {
         assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }    @Test
     public void shouldReturnDB_v3() {
-        Mockito.when(userDatabase.getUsersList()).thenReturn(userList);
+        Mockito.when(userRepository.getUsersList()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
         assertTrue(getAllUsersResponse.getUsersList().isEmpty());

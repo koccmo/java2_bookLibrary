@@ -1,8 +1,10 @@
 package java2.application_target_list.core.database;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.target.TargetListImpl;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.target.InMemoryTargetRepositoryImpl;
 import java2.application_target_list.core.domain.Target;
+
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,16 +12,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TargetTargetListImplTest {
+public class InMemoryTargetRepositoryImplTest {
 
-    private TargetDatabase targetsDatabase;
+    private TargetRepository targetsDatabase;
 
     @Before
     public void setup() {
-        targetsDatabase = new TargetListImpl();
-        Target firstTarget = new Target("Eat", "need to eat", 1);
-        Target secondTarget = new Target("Eat more", "need to eat more", 5);
-        Target thirdTarget = new Target("name", "description", 5);
+        targetsDatabase = new InMemoryTargetRepositoryImpl();
+        Target firstTarget = new Target("Eat", "need to eat", 1L);
+        Target secondTarget = new Target("Eat more", "need to eat more", 5L);
+        Target thirdTarget = new Target("name", "description", 5L);
         targetsDatabase.addTarget(firstTarget);
         targetsDatabase.addTarget(secondTarget);
         targetsDatabase.addTarget(thirdTarget);
@@ -123,15 +125,13 @@ public class TargetTargetListImplTest {
 
     @Test
     public void testAddTarget_changeTargetDeadline_v1() {
-        int newTargetDeadline = 2;
-        targetsDatabase.changeTargetDeadline(1L, newTargetDeadline);
-        Assert.assertEquals(java.util.Optional.ofNullable(targetsDatabase.getTargetsList().get(0).getDeadline()), Optional.of(2));
+        targetsDatabase.changeTargetDeadline(1L, 2L);
+        Assert.assertEquals(java.util.Optional.ofNullable(targetsDatabase.getTargetsList().get(0).getDeadline()), Optional.of(2L));
     }
 
     @Test
     public void testAddTarget_changeTargetDeadline_v2() {
-        int newTargetDeadline = 2;
-        targetsDatabase.changeTargetDeadline(2L, newTargetDeadline);
-        Assert.assertEquals(Optional.ofNullable(targetsDatabase.getTargetsList().get(1).getDeadline()), Optional.of(2));
+        targetsDatabase.changeTargetDeadline(2L, 2L);
+        Assert.assertEquals(Optional.ofNullable(targetsDatabase.getTargetsList().get(1).getDeadline()), Optional.of(2L));
     }
 }

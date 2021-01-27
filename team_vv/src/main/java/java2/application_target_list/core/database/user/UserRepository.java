@@ -5,7 +5,7 @@ import java2.application_target_list.core.domain.User;
 
 import java.util.List;
 
-public interface UserDatabase {
+public interface UserRepository {
     void addUser(User user);
     boolean deleteUser(Long userId);
     boolean changeUserFirstName(Long userId, String newName);

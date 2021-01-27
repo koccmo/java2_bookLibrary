@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.SetRecordCompleteDateResponse;
@@ -22,7 +22,8 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
 
     private List<CoreError> errors;
     @Mock SetRecordCompleteDateValidator setRecordCompleteDateValidator;
-    @Mock BoardDatabase boardDatabase;
+    @Mock
+    BoardRepository boardRepository;
     @InjectMocks SetRecordCompleteDateService setRecordCompleteDateService;
 
     @Before
@@ -32,7 +33,7 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
 
     @Test
     public void shouldSetCompleteDate() {
-        Mockito.when(boardDatabase.setRecordCompleteDate(1L)).thenReturn(true);
+        Mockito.when(boardRepository.setRecordCompleteDate(1L)).thenReturn(true);
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         assertFalse(setRecordCompleteDateResponse.hasErrors());
@@ -42,7 +43,7 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v1() {
         errors.add(new CoreError("Record ID","no record with that ID"));
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
-        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         assertTrue(setRecordCompleteDateResponse.hasErrors());
         assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 1);
@@ -54,7 +55,7 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v2() {
         errors.add(new CoreError("Record ID","must not be empty!"));
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(null);
-        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         assertTrue(setRecordCompleteDateResponse.hasErrors());
         assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 1);
@@ -66,7 +67,7 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v3() {
         errors.add(new CoreError("Record ID","must not be negative!"));
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(-2L);
-        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardDatabase)).thenReturn(errors);
+        Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         assertTrue(setRecordCompleteDateResponse.hasErrors());
         assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 1);

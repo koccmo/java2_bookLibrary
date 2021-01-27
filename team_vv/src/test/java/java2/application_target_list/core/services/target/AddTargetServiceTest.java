@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.matchers.TargetMatcher;
 import java2.application_target_list.core.responses.target.AddTargetResponse;
@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddTargetServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private TargetDatabase targetDatabase;
+    @Mock private TargetRepository targetRepository;
     @Mock private AddTargetValidator validator;
     @InjectMocks
     AddTargetService service;
@@ -36,16 +36,16 @@ public class AddTargetServiceTest extends TestCase {
     @Test
     public void shouldAddTargetToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddTargetRequest request = new AddTargetRequest("name", "description", 1);
+        AddTargetRequest request = new AddTargetRequest("name", "description", 1L);
         AddTargetResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(targetDatabase).addTarget(
-                argThat(new TargetMatcher("name", "description", 1)));
+        Mockito.verify(targetRepository).addTarget(
+                argThat(new TargetMatcher("name", "description", 1L)));
     }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails_v1() {
-        AddTargetRequest request = new AddTargetRequest("", "description", 4);
+        AddTargetRequest request = new AddTargetRequest("", "description", 4L);
         errors.add(new CoreError("Target name", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         AddTargetResponse response = service.execute(request);
@@ -53,12 +53,12 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target name");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails_v2() {
-        AddTargetRequest request = new AddTargetRequest("name", "", 4);
+        AddTargetRequest request = new AddTargetRequest("name", "", 4L);
         errors.add(new CoreError("Target description", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         AddTargetResponse response = service.execute(request);
@@ -66,7 +66,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target description");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
     @Test
@@ -79,12 +79,12 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails_v4() {
-        AddTargetRequest request = new AddTargetRequest("name", "sa", -2);
+        AddTargetRequest request = new AddTargetRequest("name", "sa", -2L);
         errors.add(new CoreError("Target deadline", "must not be negative!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         AddTargetResponse response = service.execute(request);
@@ -92,12 +92,12 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails_v5() {
-        AddTargetRequest request = new AddTargetRequest("name", "", -2);
+        AddTargetRequest request = new AddTargetRequest("name", "", -2L);
         errors.add(new CoreError("Target description", "must not be empty!"));
         errors.add(new CoreError("Target deadline", "must not be negative!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -108,12 +108,12 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
         assertEquals(response.getErrorList().get(1).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(1).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails_v6() {
-        AddTargetRequest request = new AddTargetRequest(null, "", -2);
+        AddTargetRequest request = new AddTargetRequest(null, "", -2L);
         errors.add(new CoreError("Target name", "must not be empty!"));
         errors.add(new CoreError("Target description", "must not be empty!"));
         errors.add(new CoreError("Target deadline", "must not be negative!"));
@@ -127,7 +127,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty!");
         assertEquals(response.getErrorList().get(2).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(2).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetDatabase);
+        Mockito.verifyNoInteractions(targetRepository);
     }
 
 
