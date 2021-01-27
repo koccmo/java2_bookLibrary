@@ -69,8 +69,8 @@ public class AddVisitValidator {
             coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
             return coreErrors;
         }
-        if (areTwoWordsEntered(text)) {
-            Doctor doctor = new Doctor(text.split(" ")[0], text.split(" ")[1]);
+        if (areThreeWordsEntered(text)) {
+            Doctor doctor = new Doctor(text.split(" ")[0], text.split(" ")[1], text.split(" ")[2]);
             coreErrors.addAll(validateDoctorsPersonalData(doctor));
             return coreErrors;
         }
@@ -103,10 +103,13 @@ public class AddVisitValidator {
         if (!doctor.getSurname().matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")){
             errors.add(new CoreError("doctor's surname", "Surname can contain only letters"));
         }
+        if (!doctor.getPhone().matches("\\d{8}|\\d{11}|\\d{12}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
+        }
         return errors;
     }
 
-    private boolean areTwoWordsEntered(String text) {
-        return text.split(" ").length == 2;
+    private boolean areThreeWordsEntered(String text) {
+        return text.split(" ").length == 3;
     }
 }
