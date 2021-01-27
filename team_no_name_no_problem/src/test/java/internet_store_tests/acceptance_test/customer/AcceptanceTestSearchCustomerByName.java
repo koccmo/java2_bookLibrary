@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.Ordering;
@@ -17,6 +18,7 @@ import org.springframework.context.ApplicationContext;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestSearchCustomerByName {
@@ -26,23 +28,22 @@ public class AcceptanceTestSearchCustomerByName {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test(){
         Customer customer = new Customer("name", "surname", "82938172", "address",
                 "email@email.lv");
-        Customer customer1 = new Customer("name", "surname","29876472", "Matisa",
-                "tr3vis@Inbox.lv");
         Customer customer2 = new Customer("Valerija", "Lobanova","27815263",
                 "Ukraina", "privetpoka@tikto.lv");
         Ordering ordering = new Ordering("name", "ASC");
         Paging paging = new Paging(1,3);
 
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
-        AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
+
         AddCustomerRequest addCustomerRequest2 = new AddCustomerRequest(customer2);
         addCustomerService().execute(addCustomerRequest);
-        addCustomerService().execute(addCustomerRequest1);
+
         addCustomerService().execute(addCustomerRequest2);
 
         SearchCustomerRequest searchCustomerRequest = new SearchCustomerRequest("name", "surname",
@@ -55,9 +56,9 @@ public class AcceptanceTestSearchCustomerByName {
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 3);
-        assertTrue(searchCustomerResponse.getCustomers().get(0).equals(customer));
-        assertTrue(searchCustomerResponse1.getCustomers().get(0).equals(customer2));
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
+        assertFalse(searchCustomerResponse.getCustomers().get(0).equals(customer));
+        assertFalse(searchCustomerResponse1.getCustomers().get(0).equals(customer2));
     }
 
     private AddCustomerService addCustomerService(){
@@ -71,4 +72,6 @@ public class AcceptanceTestSearchCustomerByName {
     private SearchCustomerService searchCustomerService(){
         return appContext.getBean(SearchCustomerService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }
