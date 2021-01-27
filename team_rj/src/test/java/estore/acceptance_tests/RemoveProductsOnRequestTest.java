@@ -6,7 +6,7 @@ import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.responses.RemoveProductByNameResponse;
 import estore.core.responses.GetAllProductsResponse;
 import estore.core.service.*;
-import estore.domain.Product;
+import estore.core.model.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

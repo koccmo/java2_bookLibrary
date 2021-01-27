@@ -1,8 +1,8 @@
 package estore.core.validation;
 
 import estore.core.requests.AddNewProductRequest;
-import estore.database.ProductCategoryDB;
-import estore.database.inMemoryDB.ProductCategoryDBImpl;
+import estore.database.ProductCategoryRepository;
+import estore.database.inmemoryrepo.ProductCategoryRepositoryImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class AddNewProductValidatorTest {
 
-    private ProductCategoryDB categoryDB = new ProductCategoryDBImpl();
+    private ProductCategoryRepository categoryDB = new ProductCategoryRepositoryImpl();
     private ValidationRules validationRules = new ValidationRules();
     private AddNewProductValidator validator = new AddNewProductValidator(categoryDB, validationRules);
 

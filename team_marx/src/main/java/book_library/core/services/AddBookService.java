@@ -1,7 +1,7 @@
 package book_library.core.services;
 
 import book_library.core.domain.Book;
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.AddBookResponse;
 import book_library.core.responses.CoreError;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AddBookService {
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
     @Autowired private AddBookRequestValidator validator;
 
     public AddBookResponse execute(AddBookRequest request) {
@@ -24,7 +24,7 @@ public class AddBookService {
             return new AddBookResponse(errors);
         }
         Book book = new Book(request.getTitle(), request.getAuthor());
-        database.save(book);
+        bookRepository.save(book);
 
         return new AddBookResponse(book);
     }

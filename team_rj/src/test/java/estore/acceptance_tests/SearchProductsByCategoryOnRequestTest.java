@@ -6,7 +6,7 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.AddNewProductCategoryService;
 import estore.core.service.AddNewProductService;
 import estore.core.service.SearchProductByCategoryService;
-import estore.database.ProductDB;
+import estore.database.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -91,8 +91,8 @@ public class SearchProductsByCategoryOnRequestTest {
         return applicationContext.getBean(SearchProductByCategoryService.class);
     }
 
-    private ProductDB getProductDb() {
-        return applicationContext.getBean(ProductDB.class);
+    private ProductRepository getProductDb() {
+        return applicationContext.getBean(ProductRepository.class);
     }
 
     private AddNewProductCategoryService AddNewProductCategoryService() {

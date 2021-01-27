@@ -6,8 +6,8 @@ import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
-import estore.database.ProductDB;
-import estore.domain.Product;
+import estore.database.ProductRepository;
+import estore.core.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @Component
 public class SearchProductByCategoryService {
 
-    private ProductDB productDB;
+    private ProductRepository productDB;
     private SearchProductByCategoryValidator validator;
 
-    public SearchProductByCategoryService(ProductDB productDB, SearchProductByCategoryValidator validator) {
+    public SearchProductByCategoryService(ProductRepository productDB, SearchProductByCategoryValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

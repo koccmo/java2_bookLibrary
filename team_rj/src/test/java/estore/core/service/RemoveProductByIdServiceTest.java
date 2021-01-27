@@ -4,7 +4,7 @@ import estore.core.requests.RemoveProductByIdRequest;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.RemoveProductByIdValidator;
-import estore.database.ProductDB;
+import estore.database.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class RemoveProductByIdServiceTest {
 
     @Mock
-    private ProductDB database;
+    private ProductRepository database;
     @Mock
     private RemoveProductByIdValidator validator;
 

@@ -1,11 +1,12 @@
 package internet_store.application.core.services;
 
 import internet_store.application.core.database.product.ProductRepository;
-import internet_store.application.core.requests.AddProductRequest;
-import internet_store.application.core.responses.AddProductResponse;
+import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.responses.CoreError;
+import internet_store.application.core.responses.product.AddProductResponse;
 import internet_store.application.core.services.matchers.ProductMatcher;
-import internet_store.application.core.services.validators.AddProductValidator;
+import internet_store.application.core.services.product.AddProductService;
+import internet_store.application.core.services.product.validators.AddProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

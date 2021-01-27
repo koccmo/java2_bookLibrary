@@ -12,8 +12,8 @@ public class ClassFinderTest {
 
     @Test
     public void ShouldReturnListWithFilesInGivenFolder() throws IOException, ClassNotFoundException{
-        List<Class> classList = classFinder.findClassesInsidePackage("estore.domain");
-        assertTrue(classList.size() == 3);
+        List<Class> classList = classFinder.findClassesInsidePackage("estore.core.model");
+        assertTrue(classList.size() == 2);
         classList.forEach(aClass -> {
             System.out.println(aClass.getName());
         });

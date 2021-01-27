@@ -6,7 +6,7 @@ import estore.core.responses.SearchProductByIdResponse;
 import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.service.SearchProductByIdService;
 import estore.core.service.UpdateProductByIdService;
-import estore.domain.Product;
+import estore.core.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

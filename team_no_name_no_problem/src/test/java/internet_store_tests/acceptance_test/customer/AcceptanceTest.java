@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTest {
@@ -27,7 +28,8 @@ public class AcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
-        getDatabaseCleaner().clean();
+        databaseCleaner().clean();
+
     }
     @Test
     public void test() {
@@ -54,7 +56,7 @@ public class AcceptanceTest {
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() != 2);
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
         assertTrue(findCustomerByIdResponse.getCustomer().get().equals(customer));
 
 
@@ -76,7 +78,5 @@ public class AcceptanceTest {
         return appContext.getBean(DeleteCustomerService.class);
     }
 
-   private DatabaseCleaner getDatabaseCleaner(){
-       return appContext.getBean(DatabaseCleaner.class);
-    }
+    private DatabaseCleaner databaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }
