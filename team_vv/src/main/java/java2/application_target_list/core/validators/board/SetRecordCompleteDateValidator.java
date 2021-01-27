@@ -1,6 +1,6 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
 
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -12,11 +12,11 @@ import java.util.List;
 @Component
 public class SetRecordCompleteDateValidator {
 
-    public List<CoreError> validate(SetRecordCompleteDateRequest request, BoardDatabase boardDatabase) {
+    public List<CoreError> validate(SetRecordCompleteDateRequest request, BoardRepository boardRepository) {
         List<CoreError> errors = new ArrayList<>();
 
 
-        if (!boardDatabase.isIdInBoardList(request.getRecordIdToSetCompleteDate())){
+        if (!boardRepository.isIdInBoardList(request.getRecordIdToSetCompleteDate())){
             errors.add(new CoreError("Record ID","no record with that ID"));
         }
 

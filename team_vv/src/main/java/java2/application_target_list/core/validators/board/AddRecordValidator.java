@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,10 @@ import java.util.List;
 @Component
 public class AddRecordValidator {
 
-    @Autowired TargetDatabase targetDatabase;
-    @Autowired UserDatabase userDatabase;
+    @Autowired
+    TargetRepository targetRepository;
+    @Autowired
+    UserRepository userRepository;
 
     public List<CoreError> validate(AddRecordRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -47,11 +49,11 @@ public class AddRecordValidator {
     }
 
     private boolean isTargetIdIDB(AddRecordRequest request){
-        return targetDatabase.isIdInTargetList(request.getTargetId());
+        return targetRepository.isIdInTargetList(request.getTargetId());
     }
 
     private boolean isUserIdIDB(AddRecordRequest request){
-        return userDatabase.isIdInUserList(request.getUserId());
+        return userRepository.isIdInUserList(request.getUserId());
     }
 
     private boolean isTargetIdEmpty(AddRecordRequest request) {

@@ -1,12 +1,25 @@
 package java2.application_target_list.core.domain;
 
 import java.util.Objects;
+import javax.persistence.*;
 
+@Entity
+@Table(name="users")
 public class User {
 
-    private String firstName;
-    private String lastName;
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="user_first_name", nullable = false)
+    private String firstName;
+
+    @Column(name="user_last_name", nullable = false)
+    private String lastName;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;

@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.user;
 
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.user.ChangeUserFirstNameRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
@@ -12,10 +12,10 @@ import java.util.List;
 @Component
 public class ChangeUserFirstNameValidator {
 
-    public List<CoreError> validate(ChangeUserFirstNameRequest request, UserDatabase userDatabase) {
+    public List<CoreError> validate(ChangeUserFirstNameRequest request, UserRepository userRepository) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (!userDatabase.isIdInUserList(request.getUserIdToChange())){
+        if (!userRepository.isIdInUserList(request.getUserIdToChange())){
             errors.add(new CoreError("User ID;","no user with that ID"));
         }
 

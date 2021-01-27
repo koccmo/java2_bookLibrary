@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
-import java2.application_target_list.core.database.board.BoardListImpl;
+import java2.application_target_list.core.database.board.BoardRepository;
+import java2.application_target_list.core.database.board.InMemoryBoardRepositoryImpl;
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -14,26 +14,26 @@ import java.util.List;
 public class DeleteRecordValidatorTest {
 
     private DeleteRecordValidator deleteRecordValidator;
-    private BoardDatabase boardDatabase;
+    private BoardRepository boardRepository;
 
     @Before
     public void setup() {
         deleteRecordValidator = new DeleteRecordValidator();
-        boardDatabase = new BoardListImpl();
-        boardDatabase.addToBoard(new Record(1L, 2L));
+        boardRepository = new InMemoryBoardRepositoryImpl();
+        boardRepository.addToBoard(new Record(1L, 2L));
     }
 
     @Test
     public void testValidate_validRequest() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
-        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardDatabase);
+        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardRepository);
         Assert.assertTrue(actualErrors.isEmpty());
     }
 
     @Test
     public void testValidate_invalidRequest_v1() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(3L);
-        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardDatabase);
+        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardRepository);
         Assert.assertFalse(actualErrors.isEmpty());
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
@@ -43,7 +43,7 @@ public class DeleteRecordValidatorTest {
     @Test
     public void testValidate_invalidRequest_v2() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(-3L);
-        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardDatabase);
+        List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest, boardRepository);
         Assert.assertFalse(actualErrors.isEmpty());
         Assert.assertEquals(actualErrors.size(), 2);
         Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");

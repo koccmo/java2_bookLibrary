@@ -1,20 +1,21 @@
 package java2.application_target_list.core.acceptancetests.board;
 
 import java2.application_target_list.config.TargetListConfiguration;
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.target.TargetListImpl;
-import java2.application_target_list.core.database.user.UserDatabase;
-import java2.application_target_list.core.database.user.UserListImpl;
-import java2.application_target_list.core.domain.Target;
-import java2.application_target_list.core.domain.User;
+import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
+import java2.application_target_list.core.requests.target.AddTargetRequest;
+import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
 import java2.application_target_list.core.responses.board.SetRecordCompleteDateResponse;
 import java2.application_target_list.core.services.board.AddRecordService;
 import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.board.SetRecordCompleteDateService;
+import java2.application_target_list.core.services.target.AddTargetService;
+import java2.application_target_list.core.services.user.AddUserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,26 +26,32 @@ public class SetRecordCompleteDateAcceptanceTest {
 
     private GetAllRecordsService getAllRecordsService;
     private SetRecordCompleteDateService setRecordCompleteDateService;
+    private ApplicationContext applicationContext;
+    private UserRepository userRepository;
+    private TargetRepository targetRepository;
+    private DatabaseCleaner databaseCleaner;
+    private AddTargetService addTargetService;
+    private AddUserService addUserService;
+    private AddRecordService addRecordService;
+    private Long userId;
+    private Long targetId;
+    private Long recordId;
 
     @Before
     public void setup() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
-        AddRecordService addRecordService = applicationContext.getBean(AddRecordService.class);
-        getAllRecordsService = applicationContext.getBean(GetAllRecordsService.class);
-        setRecordCompleteDateService = applicationContext.getBean(SetRecordCompleteDateService.class);
-        UserDatabase userDatabase = applicationContext.getBean(UserListImpl.class);
-        TargetDatabase targetDatabase = applicationContext.getBean(TargetListImpl.class);
-        userDatabase.addUser(new User("name1", "surname1"));
-        targetDatabase.addTarget(new Target("name", "description", 1));
-        AddRecordRequest addRecordRequest1 = new AddRecordRequest(1L, 1L);
-        addRecordService.execute(addRecordRequest1);
+        createServices();
+        databaseCleaner.clean();
+        addTargetsToDB();
+        addUsersToDB();
+        addRecordsToDB();
     }
 
     @Test
     public void shouldSetRecordCompleteDate() {
-        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
+        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(recordId);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
+
         Assert.assertFalse(setRecordCompleteDateResponse.hasErrors());
         Assert.assertNotNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
     }
@@ -54,6 +61,7 @@ public class SetRecordCompleteDateAcceptanceTest {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(-1L);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
+
         Assert.assertTrue(setRecordCompleteDateResponse.hasErrors());
         Assert.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
@@ -61,5 +69,71 @@ public class SetRecordCompleteDateAcceptanceTest {
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "no record with that ID");
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "must not be negative!");
+    }
+
+    private void addRecordsToDB() {
+        AddRecordRequest addRecordRequest1 = new AddRecordRequest(targetId, userId);
+        addRecordService.execute(addRecordRequest1);
+        recordId = getAllRecordsService.execute(new GetAllRecordsRequest()).getRecordList().get(0).getRecordId();
+    }
+
+    private void addUsersToDB() {
+        AddUserRequest addUserRequest = new AddUserRequest("name1", "surname1");
+        addUserService.execute(addUserRequest);
+        userId = userRepository.getUsersList().get(0).getId();
+    }
+
+    private void addTargetsToDB() {
+        AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
+        addTargetService.execute(addTargetRequest);
+        targetId = targetRepository.getTargetsList().get(0).getId();
+    }
+
+    private void createServices() {
+        applicationContext = createApplicationContext();
+        addRecordService = createAddRecordService();
+        getAllRecordsService = createGetAllRecordsService();
+        userRepository = createUserRepository();
+        targetRepository = createTargetRepository();
+        databaseCleaner = createDatabaseCleaner();
+        addTargetService = createAddTargetService();
+        addUserService = createAddUserService();
+        setRecordCompleteDateService = createSetRecordCompleteDateService();
+    }
+
+    private SetRecordCompleteDateService createSetRecordCompleteDateService() {
+        return applicationContext.getBean(SetRecordCompleteDateService.class);
+    }
+
+    private AddUserService createAddUserService() {
+        return applicationContext.getBean(AddUserService.class);
+    }
+
+    private AddTargetService createAddTargetService() {
+        return applicationContext.getBean(AddTargetService.class);
+    }
+
+    private DatabaseCleaner createDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
+
+    private TargetRepository createTargetRepository() {
+        return applicationContext.getBean(TargetRepository.class);
+    }
+
+    private UserRepository createUserRepository() {
+        return applicationContext.getBean(UserRepository.class);
+    }
+
+    private GetAllRecordsService createGetAllRecordsService() {
+        return applicationContext.getBean(GetAllRecordsService.class);
+    }
+
+    private AddRecordService createAddRecordService() {
+        return applicationContext.getBean(AddRecordService.class);
+    }
+
+    private ApplicationContext createApplicationContext() {
+        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
     }
 }

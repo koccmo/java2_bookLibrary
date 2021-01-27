@@ -1,19 +1,17 @@
 package java2.application_target_list.core.database.board;
 
 import java2.application_target_list.core.domain.Record;
-import java2.application_target_list.core.domain.Target;
-import java2.application_target_list.core.domain.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Profile("inmemory")
-public class BoardListImpl implements BoardDatabase{
+//@Component
+public class InMemoryBoardRepositoryImpl implements BoardRepository {
 
     Long recordId = 0L;
     List<Record> recordsList = new ArrayList<>();

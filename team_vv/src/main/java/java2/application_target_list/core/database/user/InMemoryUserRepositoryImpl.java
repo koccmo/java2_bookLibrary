@@ -3,13 +3,13 @@ package java2.application_target_list.core.database.user;
 import java2.application_target_list.core.domain.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Profile("inmemory")
-public class UserListImpl implements UserDatabase {
+//@Component
+public class InMemoryUserRepositoryImpl implements UserRepository {
 
     List<User> userList = new ArrayList<>();
     Long userId = 0L;

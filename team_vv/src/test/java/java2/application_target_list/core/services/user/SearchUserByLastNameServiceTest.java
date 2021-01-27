@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -26,7 +26,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<User> users;
-    @Mock private UserDatabase userDatabase;
+    @Mock private UserRepository userRepository;
     @Mock private SearchUserByLastNameValidator searchUserByLastNameValidator;
     @InjectMocks private SearchUserByLastNameService searchUserByLastNameService;
 
@@ -43,7 +43,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         SearchUsersByLastNameRequest searchUsersByLastNameRequest = new SearchUsersByLastNameRequest("surname");
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name", "surname"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
@@ -58,7 +58,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
@@ -75,7 +75,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByFirstNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
@@ -92,7 +92,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
@@ -109,7 +109,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
@@ -126,7 +126,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
@@ -142,7 +142,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
@@ -158,7 +158,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
@@ -174,7 +174,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
@@ -190,7 +190,7 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userDatabase.findUserByLastName("surname")).thenReturn(users);
+        Mockito.when(userRepository.findUserByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
         assertFalse(searchUserByLastNameResponse.hasErrors());
         assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);

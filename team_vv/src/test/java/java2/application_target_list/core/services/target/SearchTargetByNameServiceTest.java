@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.domain.Target;
@@ -27,7 +27,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<Target> targets;
-    @Mock private TargetDatabase targetDatabase;
+    @Mock private TargetRepository targetRepository;
     @Mock private SearchTargetByNameValidator validator;
     @InjectMocks
     SearchTargetByNameService service;
@@ -44,14 +44,14 @@ public class SearchTargetByNameServiceTest extends TestCase {
     public void shouldSearchTargetsByName() {
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name", "description", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name", "description", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -59,18 +59,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("name", "ASCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 1));
-        targets.add(new Target("name1", "description1", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 1L));
+        targets.add(new Target("name1", "description1", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
         assertEquals(response.getTargetsList().get(1).getName(), "name2");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -78,18 +78,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("name", "DESCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 10));
-        targets.add(new Target("name2", "description2", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 10L));
+        targets.add(new Target("name2", "description2", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
         assertEquals(response.getTargetsList().get(1).getName(), "name1");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -97,18 +97,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("description", "DESCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 10));
-        targets.add(new Target("name2", "description2", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 10L));
+        targets.add(new Target("name2", "description2", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
         assertEquals(response.getTargetsList().get(1).getName(), "name1");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -116,18 +116,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("description", "ASCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 1));
-        targets.add(new Target("name1", "description1", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 1L));
+        targets.add(new Target("name1", "description1", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
         assertEquals(response.getTargetsList().get(1).getName(), "name2");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -135,18 +135,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("deadline", "ASCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 10));
-        targets.add(new Target("name1", "description1", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 10L));
+        targets.add(new Target("name1", "description1", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
         assertEquals(response.getTargetsList().get(1).getName(), "name2");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -154,18 +154,18 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Ordering ordering = new Ordering("deadline", "DESCENDING");
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 1));
-        targets.add(new Target("name2", "description2", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 1L));
+        targets.add(new Target("name2", "description2", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
         assertEquals(response.getTargetsList().get(1).getName(), "name1");
         assertEquals(response.getTargetsList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -173,15 +173,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 10));
-        targets.add(new Target("name1", "description1", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 10L));
+        targets.add(new Target("name1", "description1", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -190,15 +190,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 1));
-        targets.add(new Target("name1", "description1", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 1L));
+        targets.add(new Target("name1", "description1", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -207,15 +207,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 10));
-        targets.add(new Target("name2", "description2", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 10L));
+        targets.add(new Target("name2", "description2", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -224,15 +224,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 10));
-        targets.add(new Target("name2", "description2", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 10L));
+        targets.add(new Target("name2", "description2", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -241,15 +241,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 1));
-        targets.add(new Target("name1", "description1", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 1L));
+        targets.add(new Target("name1", "description1", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -258,15 +258,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name2", "description2", 10));
-        targets.add(new Target("name1", "description1", 1));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name2", "description2", 10L));
+        targets.add(new Target("name1", "description1", 1L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name1");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -275,15 +275,15 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Paging paging = new Paging(1, 1);
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name", ordering, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        targets.add(new Target("name1", "description1", 1));
-        targets.add(new Target("name2", "description2", 10));
-        Mockito.when(targetDatabase.findByTargetName("name")).thenReturn(targets);
+        targets.add(new Target("name1", "description1", 1L));
+        targets.add(new Target("name2", "description2", 10L));
+        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
         assertEquals(response.getTargetsList().get(0).getName(), "name2");
         assertEquals(response.getTargetsList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10));
+        assertEquals(Optional.ofNullable(response.getTargetsList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test

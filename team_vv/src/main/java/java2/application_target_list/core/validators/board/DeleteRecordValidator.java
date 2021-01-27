@@ -1,6 +1,6 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.board.BoardDatabase;
+import java2.application_target_list.core.database.board.BoardRepository;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
@@ -11,11 +11,11 @@ import java.util.List;
 @Component
 public class DeleteRecordValidator {
 
-    public List<CoreError> validate(DeleteRecordRequest request, BoardDatabase boardDatabase) {
+    public List<CoreError> validate(DeleteRecordRequest request, BoardRepository boardRepository) {
         List<CoreError> errors = new ArrayList<>();
 
 
-        if (!boardDatabase.isIdInBoardList(request.getRecordIdToDelete())){
+        if (!boardRepository.isIdInBoardList(request.getRecordIdToDelete())){
             errors.add(new CoreError("Record ID","no record with that ID"));
         }
 

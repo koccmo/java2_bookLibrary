@@ -4,15 +4,13 @@ import java2.application_target_list.core.domain.Target;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.math.BigInteger;
 import java.util.List;
 
-@Component
-@Profile("mysql")
-public class TargetListJDBCImpl implements TargetDatabase{
+//@Component
+public class JdbcTargetRepositoryImpl implements TargetRepository {
 
     @Autowired JdbcTemplate jdbcTemplate;
 
@@ -42,7 +40,7 @@ public class TargetListJDBCImpl implements TargetDatabase{
     }
 
     @Override
-    public boolean changeTargetDeadline(Long targetId, int newDeadline) {
+    public boolean changeTargetDeadline(Long targetId, Long newDeadline) {
         jdbcTemplate.update("UPDATE targets SET target_deadline = ? WHERE id = ?", newDeadline, targetId);
         return true;
     }
@@ -75,13 +73,4 @@ public class TargetListJDBCImpl implements TargetDatabase{
                 new TargetsMapper());
     }
 
-    private class TargetsMapper implements RowMapper<Target> {
-        public Target mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Target target = new Target(rs.getString("target_name"),
-                    rs.getString("target_description"),
-                    rs.getInt("target_deadline"));
-            target.setId(rs.getLong("id"));
-            return target;
-        }
-    }
 }
