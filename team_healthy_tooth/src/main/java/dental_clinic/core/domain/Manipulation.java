@@ -9,6 +9,8 @@ public class Manipulation {
     private Integer price;
     private boolean isActive = true;
 
+    public Manipulation() { }
+
     public Manipulation(String manipulation_type, Integer price) {
         this.manipulation_type = manipulation_type;
         this.price = price;
@@ -26,16 +28,24 @@ public class Manipulation {
         return manipulation_type;
     }
 
+    public void setManipulation_type(String manipulation_type) {
+        this.manipulation_type = manipulation_type;
+    }
+
     public Integer getPrice() {
         return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
