@@ -11,6 +11,9 @@ public class Customers {
     private String customerPassword;
     private Boolean activity;
 
+    public Customers() {
+    }
+
     public Customers(String customerName, String customerEmail, String customerPhone, String customerPassword) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;

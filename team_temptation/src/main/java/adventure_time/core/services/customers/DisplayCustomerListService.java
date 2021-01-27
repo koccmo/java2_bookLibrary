@@ -12,16 +12,14 @@ import java.util.List;
 public class DisplayCustomerListService {
 
     @Autowired
-    private DatabaseCustomers databaseCustomers;
+    private DatabaseCustomers database;
 
     public List<Customers> getActiveCustomersList () {
-        return databaseCustomers.findAllActiveCustomers();
+        return database.findAllActiveCustomers();
     }
 
     public List<Customers> getInactiveCustomersList () {
-        List<Customers> result = new ArrayList<>();
-        result = databaseCustomers.findAllInactiveCustomers();
-        return result;
+        return database.findAllInactiveCustomers();
     }
 
 }
