@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class InMemoryCustomer implements DatabaseCustomers {
 
     private Long idCounter =1L;

@@ -1,18 +1,24 @@
 dependencies {
-	//testCompile('junit:junit:4.13.1')
+
+	compile('org.springframework:spring-context:5.2.6.RELEASE')
+	compile('org.springframework:spring-jdbc:5.2.6.RELEASE') // для интеграции Spring приложения с JDBC API, является надстройкой над JDBC API
+	compile('mysql:mysql-connector-java:8.0.22')
+	compile('org.apache.commons:commons-dbcp2:2.8.0') // библиотека пулов соединений с реляционной базой данных - DataSource
+
 	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.7.0'
 	testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '2.19.0'
 	testCompile("org.assertj:assertj-core:3.11.1")
 	testCompile('org.mockito:mockito-core:3.6.0')
-	compile('org.springframework:spring-context:5.2.6.RELEASE')
-	testCompile('org.springframework:spring-test:5.2.6.RELEASE') // https://mvnrepository.com/artifact/org.springframework/spring-test
-	// Данная библиотека будет использоваться только для тестов, поэтому при
-	//подключении библтотеки используйте область видимости testCompile.
+	testCompile('org.springframework:spring-test:5.2.6.RELEASE')
+
 }
 test {
 	useJUnitPlatform()
 }
 
+	// https://mvnrepository.com/artifact/org.springframework/spring-test
+	// Данная библиотека будет использоваться только для тестов, поэтому при
+	//подключении библтотеки используйте область видимости testCompile.
 //			* JUnit Jupiter as a testing framework.
 //        testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.2.0'
 //
