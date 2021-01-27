@@ -48,7 +48,10 @@ import java.util.stream.Collectors;
             if (isNameFilled(searchCustomerRequest.getName())) {
                 return searchByNameIsProvided(searchCustomerRequest);
             }
-            return searchBySurnameIsProvided(searchCustomerRequest);
+            if (isSurnameFilled(searchCustomerRequest.getSurname())) {
+                return searchBySurnameIsProvided(searchCustomerRequest);
+            }
+            return searchByNameAndSurnameIsProvided(searchCustomerRequest);
         }
 
         private SearchCustomerResponse searchByNameAndSurnameIsProvided (SearchCustomerRequest searchCustomerRequest){
@@ -86,6 +89,10 @@ import java.util.stream.Collectors;
             customers = order(customers, searchCustomerRequest.getOrdering());
             customers = paging(customers,searchCustomerRequest.getPaging());
             return new SearchCustomerResponse(customers);
+        }
+
+        private boolean isSurnameFilled(String surname){
+        return  surname !=null && !surname.isEmpty();
         }
 
         private SearchCustomerResponse searchBySurnameIsProvided (SearchCustomerRequest searchCustomerRequest){
