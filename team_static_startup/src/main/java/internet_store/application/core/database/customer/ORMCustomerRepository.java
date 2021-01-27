@@ -63,7 +63,7 @@ public class ORMCustomerRepository implements CustomerRepository {
                 "UPDATE Customer SET first_name = :newFirstName WHERE id = :id");
         query.setParameter("newFirstName", newFirstName);
         query.setParameter("id", id);
-        return query.executeUpdate() > 1;
+        return query.executeUpdate() >= 1;
     }
 
 }
