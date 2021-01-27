@@ -1,6 +1,6 @@
 package internet_store.application.core.services.customer;
 
-import internet_store.application.core.database.customer.ORMCustomerRepository;
+import internet_store.application.core.database.customer.CustomerRepository;
 import internet_store.application.core.requests.customer.ChangeCustomerFirstNameRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.customer.ChangeCustomerFirstNameResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class ChangeCustomerFirstNameService {
 
-    @Autowired private ORMCustomerRepository customerRepository;
+    @Autowired private CustomerRepository customerRepository;
     @Autowired private ChangeCustomerFirstNameValidator validator;
 
     public ChangeCustomerFirstNameResponse execute(ChangeCustomerFirstNameRequest request){
