@@ -2,26 +2,21 @@ package dental_clinic.console_ui.visit;
 
 import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
-import dental_clinic.console_ui.doctor.AddDoctorUIAction;
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.core.requests.doctor.AddDoctorRequest;
 import dental_clinic.core.requests.doctor.GetDoctorListRequest;
 import dental_clinic.core.requests.manipulation.GetManipulationsListRequest;
 import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
-import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.responses.doctor.GetDoctorListResponse;
 import dental_clinic.core.responses.manipulation.GetManipulationsListResponse;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
-import dental_clinic.core.services.doctor.AddDoctorService;
 import dental_clinic.core.services.doctor.GetDoctorListService;
 import dental_clinic.core.services.manipulation.GetManipulationsListService;
 import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.services.ContainsDatabaseIdService;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -59,7 +54,7 @@ public class AddVisitUIAction implements UIAction {
 
             ToothStatus toothStatus = enterToothStatus();
 
-            Doctor doctor = new Doctor(enterDoctor(), "");
+            Doctor doctor = new Doctor(enterDoctor(), "", "");
 
             List<Long>manipulationsIds = enterManipulationsIds();
 
@@ -131,7 +126,7 @@ public class AddVisitUIAction implements UIAction {
         Scanner in = new Scanner(System.in);
         GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
         GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
-        System.out.println("Please enter doctor's id from DB or enter name surname to create new doctor:\n");
+        System.out.println("Please enter doctor's id from DB or enter: name surname phone to create new doctor:\n");
         if (!getDoctorListResponse.hasErrors()) {
             getDoctorListResponse.getDoctors().forEach(System.out::println);
         }

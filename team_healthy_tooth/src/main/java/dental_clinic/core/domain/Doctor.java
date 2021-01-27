@@ -9,13 +9,17 @@ public class Doctor {
     private Long id;
     private String name;
     private String surname;
+    private String phone;
     private boolean isEmployed;
     private WorkGraphic workGraphic = new WorkGraphic();
     private List<Visit> visits = new ArrayList<>();
 
-    public Doctor(String name, String surname) {
+    public Doctor() { }
+
+    public Doctor(String name, String surname, String phone) {
         this.name = name;
         this.surname = surname;
+        this.phone = phone;
         isEmployed = true;
     }
 
@@ -31,8 +35,24 @@ public class Doctor {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSurname() {
         return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public boolean getIsEmployed() {
@@ -53,6 +73,10 @@ public class Doctor {
 
     public List<Visit> getVisits() {
         return visits;
+    }
+
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
     }
 
     public void addVisit(Visit visit){
