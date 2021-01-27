@@ -1,12 +1,14 @@
 package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
+import internet_store.application.core.domain.Product;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +52,9 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        CriteriaQuery<Customer> query = sessionFactory.getCriteriaBuilder().createQuery(Customer.class);
+        query.from(Customer.class);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
     }
 
     @Override
