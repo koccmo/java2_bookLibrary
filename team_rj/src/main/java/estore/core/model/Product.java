@@ -1,13 +1,30 @@
 package estore.core.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="products")
 public class Product {
+
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name="prodName")
     private String name;
+
+    @Column(name="prodDescription")
     private String description;
+
+    @Column(name="category_id")
     private String category;
+
+    @Column(name="quantity")
     private int quantity;
+
+    @Column(name="price")
     private double price;
 
     public Product() {}
