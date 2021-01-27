@@ -1,4 +1,4 @@
-package dental_clinic.database.in_memory.planned_visit;
+package dental_clinic.core.database.planned_visit;
 
 import dental_clinic.core.domain.PlannedVisit;
 

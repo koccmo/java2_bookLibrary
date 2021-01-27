@@ -1,15 +1,13 @@
-package dental_clinic.database.in_memory.planned_visit;
+package dental_clinic.core.database.planned_visit;
 
 import dental_clinic.core.domain.PlannedVisit;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class PlannedVisitsInMemoryDatabaseImpl implements PlannedVisitsInMemoryDatabase {
 
     private List<PlannedVisit> plannedVisitsList = new ArrayList<>();

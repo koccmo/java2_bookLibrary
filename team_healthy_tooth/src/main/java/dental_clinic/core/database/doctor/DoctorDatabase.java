@@ -1,4 +1,4 @@
-package dental_clinic.database.in_memory.doctor;
+package dental_clinic.core.database.doctor;
 
 import dental_clinic.core.domain.Doctor;
 
@@ -12,7 +12,7 @@ public interface DoctorDatabase {
 
     void addDoctor(Doctor doctor);
 
-    void deleteDoctorById(Long id);
+    boolean deleteDoctorById(Long id);
 
     boolean containsDoctor(Doctor doctor);
 

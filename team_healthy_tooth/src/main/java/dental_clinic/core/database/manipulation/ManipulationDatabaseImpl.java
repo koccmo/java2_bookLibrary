@@ -1,13 +1,12 @@
-package dental_clinic.database.in_memory.manipulation;
+package dental_clinic.core.database.manipulation;
 
 import dental_clinic.core.domain.Manipulation;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class ManipulationInMemoryDatabaseImpl implements ManipulationInMemoryDatabase{
+//@Component
+public class ManipulationDatabaseImpl implements ManipulationDatabase {
 
     private List<Manipulation> manipulations = createSomeManipulations();
     private Long id = 4L;
@@ -28,7 +27,7 @@ public class ManipulationInMemoryDatabaseImpl implements ManipulationInMemoryDat
     @Override
     public void deactivateManipulation(Long id) {
         for (Manipulation manipulation : manipulations) {
-            manipulation.setIsActive(false);
+            manipulation.setActive(false);
         }
     }
 

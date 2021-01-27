@@ -1,16 +1,15 @@
-package dental_clinic.database.in_memory.patient;
+package dental_clinic.core.database.patient;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.Visit;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class PatientDatabaseInMemory implements PatientDatabase {
 
     private Long id= 1L;

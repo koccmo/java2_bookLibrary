@@ -1,14 +1,13 @@
-package dental_clinic.database.in_memory.visit;
+package dental_clinic.core.database.visit;
 
 import dental_clinic.core.domain.Visit;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class VisitDatabaseImplInMemory implements VisitDatabase{
 
     private List<Visit> visitList = new ArrayList<>();
