@@ -5,7 +5,6 @@ import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.request.AddFlightRequest;
-import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +25,8 @@ public class AddFlightRequestValidatorTest {
 		validator = new AddFlightRequestValidator();
 
 		Ticket ticket = new Ticket("Riga", "London", LocalDate.now().plusMonths(1), "11A");
-		ticket.setFromCountry("Latvia");
-		ticket.setToCountry("United Kingdom");
+		ticket.setOriginCountry("Latvia");
+		ticket.setDestinationCountry("United Kingdom");
 
 		flight = new Flight();
 		flight.setTicket(ticket);
@@ -124,7 +123,7 @@ public class AddFlightRequestValidatorTest {
 	public void noOriginCountryTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCountry(null);
+		flight.getTicket().setOriginCountry(null);
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -138,7 +137,7 @@ public class AddFlightRequestValidatorTest {
 	public void OriginCountryContainsDigitsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCountry("Latvia88");
+		flight.getTicket().setOriginCountry("Latvia88");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -152,7 +151,7 @@ public class AddFlightRequestValidatorTest {
 	public void OriginCountryContainsSymbolsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCountry("Latvia$#@#$@#");
+		flight.getTicket().setOriginCountry("Latvia$#@#$@#");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -166,7 +165,7 @@ public class AddFlightRequestValidatorTest {
 	public void noOriginCityTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCity(null);
+		flight.getTicket().setOriginCity(null);
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -180,7 +179,7 @@ public class AddFlightRequestValidatorTest {
 	public void OriginCityContainsDigitsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCity("Riga45646");
+		flight.getTicket().setOriginCity("Riga45646");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -194,7 +193,7 @@ public class AddFlightRequestValidatorTest {
 	public void OriginCityContainsSymbolsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setFromCity("Riga$#@#$@#");
+		flight.getTicket().setOriginCity("Riga$#@#$@#");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -208,7 +207,7 @@ public class AddFlightRequestValidatorTest {
 	public void noDestinationCountryTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setToCountry(null);
+		flight.getTicket().setDestinationCountry(null);
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -222,7 +221,7 @@ public class AddFlightRequestValidatorTest {
 	public void noDestinationCityTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setToCity(null);
+		flight.getTicket().setDestinationCity(null);
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -236,7 +235,7 @@ public class AddFlightRequestValidatorTest {
 	public void destinationCityContainsDigitsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setToCity("Riga45646");
+		flight.getTicket().setDestinationCity("Riga45646");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -250,7 +249,7 @@ public class AddFlightRequestValidatorTest {
 	public void destinationCityContainsSymbolsTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setToCity("Riga$#@#$@#");
+		flight.getTicket().setDestinationCity("Riga$#@#$@#");
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -264,7 +263,7 @@ public class AddFlightRequestValidatorTest {
 	public void noDepartureDateTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setDate(null);
+		flight.getTicket().setDepartureDate(null);
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);
@@ -278,7 +277,7 @@ public class AddFlightRequestValidatorTest {
 	public void departureBeforeNowDateTest () {
 		User user = new User("Sergejs", "Aleksejevs");
 
-		flight.getTicket().setDate(LocalDate.now().minusMonths(1));
+		flight.getTicket().setDepartureDate(LocalDate.now().minusMonths(1));
 		flight.setUser(user);
 
 		request = new AddFlightRequest(flight);

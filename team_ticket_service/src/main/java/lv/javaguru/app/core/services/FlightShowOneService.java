@@ -6,9 +6,6 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.FlightShowOneRequest;
 import lv.javaguru.app.core.response.FlightShowOneResponse;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +16,12 @@ import java.util.List;
 public class FlightShowOneService {
 
 	@Autowired
-	private Database flightDatabase;
-	@Autowired
-	private UserDatabase userDatabase;
+	private Database database;
 
 
 	public FlightShowOneResponse execute (FlightShowOneRequest request) {
 
-		Flight flight = flightDatabase.getFlightById(request.getId());
+		Flight flight = database.getFlightById(request.getId());
 
 		return new FlightShowOneResponse(flight);
 	}

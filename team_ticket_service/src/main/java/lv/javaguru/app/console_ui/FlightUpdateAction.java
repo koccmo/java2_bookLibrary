@@ -163,7 +163,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter name:");
 		String name = scanner.nextLine();
 
-		EditFlightRequest request = new EditFlightRequest(response.getFlight(), name);
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), name);
 		FlightEditResponse responseEdit = flightEditService.executeUserNameUpdate(request);
 
 
@@ -179,7 +179,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter surname:");
 		String surname = scanner.nextLine();
 
-		EditFlightRequest request = new EditFlightRequest(response.getFlight(), surname);
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), surname);
 		FlightEditResponse responseEdit = flightEditService.executeUserSurnameUpdate(request);
 
 

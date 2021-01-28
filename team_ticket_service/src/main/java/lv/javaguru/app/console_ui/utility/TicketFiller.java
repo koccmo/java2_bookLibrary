@@ -24,8 +24,8 @@ public class TicketFiller {
 
 		String[] origin = acquireOriginCountryAndCity();
 		if (origin != null) {
-			ticket.setFromCountry(origin[0]);
-			ticket.setFromCity(origin[1]);
+			ticket.setOriginCountry(origin[0]);
+			ticket.setOriginCity(origin[1]);
 		}
 		else {
 			return false;
@@ -33,8 +33,8 @@ public class TicketFiller {
 
 		String[] destination = acquireDestinationCountryAndCity();
 		if (destination != null) {
-			ticket.setToCountry(destination[0]);
-			ticket.setToCity(destination[1]);
+			ticket.setDestinationCountry(destination[0]);
+			ticket.setDestinationCity(destination[1]);
 		}
 		else {
 			return false;
@@ -42,7 +42,7 @@ public class TicketFiller {
 
 		LocalDate date = acquireDate(ticket);
 		if (date != null)
-			ticket.setDate(date);
+			ticket.setDepartureDate(date);
 		else
 			return false;
 
@@ -174,9 +174,9 @@ public class TicketFiller {
 			BaseFunc.printHeader("SELECT DATE:");
 			List<LocalDate> dates = new ArrayList<>();
 
-			if (ticket.getToCity().equals("Paphos"))
+			if (ticket.getDestinationCity().equals("Paphos"))
 				dates.addAll(departEvery(new int[]{2, 6}));
-			else if (ticket.getToCity().equals("Malta"))
+			else if (ticket.getDestinationCity().equals("Malta"))
 				dates.addAll(departEvery(new int[]{4, 7}));
 
 			printDates(dates);

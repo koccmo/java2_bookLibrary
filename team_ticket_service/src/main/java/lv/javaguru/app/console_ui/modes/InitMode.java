@@ -9,7 +9,6 @@ import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
@@ -58,12 +57,12 @@ public class InitMode {
 		LocalDate flightDate = LocalDate.of(2021, 2, 14);
 
 		Ticket ticket1 = new Ticket("Riga", "Paphos", flightDate, "55");
-		ticket1.setFromCountry("Latvia");
-		ticket1.setToCountry("Cyprus");
+		ticket1.setOriginCountry("Latvia");
+		ticket1.setDestinationCountry("Cyprus");
 
 		Ticket ticket2 = new Ticket("London", "Paphos", flightDate, "55");
-		ticket2.setFromCountry("Great Britain");
-		ticket2.setToCountry("Cyprus");
+		ticket2.setOriginCountry("Great Britain");
+		ticket2.setDestinationCountry("Cyprus");
 
 		Flight flight1 = new Flight();
 		flight1.setUser(user1);
@@ -72,15 +71,17 @@ public class InitMode {
 		Flight flight2 = new Flight(user2, ticket2);
 
 
-		UserDatabase database = context.getBean(UserDatabase.class);
+		Database database = context.getBean(Database.class);
 		database.addUser(admin);
 		database.addUser(user1);
 		database.addUser(user2);
 
-		Database flightDB = context.getBean(Database.class);
+		database.addTicket(ticket1);
+		database.addTicket(ticket2);
+		//Database flightDB = context.getBean(Database.class);
 
-		flightDB.addFlight(flight1);
-		flightDB.addFlight(flight2);
+		database.addFlight(flight1);
+		database.addFlight(flight2);
 	}
 
 	private static void printInitMenu () {
