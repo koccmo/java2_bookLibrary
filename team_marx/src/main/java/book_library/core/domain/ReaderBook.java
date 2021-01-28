@@ -12,8 +12,9 @@ public class ReaderBook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="reader_id")
-    private Long readerId;
+    @OneToMany
+    @JoinColumn(name = "reader_id", nullable = false)
+    private Reader reader;
 
     @Column(name="book_id")
     private Long bookId;
@@ -33,14 +34,6 @@ public class ReaderBook {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getReaderId() {
-        return readerId;
-    }
-
-    public void setReaderId(Long readerId) {
-        this.readerId = readerId;
     }
 
     public Long getBookId() {
