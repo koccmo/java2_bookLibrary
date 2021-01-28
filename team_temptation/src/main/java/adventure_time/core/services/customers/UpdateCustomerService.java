@@ -28,6 +28,8 @@ public class UpdateCustomerService {
             return new LoginCustomerResponse(errors);
         }
 
+        //TODO всю проверку на возможные ошибки нахождения кастомера и совпадения паролей здесь!!!
+
         Long customerId = database.checkLoginBeforeUpdate(request.getEmail(), request.getPassword());
         if (customerId == -1) {
             CoreError error = new CoreError("customerEmail", "Wrong email");
