@@ -36,7 +36,7 @@ public class ReaderBook {
 	private Date bookOutDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "book_return_date", nullable = false)
+	@Column(name = "book_return_date")
 	private Date bookReturnDate;
 
 	public Long getId() {
