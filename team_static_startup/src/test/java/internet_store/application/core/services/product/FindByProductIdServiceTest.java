@@ -5,7 +5,6 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.FindByIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.FindByProductIdResponse;
-import internet_store.application.core.services.product.FindByProductIdService;
 import internet_store.application.core.services.product.validators.FindByProductIdValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,12 +23,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FindByProductIdServiceTest {
 
-    @Mock
-    ProductRepository productRepository;
-    @Mock
-    FindByProductIdValidator validator;
-    @InjectMocks
-    FindByProductIdService service;
+    @Mock ProductRepository productRepository;
+    @Mock FindByProductIdValidator validator;
+    @InjectMocks FindByProductIdService service;
 
     @Test
     public void shouldReturnResponseWithoutErrors() {
