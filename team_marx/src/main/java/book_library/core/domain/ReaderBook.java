@@ -16,8 +16,9 @@ public class ReaderBook {
     @JoinColumn(name = "reader_id", nullable = false)
     private Reader reader;
 
-    @Column(name="book_id")
-    private Long bookId;
+    @OneToMany
+    @JoinColumn(name="book_id", nullable = false)
+    private Book book;
 
     @Column(name="book_out_data")
     private Date bookOutData;
@@ -34,14 +35,6 @@ public class ReaderBook {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
     }
 
     public Date getBookOutData() {
