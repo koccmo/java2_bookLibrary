@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Profile;
 
 import static org.junit.Assert.*;
 
-@Profile("inmemory")
+// @Profile("inmemory")
 public class FindProductsAcceptanceTest {
 
     private ApplicationContext appContext;

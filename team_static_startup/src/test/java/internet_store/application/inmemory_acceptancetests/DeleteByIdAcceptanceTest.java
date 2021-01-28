@@ -1,8 +1,19 @@
 package internet_store.application.inmemory_acceptancetests;
 
-import org.springframework.context.annotation.Profile;
+import internet_store.application.core.requests.product.AddProductRequest;
+import internet_store.application.core.requests.product.DeleteByProductIdRequest;
+import internet_store.application.core.responses.product.DeleteByProductIdResponse;
+import internet_store.application.core.services.product.AddProductService;
+import internet_store.application.core.services.product.DeleteByProductIdService;
+import internet_store.lesson_6.config.ProductListConfiguration;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@Profile("inmemory")
+import java.math.BigDecimal;
+import static org.junit.Assert.*;
+
+// @Profile("inmemory")
 public class DeleteByIdAcceptanceTest {
 /*
 
@@ -44,7 +55,6 @@ public class DeleteByIdAcceptanceTest {
         assertEquals(1, deleteResponse.getErrors().size());
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
-    }
-*/
+    }*/
 
 }

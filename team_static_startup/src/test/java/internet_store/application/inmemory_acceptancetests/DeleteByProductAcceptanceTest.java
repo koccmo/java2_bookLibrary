@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-@Profile("inmemory")
+// @Profile("inmemory")
 public class DeleteByProductAcceptanceTest {
 
     private ApplicationContext applicationContext;

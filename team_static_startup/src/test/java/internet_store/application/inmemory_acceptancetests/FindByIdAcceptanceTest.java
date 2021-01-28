@@ -16,7 +16,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import org.springframework.context.annotation.Profile;
 
-@Profile("inmemory")
+// @Profile("inmemory")
 public class FindByIdAcceptanceTest {
 
     private ApplicationContext appContext;

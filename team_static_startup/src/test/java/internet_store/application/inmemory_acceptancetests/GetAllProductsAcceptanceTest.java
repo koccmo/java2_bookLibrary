@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-@Profile("inmemory")
+// @Profile("inmemory")
 public class GetAllProductsAcceptanceTest {
 
     private ApplicationContext appContext;
