@@ -3,7 +3,7 @@ package estore.core.service;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
+import estore.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,6 +1,6 @@
 package estore.core.responses;
 
-import estore.core.model.Product;
+import estore.domain.Product;
 
 import java.util.List;
 

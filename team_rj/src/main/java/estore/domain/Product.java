@@ -1,4 +1,4 @@
-package estore.core.model;
+package estore.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -19,7 +19,9 @@ public class Product {
     private String description;
 
     @Column(name="category_id")
-    private String category;
+//    @ManyToOne
+//    @JoinColumn(name="category_id")
+    private Long category;
 
     @Column(name="quantity")
     private int quantity;
@@ -29,7 +31,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, String category) {
+    public Product(String name, String description, Long category) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -37,7 +39,7 @@ public class Product {
         this.price = 0;
     }
 
-    public Product(String name, String description, String category, int quantity, double price) {
+    public Product(String name, String description, Long category, int quantity, double price) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -85,11 +87,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getCategory() {
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Long category) {
         this.category = category;
     }
 

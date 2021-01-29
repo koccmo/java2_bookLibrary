@@ -1,17 +1,20 @@
 package estore.database;
 
-import estore.core.model.Product;
+import estore.domain.Product;
+import estore.domain.ProductCategory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Component
+@Component
+@Transactional
 public class OrmProductRepositoryImpl implements ProductRepository {
 
-//    @Autowired
-//    private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Product> searchProductByName(String name) {
@@ -45,7 +48,9 @@ public class OrmProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> getDatabase() {
-        return null;
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT products FROM Product products", Product.class)
+                .getResultList();
     }
 
     @Override

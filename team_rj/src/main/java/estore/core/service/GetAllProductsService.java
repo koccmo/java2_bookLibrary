@@ -1,7 +1,7 @@
 package estore.core.service;
 
 import estore.database.ProductRepository;
-import estore.core.model.Product;
+import estore.domain.Product;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@ import estore.core.requests.Paging;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
+import estore.domain.Product;
 import estore.core.requests.SearchProductByNameRequest;
 import estore.core.responses.SearchProductByNameResponse;
 import org.springframework.stereotype.Component;

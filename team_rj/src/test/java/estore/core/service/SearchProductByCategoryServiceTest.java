@@ -7,7 +7,7 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
+import estore.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
