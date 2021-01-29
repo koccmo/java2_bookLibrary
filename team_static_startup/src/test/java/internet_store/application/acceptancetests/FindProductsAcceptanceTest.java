@@ -1,11 +1,13 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.lesson_6.config.ProductListConfiguration;
-import internet_store.lesson_6.core.requests.FindProductsRequest;
-import internet_store.lesson_6.core.requests.Ordering;
-import internet_store.lesson_6.core.requests.Paging;
-import internet_store.lesson_6.core.responses.FindProductsResponse;
-import internet_store.lesson_6.core.services.FindProductsService;
+import internet_store.application.config.AppConfig;
+import internet_store.application.core.requests.product.FindProductsRequest;
+import internet_store.application.core.requests.product.Ordering;
+import internet_store.application.core.requests.product.Paging;
+import internet_store.application.core.responses.product.FindProductsResponse;
+import internet_store.application.core.services.product.FindProductsService;
+import internet_store.application.database_cleaner.DatabaseCleaner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,19 +16,15 @@ import org.springframework.context.annotation.Profile;
 
 import static org.junit.Assert.*;
 
-// @Profile("inmemory")
+@Profile("hibernate")
 public class FindProductsAcceptanceTest {
 
     private ApplicationContext appContext;
 
     @Before
     public void before(){
-        appContext =
-                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
-    }
-
-    private FindProductsService getFindProductsService() {
-        return appContext.getBean(FindProductsService.class);
+        appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -34,7 +32,6 @@ public class FindProductsAcceptanceTest {
         FindProductsRequest request = new FindProductsRequest("A1", "B1");
         FindProductsResponse response = getFindProductsService().execute(request);
         assertFalse(response.hasErrors());
-
     }
 
     @Test
@@ -42,7 +39,6 @@ public class FindProductsAcceptanceTest {
         FindProductsRequest request = new FindProductsRequest(null, "B1");
         FindProductsResponse response = getFindProductsService().execute(request);
         assertFalse(response.hasErrors());
-
     }
 
     @Test
@@ -50,7 +46,6 @@ public class FindProductsAcceptanceTest {
         FindProductsRequest request = new FindProductsRequest("A1", null);
         FindProductsResponse response = getFindProductsService().execute(request);
         assertFalse(response.hasErrors());
-
     }
 
     @Test
@@ -65,14 +60,12 @@ public class FindProductsAcceptanceTest {
         assertEquals(response.getErrors().get(1).getMessage(), "Must not be empty!");
     }
 
-
     @Test
     public void shouldNotReturnErrorsWhenBothOrderingFieldsProvided() {
         Ordering ordering = new Ordering("Name", "Ascending");
         FindProductsRequest request = new FindProductsRequest("A1", null, ordering);
         FindProductsResponse response = getFindProductsService().execute(request);
         assertFalse(response.hasErrors());
-
     }
 
     @Test
@@ -86,7 +79,6 @@ public class FindProductsAcceptanceTest {
         assertEquals("Both must be empty or filled!", response.getErrors().get(0).getMessage());
         assertEquals("Direction", response.getErrors().get(1).getField());
         assertEquals("Must be Ascending or Descending.", response.getErrors().get(1).getMessage());
-
     }
 
     @Test
@@ -208,6 +200,14 @@ public class FindProductsAcceptanceTest {
         assertEquals(1, response.getErrors().size());
         assertEquals("Page size", response.getErrors().get(0).getField());
         assertEquals("Must be bigger than zero.", response.getErrors().get(0).getMessage());
+    }
+
+    private FindProductsService getFindProductsService() {
+        return appContext.getBean(FindProductsService.class);
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
     }
 
 }
