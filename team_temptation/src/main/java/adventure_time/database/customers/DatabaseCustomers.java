@@ -28,7 +28,7 @@ public interface DatabaseCustomers {
 
     List<Customers> findAllInactiveCustomers ();
 
-    Long checkLogin (String email, String password);
+    Optional<Customers> checkLogin (String email, String password);
 
     Long checkLoginBeforeUpdate (String email, String password);
 

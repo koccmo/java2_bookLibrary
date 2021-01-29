@@ -88,7 +88,7 @@ public class JdbcCustomersImpl implements DatabaseCustomers {
     }
 
     @Override
-    public Long checkLogin(String email, String password) {
+    public Optional<Customers> checkLogin(String email, String password) {
 //        Optional<Customers> customer = findByEmail(email);
 //        if (customer.isPresent()) {
 //            if ()

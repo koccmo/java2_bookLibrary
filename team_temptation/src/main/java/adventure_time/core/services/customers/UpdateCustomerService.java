@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UpdateCustomerService {
@@ -21,32 +22,6 @@ public class UpdateCustomerService {
     private LoginCustomerRequestValidator validatorLogin;
     @Autowired
     private UpdateCustomerRequestValidator validatorUpdate;
-
-    public LoginCustomerResponse loginCustomer (LoginCustomerRequest request) {
-        List<CoreError> errors = validatorLogin.validate(request);
-        if (!errors.isEmpty()) {
-            return new LoginCustomerResponse(errors);
-        }
-
-        //TODO всю проверку на возможные ошибки нахождения кастомера и совпадения паролей здесь!!!
-
-        Long customerId = database.checkLoginBeforeUpdate(request.getEmail(), request.getPassword());
-        if (customerId == -1) {
-            CoreError error = new CoreError("customerEmail", "Wrong email");
-            errors.add(error);
-            return new LoginCustomerResponse(errors);
-        }
-
-        if (customerId == 0) {
-            CoreError error = new CoreError("customerPassword", "Wrong password");
-            errors.add(error);
-            return new LoginCustomerResponse(errors);
-        }
-
-        Customers customer = database.findById(customerId).get();
-
-        return new LoginCustomerResponse(customer);
-    }
 
     public UpdateCustomerResponse updateCustomer (UpdateCustomerRequest request) {
 

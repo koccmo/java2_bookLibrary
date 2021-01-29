@@ -93,15 +93,8 @@ public class InMemoryCustomer implements DatabaseCustomers {
     }
 
     @Override
-    public Long checkLogin(String email, String password) {
-        Optional<Customers> customer = customers.stream().filter(items -> items.getCustomerEmail().equals(email)).findFirst();
-        if (customer.isPresent()) {
-            if (customer.get().getCustomerPassword().equals(password)) {
-                return customer.get().getCustomerID(); // user found, passwords matched
-            } else {
-                return 0L; // user found, password mismatch
-            }
-        } else return -1L; // user not found
+    public Optional<Customers> checkLogin(String email, String password) {
+        return customers.stream().filter(items -> items.getCustomerEmail().equals(email)).findFirst();
     }
 
     @Override

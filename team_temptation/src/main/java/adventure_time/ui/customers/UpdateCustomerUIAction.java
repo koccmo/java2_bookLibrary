@@ -5,6 +5,7 @@ import adventure_time.core.requests.customers.LoginCustomerRequest;
 import adventure_time.core.requests.customers.UpdateCustomerRequest;
 import adventure_time.core.responses.customer.LoginCustomerResponse;
 import adventure_time.core.responses.customer.UpdateCustomerResponse;
+import adventure_time.core.services.customers.LoginCustomerService;
 import adventure_time.core.services.customers.UpdateCustomerService;
 import adventure_time.ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import java.util.Scanner;
 public class UpdateCustomerUIAction implements UIAction {
 
     @Autowired
-    private UpdateCustomerService service;
+    private LoginCustomerService loginService;
+    @Autowired
+    private UpdateCustomerService updateService;
 
     @Override
     public void execute() {
@@ -28,14 +31,14 @@ public class UpdateCustomerUIAction implements UIAction {
         String password = scanner.nextLine();
 
         LoginCustomerRequest requestLogin = new LoginCustomerRequest(email, password);
-        LoginCustomerResponse responseLogin = service.loginCustomer(requestLogin);
+        LoginCustomerResponse responseLogin = loginService.loginCustomer(requestLogin);
 
         if (responseLogin.hasError()) {
             System.out.println("Ooops! Something went wrong! ");
             System.out.println("Your request could not be fulfilled for the reasons: ");
             responseLogin.getErrors().forEach(System.out::println);
             System.out.println();
-            return; // TODO instead of return use exception?
+            return;
         }
 
         Customers customer = (Customers) responseLogin.getObject();
@@ -77,7 +80,7 @@ public class UpdateCustomerUIAction implements UIAction {
         }
 
         UpdateCustomerRequest requestUpdate = new UpdateCustomerRequest(name, email, phone, passwordOne, passwordTwo, customer.getCustomerID());
-        UpdateCustomerResponse responseUpdate = service.updateCustomer(requestUpdate);
+        UpdateCustomerResponse responseUpdate = updateService.updateCustomer(requestUpdate);
 
         if (responseUpdate.hasError()) {
             System.out.println("Ooops! Something went wrong! ");
