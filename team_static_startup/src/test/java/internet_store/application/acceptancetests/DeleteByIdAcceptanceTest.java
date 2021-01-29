@@ -1,4 +1,4 @@
-package internet_store.application.inmemory_acceptancetests;
+package internet_store.application.acceptancetests;
 
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;

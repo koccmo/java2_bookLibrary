@@ -14,10 +14,8 @@ import java.util.List;
 @Component
 public class AddProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private AddProductValidator validator;
+    @Autowired private ProductRepository productRepository;
+    @Autowired private AddProductValidator validator;
 
     public AddProductResponse execute(AddProductRequest request) {
         List<CoreError> errors = validator.validate(request);

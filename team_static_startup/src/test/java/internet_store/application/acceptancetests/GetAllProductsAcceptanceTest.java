@@ -1,4 +1,4 @@
-package internet_store.application.inmemory_acceptancetests;
+package internet_store.application.acceptancetests;
 
 import internet_store.lesson_6.config.ProductListConfiguration;
 import internet_store.lesson_6.core.requests.AddProductRequest;

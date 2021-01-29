@@ -1,4 +1,4 @@
-package internet_store.application.inmemory_acceptancetests;
+package internet_store.application.acceptancetests;
 
 import org.springframework.context.annotation.Profile;
 
