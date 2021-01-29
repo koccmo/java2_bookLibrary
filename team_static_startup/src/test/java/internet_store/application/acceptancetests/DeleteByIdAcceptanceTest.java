@@ -1,33 +1,32 @@
 package internet_store.application.acceptancetests;
 
+import internet_store.application.config.AppConfig;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;
 import internet_store.application.core.responses.product.DeleteByProductIdResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.DeleteByProductIdService;
-import internet_store.lesson_6.config.ProductListConfiguration;
+import internet_store.application.database_cleaner.DatabaseCleaner;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
+import org.springframework.context.annotation.Profile;
 import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
-// @Profile("inmemory")
+@Profile("hibernate")
 public class DeleteByIdAcceptanceTest {
+
+    private ApplicationContext appContext;
+
+    @Before
+    public void setUp() {
+        appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        getDatabaseCleaner().clean();
+    }
+
 /*
-
-    private ApplicationContext appContext =
-            new AnnotationConfigApplicationContext(ProductListConfiguration.class);
-
-    private DeleteByProductIdService getDeleteByProductIdService() {
-        return appContext.getBean(DeleteByProductIdService.class);
-    }
-
-    private AddProductService getAddProductService() {
-        return appContext.getBean(AddProductService.class);
-    }
-
     @Test
     public void shouldDeleteWhenIdIsInDatabase() {
         AddProductRequest addRequest = new AddProductRequest("A1",
@@ -38,6 +37,7 @@ public class DeleteByIdAcceptanceTest {
         assertTrue(deleteResponse.isProductRemoved());
         assertFalse(deleteResponse.hasErrors());
     }
+*/
 
     @Test
     public void shouldNotDeleteWhenIdIsNotInDatabase() {
@@ -55,6 +55,18 @@ public class DeleteByIdAcceptanceTest {
         assertEquals(1, deleteResponse.getErrors().size());
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
-    }*/
+    }
+
+    private AddProductService getAddProductService() {
+        return appContext.getBean(AddProductService.class);
+    }
+
+    private DeleteByProductIdService getDeleteByProductIdService() {
+        return appContext.getBean(DeleteByProductIdService.class);
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
 
 }
