@@ -53,6 +53,13 @@ ALTER TABLE `reader_books`
 ADD FOREIGN KEY (`reader_id`) REFERENCES `readers`(`id`);
 
 
+CREATE INDEX ix_reader_books_reader_id
+ON reader_books (reader_id);
+
+CREATE INDEX ix_reader_books_book_id
+ON reader_books (book_id);
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
