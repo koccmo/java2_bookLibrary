@@ -1,8 +1,8 @@
 package estore.core.validation;
 
-import estore.core.requests.AddNewProductCategoryRequest;
+import estore.core.requests.AddProductCategoryRequest;
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AddNewProductCategoryValidator {
+public class AddProductCategoryValidator {
 
-    private ProductCategoryRepository categoryDB;
+    private final ProductCategoryRepository categoryDB;
     private ValidationRules validationRules;
 
-    public AddNewProductCategoryValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
+    public AddProductCategoryValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
         this.categoryDB = categoryDB;
         this.validationRules = validationRules;
     }
 
-    public List<CoreError> validate(AddNewProductCategoryRequest request) {
-        List<CoreError> errors = new ArrayList<CoreError>();
+    public List<CoreError> validate(AddProductCategoryRequest request) {
+        List<CoreError> errors = new ArrayList<>();
 
         validateProductCategoryIfEmpty(request).ifPresent(errors::add);
         validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);
@@ -29,19 +29,19 @@ public class AddNewProductCategoryValidator {
         return errors;
     }
 
-    private Optional<CoreError> validateProductCategoryIfEmpty(AddNewProductCategoryRequest request) {
+    private Optional<CoreError> validateProductCategoryIfEmpty(AddProductCategoryRequest request) {
         return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
                 ? Optional.of(new CoreError("Product category", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductCategoryRequest request) {
+    private Optional<CoreError> validateProductCategoryUnallowedPattern(AddProductCategoryRequest request) {
         return (!validationRules.validateLineWithWhitespaces(request.getProductCategory()))
                 ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductCategoryDuplication(AddNewProductCategoryRequest request) {
+    private Optional<CoreError> validateProductCategoryDuplication(AddProductCategoryRequest request) {
         return (!validateCategoryExistence(request.getProductCategory()))
                 ? Optional.empty()
                 : Optional.of(new CoreError("Product category", "exists!"));

@@ -1,17 +1,16 @@
 package estore.database.jdbcrepo;
 
-import estore.core.model.Product;
+import estore.core.domain.Product;
 import estore.database.ProductRepository;
 import estore.database.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Component
+//@Component
 public class JdbcProductRepositoryImpl implements ProductRepository {
 
     @Autowired

@@ -2,7 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.UpdateProductByIdRequest;
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

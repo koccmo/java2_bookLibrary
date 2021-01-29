@@ -1,18 +1,44 @@
-package estore.core.model;
+package estore.core.domain;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name="products")
 public class Product {
+
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="prodName")
     private String name;
+
+    @Column(name="prodDescription")
     private String description;
-    private String category;
+
+    @Column(name="category_id")
+//    @ManyToOne
+//    @JoinColumn(name="category_id")
+    private Long category;
+
+    @Column(name="quantity")
     private int quantity;
+
+    @Column(name="price")
     private double price;
+
+    @CreatedDate
+    @Column(name="dateOnStock")
+    private LocalDateTime dateOnStock = LocalDateTime.now();
 
     public Product() {}
 
-    public Product(String name, String description, String category) {
+    public Product(String name, String description, Long category) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -20,7 +46,7 @@ public class Product {
         this.price = 0;
     }
 
-    public Product(String name, String description, String category, int quantity, double price) {
+    public Product(String name, String description, Long category, int quantity, double price) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -68,12 +94,20 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getCategory() {
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Long category) {
         this.category = category;
+    }
+
+    public LocalDateTime getDateOnStock() {
+        return dateOnStock;
+    }
+
+    public void setDateOnStock(LocalDateTime dateOnStock) {
+        this.dateOnStock = dateOnStock;
     }
 
     @Override

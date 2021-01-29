@@ -1,27 +1,27 @@
 package estore.core.responses;
 
 import estore.core.validation.CoreError;
-import estore.core.model.Product;
+import estore.core.domain.ProductCategory;
 
 import java.util.List;
 
-public class AddNewProductResponse extends CoreResponse {
+public class AddProductCategoryResponse extends CoreResponse {
 
-    private Product product;
+    private ProductCategory category;
     private boolean successfullyAdded;
 
-    public AddNewProductResponse(List<CoreError> errors) {
+    public AddProductCategoryResponse(List<CoreError> errors) {
         super(errors);
         this.successfullyAdded = false;
     }
 
-    public AddNewProductResponse(Product product) {
-        this.product = product;
+    public AddProductCategoryResponse(ProductCategory category) {
+        this.category = category;
         this.successfullyAdded = false;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductCategory getCategory() {
+        return category;
     }
 
     public boolean isSuccessfullyAdded() {
