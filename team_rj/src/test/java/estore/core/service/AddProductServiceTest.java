@@ -48,10 +48,10 @@ public class AddProductServiceTest {
     @Test
     public void shouldAddNewProductToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddProductRequest request = new AddProductRequest("Name", "Description", "Fruits");
+        AddProductRequest request = new AddProductRequest("Name", "Description", "1");
         AddProductResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(database)
-                .addNewProduct(argThat(new ProductMatcher("Name", "Description", "Fruits")));
+                .addNewProduct(argThat(new ProductMatcher("Name", "Description", 1L)));
     }
 }

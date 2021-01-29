@@ -1,8 +1,8 @@
 package estore.database;
 
 import estore.domain.Product;
-import estore.domain.ProductCategory;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,10 @@ public class OrmProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> searchProductByName(String name) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT product FROM Product product WHERE prodName = :name");
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
@@ -28,22 +31,34 @@ public class OrmProductRepositoryImpl implements ProductRepository {
 
     @Override
     public List<Product> searchProductById(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT product FROM Product product WHERE id = :id");
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 
     @Override
     public boolean addNewProduct(Product product) {
-        return false;
+        sessionFactory.getCurrentSession().save(product);
+        return true;
     }
 
     @Override
     public int removeProductByName(String name) {
-        return 0;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Product WHERE prodName = :name");
+        query.setParameter("name", name);
+        int result = query.executeUpdate();
+        return result;
     }
 
     @Override
     public int removeProductById(Long id) {
-        return 0;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Product WHERE id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result;
     }
 
     @Override
@@ -55,7 +70,7 @@ public class OrmProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void updateProduct(Product product) {
-
+        sessionFactory.getCurrentSession().saveOrUpdate(product);
     }
 
     @Override

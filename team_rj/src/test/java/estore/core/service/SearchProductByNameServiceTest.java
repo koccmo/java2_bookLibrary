@@ -56,7 +56,7 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product", "Category"));
+        products.add(new Product("Product", "Good product", 1L));
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
         SearchProductByNameResponse response = service.execute(request);
 
@@ -74,8 +74,8 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 1", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
+        products.add(new Product("Product", "Good product 1", 1L));
+        products.add(new Product("Product", "Good product 2", 1L));
         products.get(0).setPrice(10);
         products.get(1).setPrice(20);
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
@@ -94,8 +94,8 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 1", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
+        products.add(new Product("Product", "Good product 1", 1L));
+        products.add(new Product("Product", "Good product 2", 1L));
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
         SearchProductByNameResponse response = service.execute(request);
 
@@ -113,10 +113,10 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 4", "Category"));
-        products.add(new Product("Product", "Good product 3", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
-        products.add(new Product("Product", "Good product 1", "Category"));
+        products.add(new Product("Product", "Good product 4", 1L));
+        products.add(new Product("Product", "Good product 3", 1L));
+        products.add(new Product("Product", "Good product 2", 1L));
+        products.add(new Product("Product", "Good product 1", 1L));
         products.get(0).setPrice(30);
         products.get(1).setPrice(20);
         products.get(2).setPrice(40);

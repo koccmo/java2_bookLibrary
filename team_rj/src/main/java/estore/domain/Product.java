@@ -1,6 +1,9 @@
 package estore.domain;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +31,10 @@ public class Product {
 
     @Column(name="price")
     private double price;
+
+    @CreatedDate
+    @Column(name="dateOnStock")
+    private LocalDateTime dateOnStock = LocalDateTime.now();
 
     public Product() {}
 
@@ -93,6 +100,14 @@ public class Product {
 
     public void setCategory(Long category) {
         this.category = category;
+    }
+
+    public LocalDateTime getDateOnStock() {
+        return dateOnStock;
+    }
+
+    public void setDateOnStock(LocalDateTime dateOnStock) {
+        this.dateOnStock = dateOnStock;
     }
 
     @Override

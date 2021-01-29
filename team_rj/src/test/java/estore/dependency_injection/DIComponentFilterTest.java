@@ -15,9 +15,9 @@ public class DIComponentFilterTest {
 
     @Test
     public void ShouldReturnListWithAnnotatedFiles() throws IOException, ClassNotFoundException {
-        List<Class> classList = classFinder.findClassesInsidePackage("estore.core.model");
+        List<Class> classList = classFinder.findClassesInsidePackage("estore.domain");
         List<Class> annotatedList = DIfilter.filter(classList);
-        assertEquals(classList.size(), 1);
+        assertEquals(classList.size(), 2);
         assertEquals(annotatedList.size(), 0);
         annotatedList.forEach(aClass ->
             System.out.println(aClass.getName())
