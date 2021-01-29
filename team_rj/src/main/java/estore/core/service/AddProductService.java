@@ -1,7 +1,7 @@
 package estore.core.service;
 
 import estore.core.validation.CoreError;
-import estore.core.validation.AddNewProductValidator;
+import estore.core.validation.AddProductValidator;
 import estore.database.ProductRepository;
 import estore.core.model.Product;
 import estore.core.requests.AddProductRequest;
@@ -14,10 +14,10 @@ import java.util.List;
 public class AddProductService {
 
     private ProductRepository productDB;
-    private AddNewProductValidator validator;
+    private AddProductValidator validator;
 
     public AddProductService(ProductRepository productDB,
-                             AddNewProductValidator validator) {
+                             AddProductValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }

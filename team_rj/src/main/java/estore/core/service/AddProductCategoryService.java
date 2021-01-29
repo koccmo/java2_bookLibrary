@@ -2,7 +2,7 @@ package estore.core.service;
 
 import estore.core.requests.AddProductCategoryRequest;
 import estore.core.responses.AddProductCategoryResponse;
-import estore.core.validation.AddNewProductCategoryValidator;
+import estore.core.validation.AddProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryRepository;
 import estore.domain.ProductCategory;
@@ -14,9 +14,9 @@ import java.util.List;
 public class AddProductCategoryService {
 
     private ProductCategoryRepository productCategoryDB;
-    private AddNewProductCategoryValidator validator;
+    private AddProductCategoryValidator validator;
 
-    public AddProductCategoryService(ProductCategoryRepository productCategoryDB, AddNewProductCategoryValidator validator) {
+    public AddProductCategoryService(ProductCategoryRepository productCategoryDB, AddProductCategoryValidator validator) {
         this.productCategoryDB = productCategoryDB;
         this.validator = validator;
     }

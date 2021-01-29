@@ -10,11 +10,11 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AddNewProductValidatorTest {
+public class AddProductValidatorTest {
 
     private ProductCategoryRepository categoryDB = new ProductCategoryRepositoryImpl();
     private ValidationRules validationRules = new ValidationRules();
-    private AddNewProductValidator validator = new AddNewProductValidator(categoryDB, validationRules);
+    private AddProductValidator validator = new AddProductValidator(categoryDB, validationRules);
 
     @Test
     public void shouldNotReturnErrorIfProductNameIsProvided() {

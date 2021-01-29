@@ -9,11 +9,11 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AddNewProductCategoryValidatorTest {
+public class AddProductCategoryValidatorTest {
 
     private ProductCategoryRepository categoryDB = new ProductCategoryRepositoryImpl();
     private ValidationRules validationRules = new ValidationRules();
-    private AddNewProductCategoryValidator validator = new AddNewProductCategoryValidator(categoryDB, validationRules);
+    private AddProductCategoryValidator validator = new AddProductCategoryValidator(categoryDB, validationRules);
 
     @Test
     public void shouldNotReturnErrorIfProductCategoryIsProvided() {

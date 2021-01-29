@@ -2,7 +2,7 @@ package estore.core.service;
 
 import estore.core.requests.AddProductCategoryRequest;
 import estore.core.responses.AddProductCategoryResponse;
-import estore.core.validation.AddNewProductCategoryValidator;
+import estore.core.validation.AddProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryRepository;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class AddNewProductCategoryServiceTest {
     @Mock
     private ProductCategoryRepository database;
     @Mock
-    private AddNewProductCategoryValidator validator;
+    private AddProductCategoryValidator validator;
 
     @InjectMocks
     private AddProductCategoryService service;

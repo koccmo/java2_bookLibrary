@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AddNewProductCategoryValidator {
+public class AddProductCategoryValidator {
 
-    private ProductCategoryRepository categoryDB;
+    private final ProductCategoryRepository categoryDB;
     private ValidationRules validationRules;
 
-    public AddNewProductCategoryValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
+    public AddProductCategoryValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
         this.categoryDB = categoryDB;
         this.validationRules = validationRules;
     }
 
     public List<CoreError> validate(AddProductCategoryRequest request) {
-        List<CoreError> errors = new ArrayList<CoreError>();
+        List<CoreError> errors = new ArrayList<>();
 
         validateProductCategoryIfEmpty(request).ifPresent(errors::add);
         validateProductCategoryUnallowedPattern(request).ifPresent(errors::add);

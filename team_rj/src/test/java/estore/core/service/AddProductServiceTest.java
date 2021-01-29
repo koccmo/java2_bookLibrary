@@ -2,7 +2,7 @@ package estore.core.service;
 
 import estore.core.requests.AddProductRequest;
 import estore.core.responses.AddProductResponse;
-import estore.core.validation.AddNewProductValidator;
+import estore.core.validation.AddProductValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductRepository;
 import estore.matchers.ProductMatcher;
@@ -26,7 +26,7 @@ public class AddProductServiceTest {
     @Mock
     private ProductRepository database;
     @Mock
-    private AddNewProductValidator validator;
+    private AddProductValidator validator;
 
     @InjectMocks
     private AddProductService service;

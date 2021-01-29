@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DIComponentFilterTest {
@@ -16,10 +17,10 @@ public class DIComponentFilterTest {
     public void ShouldReturnListWithAnnotatedFiles() throws IOException, ClassNotFoundException {
         List<Class> classList = classFinder.findClassesInsidePackage("estore.core.model");
         List<Class> annotatedList = DIfilter.filter(classList);
-        assertTrue(classList.size() == 2);
-        assertTrue(annotatedList.size() == 0);
-        annotatedList.forEach(aClass -> {
-            System.out.println(aClass.getName());
-        });
+        assertEquals(classList.size(), 1);
+        assertEquals(annotatedList.size(), 0);
+        annotatedList.forEach(aClass ->
+            System.out.println(aClass.getName())
+        );
     }
 }

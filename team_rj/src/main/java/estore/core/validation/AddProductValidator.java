@@ -2,6 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.AddProductRequest;
 import estore.database.ProductCategoryRepository;
+import estore.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,18 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AddNewProductValidator {
+public class AddProductValidator {
 
     private ProductCategoryRepository categoryDB;
     private ValidationRules validationRules;
 
-    public AddNewProductValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
+    public AddProductValidator(ProductCategoryRepository categoryDB, ValidationRules validationRules) {
         this.categoryDB = categoryDB;
         this.validationRules = validationRules;
     }
 
     public List<CoreError> validate(AddProductRequest request) {
-        List<CoreError> errors = new ArrayList<CoreError>();
+        List<CoreError> errors = new ArrayList<>();
 
         validateProductNameIfEmpty(request).ifPresent(errors::add);
         validateProductNameUnallowedPattern(request).ifPresent(errors::add);
@@ -75,13 +76,12 @@ public class AddNewProductValidator {
     }
 
     private boolean validateCategoryExistence(String categoryId) {
-//        List<ProductCategory> categories = categoryDB.getDatabase();
-//        for (var category : categories) {
-//            if (category.getId().toString().equals(categoryId)) {
-//                return true;
-//            }
-//        }
-//        return false;
-        return true;
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var category : categories) {
+            if (category.getId().toString().equals(categoryId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
