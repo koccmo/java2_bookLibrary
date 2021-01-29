@@ -68,7 +68,7 @@ public class AddProductsOnRequestTest {
         assertTrue(addResponse.hasErrors());
         assertEquals(addResponse.getErrors().get(0).getMessage(), "Must contain only english letters!");
 
-        AddProductRequest addProductRequest2 = new AddProductRequest("", "Description ProductB яя", "Fruits");
+        AddProductRequest addProductRequest2 = new AddProductRequest("", "** Description ProductB **", "Fruits");
         addResponse = addNewProductService().execute(addProductRequest2);
         assertTrue(addResponse.hasErrors());
         assertEquals(addResponse.getErrors().get(0).getMessage(), "Must not be empty!");
