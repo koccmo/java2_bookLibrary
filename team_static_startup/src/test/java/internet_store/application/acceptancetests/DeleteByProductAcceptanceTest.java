@@ -1,11 +1,13 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.lesson_6.config.ProductListConfiguration;
-import internet_store.lesson_6.core.requests.AddProductRequest;
-import internet_store.lesson_6.core.requests.DeleteByProductRequest;
-import internet_store.lesson_6.core.responses.DeleteByProductResponse;
-import internet_store.lesson_6.core.services.AddProductService;
-import internet_store.lesson_6.core.services.DeleteProductByProductService;
+import internet_store.application.config.AppConfig;
+import internet_store.application.core.requests.product.AddProductRequest;
+import internet_store.application.core.requests.product.DeleteByProductRequest;
+import internet_store.application.core.responses.product.DeleteByProductResponse;
+import internet_store.application.core.services.product.AddProductService;
+import internet_store.application.core.services.product.DeleteProductByProductService;
+import internet_store.application.database_cleaner.DatabaseCleaner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -16,15 +18,15 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-// @Profile("inmemory")
+@Profile("hibernate")
 public class DeleteByProductAcceptanceTest {
 
-    private ApplicationContext applicationContext;
+    private ApplicationContext appContext;
 
     @Before
     public void setUp() {
-        applicationContext =
-                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -75,10 +77,15 @@ public class DeleteByProductAcceptanceTest {
     }
 
     private DeleteProductByProductService getDeleteProductByProductService() {
-        return applicationContext.getBean(DeleteProductByProductService.class);
+        return appContext.getBean(DeleteProductByProductService.class);
     }
 
     private AddProductService getAddProductService() {
-        return applicationContext.getBean(AddProductService.class);
+        return appContext.getBean(AddProductService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
+
 }
