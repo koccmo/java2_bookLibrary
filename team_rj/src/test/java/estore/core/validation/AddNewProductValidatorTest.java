@@ -1,6 +1,6 @@
 package estore.core.validation;
 
-import estore.core.requests.AddNewProductRequest;
+import estore.core.requests.AddProductRequest;
 import estore.database.ProductCategoryRepository;
 import estore.database.inmemoryrepo.ProductCategoryRepositoryImpl;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldNotReturnErrorIfProductNameIsProvided() {
-        AddNewProductRequest request = new AddNewProductRequest("ValidName",
+        AddProductRequest request = new AddProductRequest("ValidName",
                 "Valid Description", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
@@ -26,7 +26,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldNotReturnErrorIfProductDescriptionIsProvided() {
-        AddNewProductRequest request = new AddNewProductRequest("ValidName",
+        AddProductRequest request = new AddProductRequest("ValidName",
                 "Valid Description", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
@@ -34,7 +34,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldReturnErrorsIfProductNameOrDescriptionIsNotProvided() {
-        AddNewProductRequest request = new AddNewProductRequest("",
+        AddProductRequest request = new AddProductRequest("",
                 "", "1");
         List<CoreError> errors = validator.validate(request);
 
@@ -47,7 +47,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldReturnErrorIfProductNameHasDigits() {
-        AddNewProductRequest request = new AddNewProductRequest("Product1",
+        AddProductRequest request = new AddProductRequest("Product1",
                 "Valid description", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
@@ -57,7 +57,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldReturnErrorIfProductNameHasWhiteSpaces() {
-        AddNewProductRequest request = new AddNewProductRequest("Product one",
+        AddProductRequest request = new AddProductRequest("Product one",
                 "Valid description", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
@@ -67,7 +67,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldReturnErrorIfProductDescriptionHasSpecialSymbols() {
-        AddNewProductRequest request = new AddNewProductRequest("Product",
+        AddProductRequest request = new AddProductRequest("Product",
                 "*** Invalid description ***", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
@@ -78,7 +78,7 @@ public class AddNewProductValidatorTest {
     @Disabled
     @Test
     public void shouldNotReturnErrorIfProductCategoryHasDigits() {
-        AddNewProductRequest request = new AddNewProductRequest("Product",
+        AddProductRequest request = new AddProductRequest("Product",
                 "Valid description", "1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
@@ -98,7 +98,7 @@ public class AddNewProductValidatorTest {
 
     @Test
     public void shouldReturnErrorIfProductCategoryDoesNotExistInDB() {
-        AddNewProductRequest request = new AddNewProductRequest("Product",
+        AddProductRequest request = new AddProductRequest("Product",
                 "Valid description", "NoSuchCategory");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 2);

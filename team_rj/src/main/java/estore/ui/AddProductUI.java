@@ -1,10 +1,10 @@
 package estore.ui;
 
-import estore.core.requests.AddNewProductRequest;
+import estore.core.requests.AddProductRequest;
 import estore.core.requests.GetAllProductCategoriesRequest;
-import estore.core.responses.AddNewProductResponse;
+import estore.core.responses.AddProductResponse;
 import estore.core.responses.GetAllProductCategoriesResponse;
-import estore.core.service.AddNewProductService;
+import estore.core.service.AddProductService;
 import estore.core.service.GetAllProductCategoriesService;
 import estore.domain.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import java.util.Scanner;
 @Component
 public class AddProductUI implements UIAction {
 
-    private AddNewProductService addNewProductService;
+    private AddProductService addProductService;
     @Autowired
     private GetAllProductCategoriesService getAllProductCategoriesService;
 
-    public AddProductUI(AddNewProductService addNewProductService) {
-        this.addNewProductService = addNewProductService;
+    public AddProductUI(AddProductService addProductService) {
+        this.addProductService = addProductService;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class AddProductUI implements UIAction {
         System.out.println("Category No: ");
         String productCategoryNo = sc.nextLine();
 
-        AddNewProductRequest request = new AddNewProductRequest(productName, productDescription, productCategoryNo);
-        AddNewProductResponse response = addNewProductService.execute(request);
+        AddProductRequest request = new AddProductRequest(productName, productDescription, productCategoryNo);
+        AddProductResponse response = addProductService.execute(request);
 
         if (!response.isSuccessfullyAdded()) {
             for (int i = 0; i < response.getErrors().size(); i++) {

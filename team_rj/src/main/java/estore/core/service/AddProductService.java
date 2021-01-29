@@ -4,35 +4,35 @@ import estore.core.validation.CoreError;
 import estore.core.validation.AddNewProductValidator;
 import estore.database.ProductRepository;
 import estore.core.model.Product;
-import estore.core.requests.AddNewProductRequest;
-import estore.core.responses.AddNewProductResponse;
+import estore.core.requests.AddProductRequest;
+import estore.core.responses.AddProductResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class AddNewProductService {
+public class AddProductService {
 
     private ProductRepository productDB;
     private AddNewProductValidator validator;
 
-    public AddNewProductService(ProductRepository productDB,
-                                AddNewProductValidator validator) {
+    public AddProductService(ProductRepository productDB,
+                             AddNewProductValidator validator) {
         this.productDB = productDB;
         this.validator = validator;
     }
 
-    public AddNewProductResponse execute(AddNewProductRequest request) {
+    public AddProductResponse execute(AddProductRequest request) {
         List<CoreError> errors = validator.validate(request);
 
         if (!errors.isEmpty()) {
-            return new AddNewProductResponse(errors);
+            return new AddProductResponse(errors);
         }
 
         Product product = new Product(request.getProductName(), request.getProductDescription(), request.getProductCategory());
 
         productDB.addNewProduct(product);
-        AddNewProductResponse response = new AddNewProductResponse(product);
+        AddProductResponse response = new AddProductResponse(product);
         response.setSuccessfullyAdded(true);
 
         return response;

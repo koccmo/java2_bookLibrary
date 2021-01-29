@@ -1,7 +1,7 @@
 package estore.core.service;
 
-import estore.core.requests.AddNewProductRequest;
-import estore.core.responses.AddNewProductResponse;
+import estore.core.requests.AddProductRequest;
+import estore.core.responses.AddProductResponse;
 import estore.core.validation.AddNewProductValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductRepository;
@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddNewProductServiceTest {
+public class AddProductServiceTest {
 
     @Mock
     private ProductRepository database;
@@ -29,16 +29,16 @@ public class AddNewProductServiceTest {
     private AddNewProductValidator validator;
 
     @InjectMocks
-    private AddNewProductService service;
+    private AddProductService service;
 
     @Test
     public void shouldReturnResponseWithErrorsIfValidationFails() {
-        AddNewProductRequest request = new AddNewProductRequest(null, "Description", "Fruits");
+        AddProductRequest request = new AddProductRequest(null, "Description", "Fruits");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Product name", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
-        AddNewProductResponse response = service.execute(request);
+        AddProductResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "Product name");
@@ -48,8 +48,8 @@ public class AddNewProductServiceTest {
     @Test
     public void shouldAddNewProductToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddNewProductRequest request = new AddNewProductRequest("Name", "Description", "Fruits");
-        AddNewProductResponse response = service.execute(request);
+        AddProductRequest request = new AddProductRequest("Name", "Description", "Fruits");
+        AddProductResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(database)
                 .addNewProduct(argThat(new ProductMatcher("Name", "Description", "Fruits")));

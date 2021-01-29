@@ -1,12 +1,12 @@
 package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
-import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.requests.AddNewProductRequest;
+import estore.core.requests.AddProductCategoryRequest;
+import estore.core.requests.AddProductRequest;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
-import estore.core.service.AddNewProductCategoryService;
-import estore.core.service.AddNewProductService;
+import estore.core.service.AddProductCategoryService;
+import estore.core.service.AddProductService;
 import estore.core.service.GetAllProductsService;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,11 +31,11 @@ public class ShowProductsOnRequestTest {
 
     @Test
     public void shouldReturnCorrectProductList() {
-        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
-        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "1");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "1");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
@@ -44,15 +44,15 @@ public class ShowProductsOnRequestTest {
         assertEquals(response.getProducts().size(), 2);
     }
 
-    private AddNewProductService addNewProductService() {
-        return applicationContext.getBean(AddNewProductService.class);
+    private AddProductService addNewProductService() {
+        return applicationContext.getBean(AddProductService.class);
     }
 
     private GetAllProductsService getAllProductsService() {
         return applicationContext.getBean(GetAllProductsService.class);
     }
 
-    private AddNewProductCategoryService AddNewProductCategoryService() {
-        return applicationContext.getBean(AddNewProductCategoryService.class);
+    private AddProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddProductCategoryService.class);
     }
 }

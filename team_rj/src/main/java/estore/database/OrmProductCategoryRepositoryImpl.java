@@ -27,7 +27,7 @@ public class OrmProductCategoryRepositoryImpl implements ProductCategoryReposito
     }
 
     @Override
-    public boolean addNewCategory(ProductCategory category) {
+    public boolean addCategory(ProductCategory category) {
         sessionFactory.getCurrentSession().save(category);
         return true;
     }

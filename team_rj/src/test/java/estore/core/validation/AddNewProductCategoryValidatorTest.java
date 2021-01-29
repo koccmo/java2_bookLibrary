@@ -1,6 +1,6 @@
 package estore.core.validation;
 
-import estore.core.requests.AddNewProductCategoryRequest;
+import estore.core.requests.AddProductCategoryRequest;
 import estore.database.ProductCategoryRepository;
 import estore.database.inmemoryrepo.ProductCategoryRepositoryImpl;
 import org.junit.Test;
@@ -17,14 +17,14 @@ public class AddNewProductCategoryValidatorTest {
 
     @Test
     public void shouldNotReturnErrorIfProductCategoryIsProvided() {
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("Category");
+        AddProductCategoryRequest request = new AddProductCategoryRequest("Category");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldReturnErrorIfProductCategoryHasDigits() {
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("Category1");
+        AddProductCategoryRequest request = new AddProductCategoryRequest("Category1");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Product category");
@@ -33,7 +33,7 @@ public class AddNewProductCategoryValidatorTest {
 
     @Test
     public void shouldReturnErrorIfProductCategoryHasSpecualSymbols() {
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("Category one$");
+        AddProductCategoryRequest request = new AddProductCategoryRequest("Category one$");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Product category");

@@ -44,7 +44,7 @@ public class ProductCategoryRepositoryImpl implements ProductCategoryRepository 
     }
 
     @Override
-    public boolean addNewCategory(ProductCategory category) {
+    public boolean addCategory(ProductCategory category) {
         category.setId(this.nextCategoryId);
         this.nextCategoryId++;
         this.categories.add(category);

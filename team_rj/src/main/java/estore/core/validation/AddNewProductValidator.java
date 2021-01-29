@@ -1,8 +1,7 @@
 package estore.core.validation;
 
-import estore.core.requests.AddNewProductRequest;
+import estore.core.requests.AddProductRequest;
 import estore.database.ProductCategoryRepository;
-import estore.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class AddNewProductValidator {
         this.validationRules = validationRules;
     }
 
-    public List<CoreError> validate(AddNewProductRequest request) {
+    public List<CoreError> validate(AddProductRequest request) {
         List<CoreError> errors = new ArrayList<CoreError>();
 
         validateProductNameIfEmpty(request).ifPresent(errors::add);
@@ -33,55 +32,56 @@ public class AddNewProductValidator {
         return errors;
     }
 
-    private Optional<CoreError> validateProductNameIfEmpty(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductNameIfEmpty(AddProductRequest request) {
         return (request.getProductName() == null || request.getProductName().isEmpty())
                 ? Optional.of(new CoreError("Product name", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductDescriptionIfEmpty(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductDescriptionIfEmpty(AddProductRequest request) {
         return (request.getProductDescription() == null || request.getProductDescription().isEmpty())
                 ? Optional.of(new CoreError("Product description", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductCategoryIfEmpty(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductCategoryIfEmpty(AddProductRequest request) {
         return (request.getProductCategory() == null || request.getProductCategory().isEmpty())
                 ? Optional.of(new CoreError("Product category", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductNameUnallowedPattern(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductNameUnallowedPattern(AddProductRequest request) {
         return (!validationRules.validateString(request.getProductName()))
                 ? Optional.of(new CoreError("Product name", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductDescriptionUnallowedPattern(AddProductRequest request) {
         return (!validationRules.validateLineWithDigits(request.getProductDescription()))
                 ? Optional.of(new CoreError("Product description", "Must contain only english letters and digits!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductCategoryUnallowedPattern(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductCategoryUnallowedPattern(AddProductRequest request) {
         return (!validationRules.validatePositiveInteger(request.getProductCategory()))
                 ? Optional.of(new CoreError("Product category", "Must contain only digits!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateProductCategoryExistence(AddNewProductRequest request) {
+    private Optional<CoreError> validateProductCategoryExistence(AddProductRequest request) {
         return (!validateCategoryExistence(request.getProductCategory()))
                 ? Optional.of(new CoreError("Product category", "Does not exist!"))
                 : Optional.empty();
     }
 
     private boolean validateCategoryExistence(String categoryId) {
-        List<ProductCategory> categories = categoryDB.getDatabase();
-        for (var category : categories) {
-            if (category.getId().toString().equals(categoryId)) {
-                return true;
-            }
-        }
-        return false;
+//        List<ProductCategory> categories = categoryDB.getDatabase();
+//        for (var category : categories) {
+//            if (category.getId().toString().equals(categoryId)) {
+//                return true;
+//            }
+//        }
+//        return false;
+        return true;
     }
 }

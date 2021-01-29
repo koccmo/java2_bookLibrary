@@ -33,12 +33,12 @@ public class RemoveProductsOnRequestTest {
 
     @Test
     public void shouldRemoveProductByNameAndId() {
-        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
-        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA", "1");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductC", "Description ProductC", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "1");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductC", "Description ProductC", "1");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
@@ -127,8 +127,8 @@ public class RemoveProductsOnRequestTest {
         assertEquals(removeByIdResponse.getErrors().get(0).getMessage(), "Must contain only digits");
     }
 
-    private AddNewProductService addNewProductService() {
-        return applicationContext.getBean(AddNewProductService.class);
+    private AddProductService addNewProductService() {
+        return applicationContext.getBean(AddProductService.class);
     }
 
     private RemoveProductByNameService removeProductByNameService() {
@@ -143,7 +143,7 @@ public class RemoveProductsOnRequestTest {
         return applicationContext.getBean(GetAllProductsService.class);
     }
 
-    private AddNewProductCategoryService AddNewProductCategoryService() {
-        return applicationContext.getBean(AddNewProductCategoryService.class);
+    private AddProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddProductCategoryService.class);
     }
 }
