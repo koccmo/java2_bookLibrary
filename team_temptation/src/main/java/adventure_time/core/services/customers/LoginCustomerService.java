@@ -29,30 +29,26 @@ public class LoginCustomerService {
 
         Optional<Customers> customer = database.findByEmail(request.getEmail());
 
-        return checkLogin(customer, request);
-    }
-
-    private LoginCustomerResponse checkLogin(Optional<Customers> customer, LoginCustomerRequest request) {
         if (customer.isPresent()) {
-            if (customer.get().getCustomerPassword().equals(request.getEmail())) {
+            if (customer.get().
+                    getCustomerPassword().
+                    equals(request.getEmail())) {
                 return new LoginCustomerResponse(customer.get());   // customer found, passwords matched
             } else {
-                return new LoginCustomerResponse(getErrorMessage(
-                        "customerPassword",
-                        "Passwords did not match"));   // customer found, passwords mismatched
+                errors.add
+                        (new CoreError(
+                                "customerPassword",
+                                "Passwords did not match"
+                        ));
+                return new LoginCustomerResponse(errors);   // customer found, passwords mismatched
             }
         } else {
-            return new LoginCustomerResponse(getErrorMessage(
-                    "customerEmail",
-                    "Customer not found"));   // customer not found
+            errors.add(
+                    new CoreError(
+                            "customerEmail",
+                            "Customer not found"
+                    ));
+            return new LoginCustomerResponse(errors);   // customer not found
         }
     }
-
-    private List<CoreError> getErrorMessage(String field, String message) {
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError(field, message));
-        return errors;
-    }
-
-
 }

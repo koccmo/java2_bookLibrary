@@ -35,6 +35,7 @@ public class UpdateCustomerService {
         if (database.updateCustomer(customer, request.getId())) {
             return new UpdateCustomerResponse();
         }
+
         CoreError error = new CoreError("customerEmail", "Email " + customer.getCustomerEmail() + " is not valid");
         errors.add(error);
         return new UpdateCustomerResponse(errors);
