@@ -1,4 +1,4 @@
-package estore.domain;
+package estore.core.domain;
 
 import org.springframework.data.annotation.CreatedDate;
 

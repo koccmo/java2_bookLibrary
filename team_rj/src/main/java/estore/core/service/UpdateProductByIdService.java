@@ -5,7 +5,7 @@ import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.UpdateProductByIdValidator;
 import estore.database.ProductRepository;
-import estore.domain.Product;
+import estore.core.domain.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

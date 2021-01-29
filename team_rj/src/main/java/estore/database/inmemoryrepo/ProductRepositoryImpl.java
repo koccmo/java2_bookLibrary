@@ -1,11 +1,5 @@
 package estore.database.inmemoryrepo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import estore.database.ProductRepository;
-import estore.domain.Product;
-
 //@Component
 //public class ProductRepositoryImpl implements ProductRepository {
 //

@@ -1,6 +1,6 @@
 package estore.matchers;
 
-import estore.domain.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.mockito.ArgumentMatcher;
 
 public class ProductCategoryMatcher implements ArgumentMatcher<ProductCategory> {

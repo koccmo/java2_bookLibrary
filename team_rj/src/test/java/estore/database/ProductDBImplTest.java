@@ -1,10 +1,6 @@
 package estore.database;
 
 //import estore.database.inmemoryrepo.ProductRepositoryImpl;
-import estore.domain.Product;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ProductDBImplTest {
 

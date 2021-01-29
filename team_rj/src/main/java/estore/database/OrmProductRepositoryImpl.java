@@ -1,6 +1,6 @@
 package estore.database;
 
-import estore.domain.Product;
+import estore.core.domain.Product;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

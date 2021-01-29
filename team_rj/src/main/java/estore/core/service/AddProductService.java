@@ -3,7 +3,7 @@ package estore.core.service;
 import estore.core.validation.CoreError;
 import estore.core.validation.AddProductValidator;
 import estore.database.ProductRepository;
-import estore.domain.Product;
+import estore.core.domain.Product;
 import estore.core.requests.AddProductRequest;
 import estore.core.responses.AddProductResponse;
 import org.springframework.stereotype.Component;

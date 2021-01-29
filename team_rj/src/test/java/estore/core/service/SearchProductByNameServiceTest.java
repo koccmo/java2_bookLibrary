@@ -7,7 +7,7 @@ import estore.core.responses.SearchProductByNameResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductRepository;
-import estore.domain.Product;
+import estore.core.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

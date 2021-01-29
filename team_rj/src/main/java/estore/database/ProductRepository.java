@@ -1,7 +1,7 @@
 package estore.database;
 
 import java.util.List;
-import estore.domain.Product;
+import estore.core.domain.Product;
 
 public interface ProductRepository {
 

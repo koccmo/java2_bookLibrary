@@ -7,7 +7,7 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
 import estore.database.ProductRepository;
-import estore.domain.Product;
+import estore.core.domain.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;

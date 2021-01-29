@@ -1,6 +1,6 @@
 package estore.database;
 
-import estore.domain.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

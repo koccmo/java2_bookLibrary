@@ -1,6 +1,6 @@
 package estore.database;
 
-import estore.domain.ProductCategory;
+import estore.core.domain.ProductCategory;
 
 import java.util.List;
 
