@@ -42,26 +42,29 @@ public class UpdateCustomerUIAction implements UIAction {
         }
 
         Customers customer = (Customers) responseLogin.getObject();
-
         System.out.println("Successful authentication!");
         System.out.println();
+
         String name;
         System.out.println("Would you like to change name (y/n)?");
         if (scanner.nextLine().equals("y")) {
             System.out.println("Enter new name (min 5, max 50 characters): ");
             name = scanner.nextLine();
         } else name = customer.getCustomerName();
+
         System.out.println("Would you like to change email (y/n)?");
         if (scanner.nextLine().equals("y")) {
             System.out.println("Enter new email (max 30 characters): ");
             email = scanner.nextLine();
         } else email = customer.getCustomerEmail();
+
         String phone;
         System.out.println("Would you like to change phone (y/n)?");
         if (scanner.nextLine().equals("y")) {
             System.out.println("Enter new phone (starting with +371): ");
             phone = scanner.nextLine();
         } else phone = customer.getCustomerPhone();
+
         String passwordOne;
         String passwordTwo;
         System.out.println("Would you like to change password (y/n)?");
@@ -83,7 +86,7 @@ public class UpdateCustomerUIAction implements UIAction {
         UpdateCustomerResponse responseUpdate = updateService.updateCustomer(requestUpdate);
 
         if (responseUpdate.hasError()) {
-            System.out.println("Ooops! Something went wrong! ");
+            System.out.println("Ooops! Sooooomething went wrong! ");
             System.out.println("Your request could not be fulfilled for the reasons: ");
             responseUpdate.getErrors().forEach(System.out::println);
             System.out.println();
@@ -91,5 +94,6 @@ public class UpdateCustomerUIAction implements UIAction {
         }
 
         System.out.println("Your data is updated");
+        System.out.println();
     }
 }

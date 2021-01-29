@@ -19,8 +19,6 @@ public class UpdateCustomerService {
     @Autowired
     private DatabaseCustomers database;
     @Autowired
-    private LoginCustomerRequestValidator validatorLogin;
-    @Autowired
     private UpdateCustomerRequestValidator validatorUpdate;
 
     public UpdateCustomerResponse updateCustomer (UpdateCustomerRequest request) {
@@ -30,7 +28,12 @@ public class UpdateCustomerService {
             return new UpdateCustomerResponse(errors);
         }
 
-        Customers customer = new Customers(request.getName(), request.getEmail(), request.getPhone(), request.getPasswordOne());
+        Customers customer = new Customers(
+                request.getName(),
+                request.getEmail(),
+                request.getPhone(),
+                request.getPasswordOne()
+        );
         customer.setCustomerID(request.getId());
         if (database.updateCustomer(customer, request.getId())) {
             return new UpdateCustomerResponse();
