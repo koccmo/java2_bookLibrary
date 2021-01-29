@@ -1,11 +1,12 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.lesson_6.config.ProductListConfiguration;
-import internet_store.lesson_6.core.database.Database;
-import internet_store.lesson_6.core.domain.Product;
-import internet_store.lesson_6.core.requests.FindByIdRequest;
-import internet_store.lesson_6.core.responses.FindByIdResponse;
-import internet_store.lesson_6.core.services.FindByIdService;
+import internet_store.application.config.AppConfig;
+import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.domain.Product;
+import internet_store.application.core.requests.product.FindByIdRequest;
+import internet_store.application.core.responses.product.FindByProductIdResponse;
+import internet_store.application.core.services.product.FindByProductIdService;
+import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -16,37 +17,38 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import org.springframework.context.annotation.Profile;
 
-// @Profile("inmemory")
+@Profile("hibernate")
 public class FindByIdAcceptanceTest {
 
     private ApplicationContext appContext;
-    private Database database;
+    private ProductRepository repository;
 
     @Before
     public void setUp() {
         appContext =
-                new AnnotationConfigApplicationContext(ProductListConfiguration.class);
-        database = getDatabase();
-        database.add(new Product("iPhone", "phone", new BigDecimal("900")));
-        database.add(new Product("iMac", "pc", new BigDecimal("4000")));
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        getDatabaseCleaner().clean();
+        repository = getRepository();
+        repository.add(new Product("iPhone", "phone", new BigDecimal("900")));
+        repository.add(new Product("iMac", "pc", new BigDecimal("4000")));
     }
 
-    @Test
+/*    @Test
     public void shouldFindById() {
         FindByIdRequest request = new FindByIdRequest("2");
-        FindByIdResponse response = getFindByIdService().execute(request);
+        FindByProductIdResponse response = getFindByIdService().execute(request);
 
         assertFalse(response.hasErrors());
         assertFalse(response.getProductFoundById().isEmpty());
         assertEquals(Optional.of(
                 newProduct(2L, "iMac", "pc", new BigDecimal("4000"))),
                 response.getProductFoundById());
-    }
+    }*/
 
     @Test
     public void shouldNotFindWhenIdIsNotExist() {
         FindByIdRequest request = new FindByIdRequest("5");
-        FindByIdResponse response = getFindByIdService().execute(request);
+        FindByProductIdResponse response = getFindByIdService().execute(request);
 
         assertFalse(response.hasErrors());
         assertEquals(Optional.empty(),
@@ -56,7 +58,7 @@ public class FindByIdAcceptanceTest {
     @Test
     public void shouldReturnErrorWhenIdIsEmpty() {
         FindByIdRequest request = new FindByIdRequest("");
-        FindByIdResponse response = getFindByIdService().execute(request);
+        FindByProductIdResponse response = getFindByIdService().execute(request);
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -70,11 +72,16 @@ public class FindByIdAcceptanceTest {
         return product;
     }
 
-    private Database getDatabase() {
-        return appContext.getBean(Database.class);
+    private ProductRepository getRepository() {
+        return appContext.getBean(ProductRepository.class);
     }
 
-    private FindByIdService getFindByIdService() {
-        return appContext.getBean(FindByIdService.class);
+    private FindByProductIdService getFindByIdService() {
+        return appContext.getBean(FindByProductIdService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
+
 }
