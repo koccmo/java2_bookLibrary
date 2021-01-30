@@ -84,6 +84,7 @@ public class Menu {
         menuUIActionsMap.put(23, findUIAction(uiActions, DeleteRecordUIAction.class));
         menuUIActionsMap.put(24, findUIAction(uiActions, SetRecordCompleteDateUIAction.class));
         menuUIActionsMap.put(25, findUIAction(uiActions, GetFullInfoAboutRecordsUIAction.class));
+        menuUIActionsMap.put(26, findUIAction(uiActions, GetUnfinishedRecordsUIAction.class));
         menuUIActionsMap.put(0, findUIAction(uiActions, ExitUIAction.class));
         return menuUIActionsMap;
     }
