@@ -4,7 +4,7 @@ import dental_clinic.core.domain.Visit;
 
 import java.util.List;
 
-public interface VisitDatabase {
+public interface VisitRepository {
 
     void addVisit (Visit visit);
 
