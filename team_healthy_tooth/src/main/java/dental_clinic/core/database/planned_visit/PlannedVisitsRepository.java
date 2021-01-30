@@ -5,7 +5,7 @@ import dental_clinic.core.domain.PlannedVisit;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public interface PlannedVisitsInMemoryDatabase {
+public interface PlannedVisitsRepository {
 
     List <PlannedVisit> getPlannedVisits();
 

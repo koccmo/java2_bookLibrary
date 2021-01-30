@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 @Component
-public class PlannedVisitsJdbcDatabaseImpl implements PlannedVisitsInMemoryDatabase{
+public class JdbcPlannedVisitsRepositoryImpl implements PlannedVisitsRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
