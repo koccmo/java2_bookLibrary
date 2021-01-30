@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class PatientJdbcDatabaseImpl implements PatientDatabase{
+public class JdbcPatientRepositoryImpl implements PatientRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

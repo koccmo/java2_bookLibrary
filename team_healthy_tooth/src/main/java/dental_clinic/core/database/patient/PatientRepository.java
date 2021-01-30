@@ -7,7 +7,7 @@ import dental_clinic.core.domain.Visit;
 import java.util.List;
 import java.util.Optional;
 
-public interface PatientDatabase {
+public interface PatientRepository {
 
     List<Patient> getPatients();
 

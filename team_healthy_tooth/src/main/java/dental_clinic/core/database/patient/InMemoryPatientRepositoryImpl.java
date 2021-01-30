@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class PatientDatabaseInMemory implements PatientDatabase {
+public class InMemoryPatientRepositoryImpl implements PatientRepository {
 
     private Long id= 1L;
     private final List<Patient> patientList = new ArrayList<>();
