@@ -10,6 +10,7 @@ import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.services.main_menu_services.AddBookService;
 import team_VK.application.database.Database;
+import team_VK.application.database.DatabaseCleaner;
 
 public class AcceptanceTestAddBook {
 
@@ -23,6 +24,10 @@ public class AcceptanceTestAddBook {
 //                appContext.getBean(DataBaseFillAdditionalFunction.class);
 //
 //        dataBaseFillAdditionalFunction.execute();
+
+        appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
+        getDatabaseCleaner().clean();
+
 
     }
 
@@ -78,6 +83,9 @@ public class AcceptanceTestAddBook {
         System.out.println();
 
 
+    }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
     }
 
 }
