@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 //@Component
-public class DoctorDatabaseInMemory implements DoctorDatabase{
+public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
 
     private List<Doctor> doctors = addSomeDoctors();
     private Long id = 4L;

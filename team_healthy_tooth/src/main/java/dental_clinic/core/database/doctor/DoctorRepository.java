@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
-public interface DoctorDatabase {
+public interface DoctorRepository {
 
     List<Doctor> getDoctorList ();
 
