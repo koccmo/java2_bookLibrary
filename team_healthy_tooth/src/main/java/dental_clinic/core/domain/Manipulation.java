@@ -1,12 +1,26 @@
 package dental_clinic.core.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name="manipulation")
 public class Manipulation {
 
+    @Id
+    @Column(name="id")
     private Long id;
+
+    @Column(name="manipulation_type", nullable = false)
     private String manipulation_type;
+
+    @Column(name="price", nullable = false)
     private Integer price;
+
+    @Column(name="isActive", nullable = false)
     private boolean isActive = true;
 
     public Manipulation() { }
@@ -40,7 +54,7 @@ public class Manipulation {
         this.price = price;
     }
 
-    public boolean getIsActive() {
+    public boolean isActive() {
         return isActive;
     }
 
