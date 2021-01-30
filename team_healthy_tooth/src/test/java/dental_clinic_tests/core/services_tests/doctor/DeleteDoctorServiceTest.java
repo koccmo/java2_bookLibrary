@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.DeleteDoctorResponse;
 import dental_clinic.core.services.doctor.DeleteDoctorService;
 import dental_clinic.core.validators.doctor.DeleteDoctorRequestValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ public class DeleteDoctorServiceTest {
     @Mock
     private DeleteDoctorRequestValidator deleteDoctorRequestValidator;
     @Mock
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @InjectMocks
     private DeleteDoctorService deleteDoctorService;
 
@@ -53,7 +53,7 @@ public class DeleteDoctorServiceTest {
 
         DeleteDoctorRequest deleteDoctorRequest = new DeleteDoctorRequest(-9L);
         Mockito.when(deleteDoctorRequestValidator.validate(deleteDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsId(-9L)).thenReturn(false);
+        Mockito.when(doctorRepository.containsId(-9L)).thenReturn(false);
 
         DeleteDoctorResponse deleteDoctorResponse = deleteDoctorService.execute(deleteDoctorRequest);
 
@@ -66,7 +66,7 @@ public class DeleteDoctorServiceTest {
     public void testDeletedSuccessfully() {
         DeleteDoctorRequest deleteDoctorRequest = new DeleteDoctorRequest(9L);
         Mockito.when(deleteDoctorRequestValidator.validate(deleteDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsId(9L)).thenReturn(true);
+        Mockito.when(doctorRepository.containsId(9L)).thenReturn(true);
 
         DeleteDoctorResponse deleteDoctorResponse = deleteDoctorService.execute(deleteDoctorRequest);
 

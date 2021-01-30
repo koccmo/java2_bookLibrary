@@ -6,7 +6,7 @@ import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.visit.AddVisitService;
 import dental_clinic.core.validators.visit.AddVisitValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import dental_clinic.core.database.patient.PatientDatabase;
 import dental_clinic.core.database.visit.VisitDatabase;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class AddVisitServiceTest {
     @Mock
     private PatientDatabase patientDatabase;
     @Mock
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @Mock
     private VisitDatabase visitDatabase;
     @InjectMocks
@@ -55,7 +55,7 @@ public class AddVisitServiceTest {
         assertTrue(addVisitResponse.getErrors().size() == 1);
         assertTrue(errors.contains(expectedError));
         Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class AddVisitServiceTest {
         assertTrue(errors.contains(expectedError2));
         assertTrue(errors.contains(expectedError3));
         Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test

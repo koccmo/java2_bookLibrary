@@ -6,7 +6,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.services.doctor.AddDoctorService;
 import dental_clinic.core.validators.doctor.AddDoctorRequestValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ public class AddDoctorServiceTest {
     @Mock
     private AddDoctorRequestValidator addDoctorRequestValidator;
     @Mock
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @InjectMocks
     AddDoctorService addDoctorService;
 
@@ -54,7 +54,7 @@ public class AddDoctorServiceTest {
 
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname", "12345678"));
         Mockito.when(addDoctorRequestValidator.validate(addDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(true);
+        Mockito.when(doctorRepository.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(true);
 
 
         AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);
@@ -68,7 +68,7 @@ public class AddDoctorServiceTest {
     public void testDoctorAddedSuccessfully(){
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname", "12345678"));
         Mockito.when(addDoctorRequestValidator.validate(addDoctorRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(false);
+        Mockito.when(doctorRepository.containsDoctor(new Doctor("Name", "Surname", "12345678"))).thenReturn(false);
 
 
         AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);

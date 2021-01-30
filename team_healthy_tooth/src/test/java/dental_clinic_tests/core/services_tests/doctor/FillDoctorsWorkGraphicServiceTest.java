@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.FillDoctorsWorkGraphicResponse;
 import dental_clinic.core.services.doctor.FillDoctorsWorkGraphicService;
 import dental_clinic.core.validators.doctor.FillDoctorsWorkGraphicRequestValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ public class FillDoctorsWorkGraphicServiceTest {
     @Mock
     private FillDoctorsWorkGraphicRequestValidator fillDoctorsWorkGraphicRequestValidator;
     @Mock
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @InjectMocks
     private FillDoctorsWorkGraphicService fillDoctorsWorkGraphicService;
 
@@ -53,7 +53,7 @@ public class FillDoctorsWorkGraphicServiceTest {
         FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest = new FillDoctorsWorkGraphicRequest(5L, 5, "10:00", "15:00");
 
         Mockito.when(fillDoctorsWorkGraphicRequestValidator.validate(fillDoctorsWorkGraphicRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsId(5L)).thenReturn(false);
+        Mockito.when(doctorRepository.containsId(5L)).thenReturn(false);
 
         FillDoctorsWorkGraphicResponse fillDoctorsWorkGraphicResponse = fillDoctorsWorkGraphicService.execute(fillDoctorsWorkGraphicRequest);
 
@@ -70,7 +70,7 @@ public class FillDoctorsWorkGraphicServiceTest {
         FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest = new FillDoctorsWorkGraphicRequest(5L, 5, "17:00", "15:00");
 
         Mockito.when(fillDoctorsWorkGraphicRequestValidator.validate(fillDoctorsWorkGraphicRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsId(5L)).thenReturn(true);
+        Mockito.when(doctorRepository.containsId(5L)).thenReturn(true);
 
         FillDoctorsWorkGraphicResponse fillDoctorsWorkGraphicResponse = fillDoctorsWorkGraphicService.execute(fillDoctorsWorkGraphicRequest);
 
@@ -84,7 +84,7 @@ public class FillDoctorsWorkGraphicServiceTest {
         FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest = new FillDoctorsWorkGraphicRequest(5L, 5, "12:00", "15:00");
 
         Mockito.when(fillDoctorsWorkGraphicRequestValidator.validate(fillDoctorsWorkGraphicRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.containsId(5L)).thenReturn(true);
+        Mockito.when(doctorRepository.containsId(5L)).thenReturn(true);
 
         FillDoctorsWorkGraphicResponse fillDoctorsWorkGraphicResponse = fillDoctorsWorkGraphicService.execute(fillDoctorsWorkGraphicRequest);
 

@@ -8,7 +8,7 @@ import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.planned_visit.AddPlannedVisitService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import dental_clinic.core.database.patient.PatientDatabase;
 import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class AddPlannedVisitServiceTest {
     @Mock
     private AddPatientService addPatientService;
     @Mock
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @InjectMocks
     private AddPlannedVisitService addPlannedVisitService;
 
