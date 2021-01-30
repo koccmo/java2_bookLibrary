@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Component
-public class ManipulationDatabaseImpl implements ManipulationDatabase {
+public class InMemoryManipulationRepositoryImpl implements ManipulationRepository {
 
     private List<Manipulation> manipulations = createSomeManipulations();
     private Long id = 4L;
@@ -41,7 +41,7 @@ public class ManipulationDatabaseImpl implements ManipulationDatabase {
     public boolean manipulationIsActive(Long id) {
         return manipulations.stream()
                 .filter(manipulation -> manipulation.getId().equals(id))
-                .anyMatch(manipulation -> manipulation.getIsActive());
+                .anyMatch(manipulation -> manipulation.isActive());
     }
 
     @Override

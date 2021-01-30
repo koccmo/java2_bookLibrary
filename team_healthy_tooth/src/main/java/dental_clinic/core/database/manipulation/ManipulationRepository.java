@@ -4,7 +4,7 @@ import dental_clinic.core.domain.Manipulation;
 
 import java.util.List;
 
-public interface ManipulationDatabase {
+public interface ManipulationRepository {
 
     void addManipulation(Manipulation manipulation);
 

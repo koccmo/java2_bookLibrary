@@ -1,6 +1,5 @@
 package dental_clinic.core.database.manipulation;
 
-import dental_clinic.core.database.doctor.DoctorRowMapper;
 import dental_clinic.core.domain.Manipulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ManipulationJdbcDatabaseImpl implements ManipulationDatabase {
+public class JdbcManipulationRepositoryImpl implements ManipulationRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -20,7 +19,7 @@ public class ManipulationJdbcDatabaseImpl implements ManipulationDatabase {
         jdbcTemplate.update(
                 "INSERT INTO service (service_type, price, isActive) "
                 + "VALUES (?, ?, ?)",
-                manipulation.getManipulation_type(), manipulation.getPrice(), manipulation.getIsActive()
+                manipulation.getManipulation_type(), manipulation.getPrice(), manipulation.isActive()
         );
     }
 
@@ -48,7 +47,7 @@ public class ManipulationJdbcDatabaseImpl implements ManipulationDatabase {
     @Override
     public boolean manipulationIsActive(Long id) {
         String sql = "SELECT * FROM service WHERE id = " + id;
-        return jdbcTemplate.query(sql, new ManipulationRowMapper()).get(0).getIsActive();
+        return jdbcTemplate.query(sql, new ManipulationRowMapper()).get(0).isActive();
     }
 
     @Override
