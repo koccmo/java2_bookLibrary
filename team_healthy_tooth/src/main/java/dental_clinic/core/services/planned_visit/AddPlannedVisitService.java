@@ -10,8 +10,8 @@ import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
 import dental_clinic.core.database.doctor.DoctorRepository;
-import dental_clinic.core.database.patient.PatientDatabase;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +26,9 @@ public class AddPlannedVisitService {
     @Autowired
     private AddPlannedVisitRequestValidator addPlannedVisitRequestValidator;
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
     private AddPatientService addPatientService;
     @Autowired
@@ -64,12 +64,12 @@ public class AddPlannedVisitService {
             return new AddPlannedVisitResponse(errorList);
         }
 
-        if (plannedVisitsInMemoryDatabase.containsPlannedVisitInTheSameTimeTheSameDoctor(plannedVisit)) {
+        if (plannedVisitsRepository.containsPlannedVisitInTheSameTimeTheSameDoctor(plannedVisit)) {
             errorList.add(new CoreError("database", "Not empty time"));
             return new AddPlannedVisitResponse(errorList);
         }
 
-        plannedVisitsInMemoryDatabase.addPlannedVisit(plannedVisit);
+        plannedVisitsRepository.addPlannedVisit(plannedVisit);
         return new AddPlannedVisitResponse(plannedVisit);
     }
 
@@ -125,7 +125,7 @@ public class AddPlannedVisitService {
     }
 
     private AddPlannedVisitRequest fillPersonalData (AddPlannedVisitRequest addPlannedVisitRequest1) {
-        PersonalData personalData = patientDatabase.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get(0).getPersonalData();
+        PersonalData personalData = patientRepository.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get(0).getPersonalData();
         return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData, addPlannedVisitRequest1.getId());
     }
 }

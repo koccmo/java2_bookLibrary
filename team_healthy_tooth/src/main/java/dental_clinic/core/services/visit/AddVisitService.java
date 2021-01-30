@@ -8,9 +8,9 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.visit.AddVisitValidator;
 import dental_clinic.core.database.doctor.DoctorRepository;
 import dental_clinic.core.database.manipulation.ManipulationRepository;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.core.database.visit.VisitDatabase;
+import dental_clinic.core.database.visit.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class AddVisitService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
     private AddVisitValidator addVisitValidator;
     @Autowired
@@ -30,7 +30,7 @@ public class AddVisitService {
     @Autowired
     private ManipulationRepository manipulationRepository;
     @Autowired
-    private VisitDatabase visitDatabase;
+    private VisitRepository visitRepository;
 
     public AddVisitResponse execute(AddVisitRequest addVisitRequest){
 
@@ -71,13 +71,13 @@ public class AddVisitService {
                 addVisitRequest.getToothStatus(), doctor,
                 manipulationList(addVisitRequest.getManipulationsIds()), addVisitRequest.getDate());
 
-        visitDatabase.addVisit(visit);
+        visitRepository.addVisit(visit);
 
         if (isNewDoctor(doctor)){
             doctorRepository.addDoctor(doctor);
         }
 
-        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
+        if (patientRepository.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
             addVisitToDoctor(doctor, visit);
             return addVisitToPatient(addVisitRequest, visit);
         }
@@ -106,10 +106,10 @@ public class AddVisitService {
     }
 
     private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
-        for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
+        for (int i = 0; i < patientRepository.getPatients().size(); i++) {
             if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
-                patientDatabase.getPatients().get(i).addVisit(visit);
-                patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
+                patientRepository.getPatients().get(i).addVisit(visit);
+                patientRepository.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
                 return new AddVisitResponse();
             }
         }
@@ -117,7 +117,7 @@ public class AddVisitService {
     }
 
     private boolean isSpecificPatient (int index, long id) {
-        return patientDatabase.getPatients().get(index).getPersonalData().getId().equals(id);
+        return patientRepository.getPatients().get(index).getPersonalData().getId().equals(id);
     }
 
     private boolean isNewDoctor(Doctor doctor) {

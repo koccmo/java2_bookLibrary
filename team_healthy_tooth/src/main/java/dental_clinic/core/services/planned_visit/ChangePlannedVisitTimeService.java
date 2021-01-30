@@ -4,7 +4,7 @@ import dental_clinic.core.requests.plannedVisit.ChangePlannedVisitTimeRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.ChangePlannedVisitTimeResponse;
 import dental_clinic.core.validators.planned_visit.ChangePlannedVisitTimeRequestValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class ChangePlannedVisitTimeService {
 
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Autowired
     private ChangePlannedVisitTimeRequestValidator changePlannedVisitTimeRequestValidator;
 
@@ -30,7 +30,7 @@ public class ChangePlannedVisitTimeService {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        if (!plannedVisitsInMemoryDatabase.containsId(changePlannedVisitTimeRequest.getId())) {
+        if (!plannedVisitsRepository.containsId(changePlannedVisitTimeRequest.getId())) {
             errorList.add(new CoreError("database", "Database doesn't contain id "
                     + changePlannedVisitTimeRequest.getId()));
             return new ChangePlannedVisitTimeResponse(errorList);
@@ -42,7 +42,7 @@ public class ChangePlannedVisitTimeService {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        plannedVisitsInMemoryDatabase.changePlannedVisitTime(changePlannedVisitTimeRequest.getId(), visitDate);
+        plannedVisitsRepository.changePlannedVisitTime(changePlannedVisitTimeRequest.getId(), visitDate);
         return new ChangePlannedVisitTimeResponse(changePlannedVisitTimeRequest.getId(), visitDate);
     }
 

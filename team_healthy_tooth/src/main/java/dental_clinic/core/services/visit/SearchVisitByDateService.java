@@ -5,7 +5,7 @@ import dental_clinic.core.requests.visit.SearchVisitByDateRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.visit.SearchVisitByDateResponse;
 import dental_clinic.core.validators.visit.SearchVisitByDateValidator;
-import dental_clinic.core.database.visit.VisitDatabase;
+import dental_clinic.core.database.visit.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class SearchVisitByDateService {
     @Autowired
     private SearchVisitByDateValidator searchVisitByDateValidator;
     @Autowired
-    private VisitDatabase visitDatabase;
+    private VisitRepository visitRepository;
 
     public SearchVisitByDateResponse execute (SearchVisitByDateRequest searchVisitByDateRequest) {
         List<CoreError> errorList = searchVisitByDateValidator.validate(searchVisitByDateRequest);
@@ -29,7 +29,7 @@ public class SearchVisitByDateService {
             return new SearchVisitByDateResponse(errorList, new ArrayList<>());
         }
 
-        List <Visit> visitList = visitDatabase.searchVisitByDate(searchVisitByDateRequest.getDayFrom(),
+        List <Visit> visitList = visitRepository.searchVisitByDate(searchVisitByDateRequest.getDayFrom(),
                 searchVisitByDateRequest.getDayTo(), searchVisitByDateRequest.getMonthFrom(), searchVisitByDateRequest.getMonthTo());
 
         if (visitList.isEmpty()) {

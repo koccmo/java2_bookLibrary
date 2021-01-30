@@ -5,7 +5,7 @@ import dental_clinic.core.requests.visit.SearchVisitByPatientIdRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.visit.SearchVisitByPatientIdResponse;
 import dental_clinic.core.validators.visit.SearchVisitByPatientIdValidator;
-import dental_clinic.core.database.visit.VisitDatabase;
+import dental_clinic.core.database.visit.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class SearchVisitByPatientIdService {
     @Autowired
     private SearchVisitByPatientIdValidator searchVisitByPatientIdValidator;
     @Autowired
-    private VisitDatabase visitDatabase;
+    private VisitRepository visitRepository;
 
     public SearchVisitByPatientIdResponse execute (SearchVisitByPatientIdRequest searchVisitByPatientIdRequest) {
         List<CoreError> errorList = searchVisitByPatientIdValidator.validate(searchVisitByPatientIdRequest);
@@ -27,7 +27,7 @@ public class SearchVisitByPatientIdService {
             return new SearchVisitByPatientIdResponse(errorList, new ArrayList<>());
         }
 
-        List<Visit> visitList = visitDatabase.searchVisitByPatientId(searchVisitByPatientIdRequest.getId());
+        List<Visit> visitList = visitRepository.searchVisitByPatientId(searchVisitByPatientIdRequest.getId());
         if (visitList.isEmpty()) {
             errorList.add(new CoreError("database", "Database doesn't contain visit for patient with id " +
                     searchVisitByPatientIdRequest.getId()));

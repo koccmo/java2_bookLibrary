@@ -7,7 +7,7 @@ import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.validators.patient.SearchPatientRequestValidator;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class SearchPatientService {
     private boolean pagingEnabled;
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
@@ -54,7 +54,7 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchByPersonalCodeIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = patientDatabase.findPatientsByPersonalCode(searchPatientRequest.getInputForSearch());
+        List <Patient> patients = patientRepository.findPatientsByPersonalCode(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with personal code " +
                     searchPatientRequest.getInputForSearch()));
@@ -67,7 +67,7 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchBySurnameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List<Patient>patients = patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch());
+        List<Patient>patients = patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with surname " +
                     searchPatientRequest.getInputForSearch()));

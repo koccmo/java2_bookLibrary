@@ -7,7 +7,7 @@ import dental_clinic.core.requests.patient.GetPatientCardRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetPatientCardResponse;
 import dental_clinic.core.validators.patient.GetPatientCardRequestValidator;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.*;
 @Component
 public class GetPatientCardService {
 
-    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private PatientRepository patientRepository;
     @Autowired
     private GetPatientCardRequestValidator getPatientCardRequestValidator;
     
@@ -27,7 +27,7 @@ public class GetPatientCardService {
             return new GetPatientCardResponse(errors);
         }
         
-        if (!patientDatabase.containsPatientWithSpecificId(getPatientCardRequest.getId())){
+        if (!patientRepository.containsPatientWithSpecificId(getPatientCardRequest.getId())){
             errors.add(new CoreError("database", "Database doesn't contain patient with id " +
                     getPatientCardRequest.getId()));
             return new GetPatientCardResponse(errors);
@@ -39,7 +39,7 @@ public class GetPatientCardService {
 
     private Patient createPatientCard(GetPatientCardRequest getPatientCardRequest){
         Patient newPatient = new Patient();
-        newPatient.setPersonalData(patientDatabase.getPatientCard(getPatientCardRequest.getId()).get().getPersonalData());
+        newPatient.setPersonalData(patientRepository.getPatientCard(getPatientCardRequest.getId()).get().getPersonalData());
         Jowl specificPatientJowl = new Jowl();
         specificPatientJowl = getSpecificPatientJowl(getPatientCardRequest);
         Jowl currentStatusOfJowl = new Jowl();
@@ -62,7 +62,7 @@ public class GetPatientCardService {
 
         for (Integer key : specificPatientJowl.getJowl().keySet()) {
             specificPatientJowl.getJowl().put(key,
-                    new ArrayList<>(addLastStatus(patientDatabase.getPatientCard(getPatientCardRequest.getId()).get().getJowl(), key)));
+                    new ArrayList<>(addLastStatus(patientRepository.getPatientCard(getPatientCardRequest.getId()).get().getJowl(), key)));
         }
         return specificPatientJowl;
     }
