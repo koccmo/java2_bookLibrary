@@ -4,7 +4,7 @@ import dental_clinic.core.requests.doctor.GetDoctorListRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.GetDoctorListResponse;
 import dental_clinic.core.validators.doctor.GetDoctorRequestListValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class GetDoctorListService {
 
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @Autowired
     private GetDoctorRequestListValidator getDoctorRequestListValidator;
 
@@ -26,12 +26,12 @@ public class GetDoctorListService {
             return new GetDoctorListResponse(errorList, new ArrayList<>());
         }
 
-        if (doctorDatabase.getDoctorList().isEmpty()) {
+        if (doctorRepository.getDoctorList().isEmpty()) {
             errorList.add(new CoreError("database", "Database is empty"));
             return new GetDoctorListResponse(errorList, new ArrayList<>());
         }
 
-        return new GetDoctorListResponse(doctorDatabase.getDoctorList());
+        return new GetDoctorListResponse(doctorRepository.getDoctorList());
     }
 
 }

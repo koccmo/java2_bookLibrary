@@ -5,7 +5,7 @@ import dental_clinic.core.requests.manipulation.GetManipulationsListRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.manipulation.GetManipulationsListResponse;
 import dental_clinic.core.validators.manipulation.GetManipulationsRequestValidator;
-import dental_clinic.core.database.manipulation.ManipulationDatabase;
+import dental_clinic.core.database.manipulation.ManipulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class GetManipulationsListService {
     @Autowired
     private GetManipulationsRequestValidator getManipulationsRequestValidator;
     @Autowired
-    private ManipulationDatabase manipulationDatabase;
+    private ManipulationRepository manipulationRepository;
 
     public GetManipulationsListResponse execute (GetManipulationsListRequest getManipulationsListRequest) {
         List<CoreError> errorList = getManipulationsRequestValidator.validate(getManipulationsListRequest);
@@ -27,7 +27,7 @@ public class GetManipulationsListService {
             return new GetManipulationsListResponse(errorList, new ArrayList<>());
         }
 
-        List <Manipulation> manipulations = manipulationDatabase.getManipulationsList();
+        List <Manipulation> manipulations = manipulationRepository.getManipulationsList();
 
         if (manipulations.isEmpty()) {
             errorList.add(new CoreError("database", "Database is empty"));

@@ -9,7 +9,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.AddPlannedVisitResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
-import dental_clinic.core.database.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import dental_clinic.core.database.patient.PatientDatabase;
 import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class AddPlannedVisitService {
     @Autowired
     private AddPatientService addPatientService;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     public AddPlannedVisitResponse execute (AddPlannedVisitRequest addPlannedVisitRequest) {
 
@@ -49,13 +49,13 @@ public class AddPlannedVisitService {
             return new AddPlannedVisitResponse(errorList);
         }
 
-        if (!doctorDatabase.containsId(addPlannedVisitRequest.getId())) {
+        if (!doctorRepository.containsId(addPlannedVisitRequest.getId())) {
             errorList.add(new CoreError("database", "Database doesn't contain doctor with id " +
                     addPlannedVisitRequest.getId()));
             return new AddPlannedVisitResponse(errorList);
         }
 
-        Doctor doctor = doctorDatabase.getDoctorById(addPlannedVisitRequest.getId()).get();
+        Doctor doctor = doctorRepository.getDoctorById(addPlannedVisitRequest.getId()).get();
 
         PlannedVisit plannedVisit = new PlannedVisit(visitDate, addPlannedVisitRequest.getPersonalData(), doctor);
 
