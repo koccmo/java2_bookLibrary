@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByPersonalCodeResponse;
 import dental_clinic.core.services.planned_visit.SearchPlannedVisitsByPersonalCodeService;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByPersonalCodeRequestValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,7 +29,7 @@ public class SearchPlannedVisitsByPersonalCodeServiceTest {
     @Mock
     private SearchPlannedVisitsByPersonalCodeRequestValidator searchPlannedVisitsByPersonalCodeRequestValidator;
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @InjectMocks
     private SearchPlannedVisitsByPersonalCodeService searchPlannedVisitsByPersonalCodeService;
 
@@ -58,7 +58,7 @@ public class SearchPlannedVisitsByPersonalCodeServiceTest {
         errorList.add(error);
 
         Mockito.when(searchPlannedVisitsByPersonalCodeRequestValidator.validate(searchPlannedVisitsByPersonalCodeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode())).thenReturn(new ArrayList<>());
+        Mockito.when(plannedVisitsRepository.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode())).thenReturn(new ArrayList<>());
 
         SearchPlannedVisitsByPersonalCodeResponse searchPlannedVisitsByPersonalCodeResponse = searchPlannedVisitsByPersonalCodeService.execute(searchPlannedVisitsByPersonalCodeRequest);
 
@@ -80,7 +80,7 @@ public class SearchPlannedVisitsByPersonalCodeServiceTest {
         plannedVisitList.add(plannedVisit);
 
         Mockito.when(searchPlannedVisitsByPersonalCodeRequestValidator.validate(searchPlannedVisitsByPersonalCodeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode())).thenReturn(plannedVisitList);
+        Mockito.when(plannedVisitsRepository.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode())).thenReturn(plannedVisitList);
 
         SearchPlannedVisitsByPersonalCodeResponse searchPlannedVisitsByPersonalCodeResponse = searchPlannedVisitsByPersonalCodeService.execute(searchPlannedVisitsByPersonalCodeRequest);
 

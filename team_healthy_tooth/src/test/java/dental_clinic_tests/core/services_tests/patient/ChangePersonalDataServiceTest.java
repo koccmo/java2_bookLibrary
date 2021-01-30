@@ -6,7 +6,7 @@ import dental_clinic.core.responses.patient.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.validators.patient.ChangePersonalDataValidator;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,7 +21,7 @@ import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
  public class ChangePersonalDataServiceTest {
-    @Mock private PatientDatabase patientDatabase;
+    @Mock private PatientRepository patientRepository;
     @Mock private ChangePersonalDataValidator changePersonalDataValidator;
     @InjectMocks private ChangePersonalDataService changePersonalDataService;
 
@@ -38,7 +38,7 @@ import java.util.List;
        ChangePersonalDataResponse changePersonalDataResponse = changePersonalDataService.execute(changePersonalDataRequest);
 
        assertTrue(changePersonalDataResponse.getErrors().equals(errors));
-       Mockito.verifyNoInteractions(patientDatabase);
+       Mockito.verifyNoInteractions(patientRepository);
     }
 
    @Test
@@ -54,7 +54,7 @@ import java.util.List;
     ChangePersonalDataResponse changePersonalDataResponse = changePersonalDataService.execute(changePersonalDataRequest);
 
     assertTrue(changePersonalDataResponse.getErrors().equals(errors));
-    Mockito.verifyNoInteractions(patientDatabase);
+    Mockito.verifyNoInteractions(patientRepository);
    }
 
  }

@@ -10,7 +10,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.services.patient.SearchPatientService;
 import dental_clinic.core.validators.patient.SearchPatientRequestValidator;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class SearchPatientServiceTest {
 
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private SearchPatientRequestValidator searchPatientRequestValidator;
     @InjectMocks
@@ -64,7 +64,7 @@ public class SearchPatientServiceTest {
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("Bobbins", validOrdering, validPaging);
 
         Mockito.when(searchPatientRequestValidator.validate(searchPatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(new ArrayList<>());
+        Mockito.when(patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(new ArrayList<>());
 
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
@@ -92,7 +92,7 @@ public class SearchPatientServiceTest {
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("A", ordering, validPaging);
 
         Mockito.when(searchPatientRequestValidator.validate(searchPatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
+        Mockito.when(patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
 
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
@@ -123,7 +123,7 @@ public class SearchPatientServiceTest {
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("A", ordering, validPaging);
 
         Mockito.when(searchPatientRequestValidator.validate(searchPatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
+        Mockito.when(patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
 
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 
@@ -153,7 +153,7 @@ public class SearchPatientServiceTest {
         SearchPatientRequest searchPatientRequest = new SearchPatientRequest("A", validOrdering, validPaging);
 
         Mockito.when(searchPatientRequestValidator.validate(searchPatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
+        Mockito.when(patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch())).thenReturn(patients);
 
         SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
 

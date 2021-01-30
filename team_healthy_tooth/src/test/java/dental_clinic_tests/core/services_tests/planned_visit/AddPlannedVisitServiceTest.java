@@ -9,8 +9,8 @@ import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.planned_visit.AddPlannedVisitService;
 import dental_clinic.core.validators.planned_visit.AddPlannedVisitRequestValidator;
 import dental_clinic.core.database.doctor.DoctorRepository;
-import dental_clinic.core.database.patient.PatientDatabase;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,9 +29,9 @@ public class AddPlannedVisitServiceTest {
     @Mock
     private AddPlannedVisitRequestValidator addPlannedVisitRequestValidator;
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private AddPatientService addPatientService;
     @Mock
@@ -60,7 +60,7 @@ public class AddPlannedVisitServiceTest {
         assertTrue(addPlannedVisitResponse.hasErrors());
         assertTrue(addPlannedVisitResponse.getErrors().size() == 1);
         assertTrue(addPlannedVisitResponse.getErrors().contains(coreError));
-        Mockito.verifyNoInteractions(plannedVisitsInMemoryDatabase);
+        Mockito.verifyNoInteractions(plannedVisitsRepository);
     }
 
     @Test
@@ -77,6 +77,6 @@ public class AddPlannedVisitServiceTest {
         assertTrue(addPlannedVisitResponse.hasErrors());
         assertTrue(addPlannedVisitResponse.getErrors().size() == 1);
         assertTrue(addPlannedVisitResponse.getErrors().contains(coreError));
-        Mockito.verifyNoInteractions(plannedVisitsInMemoryDatabase);
+        Mockito.verifyNoInteractions(plannedVisitsRepository);
     }
 }

@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.ChangePlannedVisitTimeResponse;
 import dental_clinic.core.services.planned_visit.ChangePlannedVisitTimeService;
 import dental_clinic.core.validators.planned_visit.ChangePlannedVisitTimeRequestValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class ChangePlannedVisitTimeServiceTest {
 
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Mock
     private ChangePlannedVisitTimeRequestValidator changePlannedVisitTimeRequestValidator;
     @InjectMocks
@@ -54,7 +54,7 @@ public class ChangePlannedVisitTimeServiceTest {
         ChangePlannedVisitTimeRequest changePlannedVisitTimeRequest = new ChangePlannedVisitTimeRequest(2L, "25-01-2022 14:25");
 
         Mockito.when(changePlannedVisitTimeRequestValidator.validate(changePlannedVisitTimeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.containsId(2L)).thenReturn(false);
+        Mockito.when(plannedVisitsRepository.containsId(2L)).thenReturn(false);
 
         ChangePlannedVisitTimeResponse changePlannedVisitTimeResponse = changePlannedVisitTimeService.execute(changePlannedVisitTimeRequest);
         changePlannedVisitTimeResponse.getErrors().forEach(System.out::println);
@@ -72,7 +72,7 @@ public class ChangePlannedVisitTimeServiceTest {
         ChangePlannedVisitTimeRequest changePlannedVisitTimeRequest = new ChangePlannedVisitTimeRequest(1L, "01-01-2021 14:25");
 
         Mockito.when(changePlannedVisitTimeRequestValidator.validate(changePlannedVisitTimeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.containsId(1L)).thenReturn(true);
+        Mockito.when(plannedVisitsRepository.containsId(1L)).thenReturn(true);
 
         ChangePlannedVisitTimeResponse changePlannedVisitTimeResponse = changePlannedVisitTimeService.execute(changePlannedVisitTimeRequest);
 
@@ -86,7 +86,7 @@ public class ChangePlannedVisitTimeServiceTest {
         ChangePlannedVisitTimeRequest changePlannedVisitTimeRequest = new ChangePlannedVisitTimeRequest(1L, "01-05-2021 14:25");
 
         Mockito.when(changePlannedVisitTimeRequestValidator.validate(changePlannedVisitTimeRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.containsId(1L)).thenReturn(true);
+        Mockito.when(plannedVisitsRepository.containsId(1L)).thenReturn(true);
 
         ChangePlannedVisitTimeResponse changePlannedVisitTimeResponse = changePlannedVisitTimeService.execute(changePlannedVisitTimeRequest);
 

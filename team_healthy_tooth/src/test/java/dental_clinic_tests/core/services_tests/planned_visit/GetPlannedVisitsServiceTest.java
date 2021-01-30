@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.GetPlannedVisitsResponse;
 import dental_clinic.core.services.planned_visit.GetPlannedVisitsService;
 import dental_clinic.core.validators.planned_visit.GetPlannedVisitsRequestValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,7 +29,7 @@ public class GetPlannedVisitsServiceTest {
     @Mock
     private GetPlannedVisitsRequestValidator getPlannedVisitsRequestValidator;
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @InjectMocks
     private GetPlannedVisitsService getPlannedVisitsService;
 
@@ -39,7 +39,7 @@ public class GetPlannedVisitsServiceTest {
         GetPlannedVisitsRequest getPlannedVisitsRequest = new GetPlannedVisitsRequest();
 
         Mockito.when(getPlannedVisitsRequestValidator.validate(getPlannedVisitsRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.getPlannedVisits()).thenReturn(new ArrayList<>());
+        Mockito.when(plannedVisitsRepository.getPlannedVisits()).thenReturn(new ArrayList<>());
 
         GetPlannedVisitsResponse getPlannedVisitsResponse = getPlannedVisitsService.execute(getPlannedVisitsRequest);
 
@@ -58,7 +58,7 @@ public class GetPlannedVisitsServiceTest {
         PlannedVisit plannedVisit = new PlannedVisit(visitTime, personalData, doctor);
         plannedVisitList.add(plannedVisit);
         Mockito.when(getPlannedVisitsRequestValidator.validate(getPlannedVisitsRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.getPlannedVisits()).thenReturn(plannedVisitList);
+        Mockito.when(plannedVisitsRepository.getPlannedVisits()).thenReturn(plannedVisitList);
 
         GetPlannedVisitsResponse getPlannedVisitsResponse = getPlannedVisitsService.execute(getPlannedVisitsRequest);
 

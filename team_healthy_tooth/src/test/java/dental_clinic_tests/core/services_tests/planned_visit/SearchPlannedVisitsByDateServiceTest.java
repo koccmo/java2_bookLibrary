@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByDateResponse;
 import dental_clinic.core.services.planned_visit.SearchPlannedVisitsByDateService;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByDateRequestValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,7 +29,7 @@ public class SearchPlannedVisitsByDateServiceTest {
     @Mock
     private SearchPlannedVisitsByDateRequestValidator searchPlannedVisitsByDateRequestValidator;
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @InjectMocks
     private SearchPlannedVisitsByDateService searchPlannedVisitsByDateService;
 
@@ -59,7 +59,7 @@ public class SearchPlannedVisitsByDateServiceTest {
         errorList.add(expectedError);
 
         Mockito.when(searchPlannedVisitsByDateRequestValidator.validate(searchPlannedVisitsByDateRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(1, 2, 11, 11)).thenReturn(new ArrayList<>());
+        Mockito.when(plannedVisitsRepository.searchPlannedVisitsByDate(1, 2, 11, 11)).thenReturn(new ArrayList<>());
 
         SearchPlannedVisitsByDateResponse searchPlannedVisitsByDateResponse = searchPlannedVisitsByDateService.execute(searchPlannedVisitsByDateRequest);
 
@@ -80,7 +80,7 @@ public class SearchPlannedVisitsByDateServiceTest {
         plannedVisitList.add(plannedVisit);
 
         Mockito.when(searchPlannedVisitsByDateRequestValidator.validate(searchPlannedVisitsByDateRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(1, 4, 11, 12)).thenReturn(plannedVisitList);
+        Mockito.when(plannedVisitsRepository.searchPlannedVisitsByDate(1, 4, 11, 12)).thenReturn(plannedVisitList);
 
         SearchPlannedVisitsByDateResponse searchPlannedVisitsByDateResponse = searchPlannedVisitsByDateService.execute(searchPlannedVisitsByDateRequest);
 

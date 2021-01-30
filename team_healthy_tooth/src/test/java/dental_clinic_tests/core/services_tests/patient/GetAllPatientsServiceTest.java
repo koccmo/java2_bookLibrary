@@ -7,7 +7,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
 import dental_clinic.core.services.patient.GetAllPatientsService;
 import dental_clinic.core.validators.patient.GetAllPatientsRequestValidator;
-import dental_clinic.core.database.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 public class GetAllPatientsServiceTest {
 
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private GetAllPatientsRequestValidator getAllPatientsRequestValidator;
     @InjectMocks
@@ -38,7 +38,7 @@ public class GetAllPatientsServiceTest {
 
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         Mockito.when(getAllPatientsRequestValidator.validate(getAllPatientsRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.getPatients()).thenReturn(new ArrayList<>());
+        Mockito.when(patientRepository.getPatients()).thenReturn(new ArrayList<>());
 
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService.execute(getAllPatientsRequest);
 
@@ -56,7 +56,7 @@ public class GetAllPatientsServiceTest {
 
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         Mockito.when(getAllPatientsRequestValidator.validate(getAllPatientsRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.getPatients()).thenReturn(patients);
+        Mockito.when(patientRepository.getPatients()).thenReturn(patients);
 
         GetAllPatientsResponse getAllPatientsResponse = getAllPatientsService.execute(getAllPatientsRequest);
 

@@ -5,7 +5,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.CancelPlannedVisitResponse;
 import dental_clinic.core.services.planned_visit.CancelPlannedVisitService;
 import dental_clinic.core.validators.planned_visit.CancelPlannedVisitValidator;
-import dental_clinic.core.database.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class CancelPlannedVisitServiceTest {
 
     @Mock
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Mock
     private CancelPlannedVisitValidator cancelPlannedVisitValidator;
     @InjectMocks
@@ -43,7 +43,7 @@ public class CancelPlannedVisitServiceTest {
         assertTrue(cancelPlannedVisitResponse.hasErrors());
         assertTrue(cancelPlannedVisitResponse.getErrors().size() == 1);
         assertTrue(cancelPlannedVisitResponse.getErrors().contains(coreError));
-        Mockito.verifyNoInteractions(plannedVisitsInMemoryDatabase);
+        Mockito.verifyNoInteractions(plannedVisitsRepository);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class CancelPlannedVisitServiceTest {
         CancelPlannedVisitRequest cancelPlannedVisitRequest = new CancelPlannedVisitRequest(2L);
 
         Mockito.when(cancelPlannedVisitValidator.validate(cancelPlannedVisitRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.containsId(2L)).thenReturn(false);
+        Mockito.when(plannedVisitsRepository.containsId(2L)).thenReturn(false);
 
         CancelPlannedVisitResponse cancelPlannedVisitResponse = cancelPlannedVisitService.execute(cancelPlannedVisitRequest);
 
@@ -69,7 +69,7 @@ public class CancelPlannedVisitServiceTest {
         CancelPlannedVisitRequest cancelPlannedVisitRequest = new CancelPlannedVisitRequest(2L);
 
         Mockito.when(cancelPlannedVisitValidator.validate(cancelPlannedVisitRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(plannedVisitsInMemoryDatabase.containsId(2L)).thenReturn(true);
+        Mockito.when(plannedVisitsRepository.containsId(2L)).thenReturn(true);
 
         CancelPlannedVisitResponse cancelPlannedVisitResponse = cancelPlannedVisitService.execute(cancelPlannedVisitRequest);
 
