@@ -1,6 +1,6 @@
 package estore.acceptance_tests;
 
-import estore.core.validation.AddNewProductValidator;
+import estore.core.validation.AddProductValidator;
 import estore.core.validation.CoreError;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +19,9 @@ public class TestConfig {
 
     @Bean
     @Primary
-    public AddNewProductValidator mockNewProductCategoryValidator() {
-        AddNewProductValidator validator = Mockito.mock(AddNewProductValidator.class);
-        when(validator.validate(any())).thenReturn(new ArrayList<CoreError>());
+    public AddProductValidator mockNewProductCategoryValidator() {
+        AddProductValidator validator = Mockito.mock(AddProductValidator.class);
+        when(validator.validate(any())).thenReturn(new ArrayList<>());
         return validator;
     }
 }

@@ -1,9 +1,9 @@
 package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
-import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.responses.AddNewProductCategoryResponse;
-import estore.core.service.AddNewProductCategoryService;
+import estore.core.requests.AddProductCategoryRequest;
+import estore.core.responses.AddProductCategoryResponse;
+import estore.core.service.AddProductCategoryService;
 import estore.database.ProductCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class AddProductCategoryOnRequestTest {
     @Test
     public void shouldAddValidProductCategory() {
         int dbInitialSize = getCategoryDb().getDatabase().size();
-        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("CategoryA");
-        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("CategoryB");
+        AddProductCategoryRequest addProductCategoryRequest1 = new AddProductCategoryRequest("CategoryA");
+        AddProductCategoryRequest addProductCategoryRequest2 = new AddProductCategoryRequest("CategoryB");
 
         addNewProductCategoryService().execute(addProductCategoryRequest1);
-        AddNewProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
+        AddProductCategoryResponse response = addNewProductCategoryService().execute(addProductCategoryRequest2);
 
         assertTrue(response.isSuccessfullyAdded());
         assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
@@ -45,12 +45,12 @@ public class AddProductCategoryOnRequestTest {
     public void shouldFailAddingInvalidCategory() {
         int dbInitialSize = getCategoryDb().getDatabase().size();
 
-        AddNewProductCategoryRequest addProductCategoryRequest1 = new AddNewProductCategoryRequest("Invalid category 01");
-        AddNewProductCategoryResponse addResponse = addNewProductCategoryService().execute(addProductCategoryRequest1);
+        AddProductCategoryRequest addProductCategoryRequest1 = new AddProductCategoryRequest("Invalid category 01");
+        AddProductCategoryResponse addResponse = addNewProductCategoryService().execute(addProductCategoryRequest1);
         assertTrue(addResponse.hasErrors());
         assertEquals(addResponse.getErrors().get(0).getMessage(), "Must contain only english letters!");
 
-        AddNewProductCategoryRequest addProductCategoryRequest2 = new AddNewProductCategoryRequest("");
+        AddProductCategoryRequest addProductCategoryRequest2 = new AddProductCategoryRequest("");
         addResponse = addNewProductCategoryService().execute(addProductCategoryRequest2);
         assertTrue(addResponse.hasErrors());
         assertEquals(addResponse.getErrors().size(), 1);
@@ -59,8 +59,8 @@ public class AddProductCategoryOnRequestTest {
         assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize);
     }
 
-    private AddNewProductCategoryService addNewProductCategoryService() {
-        return applicationContext.getBean(AddNewProductCategoryService.class);
+    private AddProductCategoryService addNewProductCategoryService() {
+        return applicationContext.getBean(AddProductCategoryService.class);
     }
 
     private ProductCategoryRepository getCategoryDb() {

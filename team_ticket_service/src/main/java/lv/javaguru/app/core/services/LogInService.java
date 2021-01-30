@@ -9,7 +9,6 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -24,8 +23,6 @@ public class LogInService {
 	@Autowired
 	private Database database;
 	@Autowired
-	private UserDatabase userDatabase;
-	@Autowired
 	private LoginRequestValidator validator;
 
 
@@ -36,11 +33,11 @@ public class LogInService {
 			return new LogInResponse(errors);
 
 
-		Optional<User> optionalUser = userDatabase.getUser(request.getUser());
+		Optional<User> optionalUser = database.getUserByNameAndSurname(request.getUser());
 		User user;
 		if (optionalUser.isPresent()) {
 			user = optionalUser.get();
-			userDatabase.setCurrentUser(user);
+			database.setCurrentUser(user);
 		}
 		else {
 			errors.add(new CodeError("database", "No such user"));

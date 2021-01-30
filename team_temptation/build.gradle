@@ -1,5 +1,8 @@
 dependencies {
 
+	compile('org.hibernate:hibernate-core:5.4.25.Final') // реализует ORM - Object Relational Mapping
+	compile('org.springframework:spring-tx:5.2.6.RELEASE') // для управления транзакциями при подключении к базам данных
+	compile('org.springframework:spring-orm:5.2.6.RELEASE') // реализует поддержку ORM в экосистеме Spring
 	compile('org.springframework:spring-context:5.2.6.RELEASE')
 	compile('org.springframework:spring-jdbc:5.2.6.RELEASE') // для интеграции Spring приложения с JDBC API, является надстройкой над JDBC API
 	compile('mysql:mysql-connector-java:8.0.22')

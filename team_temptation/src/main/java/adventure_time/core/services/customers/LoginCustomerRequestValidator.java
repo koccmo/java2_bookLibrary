@@ -1,7 +1,6 @@
 package adventure_time.core.services.customers;
 
 import adventure_time.core.requests.customers.LoginCustomerRequest;
-import adventure_time.core.requests.customers.UpdateCustomerRequest;
 import adventure_time.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +13,7 @@ public class LoginCustomerRequestValidator {
 
     private static final Pattern PATTERN_EMAIL = Pattern.compile("^([a-z0-9_\\.-]+)@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
+
 
     public List<CoreError> validate (LoginCustomerRequest request) {
 

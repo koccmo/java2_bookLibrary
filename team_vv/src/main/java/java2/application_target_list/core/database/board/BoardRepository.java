@@ -14,4 +14,5 @@ public interface BoardRepository {
     boolean setRecordCompleteDate(Long id);
     boolean isIdInBoardList(Long boardId);
     List<Record> getFullInfoAboutRecords();
+    List<Record> getUnfinishedRecords();
 }

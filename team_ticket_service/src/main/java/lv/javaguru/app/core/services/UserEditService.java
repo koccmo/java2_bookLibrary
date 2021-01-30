@@ -5,9 +5,7 @@ import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.validators.EditUserRequestValidator;
-import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import lv.javaguru.app.database.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +13,9 @@ import java.util.List;
 
 @Component
 public class UserEditService {
+
 	@Autowired
-	private UserDatabase userDatabase;
+	private Database database;
 	@Autowired
 	private EditUserRequestValidator validator;
 
@@ -28,7 +27,7 @@ public class UserEditService {
 			return new UserEditResponse(errorList);
 		}
 
-		User user = userDatabase.getUserById(request.getId());
+		User user = database.getUserById(request.getId());
 
 		if (user == null) {
 			errorList.add(new CodeError("ID", "No user with such ID!"));
@@ -47,7 +46,7 @@ public class UserEditService {
 		if (!responseList.isEmpty()) {
 			return new UserEditResponse(responseList);
 		}
-		userDatabase.getUserById(request.getId()).setName(name);
+		database.getUserById(request.getId()).setName(name);
 
 		return new UserEditResponse("Hurrah! Name has been changed");
 	}
@@ -61,7 +60,7 @@ public class UserEditService {
 		if (!errorList.isEmpty()) {
 			return new UserEditResponse(errorList);
 		}
-		userDatabase.getUserById(request.getId()).setSurname(surname);
+		database.getUserById(request.getId()).setSurname(surname);
 
 		return new UserEditResponse("Hurrah! Surname has been changed");
 	}

@@ -23,21 +23,13 @@ public class Record {
     @Column(name="target_date_of_completion", columnDefinition = "DATETIME")
     private String dateComplete;
 
-//    @JoinColumn()
-//    private String targetName;
-//
-//    @Column(name="target_description", nullable = false)
-//    private String targetDescription;
-//
-//    @Column(name="target_deadline", nullable = false)
-//    private Integer targetDeadline;
-//
-//    @Column(name="user_first_name", nullable = false)
-//    private String userFirstName;
-//
-//    @Column(name="user_last_name", nullable = false)
-//    private String userLastName;
+    @ManyToOne
+    @JoinColumn(name = "target_id" , nullable = false, insertable = false, updatable = false)
+    private Target target;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private User user;
 
     public Record() {
     }
@@ -93,44 +85,20 @@ public class Record {
         return dateAdded;
     }
 
-//    public String getTargetName() {
-//        return targetName;
-//    }
-//
-//    public void setTargetName(String targetName) {
-//        this.targetName = targetName;
-//    }
-//
-//    public String getTargetDescription() {
-//        return targetDescription;
-//    }
-//
-//    public void setTargetDescription(String targetDescription) {
-//        this.targetDescription = targetDescription;
-//    }
-//
-//    public Integer getTargetDeadline() {
-//        return targetDeadline;
-//    }
-//
-//    public void setTargetDeadline(Integer targetDeadline) {
-//        this.targetDeadline = targetDeadline;
-//    }
-//
-//    public String getUserFirstName() {
-//        return userFirstName;
-//    }
-//
-//    public void setUserFirstName(String userFirstName) {
-//        this.userFirstName = userFirstName;
-//    }
-//
-//    public String getUserLastName() {
-//        return userLastName;
-//    }
-//
-//    public void setUserLastName(String userLastName) {
-//        this.userLastName = userLastName;
-//    }
+    public Target getTarget() {
+        return target;
+    }
+
+    public void setTarget(Target target) {
+        this.target = target;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

@@ -16,7 +16,7 @@ public class FlightDeleteAction implements UIActions {
 
 	@Override
 	public void execute () {
-		BaseFunc.printHeader("Enter ticket ID:");
+		BaseFunc.printHeader("Enter flight ID:");
 		long id = BaseFunc.getMenuNumberFromUser();
 
 		DeleteFlightRequest request = new DeleteFlightRequest(id);

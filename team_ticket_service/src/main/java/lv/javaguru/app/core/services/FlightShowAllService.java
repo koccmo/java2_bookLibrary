@@ -6,8 +6,6 @@ import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.DIDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +16,7 @@ import java.util.List;
 public class FlightShowAllService {
 
 	@Autowired
-	private Database reservations;
-	@Autowired
-	private UserDatabase userDatabase;
+	private Database database;
 
 
 	public FlightShowAllResponse<?> execute (FlightShowAllRequest request) {
@@ -29,10 +25,10 @@ public class FlightShowAllService {
 		if (!responseList.isEmpty()) {
 			return new FlightShowAllResponse<>(responseList);
 		}
-		else if (userDatabase.getCurrentUser() == request.getCurrUser() && request.getCurrUser().getPersonType() != PersonType.ADMIN)
-			responseList = reservations.getAllUserFlights(request.getCurrUser());
+		else if (database.getCurrentUser() == request.getCurrUser() && request.getCurrUser().getPersonType() != PersonType.ADMIN)
+			responseList = database.getAllUserFlights(request.getCurrUser());
 		else {
-			responseList = reservations.getAllFlights();
+			responseList = database.getAllFlights();
 		}
 
 		return new FlightShowAllResponse<>(responseList);
@@ -41,7 +37,7 @@ public class FlightShowAllService {
 	private List<CodeError> validate (User user) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		if (!userDatabase.containsUser(user.getId()))
+		if (!database.userTableContainsUser(user.getId()))
 			errorList.add(new CodeError("User", "no user in database"));
 
 		return errorList;

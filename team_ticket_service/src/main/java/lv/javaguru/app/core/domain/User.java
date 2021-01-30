@@ -64,19 +64,19 @@ public class User {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return Objects.equals(name, user.name) &&
-				Objects.equals(surname, user.surname);
+		return id.equals(user.id) && name.equals(user.name) && surname.equals(user.surname);
 	}
 
 	@Override
 	public int hashCode () {
-		return Objects.hash(name, surname);
+		return Objects.hash(id, name, surname);
 	}
 
 	@Override
 	public String toString () {
-		return "Id: " + id
-				+ ", " + name + ", " + surname;
+		return "ID: " + id +
+				", " + name +
+				", " + surname;
 	}
 
 	public String getName () {

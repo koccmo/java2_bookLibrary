@@ -1,8 +1,8 @@
 package estore.ui;
 
-import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.responses.AddNewProductCategoryResponse;
-import estore.core.service.AddNewProductCategoryService;
+import estore.core.requests.AddProductCategoryRequest;
+import estore.core.responses.AddProductCategoryResponse;
+import estore.core.service.AddProductCategoryService;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -10,10 +10,10 @@ import java.util.Scanner;
 @Component
 public class AddProductCategoryUI implements UIAction {
 
-    private AddNewProductCategoryService addNewProductCategoryService;
+    private AddProductCategoryService addProductCategoryService;
 
-    public AddProductCategoryUI(AddNewProductCategoryService addNewProductCategoryService) {
-        this.addNewProductCategoryService = addNewProductCategoryService;
+    public AddProductCategoryUI(AddProductCategoryService addProductCategoryService) {
+        this.addProductCategoryService = addProductCategoryService;
     }
 
     @Override
@@ -22,17 +22,18 @@ public class AddProductCategoryUI implements UIAction {
         System.out.println("Enter category of the product:");
         String productCategory = sc.nextLine();
 
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest(productCategory);
-        AddNewProductCategoryResponse response = addNewProductCategoryService.execute(request);
+        AddProductCategoryRequest request = new AddProductCategoryRequest(productCategory);
+        AddProductCategoryResponse response = addProductCategoryService.execute(request);
 
-        if (!response.isSuccessfullyAdded()) {
+        if (response.hasErrors()) {
             for (int i = 0; i < response.getErrors().size(); i++) {
                 System.out.print("ERROR! ");
                 System.out.print(response.getErrors().get(i).getField() + " ");
                 System.out.println(response.getErrors().get(i).getMessage());
             }
         } else {
-            System.out.println("New product category with id #" + response.getCategory().getId() + " successfully added.");
+            System.out.println("New product category " + response.getCategory() +
+                    " with id #" + response.getCategory().getId() + " successfully added.");
         }
     }
 

@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
@@ -23,6 +24,7 @@ public class AcceptanceTestDeleteCustomerFail {
         @Before
         public void setup() {
             appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+            getDatabaseCleaner().clean();
         }
 
         @Test
@@ -56,5 +58,7 @@ public class AcceptanceTestDeleteCustomerFail {
         private GetAllCustomersService getAllCustomersService() {
             return appContext.getBean(GetAllCustomersService.class);
         }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
     }
 

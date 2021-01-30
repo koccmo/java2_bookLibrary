@@ -23,10 +23,9 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(String customerFirstName, String customerSecondName, String customerPhone) {
+    public Customer(String customerFirstName, String customerSecondName) {
         this.customerFirstName = customerFirstName;
         this.customerSecondName = customerSecondName;
-        this.customerPhone = customerPhone;
     }
 
     public Long getCustomerId() {
@@ -82,12 +81,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) &&
-                Objects.equals(customerFirstName, customer.customerFirstName) &&
-                Objects.equals(customerSecondName, customer.customerSecondName) &&
-                Objects.equals(customerPhone, customer.customerPhone) &&
-                Objects.equals(customerEmail, customer.customerEmail) &&
-                Objects.equals(customerAddress, customer.customerAddress);
+        return Objects.equals(customerId, customer.customerId)
+                && Objects.equals(customerFirstName, customer.customerFirstName)
+                && Objects.equals(customerSecondName, customer.customerSecondName)
+                && Objects.equals(customerPhone, customer.customerPhone)
+                && Objects.equals(customerEmail, customer.customerEmail)
+                && Objects.equals(customerAddress, customer.customerAddress);
     }
 
     @Override

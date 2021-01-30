@@ -1,8 +1,8 @@
 package estore.core.service;
 
-import estore.core.requests.AddNewProductCategoryRequest;
-import estore.core.responses.AddNewProductCategoryResponse;
-import estore.core.validation.AddNewProductCategoryValidator;
+import estore.core.requests.AddProductCategoryRequest;
+import estore.core.responses.AddProductCategoryResponse;
+import estore.core.validation.AddProductCategoryValidator;
 import estore.core.validation.CoreError;
 import estore.database.ProductCategoryRepository;
 import org.junit.Test;
@@ -24,19 +24,19 @@ public class AddNewProductCategoryServiceTest {
     @Mock
     private ProductCategoryRepository database;
     @Mock
-    private AddNewProductCategoryValidator validator;
+    private AddProductCategoryValidator validator;
 
     @InjectMocks
-    private AddNewProductCategoryService service;
+    private AddProductCategoryService service;
 
     @Test
     public void shouldReturnResponseWithErrorsIfValidationFails() {
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("NewCategory");
+        AddProductCategoryRequest request = new AddProductCategoryRequest("NewCategory");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Product category", "Must contain only english letters!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
-        AddNewProductCategoryResponse response = service.execute(request);
+        AddProductCategoryResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "Product category");
@@ -46,8 +46,8 @@ public class AddNewProductCategoryServiceTest {
     @Test
     public void shouldAddNewCategoryToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddNewProductCategoryRequest request = new AddNewProductCategoryRequest("NewCategory");
-        AddNewProductCategoryResponse response = service.execute(request);
+        AddProductCategoryRequest request = new AddProductCategoryRequest("NewCategory");
+        AddProductCategoryResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         //Mockito.verify(database).addNewCategory(argThat(new ProductCategoryMatcher("NewCategory")));
     }

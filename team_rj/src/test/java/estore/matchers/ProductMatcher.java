@@ -1,14 +1,14 @@
 package estore.matchers;
 
-import estore.core.model.Product;
+import estore.core.domain.Product;
 import org.mockito.ArgumentMatcher;
 
 public class ProductMatcher implements ArgumentMatcher<Product> {
     private String name;
     private String description;
-    private String category;
+    private Long category;
 
-    public ProductMatcher(String name, String description, String category) {
+    public ProductMatcher(String name, String description, Long category) {
         this.name = name;
         this.description = description;
         this.category = category;

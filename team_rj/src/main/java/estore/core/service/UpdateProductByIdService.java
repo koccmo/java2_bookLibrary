@@ -5,7 +5,7 @@ import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.UpdateProductByIdValidator;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
+import estore.core.domain.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class UpdateProductByIdService {
         Product productToUpdate = new Product(
                 request.getProductName(),
                 request.getProductDescription(),
-                request.getProductCategory(),
+                Long.valueOf(request.getProductCategory()),
                 Integer.valueOf(request.getProductQuantity()),
                 Double.valueOf(request.getProductPrice()));
         productToUpdate.setId(request.getProductId());

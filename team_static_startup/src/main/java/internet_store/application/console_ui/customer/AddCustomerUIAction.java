@@ -29,20 +29,16 @@ public class AddCustomerUIAction implements UIAction {
         System.out.print("Enter Customer Address : ");
         String customerAddress = myInput.nextLine();
 
-        AddCustomerRequest request = new AddCustomerRequest(customerFirstName, customerSecondName,
-                customerPhone);
+        AddCustomerRequest request = new AddCustomerRequest(customerFirstName, customerSecondName);
+        request.setCustomerPhone(customerPhone);
         request.setCustomerEMail(customerEMail);
         request.setCustomerAddress(customerAddress);
 
         AddCustomerResponse response = addCustomerService.execute(request);
-
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
                 System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
             );
-        } else {
-            System.out.println("Customer added -> " + customerFirstName + " " + customerSecondName + " " + customerPhone);
-        }
+        } else { System.out.println("Added -> " + response.getNewCustomer()); }
     }
-
 }

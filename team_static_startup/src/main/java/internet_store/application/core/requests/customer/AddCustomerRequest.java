@@ -8,10 +8,9 @@ public class AddCustomerRequest {
     private String customerEMail;
     private String customerAddress;
 
-    public AddCustomerRequest(String customerFirstName, String customerSecondName, String customerPhone) {
+    public AddCustomerRequest(String customerFirstName, String customerSecondName) {
         this.customerFirstName = customerFirstName;
         this.customerSecondName = customerSecondName;
-        this.customerPhone = customerPhone;
     }
 
     public String getCustomerFirstName() {

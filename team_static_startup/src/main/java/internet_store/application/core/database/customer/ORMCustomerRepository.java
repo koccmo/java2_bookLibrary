@@ -1,7 +1,6 @@
 package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
-import internet_store.application.core.domain.Product;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -40,14 +39,15 @@ public class ORMCustomerRepository implements CustomerRepository {
     @Override
     public List<Customer> findByFirstName(String customerName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT Customer WHERE name = :name");
+                "FROM Customer WHERE customerFirstName = :name");
         query.setParameter("name", customerName);
         return query.getResultList();
     }
 
     @Override
     public Optional<Customer> findByCustomerId(Long id) {
-        return Optional.empty();
+        Customer customer = sessionFactory.getCurrentSession().find(Customer.class, id);
+        return Optional.ofNullable(customer);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ORMCustomerRepository implements CustomerRepository {
                 "UPDATE Customer SET first_name = :newFirstName WHERE id = :id");
         query.setParameter("newFirstName", newFirstName);
         query.setParameter("id", id);
-        return query.executeUpdate() > 1;
+        return query.executeUpdate() >= 1;
     }
 
 }
