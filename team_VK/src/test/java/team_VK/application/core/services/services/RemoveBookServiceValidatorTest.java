@@ -4,23 +4,28 @@ package team_VK.application.core.services.services;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import team_VK.application.configuration.LibraryConfig;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.validators.RemoveBookServiceValidator;
-import team_VK.application.database.DatabaseInMemory;
+import team_VK.application.database.Database;
 
 import java.util.List;
 
 public class RemoveBookServiceValidatorTest {
-
-    DatabaseInMemory database;
+@Autowired
+    Database database;
     RemoveBookServiceValidator subject;
-
+    private ApplicationContext appContext;
     @Before
     public void setup() {
-        subject = new RemoveBookServiceValidator();
-        database = new DatabaseInMemory();
+        appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
+        subject = appContext.getBean(RemoveBookServiceValidator.class);
+        database = appContext.getBean(Database.class);
         getBooks();
     }
 
@@ -28,7 +33,7 @@ public class RemoveBookServiceValidatorTest {
     @Test
     public void ShouldValidateCorrectBook() {
 // positive functional test
-        RemoveBookRequest request = new RemoveBookRequest(1, "foobar");
+        RemoveBookRequest request = new RemoveBookRequest(1, "The Old Man and Sea");
 
         List<CoreError> errorsActual = subject.validate(request, database);
         Assert.assertEquals(0, errorsActual.size());
@@ -40,7 +45,7 @@ public class RemoveBookServiceValidatorTest {
     // negative. ID out of bound
 
     public void ShouldntValidate_incorrect_outOfBound_ID() {
-        RemoveBookRequest request = new RemoveBookRequest(3, "foobar");
+        RemoveBookRequest request = new RemoveBookRequest(100, "foobar");
         List<CoreError> errorsActual = subject.validate(request, database);
         CoreError error = new CoreError("Book ID", "Not existing book ID entered");
         List<CoreError> errorsExpected = List.of(error);

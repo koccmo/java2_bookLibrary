@@ -8,9 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import team_VK.application.configuration.LibraryConfig;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.AddBookResponse;
-import team_VK.application.core.services.additional_functions.DataBaseFillAdditionalFunction;
 import team_VK.application.core.services.main_menu_services.AddBookService;
-import team_VK.application.database.DatabaseInMemory;
+import team_VK.application.database.Database;
 
 public class AcceptanceTestAddBook {
 
@@ -20,10 +19,10 @@ public class AcceptanceTestAddBook {
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
 
-        DataBaseFillAdditionalFunction dataBaseFillAdditionalFunction =
-                appContext.getBean(DataBaseFillAdditionalFunction.class);
-
-        dataBaseFillAdditionalFunction.execute();
+//        DataBaseFillAdditionalFunction dataBaseFillAdditionalFunction =
+//                appContext.getBean(DataBaseFillAdditionalFunction.class);
+//
+//        dataBaseFillAdditionalFunction.execute();
 
     }
 
@@ -31,7 +30,7 @@ public class AcceptanceTestAddBook {
     @Test
     public void shouldAddCorrectBook(){
 
-        int bookNumberBeforeTest = appContext.getBean(DatabaseInMemory.class).getListBooks().size();
+        int bookNumberBeforeTest = appContext.getBean(Database.class).getListBooks().size();
 
         AddBookService addBookService = appContext.getBean(AddBookService.class);
         AddBookRequest addBookRequest = new AddBookRequest("Title1", "Author One", 1);
@@ -39,7 +38,7 @@ public class AcceptanceTestAddBook {
 
         Assert.assertFalse(addBookResponse.havesError());
         Assert.assertEquals(addBookResponse.errorList.size(), 0);
-        Assert.assertEquals(appContext.getBean(DatabaseInMemory.class).getListBooks().size(), bookNumberBeforeTest+1);
+        Assert.assertEquals(appContext.getBean(Database.class).getListBooks().size(), bookNumberBeforeTest+1);
         System.out.println();
 
 
@@ -48,7 +47,7 @@ public class AcceptanceTestAddBook {
     @Test
     public void shouldNotAddInCorrectBook1(){
 
-        int bookNumberBeforeTest = appContext.getBean(DatabaseInMemory.class).getListBooks().size();
+        int bookNumberBeforeTest = appContext.getBean(Database.class).getListBooks().size();
 
         AddBookService addBookService = appContext.getBean(AddBookService.class);
         AddBookRequest addBookRequest = new AddBookRequest("Title1", "Author 1", 1);
@@ -57,7 +56,7 @@ public class AcceptanceTestAddBook {
         Assert.assertTrue(addBookResponse.havesError());
         Assert.assertEquals(addBookResponse.errorList.get(0).getErrorMessage(), "Field bookAuthor contains illegal characters");
         Assert.assertEquals(addBookResponse.errorList.size(), 1);
-        Assert.assertEquals(appContext.getBean(DatabaseInMemory.class).getListBooks().size(), bookNumberBeforeTest);
+        Assert.assertEquals(appContext.getBean(Database.class).getListBooks().size(), bookNumberBeforeTest);
         System.out.println();
 
 
@@ -66,7 +65,7 @@ public class AcceptanceTestAddBook {
     @Test
     public void shouldNotAddInCorrectBook2(){
 
-        int bookNumberBeforeTest = appContext.getBean(DatabaseInMemory.class).getListBooks().size();
+        int bookNumberBeforeTest = appContext.getBean(Database.class).getListBooks().size();
 
         AddBookService addBookService = appContext.getBean(AddBookService.class);
         AddBookRequest addBookRequest = new AddBookRequest("Title@", "Author One", 1);
@@ -75,7 +74,7 @@ public class AcceptanceTestAddBook {
         Assert.assertTrue(addBookResponse.havesError());
         Assert.assertEquals(addBookResponse.errorList.get(0).getErrorMessage(), "Field bookTitle contains illegal characters");
         Assert.assertEquals(addBookResponse.errorList.size(), 1);
-        Assert.assertEquals(appContext.getBean(DatabaseInMemory.class).getListBooks().size(), bookNumberBeforeTest);
+        Assert.assertEquals(appContext.getBean(Database.class).getListBooks().size(), bookNumberBeforeTest);
         System.out.println();
 
 

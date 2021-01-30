@@ -8,9 +8,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import team_VK.application.configuration.LibraryConfig;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
-import team_VK.application.core.services.additional_functions.DataBaseFillAdditionalFunction;
 import team_VK.application.core.services.main_menu_services.BookBookService;
-import team_VK.application.database.DatabaseInMemory;
+import team_VK.application.database.Database;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,10 +23,10 @@ public class AcceptanceTestBookBook {
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
 
-        DataBaseFillAdditionalFunction dataBaseFillAdditionalFunction =
-                appContext.getBean(DataBaseFillAdditionalFunction.class);
-
-        dataBaseFillAdditionalFunction.execute();
+//        DataBaseFillAdditionalFunction dataBaseFillAdditionalFunction =
+//                appContext.getBean(DataBaseFillAdditionalFunction.class);
+//
+//        dataBaseFillAdditionalFunction.execute();
 
     }
 
@@ -40,6 +39,6 @@ public class AcceptanceTestBookBook {
 
         BookBookResponse response = service.bookBook(request);
         Assert.assertEquals(response.errorList.size(), 0);
-        Assert.assertEquals(appContext.getBean(DatabaseInMemory.class).getListBooks().get(5).bookings.get(0).getBookingFinishDate(),formatter.parse("06.01.2022"));
+        Assert.assertEquals(appContext.getBean(Database.class).getListBooks().get(5).bookings.get(0).getBookingFinishDate(),formatter.parse("06.01.2022"));
     }
 }
