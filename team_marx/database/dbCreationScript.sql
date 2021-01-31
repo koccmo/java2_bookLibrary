@@ -57,6 +57,10 @@ CREATE INDEX reader_books_book_return_date_idx ON reader_books (book_return_date
 CREATE INDEX readers_first_name_idx ON readers (first_name);
 CREATE INDEX readers_last_name_idx ON readers (last_name);
 
+CREATE INDEX reader_books_reader_id_idx ON reader_books (reader_id);
+CREATE INDEX reader_books_book_id_idx ON reader_books (book_id);
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
