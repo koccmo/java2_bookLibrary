@@ -21,6 +21,12 @@ public class Reader {
     public Reader() {
     }
 
+    public Reader(Long id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Long getId() {
         return id;
     }
