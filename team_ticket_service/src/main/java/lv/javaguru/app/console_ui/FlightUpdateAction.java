@@ -25,7 +25,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter flight ID:");
 		Long id = BaseFunc.getMenuNumberFromUserAsLong();
 
-		EditFlightRequest request = new EditFlightRequest(id);
+		EditFlightRequest request = new EditFlightRequest(id, getLoggedInUser());
 		FlightEditResponse response = flightEditService.execute(request);
 
 		if (response.hasErrors())

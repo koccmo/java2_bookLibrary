@@ -5,7 +5,7 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserShowAllResponse;
-import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.SqlDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,9 @@ import java.util.List;
 
 @Component
 public class UserShowAllService {
-	@Autowired
-	private Database database;
 
+	@Autowired
+	private SqlDatabase sqlDatabase;
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
 		List<?> errorList = validate(request.getUser());
@@ -27,7 +27,7 @@ public class UserShowAllService {
 		}
 
 		if (request.getId() == null)
-			return new UserShowAllResponse<>(database.getAllUsers());
+			return new UserShowAllResponse<>(sqlDatabase.getAllUsers());
 
 		return new UserShowAllResponse<>(errorList);
 	}
@@ -36,7 +36,9 @@ public class UserShowAllService {
 	private List<CodeError> validate (User user) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		if (!database.userTableContainsUser(user.getId()))
+		User u = sqlDatabase.getUserById(user.getId());
+
+		if (u == null)
 			errorList.add(new CodeError("User", "no user in database"));
 		if (user.getPersonType() != PersonType.ADMIN)
 			errorList.add(new CodeError("User", "User don't have required permission!"));

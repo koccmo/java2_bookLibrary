@@ -6,6 +6,7 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.validators.EditUserRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.SqlDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class UserEditService {
 
 	@Autowired
-	private Database database;
+	private SqlDatabase sqlDatabase;
 	@Autowired
 	private EditUserRequestValidator validator;
 
@@ -27,7 +28,7 @@ public class UserEditService {
 			return new UserEditResponse(errorList);
 		}
 
-		User user = database.getUserById(request.getId());
+		User user = sqlDatabase.getUserById(request.getId());
 
 		if (user == null) {
 			errorList.add(new CodeError("ID", "No user with such ID!"));
@@ -46,7 +47,7 @@ public class UserEditService {
 		if (!responseList.isEmpty()) {
 			return new UserEditResponse(responseList);
 		}
-		database.getUserById(request.getId()).setName(name);
+		sqlDatabase.updateUserNameById(request.getId(), name);
 
 		return new UserEditResponse("Hurrah! Name has been changed");
 	}
@@ -60,7 +61,7 @@ public class UserEditService {
 		if (!errorList.isEmpty()) {
 			return new UserEditResponse(errorList);
 		}
-		database.getUserById(request.getId()).setSurname(surname);
+		sqlDatabase.updateUserSurnameById(request.getId(), surname);
 
 		return new UserEditResponse("Hurrah! Surname has been changed");
 	}

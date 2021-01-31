@@ -9,6 +9,7 @@ import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
 import lv.javaguru.app.database.Database;
+import lv.javaguru.app.database.SqlDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,8 @@ public class LogInService {
 	@Autowired
 	private Database database;
 	@Autowired
+	private SqlDatabase sqlDatabase;
+	@Autowired
 	private LoginRequestValidator validator;
 
 
@@ -32,27 +35,21 @@ public class LogInService {
 		if (!errors.isEmpty())
 			return new LogInResponse(errors);
 
-
-		Optional<User> optionalUser = database.getUserByNameAndSurname(request.getUser());
-		User user;
-		if (optionalUser.isPresent()) {
-			user = optionalUser.get();
-			database.setCurrentUser(user);
-		}
-		else {
+		User u = sqlDatabase.getUserByNameAndSurname(request.getUser());
+		if (u == null) {
 			errors.add(new CodeError("database", "No such user"));
 			return new LogInResponse(errors);
 		}
+		else {
+			LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+					new LogInResponse(new AdminMode(applicationContext)) :
+					new LogInResponse(new UserMode(applicationContext));
 
+			logInResponse.setCurrUser(u);
+			logInResponse.setMessage("Successfully logged in!");
 
-		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(new AdminMode(applicationContext)) :
-				new LogInResponse(new UserMode(applicationContext));
-
-		logInResponse.setCurrUser(user);
-		logInResponse.setMessage("Successfully logged in!");
-
-		return logInResponse;
+			return logInResponse;
+		}
 
 
 	}
