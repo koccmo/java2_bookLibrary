@@ -168,6 +168,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean containsId(Long id) {
+
         return true;
     }
 
