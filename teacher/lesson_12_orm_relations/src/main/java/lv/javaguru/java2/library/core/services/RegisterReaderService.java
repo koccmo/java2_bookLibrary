@@ -14,12 +14,12 @@ import lv.javaguru.java2.library.core.responses.RegisterReaderResponse;
 import lv.javaguru.java2.library.core.services.validators.RegisterReaderRequestValidator;
 
 @Component
+@Transactional
 public class RegisterReaderService {
 
 	@Autowired private ReaderRepository readerRepository;
 	@Autowired private RegisterReaderRequestValidator validator;
 
-	@Transactional
 	public RegisterReaderResponse execute(RegisterReaderRequest request) {
 		List<CoreError> errors = validator.validate(request);
 		if (!errors.isEmpty()) {

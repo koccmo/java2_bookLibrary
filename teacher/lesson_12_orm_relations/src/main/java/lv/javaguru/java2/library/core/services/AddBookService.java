@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
@@ -13,6 +14,7 @@ import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.services.validators.AddBookRequestValidator;
 
 @Component
+@Transactional
 public class AddBookService {
 
 	@Autowired private BookRepository bookRepository;
