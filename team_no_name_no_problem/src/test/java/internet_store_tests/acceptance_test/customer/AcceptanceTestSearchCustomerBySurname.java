@@ -59,8 +59,8 @@ public class AcceptanceTestSearchCustomerBySurname {
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
         assertTrue(getAllCustomersResponse.getCustomers().size() == 3);
-        assertFalse(searchCustomerResponse.getCustomers().get(0).equals(customer));
-        assertFalse(searchCustomerResponse1.getCustomers().get(0).equals(customer1));
+        assertTrue(searchCustomerResponse.getCustomers().get(0).equals(customer));
+        assertTrue(searchCustomerResponse1.getCustomers().get(0).equals(customer1));
     }
 
     private AddCustomerService addCustomerService(){
