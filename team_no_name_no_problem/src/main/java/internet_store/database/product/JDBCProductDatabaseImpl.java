@@ -57,7 +57,10 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByTitleAndDescription(String title, String description){
-        return false;
+        String sql = "DELETE FROM products WHERE title = ? " +
+                     "and WHERE price >= :startPrice and price <= :endPrice";
+        Object[] args = new Object[]{title};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
