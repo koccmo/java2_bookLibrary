@@ -1,5 +1,6 @@
 package internet_store.user_interface.main_menu;
 
+import internet_store.core.service.SynchronizeDatabaseService;
 import internet_store.core.service.cart.PrintCartService;
 import internet_store.core.service.client.PrintClientService;
 import internet_store.core.service.product.PrintProductService;
@@ -31,6 +32,8 @@ public class MainMenuConsole {
     PrintProductService printProductService;
     @Autowired
     ClientOrderConsole clientOrderConsole;
+    @Autowired
+    SynchronizeDatabaseService databaseService;
 
     public void startMainMenu() {
         do {
@@ -45,6 +48,7 @@ public class MainMenuConsole {
                 case 6 -> printCartService.print();
                 case 7 -> printProductService.print();
                 case 8 -> clientOrderConsole.startOrderMenu();
+                case 9 -> databaseService.synchronize();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Wrong input. Try again.");
             }

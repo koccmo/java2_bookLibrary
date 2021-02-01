@@ -29,20 +29,12 @@ public class UserAddService {
 		if (!errors.isEmpty())
 			return new UserAddResponse(errors);
 
-		//if (database.getUserByNameAndSurname(user).isPresent()) {
-		//	errors.add(new CodeError("User", "User with same credential already registered!"));
-//
-		//	return new UserAddResponse(errors);
-		//}
-
-		//	database.addUser(user);
-		String message = sqlDatabase.addUser(user);
-		if (message != null && message.contains("Duplicate entry")) {
-			errors.add(new CodeError("User", "User with same credential already registered!"));
+		if (!sqlDatabase.addUser(user)) {
+			errors.add(new CodeError("User", "Haven't managed to add user!"));
 			return new UserAddResponse(errors);
 		}
-		else
-			message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getSurname());
+
+		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getSurname());
 
 		return new UserAddResponse(message);
 	}

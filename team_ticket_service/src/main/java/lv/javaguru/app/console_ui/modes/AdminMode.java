@@ -49,10 +49,10 @@ public class AdminMode {
 	}
 
 	private static void printAdminMode_MainMenu (User currentUser) {
-		BaseFunc.printHeader("MENU", currentUser);
+		BaseFunc.printHeader("MENU", currentUser.getName());
 		System.out.println(
-				"[1] Manage user\n" +
-						"[2] Manage ticket\n\n" +
+				"[1] Manage users\n" +
+						"[2] Manage flights\n\n" +
 
 						"[3] Show all users\n" +
 						"[4] Show all flights\n" +

@@ -10,6 +10,7 @@ import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
 import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.SqlDatabase;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -52,6 +53,7 @@ public class FlightAddServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void shouldReturnNoErrors () {
 		AddFlightRequest request = new AddFlightRequest(flight);
 

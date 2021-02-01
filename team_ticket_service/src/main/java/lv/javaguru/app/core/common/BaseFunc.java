@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class BaseFunc {
 	public static void printLineSeparator () {
-		System.out.println(multiplyChar(50, '='));
+		System.out.println(multiplyChar(60, '='));
 	}
 
 
@@ -24,16 +24,13 @@ public class BaseFunc {
 	}
 
 
-	public static void printHeader (String header, User user) {
-		String userName;
-		if (user != null)
-			userName = user.getName();
-		else
-			userName = "";
+	public static void printHeader (String header, String str) {
+		if (str == null)
+			str = "";
 
-		int spaceCount = 50 - header.length() - userName.length();
+		int spaceCount = 60 - header.length() - str.length();
 
-		System.out.println(header + multiplyChar(spaceCount, ' ') + userName);
+		System.out.println(header + multiplyChar(spaceCount, ' ') + str);
 
 		printLineSeparator();
 	}

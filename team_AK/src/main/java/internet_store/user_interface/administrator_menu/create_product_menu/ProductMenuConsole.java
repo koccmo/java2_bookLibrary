@@ -8,6 +8,7 @@ import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.response.product.UpdateProductResponse;
 import internet_store.core.service.product.*;
+import internet_store.database.product_database.ProductDatabaseImpl;
 import internet_store.user_interface.administrator_menu.create_product_menu.add_product_menu.AddProduct;
 import internet_store.user_interface.administrator_menu.create_product_menu.delete_product_menu.DeleteProductMenu;
 import internet_store.user_interface.administrator_menu.create_product_menu.update_product_menu.UpdateProductMenu;
@@ -35,6 +36,8 @@ public class ProductMenuConsole {
     UpdateProductAddNewChangesService updateProductServiceNewChanges;
     @Autowired
     PrintProductService printProductService;
+    @Autowired
+    ProductDatabaseImpl productDatabase;
 
     public void startProductMenuConsole() {
         boolean returnMainMenu = true;
@@ -44,7 +47,7 @@ public class ProductMenuConsole {
             switch (userInput) {
                 case 1 -> {
                     Product product = new AddProduct().addProduct();
-                    AddProductRequest productRequest = new AddProductRequest(product);
+                    AddProductRequest productRequest = new AddProductRequest(productDatabase, product);
                     AddProductResponse response = addProductService
                             .execute(productRequest);
                     if (!(response.hasErrors())) {
@@ -57,7 +60,7 @@ public class ProductMenuConsole {
                 case 2 -> {
                     deleteProductMenu.showMenuDeleteProduct();
                     long deletedId = deleteProductMenu.getUserDeletedProductIdInput();
-                    DeleteProductRequest deleteRequest = new DeleteProductRequest(deletedId);
+                    DeleteProductRequest deleteRequest = new DeleteProductRequest(productDatabase, new Product(), deletedId);
                     DeleteProductResponse response = deleteProductService
                             .execute(deleteRequest);
                     if (!(response.hasErrors())) {
@@ -71,7 +74,7 @@ public class ProductMenuConsole {
                     updateProductMenu.showMenuUpdateProduct();
                     long updatedId = updateProductMenu.getUserUpdatedProductIdInput();
 
-                    UpdateProductRequest updateRequest = new UpdateProductRequest(updatedId);
+                    UpdateProductRequest updateRequest = new UpdateProductRequest(productDatabase, updatedId);
                     UpdateProductResponse updateResponse = updateProductService
                             .execute(updateRequest);
 
@@ -82,7 +85,7 @@ public class ProductMenuConsole {
                     }
 
                     Product product = new AddProduct().addProduct();
-                    AddProductRequest productRequest = new AddProductRequest(product);
+                    AddProductRequest productRequest = new AddProductRequest(productDatabase, product);
                     productRequest.getProduct().setId(updatedId);
                     AddProductResponse response = updateProductServiceNewChanges
                             .execute(productRequest);

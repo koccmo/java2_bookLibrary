@@ -1,8 +1,8 @@
 package internet_store.core.service.product;
 
-import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Product;
-import internet_store.database.product_database.InnerProductDatabase;
+import internet_store.core.request.product.AddProductRequest;
+import internet_store.database.product_database.ProductDatabaseImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,22 +10,25 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UpdateProductAddNewChangesServiceTest {
     @Mock
-    private InnerProductDatabase productDatabase;
+    private ProductDatabaseImpl productDatabase;
     @InjectMocks
     private UpdateProductAddNewChangesService service;
 
     @Test
     public void shouldUpdateProduct() {
         Product product = new Product();
-        product.setId(1L);
+        product.setId(0L);
         product.setTitle("Test");
-        service.execute(new ArrayList<>(), product);
+        product.setDescription("Test");
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("3"));
+
+        service.execute(new AddProductRequest(productDatabase, product));
 
         Mockito.verify(productDatabase, Mockito.times(1))
                 .updateProduct(0, product);
@@ -36,9 +39,7 @@ public class UpdateProductAddNewChangesServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setTitle("Test");
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Test", "Test"));
-        service.execute(errors, product);
+        service.execute(new AddProductRequest(productDatabase, product));
 
         Mockito.verifyNoInteractions(productDatabase);
     }

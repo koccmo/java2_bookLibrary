@@ -20,15 +20,11 @@ public class UserDeleteService {
 	public UserDeleteResponse execute (UserDeleteRequest request) {
 		List<CodeError> errors = new ArrayList<>();
 
-		User userToDelete = sqlDatabase.getUserById(request.getId());
-		String message = "";
-		if (userToDelete != null)
-			message = sqlDatabase.removeUser(request.getId());
-		else {
+		if (!sqlDatabase.removeUser(request.getId()))
+		{
 			errors.add(new CodeError("Id", "No user with such Id"));
 			return new UserDeleteResponse(errors);
 		}
-
 
 		return new UserDeleteResponse(true);
 	}
