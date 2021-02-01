@@ -56,4 +56,15 @@ public class DeleteProductRequestValidatorTest {
 
         assertTrue(errors.isEmpty());
     }
+
+    @Test
+    public void testNotValidPriceRange() {
+        CoreError expectedError = new CoreError("title", "Not valid input for title");
+
+        DeleteProductByOtherRequest deleteProductByOtherRequest = new DeleteProductByOtherRequest("","",
+                0,0);
+        List<CoreError> errors = deleteByOtherRequestValidator.validate(deleteProductByOtherRequest);
+
+        assertTrue(errors.isEmpty());
+    }
 }
