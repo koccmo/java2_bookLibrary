@@ -1,6 +1,5 @@
 package internet_store.core.service.client;
 
-
 import internet_store.core.request.client.client_items.AddClientEmailRequest;
 import internet_store.core.response.client.client_items.AddClientEmailResponse;
 import org.junit.Test;

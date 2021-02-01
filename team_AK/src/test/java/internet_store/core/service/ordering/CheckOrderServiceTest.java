@@ -3,6 +3,7 @@ package internet_store.core.service.ordering;
 import internet_store.core.request.ordering.CheckOrderIdRequest;
 import internet_store.core.response.ordering.CheckOrderIdResponse;
 import internet_store.database.order_database.InnerOrderDatabase;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class CheckOrderServiceTest {
     @Mock

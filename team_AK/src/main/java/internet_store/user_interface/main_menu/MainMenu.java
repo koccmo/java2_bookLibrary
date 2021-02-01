@@ -29,6 +29,8 @@ public class MainMenu {
         System.out.println("7 - View product's list");
         System.out.println("8 - Make order");
         System.out.println("--------------------------");
+        System.out.println("9 - Synchronize database in memory and MySql database");
+        System.out.println("--------------------------");
         System.out.println("0 - Exit");
         try {
             userInput = new Scanner(System.in).nextInt();

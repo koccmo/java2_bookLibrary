@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class Order {
     private Client client;
-    private List<Product> productsInCart;
+    private List<Cart> productsInCart;
     private Long id;
     private Integer orderNumber;
     private String orderDate;

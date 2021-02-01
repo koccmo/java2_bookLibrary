@@ -4,7 +4,7 @@ import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Order;
 import internet_store.core.request.ordering.DeleteOrderRequest;
 import internet_store.core.response.ordering.DeleteOrderResponse;
-import internet_store.core.validate.NegativeNumberValidator;
+import internet_store.core.validate.NumberValidator;
 import internet_store.database.order_database.InnerOrderDatabase;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ public class DeleteOrderService {
     }
 
     public DeleteOrderResponse execute(DeleteOrderRequest deleteOrderRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>
+        NumberValidator<?> numberValidator = new NumberValidator<>
                 (deleteOrderRequest.getId());
 
-        List<CoreError> errors = negativeNumberValidator.validate();
+        List<CoreError> errors = numberValidator.validate();
 
         if (isIdExist(deleteOrderRequest.getId())) {
             Order deletedOrder = findProductById(deleteOrderRequest.getId());

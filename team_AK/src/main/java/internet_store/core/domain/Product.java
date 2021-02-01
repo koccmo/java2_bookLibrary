@@ -2,26 +2,24 @@ package internet_store.core.domain;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 @Data
+@Table(name = "product", schema = "store")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
-    private BigDecimal quantity;
+    @Column(name = "category")
+    private int category;
+    @Column(name = "quantity")
+    private Long quantity;
+    @Column(name = "price")
     private BigDecimal price;
-    private BigDecimal sum;
-
-    public Product() {
-    }
-
-    public Product(Product other) {
-        this.id = other.id;
-        this.title = other.title;
-        this.description = other.description;
-        this.quantity = other.quantity;
-        this.price = other.price;
-        this.sum = other.sum;
-    }
 }
