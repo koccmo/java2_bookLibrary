@@ -39,7 +39,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		int menuNumber;
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
-
+			BaseFunc.printLineSeparator();
 			if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
 				System.out.println("[1] Edit flight's ticket\n" +
 						"[2] Edit flight's user\n\n" +
@@ -210,11 +210,11 @@ public class FlightUpdateAction extends Action implements UIActions {
 		}
 	}
 
-	private void flightEdit_printTicketEditMenu (long id) {
-		BaseFunc.printHeader("EDIT TICKET: " + id);
+	private void flightEdit_printTicketEditMenu (Long id) {
+		BaseFunc.printHeader("EDIT TICKET: ", String.valueOf(id));
 		System.out.println(
-				"[1] Departure city\n" +
-						"[2] Destination city\n" +
+				"[1] Origin\n" +
+						"[2] Destination\n" +
 						"[3] Departure date\n" +
 						"[4] Seat\n" +
 						"[0] Back");

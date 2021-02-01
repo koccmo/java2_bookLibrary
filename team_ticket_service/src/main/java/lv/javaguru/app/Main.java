@@ -5,7 +5,6 @@ import lv.javaguru.app.console_ui.modes.InitMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.*;
 
 
 public class Main {

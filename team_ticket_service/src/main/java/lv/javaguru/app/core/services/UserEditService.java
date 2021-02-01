@@ -5,7 +5,6 @@ import lv.javaguru.app.core.request.UserEditRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserEditResponse;
 import lv.javaguru.app.core.services.validators.EditUserRequestValidator;
-import lv.javaguru.app.database.Database;
 import lv.javaguru.app.database.SqlDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,7 +46,7 @@ public class UserEditService {
 		if (!responseList.isEmpty()) {
 			return new UserEditResponse(responseList);
 		}
-		sqlDatabase.updateUserNameById(request.getId(), name);
+		sqlDatabase.updateUserNameByUserId(request.getId(), name);
 
 		return new UserEditResponse("Hurrah! Name has been changed");
 	}
