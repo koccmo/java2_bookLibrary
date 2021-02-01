@@ -50,7 +50,9 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
-        return false;
+        String sql = " DELETE FROM products WHERE price >= :startPrice and price <= :endPrice";
+        Object[] args = new Object[]{startPrice};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
