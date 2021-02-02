@@ -15,13 +15,11 @@ public interface PatientRepository {
 
     void deletePatient(Long id);
 
-    Optional <Patient> getSpecificPatientHistory(Long id);
+    PersonalData getPersonalDataById(Long id);
 
-    List<Patient> findPatientsBySurname(String surname);
+    List<PersonalData> findPatientsBySurname(String surname);
 
-    List<Patient> findPatientsByPersonalCode(String personalCode);
-
-    void addVisit(Long id, Visit newVisit);
+    List<PersonalData> findPatientsByPersonalCode(String personalCode);
 
     boolean containsPatientWithSpecificId(Long id);
 
@@ -30,8 +28,6 @@ public interface PatientRepository {
     void changeSurname(Long idToSearch, String updatedSurname);
 
     void changePhone(Long idToSearch, String updatedSurname);
-
-    Optional<Patient> findPatientByIdNumber(Long idToSearch);
 
     boolean containsSpecificPersonalData(PersonalData personalData);
 }
