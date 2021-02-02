@@ -1,7 +1,7 @@
 package estore.database.inmemoryrepo;
 
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.core.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ProductCategoryRepositoryImpl implements ProductCategoryRepository 
     }
 
     @Override
-    public boolean addNewCategory(ProductCategory category) {
+    public boolean addCategory(ProductCategory category) {
         category.setId(this.nextCategoryId);
         this.nextCategoryId++;
         this.categories.add(category);

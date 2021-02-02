@@ -3,7 +3,7 @@ package internet_store.core.service.client;
 import internet_store.core.domain.Client;
 import internet_store.core.request.client.AddClientRequest;
 import internet_store.core.response.client.AddClientResponse;
-import internet_store.database.client_database.InnerClientDatabase;
+import internet_store.database.client_database.ClientDatabaseImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class AddClientServiceTest {
     @Mock
-    private InnerClientDatabase clientDatabase;
+    private ClientDatabaseImpl clientDatabase;
     @InjectMocks
     private AddClientService service;
 
@@ -28,7 +28,7 @@ public class AddClientServiceTest {
         client.setSurname("Surname");
         client.setPhoneNumber("29789123");
         client.setEmail("test@test.lv");
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertFalse(response.hasErrors());
         Mockito.verify(clientDatabase).addClient(client);
@@ -42,7 +42,7 @@ public class AddClientServiceTest {
         client.setSurname("Surname");
         client.setPhoneNumber("29789123");
         client.setEmail("test@test.lv");
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -59,7 +59,7 @@ public class AddClientServiceTest {
         client.setSurname("");
         client.setPhoneNumber("29789123");
         client.setEmail("test@test.lv");
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -76,7 +76,7 @@ public class AddClientServiceTest {
         client.setSurname("Surname");
         client.setPhoneNumber("2978912");
         client.setEmail("test@test.lv");
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -94,7 +94,7 @@ public class AddClientServiceTest {
         client.setPhoneNumber("29789123");
         client.setEmail("test@test.lv");
         Mockito.when(clientDatabase.isClientPhoneNumber("29789123")).thenReturn(true);
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -111,7 +111,7 @@ public class AddClientServiceTest {
         client.setSurname("Surname");
         client.setPhoneNumber("29789123");
         client.setEmail("test@testlv");
-        AddClientResponse response = service.execute(new AddClientRequest(client));
+        AddClientResponse response = service.execute(new AddClientRequest(client, clientDatabase));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());

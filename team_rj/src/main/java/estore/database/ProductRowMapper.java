@@ -1,6 +1,6 @@
 package estore.database;
 
-import estore.core.model.Product;
+import estore.core.domain.Product;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setId(rs.getLong("id"));
         product.setName(rs.getString("prodName"));
         product.setDescription(rs.getString("prodDescription"));
-        product.setCategory(rs.getString("category_id"));
+//        product.setCategory(rs.getLong("category_id"));
         product.setQuantity(rs.getInt("quantity"));
         product.setPrice(rs.getDouble("price"));
         return product;

@@ -3,6 +3,7 @@ package internet_store.user_interface.client_menu.client_cart_menu.delete_from_c
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
 import internet_store.core.service.cart.DeleteProductFromCartService;
+import internet_store.database.cart_database.CartDatabaseImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DeleteFromCartConsole {
     @Autowired
     DeleteProductFromCartService deleteProductFromCartService;
+    @Autowired
+    CartDatabaseImpl cartDatabase;
 
     public void deleteFromCart() {
         DeleteFromCartMenu deleteFromCartMenu = new DeleteFromCartMenu();
         deleteFromCartMenu.showMenuDeleteProductFromCart();
         long productId = deleteFromCartMenu.getUserDeletedFromCartIdInput();
 
-        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(productId);
+        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(productId, cartDatabase, null);
         DeleteProductFromCartResponse response = deleteProductFromCartService.execute(request);
 
         if (!(response.hasErrors())) {

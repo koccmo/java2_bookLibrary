@@ -60,6 +60,11 @@ public class JdbcBoardRepositoryImpl implements BoardRepository {
                 "JOIN users ON users.id = targets_board.user_id", new RecordsInfoMapper());
     }
 
+    @Override
+    public List<Record> getUnfinishedRecords() {
+        return null;
+    }
+
     private String getDate() {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter myFormatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

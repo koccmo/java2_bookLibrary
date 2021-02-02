@@ -23,9 +23,9 @@ public class FlightShowAllAction extends Action implements UIActions {
 		FlightShowAllResponse<?> response = flightShowAllService.execute(request);
 
 		if (response.hasErrors())
-			BaseFunc.printHeader("Error:", getLoggedInUser());
+			BaseFunc.printHeader("Error:", getLoggedInUser().getName());
 		else
-			BaseFunc.printHeader("Flight list:", getLoggedInUser());
+			BaseFunc.printHeader("Flight list:", getLoggedInUser().getName());
 
 		response.printResponse();
 	}

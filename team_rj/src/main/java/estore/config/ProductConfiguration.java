@@ -53,7 +53,7 @@ public class ProductConfiguration {
         return new JdbcTemplate(dataSource);
     }
 
-//    @Bean
+    @Bean
     public Properties hibernateProperties(
             @Value("${hibernate.show_sql}") Boolean showSql,
             @Value("${hibernate.hbm2ddl.auto}") String hbm2ddl,
@@ -65,7 +65,7 @@ public class ProductConfiguration {
         return properties;
     }
 
-//    @Bean
+    @Bean
     public SessionFactory sessionFactory(DataSource dataSource,
                                          @Value("${hibernate.packagesToScan}") String packagesToScan,
                                          Properties hibernateProperties
@@ -78,7 +78,7 @@ public class ProductConfiguration {
         return sessionFactoryBean.getObject();
     }
 
-//    @Bean
+    @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
         return new HibernateTransactionManager(sessionFactory);
     }

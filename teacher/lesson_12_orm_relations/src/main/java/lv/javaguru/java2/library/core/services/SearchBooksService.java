@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
@@ -19,6 +20,7 @@ import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestValidator;
 
 @Component
+@Transactional
 public class SearchBooksService {
 
 	@Value("${search.ordering.enabled}")

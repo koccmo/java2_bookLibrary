@@ -1,13 +1,13 @@
 package internet_store.core.service.client;
 
-import internet_store.database.client_database.InnerClientDatabase;
+import internet_store.database.interfaces.ClientDatabase;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class PrintClientService {
     @Autowired
-    InnerClientDatabase clientDatabase;
+    ClientDatabase clientDatabase;
 
     public void print() {
 

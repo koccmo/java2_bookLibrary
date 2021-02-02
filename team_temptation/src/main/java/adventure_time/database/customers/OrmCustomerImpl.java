@@ -57,17 +57,17 @@ public class OrmCustomerImpl implements DatabaseCustomers {
         return false;
     }
 
-    @Override
-    public List<Customers> getCustomersList() {
-
-        /*
-        return sessionFactory.getCurrentSession()
-				.createQuery("SELECT b FROM Book b", Book.class)
-				.getResultList();
-         */
-
-        return null;
-    }
+//    @Override
+//    public List<Customers> getCustomersList() {
+//
+//        /*
+//        return sessionFactory.getCurrentSession()
+//				.createQuery("SELECT b FROM Book b", Book.class)
+//				.getResultList();
+//         */
+//
+//        return null;
+//    }
 
     @Override
     public Optional<Customers> findById(Long id) {
@@ -94,13 +94,13 @@ public class OrmCustomerImpl implements DatabaseCustomers {
         return null;
     }
 
-    @Override
-    public Long checkLogin(String email, String password) {
-        return null;
-    }
-
-    @Override
-    public Long checkLoginBeforeUpdate(String email, String password) {
-        return null;
-    }
+//    @Override
+//    public Long checkLogin(String email, String password) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Long checkLoginBeforeUpdate(String email, String password) {
+//        return null;
+//    }
 }

@@ -3,10 +3,8 @@ package internet_store.user_interface.client_menu.client_cart_menu.update_cart_m
 import internet_store.core.request.cart.UpdateCartRequest;
 import internet_store.core.response.cart.UpdateCartResponse;
 import internet_store.core.service.cart.UpdateCartService;
-import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.math.BigDecimal;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UpdateCartConsole {
@@ -20,7 +18,7 @@ public class UpdateCartConsole {
         updateCartIdMenu.showMenuUpdateCart();
         long productId = updateCartIdMenu.getUserUpdatedCartIdInput();
         updateCartQuantityMenu.showMenuUpdateQuantityCart();
-        BigDecimal newQuantity = new BigDecimal(String.valueOf(updateCartQuantityMenu.getUserUpdatedProductQuantityInput()));
+        long newQuantity = updateCartQuantityMenu.getUserUpdatedProductQuantityInput();
 
         UpdateCartRequest request = new UpdateCartRequest(productId, newQuantity);
         UpdateCartResponse response = updateCartService.execute(request);

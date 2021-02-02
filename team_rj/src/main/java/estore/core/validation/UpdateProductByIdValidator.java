@@ -2,7 +2,7 @@ package estore.core.validation;
 
 import estore.core.requests.UpdateProductByIdRequest;
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -66,8 +66,8 @@ public class UpdateProductByIdValidator {
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(UpdateProductByIdRequest request) {
-        return (!validationRules.validatePositiveInteger(request.getProductCategory()))
-                ? Optional.of(new CoreError("Product category", "Must contain only digits!"))
+        return (!validationRules.validateString(request.getProductCategory()))
+                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
@@ -77,10 +77,10 @@ public class UpdateProductByIdValidator {
                 : Optional.empty();
     }
 
-    private boolean validateCategoryExistence(String categoryId) {
+    private boolean validateCategoryExistence(String categoryStr) {
         List<ProductCategory> categories = categoryDB.getDatabase();
         for (var category : categories) {
-            if (category.getId().toString().equals(categoryId)) {
+            if (category.getCategory().equalsIgnoreCase(categoryStr)) {
                 return true;
             }
         }

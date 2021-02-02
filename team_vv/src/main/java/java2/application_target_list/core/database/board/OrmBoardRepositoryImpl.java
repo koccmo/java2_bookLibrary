@@ -63,10 +63,16 @@ public class OrmBoardRepositoryImpl implements BoardRepository{
     @Override
     public List<Record> getFullInfoAboutRecords() {
 //        return sessionFactory.getCurrentSession()
-//                .createQuery("SELECT t.target_name, t.target_description, t.target_deadline, u.user_first_name," +
-//                        "u.user_last_name, r.target_added_date, r.target_date_of_completion from Record r JOIN Target JOIN User")
-//                .list();
-        return null;
+//                .createQuery("From Record", Record.class)
+//                .getResultList();
+        return getAllRecordsList();
+    }
+
+    @Override
+    public List<Record> getUnfinishedRecords() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("From Record WHERE target_date_of_completion IS null", Record.class)
+                .getResultList();
     }
 
     private String getDate() {

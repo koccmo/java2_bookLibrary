@@ -1,77 +1,63 @@
 package internet_store.core.service.cart;
 
 import internet_store.core.core_error.CoreError;
+import internet_store.core.domain.Cart;
 import internet_store.core.domain.Product;
+import internet_store.core.operation.Arithmetic;
 import internet_store.core.request.cart.UpdateCartRequest;
 import internet_store.core.response.cart.UpdateCartResponse;
 import internet_store.core.validate.ProductQuantityValidator;
-import internet_store.database.cart_database.InnerCartDatabase;
-import internet_store.database.product_database.InnerProductDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.database.cart_database.CartDatabaseImpl;
+import internet_store.database.product_database.ProductDatabaseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
+@Transactional
 public class UpdateCartService {
     @Autowired
-    InnerProductDatabase productDatabase;
+    ProductDatabaseImpl productDatabase;
     @Autowired
-    InnerCartDatabase cartDatabase;
+    CartDatabaseImpl cartDatabase;
+    @Autowired
+    Arithmetic arithmetic;
 
-    public UpdateCartService(InnerProductDatabase productDatabase, InnerCartDatabase cartDatabase) {
-        this.productDatabase = productDatabase;
-        this.cartDatabase = cartDatabase;
-    }
-
-    public UpdateCartResponse execute(UpdateCartRequest updateCartRequest) {
+    public UpdateCartResponse execute(UpdateCartRequest request) {
+        ProductQuantityValidator quantityValidator = new ProductQuantityValidator();
         List<CoreError> errors = new ArrayList<>();
+        int index = 0;
+        Cart productInCart = new Cart();
+        Long newQuantity = null;
 
-        long productId = updateCartRequest.getId();
-
-        boolean isProductIdExist = productDatabase.isIdExist(productId);
+        long productId = request.getId();
+        boolean isProductIdExist = cartDatabase.isIdExist(productId);
 
         if (isProductIdExist) {
-            Product productInCart = cartDatabase.findById(productId);
-            int index = cartDatabase.findProductIndex(productId);
+            productInCart = cartDatabase.findById(productId);
+            index = cartDatabase.findProductIndex(productId);
 
-            Product productInDatabase = productDatabase.findByTitle(productInCart.getTitle());
+            newQuantity = request.getNewQuantity();
 
-            BigDecimal productQuantity = productInDatabase.getQuantity();
-            BigDecimal newQuantity = updateCartRequest.getNewQuantity();
+            Product totalProductInDatabase = productDatabase.findByTitle(productInCart.getTitle());
 
-            errors = validateQuantity(productInCart, productQuantity, newQuantity, index);
+            errors = quantityValidator.validate(totalProductInDatabase.getQuantity(), newQuantity);
 
         } else {
             errors.add(new CoreError("Id error ", "Wrong Id"));
         }
 
         if (errors.isEmpty()) {
-            return new UpdateCartResponse(productId);
+            productInCart.setQuantity(newQuantity);
+            BigDecimal sum = arithmetic.multiplyBigDecimalAndRound(new BigDecimal(request.getNewQuantity().toString())
+                    , productInCart.getPrice(), 2);
+            productInCart.setSum(sum);
+            cartDatabase.updateCart(index, productInCart);
         }
         return new UpdateCartResponse(errors);
-    }
-
-    private List<CoreError> validateQuantity(Product product, BigDecimal productQuantity, BigDecimal newQuantity, int index) {
-        ProductQuantityValidator quantityValidator = new ProductQuantityValidator();
-        List<CoreError> errors = quantityValidator.validate(productQuantity, newQuantity);
-        if (errors.isEmpty()) {
-            UpdatedProduct updatedProduct = new UpdatedProduct(product, newQuantity, index);
-            updateCart(updatedProduct);
-        }
-        return errors;
-    }
-
-    private void updateCart(UpdatedProduct updatedProduct) {
-        Product product = updatedProduct.getProduct();
-        BigDecimal newQuantity = updatedProduct.getNewQuantity();
-        int index = updatedProduct.getIndexInCartDatabase();
-
-        product.setQuantity(newQuantity);
-        BigDecimal productSum = product.getPrice().multiply(newQuantity);
-        product.setSum(productSum);
-        cartDatabase.updateCart(index, product);
     }
 }

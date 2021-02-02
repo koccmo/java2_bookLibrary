@@ -35,11 +35,11 @@ PRIMARY KEY (`id`)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
---ALTER TABLE `targets_board`
---ADD FOREIGN KEY (`target_id`) REFERENCES `targets`(`id`);
---
---ALTER TABLE `targets_board`
---ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
+ALTER TABLE `targets_board`
+ADD FOREIGN KEY (`target_id`) REFERENCES `targets`(`id`);
+
+ALTER TABLE `targets_board`
+ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

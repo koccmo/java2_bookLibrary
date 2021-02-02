@@ -8,9 +8,9 @@ public class UpdateCartRequest {
     @Getter
     private final long id;
     @Getter
-    private final BigDecimal newQuantity;
+    private final Long newQuantity;
 
-    public UpdateCartRequest(long id, BigDecimal newQuantity) {
+    public UpdateCartRequest(long id, Long newQuantity) {
         this.id = id;
         this.newQuantity = newQuantity;
     }

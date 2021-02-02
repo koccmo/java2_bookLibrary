@@ -9,8 +9,12 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="chatId" type="BIGINT"/>
-            <column name="orderNumber" type="INTEGER"/>
+            <column name="chatId" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

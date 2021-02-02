@@ -1,5 +1,7 @@
 package estore.core.service;
 
+import estore.core.domain.Product;
+import estore.core.domain.ProductCategory;
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByNameRequest;
@@ -7,7 +9,6 @@ import estore.core.responses.SearchProductByNameResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByNameValidator;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -56,7 +57,7 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product", "Category"));
+        products.add(new Product("Product", "Good product", new ProductCategory("Category")));
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
         SearchProductByNameResponse response = service.execute(request);
 
@@ -74,8 +75,8 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 1", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
+        products.add(new Product("Product", "Good product 1", new ProductCategory("Category")));
+        products.add(new Product("Product", "Good product 2", new ProductCategory("Category")));
         products.get(0).setPrice(10);
         products.get(1).setPrice(20);
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
@@ -94,8 +95,8 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 1", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
+        products.add(new Product("Product", "Good product 1", new ProductCategory("Category")));
+        products.add(new Product("Product", "Good product 2", new ProductCategory("Category")));
         Mockito.when(database.searchProductByName("Product")).thenReturn(products);
         SearchProductByNameResponse response = service.execute(request);
 
@@ -113,10 +114,10 @@ public class SearchProductByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product 4", "Category"));
-        products.add(new Product("Product", "Good product 3", "Category"));
-        products.add(new Product("Product", "Good product 2", "Category"));
-        products.add(new Product("Product", "Good product 1", "Category"));
+        products.add(new Product("Product", "Good product 4", new ProductCategory("Category")));
+        products.add(new Product("Product", "Good product 3", new ProductCategory("Category")));
+        products.add(new Product("Product", "Good product 2", new ProductCategory("Category")));
+        products.add(new Product("Product", "Good product 1", new ProductCategory("Category")));
         products.get(0).setPrice(30);
         products.get(1).setPrice(20);
         products.get(2).setPrice(40);

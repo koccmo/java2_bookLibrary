@@ -34,6 +34,7 @@ public class MenuUIAction implements UIAction {
         System.out.println("[23] Delete record");
         System.out.println("[24] Set record complete date");
         System.out.println("[25] Show records full info");
+        System.out.println("[26] Show unfinished targets");
         System.out.println("------------------------------");
         System.out.println("[0] Quit");
     }

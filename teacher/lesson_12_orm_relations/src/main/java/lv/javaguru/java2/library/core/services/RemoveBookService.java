@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.RemoveBookRequest;
@@ -12,6 +13,7 @@ import lv.javaguru.java2.library.core.responses.RemoveBookResponse;
 import lv.javaguru.java2.library.core.services.validators.RemoveBookRequestValidator;
 
 @Component
+@Transactional
 public class RemoveBookService {
 
 	@Autowired private BookRepository bookRepository;

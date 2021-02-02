@@ -1,5 +1,7 @@
 package lv.javaguru.java2.library.core.services;
 
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
 import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 
 @Component
+@Transactional
 public class GetAllBooksService {
 
 	@Autowired private BookRepository bookRepository;

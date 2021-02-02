@@ -3,8 +3,6 @@ package internet_store.user_interface.administrator_menu.create_product_menu.add
 
 import internet_store.core.domain.Product;
 
-import java.math.BigDecimal;
-
 public class AddProduct {
     private final Product product = new Product();
 
@@ -22,7 +20,7 @@ public class AddProduct {
         product.setDescription(addProductDescription.getUserProductDescriptionInput());
 
         addProductQuantity.showMenuProductQuantity();
-        product.setQuantity(new BigDecimal(String.valueOf(addProductQuantity.getUserProductQuantityInput())));
+        product.setQuantity((long) addProductQuantity.getUserProductQuantityInput());
 
         addProductPrice.showMenuProductPrice();
         product.setPrice(addProductPrice.getUserProductPriceInput());

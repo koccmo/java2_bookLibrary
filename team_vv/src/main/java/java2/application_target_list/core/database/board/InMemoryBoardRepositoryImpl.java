@@ -69,6 +69,11 @@ public class InMemoryBoardRepositoryImpl implements BoardRepository {
         return null;
     }
 
+    @Override
+    public List<Record> getUnfinishedRecords() {
+        return null;
+    }
+
     private int getBoardIndexFromListById(Long boardId) {
         for (int i = 0; i < recordsList.size(); i++) {
             if (recordsList.get(i).getRecordId().equals(boardId)) {

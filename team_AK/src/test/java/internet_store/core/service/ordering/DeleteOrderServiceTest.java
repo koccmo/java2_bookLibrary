@@ -6,10 +6,12 @@ import internet_store.core.request.ordering.DeleteOrderRequest;
 import internet_store.core.response.ordering.DeleteOrderResponse;
 import internet_store.database.order_database.InnerOrderDatabase;
 import internet_store.database.order_database.InnerOrderDatabaseImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 public class DeleteOrderServiceTest {
     private final InnerOrderDatabase orderDatabase = new InnerOrderDatabaseImpl();
     DeleteOrderService orderService = new DeleteOrderService(orderDatabase);
