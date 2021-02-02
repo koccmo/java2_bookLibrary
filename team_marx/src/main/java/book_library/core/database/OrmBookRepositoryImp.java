@@ -34,7 +34,7 @@ public class OrmBookRepositoryImp implements BookRepository {
     @Override
     public boolean hasTheSameBookInDatabase(Book bookToCompare) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT b FROM Book b where title = :title AND author = :author");
+                "SELECT b FROM Book b WHERE title = :title AND author = :author");
         query.setParameter("title", bookToCompare.getTitle());
         query.setParameter("author", bookToCompare.getAuthor());
         return !query.getResultList().isEmpty();
@@ -43,7 +43,7 @@ public class OrmBookRepositoryImp implements BookRepository {
     @Override
     public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT b FROM Book b where id = :id");
+                "SELECT b FROM Book b WHERE id = :id");
         query.setParameter("id", idToCheck);
         return !query.getResultList().isEmpty();
     }
