@@ -1,5 +1,5 @@
 package dental_clinic_tests.core.validators_tests.visit;
-
+/*
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.Manipulation;
 import dental_clinic.core.domain.ToothStatus;
@@ -71,5 +71,4 @@ public class AddVisitValidatorTest {
         coreErrors.forEach(System.out::println);
         assertTrue(coreErrors.isEmpty());
     }
-
-}
+}*/

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
-
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class AddVisitServiceTest {
 
@@ -129,4 +129,4 @@ public class AddVisitServiceTest {
         AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
         assertFalse(addVisitResponse.hasErrors());
     }
-}
+}*/
