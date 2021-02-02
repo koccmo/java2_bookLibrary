@@ -22,7 +22,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class SearchPlannedVisitsByPersonalCodeServiceTest {
 
@@ -87,4 +87,4 @@ public class SearchPlannedVisitsByPersonalCodeServiceTest {
         assertFalse(searchPlannedVisitsByPersonalCodeResponse.hasErrors());
         assertTrue(searchPlannedVisitsByPersonalCodeResponse.getPlannedVisitList().size() == 1);
     }
-}
+}*/

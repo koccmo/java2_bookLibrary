@@ -24,7 +24,7 @@ import dental_clinic.core.services.patient.DeletePatientService;
 import dental_clinic.core.services.patient.GetAllPatientsService;
 
 import static org.junit.Assert.assertTrue;
-
+/*
 public class AcceptanceTest3 {
 
     private ApplicationContext appContext;
@@ -78,4 +78,4 @@ public class AcceptanceTest3 {
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}
+}*/

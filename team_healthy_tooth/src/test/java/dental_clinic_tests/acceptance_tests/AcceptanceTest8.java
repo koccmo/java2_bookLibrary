@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
-
+/*
 public class AcceptanceTest8 {
 
     private ApplicationContext appContext;
@@ -55,4 +55,4 @@ System.out.println();
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}
+}*/

@@ -1,5 +1,5 @@
 package dental_clinic_tests.acceptance_tests;
-
+/*
 import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.patient.AddPatientRequest;
@@ -64,4 +64,4 @@ public class AcceptanceTest4 {
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}
+}*/
