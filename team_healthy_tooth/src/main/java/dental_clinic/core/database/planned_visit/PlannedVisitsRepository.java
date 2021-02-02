@@ -2,6 +2,7 @@ package dental_clinic.core.database.planned_visit;
 
 import dental_clinic.core.domain.PlannedVisit;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface PlannedVisitsRepository {
 
     void cancelPlannedVisit(Long id);
 
-    void changePlannedVisitTime(Long id, GregorianCalendar visitTime);
+    void changePlannedVisitTime(Long id, Date visitTime);
 
     boolean containsId(Long id);
 
