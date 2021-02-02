@@ -16,8 +16,6 @@ public interface DatabaseCustomers {
 
     boolean deactivate (Long id);
 
-    List<Customers> getCustomersList();
-
     Optional<Customers> findById (Long id);
 
     Optional<Customers> findByEmail (String customerEmail);
@@ -27,9 +25,5 @@ public interface DatabaseCustomers {
     List<Customers> findAllActiveCustomers ();
 
     List<Customers> findAllInactiveCustomers ();
-
-    Long checkLogin (String email, String password);
-
-    Long checkLoginBeforeUpdate (String email, String password);
 
 }

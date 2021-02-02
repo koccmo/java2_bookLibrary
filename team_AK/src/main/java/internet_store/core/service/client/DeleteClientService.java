@@ -4,45 +4,41 @@ import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Client;
 import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.client_database.InnerClientDatabase;
-import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
+import internet_store.core.validate.NumberValidator;
+import internet_store.database.client_database.ClientDatabaseImpl;
+import internet_store.persistence.ClientRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class DeleteClientService {
-    @Autowired
-    InnerClientDatabase clientDatabase;
 
-    public DeleteClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    public DeleteClientResponse execute(DeleteClientRequest request) {
+        NumberValidator<?> numberValidator = new NumberValidator<>(request.getId());
 
-    public DeleteClientResponse execute(DeleteClientRequest deleteClientRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(deleteClientRequest.getId());
+        List<CoreError> errors = numberValidator.validate();
 
-        List<CoreError> errors = negativeNumberValidator.validate();
+        Object databases = request.getClientDatabase();
 
-        if (isIdExist(deleteClientRequest.getId())) {
-            Client deletedClient = findProductById(deleteClientRequest.getId());
-            clientDatabase.deleteClient(deletedClient);
-        } else {
-            errors.add(new CoreError("Id error ", "wrong ID"));
+        if (databases instanceof ClientRepository) {
+            ((ClientRepository) databases).delete(request.getClient());
+            return new DeleteClientResponse(new ArrayList<>());
+        }
+
+        if (databases instanceof ClientDatabaseImpl) {
+            if (((ClientDatabaseImpl) databases).isIdExist(request.getId())) {
+                Client deletedClient = ((ClientDatabaseImpl) databases).findById(request.getId());
+                ((ClientDatabaseImpl) databases).deleteClient(deletedClient);
+            } else {
+                errors.add(new CoreError("Id error ", "wrong ID"));
+            }
         }
 
         if (errors.isEmpty()) {
-            return new DeleteClientResponse(deleteClientRequest.getId());
+            return new DeleteClientResponse(request.getId());
         }
         return new DeleteClientResponse(errors);
-    }
-
-    private boolean isIdExist(long id) {
-        return clientDatabase.isIdExist(id);
-    }
-
-    private Client findProductById(long id) {
-        return clientDatabase.findById(id);
     }
 }

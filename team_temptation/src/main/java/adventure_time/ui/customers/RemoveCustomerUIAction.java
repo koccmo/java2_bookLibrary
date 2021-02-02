@@ -22,13 +22,14 @@ public class RemoveCustomerUIAction implements UIAction {
 
         System.out.println("Enter a customer ID:");
         RemoveCustomerRequest request = new RemoveCustomerRequest(scanner.nextLong());
-        System.out.println();
 
         RemoveCustomerResponse response = service.remove(request);
         if (response.hasError()) {
             response.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("The customer is switched to the \"inactive\" state");
+            System.out.println("The customer is removed to the \"inactive\" state");
         }
+
+        System.out.println();
     }
 }

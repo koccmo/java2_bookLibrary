@@ -52,10 +52,6 @@ public class InMemoryCustomer implements DatabaseCustomers {
         return false;
     }
 
-    public List<Customers> getCustomersList() {
-        return customers;
-    }
-
     @Override
     public Optional<Customers> findById(Long id) {
         return customers.stream().filter(items -> items.getCustomerID().equals(id)).findFirst();
@@ -91,33 +87,4 @@ public class InMemoryCustomer implements DatabaseCustomers {
                 .filter(item -> !item.getActivity())
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public Long checkLogin(String email, String password) {
-        Optional<Customers> customer = customers.stream().filter(items -> items.getCustomerEmail().equals(email)).findFirst();
-        if (customer.isPresent()) {
-            if (customer.get().getCustomerPassword().equals(password)) {
-                return customer.get().getCustomerID(); // user found, passwords matched
-            } else {
-                return 0L; // user found, password mismatch
-            }
-        } else return -1L; // user not found
-    }
-
-    @Override
-    public Long checkLoginBeforeUpdate(String email, String password) {
-        Optional<Customers> customer = customers.stream().filter(items -> items.getCustomerEmail().equals(email)).findFirst();
-        if (customer.isPresent()) {
-            if (customer.get().getCustomerPassword().equals(password)) {
-                Long id = customer.get().getCustomerID();
-                int index = customers.indexOf(customer.get());
-                customer.get().setActivity(false);
-                customers.set(index, customer.get());
-                return id; // user found, passwords matched
-            } else {
-                return 0L; // user found, password mismatch
-            }
-        } else return -1L; // user not found
-    }
-
 }

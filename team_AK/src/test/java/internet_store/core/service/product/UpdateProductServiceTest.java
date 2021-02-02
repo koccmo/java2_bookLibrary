@@ -2,7 +2,7 @@ package internet_store.core.service.product;
 
 import internet_store.core.request.product.UpdateProductRequest;
 import internet_store.core.response.product.UpdateProductResponse;
-import internet_store.database.product_database.InnerProductDatabase;
+import internet_store.database.interfaces.ProductDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,14 +15,14 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UpdateProductServiceTest {
     @Mock
-    private InnerProductDatabase productDatabase;
+    private ProductDatabase productDatabase;
     @InjectMocks
     private UpdateProductService service;
 
     @Test
     public void shouldReturnNoIdError() {
         Mockito.when(productDatabase.isIdExist(1L)).thenReturn(false);
-        UpdateProductResponse response = service.execute(new UpdateProductRequest(1L));
+        UpdateProductResponse response = service.execute(new UpdateProductRequest(productDatabase, 1L));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -33,7 +33,7 @@ public class UpdateProductServiceTest {
     @Test
     public void shouldReturnErrorNegativeNumber() {
         Mockito.when(productDatabase.isIdExist(-15L)).thenReturn(true);
-        UpdateProductResponse response = service.execute(new UpdateProductRequest(-15L));
+        UpdateProductResponse response = service.execute(new UpdateProductRequest(productDatabase, -15L));
 
         assertTrue(response.hasErrors());
         assertEquals(1, response.getErrors().size());
@@ -44,7 +44,7 @@ public class UpdateProductServiceTest {
     @Test
     public void shouldReturnErrorNegativeNumberAndNoId() {
         Mockito.when(productDatabase.isIdExist(-15L)).thenReturn(false);
-        UpdateProductResponse response = service.execute(new UpdateProductRequest(-15L));
+        UpdateProductResponse response = service.execute(new UpdateProductRequest(productDatabase, -15L));
 
         assertTrue(response.hasErrors());
         assertEquals(2, response.getErrors().size());
@@ -57,7 +57,7 @@ public class UpdateProductServiceTest {
     @Test
     public void shouldReturnNoError() {
         Mockito.when(productDatabase.isIdExist(1L)).thenReturn(true);
-        UpdateProductResponse response = service.execute(new UpdateProductRequest(1L));
+        UpdateProductResponse response = service.execute(new UpdateProductRequest(productDatabase, 1L));
 
         assertFalse(response.hasErrors());
         assertEquals(1L, response.getId());

@@ -2,16 +2,17 @@ package internet_store.user_interface.client_menu.client_cart_menu.add_to_cart_m
 
 import internet_store.core.request.cart.AddProductToCartRequest;
 import internet_store.core.response.cart.AddProductToCartResponse;
-import internet_store.core.service.cart.AddProductToCartService;
-import org.springframework.stereotype.Component;
+import internet_store.core.service.cart.AddToCartService;
+import internet_store.database.cart_database.CartDatabaseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.math.BigDecimal;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AddProductToCartConsole {
-@Autowired
-AddProductToCartService addProductToCartService;
+    @Autowired
+    AddToCartService addToCartService;
+    @Autowired
+    CartDatabaseImpl cartDatabase;
 
     public void addToCart() {
         AddProductToCartMenu addProductToCartMenu = new AddProductToCartMenu();
@@ -20,10 +21,10 @@ AddProductToCartService addProductToCartService;
 
         SetQuantityMenu setQuantityMenu = new SetQuantityMenu();
         setQuantityMenu.showMenuSetQuantityProduct();
-        BigDecimal userQuantityProduct = new BigDecimal(String.valueOf(setQuantityMenu.getUserQuantityInput()));
+        long userQuantityProduct = setQuantityMenu.getUserQuantityInput();
 
-        AddProductToCartRequest addToCartRequest = new AddProductToCartRequest(productId, userQuantityProduct);
-        AddProductToCartResponse response = addProductToCartService.execute(addToCartRequest);
+        AddProductToCartRequest addToCartRequest = new AddProductToCartRequest(productId, userQuantityProduct, cartDatabase, "");
+        AddProductToCartResponse response = addToCartService.execute(addToCartRequest);
 
         if (!(response.hasErrors())) {
             System.out.println("Add product to cart");

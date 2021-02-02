@@ -24,6 +24,12 @@ public class RemoveCustomerService {
             return new RemoveCustomerResponse(errors);
         }
 
-        return new RemoveCustomerResponse(database.deactivate(request.getCustomerId()));
+        if (!database.deactivate(request.getCustomerId())) {
+            errors.add(new CoreError("customerId",
+                    "There is no customer with ID: " + request.getCustomerId() + " in the database"));
+            return new RemoveCustomerResponse(errors);
+        } else {
+            return new RemoveCustomerResponse();
+        }
     }
 }
