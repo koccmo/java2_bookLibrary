@@ -28,17 +28,18 @@ public class JdbcProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> searchProductByCategory(String category) {
-        Object[] args = new Object[] { category };
-        return jdbcTemplate.query(
-                "SELECT products.id, products.prodName, products.prodDescription, " +
-                "products.category_Id, products.quantity, products.price " +
-                " FROM products, productCategory " +
-                " WHERE productCategory.category = ? " +
-                "AND productCategory.id = products.category_Id",
-                args,
-                new ProductRowMapper()
-        );
+    public List<Product> searchProductByCategory(Long category) {
+//        Object[] args = new Object[] { category };
+//        return jdbcTemplate.query(
+//                "SELECT products.id, products.prodName, products.prodDescription, " +
+//                "products.category_Id, products.quantity, products.price " +
+//                " FROM products, productCategory " +
+//                " WHERE productCategory.category = ? " +
+//                "AND productCategory.id = products.category_Id",
+//                args,
+//                new ProductRowMapper()
+//        );
+        return null;
     }
 
     @Override

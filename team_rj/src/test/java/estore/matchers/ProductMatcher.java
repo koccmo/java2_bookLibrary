@@ -6,18 +6,22 @@ import org.mockito.ArgumentMatcher;
 public class ProductMatcher implements ArgumentMatcher<Product> {
     private String name;
     private String description;
-    private Long category;
+    private String category;
+    private int quantity;
+    private double price;
 
-    public ProductMatcher(String name, String description, Long category) {
+    public ProductMatcher(String name, String description, String category, int quantity, double price) {
         this.name = name;
         this.description = description;
         this.category = category;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     @Override
     public boolean matches(Product product) {
         return product.getName().equals(name)
                 && product.getDescription().equals(description)
-                && product.getCategory().equals(category);
+                && product.getCategory().getCategory().equals(category);
     }
 }
