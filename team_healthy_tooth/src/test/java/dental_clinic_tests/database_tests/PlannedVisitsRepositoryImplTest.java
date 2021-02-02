@@ -1,5 +1,5 @@
 package dental_clinic_tests.database_tests;
-
+/*
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.PlannedVisit;
@@ -100,4 +100,4 @@ public class PlannedVisitsRepositoryImplTest {
         assertTrue(plannedVisitsRepository.searchPlannedVisitsByDate(0, 0, 0, 0).isEmpty());
     }
 
-}
+}*/
