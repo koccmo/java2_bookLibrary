@@ -2,9 +2,9 @@ package dental_clinic.console_ui.visit;
 
 import dental_clinic.console_ui.InputFormatsValidator;
 import dental_clinic.console_ui.UIAction;
-import dental_clinic.core.domain.Doctor;
-import dental_clinic.core.domain.ToothStatus;
-import dental_clinic.core.domain.Visit;
+import dental_clinic.core.database.manipulation.ManipulationRepository;
+import dental_clinic.core.database.patient.PatientRepository;
+import dental_clinic.core.domain.*;
 import dental_clinic.core.requests.doctor.GetDoctorListRequest;
 import dental_clinic.core.requests.manipulation.GetManipulationsListRequest;
 import dental_clinic.core.requests.visit.AddVisitRequest;
@@ -34,12 +34,14 @@ public class AddVisitUIAction implements UIAction {
     @Autowired
     private GetDoctorListService getDoctorListService;
     @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
+    private ManipulationRepository manipulationRepository;
+    @Autowired
     private GetManipulationsListService getManipulationsListService;
 
 
     public void execute(){
-        Scanner in = new Scanner(System.in);
-
         Long id = inputFormatsValidator.inputLong("Please enter patient's id");
 
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(id);
@@ -48,20 +50,23 @@ public class AddVisitUIAction implements UIAction {
         if (containsDatabaseIdResponse.hasErrors()){
             containsDatabaseIdResponse.getErrors().forEach(System.out::println);
         } else {
+
+            PersonalData personalData = patientRepository.getPersonalDataById(id);
+
             Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
 
-            Optional<String> comment = enterComment();
+            String comment = enterComment();
 
             ToothStatus toothStatus = enterToothStatus();
 
             Doctor doctor = new Doctor(enterDoctor(), "", "");
 
-            List<Long>manipulationsIds = enterManipulationsIds();
+            Manipulation manipulation = enterManipulation();
 
             Date date = new Date();
 
-            Visit visit = new Visit(id, toothNumber, comment, toothStatus, doctor, new ArrayList<>(), date);
-            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit, manipulationsIds);
+            Visit visit = new Visit(personalData, toothNumber, comment, toothStatus, doctor, manipulation, date, manipulation.getPrice());
+            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit, manipulation);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 
             if (addVisitResponse.hasErrors()) {
@@ -115,11 +120,11 @@ public class AddVisitUIAction implements UIAction {
         return ToothStatus.OTHER;
     }
 
-    private Optional<String> enterComment () {
+    private String enterComment () {
         Scanner in = new Scanner(System.in);
         System.out.println("Please input comment if necessary or press enter");
         String commentIn = in.nextLine();
-        return Optional.of(commentIn);
+        return commentIn;
     }
 
     private String enterDoctor() {
@@ -133,22 +138,24 @@ public class AddVisitUIAction implements UIAction {
         return in.nextLine();
     }
 
-    private List<Long> enterManipulationsIds() {
+    private Manipulation enterManipulation() {
+        Manipulation manipulation = new Manipulation();
         GetManipulationsListRequest getManipulationsListRequest = new GetManipulationsListRequest();
         GetManipulationsListResponse getManipulationsListResponse = getManipulationsListService.execute(getManipulationsListRequest);
-        List<Long>manipulationsIds = new ArrayList<>();
         if (!getManipulationsListResponse.hasErrors()) {
             while (true) {
                 getManipulationsListResponse.getManipulationList().forEach(System.out::println);
-                Long manipulationsId = inputFormatsValidator.inputLong("Please input manipulation's id or press 0 to exit");
-                if (manipulationsId != 0) {
-                    manipulationsIds.add(manipulationsId);
-                } else {
+                Long manipulationsId = inputFormatsValidator.inputLong("Please input manipulation's id");
+                if (manipulationRepository.containsId(manipulationsId)) {
+                    manipulation = manipulationRepository.getManipulationById(manipulationsId);
+                    manipulation.setId(manipulationsId);
                     break;
+                } else {
+                    System.out.println("Not valid id, please enter valid id number!");
                 }
             }
         }
-        return manipulationsIds;
+        return manipulation;
     }
 
 }
