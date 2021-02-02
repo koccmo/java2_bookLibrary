@@ -3,15 +3,16 @@ package dental_clinic.core.responses.planned_visit;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.CoreResponse;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChangePlannedVisitTimeResponse extends CoreResponse {
 
     private Long id;
-    private GregorianCalendar visitTime;
+    private Date visitTime;
 
-    public ChangePlannedVisitTimeResponse(Long id, GregorianCalendar visitTime) {
+    public ChangePlannedVisitTimeResponse(Long id, Date visitTime) {
         this.id = id;
         this.visitTime = visitTime;
     }
@@ -24,7 +25,7 @@ public class ChangePlannedVisitTimeResponse extends CoreResponse {
         return id;
     }
 
-    public GregorianCalendar getVisitTime() {
+    public Date getVisitTime() {
         return visitTime;
     }
 }
