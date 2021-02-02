@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/*
 @Component
 public class JdbcPlannedVisitsRepositoryImpl implements PlannedVisitsRepository {
 
@@ -54,4 +55,4 @@ public class JdbcPlannedVisitsRepositoryImpl implements PlannedVisitsRepository 
     public List<PlannedVisit> searchPlannedVisitsByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
         return null;
     }
-}
+}*/

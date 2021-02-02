@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+/*
 @Component
 public class JdbcVisitRepositoryImpl implements VisitRepository {
 
@@ -28,4 +28,4 @@ public class JdbcVisitRepositoryImpl implements VisitRepository {
     public List<Visit> searchVisitByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
         return null;
     }
-}
+}*/

@@ -4,7 +4,7 @@ import dental_clinic.core.domain.Manipulation;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 //@Component
 public class InMemoryManipulationRepositoryImpl implements ManipulationRepository {
 
@@ -63,4 +63,4 @@ public class InMemoryManipulationRepositoryImpl implements ManipulationRepositor
         manipulations.add(manipulation3);
         return manipulations;
     }
-}
+}*/

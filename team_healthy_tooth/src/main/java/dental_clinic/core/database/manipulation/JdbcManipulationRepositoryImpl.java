@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+/*
 @Component
 public class JdbcManipulationRepositoryImpl implements ManipulationRepository {
 
@@ -55,4 +55,4 @@ public class JdbcManipulationRepositoryImpl implements ManipulationRepository {
         String sql = "SELECT * FROM service WHERE id = " + id + ";";
         return jdbcTemplate.query(sql, new ManipulationRowMapper()).size() == 1;
     }
-}
+}*/

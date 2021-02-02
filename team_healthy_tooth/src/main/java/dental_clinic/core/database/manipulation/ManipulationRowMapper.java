@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/*
 public class ManipulationRowMapper implements RowMapper<Manipulation> {
 
     @Override
@@ -17,4 +17,4 @@ public class ManipulationRowMapper implements RowMapper<Manipulation> {
         manipulation.setActive(rs.getBoolean("isActive"));
         return manipulation;
     }
-}
+}*/

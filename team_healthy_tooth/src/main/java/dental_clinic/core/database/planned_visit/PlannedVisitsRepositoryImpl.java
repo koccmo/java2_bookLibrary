@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/*
 //@Component
 public class PlannedVisitsRepositoryImpl implements PlannedVisitsRepository {
 
@@ -70,4 +70,4 @@ public class PlannedVisitsRepositoryImpl implements PlannedVisitsRepository {
                         plannedVisit.getVisitTime().equals(dateTo)))
                 .collect(Collectors.toList());
     }
-}
+}*/

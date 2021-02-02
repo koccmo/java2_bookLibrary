@@ -5,7 +5,7 @@ import dental_clinic.core.domain.Doctor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/*
 //@Component
 public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
 
@@ -93,4 +93,4 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     }
 
 
-}
+}*/

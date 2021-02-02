@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+/*
 //@Component
 public class InMemoryPatientRepositoryImpl implements PatientRepository {
 
@@ -131,4 +131,4 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
                 .anyMatch(personalData1 -> personalData1.getPersonalCode().equals(personalData.getPersonalCode()));
     }
 
-}
+}*/

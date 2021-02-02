@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
+/*
 @Component
 public class JdbcDoctorRepositoryImpl implements DoctorRepository {
 
@@ -104,4 +104,4 @@ public class JdbcDoctorRepositoryImpl implements DoctorRepository {
             default: return "sunday_end";
         }
     }
-}
+}*/
