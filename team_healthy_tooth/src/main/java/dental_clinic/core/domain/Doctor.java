@@ -1,18 +1,28 @@
 package dental_clinic.core.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="doctor")
 public class Doctor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "isEmployed")
     private boolean isEmployed;
-    private WorkGraphic workGraphic = new WorkGraphic();
-    private List<Visit> visits = new ArrayList<>();
 
     public Doctor() { }
 
@@ -55,36 +65,10 @@ public class Doctor {
         this.phone = phone;
     }
 
-    public boolean getIsEmployed() {
-        return isEmployed;
-    }
+    public boolean isEmployed() { return isEmployed; }
 
     public void setEmployed(boolean employed) {
         isEmployed = employed;
-    }
-
-    public WorkGraphic getWorkGraphic() {
-        return workGraphic;
-    }
-
-    public void setWorkGraphic(WorkGraphic workGraphic) {
-        this.workGraphic = workGraphic;
-    }
-
-    public List<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(List<Visit> visits) {
-        this.visits = visits;
-    }
-
-    public void addVisit(Visit visit){
-        visits.add(visit);
-    }
-
-    public boolean filledNameAndSurname() {
-        return name != null && !name.isEmpty() && surname != null && !surname.isEmpty();
     }
 
     @Override
@@ -104,8 +88,6 @@ public class Doctor {
     public String toString() {
         return "Doctor: " +
                 "id: " + id + "\n" +
-                "Dr: '" + name + " " + surname + "\n"
-                +workGraphic
-                +"Visits: " + visits + "\n\n";
+                "Dr: '" + name + " " + surname + "\n";
     }
 }
