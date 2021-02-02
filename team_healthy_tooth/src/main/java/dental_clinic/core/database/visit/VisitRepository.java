@@ -1,5 +1,6 @@
 package dental_clinic.core.database.visit;
 
+import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.domain.Visit;
 
 import java.util.List;
