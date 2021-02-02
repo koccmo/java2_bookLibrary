@@ -1,7 +1,9 @@
 package dental_clinic.core.database.doctor;
 
 import dental_clinic.core.domain.Doctor;
+import dental_clinic.core.domain.WorkGraphic;
 
+import javax.print.Doc;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +25,7 @@ public interface DoctorRepository {
     Optional<Doctor> getDoctorById(Long id);
 
     void updateWorkGraphicForSpecificDate (Long id, Integer day, String timeFrom, String timeTo);
+
+    WorkGraphic getWorkGraphic(Doctor doctor);
 
 }
