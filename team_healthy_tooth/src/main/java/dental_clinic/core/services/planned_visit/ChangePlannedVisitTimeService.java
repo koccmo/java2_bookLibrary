@@ -36,7 +36,7 @@ public class ChangePlannedVisitTimeService {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        GregorianCalendar visitDate = getVisitDate(changePlannedVisitTimeRequest.getVisitTime());
+        Date visitDate = getVisitDate(changePlannedVisitTimeRequest.getVisitTime());
         errorList.addAll(dateNotInFuture(visitDate));
         if (!errorList.isEmpty()) {
             return new ChangePlannedVisitTimeResponse(errorList);
@@ -46,22 +46,22 @@ public class ChangePlannedVisitTimeService {
         return new ChangePlannedVisitTimeResponse(changePlannedVisitTimeRequest.getId(), visitDate);
     }
 
-    private GregorianCalendar getVisitDate (String visitDate) {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    private Date getVisitDate (String visitDate) {
+        Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         try {
-            Date date = simpleDateFormat.parse(visitDate);
-            gregorianCalendar.setTime(date);
+            date = simpleDateFormat.parse(visitDate);
+
         }
         catch (ParseException e) {
 
         }
-        return gregorianCalendar;
+        return date;
     }
 
-    private List<CoreError> dateNotInFuture(GregorianCalendar visitDate) {
+    private List<CoreError> dateNotInFuture(Date visitDate) {
         List<CoreError> errors = new ArrayList<>();
-        GregorianCalendar currentDate = new GregorianCalendar();
+        Date currentDate = new Date();
         if (visitDate.before(currentDate)) {
             errors.add(new CoreError("date", "Visit date must be in future"));
         }
