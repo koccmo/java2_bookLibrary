@@ -1,17 +1,35 @@
 package dental_clinic.core.domain;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+@Entity
+@Table(name="plannedVisit")
 public class PlannedVisit {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
     private PersonalData personalData;
-    private GregorianCalendar visitTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dateAndTime")
+    private Date visitTime;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    public PlannedVisit(GregorianCalendar visitTime, PersonalData personalData, Doctor doctor) {
+    public PlannedVisit() { }
+
+    public PlannedVisit(Date visitTime, PersonalData personalData, Doctor doctor) {
         this.visitTime = visitTime;
         this.personalData = personalData;
         this.doctor = doctor;
@@ -25,11 +43,11 @@ public class PlannedVisit {
         return id;
     }
 
-    public void setVisitTime(GregorianCalendar visitTime) {
+    public void setVisitTime(Date visitTime) {
         this.visitTime = visitTime;
     }
 
-    public GregorianCalendar getVisitTime() {
+    public Date getVisitTime() {
         return  visitTime;
     }
 
@@ -37,8 +55,16 @@ public class PlannedVisit {
         return personalData;
     }
 
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
+    }
+
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     @Override

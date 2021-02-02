@@ -6,6 +6,7 @@ public class Patient {
 
     private PersonalData personalData;
     private Jowl jowl = new Jowl();
+    private JowlEntity jowlEntity;
     private List <Visit> visits = new ArrayList<>();
 
     public Patient(PersonalData personalData){
@@ -13,6 +14,12 @@ public class Patient {
     }
 
     public Patient() {};
+
+    public Patient (PersonalData personalData, JowlEntity jowl, List <Visit> visits) {
+        this.personalData = personalData;
+        this.jowlEntity = jowl;
+        this.visits = visits;
+    }
 
     public PersonalData getPersonalData() {
         return personalData;
