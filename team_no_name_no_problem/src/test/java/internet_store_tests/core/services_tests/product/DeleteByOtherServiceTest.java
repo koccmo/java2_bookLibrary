@@ -1,11 +1,8 @@
 package internet_store_tests.core.services_tests.product;
 
-import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
-import internet_store.core.requests.product.DeleteProductRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteByOtherResponse;
-import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.DeleteByOtherService;
 import internet_store.core.services.product.validators.DeleteByOtherRequestValidator;
 import internet_store.database.product.ProductDatabase;
@@ -32,7 +29,7 @@ public class DeleteByOtherServiceTest {
     DeleteByOtherService deleteByOtherService;
 
     @Test
-    public void notValidDelete() {
+    public void notValidRequestToDeleteTest() {
 
         DeleteProductByOtherRequest deleteProductByOtherRequest = new DeleteProductByOtherRequest("", "",
                 null, null);
@@ -41,10 +38,28 @@ public class DeleteByOtherServiceTest {
 
         Mockito.when(deleteByOtherRequestValidator.validate(deleteProductByOtherRequest)).thenReturn(errors);
 
-        DeleteByOtherResponse deleteByOtherResponse = (DeleteByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
-        assertEquals(deleteByOtherResponse.hasErrors(), true);
-        assertEquals(deleteByOtherResponse.getErrors().size(), 1);
-        assertEquals(deleteByOtherResponse.getErrors().get(0).getField(), "delete");
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "delete");
+    }
+
+    @Test
+    public void noTitleInDatabaseTest() {
+
+        DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("Apple","",
+                null,null);
+        List<CoreError> errors = new ArrayList<>();
+        CoreError expectedError = new CoreError("database","database doesn't contain product with title Apple");
+        errors.add(expectedError);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.containsTitle("Apple")).thenReturn(false);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
+        assertEquals(response.hasErrors(),true);
+        assertEquals(response.getErrors().size(),1);
+
 
     }
 }
