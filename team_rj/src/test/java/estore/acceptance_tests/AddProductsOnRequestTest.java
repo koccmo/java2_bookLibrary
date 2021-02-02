@@ -44,7 +44,7 @@ public class AddProductsOnRequestTest {
         AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "1");
         AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
         addNewProductService().execute(addProductRequest1);
-        addNewProductService().execute(addProductRequest2);
+        var res = addNewProductService().execute(addProductRequest2);
 
         GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
 

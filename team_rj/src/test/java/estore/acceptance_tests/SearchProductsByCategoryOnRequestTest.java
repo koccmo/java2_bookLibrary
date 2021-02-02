@@ -6,7 +6,6 @@ import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.service.AddProductCategoryService;
 import estore.core.service.AddProductService;
 import estore.core.service.SearchProductByCategoryService;
-import estore.database.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -31,23 +30,27 @@ public class SearchProductsByCategoryOnRequestTest {
 
     @Test
     public void shouldSearchProductByCategoryDescendingAndPaging() {
-//        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
-//        AddNewProductCategoryService().execute(addProductCategoryRequest);
-//
-//        AddProductRequest addProductRequest1 = new AddProductRequest("ZzProductA", "Description ProductA", "1");
-//        AddProductRequest addProductRequest2 = new AddProductRequest("ZzProductB", "Description ProductB", "1");
-//        AddProductRequest addProductRequest3 = new AddProductRequest("ZzProductC", "Description ProductC", "1");
-//
-//        addNewProductService().execute(addProductRequest1);
-//        addNewProductService().execute(addProductRequest2);
-//        addNewProductService().execute(addProductRequest3);
-//
-//        Ordering ordering = new Ordering("name", "desc");
-//        Paging paging = new Paging("2", "1");
-//        SearchProductByCategoryRequest request = new SearchProductByCategoryRequest("Category", ordering, paging);
-//        SearchProductByCategoryResponse response = searchProductByCategoryService().execute(request);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-//        System.out.println(response.getErrors().get(0).getField() + " " + response.getErrors().get(0).getMessage());
+        AddProductRequest addProductRequest1 = new AddProductRequest("ZzProductA", "Description ProductA", "1");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ZzProductB", "Description ProductB", "1");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ZzProductC", "Description ProductC", "1");
+
+        addNewProductService().execute(addProductRequest1);
+        addNewProductService().execute(addProductRequest2);
+        addNewProductService().execute(addProductRequest3);
+
+        Ordering ordering = new Ordering("name", "desc");
+        Paging paging = new Paging("2", "1");
+        SearchProductByCategoryRequest request = new SearchProductByCategoryRequest("1", ordering, paging);
+        SearchProductByCategoryResponse response = searchProductByCategoryService().execute(request);
+
+        System.out.println();
+        System.out.println(response.hasErrors());
+        System.out.println(response.getErrors().get(0).getField());
+        System.out.println(response.getErrors().get(0).getMessage());
+        System.out.println();
 
 //        assertEquals(response.getProducts().size(), 1);
 //        assertEquals(response.getProducts().get(0).getName(), "ZzProductB");
@@ -91,10 +94,6 @@ public class SearchProductsByCategoryOnRequestTest {
 
     private SearchProductByCategoryService searchProductByCategoryService() {
         return applicationContext.getBean(SearchProductByCategoryService.class);
-    }
-
-    private ProductRepository getProductDb() {
-        return applicationContext.getBean(ProductRepository.class);
     }
 
     private AddProductCategoryService AddNewProductCategoryService() {

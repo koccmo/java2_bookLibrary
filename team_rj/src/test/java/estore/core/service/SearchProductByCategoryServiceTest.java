@@ -57,7 +57,7 @@ public class SearchProductByCategoryServiceTest {
 
         List<Product> products = new ArrayList<>();
         products.add(new Product("Product", "Good product", 1L));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        Mockito.when(database.searchProductByCategory(1L)).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -78,7 +78,7 @@ public class SearchProductByCategoryServiceTest {
         products.add(new Product("Product_2", "Good product 2", 1L));
         products.get(0).setPrice(10);
         products.get(1).setPrice(20);
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        Mockito.when(database.searchProductByCategory(1L)).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -96,7 +96,7 @@ public class SearchProductByCategoryServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(new Product("Product_1", "Good product 1", 1L));
         products.add(new Product("Product_2", "Good product 2", 1L));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        Mockito.when(database.searchProductByCategory(1L)).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -116,7 +116,7 @@ public class SearchProductByCategoryServiceTest {
         products.add(new Product("Product_3", "Good product 3", 1L));
         products.add(new Product("Product_2", "Good product 2", 1L));
         products.add(new Product("Product_1", "Good product 1", 1L));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        Mockito.when(database.searchProductByCategory(1L)).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());

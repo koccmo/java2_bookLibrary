@@ -1,7 +1,9 @@
 package estore.core.service;
 
+import estore.core.domain.ProductCategory;
 import estore.core.validation.CoreError;
 import estore.core.validation.AddProductValidator;
+import estore.database.ProductCategoryRepository;
 import estore.database.ProductRepository;
 import estore.core.domain.Product;
 import estore.core.requests.AddProductRequest;
@@ -14,11 +16,14 @@ import java.util.List;
 public class AddProductService {
 
     private ProductRepository productDB;
+    private ProductCategoryRepository categoryDB;
     private AddProductValidator validator;
 
     public AddProductService(ProductRepository productDB,
+                             ProductCategoryRepository categoryDB,
                              AddProductValidator validator) {
         this.productDB = productDB;
+        this.categoryDB = categoryDB;
         this.validator = validator;
     }
 
@@ -29,7 +34,14 @@ public class AddProductService {
             return new AddProductResponse(errors);
         }
 
-        Product product = new Product(request.getProductName(), request.getProductDescription(), Long.valueOf(request.getProductCategory()));
+        ProductCategory category = new ProductCategory(request.getProductCategory());
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var item : categories) {
+            if (item.getCategory().equalsIgnoreCase(request.getProductCategory())) {
+                category.setId(item.getId());
+            }
+        }
+        Product product = new Product(request.getProductName(), request.getProductDescription(), category);
 
         productDB.addNewProduct(product);
         AddProductResponse response = new AddProductResponse(product);
