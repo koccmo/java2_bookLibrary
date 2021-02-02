@@ -33,9 +33,9 @@ public class SearchProductsByCategoryOnRequestTest {
         AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
         AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddProductRequest addProductRequest1 = new AddProductRequest("ZzProductA", "Description ProductA", "1");
-        AddProductRequest addProductRequest2 = new AddProductRequest("ZzProductB", "Description ProductB", "1");
-        AddProductRequest addProductRequest3 = new AddProductRequest("ZzProductC", "Description ProductC", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ZzProductA", "Description ProductA", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ZzProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ZzProductC", "Description ProductC", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
@@ -43,17 +43,11 @@ public class SearchProductsByCategoryOnRequestTest {
 
         Ordering ordering = new Ordering("name", "desc");
         Paging paging = new Paging("2", "1");
-        SearchProductByCategoryRequest request = new SearchProductByCategoryRequest("1", ordering, paging);
+        SearchProductByCategoryRequest request = new SearchProductByCategoryRequest("Category", ordering, paging);
         SearchProductByCategoryResponse response = searchProductByCategoryService().execute(request);
 
-        System.out.println();
-        System.out.println(response.hasErrors());
-        System.out.println(response.getErrors().get(0).getField());
-        System.out.println(response.getErrors().get(0).getMessage());
-        System.out.println();
-
-//        assertEquals(response.getProducts().size(), 1);
-//        assertEquals(response.getProducts().get(0).getName(), "ZzProductB");
+        assertEquals(response.getProducts().size(), 1);
+        assertEquals(response.getProducts().get(0).getName(), "ZzProductB");
     }
 
     @Test
@@ -61,9 +55,9 @@ public class SearchProductsByCategoryOnRequestTest {
         AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
         AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA1", "1");
-        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
-        AddProductRequest addProductRequest3 = new AddProductRequest("ProductA", "Description ProductA2", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA1", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductA", "Description ProductA2", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);

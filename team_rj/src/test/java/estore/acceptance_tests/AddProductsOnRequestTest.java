@@ -41,10 +41,10 @@ public class AddProductsOnRequestTest {
         AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
         AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "1");
-        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
         addNewProductService().execute(addProductRequest1);
-        var res = addNewProductService().execute(addProductRequest2);
+        addNewProductService().execute(addProductRequest2);
 
         GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
 

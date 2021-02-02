@@ -64,8 +64,8 @@ public class AddProductValidator {
     }
 
     private Optional<CoreError> validateProductCategoryUnallowedPattern(AddProductRequest request) {
-        return (!validationRules.validatePositiveInteger(request.getProductCategory()))
-                ? Optional.of(new CoreError("Product category", "Must contain only digits!"))
+        return (!validationRules.validateString(request.getProductCategory()))
+                ? Optional.of(new CoreError("Product category", "Must contain only english letters!"))
                 : Optional.empty();
     }
 
@@ -75,10 +75,10 @@ public class AddProductValidator {
                 : Optional.empty();
     }
 
-    private boolean validateCategoryExistence(String categoryId) {
+    private boolean validateCategoryExistence(String categoryStr) {
         List<ProductCategory> categories = categoryDB.getDatabase();
         for (var category : categories) {
-            if (category.getId().toString().equals(categoryId)) {
+            if (category.getCategory().equalsIgnoreCase(categoryStr)) {
                 return true;
             }
         }
