@@ -2,8 +2,10 @@ package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
 import estore.core.requests.AddProductCategoryRequest;
+import estore.core.requests.GetAllProductCategoriesRequest;
 import estore.core.responses.AddProductCategoryResponse;
 import estore.core.service.AddProductCategoryService;
+import estore.core.service.GetAllProductCategoriesService;
 import estore.database.ProductCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +31,10 @@ public class AddProductCategoryOnRequestTest {
 
     @Test
     public void shouldAddValidProductCategory() {
-        int dbInitialSize = getCategoryDb().getDatabase().size();
+        int dbInitialSize = getAllProductCategoriesService()
+                .execute(new GetAllProductCategoriesRequest())
+                .getCategories()
+                .size();
         AddProductCategoryRequest addProductCategoryRequest1 = new AddProductCategoryRequest("CategoryA");
         AddProductCategoryRequest addProductCategoryRequest2 = new AddProductCategoryRequest("CategoryB");
 
@@ -38,12 +43,15 @@ public class AddProductCategoryOnRequestTest {
 
         assertTrue(response.isSuccessfullyAdded());
         assertEquals(getCategoryDb().getDatabase().size(), dbInitialSize + 2);
-        assertEquals(getCategoryDb().getDatabase().get(dbInitialSize + 1).getCategory(), "CategoryB");
+        assertEquals(getCategoryDb().getDatabase().get(1).getCategory(), "CategoryB");
     }
 
     @Test
     public void shouldFailAddingInvalidCategory() {
-        int dbInitialSize = getCategoryDb().getDatabase().size();
+        int dbInitialSize = getAllProductCategoriesService()
+                .execute(new GetAllProductCategoriesRequest())
+                .getCategories()
+                .size();
 
         AddProductCategoryRequest addProductCategoryRequest1 = new AddProductCategoryRequest("Invalid category 01");
         AddProductCategoryResponse addResponse = addNewProductCategoryService().execute(addProductCategoryRequest1);
@@ -65,5 +73,9 @@ public class AddProductCategoryOnRequestTest {
 
     private ProductCategoryRepository getCategoryDb() {
         return applicationContext.getBean(ProductCategoryRepository.class);
+    }
+
+    private GetAllProductCategoriesService getAllProductCategoriesService() {
+        return applicationContext.getBean(GetAllProductCategoriesService.class);
     }
 }

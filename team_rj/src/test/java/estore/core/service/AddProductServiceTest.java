@@ -4,6 +4,7 @@ import estore.core.requests.AddProductRequest;
 import estore.core.responses.AddProductResponse;
 import estore.core.validation.AddProductValidator;
 import estore.core.validation.CoreError;
+import estore.database.ProductCategoryRepository;
 import estore.database.ProductRepository;
 import estore.matchers.ProductMatcher;
 import org.junit.Test;
@@ -27,6 +28,8 @@ public class AddProductServiceTest {
     private ProductRepository database;
     @Mock
     private AddProductValidator validator;
+    @Mock
+    private ProductCategoryRepository categoryRepository;
 
     @InjectMocks
     private AddProductService service;
@@ -48,10 +51,13 @@ public class AddProductServiceTest {
     @Test
     public void shouldAddNewProductToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddProductRequest request = new AddProductRequest("Name", "Description", "1");
+        AddProductRequest request = new AddProductRequest("Name", "Description", "Category");
         AddProductResponse response = service.execute(request);
         assertFalse(response.hasErrors());
+        assertEquals(response.getProduct().getName(), "Name");
+        assertEquals(response.getProduct().getCategory().getCategory(), "Category");
+
         Mockito.verify(database)
-                .addNewProduct(argThat(new ProductMatcher("Name", "Description", 1L)));
+                .addNewProduct(argThat(new ProductMatcher("Name", "Description", "Category", 0, 0.0)));
     }
 }
