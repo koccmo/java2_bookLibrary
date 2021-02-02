@@ -2,6 +2,7 @@ package dental_clinic.core.services.visit;
 
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.Manipulation;
+import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
@@ -57,32 +58,34 @@ public class AddVisitService {
             doctor.setEmployed(true);
         }
 
-        if (!doctor.getIsEmployed()) {
+        if (!doctor.isEmployed()) {
             errors.add(new CoreError("doctor", "Doctor must be employed"));
             return new AddVisitResponse(errors);
         }
 
-        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulationsIds()));
+        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulation()));
         if (!errors.isEmpty()){
             return new AddVisitResponse(errors);
         }
 
-        Visit visit = new Visit(addVisitRequest.getPatientsId(), addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
-                addVisitRequest.getToothStatus(), doctor,
-                manipulationList(addVisitRequest.getManipulationsIds()), addVisitRequest.getDate());
+        PersonalData personalData = patientRepository.getPersonalDataById(addVisitRequest.getId());
 
-        visitRepository.addVisit(visit);
+        Visit visit = new Visit(personalData, addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
+                addVisitRequest.getToothStatus(), doctor,
+                addVisitRequest.getManipulation(), addVisitRequest.getDate(), addVisitRequest.getManipulation().getPrice());
 
         if (isNewDoctor(doctor)){
             doctorRepository.addDoctor(doctor);
         }
 
-        if (patientRepository.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
+        visitRepository.addVisit(visit);
+
+        if (patientRepository.containsSpecificPersonalData(personalData)){
             addVisitToDoctor(doctor, visit);
             return addVisitToPatient(addVisitRequest, visit);
         }
 
-        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
+        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
         return new AddVisitResponse(errors);
 
     }
@@ -100,14 +103,14 @@ public class AddVisitService {
         for (Doctor d : doctorRepository.getDoctorList()) {
             if (d.getName().equals(doctor.getName())
             && d.getSurname().equals(doctor.getSurname())) {
-                d.addVisit(visit);
+                visitRepository.addVisit(visit);
             }
         }
     }
 
     private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
         for (int i = 0; i < patientRepository.getPatients().size(); i++) {
-            if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
+            if (isSpecificPatient(i, addVisitRequest.getId())) {
                 patientRepository.getPatients().get(i).addVisit(visit);
                 patientRepository.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
                 return new AddVisitResponse();
@@ -124,33 +127,12 @@ public class AddVisitService {
         return !doctorRepository.containsDoctor(doctor);
     }
 
-    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(List<Long>ids) {
+    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(Manipulation manipulation) {
         List<CoreError>errors = new ArrayList<>();
-        for (Long id : ids) {
-            if (!manipulationRepository.containsId(id)) {
-                errors.add(new CoreError("database", "Database doesn't contain manipulation with id " +
-                        id));
-            } else {
-                if (!manipulationRepository.manipulationIsActive(id)) {
-                    errors.add(new CoreError("manipulation", "Manipulation with id " +
-                            id + " isn't active"));
-                }
+            if (!manipulationRepository.manipulationIsActive(manipulation.getId())) {
+                errors.add(new CoreError("manipulation", "Manipulation with id " +
+                        manipulation.getId() + " isn't active"));
             }
-        }
         return errors;
     }
-
-    private List<Manipulation> manipulationList (List<Long> manipulationsIds) {
-        List<Manipulation>manipulations = new ArrayList<>();
-        for (Long id : manipulationsIds) {
-            for (Manipulation manipulation : manipulationRepository.getManipulationsList()) {
-                if (manipulation.getId().equals(id)){
-                    manipulations.add(manipulation);
-                    break;
-                }
-            }
-        }
-        return manipulations;
-    }
-
 }
