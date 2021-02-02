@@ -9,4 +9,5 @@ dependencies {
     compile('org.hibernate:hibernate-core:5.4.25.Final')
     compile('org.springframework:spring-orm:5.2.6.RELEASE')
     compile('org.springframework:spring-tx:5.2.6.RELEASE')
+
 }
