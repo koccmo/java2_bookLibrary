@@ -34,8 +34,4 @@ public class ContainsDatabaseIdService {
         errors.add(new CoreError("id", "Database doesn't contain patient with id"));
         return new ContainsDatabaseIdResponse(errors);
     }
-
-    private PersonalData getCurrentPatientPersonalData(int index){
-        return patientRepository.getPatients().get(index).getPersonalData();
-    }
 }
