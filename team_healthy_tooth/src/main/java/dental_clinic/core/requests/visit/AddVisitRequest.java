@@ -1,36 +1,32 @@
 package dental_clinic.core.requests.visit;
 
-import dental_clinic.core.domain.Doctor;
-import dental_clinic.core.domain.Manipulation;
-import dental_clinic.core.domain.ToothStatus;
-import dental_clinic.core.domain.Visit;
+import dental_clinic.core.domain.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class AddVisitRequest {
 
-    private Long patientsId;
+    private Long id;
     private Visit visit;
-    private List<Long> manipulationsIds;
+    private Manipulation manipulation;
 
 
-    public AddVisitRequest(Long patientsId, Visit visit, List<Long> manipulationsIds){
-        this.patientsId = patientsId;
+    public AddVisitRequest(Long id, Visit visit, Manipulation manipulation){
+        this.id = id;
         this.visit = visit;
-        this.manipulationsIds = manipulationsIds;
+        this.manipulation = manipulation;
     }
 
-    public Long getPatientsId() {
-        return patientsId;
+    public Long getId() {
+        return id;
     }
 
     public Integer getToothNumber() {
         return visit.getToothNumber();
     }
 
-    public Optional<String> getComment() {
+    public String getComment() {
         return visit.getComment();
     }
 
@@ -42,8 +38,8 @@ public class AddVisitRequest {
         return visit.getDoctor();
     }
 
-    public List<Long> getManipulationsIds() {
-        return manipulationsIds;
+    public Manipulation getManipulation() {
+        return manipulation;
     }
 
     public Date getDate() {
