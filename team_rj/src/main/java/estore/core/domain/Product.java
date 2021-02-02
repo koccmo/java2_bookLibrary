@@ -21,10 +21,9 @@ public class Product {
     @Column(name="prodDescription")
     private String description;
 
-    @Column(name="category_id")
-//    @ManyToOne
-//    @JoinColumn(name="category_id")
-    private Long category;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private ProductCategory category;
 
     @Column(name="quantity")
     private int quantity;
@@ -38,7 +37,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, Long category) {
+    public Product(String name, String description, ProductCategory category) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -46,7 +45,7 @@ public class Product {
         this.price = 0;
     }
 
-    public Product(String name, String description, Long category, int quantity, double price) {
+    public Product(String name, String description, ProductCategory category, int quantity, double price) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -94,11 +93,19 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Long getCategory() {
+//    public Long getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Long category) {
+//        this.category = category;
+//    }
+
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Long category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
@@ -130,7 +137,7 @@ public class Product {
         return "Product {" + "id : " + this.id +
                 ", name : " + this.name +
                 ", description : " + this.description +
-                ", category : " + this.category +
+                ", category : " + this.category.getCategory() +
                 ", available : " + this.quantity +
                 ", price per unit : " + this.price +
                 '}';
