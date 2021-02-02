@@ -10,6 +10,8 @@ public interface ManipulationRepository {
 
     List <Manipulation> getManipulationsList();
 
+    Manipulation getManipulationById (Long id);
+
     void deactivateManipulation(Long id);
 
     boolean containsTheSameManipulation (Manipulation manipulation);
