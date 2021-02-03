@@ -1,11 +1,5 @@
 package dental_clinic.core.database.doctor;
 
-import dental_clinic.core.domain.Doctor;
-import dental_clinic.core.domain.WorkGraphic;
-import org.springframework.jdbc.core.RowMapper;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 /*
 public class DoctorRowMapper implements RowMapper<Doctor> {
 
