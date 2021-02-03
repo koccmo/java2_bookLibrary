@@ -2,7 +2,6 @@ package dental_clinic.core.database.patient;
 
 import dental_clinic.core.domain.*;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +20,7 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
 
     @Override
     public List<Patient> getPatients() {
-        List <PersonalData> personalDataList = sessionFactory.getCurrentSession()
-                .createQuery("SELECT p FROM PersonalData p", PersonalData.class)
-                .getResultList();
-
+        List <PersonalData> personalDataList = getPersonalData();
         List<Patient> patientList = new ArrayList<>();
         for (PersonalData personalData : personalDataList) {
             String sql = "SELECT v FROM Visit v WHERE id =" + personalData.getId();
@@ -46,7 +42,7 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
     @Override
     public void deletePatient(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "DELETE Patient WHERE id = :id");
+                "DELETE PersonalData p WHERE id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
@@ -118,6 +114,15 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
 
     @Override
     public boolean containsSpecificPersonalData(PersonalData personalData) {
-        return sessionFactory.getCurrentSession().contains(personalData);
+        List<PersonalData> personalDataList = getPersonalData();
+        return personalDataList.stream()
+                .filter(personalData1 -> personalData1.equals(personalData))
+                .findFirst().isPresent();
+    }
+
+    private List<PersonalData> getPersonalData() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM PersonalData p", PersonalData.class)
+                .getResultList();
     }
 }
