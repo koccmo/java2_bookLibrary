@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Component
@@ -84,22 +85,24 @@ public class AddPlannedVisitService {
     }
 
     private boolean doctorDoesNotWorksInThisTime (PlannedVisit plannedVisit, AddPlannedVisitRequest addPlannedVisitRequest) {
-        Integer day = plannedVisit.getVisitTime().getDay();
-        int index = (day == 6) ? 1 : day-2;
+        Integer index = plannedVisit.getVisitTime().getDay() - 1;
+        System.out.println(index);
         if (doctorDoesNotWorkThisDay(plannedVisit, index)) {
+            System.out.println("WHY????");
             return true;
         }
-        LocalTime timeFrom =
-                LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index]);
-        LocalTime timeTo = LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index]);
-        LocalTime visitTime = LocalTime.parse(addPlannedVisitRequest.getVisitDataText().split(" ")[1]);
-        return !((visitTime.isAfter(timeFrom) && visitTime.isBefore(timeTo)));
+        LocalTime visitTime = LocalTime.parse(addPlannedVisitRequest.getVisitDataText().split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime timeFrom = LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index], DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime timeTo = LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index], DateTimeFormatter.ofPattern("HH:mm"));
+        System.out.println("Visit time:" + visitTime + "\nfrom: " + timeFrom + "\nTo: " + timeFrom);
+        return !(timeFrom.isBefore(visitTime) && timeTo.isAfter(visitTime));
     }
 
     private boolean doctorDoesNotWorkThisDay (PlannedVisit plannedVisit, int index) {
-        return ((doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index] == null ||
+        System.out.println("WorkGraphic: " + doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index]);
+        return ((doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index].equals("-") ||
                 doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index].isEmpty())
-                || (doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index] == null ||
+                || (doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index].equals("-") ||
                 doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index].isEmpty()));
     }
 
