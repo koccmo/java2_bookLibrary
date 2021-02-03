@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -35,8 +36,8 @@ public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository
     }
 
     @Override
-    public ProductShoppingCart findById(Long id) {
-        return sessionFactory.getCurrentSession().find(ProductShoppingCart.class, id);
+    public Optional<ProductShoppingCart> findById(Long id) {
+        return Optional.ofNullable(sessionFactory.getCurrentSession().find(ProductShoppingCart.class, id));
     }
 
     @Override
