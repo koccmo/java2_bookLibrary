@@ -16,48 +16,61 @@ public class DoctorsWorkGraphic {
     private Doctor doctor;
 
     @Column(name="monday_start")
-    private String monday_start;
+    private String monday_start = "-";
 
     @Column(name = "monday_end")
-    private String monday_end;
+    private String monday_end = "-";
 
     @Column(name="tuesday_start")
-    private String tuesday_start;
+    private String tuesday_start = "-";
 
     @Column(name = "tuesday_end")
-    private String tuesday_end;
+    private String tuesday_end = "-";
 
     @Column(name="wednesday_start")
-    private String wednesday_start;
+    private String wednesday_start = "-";
 
     @Column(name = "wednesday_end")
-    private String wednesday_end;
+    private String wednesday_end = "-";
 
     @Column(name="thursday_start")
-    private String thursday_start;
+    private String thursday_start = "-";
 
     @Column(name = "thursday_end")
-    private String thursday_end;
+    private String thursday_end = "-";
 
     @Column(name="friday_start")
-    private String friday_start;
+    private String friday_start = "-";
 
     @Column(name = "friday_end")
-    private String friday_end;
+    private String friday_end = "-";
 
     @Column(name="saturday_start")
-    private String saturday_start;
+    private String saturday_start = "-";
 
     @Column(name = "saturday_end")
-    private String saturday_end;
+    private String saturday_end = "-";
 
     @Column(name="sunday_start")
-    private String sunday_start;
+    private String sunday_start = "-";
 
     @Column(name = "sunday_end")
-    private String sunday_end;
+    private String sunday_end = "-";
 
     public DoctorsWorkGraphic() { }
+
+    public DoctorsWorkGraphic(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public String[] getTimesStart() {
+        return getTimeStart();
+    }
+
+    public String[] getTimesEnd() {
+        return getTimeEnd();
+    }
+
 
     public Long getId() {
         return id;
@@ -185,5 +198,48 @@ public class DoctorsWorkGraphic {
 
     public void setSunday_end(String sunday_end) {
         this.sunday_end = sunday_end;
+    }
+
+    private String [] getTimeStart() {
+        String timesStart [] = new String [7];
+        timesStart[0] = monday_start;
+        timesStart[1] = tuesday_start;
+        timesStart[2] = wednesday_start;
+        timesStart[3] = thursday_start;
+        timesStart[4] = friday_start;
+        timesStart[5] = saturday_start;
+        timesStart[6] = sunday_start;
+        return timesStart;
+    }
+
+    private String [] getTimeEnd() {
+        String timesEnd [] = new String [7];
+        timesEnd[0] = monday_end;
+        timesEnd[1] = tuesday_end;
+        timesEnd[2] = wednesday_end;
+        timesEnd[3] = thursday_end;
+        timesEnd[4] = friday_end;
+        timesEnd[5] = saturday_end;
+        timesEnd[6] = sunday_end;
+        return timesEnd;
+    }
+
+    @Override
+    public String toString() {
+        return "DoctorsWorkGraphic:" +
+                "\nmonday_start: " + monday_start +
+                "\nmonday_end: " + monday_end +
+                "\ntuesday_start: " + tuesday_start +
+                "\ntuesday_end: " + tuesday_end +
+                "\nwednesday_start: " + wednesday_start +
+                "\nwednesday_end: " + wednesday_end +
+                "\nthursday_start: " + thursday_start +
+                "\nthursday_end: " + thursday_end +
+                "\nfriday_start: " + friday_start +
+                "\nfriday_end: " + friday_end +
+                "\nsaturday_start: " + saturday_start +
+                "\nsaturday_end: " + saturday_end +
+                "\nsunday_start: " + sunday_start +
+                "\nsunday_end: " + sunday_end + "\n\n";
     }
 }
