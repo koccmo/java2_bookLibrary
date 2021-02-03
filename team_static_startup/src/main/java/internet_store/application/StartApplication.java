@@ -8,6 +8,7 @@ import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIActi
 import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
 import internet_store.application.console_ui.shopping_cart.FindShoppingCartByIdUIAction;
 import internet_store.application.console_ui.shopping_cart_item.AddShoppingCartItemUIService;
+import internet_store.application.console_ui.shopping_cart_item.FindAllShoppingCartItemsUIService;
 import internet_store.application.console_ui.shopping_cart_item.FindShoppingCartItemByIdUIService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -41,6 +42,7 @@ class StartApplication {
         menuNumberToActionMap.put(15, applicationContext.getBean(FindByCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(16, applicationContext.getBean(AddShoppingCartItemUIService.class));
         menuNumberToActionMap.put(17, applicationContext.getBean(FindShoppingCartItemByIdUIService.class));
+        menuNumberToActionMap.put(18, applicationContext.getBean(FindAllShoppingCartItemsUIService.class));
         menuNumberToActionMap.put(19, applicationContext.getBean(AddShoppingCartUIAction.class));
         menuNumberToActionMap.put(20, applicationContext.getBean(FindShoppingCartByIdUIAction.class));
         menuNumberToActionMap.put(21, applicationContext.getBean(FindAllShoppingCartsUIAction.class));
