@@ -3,7 +3,6 @@ package dental_clinic.core.domain;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 @Entity
