@@ -168,6 +168,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean containsId(Long id) {
+
         return true;
     }
 
@@ -179,5 +180,15 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public boolean containsDescription(String description) {
         return true;
+    }
+
+    @Override
+    public boolean containsPrice(Integer price) {
+        return false;
+    }
+
+    @Override
+    public boolean containsTitleAndDescription(String title, String description) {
+        return false;
     }
 }

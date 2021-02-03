@@ -40,7 +40,10 @@ public class User {
 		this(name, surname);
 		this.personType = personType;
 	}
-
+	public User (Long id, String name, String surname, PersonType personType) {
+		this(name, surname, personType);
+		this.id = id;
+	}
 
 	public PersonType getPersonType () {
 		return personType;

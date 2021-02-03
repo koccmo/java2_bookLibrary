@@ -6,8 +6,11 @@ import lombok.Getter;
 public class AddClientRequest {
     @Getter
     private final Client client;
+    @Getter
+    private final Object clientDatabase;
 
-    public AddClientRequest(Client client) {
+    public AddClientRequest(Client client, Object clientDatabase) {
         this.client = client;
+        this.clientDatabase = clientDatabase;
     }
 }

@@ -33,18 +33,19 @@ public class OrderStatusService {
 
         order = orderDatabase.findById(orderId);
 
-        order.setOrderStatus(orderStatusRequest.getOrderStatus());
+//        order.setOrderStatus(orderStatusRequest.getOrderStatus());
 
         List<TelegramChatId> clientChatId = tryFindClientChatId();
         clientChatId.forEach(this::sendTelegramChatNewInformation);
 
-        emailService.sendSimpleMessage(order.getClient().getEmail(), "Order status changed",
-                createChangeOrderText());
+//        emailService.sendSimpleMessage(order.getClient().getEmail(), "Order status changed",
+//                createChangeOrderText());
     }
 
     private List<TelegramChatId> tryFindClientChatId() {
-        FindTelegramChatIdRequest request = new FindTelegramChatIdRequest(order.getOrderNumber());
-        return telegramChatIdService.execute(request);
+        return null;
+////        FindTelegramChatIdRequest request = new FindTelegramChatIdRequest(order.getOrderNumber());
+//        return telegramChatIdService.execute(request);
     }
 
     @SneakyThrows(TelegramApiException.class)
@@ -57,9 +58,10 @@ public class OrderStatusService {
     }
 
     private String createChangeOrderText() {
-        return "New information about order number: " + order.getOrderNumber() + "\n"
-                + "Order date: " + order.getOrderDate() + "\n"
-                + "Total sum: " + order.getTotalSum() + "\n"
-                + "Order status: " + order.getOrderStatus().toString();
+        return null;
+//        return "New information about order number: " + order.getOrderNumber() + "\n"
+//                + "Order date: " + order.getOrderDate() + "\n"
+//                + "Total sum: " + order.getTotalSum() + "\n"
+//                + "Order status: " + order.getOrderStatus().toString();
     }
 }

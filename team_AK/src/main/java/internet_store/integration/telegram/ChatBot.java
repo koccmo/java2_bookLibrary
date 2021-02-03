@@ -79,16 +79,16 @@ public class ChatBot extends TelegramLongPollingBot {
         return findByOrderNumberService.execute(request);
     }
 
-    @SneakyThrows(TelegramApiException.class)
+//    @SneakyThrows(TelegramApiException.class)
     private void printOrder(Order clientOrder) {
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(String.valueOf(chatId))
-                .text("Information about order number: " + clientOrder.getOrderNumber() + "\n"
-                        + "Order date: " + clientOrder.getOrderDate() + "\n"
-                        + "Total sum: " + clientOrder.getTotalSum() + "\n"
-                        + "Order status: " + clientOrder.getOrderStatus().toString())
-                .build();
-        this.execute(sendMessage);
+//        SendMessage sendMessage = SendMessage.builder()
+//                .chatId(String.valueOf(chatId))
+//                .text("Information about order number: " + clientOrder.getOrderNumber() + "\n"
+//                        + "Order date: " + clientOrder.getOrderDate() + "\n"
+//                        + "Total sum: " + clientOrder.getTotalSum() + "\n"
+//                        + "Order status: " + clientOrder.getOrderStatus().toString())
+//                .build();
+//        this.execute(sendMessage);
     }
 
     @SneakyThrows(TelegramApiException.class)

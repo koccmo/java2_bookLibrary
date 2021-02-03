@@ -3,21 +3,22 @@ package internet_store.core.service.product;
 import internet_store.core.core_error.CoreError;
 import internet_store.core.request.product.UpdateProductRequest;
 import internet_store.core.response.product.UpdateProductResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.product_database.InnerProductDatabase;
+import internet_store.core.validate.NumberValidator;
+import internet_store.database.interfaces.ProductDatabase;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
 @Component
 public class UpdateProductService {
-    @Autowired
-    InnerProductDatabase productDatabase;
+    ProductDatabase productDatabase;
 
     public UpdateProductResponse execute(UpdateProductRequest updateProductRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(updateProductRequest.getId());
+        productDatabase = updateProductRequest.getProductDatabase();
 
-        List<CoreError> errors = negativeNumberValidator.validate();
+        NumberValidator<?> numberValidator = new NumberValidator<>(updateProductRequest.getId());
+
+        List<CoreError> errors = numberValidator.validate();
 
         if (!(isIdExist(updateProductRequest.getId()))) {
             errors.add(new CoreError("Id error ", "wrong ID"));

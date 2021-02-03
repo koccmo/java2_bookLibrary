@@ -1,11 +1,13 @@
 package estore.core.service;
 
+import estore.core.domain.ProductCategory;
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
+import estore.database.ProductCategoryRepository;
 import estore.database.ProductRepository;
 import estore.core.domain.Product;
 import org.springframework.stereotype.Component;
@@ -18,10 +20,14 @@ import java.util.stream.Collectors;
 public class SearchProductByCategoryService {
 
     private ProductRepository productDB;
+    private ProductCategoryRepository categoryDB;
     private SearchProductByCategoryValidator validator;
 
-    public SearchProductByCategoryService(ProductRepository productDB, SearchProductByCategoryValidator validator) {
+    public SearchProductByCategoryService(ProductRepository productDB,
+                                          ProductCategoryRepository categoryDB,
+                                          SearchProductByCategoryValidator validator) {
         this.productDB = productDB;
+        this.categoryDB = categoryDB;
         this.validator = validator;
     }
 
@@ -32,7 +38,15 @@ public class SearchProductByCategoryService {
             return new SearchProductByCategoryResponse(errors);
         }
 
-        List<Product> foundProducts = productDB.searchProductByCategory(request.getProductCategory());
+        Long categoryId = null;
+        List<ProductCategory> categories = categoryDB.getDatabase();
+        for (var item : categories) {
+            if (item.getCategory().equalsIgnoreCase(request.getProductCategory())) {
+                categoryId = item.getId();
+            }
+        }
+
+        List<Product> foundProducts = productDB.searchProductByCategory(categoryId);
         foundProducts = order(foundProducts, request.getOrdering());
         foundProducts = paging(foundProducts, request.getPaging());
         return new SearchProductByCategoryResponse(foundProducts, foundProducts.size());

@@ -77,7 +77,11 @@ public class InMemoryDatabase implements Database {
 	public List<User> getAllUsers () {
 		if (userTable.size() == 0)
 			return new ArrayList<>();
-		return new ArrayList<>(userTable.values());
+		else {
+			List<User> list = new ArrayList<>(userTable.values());
+			return list;
+
+		}
 	}
 
 	public User getUserById (Long id) {

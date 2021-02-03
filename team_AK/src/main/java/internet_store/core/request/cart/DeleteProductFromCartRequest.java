@@ -5,8 +5,11 @@ import lombok.Getter;
 public class DeleteProductFromCartRequest {
     @Getter
     private final long id;
+    @Getter
+    private final Object clientDatabase;
 
-    public DeleteProductFromCartRequest(long id) {
+    public DeleteProductFromCartRequest(long id, Object clientDatabase) {
         this.id = id;
+        this.clientDatabase = clientDatabase;
     }
 }

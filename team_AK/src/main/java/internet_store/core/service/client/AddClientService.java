@@ -12,19 +12,20 @@ import internet_store.core.response.client.client_items.AddClientEmailResponse;
 import internet_store.core.response.client.client_items.AddClientNameResponse;
 import internet_store.core.response.client.client_items.AddClientPhoneResponse;
 import internet_store.core.response.client.client_items.AddClientSurnameResponse;
-import internet_store.database.client_database.InnerClientDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.database.client_database.ClientDatabaseImpl;
+import internet_store.persistence.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class AddClientService implements ClientUpdate {
     @Autowired
-    InnerClientDatabase clientDatabase;
+    ClientDatabaseImpl clientDatabase;
 
-    public AddClientResponse execute(AddClientRequest addClientRequest) {
+    public AddClientResponse execute(AddClientRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
         AddClientNameService nameService = new AddClientNameService();
@@ -33,13 +34,13 @@ public class AddClientService implements ClientUpdate {
         AddClientEmailService emailService = new AddClientEmailService();
 
         AddClientNameResponse nameResponse = nameService.execute(new AddClientNameRequest
-                (addClientRequest.getClient().getName()));
+                (request.getClient().getName()));
         AddClientSurnameResponse surnameResponse = surnameService.execute(new AddClientSurnameRequest
-                (addClientRequest.getClient().getSurname()));
+                (request.getClient().getSurname()));
         AddClientPhoneResponse phoneResponse = phoneService.execute(new AddClientPhoneRequest
-                (addClientRequest.getClient().getPhoneNumber()));
+                (request.getClient().getPhoneNumber()));
         AddClientEmailResponse emailResponse = emailService.execute(new AddClientEmailRequest
-                (addClientRequest.getClient().getEmail()));
+                (request.getClient().getEmail()));
 
         if (nameResponse.hasErrors()) {
             errors.add(new CoreError("Name input error: ", "Empty field"));
@@ -50,26 +51,30 @@ public class AddClientService implements ClientUpdate {
         if (phoneResponse.hasErrors()) {
             errors.add(new CoreError("Phone number input error: ", "Phone number unsupported format"));
         }
-        if (isPhoneNumberExist(addClientRequest)) {
-            errors.add(new CoreError("Phone number input error: ", "Duplicate"));
-        }
         if (emailResponse.hasErrors()) {
             errors.add(new CoreError("Email input error: ", "Email unsupported format"));
         }
 
-        execute(errors, addClientRequest.getClient());
+        execute(errors, request);
 
         return new AddClientResponse(errors);
     }
 
     @Override
-    public void execute(List<CoreError> errors, Client client) {
-        if (errors.isEmpty()) {
-            clientDatabase.addClient(client);
-        }
-    }
+    public void execute(List<CoreError> errors, AddClientRequest request) {
+        Client client = request.getClient();
+        Object databases = request.getClientDatabase();
 
-    private boolean isPhoneNumberExist(AddClientRequest request) {
-        return clientDatabase.isClientPhoneNumber(request.getClient().getPhoneNumber());
+        if (databases instanceof ClientDatabaseImpl) {
+            if (errors.isEmpty()) {
+                ((ClientDatabaseImpl) databases).addClient(client);
+            }
+        }
+
+        if (databases instanceof ClientRepository) {
+            if (errors.isEmpty()) {
+                ((ClientRepository) databases).save(client);
+            }
+        }
     }
 }

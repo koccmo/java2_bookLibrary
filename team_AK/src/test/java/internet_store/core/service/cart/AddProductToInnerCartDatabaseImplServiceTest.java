@@ -1,50 +1,51 @@
 package internet_store.core.service.cart;
 
+import internet_store.configuration.StoreConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.request.cart.AddProductToCartRequest;
 import internet_store.core.response.cart.AddProductToCartResponse;
-import internet_store.database.cart_database.InnerCartDatabase;
-import internet_store.database.cart_database.InnerCartDatabaseImpl;
-import internet_store.database.product_database.InnerProductDatabase;
-import internet_store.database.product_database.InnerProductDatabaseImpl;
-import org.junit.BeforeClass;
+import internet_store.database.cart_database.CartDatabaseImpl;
+import internet_store.database.product_database.ProductDatabaseImpl;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = StoreConfiguration.class)
+@WebAppConfiguration
 public class AddProductToInnerCartDatabaseImplServiceTest {
-
-    private static final Product product = new Product();
-    private static final InnerProductDatabase productDatabase = new InnerProductDatabaseImpl();
-    private final InnerCartDatabase cartDatabase = new InnerCartDatabaseImpl();
-
-    @BeforeClass
-    public static void startUp() {
-        product.setId(1L);
-        product.setTitle("Title");
-        product.setDescription("Description");
-        product.setQuantity(new BigDecimal("5"));
-        product.setPrice(new BigDecimal("100"));
-        productDatabase.addProduct(product);
-    }
+    private final Product product = new Product();
+    @Autowired
+    ProductDatabaseImpl productDatabase;
+    @Autowired
+    CartDatabaseImpl cartDatabase;
+    @Autowired
+    AddToCartService service;
 
     @Test
     public void shouldReturnNoErrors() {
-        AddProductToCartService service = new AddProductToCartService(productDatabase, cartDatabase);
-
-        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, new BigDecimal("1")));
-        assertNull(response.getErrors());
-        assertEquals(1L, response.getId());
+        product.setId(1L);
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("100"));
+        productDatabase.addProduct(product);
+        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, 1L, cartDatabase, ""));
+        assertFalse(response.hasErrors());
+        productDatabase.clear();
     }
 
     @Test
     public void shouldReturnError_NoId() {
-        AddProductToCartService service = new AddProductToCartService(productDatabase, cartDatabase);
-
-        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(2L, new BigDecimal("1")));
+        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(2L, 1L, cartDatabase, ""));
 
         assertEquals("Id error ", response.getErrors().get(0).getField());
         assertEquals("Wrong Id", response.getErrors().get(0).getMessage());
@@ -52,26 +53,34 @@ public class AddProductToInnerCartDatabaseImplServiceTest {
 
     @Test
     public void shouldReturnError_QualityEqualZero() {
-        AddProductToCartService service = new AddProductToCartService(productDatabase, cartDatabase);
-        product.setQuantity(new BigDecimal("0"));
 
-        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, new BigDecimal("1")));
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setQuantity(0L);
+        product.setPrice(new BigDecimal("100"));
+        productDatabase.setId(1L);
+        productDatabase.addProduct(product);
+
+        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, 5L, cartDatabase, ""));
 
         assertEquals("Quantity error ", response.getErrors().get(0).getField());
         assertEquals("Product quantity is zero", response.getErrors().get(0).getMessage());
-        assertEquals("Quantity error ", response.getErrors().get(1).getField());
-        assertEquals("No more product's quantity", response.getErrors().get(1).getMessage());
+        productDatabase.clear();
     }
 
     @Test
     public void shouldReturnError_QualityLessZero_1() {
-        AddProductToCartService service = new AddProductToCartService(productDatabase, cartDatabase);
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("100"));
+        productDatabase.setId(1L);
+        productDatabase.addProduct(product);
 
-        product.setQuantity(new BigDecimal("5"));
-
-        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, new BigDecimal("6")));
+        AddProductToCartResponse response = service.execute(new AddProductToCartRequest(1L, 6L, cartDatabase, "'"));
 
         assertEquals("Quantity error ", response.getErrors().get(0).getField());
         assertEquals("No more product's quantity", response.getErrors().get(0).getMessage());
+        productDatabase.clear();
     }
 }

@@ -12,38 +12,31 @@ import internet_store.core.response.product.product_item.AddProductDescriptionRe
 import internet_store.core.response.product.product_item.AddProductPriceResponse;
 import internet_store.core.response.product.product_item.AddProductQuantityResponse;
 import internet_store.core.response.product.product_item.AddProductTitleResponse;
-import internet_store.database.product_database.InnerProductDatabase;
-import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
+import internet_store.database.product_database.ProductDatabaseImpl;
+import internet_store.persistence.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class UpdateProductAddNewChangesService implements ProductUpdate {
-    @Autowired
-    InnerProductDatabase productDatabase;
-    @Autowired
-    AddProductTitleService titleService;
-    @Autowired
-    AddProductDescriptionService descriptionService;
-    @Autowired
-    AddProductQuantityService quantityService;
-    @Autowired
-    AddProductPriceService priceService;
+@Service
+public class UpdateProductAddNewChangesService {
+    private final AddProductTitleService titleService = new AddProductTitleService();
+    private final AddProductDescriptionService descriptionService = new AddProductDescriptionService();
+    private final AddProductQuantityService quantityService = new AddProductQuantityService();
+    private final AddProductPriceService priceService = new AddProductPriceService();
 
-
-    public AddProductResponse execute(AddProductRequest addProductRequest) {
+    public AddProductResponse execute(AddProductRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
         AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
-                (addProductRequest.getProduct().getTitle()));
+                (request.getProduct().getTitle()));
         AddProductDescriptionResponse descriptionResponse = descriptionService.execute(new AddProductDescriptionRequest
-                (addProductRequest.getProduct().getDescription()));
+                (request.getProduct().getDescription()));
         AddProductQuantityResponse quantityResponse = quantityService.execute(new AddProductQuantityRequest
-                (addProductRequest.getProduct().getQuantity()));
+                (request.getProduct().getQuantity()));
         AddProductPriceResponse priceResponse = priceService.execute(new AddProductPriceRequest
-                (addProductRequest.getProduct().getPrice()));
+                (request.getProduct().getPrice()));
 
         if (titleResponse.hasErrors()) {
             errors.add(new CoreError("Title input error: ", "Empty field"));
@@ -58,16 +51,30 @@ public class UpdateProductAddNewChangesService implements ProductUpdate {
             errors.add(new CoreError("Price input error: ", "Negative number"));
         }
 
-        execute(errors, addProductRequest.getProduct());
+        execute(errors, request);
 
         return new AddProductResponse(errors);
     }
 
-    @Override
-    public void execute(List<CoreError> errors, Product product) {
-        if (errors.isEmpty()) {
-            int updateIndex = productDatabase.findProductIndex(product.getId());
-            productDatabase.updateProduct(updateIndex, product);
+    private void execute(List<CoreError> errors, AddProductRequest request) {
+        Product product = request.getProduct();
+        Object databases = request.getProductDatabase();
+        ProductDatabaseImpl innerDatabase;
+        ProductRepository productRepository;
+
+        if (databases instanceof ProductDatabaseImpl) {
+            innerDatabase = (ProductDatabaseImpl) databases;
+            if (errors.isEmpty()) {
+                int updateIndex = innerDatabase.findProductIndex(product.getId());
+                innerDatabase.updateProduct(updateIndex, product);
+            }
+        }
+
+        if (databases instanceof ProductRepository) {
+            productRepository = (ProductRepository) databases;
+            if (errors.isEmpty()) {
+                productRepository.save(product);
+            }
         }
     }
 }
