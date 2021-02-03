@@ -1,18 +1,39 @@
 package internet_store.core.domain;
 
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "shopping_cart_item")
 public class ShoppingCartItem {
 
+    @Id
+    @Column(name = "shopping_cart_item_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
+    @OneToMany
+    @JoinColumn(name = "product_id")
     private Product product;
 
+    @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "price")
     private int price;
 
-    public ShoppingCartItem (){ }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
@@ -46,23 +67,26 @@ public class ShoppingCartItem {
         this.price = price;
     }
 
+    public ShoppingCartItem () { }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ShoppingCartItem that = (ShoppingCartItem) o;
-        return price == that.price && Objects.equals(shoppingCart, that.shoppingCart) && Objects.equals(product, that.product) && Objects.equals(quantity, that.quantity);
+        return price == that.price && Objects.equals(id, that.id) && Objects.equals(shoppingCart, that.shoppingCart) && Objects.equals(product, that.product) && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(shoppingCart, product, quantity, price);
+        return Objects.hash(id, shoppingCart, product, quantity, price);
     }
 
     @Override
     public String toString() {
         return "ShoppingCartItem{" +
-                "shoppingCart=" + shoppingCart +
+                "id=" + id +
+                ", shoppingCart=" + shoppingCart +
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", price=" + price +
