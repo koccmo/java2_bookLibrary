@@ -19,15 +19,25 @@ public class AddShoppingCartItemValidator {
     public List<CoreError> validate(AddShoppingCartItemRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
+        if (request.getQuantity() <= 0){
+            errors.add(new CoreError("Quantity.", "Should be more than zero."));
+        }
 
         try {
             shoppingCartRepository.findById(request.getShoppingCartId());
-//        } catch (IllegalArgumentException | PropertyValueException | NoSuchElementException e){
         } catch (Exception e){
-            errors.add(new CoreError("Shopping Cart ID.", "Should EXIST or not be NULL."));
             e.printStackTrace();
+        }finally {
+            errors.add(new CoreError("Shopping Cart.", "Should EXIST or not be NULL."));
         }
 
+        try{
+            productRepository.findById(request.getProductId());
+        }catch (Exception e){
+
+        }finally {
+            errors.add(new CoreError("Product.", "Should EXIST or not be NULL."));
+        }
 
         return errors;
     }
