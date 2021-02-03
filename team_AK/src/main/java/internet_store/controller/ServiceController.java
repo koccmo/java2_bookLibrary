@@ -2,6 +2,7 @@ package internet_store.controller;
 
 import internet_store.core.operation.Tax;
 import internet_store.core.service.client.paging.ClientPagingService;
+import internet_store.core.service.ordering.CreateOrderNumberService;
 import internet_store.core.service.product.paging.ProductsPagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ public class ServiceController {
     @Autowired
     ClientPagingService clientPagingService;
     @Autowired
+    CreateOrderNumberService numberService;
+    @Autowired
     Tax tax;
 
 
@@ -33,6 +36,7 @@ public class ServiceController {
         modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
         modelMap.addAttribute("tax", tax.getTaxRate());
         modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
         return "service/general_service";
     }
 
@@ -44,6 +48,7 @@ public class ServiceController {
         modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
         modelMap.addAttribute("tax", tax.getTaxRate());
         modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
         return "service/general_service";
     }
 
@@ -55,6 +60,7 @@ public class ServiceController {
         modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
         modelMap.addAttribute("tax", tax.getTaxRate());
         modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
         return "service/general_service";
     }
 
@@ -66,6 +72,7 @@ public class ServiceController {
         modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
         modelMap.addAttribute("tax", tax.getTaxRate());
         modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
         return "service/general_service";
     }
 
@@ -78,6 +85,19 @@ public class ServiceController {
         modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
         modelMap.addAttribute("tax", tax.getTaxRate());
         modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
+        return "service/general_service";
+    }
+
+    @PostMapping(value = "order_number")
+    public String setOrderNumber(@RequestParam("orderNumber") Integer orderNumber,
+                                  ModelMap modelMap) {
+        numberService.setOrderNumber(orderNumber);
+        modelMap.addAttribute("product_page_quantity", productsPagingService.getRecordsCountOnPage());
+        modelMap.addAttribute("client_page_quantity", clientPagingService.getRecordsCountOnPage());
+        modelMap.addAttribute("tax", tax.getTaxRate());
+        modelMap.addAttribute("currency", tax.getCurrencySymbol());
+        modelMap.addAttribute("orderNumber", numberService.getOrderNumber());
         return "service/general_service";
     }
 }

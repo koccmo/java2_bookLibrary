@@ -49,13 +49,13 @@ public class ClientPagingService {
 
     public void nextPage(boolean pagingDirection) {
         if (pagingDirection) {
-            nextPage(clientRepository.count());
+            nextPage();
         } else {
             prevPage();
         }
     }
 
-    private void nextPage(long allRecordsNumber) {
+    private void nextPage() {
         if (currentPage + PAGE_OFFSET == pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;

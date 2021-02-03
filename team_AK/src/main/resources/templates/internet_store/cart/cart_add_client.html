@@ -33,6 +33,10 @@
         display:inline-block
     }
 
+
+
+
+
     </style>
 </head>
 
@@ -135,112 +139,83 @@
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
             <div class="header-h3_center">
-                <p class="h3"><small>Cart</small></p>
+                <p class="h3"><small>Clients Data</small></p>
             </div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="cart">Cart</a>
+                    <a class="nav-link" aria-current="page" href="cart">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart_add_client">Client</a>
+                    <a class="nav-link active" href="cart_add_client">Client</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cart_make_order">Order</a>
                 </li>
             </ul>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="text-center">Product Title</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Price</th>
-                            <th scope="col" class="text-center">Total</th>
-                            <th scope="col" class="text-center">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cart : ${cartList}">
-                            <td scope="row" style="vertical-align: middle;" th:text="${cart.getProduct().getTitle()}"></td>
-                            <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.quantity}"></td>
-                            <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.getProduct.price}"></td>
-                            <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.sum}"></td>
-                            <td align="center">
-                                <form action="/deleted_from_cart" method="post">
-                                    <button type="submit" title="Delete" th:name="deletedProduct"
-                                            th:value="${cart.getId}"
-                                            class="btn btn-danger button-center">
-                                        <i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <center>
-                        <div class="one_row">
-                            <form>
-                                <button type="submit" formaction="/view_cart_prev" formmethod="post"
-                                        class="btn btn-outline-primary">
-                                    Prev
-                                </button>
-                            </form>
-                        </div>
-                        <div class="one_row">
-                            <div th:text="${pages}"></div>
-                        </div>
-                        <div class="one_row">
-                            <form>
-                                <button type="submit" formaction="/view_cart_next" formmethod="post"
-                                        class="btn btn-outline-primary">
-                                    Next
-                                </button>
-                            </form>
-                        </div>
-                    </center>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6> Total sum without tax: </h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="${totalSum}+' '+${currencySymbol}"></div>
-                            </h6>
+
+            <form>
+                <div class="form-group form-control-sm">
+                    <div class="text_align_left">
+                        <div class="col-md-0">
+                            <label for="client_name" style="margin-bottom:0rem !important;">Client Name</label>
                         </div>
                     </div>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6>Tax</h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="' '+ ${taxRate}+'%: '+${taxAmount}+' '+${currencySymbol}"></div>
-                            </h6>
-                        </div>
-                    </div>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6>Total sum with tax:</h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="' '+${total}+' '+${currencySymbol}"></div>
-                            </h6>
+                    <input type="text" class="form-control form-control-sm" id="client_name"
+                           th:field="${client.name}" aria-describedby="titleHelp"
+                           placeholder="Enter client name">
+
+                    <div class="text_align_left">
+                        <div class="col-md-0">
+                            <label for="client_surname" style="margin-bottom:0rem !important;">Client
+                                Surname</label>
                         </div>
                     </div>
+                    <input type="text" class="form-control form-control-sm" id="client_surname"
+                           th:field="${client.surname}" aria-describedby="descriptionHelp"
+                           placeholder="Enter client surname">
+
+
+                    <div class="text_align_left">
+                        <div class="col-md-0">
+                            <label for="client_phone" style="margin-bottom:0rem !important;">Client's phone</label>
+                        </div>
+                    </div>
+                    <input type="tel" step="1" min="0" class="form-control form-control-sm" id="client_phone"
+                           th:field="${client.phoneNumber}" aria-describedby="quantityHelp"
+                           placeholder="Enter phone number">
+
+                    <div class="text_align_left">
+                        <div class="col-md-0">
+                            <label for="client_email" style="margin-bottom:0rem !important;">Client's email</label>
+                        </div>
+                    </div>
+                    <input type="email" class="form-control form-control-sm" id="client_email"
+                           th:field="${client.email}" aria-describedby="priceHelp"
+                           placeholder="Enter email address">
                     <p></p>
+                    <center>
+                        <button type="submit" formaction="/order_add_client" th:object="${client}"
+                                formmethod="post" data-target="#infoMessage"
+                                class="btn btn-outline-primary">Apply
+                        </button>
+                    </center>
+                    <p></p>
+                    <div th:if="${errors.length>0}">
+                        <div class="alert alert-danger" role="alert">
+                            <center>
+                                <div th:text="${errors}"></div>
+                            </center>
+                        </div>
+                    </div>
                     <div th:if="${info.length>0}">
-                        <div class="text_align_center">
-                            <div class="alert alert-info" role="alert">
+                        <div class="alert alert-success" role="alert">
+                            <center>
                                 <div th:text="${info}"></div>
-                            </div>
+                            </center>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

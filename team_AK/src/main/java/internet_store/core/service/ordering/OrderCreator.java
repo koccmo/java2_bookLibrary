@@ -37,18 +37,18 @@ public class OrderCreator {
 
         Client client = clientDatabase.findById(clientId);
 
-        Order order = new Order(client);
-        order.setProductsInCart(new ArrayList<>(cartDatabase.getCart()));
-        order.setOrderStatus(OrderStatus.ORDER_RECEIVED);
-        order.setOrderDate(dateCreator.createShortDateFormat());
-        order.setTotalSum(orderTotalSum());
-        orderDatabase.addOrder(order);
+//        Order order = new Order(client);
+//        order.setProductsInCart(new ArrayList<>(cartDatabase.getCart()));
+//        order.setOrderStatus(OrderStatus.ORDER_RECEIVED);
+//        order.setOrderDate(dateCreator.createShortDateFormat());
+//        order.setTotalSum(orderTotalSum());
+       // orderDatabase.addOrder(order);
 
         System.out.println("Order process finished");
 
-        if (emailService != null) {
-            emailService.sendSimpleMessage(client.getEmail(), "Order confirmed", createMailBodyText(order));
-        }
+//        if (emailService != null) {
+//            emailService.sendSimpleMessage(client.getEmail(), "Order confirmed", createMailBodyText(order));
+//        }
 
         cartDatabase.clearCart();
     }
@@ -64,10 +64,11 @@ public class OrderCreator {
     }
 
     private String createMailBodyText(Order order) {
-        return "Information about order number: " + order.getOrderNumber() + "\n"
-                + "Order date: " + order.getOrderDate() + "\n"
-                + "Total sum: " + order.getTotalSum() + "\n"
-                + "Order status: " + order.getOrderStatus().toString();
+        return null;
+//        return "Information about order number: " + order.getOrderNumber() + "\n"
+//                + "Order date: " + order.getOrderDate() + "\n"
+//                + "Total sum: " + order.getTotalSum() + "\n"
+//                + "Order status: " + order.getOrderStatus().toString();
 
     }
 }

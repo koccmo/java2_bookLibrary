@@ -51,9 +51,6 @@ public class AddClientService implements ClientUpdate {
         if (phoneResponse.hasErrors()) {
             errors.add(new CoreError("Phone number input error: ", "Phone number unsupported format"));
         }
-        if (isPhoneNumberExist(request)) {
-            errors.add(new CoreError("Phone number input error: ", "Duplicate"));
-        }
         if (emailResponse.hasErrors()) {
             errors.add(new CoreError("Email input error: ", "Email unsupported format"));
         }
@@ -67,25 +64,17 @@ public class AddClientService implements ClientUpdate {
     public void execute(List<CoreError> errors, AddClientRequest request) {
         Client client = request.getClient();
         Object databases = request.getClientDatabase();
-        ClientDatabaseImpl innerDatabase;
-        ClientRepository clientRepository;
 
         if (databases instanceof ClientDatabaseImpl) {
-            innerDatabase = (ClientDatabaseImpl) databases;
             if (errors.isEmpty()) {
-                innerDatabase.addClient(client);
+                ((ClientDatabaseImpl) databases).addClient(client);
             }
         }
 
         if (databases instanceof ClientRepository) {
-            clientRepository = (ClientRepository) databases;
             if (errors.isEmpty()) {
-                clientRepository.save(client);
+                ((ClientRepository) databases).save(client);
             }
         }
-    }
-
-    private boolean isPhoneNumberExist(AddClientRequest request) {
-        return clientDatabase.isClientPhoneNumber(request.getClient().getPhoneNumber());
     }
 }

@@ -25,6 +25,8 @@
         padding-top: 60px;
         }
 
+
+
     </style>
 </head>
 
@@ -107,7 +109,7 @@
                         </div>
                         <input type="text" class="form-control form-control-sm" id="client_name"
                                th:field="${client.name}" aria-describedby="titleHelp"
-                               placeholder="Enter client's name">
+                               placeholder="Enter client name">
 
                         <div class="text_align_left">
                             <div class="col-md-0">
@@ -117,12 +119,12 @@
                         </div>
                         <input type="text" class="form-control form-control-sm" id="client_surname"
                                th:field="${client.surname}" aria-describedby="descriptionHelp"
-                               placeholder="Enter client's surname">
+                               placeholder="Enter client surname">
 
 
                         <div class="text_align_left">
                             <div class="col-md-0">
-                                <label for="client_phone" style="margin-bottom:0rem !important;">Client's phone</label>
+                                <label for="client_phone" style="margin-bottom:0rem !important;">Client phone</label>
                             </div>
                         </div>
                         <input type="tel" step="1" min="0" class="form-control form-control-sm" id="client_phone"
@@ -131,7 +133,7 @@
 
                         <div class="text_align_left">
                             <div class="col-md-0">
-                                <label for="client_email" style="margin-bottom:0rem !important;">Client's email</label>
+                                <label for="client_email" style="margin-bottom:0rem !important;">Client email</label>
                             </div>
                         </div>
                         <input type="email" class="form-control form-control-sm" id="client_email"
@@ -148,14 +150,14 @@
                                 class="btn btn-outline-secondary">Back
                         </button>
                         <p></p>
-                        <div th:if="${errors.length>5}">
+                        <div th:if="${errors.length>0}">
                             <div class="alert alert-danger" role="alert">
                                 <div th:text="${errors}"></div>
                             </div>
                         </div>
-                        <div th:if="${errors.length==0}">
+                        <div th:if="${info.length>0}">
                             <div class="alert alert-success" role="alert">
-                                Client's data successful add to database
+                                <div th:text="${info}"></div>
                             </div>
                         </div>
                     </div>

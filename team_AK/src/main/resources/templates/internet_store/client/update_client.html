@@ -26,6 +26,7 @@
         }
 
 
+
     </style>
 </head>
 
@@ -97,7 +98,7 @@
         <div class="col-lg-9">
             <div class="header-h3_center">
                 <h3>Control menu</h3>
-                <p class="h3"><small>Client's data update</small></p>
+                <p class="h3"><small>Client data update</small></p>
                 <form>
                     <div class="container-fluid">&nbsp;
                         <div class="row">
@@ -142,18 +143,11 @@
                             </div>
                         </div>
 
-                        <div th:switch="${disabled}">
-                            <input type="text" class="form-control form-control-sm"
-                                   th:field="${client.name}"
-                                   th:case="'true'" disabled
-                                   aria-describedby="titleHelp"
-                                   placeholder="Enter client's name">
-                            <input type="text" class="form-control form-control-sm"
-                                   th:field="${client.name}"
-                                   th:case="*"
-                                   aria-describedby="titleHelp"
-                                   placeholder="Enter client's name" required>
-                        </div>
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.name}"
+                               aria-describedby="titleHelp"
+                               placeholder="Enter client name" required>
 
                         <div class="text_align_left">
                             <div class="col-md-0">
@@ -161,79 +155,56 @@
                                     Surname</label>
                             </div>
                         </div>
-                        <div th:switch="${disabled}">
-                            <input type="text" class="form-control form-control-sm"
-                                   th:field="${client.surname}"
-                                   th:case="'true'" disabled
-                                   aria-describedby="descriptionHelp"
-                                   placeholder="Enter client's surname">
-                            <input type="text" class="form-control form-control-sm"
-                                   th:field="${client.surname}"
-                                   th:case="*"
-                                   aria-describedby="descriptionHelp"
-                                   placeholder="Enter client's surname" required>
-                        </div>
+
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.surname}"
+                               aria-describedby="descriptionHelp"
+                               placeholder="Enter client surname" required>
 
                         <div class="text_align_left">
                             <div class="col-md-0">
-                                <label style="margin-bottom:0rem !important;">Client's phone</label>
+                                <label style="margin-bottom:0rem !important;">Client phone</label>
                             </div>
                         </div>
 
-                        <div th:switch="${disabled}">
-                            <input type="number" class="form-control form-control-sm"
-                                   th:field="${client.phoneNumber}"
-                                   th:case="'true'" disabled
-                                   aria-describedby="quantityHelp"
-                                   placeholder="Enter phone number">
-                            <input type="number" class="form-control form-control-sm"
-                                   th:field="${client.phoneNumber}"
-                                   th:case="*"
-                                   aria-describedby="quantityHelp"
-                                   placeholder="Enter phone number" required>
-                        </div>
+                        <input type="number" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.phoneNumber}"
+                               aria-describedby="quantityHelp"
+                               placeholder="Enter phone number" required>
 
                         <div class="text_align_left">
                             <div class="col-md-0">
-                                <label style="margin-bottom:0rem !important;">Client's email</label>
+                                <label style="margin-bottom:0rem !important;">Client email</label>
                             </div>
                         </div>
 
-                        <div th:switch="${disabled}">
-                            <input type="email" class="form-control form-control-sm"
-                                   th:field="${client.email}"
-                                   th:case="'true'" disabled
-                                   aria-describedby="priceHelp"
-                                   placeholder="Enter email address">
-                            <input type="email" class="form-control form-control-sm"
-                                   th:field="${client.email}"
-                                   th:case="*"
-                                   aria-describedby="priceHelp"
-                                   placeholder="Enter email address" required>
-                        </div>
-
+                        <input type="email" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.email}"
+                               aria-describedby="priceHelp"
+                               placeholder="Enter email address" required>
                         <p></p>
-                        <div th:switch="${disabled}">
-                            <button type="submit" formaction="/update_client" th:object="${client}"
-                                    formmethod="post"
-                                    th:case="'true'" disabled
-                                    data-toggle="modal" data-target="#infoMessage"
-                                    class="btn btn-outline-primary">Apply
-                            </button>
-                            <button type="submit" formaction="/update_client" th:object="${client}"
-                                    formmethod="post"
-                                    th:case="*"
-                                    data-toggle="modal" data-target="#infoMessage"
-                                    class="btn btn-outline-primary">Apply
-                            </button>
-                            <button type="submit" formaction="/update_client_back" formmethod="post"
-                                    class="btn btn-outline-secondary">Back
-                            </button>
-                        </div>
+                        <button type="submit" formaction="/update_client" th:object="${client}"
+                                th:disabled="${disabled}"
+                                formmethod="post"
+                                data-toggle="modal" data-target="#infoMessage"
+                                class="btn btn-outline-primary">Apply
+                        </button>
+                        <button type="submit" formaction="/update_client_back" formmethod="post"
+                                class="btn btn-outline-secondary">Back
+                        </button>
 
                         <p></p>
 
                         <div th:if="${error.length==51}">
+                            <div class="alert alert-danger" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                        <div th:if="${error.length>51}">
                             <div class="alert alert-danger" role="alert">
                                 <div th:text="${error}"></div>
                             </div>

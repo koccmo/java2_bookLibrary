@@ -33,6 +33,10 @@
         display:inline-block
     }
 
+
+
+
+
     </style>
 </head>
 
@@ -135,107 +139,93 @@
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
             <div class="header-h3_center">
-                <p class="h3"><small>Cart</small></p>
+                <p class="h3"><small>Order</small></p>
             </div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="cart">Cart</a>
+                    <a class="nav-link" aria-current="page" href="cart">Cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cart_add_client">Client</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart_make_order">Order</a>
+                    <a class="nav-link active" href="cart_make_order" th:disabled="disabled">Order</a>
                 </li>
             </ul>
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="tableId">
                         <thead>
                         <tr>
-                            <th scope="col" class="text-center">Product Title</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-center">Price</th>
-                            <th scope="col" class="text-center">Total</th>
-                            <th scope="col" class="text-center">Actions</th>
+                            <th scope="col" class="text-center">Order Number</th>
+                            <th scope="col" class="text-center">Order Date</th>
+                            <th scope="col" class="text-center"><div th:text="'Sum ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center"><div th:text="'Tax ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center"><div th:text="'Total ' + ${currency_symbol}"></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="cart : ${cartList}">
-                            <td scope="row" style="vertical-align: middle;" th:text="${cart.getProduct().getTitle()}"></td>
+                        <tr>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.quantity}"></td>
+                                th:text="${order.number}"></td>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.getProduct.price}"></td>
+                                th:text="${order.date}"></td>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.sum}"></td>
-                            <td align="center">
-                                <form action="/deleted_from_cart" method="post">
-                                    <button type="submit" title="Delete" th:name="deletedProduct"
-                                            th:value="${cart.getId}"
-                                            class="btn btn-danger button-center">
-                                        <i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
+                                th:text="${order.sum}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.tax}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.total}"></td>
                         </tr>
                         </tbody>
                     </table>
-                    <center>
-                        <div class="one_row">
-                            <form>
-                                <button type="submit" formaction="/view_cart_prev" formmethod="post"
-                                        class="btn btn-outline-primary">
-                                    Prev
-                                </button>
-                            </form>
-                        </div>
-                        <div class="one_row">
-                            <div th:text="${pages}"></div>
-                        </div>
-                        <div class="one_row">
-                            <form>
-                                <button type="submit" formaction="/view_cart_next" formmethod="post"
-                                        class="btn btn-outline-primary">
-                                    Next
-                                </button>
-                            </form>
-                        </div>
-                    </center>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6> Total sum without tax: </h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="${totalSum}+' '+${currencySymbol}"></div>
-                            </h6>
-                        </div>
-                    </div>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6>Tax</h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="' '+ ${taxRate}+'%: '+${taxAmount}+' '+${currencySymbol}"></div>
-                            </h6>
-                        </div>
-                    </div>
-                    <div align="right">
-                        <div class="one_row">
-                            <h6>Total sum with tax:</h6>
-                        </div>
-                        <div class="one_row">
-                            <h6>
-                                <div th:text="' '+${total}+' '+${currencySymbol}"></div>
-                            </h6>
+
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#fullInformation"
+                            aria-expanded="false" aria-controls="fullInformation">
+                        Full Information about Order
+                    </button>
+                    <div class="collapse" id="fullInformation">
+                        <div class="card card-body">
+                            <b>Client data:</b>
+                            <div th:text="${client.phoneNumber==null} ? 'Client phone: n/a' : 'Client phone: ' + ${client.phoneNumber}">
+                                <br></div>
+                            <div th:text="${client.email==null} ? 'Client email: n/a' : 'Client email: ' + ${client.email}">
+                                <br></div>
+                            <b>Products list:</b>
+                            <div th:each="item:${items}">
+                                <div th:text="${item.product.getTitle} +
+                                                        ' Quantity: ' +
+                                                        ${item.quantity} + ' Price: ' +
+                                                        ${item.product.getPrice} + ' ' + ${currency_symbol} + ' Total: ' +
+                                                        ${item.sum} + ' ' + ${currency_symbol}"></div>
+                            </div>
                         </div>
                     </div>
                     <p></p>
-                    <div th:if="${info.length>0}">
-                        <div class="text_align_center">
-                            <div class="alert alert-info" role="alert">
-                                <div th:text="${info}"></div>
+                    <center>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#makeOrder"
+                                th:disabled="${disabled}">Make Order
+                        </button>
+                    </center>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="makeOrder" data-bs-backdrop="static" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Process finished</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div th:text="'Order number ' + ${orderNumber} + ' completed.'"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="/make_order" method="post">
+                                        <button type="submit" class="btn btn-primary">Ok</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -255,7 +245,7 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
 
-<script>
+<script type="text/javascript">
 
 </script>
 
