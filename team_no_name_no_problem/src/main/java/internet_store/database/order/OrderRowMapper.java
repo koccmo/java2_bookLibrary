@@ -1,6 +1,5 @@
 package internet_store.database.order;
 
-import internet_store.core.domain.Customer;
 import internet_store.core.domain.Order;
 import org.springframework.jdbc.core.RowMapper;
 
