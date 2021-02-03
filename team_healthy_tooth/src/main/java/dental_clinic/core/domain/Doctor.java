@@ -76,7 +76,7 @@ public class Doctor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Doctor doctor = (Doctor) o;
-        return Objects.equals(name, doctor.name) && Objects.equals(surname, doctor.surname);
+        return name.equalsIgnoreCase(doctor.name) && surname.equalsIgnoreCase(doctor.surname);
     }
 
     @Override
@@ -88,6 +88,8 @@ public class Doctor {
     public String toString() {
         return "Doctor: " +
                 "id: " + id + "\n" +
-                "Dr: '" + name + " " + surname + "\n";
+                "Dr: " + name + " " + surname + "\n" +
+                "Phone: " + phone + " \n" +
+                "Is employed: " + isEmployed + "\n\n";
     }
 }
