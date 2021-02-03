@@ -80,14 +80,7 @@ public class AddVisitService {
 
         visitRepository.addVisit(visit);
 
-        if (patientRepository.containsSpecificPersonalData(personalData)){
-            addVisitToDoctor(doctor, visit);
-            return addVisitToPatient(addVisitRequest, visit);
-        }
-
-        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getId()));
         return new AddVisitResponse(errors);
-
     }
 
     private boolean isIdAdded(String text) {
@@ -97,30 +90,6 @@ public class AddVisitService {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    private void addVisitToDoctor (Doctor doctor, Visit visit) {
-        for (Doctor d : doctorRepository.getDoctorList()) {
-            if (d.getName().equals(doctor.getName())
-            && d.getSurname().equals(doctor.getSurname())) {
-                visitRepository.addVisit(visit);
-            }
-        }
-    }
-
-    private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
-        for (int i = 0; i < patientRepository.getPatients().size(); i++) {
-            if (isSpecificPatient(i, addVisitRequest.getId())) {
-                patientRepository.getPatients().get(i).addVisit(visit);
-                patientRepository.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
-                return new AddVisitResponse();
-            }
-        }
-        return new AddVisitResponse();
-    }
-
-    private boolean isSpecificPatient (int index, long id) {
-        return patientRepository.getPatients().get(index).getPersonalData().getId().equals(id);
     }
 
     private boolean isNewDoctor(Doctor doctor) {
