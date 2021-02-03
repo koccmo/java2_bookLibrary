@@ -167,4 +167,14 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     public boolean containsDescription(String description) {
         return false;
     }
+
+    @Override
+    public boolean containsPrice(Integer price) {
+        return false;
+    }
+
+    @Override
+    public boolean containsTitleAndDescription(String title, String description) {
+        return false;
+    }
 }

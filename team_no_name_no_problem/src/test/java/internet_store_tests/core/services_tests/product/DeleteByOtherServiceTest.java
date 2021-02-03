@@ -61,7 +61,25 @@ public class DeleteByOtherServiceTest {
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
-/*
+
+    @Test
+    public void titleIsInDatabaseToDeleteProduct() {
+
+        Product apple = new Product("Apple","Green",3);
+        List<Product> products = new ArrayList<>();
+        products.add(apple);
+        List<CoreError> errors = new ArrayList<>();
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+                null,null);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.deleteAllByTitle(request.getTitle())).thenReturn(true);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        assertTrue(productDatabase.containsTitle("Apple"));
+
+    }
+
     @Test
     public void noDescriptionInDatabaseTest() {
 
@@ -95,7 +113,7 @@ public class DeleteByOtherServiceTest {
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
- */
+
     @Test
     public void noTitleAndDescriptionInDatabaseTest() {
 
