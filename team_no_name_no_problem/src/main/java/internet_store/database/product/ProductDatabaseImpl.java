@@ -215,4 +215,16 @@ public class ProductDatabaseImpl implements ProductDatabase{
         return productList.stream()
                 .anyMatch(product -> product.getDescription().equals(description));
     }
+
+    @Override
+    public boolean containsPrice(Integer price) {
+        return productList.stream()
+                .anyMatch(product -> product.getPrice() == price);
+    }
+
+    @Override
+    public boolean containsTitleAndDescription(String title, String description) {
+        return productList.stream()
+                .anyMatch(product -> product.getTitle().equals(title) && product.getDescription().equals(description));
+    }
 }
