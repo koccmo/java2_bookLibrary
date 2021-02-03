@@ -21,8 +21,10 @@ public class Tax {
     @Value("${currency-symbol}")
     private String currencySymbol;
     @Getter
+    @Setter
     private BigDecimal taxAmount;
     @Getter
+    @Setter
     private BigDecimal amountWithTax;
 
     public BigDecimal getTaxAmount(BigDecimal sumWithoutTax) {

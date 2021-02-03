@@ -1,4 +1,4 @@
-package internet_store.controller;
+package internet_store.controller.cart;
 
 import internet_store.core.operation.Tax;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
@@ -6,6 +6,7 @@ import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.cart.DeleteProductFromCartService;
 import internet_store.core.service.cart.TotalSumCartService;
 import internet_store.core.service.cart.paging.CartPagingService;
+import internet_store.core.service.ordering.OrderService;
 import internet_store.persistence.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import java.math.BigDecimal;
 @Controller
 public class CartController {
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
     @Autowired
     CartProductsCountService cartCountService;
     @Autowired
@@ -30,25 +31,33 @@ public class CartController {
     Tax tax;
     @Autowired
     DeleteProductFromCartService service;
+    @Autowired
+    OrderService orderService;
     private BigDecimal totalSumInCart;
     private long cartCount;
 
     @GetMapping(value = "cart")
     public String getCart(ModelMap modelMap) {
-        paging.startPaging();
+        long countProductInCart = cartCountService.getCartCount();
 
         updatePage();
+        paging.startPaging();
+
+        if (countProductInCart == 0) {
+            tax.setTaxAmount(new BigDecimal("0.00"));
+            tax.setAmountWithTax(new BigDecimal("0.00"));
+        }
         modelMap.addAttribute("info", "");
         modelMap.addAttribute("cartList", paging.getListOnePage());
         modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
                 + paging.getPagesQuantity());
         modelMap.addAttribute("cartCount", cartCount);
-        modelMap.addAttribute("totalSum", totalSumInCart);
-        modelMap.addAttribute("totalSum", totalSumInCart);
         modelMap.addAttribute("currencySymbol", tax.getCurrencySymbol());
         modelMap.addAttribute("taxRate", tax.getTaxRate());
+        modelMap.addAttribute("totalSum", totalSumInCart);
         modelMap.addAttribute("taxAmount", tax.getTaxAmount());
         modelMap.addAttribute("total", tax.getAmountWithTax());
+
         return "cart/cart";
     }
 
@@ -97,11 +106,11 @@ public class CartController {
     }
 
     @PostMapping(value = "/deleted_from_cart")
-    public String deleteProductFromCart(@RequestParam(value = "deletedProduct") String deletedProductTitle,
+    public String deleteProductFromCart(@RequestParam(value = "deletedProduct") Long  deletedCartId,
                                         ModelMap modelMap) {
 
-        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(0,
-                cartRepository, deletedProductTitle);
+        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(deletedCartId,
+                CartRepository);
         service.execute(request);
         paging.startPaging();
 

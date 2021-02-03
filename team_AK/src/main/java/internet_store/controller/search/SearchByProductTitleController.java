@@ -25,7 +25,7 @@ public class SearchByProductTitleController {
     @Autowired
     SearchByProductTitlePagingService paging;
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
     private long cartCount;
 
     @PostMapping("search_product")
@@ -69,7 +69,7 @@ public class SearchByProductTitleController {
             String errorMessage = response.getErrors().get(0).getMessage();
             modelMap.addAttribute("error", errorMessage);
         } else {
-            AddProductToCartRequest addRequest = new AddProductToCartRequest(0, quantity, cartRepository, title);
+            AddProductToCartRequest addRequest = new AddProductToCartRequest(0, quantity, CartRepository, title);
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }
