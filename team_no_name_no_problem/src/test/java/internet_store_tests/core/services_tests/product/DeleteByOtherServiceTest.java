@@ -69,7 +69,7 @@ public class DeleteByOtherServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(apple);
         List<CoreError> errors = new ArrayList<>();
-        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","",
                 null,null);
 
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
@@ -103,7 +103,7 @@ public class DeleteByOtherServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(apple);
         List<CoreError> errors = new ArrayList<>();
-        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("","Green",
                 null,null);
 
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
@@ -128,6 +128,23 @@ public class DeleteByOtherServiceTest {
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
+    }
+
+    @Test
+    public void priceIsInDatabaseToDeleteProduct() {
+
+        Product apple = new Product("Apple","Green",3);
+        List<Product> products = new ArrayList<>();
+        products.add(apple);
+        List<CoreError> errors = new ArrayList<>();
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("","",
+                2,4);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.deleteAllByPriceRange(request.getStartPrice(), request.getEndPrice())).thenReturn(true);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        assertTrue(productDatabase.containsPrice(3));
     }
 
     @Test
