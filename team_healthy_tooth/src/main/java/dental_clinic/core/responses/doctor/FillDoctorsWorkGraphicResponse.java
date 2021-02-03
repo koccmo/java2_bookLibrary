@@ -1,6 +1,5 @@
 package dental_clinic.core.responses.doctor;
 
-import dental_clinic.core.domain.WorkGraphic;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.CoreResponse;
 
