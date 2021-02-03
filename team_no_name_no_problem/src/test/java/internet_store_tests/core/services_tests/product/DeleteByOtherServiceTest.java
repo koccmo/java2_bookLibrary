@@ -1,5 +1,5 @@
 package internet_store_tests.core.services_tests.product;
-
+/*
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
@@ -183,4 +183,4 @@ public class DeleteByOtherServiceTest {
 
     }
 }
-
+*/
