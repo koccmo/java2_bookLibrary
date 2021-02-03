@@ -4,6 +4,9 @@ import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.UIAction;
 import internet_store.application.console_ui.customer.*;
 import internet_store.application.console_ui.product.*;
+import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIAction;
+import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
+import internet_store.application.console_ui.shopping_cart.FindShoppingCartByIdUIAction;
 import internet_store.application.console_ui.shopping_cart_item.AddShoppingCartItemUIService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -36,6 +39,9 @@ class StartApplication {
         menuNumberToActionMap.put(14, applicationContext.getBean(GetAllCustomersUIAction.class));
         menuNumberToActionMap.put(15, applicationContext.getBean(FindByCustomerFirstNameUIAction.class));
         menuNumberToActionMap.put(16, applicationContext.getBean(AddShoppingCartItemUIService.class));
+        menuNumberToActionMap.put(17, applicationContext.getBean(AddShoppingCartUIAction.class));
+        menuNumberToActionMap.put(18, applicationContext.getBean(FindShoppingCartByIdUIAction.class));
+        menuNumberToActionMap.put(19, applicationContext.getBean(FindAllShoppingCartsUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
@@ -73,8 +79,12 @@ class StartApplication {
         System.out.println("12. Find customer from database by ID");
         System.out.println("13. Find customer from database by ID and change FirstName");
         System.out.println("14. Print out all customers");
-        System.out.println("15. Find customer(s) by first name: ");
+        System.out.println("15. Find customer(s) by first name");
         System.out.println("16. Add shopping cart item: ");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("17. Add shopping cart");
+        System.out.println("18. Find shopping cart by ID");
+        System.out.println("19. Find all shopping carts");
         System.out.println("------------------------------------------------------------");
         System.out.println("0. Exit the program");
         System.out.println("------------------------------------------------------------");
