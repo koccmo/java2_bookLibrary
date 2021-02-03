@@ -26,7 +26,7 @@ public class AllCateroriesController {
     @Autowired
     AllCategoriesPagingService paging;
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
     private long cartCount;
 
     @GetMapping(value = "categories")
@@ -70,7 +70,7 @@ public class AllCateroriesController {
             String errorMessage = response.getErrors().get(0).getMessage();
             modelMap.addAttribute("error", errorMessage);
         } else {
-            AddProductToCartRequest addRequest = new AddProductToCartRequest(0, quantity, cartRepository, title);
+            AddProductToCartRequest addRequest = new AddProductToCartRequest(0, quantity, CartRepository, title);
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }

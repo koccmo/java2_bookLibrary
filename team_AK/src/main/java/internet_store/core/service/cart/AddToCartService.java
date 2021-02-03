@@ -27,7 +27,7 @@ public class AddToCartService {
     @Autowired
     ProductDatabaseImpl productDatabase;
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
     @Autowired
     CartDatabaseImpl cartDatabase;
     @Autowired
@@ -42,15 +42,14 @@ public class AddToCartService {
             Product product = productRepository.findByTitle(request.getProductTitle());
             BigDecimal price = product.getPrice();
 
-            cart.setTitle(product.getTitle());
-            cart.setPrice(price);
+            cart.setProduct(product);
             cart.setQuantity(request.getNewQuantity());
 
             BigDecimal sum = arithmetic.multiplyBigDecimalAndRound(new BigDecimal(request.getNewQuantity().toString())
                     , price, 2);
             cart.setSum(sum);
 
-            cartRepository.save(cart);
+            CartRepository.save(cart);
         }
 
         if (request.getDatabase() instanceof CartDatabaseImpl) {
@@ -66,8 +65,6 @@ public class AddToCartService {
                 errors.add(new CoreError("Id error ", "Wrong Id"));
             }
             if (errors.isEmpty()) {
-                cart.setTitle(findProductAddToCart.getTitle());
-                cart.setPrice(findProductAddToCart.getPrice());
                 cart.setQuantity(request.getNewQuantity());
                 BigDecimal sum = arithmetic.multiplyBigDecimalAndRound(new BigDecimal(request.getNewQuantity().toString())
                         , findProductAddToCart.getPrice(), 2);

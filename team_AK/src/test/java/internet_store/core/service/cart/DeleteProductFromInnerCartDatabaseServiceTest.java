@@ -42,28 +42,28 @@ public class DeleteProductFromInnerCartDatabaseServiceTest {
         productDatabase.addProduct(product);
         service.execute(new AddProductToCartRequest(1L, 4, cartDatabase, product.getTitle()));
 
-        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(1L, cartDatabase, "Title"));
+        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(1L, cartDatabase));
         assertEquals(1L, response.getId());
         productDatabase.clear();
     }
 
     @Test
     public void shouldReturnError_1() {
-        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(-1L, cartDatabase, ""));
+        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(-1L, cartDatabase));
         assertEquals("Long input error ", response.getErrors().get(0).getField());
         assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
     }
 
     @Test
     public void shouldReturnError_2() {
-        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(5L, cartDatabase, ""));
+        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(5L, cartDatabase));
         assertEquals("Id error ", response.getErrors().get(0).getField());
         assertEquals("wrong ID", response.getErrors().get(0).getMessage());
     }
 
     @Test
     public void shouldReturnError_3() {
-        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(0L, cartDatabase, ""));
+        DeleteProductFromCartResponse response = deleteService.execute(new DeleteProductFromCartRequest(0L, cartDatabase));
         assertEquals("Id error ", response.getErrors().get(0).getField());
         assertEquals("wrong ID", response.getErrors().get(0).getMessage());
     }

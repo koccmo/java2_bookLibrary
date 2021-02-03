@@ -39,7 +39,7 @@ public class UpdateClientController {
 
     @PostMapping(value = "/search_update_client")
     public String clientForUpdate(@RequestParam(value = "search") String searchClient,
-                                   @RequestParam(value = "clientName") String searchBy, ModelMap modelMap) {
+                                  @RequestParam(value = "clientName") String searchBy, ModelMap modelMap) {
 
         SearchClientRequest request = new SearchClientRequest(searchClient, searchBy);
         SearchClientResponse response = service.exexute(request);
@@ -52,9 +52,8 @@ public class UpdateClientController {
             return "client/update_client";
         }
 
-        updatedClient = response.getClient().get(0);
-
-        if (updatedClient != null) {
+        if (clientsResultList.size() == 1) {
+            updatedClient = response.getClient().get(0);
             modelMap.addAttribute("error", "");
             modelMap.addAttribute("disabled", "false");
             modelMap.addAttribute("client", updatedClient);
@@ -64,7 +63,6 @@ public class UpdateClientController {
             modelMap.addAttribute("client", new Client());
 
         }
-        modelMap.addAttribute("error", "");
         return "client/update_client";
     }
 

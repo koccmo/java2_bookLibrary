@@ -19,7 +19,7 @@ public class DeleteFromCartConsole {
         deleteFromCartMenu.showMenuDeleteProductFromCart();
         long productId = deleteFromCartMenu.getUserDeletedFromCartIdInput();
 
-        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(productId, cartDatabase, null);
+        DeleteProductFromCartRequest request = new DeleteProductFromCartRequest(productId, cartDatabase);
         DeleteProductFromCartResponse response = deleteProductFromCartService.execute(request);
 
         if (!(response.hasErrors())) {

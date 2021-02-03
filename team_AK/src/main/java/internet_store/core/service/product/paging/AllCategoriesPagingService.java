@@ -46,13 +46,13 @@ public class AllCategoriesPagingService {
 
     public void nextPage(boolean pagingDirection) {
         if (pagingDirection) {
-            nextPage(productRepository.count());
+            nextPage();
         } else {
             prevPage();
         }
     }
 
-    private void nextPage(long allRecordsNumber) {
+    private void nextPage() {
         if (currentPage + PAGE_OFFSET == pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;

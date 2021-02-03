@@ -39,8 +39,8 @@ public class CartDatabaseImpl implements CartDatabase {
     @Override
     public void showReport() {
         productsInCart.forEach(pr -> System.out.println("ID: " + pr.getId() + " " +
-                "Title: " + pr.getTitle() + " " + "Quantity: " + pr.getQuantity() + " " +
-                "Price: " + pr.getPrice() + " " + "Sum: " + pr.getSum()));
+                "Title: " + pr.getProduct().getTitle() + " " + "Quantity: " + pr.getQuantity() + " " +
+                "Price: " + pr.getProduct().getPrice() + " " + "Sum: " + pr.getSum()));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class CartDatabaseImpl implements CartDatabase {
 
     @Override
     public Cart findByTitle(String title) {
-        return productsInCart.stream().filter(p -> p.getTitle().equals(title)).findFirst().orElse(null);
+        return productsInCart.stream().filter(p -> p.getProduct().getTitle().equals(title)).findFirst().orElse(null);
     }
 
     @Override

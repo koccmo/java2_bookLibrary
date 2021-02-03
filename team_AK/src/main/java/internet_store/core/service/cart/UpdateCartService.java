@@ -43,7 +43,7 @@ public class UpdateCartService {
 
             newQuantity = request.getNewQuantity();
 
-            Product totalProductInDatabase = productDatabase.findByTitle(productInCart.getTitle());
+            Product totalProductInDatabase = productDatabase.findByTitle(productInCart.getProduct().getTitle());
 
             errors = quantityValidator.validate(totalProductInDatabase.getQuantity(), newQuantity);
 
@@ -54,7 +54,7 @@ public class UpdateCartService {
         if (errors.isEmpty()) {
             productInCart.setQuantity(newQuantity);
             BigDecimal sum = arithmetic.multiplyBigDecimalAndRound(new BigDecimal(request.getNewQuantity().toString())
-                    , productInCart.getPrice(), 2);
+                    , productInCart.getProduct().getPrice(), 2);
             productInCart.setSum(sum);
             cartDatabase.updateCart(index, productInCart);
         }
