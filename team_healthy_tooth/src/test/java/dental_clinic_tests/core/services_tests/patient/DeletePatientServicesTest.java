@@ -2,12 +2,8 @@ package dental_clinic_tests.core.services_tests.patient;
 
 import dental_clinic.core.domain.Patient;
 import dental_clinic.core.domain.PersonalData;
-import dental_clinic.core.requests.patient.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.responses.patient.DeletePatientResponse;
-import dental_clinic.core.services.patient.DeletePatientService;
 import dental_clinic_tests.core.services_tests.matchers.IdMatcher;
-import dental_clinic.core.validators.patient.DeletePatientValidator;
 import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

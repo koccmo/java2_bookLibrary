@@ -1,8 +1,6 @@
 package dental_clinic_tests.core.validators_tests.patient;
 
-import dental_clinic.core.requests.patient.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
-import dental_clinic.core.validators.patient.DeletePatientValidator;
 import org.junit.Test;
 
 import java.util.List;
