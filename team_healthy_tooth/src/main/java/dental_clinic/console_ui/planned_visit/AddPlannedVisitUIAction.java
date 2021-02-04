@@ -67,7 +67,7 @@ public class AddPlannedVisitUIAction implements UIAction {
         if (getDoctorListResponse.hasErrors()) {
             System.out.println("Planned visit canned be registered");
         } else {
-            getDoctorListResponse.getDoctors().forEach(System.out::println);
+            getDoctorListResponse.getDoctorAndGraphic().forEach(System.out::println);
 
             Long id = inputFormatsValidator.inputLong("Please input doctor's id");
 
