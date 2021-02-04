@@ -1,8 +1,9 @@
-package electronic_library.ui;
+package electronic_library.ui.book;
 
 import electronic_library.core.requests.book.AddBookRequest;
 import electronic_library.core.responses.book.AddBookResponse;
 import electronic_library.core.services.book.AddBookService;
+import electronic_library.ui.UICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

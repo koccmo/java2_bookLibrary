@@ -1,8 +1,9 @@
-package electronic_library.ui;
+package electronic_library.ui.book;
 
 import electronic_library.core.requests.book.DeleteBookByIdRequest;
 import electronic_library.core.responses.book.DeleteBookByIdResponse;
 import electronic_library.core.services.book.DeleteBookByIdService;
+import electronic_library.ui.UICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

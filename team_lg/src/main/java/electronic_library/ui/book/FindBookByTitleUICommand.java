@@ -1,53 +1,47 @@
-package electronic_library.ui;
+package electronic_library.ui.book;
 
 import electronic_library.core.requests.book.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
 import electronic_library.core.requests.Paging;
 import electronic_library.core.responses.book.FindBooksResponse;
 import electronic_library.core.services.book.FindBooksService;
+import electronic_library.ui.UICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
-public class FindBooksUICommand implements UICommand {
+public class FindBookByTitleUICommand implements UICommand {
 
     @Autowired
     private FindBooksService findBooksService;
 
     @Override
     public void execute() {
-
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your book title: ");
+        String bookTitle = scanner.nextLine();
 
-        System.out.println("Please enter book title: ");
-        String title = scanner.nextLine();
-
-        System.out.println("Please enter book author: ");
-        String author = scanner.nextLine();
-
-        System.out.println("Please enter orderBy (title||author): ");
+        System.out.println("Enter orderBy (title||author): ");
         String orderBy = scanner.nextLine();
-
-        System.out.println("Please enter orderDirection (ASC||DESC): ");
+        System.out.println("Enter orderDirection (ASC||DESC): ");
         String orderDirection = scanner.nextLine();
-
         Ordering ordering = new Ordering(orderBy, orderDirection);
 
-        System.out.println("Please enter pageNumber: ");
+        System.out.println("Please enter your page number: ");
         Integer pageNumber = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Please enter pageSize: ");
+        System.out.println("Please enter your page size: ");
         Integer pageSize = Integer.parseInt(scanner.nextLine());
 
         Paging paging = new Paging(pageNumber, pageSize);
 
-        FindBooksRequest request = new FindBooksRequest(title, author, ordering, paging);
+        FindBooksRequest request = new FindBooksRequest(bookTitle, "", ordering, paging);
         FindBooksResponse response = findBooksService.execute(request);
 
         if (response.hasErrors()) {
-            response.getErrors().forEach(coreError -> System.out.println("Error: " + coreError.getErrorField() + " " + coreError.getErrorMessage()));
+            response.getErrors().forEach(System.out::println);
         } else {
             if (!response.getBooks().isEmpty()) {
                 System.out.println("\nFound " + response.getBooks().size() + " book(s) in Electronic library : ");

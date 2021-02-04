@@ -11,7 +11,7 @@ public class FindReadersResponse extends CoreResponse {
 
     private List<Reader> readers;
 
-    public FindReadersResponse(List<CoreError> errors, List<Reader> readers) {
+    public FindReadersResponse(List<Reader> readers, List<CoreError> errors) {
         super(errors);
         this.readers = readers;
     }

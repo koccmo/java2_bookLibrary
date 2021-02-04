@@ -17,6 +17,15 @@ public class AddReaderRequest {
         this.readerEmail = readerEmail;
     }
 
+    public AddReaderRequest(String readerFirstName, String readerLastName, String readerPersonalCode, String readerPhoneNumber, String readerEmail, String readerAddress) {
+        this.readerFirstName = readerFirstName;
+        this.readerLastName = readerLastName;
+        this.readerPersonalCode = readerPersonalCode;
+        this.readerPhoneNumber = readerPhoneNumber;
+        this.readerEmail = readerEmail;
+        this.readerAddress = readerAddress;
+    }
+
     public String getReaderFirstName() {
         return readerFirstName;
     }

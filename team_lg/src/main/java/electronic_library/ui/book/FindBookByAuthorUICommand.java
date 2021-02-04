@@ -1,10 +1,11 @@
-package electronic_library.ui;
+package electronic_library.ui.book;
 
 import electronic_library.core.requests.book.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
 import electronic_library.core.requests.Paging;
 import electronic_library.core.responses.book.FindBooksResponse;
 import electronic_library.core.services.book.FindBooksService;
+import electronic_library.ui.UICommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
