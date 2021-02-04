@@ -37,14 +37,9 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
     @Override
     public void addPatient(PersonalData personalData) {
         sessionFactory.getCurrentSession().save(personalData);
-    }
-
-    @Override
-    public void deletePatient(Long id) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "DELETE PersonalData p WHERE id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        Long id = getPersonalData().get(getPersonalData().size() - 1).getId();
+        JowlEntity jowlEntity = new JowlEntity(getPersonalDataById(id));
+        sessionFactory.getCurrentSession().save(jowlEntity);
     }
 
     @Override
@@ -120,9 +115,32 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
                 .findFirst().isPresent();
     }
 
+    public void updateJowl(Long patientId, int toothNumber, ToothStatus toothStatus) {
+        String sql = "UPDATE JowlEntity SET d"+ toothNumber + " = " + getToothStatusInt(toothStatus) +" WHERE patient_id = " + patientId;
+        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        query.executeUpdate();
+    }
+
     private List<PersonalData> getPersonalData() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM PersonalData p", PersonalData.class)
                 .getResultList();
+    }
+
+    private int getToothStatusInt(ToothStatus toothStatus) {
+        switch (toothStatus) {
+            case KARIES: return 0;
+            case PLOMBA: return 1;
+            case SAKNE: return 2;
+            case KRONITIS: return 3;
+            case KLAMERS: return 4;
+            case NAV_ZOBA: return 5;
+            case FASETE: return 6;
+            case NONEMAMA_PROTEZE: return 7;
+            case KRONITIS_AR_FAS: return 8;
+            case PLAST_KRONITIS: return 9;
+            case TILTINI: return 10;
+            default: HEALTHY: return 11;
+        }
     }
 }
