@@ -12,14 +12,15 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(name = "product_title")
-    String title;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    Product product;
     @Column(name = "quantity")
     Long quantity;
-    @Column(name = "price")
-    BigDecimal price;
     @Column(name = "sum")
     BigDecimal sum;
     @Column(name = "deleted")
     Boolean deleted = false;
+    @Column(name = "ordered")
+    Boolean ordered = false;
 }

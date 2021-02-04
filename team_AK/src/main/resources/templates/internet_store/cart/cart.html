@@ -137,6 +137,17 @@
             <div class="header-h3_center">
                 <p class="h3"><small>Cart</small></p>
             </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart_add_client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart_make_order">Order</a>
+                </li>
+            </ul>
             <div class="row">
                 <div class="col-12">
                     <table class="table table-bordered">
@@ -151,17 +162,17 @@
                         </thead>
                         <tbody>
                         <tr th:each="cart : ${cartList}">
-                            <td scope="row" style="vertical-align: middle;" th:text="${cart.title}"></td>
+                            <td scope="row" style="vertical-align: middle;" th:text="${cart.getProduct().getTitle()}"></td>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
                                 th:text="${cart.quantity}"></td>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
-                                th:text="${cart.price}"></td>
+                                th:text="${cart.getProduct.price}"></td>
                             <td scope="row" class="text-center" style="vertical-align: middle;"
                                 th:text="${cart.sum}"></td>
                             <td align="center">
                                 <form action="/deleted_from_cart" method="post">
                                     <button type="submit" title="Delete" th:name="deletedProduct"
-                                            th:value="${cart.title}"
+                                            th:value="${cart.getId}"
                                             class="btn btn-danger button-center">
                                         <i class="fas fa-trash-alt"></i></button>
                                 </form>
@@ -219,14 +230,6 @@
                                 <div th:text="' '+${total}+' '+${currencySymbol}"></div>
                             </h6>
                         </div>
-                    </div>
-                    <div align="center">
-                        <form>
-                            <button type="submit" formaction="/make_order" formmethod="post"
-                                    class="btn btn-outline-primary">
-                                Make Order
-                            </button>
-                        </form>
                     </div>
                     <p></p>
                     <div th:if="${info.length>0}">

@@ -26,7 +26,7 @@ public class DeleteDoctorUIAction implements UIAction {
         if (deleteDoctorResponse.hasErrors()) {
             deleteDoctorResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Doctor with id " + deleteDoctorRequest.getId() + "is deleted");
+            System.out.println("Doctor with id " + deleteDoctorRequest.getId() + " is deleted");
         }
     }
 

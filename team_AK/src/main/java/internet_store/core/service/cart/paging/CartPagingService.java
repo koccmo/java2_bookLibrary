@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class CartPagingService {
     private final int FIRST_PAGE = 1;
     private final int START_FROM_FIRST_RECORD = 0;
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
     @Getter
     @Setter
     private int recordsCountOnPage;
@@ -41,21 +42,21 @@ public class CartPagingService {
         recordsCountOnPage = LIMIT_RECORDS_ON_ONE_PAGE;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
-        listOnePage = cartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
-        if ((startRecordOffset + recordsCountOnPage) >= cartRepository.count()) {
+        listOnePage = CartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
+        if ((startRecordOffset + recordsCountOnPage) >= CartRepository.countProductInCart()) {
             isLastPage = true;
         }
     }
 
     public void nextPage(boolean pagingDirection) {
         if (pagingDirection) {
-            nextPage(cartRepository.count());
+            nextPage();
         } else {
             prevPage();
         }
     }
 
-    private void nextPage(long allRecordsNumber) {
+    private void nextPage() {
         if (currentPage + PAGE_OFFSET == pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
@@ -68,7 +69,7 @@ public class CartPagingService {
             isLastPage = false;
             isFirstPage = false;
         }
-        listOnePage = cartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
+        listOnePage = CartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
     }
 
     private void prevPage() {
@@ -84,13 +85,14 @@ public class CartPagingService {
             isFirstPage = false;
             isLastPage = false;
         }
-        listOnePage = cartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
+        listOnePage = CartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
     }
 
+    @Transactional
     private void calculatePagesQuantity() {
         final int NO_EXTRA_PAGE = 0;
 
-        long searchResultCount = cartRepository.count();
+        long searchResultCount = CartRepository.countProductInCart();
 
         if (isAllRecordsCanSetOnePage(searchResultCount)) return;
 

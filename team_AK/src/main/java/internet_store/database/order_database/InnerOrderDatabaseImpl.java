@@ -17,7 +17,7 @@ public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     @Override
     public void addOrder(Order order) {
         order.setId(id);
-        order.setOrderNumber(orderNumber);
+        //order.setOrderNumber(orderNumber);
         orders.add(order);
         id++;
         orderNumber++;
@@ -31,13 +31,13 @@ public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     @Override
     public void showReport() {
         orders.forEach(or -> {
-            System.out.println("ID: " + or.getId() + " " +
-                    "Order Number: " + or.getOrderNumber() + " " + "Order Date: " + or.getOrderDate() + " " +
-                    "Total sum: " + or.getTotalSum() + " " + "Ordering status: "
-                    + or.getOrderStatus().toString());
-            or.getProductsInCart().forEach(pr -> System.out.println("ID: " + pr.getId() + " " +
-                    "Title: " + pr.getTitle() + " " + "Description: " + "Quantity: " + pr.getQuantity() + " "
-                    + "Price: " + pr.getPrice() + " " + "Sum: "/* + pr.getSum()*/));
+            System.out.println("ID: " + or.getId() + " "); //+
+//                    "Order Number: " + or.getOrderNumber() + " " + "Order Date: " + or.getOrderDate() + " " +
+//                    "Total sum: " + or.getTotalSum() + " " + "Ordering status: "
+//                    + or.getOrderStatus().toString());
+//            or.getProductsInCart().forEach(pr -> System.out.println("ID: " + pr.getId() + " " +
+//                    "Title: " + pr.getTitle() + " " + "Description: " + "Quantity: " + pr.getQuantity() + " "
+//                    + "Price: " + pr.getPrice() + " " + "Sum: "/* + pr.getSum()*/));
         });
     }
 
@@ -50,8 +50,9 @@ public class InnerOrderDatabaseImpl implements InnerOrderDatabase {
     @SuppressWarnings("ConstantConditions")
     @Override
     public Order findByOrderNumber(int orderNumber) {
-        return orders.stream().filter(pr -> pr.getOrderNumber() == orderNumber)
-                .findFirst().orElse(EMPTY_OBJECT);
+        return null;
+//        return orders.stream().filter(pr -> pr.getOrderNumber() == orderNumber)
+//                .findFirst().orElse(EMPTY_OBJECT);
     }
 
     @Override

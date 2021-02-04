@@ -5,7 +5,7 @@ import dental_clinic.core.requests.patient.UpdatePatientsJowlInfoRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.UpdatePatientJowlInfoResponse;
 import dental_clinic.core.validators.patient.UpdatePatientJowlInfoRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class UpdatePatientJowlInfoService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
     private UpdatePatientJowlInfoRequestValidator updatePatientJowlInfoRequestValidator;
 
@@ -26,7 +26,7 @@ public class UpdatePatientJowlInfoService {
             return new UpdatePatientJowlInfoResponse(errors);
         }
 
-        if (!patientDatabase.containsPatientWithSpecificId(updatePatientsJowlInfoRequest.getId())) {
+        if (!patientRepository.containsPatientWithSpecificId(updatePatientsJowlInfoRequest.getId())) {
             errors.add(new CoreError("database", "Database doesn't contain patient with id " +
                     updatePatientsJowlInfoRequest.getId()));
             return new UpdatePatientJowlInfoResponse(errors);
@@ -37,7 +37,7 @@ public class UpdatePatientJowlInfoService {
     }
 
     private void updatePatientsJowl (UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest) {
-        for (Patient patient : patientDatabase.getPatients()) {
+        for (Patient patient : patientRepository.getPatients()) {
             if (patient.getPersonalData().getId().equals(updatePatientsJowlInfoRequest.getId())) {
                 for (Integer key : updatePatientsJowlInfoRequest.getJowlInfo().keySet()) {
                     patient.updateJowl(key, updatePatientsJowlInfoRequest.getJowlInfo().get(key));

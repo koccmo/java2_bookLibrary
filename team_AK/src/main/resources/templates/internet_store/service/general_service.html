@@ -30,8 +30,6 @@
         padding-top: 60px;
         }
 
-
-
     </style>
 </head>
 
@@ -150,6 +148,17 @@
                             <button type="submit" class="btn btn-primary btn-sm"
                                     formmethod="post" formaction="/currency"
                                     value="currency">Set
+                            </button>
+                        </div>
+                        <p></p>
+                        <label style="margin-bottom:0rem !important;">Set order number</label>
+                        <div class="input-group-append">
+                            <input name="orderNumber" style="width:280px" type="number" min="1" required
+                                   value="1" class="form-control form-control-sm"
+                                   th:value="${orderNumber}"/>
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                    formmethod="post" formaction="/order_number"
+                                    value="orderNumber">Set
                             </button>
                         </div>
                     </form>

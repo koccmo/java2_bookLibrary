@@ -25,8 +25,11 @@ public class OrmProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> searchProductByCategory(String category) {
-        return null;
+    public List<Product> searchProductByCategory(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT product FROM Product product WHERE category_id = :id");
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 
     @Override

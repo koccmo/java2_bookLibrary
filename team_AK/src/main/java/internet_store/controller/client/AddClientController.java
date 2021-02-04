@@ -23,7 +23,8 @@ public class AddClientController {
     @GetMapping(value = "add_client")
     public String showAddClient(ModelMap modelMap) {
         modelMap.addAttribute("client", new Client());
-        modelMap.addAttribute("errors", "start");
+        modelMap.addAttribute("errors", "");
+        modelMap.addAttribute("info", "");
         return "client/add_client";
     }
 
@@ -41,6 +42,11 @@ public class AddClientController {
 
         for (CoreError error : response.getErrors()) {
             allErrors.append(error.getField()).append(" ").append(error.getMessage()).append(" ");
+        }
+        if (!(response.hasErrors())) {
+            modelMap.addAttribute("info", "Client data successful add to database");
+        } else {
+            modelMap.addAttribute("info", "");
         }
         modelMap.addAttribute("errors", allErrors.toString());
         modelMap.addAttribute("client", client);

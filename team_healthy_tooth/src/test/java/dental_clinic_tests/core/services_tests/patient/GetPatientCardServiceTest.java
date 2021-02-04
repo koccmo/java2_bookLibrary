@@ -7,7 +7,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetPatientCardResponse;
 import dental_clinic.core.services.patient.GetPatientCardService;
 import dental_clinic.core.validators.patient.GetPatientCardRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class GetPatientCardServiceTest {
     @Mock
     private GetPatientCardRequestValidator getPatientCardRequestValidator;
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @InjectMocks
     private GetPatientCardService getPatientCardService;
 
@@ -57,7 +57,7 @@ public class GetPatientCardServiceTest {
         errors.add(error);
 
         Mockito.when(getPatientCardRequestValidator.validate(getPatientCardRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(getPatientCardRequest.getId())).thenReturn(false);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(getPatientCardRequest.getId())).thenReturn(false);
         GetPatientCardResponse getPatientCardResponse = getPatientCardService.execute(getPatientCardRequest);
 
         assertTrue(getPatientCardResponse.hasErrors());
@@ -72,8 +72,8 @@ public class GetPatientCardServiceTest {
         Patient patientCard = new Patient(personalData);
 
         Mockito.when(getPatientCardRequestValidator.validate(getPatientCardRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(getPatientCardRequest.getId())).thenReturn(true);
-        Mockito.when(patientDatabase.getPatientCard(getPatientCardRequest.getId())).thenReturn(Optional.of(patientCard));
+        Mockito.when(patientRepository.containsPatientWithSpecificId(getPatientCardRequest.getId())).thenReturn(true);
+        Mockito.when(patientRepository.getPatientCard(getPatientCardRequest.getId())).thenReturn(Optional.of(patientCard));
         GetPatientCardResponse getPatientCardResponse = getPatientCardService.execute(getPatientCardRequest);
 
         assertFalse(getPatientCardResponse.hasErrors());

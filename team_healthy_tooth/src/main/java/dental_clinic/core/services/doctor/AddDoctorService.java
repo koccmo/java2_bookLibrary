@@ -4,7 +4,7 @@ import dental_clinic.core.requests.doctor.AddDoctorRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.validators.doctor.AddDoctorRequestValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class AddDoctorService {
     @Autowired
     private AddDoctorRequestValidator addDoctorRequestValidator;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     public AddDoctorResponse execute (AddDoctorRequest addDoctorRequest) {
 
@@ -26,12 +26,12 @@ public class AddDoctorService {
             return new AddDoctorResponse(errors);
         }
 
-        if (doctorDatabase.containsDoctor(addDoctorRequest.getDoctor())) {
+        if (doctorRepository.containsDoctor(addDoctorRequest.getDoctor())) {
             errors.add(new CoreError("database", "Database contains the same doctor"));
             return new AddDoctorResponse(errors);
         }
 
-        doctorDatabase.addDoctor(addDoctorRequest.getDoctor());
+        doctorRepository.addDoctor(addDoctorRequest.getDoctor());
         return new AddDoctorResponse(addDoctorRequest.getDoctor());
     }
 

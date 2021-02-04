@@ -181,4 +181,14 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     public boolean containsDescription(String description) {
         return true;
     }
+
+    @Override
+    public boolean containsPrice(Integer price) {
+        return false;
+    }
+
+    @Override
+    public boolean containsTitleAndDescription(String title, String description) {
+        return false;
+    }
 }

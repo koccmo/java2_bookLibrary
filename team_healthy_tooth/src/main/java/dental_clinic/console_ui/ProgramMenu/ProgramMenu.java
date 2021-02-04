@@ -11,6 +11,7 @@ import dental_clinic.console_ui.manipulation.GetManipulationsUIAction;
 import dental_clinic.console_ui.patient.*;
 import dental_clinic.console_ui.planned_visit.*;
 import dental_clinic.console_ui.visit.AddVisitUIAction;
+import dental_clinic.console_ui.visit.SearchVisitByDateUIAction;
 import dental_clinic.console_ui.visit.SearchVisitByPatientIdUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ public class ProgramMenu {
         menuNumberToActionMap.put(8, findUIAction(uiActions, GetPatientCardUIAction.class));
         menuNumberToActionMap.put(9, findUIAction(uiActions, AddVisitUIAction.class));
         menuNumberToActionMap.put(10, findUIAction(uiActions, SearchVisitByPatientIdUIAction.class));
-
+        menuNumberToActionMap.put(11, findUIAction(uiActions, SearchVisitByDateUIAction.class));
 
         menuNumberToActionMap.put(12, findUIAction(uiActions, AddDoctorUIAction.class));
         menuNumberToActionMap.put(13, findUIAction(uiActions, FillDoctorsWorkGraphicUIAction.class));

@@ -4,8 +4,7 @@ import dental_clinic.core.requests.patient.DeletePatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.DeletePatientResponse;
 import dental_clinic.core.validators.patient.DeletePatientValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
-import dental_clinic.core.domain.PersonalData;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class DeletePatientService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
     private DeletePatientValidator deletePatientValidator;
 
@@ -27,8 +26,8 @@ public class DeletePatientService {
             return new DeletePatientResponse(errors);
         }
 
-        if (patientDatabase.containsPatientWithSpecificId(deletePatientRequest.getId())){
-            patientDatabase.deletePatient(deletePatientRequest.getId());
+        if (patientRepository.containsPatientWithSpecificId(deletePatientRequest.getId())){
+            patientRepository.deletePatient(deletePatientRequest.getId());
             return new DeletePatientResponse(deletePatientRequest.getId());
         }
 

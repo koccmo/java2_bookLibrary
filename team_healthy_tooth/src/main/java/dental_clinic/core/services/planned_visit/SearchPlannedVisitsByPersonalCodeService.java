@@ -5,7 +5,7 @@ import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByPersonalCod
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByPersonalCodeResponse;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByPersonalCodeRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class SearchPlannedVisitsByPersonalCodeService {
     @Autowired
     private SearchPlannedVisitsByPersonalCodeRequestValidator searchPlannedVisitsByPersonalCodeRequestValidator;
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
 
     public SearchPlannedVisitsByPersonalCodeResponse execute (SearchPlannedVisitsByPersonalCodeRequest searchPlannedVisitsByPersonalCodeRequest) {
         List<CoreError> errorList = searchPlannedVisitsByPersonalCodeRequestValidator.validate(searchPlannedVisitsByPersonalCodeRequest);
@@ -30,7 +30,7 @@ public class SearchPlannedVisitsByPersonalCodeService {
         }
 
         List <PlannedVisit> plannedVisitList
-                = plannedVisitsInMemoryDatabase.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode());
+                = plannedVisitsRepository.searchPlannedVisitsByPersonalCode(searchPlannedVisitsByPersonalCodeRequest.getPersonalCode());
         if (plannedVisitList.isEmpty()) {
             errorList.add(new CoreError("database", "Database is empty"));
             return new SearchPlannedVisitsByPersonalCodeResponse(errorList, new ArrayList<>());

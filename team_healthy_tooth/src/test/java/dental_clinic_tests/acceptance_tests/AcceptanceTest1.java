@@ -7,13 +7,14 @@ import dental_clinic.core.requests.patient.GetAllPatientsRequest;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.GetAllPatientsService;
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
-
+/*
 public class AcceptanceTest1 {
 
     private ApplicationContext appContext;
@@ -25,6 +26,7 @@ public class AcceptanceTest1 {
 
     @Test
     public void test(){
+        getDatabaseCleaner().clean();
         PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25065612345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         addPatientService().execute(addPatientRequest);
@@ -43,4 +45,8 @@ public class AcceptanceTest1 {
     private GetAllPatientsService getAllPatientsService() {
         return appContext.getBean(GetAllPatientsService.class);
     }
-}
+
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
+    }
+}*/

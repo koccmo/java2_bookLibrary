@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,7 +21,7 @@ public class DeleteProductFromCartService {
     @Autowired
     CartDatabaseImpl cartDatabase;
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
 
     public DeleteProductFromCartResponse execute(DeleteProductFromCartRequest request) {
         NumberValidator<?> numberValidator = new NumberValidator<>
@@ -30,9 +31,9 @@ public class DeleteProductFromCartService {
         Object databases = request.getClientDatabase();
 
         if (databases instanceof CartRepository) {
-            Cart productInCart = cartRepository.findByTitle(request.getProductTitle());
-            productInCart.setDeleted(true);
-            cartRepository.save(productInCart);
+            Optional<Cart> productInCart = CartRepository.findById(request.getId());
+            productInCart.ifPresent(cart -> cart.setDeleted(true));
+            productInCart.ifPresent(cart -> CartRepository.save(cart));
             return new DeleteProductFromCartResponse(new ArrayList<>());
         }
 

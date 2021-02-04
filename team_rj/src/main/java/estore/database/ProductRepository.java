@@ -7,7 +7,7 @@ public interface ProductRepository {
 
     List<Product> searchProductByName(String name);
 
-    List<Product> searchProductByCategory(String category);
+    List<Product> searchProductByCategory(Long category);
 
     List<Product> searchProductById(Long id);
 

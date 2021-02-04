@@ -1,12 +1,12 @@
 package estore.acceptance_tests;
 
 import estore.config.ProductConfiguration;
+import estore.core.domain.Product;
 import estore.core.requests.*;
+import estore.core.responses.GetAllProductsResponse;
 import estore.core.responses.RemoveProductByIdResponse;
 import estore.core.responses.RemoveProductByNameResponse;
-import estore.core.responses.GetAllProductsResponse;
 import estore.core.service.*;
-import estore.core.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -36,9 +36,9 @@ public class RemoveProductsOnRequestTest {
         AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
         AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "1");
-        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "1");
-        AddProductRequest addProductRequest3 = new AddProductRequest("ProductC", "Description ProductC", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductC", "Description ProductC", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);

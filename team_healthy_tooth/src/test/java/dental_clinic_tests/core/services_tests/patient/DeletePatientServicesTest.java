@@ -8,7 +8,7 @@ import dental_clinic.core.responses.patient.DeletePatientResponse;
 import dental_clinic.core.services.patient.DeletePatientService;
 import dental_clinic_tests.core.services_tests.matchers.IdMatcher;
 import dental_clinic.core.validators.patient.DeletePatientValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class DeletePatientServicesTest {
 
     @Mock private DeletePatientValidator deletePatientValidator;
-    @Mock private PatientDatabase patientDatabase;
+    @Mock private PatientRepository patientRepository;
     @InjectMocks private DeletePatientService deletePatientService;
 
     @Test
@@ -41,7 +41,7 @@ public class DeletePatientServicesTest {
 
         assertTrue(deletePatientResponse.hasErrors());
         assertTrue(deletePatientResponse.getErrors().contains(expectedError));
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class DeletePatientServicesTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(expectedError);
         Mockito.when(deletePatientValidator.validate(deletePatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(8L)).thenReturn(false);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(8L)).thenReturn(false);
 
         DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);
 
@@ -68,11 +68,11 @@ public class DeletePatientServicesTest {
         patients.add(patient);
         DeletePatientRequest deletePatientRequest = new DeletePatientRequest(8L);
         Mockito.when(deletePatientValidator.validate(deletePatientRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(8L)).thenReturn(true);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(8L)).thenReturn(true);
 
         DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);
 
         assertFalse(deletePatientResponse.hasErrors());
-        Mockito.verify(patientDatabase).deletePatient(argThat(new IdMatcher(8L)));
+        Mockito.verify(patientRepository).deletePatient(argThat(new IdMatcher(8L)));
     }
 }

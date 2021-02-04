@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 @Transactional
 public class TotalSumCartService {
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
 
     public BigDecimal calculateTotalSum() {
-        BigDecimal sum = cartRepository.getCartTotalSum();
+        BigDecimal sum = CartRepository.getCartTotalSum();
         if (sum == null) {
             sum = new BigDecimal("0.00");
         }
         return sum;
     }
-} 
+}

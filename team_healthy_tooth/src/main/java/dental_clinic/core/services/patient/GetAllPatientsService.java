@@ -5,7 +5,7 @@ import dental_clinic.core.requests.patient.GetAllPatientsRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
 import dental_clinic.core.validators.patient.GetAllPatientsRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class GetAllPatientsService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired private GetAllPatientsRequestValidator getAllPatientsRequestValidator;
 
     public GetAllPatientsResponse execute(GetAllPatientsRequest getAllPatientsRequest){
@@ -26,12 +26,12 @@ public class GetAllPatientsService {
             return new GetAllPatientsResponse(errors, new ArrayList<>());
         }
 
-        if (patientDatabase.getPatients().isEmpty()){
+        if (patientRepository.getPatients().isEmpty()){
             errors.add(new CoreError("database", "Database is empty"));
             return new GetAllPatientsResponse(errors, new ArrayList<>());
         }
 
-        List<Patient>patients = patientDatabase.getPatients();
+        List<Patient>patients = patientRepository.getPatients();
         return new GetAllPatientsResponse(patients);
     }
 }

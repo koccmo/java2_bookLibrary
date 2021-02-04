@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CartProductsCountService {
     @Autowired
-    CartRepository cartRepository;
+    CartRepository CartRepository;
 
     public long getCartCount() {
-        return cartRepository.countProductInCart();
+        return CartRepository.countProductInCart();
     }
 }

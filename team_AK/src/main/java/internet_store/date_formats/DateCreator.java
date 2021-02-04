@@ -6,6 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class DateCreator {
     public String createShortDateFormat() {
         LocalDate localDate = LocalDate.now();
-        return DateTimeFormatter.ofPattern("dd.MM.yyyy").format(localDate);
+        return DateTimeFormatter.ofPattern("ddMMyyyy").format(localDate);
     }
 }
