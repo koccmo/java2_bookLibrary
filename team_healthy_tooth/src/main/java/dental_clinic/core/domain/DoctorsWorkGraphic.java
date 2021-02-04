@@ -227,19 +227,12 @@ public class DoctorsWorkGraphic {
     @Override
     public String toString() {
         return "DoctorsWorkGraphic:" +
-                "\nmonday_start: " + monday_start +
-                "\nmonday_end: " + monday_end +
-                "\ntuesday_start: " + tuesday_start +
-                "\ntuesday_end: " + tuesday_end +
-                "\nwednesday_start: " + wednesday_start +
-                "\nwednesday_end: " + wednesday_end +
-                "\nthursday_start: " + thursday_start +
-                "\nthursday_end: " + thursday_end +
-                "\nfriday_start: " + friday_start +
-                "\nfriday_end: " + friday_end +
-                "\nsaturday_start: " + saturday_start +
-                "\nsaturday_end: " + saturday_end +
-                "\nsunday_start: " + sunday_start +
-                "\nsunday_end: " + sunday_end + "\n\n";
+                "\nmonday: " + monday_start + " : " + monday_end +
+                "\ntuesday: " + tuesday_start + " : " + tuesday_end +
+                "\nwednesday: " + wednesday_start + " : " + wednesday_end +
+                "\nthursday: " + thursday_start + " : " + thursday_end +
+                "\nfriday: " + friday_start + " : " + friday_end +
+                "\nsaturday: " + saturday_start + " : " + saturday_end +
+                "\nsunday: " + sunday_start + " : " + sunday_end + "\n\n";
     }
 }
