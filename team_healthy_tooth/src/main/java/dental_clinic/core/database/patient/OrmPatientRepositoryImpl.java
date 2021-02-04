@@ -23,12 +23,16 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
         List <PersonalData> personalDataList = getPersonalData();
         List<Patient> patientList = new ArrayList<>();
         for (PersonalData personalData : personalDataList) {
-            String sql = "SELECT v FROM Visit v WHERE id =" + personalData.getId();
+            String sql = "SELECT v FROM Visit v WHERE patient_id =" + personalData.getId();
             List<Visit>visits = sessionFactory.getCurrentSession()
                     .createQuery(sql, Visit.class)
                     .getResultList();
-            JowlEntity jowlEntity = sessionFactory.getCurrentSession().get(JowlEntity.class, personalData.getId());
-            Patient patient = new Patient(personalData, jowlEntity,visits);
+
+            Query query1 = sessionFactory.getCurrentSession().createQuery(
+                    "SELECT j FROM JowlEntity j WHERE patient_id = :id");
+            query1.setParameter("id", personalData.getId());
+            JowlEntity jowlEntity = (JowlEntity) query1.getResultList().get(0);
+            Patient patient = new Patient(personalData, jowlEntity, visits);
             patientList.add(patient);
         }
         return patientList;
@@ -84,7 +88,10 @@ public class OrmPatientRepositoryImpl implements PatientRepository{
         List<Visit>visits = sessionFactory.getCurrentSession()
                 .createQuery(sql, Visit.class)
                 .getResultList();
-        JowlEntity jowlEntity = sessionFactory.getCurrentSession().get(JowlEntity.class, personalData.getId());
+        Query query1 = sessionFactory.getCurrentSession().createQuery(
+                "SELECT j FROM JowlEntity j WHERE patient_id = :id");
+        query1.setParameter("id", personalData.getId());
+        JowlEntity jowlEntity = (JowlEntity) query1.getResultList().get(0);
         Patient patient = new Patient(personalData, jowlEntity,visits);
         return Optional.ofNullable(patient);
     }
