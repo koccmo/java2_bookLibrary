@@ -1,13 +1,14 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibraryRepository;
+import electronic_library.core.database.book.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
-import electronic_library.core.requests.FindBooksRequest;
+import electronic_library.core.requests.book.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
 import electronic_library.core.requests.Paging;
 import electronic_library.core.responses.CoreError;
-import electronic_library.core.responses.FindBooksResponse;
-import electronic_library.core.services.validators.FindBooksRequestValidator;
+import electronic_library.core.responses.book.FindBooksResponse;
+import electronic_library.core.services.book.FindBooksService;
+import electronic_library.core.services.book.validators.FindBooksRequestValidator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

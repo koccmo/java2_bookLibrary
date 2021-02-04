@@ -2,11 +2,11 @@ package electronic_library.acceptance_tests;
 
 import electronic_library.DatabaseCleaner;
 import electronic_library.config.BookListConfiguration;
-import electronic_library.core.requests.AddBookRequest;
-import electronic_library.core.requests.GetAllBooksRequest;
-import electronic_library.core.responses.GetAllBooksResponse;
-import electronic_library.core.services.AddBookService;
-import electronic_library.core.services.GetAllBooksService;
+import electronic_library.core.requests.book.AddBookRequest;
+import electronic_library.core.requests.book.GetAllBooksRequest;
+import electronic_library.core.responses.book.GetAllBooksResponse;
+import electronic_library.core.services.book.AddBookService;
+import electronic_library.core.services.book.GetAllBooksService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

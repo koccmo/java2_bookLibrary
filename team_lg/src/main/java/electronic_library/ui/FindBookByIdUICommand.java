@@ -1,9 +1,9 @@
 package electronic_library.ui;
 
 import electronic_library.core.domain.Book;
-import electronic_library.core.requests.FindBookByIdRequest;
-import electronic_library.core.responses.FindBookByIdResponse;
-import electronic_library.core.services.FindBookByIdService;
+import electronic_library.core.requests.book.FindBookByIdRequest;
+import electronic_library.core.responses.book.FindBookByIdResponse;
+import electronic_library.core.services.book.FindBookByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
