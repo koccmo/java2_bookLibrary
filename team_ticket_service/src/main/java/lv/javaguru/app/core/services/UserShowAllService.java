@@ -5,18 +5,20 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserShowAllResponse;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserShowAllService {
 
 	@Autowired
-	private SqlDatabase sqlDatabase;
+	private UserRepository userRepository;
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
 		List<?> errorList = validate(request.getUser());
@@ -27,7 +29,7 @@ public class UserShowAllService {
 		}
 
 		if (request.getId() == null)
-			return new UserShowAllResponse<>(sqlDatabase.getAllUsers());
+			return new UserShowAllResponse<>(userRepository.getAllUsers());
 
 		return new UserShowAllResponse<>(errorList);
 	}
@@ -36,7 +38,7 @@ public class UserShowAllService {
 	private List<CodeError> validate (User user) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		User u = sqlDatabase.getUserById(user.getId());
+		User u = userRepository.getUserById(user.getId());
 
 		if (u == null)
 			errorList.add(new CodeError("User", "no user in database"));

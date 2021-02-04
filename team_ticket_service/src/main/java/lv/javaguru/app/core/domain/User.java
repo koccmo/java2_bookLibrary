@@ -1,32 +1,28 @@
 package lv.javaguru.app.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class User {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	//private final String login;
-	//private String password;
+
+	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Column(name = "surname", nullable = false)
 	private String surname;
+
+	@Column(name = "person_type", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private PersonType personType;
 
-//private User (String login, String password) {
-//	this.login = login;
-//	this.password = password;
-//	this.personType = PersonType.CLIENT;
-//}
-
-	//public User (String login, String password, String name, String surname) {
-//	this(login, password);
-//	this.name = name;
-//	this.surname = surname;
-//}
 	public User () {
-	}
-
-	public User (String name) {
-		this.name = name;
 	}
 
 	public User (String name, String surname) {
@@ -35,15 +31,11 @@ public class User {
 		this.personType = PersonType.CLIENT;
 	}
 
-	//
 	public User (String name, String surname, PersonType personType) {
 		this(name, surname);
 		this.personType = personType;
 	}
-	public User (Long id, String name, String surname, PersonType personType) {
-		this(name, surname, personType);
-		this.id = id;
-	}
+
 
 	public PersonType getPersonType () {
 		return personType;

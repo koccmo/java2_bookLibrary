@@ -3,12 +3,10 @@ package lv.javaguru.app.database;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
 public class InMemoryDatabase implements Database {
 	private final Map<Long, Ticket> ticketTable = new HashMap<>();
 	private final Map<Long, User> userTable = new HashMap<>();

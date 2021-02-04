@@ -1,15 +1,36 @@
 package lv.javaguru.app.core.domain;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tickets")
 public class Ticket {
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "fromCountry")
 	private String originCountry;
+
+	@Column(name = "fromCity")
 	private String originCity;
+
+	@Column(name = "toCountry")
 	private String destinationCountry;
+
+	@Column(name = "toCity")
 	private String destinationCity;
-	private LocalDate departureDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date")
+	private Date departureDate;
+
+	@Column(name = "seat")
 	private String seat;
 
 
@@ -24,7 +45,7 @@ public class Ticket {
 	public Ticket () {
 	}
 
-	public Ticket (String originCity, String destinationCity, LocalDate departureDate, String seat) {
+	public Ticket (String originCity, String destinationCity, Date departureDate, String seat) {
 		this.originCity = originCity;
 		this.destinationCity = destinationCity;
 		this.departureDate = departureDate;
@@ -92,11 +113,11 @@ public class Ticket {
 		this.destinationCountry = destinationCountry;
 	}
 
-	public LocalDate getDepartureDate () {
+	public Date getDepartureDate () {
 		return departureDate;
 	}
 
-	public void setDepartureDate (LocalDate departureDate) {
+	public void setDepartureDate (Date departureDate) {
 		this.departureDate = departureDate;
 	}
 

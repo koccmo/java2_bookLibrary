@@ -3,12 +3,13 @@ package lv.javaguru.app.core.request;
 import lv.javaguru.app.core.domain.Flight;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class EditFlightValueRequest {
 	private final Flight flight;
 	private String newValue;
 	private String[] newValues;
-	private LocalDate newDate;
+	private Date newDate;
 
 	public EditFlightValueRequest (Flight flight, String newValue) {
 		this.flight = flight;
@@ -20,7 +21,7 @@ public class EditFlightValueRequest {
 		this.newValues = newValues;
 	}
 
-	public EditFlightValueRequest (Flight flight, LocalDate newDate) {
+	public EditFlightValueRequest (Flight flight, Date newDate) {
 		this.flight = flight;
 		this.newDate = newDate;
 	}
@@ -33,7 +34,7 @@ public class EditFlightValueRequest {
 		return newValue;
 	}
 
-	public LocalDate getNewDate () {
+	public Date getNewDate () {
 		return newDate;
 	}
 

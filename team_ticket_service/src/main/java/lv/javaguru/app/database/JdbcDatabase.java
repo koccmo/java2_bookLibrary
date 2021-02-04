@@ -7,16 +7,13 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.database.rowmappers.FlightRowMapper;
 import lv.javaguru.app.database.rowmappers.TicketRowMapper;
 import lv.javaguru.app.database.rowmappers.UserRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class SqlDatabase {
 
-	@Autowired
+public class JdbcDatabase {
+
 	private JdbcTemplate jdbcTemplate;
 
 	public User getUserByNameAndSurname (User user) {
@@ -42,21 +39,6 @@ public class SqlDatabase {
 		jdbcTemplate.update(sql, args);
 	}
 
-	public Ticket getAddedTicketId (Ticket ticket) {
-		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
-		Object[] args = new Object[]{
-				ticket.getOriginCountry(),
-				ticket.getOriginCity(),
-				ticket.getDestinationCountry(),
-				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
-				ticket.getSeat()
-		};
-		List<Ticket> tickets = jdbcTemplate.query(sql, args, new TicketRowMapper());
-
-		return tickets.size() > 0 ? tickets.get(0) : null;
-	}
-
 	public boolean deleteFlightById (Long id) {
 		String sql = "DELETE FROM flights WHERE flights.id = ?";
 		Object[] args = new Object[]{id};
@@ -64,20 +46,7 @@ public class SqlDatabase {
 		return jdbcTemplate.update(sql, args) == 1;
 	}
 
-	public void addTicket (Ticket ticket) {
-		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
-				+ "VALUES (?, ?, ?, ?, ?, ?)";
-		Object[] args = new Object[]{
-				ticket.getOriginCountry(),
-				ticket.getOriginCity(),
-				ticket.getDestinationCountry(),
-				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
-				ticket.getSeat()
-		};
 
-		jdbcTemplate.update(sql, args);
-	}
 
 	public boolean addUser (User userToAdd) {
 		String sql = "INSERT INTO users (name, surname, person_type) " +
@@ -87,6 +56,27 @@ public class SqlDatabase {
 				userToAdd.getSurname(),
 				userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
 		};
+
+		return jdbcTemplate.update(sql, args) == 1;
+	}
+	public User getUserById (Long id) {
+		String sql = "SELECT * FROM users WHERE users.id = ?";
+		Object[] args = new Object[]{id};
+
+		List<User> users = jdbcTemplate.query(sql, args, new UserRowMapper());
+
+		return users.size() > 0 ? users.get(0) : null;
+	}
+
+	public List<User> getAllUsers () {
+		String sql = "SELECT * FROM users;";
+
+		return jdbcTemplate.query(sql, new UserRowMapper());
+	}
+
+	public boolean removeUser (Long id) {
+		String sql = "DELETE FROM users WHERE id = ?";
+		Object[] args = new Object[]{id};
 
 		return jdbcTemplate.update(sql, args) == 1;
 	}
@@ -104,6 +94,37 @@ public class SqlDatabase {
 
 		return jdbcTemplate.update(sql, args) == 1;
 	}
+
+	public Ticket getAddedTicketId (Ticket ticket) {
+		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
+		Object[] args = new Object[]{
+				ticket.getOriginCountry(),
+				ticket.getOriginCity(),
+				ticket.getDestinationCountry(),
+				ticket.getDestinationCity(),
+				ticket.getDepartureDate(),
+				ticket.getSeat()
+		};
+		List<Ticket> tickets = jdbcTemplate.query(sql, args, new TicketRowMapper());
+
+		return tickets.size() > 0 ? tickets.get(0) : null;
+	}
+
+	public void addTicket (Ticket ticket) {
+		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		Object[] args = new Object[]{
+				ticket.getOriginCountry(),
+				ticket.getOriginCity(),
+				ticket.getDestinationCountry(),
+				ticket.getDestinationCity(),
+				ticket.getDepartureDate(),
+				ticket.getSeat()
+		};
+
+		jdbcTemplate.update(sql, args);
+	}
+
 
 	public boolean updateTicketOriginByTicketId (Long id, String originCountry, String originCity) {
 		String sql = "UPDATE tickets SET tickets.fromCountry = ?, tickets.fromCity = ? WHERE tickets.id = ?";
@@ -133,14 +154,10 @@ public class SqlDatabase {
 		return jdbcTemplate.update(sql, args) == 1;
 	}
 
-	public User getUserById (Long id) {
-		String sql = "SELECT * FROM users WHERE users.id = ?";
-		Object[] args = new Object[]{id};
 
-		List<User> users = jdbcTemplate.query(sql, args, new UserRowMapper());
 
-		return users.size() > 0 ? users.get(0) : null;
-	}
+
+
 
 	public Flight getFlightById (Long id) {
 		String sql = "SELECT flights.id, users.*, tickets.* " +
@@ -155,11 +172,6 @@ public class SqlDatabase {
 		return flights.size() > 0 ? flights.get(0) : null;
 	}
 
-	public List<User> getAllUsers () {
-		String sql = "SELECT * FROM users;";
-
-		return jdbcTemplate.query(sql, new UserRowMapper());
-	}
 
 	public List<Flight> getAllFlights () {
 		String sql = "SELECT flights.id, users.*, tickets.* " +
@@ -186,12 +198,5 @@ public class SqlDatabase {
 		Object[] args = new Object[]{user.getId(), user.getName(), user.getSurname()};
 
 		return jdbcTemplate.query(sql, args, new FlightRowMapper());
-	}
-
-	public boolean removeUser (Long id) {
-		String sql = "DELETE FROM users WHERE id = ?";
-		Object[] args = new Object[]{id};
-
-		return jdbcTemplate.update(sql, args) == 1;
 	}
 }
