@@ -1,5 +1,7 @@
 package dental_clinic.core.services.doctor;
 
+import dental_clinic.core.domain.Doctor;
+import dental_clinic.core.domain.DoctorAndGraphic;
 import dental_clinic.core.requests.doctor.GetDoctorListRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.GetDoctorListResponse;
@@ -31,7 +33,12 @@ public class GetDoctorListService {
             return new GetDoctorListResponse(errorList, new ArrayList<>());
         }
 
-        return new GetDoctorListResponse(doctorRepository.getDoctorList());
+        List <DoctorAndGraphic> doctorAndGraphicList = new ArrayList<>();
+        for (Doctor doctor : doctorRepository.getDoctorList()) {
+            DoctorAndGraphic doctorAndGraphic = new DoctorAndGraphic(doctor, doctorRepository.getWorkGraphic(doctor));
+            doctorAndGraphicList.add(doctorAndGraphic);
+        }
+        return new GetDoctorListResponse(doctorAndGraphicList);
     }
 
 }
