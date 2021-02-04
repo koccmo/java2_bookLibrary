@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Component
 public class DeleteReaderByIdValidator {
     public List<CoreError> validate(DeleteReaderByIdRequest request) {
 

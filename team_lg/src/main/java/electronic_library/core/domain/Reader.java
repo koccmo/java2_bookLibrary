@@ -115,4 +115,17 @@ public class Reader {
     public int hashCode() {
         return Objects.hash(id, readerFirstName, readerLastName, readerPersonalCode, readerPhoneNumber, readerEmail, readerAddress);
     }
+
+    @Override
+    public String toString() {
+        return "Reader{" +
+                "id=" + id +
+                ", readerFirstName='" + readerFirstName + '\'' +
+                ", readerLastName='" + readerLastName + '\'' +
+                ", readerPersonalCode='" + readerPersonalCode + '\'' +
+                ", readerPhoneNumber='" + readerPhoneNumber + '\'' +
+                ", readerEmail='" + readerEmail + '\'' +
+                ", readerAddress='" + readerAddress + '\'' +
+                '}';
+    }
 }

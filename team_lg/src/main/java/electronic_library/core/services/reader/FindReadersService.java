@@ -17,8 +17,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Component
-//@Transactional
+@Component
+@Transactional
 public class FindReadersService {
     @Autowired
     private ReaderRepository readerRepository;
@@ -41,7 +41,7 @@ public class FindReadersService {
 
     private List<Reader> order(List<Reader> Readers, Ordering ordering) {
         if (ordering != null) {
-            Comparator<Reader> comparator = ordering.getOrderBy().equals("readerFirstName")
+            Comparator<Reader> comparator = ordering.getOrderBy().equals("firstName")
                     ? Comparator.comparing(Reader::getReaderFirstName)
                     : Comparator.comparing(Reader::getReaderLastName);
             if (ordering.getOrderDirection().equals("DESC")) {
@@ -81,5 +81,4 @@ public class FindReadersService {
             return Readers;
         }
     }
-
 }

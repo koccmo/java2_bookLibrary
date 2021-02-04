@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Component
 public class GetAllReadersValidator {
     public List<CoreError> validate (GetAllReadersRequest getAllReadersRequest){
         return new ArrayList<>();

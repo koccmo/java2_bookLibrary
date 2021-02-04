@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@Component
+@Component
 public class FindReadersRequestValidator {
     public List<CoreError> validate(FindReadersRequest request) {
 
