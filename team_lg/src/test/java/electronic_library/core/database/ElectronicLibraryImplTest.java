@@ -1,5 +1,6 @@
 package electronic_library.core.database;
 
+import electronic_library.core.database.book.ElectronicLibraryRepositoryImpl;
 import electronic_library.core.domain.Book;
 import org.junit.Before;
 import org.junit.Test;

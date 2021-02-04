@@ -13,7 +13,6 @@ public class Main {
 
 	public static void main (String[] args) {
 		InitMode initMode = new InitMode(applicationContext);
-		initMode.fillDb();
 		initMode.execute();
 	}
 

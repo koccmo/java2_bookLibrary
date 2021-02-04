@@ -5,24 +5,24 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name="book")
+@Table(name="books")
 public class Book {
-
-    @Column(name="bookTitle")
-    private String bookTitle;
-
-    @Column(name="bookAuthor")
-    private String bookAuthor;
-
-    @Column(name="bookPrice")
-    private BigDecimal bookPrice;
 
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="yearOfBookIssue")
+    @Column(name="bookTitle", nullable = false)
+    private String bookTitle;
+
+    @Column(name="bookAuthor", nullable = false)
+    private String bookAuthor;
+
+    @Column(name="bookPrice", nullable = false)
+    private BigDecimal bookPrice;
+
+    @Column(name="yearOfBookIssue", nullable = false)
     private int yearOfBookIssue;
 
     public Book(String bookTitle, String bookAuthor, BigDecimal bookPrice, int yearOfBookIssue) {

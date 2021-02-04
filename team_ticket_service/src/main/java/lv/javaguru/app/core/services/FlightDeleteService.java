@@ -6,19 +6,21 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.DeleteFlightRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightDeleteResponse;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class FlightDeleteService {
 
 	@Autowired
-	private SqlDatabase sqlDatabase;
+	private FlightRepository flightRepository;
+
 
 	public FlightDeleteResponse execute (DeleteFlightRequest request) {
 		List<CodeError> errors = validate(request);
@@ -26,9 +28,8 @@ public class FlightDeleteService {
 		if (!errors.isEmpty())
 			return new FlightDeleteResponse(errors);
 
-		sqlDatabase.deleteFlightById(request.getId());
 
-		if (sqlDatabase.getFlightById(request.getId()) != null) {
+		if (!flightRepository.deleteFlightById(request.getId())) {
 			errors.add(new CodeError("Flight", "Haven't managed to delete flight with Id: " + request.getId()));
 			return new FlightDeleteResponse(errors);
 		}
@@ -39,7 +40,7 @@ public class FlightDeleteService {
 	private List<CodeError> validate (DeleteFlightRequest request) {
 		List<CodeError> errors = new ArrayList<>();
 
-		Flight flight = sqlDatabase.getFlightById(request.getId());
+		Flight flight = flightRepository.getFlightById(request.getId());
 		if (flight == null) {
 			errors.add(new CodeError("Id", "wrong ID"));
 

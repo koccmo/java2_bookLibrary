@@ -8,7 +8,7 @@ import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.response.FlightAddResponse;
 import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.JdbcDatabase;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,20 +18,19 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FlightAddServiceTest {
 	@Mock
 	private Database flights;
-	@Mock
-	private SqlDatabase d;
+	//@Mock
+	//private JdbcDatabase d;
 	@Mock
 	private AddFlightRequestValidator validator;
 	@InjectMocks
@@ -44,8 +43,9 @@ public class FlightAddServiceTest {
 	@Before
 	public void setUp () {
 		user = new User("Jimbo", "Johnson");
+		Date date = new Date();
 
-		ticket = new Ticket("Riga", "Paphos", LocalDate.now().plusMonths(1), "155d");
+		ticket = new Ticket("Riga", "Paphos", date, "155d");
 		ticket.setOriginCountry("Latvia");
 		ticket.setDestinationCountry("Cyprus");
 
@@ -72,7 +72,7 @@ public class FlightAddServiceTest {
 		AddFlightRequest request = new AddFlightRequest(flight);
 
 		List<CodeError> errors = new ArrayList<>();
-		errors.add(new CodeError("User Name","Shouldn't be null or empty!"));
+		errors.add(new CodeError("User Name", "Shouldn't be null or empty!"));
 
 		Mockito.when(validator.validate(request)).thenReturn(errors);
 

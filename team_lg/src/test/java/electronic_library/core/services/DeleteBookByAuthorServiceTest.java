@@ -1,10 +1,11 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibraryRepository;
-import electronic_library.core.requests.DeleteBookByAuthorRequest;
+import electronic_library.core.database.book.ElectronicLibraryRepository;
+import electronic_library.core.requests.book.DeleteBookByAuthorRequest;
 import electronic_library.core.responses.CoreError;
-import electronic_library.core.responses.DeleteBookByAuthorResponse;
-import electronic_library.core.services.validators.DeleteBookByAuthorValidator;
+import electronic_library.core.responses.book.DeleteBookByAuthorResponse;
+import electronic_library.core.services.book.DeleteBookByAuthorService;
+import electronic_library.core.services.book.validators.DeleteBookByAuthorValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

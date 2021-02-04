@@ -8,23 +8,24 @@ import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Component
+@Transactional
 public class LogInService {
+
 	@Autowired
 	private ApplicationContext applicationContext;
+
 	@Autowired
-	private Database database;
-	@Autowired
-	private SqlDatabase sqlDatabase;
+	private UserRepository userRepository;
+
 	@Autowired
 	private LoginRequestValidator validator;
 
@@ -35,7 +36,7 @@ public class LogInService {
 		if (!errors.isEmpty())
 			return new LogInResponse(errors);
 
-		User u = sqlDatabase.getUserByNameAndSurname(request.getUser());
+		User u = userRepository.getUserByNameAndSurname(request.getUser());
 		if (u == null) {
 			errors.add(new CodeError("database", "No such user"));
 			return new LogInResponse(errors);
