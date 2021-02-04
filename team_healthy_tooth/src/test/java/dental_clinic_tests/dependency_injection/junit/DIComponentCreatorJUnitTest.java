@@ -1,5 +1,5 @@
 package dental_clinic_tests.dependency_injection.junit;
-
+/*
 import dental_clinic.console_ui.patient.AddPatientUIAction;
 import dental_clinic.dependency_injection.ApplicationContext;
 import dental_clinic.dependency_injection.DIComponentCreator;
@@ -29,4 +29,4 @@ public class DIComponentCreatorJUnitTest {
         assertTrue(applicationContext.getBeans().containsKey(DeletePatientUIAction.class));
 
     }
-}
+}*/
