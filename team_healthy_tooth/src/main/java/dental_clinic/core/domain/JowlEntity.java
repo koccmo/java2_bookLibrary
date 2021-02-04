@@ -1,12 +1,14 @@
 package dental_clinic.core.domain;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name="jowl")
 public class JowlEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
 
@@ -15,163 +17,163 @@ public class JowlEntity {
     private PersonalData personalData;
 
     @Column(name="d18", nullable = false)
-    private String d18;
+    private ToothStatus d18 = ToothStatus.HEALTHY;
 
     @Column(name="d17", nullable = false)
-    private String d17;
+    private ToothStatus d17 = ToothStatus.HEALTHY;
 
     @Column(name="d16", nullable = false)
-    private String d16;
+    private ToothStatus d16 = ToothStatus.HEALTHY;
 
     @Column(name="d15", nullable = false)
-    private String d15;
+    private ToothStatus d15 = ToothStatus.HEALTHY;
 
     @Column(name="d14", nullable = false)
-    private String d14;
+    private ToothStatus d14 = ToothStatus.HEALTHY;
 
     @Column(name="d13", nullable = false)
-    private String d13;
+    private ToothStatus d13 = ToothStatus.HEALTHY;
 
     @Column(name="d12", nullable = false)
-    private String d12;
+    private ToothStatus d12 = ToothStatus.HEALTHY;
 
     @Column(name="d11", nullable = false)
-    private String d11;
+    private ToothStatus d11 = ToothStatus.HEALTHY;
 
     @Column(name="d21", nullable = false)
-    private String d21;
+    private ToothStatus d21 = ToothStatus.HEALTHY;
 
     @Column(name="d22", nullable = false)
-    private String d22;
+    private ToothStatus d22 = ToothStatus.HEALTHY;
 
     @Column(name="d23", nullable = false)
-    private String d23;
+    private ToothStatus d23 = ToothStatus.HEALTHY;
 
     @Column(name="d24", nullable = false)
-    private String d24;
+    private ToothStatus d24 = ToothStatus.HEALTHY;
 
     @Column(name="d25", nullable = false)
-    private String d25;
+    private ToothStatus d25 = ToothStatus.HEALTHY;
 
     @Column(name="d26", nullable = false)
-    private String d26;
+    private ToothStatus d26 = ToothStatus.HEALTHY;
 
     @Column(name="d27", nullable = false)
-    private String d27;
+    private ToothStatus d27 = ToothStatus.HEALTHY;
 
     @Column(name="d28", nullable = false)
-    private String d28;
+    private ToothStatus d28 = ToothStatus.HEALTHY;
 
     @Column(name="d55", nullable = false)
-    private String d55;
+    private ToothStatus d55 = ToothStatus.HEALTHY;
 
     @Column(name="d54", nullable = false)
-    private String d54;
+    private ToothStatus d54 = ToothStatus.HEALTHY;
 
     @Column(name="d53", nullable = false)
-    private String d53;
+    private ToothStatus d53 = ToothStatus.HEALTHY;
 
     @Column(name="d52", nullable = false)
-    private String d52;
+    private ToothStatus d52 = ToothStatus.HEALTHY;
 
     @Column(name="d51", nullable = false)
-    private String d51;
+    private ToothStatus d51 = ToothStatus.HEALTHY;
 
     @Column(name="d61", nullable = false)
-    private String d61;
+    private ToothStatus d61 = ToothStatus.HEALTHY;
 
     @Column(name="d62", nullable = false)
-    private String d62;
+    private ToothStatus d62 = ToothStatus.HEALTHY;
 
     @Column(name="d63", nullable = false)
-    private String d63;
+    private ToothStatus d63 = ToothStatus.HEALTHY;
 
     @Column(name="d64", nullable = false)
-    private String d64;
+    private ToothStatus d64 = ToothStatus.HEALTHY;
 
     @Column(name="d65", nullable = false)
-    private String d65;
+    private ToothStatus d65 = ToothStatus.HEALTHY;
 
     @Column(name="d48", nullable = false)
-    private String d48;
+    private ToothStatus d48 = ToothStatus.HEALTHY;
 
     @Column(name="d47", nullable = false)
-    private String d47;
+    private ToothStatus d47 = ToothStatus.HEALTHY;
 
     @Column(name="d46", nullable = false)
-    private String d46;
+    private ToothStatus d46 = ToothStatus.HEALTHY;
 
     @Column(name="d45", nullable = false)
-    private String d45;
+    private ToothStatus d45 = ToothStatus.HEALTHY;
 
     @Column(name="d44", nullable = false)
-    private String d44;
+    private ToothStatus d44 = ToothStatus.HEALTHY;
 
     @Column(name="d43", nullable = false)
-    private String d43;
+    private ToothStatus d43 = ToothStatus.HEALTHY;
 
     @Column(name="d42", nullable = false)
-    private String d42;
+    private ToothStatus d42 = ToothStatus.HEALTHY;
 
     @Column(name="d41", nullable = false)
-    private String d41;
+    private ToothStatus d41 = ToothStatus.HEALTHY;
 
     @Column(name="d31", nullable = false)
-    private String d31;
+    private ToothStatus d31 = ToothStatus.HEALTHY;
 
     @Column(name="d32", nullable = false)
-    private String d32;
+    private ToothStatus d32 = ToothStatus.HEALTHY;
 
     @Column(name="d33", nullable = false)
-    private String d33;
+    private ToothStatus d33 = ToothStatus.HEALTHY;
 
     @Column(name="d34", nullable = false)
-    private String d34;
+    private ToothStatus d34 = ToothStatus.HEALTHY;
 
     @Column(name="d35", nullable = false)
-    private String d35;
+    private ToothStatus d35 = ToothStatus.HEALTHY;
 
     @Column(name="d36", nullable = false)
-    private String d36;
+    private ToothStatus d36 = ToothStatus.HEALTHY;
 
     @Column(name="d37", nullable = false)
-    private String d37;
+    private ToothStatus d37 = ToothStatus.HEALTHY;
 
     @Column(name="d38", nullable = false)
-    private String d38;
+    private ToothStatus d38 = ToothStatus.HEALTHY;
 
     @Column(name="d85", nullable = false)
-    private String d85;
+    private ToothStatus d85 = ToothStatus.HEALTHY;
 
     @Column(name="d84", nullable = false)
-    private String d84;
+    private ToothStatus d84 = ToothStatus.HEALTHY;
 
     @Column(name="d83", nullable = false)
-    private String d83;
+    private ToothStatus d83 = ToothStatus.HEALTHY;
 
     @Column(name="d82", nullable = false)
-    private String d82;
+    private ToothStatus d82 = ToothStatus.HEALTHY;
 
     @Column(name="d81", nullable = false)
-    private String d81;
+    private ToothStatus d81 = ToothStatus.HEALTHY;
 
     @Column(name="d71", nullable = false)
-    private String d71;
+    private ToothStatus d71 = ToothStatus.HEALTHY;
 
     @Column(name="d72", nullable = false)
-    private String d72;
+    private ToothStatus d72 = ToothStatus.HEALTHY;
 
     @Column(name="d73", nullable = false)
-    private String d73;
+    private ToothStatus d73 = ToothStatus.HEALTHY;
 
     @Column(name="d74", nullable = false)
-    private String d74;
+    private ToothStatus d74 = ToothStatus.HEALTHY;
 
     @Column(name="d75", nullable = false)
-    private String d75;
+    private ToothStatus d75 = ToothStatus.HEALTHY;
 
     @Column(name="isMost", nullable = false)
-    private boolean isMost;
+    private boolean isMost = false;
 
     @Column(name="m01s")
     private Long m01s;
@@ -211,6 +213,10 @@ public class JowlEntity {
 
     public JowlEntity() { }
 
+    public JowlEntity(PersonalData personalData) {
+        this.personalData = personalData;
+    }
+
     public Long getId() {
         return id;
     }
@@ -227,419 +233,419 @@ public class JowlEntity {
         this.personalData = personalData;
     }
 
-    public String getD18() {
+    public ToothStatus getD18() {
         return d18;
     }
 
-    public void setD18(String d18) {
+    public void setD18(ToothStatus d18) {
         this.d18 = d18;
     }
 
-    public String getD17() {
+    public ToothStatus getD17() {
         return d17;
     }
 
-    public void setD17(String d17) {
+    public void setD17(ToothStatus d17) {
         this.d17 = d17;
     }
 
-    public String getD16() {
+    public ToothStatus getD16() {
         return d16;
     }
 
-    public void setD16(String d16) {
+    public void setD16(ToothStatus d16) {
         this.d16 = d16;
     }
 
-    public String getD15() {
+    public ToothStatus getD15() {
         return d15;
     }
 
-    public void setD15(String d15) {
+    public void setD15(ToothStatus d15) {
         this.d15 = d15;
     }
 
-    public String getD14() {
+    public ToothStatus getD14() {
         return d14;
     }
 
-    public void setD14(String d14) {
+    public void setD14(ToothStatus d14) {
         this.d14 = d14;
     }
 
-    public String getD13() {
+    public ToothStatus getD13() {
         return d13;
     }
 
-    public void setD13(String d13) {
+    public void setD13(ToothStatus d13) {
         this.d13 = d13;
     }
 
-    public String getD12() {
+    public ToothStatus getD12() {
         return d12;
     }
 
-    public void setD12(String d12) {
+    public void setD12(ToothStatus d12) {
         this.d12 = d12;
     }
 
-    public String getD11() {
+    public ToothStatus getD11() {
         return d11;
     }
 
-    public void setD11(String d11) {
+    public void setD11(ToothStatus d11) {
         this.d11 = d11;
     }
 
-    public String getD21() {
+    public ToothStatus getD21() {
         return d21;
     }
 
-    public void setD21(String d21) {
+    public void setD21(ToothStatus d21) {
         this.d21 = d21;
     }
 
-    public String getD22() {
+    public ToothStatus getD22() {
         return d22;
     }
 
-    public void setD22(String d22) {
+    public void setD22(ToothStatus d22) {
         this.d22 = d22;
     }
 
-    public String getD23() {
+    public ToothStatus getD23() {
         return d23;
     }
 
-    public void setD23(String d23) {
+    public void setD23(ToothStatus d23) {
         this.d23 = d23;
     }
 
-    public String getD24() {
+    public ToothStatus getD24() {
         return d24;
     }
 
-    public void setD24(String d24) {
+    public void setD24(ToothStatus d24) {
         this.d24 = d24;
     }
 
-    public String getD25() {
+    public ToothStatus getD25() {
         return d25;
     }
 
-    public void setD25(String d25) {
+    public void setD25(ToothStatus d25) {
         this.d25 = d25;
     }
 
-    public String getD26() {
+    public ToothStatus getD26() {
         return d26;
     }
 
-    public void setD26(String d26) {
+    public void setD26(ToothStatus d26) {
         this.d26 = d26;
     }
 
-    public String getD27() {
+    public ToothStatus getD27() {
         return d27;
     }
 
-    public void setD27(String d27) {
+    public void setD27(ToothStatus d27) {
         this.d27 = d27;
     }
 
-    public String getD28() {
+    public ToothStatus getD28() {
         return d28;
     }
 
-    public void setD28(String d28) {
+    public void setD28(ToothStatus d28) {
         this.d28 = d28;
     }
 
-    public String getD55() {
+    public ToothStatus getD55() {
         return d55;
     }
 
-    public void setD55(String d55) {
+    public void setD55(ToothStatus d55) {
         this.d55 = d55;
     }
 
-    public String getD54() {
+    public ToothStatus getD54() {
         return d54;
     }
 
-    public void setD54(String d54) {
+    public void setD54(ToothStatus d54) {
         this.d54 = d54;
     }
 
-    public String getD53() {
+    public ToothStatus getD53() {
         return d53;
     }
 
-    public void setD53(String d53) {
+    public void setD53(ToothStatus d53) {
         this.d53 = d53;
     }
 
-    public String getD52() {
+    public ToothStatus getD52() {
         return d52;
     }
 
-    public void setD52(String d52) {
+    public void setD52(ToothStatus d52) {
         this.d52 = d52;
     }
 
-    public String getD51() {
+    public ToothStatus getD51() {
         return d51;
     }
 
-    public void setD51(String d51) {
+    public void setD51(ToothStatus d51) {
         this.d51 = d51;
     }
 
-    public String getD61() {
+    public ToothStatus getD61() {
         return d61;
     }
 
-    public void setD61(String d61) {
+    public void setD61(ToothStatus d61) {
         this.d61 = d61;
     }
 
-    public String getD62() {
+    public ToothStatus getD62() {
         return d62;
     }
 
-    public void setD62(String d62) {
+    public void setD62(ToothStatus d62) {
         this.d62 = d62;
     }
 
-    public String getD63() {
+    public ToothStatus getD63() {
         return d63;
     }
 
-    public void setD63(String d63) {
+    public void setD63(ToothStatus d63) {
         this.d63 = d63;
     }
 
-    public String getD64() {
+    public ToothStatus getD64() {
         return d64;
     }
 
-    public void setD64(String d64) {
+    public void setD64(ToothStatus d64) {
         this.d64 = d64;
     }
 
-    public String getD65() {
+    public ToothStatus getD65() {
         return d65;
     }
 
-    public void setD65(String d65) {
+    public void setD65(ToothStatus d65) {
         this.d65 = d65;
     }
 
-    public String getD48() {
+    public ToothStatus getD48() {
         return d48;
     }
 
-    public void setD48(String d48) {
+    public void setD48(ToothStatus d48) {
         this.d48 = d48;
     }
 
-    public String getD47() {
+    public ToothStatus getD47() {
         return d47;
     }
 
-    public void setD47(String d47) {
+    public void setD47(ToothStatus d47) {
         this.d47 = d47;
     }
 
-    public String getD46() {
+    public ToothStatus getD46() {
         return d46;
     }
 
-    public void setD46(String d46) {
+    public void setD46(ToothStatus d46) {
         this.d46 = d46;
     }
 
-    public String getD45() {
+    public ToothStatus getD45() {
         return d45;
     }
 
-    public void setD45(String d45) {
+    public void setD45(ToothStatus d45) {
         this.d45 = d45;
     }
 
-    public String getD44() {
+    public ToothStatus getD44() {
         return d44;
     }
 
-    public void setD44(String d44) {
+    public void setD44(ToothStatus d44) {
         this.d44 = d44;
     }
 
-    public String getD43() {
+    public ToothStatus getD43() {
         return d43;
     }
 
-    public void setD43(String d43) {
+    public void setD43(ToothStatus d43) {
         this.d43 = d43;
     }
 
-    public String getD42() {
+    public ToothStatus getD42() {
         return d42;
     }
 
-    public void setD42(String d42) {
+    public void setD42(ToothStatus d42) {
         this.d42 = d42;
     }
 
-    public String getD41() {
+    public ToothStatus getD41() {
         return d41;
     }
 
-    public void setD41(String d41) {
+    public void setD41(ToothStatus d41) {
         this.d41 = d41;
     }
 
-    public String getD31() {
+    public ToothStatus getD31() {
         return d31;
     }
 
-    public void setD31(String d31) {
+    public void setD31(ToothStatus d31) {
         this.d31 = d31;
     }
 
-    public String getD32() {
+    public ToothStatus getD32() {
         return d32;
     }
 
-    public void setD32(String d32) {
+    public void setD32(ToothStatus d32) {
         this.d32 = d32;
     }
 
-    public String getD33() {
+    public ToothStatus getD33() {
         return d33;
     }
 
-    public void setD33(String d33) {
+    public void setD33(ToothStatus d33) {
         this.d33 = d33;
     }
 
-    public String getD34() {
+    public ToothStatus getD34() {
         return d34;
     }
 
-    public void setD34(String d34) {
+    public void setD34(ToothStatus d34) {
         this.d34 = d34;
     }
 
-    public String getD35() {
+    public ToothStatus getD35() {
         return d35;
     }
 
-    public void setD35(String d35) {
+    public void setD35(ToothStatus d35) {
         this.d35 = d35;
     }
 
-    public String getD36() {
+    public ToothStatus getD36() {
         return d36;
     }
 
-    public void setD36(String d36) {
+    public void setD36(ToothStatus d36) {
         this.d36 = d36;
     }
 
-    public String getD37() {
+    public ToothStatus getD37() {
         return d37;
     }
 
-    public void setD37(String d37) {
+    public void setD37(ToothStatus d37) {
         this.d37 = d37;
     }
 
-    public String getD38() {
+    public ToothStatus getD38() {
         return d38;
     }
 
-    public void setD38(String d38) {
+    public void setD38(ToothStatus d38) {
         this.d38 = d38;
     }
 
-    public String getD85() {
+    public ToothStatus getD85() {
         return d85;
     }
 
-    public void setD85(String d85) {
+    public void setD85(ToothStatus d85) {
         this.d85 = d85;
     }
 
-    public String getD84() {
+    public ToothStatus getD84() {
         return d84;
     }
 
-    public void setD84(String d84) {
+    public void setD84(ToothStatus d84) {
         this.d84 = d84;
     }
 
-    public String getD83() {
+    public ToothStatus getD83() {
         return d83;
     }
 
-    public void setD83(String d83) {
+    public void setD83(ToothStatus d83) {
         this.d83 = d83;
     }
 
-    public String getD82() {
+    public ToothStatus getD82() {
         return d82;
     }
 
-    public void setD82(String d82) {
+    public void setD82(ToothStatus d82) {
         this.d82 = d82;
     }
 
-    public String getD81() {
+    public ToothStatus getD81() {
         return d81;
     }
 
-    public void setD81(String d81) {
+    public void setD81(ToothStatus d81) {
         this.d81 = d81;
     }
 
-    public String getD71() {
+    public ToothStatus getD71() {
         return d71;
     }
 
-    public void setD71(String d71) {
+    public void setD71(ToothStatus d71) {
         this.d71 = d71;
     }
 
-    public String getD72() {
+    public ToothStatus getD72() {
         return d72;
     }
 
-    public void setD72(String d72) {
+    public void setD72(ToothStatus d72) {
         this.d72 = d72;
     }
 
-    public String getD73() {
+    public ToothStatus getD73() {
         return d73;
     }
 
-    public void setD73(String d73) {
+    public void setD73(ToothStatus d73) {
         this.d73 = d73;
     }
 
-    public String getD74() {
+    public ToothStatus getD74() {
         return d74;
     }
 
-    public void setD74(String d74) {
+    public void setD74(ToothStatus d74) {
         this.d74 = d74;
     }
 
-    public String getD75() {
+    public ToothStatus getD75() {
         return d75;
     }
 
-    public void setD75(String d75) {
+    public void setD75(ToothStatus d75) {
         this.d75 = d75;
     }
 
@@ -745,5 +751,35 @@ public class JowlEntity {
 
     public void setM06e(Long m06e) {
         this.m06e = m06e;
+    }
+
+    private Map<Integer, List<ToothStatus>> getJowl(){
+        Map <Integer, List<ToothStatus>> newJowl = new HashMap<>();
+        for (int i = 18; i>10; i--) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 21; i<29; i++) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 55; i>50; i--) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 61; i<66; i++) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+
+        for (int i = 48; i>40; i--) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 31; i<39; i++) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 85; i>80; i--) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        for (int i = 71; i<76; i++) {
+            newJowl.put(i, new ArrayList<>(Arrays.asList(ToothStatus.HEALTHY)));
+        }
+        return newJowl;
     }
 }
