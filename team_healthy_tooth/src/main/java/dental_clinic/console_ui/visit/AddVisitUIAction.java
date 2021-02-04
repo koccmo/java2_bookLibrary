@@ -133,7 +133,7 @@ public class AddVisitUIAction implements UIAction {
         GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
         System.out.println("Please enter doctor's id from DB or enter: name surname phone to create new doctor:\n");
         if (!getDoctorListResponse.hasErrors()) {
-            getDoctorListResponse.getDoctors().forEach(System.out::println);
+            getDoctorListResponse.getDoctorAndGraphic().forEach(System.out::println);
         }
         return in.nextLine();
     }
