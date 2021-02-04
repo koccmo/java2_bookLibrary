@@ -31,11 +31,12 @@ public class ApplicationMenu {
         menuNumberToUICommandMap.put(21, findUICommand(uiCommands, DeleteReaderByFirstNameUICommand.class));
         menuNumberToUICommandMap.put(22, findUICommand(uiCommands, DeleteReaderByLastNameUICommand.class));
         menuNumberToUICommandMap.put(23, findUICommand(uiCommands, DeleteReaderByIdUICommand.class));
-        menuNumberToUICommandMap.put(24, findUICommand(uiCommands, GetAllReadersUICommand.class));
-        menuNumberToUICommandMap.put(25, findUICommand(uiCommands, FindReaderByFirstNameUICommand.class));
-        menuNumberToUICommandMap.put(26, findUICommand(uiCommands, FindReaderByLastNameUICommand.class));
-        menuNumberToUICommandMap.put(27, findUICommand(uiCommands, FindReaderByPersonalCodeUICommand.class));
-        menuNumberToUICommandMap.put(28, findUICommand(uiCommands, FindReaderByIdUICommand.class));
+        menuNumberToUICommandMap.put(24, findUICommand(uiCommands, DeleteReaderUICommand.class));
+        menuNumberToUICommandMap.put(25, findUICommand(uiCommands, GetAllReadersUICommand.class));
+        menuNumberToUICommandMap.put(26, findUICommand(uiCommands, FindReaderByFirstNameUICommand.class));
+        menuNumberToUICommandMap.put(27, findUICommand(uiCommands, FindReaderByLastNameUICommand.class));
+        menuNumberToUICommandMap.put(28, findUICommand(uiCommands, FindReaderByPersonalCodeUICommand.class));
+        menuNumberToUICommandMap.put(29, findUICommand(uiCommands, FindReaderByIdUICommand.class));
         menuNumberToUICommandMap.put(0, findUICommand(uiCommands, ExitUICommand.class));
     }
 
@@ -67,11 +68,12 @@ public class ApplicationMenu {
         System.out.println("21. Delete reader by first name from reader's registry");
         System.out.println("22. Delete reader by last name from reader's registry");
         System.out.println("23. Delete reader by Id from reader's registry");
-        System.out.println("24. Print all readers in reader's registry");
-        System.out.println("25. Find all readers in reader's registry by first name");
-        System.out.println("26. Find all readers in reader's registry by second name");
-        System.out.println("27. Find all readers in reader's registry by person code");
-        System.out.println("28. Find reader by Id in reader's registry");
+        System.out.println("24. Delete reader from reader's registry");
+        System.out.println("25. Print all readers in reader's registry");
+        System.out.println("26. Find all readers in reader's registry by first name");
+        System.out.println("27. Find all readers in reader's registry by second name");
+        System.out.println("28. Find all readers in reader's registry by person code");
+        System.out.println("29. Find reader by Id in reader's registry");
         System.out.println("==============================================================");
         System.out.println("0. Exit program menu");
         System.out.println("==============================================================");

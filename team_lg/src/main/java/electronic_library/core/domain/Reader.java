@@ -30,7 +30,13 @@ public class Reader {
     @Column(name="address")
     private String readerAddress;
 
-    public Reader() {
+    public Reader(){
+    }
+
+    public Reader(String readerFirstName, String readerLastName, String readerPersonalCode) {
+        this.readerFirstName = readerFirstName;
+        this.readerLastName = readerLastName;
+        this.readerPersonalCode = readerPersonalCode;
     }
 
     public Reader(String readerFirstName, String readerLastName, String readerPersonalCode, String readerPhoneNumber, String readerEmail) {
