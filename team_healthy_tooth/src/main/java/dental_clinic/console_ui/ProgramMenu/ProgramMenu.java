@@ -90,7 +90,7 @@ public class ProgramMenu {
 
                 "       7   Print patients card\n" +
                 "       8   Add visit\n" +
-                "       9  Search visit by patient's id\n" +
+                "       9   Search visit by patient's id\n" +
                 "       10  Search visit by date\n\n" +
 
                 "       11  Add doctor\n" +
