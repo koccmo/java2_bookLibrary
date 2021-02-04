@@ -31,31 +31,30 @@ public class ProgramMenu {
         menuNumberToActionMap.put(2, findUIAction(uiActions, ChangePersonalDataUiAction.class));
         menuNumberToActionMap.put(3, findUIAction(uiActions, SearchPatientUIAction.class));
         menuNumberToActionMap.put(4, findUIAction(uiActions, UpdatePatientJowlInfoUIAction.class));
-        menuNumberToActionMap.put(5, findUIAction(uiActions, DeletePatientUIAction.class));
 
-        menuNumberToActionMap.put(6, findUIAction(uiActions, GetAllPatientsUIAction.class));
-        menuNumberToActionMap.put(7, findUIAction(uiActions, GetSpecificPatientHistoryUIAction.class));
+        menuNumberToActionMap.put(5, findUIAction(uiActions, GetAllPatientsUIAction.class));
+        menuNumberToActionMap.put(6, findUIAction(uiActions, GetSpecificPatientHistoryUIAction.class));
 
-        menuNumberToActionMap.put(8, findUIAction(uiActions, GetPatientCardUIAction.class));
-        menuNumberToActionMap.put(9, findUIAction(uiActions, AddVisitUIAction.class));
-        menuNumberToActionMap.put(10, findUIAction(uiActions, SearchVisitByPatientIdUIAction.class));
-        menuNumberToActionMap.put(11, findUIAction(uiActions, SearchVisitByDateUIAction.class));
+        menuNumberToActionMap.put(7, findUIAction(uiActions, GetPatientCardUIAction.class));
+        menuNumberToActionMap.put(8, findUIAction(uiActions, AddVisitUIAction.class));
+        menuNumberToActionMap.put(9, findUIAction(uiActions, SearchVisitByPatientIdUIAction.class));
+        menuNumberToActionMap.put(10, findUIAction(uiActions, SearchVisitByDateUIAction.class));
 
-        menuNumberToActionMap.put(12, findUIAction(uiActions, AddDoctorUIAction.class));
-        menuNumberToActionMap.put(13, findUIAction(uiActions, FillDoctorsWorkGraphicUIAction.class));
-        menuNumberToActionMap.put(14, findUIAction(uiActions, DeleteDoctorUIAction.class));
-        menuNumberToActionMap.put(15, findUIAction(uiActions, GetDoctorListUIAction.class));
+        menuNumberToActionMap.put(11, findUIAction(uiActions, AddDoctorUIAction.class));
+        menuNumberToActionMap.put(12, findUIAction(uiActions, FillDoctorsWorkGraphicUIAction.class));
+        menuNumberToActionMap.put(13, findUIAction(uiActions, DeleteDoctorUIAction.class));
+        menuNumberToActionMap.put(14, findUIAction(uiActions, GetDoctorListUIAction.class));
 
-        menuNumberToActionMap.put(16, findUIAction(uiActions, AddPlannedVisitUIAction.class));
-        menuNumberToActionMap.put(17, findUIAction(uiActions, ChangePlannedVisitTimeUIAction.class));
-        menuNumberToActionMap.put(18, findUIAction(uiActions, GetPlannedVisitsUIAction.class));
-        menuNumberToActionMap.put(19, findUIAction(uiActions, CancelPlannedVisitUIAction.class));
-        menuNumberToActionMap.put(20, findUIAction(uiActions, SearchPlannedVisitsByPersonalCodeUIAction.class));
-        menuNumberToActionMap.put(21, findUIAction(uiActions, SearchPlannedVisitsByDateUIAction.class));
+        menuNumberToActionMap.put(15, findUIAction(uiActions, AddPlannedVisitUIAction.class));
+        menuNumberToActionMap.put(16, findUIAction(uiActions, ChangePlannedVisitTimeUIAction.class));
+        menuNumberToActionMap.put(17, findUIAction(uiActions, GetPlannedVisitsUIAction.class));
+        menuNumberToActionMap.put(18, findUIAction(uiActions, CancelPlannedVisitUIAction.class));
+        menuNumberToActionMap.put(19, findUIAction(uiActions, SearchPlannedVisitsByPersonalCodeUIAction.class));
+        menuNumberToActionMap.put(20, findUIAction(uiActions, SearchPlannedVisitsByDateUIAction.class));
 
-        menuNumberToActionMap.put(22, findUIAction(uiActions, AddManipulationUIAction.class));
-        menuNumberToActionMap.put(23, findUIAction(uiActions, GetManipulationsUIAction.class));
-        menuNumberToActionMap.put(24, findUIAction(uiActions, DeactivateManipulationUIAction.class));
+        menuNumberToActionMap.put(21, findUIAction(uiActions, AddManipulationUIAction.class));
+        menuNumberToActionMap.put(22, findUIAction(uiActions, GetManipulationsUIAction.class));
+        menuNumberToActionMap.put(23, findUIAction(uiActions, DeactivateManipulationUIAction.class));
 
         menuNumberToActionMap.put(0, findUIAction(uiActions, ExitUIAction.class));
     }
@@ -84,32 +83,31 @@ public class ProgramMenu {
                 "       1   Add patient\n" +
                 "       2   Change patient's personal data\n" +
                 "       3   Search by surname or personal code\n" +
-                "       4   Update patient's jowl info\n" +
-                "       5   Delete by id\n\n" +
+                "       4   Update patient's jowl info\n\n" +
 
-                "       6   Print patients database\n" +
-                "       7   Print specific patient information\n\n" +
+                "       5   Print patients database\n" +
+                "       6   Print specific patient information\n\n" +
 
-                "       8   Print patients card\n" +
-                "       9   Add visit\n" +
-                "       10  Search visit by patient's id\n" +
-                "       11  Search visit by date\n\n" +
+                "       7   Print patients card\n" +
+                "       8   Add visit\n" +
+                "       9  Search visit by patient's id\n" +
+                "       10  Search visit by date\n\n" +
 
-                "       12  Add doctor\n" +
-                "       13  Fill doctor's work graphic\n" +
-                "       14  Delete doctor\n" +
-                "       15  Print doctor's database\n\n" +
+                "       11  Add doctor\n" +
+                "       12  Fill doctor's work graphic\n" +
+                "       13  Delete doctor\n" +
+                "       14  Print doctor's database\n\n" +
 
-                "       16  Add planned visit\n" +
-                "       17  Change planned visit\n" +
-                "       18  Print planned visits\n" +
-                "       19  Cancel planned visit\n" +
-                "       20  Search planned visit by personal code\n" +
-                "       21  Search planned visit by date\n\n" +
+                "       15  Add planned visit\n" +
+                "       16  Change planned visit\n" +
+                "       17  Print planned visits\n" +
+                "       18  Cancel planned visit\n" +
+                "       19  Search planned visit by personal code\n" +
+                "       20  Search planned visit by date\n\n" +
 
-                "       22  Add manipulation\n" +
-                "       23  Get manipulations list\n" +
-                "       24  Deactivate manipulation\n\n" +
+                "       21  Add manipulation\n" +
+                "       22  Get manipulations list\n" +
+                "       23  Deactivate manipulation\n\n" +
 
                 "       0   Exit\n");
     }
