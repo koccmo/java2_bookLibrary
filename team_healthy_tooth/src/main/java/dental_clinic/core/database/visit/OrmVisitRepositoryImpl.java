@@ -1,5 +1,6 @@
 package dental_clinic.core.database.visit;
 
+import dental_clinic.core.domain.ToothStatus;
 import dental_clinic.core.domain.Visit;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,13 @@ public class OrmVisitRepositoryImpl implements VisitRepository{
     @Override
     public void addVisit(Visit visit) {
         sessionFactory.getCurrentSession().save(visit);
+
+        String sql = "UPDATE JowlEntity SET d"+ visit.getToothNumber()
+                + " = " + getToothStatusInt(visit.getToothStatus())
+                +" WHERE patient_id = " + visit.getPersonalData().getId();
+        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        query.executeUpdate();
+
     }
 
     @Override
@@ -100,5 +108,20 @@ public class OrmVisitRepositoryImpl implements VisitRepository{
         return monthToText;
     }
 
-
+    private int getToothStatusInt(ToothStatus toothStatus) {
+        switch (toothStatus) {
+            case KARIES: return 0;
+            case PLOMBA: return 1;
+            case SAKNE: return 2;
+            case KRONITIS: return 3;
+            case KLAMERS: return 4;
+            case NAV_ZOBA: return 5;
+            case FASETE: return 6;
+            case NONEMAMA_PROTEZE: return 7;
+            case KRONITIS_AR_FAS: return 8;
+            case PLAST_KRONITIS: return 9;
+            case TILTINI: return 10;
+            default: HEALTHY: return 11;
+        }
+    }
 }
