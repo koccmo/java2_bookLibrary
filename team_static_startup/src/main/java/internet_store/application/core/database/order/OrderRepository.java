@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderRepository {
 
-    Long add(Long shoppingCartId);
+    Long add(Order order);
 
     Order findById(Long id);
 

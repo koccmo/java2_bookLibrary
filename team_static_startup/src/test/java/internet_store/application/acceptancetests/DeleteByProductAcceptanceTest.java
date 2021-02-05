@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 
 @Profile("hibernate")
 public class DeleteByProductAcceptanceTest {
+/*
 
     private ApplicationContext appContext;
 
@@ -87,5 +88,6 @@ public class DeleteByProductAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
+*/
 
 }
