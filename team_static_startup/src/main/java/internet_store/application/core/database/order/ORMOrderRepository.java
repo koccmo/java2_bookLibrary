@@ -25,7 +25,6 @@ public class ORMOrderRepository implements OrderRepository{
 
     @Override
     public Long add(Order order) {
-        //ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId);
         return (Long) sessionFactory.getCurrentSession().save(order);
     }
 
