@@ -1,6 +1,6 @@
 Измените класс запуска приложения следующим образом:
 
-@SpringBootApplication
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class WebBookListApplication {
 
 	public static void main(String[] args) {
