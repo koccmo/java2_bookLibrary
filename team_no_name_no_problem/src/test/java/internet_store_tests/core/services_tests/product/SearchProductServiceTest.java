@@ -92,7 +92,8 @@ public class SearchProductServiceTest {
         SearchProductResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        //assertTrue(response.getErrors().contains(expectedError));
+        assertFalse(productDatabase.containsTitleAndDescription("Mobile phone","Nokia"));
+        assertFalse(productDatabase.containsPrice(2));
     }
 
     @Test
