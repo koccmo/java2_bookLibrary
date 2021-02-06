@@ -46,7 +46,7 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void noTitleInDatabaseTest() {
+    public void noTitleInDatabaseToDeleteProducTest() {
 
         DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("Apple","",
                 null,null);
@@ -97,7 +97,7 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void descriptionIsInDatabaseToDeleteProduct() {
+    public void descriptionIsInDatabaseToDeleteProductTest() {
 
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
