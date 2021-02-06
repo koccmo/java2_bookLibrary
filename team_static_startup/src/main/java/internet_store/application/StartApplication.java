@@ -45,7 +45,7 @@ class StartApplication {
         menuNumberToActionMap.put(21, applicationContext.getBean(FindAllShoppingCartsUIAction.class));
         menuNumberToActionMap.put(22, applicationContext.getBean(AddOrderUIAction.class));
         menuNumberToActionMap.put(23, applicationContext.getBean(FindOrderByIdUIAction.class));
-//        menuNumberToActionMap.put(24, applicationContext.getBean(FindAllOrdersUIAction.class));
+        menuNumberToActionMap.put(24, applicationContext.getBean(FindAllOrdersUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
