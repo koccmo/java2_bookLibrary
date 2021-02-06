@@ -1,5 +1,5 @@
 package internet_store_tests.core.services_tests.product;
-/*
+
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
@@ -102,7 +102,6 @@ public class DeleteByOtherServiceTest {
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
         products.add(apple);
-        List<CoreError> errors = new ArrayList<>();
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("","Green",
                 null,null);
 
@@ -110,7 +109,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByDescription(request.getDescription())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsTitle("Green"));
+        assertFalse(productDatabase.containsTitle("Green"));
     }
 
     @Test
@@ -183,4 +182,3 @@ public class DeleteByOtherServiceTest {
 
     }
 }
-*/
