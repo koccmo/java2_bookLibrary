@@ -1,5 +1,5 @@
 package internet_store.core.response.order;
-
+/*
 import internet_store.core.domain.Order;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.CoreResponse;
@@ -22,4 +22,4 @@ public class GetOrdersResponse extends CoreResponse {
     public List<Order> getOrders() {
         return orders;
     }
-}
+}*/

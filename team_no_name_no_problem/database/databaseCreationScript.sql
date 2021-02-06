@@ -48,24 +48,18 @@ CREATE TABLE IF NOT EXISTS `shopping_cart_item` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
-CREATE TABLE IF NOT EXISTS `customer_order` (
-  `order_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `shopping_cart_id` BIGINT NOT NULL,
-  PRIMARY KEY (`order_id`),
-  FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart`(`shopping_cart_id`)
-  )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS `order_item` (
     `order_item_id` BIGINT NOT NULL AUTO_INCREMENT,
-    `order_id` BIGINT NOT NULL,
     `product_id` BIGINT NOT NULL,
+    `shopping_cart_id` BIGINT NOT NULL,
     `itemQuantity` INTEGER (100) NOT NULL,
     PRIMARY KEY (`order_item_id`),
-    FOREIGN KEY (`order_id`) REFERENCES `customer_order`(`order_id`),
+    FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart`(`shopping_cart_id`),
     FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
 )
+ENGINE = innoDB
+AUTO_INCREMENT = 1;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -12,25 +12,12 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "sum_total")
     private Integer sumTotal;
-
-    public Integer getSumTotal() {
-         Integer sum = 0;
-      return getSumTotal();
-    }
-
-   /* public Integer getSumTotal() {
-        Integer sum = 0;
-        for (Product product : shoppingCart.keySet()) {
-            sum += shoppingCart.get(product) * product.getPrice();
-        }
-        return sum;
-    }*/
 
     public Long getId() {
         return id;
@@ -47,6 +34,10 @@ public class ShoppingCart {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+
+    public Integer getSumTotal()
+    {return sumTotal;}
 
     public void setSumTotal(Integer sumTotal) {
         this.sumTotal = sumTotal;

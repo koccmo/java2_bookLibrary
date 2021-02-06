@@ -1,5 +1,5 @@
 package internet_store.database.order;
-
+/*
 import internet_store.core.domain.Order;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,3 +15,4 @@ public class OrderRowMapper implements RowMapper<Order> {
         return order;
     }
 }
+*/

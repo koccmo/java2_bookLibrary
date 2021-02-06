@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.util.Objects;
 
 
-@Entity
-@Table(name = "customer_order")
 public class Order {
 
     @Id

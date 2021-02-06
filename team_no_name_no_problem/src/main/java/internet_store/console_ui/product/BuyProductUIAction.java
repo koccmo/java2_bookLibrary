@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-/*
+
 @Component public class BuyProductUIAction implements UIAction {
 
     @Autowired private BuyProductService buyProductService;
@@ -106,4 +106,4 @@ import java.util.Scanner;
         return newCustomer;
     }
 
-}*/
+}
