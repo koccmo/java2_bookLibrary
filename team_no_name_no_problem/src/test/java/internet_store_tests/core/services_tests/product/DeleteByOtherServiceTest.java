@@ -1,5 +1,5 @@
 package internet_store_tests.core.services_tests.product;
-/*
+
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
@@ -46,7 +46,7 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void noTitleInDatabaseTest() {
+    public void noTitleInDatabaseToDeleteProductTest() {
 
         DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("Apple","",
                 null,null);
@@ -76,20 +76,20 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByTitle(request.getTitle())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsTitle("Apple"));
+        assertTrue(!productDatabase.containsTitle("Apple"));
     }
 
     @Test
-    public void noDescriptionInDatabaseTest() {
+    public void noDescriptionInDatabaseToDeleteTest() {
 
-        DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","Green",
+        DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","Red",
                 null,null);
         List<CoreError> errors = new ArrayList<>();
-        CoreError expectedError = new CoreError("database","database doesn't contain product with description Green");
+        CoreError expectedError = new CoreError("database","database doesn't contain product with description Red");
         errors.add(expectedError);
 
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.containsDescription("Green")).thenReturn(false);
+        Mockito.when(productDatabase.deleteAllByDescription(firstRequest.getDescription())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
@@ -97,12 +97,11 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void descriptionIsInDatabaseToDeleteProduct() {
+    public void descriptionIsInDatabaseToDeleteProductTest() {
 
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
         products.add(apple);
-        List<CoreError> errors = new ArrayList<>();
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("","Green",
                 null,null);
 
@@ -110,11 +109,12 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByDescription(request.getDescription())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsTitle("Green"));
+        assertFalse(productDatabase.containsTitle("Green"));
+        assertTrue(!productDatabase.containsProduct(apple));
     }
 
     @Test
-    public void noPriceInDatabaseTest() {
+    public void noSuchPriceInDatabaseToDeleteProductTest() {
 
         DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","",
                 1,3);
@@ -123,7 +123,7 @@ public class DeleteByOtherServiceTest {
         errors.add(expectedError);
 
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.containsPrice(2)).thenReturn(false);
+        Mockito.when(productDatabase.deleteAllByPriceRange(firstRequest.getStartPrice(),firstRequest.getEndPrice())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
@@ -131,12 +131,11 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void priceIsInDatabaseToDeleteProduct() {
+    public void priceIsInDatabaseToDeleteProductTest() {
 
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
         products.add(apple);
-        List<CoreError> errors = new ArrayList<>();
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("","",
                 2,4);
 
@@ -144,11 +143,12 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByPriceRange(request.getStartPrice(), request.getEndPrice())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsPrice(3));
+        assertFalse(productDatabase.containsPrice(3));
+        assertTrue(!productDatabase.containsPrice(3));
     }
 
     @Test
-    public void noTitleAndDescriptionInDatabaseTest() {
+    public void noTitleAndDescriptionInDatabaseToDeleteProductTest() {
 
         DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("Apple","Green",
             null,null);
@@ -166,12 +166,11 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void titleAndDescriptionAreInDatabaseToBeDeleted() {
+    public void titleAndDescriptionAreInDatabaseToDeleteProductTest() {
 
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
         products.add(apple);
-        List<CoreError> errors = new ArrayList<>();
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
                 null,null);
 
@@ -179,8 +178,45 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByTitleAndDescription(request.getTitle(),request.getDescription())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsTitleAndDescription("Apple","Green"));
+        assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
+        assertEquals(productDatabase.containsProduct(apple),false);
+    }
 
+    @Test
+    public void titleAndDescriptionAndPriceAreInDatabaseToDeleteProductTest() {
+
+        Product apple = new Product("Apple","Green",3);
+        List<Product> products = new ArrayList<>();
+        products.add(apple);
+        List<CoreError> errors = new ArrayList<>();
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+                2,4);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(request.getTitle(),request.getDescription(),
+                request.getStartPrice(),request.getEndPrice())).thenReturn(true);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
+        assertFalse(productDatabase.containsPrice(3));
+        assertEquals(productDatabase.containsProduct(apple),false);
+    }
+
+    @Test
+    public void noTitleAndDescriptionAndPriceAreInDatabaseToDeleteProductTest() {
+
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+                2,4);
+        List<CoreError> errors = new ArrayList<>();
+        CoreError expectedError = new CoreError("database","database doesn't contain product with title Apple" +
+                "and description green and price 3");
+        errors.add(expectedError);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(request.getTitle(),request.getDescription(),
+                request.getStartPrice(),request.getEndPrice())).thenReturn(false);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        assertTrue(response.hasErrors());
     }
 }
-*/

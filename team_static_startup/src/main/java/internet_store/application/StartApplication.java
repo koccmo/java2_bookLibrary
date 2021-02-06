@@ -3,14 +3,10 @@ package internet_store.application;
 import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.UIAction;
 import internet_store.application.console_ui.customer.*;
-import internet_store.application.console_ui.order.AddOrderUIAction;
+import internet_store.application.console_ui.order.*;
 import internet_store.application.console_ui.product.*;
-import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIAction;
-import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
-import internet_store.application.console_ui.shopping_cart.FindShoppingCartByIdUIAction;
-import internet_store.application.console_ui.shopping_cart_item.AddShoppingCartItemUIService;
-import internet_store.application.console_ui.shopping_cart_item.FindAllShoppingCartItemsUIService;
-import internet_store.application.console_ui.shopping_cart_item.FindShoppingCartItemByIdUIService;
+import internet_store.application.console_ui.shopping_cart.*;
+import internet_store.application.console_ui.shopping_cart_item.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -48,8 +44,8 @@ class StartApplication {
         menuNumberToActionMap.put(20, applicationContext.getBean(FindShoppingCartByIdUIAction.class));
         menuNumberToActionMap.put(21, applicationContext.getBean(FindAllShoppingCartsUIAction.class));
         menuNumberToActionMap.put(22, applicationContext.getBean(AddOrderUIAction.class));
-//        menuNumberToActionMap.put(23, applicationContext.getBean(FindOrderByIdUIAction.class));
-//        menuNumberToActionMap.put(24, applicationContext.getBean(FindAllOrdersUIAction.class));
+        menuNumberToActionMap.put(23, applicationContext.getBean(FindOrderByIdUIAction.class));
+        menuNumberToActionMap.put(24, applicationContext.getBean(FindAllOrdersUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
