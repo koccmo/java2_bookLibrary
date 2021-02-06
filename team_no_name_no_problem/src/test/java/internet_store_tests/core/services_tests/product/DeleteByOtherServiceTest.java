@@ -171,7 +171,6 @@ public class DeleteByOtherServiceTest {
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
         products.add(apple);
-        List<CoreError> errors = new ArrayList<>();
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
                 null,null);
 
@@ -181,7 +180,6 @@ public class DeleteByOtherServiceTest {
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
         assertEquals(productDatabase.containsProduct(apple),false);
-
     }
 
     @Test
@@ -200,7 +198,25 @@ public class DeleteByOtherServiceTest {
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
+        assertFalse(productDatabase.containsPrice(3));
         assertEquals(productDatabase.containsProduct(apple),false);
+    }
 
+    @Test
+    public void noTitleAndDescriptionAndPriceAreInDatabaseToDeleteProductTest() {
+
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("Apple","Green",
+                2,4);
+        List<CoreError> errors = new ArrayList<>();
+        CoreError expectedError = new CoreError("database","database doesn't contain product with title Apple" +
+                "and description green and price 3");
+        errors.add(expectedError);
+
+        Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(request.getTitle(),request.getDescription(),
+                request.getStartPrice(),request.getEndPrice())).thenReturn(false);
+
+        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        assertTrue(response.hasErrors());
     }
 }
