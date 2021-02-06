@@ -76,7 +76,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByTitle(request.getTitle())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
-        assertTrue(productDatabase.containsTitle("Apple"));
+        assertTrue(!productDatabase.containsTitle("Apple"));
     }
 
     @Test
