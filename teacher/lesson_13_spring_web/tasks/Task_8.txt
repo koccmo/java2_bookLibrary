@@ -1,0 +1,32 @@
+Создайте в пакете lv.javaguru.java2.library.web_ui.config
+класс SpringWebMvcInitializer:
+
+public class SpringWebMvcInitializer extends AbstractDispatcherServletInitializer {
+
+	@Override
+	protected WebApplicationContext createRootApplicationContext() {
+		AnnotationConfigWebApplicationContext applicationContext =
+				new AnnotationConfigWebApplicationContext();
+		applicationContext.register(SpringCoreConfiguration.class);
+		return applicationContext;
+	}
+
+	@Override
+	protected WebApplicationContext createServletApplicationContext() {
+		AnnotationConfigWebApplicationContext applicationContext =
+				new AnnotationConfigWebApplicationContext();
+		applicationContext.register(SpringWebConfiguration.class);
+		return applicationContext;
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[]{"/"};
+	}
+
+}
+
+Цель этого класса заключается в инициализации веб и бекенд
+IoC контейнеров. Бекенд IoC контейнер стартует используя
+класс конфигурации SpringCoreConfiguration, а веб контейнер
+стартует используя класс SpringWebConfiguration.

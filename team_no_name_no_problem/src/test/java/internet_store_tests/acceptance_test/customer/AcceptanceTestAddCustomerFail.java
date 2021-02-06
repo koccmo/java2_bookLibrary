@@ -17,7 +17,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.junit.Assert.assertTrue;
 
-public class AcceptanceTestDeleteCustomerFail {
+public class AcceptanceTestAddCustomerFail {
 
         private ApplicationContext appContext;
 
@@ -38,17 +38,10 @@ public class AcceptanceTestDeleteCustomerFail {
             addCustomerService().execute(addCustomerRequest);
             addCustomerService().execute(addCustomerRequest1);
 
-            DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(4L);
-            deleteCustomerService().execute(deleteCustomerRequest);
-
             GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
             GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
             assertTrue(getAllCustomersResponse.getCustomers().size() == 1);
-        }
-
-        private DeleteCustomerService deleteCustomerService() {
-            return appContext.getBean(DeleteCustomerService.class);
         }
 
         private AddCustomerService addCustomerService() {

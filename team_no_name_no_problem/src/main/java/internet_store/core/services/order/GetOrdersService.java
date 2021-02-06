@@ -1,5 +1,5 @@
 package internet_store.core.services.order;
-
+/*
 import internet_store.core.requests.order.GetOrdersRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.order.GetOrdersResponse;
@@ -33,3 +33,4 @@ public class GetOrdersService {
         return new GetOrdersResponse(orderDatabase.getOrders());
     }
 }
+*/

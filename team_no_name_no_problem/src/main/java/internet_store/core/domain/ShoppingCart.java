@@ -8,23 +8,16 @@ import java.util.Objects;
 public class ShoppingCart {
 
     @Id
-    @Column(name = "cart_id")
+    @Column(name = "shopping_cart_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @Column
-    private Integer quantity;
-
-    public ShoppingCart() {
-    }
+    @Column(name = "sum_total")
+    private Integer sumTotal;
 
     public Long getId() {
         return id;
@@ -34,29 +27,43 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 
+    public Integer getSumTotal()
+    {return sumTotal;}
+
+    public void setSumTotal(Integer sumTotal) {
+        this.sumTotal = sumTotal;
+    }
+
+    public ShoppingCart () { }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingCart that = (ShoppingCart) o;
+        return Objects.equals(id, that.id) && Objects.equals(customer, that.customer) && Objects.equals(sumTotal, that.sumTotal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, sumTotal);
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", sumTotal=" + sumTotal +
+                '}';
+    }
 }

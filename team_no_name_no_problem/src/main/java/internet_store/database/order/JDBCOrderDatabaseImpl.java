@@ -1,6 +1,6 @@
 package internet_store.database.order;
 
-import internet_store.core.domain.Order;
+/*import internet_store.core.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -21,4 +21,4 @@ public class JDBCOrderDatabaseImpl implements OrderDatabase{
     public void addOrder(Order order) {
 
     }
-}
+}*/

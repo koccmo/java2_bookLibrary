@@ -1,5 +1,5 @@
 package internet_store.database.order;
-
+/*
 import internet_store.core.domain.Order;
 import org.springframework.stereotype.Component;
 
@@ -25,3 +25,4 @@ public class OrderDatabaseImpl implements OrderDatabase{
         id++;
     }
 }
+*/
