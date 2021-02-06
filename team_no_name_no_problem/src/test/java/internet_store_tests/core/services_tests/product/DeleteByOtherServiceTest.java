@@ -114,7 +114,7 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void noPriceInDatabaseTest() {
+    public void noSuchPriceInDatabaseToDeleteProductTest() {
 
         DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","",
                 1,3);
@@ -123,7 +123,7 @@ public class DeleteByOtherServiceTest {
         errors.add(expectedError);
 
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.containsPrice(2)).thenReturn(false);
+        Mockito.when(productDatabase.deleteAllByPriceRange(firstRequest.getStartPrice(),firstRequest.getEndPrice())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
