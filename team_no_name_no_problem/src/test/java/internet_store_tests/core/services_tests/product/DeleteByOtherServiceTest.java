@@ -110,6 +110,7 @@ public class DeleteByOtherServiceTest {
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
         assertFalse(productDatabase.containsTitle("Green"));
+        assertTrue(!productDatabase.containsProduct(apple));
     }
 
     @Test
