@@ -1,6 +1,5 @@
 package internet_store.core.services.customer;
 
-
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.AddCustomerResponse;

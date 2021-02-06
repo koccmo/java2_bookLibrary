@@ -75,6 +75,27 @@ public class SearchProductServiceTest {
     }
 
     @Test
+    public void databaseDoesNotContainsSuchProductTitleAndDescriptionAndPriceRange() {
+
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                1,3, ordering, paging);
+        List<CoreError> errors = new ArrayList<>();
+        CoreError expectedError =
+                new CoreError("database", "Database doesn't contain product with title: " +
+                        "Mobile phone, description: Nokia and price: 3");
+        errors.add(expectedError);
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitleAndDescriptionAndPriceRange(request1.getTitle(),
+                request1.getDescription(),request1.getStartPrice(),request1.getEndPrice())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertEquals(response.hasErrors(), true);
+        assertEquals(response.getErrors().size(), 1);
+        //assertTrue(response.getErrors().contains(expectedError));
+    }
+
+    @Test
     public void databaseContainsSuchProductTitleAndDescription() {
 
         Product mobilePhone = new Product("Mobile phone","Nokia",40);
