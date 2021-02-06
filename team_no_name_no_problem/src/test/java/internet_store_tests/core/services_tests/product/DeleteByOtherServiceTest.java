@@ -89,7 +89,7 @@ public class DeleteByOtherServiceTest {
         errors.add(expectedError);
 
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.deleteAllByDescription(firstRequest.getDescription())).thenReturn(false);
+        Mockito.when(productDatabase.deleteAllByDescription(firstRequest.getDescription())).thenReturn(true);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
