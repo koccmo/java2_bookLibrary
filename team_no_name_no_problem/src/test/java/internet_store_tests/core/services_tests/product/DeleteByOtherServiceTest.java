@@ -80,16 +80,16 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void noDescriptionInDatabaseTest() {
+    public void noDescriptionInDatabaseToDeleteTest() {
 
-        DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","Green",
+        DeleteProductByOtherRequest firstRequest = new DeleteProductByOtherRequest("","Red",
                 null,null);
         List<CoreError> errors = new ArrayList<>();
-        CoreError expectedError = new CoreError("database","database doesn't contain product with description Green");
+        CoreError expectedError = new CoreError("database","database doesn't contain product with description Red");
         errors.add(expectedError);
 
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(productDatabase.containsDescription("Green")).thenReturn(false);
+        Mockito.when(productDatabase.deleteAllByDescription(firstRequest.getDescription())).thenReturn(false);
 
         DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
