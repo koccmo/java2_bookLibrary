@@ -12,24 +12,27 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import static org.junit.Assert.assertTrue;
-/*
-public class AcceptanceTest1 {
+
+public class AcceptanceTest1AddValidAndNotValidPersonalData {
 
     private ApplicationContext appContext;
 
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
     public void test(){
-        getDatabaseCleaner().clean();
         PersonalData personalData = new PersonalData("Name", "Surname", "12345678", "25065612345");
         AddPatientRequest addPatientRequest = new AddPatientRequest(personalData);
         addPatientService().execute(addPatientRequest);
+        addPatientService().execute(addPatientRequest);
+
+        PersonalData personalDataNotValid = new PersonalData("Name1", "Surname", "1234578", "25065612345");
+        addPatientRequest = new AddPatientRequest(personalDataNotValid);
         addPatientService().execute(addPatientRequest);
 
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
@@ -49,4 +52,4 @@ public class AcceptanceTest1 {
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}*/
+}
