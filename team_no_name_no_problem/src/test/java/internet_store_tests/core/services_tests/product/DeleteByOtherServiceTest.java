@@ -185,7 +185,7 @@ public class DeleteByOtherServiceTest {
     }
 
     @Test
-    public void TitleAndDescriptionAndPriceAreInDatabaseToDeleteProductTest() {
+    public void titleAndDescriptionAndPriceAreInDatabaseToDeleteProductTest() {
 
         Product apple = new Product("Apple","Green",3);
         List<Product> products = new ArrayList<>();
