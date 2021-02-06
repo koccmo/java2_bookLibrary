@@ -3,6 +3,7 @@ package internet_store.application;
 import internet_store.application.config.AppConfig;
 import internet_store.application.console_ui.UIAction;
 import internet_store.application.console_ui.customer.*;
+import internet_store.application.console_ui.order.AddOrderUIAction;
 import internet_store.application.console_ui.product.*;
 import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIAction;
 import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
@@ -46,6 +47,9 @@ class StartApplication {
         menuNumberToActionMap.put(19, applicationContext.getBean(AddShoppingCartUIAction.class));
         menuNumberToActionMap.put(20, applicationContext.getBean(FindShoppingCartByIdUIAction.class));
         menuNumberToActionMap.put(21, applicationContext.getBean(FindAllShoppingCartsUIAction.class));
+        menuNumberToActionMap.put(22, applicationContext.getBean(AddOrderUIAction.class));
+//        menuNumberToActionMap.put(23, applicationContext.getBean(FindOrderByIdUIAction.class));
+//        menuNumberToActionMap.put(24, applicationContext.getBean(FindAllOrdersUIAction.class));
         menuNumberToActionMap.put(0, applicationContext.getBean(ExitProgramUIAction.class));
     }
 
@@ -92,6 +96,10 @@ class StartApplication {
         System.out.println("19. Add shopping cart");
         System.out.println("20. Find shopping cart by ID");
         System.out.println("21. Find all shopping carts");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("22. Add order");
+        System.out.println("23. Find order by ID");
+        System.out.println("24. Find all orders");
         System.out.println("------------------------------------------------------------");
         System.out.println("0. Exit the program");
         System.out.println("------------------------------------------------------------");

@@ -1,9 +1,10 @@
 package electronic_library.core.services.validators;
 
-import electronic_library.core.requests.FindBooksRequest;
+import electronic_library.core.requests.book.FindBooksRequest;
 import electronic_library.core.requests.Ordering;
 import electronic_library.core.requests.Paging;
 import electronic_library.core.responses.CoreError;
+import electronic_library.core.services.book.validators.FindBooksRequestValidator;
 import org.junit.Test;
 
 import java.util.List;

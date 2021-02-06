@@ -1,7 +1,8 @@
 package electronic_library.core.services.validators;
 
-import electronic_library.core.requests.FindBookByIdRequest;
+import electronic_library.core.requests.book.FindBookByIdRequest;
 import electronic_library.core.responses.CoreError;
+import electronic_library.core.services.book.validators.FindBookByIdValidator;
 import org.junit.Before;
 import org.junit.Test;
 

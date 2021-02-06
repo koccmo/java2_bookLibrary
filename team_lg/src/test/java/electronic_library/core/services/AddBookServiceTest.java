@@ -1,11 +1,12 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibraryRepository;
+import electronic_library.core.database.book.ElectronicLibraryRepository;
 import electronic_library.core.matchers.BookMatcher;
-import electronic_library.core.requests.AddBookRequest;
-import electronic_library.core.responses.AddBookResponse;
+import electronic_library.core.requests.book.AddBookRequest;
+import electronic_library.core.responses.book.AddBookResponse;
 import electronic_library.core.responses.CoreError;
-import electronic_library.core.services.validators.AddBookValidator;
+import electronic_library.core.services.book.AddBookService;
+import electronic_library.core.services.book.validators.AddBookValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

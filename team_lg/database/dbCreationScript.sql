@@ -9,11 +9,11 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-CREATE TABLE IF NOT EXISTS `book` (
+CREATE TABLE IF NOT EXISTS `books` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `bookTitle` VARCHAR(100) NOT NULL,
+  `bookTitle` VARCHAR(200) NOT NULL,
   `bookAuthor` VARCHAR(100) NOT NULL,
-  `bookPrice` DECIMAL(10,2),
+  `bookPrice` DECIMAL(10,2) NOT NULL,
   `yearOfBookIssue` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 )
@@ -21,10 +21,14 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
 
-CREATE TABLE IF NOT EXISTS `reader` (
+CREATE TABLE IF NOT EXISTS `readers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
+  `firstName` VARCHAR(100) NOT NULL,
+  `lastName` VARCHAR(100) NOT NULL,
+  `personalCode` VARCHAR(20) NOT NULL,
+  `phoneNumber` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `address` VARCHAR(100),
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -43,7 +47,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
 CREATE INDEX indexOne
-ON book(bookTitle);
+ON books(bookTitle);
 
 CREATE INDEX indexTwo
-ON book(bookTitle,bookAuthor);
+ON books(bookTitle,bookAuthor);

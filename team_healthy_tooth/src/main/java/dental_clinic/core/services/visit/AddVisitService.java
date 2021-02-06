@@ -2,15 +2,16 @@ package dental_clinic.core.services.visit;
 
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.Manipulation;
+import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.visit.AddVisitRequest;
 import dental_clinic.core.responses.visit.AddVisitResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.visit.AddVisitValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
-import dental_clinic.database.in_memory.manipulation.ManipulationInMemoryDatabase;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
+import dental_clinic.core.database.manipulation.ManipulationRepository;
+import dental_clinic.core.database.patient.PatientRepository;
 import dental_clinic.core.domain.Visit;
-import dental_clinic.database.in_memory.visit.VisitDatabase;
+import dental_clinic.core.database.visit.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,15 +23,15 @@ import java.util.Optional;
 public class AddVisitService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
     private AddVisitValidator addVisitValidator;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
     @Autowired
-    private ManipulationInMemoryDatabase manipulationDatabase;
+    private ManipulationRepository manipulationRepository;
     @Autowired
-    private VisitDatabase visitDatabase;
+    private VisitRepository visitRepository;
 
     public AddVisitResponse execute(AddVisitRequest addVisitRequest){
 
@@ -43,7 +44,7 @@ public class AddVisitService {
         Doctor doctor;
 
         if (isIdAdded(addVisitRequest.getDoctor().getName())) {
-            Optional<Doctor> doctorOptional = doctorDatabase.getDoctorById(Long.parseLong(addVisitRequest.getDoctor().getName()));
+            Optional<Doctor> doctorOptional = doctorRepository.getDoctorById(Long.parseLong(addVisitRequest.getDoctor().getName()));
             if (!doctorOptional.isPresent()) {
                 errors.add(new CoreError("id", "Database doesn't contain doctor with id "
                         + addVisitRequest.getDoctor().getName() + " in database"));
@@ -52,38 +53,34 @@ public class AddVisitService {
             doctor = doctorOptional.get();
         } else {
             doctor = new Doctor(addVisitRequest.getDoctor().getName().split(" ")[0],
-                    addVisitRequest.getDoctor().getName().split(" ")[1]);
+                    addVisitRequest.getDoctor().getName().split(" ")[1],
+                    addVisitRequest.getDoctor().getName().split(" ")[2]);
             doctor.setEmployed(true);
         }
 
-        if (!doctor.getIsEmployed()) {
+        if (!doctor.isEmployed()) {
             errors.add(new CoreError("doctor", "Doctor must be employed"));
             return new AddVisitResponse(errors);
         }
 
-        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulationsIds()));
+        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulation()));
         if (!errors.isEmpty()){
             return new AddVisitResponse(errors);
         }
 
-        Visit visit = new Visit(addVisitRequest.getPatientsId(), addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
-                addVisitRequest.getToothStatus(), doctor,
-                manipulationList(addVisitRequest.getManipulationsIds()), addVisitRequest.getDate());
+        PersonalData personalData = patientRepository.getPersonalDataById(addVisitRequest.getId());
 
-        visitDatabase.addVisit(visit);
+        Visit visit = new Visit(personalData, addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
+                addVisitRequest.getToothStatus(), doctor,
+                addVisitRequest.getManipulation(), addVisitRequest.getDate(), addVisitRequest.getManipulation().getPrice());
 
         if (isNewDoctor(doctor)){
-            doctorDatabase.addDoctor(doctor);
+            doctorRepository.addDoctor(doctor);
         }
 
-        if (patientDatabase.containsPatientWithSpecificId(addVisitRequest.getPatientsId())){
-            addVisitToDoctor(doctor, visit);
-            return addVisitToPatient(addVisitRequest, visit);
-        }
+        visitRepository.addVisit(visit);
 
-        errors.add(new CoreError("id", "Database doesn't contain patient with id " + addVisitRequest.getPatientsId()));
         return new AddVisitResponse(errors);
-
     }
 
     private boolean isIdAdded(String text) {
@@ -95,61 +92,16 @@ public class AddVisitService {
         }
     }
 
-    private void addVisitToDoctor (Doctor doctor, Visit visit) {
-        for (Doctor d : doctorDatabase.getDoctorList()) {
-            if (d.getName().equals(doctor.getName())
-            && d.getSurname().equals(doctor.getSurname())) {
-                d.addVisit(visit);
-            }
-        }
-    }
-
-    private AddVisitResponse addVisitToPatient (AddVisitRequest addVisitRequest, Visit visit) {
-        for (int i = 0; i < patientDatabase.getPatients().size(); i++) {
-            if (isSpecificPatient(i, addVisitRequest.getPatientsId())) {
-                patientDatabase.getPatients().get(i).addVisit(visit);
-                patientDatabase.getPatients().get(i).updateJowl(addVisitRequest.getToothNumber(), addVisitRequest.getToothStatus());
-                return new AddVisitResponse();
-            }
-        }
-        return new AddVisitResponse();
-    }
-
-    private boolean isSpecificPatient (int index, long id) {
-        return patientDatabase.getPatients().get(index).getPersonalData().getId().equals(id);
-    }
-
     private boolean isNewDoctor(Doctor doctor) {
-        return !doctorDatabase.containsDoctor(doctor);
+        return !doctorRepository.containsDoctor(doctor);
     }
 
-    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(List<Long>ids) {
+    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(Manipulation manipulation) {
         List<CoreError>errors = new ArrayList<>();
-        for (Long id : ids) {
-            if (!manipulationDatabase.containsId(id)) {
-                errors.add(new CoreError("database", "Database doesn't contain manipulation with id " +
-                        id));
-            } else {
-                if (!manipulationDatabase.manipulationIsActive(id)) {
-                    errors.add(new CoreError("manipulation", "Manipulation with id " +
-                            id + " isn't active"));
-                }
+            if (!manipulationRepository.manipulationIsActive(manipulation.getId())) {
+                errors.add(new CoreError("manipulation", "Manipulation with id " +
+                        manipulation.getId() + " isn't active"));
             }
-        }
         return errors;
     }
-
-    private List<Manipulation> manipulationList (List<Long> manipulationsIds) {
-        List<Manipulation>manipulations = new ArrayList<>();
-        for (Long id : manipulationsIds) {
-            for (Manipulation manipulation : manipulationDatabase.getManipulationsList()) {
-                if (manipulation.getId().equals(id)){
-                    manipulations.add(manipulation);
-                    break;
-                }
-            }
-        }
-        return manipulations;
-    }
-
 }

@@ -4,7 +4,7 @@ import dental_clinic.core.requests.doctor.DeleteDoctorRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.DeleteDoctorResponse;
 import dental_clinic.core.validators.doctor.DeleteDoctorRequestValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class DeleteDoctorService {
     @Autowired
     private DeleteDoctorRequestValidator deleteDoctorRequestValidator;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     public DeleteDoctorResponse execute (DeleteDoctorRequest deleteDoctorRequest) {
 
@@ -26,13 +26,13 @@ public class DeleteDoctorService {
             return new DeleteDoctorResponse(errorList);
         }
 
-        if (!doctorDatabase.containsId(deleteDoctorRequest.getId())) {
+        if (!doctorRepository.containsId(deleteDoctorRequest.getId())) {
             errorList.add(new CoreError("database", "Database doesn't contain id " +
                     deleteDoctorRequest.getId()));
             return new DeleteDoctorResponse(errorList);
         }
 
-        doctorDatabase.deleteDoctorById(deleteDoctorRequest.getId());
+        doctorRepository.deleteDoctorById(deleteDoctorRequest.getId());
         return new DeleteDoctorResponse(deleteDoctorRequest.getId());
     }
 

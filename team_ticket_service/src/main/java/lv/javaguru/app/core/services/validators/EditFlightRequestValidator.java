@@ -1,12 +1,10 @@
 package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.domain.CodeError;
-import lv.javaguru.app.dependency_injection.DIComponent;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +46,7 @@ public class EditFlightRequestValidator extends Validator {
 		return validateCity(country, fieldName);
 	}
 
-	public List<CodeError> validateDate (LocalDate date) {
+	public List<CodeError> validateDate (Date date) {
 		List<CodeError> errors = new ArrayList<>();
 
 		Optional<CodeError> codeError = dateIsNotNullOrEmpty(date, "Departure date");
@@ -62,24 +60,24 @@ public class EditFlightRequestValidator extends Validator {
 		return errors;
 	}
 
-	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
+	private Optional<CodeError> dateIsNotNullOrEmpty (Date dateRequest, String field) {
 		return (isNullOrEmpty(dateRequest))
 				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
 				: Optional.empty();
 	}
 
-	private Optional<CodeError> isDateAfter (LocalDate request, String field) {
+	private Optional<CodeError> isDateAfter (Date request, String field) {
 		return (!isDateAfter(request))
 				? Optional.of(new CodeError(field, "Date shouldn't be in past!"))
 				: Optional.empty();
 	}
 
-	private boolean isNullOrEmpty (LocalDate date) {
+	private boolean isNullOrEmpty (Date date) {
 		return (date == null);
 	}
 
-	private boolean isDateAfter (LocalDate date) {
-		return date.isAfter(LocalDate.now());
+	private boolean isDateAfter (Date date) {
+		return date.after(new Date());
 	}
 
 

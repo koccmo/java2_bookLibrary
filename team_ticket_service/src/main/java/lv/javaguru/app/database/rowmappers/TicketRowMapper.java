@@ -5,7 +5,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class TicketRowMapper implements RowMapper<Ticket> {
 
@@ -22,7 +25,14 @@ public class TicketRowMapper implements RowMapper<Ticket> {
 		String dateStr = rs.getString("tickets.date").split(" ")[0];
 		LocalDate date = LocalDate.parse(dateStr.trim());
 
-		ticket.setDepartureDate(date);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date d = null;
+		try {
+			d = formatter.parse(dateStr.trim());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		ticket.setDepartureDate(d);
 		ticket.setSeat(rs.getString("tickets.seat"));
 
 		return ticket;

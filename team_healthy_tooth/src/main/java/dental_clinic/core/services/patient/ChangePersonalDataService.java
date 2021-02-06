@@ -4,7 +4,7 @@ import dental_clinic.core.requests.patient.ChangePersonalDataRequest;
 import dental_clinic.core.responses.patient.ChangePersonalDataResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.patient.ChangePersonalDataValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class ChangePersonalDataService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired private ChangePersonalDataValidator validator;
 
     public ChangePersonalDataResponse execute (ChangePersonalDataRequest request) {
@@ -29,11 +29,11 @@ public class ChangePersonalDataService {
         String updatedPhone = request.getUpdatedPhoneNumber();
 
         if (updatedSurname != null && !updatedSurname.isEmpty()){
-            patientDatabase.changeSurname(patientId, updatedSurname);
+            patientRepository.changeSurname(patientId, updatedSurname);
         }
 
         if (updatedPhone != null && !updatedPhone.isEmpty()){
-            patientDatabase.changePhone(patientId, updatedPhone);
+            patientRepository.changePhone(patientId, updatedPhone);
         }
 
         return new ChangePersonalDataResponse(patientId);

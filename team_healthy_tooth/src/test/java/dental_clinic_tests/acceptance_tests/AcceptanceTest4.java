@@ -1,5 +1,5 @@
 package dental_clinic_tests.acceptance_tests;
-
+/*
 import dental_clinic.config.DentalClinicConfiguration;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.patient.AddPatientRequest;
@@ -9,6 +9,7 @@ import dental_clinic.core.responses.patient.GetAllPatientsResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.services.patient.GetAllPatientsService;
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +24,7 @@ public class AcceptanceTest4 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -59,4 +61,7 @@ public class AcceptanceTest4 {
         return appContext.getBean(GetAllPatientsService.class);
     }
 
-}
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
+    }
+}*/

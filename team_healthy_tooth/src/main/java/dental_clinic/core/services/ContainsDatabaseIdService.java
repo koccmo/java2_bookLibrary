@@ -1,12 +1,10 @@
 package dental_clinic.core.services;
 
-
-import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.ContainsDatabaseIdRequest;
 import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.validators.ContainsDatabaseIdValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import java.util.List;
 public class ContainsDatabaseIdService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired private ContainsDatabaseIdValidator containsDatabaseIdValidator;
 
     public ContainsDatabaseIdResponse execute(ContainsDatabaseIdRequest containsDatabaseIdRequest){
@@ -27,15 +25,11 @@ public class ContainsDatabaseIdService {
             return new ContainsDatabaseIdResponse(errors);
         }
 
-        if (patientDatabase.containsPatientWithSpecificId(containsDatabaseIdRequest.getId())){
+        if (patientRepository.containsPatientWithSpecificId(containsDatabaseIdRequest.getId())){
             return new ContainsDatabaseIdResponse(containsDatabaseIdRequest.getId());
         }
 
         errors.add(new CoreError("id", "Database doesn't contain patient with id"));
         return new ContainsDatabaseIdResponse(errors);
-    }
-
-    private PersonalData getCurrentPatientPersonalData(int index){
-        return patientDatabase.getPatients().get(index).getPersonalData();
     }
 }

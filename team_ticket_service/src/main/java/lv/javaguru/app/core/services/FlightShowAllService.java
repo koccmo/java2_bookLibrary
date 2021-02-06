@@ -5,19 +5,21 @@ import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class FlightShowAllService {
 
 	@Autowired
-	private SqlDatabase sqlDatabase;
+	private FlightRepository flightRepository;
+
 
 	public FlightShowAllResponse<?> execute (FlightShowAllRequest request) {
 		List<?> responseList = validate(request.getCurrUser());
@@ -26,9 +28,9 @@ public class FlightShowAllService {
 			return new FlightShowAllResponse<>(responseList);
 		}
 		else if (request.getCurrUser().getPersonType() != PersonType.ADMIN)
-			responseList = sqlDatabase.getAllUserFlights(request.getCurrUser());
+			responseList = flightRepository.getAllUserFlights(request.getCurrUser());
 		else {
-			responseList = sqlDatabase.getAllFlights();
+			responseList = flightRepository.getAllFlights();
 		}
 
 		return new FlightShowAllResponse<>(responseList);

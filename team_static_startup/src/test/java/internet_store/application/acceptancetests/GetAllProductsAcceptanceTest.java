@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 @Profile("hibernate")
 public class GetAllProductsAcceptanceTest {
+/*
 
     private ApplicationContext appContext;
 
@@ -53,5 +54,6 @@ public class GetAllProductsAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
+*/
 
 }

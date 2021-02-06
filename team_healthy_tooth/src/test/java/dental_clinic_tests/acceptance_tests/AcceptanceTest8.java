@@ -7,13 +7,14 @@ import dental_clinic.core.requests.plannedVisit.GetPlannedVisitsRequest;
 import dental_clinic.core.responses.planned_visit.GetPlannedVisitsResponse;
 import dental_clinic.core.services.planned_visit.AddPlannedVisitService;
 import dental_clinic.core.services.planned_visit.GetPlannedVisitsService;
+import dental_clinic.DatabaseCleanerClinic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
-
+/*
 public class AcceptanceTest8 {
 
     private ApplicationContext appContext;
@@ -21,6 +22,7 @@ public class AcceptanceTest8 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -49,4 +51,8 @@ System.out.println();
     private GetPlannedVisitsService getPlannedVisitsService() {
         return appContext.getBean(GetPlannedVisitsService.class);
     }
-}
+
+    private DatabaseCleanerClinic getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleanerClinic.class);
+    }
+}*/

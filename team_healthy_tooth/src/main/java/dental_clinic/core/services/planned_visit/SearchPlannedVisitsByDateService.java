@@ -5,7 +5,7 @@ import dental_clinic.core.requests.plannedVisit.SearchPlannedVisitsByDateRequest
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.SearchPlannedVisitsByDateResponse;
 import dental_clinic.core.validators.planned_visit.SearchPlannedVisitsByDateRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class SearchPlannedVisitsByDateService {
     @Autowired
     private SearchPlannedVisitsByDateRequestValidator searchPlannedVisitsByDateRequestValidator;
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
 
     public SearchPlannedVisitsByDateResponse execute (SearchPlannedVisitsByDateRequest searchPlannedVisitsByDateRequest) {
         List<CoreError> errorList = searchPlannedVisitsByDateRequestValidator.validate(searchPlannedVisitsByDateRequest);
@@ -29,7 +29,7 @@ public class SearchPlannedVisitsByDateService {
             return new SearchPlannedVisitsByDateResponse(errorList, new ArrayList<>());
         }
 
-        List <PlannedVisit> plannedVisitList = plannedVisitsInMemoryDatabase.searchPlannedVisitsByDate(searchPlannedVisitsByDateRequest.getDayFrom(),
+        List <PlannedVisit> plannedVisitList = plannedVisitsRepository.searchPlannedVisitsByDate(searchPlannedVisitsByDateRequest.getDayFrom(),
                 searchPlannedVisitsByDateRequest.getDayTo(), searchPlannedVisitsByDateRequest.getMonthFrom(), searchPlannedVisitsByDateRequest.getMonthTo());
 
         if (plannedVisitList.isEmpty()) {

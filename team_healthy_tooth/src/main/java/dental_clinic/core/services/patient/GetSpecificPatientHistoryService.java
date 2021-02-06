@@ -4,7 +4,7 @@ import dental_clinic.core.requests.patient.GetSpecificPatientHistoryRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.validators.patient.GetSpecificPatientHistoryRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class GetSpecificPatientHistoryService {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
 
     public GetSpecificPatientHistoryResponse execute(GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest){
@@ -26,10 +26,10 @@ public class GetSpecificPatientHistoryService {
             return new GetSpecificPatientHistoryResponse(errors);
         }
 
-        if (patientDatabase.containsPatientWithSpecificId(getSpecificPatientHistoryRequest.getId())){
-            for (int i = 0; i < patientDatabase.getPatients().size(); i++){
+        if (patientRepository.containsPatientWithSpecificId(getSpecificPatientHistoryRequest.getId())){
+            for (int i = 0; i < patientRepository.getPatients().size(); i++){
                 if (isSpecificPatient(i, getSpecificPatientHistoryRequest.getId())){
-                    return new GetSpecificPatientHistoryResponse(Optional.of(patientDatabase.getPatients().get(i)));
+                    return new GetSpecificPatientHistoryResponse(Optional.of(patientRepository.getPatients().get(i)));
                 }
             }
         }
@@ -39,6 +39,6 @@ public class GetSpecificPatientHistoryService {
     }
 
     private boolean isSpecificPatient (int index, Long id) {
-        return patientDatabase.getPatients().get(index).getPersonalData().getId().equals(id);
+        return patientRepository.getPatients().get(index).getPersonalData().getId().equals(id);
     }
 }
