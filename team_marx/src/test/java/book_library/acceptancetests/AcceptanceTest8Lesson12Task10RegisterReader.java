@@ -55,6 +55,19 @@ public class AcceptanceTest8Lesson12Task10RegisterReader {
         assertEquals("Must not be empty!", response.getErrors().get(0).getMessage());
     }
 
+    @Test
+    public void shouldReturnErrorSuchReaderAlreadyIsRegistered() {
+        RegisterReaderRequest request1 = new RegisterReaderRequest("FirstName","LastName");
+        getRegisterReaderService().execute(request1);
+
+        RegisterReaderRequest request2 = new RegisterReaderRequest("FirstName","LastName");
+        RegisterReaderResponse response = getRegisterReaderService().execute(request2);
+
+        assertEquals(1, response.getErrors().size());
+        assertEquals("First name and last name", response.getErrors().get(0).getField());
+        assertEquals("This reader already is registered", response.getErrors().get(0).getMessage());
+    }
+
     private RegisterReaderService getRegisterReaderService() {
         return appContext.getBean(RegisterReaderService.class);
     }
