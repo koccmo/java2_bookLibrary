@@ -1,11 +1,11 @@
 package dental_clinic;
-
-import dental_clinic.config.DentalClinicConfiguration;
+/*
+import dental_clinic.config.DentalClinicSpringCoreConfiguration;
 import dental_clinic.console_ui.ProgramMenu.ProgramMenu;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class DentalClinic {
+public class DentalClinicConsole {
 
     public static void main(String [] args){
 
@@ -26,7 +26,7 @@ public class DentalClinic {
     }
 
     private static ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        return new AnnotationConfigApplicationContext(DentalClinicSpringCoreConfiguration.class);
     }
 
-}
+}*/
