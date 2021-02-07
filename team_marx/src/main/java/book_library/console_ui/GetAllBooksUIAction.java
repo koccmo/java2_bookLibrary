@@ -1,8 +1,8 @@
 package book_library.console_ui;
 
-import book_library.core.requests.GetAllBooksRequest;
-import book_library.core.responses.GetAllBooksResponse;
-import book_library.core.services.GetAllBooksService;
+import book_library.core.requests.Book.GetAllBooksRequest;
+import book_library.core.responses.Book.GetAllBooksResponse;
+import book_library.core.services.Book.GetAllBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

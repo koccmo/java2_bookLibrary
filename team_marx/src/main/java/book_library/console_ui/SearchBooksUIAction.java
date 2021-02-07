@@ -1,9 +1,9 @@
 package book_library.console_ui;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
-import book_library.core.requests.SearchBooksRequest;
-import book_library.core.responses.SearchBooksResponse;
-import book_library.core.services.SearchBooksService;
+import book_library.core.requests.Book.SearchBooksRequest;
+import book_library.core.responses.Book.SearchBooksResponse;
+import book_library.core.services.Book.SearchBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

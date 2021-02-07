@@ -1,8 +1,8 @@
 package book_library.console_ui;
 
-import book_library.core.requests.RegisterReaderRequest;
-import book_library.core.responses.RegisterReaderResponse;
-import book_library.core.services.RegisterReaderService;
+import book_library.core.requests.Reader.RegisterReaderRequest;
+import book_library.core.responses.Reader.RegisterReaderResponse;
+import book_library.core.services.Reader.RegisterReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

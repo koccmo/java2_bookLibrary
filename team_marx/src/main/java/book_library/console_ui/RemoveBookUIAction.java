@@ -1,8 +1,8 @@
 package book_library.console_ui;
 
-import book_library.core.requests.RemoveBookRequest;
-import book_library.core.responses.RemoveBookResponse;
-import book_library.core.services.RemoveBookService;
+import book_library.core.requests.Book.RemoveBookRequest;
+import book_library.core.responses.Book.RemoveBookResponse;
+import book_library.core.services.Book.RemoveBookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package book_library.console_ui;
 
-import book_library.core.database.NewBookIdMapper;
-import book_library.core.requests.AddBookRequest;
-import book_library.core.responses.AddBookResponse;
-import book_library.core.services.AddBookService;
+import book_library.core.database.Mapper.Book.NewBookIdMapper;
+import book_library.core.requests.Book.AddBookRequest;
+import book_library.core.responses.Book.AddBookResponse;
+import book_library.core.services.Book.AddBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
