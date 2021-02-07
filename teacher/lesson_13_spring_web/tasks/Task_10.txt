@@ -1,26 +1,17 @@
-Измените класс запуска приложения следующим образом:
+Запустите приложение используя WebBookListApplication.
 
-@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-public class WebBookListApplication {
+Откройте браузер и наберите: http://localhost:8080/.
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
+Перед вами должна открыться веб страница:
 
-		ProgramMenu programMenu = context.getBean(ProgramMenu.class);
-		while (true) {
-			programMenu.print();
-			int menuNumber = programMenu.getMenuNumberFromUser();
-			programMenu.executeSelectedMenuItem(menuNumber);
-		}
-	}
-
-}
+Program menu
+Add book to list
+Delete book from list
+Show all books in the list
+Search books
+Register reader
 
 
-@SpringBootApplication - данная аннотация необходима для
-автоконфигурации библиотек Spring входящих в Spring Boot.
-
-ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
-
-Так можно запустить Spring Ioc контекст используя
-библиотеку Spring Boot.
+По умолчанию приложение поднимается на порту 8080.
+Если это вас не устраивает, то это можно поменять
+указав в свойствах приложения другой порт.

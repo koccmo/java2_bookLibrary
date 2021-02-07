@@ -1,17 +1,39 @@
-Запустите приложение используя WebBookListApplication.
-
-Откройте браузер и наберите: http://localhost:8080/.
-
-Перед вами должна открыться веб страница:
-
-Program menu
-Add book to list
-Delete book from list
-Show all books in the list
-Search books
-Register reader
+Создайте в папке templates шаблон для страницы добавления
+книги в библиотеку addBookToList.html:
 
 
-По умолчанию приложение поднимается на порту 8080.
-Если это вас не устраивает, то это можно поменять
-указав в свойствах приложения другой порт.
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Book Library demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Book Library</title>
+</head>
+
+<body>
+
+    <h3>Add book to list</h3>
+
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td>Author:</td>
+        </tr>
+
+        <tr>
+            <form action="/addBookToList" th:object="${request}" method="post">
+                <td><input type="text" th:field="${request.title}"/></td>
+                <td><input type="text" th:field="${request.author}"/></td>
+                <td>
+                    <input type="submit" value="Add Book"/>
+                    <input type="reset" value="Clear"/>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+</body>
+
+</html>

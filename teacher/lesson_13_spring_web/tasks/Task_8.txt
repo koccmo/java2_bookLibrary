@@ -1,32 +1,29 @@
-Создайте в пакете lv.javaguru.java2.library.web_ui.config
-класс SpringWebMvcInitializer:
+В папке main/resources создайте папку templates.
 
-public class SpringWebMvcInitializer extends AbstractDispatcherServletInitializer {
+Создайте в папке templates файл index.html:
 
-	@Override
-	protected WebApplicationContext createRootApplicationContext() {
-		AnnotationConfigWebApplicationContext applicationContext =
-				new AnnotationConfigWebApplicationContext();
-		applicationContext.register(SpringCoreConfiguration.class);
-		return applicationContext;
-	}
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
-	@Override
-	protected WebApplicationContext createServletApplicationContext() {
-		AnnotationConfigWebApplicationContext applicationContext =
-				new AnnotationConfigWebApplicationContext();
-		applicationContext.register(SpringWebConfiguration.class);
-		return applicationContext;
-	}
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Book Library demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Book Library</title>
+</head>
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[]{"/"};
-	}
+<body>
 
-}
+    <h3>Program menu</h3>
 
-Цель этого класса заключается в инициализации веб и бекенд
-IoC контейнеров. Бекенд IoC контейнер стартует используя
-класс конфигурации SpringCoreConfiguration, а веб контейнер
-стартует используя класс SpringWebConfiguration.
+    <a href="/addBookToList">Add book to list</a> <br>
+    <a href="/deleteBookFromList">Delete book from list</a> <br>
+    <a href="/showAllBooks">Show all books in the list</a> <br>
+    <a href="/searchBooks">Search books</a> <br>
+    <a href="/registerReader">Register reader</a> <br>
+
+</body>
+
+</html>
+
+Это простой html файл со списком пунктов меню программы.
