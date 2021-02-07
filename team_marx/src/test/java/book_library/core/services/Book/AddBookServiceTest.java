@@ -4,7 +4,6 @@ import book_library.core.database.Book.BookRepository;
 import book_library.core.requests.Book.AddBookRequest;
 import book_library.core.responses.Book.AddBookResponse;
 import book_library.core.responses.CoreError;
-import book_library.core.services.Book.AddBookService;
 import book_library.core.validators.Book.AddBookRequestValidator;
 import book_library.matchers.BookMatcher;
 import org.junit.Test;
