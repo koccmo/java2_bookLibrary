@@ -110,8 +110,8 @@ public class SearchProductServiceTest {
                 request1.getDescription(),request1.getStartPrice(),request1.getEndPrice())).thenReturn(new ArrayList<>());
 
         SearchProductResponse response = searchProductService.execute(request1);
-        assertTrue(!productDatabase.containsTitleAndDescription("Mobile phone","Nokia"));
-        assertTrue(!productDatabase.containsPrice(50));
+        assertTrue(productDatabase.containsTitleAndDescription("Mobile phone","Nokia"));
+        assertTrue(productDatabase.containsPrice(50));
     }
 
     @Test
