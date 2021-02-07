@@ -1,19 +1,25 @@
 package internet_store.core.domain;
 
 import javax.persistence.*;
+import java.util.Map;
 import java.util.Objects;
 
 
 public class Order {
 
-    @Id
-    @Column(name = "order_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "shopping_cart_id")
-    private ShoppingCart shoppingCart;
+    private Customer customer;
+
+    private Map<Product, Integer> shoppingCart;
+
+    private Integer sum;
+
+    public Order(Customer customer, Map<Product, Integer> shoppingCart, Integer sum) {
+        this.customer = customer;
+        this.shoppingCart = shoppingCart;
+        this.sum = sum;
+    }
 
     public Order() {}
 
@@ -25,11 +31,11 @@ public class Order {
         this.id = id;
     }
 
-    public ShoppingCart getShoppingCart() {
+    public Map<Product, Integer> getShoppingCart() {
         return shoppingCart;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
+    public void setShoppingCart(Map<Product, Integer> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 
