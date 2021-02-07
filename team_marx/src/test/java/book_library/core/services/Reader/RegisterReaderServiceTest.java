@@ -6,6 +6,7 @@ import book_library.core.requests.Reader.RegisterReaderRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.Reader.RegisterReaderResponse;
 import book_library.core.validators.Reader.RegisterReaderValidator;
+import book_library.matchers.ReaderMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterReaderServiceTest {
@@ -45,6 +48,17 @@ public class RegisterReaderServiceTest {
         assertEquals("Must not be empty!", response.getErrors().get(0).getMessage());
 
         Mockito.verifyNoInteractions(readerRepository);
+    }
+
+    @Test
+    public void shouldRegisterReaderInDatabase() {
+        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
+        RegisterReaderRequest request = new RegisterReaderRequest("FirstName", "LastName");
+        RegisterReaderResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        Mockito.verify(readerRepository).save(
+                argThat(new ReaderMatcher("FirstName", "LastName"))
+        );
     }
 
 }
