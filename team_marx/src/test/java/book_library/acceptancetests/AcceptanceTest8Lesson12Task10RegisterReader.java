@@ -45,6 +45,16 @@ public class AcceptanceTest8Lesson12Task10RegisterReader {
         assertEquals("Must not be empty!", response.getErrors().get(0).getMessage());
     }
 
+    @Test
+    public void shouldReturnErrorNotValidLastName() {
+        RegisterReaderRequest request = new RegisterReaderRequest("FirstName",null);
+        RegisterReaderResponse response = getRegisterReaderService().execute(request);
+
+        assertEquals(1, response.getErrors().size());
+        assertEquals("lastName", response.getErrors().get(0).getField());
+        assertEquals("Must not be empty!", response.getErrors().get(0).getMessage());
+    }
+
     private RegisterReaderService getRegisterReaderService() {
         return appContext.getBean(RegisterReaderService.class);
     }
