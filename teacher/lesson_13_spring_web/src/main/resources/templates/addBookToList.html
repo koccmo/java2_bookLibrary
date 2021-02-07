@@ -1,7 +1,3 @@
-Создайте в папке templates шаблон для страницы добавления
-книги в библиотеку addBookToList.html:
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
@@ -33,6 +29,13 @@
             </form>
         </tr>
     </table>
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}" />
+            <td th:text="${error.message}" />
+        </tr>
+    </td>
 
 </body>
 

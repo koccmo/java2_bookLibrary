@@ -29,6 +29,7 @@ public class SearchPatientService {
 
     @Autowired
     private PatientRepository patientRepository;
+
     @Autowired private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){

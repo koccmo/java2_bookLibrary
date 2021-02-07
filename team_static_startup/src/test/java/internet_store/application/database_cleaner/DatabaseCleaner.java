@@ -24,6 +24,9 @@ public class DatabaseCleaner {
         List<String> tableNames = new ArrayList<>();
         tableNames.add("products");
         tableNames.add("customers");
+        tableNames.add("orders");
+        tableNames.add("shopping_carts");
+        tableNames.add("shopping_cart_items");
         return tableNames;
     }
 
