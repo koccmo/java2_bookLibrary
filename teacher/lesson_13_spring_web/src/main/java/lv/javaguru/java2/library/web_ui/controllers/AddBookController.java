@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
+import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 
 @Controller
@@ -23,9 +24,14 @@ public class AddBookController {
 	}
 
 	@PostMapping("/addBookToList")
-	public String processAddBookRequest(@ModelAttribute(value = "request") AddBookRequest request) {
-		addBookService.execute(request);
-		return "index";
+	public String processAddBookRequest(@ModelAttribute(value = "request") AddBookRequest request, ModelMap modelMap) {
+		AddBookResponse response = addBookService.execute(request);
+		if (response.hasErrors()) {
+			modelMap.addAttribute("errors", response.getErrors());
+			return "addBookToList";
+		} else {
+			return "index";
+		}
 	}
 
 }
