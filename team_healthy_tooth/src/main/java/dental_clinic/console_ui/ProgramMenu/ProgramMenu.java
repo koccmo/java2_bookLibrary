@@ -72,8 +72,6 @@ public class ProgramMenu {
         menuNumberToActionMap.get(selectedMenuNumber).execute();
     }
 
-
-
     public int inputValidInteger(){
         return inputFormatsValidator.inputInteger("Please enter menu number: ");
     }
