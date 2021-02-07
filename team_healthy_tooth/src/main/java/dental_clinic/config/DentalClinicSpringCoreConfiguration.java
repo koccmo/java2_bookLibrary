@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "dental_clinic")
+@ComponentScan(basePackages = "dental_clinic.core")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
-public class DentalClinicConfiguration {
+public class DentalClinicSpringCoreConfiguration {
 
     //JDBC
     @Value("${jdbc.url}")
