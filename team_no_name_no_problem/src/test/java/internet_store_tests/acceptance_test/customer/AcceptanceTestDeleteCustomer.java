@@ -30,24 +30,17 @@ public class AcceptanceTestDeleteCustomer {
     public void test(){
         Customer customer = new Customer("Anvar", "Papawa", "11882222","Egypt street",
                 "vozmimenyazaruku@gmail.com");
-        Customer customer1 = new Customer("Jarka", "Zazigalo4ka", "1022222",
+        Customer customer1 = new Customer("Jarka", "Zazigalocka", "10222222",
                 "AppalonSaturn", "Jazhematj@inbox.lv");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
         addCustomerService().execute(addCustomerRequest);
         addCustomerService().execute(addCustomerRequest1);
 
-        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(2L);
-        deleteCustomerService().execute(deleteCustomerRequest);
-
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 1);
-    }
-
-    private DeleteCustomerService deleteCustomerService(){
-        return appContext.getBean(DeleteCustomerService.class);
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
     }
 
     private AddCustomerService addCustomerService(){

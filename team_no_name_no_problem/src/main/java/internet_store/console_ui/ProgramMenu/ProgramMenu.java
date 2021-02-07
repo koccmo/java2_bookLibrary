@@ -5,7 +5,7 @@ import internet_store.console_ui.customer.AddCustomerUIAction;
 import internet_store.console_ui.customer.DeleteCustomerUIAction;
 import internet_store.console_ui.customer.FindCustomerByIdUIAction;
 import internet_store.console_ui.customer.SearchCustomerUIAction;
-import internet_store.console_ui.order.GetOrdersUIAction;
+//import internet_store.console_ui.order.GetOrdersUIAction;
 import internet_store.console_ui.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,9 +29,10 @@ public class ProgramMenu {
         menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
         menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
-        menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
+       // menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
+        // Deletecustomer ui
 
-        //menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
+        menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
         menuNumberToActionMap.put(10, findUIAction(uiActionList, DeleteCustomerUIAction.class));
         menuNumberToActionMap.put(11, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(12, findUIAction(uiActionList, GetAllProductsUIAction.class));

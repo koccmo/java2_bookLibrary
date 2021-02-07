@@ -86,15 +86,12 @@ public class AddPlannedVisitService {
 
     private boolean doctorDoesNotWorksInThisTime (PlannedVisit plannedVisit, AddPlannedVisitRequest addPlannedVisitRequest) {
         Integer index = plannedVisit.getVisitTime().getDay() - 1;
-        System.out.println(index);
         if (doctorDoesNotWorkThisDay(plannedVisit, index)) {
-            System.out.println("WHY????");
             return true;
         }
         LocalTime visitTime = LocalTime.parse(addPlannedVisitRequest.getVisitDataText().split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime timeFrom = LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesStart()[index], DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime timeTo = LocalTime.parse(doctorRepository.getWorkGraphic(plannedVisit.getDoctor()).getTimesEnd()[index], DateTimeFormatter.ofPattern("HH:mm"));
-        System.out.println("Visit time:" + visitTime + "\nfrom: " + timeFrom + "\nTo: " + timeFrom);
         return !(timeFrom.isBefore(visitTime) && timeTo.isAfter(visitTime));
     }
 

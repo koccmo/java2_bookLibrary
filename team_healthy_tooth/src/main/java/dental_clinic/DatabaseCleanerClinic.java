@@ -22,12 +22,13 @@ public class DatabaseCleanerClinic {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
+        tableNames.add("doctorsWorkGraphic");
+        tableNames.add("jowl");
+        tableNames.add("plannedVisit");
+        tableNames.add("visit");
         tableNames.add("doctor");
         tableNames.add("personalData");
-        tableNames.add("service");
-        tableNames.add("jowl");
-        tableNames.add("visit");
-        tableNames.add("plannedVisit");
+        tableNames.add("manipulation");
         return tableNames;
     }
 

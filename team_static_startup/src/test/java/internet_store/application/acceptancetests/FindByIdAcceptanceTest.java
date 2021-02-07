@@ -19,7 +19,6 @@ import org.springframework.context.annotation.Profile;
 
 @Profile("hibernate")
 public class FindByIdAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
     private ProductRepository repository;
@@ -34,7 +33,6 @@ public class FindByIdAcceptanceTest {
         repository.add(new Product("iMac", "pc", new BigDecimal("4000")));
     }
 
-*/
 /*    @Test
     public void shouldFindById() {
         FindByIdRequest request = new FindByIdRequest("2");
@@ -45,7 +43,7 @@ public class FindByIdAcceptanceTest {
         assertEquals(Optional.of(
                 newProduct(2L, "iMac", "pc", new BigDecimal("4000"))),
                 response.getProductFoundById());
-    }*//*
+    }*/
 
 
     @Test
@@ -86,6 +84,5 @@ public class FindByIdAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }

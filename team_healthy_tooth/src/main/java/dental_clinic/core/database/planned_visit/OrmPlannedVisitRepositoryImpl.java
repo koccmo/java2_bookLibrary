@@ -61,7 +61,8 @@ public class OrmPlannedVisitRepositoryImpl implements PlannedVisitsRepository{
 
     @Override
     public boolean containsPlannedVisitInTheSameTimeTheSameDoctor(PlannedVisit plannedVisit) {
-        return sessionFactory.getCurrentSession().contains(plannedVisit);
+        return getPlannedVisits().stream()
+                .anyMatch(plannedVisit1 -> plannedVisit1.equals(plannedVisit));
     }
 
     @Override
@@ -78,15 +79,6 @@ public class OrmPlannedVisitRepositoryImpl implements PlannedVisitsRepository{
 
     @Override
     public List<PlannedVisit> searchPlannedVisitsByDate(int dayFrom, int dayTo, int monthFrom, int monthTo) {
-        /*Date dateFrom = new Date(2021, monthFrom, dayFrom);
-        Date dateTo = new Date(2021, monthTo, dayTo);
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT p FROM PlannedVisit p WHERE dateAndTime > :dateFrom AND" +
-                        "dateAndTime < :dateTo");
-        query.setParameter("dateFrom", dateFrom);
-        query.setParameter("dateTo", dateTo);
-        return query.getResultList();*/
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String dateFromText= getDayFromInStringFormat(dayFrom) + "-" + getMonthFromInStringFormat(monthFrom) + "-2021";
         String dateToText = getDayToInStringFormat(dayTo) + "-" + getMonthToInStringFormat(monthTo) + "-2021";

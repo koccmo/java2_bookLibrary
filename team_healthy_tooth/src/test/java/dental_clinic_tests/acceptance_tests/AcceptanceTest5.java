@@ -1,22 +1,28 @@
 package dental_clinic_tests.acceptance_tests;
 
 import dental_clinic.config.DentalClinicConfiguration;
+import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.PersonalData;
+import dental_clinic.core.requests.Ordering;
+import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.patient.AddPatientRequest;
 import dental_clinic.core.requests.patient.ChangePersonalDataRequest;
 import dental_clinic.core.requests.patient.GetAllPatientsRequest;
+import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.responses.patient.GetAllPatientsResponse;
+import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.services.patient.GetAllPatientsService;
 import dental_clinic.DatabaseCleanerClinic;
+import dental_clinic.core.services.patient.SearchPatientService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertTrue;
-/*
+
 public class AcceptanceTest5 {
 
     private ApplicationContext appContext;
@@ -34,10 +40,19 @@ public class AcceptanceTest5 {
         AddPatientRequest addPatientRequest1 = new AddPatientRequest(personalData1);
         addPatientService().execute(addPatientRequest1);
 
-        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(1L, "SurnameB", "");
+        SearchPatientRequest searchPatientRequest =
+                new SearchPatientRequest("Surname",
+                        new Ordering("name", OrderingDirection.ASC),
+                        new Paging(1, 100));
+
+        SearchPatientResponse searchPatientResponse = searchPatientService().execute(searchPatientRequest);
+
+        Long id = searchPatientResponse.getPatients().get(0).getId();
+
+        ChangePersonalDataRequest changePersonalDataRequest = new ChangePersonalDataRequest(id, "SurnameB", "");
         changePersonalDataService().execute(changePersonalDataRequest);
 
-        ChangePersonalDataRequest changePersonalDataRequest2 = new ChangePersonalDataRequest(1L, "SurnameK", "87654321");
+        ChangePersonalDataRequest changePersonalDataRequest2 = new ChangePersonalDataRequest(id, "SurnameK", "87654321");
         changePersonalDataService().execute(changePersonalDataRequest2);
 
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
@@ -54,6 +69,10 @@ public class AcceptanceTest5 {
         return appContext.getBean(AddPatientService.class);
     }
 
+    private SearchPatientService searchPatientService() {
+        return appContext.getBean(SearchPatientService.class);
+    }
+
     private ChangePersonalDataService changePersonalDataService(){
         return appContext.getBean(ChangePersonalDataService.class);
     }
@@ -65,4 +84,4 @@ public class AcceptanceTest5 {
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}*/
+}

@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 
 @Profile("hibernate")
 public class ChangeProductNameAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
     private ProductRepository productRepository;
@@ -32,7 +31,7 @@ public class ChangeProductNameAcceptanceTest {
         productRepository.add(new Product("iMac", "pc", new BigDecimal("4000")));
     }
 
-*/
+
 /*
     @Test
     public void shouldChangeProductName() {
@@ -43,7 +42,7 @@ public class ChangeProductNameAcceptanceTest {
         assertEquals("iPhone12", productRepository.getProductList().get(0).getName());
         assertNull(response.getErrors());
     }
-*//*
+*/
 
 
     @Test
@@ -77,6 +76,5 @@ public class ChangeProductNameAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }

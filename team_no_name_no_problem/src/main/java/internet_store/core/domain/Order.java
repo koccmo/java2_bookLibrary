@@ -1,12 +1,9 @@
 package internet_store.core.domain;
 
 import javax.persistence.*;
-import java.util.Map;
 import java.util.Objects;
 
 
-@Entity
-@Table(name = "customer_order")
 public class Order {
 
     @Id
@@ -14,55 +11,26 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
-
-   /* @ElementCollection
-    @CollectionTable(name = "shopping_cart", joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "order_id")})
-    @MapKey(name = "product_id")
-    @Column(name = "quantity") */
-    @OneToMany(mappedBy = "shopping_cart")
-    private Map<Product, Integer> shoppingCart;
-
-    @Column(name = "price", nullable = false)
-    private Integer sumTotal;
+    @OneToOne
+    @JoinColumn(name = "shopping_cart_id")
+    private ShoppingCart shoppingCart;
 
     public Order() {}
 
-    public Order (Customer customer, Map <Product, Integer> shoppingCart, Integer sumTotal){
-        this.customer = customer;
-        this.shoppingCart = shoppingCart;
-        this.sumTotal = sumTotal;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setShoppingCart(Map<Product, Integer>shoppingCart){
-        this.shoppingCart = shoppingCart;
-    }
-
-    public Map<Product, Integer> getShoppingCart() {
+    public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
 
-    public Integer getSumTotal() {
-        Integer sum = 0;
-        for (Product product : shoppingCart.keySet()) {
-            sum += shoppingCart.get(product) * product.getPrice();
-        }
-        return sum;
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     @Override
@@ -70,28 +38,19 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(customer, order.customer) && Objects.equals(shoppingCart, order.shoppingCart);
+        return Objects.equals(id, order.id) && Objects.equals(shoppingCart, order.shoppingCart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, shoppingCart);
+        return Objects.hash(id, shoppingCart);
     }
 
     @Override
     public String toString() {
-        return "Order details:" +
-                customer + "\n" +
-                "product list:" +
-                shoppingCartToStringForPrint(shoppingCart);
-    }
-
-    private String shoppingCartToStringForPrint (Map<Product, Integer> shoppingCart) {
-        String result = "";
-        for (Product product : shoppingCart.keySet()) {
-            result += product + " " + shoppingCart.get(product) + "\n";
-        }
-        result += "Sum = " + sumTotal + " EUR\n";
-        return result;
+        return "Order{" +
+                "id=" + id +
+                ", shoppingCart=" + shoppingCart +
+                '}';
     }
 }

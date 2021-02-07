@@ -5,6 +5,7 @@ import internet_store.core.domain.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public interface OrderDatabase {
 
     List <Order> getOrders();
