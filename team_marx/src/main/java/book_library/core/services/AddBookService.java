@@ -8,6 +8,8 @@ import book_library.core.responses.CoreError;
 import book_library.core.validators.AddBookRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class AddBookService {
     private BookRepository bookRepository;
     @Autowired private AddBookRequestValidator validator;
 
+    @Transactional
     public AddBookResponse execute(AddBookRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {

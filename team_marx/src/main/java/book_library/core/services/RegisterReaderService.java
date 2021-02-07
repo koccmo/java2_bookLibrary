@@ -8,6 +8,7 @@ import book_library.core.responses.RegisterReaderResponse;
 import book_library.core.validators.RegisterReaderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class RegisterReaderService {
     @Autowired
     private RegisterReaderValidator validator;
 
+    @Transactional
     public RegisterReaderResponse execute(RegisterReaderRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()){

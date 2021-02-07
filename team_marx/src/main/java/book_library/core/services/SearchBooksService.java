@@ -11,6 +11,7 @@ import book_library.core.validators.SearchBooksRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,6 +31,7 @@ public class SearchBooksService {
     private BookRepository bookRepository;
     @Autowired private SearchBooksRequestValidator validator;
 
+    @Transactional
     public SearchBooksResponse execute(SearchBooksRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {

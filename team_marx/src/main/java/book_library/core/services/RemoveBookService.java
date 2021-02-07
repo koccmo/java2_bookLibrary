@@ -7,6 +7,7 @@ import book_library.core.responses.RemoveBookResponse;
 import book_library.core.validators.RemoveBookRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class RemoveBookService {
     @Autowired
     private RemoveBookRequestValidator validator;
 
+    @Transactional
     public RemoveBookResponse execute(RemoveBookRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
