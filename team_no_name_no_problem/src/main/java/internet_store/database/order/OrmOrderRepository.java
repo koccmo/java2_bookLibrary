@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Transactional
@@ -36,8 +33,8 @@ public class OrmOrderRepository implements OrderDatabase{
 
     @Override
     public void addOrder(Order order) {
-        for(ShoppingCart shoppingCart : )
-                sessionFactory.getCurrentSession().save(ShoppingCart);
+        List<Order> orderFromClients = new ArrayList<>();
+        orderFromClients.add(order);
     };
 
     private Map<Product, Integer> saveShoppingCartToMap(List<ShoppingCartItem> items){
@@ -47,4 +44,5 @@ public class OrmOrderRepository implements OrderDatabase{
         }
         return result;
     }
+
 }
