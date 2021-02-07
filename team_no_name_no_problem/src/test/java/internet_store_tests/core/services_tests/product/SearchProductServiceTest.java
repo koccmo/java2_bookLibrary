@@ -97,6 +97,24 @@ public class SearchProductServiceTest {
     }
 
     @Test
+    public void databaseContainsSuchProductTitleAndDescriptionAndPriceRange() {
+
+        Product mobilePhone = new Product("Mobile phone","Nokia",50);
+        productDatabase.add(mobilePhone);
+
+        SearchProductRequest request1 = new SearchProductRequest("Mobile phone", "Nokia",
+                1,51, ordering, paging);
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.findAllByTitleAndDescriptionAndPriceRange(request1.getTitle(),
+                request1.getDescription(),request1.getStartPrice(),request1.getEndPrice())).thenReturn(new ArrayList<>());
+
+        SearchProductResponse response = searchProductService.execute(request1);
+        assertTrue(!productDatabase.containsTitleAndDescription("Mobile phone","Nokia"));
+        assertTrue(!productDatabase.containsPrice(50));
+    }
+
+    @Test
     public void databaseContainsSuchProductTitleAndDescription() {
 
         Product mobilePhone = new Product("Mobile phone","Nokia",40);
