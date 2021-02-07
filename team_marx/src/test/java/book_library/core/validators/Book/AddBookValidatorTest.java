@@ -36,7 +36,7 @@ public class AddBookValidatorTest {
     public void shouldReturnErrorWhenTitleIsNull() {
         AddBookRequest request = new AddBookRequest(null, "Author");
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(),1);
+        assertEquals(1,errors.size());
         assertEquals("title", errors.get(0).getField());
         assertEquals("Must not be empty", errors.get(0).getMessage());
     }
@@ -75,6 +75,17 @@ public class AddBookValidatorTest {
         assertEquals( 2, errors.size());
         assertEquals("title", errors.get(0).getField());
         assertEquals( "Must not be empty", errors.get(0).getMessage());
+        assertEquals("author", errors.get(1).getField());
+        assertEquals("Must not be empty", errors.get(1).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenTitleAndAuthorIsNull() {
+        AddBookRequest request = new AddBookRequest(null, null);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(2,errors.size());
+        assertEquals("title", errors.get(0).getField());
+        assertEquals("Must not be empty", errors.get(0).getMessage());
         assertEquals("author", errors.get(1).getField());
         assertEquals("Must not be empty", errors.get(1).getMessage());
     }
