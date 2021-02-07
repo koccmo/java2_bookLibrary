@@ -17,7 +17,6 @@ import static org.junit.Assert.*;
 
 @Profile("hibernate")
 public class DeleteByIdAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -27,7 +26,6 @@ public class DeleteByIdAcceptanceTest {
         getDatabaseCleaner().clean();
     }
 
-*/
 /*
     @Test
     public void shouldDeleteWhenIdIsInDatabase() {
@@ -39,8 +37,7 @@ public class DeleteByIdAcceptanceTest {
         assertTrue(deleteResponse.isProductRemoved());
         assertFalse(deleteResponse.hasErrors());
     }
-*//*
-
+*/
 
     @Test
     public void shouldNotDeleteWhenIdIsNotInDatabase() {
@@ -71,6 +68,5 @@ public class DeleteByIdAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
