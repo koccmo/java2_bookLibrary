@@ -29,7 +29,7 @@ public class ProgramMenu {
         menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
         menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
-       // menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
+       //menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
         // Deletecustomer ui
 
         menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));

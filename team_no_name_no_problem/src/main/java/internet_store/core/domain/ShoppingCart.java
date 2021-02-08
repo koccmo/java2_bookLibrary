@@ -19,6 +19,11 @@ public class ShoppingCart {
     @Column(name = "sum_total")
     private Integer sumTotal;
 
+    public ShoppingCart(Customer customer, Integer sumTotal) {
+        this.customer = customer;
+        this.sumTotal = sumTotal;
+    }
+
     public Long getId() {
         return id;
     }
