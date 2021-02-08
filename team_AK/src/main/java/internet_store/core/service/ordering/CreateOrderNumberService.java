@@ -1,6 +1,6 @@
 package internet_store.core.service.ordering;
 
-import internet_store.date_formats.DateCreator;
+import internet_store.core.service.date_formats.DateCreator;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;

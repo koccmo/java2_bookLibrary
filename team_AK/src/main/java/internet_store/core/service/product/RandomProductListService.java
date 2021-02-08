@@ -1,7 +1,7 @@
 package internet_store.core.service.product;
 
 import internet_store.core.domain.Product;
-import internet_store.persistence.ProductRepository;
+import internet_store.core.persistence.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class RandomProductListService {
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public List<Product> createRandomProductsList() {
         List<Long> rndId = new ArrayList<>();
+        final int FIRST_PRODUCT = 0;
+        final int LAST_PRODUCT = 6;
 
-        int count = 0;
+        int count = FIRST_PRODUCT;
         boolean flag = true;
         while (flag) {
             long generatedValue = 1 + (long) ((Math.random()) * productRepository.count());
@@ -26,7 +28,7 @@ public class RandomProductListService {
                 rndId.add(generatedValue);
                 count++;
             }
-            if (count == 6) {
+            if (count == LAST_PRODUCT) {
                 flag = false;
             }
         }

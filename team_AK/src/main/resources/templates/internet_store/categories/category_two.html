@@ -30,35 +30,39 @@
 
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
     <div class="container">
-        <a class="navbar-brand" href="/">EStore Internet Shop</a>
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
+                    <a class="nav-link" href="/"><b>Home</b>
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart">Cart
+                    <a class="nav-link" href="cart"><b>Cart</b>
                         <span class="badge badge-light">
                                 <div th:text="${cartCount}"></div>
                     </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
+                    <a class="nav-link" href="about"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact">Contact</a>
+                    <a class="nav-link" href="contact"><b>Contact</b></a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropDown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href="">Service</a>
+                       data-bs-toggle="dropdown" aria-expanded="false" href=""><b>Service</b></a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropDown">
                         <form id="pass_enter">
@@ -67,7 +71,7 @@
                                     &nbsp&nbsp<input name="pass" type="password" class="form-control form-control-sm"
                                                      placeholder="password">
                                     <button type="submit" class="btn btn-primary btn-sm"
-                                            formaction="/pass_from_category_two" value="pass"
+                                            formaction="/pass" value="pass"
                                             formmethod="post">Ok
                                     </button>
                                     &nbsp&nbsp
@@ -80,28 +84,25 @@
         </div>
     </div>
 </nav>
-
 <!-- Page Content -->
 <div class="container">
-
     <div class="row">
-
         <div class="col-lg-3">
-
-            <h3 class="my-4">Shop categories</h3>
+            <center>
+                <h3 class="my-4" style="color:#007BFF;">Categories</h3>
+            </center>
             <div class="list-group">
-                <a href="categories" class="list-group-item">All Categories</a>
-                <a href="category_1" class="list-group-item">Category 1</a>
-                <a href="category_2" class="list-group-item">Category 2</a>
-                <a href="category_3" class="list-group-item">Category 3</a>
+                <a href="categories" class="list-group-item"><b>All Categories</b></a>
+                <a href="category_1" class="list-group-item"><b>Category 1</b></a>
+                <a href="category_2" class="list-group-item"><b>Category 2</b></a>
+                <a href="category_3" class="list-group-item"><b>Category 3</b></a>
             </div>
-            <p></p>
-            <h6>Search</h6>
             <p></p>
             <div class="input-group mb-3">
                 <form>
                     <div class="input-group-append">
-                        <input type="search" name="search" class="form-control form-control-sm" placeholder="Product">
+                        <input type="search" name="search" class="form-control form-control-sm" placeholder="Product"
+                               id="search">
                         <span class="input-group-btn">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle btn-sm"

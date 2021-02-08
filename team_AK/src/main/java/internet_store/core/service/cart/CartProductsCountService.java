@@ -1,6 +1,6 @@
 package internet_store.core.service.cart;
 
-import internet_store.persistence.CartRepository;
+import internet_store.core.persistence.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CartProductsCountService {
     @Autowired
-    CartRepository CartRepository;
+    private CartRepository CartRepository;
 
     public long getCartCount() {
         return CartRepository.countProductInCart();

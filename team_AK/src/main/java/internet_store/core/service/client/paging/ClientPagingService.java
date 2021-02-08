@@ -1,22 +1,24 @@
 package internet_store.core.service.client.paging;
 
 import internet_store.core.domain.Client;
-import internet_store.persistence.ClientRepository;
+import internet_store.core.persistence.ClientRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ClientPagingService {
     private final int PAGE_OFFSET = 1;
     private final int FIRST_PAGE = 1;
     private final int START_FROM_FIRST_RECORD = 0;
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @Getter
     @Setter
     @Value("${client-records-on-page}")
@@ -41,7 +43,7 @@ public class ClientPagingService {
         endRecordOffset = recordsCountOnPage;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
-        listOnePage = clientRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
+        listOnePage = clientRepository.getLimitsClientRecords(recordsCountOnPage, startRecordOffset);
         if ((startRecordOffset + recordsCountOnPage) >= clientRepository.count()) {
             isLastPage = true;
         }
@@ -56,7 +58,7 @@ public class ClientPagingService {
     }
 
     private void nextPage() {
-        if (currentPage + PAGE_OFFSET == pagesQuantity) {
+        if (currentPage + PAGE_OFFSET >= pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
             isLastPage = true;
@@ -68,11 +70,11 @@ public class ClientPagingService {
             isLastPage = false;
             isFirstPage = false;
         }
-        listOnePage = clientRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
+        listOnePage = clientRepository.getLimitsClientRecords(recordsCountOnPage, startRecordOffset);
     }
 
     private void prevPage() {
-        if (currentPage - PAGE_OFFSET == FIRST_PAGE) {
+        if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
             endRecordOffset = recordsCountOnPage;
@@ -84,7 +86,7 @@ public class ClientPagingService {
             isFirstPage = false;
             isLastPage = false;
         }
-        listOnePage = clientRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
+        listOnePage = clientRepository.getLimitsClientRecords(recordsCountOnPage, startRecordOffset);
     }
 
     private void calculatePagesQuantity() {

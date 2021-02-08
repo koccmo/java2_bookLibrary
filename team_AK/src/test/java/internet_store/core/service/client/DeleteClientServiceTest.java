@@ -3,43 +3,50 @@ package internet_store.core.service.client;
 import internet_store.core.domain.Client;
 import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
-import internet_store.database.interfaces.ClientDatabase;
-import internet_store.database.client_database.ClientDatabaseImpl;
+import internet_store.core.persistence.ClientRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DeleteClientServiceTest {
-    private final ClientDatabase clientDatabase = new ClientDatabaseImpl();
-    private final DeleteClientService deleteService = new DeleteClientService();
+    @Mock
+    ClientRepository clientRepository;
+    @InjectMocks
+    DeleteClientService deleteClientService;
 
     @Test
-    public void shouldReturnNoErrors() {
+    public void shouldReturnNoError_ClientDelete() {
         Client client = new Client();
-        client.setId(1L);
-        client.setName("Name");
-        client.setSurname("Surname");
-        client.setPhoneNumber("29336699");
-        client.setEmail("a@a.lv");
-        clientDatabase.addClient(client);
+        client.setName("Name#1");
 
-        DeleteClientResponse response = deleteService.execute(new DeleteClientRequest(1L, clientDatabase, new Client()));
-        assertEquals(1, response.getId());
+        Mockito.when(clientRepository.existsByName("Name#1")).thenReturn(true);
+        Mockito.doNothing().when(clientRepository).delete(client);
+        DeleteClientResponse response = deleteClientService
+                .execute(new DeleteClientRequest(client));
+
         assertFalse(response.hasErrors());
     }
 
     @Test
-    public void shouldReturnError_1() {
-        DeleteClientResponse response = deleteService.execute(new DeleteClientRequest(-1L, clientDatabase, new Client()));
-        assertEquals("Long input error ", response.getErrors().get(0).getField());
-        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
+    public void shouldReturnError_ClientNoExist() {
+        Client client = new Client();
+        client.setName("Name#1");
+
+        Mockito.when(clientRepository.existsByName("Name#1")).thenReturn(false);
+        DeleteClientResponse response = deleteClientService
+                .execute(new DeleteClientRequest(client));
+
+        assertTrue(response.hasErrors());
+        assertEquals(1, response.getErrors().size());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("Client not exist in database", response.getErrors().get(0).getMessage());
     }
 
-    @Test
-    public void shouldReturnError_2() {
-        DeleteClientResponse response = deleteService.execute(new DeleteClientRequest(25L, clientDatabase, new Client()));
-        assertEquals("Id error ", response.getErrors().get(0).getField());
-        assertEquals("wrong ID", response.getErrors().get(0).getMessage());
-    }
 }
