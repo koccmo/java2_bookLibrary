@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Dental Clinic demo project">
+    <meta name="author" content="Valeria">
+    <title>Dental clinic Healthy tooth</title>
+</head>
+
+<body>
+
+<h3>Add doctor</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Phone:</td>
+    </tr>
+
+    <tr>
+        <form action="/addDoctor" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.doctor.name}"/></td>
+            <td><input type="text" th:field="${request.doctor.surname}"/></td>
+            <td><input type="text" th:field="${request.doctor.phone}"/></td>
+            <td>
+                <input type="submit" value="Add Doctor"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+</body>
+
+</html>
