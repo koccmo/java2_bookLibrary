@@ -43,7 +43,6 @@ public class OrmOrderRepository implements OrderDatabase{
         }
     }
 
-
     private Map<Product, Integer> saveShoppingCartToMap(List<ShoppingCartItem> items){
         Map< Product, Integer> result = new HashMap<>();
         for (ShoppingCartItem shoppingCartItem : items){
