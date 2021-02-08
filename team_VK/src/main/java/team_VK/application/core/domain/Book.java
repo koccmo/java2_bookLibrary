@@ -1,8 +1,6 @@
 package team_VK.application.core.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -13,7 +11,7 @@ public class Book {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long ID;
 
     @Column(name="title", nullable = false)
@@ -25,20 +23,20 @@ public class Book {
     public int bookingDurationPermitted;
 
 
-    public List<BookingPeriod> bookings;
+ //   public List<BookingPeriod> bookings;
 
     public Book(String bookTitle, String bookAuthor, int bookingDurationPermitted) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookingDurationPermitted = bookingDurationPermitted;
-        bookings = new ArrayList<>();
+       // bookings = new ArrayList<>();
     }
 
     public Book() {}
 
-    public List<BookingPeriod> getBookings() {
-        return bookings;
-    }
+//    public List<BookingPeriod> getBookings() {
+//        return bookings;
+//    }
 
     public long getID() {
         return ID;
@@ -67,7 +65,7 @@ public class Book {
     public void setBookingDurationPermitted(int bookingDurationPermitted) {this.bookingDurationPermitted = bookingDurationPermitted;}
 
 
-    public void addBooking (BookingPeriod period) {bookings.add(period); }
+ //   public void addBooking (BookingPeriod period) {bookings.add(period); }
 
 
 

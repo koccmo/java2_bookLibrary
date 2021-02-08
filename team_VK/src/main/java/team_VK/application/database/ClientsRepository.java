@@ -4,7 +4,7 @@ import team_VK.application.core.domain.Client;
 
 import java.util.List;
 
-public interface DatabaseClients {
+public interface ClientsRepository {
 
     void addClient(Client client);
     void deleteClient(Client client);

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class RemoveBookServiceValidator {
 
 
-    public List<CoreError> validate(RemoveBookRequest request, Database database) {
+    public List<CoreError> validate(RemoveBookRequest request, BookRepository database) {
         List<CoreError> errors = new ArrayList<>();
 
 

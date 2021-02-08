@@ -10,8 +10,9 @@ public class Client {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long clientID;
+
     @Column(name="first_name", nullable = false)
     public String clientFirstName;
     @Column(name="last_name", nullable = false)

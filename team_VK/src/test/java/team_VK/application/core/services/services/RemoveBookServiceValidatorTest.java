@@ -5,27 +5,29 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import team_VK.application.configuration.LibraryConfig;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.requests.RemoveBookRequest;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.validators.RemoveBookServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.List;
 
 public class RemoveBookServiceValidatorTest {
-@Autowired
-    Database database;
+
+    @Autowired
+    BookRepository database;
+    @Autowired
     RemoveBookServiceValidator subject;
-    private ApplicationContext appContext;
+
+    //RemoveBookServiceValidator subject;
+
+    //   private ApplicationContext appContext;
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
-        subject = appContext.getBean(RemoveBookServiceValidator.class);
-        database = appContext.getBean(Database.class);
+        //     appContext = new AnnotationConfigApplicationContext(LibraryConfig.class);
+       // subject = appContext.getBean(RemoveBookServiceValidator.class);
+       // database = appContext.getBean(BookRepository.class);
         getBooks();
     }
 
@@ -63,7 +65,7 @@ public class RemoveBookServiceValidatorTest {
 
         Assert.assertEquals(errors.size(), 1);
         Assert.assertEquals(errors.get(0).getErrorMessage(), "ID not consist to Book Title");
-        Assert.assertEquals(errors.get(0).getField(),"Book ID");
+        Assert.assertEquals(errors.get(0).getField(), "Book ID");
     }
 
 

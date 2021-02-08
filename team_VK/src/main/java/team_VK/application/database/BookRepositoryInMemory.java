@@ -5,7 +5,7 @@ import team_VK.application.core.domain.Book;
 import java.util.ArrayList;
 import java.util.List;
 //@Component
-public class DatabaseInMemory implements Database {
+public class BookRepositoryInMemory implements BookRepository {
 
     private long idCounter = 1L;
     List<Book> books = new ArrayList<>();

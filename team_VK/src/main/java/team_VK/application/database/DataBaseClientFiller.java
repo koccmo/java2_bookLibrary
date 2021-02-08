@@ -8,7 +8,7 @@ import team_VK.application.core.domain.Client;
 public class DataBaseClientFiller {
 
     @Autowired
-    private DatabaseClients databaseClient;
+    private ClientsRepository databaseClient;
 
     public void fill() {
 

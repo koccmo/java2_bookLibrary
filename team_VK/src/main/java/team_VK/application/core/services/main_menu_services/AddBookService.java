@@ -7,7 +7,7 @@ import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.validators.AddBookServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class AddBookService {
 
     @Autowired
-    private Database database;
+    private BookRepository database;
     @Autowired public AddBookServiceValidator validator;
 
 

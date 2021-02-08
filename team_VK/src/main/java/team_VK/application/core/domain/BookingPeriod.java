@@ -10,7 +10,7 @@ public class BookingPeriod {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long bookingID;
 
     @Column(name="client_id", nullable = false)
@@ -19,12 +19,14 @@ public class BookingPeriod {
     public long bookID;
     @Column(name="bookingStartDate", nullable = false)
     Date bookingStartDate;
-    @Column(name="bookingFinishDate", nullable = false)
+    @Column(name="bookingFinishDate", nullable = true)
     Date bookingFinishDate;
 
     public BookingPeriod() {}
 
-    public BookingPeriod(Date bookingStartDate, Date bookingFinishDate) {
+    public BookingPeriod(long clientID, long bookID, Date bookingStartDate, Date bookingFinishDate) {
+        this.clientID = clientID;
+        this.bookID = bookID;
         this.bookingStartDate = bookingStartDate;
         this.bookingFinishDate = bookingFinishDate;
     }
@@ -50,6 +52,7 @@ public class BookingPeriod {
 
     @Override
     public String toString() {
+
         return "BookingPeriod{" +
                 "bookingStartDate=" + bookingStartDate +
                 ", bookingFinishDate=" + bookingFinishDate +

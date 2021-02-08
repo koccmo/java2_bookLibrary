@@ -6,7 +6,7 @@ import team_VK.application.core.domain.Client;
 import java.util.ArrayList;
 import java.util.List;
 @Component
-public class DatabaseClientsInMemory implements DatabaseClients {
+public class ClientsRepositoryInMemory implements ClientsRepository {
 
     private long idClientsCounter = 1L;
     List<Client> clients = new ArrayList<>();

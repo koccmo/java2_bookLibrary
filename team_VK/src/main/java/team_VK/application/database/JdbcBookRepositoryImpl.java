@@ -2,13 +2,12 @@ package team_VK.application.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 
 import java.util.List;
 
-@Component
-public class JdbcDatabaseImpl implements Database {
+//@Component
+public class JdbcBookRepositoryImpl implements BookRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
