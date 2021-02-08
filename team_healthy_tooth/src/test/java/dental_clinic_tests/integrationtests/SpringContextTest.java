@@ -1,5 +1,5 @@
 package dental_clinic_tests.integrationtests;
-
+/*
 import dental_clinic.config.DentalClinicConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,4 +20,4 @@ public class SpringContextTest {
     public void start(){
         assertNotNull(applicationContext);
     }
-}
+}*/

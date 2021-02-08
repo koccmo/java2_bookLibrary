@@ -6,9 +6,17 @@ import java.math.BigDecimal;
 
 public class AddProductQuantityRequest {
     @Getter
-    private final BigDecimal quantity;
+    private final Object quantity;
+
+    public AddProductQuantityRequest(Long quantity) {
+        this.quantity = quantity;
+    }
 
     public AddProductQuantityRequest(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+    public AddProductQuantityRequest(Integer quantity) {
         this.quantity = quantity;
     }
 }

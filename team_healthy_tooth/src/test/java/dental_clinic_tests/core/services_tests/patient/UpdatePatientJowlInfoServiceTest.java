@@ -8,7 +8,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.UpdatePatientJowlInfoResponse;
 import dental_clinic.core.services.patient.UpdatePatientJowlInfoService;
 import dental_clinic.core.validators.patient.UpdatePatientJowlInfoRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 public class UpdatePatientJowlInfoServiceTest {
 
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private UpdatePatientJowlInfoRequestValidator updatePatientJowlInfoRequestValidator;
     @InjectMocks
@@ -60,7 +60,7 @@ public class UpdatePatientJowlInfoServiceTest {
         UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest = new UpdatePatientsJowlInfoRequest(1L, jowlInfo);
 
         Mockito.when(updatePatientJowlInfoRequestValidator.validate(updatePatientsJowlInfoRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(1L)).thenReturn(false);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(1L)).thenReturn(false);
 
         UpdatePatientJowlInfoResponse updatePatientJowlInfoResponse = updatePatientJowlInfoService.execute(updatePatientsJowlInfoRequest);
 
@@ -82,8 +82,8 @@ public class UpdatePatientJowlInfoServiceTest {
         UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest = new UpdatePatientsJowlInfoRequest(1L, jowlInfo);
 
         Mockito.when(updatePatientJowlInfoRequestValidator.validate(updatePatientsJowlInfoRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(1L)).thenReturn(true);
-        Mockito.when(patientDatabase.getPatients()).thenReturn(patientList);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(1L)).thenReturn(true);
+        Mockito.when(patientRepository.getPatients()).thenReturn(patientList);
 
         UpdatePatientJowlInfoResponse updatePatientJowlInfoResponse = updatePatientJowlInfoService.execute(updatePatientsJowlInfoRequest);
 

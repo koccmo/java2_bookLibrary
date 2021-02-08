@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.DeleteTargetResponse;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class DeleteTargetServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private TargetDatabase targetDatabase;
+    @Mock private TargetRepository targetRepository;
     @Mock private DeleteTargetValidator validator;
     @InjectMocks
     DeleteTargetService service;
@@ -33,7 +33,7 @@ public class DeleteTargetServiceTest extends TestCase {
 
     @Test
     public void shouldDeleteTarget() {
-        Mockito.when(targetDatabase.isIdInTargetList(1L)).thenReturn(true);
+        Mockito.when(targetRepository.isIdInTargetList(1L)).thenReturn(true);
         DeleteTargetRequest request = new DeleteTargetRequest(1L);
         DeleteTargetResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -44,7 +44,7 @@ public class DeleteTargetServiceTest extends TestCase {
     public void invalidIdRequest_v1() {
         DeleteTargetRequest request = new DeleteTargetRequest(2L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         DeleteTargetResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 1);
@@ -57,7 +57,7 @@ public class DeleteTargetServiceTest extends TestCase {
         DeleteTargetRequest request = new DeleteTargetRequest(-2L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target ID;", "must not be negative!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         DeleteTargetResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -72,7 +72,7 @@ public class DeleteTargetServiceTest extends TestCase {
         DeleteTargetRequest request = new DeleteTargetRequest(null);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target ID;", "must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         DeleteTargetResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);

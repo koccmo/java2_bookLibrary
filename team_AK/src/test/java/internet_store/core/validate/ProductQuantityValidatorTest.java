@@ -3,7 +3,6 @@ package internet_store.core.validate;
 import internet_store.core.core_error.CoreError;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -14,13 +13,13 @@ public class ProductQuantityValidatorTest {
 
     @Test
     public void shouldReturnTrue_QuantityMoreZero() {
-        List<CoreError> errors = validator.validate(new BigDecimal("5"), new BigDecimal("1"));
+        List<CoreError> errors = validator.validate(5L, 1L);
         assertTrue(errors.isEmpty());
     }
 
     @Test
     public void shouldReturnError_QuantityIsZero() {
-        List<CoreError> errors = validator.validate(new BigDecimal("0"), new BigDecimal("0"));
+        List<CoreError> errors = validator.validate(0L, 0L);
         assertFalse(errors.isEmpty());
         assertEquals("Quantity error ", errors.get(0).getField());
         assertEquals("Product quantity is zero", errors.get(0).getMessage());
@@ -28,7 +27,7 @@ public class ProductQuantityValidatorTest {
 
     @Test
     public void shouldReturnError_QuantityIsZero_1() {
-        List<CoreError> errors = validator.validate(new BigDecimal("0"), new BigDecimal("5"));
+        List<CoreError> errors = validator.validate(0L, 5L);
         assertFalse(errors.isEmpty());
         assertEquals("Quantity error ", errors.get(0).getField());
         assertEquals("Product quantity is zero", errors.get(0).getMessage());
@@ -38,7 +37,7 @@ public class ProductQuantityValidatorTest {
 
     @Test
     public void shouldReturnError_QuantityIsZero_2() {
-        List<CoreError> errors = validator.validate(new BigDecimal("5"), new BigDecimal("15"));
+        List<CoreError> errors = validator.validate(5L, 15L);
         assertFalse(errors.isEmpty());
         assertEquals("Quantity error ", errors.get(0).getField());
         assertEquals("No more product's quantity", errors.get(0).getMessage());

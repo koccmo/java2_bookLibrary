@@ -1,49 +1,40 @@
 package internet_store.core.service.cart;
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.domain.Product;
+import internet_store.core.domain.ProductInCart;
+import internet_store.core.persistence.CartRepository;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.response.cart.DeleteProductFromCartResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.cart_database.InnerCartDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.validate.NumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Service
+@Transactional
 public class DeleteProductFromCartService {
     @Autowired
-    InnerCartDatabase cartDatabase;
+    private CartRepository CartRepository;
 
-    public DeleteProductFromCartService(InnerCartDatabase cartDatabase) {
-        this.cartDatabase = cartDatabase;
-    }
+    public DeleteProductFromCartResponse execute(DeleteProductFromCartRequest request) {
+        NumberValidator<?> numberValidator = new NumberValidator<>(request.getId());
 
-    public DeleteProductFromCartResponse execute(DeleteProductFromCartRequest deleteProductFromCartRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>
-                (deleteProductFromCartRequest.getId());
-
-        List<CoreError> errors = negativeNumberValidator.validate();
-
-        if (isIdExist(deleteProductFromCartRequest.getId())) {
-            Product deletedProduct = findProductById(deleteProductFromCartRequest.getId());
-            cartDatabase.deleteProductFromCart(deletedProduct);
-        } else {
-            errors.add(new CoreError("Id error ", "wrong ID"));
-        }
+        List<CoreError> errors = numberValidator.validate();
+        Optional<ProductInCart> productInCart = Optional.empty();
 
         if (errors.isEmpty()) {
-            return new DeleteProductFromCartResponse(deleteProductFromCartRequest.getId());
+            productInCart = CartRepository.findById(request.getId());
         }
+        if (productInCart.isEmpty()) {
+            errors.add(new CoreError("error", "record no exist in database"));
+            return new DeleteProductFromCartResponse(errors);
+        }
+        productInCart.ifPresent(cart -> cart.setDeleted(true));
+        productInCart.ifPresent(cart -> CartRepository.save(cart));
+
         return new DeleteProductFromCartResponse(errors);
-    }
-
-    private boolean isIdExist(long id) {
-        return cartDatabase.isIdExist(id);
-    }
-
-    private Product findProductById(long id) {
-        return cartDatabase.findById(id);
     }
 }

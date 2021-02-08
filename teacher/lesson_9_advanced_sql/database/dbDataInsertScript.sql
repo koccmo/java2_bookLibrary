@@ -26,5 +26,5 @@ values (7777, 'FirstName3', 'LastName3');
 
 
 
-insert into reader_journal(reader_id, book_id, book_out_date)
+insert into reader_books(reader_id, book_id, book_out_date)
 values (7777, 1005, '2021-01-01 23:59:59');

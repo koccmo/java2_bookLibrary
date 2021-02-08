@@ -3,65 +3,73 @@ package internet_store.core.service.product;
 import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.AddProductRequest;
-import internet_store.core.request.product.product_items.AddProductDescriptionRequest;
-import internet_store.core.request.product.product_items.AddProductPriceRequest;
-import internet_store.core.request.product.product_items.AddProductQuantityRequest;
-import internet_store.core.request.product.product_items.AddProductTitleRequest;
+import internet_store.core.request.product.CheckDuplicateRecordRequest;
+import internet_store.core.request.product.product_items.*;
 import internet_store.core.response.product.AddProductResponse;
-import internet_store.core.response.product.product_item.AddProductDescriptionResponse;
-import internet_store.core.response.product.product_item.AddProductPriceResponse;
-import internet_store.core.response.product.product_item.AddProductQuantityResponse;
-import internet_store.core.response.product.product_item.AddProductTitleResponse;
-import internet_store.database.product_database.InnerProductDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.response.product.CheckDuplicateRecordResponse;
+import internet_store.core.response.product.product_item.*;
+import internet_store.core.service.product.product_item.*;
+import internet_store.core.persistence.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@Component
-public class AddProductService implements ProductUpdate {
+@Service
+@Transactional
+public class AddProductService {
+    private final AddProductTitleService titleService = new AddProductTitleService();
+    private final AddProductDescriptionService descriptionService = new AddProductDescriptionService();
+    private final AddProductQuantityService quantityService = new AddProductQuantityService();
+    private final AddProductPriceService priceService = new AddProductPriceService();
+    private final AddProductCategoryService categoryService = new AddProductCategoryService();
+    private final CheckDuplicateRecordService duplicateRecordService = new CheckDuplicateRecordService();
     @Autowired
-    InnerProductDatabase productDatabase;
-    final AddProductTitleService titleService = new AddProductTitleService();
-    final AddProductDescriptionService descriptionService = new AddProductDescriptionService();
-    final AddProductQuantityService quantityService = new AddProductQuantityService();
-    final AddProductPriceService priceService = new AddProductPriceService();
+    private ProductRepository productRepository;
+    private List<CoreError> errors;
 
-    public AddProductResponse execute(AddProductRequest addProductRequest) {
-        List<CoreError> errors = new ArrayList<>();
+    public AddProductResponse execute(AddProductRequest request) {
+        List<List<CoreError>> allErrors = new ArrayList<>();
 
-        AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
-                (addProductRequest.getProduct().getTitle()));
-        AddProductDescriptionResponse descriptionResponse = descriptionService.execute(new AddProductDescriptionRequest
-                (addProductRequest.getProduct().getDescription()));
-        AddProductQuantityResponse quantityResponse = quantityService.execute(new AddProductQuantityRequest
-                (addProductRequest.getProduct().getQuantity()));
-        AddProductPriceResponse priceResponse = priceService.execute(new AddProductPriceRequest
-                (addProductRequest.getProduct().getPrice()));
+        checkHaveInputDataErrors(request, allErrors);
 
-        if (titleResponse.hasErrors()) {
-            errors.add(new CoreError("Title input error: ", "Empty field"));
+        if (errors.isEmpty()) {
+            productRepository.save(request.getProduct());
         }
-        if (descriptionResponse.hasErrors()) {
-            errors.add(new CoreError("Description input error: ", "Empty field"));
-        }
-        if (quantityResponse.hasErrors()) {
-            errors.add(new CoreError("Quantity input error: ", "Negative number"));
-        }
-        if (priceResponse.hasErrors()) {
-            errors.add(new CoreError("Price input error: ", "Negative number"));
-        }
-
-        execute(errors, addProductRequest.getProduct());
-
         return new AddProductResponse(errors);
     }
 
-    @Override
-    public void execute(List<CoreError> errors, Product product) {
-        if (errors.isEmpty()) {
-            productDatabase.addProduct(product);
+    private void checkHaveInputDataErrors(AddProductRequest request, List<List<CoreError>> allErrors) {
+        AddProductTitleResponse titleResponse = titleService.execute(new AddProductTitleRequest
+                (request.getProduct().getTitle()));
+        allErrors.add(titleResponse.getErrors());
+        AddProductDescriptionResponse descriptionResponse = descriptionService.execute(new AddProductDescriptionRequest
+                (request.getProduct().getDescription()));
+        allErrors.add(descriptionResponse.getErrors());
+        AddProductQuantityResponse quantityResponse = quantityService.execute(new AddProductQuantityRequest
+                (request.getProduct().getQuantity()));
+        allErrors.add(quantityResponse.getErrors());
+        AddProductPriceResponse priceResponse = priceService.execute(new AddProductPriceRequest
+                (request.getProduct().getPrice()));
+        allErrors.add(priceResponse.getErrors());
+        AddProductCategoryResponse categoryResponse = categoryService.execute(new AddProductCategoryRequest
+                (request.getProduct().getCategory()));
+        allErrors.add(categoryResponse.getErrors());
+        Product product = productRepository.findByTitle(request.getProduct().getTitle());
+        CheckDuplicateRecordResponse duplicateResponse = duplicateRecordService.execute(new
+                CheckDuplicateRecordRequest(product));
+        allErrors.add(duplicateResponse.getErrors());
+
+        Stream<CoreError> coreErrorStream = Stream.of();
+        for (List<CoreError> error : allErrors) {
+            if (error != null) {
+                coreErrorStream = Stream.concat(coreErrorStream, error.stream());
+            }
         }
+        errors = coreErrorStream.collect(Collectors.toList());
     }
 }

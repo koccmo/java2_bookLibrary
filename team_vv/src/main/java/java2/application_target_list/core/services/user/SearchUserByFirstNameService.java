@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -25,7 +25,7 @@ public class SearchUserByFirstNameService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private UserDatabase userDatabase;
+    @Autowired private UserRepository userRepository;
     @Autowired private SearchUserByFirstNameValidator searchUserByFirstNameValidator;
 
     public SearchUserByFirstNameResponse execute(SearchUsersByFirstNameRequest request){
@@ -35,7 +35,7 @@ public class SearchUserByFirstNameService {
             return new SearchUserByFirstNameResponse(errors, null);
         }
 
-        List<User> users = userDatabase.findUserByFirstName(request.getFirstName());
+        List<User> users = userRepository.findUserByFirstName(request.getFirstName());
         users = order(users, request.getOrdering());
         users = paging(users, request.getPaging());
 

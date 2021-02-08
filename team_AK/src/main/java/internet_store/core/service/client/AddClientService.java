@@ -1,7 +1,6 @@
 package internet_store.core.service.client;
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.domain.Client;
 import internet_store.core.request.client.AddClientRequest;
 import internet_store.core.request.client.client_items.AddClientEmailRequest;
 import internet_store.core.request.client.client_items.AddClientNameRequest;
@@ -12,64 +11,62 @@ import internet_store.core.response.client.client_items.AddClientEmailResponse;
 import internet_store.core.response.client.client_items.AddClientNameResponse;
 import internet_store.core.response.client.client_items.AddClientPhoneResponse;
 import internet_store.core.response.client.client_items.AddClientSurnameResponse;
-import internet_store.database.client_database.InnerClientDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.service.client.client_item.AddClientEmailService;
+import internet_store.core.service.client.client_item.AddClientNameService;
+import internet_store.core.service.client.client_item.AddClientPhoneService;
+import internet_store.core.service.client.client_item.AddClientSurnameService;
+import internet_store.core.persistence.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@Component
-public class AddClientService implements ClientUpdate {
+@Service
+@Transactional
+public class AddClientService {
+    private final AddClientNameService nameService = new AddClientNameService();
+    private final AddClientSurnameService surnameService = new AddClientSurnameService();
+    private final AddClientPhoneService phoneService = new AddClientPhoneService();
+    private final AddClientEmailService emailService = new AddClientEmailService();
     @Autowired
-    InnerClientDatabase clientDatabase;
+    private ClientRepository clientRepository;
+    private List<CoreError> errors;
 
-    public AddClientResponse execute(AddClientRequest addClientRequest) {
-        List<CoreError> errors = new ArrayList<>();
+    public AddClientResponse execute(AddClientRequest request) {
+        List<List<CoreError>> allErrors = new ArrayList<>();
 
-        AddClientNameService nameService = new AddClientNameService();
-        AddClientSurnameService surnameService = new AddClientSurnameService();
-        AddClientPhoneService phoneService = new AddClientPhoneService();
-        AddClientEmailService emailService = new AddClientEmailService();
+        checkHaveInputDataErrors(request, allErrors);
 
-        AddClientNameResponse nameResponse = nameService.execute(new AddClientNameRequest
-                (addClientRequest.getClient().getName()));
-        AddClientSurnameResponse surnameResponse = surnameService.execute(new AddClientSurnameRequest
-                (addClientRequest.getClient().getSurname()));
-        AddClientPhoneResponse phoneResponse = phoneService.execute(new AddClientPhoneRequest
-                (addClientRequest.getClient().getPhoneNumber()));
-        AddClientEmailResponse emailResponse = emailService.execute(new AddClientEmailRequest
-                (addClientRequest.getClient().getEmail()));
-
-        if (nameResponse.hasErrors()) {
-            errors.add(new CoreError("Name input error: ", "Empty field"));
+        if (errors.isEmpty()) {
+            clientRepository.save(request.getClient());
         }
-        if (surnameResponse.hasErrors()) {
-            errors.add(new CoreError("Surname input error: ", "Empty field"));
-        }
-        if (phoneResponse.hasErrors()) {
-            errors.add(new CoreError("Phone number input error: ", "Phone number unsupported format"));
-        }
-        if (isPhoneNumberExist(addClientRequest)) {
-            errors.add(new CoreError("Phone number input error: ", "Duplicate"));
-        }
-        if (emailResponse.hasErrors()) {
-            errors.add(new CoreError("Email input error: ", "Email unsupported format"));
-        }
-
-        execute(errors, addClientRequest.getClient());
-
         return new AddClientResponse(errors);
     }
 
-    @Override
-    public void execute(List<CoreError> errors, Client client) {
-        if (errors.isEmpty()) {
-            clientDatabase.addClient(client);
-        }
-    }
+    private void checkHaveInputDataErrors(AddClientRequest request, List<List<CoreError>> allErrors) {
+        AddClientNameResponse nameResponse = nameService.execute(new AddClientNameRequest
+                (request.getClient().getName()));
+        allErrors.add(nameResponse.getErrors());
+        AddClientSurnameResponse surnameResponse = surnameService.execute(new AddClientSurnameRequest
+                (request.getClient().getSurname()));
+        allErrors.add(surnameResponse.getErrors());
+        AddClientPhoneResponse phoneResponse = phoneService.execute(new AddClientPhoneRequest
+                (request.getClient().getPhoneNumber()));
+        allErrors.add(phoneResponse.getErrors());
+        AddClientEmailResponse emailResponse = emailService.execute(new AddClientEmailRequest
+                (request.getClient().getEmail()));
+        allErrors.add(emailResponse.getErrors());
 
-    private boolean isPhoneNumberExist(AddClientRequest request) {
-        return clientDatabase.isClientPhoneNumber(request.getClient().getPhoneNumber());
+        Stream<CoreError> coreErrorStream = Stream.of();
+        for (List<CoreError> error : allErrors) {
+            if (error != null) {
+                coreErrorStream = Stream.concat(coreErrorStream, error.stream());
+            }
+        }
+        errors = coreErrorStream.collect(Collectors.toList());
     }
 }

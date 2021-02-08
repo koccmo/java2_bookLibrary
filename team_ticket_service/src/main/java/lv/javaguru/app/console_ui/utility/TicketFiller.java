@@ -3,8 +3,10 @@ package lv.javaguru.app.console_ui.utility;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.Ticket;
 
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
@@ -24,8 +26,8 @@ public class TicketFiller {
 
 		String[] origin = acquireOriginCountryAndCity();
 		if (origin != null) {
-			ticket.setFromCountry(origin[0]);
-			ticket.setFromCity(origin[1]);
+			ticket.setOriginCountry(origin[0]);
+			ticket.setOriginCity(origin[1]);
 		}
 		else {
 			return false;
@@ -33,16 +35,16 @@ public class TicketFiller {
 
 		String[] destination = acquireDestinationCountryAndCity();
 		if (destination != null) {
-			ticket.setToCountry(destination[0]);
-			ticket.setToCity(destination[1]);
+			ticket.setDestinationCountry(destination[0]);
+			ticket.setDestinationCity(destination[1]);
 		}
 		else {
 			return false;
 		}
 
-		LocalDate date = acquireDate(ticket);
+		Date date = acquireDate(ticket);
 		if (date != null)
-			ticket.setDate(date);
+			ticket.setDepartureDate(date);
 		else
 			return false;
 
@@ -166,7 +168,7 @@ public class TicketFiller {
 		return city;
 	}
 
-	public LocalDate acquireDate (Ticket ticket) {
+	public Date acquireDate (Ticket ticket) {
 		String input;
 		LocalDate date;
 
@@ -174,9 +176,9 @@ public class TicketFiller {
 			BaseFunc.printHeader("SELECT DATE:");
 			List<LocalDate> dates = new ArrayList<>();
 
-			if (ticket.getToCity().equals("Paphos"))
+			if (ticket.getDestinationCity().equals("Paphos"))
 				dates.addAll(departEvery(new int[]{2, 6}));
-			else if (ticket.getToCity().equals("Malta"))
+			else if (ticket.getDestinationCity().equals("Malta"))
 				dates.addAll(departEvery(new int[]{4, 7}));
 
 			printDates(dates);
@@ -194,7 +196,9 @@ public class TicketFiller {
 				}
 			}
 		}
-		return date;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+
+		return Date.from(date.atStartOfDay(defaultZoneId).toInstant());
 	}
 
 	private boolean isInputValid (String input) {

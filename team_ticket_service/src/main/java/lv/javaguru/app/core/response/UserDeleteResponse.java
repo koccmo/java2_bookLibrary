@@ -2,10 +2,17 @@ package lv.javaguru.app.core.response;
 
 import lv.javaguru.app.core.domain.CodeError;
 
-public class UserDeleteResponse {
+import java.util.List;
+
+public class UserDeleteResponse extends Response {
 
 	private CodeError error;
 	private boolean isDeleted;
+	private List<CodeError> errorList;
+
+	public UserDeleteResponse (List<CodeError> errorList) {
+		this.errorList = errorList;
+	}
 
 	public UserDeleteResponse (CodeError error) {
 		this.error = error;

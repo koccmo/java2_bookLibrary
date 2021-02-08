@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.requests.user.ChangeUserFirstNameRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.ChangeUserFirstNameResponse;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ChangeUserFirstNameServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private UserDatabase userDatabase;
+    @Mock private UserRepository userRepository;
     @Mock private ChangeUserFirstNameValidator changeUserFirstNameValidator;
     @InjectMocks private ChangeUserFirstNameService changeUserFirstNameService;
 
@@ -32,7 +32,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
 
     @Test
     public void shouldChangeUserName() {
-        Mockito.when(userDatabase.changeUserFirstName(1L, "new name")).thenReturn(true);
+        Mockito.when(userRepository.changeUserFirstName(1L, "new name")).thenReturn(true);
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "new name");
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertFalse(changeUserFirstNameResponse.hasErrors());
@@ -42,7 +42,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v1() {
         errorList.add(new CoreError("User ID;","no user with that ID"));
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(2L, "new name");
-        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userDatabase)).thenReturn(errorList);
+        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userRepository)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertTrue(changeUserFirstNameResponse.hasErrors());
         assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
@@ -54,7 +54,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v2() {
         errorList.add(new CoreError("User ID","must not be empty!"));
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(null, "new name");
-        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userDatabase)).thenReturn(errorList);
+        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userRepository)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertTrue(changeUserFirstNameResponse.hasErrors());
         assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
@@ -66,7 +66,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v3() {
         errorList.add(new CoreError("User ID","must not be negative!"));
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(-3L, "new name");
-        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userDatabase)).thenReturn(errorList);
+        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userRepository)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertTrue(changeUserFirstNameResponse.hasErrors());
         assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
@@ -78,7 +78,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     public void shouldReturnResponseWithErrors_v4() {
         errorList.add(new CoreError("User new first name","must not be empty!"));
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "");
-        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userDatabase)).thenReturn(errorList);
+        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userRepository)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertTrue(changeUserFirstNameResponse.hasErrors());
         assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
@@ -91,7 +91,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         errorList.add(new CoreError("User new first name","must not be empty!"));
         errorList.add(new CoreError("User ID","must not be negative!"));
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(-1L, "");
-        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userDatabase)).thenReturn(errorList);
+        Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest, userRepository)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
         assertTrue(changeUserFirstNameResponse.hasErrors());
         assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);

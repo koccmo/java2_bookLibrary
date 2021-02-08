@@ -5,7 +5,7 @@ import java.util.*;
 public class Patient {
 
     private PersonalData personalData;
-    private Jowl jowl = new Jowl();
+    private JowlEntity jowlEntity;
     private List <Visit> visits = new ArrayList<>();
 
     public Patient(PersonalData personalData){
@@ -13,6 +13,12 @@ public class Patient {
     }
 
     public Patient() {};
+
+    public Patient (PersonalData personalData, JowlEntity jowl, List <Visit> visits) {
+        this.personalData = personalData;
+        this.jowlEntity = jowl;
+        this.visits = visits;
+    }
 
     public PersonalData getPersonalData() {
         return personalData;
@@ -22,12 +28,12 @@ public class Patient {
         this.personalData = personalData;
     }
 
-    public Jowl getJowl() {
-        return jowl;
+    public JowlEntity getJowl() {
+        return jowlEntity;
     }
 
-    public void setJowl(Jowl jowl) {
-        this.jowl = jowl;
+    public void setJowl(JowlEntity jowl) {
+        this.jowlEntity = jowl;
     }
 
     public List<Visit> getVisits() {
@@ -38,30 +44,24 @@ public class Patient {
         visits.add(visit);
     }
 
-    public void updateJowl(int toothNumber, ToothStatus toothStatus){
-        jowl.updateJowl(toothNumber, toothStatus);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Patient patient = (Patient) o;
-        return Objects.equals(personalData, patient.personalData) &&
-                Objects.equals(jowl, patient.jowl) &&
-                Objects.equals(visits, patient.visits);
+        return Objects.equals(personalData, patient.personalData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personalData, jowl, visits);
+        return Objects.hash(personalData);
     }
 
     @Override
     public String toString() {
         return "\nPatient:" +
                 personalData +
-                jowl +
+                jowlEntity +
                 "Visits: " + visits;
     }
 }

@@ -21,9 +21,9 @@ public class SearchCustomerUIAction implements UIAction {
         Scanner scanner = new Scanner(System.in);
         SearchCustomerRequest request;
 
-        System.out.println("Would you like to remove a customer by: ");
-        System.out.println("   ID (1) or ");
-        System.out.println("   email (login) (2)?");
+        System.out.println("Would you like to find the customer by: ");
+        System.out.println("   1. ID ");
+        System.out.println("   2. email (login)");
 
         if (scanner.nextLine().equals("1")) {
             System.out.println("Enter customer ID: ");

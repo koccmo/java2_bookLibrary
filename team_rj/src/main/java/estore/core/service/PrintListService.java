@@ -1,7 +1,7 @@
 package estore.core.service;
 
 import java.util.List;
-import estore.core.model.Product;
+import estore.core.domain.Product;
 
 public class PrintListService {
 

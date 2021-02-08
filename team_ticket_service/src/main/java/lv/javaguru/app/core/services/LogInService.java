@@ -8,23 +8,24 @@ import lv.javaguru.app.core.request.LogInRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.validators.LoginRequestValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
+import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Component
+@Transactional
 public class LogInService {
+
 	@Autowired
 	private ApplicationContext applicationContext;
+
 	@Autowired
-	private Database database;
-	@Autowired
-	private UserDatabase userDatabase;
+	private UserRepository userRepository;
+
 	@Autowired
 	private LoginRequestValidator validator;
 
@@ -35,27 +36,21 @@ public class LogInService {
 		if (!errors.isEmpty())
 			return new LogInResponse(errors);
 
-
-		Optional<User> optionalUser = userDatabase.getUser(request.getUser());
-		User user;
-		if (optionalUser.isPresent()) {
-			user = optionalUser.get();
-			userDatabase.setCurrentUser(user);
-		}
-		else {
+		User u = userRepository.getUserByNameAndSurname(request.getUser());
+		if (u == null) {
 			errors.add(new CodeError("database", "No such user"));
 			return new LogInResponse(errors);
 		}
+		else {
+			LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+					new LogInResponse(new AdminMode(applicationContext)) :
+					new LogInResponse(new UserMode(applicationContext));
 
+			logInResponse.setCurrUser(u);
+			logInResponse.setMessage("Successfully logged in!");
 
-		LogInResponse logInResponse = (user.getPersonType() == PersonType.ADMIN) ?
-				new LogInResponse(new AdminMode(applicationContext)) :
-				new LogInResponse(new UserMode(applicationContext));
-
-		logInResponse.setCurrUser(user);
-		logInResponse.setMessage("Successfully logged in!");
-
-		return logInResponse;
+			return logInResponse;
+		}
 
 
 	}

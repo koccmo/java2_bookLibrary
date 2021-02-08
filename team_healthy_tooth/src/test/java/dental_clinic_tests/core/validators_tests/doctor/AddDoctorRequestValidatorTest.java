@@ -16,7 +16,7 @@ public class AddDoctorRequestValidatorTest {
 
     @Test
     public void testEmptyName(){
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor(null, "Bobik"));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor(null, "Bobik", "12345678"));
         CoreError expectedError = new CoreError("name", "Name can't be empty");
         List<CoreError> errorList = addDoctorRequestValidator.validate(addDoctorRequest);
 
@@ -26,7 +26,7 @@ public class AddDoctorRequestValidatorTest {
 
     @Test
     public void testEmptySurname(){
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", ""));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "", "12345678"));
         CoreError expectedError = new CoreError("surname", "Surname can't be empty");
         List<CoreError> errorList = addDoctorRequestValidator.validate(addDoctorRequest);
 
@@ -36,7 +36,7 @@ public class AddDoctorRequestValidatorTest {
 
     @Test
     public void testEmptySurnameAndName(){
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor(null, ""));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor(null, "", "12345678"));
         CoreError expectedError1 = new CoreError("name", "Name can't be empty");
         CoreError expectedError2 = new CoreError("surname", "Surname can't be empty");
         List<CoreError> errorList = addDoctorRequestValidator.validate(addDoctorRequest);
@@ -48,7 +48,7 @@ public class AddDoctorRequestValidatorTest {
 
     @Test
     public void testNoErrors(){
-        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname"));
+        AddDoctorRequest addDoctorRequest = new AddDoctorRequest(new Doctor("Name", "Surname", "12345678"));
         List<CoreError> errorList = addDoctorRequestValidator.validate(addDoctorRequest);
 
         assertTrue(errorList.isEmpty());

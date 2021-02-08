@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.product;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
@@ -17,12 +18,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTestDeleteProduct1 {
-
+/*
     private ApplicationContext appContext;
 
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test() {
@@ -56,6 +58,10 @@ public class AcceptanceTestDeleteProduct1 {
     private DeleteByIdService deleteProductByIdService(){
         return appContext.getBean(DeleteByIdService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
+
+ */
 }
 
 

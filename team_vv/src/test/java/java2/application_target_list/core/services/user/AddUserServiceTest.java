@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserDatabase;
+import java2.application_target_list.core.database.user.UserRepository;
 import java2.application_target_list.core.matchers.UserMatcher;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -25,7 +25,8 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddUserServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock UserDatabase userDatabase;
+    @Mock
+    UserRepository userRepository;
     @Mock AddUserValidator addUserValidator;
     @InjectMocks AddUserService addUserService;
 
@@ -40,7 +41,7 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest("name", "surname");
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
         assertFalse(addUserResponse.hasErrors());
-        Mockito.verify(userDatabase).addUser(argThat(new UserMatcher("name", "surname")));
+        Mockito.verify(userRepository).addUser(argThat(new UserMatcher("name", "surname")));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class AddUserServiceTest extends TestCase {
         assertEquals(addUserResponse.getErrorList().size(), 1);
         assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
         assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(userDatabase);
+        Mockito.verifyNoInteractions(userRepository);
     }
 
     @Test
@@ -66,7 +67,7 @@ public class AddUserServiceTest extends TestCase {
         assertEquals(addUserResponse.getErrorList().size(), 1);
         assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
         assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(userDatabase);
+        Mockito.verifyNoInteractions(userRepository);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class AddUserServiceTest extends TestCase {
         assertEquals(addUserResponse.getErrorList().size(), 1);
         assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
         assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(userDatabase);
+        Mockito.verifyNoInteractions(userRepository);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class AddUserServiceTest extends TestCase {
         assertEquals(addUserResponse.getErrorList().size(), 1);
         assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
         assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(userDatabase);
+        Mockito.verifyNoInteractions(userRepository);
     }
 
     @Test
@@ -108,6 +109,6 @@ public class AddUserServiceTest extends TestCase {
         assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         assertEquals(addUserResponse.getErrorList().get(1).getField(), "User last name");
         assertEquals(addUserResponse.getErrorList().get(1).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(userDatabase);
+        Mockito.verifyNoInteractions(userRepository);
     }
 }

@@ -57,4 +57,8 @@ public interface ProductDatabase {
 
     boolean containsDescription(String description);
 
+    boolean containsPrice(Integer price);
+
+    boolean containsTitleAndDescription(String title, String description);
+
 }

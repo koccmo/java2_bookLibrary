@@ -1,7 +1,7 @@
 package java2.application_target_list.core.validators.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
-import java2.application_target_list.core.database.target.TargetListImpl;
+import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.target.InMemoryTargetRepositoryImpl;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.requests.target.SearchTargetByDescriptionRequest;
@@ -15,12 +15,12 @@ import java.util.List;
 public class SearchTargetByDescriptionValidatorTest {
 
     private SearchTargetByDescriptionValidator validator;
-    private TargetDatabase targetDatabase;
+    private TargetRepository targetRepository;
 
     @Before
     public void setup() {
        validator = new SearchTargetByDescriptionValidator();
-       targetDatabase = new TargetListImpl();
+       targetRepository = new InMemoryTargetRepositoryImpl();
     }
 
     @Test

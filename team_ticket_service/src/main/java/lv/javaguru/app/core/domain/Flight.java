@@ -1,15 +1,27 @@
 package lv.javaguru.app.core.domain;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "flights")
 public class Flight {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
+
+	@OneToOne
+	@JoinColumn(name = "tickets_id", nullable = false)
 	private Ticket ticket;
 
 
-	public Flight () {
-
-	}
+	public Flight () {	}
 
 	public Flight (User user, Ticket ticket) {
 		this.user = user;
@@ -42,8 +54,8 @@ public class Flight {
 
 	@Override
 	public String toString () {
-		return "id: " + id +
+		return "Flight ID: " + id +
 				",\n\t" + user +
-				", \n\t" + ticket;
+				",\n\t" + ticket;
 	}
 }

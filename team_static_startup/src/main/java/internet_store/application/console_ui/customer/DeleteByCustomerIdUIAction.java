@@ -28,9 +28,9 @@ public class DeleteByCustomerIdUIAction implements UIAction {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getField()));
         } else {
             if (response.isCustomerRemoved()){
-                System.out.println("\nCustomer with Id = " + customerId + " deleted");
+                System.out.println("Customer with Id = " + customerId + " deleted");
             } else {
-                System.out.println("\nCustomer with Id = " + customerId + " was NOT deleted");
+                System.out.println("Customer with Id = " + customerId + " was NOT deleted");
             }
         }
     }

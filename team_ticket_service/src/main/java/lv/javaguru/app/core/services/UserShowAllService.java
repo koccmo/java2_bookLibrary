@@ -5,20 +5,20 @@ import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.UserShowAllResponse;
-import lv.javaguru.app.database.UserDatabase;
-import lv.javaguru.app.dependency_injection.DIComponent;
-import lv.javaguru.app.dependency_injection.DIDependency;
+import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserShowAllService {
-	@Autowired
-	private UserDatabase userDatabase;
 
+	@Autowired
+	private UserRepository userRepository;
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
 		List<?> errorList = validate(request.getUser());
@@ -29,7 +29,7 @@ public class UserShowAllService {
 		}
 
 		if (request.getId() == null)
-			return new UserShowAllResponse<>(userDatabase.getAllUsers());
+			return new UserShowAllResponse<>(userRepository.getAllUsers());
 
 		return new UserShowAllResponse<>(errorList);
 	}
@@ -38,7 +38,9 @@ public class UserShowAllService {
 	private List<CodeError> validate (User user) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		if (!userDatabase.containsUser(user.getId()))
+		User u = userRepository.getUserById(user.getId());
+
+		if (u == null)
 			errorList.add(new CodeError("User", "no user in database"));
 		if (user.getPersonType() != PersonType.ADMIN)
 			errorList.add(new CodeError("User", "User don't have required permission!"));

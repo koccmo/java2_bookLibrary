@@ -10,7 +10,7 @@ import lv.javaguru.app.core.services.FlightEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 @Component
@@ -25,7 +25,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter flight ID:");
 		Long id = BaseFunc.getMenuNumberFromUserAsLong();
 
-		EditFlightRequest request = new EditFlightRequest(id);
+		EditFlightRequest request = new EditFlightRequest(id, getLoggedInUser());
 		FlightEditResponse response = flightEditService.execute(request);
 
 		if (response.hasErrors())
@@ -39,7 +39,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		int menuNumber;
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
-
+			BaseFunc.printLineSeparator();
 			if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
 				System.out.println("[1] Edit flight's ticket\n" +
 						"[2] Edit flight's user\n\n" +
@@ -76,7 +76,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			flightEdit_printTicketEditMenu(response.getFlight().getId());
+			flightEdit_printTicketEditMenu(response.getFlight().getTicket().getId());
 
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
@@ -131,7 +131,8 @@ public class FlightUpdateAction extends Action implements UIActions {
 
 	private void editFlightDepartureDate (FlightEditResponse response) {
 		TicketFiller ticketFiller = new TicketFiller();
-		LocalDate date = ticketFiller.acquireDate(response.getFlight().getTicket());
+
+		Date date = ticketFiller.acquireDate(response.getFlight().getTicket());
 
 		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), date);
 		FlightEditResponse responseEdit = flightEditService.updateDate(request);
@@ -163,7 +164,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter name:");
 		String name = scanner.nextLine();
 
-		EditFlightRequest request = new EditFlightRequest(response.getFlight(), name);
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), name);
 		FlightEditResponse responseEdit = flightEditService.executeUserNameUpdate(request);
 
 
@@ -179,7 +180,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		BaseFunc.printHeader("Enter surname:");
 		String surname = scanner.nextLine();
 
-		EditFlightRequest request = new EditFlightRequest(response.getFlight(), surname);
+		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), surname);
 		FlightEditResponse responseEdit = flightEditService.executeUserSurnameUpdate(request);
 
 
@@ -210,11 +211,11 @@ public class FlightUpdateAction extends Action implements UIActions {
 		}
 	}
 
-	private void flightEdit_printTicketEditMenu (long id) {
-		BaseFunc.printHeader("EDIT TICKET: " + id);
+	private void flightEdit_printTicketEditMenu (Long id) {
+		BaseFunc.printHeader("EDIT TICKET: ", String.valueOf(id));
 		System.out.println(
-				"[1] Departure city\n" +
-						"[2] Destination city\n" +
+				"[1] Origin\n" +
+						"[2] Destination\n" +
 						"[3] Departure date\n" +
 						"[4] Seat\n" +
 						"[0] Back");

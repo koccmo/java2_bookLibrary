@@ -1,7 +1,7 @@
 package book_library.core.services;
 
 import book_library.core.domain.Book;
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.GetAllBooksRequest;
 import book_library.core.responses.GetAllBooksResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.util.List;
 public class GetAllBooksService {
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
 
     public GetAllBooksResponse execute(GetAllBooksRequest request) {
-        List<Book> books = database.getAllBooks();
+        List<Book> books = bookRepository.getAllBooks();
         return new GetAllBooksResponse(books);
     }
 }

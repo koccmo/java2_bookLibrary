@@ -1,12 +1,13 @@
 package internet_store.core.request.product;
 
+import internet_store.core.domain.Product;
 import lombok.Getter;
 
 public class DeleteProductRequest {
     @Getter
-    private final long id;
+    private final Product product;
 
-    public DeleteProductRequest(long id) {
-        this.id = id;
+    public DeleteProductRequest(Product product) {
+        this.product = product;
     }
 }

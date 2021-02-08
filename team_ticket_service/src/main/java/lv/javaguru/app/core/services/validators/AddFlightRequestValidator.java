@@ -2,12 +2,10 @@ package lv.javaguru.app.core.services.validators;
 
 import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.domain.CodeError;
-import lv.javaguru.app.dependency_injection.DIComponent;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +64,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketOriginCountry (AddFlightRequest request) {
-		String originCountry = request.getFlight().getTicket().getFromCountry();
+		String originCountry = request.getFlight().getTicket().getOriginCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -83,7 +81,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketOriginCity (AddFlightRequest request) {
-		String originCity = request.getFlight().getTicket().getFromCity();
+		String originCity = request.getFlight().getTicket().getOriginCity();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -100,7 +98,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDestinationCountry (AddFlightRequest request) {
-		String destinationCountry = request.getFlight().getTicket().getToCountry();
+		String destinationCountry = request.getFlight().getTicket().getDestinationCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -117,7 +115,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDestinationCity (AddFlightRequest request) {
-		String destinationCity = request.getFlight().getTicket().getToCity();
+		String destinationCity = request.getFlight().getTicket().getDestinationCity();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -134,7 +132,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDepartureDate (AddFlightRequest request) {
-		LocalDate date = request.getFlight().getTicket().getDate();
+		Date date = request.getFlight().getTicket().getDepartureDate();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -150,7 +148,7 @@ public class AddFlightRequestValidator {
 	}
 
 
-	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
+	private Optional<CodeError> dateIsNotNullOrEmpty (Date dateRequest, String field) {
 		return (isNullOrEmpty(dateRequest))
 				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
 				: Optional.empty();
@@ -174,7 +172,7 @@ public class AddFlightRequestValidator {
 				: Optional.empty();
 	}
 
-	private Optional<CodeError> isDateAfter (LocalDate request, String field) {
+	private Optional<CodeError> isDateAfter (Date request, String field) {
 		return (!isDateAfter(request))
 				? Optional.of(new CodeError(field, "Date shouldn't be in past!"))
 				: Optional.empty();
@@ -192,7 +190,7 @@ public class AddFlightRequestValidator {
 		return str.length() - str.replaceAll("(?i)[^a-z-\\s\\d]", "").length() != 0;
 	}
 
-	private boolean isNullOrEmpty (LocalDate date) {
+	private boolean isNullOrEmpty (Date date) {
 		return (date == null);
 	}
 
@@ -200,7 +198,7 @@ public class AddFlightRequestValidator {
 		return (str == null || str.isEmpty());
 	}
 
-	private boolean isDateAfter (LocalDate date) {
-		return date.isAfter(LocalDate.now());
+	private boolean isDateAfter (Date date) {
+		return date.after(new Date());
 	}
 }

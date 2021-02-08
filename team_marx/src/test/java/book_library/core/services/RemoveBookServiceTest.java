@@ -1,6 +1,6 @@
 package book_library.core.services;
 
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.RemoveBookResponse;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class RemoveBookServiceTest {
 
     @Mock
-    private Database database;
+    private BookRepository bookRepository;
     @Mock
     private RemoveBookRequestValidator validator;
     @InjectMocks
@@ -44,7 +44,7 @@ public class RemoveBookServiceTest {
     @Test
     public void shouldDeleteBookWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.deleteById(1L)).thenReturn(true);
+        Mockito.when(bookRepository.deleteById(1L)).thenReturn(true);
         RemoveBookRequest request = new RemoveBookRequest(1L);
         RemoveBookResponse response = service.execute(request);
         assertFalse(response.hasErrors());

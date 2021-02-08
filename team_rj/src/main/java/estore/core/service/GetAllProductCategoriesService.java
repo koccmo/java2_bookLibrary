@@ -3,7 +3,7 @@ package estore.core.service;
 import estore.core.requests.GetAllProductCategoriesRequest;
 import estore.core.responses.GetAllProductCategoriesResponse;
 import estore.database.ProductCategoryRepository;
-import estore.core.model.ProductCategory;
+import estore.core.domain.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

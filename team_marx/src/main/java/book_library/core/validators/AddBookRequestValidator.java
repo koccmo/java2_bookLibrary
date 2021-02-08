@@ -1,7 +1,7 @@
 package book_library.core.validators;
 
 import book_library.core.domain.Book;
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.AddBookRequest;
 import book_library.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class AddBookRequestValidator {
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
 
     public List<CoreError> validate(AddBookRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -29,7 +29,7 @@ public class AddBookRequestValidator {
 
     private Optional<CoreError> validatePresenceInDatabase(AddBookRequest request) {
         Book addBook = new Book(request.getTitle(), request.getAuthor());
-        return database.hasTheSameBookInDatabase(addBook)
+        return bookRepository.hasTheSameBookInDatabase(addBook)
                 ? Optional.of(new CoreError("Title and author", "Such book already exists!"))
                 : Optional.empty();
     }

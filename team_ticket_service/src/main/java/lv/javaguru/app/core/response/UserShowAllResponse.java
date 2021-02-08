@@ -26,6 +26,9 @@ public class UserShowAllResponse<T> extends ArrayList<T> {
 
 	public void printResponse () {
 		if (!response.isEmpty())
-			response.forEach(System.out::println);
+			for (T s : response) {
+				System.out.println("\t" + s);
+			}
+		//response.forEach(System.out::println);
 	}
 }

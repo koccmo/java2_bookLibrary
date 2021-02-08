@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private TargetDatabase targetDatabase;
+    @Mock private TargetRepository targetRepository;
     @Mock private ChangeTargetDeadlineValidator validator;
     @InjectMocks
     ChangeTargetDeadlineService service;
@@ -34,20 +34,20 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     @Test
     public void shouldChangeTargetDeadline() {
-        Target target = new Target("name", "description", 1);
+        Target target = new Target("name", "description", 1L);
         target.setId(1L);
-        targetDatabase.addTarget(target);
-        Mockito.when(targetDatabase.changeTargetDeadline(1L, 100)).thenReturn(true);
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100);
+        targetRepository.addTarget(target);
+        Mockito.when(targetRepository.changeTargetDeadline(1L, 100L)).thenReturn(true);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertFalse(response.hasErrors());
     }
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v1() {
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 1);
@@ -57,10 +57,10 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v2() {
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(null, 100);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(null, 100L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target ID;", "must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -72,10 +72,10 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v3() {
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-2L, 100);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-2L, 100L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target ID;", "must not be negative!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -87,10 +87,10 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v4() {
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, -100);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, -100L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target new deadline", "must not be negative!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);
@@ -102,11 +102,11 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v5() {
-        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-1L, -100);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-1L, -100L);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target ID;", "must not be negative!"));
         errors.add(new CoreError("Target new deadline", "must not be negative!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 3);
@@ -123,7 +123,7 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, null);
         errors.add(new CoreError("Target ID;", "no target with that ID"));
         errors.add(new CoreError("Target new deadline", "must not be empty!"));
-        Mockito.when(validator.validate(request, targetDatabase)).thenReturn(errors);
+        Mockito.when(validator.validate(request, targetRepository)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrorList().size(), 2);

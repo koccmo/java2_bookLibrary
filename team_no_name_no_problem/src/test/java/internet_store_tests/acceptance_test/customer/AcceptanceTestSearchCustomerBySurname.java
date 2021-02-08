@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.Ordering;
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestSearchCustomerBySurname {
@@ -26,6 +28,7 @@ public class AcceptanceTestSearchCustomerBySurname {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test(){
@@ -71,4 +74,6 @@ public class AcceptanceTestSearchCustomerBySurname {
     private SearchCustomerService searchCustomerService(){
         return appContext.getBean(SearchCustomerService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }

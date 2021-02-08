@@ -6,13 +6,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
+
 public class Main {
 	private static final ApplicationContext applicationContext =
 			new AnnotationConfigApplicationContext(TicketServiceConfiguration.class);
 
 	public static void main (String[] args) {
 		InitMode initMode = new InitMode(applicationContext);
-		initMode.fillDb();
 		initMode.execute();
 	}
 

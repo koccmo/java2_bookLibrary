@@ -4,15 +4,7 @@ import lv.javaguru.app.console_ui.ExitAction;
 import lv.javaguru.app.console_ui.LogInAction;
 import lv.javaguru.app.console_ui.UserAddAction;
 import lv.javaguru.app.core.common.BaseFunc;
-import lv.javaguru.app.core.domain.PersonType;
-import lv.javaguru.app.core.domain.Flight;
-import lv.javaguru.app.core.domain.Ticket;
-import lv.javaguru.app.core.domain.User;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.UserDatabase;
 import org.springframework.context.ApplicationContext;
-
-import java.time.LocalDate;
 
 public class InitMode {
 
@@ -48,39 +40,6 @@ public class InitMode {
 				}
 			}
 		}
-	}
-
-
-	public void fillDb () {
-		User admin = new User("admin", "admin", PersonType.ADMIN);
-		User user1 = new User("Sergejs", "Aleksejevs");
-		User user2 = new User("Bill", "Johnson");
-		LocalDate flightDate = LocalDate.of(2021, 2, 14);
-
-		Ticket ticket1 = new Ticket("Riga", "Paphos", flightDate, "55");
-		ticket1.setFromCountry("Latvia");
-		ticket1.setToCountry("Cyprus");
-
-		Ticket ticket2 = new Ticket("London", "Paphos", flightDate, "55");
-		ticket2.setFromCountry("Great Britain");
-		ticket2.setToCountry("Cyprus");
-
-		Flight flight1 = new Flight();
-		flight1.setUser(user1);
-		flight1.setTicket(ticket1);
-
-		Flight flight2 = new Flight(user2, ticket2);
-
-
-		UserDatabase database = context.getBean(UserDatabase.class);
-		database.addUser(admin);
-		database.addUser(user1);
-		database.addUser(user2);
-
-		Database flightDB = context.getBean(Database.class);
-
-		flightDB.addFlight(flight1);
-		flightDB.addFlight(flight2);
 	}
 
 	private static void printInitMenu () {

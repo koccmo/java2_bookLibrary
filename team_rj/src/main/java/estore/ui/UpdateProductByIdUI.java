@@ -6,7 +6,7 @@ import estore.core.responses.SearchProductByIdResponse;
 import estore.core.responses.UpdateProductByIdResponse;
 import estore.core.service.SearchProductByIdService;
 import estore.core.service.UpdateProductByIdService;
-import estore.core.model.Product;
+import estore.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -72,10 +72,10 @@ public class UpdateProductByIdUI implements UIAction {
         if (productDescription == "") {
             productDescription = productToUpdate.getDescription();
         }
-        System.out.println("Enter updated category number of the product, enter to skip:");
-        String productCategoryNo= sc.nextLine();
-        if (productCategoryNo == "") {
-            productCategoryNo = productToUpdate.getCategory();
+        System.out.println("Enter updated category of the product, enter to skip:");
+        String productCategory = sc.nextLine();
+        if (productCategory == "") {
+            productCategory = productToUpdate.getCategory().toString();
         }
         System.out.println("Enter updated quantity of the product, enter to skip:");
         String productQuantity= sc.nextLine();
@@ -91,7 +91,7 @@ public class UpdateProductByIdUI implements UIAction {
                 productToUpdate.getId(),
                 productName,
                 productDescription,
-                productCategoryNo,
+                productCategory,
                 productQuantity,
                 productPrice);
         return request;

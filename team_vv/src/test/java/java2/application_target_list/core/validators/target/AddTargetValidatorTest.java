@@ -23,14 +23,14 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_validRequest() {
-        AddTargetRequest request = new AddTargetRequest("name", "description", 2);
+        AddTargetRequest request = new AddTargetRequest("name", "description", 2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 0);
     }
 
     @Test
     public void testValidate_invalidNameRequest_v1() {
-        AddTargetRequest request = new AddTargetRequest("", "description", 2);
+        AddTargetRequest request = new AddTargetRequest("", "description", 2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));
@@ -39,7 +39,7 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_invalidNameRequest_v2() {
-        AddTargetRequest request = new AddTargetRequest(null, "description", 2);
+        AddTargetRequest request = new AddTargetRequest(null, "description", 2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));
@@ -48,7 +48,7 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_invalidDescriptionRequest_v1() {
-        AddTargetRequest request = new AddTargetRequest("name", "", 2);
+        AddTargetRequest request = new AddTargetRequest("name", "", 2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target description"));
@@ -57,7 +57,7 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_invalidDescriptionRequest_v2() {
-        AddTargetRequest request = new AddTargetRequest("name", null, 2);
+        AddTargetRequest request = new AddTargetRequest("name", null, 2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target description"));
@@ -66,7 +66,7 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_invalidDeadlineRequest_v1() {
-        AddTargetRequest request = new AddTargetRequest("name", "description", -2);
+        AddTargetRequest request = new AddTargetRequest("name", "description", -2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target deadline"));
@@ -75,7 +75,7 @@ public class AddTargetValidatorTest {
 
     @Test
     public void testValidate_invalidDeadlineNameDescriptionRequest() {
-        AddTargetRequest request = new AddTargetRequest("", null, -2);
+        AddTargetRequest request = new AddTargetRequest("", null, -2L);
         List<CoreError> actualErrors = validator.validate(request);
         Assert.assertEquals(actualErrors.size(), 3);
         Assert.assertTrue(actualErrors.get(0).getField().contains("Target name"));

@@ -19,8 +19,8 @@ public class DisplayCustomerUIAction implements UIAction {
     public void execute() {
 
         System.out.println("Would you like to get a list of: ");
-        System.out.println("   active customers (1) or ");
-        System.out.println("   inactive customers (2)?");
+        System.out.println("   1. Active customers ");
+        System.out.println("   2. Inactive customers ");
 
         Scanner scanner = new Scanner(System.in);
 

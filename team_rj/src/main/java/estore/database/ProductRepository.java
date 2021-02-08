@@ -1,13 +1,13 @@
 package estore.database;
 
 import java.util.List;
-import estore.core.model.Product;
+import estore.core.domain.Product;
 
 public interface ProductRepository {
 
     List<Product> searchProductByName(String name);
 
-    List<Product> searchProductByCategory(String category);
+    List<Product> searchProductByCategory(Long category);
 
     List<Product> searchProductById(Long id);
 

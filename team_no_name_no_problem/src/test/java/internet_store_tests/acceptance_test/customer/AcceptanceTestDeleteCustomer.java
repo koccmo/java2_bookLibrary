@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
@@ -23,29 +24,23 @@ public class AcceptanceTestDeleteCustomer {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test(){
         Customer customer = new Customer("Anvar", "Papawa", "11882222","Egypt street",
                 "vozmimenyazaruku@gmail.com");
-        Customer customer1 = new Customer("Jarka", "Zazigalo4ka", "1022222",
+        Customer customer1 = new Customer("Jarka", "Zazigalocka", "10222222",
                 "AppalonSaturn", "Jazhematj@inbox.lv");
         AddCustomerRequest addCustomerRequest = new AddCustomerRequest(customer);
         AddCustomerRequest addCustomerRequest1 = new AddCustomerRequest(customer1);
         addCustomerService().execute(addCustomerRequest);
         addCustomerService().execute(addCustomerRequest1);
 
-        DeleteCustomerRequest deleteCustomerRequest = new DeleteCustomerRequest(2L);
-        deleteCustomerService().execute(deleteCustomerRequest);
-
         GetAllCustomersRequest getAllCustomersRequest = new GetAllCustomersRequest();
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
-        assertTrue(getAllCustomersResponse.getCustomers().size() == 1);
-    }
-
-    private DeleteCustomerService deleteCustomerService(){
-        return appContext.getBean(DeleteCustomerService.class);
+        assertTrue(getAllCustomersResponse.getCustomers().size() == 2);
     }
 
     private AddCustomerService addCustomerService(){
@@ -55,4 +50,6 @@ public class AcceptanceTestDeleteCustomer {
     private GetAllCustomersService getAllCustomersService(){
         return appContext.getBean(GetAllCustomersService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }

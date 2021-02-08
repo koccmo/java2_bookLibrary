@@ -1,80 +1,80 @@
 package lv.javaguru.app.core.domain;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tickets")
 public class Ticket {
-	private String fromCountry;
-	private String fromCity;
-	private String toCountry;
-	private String toCity;
-	private LocalDate date;
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "fromCountry")
+	private String originCountry;
+
+	@Column(name = "fromCity")
+	private String originCity;
+
+	@Column(name = "toCountry")
+	private String destinationCountry;
+
+	@Column(name = "toCity")
+	private String destinationCity;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date")
+	private Date departureDate;
+
+	@Column(name = "seat")
 	private String seat;
-	private boolean isCanceled;
-	private boolean isFinished;
-	private boolean isEditing;
 
-	public boolean isEditing () {
-		return isEditing;
+
+	public Long getId () {
+		return id;
 	}
 
-	public void setEditing (boolean editing) {
-		isEditing = editing;
+	public void setId (Long id) {
+		this.id = id;
 	}
-
-	public boolean isOriginSelected () {
-		return fromCountry != null && fromCity != null;
-	}
-
 
 	public Ticket () {
 	}
 
-	public Ticket (String fromCity, String toCity, LocalDate date, String seat) {
-		this.fromCity = fromCity;
-		this.toCity = toCity;
-		this.date = date;
+	public Ticket (String originCity, String destinationCity, Date departureDate, String seat) {
+		this.originCity = originCity;
+		this.destinationCity = destinationCity;
+		this.departureDate = departureDate;
 		this.seat = seat;
 	}
 
-	public String getFromCountry () {
-		return fromCountry;
+	public String getOriginCountry () {
+		return originCountry;
 	}
 
-	public void setFromCountry (String fromCountry) {
-		this.fromCountry = fromCountry;
+	public void setOriginCountry (String originCountry) {
+		this.originCountry = originCountry;
 	}
 
-	public String getToCity () {
-		return toCity;
+	public String getDestinationCity () {
+		return destinationCity;
 	}
 
-	public void setToCity (String toCity) {
-		this.toCity = toCity;
-	}
-
-	public boolean isCanceled () {
-		return isCanceled;
-	}
-
-	public void setCanceled (boolean canceled) {
-		isCanceled = canceled;
-	}
-
-	public boolean isFinished () {
-		return isFinished;
-	}
-
-	public void setFinished (boolean finished) {
-		isFinished = finished;
+	public void setDestinationCity (String destinationCity) {
+		this.destinationCity = destinationCity;
 	}
 
 
 	@Override
 	public String toString () {
-		return "FROM: " + fromCity + ", " + fromCountry +
-				", TO: " + toCity + ", " + toCountry +
-				", DATE: " + date +
+		return "ID: " + id + ", " +
+				"FROM: " + originCity + ", " + originCountry +
+				", TO: " + destinationCity + ", " + destinationCountry +
+				", DATE: " + departureDate +
 				", SEAT: " + seat;
 	}
 
@@ -83,39 +83,42 @@ public class Ticket {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Ticket ticket = (Ticket) o;
-		return Objects.equals(fromCity, ticket.fromCity) &&
-				Objects.equals(toCountry, ticket.toCountry) &&
-				Objects.equals(date, ticket.date) &&
+		return Objects.equals(id, ticket.id) &&
+				Objects.equals(originCountry, ticket.originCountry) &&
+				Objects.equals(originCity, ticket.originCity) &&
+				Objects.equals(destinationCountry, ticket.destinationCountry) &&
+				Objects.equals(destinationCity, ticket.destinationCity) &&
+				Objects.equals(departureDate, ticket.departureDate) &&
 				Objects.equals(seat, ticket.seat);
 	}
 
 	@Override
 	public int hashCode () {
-		return Objects.hash(fromCity, toCountry, date, seat);
+		return Objects.hash(id, originCountry, originCity, destinationCountry, destinationCity, departureDate, seat);
 	}
 
-	public String getFromCity () {
-		return fromCity;
+	public String getOriginCity () {
+		return originCity;
 	}
 
-	public void setFromCity (String fromCity) {
-		this.fromCity = fromCity;
+	public void setOriginCity (String originCity) {
+		this.originCity = originCity;
 	}
 
-	public String getToCountry () {
-		return toCountry;
+	public String getDestinationCountry () {
+		return destinationCountry;
 	}
 
-	public void setToCountry (String toCountry) {
-		this.toCountry = toCountry;
+	public void setDestinationCountry (String destinationCountry) {
+		this.destinationCountry = destinationCountry;
 	}
 
-	public LocalDate getDate () {
-		return date;
+	public Date getDepartureDate () {
+		return departureDate;
 	}
 
-	public void setDate (LocalDate date) {
-		this.date = date;
+	public void setDepartureDate (Date departureDate) {
+		this.departureDate = departureDate;
 	}
 
 	public String getSeat () {

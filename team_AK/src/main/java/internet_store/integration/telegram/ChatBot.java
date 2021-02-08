@@ -1,12 +1,8 @@
 package internet_store.integration.telegram;
 
 import internet_store.core.domain.Order;
-import internet_store.core.domain.TelegramChatId;
-import internet_store.core.request.ordering.FindByOrderNumberRequest;
 import internet_store.core.request.telegram.CheckTelegramChatIdRequest;
-import internet_store.core.service.ordering.FindByOrderNumberService;
 import internet_store.core.service.telegram.CheckTelegramChatIdService;
-import internet_store.database.telegram_database.InnerTelegramDatabase;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,10 +18,6 @@ public class ChatBot extends TelegramLongPollingBot {
     private String chatMessage;
     private int orderNumber;
 
-    @Autowired
-    private InnerTelegramDatabase telegramDatabase;
-    @Autowired
-    private FindByOrderNumberService findByOrderNumberService;
     @Autowired
     private CheckTelegramChatIdService checkTelegramChatIdService;
     @Value("${botName}")
@@ -52,14 +44,14 @@ public class ChatBot extends TelegramLongPollingBot {
             if (chatMessage.equals("/start")) {
                 printStartMessage();
             }
-            Order clientOrder = tryFindOrder();
+            Order clientOrder = null;
             if (clientOrder != null) {
                 printOrder(clientOrder);
             } else {
                 printNotFoundOrder();
             }
             if (!(isChatId())) {
-                telegramDatabase.addClientChatId(new TelegramChatId(chatId, orderNumber));
+
             }
         }
     }
@@ -73,22 +65,22 @@ public class ChatBot extends TelegramLongPollingBot {
         this.execute(sendMessage);
     }
 
-    private Order tryFindOrder() {
-        orderNumber = Integer.parseInt(chatMessage);
-        FindByOrderNumberRequest request = new FindByOrderNumberRequest(orderNumber);
-        return findByOrderNumberService.execute(request);
-    }
+//    private Order tryFindOrder() {
+//        orderNumber = Integer.parseInt(chatMessage);
+//        FindByOrderNumberRequest request = new FindByOrderNumberRequest(orderNumber);
+//        return findByOrderNumberService.execute(request);
+//    }
 
-    @SneakyThrows(TelegramApiException.class)
+//    @SneakyThrows(TelegramApiException.class)
     private void printOrder(Order clientOrder) {
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(String.valueOf(chatId))
-                .text("Information about order number: " + clientOrder.getOrderNumber() + "\n"
-                        + "Order date: " + clientOrder.getOrderDate() + "\n"
-                        + "Total sum: " + clientOrder.getTotalSum() + "\n"
-                        + "Order status: " + clientOrder.getOrderStatus().toString())
-                .build();
-        this.execute(sendMessage);
+//        SendMessage sendMessage = SendMessage.builder()
+//                .chatId(String.valueOf(chatId))
+//                .text("Information about order number: " + clientOrder.getOrderNumber() + "\n"
+//                        + "Order date: " + clientOrder.getOrderDate() + "\n"
+//                        + "Total sum: " + clientOrder.getTotalSum() + "\n"
+//                        + "Order status: " + clientOrder.getOrderStatus().toString())
+//                .build();
+//        this.execute(sendMessage);
     }
 
     @SneakyThrows(TelegramApiException.class)
@@ -102,6 +94,6 @@ public class ChatBot extends TelegramLongPollingBot {
 
     private boolean isChatId() {
         CheckTelegramChatIdRequest request = new CheckTelegramChatIdRequest(chatId);
-        return checkTelegramChatIdService.execute(request);
+        return true;
     }
 }

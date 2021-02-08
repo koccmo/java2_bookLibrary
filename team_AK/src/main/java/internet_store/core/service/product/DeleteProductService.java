@@ -1,48 +1,33 @@
 package internet_store.core.service.product;
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.domain.Product;
 import internet_store.core.request.product.DeleteProductRequest;
 import internet_store.core.response.product.DeleteProductResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.product_database.InnerProductDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.persistence.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
+@Transactional
 public class DeleteProductService {
     @Autowired
-    InnerProductDatabase productDatabase;
+    private ProductRepository productRepository;
 
-    public DeleteProductService(InnerProductDatabase productDatabase) {
-        this.productDatabase = productDatabase;
-    }
+    public DeleteProductResponse execute(DeleteProductRequest request) {
 
-    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(deleteProductRequest.getId());
+        List<CoreError> errors = new ArrayList<>();
 
-        List<CoreError> errors = negativeNumberValidator.validate();
+        boolean isExist = productRepository.existsByTitle(request.getProduct().getTitle());
 
-        if (isIdExist(deleteProductRequest.getId())) {
-            Product deletedProduct = findProductById(deleteProductRequest.getId());
-            productDatabase.deleteProduct(deletedProduct);
+        if (isExist) {
+            productRepository.delete(request.getProduct());
         } else {
-            errors.add(new CoreError("Id error ", "wrong ID"));
-        }
-
-        if (errors.isEmpty()) {
-            return new DeleteProductResponse(deleteProductRequest.getId());
+            errors.add(new CoreError("error", "Product not exist in database"));
         }
         return new DeleteProductResponse(errors);
-    }
-
-    private boolean isIdExist(long id) {
-        return productDatabase.isIdExist(id);
-    }
-
-    private Product findProductById(long id) {
-        return productDatabase.findById(id);
     }
 }

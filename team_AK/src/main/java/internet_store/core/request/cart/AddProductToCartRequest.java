@@ -2,16 +2,14 @@ package internet_store.core.request.cart;
 
 import lombok.Getter;
 
-import java.math.BigDecimal;
-
 public class AddProductToCartRequest {
     @Getter
-    private final long id;
+    private final Long newQuantity;
     @Getter
-    private final BigDecimal newQuantity;
+    private final String  productTitle;
 
-    public AddProductToCartRequest(long id, BigDecimal newQuantity) {
-        this.id = id;
+    public AddProductToCartRequest(long newQuantity, String  productTitle) {
         this.newQuantity = newQuantity;
+        this.productTitle = productTitle;
     }
 }

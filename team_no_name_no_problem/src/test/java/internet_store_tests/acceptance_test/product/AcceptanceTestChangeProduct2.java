@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AcceptanceTestChangeProduct2 {
-
+/*
     private ApplicationContext appContext;
 
     @Before
@@ -57,4 +57,6 @@ public class AcceptanceTestChangeProduct2 {
     private GetAllProductsService getAllProductsService() {
         return appContext.getBean(GetAllProductsService.class);
     }
+
+ */
 }

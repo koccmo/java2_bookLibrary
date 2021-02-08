@@ -1,48 +1,33 @@
 package internet_store.core.service.client;
 
 import internet_store.core.core_error.CoreError;
-import internet_store.core.domain.Client;
 import internet_store.core.request.client.DeleteClientRequest;
 import internet_store.core.response.client.DeleteClientResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.client_database.InnerClientDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.persistence.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
+@Transactional
 public class DeleteClientService {
     @Autowired
-    InnerClientDatabase clientDatabase;
+    private ClientRepository clientRepository;
 
-    public DeleteClientService(InnerClientDatabase clientDatabase) {
-        this.clientDatabase = clientDatabase;
-    }
+    public DeleteClientResponse execute(DeleteClientRequest request) {
 
-    public DeleteClientResponse execute(DeleteClientRequest deleteClientRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(deleteClientRequest.getId());
+        List<CoreError> errors = new ArrayList<>();
 
-        List<CoreError> errors = negativeNumberValidator.validate();
+        boolean isExist = clientRepository.existsByName(request.getClient().getName());
 
-        if (isIdExist(deleteClientRequest.getId())) {
-            Client deletedClient = findProductById(deleteClientRequest.getId());
-            clientDatabase.deleteClient(deletedClient);
+        if (isExist) {
+            clientRepository.delete(request.getClient());
         } else {
-            errors.add(new CoreError("Id error ", "wrong ID"));
-        }
-
-        if (errors.isEmpty()) {
-            return new DeleteClientResponse(deleteClientRequest.getId());
+            errors.add(new CoreError("error", "Client not exist in database"));
         }
         return new DeleteClientResponse(errors);
-    }
-
-    private boolean isIdExist(long id) {
-        return clientDatabase.isIdExist(id);
-    }
-
-    private Client findProductById(long id) {
-        return clientDatabase.findById(id);
     }
 }

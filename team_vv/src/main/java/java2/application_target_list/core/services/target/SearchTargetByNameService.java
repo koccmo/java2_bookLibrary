@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetDatabase;
+import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.requests.target.SearchTargetByNameRequest;
@@ -27,7 +27,7 @@ public class SearchTargetByNameService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private TargetDatabase targetDatabase;
+    @Autowired private TargetRepository targetRepository;
     @Autowired private SearchTargetByNameValidator validator;
 
     public SearchTargetByNameResponse execute(SearchTargetByNameRequest request){
@@ -37,7 +37,7 @@ public class SearchTargetByNameService {
             return new SearchTargetByNameResponse(errors, null);
         }
 
-        List<Target> targets = targetDatabase.findByTargetName(request.getName());
+        List<Target> targets = targetRepository.findByTargetName(request.getName());
         targets = order(targets, request.getOrdering());
         targets = paging(targets, request.getPaging());
 

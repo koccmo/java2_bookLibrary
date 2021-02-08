@@ -13,6 +13,7 @@ public class GetDoctorListUIAction implements UIAction {
     @Autowired
     private GetDoctorListService getDoctorListService;
 
+
     @Override
     public void execute() {
 
@@ -22,8 +23,7 @@ public class GetDoctorListUIAction implements UIAction {
         if (getDoctorListResponse.hasErrors()) {
             getDoctorListResponse.getErrors().forEach(System.out::println);
         } else {
-            System.out.println("Doctor's database:\n");
-            getDoctorListResponse.getDoctors().forEach(System.out::println);
+            getDoctorListResponse.getDoctorAndGraphic().forEach(System.out::println);
         }
     }
 }

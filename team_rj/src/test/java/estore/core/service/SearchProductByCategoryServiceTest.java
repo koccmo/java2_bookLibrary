@@ -1,13 +1,15 @@
 package estore.core.service;
 
+import estore.core.domain.Product;
+import estore.core.domain.ProductCategory;
 import estore.core.requests.Ordering;
 import estore.core.requests.Paging;
 import estore.core.requests.SearchProductByCategoryRequest;
 import estore.core.responses.SearchProductByCategoryResponse;
 import estore.core.validation.CoreError;
 import estore.core.validation.SearchProductByCategoryValidator;
+import estore.database.ProductCategoryRepository;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,6 +30,8 @@ public class SearchProductByCategoryServiceTest {
     private ProductRepository database;
     @Mock
     private SearchProductByCategoryValidator validator;
+    @Mock
+    private ProductCategoryRepository categoryRepository;
 
     @InjectMocks
     private SearchProductByCategoryService service;
@@ -56,8 +60,8 @@ public class SearchProductByCategoryServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product", "Good product", "Category"));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        products.add(new Product("Product", "Good product", new ProductCategory("Category")));
+        Mockito.when(database.searchProductByCategory(any())).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -74,11 +78,11 @@ public class SearchProductByCategoryServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product_1", "Good product 1", "Category"));
-        products.add(new Product("Product_2", "Good product 2", "Category"));
+        products.add(new Product("Product_1", "Good product 1", new ProductCategory("Category")));
+        products.add(new Product("Product_2", "Good product 2", new ProductCategory("Category")));
         products.get(0).setPrice(10);
         products.get(1).setPrice(20);
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        Mockito.when(database.searchProductByCategory(any())).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -94,9 +98,9 @@ public class SearchProductByCategoryServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product_1", "Good product 1", "Category"));
-        products.add(new Product("Product_2", "Good product 2", "Category"));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        products.add(new Product("Product_1", "Good product 1", new ProductCategory("Category")));
+        products.add(new Product("Product_2", "Good product 2", new ProductCategory("Category")));
+        Mockito.when(database.searchProductByCategory(any())).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
@@ -113,10 +117,10 @@ public class SearchProductByCategoryServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product_3", "Good product 3", "Category"));
-        products.add(new Product("Product_2", "Good product 2", "Category"));
-        products.add(new Product("Product_1", "Good product 1", "Category"));
-        Mockito.when(database.searchProductByCategory("Category")).thenReturn(products);
+        products.add(new Product("Product_3", "Good product 3", new ProductCategory("Category")));
+        products.add(new Product("Product_2", "Good product 2", new ProductCategory("Category")));
+        products.add(new Product("Product_1", "Good product 1", new ProductCategory("Category")));
+        Mockito.when(database.searchProductByCategory(any())).thenReturn(products);
         SearchProductByCategoryResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());

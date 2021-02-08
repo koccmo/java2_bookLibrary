@@ -3,8 +3,8 @@ package estore.acceptance_tests;
 import estore.config.ProductConfiguration;
 import estore.core.requests.*;
 import estore.core.responses.SearchProductByNameResponse;
-import estore.core.service.AddNewProductCategoryService;
-import estore.core.service.AddNewProductService;
+import estore.core.service.AddProductCategoryService;
+import estore.core.service.AddProductService;
 import estore.core.service.SearchProductByNameService;
 import estore.core.service.UpdateProductByIdService;
 import org.junit.Before;
@@ -30,12 +30,12 @@ public class SearchProductsByNameOnRequestTest {
 
     @Test
     public void shouldSearchProductByName() {
-        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
-        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA1", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductA", "Description ProductA2", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
@@ -52,23 +52,23 @@ public class SearchProductsByNameOnRequestTest {
 
     @Test
     public void shouldSearchProductByNameDescending() {
-        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
-        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA1", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductA", "Description ProductA2", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
         addNewProductService().execute(addProductRequest3);
 
         UpdateProductByIdRequest updateProductByIdRequest1 = new UpdateProductByIdRequest(
-                1L, "ProductA", "Description ProductA1", "1", "0", "1");
+                1L, "ProductA", "Description ProductA1", "Category", "0", "1");
         UpdateProductByIdRequest updateProductByIdRequest2 = new UpdateProductByIdRequest(
-                2L, "ProductB", "Description ProductB", "1", "0", "2");
+                2L, "ProductB", "Description ProductB", "Category", "0", "2");
         UpdateProductByIdRequest updateProductByIdRequest3 = new UpdateProductByIdRequest(
-                3L, "ProductA", "Description ProductA2", "1", "0", "3");
+                3L, "ProductA", "Description ProductA2", "Category", "0", "3");
 
         updateProductByIdService().execute(updateProductByIdRequest1);
         updateProductByIdService().execute(updateProductByIdRequest2);
@@ -86,23 +86,23 @@ public class SearchProductsByNameOnRequestTest {
 
     @Test
     public void shouldSearchProductByNameAscendingAndPaging() {
-        AddNewProductCategoryRequest addNewProductCategoryRequest = new AddNewProductCategoryRequest("Category");
-        AddNewProductCategoryService().execute(addNewProductCategoryRequest);
+        AddProductCategoryRequest addProductCategoryRequest = new AddProductCategoryRequest("Category");
+        AddNewProductCategoryService().execute(addProductCategoryRequest);
 
-        AddNewProductRequest addProductRequest1 = new AddNewProductRequest("ProductA", "Description ProductA1", "1");
-        AddNewProductRequest addProductRequest2 = new AddNewProductRequest("ProductB", "Description ProductB", "1");
-        AddNewProductRequest addProductRequest3 = new AddNewProductRequest("ProductA", "Description ProductA2", "1");
+        AddProductRequest addProductRequest1 = new AddProductRequest("ProductA", "Description ProductA1", "Category");
+        AddProductRequest addProductRequest2 = new AddProductRequest("ProductB", "Description ProductB", "Category");
+        AddProductRequest addProductRequest3 = new AddProductRequest("ProductA", "Description ProductA2", "Category");
 
         addNewProductService().execute(addProductRequest1);
         addNewProductService().execute(addProductRequest2);
         addNewProductService().execute(addProductRequest3);
 
         UpdateProductByIdRequest updateProductByIdRequest1 = new UpdateProductByIdRequest(
-                1L, "ProductA", "Description ProductA1", "1", "0", "3");
+                1L, "ProductA", "Description ProductA1", "Category", "0", "3");
         UpdateProductByIdRequest updateProductByIdRequest2 = new UpdateProductByIdRequest(
-                2L, "ProductB", "Description ProductB", "1", "0", "2");
+                2L, "ProductB", "Description ProductB", "Category", "0", "2");
         UpdateProductByIdRequest updateProductByIdRequest3 = new UpdateProductByIdRequest(
-                3L, "ProductA", "Description ProductA2", "1", "0", "1");
+                3L, "ProductA", "Description ProductA2", "Category", "0", "1");
 
         updateProductByIdService().execute(updateProductByIdRequest1);
         updateProductByIdService().execute(updateProductByIdRequest2);
@@ -118,16 +118,16 @@ public class SearchProductsByNameOnRequestTest {
         assertEquals(response.getProducts().get(0).getPrice(), 1, 0.01);
     }
 
-    private AddNewProductService addNewProductService() {
-        return applicationContext.getBean(AddNewProductService.class);
+    private AddProductService addNewProductService() {
+        return applicationContext.getBean(AddProductService.class);
     }
 
     private SearchProductByNameService searchProductByNameService() {
         return applicationContext.getBean(SearchProductByNameService.class);
     }
 
-    private AddNewProductCategoryService AddNewProductCategoryService() {
-        return applicationContext.getBean(AddNewProductCategoryService.class);
+    private AddProductCategoryService AddNewProductCategoryService() {
+        return applicationContext.getBean(AddProductCategoryService.class);
     }
 
     private UpdateProductByIdService updateProductByIdService() {

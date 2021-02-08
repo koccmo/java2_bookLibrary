@@ -1,7 +1,7 @@
 package book_library.core.services;
 
 import book_library.core.domain.Book;
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
 import book_library.core.requests.SearchBooksRequest;
@@ -27,7 +27,7 @@ public class SearchBooksService {
     private boolean pagingEnabled;
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
     @Autowired private SearchBooksRequestValidator validator;
 
     public SearchBooksResponse execute(SearchBooksRequest request) {
@@ -60,13 +60,13 @@ public class SearchBooksService {
     private List<Book> search(SearchBooksRequest request) {
         List<Book> books = new ArrayList<>();
         if (request.isTitleProvided() && !request.isAuthorProvided()) {
-            books = database.findByTitle(request.getTitle());
+            books = bookRepository.findByTitle(request.getTitle());
         }
         if (!request.isTitleProvided() && request.isAuthorProvided()) {
-            books = database.findByAuthor(request.getAuthor());
+            books = bookRepository.findByAuthor(request.getAuthor());
         }
         if (request.isTitleProvided() && request.isAuthorProvided()) {
-            books = database.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
+            books = bookRepository.findByTitleAndAuthor(request.getTitle(), request.getAuthor());
         }
         return books;
     }

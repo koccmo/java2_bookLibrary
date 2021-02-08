@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.product;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
@@ -21,12 +22,12 @@ public class AcceptanceTestAddProduct1 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
     @Test
     public void test(){
         Product product = new Product("Milk", "10%", 12);
         AddProductRequest addProductRequest = new AddProductRequest(product);
-        addProductService().execute(addProductRequest);
         addProductService().execute(addProductRequest);
 
         GetProductsRequest getProductsRequest = new GetProductsRequest();
@@ -43,4 +44,6 @@ public class AcceptanceTestAddProduct1 {
     private GetAllProductsService getAllProductsService(){
         return appContext.getBean(GetAllProductsService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }

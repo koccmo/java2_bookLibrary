@@ -1,9 +1,10 @@
 package estore.core.service;
 
+import estore.core.domain.Product;
+import estore.core.domain.ProductCategory;
 import estore.core.requests.GetAllProductsRequest;
 import estore.core.responses.GetAllProductsResponse;
 import estore.database.ProductRepository;
-import estore.core.model.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,8 +30,8 @@ public class ShowAllProductsServiceTest {
     @Test
     public void shouldReturnAllProductsFromDatabase() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Product_1", "Good product 1", "Category"));
-        products.add(new Product("Product_2", "Good product 2", "Category"));
+        products.add(new Product("Product_1", "Good product 1", new ProductCategory("Category")));
+        products.add(new Product("Product_2", "Good product 2", new ProductCategory("Category")));
         Mockito.when(database.getDatabase()).thenReturn(products);
 
         GetAllProductsRequest request = new GetAllProductsRequest();

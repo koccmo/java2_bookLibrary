@@ -1,5 +1,6 @@
 package lv.javaguru.app.console_ui;
 
+import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
@@ -21,12 +22,10 @@ public class FlightShowAllAction extends Action implements UIActions {
 		FlightShowAllRequest request = new FlightShowAllRequest(currUser);
 		FlightShowAllResponse<?> response = flightShowAllService.execute(request);
 
-		if (response.hasErrors()) {
-			System.out.println("Error list:");
-		}
-		else {
-			System.out.println("Ticket list:");
-		}
+		if (response.hasErrors())
+			BaseFunc.printHeader("Error:", getLoggedInUser().getName());
+		else
+			BaseFunc.printHeader("Flight list:", getLoggedInUser().getName());
 
 		response.printResponse();
 	}

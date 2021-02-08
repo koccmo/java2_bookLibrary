@@ -5,7 +5,7 @@ import dental_clinic.core.requests.plannedVisit.GetPlannedVisitsRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.GetPlannedVisitsResponse;
 import dental_clinic.core.validators.planned_visit.GetPlannedVisitsRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class GetPlannedVisitsService {
     @Autowired
     private GetPlannedVisitsRequestValidator getPlannedVisitsRequestValidator;
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
 
     public GetPlannedVisitsResponse execute (GetPlannedVisitsRequest getPlannedVisitsRequest) {
 
@@ -30,7 +30,7 @@ public class GetPlannedVisitsService {
             return new GetPlannedVisitsResponse(errors, new ArrayList<>());
         }
 
-        List<PlannedVisit> plannedVisits = plannedVisitsInMemoryDatabase.getPlannedVisits();
+        List<PlannedVisit> plannedVisits = plannedVisitsRepository.getPlannedVisits();
 
         if (plannedVisits.isEmpty()) {
             errors.add(new CoreError("database", "Database is empty"));

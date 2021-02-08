@@ -1,5 +1,5 @@
 package internet_store.console_ui.order;
-
+/*
 import internet_store.console_ui.UIAction;
 import internet_store.core.requests.order.GetOrdersRequest;
 import internet_store.core.response.order.GetOrdersResponse;
@@ -26,3 +26,4 @@ public class GetOrdersUIAction implements UIAction {
         }
     }
 }
+*/

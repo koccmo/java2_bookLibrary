@@ -1,5 +1,6 @@
 package internet_store_tests.acceptance_test.customer;
 
+import internet_store.DatabaseCleaner;
 import internet_store.config.MainMenuConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
@@ -21,7 +22,9 @@ public class AcceptanceTestAddCustomer {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        getDatabaseCleaner().clean();
     }
+
     @Test
     public void test(){
         Customer customer = new Customer("Jarik","Brutaxa","28450116", "Matisa 31",
@@ -42,4 +45,6 @@ public class AcceptanceTestAddCustomer {
     private GetAllCustomersService getAllCustomersService(){
         return appContext.getBean(GetAllCustomersService.class);
     }
+
+    private DatabaseCleaner getDatabaseCleaner(){ return appContext.getBean(DatabaseCleaner.class);}
 }

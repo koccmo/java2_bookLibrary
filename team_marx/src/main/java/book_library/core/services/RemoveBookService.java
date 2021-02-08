@@ -1,6 +1,6 @@
 package book_library.core.services;
 
-import book_library.core.database.Database;
+import book_library.core.database.BookRepository;
 import book_library.core.requests.RemoveBookRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.RemoveBookResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class RemoveBookService {
 
     @Autowired
-    private Database database;
+    private BookRepository bookRepository;
     @Autowired
     private RemoveBookRequestValidator validator;
 
@@ -23,7 +23,7 @@ public class RemoveBookService {
         if (!errors.isEmpty()) {
             return new RemoveBookResponse(errors);
         }
-        boolean isBookRemoved = database.deleteById(request.getBookIdToRemove());
+        boolean isBookRemoved = bookRepository.deleteById(request.getBookIdToRemove());
         return new RemoveBookResponse(isBookRemoved);
     }
 }

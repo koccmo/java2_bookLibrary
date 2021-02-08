@@ -1,48 +1,92 @@
 package internet_store.core.service.ordering;
 
-import internet_store.core.core_error.CoreError;
-import internet_store.core.request.ordering.OrderRequest;
-import internet_store.core.response.ordering.OrderResponse;
-import internet_store.core.validate.NegativeNumberValidator;
-import internet_store.database.cart_database.InnerCartDatabase;
-import internet_store.database.client_database.InnerClientDatabase;
-import org.springframework.stereotype.Component;
+import internet_store.core.domain.Client;
+import internet_store.core.domain.Order;
+import internet_store.core.domain.ProductInCart;
+import internet_store.core.operation.Tax;
+import internet_store.core.persistence.CartRepository;
+import internet_store.core.persistence.OrderRepository;
+import internet_store.core.service.cart.CartProductsCountService;
+import internet_store.core.service.cart.TotalSumCartService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
-@Component
+@Service
+@Transactional
 public class OrderService {
     @Autowired
-    InnerClientDatabase clientDatabase;
+    private CartProductsCountService countService;
     @Autowired
-    InnerCartDatabase cartDatabase;
+    private TotalSumCartService totalSumCartService;
+    @Autowired
+    private CreateOrderNumberService numberService;
+    @Autowired
+    private Tax tax;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private OrderStatusService orderStatusService;
+    @Getter
+    @Setter
+    private Client client;
+    private String orderNumber;
+    private BigDecimal totalSumInCart;
+    private BigDecimal taxAmount;
+    private BigDecimal total;
 
-    public OrderService(InnerClientDatabase clientDatabase, InnerCartDatabase cartDatabase) {
-        this.clientDatabase = clientDatabase;
-        this.cartDatabase = cartDatabase;
+    public Order createOrder() {
+        Order order = new Order();
+        totalSumInCart = totalSumCartService.calculateTotalSum();
+        if (numberService.getOrderHaveNumber()) {
+            orderNumber = numberService.getFullOrderNumber();
+        } else {
+            orderNumber = numberService.createOrderNumber();
+        }
+
+        taxAmount = tax.getTaxAmount(totalSumInCart);
+        total = tax.getAmountWithTax(totalSumInCart);
+        order.setNumber(orderNumber);
+        order.setDate(new Date());
+        order.setClient(getClient());
+        order.setSum(totalSumInCart);
+        order.setTax(taxAmount);
+        order.setTotal(total);
+        return order;
     }
 
-    public OrderResponse execute(OrderRequest orderRequest) {
-        NegativeNumberValidator<?> negativeNumberValidator = new NegativeNumberValidator<>(orderRequest.getId());
-
-        List<CoreError> errors = negativeNumberValidator.validate();
-
-        if (cartDatabase.isCartDatabaseEmpty()) {
-            errors.add(new CoreError("Cart error ", "cart empty"));
-        }
-
-        if (!(isIdExist(orderRequest.getId()))) {
-            errors.add(new CoreError("Id error ", "wrong ID"));
-        }
-
-        if (errors.isEmpty()) {
-            return new OrderResponse(orderRequest.getId());
-        }
-        return new OrderResponse(errors);
+    public void saveOrder() {
+        List<ProductInCart> itemsForOrder = cartRepository.itemsForOrder();
+        itemsForOrder.forEach(productInCart -> {
+            Order orderForSave = new Order();
+            orderForSave.setNumber(orderNumber);
+            orderForSave.setDate(new Date());
+            orderForSave.setClient(getClient());
+            orderForSave.setCart(productInCart);
+            productInCart.setOrdered(true);
+            orderForSave.setSum(totalSumInCart);
+            orderForSave.setTax(taxAmount);
+            orderForSave.setTotal(total);
+            orderForSave.setStatus("ORDER RECEIVED");
+            productInCart.getProduct().setQuantity(productInCart.getProduct().getQuantity() - productInCart.getQuantity());
+            orderRepository.saveAndFlush(orderForSave);
+        });
+        orderStatusService.changeOrderStatus(orderNumber, "ORDER RECEIVED");
     }
 
-    private boolean isIdExist(long id) {
-        return clientDatabase.isIdExist(id);
+    public List<ProductInCart> getAllItemsFromCart() {
+        return cartRepository.itemsForOrder();
+    }
+
+    public boolean isCanMakeOrder() {
+        return client != null && countService.getCartCount() != 0;
     }
 }

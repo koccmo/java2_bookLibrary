@@ -2,11 +2,12 @@ package internet_store.application.core.database.customer;
 
 import internet_store.application.core.domain.Customer;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,22 +38,32 @@ public class ORMCustomerRepository implements CustomerRepository {
 
     @Override
     public List<Customer> findByFirstName(String customerName) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Customer WHERE customerFirstName = :name");
+        query.setParameter("name", customerName);
+        return query.getResultList();
     }
 
     @Override
     public Optional<Customer> findByCustomerId(Long id) {
-        return Optional.empty();
+        Customer customer = sessionFactory.getCurrentSession().find(Customer.class, id);
+        return Optional.ofNullable(customer);
     }
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        CriteriaQuery<Customer> query = sessionFactory.getCriteriaBuilder().createQuery(Customer.class);
+        query.from(Customer.class);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
     }
 
     @Override
     public boolean changeFirstName(Long id, String newFirstName) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "UPDATE Customer SET first_name = :newFirstName WHERE id = :id");
+        query.setParameter("newFirstName", newFirstName);
+        query.setParameter("id", id);
+        return query.executeUpdate() >= 1;
     }
 
 }
