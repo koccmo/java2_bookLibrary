@@ -6,11 +6,17 @@ public class AddDoctorRequest {
 
     private Doctor doctor;
 
+    public AddDoctorRequest() { }
+
     public AddDoctorRequest(Doctor doctor) {
         this.doctor = doctor;
     }
 
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }
