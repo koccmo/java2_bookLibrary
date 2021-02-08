@@ -1,46 +1,40 @@
 package internet_store.core.service.ordering;
 
-import internet_store.core.core_error.CoreError;
-import internet_store.core.domain.Cart;
 import internet_store.core.domain.Client;
 import internet_store.core.domain.Order;
+import internet_store.core.domain.ProductInCart;
 import internet_store.core.operation.Tax;
-import internet_store.core.request.ordering.OrderRequest;
-import internet_store.core.response.ordering.OrderResponse;
+import internet_store.core.persistence.CartRepository;
+import internet_store.core.persistence.OrderRepository;
 import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.cart.TotalSumCartService;
-import internet_store.core.validate.NumberValidator;
-import internet_store.database.interfaces.CartDatabase;
-import internet_store.database.interfaces.ClientDatabase;
-import internet_store.persistence.CartRepository;
-import internet_store.persistence.OrderRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderService {
     @Autowired
-    CartProductsCountService countService;
+    private CartProductsCountService countService;
     @Autowired
-    ClientDatabase clientDatabase;
+    private TotalSumCartService totalSumCartService;
     @Autowired
-    CartDatabase cartDatabase;
+    private CreateOrderNumberService numberService;
     @Autowired
-    TotalSumCartService totalSumCartService;
+    private Tax tax;
     @Autowired
-    CreateOrderNumberService numberService;
+    private CartRepository cartRepository;
     @Autowired
-    Tax tax;
+    private OrderRepository orderRepository;
     @Autowired
-    CartRepository cartRepository;
-    @Autowired
-    OrderRepository orderRepository;
+    private OrderStatusService orderStatusService;
     @Getter
     @Setter
     private Client client;
@@ -48,11 +42,6 @@ public class OrderService {
     private BigDecimal totalSumInCart;
     private BigDecimal taxAmount;
     private BigDecimal total;
-
-    public OrderService(ClientDatabase clientDatabase, CartDatabase cartDatabase) {
-        this.clientDatabase = clientDatabase;
-        this.cartDatabase = cartDatabase;
-    }
 
     public Order createOrder() {
         Order order = new Order();
@@ -75,51 +64,29 @@ public class OrderService {
     }
 
     public void saveOrder() {
-        List<Cart> itemsForOrder = cartRepository.itemsForOrder();
-        itemsForOrder.forEach(i -> {
+        List<ProductInCart> itemsForOrder = cartRepository.itemsForOrder();
+        itemsForOrder.forEach(productInCart -> {
             Order orderForSave = new Order();
             orderForSave.setNumber(orderNumber);
             orderForSave.setDate(new Date());
             orderForSave.setClient(getClient());
-            orderForSave.setCart(i);
-            i.setOrdered(true);
+            orderForSave.setCart(productInCart);
+            productInCart.setOrdered(true);
             orderForSave.setSum(totalSumInCart);
             orderForSave.setTax(taxAmount);
             orderForSave.setTotal(total);
-            orderForSave.setStatus("ORDER_RECEIVED");
-            i.getProduct().setQuantity(i.getProduct().getQuantity() - i.getQuantity());
+            orderForSave.setStatus("ORDER RECEIVED");
+            productInCart.getProduct().setQuantity(productInCart.getProduct().getQuantity() - productInCart.getQuantity());
             orderRepository.saveAndFlush(orderForSave);
         });
+        orderStatusService.changeOrderStatus(orderNumber, "ORDER RECEIVED");
     }
 
-    public List<Cart> getAllItemsFromCart() {
+    public List<ProductInCart> getAllItemsFromCart() {
         return cartRepository.itemsForOrder();
-    }
-
-    public OrderResponse execute(OrderRequest orderRequest) {
-        NumberValidator<?> numberValidator = new NumberValidator<>(orderRequest.getId());
-
-        List<CoreError> errors = numberValidator.validate();
-
-        if (cartDatabase.isCartDatabaseEmpty()) {
-            errors.add(new CoreError("Cart error ", "cart empty"));
-        }
-
-        if (!(isIdExist(orderRequest.getId()))) {
-            errors.add(new CoreError("Id error ", "wrong ID"));
-        }
-
-        if (errors.isEmpty()) {
-            return new OrderResponse(orderRequest.getId());
-        }
-        return new OrderResponse(errors);
     }
 
     public boolean isCanMakeOrder() {
         return client != null && countService.getCartCount() != 0;
-    }
-
-    private boolean isIdExist(long id) {
-        return clientDatabase.isIdExist(id);
     }
 }

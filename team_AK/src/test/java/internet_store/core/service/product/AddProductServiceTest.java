@@ -3,95 +3,175 @@ package internet_store.core.service.product;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.AddProductRequest;
 import internet_store.core.response.product.AddProductResponse;
-import internet_store.database.interfaces.ProductDatabase;
-import internet_store.database.product_database.ProductDatabaseImpl;
-import org.junit.Before;
+import internet_store.core.persistence.ProductRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class AddProductServiceTest {
-    private final ProductDatabase productDatabase = new ProductDatabaseImpl();
-    private final AddProductService service = new AddProductService();
-    private Product product;
-
-    @Before
-    public void startUp() {
-        product = new Product();
-    }
+    @Mock
+    private ProductRepository productRepository;
+    @InjectMocks
+    private AddProductService addProductService;
 
     @Test
-    public void shouldReturnNoError() {
-        product.setId(1L);
-        product.setTitle("Example");
-        product.setDescription("Test");
-        product.setPrice(new BigDecimal("1.55"));
+    public void returnNoError() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setCategory(1);
         product.setQuantity(5L);
+        product.setPrice(new BigDecimal("75.05"));
 
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product));
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+        Mockito.when(productRepository.save(product)).thenReturn(product);
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+
         assertFalse(response.hasErrors());
     }
 
     @Test
-    public void shouldReturnErrorNoTitle() {
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product));
-        assertTrue(response.hasErrors());
-        assertEquals("Title input error: ", response.getErrors().get(0).getField());
-        assertEquals("Empty field", response.getErrors().get(0).getMessage());
-    }
-
-    @Test
-    public void shouldReturnErrorNoDescription() {
-        product.setTitle("Test");
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product));
-        assertTrue(response.hasErrors());
-        assertEquals("Description input error: ", response.getErrors().get(0).getField());
-        assertEquals("Empty field", response.getErrors().get(0).getMessage());
-    }
-
-    @Test
-    public void shouldReturnErrorQuantityLessZero() {
-        product.setTitle("Test");
-        product.setDescription("Test");
-        product.setQuantity(-5L);
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product));
-        assertTrue(response.hasErrors());
-        assertEquals("Quantity input error: ", response.getErrors().get(0).getField());
-        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
-    }
-
-    @Test
-    public void shouldReturnErrorPriceLessZero() {
-        product.setTitle("Test");
-        product.setDescription("Test");
+    public void returnError_DuplicateInDatabase() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setCategory(1);
         product.setQuantity(5L);
-        product.setPrice(new BigDecimal("-1.55"));
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product));
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(product);
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+
         assertTrue(response.hasErrors());
-        assertEquals("Price input error: ", response.getErrors().get(0).getField());
-        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
-    }
-
-    @Test
-    public void shouldReturnErrorDuplicateExist() {
-        product.setTitle("Test");
-        product.setDescription("Test");
-        product.setQuantity(5L);
-        product.setPrice(new BigDecimal("3.15"));
-        productDatabase.addProduct(product);
-
-        Product product1 = new Product();
-        product1.setTitle("Test");
-        product1.setDescription("Test");
-        product1.setQuantity(5L);
-        product1.setPrice(new BigDecimal("2.00"));
-
-        AddProductResponse response = service.execute(new AddProductRequest(productDatabase, product1));
-        assertTrue(response.hasErrors());
-        assertEquals("Add command error: ", response.getErrors().get(0).getField());
+        assertEquals("error", response.getErrors().get(0).getField());
         assertEquals("Record exist in database", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void returnError_AllErrorsWithoutDuplicate() {
+        Product product = new Product();
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+
+        assertTrue(response.hasErrors());
+        assertEquals(5, response.getErrors().size());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("Empty field", response.getErrors().get(0).getMessage());
+        assertEquals("error", response.getErrors().get(1).getField());
+        assertEquals("Empty field", response.getErrors().get(1).getMessage());
+        assertEquals("error", response.getErrors().get(2).getField());
+        assertEquals("Empty field", response.getErrors().get(2).getMessage());
+        assertEquals("error", response.getErrors().get(3).getField());
+        assertEquals("Empty field", response.getErrors().get(3).getMessage());
+        assertEquals("error", response.getErrors().get(4).getField());
+        assertEquals("category no set", response.getErrors().get(4).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_NoTitle() {
+        Product product = new Product();
+        product.setDescription("Description");
+        product.setCategory(1);
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("Empty field", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_NoDiscription() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setCategory(1);
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("Empty field", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_QuantityLessZero() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setCategory(1);
+        product.setQuantity(-55L);
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("Long input error", response.getErrors().get(0).getField());
+        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_PriceLessZero() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setCategory(1);
+        product.setQuantity(55L);
+        product.setPrice(new BigDecimal("-1175.89"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("BigDecimal input error", response.getErrors().get(0).getField());
+        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_NoSetCategory() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("category no set", response.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnError_CategoryLessZero() {
+        Product product = new Product();
+        product.setTitle("Title");
+        product.setDescription("Description");
+        product.setCategory(-55);
+        product.setQuantity(5L);
+        product.setPrice(new BigDecimal("75.05"));
+
+        Mockito.when(productRepository.findByTitle(product.getTitle())).thenReturn(null);
+
+        AddProductResponse response = addProductService.execute(new AddProductRequest(product));
+        assertTrue(response.hasErrors());
+        assertEquals("Integer input error", response.getErrors().get(0).getField());
+        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
     }
 }

@@ -23,7 +23,7 @@ public class Order {
     private Client client;
     @ManyToOne
     @JoinColumn(name = "cart_id")
-    private Cart cart;
+    private ProductInCart cart;
     @Column(name = "sum")
     private BigDecimal sum;
     @Column(name = "tax")

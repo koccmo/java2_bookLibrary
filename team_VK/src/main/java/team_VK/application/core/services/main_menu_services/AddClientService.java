@@ -7,14 +7,14 @@ import team_VK.application.core.requests.AddClientRequest;
 import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.validators.AddClientServiceValidator;
-import team_VK.application.database.DatabaseClients;
+import team_VK.application.database.ClientsRepository;
 
 import java.util.List;
 @Component
 public class AddClientService {
 
     @Autowired
-    private DatabaseClients databaseClient;
+    private ClientsRepository databaseClient;
     @Autowired private AddClientServiceValidator validator;
 
 

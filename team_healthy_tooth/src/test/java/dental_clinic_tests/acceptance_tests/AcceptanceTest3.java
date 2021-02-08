@@ -1,7 +1,7 @@
 package dental_clinic_tests.acceptance_tests;
 
-import dental_clinic.DatabaseCleanerClinic;
-import dental_clinic.config.DentalClinicConfiguration;
+import dental_clinic.core.DatabaseCleanerClinic;
+import dental_clinic.config.DentalClinicSpringCoreConfiguration;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
@@ -27,7 +27,7 @@ public class AcceptanceTest3 {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(DentalClinicSpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

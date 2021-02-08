@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(value = "internet_store.persistence")
+@EnableJpaRepositories(value = "internet_store.core.persistence")
 @EntityScan(basePackages = "internet_store.core.domain")
 @ComponentScan(basePackages = "internet_store")
 @EnableTransactionManagement

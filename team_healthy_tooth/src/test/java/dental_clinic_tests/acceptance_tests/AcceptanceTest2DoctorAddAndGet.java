@@ -1,7 +1,7 @@
 package dental_clinic_tests.acceptance_tests;
 
-import dental_clinic.DatabaseCleanerClinic;
-import dental_clinic.config.DentalClinicConfiguration;
+import dental_clinic.core.DatabaseCleanerClinic;
+import dental_clinic.config.DentalClinicSpringCoreConfiguration;
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.requests.doctor.AddDoctorRequest;
 import dental_clinic.core.requests.doctor.GetDoctorListRequest;
@@ -21,7 +21,7 @@ public class AcceptanceTest2DoctorAddAndGet {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(DentalClinicSpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

@@ -6,7 +6,7 @@ public class SearchProductByTitleRequest {
     @Getter
     private final String title;
 
-    public SearchProductByTitleRequest( String title) {
+    public SearchProductByTitleRequest(String title) {
         this.title = title;
     }
 }

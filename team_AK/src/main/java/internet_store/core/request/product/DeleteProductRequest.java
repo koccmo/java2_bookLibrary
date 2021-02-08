@@ -5,15 +5,9 @@ import lombok.Getter;
 
 public class DeleteProductRequest {
     @Getter
-    private final long id;
-    @Getter
     private final Product product;
-    @Getter
-    private final Object productDatabase;
 
-    public DeleteProductRequest(Object productDatabase, Product product, long id) {
-        this.productDatabase = productDatabase;
+    public DeleteProductRequest(Product product) {
         this.product = product;
-        this.id = id;
     }
 }

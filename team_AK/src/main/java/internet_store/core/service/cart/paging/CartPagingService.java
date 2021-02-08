@@ -1,9 +1,8 @@
 package internet_store.core.service.cart.paging;
 
-import internet_store.core.domain.Cart;
-import internet_store.persistence.CartRepository;
+import internet_store.core.domain.ProductInCart;
+import internet_store.core.persistence.CartRepository;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,14 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class CartPagingService {
     private final int PAGE_OFFSET = 1;
     private final int FIRST_PAGE = 1;
     private final int START_FROM_FIRST_RECORD = 0;
     @Autowired
-    CartRepository CartRepository;
+    private CartRepository CartRepository;
     @Getter
-    @Setter
     private int recordsCountOnPage;
     private int startRecordOffset;
     private int endRecordOffset;
@@ -31,7 +30,7 @@ public class CartPagingService {
     @Getter
     private boolean isLastPage;
     @Getter
-    private List<Cart> listOnePage;
+    private List<ProductInCart> listOnePage;
 
     public void startPaging() {
         final int LIMIT_RECORDS_ON_ONE_PAGE = 4;
@@ -57,7 +56,7 @@ public class CartPagingService {
     }
 
     private void nextPage() {
-        if (currentPage + PAGE_OFFSET == pagesQuantity) {
+        if (currentPage + PAGE_OFFSET >= pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
             isLastPage = true;
@@ -73,7 +72,7 @@ public class CartPagingService {
     }
 
     private void prevPage() {
-        if (currentPage - PAGE_OFFSET == FIRST_PAGE) {
+        if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
             endRecordOffset = recordsCountOnPage;
@@ -88,7 +87,6 @@ public class CartPagingService {
         listOnePage = CartRepository.getLimitsCartRecords(recordsCountOnPage, startRecordOffset);
     }
 
-    @Transactional
     private void calculatePagesQuantity() {
         final int NO_EXTRA_PAGE = 0;
 

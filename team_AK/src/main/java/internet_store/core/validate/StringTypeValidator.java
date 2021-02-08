@@ -10,11 +10,11 @@ public class StringTypeValidator {
 
     public List<CoreError> validate(String stringRequest) {
         if (stringRequest == null) {
-            errors.add(new CoreError("Input error", "Empty field"));
+            errors.add(new CoreError("error", "Empty field"));
             return errors;
         }
         if (stringRequest.isEmpty()) {
-            errors.add(new CoreError("Input error", "Empty field"));
+            errors.add(new CoreError("error", "Empty field"));
         }
         return errors;
     }

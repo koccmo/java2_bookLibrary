@@ -1,6 +1,6 @@
 package dental_clinic_tests.acceptance_tests;
 
-import dental_clinic.config.DentalClinicConfiguration;
+import dental_clinic.config.DentalClinicSpringCoreConfiguration;
 import dental_clinic.core.domain.OrderingDirection;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
@@ -14,7 +14,7 @@ import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.services.patient.AddPatientService;
 import dental_clinic.core.services.patient.ChangePersonalDataService;
 import dental_clinic.core.services.patient.GetPatientCardService;
-import dental_clinic.DatabaseCleanerClinic;
+import dental_clinic.core.DatabaseCleanerClinic;
 import dental_clinic.core.services.patient.SearchPatientService;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class AcceptanceTest6 {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(DentalClinicConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(DentalClinicSpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

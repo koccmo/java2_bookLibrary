@@ -1,17 +1,23 @@
 package team_VK.application.core.services.validators;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import team_VK.application.core.domain.Book;
 import team_VK.application.core.domain.BookingPeriod;
 import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.CoreError;
-import team_VK.application.database.Database;
+import team_VK.application.core.services.additional_functions.GetBookingPeriod;
+import team_VK.application.database.BookRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 @Component
 public class BookBookServiceValidator {
 
-    public List<CoreError> validate(BookBookRequest request, Database database) {
+    @Autowired private GetBookingPeriod gBP;
+    public List<CoreError> validate(BookBookRequest request, BookRepository database) {
 
         List<CoreError> errors = new ArrayList<>();
 
@@ -33,13 +39,7 @@ public class BookBookServiceValidator {
                 errors.add(new CoreError("bookTitle", "Field bookAuthor doesn't consist book ID"));
             }
 
-            Calendar bookingFinishDate = getCalendarShiftedFromBookingStartDate(request, bookableBook);
-                Optional<BookingPeriod> bp = bookableBook.get().getBookings().stream()
-                        .filter(period -> period.getBookingFinishDate().after(bookingFinishDate.getTime()) &&
-                                period.getBookingStartDate().before(bookingFinishDate.getTime()) ||
-                                period.getBookingFinishDate().after(request.getBookingStartDate()) &&
-                                        period.getBookingStartDate().before(request.getBookingStartDate()))
-                        .findFirst();
+            Optional<BookingPeriod> bp =  gBP.getBookingPeriod(request, bookableBook);
             if (bp.isPresent()) {
                 errors.add(new CoreError("bookStartDate", "Enquired booking period is already filled"));
             }
@@ -49,12 +49,8 @@ public class BookBookServiceValidator {
         return errors;
     }
 
-    private Calendar getCalendarShiftedFromBookingStartDate(BookBookRequest request, Optional<Book> bookableBook) {
-        Calendar bookingFinishDate = Calendar.getInstance();
-        bookingFinishDate.setTime(request.bookingStartDate);
-        bookingFinishDate.add(Calendar.DAY_OF_YEAR, bookableBook.get().bookingDurationPermitted);
-        return bookingFinishDate;
-    }
+
+
 
 
 }

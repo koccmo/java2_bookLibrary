@@ -6,9 +6,17 @@ import java.math.BigDecimal;
 
 public class AddProductPriceRequest {
     @Getter
-    private final BigDecimal price;
+    private final Object price;
 
     public AddProductPriceRequest(BigDecimal price) {
+        this.price = price;
+    }
+
+    public AddProductPriceRequest(Integer price) {
+        this.price = price;
+    }
+
+    public AddProductPriceRequest(Long price) {
         this.price = price;
     }
 }

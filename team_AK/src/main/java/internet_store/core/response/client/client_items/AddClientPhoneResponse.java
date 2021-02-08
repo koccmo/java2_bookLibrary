@@ -13,8 +13,4 @@ public class AddClientPhoneResponse extends CoreErrorResponse {
     public AddClientPhoneResponse(List<CoreError> errors) {
         super(errors);
     }
-
-    public AddClientPhoneResponse(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

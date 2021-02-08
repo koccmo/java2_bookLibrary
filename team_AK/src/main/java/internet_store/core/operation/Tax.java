@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Component
 public class Tax {
     @Autowired
-    Arithmetic arithmetic;
+    private Arithmetic arithmetic;
     @Getter
     @Setter
     @Value("${tax}")

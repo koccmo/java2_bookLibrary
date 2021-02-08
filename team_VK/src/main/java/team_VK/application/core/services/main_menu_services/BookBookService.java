@@ -8,17 +8,21 @@ import team_VK.application.core.requests.BookBookRequest;
 import team_VK.application.core.responses.BookBookResponse;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.validators.BookBookServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
+import team_VK.application.database.BookingPeriodsRepository;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 @Component
 public class BookBookService {
 
     @Autowired
-    private Database database;
+    private BookRepository database;
+    @Autowired
+    private BookingPeriodsRepository bookingPeriods;
     @Autowired public BookBookServiceValidator validator;
 
     public BookBookResponse bookBook(BookBookRequest request) {
@@ -32,20 +36,22 @@ public class BookBookService {
                     .findFirst();
 
             Date bookingStartDate = request.bookingStartDate;
+
             if (bookableBook.isPresent()) {
-                BookingPeriod bookingPeriod = getBookingPeriod(bookingStartDate, bookableBook.get().getBookingDurationPermitted());
-                bookableBook.get().addBooking(bookingPeriod);
+                BookingPeriod bookingPeriod = getBookingPeriod(1,bookableBook.get(), bookingStartDate, bookableBook.get().getBookingDurationPermitted());
+                bookingPeriods.addBooking(bookingPeriod);
+//               BookingPeriod bookingPeriod = new BookingPeriod(0, bookableBook.get().getID(), bookingStartDate, bookingStartDate+10);
             }
         }
         return new BookBookResponse(errors);
     }
 
-    private BookingPeriod getBookingPeriod(Date bookingStartDate, int bookingDuration) {
+    private BookingPeriod getBookingPeriod(long clientID, Book bookableBook, Date bookingStartDate, int bookingDuration) {
         Calendar bookingFinishCalendar = Calendar.getInstance();
         bookingFinishCalendar.setTime(bookingStartDate);
         bookingFinishCalendar.add(Calendar.DAY_OF_YEAR, bookingDuration);
 
-        return new BookingPeriod(bookingStartDate, bookingFinishCalendar.getTime());
+        return new BookingPeriod(1, bookableBook.getID(), bookingStartDate, bookingFinishCalendar.getTime());
     }
 
 }

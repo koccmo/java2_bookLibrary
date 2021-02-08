@@ -15,6 +15,8 @@ public class AddPatientRequestValidator {
     public List <CoreError> validate (AddPatientRequest addPatientRequest){
         List <CoreError> errors = new ArrayList<>();
 
+        addPatientRequest.setPersonalCode(addPatientRequest.getPersonalCode().replace("-", ""));
+
         PersonalData personalData = addPatientRequest.getPersonalData();
         errors.addAll(isValidPersonalData(personalData));
 
