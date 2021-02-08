@@ -27,7 +27,7 @@ public class AddPatientController {
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
         if (addPatientResponse.hasErrors()) {
             modelMap.addAttribute("errors", addPatientResponse.getErrors());
-            return "addPatient";
+            return "/addPatient";
         } else {
             return "redirect:/";
         }
