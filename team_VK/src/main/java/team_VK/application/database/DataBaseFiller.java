@@ -7,7 +7,7 @@ import team_VK.application.core.domain.Book;
 public class DataBaseFiller {
 
  @Autowired
- private Database database;
+ private BookRepository database;
 
     public void fill() {
 

@@ -3,38 +3,48 @@ package internet_store.core.service.product;
 import internet_store.core.domain.Product;
 import internet_store.core.request.product.DeleteProductRequest;
 import internet_store.core.response.product.DeleteProductResponse;
-import internet_store.database.interfaces.ProductDatabase;
-import internet_store.database.product_database.ProductDatabaseImpl;
+import internet_store.core.persistence.ProductRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DeleteProductServiceTest {
-    private final ProductDatabase productDatabase = new ProductDatabaseImpl();
-    private final DeleteProductService service = new DeleteProductService();
+    @Mock
+    ProductRepository productRepository;
+    @InjectMocks
+    DeleteProductService deleteProductService;
 
     @Test
-    public void shouldReturnNoError() {
+    public void shouldReturnNoError_DeleteProduct() {
         Product product = new Product();
-        product.setId(1L);
-        productDatabase.addProduct(product);
-        DeleteProductResponse response = service.execute(new DeleteProductRequest(productDatabase, product, 1L));
-        assertEquals(1, response.getId());
+        product.setTitle("Product#1");
+
+        Mockito.when(productRepository.existsByTitle("Product#1")).thenReturn(true);
+        Mockito.doNothing().when(productRepository).delete(product);
+        DeleteProductResponse response = deleteProductService
+                .execute(new DeleteProductRequest(product));
+
         assertFalse(response.hasErrors());
     }
 
     @Test
-    public void shouldReturnError_1() {
-        DeleteProductResponse response = service.execute(new DeleteProductRequest(productDatabase, new Product(), -1L));
-        assertEquals("Long input error ", response.getErrors().get(0).getField());
-        assertEquals("only positive number allowed", response.getErrors().get(0).getMessage());
-    }
+    public void shouldReturnError_ProductNoExist() {
+        Product product = new Product();
+        product.setTitle("Product#1");
 
-    @Test
-    public void shouldReturnError_2() {
-        DeleteProductResponse response = service.execute(new DeleteProductRequest(productDatabase, new Product(), 25L));
-        assertEquals("Id error ", response.getErrors().get(0).getField());
-        assertEquals("wrong ID", response.getErrors().get(0).getMessage());
+        Mockito.when(productRepository.existsByTitle("Product#1")).thenReturn(false);
+        DeleteProductResponse response = deleteProductService
+                .execute(new DeleteProductRequest(product));
+
+        assertTrue(response.hasErrors());
+        assertEquals(1, response.getErrors().size());
+        assertEquals("error", response.getErrors().get(0).getField());
+        assertEquals("Product not exist in database", response.getErrors().get(0).getMessage());
     }
 }

@@ -27,6 +27,13 @@ public class ShoppingCartItem {
     @Column(name = "price")
     private int price;
 
+    public ShoppingCartItem(ShoppingCart shoppingCart, Product product, Integer quantity, int price) {
+        this.shoppingCart = shoppingCart;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

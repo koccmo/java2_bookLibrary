@@ -14,7 +14,7 @@ public class NumberValidatorTest {
     public void checkNullObject() {
         NumberValidator<?> validator = new NumberValidator<>(null);
         List<CoreError> result = validator.validate();
-        assertEquals("Input error ", result.get(0).getField());
+        assertEquals("error", result.get(0).getField());
         assertEquals("Empty field", result.get(0).getMessage());
     }
 
@@ -22,7 +22,7 @@ public class NumberValidatorTest {
     public void checkIntegerLessZero() {
         NumberValidator<?> validator = new NumberValidator<>(-5);
         List<CoreError> result = validator.validate();
-        assertEquals("Integer input error ", result.get(0).getField());
+        assertEquals("Integer input error", result.get(0).getField());
         assertEquals("only positive number allowed", result.get(0).getMessage());
     }
 
@@ -30,7 +30,7 @@ public class NumberValidatorTest {
     public void checkLongLessZero() {
         NumberValidator<?> validator = new NumberValidator<>(-105L);
         List<CoreError> result = validator.validate();
-        assertEquals("Long input error ", result.get(0).getField());
+        assertEquals("Long input error", result.get(0).getField());
         assertEquals("only positive number allowed", result.get(0).getMessage());
     }
 
@@ -38,7 +38,7 @@ public class NumberValidatorTest {
     public void checkBigDecimalLessZero() {
         NumberValidator<?> validator = new NumberValidator<>(new BigDecimal("-985"));
         List<CoreError> result = validator.validate();
-        assertEquals("BigDecimal input error ", result.get(0).getField());
+        assertEquals("BigDecimal input error", result.get(0).getField());
         assertEquals("only positive number allowed", result.get(0).getMessage());
     }
 }

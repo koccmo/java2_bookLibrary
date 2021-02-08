@@ -6,7 +6,6 @@ import lombok.Getter;
 import java.util.List;
 
 public class SearchClientResponse {
-
     @Getter
     private final List<Client> client;
 
