@@ -16,9 +16,18 @@ public class ChangePersonalDataValidator {
         String updatedSurnameToCheck = request.getUpdatedSurname();
         String updaterPhoneNumberToCheck = request.getUpdatedPhoneNumber();
 
+        errors.addAll(idValidationErrors(request));
         errors.addAll(isValidUpdatedSurname(updatedSurnameToCheck));
         errors.addAll(isValidUpdatedPhoneNumber(updaterPhoneNumberToCheck));
 
+        return errors;
+    }
+
+    private List<CoreError> idValidationErrors (ChangePersonalDataRequest changePersonalDataRequest) {
+        List<CoreError> errors = new ArrayList<>();
+        if (changePersonalDataRequest.getPatientIdNumber() == null || changePersonalDataRequest.getPatientIdNumber() < 1) {
+            errors.add(new CoreError("id", "Not valid id number"));
+        }
         return errors;
     }
 
