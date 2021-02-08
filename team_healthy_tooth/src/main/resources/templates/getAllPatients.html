@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Dental Clinic demo project">
+    <meta name="author" content="Valeria">
+    <title>Dental clinic Healthy tooth</title>
+</head>
+
+<body>
+
+<h3>Get patient's list</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Phone:</td>
+        <td>PersonalCode:</td>
+    </tr>
+
+    <td th:if="${list != null}">
+        <tr th:each="patient : ${list}">
+            <td th:text="${patient.personalData.name}" />
+            <td th:text="${patient.personalData.surname}" />
+            <td th:text="${patient.personalData.phone}" />
+            <td th:text="${patient.personalData.personalCode}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>
