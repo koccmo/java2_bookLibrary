@@ -34,13 +34,12 @@ public class ProgramMenu {
 
         menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
         menuNumberToActionMap.put(10, findUIAction(uiActionList, DeleteCustomerUIAction.class));
-        menuNumberToActionMap.put(11, findUIAction(uiActionList, SearchProductUIAction.class));
-        menuNumberToActionMap.put(12, findUIAction(uiActionList, GetAllProductsUIAction.class));
-        menuNumberToActionMap.put(13, findUIAction(uiActionList, BuyProductUIAction.class));
+        menuNumberToActionMap.put(11, findUIAction(uiActionList, GetAllProductsUIAction.class));
+        menuNumberToActionMap.put(12, findUIAction(uiActionList, BuyProductUIAction.class));
         // Get my order list
 
-        menuNumberToActionMap.put(14, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
-        menuNumberToActionMap.put(15, findUIAction(uiActionList, SearchCustomerUIAction.class));
+        menuNumberToActionMap.put(13, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
+        menuNumberToActionMap.put(14, findUIAction(uiActionList, SearchCustomerUIAction.class));
 
         menuNumberToActionMap.put(0, new ExitFromApplicationUIAction());
     }
@@ -73,11 +72,10 @@ public class ProgramMenu {
         System.out.println("\nCustomer Menu\n\n" +
                 "9   Sign in\n" +
                 "10  Delete account by id\n" +
-                "11  Search product\n" +
-                "12  See product list\n" +
-                "13  Buy product\n\n"+
-                "14  Search customer by ID\n" +
-                "15  Search customer by other criteria\n" +
+                "11  See product list\n" +
+                "12  Buy product\n\n"+
+                "13  Search customer by ID\n" +
+                "14  Search customer by other criteria\n" +
                 "*****************************\n");
 
         System.out.println("0   Exit\n");
