@@ -61,6 +61,9 @@ CREATE INDEX reader_books_book_return_date_idx ON reader_books (book_return_date
 CREATE INDEX readers_first_name_idx ON readers (first_name);
 CREATE INDEX readers_last_name_idx ON readers (last_name);
 
+-- Lesson12_Task12_SubTask3
+CREATE INDEX readers_first_name_last_name_personal_code_idx ON readers (first_name, last_name, personal_code);
+
 CREATE INDEX reader_books_reader_id_idx ON reader_books (reader_id);
 CREATE INDEX reader_books_book_id_idx ON reader_books (book_id);
 
