@@ -30,7 +30,7 @@ public class GetAllProductsServiceTest {
         products.add(new Product("TV", "SONY", new BigDecimal("1000")));
         Mockito.when(productRepository.getProductList()).thenReturn(products);
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = service.execute(request);
+        GetAllProductsResponse response = service.execute();
         assertFalse(response.hasErrors());
         assertEquals(response.getProductList().size(), 1);
         assertEquals(response.getProductList().get(0).getName(), "TV");

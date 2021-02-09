@@ -19,7 +19,7 @@ public class GetAllProductsUIAction implements UIAction {
     @Override
     public void execute() {
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse productResponse = getAllProductsService.execute(request);
+        GetAllProductsResponse productResponse = getAllProductsService.execute();
         List<Product> productList = productResponse.getProductList();
         if (productList.isEmpty()){
             System.out.println("Database is empty.");

@@ -13,8 +13,8 @@ public class ShowAllProductsController {
 
     @GetMapping(value = "/showAllProducts")
     public String showAllProducts(ModelMap modelMap) {
-//        GetAllProductsResponse response = getAllProductsService.execute();
-//        modelMap.addAttribute("products", response.getProductList());
+        GetAllProductsResponse response = getAllProductsService.execute();
+        modelMap.addAttribute("products", response.getProductList());
         return "/showAllProducts";
     }
 
