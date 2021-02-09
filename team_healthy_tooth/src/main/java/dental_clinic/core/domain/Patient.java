@@ -5,7 +5,7 @@ import java.util.*;
 public class Patient {
 
     private PersonalData personalData;
-    private JowlEntity jowlEntity;
+    public JowlEntity jowlEntity;
     private List <Visit> visits = new ArrayList<>();
 
     public Patient(PersonalData personalData){
