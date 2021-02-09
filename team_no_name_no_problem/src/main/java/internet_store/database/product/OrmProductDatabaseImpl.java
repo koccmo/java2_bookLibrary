@@ -57,7 +57,12 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE price >= :startPrice and price <= :endPrice ");
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
