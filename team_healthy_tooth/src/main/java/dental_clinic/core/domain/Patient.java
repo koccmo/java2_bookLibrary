@@ -6,7 +6,7 @@ public class Patient {
 
     private PersonalData personalData;
     public JowlEntity jowlEntity;
-    private List <Visit> visits = new ArrayList<>();
+    public List <Visit> visits = new ArrayList<>();
 
     public Patient(PersonalData personalData){
         this.personalData = personalData;
