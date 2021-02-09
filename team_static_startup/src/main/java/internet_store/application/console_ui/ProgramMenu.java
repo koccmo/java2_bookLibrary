@@ -23,13 +23,13 @@ public class ProgramMenu {
     public ProgramMenu(List<UIAction> uiActions) {
         menuNumberToUIActionMap = new HashMap<>();
         // menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddProductUIAction.class));
-        menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteByProductIdUIAction.class));
+        // menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteByProductIdUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, DeleteByProductNameUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, FindByProductIdUIAction.class));
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindProductsUIAction.class));
         menuNumberToUIActionMap.put(7, findUIAction(uiActions, ChangeProductNameUIAction.class));
-        menuNumberToUIActionMap.put(8, findUIAction(uiActions, GetAllProductsUIAction.class));
+        // menuNumberToUIActionMap.put(8, findUIAction(uiActions, GetAllProductsUIAction.class));
         menuNumberToUIActionMap.put(10, findUIAction(uiActions, AddCustomerUIAction.class));
         menuNumberToUIActionMap.put(11, findUIAction(uiActions, DeleteByCustomerIdUIAction.class));
         menuNumberToUIActionMap.put(12, findUIAction(uiActions, FindByCustomerIdUIAction.class));
@@ -70,13 +70,13 @@ public class ProgramMenu {
 
     public void printMenu() {
         // System.out.println("1. Add product to database");
-        System.out.println("\n2. Delete product from database by ID");
-        System.out.println("3. Delete product from database by name and description");
+        // System.out.println("\n2. Delete product from database by ID");
+        System.out.println("\n3. Delete product from database by name and description");
         System.out.println("4. Delete product from database by name");
         System.out.println("5. Find product(s) from database by ID");
         System.out.println("6. Find product(s) from database by name and(or) description");
         System.out.println("7. Find product from database by ID and change name");
-        System.out.println("8. Print out all database products");
+        // System.out.println("8. Print out all database products");
         System.out.println("------------------------------------------------------------");
         System.out.println("10. Add customer to database");
         System.out.println("11. Delete customer from database by ID");
