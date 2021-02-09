@@ -17,7 +17,7 @@ public class UpdatePatientJowlInfoRequestValidator {
 
         coreErrors.addAll(idValidationErrors(updatePatientsJowlInfoRequest.getId()));
 
-        coreErrors.addAll(jowlInfoValidationErrors(updatePatientsJowlInfoRequest.getJowlInfo()));
+        coreErrors.addAll(jowlInfoValidationErrors(updatePatientsJowlInfoRequest));
 
         return coreErrors;
     }
@@ -30,15 +30,13 @@ public class UpdatePatientJowlInfoRequestValidator {
         return coreErrors;
     }
 
-    private List<CoreError> jowlInfoValidationErrors (Map<Integer, ToothStatus> jowlInfo) {
+    private List<CoreError> jowlInfoValidationErrors (UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest) {
         List <CoreError> coreErrors = new ArrayList<>();
-        for (Integer key : jowlInfo.keySet()) {
-            if (!isValidToothNumber(key)) {
-                coreErrors.add(new CoreError("tooth number", "Not valid tooth number " + key));
-            }
-            if (!isValidToothStatus(jowlInfo.get(key))) {
-                coreErrors.add(new CoreError("tooth status", "Not valid tooth status for tooth number " + key));
-            }
+        if (!isValidToothNumber(updatePatientsJowlInfoRequest.getToothNumber())) {
+            coreErrors.add(new CoreError("tooth number", "Not valid tooth number " + updatePatientsJowlInfoRequest.getToothNumber()));
+        }
+        if (!isValidToothStatus(updatePatientsJowlInfoRequest.getToothStatus())) {
+            coreErrors.add(new CoreError("tooth status", "Not valid tooth status for tooth number " + updatePatientsJowlInfoRequest.getToothStatus()));
         }
         return coreErrors;
     }
