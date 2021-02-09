@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SearchPatientResponse extends CoreResponse {
 
-    List<PersonalData> patients;
+    private List<PersonalData> patients;
 
     public SearchPatientResponse(List<PersonalData> patients) {
         this.patients = patients;
