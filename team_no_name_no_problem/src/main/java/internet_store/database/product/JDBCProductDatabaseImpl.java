@@ -123,7 +123,10 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
-        return null;
+        String sql = "SELECT FROM products WHERE title = ? " +
+                "and WHERE description = ? and WHERE price >= :startPrice and price <= :endPrice";
+        Object[] args = new Object[]{title, startPrice, endPrice};
+        return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
