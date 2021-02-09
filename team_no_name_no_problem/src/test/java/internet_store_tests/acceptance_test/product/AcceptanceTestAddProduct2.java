@@ -1,7 +1,7 @@
 package internet_store_tests.acceptance_test.product;
 
-import internet_store.DatabaseCleaner;
-import internet_store.config.MainMenuConfiguration;
+import internet_store.core.DatabaseCleaner;
+import internet_store.config.SpringCoreConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.FindByIdRequest;
@@ -25,7 +25,7 @@ public class AcceptanceTestAddProduct2 {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
     @Test
