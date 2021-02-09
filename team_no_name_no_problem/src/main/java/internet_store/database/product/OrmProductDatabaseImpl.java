@@ -74,7 +74,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("DELETE Product WHERE description = :description " +
-                        "  WHERE price >= :startPrice and price <= :endPrice ");
+                        "  AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("description", description);
         query.setParameter("startPrice", startPrice);
         query.setParameter("endPrice", endPrice);
@@ -86,7 +86,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     public boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("DELETE Product WHERE title = :title " +
-                        "  WHERE price >= :startPrice and price <= :endPrice ");
+                        "  AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("title", title);
         query.setParameter("startPrice", startPrice);
         query.setParameter("endPrice", endPrice);
@@ -96,7 +96,15 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE title = :title " +
+                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
