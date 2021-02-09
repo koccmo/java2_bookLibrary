@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@Component
+//@Component
 @Transactional
 public class OrmOrderRepository implements OrderDatabase{
 
