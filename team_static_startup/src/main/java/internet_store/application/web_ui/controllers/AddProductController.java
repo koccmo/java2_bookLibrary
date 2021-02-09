@@ -26,7 +26,12 @@ public class AddProductController {
     @PostMapping("/addProduct")
     public String processAddProductRequest(@ModelAttribute(value = "request") AddProductRequest request, ModelMap modelMap) {
         AddProductResponse response = addProductService.execute(request);
-        return "redirect:/";
+        if (response.hasErrors()) {
+            modelMap.addAttribute("errors", response.getErrors());
+            return "addProduct";
+        } else {
+            return "redirect:/";
+        }
 
 
 /*        @PostMapping("/addCustomer")
