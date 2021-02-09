@@ -165,7 +165,14 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
-        return null;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("SELECT Product WHERE title = :title " +
+                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        return query.getResultList();
     }
 
     @Override
@@ -180,7 +187,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("DELETE Product WHERE description = :description " +
+                .createQuery("SELECT Product WHERE description = :description " +
                         "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("title", title);
         query.setParameter("startPrice", startPrice);
@@ -191,7 +198,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("DELETE Product WHERE description = :description " +
+                .createQuery("SELECT Product WHERE description = :description " +
                         "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("description", description);
         query.setParameter("startPrice", startPrice);
