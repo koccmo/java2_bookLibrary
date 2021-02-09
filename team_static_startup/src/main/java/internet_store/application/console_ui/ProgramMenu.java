@@ -22,7 +22,7 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu(List<UIAction> uiActions) {
         menuNumberToUIActionMap = new HashMap<>();
-        menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddProductUIAction.class));
+        // menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddProductUIAction.class));
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteByProductIdUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, DeleteByProductNameUIAction.class));
@@ -69,8 +69,8 @@ public class ProgramMenu {
     }
 
     public void printMenu() {
-        System.out.println("\n1. Add product to database");
-        System.out.println("2. Delete product from database by ID");
+        // System.out.println("1. Add product to database");
+        System.out.println("\n2. Delete product from database by ID");
         System.out.println("3. Delete product from database by name and description");
         System.out.println("4. Delete product from database by name");
         System.out.println("5. Find product(s) from database by ID");
