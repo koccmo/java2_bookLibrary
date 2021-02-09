@@ -13,7 +13,7 @@ public class Manipulation {
     private Long id;
 
     @Column(name="manipulation_type", nullable = false)
-    private String manipulation_type;
+    private String manipulationType;
 
     @Column(name="price", nullable = false)
     private Integer price;
@@ -23,8 +23,8 @@ public class Manipulation {
 
     public Manipulation() { }
 
-    public Manipulation(String manipulation_type, Integer price) {
-        this.manipulation_type = manipulation_type;
+    public Manipulation(String manipulationType, Integer price) {
+        this.manipulationType = manipulationType;
         this.price = price;
     }
 
@@ -36,12 +36,12 @@ public class Manipulation {
         this.id = id;
     }
 
-    public String getManipulation_type() {
-        return manipulation_type;
+    public String getManipulationType() {
+        return manipulationType;
     }
 
-    public void setManipulation_type(String manipulation_type) {
-        this.manipulation_type = manipulation_type;
+    public void setManipulationType(String manipulationType) {
+        this.manipulationType = manipulationType;
     }
 
     public Integer getPrice() {
@@ -65,19 +65,19 @@ public class Manipulation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manipulation that = (Manipulation) o;
-        return isActive == that.isActive && Objects.equals(manipulation_type, that.manipulation_type) && Objects.equals(price, that.price);
+        return isActive == that.isActive && Objects.equals(manipulationType, that.manipulationType) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manipulation_type, price, isActive);
+        return Objects.hash(manipulationType, price, isActive);
     }
 
     @Override
     public String toString() {
         return "Manipulation:\n" +
                 "id: " + id +
-                ", manipulation_type: " + manipulation_type +
+                ", manipulation_type: " + manipulationType +
                 ", price: " + price +
                 ", isActive: " + isActive;
     }
