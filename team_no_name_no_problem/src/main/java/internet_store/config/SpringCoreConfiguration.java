@@ -20,11 +20,11 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "internet_store")
+@ComponentScan(basePackages = "internet_store.core")
 @PropertySource(value = "classpath:application.properties")
 @PropertySource(value = "classpath:database.properties")
 @EnableTransactionManagement
-public class MainMenuConfiguration {
+public class SpringCoreConfiguration {
 
     @Value("${jdbc.url}") private String jdbcUrl;
     @Value("${driverClass}") private String driverClass;
