@@ -166,7 +166,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("SELECT Product WHERE title = :title " +
+                .createQuery("SELECT p FROM Product p WHERE title = :title " +
                         "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("title", title);
         query.setParameter("description", description);
@@ -187,7 +187,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("SELECT p FROM Product WHERE description = :description " +
+                .createQuery("SELECT p FROM Product p WHERE description = :description " +
                         "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("title", title);
         query.setParameter("startPrice", startPrice);
@@ -198,7 +198,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("SELECT p FROM Product WHERE description = :description " +
+                .createQuery("SELECT p FROM Product p WHERE description = :description " +
                         "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("description", description);
         query.setParameter("startPrice", startPrice);
