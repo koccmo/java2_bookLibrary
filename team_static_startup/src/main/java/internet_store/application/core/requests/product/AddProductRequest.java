@@ -28,4 +28,16 @@ public class AddProductRequest {
     public BigDecimal getProductPrice() {
         return productPrice;
     }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
+    }
 }
