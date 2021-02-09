@@ -25,9 +25,10 @@ public class ReaderRepository {
 
     public boolean hasTheSameReaderInDatabase (Reader reader){
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT b FROM Reader b WHERE first_name = :first_name AND last_name = :last_name");
+                "SELECT b FROM Reader b WHERE first_name = :first_name AND last_name = :last_name AND personal_code = :personal_code");
         query.setParameter("first_name", reader.getFirstName());
         query.setParameter("last_name", reader.getLastName());
+        query.setParameter("personal_code", reader.getPersonalCode());
         return !query.getResultList().isEmpty();
     }
 }

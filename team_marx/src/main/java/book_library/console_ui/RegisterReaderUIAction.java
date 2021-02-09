@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class RegisterReaderUIAction implements UIAction{
+public class RegisterReaderUIAction implements UIAction {
 
     @Autowired
     private RegisterReaderService registerReaderService;
@@ -21,10 +21,18 @@ public class RegisterReaderUIAction implements UIAction{
         String readerFirstName = scanner.nextLine();
         System.out.println("Enter reader last name: ");
         String readerLastName = scanner.nextLine();
-        RegisterReaderRequest request = new RegisterReaderRequest(readerFirstName, readerLastName);
+        System.out.println("Enter reader personal code: ");
+        String personalCodeString = scanner.nextLine();
+        Long personalCode = null;
+        if (personalCodeString.isEmpty()) {
+            personalCode = null;
+        } else {
+            personalCode = Long.parseLong(personalCodeString);
+        }
+        RegisterReaderRequest request = new RegisterReaderRequest(readerFirstName, readerLastName, personalCode);
         RegisterReaderResponse response = registerReaderService.execute(request);
 
-        if (response.hasErrors()){
+        if (response.hasErrors()) {
             response.getErrors().forEach(System.out::println);
         } else {
             System.out.println("Reader was added to the list.");

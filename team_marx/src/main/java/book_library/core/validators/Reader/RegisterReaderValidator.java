@@ -21,7 +21,9 @@ public class RegisterReaderValidator {
         List<CoreError> errors = new ArrayList<>();
         validateFirstName(request).ifPresent(errors::add);
         validateLastName(request).ifPresent(errors::add);
+        validatePersonalCode(request).ifPresent(errors::add);
         if(errors.isEmpty()){
+            validatePersonalCodeLength(request).ifPresent(errors::add);
             validatePresenceInDatabase(request).ifPresent(errors::add);
         }
         return errors;
@@ -39,10 +41,22 @@ public class RegisterReaderValidator {
                 : Optional.empty();
     }
 
+    private Optional<CoreError> validatePersonalCode (RegisterReaderRequest request) {
+        return (request.getPersonalCode() == null)
+                ? Optional.of(new CoreError("personalCode", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validatePersonalCodeLength (RegisterReaderRequest request) {
+        return (request.getPersonalCode().toString().length() != 11)
+                ? Optional.of(new CoreError("personalCode", "Must contain 11 digits!"))
+                : Optional.empty();
+    }
+
     private Optional<CoreError> validatePresenceInDatabase (RegisterReaderRequest request) {
-        Reader reader= new Reader(request.getReaderFirstName(), request.getReaderLastName());
+        Reader reader= new Reader(request.getReaderFirstName(), request.getReaderLastName(), request.getPersonalCode());
         return  readerRepository.hasTheSameReaderInDatabase(reader)
-                ? Optional.of(new CoreError("First name and last name", "This reader already is registered"))
+                ? Optional.of(new CoreError("First name, last name and personal code", "This reader already is registered"))
                 : Optional.empty();
     }
 }

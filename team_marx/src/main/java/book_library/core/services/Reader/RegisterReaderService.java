@@ -28,7 +28,7 @@ public class RegisterReaderService {
             return new RegisterReaderResponse(errors);
         }
 
-        Reader reader = new Reader(request.getReaderFirstName(), request.getReaderLastName());
+        Reader reader = new Reader(request.getReaderFirstName(), request.getReaderLastName(), request.getPersonalCode());
         readerRepository.save(reader);
         return new RegisterReaderResponse(reader);
     }

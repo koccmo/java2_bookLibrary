@@ -18,18 +18,23 @@ public class Reader {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "personal_code")
+    private Long personalCode;
+
     public Reader() {
     }
 
-    public Reader(String firstName, String lastName) {
+    public Reader(String firstName, String lastName, Long personalCode) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.personalCode = personalCode;
     }
 
-    public Reader(Long id, String firstName, String lastName) {
+    public Reader(Long id, String firstName, String lastName, Long personalCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.personalCode = personalCode;
     }
 
     public Long getId() {
@@ -56,9 +61,17 @@ public class Reader {
         this.lastName = lastName;
     }
 
+    public Long getPersonalCode() {
+        return personalCode;
+    }
+
+    public void setPersonalCode(Long personalCode) {
+        this.personalCode = personalCode;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(firstName, lastName, personalCode);
     }
 
     @Override
@@ -67,7 +80,8 @@ public class Reader {
         if (o == null || getClass() != o.getClass()) return false;
         Reader reader = (Reader) o;
         return firstName.equals(reader.firstName) &&
-                lastName.equals(reader.lastName);
+                lastName.equals(reader.lastName) &&
+                personalCode.equals(reader.personalCode);
     }
 
     @Override
@@ -76,6 +90,7 @@ public class Reader {
                 "id=" + id +
                 ", first name='" + firstName + '\'' +
                 ", last name='" + lastName + '\'' +
+                ", personal code='" + personalCode + '\'' +
                 '}';
     }
 }

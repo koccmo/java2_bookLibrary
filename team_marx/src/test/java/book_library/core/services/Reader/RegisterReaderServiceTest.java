@@ -36,7 +36,7 @@ public class RegisterReaderServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        RegisterReaderRequest request = new RegisterReaderRequest(null, "LastName");
+        RegisterReaderRequest request = new RegisterReaderRequest(null, "LastName", 11111111111L);
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("firstName", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -53,7 +53,7 @@ public class RegisterReaderServiceTest {
     @Test
     public void shouldRegisterReaderInDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        RegisterReaderRequest request = new RegisterReaderRequest("FirstName", "LastName");
+        RegisterReaderRequest request = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
         RegisterReaderResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(readerRepository).save(
