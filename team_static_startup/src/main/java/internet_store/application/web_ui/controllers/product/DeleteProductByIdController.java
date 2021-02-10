@@ -1,6 +1,5 @@
 package internet_store.application.web_ui.controllers.product;
 
-import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;
 import internet_store.application.core.responses.product.DeleteByProductIdResponse;
 import internet_store.application.core.services.product.DeleteByProductIdService;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class DeleteProductController {
+public class DeleteProductByIdController {
 
     @Autowired
     private DeleteByProductIdService deleteByProductIdService;
