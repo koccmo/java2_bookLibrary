@@ -30,7 +30,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindProductsUIAction.class));
         menuNumberToUIActionMap.put(7, findUIAction(uiActions, ChangeProductNameUIAction.class));
         // menuNumberToUIActionMap.put(8, findUIAction(uiActions, GetAllProductsUIAction.class));
-        menuNumberToUIActionMap.put(10, findUIAction(uiActions, AddCustomerUIAction.class));
+        // menuNumberToUIActionMap.put(10, findUIAction(uiActions, AddCustomerUIAction.class));
         menuNumberToUIActionMap.put(11, findUIAction(uiActions, DeleteByCustomerIdUIAction.class));
         menuNumberToUIActionMap.put(12, findUIAction(uiActions, FindByCustomerIdUIAction.class));
         menuNumberToUIActionMap.put(13, findUIAction(uiActions, ChangeCustomerFirstNameUIAction.class));
@@ -78,7 +78,7 @@ public class ProgramMenu {
         System.out.println("7. Find product from database by ID and change name");
         // System.out.println("8. Print out all database products");
         System.out.println("------------------------------------------------------------");
-        System.out.println("10. Add customer to database");
+        // System.out.println("10. Add customer to database");
         System.out.println("11. Delete customer from database by ID");
         System.out.println("12. Find customer from database by ID");
         System.out.println("13. Find customer from database by ID and change FirstName");
