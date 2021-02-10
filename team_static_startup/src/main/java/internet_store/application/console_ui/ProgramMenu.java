@@ -45,7 +45,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
         menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
         menuNumberToUIActionMap.put(24, findUIAction(uiActions, FindAllOrdersUIAction.class));
-        menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramService.class));
+        // menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramService.class));
     }
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
@@ -97,8 +97,8 @@ public class ProgramMenu {
         System.out.println("23. Find order by ID");
         System.out.println("24. Find all orders");
         System.out.println("------------------------------------------------------------");
-        System.out.println("0. Exit the program");
-        System.out.println("------------------------------------------------------------");
+        // System.out.println("0. Exit the program");
+        // System.out.println("------------------------------------------------------------");
         System.out.print("Please enter menu number: ");
     }
 
