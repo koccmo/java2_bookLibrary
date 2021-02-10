@@ -22,6 +22,14 @@ public class BookingPeriod {
     @Column(name="bookingFinishDate", nullable = true)
     Date bookingFinishDate;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
+
     public BookingPeriod() {}
 
     public BookingPeriod(long clientID, long bookID, Date bookingStartDate, Date bookingFinishDate) {
