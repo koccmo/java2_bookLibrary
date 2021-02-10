@@ -29,7 +29,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap = new HashMap<>();
         // menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddProductUIAction.class));
         // menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteByProductIdUIAction.class));
-        menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
+        // menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, DeleteByProductNameUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, FindByProductIdUIAction.class));
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindProductsUIAction.class));
