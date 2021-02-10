@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+@ComponentScan(basePackages = {"internet_store"})
 public class WebInternetStoreApplication {
 
     public static void main(String[] args) {
