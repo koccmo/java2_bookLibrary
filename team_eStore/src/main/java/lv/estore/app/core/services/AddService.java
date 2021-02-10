@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.AddRequest;
 import lv.estore.app.core.responses.AddResponse;
 import lv.estore.app.core.validators.AddValidator;
@@ -15,9 +15,14 @@ import java.util.List;
 @Component
 public class AddService {
 
-    @Autowired AddValidator validator;
-    @Autowired ProductDatabase database;
-    @Autowired CommonUtils commonUtils;
+    @Autowired
+    AddValidator validator;
+
+    @Autowired
+    ProductRepository database;
+
+    @Autowired
+    CommonUtils commonUtils;
 
     /** Method to add product.
     * @param request CoreRequest

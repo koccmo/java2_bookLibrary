@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@Component
+//@Component
 @Transactional
 public class OrmOrderRepository implements OrderDatabase{
 
@@ -33,9 +33,15 @@ public class OrmOrderRepository implements OrderDatabase{
 
     @Override
     public void addOrder(Order order) {
-        List<Order> orderFromClients = new ArrayList<>();
-        orderFromClients.add(order);
-    };
+        ShoppingCart shoppingCart = new ShoppingCart(order.getCustomer(), order.getSum());
+        sessionFactory.getCurrentSession().save(shoppingCart);
+        Map<Product, Integer> shoppingCartItemMap = order.getShoppingCart();
+        for (Product product : shoppingCartItemMap.keySet()) {
+            ShoppingCartItem shoppingCartItem = new ShoppingCartItem(shoppingCart, product,
+                    shoppingCartItemMap.get(product), product.getPrice());
+            sessionFactory.getCurrentSession().save(shoppingCartItem);
+        }
+    }
 
     private Map<Product, Integer> saveShoppingCartToMap(List<ShoppingCartItem> items){
         Map< Product, Integer> result = new HashMap<>();

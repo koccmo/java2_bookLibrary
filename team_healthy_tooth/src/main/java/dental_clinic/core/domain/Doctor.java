@@ -22,7 +22,7 @@ public class Doctor {
     private String phone;
 
     @Column(name = "isEmployed")
-    private boolean isEmployed;
+    private boolean isEmployed = true;
 
     public Doctor() { }
 

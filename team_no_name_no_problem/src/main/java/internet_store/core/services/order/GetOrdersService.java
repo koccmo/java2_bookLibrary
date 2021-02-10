@@ -1,8 +1,8 @@
 package internet_store.core.services.order;
-/*
+
 import internet_store.core.requests.order.GetOrdersRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.response.order.GetOrdersResponse;
+//import internet_store.core.response.order.GetOrdersResponse;
 import internet_store.core.services.order.validators.GetOrdersRequestValidator;
 import internet_store.database.order.OrderDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class GetOrdersService {
-
+/*
     @Autowired
     private OrderDatabase orderDatabase;
     @Autowired
@@ -32,5 +32,5 @@ public class GetOrdersService {
         }
         return new GetOrdersResponse(orderDatabase.getOrders());
     }
+    */
 }
-*/

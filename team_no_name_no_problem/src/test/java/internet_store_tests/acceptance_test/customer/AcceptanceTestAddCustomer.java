@@ -1,7 +1,7 @@
 package internet_store_tests.acceptance_test.customer;
 
-import internet_store.DatabaseCleaner;
-import internet_store.config.MainMenuConfiguration;
+import internet_store.core.DatabaseCleaner;
+import internet_store.config.SpringCoreConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.GetAllCustomersRequest;
@@ -21,7 +21,7 @@ public class AcceptanceTestAddCustomer {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

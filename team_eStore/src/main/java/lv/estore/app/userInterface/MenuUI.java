@@ -46,7 +46,7 @@ public class MenuUI {
         System.out.println("5 - remove product by 'Id'");
         System.out.println("6 - remove product by 'Name'");
         System.out.println("7 - update product by 'Id'");
-        System.out.println("8 - search products by 'Name' and 'Price'");
+        System.out.println("8 - exit");
         System.out.println();
     }
 

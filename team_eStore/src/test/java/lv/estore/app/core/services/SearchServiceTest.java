@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.SearchRequest;
 import lv.estore.app.core.responses.SearchResponse;
 import lv.estore.app.core.validators.SearchValidator;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -32,7 +33,7 @@ public class SearchServiceTest {
     @Mock
     SearchValidator validator;
     @Mock
-    ProductDatabase database;
+    InMemoryProductRepositoryImpl database;
     @Mock
     CommonUtils utils;
 
@@ -51,7 +52,7 @@ public class SearchServiceTest {
         SearchRequest request = new SearchRequest("name", "1.0");
         SearchResponse response = service.execute(request);
 
-        assertTrue(response.getProducts().size() == 2);
+        assertEquals(2, response.getProducts().size());
         assertFalse(response.hasErrors());
 
         Mockito.verify(database, atLeastOnce()).findManyByNameAndPrice("name", price);
@@ -63,16 +64,16 @@ public class SearchServiceTest {
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Mockito.when(utils.createBigDecimal(any())).thenReturn(price);
-        Mockito.when(database.findManyByPrice(any()))
+        Mockito.when(database.findByPrice(any()))
                 .thenReturn(Arrays.asList(new Product("name1","description1",price),
                         new Product("name2", "description2", price)));
         SearchRequest request = new SearchRequest(null, "1.0");
         SearchResponse response = service.execute(request);
 
-        assertTrue(response.getProducts().size() == 2);
+        assertEquals(2, response.getProducts().size());
         assertFalse(response.hasErrors());
 
-        Mockito.verify(database, atLeastOnce()).findManyByPrice(price);
+        Mockito.verify(database, atLeastOnce()).findByPrice(price);
     }
 
     @Test
@@ -80,16 +81,16 @@ public class SearchServiceTest {
         BigDecimal price = new BigDecimal("1.0").abs().setScale(2, RoundingMode.FLOOR);
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.findManyByName(any()))
+        Mockito.when(database.findByName(any()))
                 .thenReturn(Arrays.asList(new Product("name1","description1",price),
                         new Product("name2", "description2", price)));
         SearchRequest request = new SearchRequest("name", null);
         SearchResponse response = service.execute(request);
 
-        assertTrue(response.getProducts().size() == 2);
+        assertEquals(2, response.getProducts().size());
         assertFalse(response.hasErrors());
 
-        Mockito.verify(database, atLeastOnce()).findManyByName("name");
+        Mockito.verify(database, atLeastOnce()).findByName("name");
     }
 
     @Test

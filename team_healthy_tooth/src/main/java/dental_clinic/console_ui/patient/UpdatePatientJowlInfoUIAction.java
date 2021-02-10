@@ -12,9 +12,9 @@ import dental_clinic.core.services.patient.UpdatePatientJowlInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+
 import java.util.Map;
-import java.util.Scanner;
+
 
 @Component
 public class UpdatePatientJowlInfoUIAction implements UIAction {
@@ -44,9 +44,14 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
     private void inputJowlData(Long id) {
         Map<Integer, ToothStatus> toothInfo;
 
-        toothInfo = fillJowlInfo();
+        Integer toothNumber = inputFormatsValidator.inputInteger("Please enter tooth number");
 
-        UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest = new UpdatePatientsJowlInfoRequest(id, toothInfo);
+        printToothStatuses();
+
+        Integer variant = inputFormatsValidator.inputInteger("Please enter tooth status");
+        ToothStatus toothStatus = inputToothStatus(variant);
+
+        UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest = new UpdatePatientsJowlInfoRequest(id, toothNumber, toothStatus);
         UpdatePatientJowlInfoResponse updatePatientJowlInfoResponse = updatePatientJowlInfoService.execute(updatePatientsJowlInfoRequest);
 
         if (updatePatientJowlInfoResponse.hasErrors()) {
@@ -55,26 +60,6 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
             System.out.println("Patient's with id " + updatePatientJowlInfoResponse.getId() +
                     " jowl info is updated");
         }
-    }
-
-    private Map<Integer, ToothStatus> fillJowlInfo() {
-        Map<Integer, ToothStatus> toothInfo = new HashMap<>();
-        while (true) {
-            Scanner in = new Scanner(System.in);
-            Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
-
-            printToothStatuses();
-            Integer variant = inputFormatsValidator.inputInteger("Please enter tooth status");
-            ToothStatus toothStatus = inputToothStatus(variant);
-            toothInfo.put(toothNumber, toothStatus);
-
-            System.out.println("Enter End to exit or Enter to continue");
-            String ifStop = in.nextLine();
-            if (ifStop.equalsIgnoreCase("end")) {
-                break;
-            }
-        }
-        return toothInfo;
     }
 
     private void printToothStatuses(){

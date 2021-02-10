@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.Ordering;
 import lv.estore.app.core.request.Paging;
 import lv.estore.app.core.request.SearchRequest;
@@ -27,9 +27,14 @@ public class SearchService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired SearchValidator validator;
-    @Autowired ProductDatabase database;
-    @Autowired CommonUtils commonUtils;
+    @Autowired
+    SearchValidator validator;
+
+    @Autowired
+    ProductRepository database;
+
+    @Autowired
+    CommonUtils commonUtils;
 
     /**
      * Method to search products.
@@ -50,10 +55,10 @@ public class SearchService {
     private List<Product> search(final SearchRequest request) {
         List<Product> products = new ArrayList<>();
         if (request.isNameProvided() && !request.isPriceProvided()) {
-            products = database.findManyByName(request.getName());
+            products = database.findByName(request.getName());
         }
         if (!request.isNameProvided() && request.isPriceProvided()) {
-            products = database.findManyByPrice(commonUtils.createBigDecimal(request.getPrice()));
+            products = database.findByPrice(commonUtils.createBigDecimal(request.getPrice()));
         }
         if (request.isNameProvided() && request.isPriceProvided()) {
             products = database.findManyByNameAndPrice(request.getName(), commonUtils.createBigDecimal(request.getPrice()));

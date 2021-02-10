@@ -39,9 +39,9 @@ public class UpdatePatientJowlInfoService {
     private void updatePatientsJowl (UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest) {
         for (Patient patient : patientRepository.getPatients()) {
             if (patient.getPersonalData().getId().equals(updatePatientsJowlInfoRequest.getId())) {
-                for (Integer key : updatePatientsJowlInfoRequest.getJowlInfo().keySet()) {
-                    patientRepository.updateJowl(patient.getPersonalData().getId(), key, updatePatientsJowlInfoRequest.getJowlInfo().get(key));
-                }
+                patientRepository.updateJowl(patient.getPersonalData().getId(),
+                        updatePatientsJowlInfoRequest.getToothNumber(),
+                        updatePatientsJowlInfoRequest.getToothStatus());
                 break;
             }
         }

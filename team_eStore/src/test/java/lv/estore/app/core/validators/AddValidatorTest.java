@@ -96,8 +96,7 @@ public class AddValidatorTest {
         AddRequest request = new AddRequest("pen", "", "1.10");
         List<CoreError> errors = addValidator.validate(request);
         assertTrue(errors.size() == 1);
-        assertTrue(errors.stream().anyMatch(s -> s.getField().equals("Description")));
-        assertTrue(errors.stream().anyMatch(s -> s.getMessage().equals("Field should not be empty")));
+        assertTrue(errors.stream().anyMatch(s -> s.getField().equals("Description") && s.getMessage().equals("Field should not be empty")));
     }
 
     @Test

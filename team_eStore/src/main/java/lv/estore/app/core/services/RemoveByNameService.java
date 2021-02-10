@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.NameRequest;
 import lv.estore.app.core.responses.RemoveResponse;
 import lv.estore.app.core.validators.NameValidator;
@@ -13,7 +13,9 @@ import java.util.List;
 @Component
 public class RemoveByNameService {
 
-    @Autowired ProductDatabase database;
+    @Autowired
+    ProductRepository database;
+
     @Autowired
     NameValidator validator;
 

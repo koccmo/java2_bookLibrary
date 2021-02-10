@@ -98,4 +98,16 @@ public class ReaderRepositoryImpl implements ReaderRepository{
     public List<Reader> getReaders() {
         return readerList;
     }
+
+    @Override
+    public boolean containsReader(Reader reader) {
+            for (Reader readers : readerList) {
+                if ((readers.getReaderFirstName().equals(reader.getReaderFirstName())) &&
+                        (readers.getReaderLastName().equals(reader.getReaderLastName())) &&
+                        (readers.getReaderPersonalCode().equals(reader.getReaderPersonalCode()))) {
+                    return true;
+                }
+            }
+            return false;
+    }
 }

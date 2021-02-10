@@ -30,4 +30,6 @@ public interface ReaderRepository {
 
     List<Reader> getReaders();
 
+    boolean containsReader (Reader reader);
+
 }

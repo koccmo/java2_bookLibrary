@@ -9,9 +9,25 @@ public class Order {
 
     private Long id;
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     private Customer customer;
 
     private Map<Product, Integer> shoppingCart;
+
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
 
     private Integer sum;
 
