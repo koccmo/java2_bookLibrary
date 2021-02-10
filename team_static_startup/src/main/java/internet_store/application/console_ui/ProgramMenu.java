@@ -1,16 +1,21 @@
 package internet_store.application.console_ui;
 
-import internet_store.application.console_ui.customer.*;
+import internet_store.application.console_ui.customer.ChangeCustomerFirstNameUIAction;
+import internet_store.application.console_ui.customer.FindByCustomerFirstNameUIAction;
+import internet_store.application.console_ui.customer.FindByCustomerIdUIAction;
+import internet_store.application.console_ui.customer.GetAllCustomersUIAction;
 import internet_store.application.console_ui.order.AddOrderUIAction;
 import internet_store.application.console_ui.order.FindAllOrdersUIAction;
 import internet_store.application.console_ui.order.FindOrderByIdUIAction;
-import internet_store.application.console_ui.product.*;
+import internet_store.application.console_ui.product.ChangeProductNameUIAction;
+import internet_store.application.console_ui.product.DeleteByProductNameUIAction;
+import internet_store.application.console_ui.product.FindByProductIdUIAction;
+import internet_store.application.console_ui.product.FindProductsUIAction;
 import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIAction;
 import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
 import internet_store.application.console_ui.shopping_cart.FindShoppingCartByIdUIAction;
 import internet_store.application.console_ui.shopping_cart_item.AddShoppingCartItemUIService;
 import internet_store.application.console_ui.shopping_cart_item.FindAllShoppingCartItemsUIService;
-import internet_store.application.console_ui.shopping_cart_item.FindShoppingCartItemByIdUIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +47,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(14, findUIAction(uiActions, GetAllCustomersUIAction.class));
         menuNumberToUIActionMap.put(15, findUIAction(uiActions, FindByCustomerFirstNameUIAction.class));
         menuNumberToUIActionMap.put(16, findUIAction(uiActions, AddShoppingCartItemUIService.class));
-        menuNumberToUIActionMap.put(17, findUIAction(uiActions, FindShoppingCartItemByIdUIService.class));
+        // menuNumberToUIActionMap.put(17, findUIAction(uiActions, FindShoppingCartItemByIdUIService.class));
         menuNumberToUIActionMap.put(18, findUIAction(uiActions, FindAllShoppingCartItemsUIService.class));
         menuNumberToUIActionMap.put(19, findUIAction(uiActions, AddShoppingCartUIAction.class));
         menuNumberToUIActionMap.put(20, findUIAction(uiActions, FindShoppingCartByIdUIAction.class));
