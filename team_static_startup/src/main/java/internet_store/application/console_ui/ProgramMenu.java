@@ -1,11 +1,16 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.console_ui.customer.*;
-import internet_store.application.console_ui.order.*;
+import internet_store.application.console_ui.order.AddOrderUIAction;
+import internet_store.application.console_ui.order.FindAllOrdersUIAction;
+import internet_store.application.console_ui.order.FindOrderByIdUIAction;
 import internet_store.application.console_ui.product.*;
-import internet_store.application.console_ui.shopping_cart.*;
-import internet_store.application.console_ui.shopping_cart_item.*;
-import internet_store.application.core.services.ExitProgramService;
+import internet_store.application.console_ui.shopping_cart.AddShoppingCartUIAction;
+import internet_store.application.console_ui.shopping_cart.FindAllShoppingCartsUIAction;
+import internet_store.application.console_ui.shopping_cart.FindShoppingCartByIdUIAction;
+import internet_store.application.console_ui.shopping_cart_item.AddShoppingCartItemUIService;
+import internet_store.application.console_ui.shopping_cart_item.FindAllShoppingCartItemsUIService;
+import internet_store.application.console_ui.shopping_cart_item.FindShoppingCartItemByIdUIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +29,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap = new HashMap<>();
         // menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddProductUIAction.class));
         // menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteByProductIdUIAction.class));
-        menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
+        // menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteByProductUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, DeleteByProductNameUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, FindByProductIdUIAction.class));
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindProductsUIAction.class));
@@ -71,7 +76,7 @@ public class ProgramMenu {
     public void printMenu() {
         // System.out.println("1. Add product to database");
         // System.out.println("\n2. Delete product from database by ID");
-        System.out.println("\n3. Delete product from database by name and description");
+        // System.out.println("\n3. Delete product from database by name and description");
         System.out.println("4. Delete product from database by name");
         System.out.println("5. Find product(s) from database by ID");
         System.out.println("6. Find product(s) from database by name and(or) description");
