@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.InMemoryDatabaseImpl;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.SearchRequest;
 import lv.estore.app.core.responses.SearchResponse;
 import lv.estore.app.core.validators.SearchValidator;
@@ -33,7 +33,7 @@ public class SearchServiceTest {
     @Mock
     SearchValidator validator;
     @Mock
-    InMemoryDatabaseImpl database;
+    InMemoryProductRepositoryImpl database;
     @Mock
     CommonUtils utils;
 

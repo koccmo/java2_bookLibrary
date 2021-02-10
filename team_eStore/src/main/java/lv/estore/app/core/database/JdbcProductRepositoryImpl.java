@@ -3,13 +3,12 @@ package lv.estore.app.core.database;
 import lv.estore.app.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Component
-public class JdbcDatabaseImpl implements iDatabase {
+//@Component
+public class JdbcProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;

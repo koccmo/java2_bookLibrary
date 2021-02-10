@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.Ordering;
 import lv.estore.app.core.request.Paging;
 import lv.estore.app.core.request.SearchRequest;
@@ -31,7 +31,7 @@ public class SearchService {
     SearchValidator validator;
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     @Autowired
     CommonUtils commonUtils;

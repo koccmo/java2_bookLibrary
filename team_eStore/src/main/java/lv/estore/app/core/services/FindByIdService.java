@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.IdRequest;
 import lv.estore.app.core.responses.FindByIdResponse;
 import lv.estore.app.core.validators.IdValidator;
@@ -17,7 +17,7 @@ public class FindByIdService {
     IdValidator validator;
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     /**
      * Method to find product by 'Id'.

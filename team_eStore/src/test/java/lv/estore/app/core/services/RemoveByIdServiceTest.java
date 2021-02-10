@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.InMemoryDatabaseImpl;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.IdRequest;
 import lv.estore.app.core.responses.RemoveResponse;
 import lv.estore.app.core.validators.IdValidator;
@@ -25,7 +25,7 @@ public class RemoveByIdServiceTest {
     @Mock
     IdValidator validator;
     @Mock
-    InMemoryDatabaseImpl database;
+    InMemoryProductRepositoryImpl database;
 
     @InjectMocks
     RemoveByIdService service;

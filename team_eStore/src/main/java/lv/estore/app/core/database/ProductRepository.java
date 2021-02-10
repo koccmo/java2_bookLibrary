@@ -5,7 +5,7 @@ import lv.estore.app.core.domain.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface iDatabase {
+public interface ProductRepository {
 
     boolean addProduct(final Product product);
     boolean updateById(final Long id, final String name, final String description, final BigDecimal price);

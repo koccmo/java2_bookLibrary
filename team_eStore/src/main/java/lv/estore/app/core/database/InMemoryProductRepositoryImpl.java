@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 //@Component
-public class InMemoryDatabaseImpl implements iDatabase {
+public class InMemoryProductRepositoryImpl implements ProductRepository {
 
     private List<Product> productList = new ArrayList<>();
     private Long id = 1L;
