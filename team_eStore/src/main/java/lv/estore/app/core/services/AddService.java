@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.AddRequest;
 import lv.estore.app.core.responses.AddResponse;
 import lv.estore.app.core.validators.AddValidator;
@@ -19,7 +19,7 @@ public class AddService {
     AddValidator validator;
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     @Autowired
     CommonUtils commonUtils;

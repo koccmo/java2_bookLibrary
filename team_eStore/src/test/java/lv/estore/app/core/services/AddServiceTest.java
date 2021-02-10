@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.InMemoryDatabaseImpl;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.AddRequest;
 import lv.estore.app.core.responses.AddResponse;
 import lv.estore.app.core.validators.AddValidator;
@@ -29,7 +29,7 @@ public class AddServiceTest {
 
     @Mock AddValidator validator;
     @Mock
-    InMemoryDatabaseImpl database;
+    InMemoryProductRepositoryImpl database;
     @Mock CommonUtils utils;
 
     @InjectMocks AddService service;

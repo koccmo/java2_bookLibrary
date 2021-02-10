@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.GetAllRequest;
 import lv.estore.app.core.responses.GetAllResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class GetAllService {
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     /**
      * Method to find all products.

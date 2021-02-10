@@ -2,7 +2,7 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.NameRequest;
 import lv.estore.app.core.responses.FindByNameResponse;
 import lv.estore.app.core.validators.NameValidator;
@@ -15,7 +15,7 @@ import java.util.List;
 public class FindByNameService {
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     @Autowired
     NameValidator validator;

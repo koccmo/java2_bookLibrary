@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.InMemoryDatabaseImpl;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.UpdateRequest;
 import lv.estore.app.core.responses.UpdateResponse;
 import lv.estore.app.core.validators.UpdateValidator;
@@ -28,7 +28,7 @@ public class UpdateByIdServiceTest {
     @Mock
     UpdateValidator validator;
     @Mock
-    InMemoryDatabaseImpl database;
+    InMemoryProductRepositoryImpl database;
     @Mock
     CommonUtils utils;
 

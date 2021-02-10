@@ -1,3 +1,5 @@
+USE e_store;
+
 INSERT INTO products(name, description, price)
 VALUES ("mouse", "wireless", 10.0);
 

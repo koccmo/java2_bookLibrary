@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.database.iDatabase;
+import lv.estore.app.core.database.ProductRepository;
 import lv.estore.app.core.request.UpdateRequest;
 import lv.estore.app.core.responses.UpdateResponse;
 import lv.estore.app.core.validators.UpdateValidator;
@@ -15,7 +15,7 @@ import java.util.List;
 public class UpdateByIdService {
 
     @Autowired
-    iDatabase database;
+    ProductRepository database;
 
     @Autowired
     UpdateValidator validator;

@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
-import lv.estore.app.core.database.InMemoryDatabaseImpl;
+import lv.estore.app.core.database.InMemoryProductRepositoryImpl;
 import lv.estore.app.core.request.GetAllRequest;
 import lv.estore.app.core.responses.GetAllResponse;
 import lv.estore.app.utils.CommonUtils;
@@ -25,7 +25,7 @@ public class GetAllServiceTest {
     CommonUtils commonUtils = new CommonUtils();
 
     @Mock
-    InMemoryDatabaseImpl database;
+    InMemoryProductRepositoryImpl database;
 
     @InjectMocks
     GetAllService service;
