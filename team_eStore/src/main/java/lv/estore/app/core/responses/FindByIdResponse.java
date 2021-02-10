@@ -5,14 +5,14 @@ import lv.estore.app.core.errors.CoreError;
 
 import java.util.List;
 
-public class FindResponse extends CoreResponse{
+public class FindByIdResponse extends CoreResponse{
     private Product product;
 
-    public FindResponse(List<CoreError> errors) {
+    public FindByIdResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public FindResponse(final Product product) {
+    public FindByIdResponse(final Product product) {
         this.product = product;
     }
 

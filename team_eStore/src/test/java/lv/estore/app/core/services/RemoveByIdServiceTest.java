@@ -1,7 +1,7 @@
 package lv.estore.app.core.services;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.InMemoryDatabaseImpl;
 import lv.estore.app.core.request.IdRequest;
 import lv.estore.app.core.responses.RemoveResponse;
 import lv.estore.app.core.validators.IdValidator;
@@ -25,7 +25,7 @@ public class RemoveByIdServiceTest {
     @Mock
     IdValidator validator;
     @Mock
-    ProductDatabase database;
+    InMemoryDatabaseImpl database;
 
     @InjectMocks
     RemoveByIdService service;
@@ -50,7 +50,7 @@ public class RemoveByIdServiceTest {
         RemoveResponse response = service.execute(request);
 
         assertTrue(response.hasErrors());
-        assertTrue(response.getErrors().size() == 1);
+        assertTrue(response.getErrors().size() != 0);
         assertTrue(response.getErrors()
                 .stream().anyMatch(s -> s.getField().equals("Id")
                                         && s.getMessage().equals("Field should not be empty")));

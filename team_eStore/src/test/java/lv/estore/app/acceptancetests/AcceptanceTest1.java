@@ -1,5 +1,6 @@
 package lv.estore.app.acceptancetests;
 
+import lv.estore.app.DatabaseCleaner;
 import lv.estore.app.config.EStoreConfiguration;
 import lv.estore.app.core.request.AddRequest;
 import lv.estore.app.core.request.GetAllRequest;
@@ -20,6 +21,7 @@ public class AcceptanceTest1 {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(EStoreConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -40,5 +42,9 @@ public class AcceptanceTest1 {
 
     private GetAllService getAllService() {
         return appContext.getBean(GetAllService.class);
+    }
+
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
     }
 }

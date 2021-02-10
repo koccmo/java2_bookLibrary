@@ -1,7 +1,6 @@
-package lv.estore.app.core.repository;
+package lv.estore.app.core.database;
 
 import lv.estore.app.core.domain.Product;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,8 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Component
-public class ProductDatabase implements iDatabase {
+//@Component
+public class InMemoryDatabaseImpl implements iDatabase {
 
     private List<Product> productList = new ArrayList<>();
     private Long id = 1L;
@@ -76,23 +75,14 @@ public class ProductDatabase implements iDatabase {
      * @return Product if product was found, else null.
      */
     @Override
-    public Product findByName(final String name) {
-        return productList
-                .stream()
-                .filter(product -> name.equals(product.getName()))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
-    public List<Product> findManyByName(String name) {
+    public List<Product> findByName(final String name) {
         return productList.stream()
                 .filter(product -> name.equals(product.getName()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findManyByPrice(BigDecimal price) {
+    public List<Product> findByPrice(BigDecimal price) {
         return productList.stream()
                 .filter(product -> price.equals(product.getPrice()))
                 .collect(Collectors.toList());

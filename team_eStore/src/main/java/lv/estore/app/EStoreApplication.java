@@ -8,13 +8,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class EStoreApplication {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(EStoreConfiguration.class);
-
-        MenuUI menu = applicationContext.getBean(MenuUI.class);
+        ApplicationContext applicationContext = createApplicationContext();
+        MenuUI menuUI = applicationContext.getBean(MenuUI.class);
         while (true) {
-            menu.showMenu();
-            int menuNumber = menu.getMenuNumberFromUser();
-            menu.executeSelectedMenuItem(menuNumber);
+            menuUI.showMenu();
+            int menuNumber = menuUI.getMenuNumberFromUser();
+            menuUI.executeSelectedMenuItem(menuNumber);
         }
+    }
+
+    private static ApplicationContext createApplicationContext() {
+        return new AnnotationConfigApplicationContext(EStoreConfiguration.class);
     }
 }
