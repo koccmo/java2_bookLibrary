@@ -13,7 +13,7 @@ public class ReaderRowMapper implements RowMapper {
         reader.setId(rs.getLong("id"));
         reader.setReaderFirstName(rs.getString("firstName"));
         reader.setReaderLastName(rs.getString("lastName"));
-        reader.setReaderLastName(rs.getString("personalCode"));
+        reader.setReaderPersonalCode(rs.getString("personalCode"));
         reader.setReaderPhoneNumber(rs.getString("phoneNumber"));
         reader.setReaderEmail(rs.getString("email"));
         reader.setReaderAddress(rs.getString("address"));

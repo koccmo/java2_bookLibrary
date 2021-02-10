@@ -39,12 +39,28 @@ public class Reader {
         this.readerPersonalCode = readerPersonalCode;
     }
 
+    public Reader(String readerFirstName, String readerLastName, String readerPersonalCode, String readerPhoneNumber) {
+        this.readerFirstName = readerFirstName;
+        this.readerLastName = readerLastName;
+        this.readerPersonalCode = readerPersonalCode;
+        this.readerPhoneNumber = readerPhoneNumber;
+    }
+
     public Reader(String readerFirstName, String readerLastName, String readerPersonalCode, String readerPhoneNumber, String readerEmail) {
         this.readerFirstName = readerFirstName;
         this.readerLastName = readerLastName;
         this.readerPersonalCode = readerPersonalCode;
         this.readerPhoneNumber = readerPhoneNumber;
         this.readerEmail = readerEmail;
+    }
+
+    public Reader(String readerFirstName, String readerLastName, String readerPersonalCode, String readerPhoneNumber, String readerEmail, String readerAddress) {
+        this.readerFirstName = readerFirstName;
+        this.readerLastName = readerLastName;
+        this.readerPersonalCode = readerPersonalCode;
+        this.readerPhoneNumber = readerPhoneNumber;
+        this.readerEmail = readerEmail;
+        this.readerAddress = readerAddress;
     }
 
     public Long getId() {

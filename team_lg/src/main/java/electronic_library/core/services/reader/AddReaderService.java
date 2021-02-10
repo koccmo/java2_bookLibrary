@@ -29,14 +29,18 @@ public class AddReaderService {
         }
 
         Reader reader = new Reader(request.getReaderFirstName(), request.getReaderLastName(),
-                request.getReaderPersonalCode(), request.getReaderPhoneNumber(), request.getReaderEmail());
-        readerRepository.saveReader(getReader(reader));
+                request.getReaderPersonalCode(), request.getReaderPhoneNumber(), request.getReaderEmail(), request.getReaderAddress());
 
-        return new AddReaderResponse(reader);
+        if (readerRepository.containsReader(getReader(reader))) {
+            errors.add(new CoreError("database", "Database contains the this reader"));
+            return new AddReaderResponse(errors);
+        } else {
+            readerRepository.saveReader(getReader(reader));
+            return new AddReaderResponse(reader);
+        }
     }
 
     private Reader getReader(Reader reader) {
         return reader;
     }
-
 }
