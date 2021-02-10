@@ -1,4 +1,4 @@
-package internet_store.application.web_ui.controllers;
+package internet_store.application.web_ui.controllers.product;
 
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.responses.product.AddProductResponse;
@@ -16,7 +16,6 @@ public class AddProductController {
     @Autowired
     private AddProductService addProductService;
 
-
     @GetMapping(value = "/addProduct")
     public String showAddProductPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new AddProductRequest());
@@ -32,19 +31,6 @@ public class AddProductController {
         } else {
             return "redirect:/";
         }
-
-
-/*        @PostMapping("/addCustomer")
-        public String processAddCustomerRequest(@ModelAttribute(value = "request") AddCustomerRequest request, ModelMap modelMap) {
-            AddCustomerResponse response = addCustomerService.execute(request);
-            if (response.hasErrors()) {
-                modelMap.addAttribute("errors", response.getErrors());
-                return "addCustomer";
-            } else {
-                return "redirect:/";
-            }
-        }*/
-
     }
 
 }

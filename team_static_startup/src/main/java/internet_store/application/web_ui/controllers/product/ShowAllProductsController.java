@@ -1,4 +1,4 @@
-package internet_store.application.web_ui.controllers;
+package internet_store.application.web_ui.controllers.product;
 
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.GetAllProductsService;
@@ -13,11 +13,11 @@ public class ShowAllProductsController {
     @Autowired
     private GetAllProductsService getAllProductsService;
 
-    @GetMapping(value = "/showAllProducts")
+    @GetMapping(value = "/product/showAllProducts")
     public String showAllProducts(ModelMap modelMap) {
         GetAllProductsResponse response = getAllProductsService.execute();
         modelMap.addAttribute("products", response.getProductList());
-        return "/showAllProducts";
+        return "product/showAllProducts";
     }
 
 }

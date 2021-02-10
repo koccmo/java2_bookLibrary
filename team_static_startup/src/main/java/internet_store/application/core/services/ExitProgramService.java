@@ -1,10 +1,10 @@
-package internet_store.application.console_ui.product;
+package internet_store.application.core.services;
 
 import internet_store.application.console_ui.UIAction;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExitProgramUIAction implements UIAction {
+public class ExitProgramService implements UIAction {
 
     @Override
     public void execute() {

@@ -5,7 +5,7 @@ import internet_store.application.console_ui.order.*;
 import internet_store.application.console_ui.product.*;
 import internet_store.application.console_ui.shopping_cart.*;
 import internet_store.application.console_ui.shopping_cart_item.*;
-
+import internet_store.application.core.services.ExitProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +45,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
         menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
         menuNumberToUIActionMap.put(24, findUIAction(uiActions, FindAllOrdersUIAction.class));
-        menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramUIAction.class));
+        menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramService.class));
     }
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
