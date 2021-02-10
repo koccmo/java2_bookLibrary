@@ -83,7 +83,7 @@ public class DeleteByOtherService {
     private boolean isTitleAndDescriptionAndPriceNotEmptyForDelete(String title, String description,
                                                                    Integer startPrice, Integer endPrice){
         return title != null && !title.isEmpty() && description != null && !description.isEmpty() &&
-                startPrice != null && endPrice != null;
+                startPrice != 0 && endPrice != 0;
     }
 
     private boolean isTitleAndDescriptionFilledForDelete(String title, String description) {
@@ -91,11 +91,11 @@ public class DeleteByOtherService {
     }
 
     private boolean isTitleFilledAndPriceRangeNotEmptyForDelete(String title, Integer startPrice, Integer endPrice) {
-        return title != null && !title.isEmpty() && startPrice != null && endPrice != null;
+        return title != null && !title.isEmpty() && startPrice != 0 && endPrice != 0;
     }
 
     private boolean isDescriptionFilledAndPriceRangeNotEmptyForDelete(String description, Integer startPrice, Integer endPrice) {
-        return description != null && !description.isEmpty() && startPrice != null && endPrice != null;
+        return description != null && !description.isEmpty() && startPrice != 0 && endPrice != 0;
     }
 
     private boolean isTitleFilledToForDelete(String title){
@@ -107,7 +107,7 @@ public class DeleteByOtherService {
     }
 
     private boolean isPriceRangeFilledForDelete(Integer startPrice, Integer endPrice) {
-        return startPrice != null && endPrice != null;
+        return startPrice != 0 && endPrice != 0;
     }
 
     private DeleteByOtherResponse deleteByTitleAndDescriptionAndPriceIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
