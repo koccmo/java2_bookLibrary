@@ -1,7 +1,7 @@
 package lv.estore.app.userInterface;
 
 import lv.estore.app.core.request.IdRequest;
-import lv.estore.app.core.responses.FindResponse;
+import lv.estore.app.core.responses.FindByIdResponse;
 import lv.estore.app.core.services.FindByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class FindByIdUIAction implements  UIAction{
         String id = scanner.nextLine();
 
         IdRequest request = new IdRequest(id);
-        FindResponse response = findByIdService.execute(request);
+        FindByIdResponse response = findByIdService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().stream().forEach(coreError ->

@@ -2,9 +2,9 @@ package lv.estore.app.core.services;
 
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
+import lv.estore.app.core.database.InMemoryDatabaseImpl;
 import lv.estore.app.core.request.IdRequest;
-import lv.estore.app.core.responses.FindResponse;
+import lv.estore.app.core.responses.FindByIdResponse;
 import lv.estore.app.core.validators.IdValidator;
 import lv.estore.app.matchers.IdMatcher;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class FindByIdServiceTest {
     @Mock
     IdValidator validator;
     @Mock
-    ProductDatabase database;
+    InMemoryDatabaseImpl database;
 
     @InjectMocks
     FindByIdService service;
@@ -45,7 +45,7 @@ public class FindByIdServiceTest {
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Mockito.when(database.findById(any())).thenReturn(product);
-        FindResponse response = service.execute(request);
+        FindByIdResponse response = service.execute(request);
 
         assertTrue(response.hasProduct());
         assertFalse(response.hasErrors());
@@ -63,7 +63,7 @@ public class FindByIdServiceTest {
         errors.add(new CoreError("Id", "Field should not be empty"));
 
         Mockito.when(validator.validate(any())).thenReturn(errors);
-        FindResponse response = service.execute(request);
+        FindByIdResponse response = service.execute(request);
 
         assertFalse(response.hasProduct());
         assertTrue(response.hasErrors());

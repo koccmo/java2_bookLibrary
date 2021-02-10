@@ -1,10 +1,10 @@
 package lv.estore.app.core.services;
 
+import lv.estore.app.core.database.InMemoryDatabaseImpl;
 import lv.estore.app.core.domain.Product;
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.repository.ProductDatabase;
 import lv.estore.app.core.request.NameRequest;
-import lv.estore.app.core.responses.FindResponse;
+import lv.estore.app.core.responses.FindByNameResponse;
 import lv.estore.app.core.validators.NameValidator;
 import lv.estore.app.matchers.NameMatcher;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,7 +30,7 @@ public class FindByNameServiceTest {
     @Mock
     NameValidator validator;
     @Mock
-    ProductDatabase database;
+    InMemoryDatabaseImpl database;
 
     @InjectMocks
     FindByNameService service;
@@ -39,18 +38,20 @@ public class FindByNameServiceTest {
     @Test
     public void testFindByNameSuccess(){
         NameRequest request = new NameRequest("name");
+        List<Product> products = new ArrayList<>();
         Product product = new Product("name",
                 "description",
-                new BigDecimal(1.0).abs().setScale(2, RoundingMode.FLOOR));
+                new BigDecimal("1.0").abs().setScale(2, RoundingMode.FLOOR));
+        products.add(product);
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.findByName(any())).thenReturn(product);
-        FindResponse response = service.execute(request);
+        Mockito.when(database.findByName(any())).thenReturn(products);
+        FindByNameResponse response = service.execute(request);
 
-        assertTrue(response.hasProduct());
+        assertTrue(response.hasProducts());
         assertFalse(response.hasErrors());
-        assertEquals("name", response.getProduct().getName());
-        assertEquals("description", response.getProduct().getDescription());
+        assertTrue(response.getProducts().stream().anyMatch(p -> "name".equals(p.getName())));
+        assertTrue(response.getProducts().stream().anyMatch(p -> "description".equals(p.getDescription())));
 
         Mockito.verify(database).findByName(
                 argThat(new NameMatcher("name")));
@@ -63,10 +64,13 @@ public class FindByNameServiceTest {
         errors.add(new CoreError("Name", "Field should not be empty"));
 
         Mockito.when(validator.validate(any())).thenReturn(errors);
-        FindResponse response = service.execute(request);
+        FindByNameResponse response = service.execute(request);
 
-        assertFalse(response.hasProduct());
         assertTrue(response.hasErrors());
+        assertTrue(response.getErrors()
+                .stream().anyMatch(s -> s.getField().equals("Name")
+                        && s.getMessage().equals("Field should not be empty")));
+        assertFalse(response.hasProducts());
 
         Mockito.verifyNoInteractions(database);
     }

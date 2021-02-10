@@ -1,14 +1,12 @@
 package internet_store_tests.acceptance_test.customer;
 
-import internet_store.DatabaseCleaner;
-import internet_store.config.MainMenuConfiguration;
+import internet_store.core.DatabaseCleaner;
+import internet_store.config.SpringCoreConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.customer.AddCustomerRequest;
-import internet_store.core.requests.customer.DeleteCustomerRequest;
 import internet_store.core.requests.customer.GetAllCustomersRequest;
 import internet_store.core.response.customer.GetAllCustomersResponse;
 import internet_store.core.services.customer.AddCustomerService;
-import internet_store.core.services.customer.DeleteCustomerService;
 import internet_store.core.services.customer.GetAllCustomersService;
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +21,7 @@ public class AcceptanceTestDeleteCustomer {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
     @Test

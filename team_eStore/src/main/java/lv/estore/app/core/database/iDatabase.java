@@ -1,4 +1,4 @@
-package lv.estore.app.core.repository;
+package lv.estore.app.core.database;
 
 import lv.estore.app.core.domain.Product;
 
@@ -12,9 +12,8 @@ public interface iDatabase {
     boolean removeById(final Long id);
     boolean removeByName(final String name);
     Product findById(final Long id);
-    Product findByName(final String name);
-    List<Product> findManyByName(final String name);
-    List<Product> findManyByPrice(final BigDecimal price);
+    List<Product> findByName(final String name);
+    List<Product> findByPrice(final BigDecimal price);
     List<Product> findManyByNameAndPrice(final String name, final BigDecimal price);
     List<Product> getAllProducts();
 }
