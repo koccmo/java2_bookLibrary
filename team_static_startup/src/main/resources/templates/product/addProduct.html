@@ -10,18 +10,22 @@
 
 <body>
 
-<h3>Delete product</h3>
+<h3>Add product</h3>
 
 <table>
     <tr>
-        <td>Product ID:</td>
+        <td>Name:</td>
+        <td>Description:</td>
+        <td>Price:</td>
     </tr>
 
     <tr>
-        <form action="/deleteProduct" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.productId}"/></td>
+        <form action="/product/addProduct" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.productName}"/></td>
+            <td><input type="text" th:field="${request.productDescription}"/></td>
+            <td><input type="text" th:field="${request.productPrice}"/></td>
             <td>
-                <input type="submit" value="Delete product"/>
+                <input type="submit" value="Add Product"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>

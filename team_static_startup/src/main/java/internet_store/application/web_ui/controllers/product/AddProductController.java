@@ -16,18 +16,18 @@ public class AddProductController {
     @Autowired
     private AddProductService addProductService;
 
-    @GetMapping(value = "/addProduct")
+    @GetMapping(value = "/product/addProduct")
     public String showAddProductPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new AddProductRequest());
-        return "addProduct";
+        return "product/addProduct";
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/product/addProduct")
     public String processAddProductRequest(@ModelAttribute(value = "request") AddProductRequest request, ModelMap modelMap) {
         AddProductResponse response = addProductService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-            return "addProduct";
+            return "product/addProduct";
         } else {
             return "redirect:/";
         }

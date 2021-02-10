@@ -1,4 +1,4 @@
-package internet_store.application.web_ui.controllers;
+package internet_store.application.web_ui.controllers.product;
 
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;
@@ -17,18 +17,18 @@ public class DeleteProductController {
     @Autowired
     private DeleteByProductIdService deleteByProductIdService;
 
-    @GetMapping("/deleteProduct")
+    @GetMapping("/product/deleteProduct")
     public String showAddProductPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new DeleteByProductIdRequest());
-        return "deleteProduct";
+        return "product/deleteProduct";
     }
 
-    @PostMapping(value = "/deleteProduct")
+    @PostMapping(value = "/product/deleteProduct")
     public String deleteProduct(@ModelAttribute(value = "request") DeleteByProductIdRequest request, ModelMap modelMap) {
         DeleteByProductIdResponse response = deleteByProductIdService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-            return "deleteProduct";
+            return "product/deleteProduct";
         } else {
             return "redirect:/";
         }
