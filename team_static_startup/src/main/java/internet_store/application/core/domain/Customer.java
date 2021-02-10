@@ -32,44 +32,44 @@ public class Customer {
         return customerId;
     }
 
-    public String getCustomerFirstName() {
-        return customerFirstName;
-    }
-
-    public String getCustomerSecondName() {
-        return customerSecondName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerFirstName() {
+        return customerFirstName;
     }
 
     public void setCustomerFirstName(String customerFirstName) {
         this.customerFirstName = customerFirstName;
     }
 
+    public String getCustomerSecondName() {
+        return customerSecondName;
+    }
+
     public void setCustomerSecondName(String customerSecondName) {
         this.customerSecondName = customerSecondName;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
 
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
     }
 
     public void setCustomerAddress(String customerAddress) {
