@@ -103,4 +103,4 @@ public class AcceptanceTest8 {
     private DatabaseCleanerClinic getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleanerClinic.class);
     }
-}
+}*/
