@@ -5,23 +5,27 @@
     <meta charset="utf-8">
     <meta name="description" content="Internet Store demo project">
     <meta name="author" content="Team Static Startup">
-    <title>Product Library</title>
+    <title>Add Shopping Cart Item</title>
 </head>
 
 <body>
 
-<h3>Delete product</h3>
+<h3>Add Shopping Cart Item</h3>
 
 <table>
     <tr>
-        <td>Product ID:</td>
+        <td>Shopping Cart Id:</td>
+        <td>Product Id:</td>
+        <td>Quantity:</td>
     </tr>
 
     <tr>
-        <form action="/product/deleteProduct" th:object="${request}" method="post">
+        <form action="/product_shopping_cart/addShoppingCartItem" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.shoppingCartId}"/></td>
             <td><input type="text" th:field="${request.productId}"/></td>
+            <td><input type="text" th:field="${request.quantity}"/></td>
             <td>
-                <input type="submit" value="Delete product"/>
+                <input type="submit" value="Add Shopping Cart Item"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
