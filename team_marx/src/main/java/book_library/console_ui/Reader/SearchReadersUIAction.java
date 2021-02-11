@@ -3,6 +3,9 @@ package book_library.console_ui.Reader;
 import book_library.console_ui.UIAction;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
+import book_library.core.requests.Reader.SearchReaderRequest;
+import book_library.core.responses.Book.SearchBooksResponse;
+import book_library.core.responses.Reader.SearchReadersResponse;
 import book_library.core.services.Reader.SearchReadersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +26,13 @@ public class SearchReadersUIAction implements UIAction {
         System.out.println("Enter reader last name: ");
         String lastName = scanner.nextLine();
         System.out.println("Enter reader personal code: ");
-        String personalCode = scanner.nextLine();
+        String personalCodeString = scanner.nextLine();
+        Long personalCode = null;
+        if (personalCodeString.isEmpty()) {
+            personalCode = null;
+        } else {
+            personalCode = Long.parseLong(personalCodeString);
+        }
 
         System.out.println("Enter orderBy (firstName||lastName||personalCode): ");
         String orderBy = scanner.nextLine();
@@ -57,5 +66,20 @@ public class SearchReadersUIAction implements UIAction {
         Ordering ordering = new Ordering(orderBy, orderDirection);
         Paging paging = new Paging(pageNumber, pageSize);
 
+        SearchReaderRequest request = new SearchReaderRequest(firstName, lastName, personalCode, ordering, paging);
+        SearchReadersResponse response = searchReadersService.execute(request);
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(System.out::println);
+        } else {
+            if (response.getReaders().isEmpty()) {
+                System.out.println("No reader with such parameters was found.");
+            }
+            System.out.println("Reader list:");
+            System.out.println("***************************************************************************");
+            response.getReaders().forEach(System.out::println);
+            System.out.println("***************************************************************************");
+            System.out.println("Reader list end.");
+        }
     }
 }

@@ -1,6 +1,8 @@
 package book_library.core.services.Reader;
 
 import book_library.core.database.Reader.ReaderRepository;
+import book_library.core.requests.Reader.SearchReaderRequest;
+import book_library.core.responses.Reader.SearchReadersResponse;
 import book_library.core.services.Book.SearchBooksService;
 import book_library.core.validators.Reader.SearchReadersRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,7 @@ public class SearchReadersService {
     private SearchReadersRequestValidator validator;
 
 
+    public SearchReadersResponse execute(SearchReaderRequest request) {
 
+    }
 }
