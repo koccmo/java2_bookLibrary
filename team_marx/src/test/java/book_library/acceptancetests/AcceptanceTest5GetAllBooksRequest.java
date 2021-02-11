@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class AcceptanceTest5GetAllBooksRequest {
 
@@ -39,6 +40,7 @@ public class AcceptanceTest5GetAllBooksRequest {
 
         GetAllBooksRequest getAllBooksRequest1 = new GetAllBooksRequest();
         GetAllBooksResponse response = getAllBooksService().execute(getAllBooksRequest1);
+        assertFalse(response.hasErrors());
         assertEquals(2, response.getBooks().size());
         assertEquals("TitleA", response.getBooks().get(0).getTitle());
         assertEquals("AuthorA", response.getBooks().get(0).getAuthor());

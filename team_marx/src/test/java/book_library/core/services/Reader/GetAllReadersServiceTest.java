@@ -39,7 +39,7 @@ public class GetAllReadersServiceTest {
         assertEquals(1, response.getReaders().size());
         assertEquals("FirstName", response.getReaders().get(0).getFirstName());
         assertEquals("LastName", response.getReaders().get(0).getLastName());
-        assertEquals(11111111111L, response.getReaders().get(0).getPersonalCode();
+        assertEquals(java.util.Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
     }
 
 }
