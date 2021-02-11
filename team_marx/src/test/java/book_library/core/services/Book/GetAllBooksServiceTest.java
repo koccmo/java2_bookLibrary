@@ -4,7 +4,6 @@ import book_library.core.domain.Book;
 import book_library.core.database.Book.BookRepository;
 import book_library.core.requests.Book.GetAllBooksRequest;
 import book_library.core.responses.Book.GetAllBooksResponse;
-import book_library.core.services.Book.GetAllBooksService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
