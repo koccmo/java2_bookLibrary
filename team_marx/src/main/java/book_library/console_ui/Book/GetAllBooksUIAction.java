@@ -1,5 +1,6 @@
-package book_library.console_ui;
+package book_library.console_ui.Book;
 
+import book_library.console_ui.UIAction;
 import book_library.core.requests.Book.GetAllBooksRequest;
 import book_library.core.responses.Book.GetAllBooksResponse;
 import book_library.core.services.Book.GetAllBooksService;

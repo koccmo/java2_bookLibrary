@@ -1,5 +1,6 @@
-package book_library.console_ui;
+package book_library.console_ui.Book;
 
+import book_library.console_ui.UIAction;
 import book_library.core.requests.Book.RemoveBookRequest;
 import book_library.core.responses.Book.RemoveBookResponse;
 import book_library.core.services.Book.RemoveBookService;

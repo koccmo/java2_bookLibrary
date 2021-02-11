@@ -1,4 +1,5 @@
-package book_library.console_ui;
+package book_library.console_ui.Book;
+import book_library.console_ui.UIAction;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
 import book_library.core.requests.Book.SearchBooksRequest;

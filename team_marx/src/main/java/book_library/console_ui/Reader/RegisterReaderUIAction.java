@@ -1,5 +1,6 @@
-package book_library.console_ui;
+package book_library.console_ui.Reader;
 
+import book_library.console_ui.UIAction;
 import book_library.core.requests.Reader.RegisterReaderRequest;
 import book_library.core.responses.Reader.RegisterReaderResponse;
 import book_library.core.services.Reader.RegisterReaderService;

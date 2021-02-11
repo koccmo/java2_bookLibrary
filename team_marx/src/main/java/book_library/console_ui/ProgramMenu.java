@@ -1,5 +1,11 @@
 package book_library.console_ui;
 
+import book_library.console_ui.Book.AddBookUIAction;
+import book_library.console_ui.Book.GetAllBooksUIAction;
+import book_library.console_ui.Book.RemoveBookUIAction;
+import book_library.console_ui.Book.SearchBooksUIAction;
+import book_library.console_ui.Reader.GetAllReadersUIAction;
+import book_library.console_ui.Reader.RegisterReaderUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +27,8 @@ public class ProgramMenu {
         menuNumberToUiActionMap.put(3, findUIAction(uiActions, GetAllBooksUIAction.class));
         menuNumberToUiActionMap.put(4, findUIAction(uiActions, SearchBooksUIAction.class));
         menuNumberToUiActionMap.put(5, findUIAction(uiActions, RegisterReaderUIAction.class));
-        menuNumberToUiActionMap.put(6, findUIAction(uiActions, ExitUIAction.class));
+        menuNumberToUiActionMap.put(6, findUIAction(uiActions, GetAllReadersUIAction.class));
+        menuNumberToUiActionMap.put(7, findUIAction(uiActions, ExitUIAction.class));
     }
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
@@ -39,8 +46,9 @@ public class ProgramMenu {
         System.out.println("2. Delete book from list");
         System.out.println("3. Show all books in the list");
         System.out.println("4. Search books");
-        System.out.println("5. Register new reader");
-        System.out.println("6. Exit");
+        System.out.println("5. Register new readers");
+        System.out.println("6. Show all readers in the list");
+        System.out.println("7. Exit");
         System.out.println("=================================");
 
         System.out.println("");
