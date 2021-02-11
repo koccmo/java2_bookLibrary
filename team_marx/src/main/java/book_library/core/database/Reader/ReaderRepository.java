@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Component
 @Transactional
@@ -30,5 +31,11 @@ public class ReaderRepository {
         query.setParameter("last_name", reader.getLastName());
         query.setParameter("personal_code", reader.getPersonalCode());
         return !query.getResultList().isEmpty();
+    }
+
+    public List<Reader> getAllReaders() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT r FROM Reader r", Reader.class)
+                .getResultList();
     }
 }
