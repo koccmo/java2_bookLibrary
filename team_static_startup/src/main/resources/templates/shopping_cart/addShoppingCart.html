@@ -5,23 +5,23 @@
     <meta charset="utf-8">
     <meta name="description" content="Internet Store demo project">
     <meta name="author" content="Team Static Startup">
-    <title>Add Order</title>
+    <title>Add Shopping Cart</title>
 </head>
 
 <body>
 
-<h3>Add order</h3>
+<h3>Add Shopping Cart</h3>
 
 <table>
     <tr>
-        <td>Shopping Cart Id:</td>
+        <td>Customer Id:</td>
     </tr>
 
     <tr>
-        <form action="/order/addOrder" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.shoppingCartId}"/></td>
+        <form action="/shopping_cart/addShoppingCart" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.customerId}"/></td>
             <td>
-                <input type="submit" value="Add Order"/>
+                <input type="submit" value="Add Shopping Cart"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
