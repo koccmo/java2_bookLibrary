@@ -23,4 +23,8 @@ public class FindByCustomerIdResponse extends CoreResponse {
         return customerFindById;
     }
 
+    public Customer getCustomerObject() {
+        return customerFindById.orElse(null);
+    }
+
 }
