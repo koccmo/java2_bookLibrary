@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class AddVisitService {
@@ -42,37 +42,32 @@ public class AddVisitService {
         }
 
         Doctor doctor;
-
-        if (isIdAdded(addVisitRequest.getDoctor().getName())) {
-            Optional<Doctor> doctorOptional = doctorRepository.getDoctorById(Long.parseLong(addVisitRequest.getDoctor().getName()));
-            if (!doctorOptional.isPresent()) {
-                errors.add(new CoreError("id", "Database doesn't contain doctor with id "
-                        + addVisitRequest.getDoctor().getName() + " in database"));
-                return new AddVisitResponse(errors);
-            }
-            doctor = doctorOptional.get();
+        if (doctorRepository.containsId(addVisitRequest.getDoctorId())) {
+            doctor = doctorRepository.getDoctorById(addVisitRequest.getDoctorId()).get();
         } else {
-            doctor = new Doctor(addVisitRequest.getDoctor().getName().split(" ")[0],
-                    addVisitRequest.getDoctor().getName().split(" ")[1],
-                    addVisitRequest.getDoctor().getName().split(" ")[2]);
-            doctor.setEmployed(true);
+            errors.add(new CoreError("doctor", "Database doesn't contain doctor with id "
+                    + addVisitRequest.getDoctorId()));
+            return new AddVisitResponse(errors);
         }
+
 
         if (!doctor.isEmployed()) {
             errors.add(new CoreError("doctor", "Doctor must be employed"));
             return new AddVisitResponse(errors);
         }
 
-        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulation()));
+        errors.addAll(manipulationsDatabaseContainsIdAndIsActive(addVisitRequest.getManipulationId()));
         if (!errors.isEmpty()){
             return new AddVisitResponse(errors);
         }
 
-        PersonalData personalData = patientRepository.getPersonalDataById(addVisitRequest.getId());
+        Manipulation manipulation = manipulationRepository.getManipulationById(addVisitRequest.getManipulationId());
+
+        PersonalData personalData = patientRepository.getPersonalDataById(addVisitRequest.getPatientId());
 
         Visit visit = new Visit(personalData, addVisitRequest.getToothNumber(), addVisitRequest.getComment(),
                 addVisitRequest.getToothStatus(), doctor,
-                addVisitRequest.getManipulation(), addVisitRequest.getDate(), addVisitRequest.getManipulation().getPrice());
+                manipulation, new Date(), manipulation.getPrice());
 
         if (isNewDoctor(doctor)){
             doctorRepository.addDoctor(doctor);
@@ -96,11 +91,11 @@ public class AddVisitService {
         return !doctorRepository.containsDoctor(doctor);
     }
 
-    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(Manipulation manipulation) {
+    private List<CoreError> manipulationsDatabaseContainsIdAndIsActive(Long manipulationId) {
         List<CoreError>errors = new ArrayList<>();
-            if (!manipulationRepository.manipulationIsActive(manipulation.getId())) {
+            if (!manipulationRepository.manipulationIsActive(manipulationId)) {
                 errors.add(new CoreError("manipulation", "Manipulation with id " +
-                        manipulation.getId() + " isn't active"));
+                        manipulationId + " isn't active"));
             }
         return errors;
     }
