@@ -44,7 +44,7 @@ public class ProgramMenu {
         // menuNumberToUIActionMap.put(11, findUIAction(uiActions, DeleteByCustomerIdUIAction.class));
         menuNumberToUIActionMap.put(12, findUIAction(uiActions, FindByCustomerIdUIAction.class));
         menuNumberToUIActionMap.put(13, findUIAction(uiActions, ChangeCustomerFirstNameUIAction.class));
-        menuNumberToUIActionMap.put(14, findUIAction(uiActions, GetAllCustomersUIAction.class));
+        // menuNumberToUIActionMap.put(14, findUIAction(uiActions, GetAllCustomersUIAction.class));
         menuNumberToUIActionMap.put(15, findUIAction(uiActions, FindByCustomerFirstNameUIAction.class));
         menuNumberToUIActionMap.put(16, findUIAction(uiActions, AddShoppingCartItemUIService.class));
         // menuNumberToUIActionMap.put(17, findUIAction(uiActions, FindShoppingCartItemByIdUIService.class));
@@ -52,7 +52,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(19, findUIAction(uiActions, AddShoppingCartUIAction.class));
         menuNumberToUIActionMap.put(20, findUIAction(uiActions, FindShoppingCartByIdUIAction.class));
         menuNumberToUIActionMap.put(21, findUIAction(uiActions, FindAllShoppingCartsUIAction.class));
-        menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
+        // menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
         menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
         menuNumberToUIActionMap.put(24, findUIAction(uiActions, FindAllOrdersUIAction.class));
         // menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramService.class));
@@ -80,9 +80,9 @@ public class ProgramMenu {
 
     public void printMenu() {
         // System.out.println("1. Add product to database");
-        // System.out.println("\n2. Delete product from database by ID");
-        // System.out.println("\n3. Delete product from database by name and description");
-        System.out.println("4. Delete product from database by name");
+        // System.out.println("2. Delete product from database by ID");
+        // System.out.println("3. Delete product from database by name and description");
+        System.out.println("\n4. Delete product from database by name");
         System.out.println("5. Find product(s) from database by ID");
         System.out.println("6. Find product(s) from database by name and(or) description");
         System.out.println("7. Find product from database by ID and change name");
@@ -92,7 +92,7 @@ public class ProgramMenu {
         // System.out.println("11. Delete customer from database by ID");
         System.out.println("12. Find customer from database by ID");
         System.out.println("13. Find customer from database by ID and change FirstName");
-        System.out.println("14. Print out all customers");
+        // System.out.println("14. Print out all customers");
         System.out.println("15. Find customer(s) by first name");
         System.out.println("------------------------------------------------------------");
         System.out.println("16. Add shopping cart item: ");
@@ -103,7 +103,7 @@ public class ProgramMenu {
         System.out.println("20. Find shopping cart by ID");
         System.out.println("21. Find all shopping carts");
         System.out.println("------------------------------------------------------------");
-        System.out.println("22. Add order");
+        // System.out.println("22. Add order");
         System.out.println("23. Find order by ID");
         System.out.println("24. Find all orders");
         System.out.println("------------------------------------------------------------");
