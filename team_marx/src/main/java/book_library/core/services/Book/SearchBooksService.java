@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class SearchBooksService {
 
     @Value("${search.ordering.enabled}")
