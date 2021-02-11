@@ -37,7 +37,7 @@ public class AddPlannedVisitService {
 
     public AddPlannedVisitResponse execute (AddPlannedVisitRequest addPlannedVisitRequest) {
 
-        addPlannedVisitRequest = getAddPlannedVisitRequest(addPlannedVisitRequest);
+        PersonalData personalData = patientRepository.findPatientsByPersonalCode(addPlannedVisitRequest.getPersonalCode()).get(0);
 
         List<CoreError> errorList = addPlannedVisitRequestValidator.validate(addPlannedVisitRequest);
         if (!errorList.isEmpty()) {
@@ -50,15 +50,15 @@ public class AddPlannedVisitService {
             return new AddPlannedVisitResponse(errorList);
         }
 
-        if (!doctorRepository.containsId(addPlannedVisitRequest.getId())) {
+        if (!doctorRepository.containsId(addPlannedVisitRequest.getDoctorsId())) {
             errorList.add(new CoreError("database", "Database doesn't contain doctor with id " +
-                    addPlannedVisitRequest.getId()));
+                    addPlannedVisitRequest.getDoctorsId()));
             return new AddPlannedVisitResponse(errorList);
         }
 
-        Doctor doctor = doctorRepository.getDoctorById(addPlannedVisitRequest.getId()).get();
+        Doctor doctor = doctorRepository.getDoctorById(addPlannedVisitRequest.getDoctorsId()).get();
 
-        PlannedVisit plannedVisit = new PlannedVisit(visitDate, addPlannedVisitRequest.getPersonalData(), doctor);
+        PlannedVisit plannedVisit = new PlannedVisit(visitDate, personalData, doctor);
 
         if (doctorDoesNotWorksInThisTime(plannedVisit, addPlannedVisitRequest)) {
             errorList.add(new CoreError("work graphic", "Doctor doesn't work at this time"));
@@ -72,16 +72,6 @@ public class AddPlannedVisitService {
 
         plannedVisitsRepository.addPlannedVisit(plannedVisit);
         return new AddPlannedVisitResponse(plannedVisit);
-    }
-
-    private AddPlannedVisitRequest getAddPlannedVisitRequest(AddPlannedVisitRequest addPlannedVisitRequest) {
-        if (!addPlannedVisitRequest.getIsNewPatient()) {
-            addPlannedVisitRequest = fillPersonalData(addPlannedVisitRequest);
-        } else {
-            AddPatientRequest addPatientRequest = new AddPatientRequest(addPlannedVisitRequest.getPersonalData());
-            addPatientService.execute(addPatientRequest);
-        }
-        return addPlannedVisitRequest;
     }
 
     private boolean doctorDoesNotWorksInThisTime (PlannedVisit plannedVisit, AddPlannedVisitRequest addPlannedVisitRequest) {
@@ -122,10 +112,5 @@ public class AddPlannedVisitService {
             errors.add(new CoreError("date", "Visit date must be in future"));
         }
         return errors;
-    }
-
-    private AddPlannedVisitRequest fillPersonalData (AddPlannedVisitRequest addPlannedVisitRequest1) {
-        PersonalData personalData = patientRepository.findPatientsByPersonalCode(addPlannedVisitRequest1.getPersonalData().getPersonalCode()).get(0);
-        return new AddPlannedVisitRequest(false, addPlannedVisitRequest1.getVisitDataText(), personalData, addPlannedVisitRequest1.getId());
     }
 }

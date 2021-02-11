@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class UpdatePatientJowlInfo {
+public class UpdatePatientJowlInfoController {
 
     @Autowired
     private UpdatePatientJowlInfoService updatePatientJowlInfoService;
@@ -27,7 +27,8 @@ public class UpdatePatientJowlInfo {
         UpdatePatientJowlInfoResponse updatePatientJowlInfoResponse = updatePatientJowlInfoService.execute(updatePatientsJowlInfoRequest);
         if (updatePatientJowlInfoResponse.hasErrors()) {
             modelMap.addAttribute("errors", updatePatientJowlInfoResponse.getErrors());
+            return "/updatePatientJowlInfo";
         }
-        return "/updatePatientJowlInfo";
+        return "redirect:/";
     }
 }

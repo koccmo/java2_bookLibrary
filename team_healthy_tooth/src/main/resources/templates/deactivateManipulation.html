@@ -10,22 +10,18 @@
 
     <body>
 
-        <h3>Add doctor</h3>
+        <h3>Deactivate manipulation</h3>
 
         <table>
             <tr>
-                <td>Name:</td>
-                <td>Surname:</td>
-                <td>Phone:</td>
+                <td>Id:</td>
             </tr>
 
             <tr>
-                <form action="/addDoctor" th:object="${request}" method="post">
-                    <td><input type="text" th:field="${request.doctor.name}"/></td>
-                    <td><input type="text" th:field="${request.doctor.surname}"/></td>
-                    <td><input type="text" th:field="${request.doctor.phone}"/></td>
+                <form action="/deactivateManipulation" th:object="${request}" method="post">
+                    <td><input type="number" min="1" th:field="${request.id}"/></td>
                     <td>
-                        <input type="submit" value="Add Doctor"/>
+                        <input type="submit" value="Deactivate manipulation"/>
                         <input type="reset" value="Clear"/>
                     </td>
                 </form>

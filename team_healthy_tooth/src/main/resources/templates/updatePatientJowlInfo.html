@@ -10,38 +10,51 @@
 
 <body>
 
-<h3>Update patient jowl info</h3>
+    <h3>Update patient jowl info</h3>
 
-<table>
-    <tr>
-        <td>Id:</td>
-        <td>Tooth number:</td>
-        <td>Tooth status:</td>
-    </tr>
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td>Tooth number:</td>
+            <td>Tooth status:</td>
+        </tr>
 
-    <tr>
-        <form action="/updatePatientJowlInfo" th:object="${request}" method="get">
-            <td><input type="number" min="1" th:field="${request.id}"/></td>
-            <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
-            <td><input type="number" min="1" th:field="${request.toothStatus}"/></td>
-            <td>
-                <input type="submit" value="Update jowl info"/>
-                <input type="reset" value="Clear"/>
-            </td>
-        </form>
-    </tr>
-</table>
+        <tr>
+            <form action="/updatePatientJowlInfo" th:object="${request}" method="post">
+                <td><input type="number" min="1" th:field="${request.id}"/></td>
+                <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
+                <td><input type="text" th:field="${request.toothStatus}"/></td>
+                <td>
+                    <input type="submit" value="Update jowl info"/>
+                    <input type="reset" value="Clear"/>
+                </td>
+            </form>
+        </tr>
+    </table>
 
-<td th:if="${errors != null}">
-    <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.message}" /> </br>
-    </tr>
-</td>
+    <h4>Tooth statuses:</h4>
+    <table>
+        <tr>
+           <td>KARIES</td>
+           <td>PLOMBA</td>
+           <td>SAKNE</td>
+           <td>KRONITIS</td>
+           <td>KLAMERS</td>
+           <td>NAV_ZOBA</td>
+           <td>NONEMAMA_PROTEZE</td>
+           <td>KRONITIS_AR_FAS</td>
+           <td>PLAST_KRONITIS</td>
+           <td>TILTINI</td>
+           <td>HEALTHY</td>
+        </tr>
+    </table>
 
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}" />
+            <td th:text="${error.message}" /> </br>
+        </tr>
+    </td>
 
 </body>
 
