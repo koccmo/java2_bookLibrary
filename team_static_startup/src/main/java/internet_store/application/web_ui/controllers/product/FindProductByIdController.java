@@ -28,7 +28,7 @@ public class FindProductByIdController {
         if (response.hasErrors()){
             modelMap.addAttribute("errors", response.getErrors());
         } else {
-            modelMap.addAttribute("products", response.getProductFoundById());
+            modelMap.addAttribute("products", response.getProductObject());
         }
         return "product/findProductById";
     }
