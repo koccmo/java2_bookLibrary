@@ -4,7 +4,6 @@ import book_library.console_ui.UIAction;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
 import book_library.core.requests.Reader.SearchReaderRequest;
-import book_library.core.responses.Book.SearchBooksResponse;
 import book_library.core.responses.Reader.SearchReadersResponse;
 import book_library.core.services.Reader.SearchReadersService;
 import org.springframework.beans.factory.annotation.Autowired;
