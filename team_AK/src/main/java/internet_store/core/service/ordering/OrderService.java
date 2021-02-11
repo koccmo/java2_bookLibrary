@@ -76,10 +76,14 @@ public class OrderService {
             orderForSave.setTax(taxAmount);
             orderForSave.setTotal(total);
             orderForSave.setStatus("ORDER RECEIVED");
-            productInCart.getProduct().setQuantity(productInCart.getProduct().getQuantity() - productInCart.getQuantity());
+            productInCart.getProduct().setQuantity(newCartQuantity(productInCart));
             orderRepository.saveAndFlush(orderForSave);
         });
         orderStatusService.changeOrderStatus(orderNumber, "ORDER RECEIVED");
+    }
+
+    private long newCartQuantity(ProductInCart productInCart) {
+        return productInCart.getProduct().getQuantity() - productInCart.getQuantity();
     }
 
     public List<ProductInCart> getAllItemsFromCart() {

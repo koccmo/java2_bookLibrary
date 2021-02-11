@@ -10,6 +10,17 @@ public class ChangeTargetNameRequest {
         this.newTargetName = newTargetName;
     }
 
+    public void setTargetIdToChange(Long targetIdToChange) {
+        this.targetIdToChange = targetIdToChange;
+    }
+
+    public void setNewTargetName(String newTargetName) {
+        this.newTargetName = newTargetName;
+    }
+
+    public ChangeTargetNameRequest() {
+    }
+
     public Long getTargetIdToChange() {
         return targetIdToChange;
     }

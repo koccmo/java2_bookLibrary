@@ -17,28 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SearchByProductPriceController {
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    CheckStockQuantityService quantityService;
+    private CheckStockQuantityService quantityService;
     @Autowired
-    AddToCartService addToCartService;
+    private AddToCartService addToCartService;
     @Autowired
-    SearchByProductPricePagingService paging;
+    private SearchByProductPricePagingService paging;
     @Autowired
-    CartRepository CartRepository;
-    private long cartCount;
+    private CartRepository CartRepository;
 
     @PostMapping("search_product_price")
     public String startSearchByPrice(@RequestParam(value = "search") String search, ModelMap modelMap) {
         paging.startPaging(search);
 
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_price";
     }
 
@@ -48,13 +43,9 @@ public class SearchByProductPriceController {
         if (password.equals("admin")) {
             return "service/service";
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "Login error : Incorrect password");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_price";
     }
 
@@ -73,12 +64,8 @@ public class SearchByProductPriceController {
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_price";
     }
 
@@ -90,12 +77,8 @@ public class SearchByProductPriceController {
             modelMap.addAttribute("info", "");
             paging.nextPage(true);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_price";
     }
 
@@ -107,16 +90,15 @@ public class SearchByProductPriceController {
             modelMap.addAttribute("info", "");
             paging.nextPage(false);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_price";
     }
 
-    private void updateCartCount() {
-        cartCount = cartCountService.getCartCount();
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("products", paging.getListOnePage());
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
+        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
+                + paging.getPagesQuantity());
     }
 }

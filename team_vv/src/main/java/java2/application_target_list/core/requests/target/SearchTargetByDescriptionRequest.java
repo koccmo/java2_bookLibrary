@@ -5,10 +5,12 @@ import java2.application_target_list.core.requests.Paging;
 
 public class SearchTargetByDescriptionRequest {
 
-    private final String description;
-
+    private String description;
     private Paging paging;
     private Ordering ordering;
+
+    public SearchTargetByDescriptionRequest() {
+    }
 
     public SearchTargetByDescriptionRequest(String description) {
         this.description = description;
@@ -40,5 +42,17 @@ public class SearchTargetByDescriptionRequest {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

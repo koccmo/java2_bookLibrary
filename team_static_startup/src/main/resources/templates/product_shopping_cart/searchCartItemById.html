@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Search Shopping Cart Item by Id</title>
+</head>
+<body>
+
+<h3>Search shopping cart item by Id</h3>
+
+<!--Request Table-->
+<table>
+    <tr>
+        <td>ID:</td>
+    </tr>
+
+    <tr>
+        <form action="/product_shopping_cart/searchCartItemById" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.shoppingCartItemId}"/></td>
+            <td>
+                <input type="submit" value="Search for Cart Item"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}" />
+            <td th:text="${error.message}" />
+        </tr>
+    </td>
+
+
+</table>
+
+<br>
+
+<!--Result Table-->
+<td th:if="${cartItem != null}">
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td>Shopping Cart Id:</td>
+            <td>Product Id:</td>
+            <td>Quantity:</td>
+        </tr>
+
+        <tr th:each="item : ${cartItem}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.shoppingCart.id}"></td>
+            <td th:text="${item.product.id}"></td>
+            <td th:text="${item.quantity}"></td>
+        </tr>
+
+
+    </table>
+
+</td>
+
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+</form>
+
+</body>
+
+</html>

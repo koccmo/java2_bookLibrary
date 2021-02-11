@@ -18,28 +18,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CategoryTwoController {
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    CheckStockQuantityService quantityService;
+    private CheckStockQuantityService quantityService;
     @Autowired
-    AddToCartService addToCartService;
+    private AddToCartService addToCartService;
     @Autowired
-    CategoryTwoPagingService paging;
+    private CategoryTwoPagingService paging;
     @Autowired
-    CartRepository CartRepository;
-    private long cartCount;
+    private CartRepository CartRepository;
 
     @GetMapping(value = "category_2")
     public String showCategoryTwo(ModelMap modelMap) {
         paging.startPaging();
-
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
+        refreshData(modelMap);
         return "categories/category_two";
     }
 
@@ -49,13 +43,10 @@ public class CategoryTwoController {
         if (password.equals("admin")) {
             return "service/service";
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "Login error : Incorrect password");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "categories/category_two";
     }
 
@@ -74,12 +65,9 @@ public class CategoryTwoController {
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "categories/category_two";
     }
 
@@ -91,12 +79,9 @@ public class CategoryTwoController {
             modelMap.addAttribute("info", "");
             paging.nextPage(true);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "categories/category_two";
     }
 
@@ -108,16 +93,16 @@ public class CategoryTwoController {
             modelMap.addAttribute("info", "");
             paging.nextPage(false);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "categories/category_two";
     }
 
-    private void updateCartCount() {
-        cartCount = cartCountService.getCartCount();
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("products", paging.getListOnePage());
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
+        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
+                + paging.getPagesQuantity());
     }
 }

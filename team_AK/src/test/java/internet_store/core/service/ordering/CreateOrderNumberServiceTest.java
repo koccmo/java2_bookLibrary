@@ -1,28 +1,22 @@
 package internet_store.core.service.ordering;
 
-import internet_store.core.service.date_formats.DateCreator;
+import internet_store.core.service.date_formats.ShortDateFormatCreatorImpl;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class CreateOrderNumberServiceTest {
-    @Mock
-    DateCreator dateCreator;
-    @InjectMocks
-    CreateOrderNumberService numberService;
+    private final CreateOrderNumberService numberService = new CreateOrderNumberService();
+    private final ShortDateFormatCreatorImpl shortDateFormatCreator = new ShortDateFormatCreatorImpl();
 
     @Test
     public void createFullOrderNumber() {
-        Mockito.lenient().when(dateCreator.createShortDateFormat()).thenReturn("08022021");
         numberService.setOrderNumber(1);
         numberService.createOrderNumber();
 
-        assertEquals("08022021/1", numberService.getFullOrderNumber());
+        String result = shortDateFormatCreator.createShortDateFormat() + "/1";
+
+        assertEquals(result, numberService.getFullOrderNumber());
     }
 }

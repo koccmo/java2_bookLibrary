@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DeleteProductController {
     @Autowired
-    SearchProductByTitleService service;
+    private SearchProductByTitleService service;
     @Autowired
-    DeleteProductService deletedProductService;
-
+    private DeleteProductService deletedProductService;
     private Product deletedProduct;
 
     @GetMapping(value = "delete_product")

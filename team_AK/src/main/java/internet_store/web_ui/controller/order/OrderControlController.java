@@ -27,10 +27,7 @@ public class OrderControlController {
         paging.startPaging();
 
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("orders", paging.getListOnePage());
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
+        refreshData(modelMap);
         return "order/order_control";
     }
 
@@ -43,10 +40,7 @@ public class OrderControlController {
             paging.nextPage(true);
         }
 
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("orders", paging.getListOnePage());
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
+        refreshData(modelMap);
         return "order/order_control";
     }
 
@@ -59,11 +53,7 @@ public class OrderControlController {
             paging.nextPage(false);
         }
 
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("orders", paging.getListOnePage());
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
-
+        refreshData(modelMap);
         return "order/order_control";
     }
 
@@ -75,10 +65,14 @@ public class OrderControlController {
         orderStatusService.changeOrderStatus(orderNumber, status);
 
         modelMap.addAttribute("info", "");
+        refreshData(modelMap);
+        return "order/order_control";
+    }
+
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("orders", paging.getListOnePage());
+        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
         modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
                 + paging.getPagesQuantity());
-        modelMap.addAttribute("orders", paging.refreshTableContent());
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
-        return "order/order_control";
     }
 }

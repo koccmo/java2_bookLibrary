@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Show All Customers</title>
+</head>
+<body>
+
+<h3>Show all customers</h3>
+
+<table>
+    <tr>
+        <td>ID:</td>
+        <td>First Name:</td>
+        <td>Last Name:</td>
+        <td>E-mail:</td>
+        <td>Phone number:</td>
+        <td>Address:</td>
+    </tr>
+
+    <td th:if="${customers != null}">
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.customerId}"></td>
+            <td th:text="${customer.customerFirstName}"></td>
+            <td th:text="${customer.customerSecondName}"></td>
+            <td th:text="${customer.customerPhone}"></td>
+            <td th:text="${customer.customerEmail}"></td>
+            <td th:text="${customer.customerAddress}"></td>
+
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

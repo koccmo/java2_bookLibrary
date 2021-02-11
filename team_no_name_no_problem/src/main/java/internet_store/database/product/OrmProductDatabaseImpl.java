@@ -162,7 +162,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("SELECT p FROM Product p WHERE description = :description");
+                .createQuery("SELECT p FROM Product p WHERE price >= :startPrice and price <= :endPrice");
         query.setParameter("startPrice", startPrice);
         query.setParameter("endPrice", endPrice);
         return query.getResultList();
@@ -192,8 +192,8 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("SELECT p FROM Product p WHERE description = :description " +
-                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+                .createQuery("SELECT p FROM Product p WHERE title = :title " +
+                        "  AND price >= :startPrice and price <= :endPrice ");
         query.setParameter("title", title);
         query.setParameter("startPrice", startPrice);
         query.setParameter("endPrice", endPrice);

@@ -21,19 +21,19 @@ import java.math.BigDecimal;
 @Controller
 public class CartController {
     @Autowired
-    CartRepository CartRepository;
+    private CartRepository CartRepository;
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    CartPagingService paging;
+    private CartPagingService paging;
     @Autowired
-    TotalSumCartService totalSumCartService;
+    private TotalSumCartService totalSumCartService;
     @Autowired
-    Tax tax;
+    private Tax tax;
     @Autowired
-    DeleteProductFromCartService service;
+    private DeleteProductFromCartService service;
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @GetMapping(value = "cart")
     public String getCart(ModelMap modelMap) {
@@ -46,16 +46,7 @@ public class CartController {
             tax.setAmountWithTax(new BigDecimal("0.00"));
         }
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartList", paging.getListOnePage());
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
-        modelMap.addAttribute("currencySymbol", tax.getCurrencySymbol());
-        modelMap.addAttribute("taxRate", tax.getTaxRate());
-        modelMap.addAttribute("totalSum", totalSumCartService.calculateTotalSum());
-        modelMap.addAttribute("taxAmount", tax.getTaxAmount(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("total", tax.getAmountWithTax(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
+        refreshData(modelMap);
         return "cart/cart";
     }
 
@@ -68,16 +59,7 @@ public class CartController {
             paging.nextPage(true);
         }
 
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("cartList", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
-        modelMap.addAttribute("totalSum", totalSumCartService.calculateTotalSum());
-        modelMap.addAttribute("currencySymbol", tax.getCurrencySymbol());
-        modelMap.addAttribute("taxRate", tax.getTaxRate());
-        modelMap.addAttribute("taxAmount", tax.getTaxAmount(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("total", tax.getAmountWithTax(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
+        refreshData(modelMap);
         return "cart/cart";
     }
 
@@ -90,16 +72,7 @@ public class CartController {
             paging.nextPage(false);
         }
 
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("cartList", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
-        modelMap.addAttribute("totalSum", totalSumCartService.calculateTotalSum());
-        modelMap.addAttribute("currencySymbol", tax.getCurrencySymbol());
-        modelMap.addAttribute("taxRate", tax.getTaxRate());
-        modelMap.addAttribute("taxAmount", tax.getTaxAmount(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("total", tax.getAmountWithTax(totalSumCartService.calculateTotalSum()));
-        modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
+        refreshData(modelMap);
         return "cart/cart";
     }
 
@@ -112,17 +85,21 @@ public class CartController {
         paging.startPaging();
 
         modelMap.addAttribute("info", "");
+        refreshData(modelMap);
+        orderService.setClient(new Client());
+        return "cart/cart";
+    }
+
+    private void refreshData(ModelMap modelMap) {
         modelMap.addAttribute("cartList", paging.getListOnePage());
         modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
                 + paging.getPagesQuantity());
         modelMap.addAttribute("cartCount", cartCountService.getCartCount());
-        modelMap.addAttribute("totalSum", totalSumCartService.calculateTotalSum());
         modelMap.addAttribute("currencySymbol", tax.getCurrencySymbol());
         modelMap.addAttribute("taxRate", tax.getTaxRate());
+        modelMap.addAttribute("totalSum", totalSumCartService.calculateTotalSum());
         modelMap.addAttribute("taxAmount", tax.getTaxAmount(totalSumCartService.calculateTotalSum()));
         modelMap.addAttribute("total", tax.getAmountWithTax(totalSumCartService.calculateTotalSum()));
         modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
-        orderService.setClient(new Client());
-        return "cart/cart";
     }
 }

@@ -20,7 +20,11 @@ public class FindShoppingCartItemByIdResponse extends CoreResponse {
         this.productShoppingCart = productShoppingCart;
     }
 
-    public Optional<ProductShoppingCart> getProductShoppingCart() {
-        return productShoppingCart;
+    public ProductShoppingCart getProductShoppingCart() {
+        if (productShoppingCart.isPresent()) {
+            return productShoppingCart.get();
+        } else {
+            return null;
+        }
     }
 }

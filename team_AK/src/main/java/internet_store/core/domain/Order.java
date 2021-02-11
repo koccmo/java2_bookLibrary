@@ -17,7 +17,7 @@ public class Order {
     private String number;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
-    private Date  date;
+    private Date date;
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Find customer by First name</title>
+</head>
+
+<body>
+
+<h3>Find customers by First name</h3>
+
+<table>
+    <tr>
+        <td>Customer First name:</td>
+    </tr>
+
+    <tr>
+        <form action="/customer/findCustomerByFirstName" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.customerFirstName}"/></td>
+            <td>
+                <input type="submit" value="Find customer"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+
+    <td th:if="${customers != null}">
+        <tr>
+            <td>ID:</td>
+            <td>First name:</td>
+            <td>Second name:</td>
+            <td>Phone:</td>
+            <td>Email:</td>
+            <td>Address:</td>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.customerId}" /></td>
+            <td th:text="${customer.customerFirstName}" /></td>
+            <td th:text="${customer.customerSecondName}" /></td>
+            <td th:text="${customer.customerPhone}" /></td>
+            <td th:text="${customer.customerEmail}" /></td>
+            <td th:text="${customer.customerAddress}" /></td>
+        </tr>
+    </td>
+</table>
+
+</body>
+
+</html>

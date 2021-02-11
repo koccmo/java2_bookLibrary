@@ -17,28 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SearchByProductTitleController {
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    CheckStockQuantityService quantityService;
+    private CheckStockQuantityService quantityService;
     @Autowired
-    AddToCartService addToCartService;
+    private AddToCartService addToCartService;
     @Autowired
-    SearchByProductTitlePagingService paging;
+    private SearchByProductTitlePagingService paging;
     @Autowired
-    CartRepository CartRepository;
-    private long cartCount;
+    private CartRepository CartRepository;
 
     @PostMapping("search_product")
     public String startSearchByTitle(@RequestParam(value = "search") String search, ModelMap modelMap) {
         paging.startPaging(search);
 
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_title";
     }
 
@@ -48,13 +43,9 @@ public class SearchByProductTitleController {
         if (password.equals("admin")) {
             return "service/service";
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "Login error : Incorrect password");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_title";
     }
 
@@ -73,12 +64,8 @@ public class SearchByProductTitleController {
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
+        refreshData(modelMap);
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("cartCount", cartCount);
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_title";
     }
 
@@ -90,12 +77,8 @@ public class SearchByProductTitleController {
             modelMap.addAttribute("info", "");
             paging.nextPage(true);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_title";
     }
 
@@ -107,16 +90,15 @@ public class SearchByProductTitleController {
             modelMap.addAttribute("info", "");
             paging.nextPage(false);
         }
-        updateCartCount();
-        modelMap.addAttribute("products", paging.getListOnePage());
-        modelMap.addAttribute("cartCount", cartCount);
+        refreshData(modelMap);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
         return "search/search_by_product_title";
     }
 
-    private void updateCartCount() {
-        cartCount = cartCountService.getCartCount();
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("products", paging.getListOnePage());
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
+        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
+                + paging.getPagesQuantity());
     }
 }

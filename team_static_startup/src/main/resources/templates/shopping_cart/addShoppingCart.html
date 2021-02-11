@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Add Shopping Cart</title>
+</head>
+
+<body>
+
+<h3>Add Shopping Cart</h3>
+
+<table>
+    <tr>
+        <td>Customer Id:</td>
+    </tr>
+
+    <tr>
+        <form action="/shopping_cart/addShoppingCart" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.customerId}"/></td>
+            <td>
+                <input type="submit" value="Add Shopping Cart"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+</table>
+
+</body>
+
+</html>

@@ -18,20 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CartAddClientController {
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @Autowired
-    AddClientService addClientService;
+    private AddClientService addClientService;
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    OrderService orderService;
-    private long cartCount;
+    private  OrderService orderService;
 
     @GetMapping(value = "cart_add_client")
     public String getCartClient(ModelMap modelMap) {
-        updatePage();
         modelMap.addAttribute("client", new Client());
-        modelMap.addAttribute("cartCount", cartCount);
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
         modelMap.addAttribute("errors", "");
         modelMap.addAttribute("info", "");
         modelMap.addAttribute("disabled", "false");
@@ -41,8 +39,6 @@ public class CartAddClientController {
     @PostMapping(value = "/order_add_client")
     public String addNewClient(@ModelAttribute(value = "client") Client client, ModelMap modelMap) {
         StringBuilder allErrors = new StringBuilder();
-
-        updatePage();
 
         AddClientRequest request = new AddClientRequest(client);
         AddClientResponse response = addClientService.execute(request);
@@ -57,13 +53,9 @@ public class CartAddClientController {
             modelMap.addAttribute("info", "");
         }
 
-        modelMap.addAttribute("cartCount", cartCount);
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
         modelMap.addAttribute("errors", allErrors.toString());
         modelMap.addAttribute("client", client);
         return "cart/cart_add_client";
-    }
-
-    private void updatePage() {
-        cartCount = cartCountService.getCartCount();
     }
 }
