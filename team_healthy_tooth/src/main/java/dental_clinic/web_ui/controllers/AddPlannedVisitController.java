@@ -16,7 +16,7 @@ public class AddPlannedVisitController {
     @Autowired
     private AddPlannedVisitService addPlannedVisitService;
 
-    @GetMapping(value = "addPlannedVisit")
+    @GetMapping(value = "/addPlannedVisit")
     public String showAddPlannedVisitPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new AddPlannedVisitRequest());
         return "addPlannedVisit";
@@ -26,7 +26,7 @@ public class AddPlannedVisitController {
     public String processAddPlannedVisitRequest(@ModelAttribute(value = "request") AddPlannedVisitRequest addPlannedVisitRequest, ModelMap modelMap) {
         AddPlannedVisitResponse addPlannedVisitResponse = addPlannedVisitService.execute(addPlannedVisitRequest);
         if (addPlannedVisitResponse.hasErrors()) {
-            modelMap.addAttribute("request", addPlannedVisitResponse.getErrors());
+            modelMap.addAttribute("errors", addPlannedVisitResponse.getErrors());
             return "/addPlannedVisit";
         } else {
             return "redirect:/";
