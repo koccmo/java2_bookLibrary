@@ -4,11 +4,13 @@ import internet_store.application.core.requests.shopping_cart_item.AddShoppingCa
 import internet_store.application.core.responses.shopping_cart_item.AddShoppingCartItemResponse;
 import internet_store.application.core.services.shopping_cart_item.AddShoppingCartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Controller
 public class AddShoppingCartItemController {
 
     @Autowired
