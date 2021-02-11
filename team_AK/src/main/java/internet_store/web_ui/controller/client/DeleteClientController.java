@@ -19,12 +19,11 @@ import java.util.List;
 @Controller
 public class DeleteClientController {
     @Autowired
-    SearchClientService service;
+    private SearchClientService service;
     @Autowired
-    DeleteClientService deletedClientService;
+    private DeleteClientService deletedClientService;
     @Autowired
-    ClientRepository clientRepository;
-
+    private ClientRepository clientRepository;
     private Client deletedClient;
 
     @GetMapping(value = "delete_client")

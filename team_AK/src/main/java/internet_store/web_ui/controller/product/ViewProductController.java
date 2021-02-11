@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ViewProductController {
 
     @Autowired
-    ProductsPagingService paging;
+    private ProductsPagingService paging;
 
     @GetMapping(value = "view_product")
     public String showProduct(ModelMap modelMap) {
         paging.startPaging();
 
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("productList", paging.getListOnePage());
-
+        refreshData(modelMap);
         return "product/view_product";
     }
+
 
     @PostMapping(value = "/view_product_next")
     public String nextPageProductControl(ModelMap modelMap) {
@@ -33,9 +31,7 @@ public class ViewProductController {
             modelMap.addAttribute("info", "");
             paging.nextPage(true);
         }
-        modelMap.addAttribute("pages", "          Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity() + "          ");
-        modelMap.addAttribute("productList", paging.getListOnePage());
+        refreshData(modelMap);
         return "product/view_product";
     }
 
@@ -47,9 +43,13 @@ public class ViewProductController {
             modelMap.addAttribute("info", "");
             paging.nextPage(false);
         }
-        modelMap.addAttribute("pages", "          Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity() + "          ");
-        modelMap.addAttribute("productList", paging.getListOnePage());
+        refreshData(modelMap);
         return "product/view_product";
+    }
+
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
+                + paging.getPagesQuantity());
+        modelMap.addAttribute("productList", paging.getListOnePage());
     }
 }

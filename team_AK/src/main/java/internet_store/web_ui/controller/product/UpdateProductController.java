@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UpdateProductController {
     @Autowired
-    SearchProductByTitleService service;
+    private SearchProductByTitleService service;
     @Autowired
-    AddProductService addProductService;
-
+    private AddProductService addProductService;
     private Product updatedProduct;
 
     @GetMapping(value = "update_product")

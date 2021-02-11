@@ -24,30 +24,27 @@ import java.util.List;
 @Controller
 public class IndexController {
     @Autowired
-    ProductRangeService rangeService;
+    private ProductRangeService rangeService;
     @Autowired
-    CheckStockQuantityService quantityService;
+    private CheckStockQuantityService quantityService;
     @Autowired
-    CartProductsCountService cartCountService;
+    private CartProductsCountService cartCountService;
     @Autowired
-    AddToCartService addToCartService;
+    private AddToCartService addToCartService;
     @Autowired
-    RandomProductListService randomService;
+    private RandomProductListService randomService;
     @Autowired
-    CartRepository CartRepository;
-
+    private CartRepository CartRepository;
     private List<Product> startPageProducts;
-    private long cartCount;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/index")
     public String index(ModelMap modelMap) {
         updatePage();
 
         Path resourceDirectory = Paths.get("resources");
 
-        modelMap.addAttribute("cartCount", cartCount);
         modelMap.addAttribute("error", "");
-        modelMap.addAttribute("products", startPageProducts);
+        refreshData(modelMap);
         return "index";
     }
 
@@ -67,8 +64,7 @@ public class IndexController {
             modelMap.addAttribute("error", "");
         }
         updatePage();
-        modelMap.addAttribute("cartCount", cartCount);
-        modelMap.addAttribute("products", startPageProducts);
+        refreshData(modelMap);
         return "index";
     }
 
@@ -79,20 +75,22 @@ public class IndexController {
             return "service/service";
         }
         updatePage();
-        modelMap.addAttribute("cartCount", cartCount);
+        refreshData(modelMap);
         modelMap.addAttribute("error", "Login error : Incorrect password");
-        modelMap.addAttribute("products", startPageProducts);
         return "index";
     }
 
     private void updatePage() {
-        cartCount = cartCountService.getCartCount();
-
         List<Product> randomList = randomService.createRandomProductsList();
         if (randomList.size() < 6) {
             startPageProducts = rangeService.getProductsRange(6, 0);
         } else {
             startPageProducts = randomList;
         }
+    }
+
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("cartCount", cartCountService.getCartCount());
+        modelMap.addAttribute("products", startPageProducts);
     }
 }

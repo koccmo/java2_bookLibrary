@@ -4,16 +4,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
-    <changeSet author="aleksey.kodin" id="3">
-        <createTable tableName="telegram">
+    <changeSet author="aleksey.kodin" id="10">
+        <createTable tableName="session">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="chatid" type="BIGINT">
+            <column name="session_id" type="VARCHAR(32)">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_number" type="VARCHAR(55)">
-                <constraints nullable="false"/>
+           <column name="client_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+           <column name="cart_id" type="BIGINT">
+                <constraints nullable="true"/>
             </column>
         </createTable>
     </changeSet>

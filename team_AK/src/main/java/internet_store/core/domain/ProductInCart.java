@@ -11,16 +11,16 @@ import java.math.BigDecimal;
 public class ProductInCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
     @Column(name = "quantity")
-    Long quantity;
+    private Long quantity;
     @Column(name = "sum")
-    BigDecimal sum;
+    private BigDecimal sum;
     @Column(name = "deleted")
-    Boolean deleted = false;
+    private Boolean deleted = false;
     @Column(name = "ordered")
-    Boolean ordered = false;
+    private Boolean ordered = false;
 }

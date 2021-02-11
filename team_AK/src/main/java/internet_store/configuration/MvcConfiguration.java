@@ -1,15 +1,16 @@
 package internet_store.configuration;
 
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
+@ServletComponentScan(basePackages = "internet_store.web_ui.servlet")
 @EnableWebMvc
 public class MvcConfiguration implements WebMvcConfigurer {
     @Bean
@@ -29,7 +30,18 @@ public class MvcConfiguration implements WebMvcConfigurer {
                 .addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/templates/internet_store/images/")
                 .setCachePeriod(320000)
-                .resourceChain(true)
+                .resourceChain(false)
                 .addResolver(new PathResourceResolver());
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable("estore");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("forward:/index");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 }

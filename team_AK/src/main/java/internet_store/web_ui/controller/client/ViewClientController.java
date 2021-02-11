@@ -12,18 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ViewClientController {
 
     @Autowired
-    ClientPagingService paging;
+    private ClientPagingService paging;
     @Value("${client-records-on-page}")
     private int recordsCountOnPage;
 
     @GetMapping(value = "view_client")
     public String showClient(ModelMap modelMap) {
         paging.startPaging();
-
         modelMap.addAttribute("info", "");
-        modelMap.addAttribute("clientList", paging.getListOnePage());
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
+        refreshData(modelMap);
         return "client/view_client";
     }
 
@@ -35,9 +32,7 @@ public class ViewClientController {
             modelMap.addAttribute("info", "");
             paging.nextPage(true);
         }
-        modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
-                + paging.getPagesQuantity());
-        modelMap.addAttribute("clientList", paging.getListOnePage());
+        refreshData(modelMap);
         return "client/view_client";
     }
 
@@ -49,9 +44,13 @@ public class ViewClientController {
             modelMap.addAttribute("info", "");
             paging.nextPage(false);
         }
+        refreshData(modelMap);
+        return "client/view_client";
+    }
+
+    private void refreshData(ModelMap modelMap) {
+        modelMap.addAttribute("clientList", paging.getListOnePage());
         modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
                 + paging.getPagesQuantity());
-        modelMap.addAttribute("clientList", paging.getListOnePage());
-        return "client/view_client";
     }
 }

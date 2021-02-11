@@ -20,12 +20,11 @@ import java.util.List;
 @Controller
 public class UpdateClientController {
     @Autowired
-    SearchClientService service;
+    private SearchClientService service;
     @Autowired
-    AddClientService addClientService;
+    private AddClientService addClientService;
     @Autowired
-    ClientRepository clientRepository;
-
+    private ClientRepository clientRepository;
     private Client updatedClient;
 
     @GetMapping(value = "update_client")
