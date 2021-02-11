@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class SearchVisitsByPersonalCode {
+public class SearchVisitsByPatientIdController {
 
     @Autowired
     private SearchVisitByPatientIdService searchVisitByPatientIdService;
 
-    @GetMapping(value = "searchVisitByPatientId")
+    @GetMapping(value = "/searchVisitByPatientId")
     public String showSearchVisitsById(ModelMap modelMap) {
         modelMap.addAttribute("request", new SearchVisitByPatientIdRequest());
         return "searchVisitByPatientId";
