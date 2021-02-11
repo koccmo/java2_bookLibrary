@@ -30,7 +30,9 @@ public class SearchBooksService {
 
     @Autowired
     private BookRepository bookRepository;
-    @Autowired private SearchBooksRequestValidator validator;
+
+    @Autowired
+    private SearchBooksRequestValidator validator;
 
     @Transactional
     public SearchBooksResponse execute(SearchBooksRequest request) {
