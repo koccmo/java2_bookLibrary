@@ -49,12 +49,12 @@
             <td>Quantity:</td>
         </tr>
 
-<!--        <tr th:each="item : ${cartItem}">-->
-<!--            <td th:text="${item.id}"></td>-->
-<!--            <td th:text="${item.shopping_cart_id}"></td>-->
-<!--            <td th:text="${item.product_id}"></td>-->
-<!--            <td th:text="${item.quantity}"></td>-->
-<!--        </tr>-->
+        <tr th:each="item : ${cartItem}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.shoppingCart.id}"></td>
+            <td th:text="${item.product.id}"></td>
+            <td th:text="${item.quantity}"></td>
+        </tr>
 
 
     </table>

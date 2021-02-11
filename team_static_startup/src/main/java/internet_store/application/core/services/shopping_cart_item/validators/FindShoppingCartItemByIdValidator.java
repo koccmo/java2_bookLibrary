@@ -13,7 +13,7 @@ public class FindShoppingCartItemByIdValidator {
     public List<CoreError> validate(FindShoppingCartItemByIdRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (request.getShoppingCartItemId() <= 0 || request.getShoppingCartItemId() == null){
+        if (request.getShoppingCartItemId() == null || request.getShoppingCartItemId() <= 0){
             errors.add(new CoreError("Shopping Cart Item Id.", "Should be grater than zero or not equal to NULL."));
         }
 
