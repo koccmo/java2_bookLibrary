@@ -20,10 +20,10 @@ public class DeleteByOtherUIAction implements UIAction {
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please select criteria by which you wish to delete  product/products from existing database");
-        System.out.println("Criterias are: title, description and price range. However, if one price type");
-        System.out.println("Each criteria may be used individually or in combinations with others.");
-        System.out.println("If a certain criteria is not needed to be used, please press enter to select another.");
+        System.out.println("Please select criteria by which you wish to delete product/products from existing database");
+        System.out.println("Criterias are: title, description and price range.");
+        System.out.println("Each criteria may be used individually or in combination with others.");
+        System.out.println("If a certain criteria is not needed to be used, please press enter to skip and move to the next criteria.");
         System.out.println("Price range can be skipped only by entering zeros.");
         System.out.println();
 
