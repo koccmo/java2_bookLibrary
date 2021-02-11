@@ -5,6 +5,9 @@ public class AddUserRequest {
     private String firstName;
     private String lastName;
 
+    public AddUserRequest() {
+    }
+
     public AddUserRequest(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,4 +20,16 @@ public class AddUserRequest {
     public String getLastName() {
         return lastName;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+
+
 }

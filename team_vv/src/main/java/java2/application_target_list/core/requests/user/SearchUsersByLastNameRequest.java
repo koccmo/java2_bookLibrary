@@ -9,6 +9,9 @@ public class SearchUsersByLastNameRequest {
     private Paging paging;
     private Ordering ordering;
 
+    public SearchUsersByLastNameRequest() {
+    }
+
     public SearchUsersByLastNameRequest(String lastName) {
         this.lastName = lastName;
     }
@@ -39,5 +42,17 @@ public class SearchUsersByLastNameRequest {
 
     public Ordering getOrdering() {
         return ordering;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
     }
 }

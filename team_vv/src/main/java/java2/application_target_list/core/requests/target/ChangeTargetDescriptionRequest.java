@@ -10,11 +10,22 @@ public class ChangeTargetDescriptionRequest {
         this.newTargetDescription = newTargetDescription;
     }
 
+    public ChangeTargetDescriptionRequest() {
+    }
+
     public Long getTargetIdToChange() {
         return targetIdToChange;
     }
 
     public String getNewTargetDescription() {
         return newTargetDescription;
+    }
+
+    public void setTargetIdToChange(Long targetIdToChange) {
+        this.targetIdToChange = targetIdToChange;
+    }
+
+    public void setNewTargetDescription(String newTargetDescription) {
+        this.newTargetDescription = newTargetDescription;
     }
 }

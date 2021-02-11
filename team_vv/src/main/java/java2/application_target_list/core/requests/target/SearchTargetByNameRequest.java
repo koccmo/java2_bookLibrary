@@ -5,11 +5,12 @@ import java2.application_target_list.core.requests.Paging;
 
 public class SearchTargetByNameRequest {
 
-    private final String name;
+    private String name;
     private Paging paging;
     private Ordering ordering;
 
-
+    public SearchTargetByNameRequest() {
+    }
 
     public SearchTargetByNameRequest(String name) {
         this.name = name;
@@ -43,4 +44,15 @@ public class SearchTargetByNameRequest {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
 }

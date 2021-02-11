@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.AddUserRequest;
@@ -84,7 +84,7 @@ public class ChangeUserLastNameAcceptanceTest {
     }
 
     private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private DatabaseCleaner createDatabaseCleaner() {

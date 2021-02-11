@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.database.user.UserRepository;
@@ -105,7 +105,7 @@ public class GetAllRecordsAcceptanceTest {
     }
 
     private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
 
     }
 }

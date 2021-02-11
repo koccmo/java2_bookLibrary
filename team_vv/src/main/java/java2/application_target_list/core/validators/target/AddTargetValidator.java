@@ -4,6 +4,8 @@ import java2.application_target_list.core.requests.target.AddTargetRequest;
 import org.springframework.stereotype.Component;
 
 import java2.application_target_list.core.responses.CoreError;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class AddTargetValidator {
             errors.add(new CoreError("Target description", "must not be empty!"));
         }
 
-        if (isDeadlineNegative(request)){
+        if (isDeadlineNegative(request)) {
             errors.add(new CoreError("Target deadline", "must not be negative!"));
         }
 

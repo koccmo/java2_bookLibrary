@@ -26,7 +26,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "java2.application_target_list")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
-public class TargetListConfiguration {
+public class SpringCoreConfiguration {
 
     @Value("${jdbc.url}") private String jdbcUrl;
     @Value("${driverClass}") private String driverClass;

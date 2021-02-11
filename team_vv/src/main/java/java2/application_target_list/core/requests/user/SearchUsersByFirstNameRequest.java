@@ -9,6 +9,9 @@ public class SearchUsersByFirstNameRequest {
     private Paging paging;
     private Ordering ordering;
 
+    public SearchUsersByFirstNameRequest() {
+    }
+
     public SearchUsersByFirstNameRequest(String firstName) {
         this.firstName = firstName;
     }
@@ -39,5 +42,17 @@ public class SearchUsersByFirstNameRequest {
 
     public Ordering getOrdering() {
         return ordering;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
     }
 }
