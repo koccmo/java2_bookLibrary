@@ -50,7 +50,7 @@ public class ProgramMenu {
         // menuNumberToUIActionMap.put(17, findUIAction(uiActions, FindShoppingCartItemByIdUIService.class));
         // menuNumberToUIActionMap.put(18, findUIAction(uiActions, FindAllShoppingCartItemsUIService.class));
         // menuNumberToUIActionMap.put(19, findUIAction(uiActions, AddShoppingCartUIAction.class));
-        // menuNumberToUIActionMap.put(20, findUIAction(uiActions, FindShoppingCartByIdUIAction.class));
+        menuNumberToUIActionMap.put(20, findUIAction(uiActions, FindShoppingCartByIdUIAction.class));
         // menuNumberToUIActionMap.put(21, findUIAction(uiActions, FindAllShoppingCartsUIAction.class));
         // menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
         menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
@@ -96,11 +96,11 @@ public class ProgramMenu {
         // System.out.println("15. Find customer(s) by first name");
         System.out.println("------------------------------------------------------------");
         // System.out.println("16. Add shopping cart item: ");
-        System.out.println("17. Find shopping cart item by ID: ");
+        // System.out.println("17. Find shopping cart item by ID: ");
         // System.out.println("18. Print all shopping cart items: ");
         // System.out.println("------------------------------------------------------------");
         // System.out.println("19. Add shopping cart");
-        // System.out.println("20. Find shopping cart by ID");
+         System.out.println("20. Find shopping cart by ID");
         // System.out.println("21. Find all shopping carts");
         System.out.println("------------------------------------------------------------");
         // System.out.println("22. Add order");
