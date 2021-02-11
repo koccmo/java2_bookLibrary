@@ -24,7 +24,4 @@ public class FindByProductIdResponse extends CoreResponse {
         return productFoundById;
     }
 
-    public Product getProductObject() {
-        return productFoundById.orElse(null);
-    }
 }
