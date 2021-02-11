@@ -10,22 +10,20 @@
 
     <body>
 
-        <h3>Add doctor</h3>
+        <h3>Add manipulation</h3>
 
         <table>
             <tr>
-                <td>Name:</td>
-                <td>Surname:</td>
-                <td>Phone:</td>
+                <td>Manipulation type:</td>
+                <td>Price:</td>
             </tr>
 
             <tr>
-                <form action="/addDoctor" th:object="${request}" method="post">
-                    <td><input type="text" th:field="${request.doctor.name}"/></td>
-                    <td><input type="text" th:field="${request.doctor.surname}"/></td>
-                    <td><input type="text" th:field="${request.doctor.phone}"/></td>
+                <form action="/addManipulation" th:object="${request}" method="post">
+                    <td><input type="text" th:field="${request.manipulation.manipulationType}"/></td>
+                    <td><input type="text" th:field="${request.manipulation.price}"/></td>
                     <td>
-                        <input type="submit" value="Add Doctor"/>
+                        <input type="submit" value="Add manipulation"/>
                         <input type="reset" value="Clear"/>
                     </td>
                 </form>

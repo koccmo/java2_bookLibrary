@@ -42,7 +42,6 @@ public class UpdatePatientJowlInfoUIAction implements UIAction {
     }
 
     private void inputJowlData(Long id) {
-        Map<Integer, ToothStatus> toothInfo;
 
         Integer toothNumber = inputFormatsValidator.inputInteger("Please enter tooth number");
 

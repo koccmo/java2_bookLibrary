@@ -10,20 +10,28 @@
 
     <body>
 
-        <h3>Get doctor's list</h3>
+        <h3>Get planned visits list</h3>
 
         <table>
             <tr>
                 <td>Name:</td>
                 <td>Surname:</td>
                 <td>Phone:</td>
+                <td>PersonalCode:</td>
+                <td>Visit time:</td>
+                <td>Doctor: name:</td>
+                <td>Surname:</td>
             </tr>
 
             <td th:if="${list != null}">
-                <tr th:each="doctorAndGraphic : ${list}">
-                    <td th:text="${doctorAndGraphic.doctor.name}" />
-                    <td th:text="${doctorAndGraphic.doctor.surname}" />
-                    <td th:text="${doctorAndGraphic.doctor.phone}" />
+                <tr th:each="info : ${list}">
+                    <td th:text="${info.personalData.name}" />
+                    <td th:text="${info.personalData.surname}" />
+                    <td th:text="${info.personalData.phone}" />
+                    <td th:text="${info.personalData.personalCode}" />
+                    <td th:text="${info.visitTime}" />
+                    <td th:text="${info.doctor.name}" />
+                    <td th:text="${info.doctor.surname}" />
                 </tr>
             </td>
 

@@ -7,6 +7,8 @@ public class SearchPlannedVisitsByDateRequest {
     private int monthFrom;
     private int monthTo;
 
+    public SearchPlannedVisitsByDateRequest() { }
+
     public SearchPlannedVisitsByDateRequest(int dayFrom, int dayTo, int monthFrom, int monthTo) {
         this.dayFrom = dayFrom;
         this.dayTo = dayTo;
@@ -28,5 +30,21 @@ public class SearchPlannedVisitsByDateRequest {
 
     public int getMonthTo() {
         return monthTo;
+    }
+
+    public void setDayFrom(int dayFrom) {
+        this.dayFrom = dayFrom;
+    }
+
+    public void setDayTo(int dayTo) {
+        this.dayTo = dayTo;
+    }
+
+    public void setMonthFrom(int monthFrom) {
+        this.monthFrom = monthFrom;
+    }
+
+    public void setMonthTo(int monthTo) {
+        this.monthTo = monthTo;
     }
 }

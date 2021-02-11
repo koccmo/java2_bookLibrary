@@ -10,22 +10,22 @@
 
     <body>
 
-        <h3>Add doctor</h3>
+        <h3>Add planned visit</h3>
 
         <table>
             <tr>
-                <td>Name:</td>
-                <td>Surname:</td>
-                <td>Phone:</td>
+                <td>Visit date and time DD-MM-YYYY HH:MM:</td>
+                <td>Personal code:</td>
+                <td>Doctor's id:</td>
             </tr>
 
             <tr>
-                <form action="/addDoctor" th:object="${request}" method="post">
-                    <td><input type="text" th:field="${request.doctor.name}"/></td>
-                    <td><input type="text" th:field="${request.doctor.surname}"/></td>
-                    <td><input type="text" th:field="${request.doctor.phone}"/></td>
+                <form action="/addPlannedVisit" th:object="${request}" method="post">
+                    <td><input type="text" th:field="${request.visitDataText}"/></td>
+                    <td><input type="text" th:field="${request.personalCode}"/></td>
+                    <td><input type="number" th:field="${request.doctorsId}"/></td>
                     <td>
-                        <input type="submit" value="Add Doctor"/>
+                        <input type="submit" value="Add planned visit"/>
                         <input type="reset" value="Clear"/>
                     </td>
                 </form>

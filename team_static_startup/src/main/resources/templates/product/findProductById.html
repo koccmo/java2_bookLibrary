@@ -37,28 +37,25 @@
 
 <br>
 
-<!--<table>
-    <tr>
-        <td>ID:</td>
-        <td>Name:</td>
-        <td>Description:</td>
-        <td>Price:</td>
-    </tr>
+<td th:if="${products != null}">
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td>Name:</td>
+            <td>Description:</td>
+            <td>Price:</td>
+        </tr>
 
-    <td th:if="${products != null}">
         <tr th:each="product : ${products}">
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
-
         </tr>
-    </td>
 
-</table>-->
+    </table>
 
 </td>
-
 
 <form action="/" method="get">
     <input type="submit" value="Go to main page" name="Submit"/>
