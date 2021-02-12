@@ -31,7 +31,7 @@ public class FindCustomerByIdController {
         if (response.hasErrors()){
             modelMap.addAttribute("errors", response.getErrors());
         } else {
-            modelMap.addAttribute("customers", response.getCustomerObject());
+            modelMap.addAttribute("customers", response.getCustomerFindById().orElse(null));
         }
         return "/customer/findCustomerById";
     }
