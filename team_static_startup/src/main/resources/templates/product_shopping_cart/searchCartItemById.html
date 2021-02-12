@@ -29,11 +29,10 @@
 
     <td th:if="${errors != null}">
         <tr th:each="error : ${errors}">
-            <td th:text="${error.field}" />
-            <td th:text="${error.message}" />
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
         </tr>
     </td>
-
 
 </table>
 
@@ -56,11 +55,9 @@
             <td th:text="${item.quantity}"></td>
         </tr>
 
-
     </table>
 
 </td>
-
 
 <form action="/" method="get">
     <input type="submit" value="Go to main page" name="Submit"/>

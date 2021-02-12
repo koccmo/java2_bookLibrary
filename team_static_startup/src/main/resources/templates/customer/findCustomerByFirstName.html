@@ -45,15 +45,19 @@
             <td>Address:</td>
         </tr>
         <tr th:each="customer : ${customers}">
-            <td th:text="${customer.customerId}" /></td>
-            <td th:text="${customer.customerFirstName}" /></td>
-            <td th:text="${customer.customerSecondName}" /></td>
-            <td th:text="${customer.customerPhone}" /></td>
-            <td th:text="${customer.customerEmail}" /></td>
-            <td th:text="${customer.customerAddress}" /></td>
+            <td th:text="${customer.customerId}"></td>
+            <td th:text="${customer.customerFirstName}"></td>
+            <td th:text="${customer.customerSecondName}"></td>
+            <td th:text="${customer.customerPhone}"></td>
+            <td th:text="${customer.customerEmail}"></td>
+            <td th:text="${customer.customerAddress}"></td>
         </tr>
     </td>
 </table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
 
 </body>
 
