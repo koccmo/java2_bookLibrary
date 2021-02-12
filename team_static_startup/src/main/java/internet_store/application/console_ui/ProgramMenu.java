@@ -1,7 +1,6 @@
 package internet_store.application.console_ui;
 
 import internet_store.application.console_ui.customer.ChangeCustomerFirstNameUIAction;
-import internet_store.application.console_ui.order.FindOrderByIdUIAction;
 import internet_store.application.console_ui.product.ChangeProductNameUIAction;
 import internet_store.application.console_ui.product.DeleteByProductNameUIAction;
 import internet_store.application.console_ui.product.FindProductsUIAction;
@@ -42,7 +41,7 @@ public class ProgramMenu {
         //menuNumberToUIActionMap.put(20, findUIAction(uiActions, FindShoppingCartByIdUIAction.class));
         // menuNumberToUIActionMap.put(21, findUIAction(uiActions, FindAllShoppingCartsUIAction.class));
         // menuNumberToUIActionMap.put(22, findUIAction(uiActions, AddOrderUIAction.class));
-        menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
+        //menuNumberToUIActionMap.put(23, findUIAction(uiActions, FindOrderByIdUIAction.class));
         // menuNumberToUIActionMap.put(24, findUIAction(uiActions, FindAllOrdersUIAction.class));
         // menuNumberToUIActionMap.put(0, findUIAction(uiActions, ExitProgramService.class));
     }
@@ -83,7 +82,7 @@ public class ProgramMenu {
         System.out.println("13. Find customer from database by ID and change FirstName");
         // System.out.println("14. Print out all customers");
         // System.out.println("15. Find customer(s) by first name");
-        System.out.println("------------------------------------------------------------");
+        // System.out.println("------------------------------------------------------------");
         // System.out.println("16. Add shopping cart item: ");
         // System.out.println("17. Find shopping cart item by ID: ");
         // System.out.println("18. Print all shopping cart items: ");
@@ -91,11 +90,11 @@ public class ProgramMenu {
         // System.out.println("19. Add shopping cart");
         // System.out.println("20. Find shopping cart by ID");
         // System.out.println("21. Find all shopping carts");
-        System.out.println("------------------------------------------------------------");
+        // System.out.println("------------------------------------------------------------");
         // System.out.println("22. Add order");
-        System.out.println("23. Find order by ID");
+        // System.out.println("23. Find order by ID");
         // System.out.println("24. Find all orders");
-        System.out.println("------------------------------------------------------------");
+        // System.out.println("------------------------------------------------------------");
         // System.out.println("0. Exit the program");
         // System.out.println("------------------------------------------------------------");
         System.out.print("Please enter menu number: ");
