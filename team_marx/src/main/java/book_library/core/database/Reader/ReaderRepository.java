@@ -24,7 +24,7 @@ public class ReaderRepository {
         return sessionFactory.getCurrentSession().get(Reader.class, id);
     }
 
-    public boolean hasTheSameReaderInDatabase (Reader reader){
+    public boolean hasTheSameReaderInDatabase(Reader reader) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT b FROM Reader b WHERE first_name = :first_name AND last_name = :last_name AND personal_code = :personal_code");
         query.setParameter("first_name", reader.getFirstName());
@@ -39,24 +39,32 @@ public class ReaderRepository {
                 .getResultList();
     }
 
-    public List<Reader> findByFirstName (String firstName) {
+    public List<Reader> findByFirstName(String firstName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT r FROM Reader r WHERE first_name = :first_mane");
+                "SELECT r FROM Reader r WHERE first_name = :first_name");
         query.setParameter("first_name", firstName);
         return query.getResultList();
     }
 
-    public List<Reader> findByLastName (String lastName) {
+    public List<Reader> findByLastName(String lastName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT r FROM Reader r WHERE last_name = :last_mane");
+                "SELECT r FROM Reader r WHERE last_name = :last_name");
         query.setParameter("last_name", lastName);
         return query.getResultList();
     }
 
-    public List<Reader> findByPersonalCode (String personalCode) {
+    public List<Reader> findByPersonalCode(String personalCode) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT r FROM Reader r WHERE personal_code = :personal_code");
         query.setParameter("personal_code", personalCode);
+        return query.getResultList();
+    }
+
+    public List<Reader> findByFirstNameAndLastName(String firstName, String lastName) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE first_name = :first_name AND last_name = :last_name");
+        query.setParameter("first_name", firstName);
+        query.setParameter("last_name", lastName);
         return query.getResultList();
     }
 }
