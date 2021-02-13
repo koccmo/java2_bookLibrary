@@ -52,4 +52,11 @@ public class ReaderRepository {
         query.setParameter("last_name", lastName);
         return query.getResultList();
     }
+
+    public List<Reader> findByPersonalCode (String personalCode) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE personal_code = :personal_code");
+        query.setParameter("personal_code", personalCode);
+        return query.getResultList();
+    }
 }
