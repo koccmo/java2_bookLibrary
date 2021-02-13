@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class changeCustomerFirstName {
+public class changeCustomerFirstNameController {
 
     @Autowired
     private ChangeCustomerFirstNameService changeCustomerFirstNameService;
@@ -22,16 +22,16 @@ public class changeCustomerFirstName {
         return "customer/changeCustomerFirstName";
     }
 
-/*    @PostMapping("/customer/changeCustomerFirstName")
+    @PostMapping("/customer/changeCustomerFirstName")
     public String showChangeCustomerFirstName(
             @ModelAttribute(value = "request") ChangeCustomerFirstNameRequest request, ModelMap modelMap){
-        ChangeCustomerFirstNameResponse response = ChangeCustomerFirstNameService.execute(request);
-        if (response.hasErrors()){
-            modelMap.addAttribute("errors", response.getErrors());
-        } else {
-            modelMap.addAttribute("customers", response.getCustomerObject());
-        }
+//        ChangeCustomerFirstNameResponse response = ChangeCustomerFirstNameService.execute(request);
+//        if (response.hasErrors()){
+//            modelMap.addAttribute("errors", response.getErrors());
+//        } else {
+//            modelMap.addAttribute("customers", response.isNameChanged());
+//        }
         return "customer/changeCustomerFirstName";
-    }*/
+    }
 
 }

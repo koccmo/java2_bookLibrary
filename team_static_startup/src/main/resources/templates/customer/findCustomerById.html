@@ -19,7 +19,7 @@
 
     <tr>
         <form action="/customer/findCustomerById" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.customerId}"/></td>
+            <td><input type="number" min="1" th:field="${request.customerId}"/></td>
             <td>
                 <input type="submit" value="Find customer"/>
                 <input type="reset" value="Clear"/>
