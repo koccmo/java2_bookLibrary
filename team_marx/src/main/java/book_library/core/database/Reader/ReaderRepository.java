@@ -20,6 +20,14 @@ public class ReaderRepository {
         sessionFactory.getCurrentSession().save(reader);
     }
 
+    public boolean deleteById(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Reader WHERE id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result == 1;
+    }
+
     public Reader findById(Long id) {
         return sessionFactory.getCurrentSession().get(Reader.class, id);
     }
