@@ -1,6 +1,7 @@
 package book_library.core.services.Reader;
 
 import book_library.core.database.Reader.ReaderRepository;
+import book_library.core.domain.Reader;
 import book_library.core.requests.Reader.SearchReaderRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.Reader.SearchReadersResponse;
@@ -16,6 +17,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -59,5 +61,25 @@ public class SearchReadersServiceTest {
 
         Mockito.verify(validator).validate(request);
         Mockito.verifyNoInteractions(readerRepository);
+    }
+
+    @Test
+    public void shouldSearchByFirstname() {
+        SearchReaderRequest request = new SearchReaderRequest("FirstName", null, null);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName", "LastName", 11111111111L));
+        Mockito.when(readerRepository.findByFirstName("FirstName")).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(1, response.getReaders().size());
+        assertEquals("FirstName", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+
+        Mockito.verify(validator).validate(request);
     }
 }
