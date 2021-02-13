@@ -68,7 +68,7 @@ public class ReaderRepository {
         return query.getResultList();
     }
 
-    public List<Reader> findByPersonalCode(String personalCode) {
+    public List<Reader> findByPersonalCode(Long personalCode) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT r FROM Reader r WHERE personal_code = :personal_code");
         query.setParameter("personal_code", personalCode);

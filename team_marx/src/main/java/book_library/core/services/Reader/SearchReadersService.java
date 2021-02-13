@@ -1,10 +1,9 @@
 package book_library.core.services.Reader;
 
 import book_library.core.database.Reader.ReaderRepository;
-import book_library.core.domain.Book;
 import book_library.core.domain.Reader;
-import book_library.core.requests.Book.SearchBooksRequest;
 import book_library.core.requests.Ordering;
+import book_library.core.requests.Paging;
 import book_library.core.requests.Reader.SearchReaderRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.Reader.SearchReadersResponse;
@@ -42,7 +41,10 @@ public class SearchReadersService {
         if (!errors.isEmpty()) {
             return new SearchReadersResponse(null, errors);
         }
-        List<Reader> readers = new ArrayList<>();
+        List<Reader> readers = search(request);
+        readers = order(readers, request.getOrdering());
+        readers = paging(readers, request.getPaging());
+
         return new SearchReadersResponse(readers, null);
     }
 
@@ -60,10 +62,52 @@ public class SearchReadersService {
 //                        Comparator.comparing(Reader::getFirstName);
 //                    } else {Comparator.comparing(Reader::getFirstName);};
 
-                if (ordering.getOrderDirection().equals("DESCENDING")) {
-                    comparator = comparator.reversed();
-                }
+            if (ordering.getOrderDirection().equals("DESCENDING")) {
+                comparator = comparator.reversed();
+            }
             return readers.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return readers;
+        }
+    }
+
+    private List<Reader> search(SearchReaderRequest request) {
+        List<Reader> readers = new ArrayList<>();
+        if (request.isFirstNameProvided() && !request.isLastNameProvided() && !request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByFirstName(request.getFirstName());
+        }
+        if (!request.isFirstNameProvided() && request.isLastNameProvided() && !request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByLastName(request.getLastName());
+        }
+
+        if (!request.isFirstNameProvided() && !request.isLastNameProvided() && request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByPersonalCode(request.getPersonalCode());
+        }
+
+        if (request.isFirstNameProvided() && request.isLastNameProvided() && !request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByFirstNameAndLastName(request.getFirstName(), request.getLastName());
+        }
+        if (request.isFirstNameProvided() && !request.isLastNameProvided() && request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByFirstNameAndPersonalCode(request.getFirstName(), request.getPersonalCode());
+        }
+
+        if (!request.isFirstNameProvided() && request.isLastNameProvided() && request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByLastNameAndPersonalCode(request.getLastName(), request.getPersonalCode());
+        }
+
+        if (request.isFirstNameProvided() && request.isLastNameProvided() && request.isPersonalCodeProvided()) {
+            readers = readerRepository.findByFirstNameAndLastNameAndPersonalCode(request.getFirstName(), request.getLastName(), request.getPersonalCode());
+        }
+        return readers;
+    }
+
+    private List<Reader> paging(List<Reader> readers, Paging paging) {
+        if (pagingEnabled && SearchBooksRequestValidator.isPagingRequested(paging)) {
+            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            return readers.stream()
+                    .skip(skip)
+                    .limit(paging.getPageSize())
+                    .collect(Collectors.toList());
         } else {
             return readers;
         }
