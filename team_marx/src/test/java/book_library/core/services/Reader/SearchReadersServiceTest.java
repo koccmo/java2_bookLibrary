@@ -64,7 +64,7 @@ public class SearchReadersServiceTest {
     }
 
     @Test
-    public void shouldSearchByFirstname() {
+    public void shouldSearchByFirstName() {
         SearchReaderRequest request = new SearchReaderRequest("FirstName", null, null);
         List<CoreError> errors = new ArrayList<>();
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -72,6 +72,26 @@ public class SearchReadersServiceTest {
         List<Reader> readers = new ArrayList<>();
         readers.add(new Reader("FirstName", "LastName", 11111111111L));
         Mockito.when(readerRepository.findByFirstName("FirstName")).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(1, response.getReaders().size());
+        assertEquals("FirstName", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+
+        Mockito.verify(validator).validate(request);
+    }
+
+    @Test
+    public void shouldSearchByLastName() {
+        SearchReaderRequest request = new SearchReaderRequest(null, "LastName", null);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName", "LastName", 11111111111L));
+        Mockito.when(readerRepository.findByLastName("LastName")).thenReturn(readers);
 
         SearchReadersResponse response = service.execute(request);
         assertFalse(response.hasErrors());
