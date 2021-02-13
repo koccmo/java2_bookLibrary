@@ -1,4 +1,4 @@
-package internet_store.application.database_cleaner;
+package internet_store.application.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

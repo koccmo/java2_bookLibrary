@@ -1,12 +1,12 @@
 package internet_store.application.acceptancetests;
 
 import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.GetAllProductsRequest;
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.GetAllProductsService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

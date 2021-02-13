@@ -1,12 +1,12 @@
 package internet_store.application.acceptancetests;
 
 import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.GetAllProductsRequest;
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.GetAllProductsService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 @Profile("hibernate")
 public class GetAllProductsAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -29,7 +28,7 @@ public class GetAllProductsAcceptanceTest {
         getDatabaseCleaner().clean();
     }
 
-    @Test
+/*    @Test
     public void shouldReturnCorrectProductList() {
         AddProductRequest addProductRequest1 = new AddProductRequest(
                 "TV", "SONY", new BigDecimal("1000"));
@@ -41,7 +40,7 @@ public class GetAllProductsAcceptanceTest {
 
         GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
         assertEquals(response.getProductList().size(), 2);
-    }
+    }*/
 
     private AddProductService getAddProductService() {
         return appContext.getBean(AddProductService.class);
@@ -54,6 +53,5 @@ public class GetAllProductsAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }

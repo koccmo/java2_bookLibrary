@@ -1,12 +1,12 @@
 package internet_store.application.acceptancetests;
 
 import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.ChangeProductNameRequest;
 import internet_store.application.core.responses.product.ChangeProductNameResponse;
 import internet_store.application.core.services.product.ChangeProductNameService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 @Profile("hibernate")
 public class ChangeProductNameAcceptanceTest {
 
-/*
     private ApplicationContext appContext;
     private ProductRepository productRepository;
 
@@ -32,10 +31,7 @@ public class ChangeProductNameAcceptanceTest {
         productRepository.add(new Product("iMac", "pc", new BigDecimal("4000")));
     }
 
-
-*/
-/*
-    @Test
+/*    @Test
     public void shouldChangeProductName() {
         ChangeProductNameRequest request = new ChangeProductNameRequest(1L, "iPhone12");
         ChangeProductNameResponse response = getChangeProductNameService().execute(request);
@@ -43,10 +39,7 @@ public class ChangeProductNameAcceptanceTest {
         assertTrue(response.isNameChanged());
         assertEquals("iPhone12", productRepository.getProductList().get(0).getName());
         assertNull(response.getErrors());
-    }
-*//*
-
-
+    }*/
 
     @Test
     public void shouldNotChangeNameWhenProductNotFound() {
@@ -79,6 +72,5 @@ public class ChangeProductNameAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }

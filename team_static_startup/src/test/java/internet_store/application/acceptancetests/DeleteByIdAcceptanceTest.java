@@ -1,22 +1,24 @@
 package internet_store.application.acceptancetests;
 
 import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
+import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductIdRequest;
 import internet_store.application.core.responses.product.DeleteByProductIdResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.DeleteByProductIdService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 @Profile("hibernate")
 public class DeleteByIdAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -26,9 +28,7 @@ public class DeleteByIdAcceptanceTest {
         getDatabaseCleaner().clean();
     }
 
-*/
-/*
-    @Test
+/*    @Test
     public void shouldDeleteWhenIdIsInDatabase() {
         AddProductRequest addRequest = new AddProductRequest("A1",
                 "B1", new BigDecimal("1"));
@@ -37,9 +37,7 @@ public class DeleteByIdAcceptanceTest {
         DeleteByProductIdResponse deleteResponse = getDeleteByProductIdService().execute(deleteRequest);
         assertTrue(deleteResponse.isProductRemoved());
         assertFalse(deleteResponse.hasErrors());
-    }
-*//*
-
+    }*/
 
     @Test
     public void shouldNotDeleteWhenIdIsNotInDatabase() {
@@ -70,6 +68,5 @@ public class DeleteByIdAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
