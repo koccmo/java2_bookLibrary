@@ -33,6 +33,13 @@ public class ReaderRepository {
         return !query.getResultList().isEmpty();
     }
 
+    public boolean isSuchIdPresentsInDatabase(Long idToCheck) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE id = :id");
+        query.setParameter("id", idToCheck);
+        return !query.getResultList().isEmpty();
+    }
+
     public List<Reader> getAllReaders() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT r FROM Reader r", Reader.class)
