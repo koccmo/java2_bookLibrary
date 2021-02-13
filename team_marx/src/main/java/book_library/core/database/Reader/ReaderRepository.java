@@ -45,4 +45,11 @@ public class ReaderRepository {
         query.setParameter("first_name", firstName);
         return query.getResultList();
     }
+
+    public List<Reader> findByLastName (String lastName) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE last_name = :last_mane");
+        query.setParameter("last_name", lastName);
+        return query.getResultList();
+    }
 }
