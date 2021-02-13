@@ -38,4 +38,11 @@ public class ReaderRepository {
                 .createQuery("SELECT r FROM Reader r", Reader.class)
                 .getResultList();
     }
+
+    public List<Reader> findByFirstName (String firstName) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE first_name = :first_mane");
+        query.setParameter("first_name", firstName);
+        return query.getResultList();
+    }
 }
