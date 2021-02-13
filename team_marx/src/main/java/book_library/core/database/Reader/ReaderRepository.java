@@ -83,4 +83,13 @@ public class ReaderRepository {
         query.setParameter("personal_code", personalCode);
         return query.getResultList();
     }
+
+    public List<Reader> findByFirstNameAndLastNameAndPersonalCode(String firstName, String lastName, Long personalCode) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE first_name = :first_name AND last_name = :last_name AND personal_code = :personal_code");
+        query.setParameter("first_name", firstName);
+        query.setParameter("last_name", lastName);
+        query.setParameter("personal_code", personalCode);
+        return query.getResultList();
+    }
 }
