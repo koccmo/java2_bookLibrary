@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="description" content="Internet Store demo project">
     <meta name="author" content="Team Static Startup">
-    <title>Find customer by ID</title>
+    <title>Change customer First Name</title>
 </head>
 <body>
 
-<h3>Find customer by ID</h3>
+<h3>Change customer First Name</h3>
 
 <!--Request Table-->
 <table>
@@ -19,11 +19,11 @@
     </tr>
 
     <tr>
-        <form action="/customer/findCustomerById" th:object="${request}" method="post">
+        <form action="/customer/changeCustomerFirstName" th:object="${request}" method="post">
             <td><input type="number" min="1" th:field="${request.customerId}"/></td>
             <td><input type="text" th:field="${request.customerNewName}"/></td>
             <td>
-                <input type="submit" value="Find customer"/>
+                <input type="submit" value="Change customer First Name"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
