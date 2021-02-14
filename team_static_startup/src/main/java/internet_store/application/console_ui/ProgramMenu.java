@@ -31,7 +31,7 @@ public class ProgramMenu {
         // menuNumberToUIActionMap.put(10, findUIAction(uiActions, AddCustomerUIAction.class));
         // menuNumberToUIActionMap.put(11, findUIAction(uiActions, DeleteByCustomerIdUIAction.class));
         // menuNumberToUIActionMap.put(12, findUIAction(uiActions, FindByCustomerIdUIAction.class));
-        menuNumberToUIActionMap.put(13, findUIAction(uiActions, ChangeCustomerFirstNameUIAction.class));
+        // menuNumberToUIActionMap.put(13, findUIAction(uiActions, ChangeCustomerFirstNameUIAction.class));
         // menuNumberToUIActionMap.put(14, findUIAction(uiActions, GetAllCustomersUIAction.class));
         // menuNumberToUIActionMap.put(15, findUIAction(uiActions, FindByCustomerFirstNameUIAction.class));
         // menuNumberToUIActionMap.put(16, findUIAction(uiActions, AddShoppingCartItemUIService.class));
@@ -75,11 +75,11 @@ public class ProgramMenu {
         System.out.println("6. Find product(s) from database by name and(or) description");
         System.out.println("7. Find product from database by ID and change name");
         // System.out.println("8. Print out all database products");
-        System.out.println("------------------------------------------------------------");
+        // System.out.println("------------------------------------------------------------");
         // System.out.println("10. Add customer to database");
         // System.out.println("11. Delete customer from database by ID");
         // System.out.println("12. Find customer from database by ID");
-        System.out.println("13. Find customer from database by ID and change FirstName");
+        // System.out.println("13. Find customer from database by ID and change FirstName");
         // System.out.println("14. Print out all customers");
         // System.out.println("15. Find customer(s) by first name");
         // System.out.println("------------------------------------------------------------");
@@ -96,7 +96,7 @@ public class ProgramMenu {
         // System.out.println("24. Find all orders");
         // System.out.println("------------------------------------------------------------");
         // System.out.println("0. Exit the program");
-        // System.out.println("------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------");
         System.out.print("Please enter menu number: ");
     }
 
