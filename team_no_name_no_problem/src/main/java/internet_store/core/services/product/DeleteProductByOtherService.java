@@ -2,9 +2,8 @@ package internet_store.core.services.product;
 
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.response.CoreResponse;
-import internet_store.core.response.product.DeleteByOtherResponse;
-import internet_store.core.services.product.validators.DeleteByOtherRequestValidator;
+import internet_store.core.response.product.DeleteProductByOtherResponse;
+import internet_store.core.services.product.validators.DeleteProductByOtherRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,22 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DeleteByOtherService {
+public class DeleteProductByOtherService {
 
     @Autowired
     private ProductDatabase productDatabase;
     @Autowired
-    private DeleteByOtherRequestValidator deleteByOtherRequestValidator;
+    private DeleteProductByOtherRequestValidator deleteProductByOtherRequestValidator;
 
-    public DeleteByOtherResponse execute(DeleteProductByOtherRequest deleteProductByOtherRequest) {
-        List<CoreError> errors = deleteByOtherRequestValidator.validate(deleteProductByOtherRequest);
+    public DeleteProductByOtherResponse execute(DeleteProductByOtherRequest deleteProductByOtherRequest) {
+        List<CoreError> errors = deleteProductByOtherRequestValidator.validate(deleteProductByOtherRequest);
         if (!errors.isEmpty()) {
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
         return provideDeleteResultAccordingToRequest(deleteProductByOtherRequest);
     }
 
-    private DeleteByOtherResponse provideDeleteResultAccordingToRequest(DeleteProductByOtherRequest
+    private DeleteProductByOtherResponse provideDeleteResultAccordingToRequest(DeleteProductByOtherRequest
                                                                                deleteProductByOtherRequest) {
 
         if (isTitleAndDescriptionAndPriceNotEmptyForDelete(deleteProductByOtherRequest.getTitle(), deleteProductByOtherRequest.getDescription(),
@@ -110,7 +109,7 @@ public class DeleteByOtherService {
         return startPrice != 0 && endPrice != 0;
     }
 
-    private DeleteByOtherResponse deleteByTitleAndDescriptionAndPriceIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByTitleAndDescriptionAndPriceIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByTitleDescriptionAndPriceRange = productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(deleteProductByOtherRequest.getTitle(),
                 deleteProductByOtherRequest.getDescription(),deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
@@ -118,24 +117,24 @@ public class DeleteByOtherService {
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
                     deleteProductByOtherRequest.getTitle() + ", description: " + deleteProductByOtherRequest.getDescription() +
                     ", price range: from " + deleteProductByOtherRequest.getStartPrice() + " till " + deleteProductByOtherRequest.getEndPrice()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByTitleDescriptionAndPriceRange);
+        return new DeleteProductByOtherResponse(resultOfDeleteByTitleDescriptionAndPriceRange);
     }
 
-    private DeleteByOtherResponse deleteByTitleAndDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByTitleAndDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByTitleDescription = productDatabase.deleteAllByTitleAndDescription(deleteProductByOtherRequest.getTitle(),
                 deleteProductByOtherRequest.getDescription());
         if (!resultOfDeleteByTitleDescription){
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
                     deleteProductByOtherRequest.getTitle() + ", description: " + deleteProductByOtherRequest.getDescription()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByTitleDescription);
+        return new DeleteProductByOtherResponse(resultOfDeleteByTitleDescription);
     }
 
-    private DeleteByOtherResponse deleteByTitleAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByTitleAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByTitleAndPriceRange = productDatabase.deleteAllByTitleAndPriceRange(deleteProductByOtherRequest.getTitle(),
                 deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
@@ -143,12 +142,12 @@ public class DeleteByOtherService {
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with title: " +
                     deleteProductByOtherRequest.getTitle() + ", price range: from " + deleteProductByOtherRequest.getStartPrice() +
                     " till " + deleteProductByOtherRequest.getEndPrice()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByTitleAndPriceRange);
+        return new DeleteProductByOtherResponse(resultOfDeleteByTitleAndPriceRange);
     }
 
-    private DeleteByOtherResponse deleteByDescriptionAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByDescriptionAndPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByDescriptionAndPriceRange = productDatabase.deleteAllByDescriptionAndPriceRange(deleteProductByOtherRequest.getDescription(),
                 deleteProductByOtherRequest.getStartPrice(),deleteProductByOtherRequest.getEndPrice());
@@ -156,35 +155,35 @@ public class DeleteByOtherService {
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain product with description: " +
                     deleteProductByOtherRequest.getDescription() + ", price range: from " + deleteProductByOtherRequest.getStartPrice() +
                     " till " + deleteProductByOtherRequest.getEndPrice()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByDescriptionAndPriceRange);
+        return new DeleteProductByOtherResponse(resultOfDeleteByDescriptionAndPriceRange);
     }
 
 
-    private DeleteByOtherResponse deleteByTitleIsProvidedForDelete(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByTitleIsProvidedForDelete(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByTitle = productDatabase.deleteAllByTitle(deleteProductByOtherRequest.getTitle());
         if (!resultOfDeleteByTitle){
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain products with title: " +
                     deleteProductByOtherRequest.getTitle()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByTitle);
+        return new DeleteProductByOtherResponse(resultOfDeleteByTitle);
     }
 
-    private DeleteByOtherResponse deleteByDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
+    private DeleteProductByOtherResponse deleteByDescriptionIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest){
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByDescription = productDatabase.deleteAllByDescription(deleteProductByOtherRequest.getDescription());
         if (resultOfDeleteByDescription){
             errors.add(new CoreError("database", "Cannot delete. Database doesn't contain products with description: " +
                     deleteProductByOtherRequest.getDescription()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByDescription);
+        return new DeleteProductByOtherResponse(resultOfDeleteByDescription);
     }
 
-    private DeleteByOtherResponse deleteByPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest) {
+    private DeleteProductByOtherResponse deleteByPriceRangeIsProvided(DeleteProductByOtherRequest deleteProductByOtherRequest) {
         List <CoreError>errors = new ArrayList<>();
         boolean resultOfDeleteByPriceRange = productDatabase.deleteAllByPriceRange(deleteProductByOtherRequest.getStartPrice(),
                 deleteProductByOtherRequest.getEndPrice());
@@ -192,8 +191,8 @@ public class DeleteByOtherService {
             errors.add (new CoreError("database","Cannot delete. Database doesn't contain products with price" +
                     " range starting from: " + deleteProductByOtherRequest.getStartPrice() +
                     " end ending with " + deleteProductByOtherRequest.getEndPrice()));
-            return new DeleteByOtherResponse(errors);
+            return new DeleteProductByOtherResponse(errors);
         }
-        return new DeleteByOtherResponse(resultOfDeleteByPriceRange);
+        return new DeleteProductByOtherResponse(resultOfDeleteByPriceRange);
     }
 }

@@ -2,8 +2,8 @@ package internet_store.console_ui.product;
 
 import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
-import internet_store.core.response.product.DeleteByOtherResponse;
-import internet_store.core.services.product.DeleteByOtherService;
+import internet_store.core.response.product.DeleteProductByOtherResponse;
+import internet_store.core.services.product.DeleteProductByOtherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class DeleteProductByOtherUIAction implements UIAction {
 
     @Autowired
-    private DeleteByOtherService deleteByOtherService;
+    private DeleteProductByOtherService deleteByOtherService;
 
     @Override
     public void execute (){
@@ -42,7 +42,7 @@ public class DeleteProductByOtherUIAction implements UIAction {
 
         DeleteProductByOtherRequest deleteProductByOtherRequest = new DeleteProductByOtherRequest(title, description, startPrice,
                 endPrice);
-        DeleteByOtherResponse deleteByOtherResponse = (DeleteByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
+        DeleteProductByOtherResponse deleteByOtherResponse = (DeleteProductByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
 
         if (deleteByOtherResponse.hasErrors()){
             deleteByOtherResponse.getErrors().forEach(System.out::println);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DeleteByOtherRequestValidator {
+public class DeleteProductByOtherRequestValidator {
 
     public List<CoreError> validate (DeleteProductByOtherRequest deleteProductByOtherRequest){
 
