@@ -1,68 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="Dental Clinic demo project">
-    <meta name="author" content="Valeria">
-    <title>Dental clinic Healthy tooth</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Dental Clinic demo project">
+        <meta name="author" content="Valeria">
+        <title>Dental clinic Healthy tooth</title>
+        <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    color: #800040;
+                }
+                    page {
+                    width: 900px;
+                    margin: 0 auto;
+                }
+                #title {
+                    height: 100px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 4em;
+                    color: white;
+                    text-shadow: 2px 2px 5px #ffffff;
+                    text-align: center;
+                }
+                #content{
+                    float: left;
+                    width: 1950px;
+                    height: 80px;
+                    background-color: #ffe6f2;
+                }
+                #footer{
+                    overflow: hidden;
+                    background-color: #660033;
+                }
+                #menu {
+                    float: left;
+                    width: 98%;
+                    margin: 20px 1.15%;
+                    height: 200px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 2em;
+                    text-align: center;
+                }
 
-<body>
+                #toothStatuses {
+                    float: left;
+                    width: 98%;
+                    margin: 20px 1.15%;
+                    height: 500px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 2em;
+                    text-align: center;
+                }
+                table {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            </style>
+    </head>
 
-<h3>Add visit</h3>
+    <body>
+        <div id="title">
+            <h3>Add visit</h3>
+        </div>
 
-<table>
-    <tr>
-        <td>Patient's id:</td>
-        <td>Manipulation's id:</td>
-        <td>Doctor's id:</td>
-        <td>Tooth number:</td>
-        <td>Tooth status:</td>
-        <td>Comments:</td>
-    </tr>
+        <div id="menu">
 
-    <tr>
-        <form action="/addVisit" th:object="${request}" method="post">
-            <td><input type="number" min="1" th:field="${request.patientId}"/></td>
-            <td><input type="number" min="1" th:field="${request.manipulationId}"/></td>
-            <td><input type="number" min="1" th:field="${request.doctorId}"/></td>
-            <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
-            <td><input type="text" th:field="${request.toothStatus}"/></td>
-            <td><input type="text" th:field="${request.comment}"/></td>
+            <table>
+                <tr>
+                    <td>Patient's id:</td>
+                    <td>Manipulation's id:</td>
+                    <td>Doctor's id:</td>
+                    <td>Tooth number:</td>
+                    <td>Tooth status:</td>
+                    <td>Comments:</td>
+                </tr>
 
-            <td>
-                <input type="submit" value="Add Visit"/>
-                <input type="reset" value="Clear"/>
+                <tr>
+                    <form action="/addVisit" th:object="${request}" method="post">
+                        <td><input type="number" min="1" th:field="${request.patientId}"/></td>
+                        <td><input type="number" min="1" th:field="${request.manipulationId}"/></td>
+                        <td><input type="number" min="1" th:field="${request.doctorId}"/></td>
+                        <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
+                        <td><input type="text" th:field="${request.toothStatus}"/></td>
+                        <td><input type="text" th:field="${request.comment}"/></td>
+
+                        <td>
+                            <input type="submit" value="Add Visit"/>
+                            <input type="reset" value="Clear"/>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+
+            <td th:if="${errors != null}">
+                <tr th:each="error : ${errors}">
+                    <td th:text="${error.field}" />
+                    <td th:text="${error.message}" /> </br>
+                </tr>
             </td>
-        </form>
-    </tr>
-</table>
+        </div>
 
-<h4>Tooth statuses:</h4>
-<table>
-    <tr>
-        <td>KARIES</td>
-        <td>PLOMBA</td>
-        <td>SAKNE</td>
-        <td>KRONITIS</td>
-        <td>KLAMERS</td>
-        <td>NAV_ZOBA</td>
-        <td>NONEMAMA_PROTEZE</td>
-        <td>KRONITIS_AR_FAS</td>
-        <td>PLAST_KRONITIS</td>
-        <td>TILTINI</td>
-        <td>HEALTHY</td>
-    </tr>
-</table>
+        <div id="toothStatuses">
+            <h4>Tooth statuses:</h4>
 
-<td th:if="${errors != null}">
-    <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.message}" /> </br>
-    </tr>
-</td>
+            <p>KARIES</p>
+            <p>PLOMBA</p>
+            <p>SAKNE</p>
+            <p>KRONITIS</p>
+            <p>KLAMERS</p>
+            <p>NAV_ZOBA</p>
+            <p>NONEMAMA_PROTEZE</p>
+            <p>KRONITIS_AR_FAS</p>
+            <p>PLAST_KRONITIS</p>
+            <p>TILTINI</p>
+            <p>HEALTHY</p>
+        </div>
 
-</body>
+    </body>
 
 </html>
