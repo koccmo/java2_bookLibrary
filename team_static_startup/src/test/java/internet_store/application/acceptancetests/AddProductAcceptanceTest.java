@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 @Profile("hibernate")
 public class AddProductAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -40,7 +39,7 @@ public class AddProductAcceptanceTest {
         getAddProductService().execute(addProductRequest2);
 
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(2, response.getProductList().size());
     }
 
@@ -51,7 +50,7 @@ public class AddProductAcceptanceTest {
         getAddProductService().execute(addProductRequest);
 
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -62,7 +61,7 @@ public class AddProductAcceptanceTest {
         getAddProductService().execute(addProductRequest);
 
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -73,7 +72,7 @@ public class AddProductAcceptanceTest {
         getAddProductService().execute(addProductRequest);
 
         GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -88,6 +87,5 @@ public class AddProductAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
