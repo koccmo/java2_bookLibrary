@@ -10,9 +10,7 @@ public class AddProductRequest {
         this.product = product;
     }
 
-    public AddProductRequest() {
-
-    }
+    public AddProductRequest() { }
 
     public Product getProduct(){
         return product;
