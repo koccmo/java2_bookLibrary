@@ -340,6 +340,33 @@ public class SearchReadersServiceTest {
     }
 
     @Test
+    public void shouldSearchByFirstNameAndPersonalCodeWithOrderingAscendingByLastName() {
+        Ordering ordering = new Ordering("lastName", "ASCENDING");
+        SearchReaderRequest request = new SearchReaderRequest("FirstName", null, 11111111111L, ordering);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName", "LastName2", 11111111111L));
+        readers.add(new Reader("FirstName", "LastName1", 11111111111L));
+        readers.add(new Reader("FirstName", "LastName3", 11111111111L));
+        Mockito.when(readerRepository.findByFirstNameAndPersonalCode("FirstName", 11111111111L)).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(3, response.getReaders().size());
+        assertEquals("FirstName", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName1", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+        assertEquals("FirstName", response.getReaders().get(1).getFirstName());
+        assertEquals("LastName2", response.getReaders().get(1).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(1).getPersonalCode()));
+        assertEquals("FirstName", response.getReaders().get(2).getFirstName());
+        assertEquals("LastName3", response.getReaders().get(2).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(2).getPersonalCode()));
+    }
+
+    @Test
     public void shouldSearchByFirstNameWithOrderingAscendingByLastName_a() {
         Ordering ordering = new Ordering("lastName", "ASCENDING");
         SearchReaderRequest request = new SearchReaderRequest("FirstName", "LastName", 11111111111L, ordering);
