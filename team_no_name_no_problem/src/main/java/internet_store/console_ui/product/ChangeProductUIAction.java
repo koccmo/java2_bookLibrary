@@ -17,7 +17,7 @@ import java.util.Scanner;
     public void execute() {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Please enter new id for product");
+        System.out.println("Please enter product ID");
         Long id = in.nextLong();
 
         System.out.println("Please enter new title for product");
