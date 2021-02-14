@@ -25,12 +25,12 @@ public class changeCustomerFirstNameController {
     @PostMapping("/customer/changeCustomerFirstName")
     public String showChangeCustomerFirstName(
         @ModelAttribute(value = "request") ChangeCustomerFirstNameRequest request, ModelMap modelMap){
-//        ChangeCustomerFirstNameResponse response = ChangeCustomerFirstNameService.execute(request);
-//        if (response.hasErrors()){
-//            modelMap.addAttribute("errors", response.getErrors());
-//        } else {
-//            modelMap.addAttribute("customers", response.isNameChanged());
-//        }
+        ChangeCustomerFirstNameResponse response = changeCustomerFirstNameService.execute(request);
+        if (response.hasErrors()){
+            modelMap.addAttribute("errors", response.getErrors());
+        } else {
+            modelMap.addAttribute("customers", response.isNameChanged());
+        }
         return "customer/changeCustomerFirstName";
     }
 

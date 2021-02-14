@@ -20,7 +20,7 @@
 
     <tr>
         <form action="/customer/changeCustomerFirstName" th:object="${request}" method="post">
-            <td><input type="number" min="1" th:field="${request.customerId}"/></td>
+            <td><input type="number" min="1" th:field="${request.id}"/></td>
             <td><input type="text" th:field="${request.customerNewName}"/></td>
             <td>
                 <input type="submit" value="Change customer First Name"/>
