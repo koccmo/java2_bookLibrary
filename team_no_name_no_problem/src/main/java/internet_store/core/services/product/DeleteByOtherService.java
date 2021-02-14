@@ -20,7 +20,7 @@ public class DeleteByOtherService {
     @Autowired
     private DeleteByOtherRequestValidator deleteByOtherRequestValidator;
 
-    public CoreResponse execute(DeleteProductByOtherRequest deleteProductByOtherRequest) {
+    public DeleteByOtherResponse execute(DeleteProductByOtherRequest deleteProductByOtherRequest) {
         List<CoreError> errors = deleteByOtherRequestValidator.validate(deleteProductByOtherRequest);
         if (!errors.isEmpty()) {
             return new DeleteByOtherResponse(errors);
