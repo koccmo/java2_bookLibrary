@@ -6,15 +6,15 @@ import internet_store.core.response.CoreResponse;
 
 import java.util.List;
 
-public class DeleteByOtherResponse extends CoreResponse {
+public class DeleteProductByOtherResponse extends CoreResponse {
 
     private boolean responseOfRequestToDelete;
 
-    public DeleteByOtherResponse(List<CoreError> errors) {
+    public DeleteProductByOtherResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public DeleteByOtherResponse(boolean responseOfRequestToDelete) {
+    public DeleteProductByOtherResponse(boolean responseOfRequestToDelete) {
     }
 
     public boolean getResponseOfRequestToDelete() {
