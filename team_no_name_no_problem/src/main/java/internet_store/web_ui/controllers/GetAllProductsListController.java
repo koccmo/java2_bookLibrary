@@ -15,8 +15,8 @@ public class GetAllProductsListController {
     private GetAllProductsService getAllProductsService;
 
 
-    @GetMapping(value = "/showAllBooks")
-    public String showAllBooks(ModelMap modelMap) {
+    @GetMapping(value = "/getAllProductList")
+    public String getAllProductList(ModelMap modelMap) {
         GetProductsResponse response = getAllProductsService.execute(
                 new GetProductsRequest()
         );
