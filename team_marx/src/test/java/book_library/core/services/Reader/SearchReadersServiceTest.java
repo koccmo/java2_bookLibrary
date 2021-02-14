@@ -3,6 +3,7 @@ package book_library.core.services.Reader;
 import book_library.core.database.Reader.ReaderRepository;
 import book_library.core.domain.Reader;
 import book_library.core.requests.Ordering;
+import book_library.core.requests.Paging;
 import book_library.core.requests.Reader.SearchReaderRequest;
 import book_library.core.responses.CoreError;
 import book_library.core.responses.Reader.SearchReadersResponse;
@@ -377,7 +378,7 @@ public class SearchReadersServiceTest {
         readers.add(new Reader("FirstName2", "LastName", 11111111111L));
         readers.add(new Reader("FirstName1", "LastName", 11111111111L));
         readers.add(new Reader("FirstName3", "LastName", 11111111111L));
-        Mockito.when(readerRepository.findByLastNameAndPersonalCode("LastName",11111111111L )).thenReturn(readers);
+        Mockito.when(readerRepository.findByLastNameAndPersonalCode("LastName", 11111111111L)).thenReturn(readers);
 
         SearchReadersResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -391,6 +392,30 @@ public class SearchReadersServiceTest {
         assertEquals("FirstName3", response.getReaders().get(2).getFirstName());
         assertEquals("LastName", response.getReaders().get(2).getLastName());
         assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(2).getPersonalCode()));
+    }
+
+    @Test
+    public void shouldSearchByFirstNameWithPagingFirstPage() {
+        Paging paging = new Paging(1, 2);
+        SearchReaderRequest request = new SearchReaderRequest("FirstName", null, null, paging);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName", "LastName2", 22222222222L));
+        readers.add(new Reader("FirstName", "LastName1", 11111111111L));
+        readers.add(new Reader("FirstName", "LastName3", 33333333333L));
+        Mockito.when(readerRepository.findByFirstName("FirstName")).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(2, response.getReaders().size());
+        assertEquals("FirstName", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName2", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(22222222222L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+        assertEquals("FirstName", response.getReaders().get(1).getFirstName());
+        assertEquals("LastName1", response.getReaders().get(1).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(1).getPersonalCode()));
     }
 
     @Test
