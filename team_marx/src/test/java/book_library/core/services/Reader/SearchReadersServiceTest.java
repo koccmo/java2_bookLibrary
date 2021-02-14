@@ -232,6 +232,60 @@ public class SearchReadersServiceTest {
     }
 
     @Test
+    public void shouldSearchByFirstNameWithOrderingDescendingByLastName() {
+        Ordering ordering = new Ordering("lastName", "DESCENDING");
+        SearchReaderRequest request = new SearchReaderRequest("FirstName", null, null, ordering);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName", "LastName2", 22222222222L));
+        readers.add(new Reader("FirstName", "LastName1", 11111111111L));
+        readers.add(new Reader("FirstName", "LastName3", 33333333333L));
+        Mockito.when(readerRepository.findByFirstName("FirstName")).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(3, response.getReaders().size());
+        assertEquals("FirstName", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName3", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(33333333333L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+        assertEquals("FirstName", response.getReaders().get(1).getFirstName());
+        assertEquals("LastName2", response.getReaders().get(1).getLastName());
+        assertEquals(Optional.of(22222222222L), java.util.Optional.ofNullable(response.getReaders().get(1).getPersonalCode()));
+        assertEquals("FirstName", response.getReaders().get(2).getFirstName());
+        assertEquals("LastName1", response.getReaders().get(2).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(2).getPersonalCode()));
+    }
+
+    @Test
+    public void shouldSearchByLastNameWithOrderingAscendingByPersonalCode() {
+        Ordering ordering = new Ordering("personalCode", "ASCENDING");
+        SearchReaderRequest request = new SearchReaderRequest(null, "LastName", null, ordering);
+        List<CoreError> errors = new ArrayList<>();
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        List<Reader> readers = new ArrayList<>();
+        readers.add(new Reader("FirstName2", "LastName", 22222222222L));
+        readers.add(new Reader("FirstName1", "LastName", 11111111111L));
+        readers.add(new Reader("FirstName3", "LastName", 33333333333L));
+        Mockito.when(readerRepository.findByLastName("LastName")).thenReturn(readers);
+
+        SearchReadersResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(3, response.getReaders().size());
+        assertEquals("FirstName1", response.getReaders().get(0).getFirstName());
+        assertEquals("LastName", response.getReaders().get(0).getLastName());
+        assertEquals(Optional.of(11111111111L), java.util.Optional.ofNullable(response.getReaders().get(0).getPersonalCode()));
+        assertEquals("FirstName2", response.getReaders().get(1).getFirstName());
+        assertEquals("LastName", response.getReaders().get(1).getLastName());
+        assertEquals(Optional.of(22222222222L), java.util.Optional.ofNullable(response.getReaders().get(1).getPersonalCode()));
+        assertEquals("FirstName3", response.getReaders().get(2).getFirstName());
+        assertEquals("LastName", response.getReaders().get(2).getLastName());
+        assertEquals(Optional.of(33333333333L), java.util.Optional.ofNullable(response.getReaders().get(2).getPersonalCode()));
+    }
+
+    @Test
     public void shouldSearchByFirstNameWithOrderingAscendingByLastName_a() {
         Ordering ordering = new Ordering("lastName", "ASCENDING");
         SearchReaderRequest request = new SearchReaderRequest("FirstName", "LastName", 11111111111L, ordering);
