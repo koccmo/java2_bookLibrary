@@ -10,6 +10,7 @@ import static internet_store.application.core.services.product.validators.FindPr
 public class OrderingProductsService {
 
     public List<Product> order(List<Product> products, Ordering ordering) {
+
         Comparator<Product> comparator = getComparator(ordering.getOrderBy());
         if (ORDERING_DIRECTION_2.equals(ordering.getOrderDirection())) {
             comparator = comparator.reversed();

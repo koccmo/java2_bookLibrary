@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Search Products by entry</title>
+</head>
+<body>
+
+<h3>Search product by certain criteria.</h3>
+
+<form action="/product/SearchProductBy" th:object="${request}" method="post">
+
+<!--    <table>-->
+<!--        <td><b>Ordering options sort by:</b></td>-->
+<!--        <tr>-->
+
+<!--            <td th:action="${request.ordering.orderBy}">-->
+
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="nameDescription" id="name" value="Name" checked>-->
+<!--                    <label class="form-check-label" for="name">Name</label>-->
+<!--                </div>-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="nameDescription" id="description" value="Description">-->
+<!--                    <label class="form-check-label" for="description">Description</label>-->
+<!--                </div>-->
+
+<!--            </td>-->
+<!--            <td th:action="${request.ordering.orderDirection}">-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="ascDesc" id="asc" value="Ascending" checked>-->
+<!--                    <label class="form-check-label" for="asc">Ascending</label>-->
+<!--                </div>-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="ascDesc" id="desc" value="Description">-->
+<!--                    <label class="form-check-label" for="desc">Descending</label>-->
+<!--                </div>-->
+
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--    </table>-->
+
+    <br>
+
+    <table>
+
+        <b>Enter product Name or/and Description to search:</b>
+        <tr>
+            <td>By Name:</td>
+            <td>By Description:</td>
+            <td>'Name' or 'Description':</td>
+            <td>'Ascending' or 'Descending':</td>
+        </tr>
+
+        <tr>
+            <!--        <form action="/product/SearchProductBy" th:object="${request}" method="post">-->
+            <td><input type="text" th:field="${request.name}"/></td>
+            <td><input type="text" th:field="${request.description}"/></td>
+            <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
+            <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
+            <td>
+                <input type="submit" value="Find products"/>
+                <input type="reset" value="Clear"/>
+            </td>
+            <!--        </form>-->
+        </tr>
+
+        <td th:if="${errors != null}">
+            <tr th:each="error : ${errors}">
+                <td th:text="${error.field}"></td>
+                <td th:text="${error.message}"></td>
+            </tr>
+        </td>
+
+    </table>
+
+</form>
+
+
+<br><br>
+
+<td th:if="${products != null}">
+    <table>
+        <b>Search Results:</b>
+        <tr>
+            <td>Product ID:</td>
+            <td>Product name:</td>
+            <td>Product description:</td>
+            <td>Product price:</td>
+        </tr>
+
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+    </table>
+</td>
+
+<br>
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+</form>
+
+</body>
+
+</html>
