@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="author" content="NoNameNoProblem">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3>Search customer</h3>
+
+<table>
+    <tr>
+        <td>Enter name:</td>
+        <td>Enter surname:</td>
+        <td>Order by name/surname:</td>
+        <td>Ordering direction ASC/DESC:</td>
+        <td>Enter page number:</td>
+        <td>Enter page size:</td>
+    </tr>
+
+    <tr>
+        <form action="/searchCustomer" th:object="${request}" method="post">
+                <td><input type="text" th:field="${request.name}"/></td>
+                <td><input type="text" th:field="${request.surname}"/></td>
+                <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
+                <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
+                <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>
+                <td><input type="number" min = "1" th:field="${request.paging.pageSize}"/></td>
+            <td>
+                <input type="submit" value="Search customer"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+<td th:if="${customers != null}">
+    <h4>Customer</h4>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <br>
+            <td>Surname:</td>
+            <br>
+            <td>Phone number:</td>
+            <br>
+            <td>Address:</td>
+            <br>
+            <td>E-mail:</td>
+        </tr>
+        <td th:if="${customers != null}">
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.name}" />
+                <td th:text="${customer.surname}" />
+                <td th:text="${customer.phoneNumber}" />
+                <td th:text="${customer.address}" />
+                <td th:text="${customer.email}" />
+            </tr>
+        </td>
+    </table>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+</body>
+
+</html>
