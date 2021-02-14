@@ -3,7 +3,6 @@ package internet_store.application.acceptancetests;
 import internet_store.application.config.SpringCoreConfiguration;
 import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
-import internet_store.application.core.requests.product.GetAllProductsRequest;
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.GetAllProductsService;
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertEquals;
 
 @Profile("hibernate")
 public class AddProductAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -39,8 +37,7 @@ public class AddProductAcceptanceTest {
                 "good tv2", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest2);
 
-        GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(2, response.getProductList().size());
     }
 
@@ -50,8 +47,7 @@ public class AddProductAcceptanceTest {
                 "good tv", new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest);
 
-        GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -61,8 +57,7 @@ public class AddProductAcceptanceTest {
                 null, new BigDecimal("399.99"));
         getAddProductService().execute(addProductRequest);
 
-        GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -72,8 +67,7 @@ public class AddProductAcceptanceTest {
                 "good tv", null);
         getAddProductService().execute(addProductRequest);
 
-        GetAllProductsRequest request = new GetAllProductsRequest();
-        GetAllProductsResponse response = getAllProductsService().execute(request);
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(0, response.getProductList().size());
     }
 
@@ -88,6 +82,5 @@ public class AddProductAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
