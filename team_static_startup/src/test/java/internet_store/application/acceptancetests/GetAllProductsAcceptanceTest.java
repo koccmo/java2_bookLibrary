@@ -3,7 +3,6 @@ package internet_store.application.acceptancetests;
 import internet_store.application.config.SpringCoreConfiguration;
 import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
-import internet_store.application.core.requests.product.GetAllProductsRequest;
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.GetAllProductsService;
@@ -28,7 +27,7 @@ public class GetAllProductsAcceptanceTest {
         getDatabaseCleaner().clean();
     }
 
-/*    @Test
+    @Test
     public void shouldReturnCorrectProductList() {
         AddProductRequest addProductRequest1 = new AddProductRequest(
                 "TV", "SONY", new BigDecimal("1000"));
@@ -38,9 +37,9 @@ public class GetAllProductsAcceptanceTest {
                 "Receiver", "Denon", new BigDecimal("1500"));
         getAddProductService().execute(addBookRequest2);
 
-        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(response.getProductList().size(), 2);
-    }*/
+    }
 
     private AddProductService getAddProductService() {
         return appContext.getBean(AddProductService.class);

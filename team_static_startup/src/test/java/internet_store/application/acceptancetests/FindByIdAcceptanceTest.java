@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Profile("hibernate")
 public class FindByIdAcceptanceTest {
-
+/*
     private ApplicationContext appContext;
     private ProductRepository repository;
 
@@ -33,7 +33,7 @@ public class FindByIdAcceptanceTest {
         repository.add(new Product("iMac", "pc", new BigDecimal("4000")));
     }
 
-/*    @Test
+    @Test
     public void shouldFindById() {
         FindByIdRequest request = new FindByIdRequest("2");
         FindByProductIdResponse response = getFindByIdService().execute(request);
@@ -43,7 +43,7 @@ public class FindByIdAcceptanceTest {
         assertEquals(Optional.of(
                 newProduct(2L, "iMac", "pc", new BigDecimal("4000"))),
                 response.getProductFoundById());
-    }*/
+    }
 
     @Test
     public void shouldNotFindWhenIdIsNotExist() {
@@ -83,5 +83,5 @@ public class FindByIdAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-
+*/
 }
