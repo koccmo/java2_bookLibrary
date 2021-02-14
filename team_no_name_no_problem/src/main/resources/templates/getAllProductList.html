@@ -19,10 +19,11 @@
         <td>Price:</td>
     </tr>
 
-    <td th:if="${books != null}">
-        <tr th:each="book : ${books}">
-            <td th:text="${book.title}" />
-            <td th:text="${book.author}" />
+    <td th:if="${products != null}">
+        <tr th:each="product : ${products}">
+            <td th:text="${product.title}" />
+            <td th:text="${product.description}" />
+            <td th:text="${product.price}" />
         </tr>
     </td>
 
