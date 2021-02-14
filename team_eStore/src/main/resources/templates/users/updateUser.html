@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore_project">
+    <meta name="author" content="team_estore">
+    <title>eStore</title>
+</head>
+
+    <body>
+        <h3>Update User</h3>
+        <table>
+            <tr>
+                <td>Id:</td>
+                <td>FirstName:</td>
+                <td>LastName:</td>
+                <td>Email:</td>
+            </tr>
+            <tr>
+                <form action="/users/updateUser" th:object="${request}" method="post">
+                    <td><input type="text" th:field="${request.id}"/></td>
+                    <td><input type="text" th:field="${request.firstName}"/></td>
+                    <td><input type="text" th:field="${request.lastName}"/></td>
+                    <td><input type="text" th:field="${request.email}"/></td>
+                    <td><input type="submit" value="Update User"/>
+                        <input type="reset" value="Clear"/></td>
+                </form>
+                </form>
+            </tr>
+        </table>
+
+        <td th:if="${errors != null}">
+            <tr th:each="error : ${errors}">
+                <td th:text="${error.field}" />
+                <td th:text="${error.message}" />
+                <td th:text="${error.message}" />
+            </tr>
+        </td>
+        <br>
+        <form action="/users" method="get">
+            <input type="submit" value="To Users page" name="Submit" />
+        </form>
+    </body>
+</html>

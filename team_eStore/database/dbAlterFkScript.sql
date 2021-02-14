@@ -1,5 +1,5 @@
-ALTER TABLE `shopping_cart`
-ADD FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+ALTER TABLE `deals`
+ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `shopping_cart`
+ALTER TABLE `deals`
 ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
