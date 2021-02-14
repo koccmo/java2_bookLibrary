@@ -58,9 +58,6 @@ public class SearchReadersService {
             } else {
                 comparator = Comparator.comparing(Reader::getPersonalCode);
             }
-//            Comparator<Reader> comparator = if(ordering.getOrderBy().equals("firstName")){
-//                        Comparator.comparing(Reader::getFirstName);
-//                    } else {Comparator.comparing(Reader::getFirstName);};
 
             if (ordering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
