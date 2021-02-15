@@ -9,9 +9,12 @@ import internet_store.database.customer.CustomerDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Component public class DeleteCustomerService {
+@Component
+@Transactional
+public class DeleteCustomerService {
 
     @Autowired private CustomerDatabase customerDatabase;
     @Autowired private DeleteCustomerRequestValidator deleteCustomerRequestValidator;
