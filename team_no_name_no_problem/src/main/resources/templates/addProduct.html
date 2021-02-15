@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Internet store demo project">
-    <meta name="NoNameNoProblem" content="internet_store">
+    <meta name="author" content="NoNameNoProblem">
     <title>Internet store</title>
 </head>
 
@@ -20,9 +21,9 @@
 
     <tr>
         <form action="/addProduct" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.title}"/></td>
-            <td><input type="text" th:field="${request.description}"/></td>
-            <td><input type="text" th:field="${request.price}"/></td>
+            <td><input type="text" th:field="${request.product.title}"/></td>
+            <td><input type="text" th:field="${request.product.description}"/></td>
+            <td><input type="text" th:field="${request.product.price}"/></td>
             <td>
                 <input type="submit" value="Add Product"/>
                 <input type="reset" value="Clear"/>
