@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchClientServiceTest {
     @Mock
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @InjectMocks
-    SearchClientService searchClientService;
+    private SearchClientService searchClientService;
 
     @Test
     public void returnClientByName() {

@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CheckStockQuantityServiceTest {
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @InjectMocks
-    CheckStockQuantityService stockQuantityService;
+    private CheckStockQuantityService stockQuantityService;
 
     @Test
     public void shoulReturn_NoError() {

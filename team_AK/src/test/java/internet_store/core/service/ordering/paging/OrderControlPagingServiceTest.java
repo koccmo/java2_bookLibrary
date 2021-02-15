@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class OrderControlPagingServiceTest {
     @Mock
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
     @InjectMocks
-    OrderControlPagingService pagingService;
+    private OrderControlPagingService pagingService;
 
     @Test
     public void onlyOnePage() {

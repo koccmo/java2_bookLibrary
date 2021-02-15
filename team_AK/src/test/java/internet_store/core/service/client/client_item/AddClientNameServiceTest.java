@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AddClientNameServiceTest {
-    AddClientNameService service = new AddClientNameService();
+    private final AddClientNameService service = new AddClientNameService();
 
     @Test
     public void shouldReturnCurrentString() {

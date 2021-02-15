@@ -1,8 +1,10 @@
 package internet_store.core.service.ordering;
 
+import internet_store.core.domain.Client;
 import internet_store.core.domain.Order;
 import internet_store.core.operation.Tax;
 import internet_store.core.service.cart.TotalSumCartService;
+import internet_store.core.service.session.SessionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,13 +19,15 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest {
     @Mock
-    TotalSumCartService totalSumCartService;
+    private TotalSumCartService totalSumCartService;
     @Mock
-    CreateOrderNumberService numberService;
+    private CreateOrderNumberService numberService;
     @Mock
-    Tax tax;
+    private SessionService sessionService;
+    @Mock
+    private Tax tax;
     @InjectMocks
-    OrderService orderService;
+    private OrderService orderService;
 
     @Test
     public void createNewOrder() {
@@ -32,6 +36,7 @@ public class OrderServiceTest {
         Mockito.when(numberService.createOrderNumber()).thenReturn("5");
         Mockito.when(tax.getTaxAmount(new BigDecimal("10.00"))).thenReturn(new BigDecimal("2.10"));
         Mockito.when(tax.getAmountWithTax(new BigDecimal("10.00"))).thenReturn(new BigDecimal("12.10"));
+        Mockito.when(sessionService.getSessionClient()).thenReturn(new Client());
 
         Order newOrder = orderService.createOrder();
         assertEquals("5", newOrder.getNumber());

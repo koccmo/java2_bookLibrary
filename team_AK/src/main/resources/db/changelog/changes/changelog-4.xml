@@ -176,5 +176,11 @@
             <column name="quantity" value="2"/>
             <column name="price" value="18.70"/>
         </insert>
+        <rollback>
+            <sql>
+                TRUNCATE product;
+                ALTER TABLE product AUTO_INCREMENT = 1;
+            </sql>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

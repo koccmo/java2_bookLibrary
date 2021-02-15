@@ -22,5 +22,10 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <rollback>
+            <dropTable schemaName="store"
+                       tableName="client"
+                       cascadeConstraints="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

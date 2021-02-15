@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @WebAppConfiguration
 public class TaxTest {
     @Autowired
-    Tax tax;
+    private Tax tax;
 
     @Test
     public void taxAmount_Tax_Rate_21_1() {

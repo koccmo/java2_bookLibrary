@@ -1,6 +1,5 @@
 package internet_store.core.service.ordering;
 
-import internet_store.core.domain.Client;
 import internet_store.core.domain.Order;
 import internet_store.core.domain.ProductInCart;
 import internet_store.core.operation.Tax;
@@ -8,8 +7,7 @@ import internet_store.core.persistence.CartRepository;
 import internet_store.core.persistence.OrderRepository;
 import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.cart.TotalSumCartService;
-import lombok.Getter;
-import lombok.Setter;
+import internet_store.core.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +33,8 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private OrderStatusService orderStatusService;
-    @Getter
-    @Setter
-    private Client client;
+    @Autowired
+    private SessionService sessionService;
     private String orderNumber;
     private BigDecimal totalSumInCart;
     private BigDecimal taxAmount;
@@ -56,7 +53,7 @@ public class OrderService {
         total = tax.getAmountWithTax(totalSumInCart);
         order.setNumber(orderNumber);
         order.setDate(new Date());
-        order.setClient(getClient());
+        order.setClient(sessionService.getSessionClient());
         order.setSum(totalSumInCart);
         order.setTax(taxAmount);
         order.setTotal(total);
@@ -64,33 +61,32 @@ public class OrderService {
     }
 
     public void saveOrder() {
-        List<ProductInCart> itemsForOrder = cartRepository.itemsForOrder();
+        List<ProductInCart> itemsForOrder = cartRepository.itemsForOrder(sessionService.getSessionId());
         itemsForOrder.forEach(productInCart -> {
             Order orderForSave = new Order();
             orderForSave.setNumber(orderNumber);
             orderForSave.setDate(new Date());
-            orderForSave.setClient(getClient());
+            orderForSave.setClient(sessionService.getSessionClient());
             orderForSave.setCart(productInCart);
             productInCart.setOrdered(true);
             orderForSave.setSum(totalSumInCart);
             orderForSave.setTax(taxAmount);
             orderForSave.setTotal(total);
-            orderForSave.setStatus("ORDER RECEIVED");
-            productInCart.getProduct().setQuantity(newCartQuantity(productInCart));
+            productInCart.getProduct().setQuantity(newProductQuantity(productInCart));
             orderRepository.saveAndFlush(orderForSave);
         });
         orderStatusService.changeOrderStatus(orderNumber, "ORDER RECEIVED");
     }
 
-    private long newCartQuantity(ProductInCart productInCart) {
+    private long newProductQuantity(ProductInCart productInCart) {
         return productInCart.getProduct().getQuantity() - productInCart.getQuantity();
     }
 
     public List<ProductInCart> getAllItemsFromCart() {
-        return cartRepository.itemsForOrder();
+        return cartRepository.itemsForOrder(sessionService.getSessionId());
     }
 
     public boolean isCanMakeOrder() {
-        return client != null && countService.getCartCount() != 0;
+        return sessionService.getSessionClient() != null && countService.getCartCount() != 0;
     }
 }

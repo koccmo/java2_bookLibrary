@@ -16,7 +16,4 @@ public class Session {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private ProductInCart cart;
 }

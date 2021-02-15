@@ -66,4 +66,13 @@ public class ORMCustomerRepository implements CustomerRepository {
         return query.executeUpdate() >= 1;
     }
 
+    @Override
+    public Optional<Customer> getById(Long id) {
+        Customer customer = sessionFactory.getCurrentSession().get(Customer.class, id);
+        if (customer == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(customer);
+        }
+    }
 }
