@@ -26,10 +26,10 @@
 
     <tr>
         <form action="/searchProduct" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.title}"/></td>
-            <td><input type="text" th:field="${request.description}"/></td>
-            <td><input type="text" th:field="${request.startPrice}"/></td>
-            <td><input type="text" th:field="${request.endPrice}"/></td>
+            <td><input type="text" th:field="${request.product.title}"/></td>
+            <td><input type="text" th:field="${request.product.description}"/></td>
+            <td><input type="text" th:field="${request.product.startPrice}"/></td>
+            <td><input type="text" th:field="${request.product.endPrice}"/></td>
             <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
             <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
             <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>
