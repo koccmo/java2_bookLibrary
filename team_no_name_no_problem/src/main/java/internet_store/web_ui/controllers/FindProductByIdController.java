@@ -1,7 +1,7 @@
 package internet_store.web_ui.controllers;
 
 
-import internet_store.core.requests.product.FindByIdRequest;
+import internet_store.core.requests.product.FindProductByIdRequest;
 import internet_store.core.requests.product.SearchProductRequest;
 import internet_store.core.response.product.SearchProductResponse;
 import internet_store.core.services.product.SearchProductService;
@@ -20,7 +20,7 @@ public class FindProductByIdController {
 
     @GetMapping(value = "/findProductById")
     public String showFindProductByIdPage(ModelMap modelMap) {
-        modelMap.addAttribute("request", new FindByIdRequest());
+        modelMap.addAttribute("request", new FindProductByIdRequest());
         return "findProductById";
     }
 

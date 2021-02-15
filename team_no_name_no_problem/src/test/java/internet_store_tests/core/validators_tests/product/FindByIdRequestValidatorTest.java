@@ -1,6 +1,6 @@
 package internet_store_tests.core.validators_tests.product;
 
-import internet_store.core.requests.product.FindByIdRequest;
+import internet_store.core.requests.product.FindProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.services.product.validators.FindByIdRequestValidator;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class FindByIdRequestValidatorTest {
 
         CoreError expectedError = new CoreError("id", "Not valid input for id");
 
-        FindByIdRequest findByIdRequest = new FindByIdRequest(-9L);
+        FindProductByIdRequest findByIdRequest = new FindProductByIdRequest(-9L);
         List<CoreError> errors = findByIdRequestValidator.validate(findByIdRequest);
 
         assertTrue(errors.size() == 1);
@@ -28,7 +28,7 @@ public class FindByIdRequestValidatorTest {
     @Test
     public void testValidInput(){
 
-        FindByIdRequest findByIdRequest = new FindByIdRequest(5L);
+        FindProductByIdRequest findByIdRequest = new FindProductByIdRequest(5L);
         List<CoreError> errors = findByIdRequestValidator.validate(findByIdRequest);
 
         assertTrue(errors.size() == 0);

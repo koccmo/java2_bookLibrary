@@ -1,6 +1,6 @@
 package internet_store.core.services.product.validators;
 
-import internet_store.core.requests.product.FindByIdRequest;
+import internet_store.core.requests.product.FindProductByIdRequest;
 import internet_store.core.response.CoreError;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class FindByIdRequestValidator {
 
-    public List<CoreError> validate (FindByIdRequest findByIdRequest){
+    public List<CoreError> validate (FindProductByIdRequest findByIdRequest){
         List<CoreError>errors = new ArrayList<>();
 
         if ((findByIdRequest.getId() == null) || (findByIdRequest.getId() < 1)){
