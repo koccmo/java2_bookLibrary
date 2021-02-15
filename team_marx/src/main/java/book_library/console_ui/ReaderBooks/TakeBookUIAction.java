@@ -1,6 +1,8 @@
 package book_library.console_ui.ReaderBooks;
 
 import book_library.console_ui.UIAction;
+import book_library.core.requests.ReaderBook.TakeBookRequest;
+import book_library.core.responses.ReaderBook.TakeBookResponse;
 import book_library.core.services.ReaderBooks.TakeBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,14 +49,14 @@ public class TakeBookUIAction implements UIAction {
         } else {
             bookOutDate = formatter1.parse(bookOutDateString);
         }
-//        RegisterReaderRequest request = new RegisterReaderRequest(readerFirstName, readerLastName, bookOutDateId);
-//        RegisterReaderResponse response = registerReaderService.execute(request);
-//
-//        if (response.hasErrors()) {
-//            response.getErrors().forEach(System.out::println);
-//        } else {
-//            System.out.println("Reader was added to the list.");
-//            System.out.println("New reader id is: " + response.getNewReader().getId());
-//        }
+        TakeBookRequest request = new TakeBookRequest(readerId, bookId, bookOutDate);
+        TakeBookResponse response = takeBookService.execute(request);
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(System.out::println);
+        } else {
+            System.out.println("The taking of the book has been successfully registered.");
+            System.out.println("New readerBook id is: " + response.getNewReaderBook().getId());
+        }
     }
 }

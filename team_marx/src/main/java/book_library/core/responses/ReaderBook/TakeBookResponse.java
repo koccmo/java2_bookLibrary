@@ -17,4 +17,8 @@ public class TakeBookResponse extends CoreResponse {
     public TakeBookResponse(ReaderBook newReaderBook) {
         this.newReaderBook = newReaderBook;
     }
+
+    public ReaderBook getNewReaderBook() {
+        return newReaderBook;
+    }
 }
