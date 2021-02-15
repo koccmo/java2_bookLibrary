@@ -9,11 +9,14 @@ import internet_store.database.product.ProductDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component public class BuyProductService {
+@Component
+@Transactional
+public class BuyProductService {
 
     @Autowired private ProductDatabase productDatabase;
     @Autowired private BuyProductRequestValidator buyProductRequestValidator;
