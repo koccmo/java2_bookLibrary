@@ -6,18 +6,18 @@ import lv.javaguru.java2.library.core.domain.Book;
 
 public class DeleteBookResponse extends CoreResponse {
 
-	private Book book;
+	private Book deletedBook;
 
 	public DeleteBookResponse(List<CoreError> errors) {
 		super(errors);
 	}
 
-	public DeleteBookResponse(Book book) {
-		this.book = book;
+	public DeleteBookResponse(Book deletedBook) {
+		this.deletedBook = deletedBook;
 	}
 
-	public Book getBook() {
-		return book;
+	public Book getDeletedBook() {
+		return deletedBook;
 	}
 
 }
