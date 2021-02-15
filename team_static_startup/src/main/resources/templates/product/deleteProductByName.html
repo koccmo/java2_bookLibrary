@@ -3,25 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Change Product Name</title>
+    <title>Delete Product by Name</title>
 </head>
 <body>
 
-<h3>Change Product Name</h3>
+<h3>Delete Product by Name</h3>
 
 <!--Request Table-->
 <table>
     <tr>
-        <td>Product ID:</td>
-        <td>Product New Name:</td>
+        <td>Product Name:</td>
     </tr>
 
     <tr>
-        <form action="/product/changeProductName" th:object="${request}" method="post">
-            <td><input type="number" min="1" th:field="${request.productId}"/></td>
-            <td><input type="text" th:field="${request.productNewName}"/></td>
+        <form action="/product/deleteProductByName" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.productName}"/></td>
             <td>
-                <input type="submit" value="Change product Name"/>
+                <input type="submit" value="Delete product by Name"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
@@ -36,9 +34,9 @@
 
 </table>
 
-<div th:switch="${products}">
-    <h4 th:case="true">Product Name was successfully changed</h4>
-    <h4 th:case="false">Product Name was not changed</h4>
+<div th:switch="${productRemoved}">
+    <h4 th:case="true">Product(s) was successfully removed</h4>
+    <h4 th:case="false">Product(s) was not removed</h4>
 </div>
 
 <form action="/" method="get">
