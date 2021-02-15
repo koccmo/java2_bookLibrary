@@ -32,7 +32,7 @@ public class BuyProductController {
                 modelMap.addAttribute("errors", buyProductResponse.getErrors());
                 return "buyProduct";
             } else {
-                return "redirect:/";
+                return "index";
             }
         }
     }
