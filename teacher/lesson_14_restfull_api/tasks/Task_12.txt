@@ -1,36 +1,35 @@
 Запустите приложение. Откройте программу Postman.
 
-Сформируйте HTTP POST запрос на /book/.
-
-Укажите в заголовках запроса (Headers) заголовок:
-Content-Type = application/json.
+Сформируйте HTTP PUT запрос на /book/{id}.
 
 Так как это HTTP POST запрос, то данные о новой книге передаются
 в теле запроса.
 
+Укажите в заголовках запроса (Headers) заголовок:
+Content-Type = application/json.
+
 Пример JSON документа для запроса:
-{"title": "AAA", "author": "WWW"}.
+{"id": 1227, "newTitle": "hgjggj", "newAuthor": "WWW"}.
 
 Убедитесь, что при формировании
 правильно запроса в ответ вы получаете:
 
 {
     "errors": null,
-    "newBook": {
-        "id": 1231,
-        "title": "AAA",
+    "updatedBook": {
+        "id": 1227,
+        "title": "hgjggj",
         "author": "WWW"
     }
 }
-
 а при указании не верного запроса (например title пустой):
 
 {
     "errors": [
         {
-            "field": "title",
+            "field": "newTitle",
             "message": "Must not be empty!"
         }
     ],
-    "newBook": null
+    "updatedBook": null
 }
