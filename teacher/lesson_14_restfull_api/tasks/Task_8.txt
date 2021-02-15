@@ -25,13 +25,17 @@ public class BookRestController {
 consumes = "application/json" - указывает на то, что в теле HTTP POST
 запроса должен быть JSON документ.
 
-Пример JSON документа для запроса: {title="A", author="B"}.
+Пример JSON документа для запроса: {"title": "AAA", "author": "WWW"}.
 
 produces = "application/json" - указывает на то, что в теле HTTP
 ответа будет JSON документ.
 
 Пример JSON документа для ответа:
 {
-    errors: null,
-    newBook: {id=111, title="A", author="B"}
+    "errors": null,
+    "newBook": {
+        "id": 1231,
+        "title": "AAA",
+        "author": "WWW"
+    }
 }.
