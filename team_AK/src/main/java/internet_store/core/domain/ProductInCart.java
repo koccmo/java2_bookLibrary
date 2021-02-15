@@ -23,4 +23,6 @@ public class ProductInCart {
     private Boolean deleted = false;
     @Column(name = "ordered")
     private Boolean ordered = false;
+    @Column(name="session_id")
+    private String sessionId;
 }

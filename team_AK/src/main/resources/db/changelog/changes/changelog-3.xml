@@ -16,5 +16,10 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <rollback>
+            <dropTable schemaName="store"
+                       tableName="telegram"
+                       cascadeConstraints="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

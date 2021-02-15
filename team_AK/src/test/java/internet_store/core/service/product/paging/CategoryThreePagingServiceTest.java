@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryThreePagingServiceTest {
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @InjectMocks
-    CategoryThreePagingService pagingService;
+    private CategoryThreePagingService pagingService;
 
     @Test
     public void onlyOnePage() {

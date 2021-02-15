@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FindOrderServiceTest {
     @Mock
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
     @InjectMocks
-    FindOrderService findOrderService;
+    private FindOrderService findOrderService;
 
     @Test
     public void shouldReturn_Order() {

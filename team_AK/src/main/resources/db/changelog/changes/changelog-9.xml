@@ -10,5 +10,10 @@
                                  constraintName="fk_product_id"
                                  referencedTableName="product"
                                  referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableSchemaName="store"
+                                      baseTableName="cart"
+                                      constraintName="fk_product_id"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

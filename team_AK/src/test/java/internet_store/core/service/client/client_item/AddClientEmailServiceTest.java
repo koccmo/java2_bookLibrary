@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class AddClientEmailServiceTest {
 
-    AddClientEmailService service = new AddClientEmailService();
+    private final AddClientEmailService service = new AddClientEmailService();
 
     @Test
     public void shouldReturn_NoError() {

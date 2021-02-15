@@ -1,14 +1,18 @@
-package internet_store.web_ui.controller.cart;
+package internet_store.web_ui.controller.order;
 
 import internet_store.core.domain.Client;
 import internet_store.core.domain.Order;
 import internet_store.core.operation.Tax;
 import internet_store.core.persistence.ClientRepository;
+import internet_store.core.request.session.SaveClientSesionRequest;
 import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.client.AddClientService;
 import internet_store.core.service.ordering.CreateOrderNumberService;
 import internet_store.core.service.ordering.OrderService;
 import internet_store.core.service.ordering.OrderStatusService;
+import internet_store.core.service.session.FindSessionService;
+import internet_store.core.service.session.SaveSessionService;
+import internet_store.core.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Controller
-public class CartMakeOrderController {
+public class CompleteOrderController {
     @Autowired
     private OrderStatusService orderStatusService;
     @Autowired
@@ -32,13 +36,19 @@ public class CartMakeOrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
+    private SessionService sessionService;
+    @Autowired
     private CreateOrderNumberService numberService;
     @Autowired
     private Tax tax;
+    @Autowired
+    private SaveSessionService saveSessionService;
+    @Autowired
+    private FindSessionService findSessionService;
 
-    @GetMapping(value = "cart_make_order")
+    @GetMapping(value = "/cart_make_order")
     public String getCartOrder(ModelMap modelMap) {
-        Client client = orderService.getClient();
+        Client client = sessionService.getSessionClient();
 
         Order order = orderService.createOrder();
 
@@ -68,7 +78,10 @@ public class CartMakeOrderController {
         orderStatusService.changeOrderStatus(numberService.getFullOrderNumber(), "ORDER RECEIVED");
 
         numberService.setOrderHaveNumber(false);
-        orderService.setClient(new Client());
+
+        saveSessionService.saveClientSession(new SaveClientSesionRequest(sessionService.getSessionId()));
+        sessionService.setSessionClient(new Client());
+
         modelMap.addAttribute("order", new Order());
         modelMap.addAttribute("items", new ArrayList<>());
         modelMap.addAttribute("client", new Client());

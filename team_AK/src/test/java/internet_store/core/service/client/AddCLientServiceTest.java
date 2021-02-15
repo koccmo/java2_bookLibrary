@@ -14,11 +14,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddProductServiceTest {
+public class AddCLientServiceTest {
     @Mock
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @InjectMocks
-    AddClientService addClientService;
+    private AddClientService addClientService;
 
     @Test
     public void returnNoError() {
