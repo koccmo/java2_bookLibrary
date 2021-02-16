@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ClientEmailValidatorTest {
-    ClientEmailValidator clientEmailValidator = new ClientEmailValidator();
+    private final ClientEmailValidator clientEmailValidator = new ClientEmailValidator();
 
     @Test
     public void shouldReturnNoErrors() {

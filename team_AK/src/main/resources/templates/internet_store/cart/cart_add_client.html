@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart"><b>Cart</b>
+                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light">
                                 <div th:text="${cartCount}"></div>
                     </span></a>
@@ -143,10 +143,10 @@
             </div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="cart">Cart</a>
+                    <a class="nav-link" aria-current="page" href="add_product_for_cart">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="cart_add_client">Client</a>
+                    <a class="nav-link active" href="add_client_for_cart">Client</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cart_make_order">Order</a>
@@ -177,7 +177,7 @@
 
                     <div class="text_align_left">
                         <div class="col-md-0">
-                            <label for="client_phone" style="margin-bottom:0rem !important;">Client's phone</label>
+                            <label for="client_phone" style="margin-bottom:0rem !important;">Client phone</label>
                         </div>
                     </div>
                     <input type="tel" step="1" min="0" class="form-control form-control-sm" id="client_phone"
@@ -186,7 +186,7 @@
 
                     <div class="text_align_left">
                         <div class="col-md-0">
-                            <label for="client_email" style="margin-bottom:0rem !important;">Client's email</label>
+                            <label for="client_email" style="margin-bottom:0rem !important;">Client email</label>
                         </div>
                     </div>
                     <input type="email" class="form-control form-control-sm" id="client_email"

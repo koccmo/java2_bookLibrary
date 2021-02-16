@@ -22,7 +22,7 @@ public class OrderControlController {
     @Autowired
     private OrderStatusService orderStatusService;
 
-    @GetMapping(value = "order_control")
+    @GetMapping(value = "/order_control")
     public String getOrders(ModelMap modelMap) {
         paging.startPaging();
 

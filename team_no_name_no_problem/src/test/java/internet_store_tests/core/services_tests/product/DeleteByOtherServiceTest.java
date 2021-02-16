@@ -3,9 +3,9 @@ package internet_store_tests.core.services_tests.product;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.response.product.DeleteByOtherResponse;
-import internet_store.core.services.product.DeleteByOtherService;
-import internet_store.core.services.product.validators.DeleteByOtherRequestValidator;
+import internet_store.core.response.product.DeleteProductByOtherResponse;
+import internet_store.core.services.product.DeleteProductByOtherService;
+import internet_store.core.services.product.validators.DeleteProductByOtherRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,9 +25,9 @@ public class DeleteByOtherServiceTest {
     @Mock
     private ProductDatabase productDatabase;
     @Mock
-    private DeleteByOtherRequestValidator deleteByOtherRequestValidator;
+    private DeleteProductByOtherRequestValidator deleteByOtherRequestValidator;
     @InjectMocks
-    DeleteByOtherService deleteByOtherService;
+    DeleteProductByOtherService deleteByOtherService;
 
     @Test
     public void notValidRequestToDeleteTest() {
@@ -39,7 +39,7 @@ public class DeleteByOtherServiceTest {
 
         Mockito.when(deleteByOtherRequestValidator.validate(deleteProductByOtherRequest)).thenReturn(errors);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(deleteProductByOtherRequest);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "delete");
@@ -57,7 +57,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.containsTitle("Apple")).thenReturn(false);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
@@ -75,7 +75,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByTitle(request.getTitle())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(!productDatabase.containsTitle("Apple"));
     }
 
@@ -91,7 +91,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByDescription(firstRequest.getDescription())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
@@ -108,7 +108,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByDescription(request.getDescription())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertFalse(productDatabase.containsTitle("Green"));
         assertTrue(!productDatabase.containsProduct(apple));
     }
@@ -125,7 +125,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByPriceRange(firstRequest.getStartPrice(),firstRequest.getEndPrice())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
@@ -142,7 +142,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByPriceRange(request.getStartPrice(), request.getEndPrice())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertFalse(productDatabase.containsPrice(3));
         assertTrue(!productDatabase.containsPrice(3));
     }
@@ -160,7 +160,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(firstRequest)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.containsTitleAndDescription("Apple","Green")).thenReturn(false);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(firstRequest);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(firstRequest);
         assertEquals(response.hasErrors(),true);
         assertEquals(response.getErrors().size(),1);
     }
@@ -177,7 +177,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(deleteByOtherRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.deleteAllByTitleAndDescription(request.getTitle(),request.getDescription())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
         assertEquals(productDatabase.containsProduct(apple),false);
     }
@@ -196,7 +196,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(request.getTitle(),request.getDescription(),
                 request.getStartPrice(),request.getEndPrice())).thenReturn(true);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(!productDatabase.containsTitleAndDescription("Apple","Green"));
         assertFalse(productDatabase.containsPrice(3));
         assertEquals(productDatabase.containsProduct(apple),false);
@@ -216,7 +216,7 @@ public class DeleteByOtherServiceTest {
         Mockito.when(productDatabase.deleteAllByTitleAndDescriptionAndPriceRange(request.getTitle(),request.getDescription(),
                 request.getStartPrice(),request.getEndPrice())).thenReturn(false);
 
-        DeleteByOtherResponse response = (DeleteByOtherResponse) deleteByOtherService.execute(request);
+        DeleteProductByOtherResponse response = (DeleteProductByOtherResponse) deleteByOtherService.execute(request);
         assertTrue(response.hasErrors());
     }
 }

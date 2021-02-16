@@ -2,12 +2,14 @@ package internet_store.web_ui.controller.cart;
 
 import internet_store.core.core_error.CoreError;
 import internet_store.core.domain.Client;
+import internet_store.core.persistence.ClientRepository;
 import internet_store.core.request.client.AddClientRequest;
+import internet_store.core.request.session.SaveClientSesionRequest;
 import internet_store.core.response.client.AddClientResponse;
 import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.client.AddClientService;
-import internet_store.core.service.ordering.OrderService;
-import internet_store.core.persistence.ClientRepository;
+import internet_store.core.service.session.SaveSessionService;
+import internet_store.core.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,11 +26,13 @@ public class CartAddClientController {
     @Autowired
     private CartProductsCountService cartCountService;
     @Autowired
-    private  OrderService orderService;
+    private SessionService sessionService;
+    @Autowired
+    private SaveSessionService saveSessionService;
 
-    @GetMapping(value = "cart_add_client")
+    @GetMapping(value = "/cart_add_client")
     public String getCartClient(ModelMap modelMap) {
-        modelMap.addAttribute("client", new Client());
+        modelMap.addAttribute("client", sessionService.getSessionClient());
         modelMap.addAttribute("cartCount", cartCountService.getCartCount());
         modelMap.addAttribute("errors", "");
         modelMap.addAttribute("info", "");
@@ -47,7 +51,10 @@ public class CartAddClientController {
             allErrors.append(error.getField()).append(" ").append(error.getMessage()).append(" ");
         }
         if (!(response.hasErrors())) {
-            orderService.setClient(client);
+            clientRepository.save(client);
+            sessionService.setSessionClient(client);
+            saveSessionService.saveClientSession(new SaveClientSesionRequest(sessionService.getSessionId()));
+
             modelMap.addAttribute("info", "Client data successful created");
         } else {
             modelMap.addAttribute("info", "");

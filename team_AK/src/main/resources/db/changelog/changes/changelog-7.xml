@@ -10,5 +10,10 @@
                                  constraintName="fk_client_id"
                                  referencedTableName="client"
                                  referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableSchemaName="store"
+                                      baseTableName="order_for_client"
+                                      constraintName="fk_client_id"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

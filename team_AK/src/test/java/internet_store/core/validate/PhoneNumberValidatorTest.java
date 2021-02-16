@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class PhoneNumberValidatorTest {
-    PhoneNumberValidator phoneValidator = new PhoneNumberValidator();
+    private final PhoneNumberValidator phoneValidator = new PhoneNumberValidator();
 
     @Test
     public void checkPhoneNumberFormat_1() {

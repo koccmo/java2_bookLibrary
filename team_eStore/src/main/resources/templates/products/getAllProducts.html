@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore project">
+    <meta name="author" content="team_eStore">
+    <title>eStore</title>
+</head>
+
+<body>
+
+<h3>Show all products in the store</h3>
+
+<table>
+    <tr>
+        <td>Id:</td>
+        <td>Name:</td>
+        <td>Description:</td>
+        <td>Price:</td>
+    </tr>
+
+    <td th:if="${products != null}">
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}" />
+            <td th:text="${product.name}" />
+            <td th:text="${product.description}" />
+            <td th:text="${product.price}" />
+        </tr>
+    </td>
+
+</table>
+
+<br>
+<form action="/products" method="get">
+    <input type="submit" value="Products page" name="Submit" />
+</form>
+
+</body>
+
+</html>

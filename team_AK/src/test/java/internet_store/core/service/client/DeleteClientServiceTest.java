@@ -17,9 +17,9 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteClientServiceTest {
     @Mock
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @InjectMocks
-    DeleteClientService deleteClientService;
+    private DeleteClientService deleteClientService;
 
     @Test
     public void shouldReturnNoError_ClientDelete() {

@@ -11,42 +11,40 @@ import java.util.Optional;
 public class Cookies {
     private final HttpServletRequest request;
     private final HttpServletResponse response;
-    private Cookie[] cookies;
+    private Cookie[] cookiesFromClient;
     @Getter
     private String sessionId = "";
 
     public Cookies(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
-        getCookies();
-        findClientId();
-        setClientId();
+        getCookiesFromClient();
     }
 
-    private void getCookies() {
-        cookies = request.getCookies();
+    private void getCookiesFromClient() {
+        cookiesFromClient = request.getCookies();
+        findSessionId();
     }
 
-    private void findClientId() {
-        if (cookies != null) {
-            Optional<Cookie> optionalCookie = Arrays.stream(cookies).filter(c -> c.getName()
+    private void findSessionId() {
+        if (cookiesFromClient != null) {
+            Optional<Cookie> optionalCookie = Arrays.stream(cookiesFromClient).filter(c -> c.getName()
                     .equals("clientId")).findFirst();
             optionalCookie.ifPresentOrElse(cookie -> sessionId = cookie.getValue(),
                     () -> sessionId = "");
         }
+        setSessionId();
     }
 
-    private void setClientId() {
+    private void setSessionId() {
         final int STORE_COOKIE_ONE_DAY = 24 * 60 * 60;
 
-        String sessionId = request.getSession().getId();
-
         if (sessionId.equals("")) {
+            sessionId = request.getSession().getId();
 
             Cookie cookie = new Cookie("clientId", sessionId);
-            this.sessionId = sessionId;
-
             cookie.setMaxAge(STORE_COOKIE_ONE_DAY);
+
             response.addCookie(cookie);
         }
     }

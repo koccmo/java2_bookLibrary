@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="description" content="Internet Store demo project">
     <meta name="author" content="Team Static Startup">
-    <title>Change customer First Name</title>
+    <title>Change Customer First Name</title>
 </head>
 <body>
 
-<h3>Change customer First Name</h3>
+<h3>Change Customer First Name</h3>
 
 <!--Request Table-->
 <table>
@@ -39,7 +39,6 @@
 </table>
 
 <!--
-
 <td th:if="${customers != null}">
     <table>
         <tr>
@@ -62,6 +61,10 @@
     </table>
 </td>
 -->
+
+<td th:if="${customers != null}">
+    <h4>Customer First Name was successfully changed</h4>
+</td>
 
 <form action="/" method="get">
     <input type="submit" value="Go to main page" name="Submit"/>

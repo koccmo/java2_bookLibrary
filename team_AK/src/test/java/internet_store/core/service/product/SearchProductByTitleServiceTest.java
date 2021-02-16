@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchProductByTitleServiceTest {
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @InjectMocks
-    SearchProductByTitleService productByTitleService;
+    private SearchProductByTitleService productByTitleService;
 
     @Test
     public void shouldReturnNoError_ProductExist() {

@@ -23,7 +23,7 @@ public class DatabaseCleaner {
 	private List<String> getTableNames() {
 		List<String> tableNames = new ArrayList<>();
 		tableNames.add("products");
-		tableNames.add("customers");
+		tableNames.add("users");
 		tableNames.add("shopping_cart");
 		return tableNames;
 	}

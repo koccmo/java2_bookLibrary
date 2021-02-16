@@ -10,18 +10,16 @@ import java.util.List;
 
 @Repository
 public interface CartRepository extends JpaRepository<ProductInCart, Long> {
-    @Query(value = "SELECT * FROM cart WHERE product_title=? AND deleted=false", nativeQuery = true)
-    ProductInCart findByTitle(String title);
 
-    @Query(value = "SELECT COUNT(*) FROM cart WHERE deleted=false AND ordered=false", nativeQuery = true)
-    Long countProductInCart();
+    @Query(value = "SELECT COUNT(*) FROM cart WHERE deleted=false AND ordered=false AND session_id=?", nativeQuery = true)
+    Long countProductInCart(String sessionId);
 
-    @Query(value = "SELECT * FROM cart WHERE deleted=false AND ordered=false limit ? offset ?", nativeQuery = true)
-    List<ProductInCart> getLimitsCartRecords(int limit, int offset);
+    @Query(value = "SELECT * FROM cart WHERE deleted=false AND ordered=false AND session_id=? limit ? offset ?", nativeQuery = true)
+    List<ProductInCart> getLimitsCartRecords(String sessionId, int limit, int offset);
 
-    @Query(value = "SELECT SUM(sum) FROM cart WHERE deleted=false and ordered=false", nativeQuery = true)
-    BigDecimal getCartTotalSum();
+    @Query(value = "SELECT SUM(sum) FROM cart WHERE deleted=false AND ordered=false AND session_id=?", nativeQuery = true)
+    BigDecimal getCartTotalSum(String sessionId);
 
-    @Query(value = "SELECT * FROM cart WHERE deleted=false AND ordered=false", nativeQuery = true)
-    List<ProductInCart> itemsForOrder();
+    @Query(value = "SELECT * FROM cart WHERE deleted=false AND ordered=false AND session_id=?", nativeQuery = true)
+    List<ProductInCart> itemsForOrder(String sessionId);
 }

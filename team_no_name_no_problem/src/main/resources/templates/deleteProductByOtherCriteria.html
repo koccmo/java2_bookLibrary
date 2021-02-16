@@ -22,9 +22,9 @@
     <tr>
         <form action="/deleteProductByOtherCriteria" th:object="${request}" method="post">
             <td>
-                <input type="text" th:field="${request.title}"/>
-                <input type="text" th:field="${request.description}"/>
-                <input type="text" th:field="${request.price}"/>
+                <input type="text" th:field="${request.product.title}"/>
+                <input type="text" th:field="${request.product.description}"/>
+                <input type="text" th:field="${request.product.price}"/>
             </td>
             <td>
                 <input type="submit" value="Delete product"/>

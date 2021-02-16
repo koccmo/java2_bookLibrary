@@ -2,13 +2,13 @@ package internet_store.web_ui.controller.cart;
 
 import internet_store.core.domain.Client;
 import internet_store.core.operation.Tax;
+import internet_store.core.persistence.CartRepository;
 import internet_store.core.request.cart.DeleteProductFromCartRequest;
 import internet_store.core.service.cart.CartProductsCountService;
 import internet_store.core.service.cart.DeleteProductFromCartService;
 import internet_store.core.service.cart.TotalSumCartService;
 import internet_store.core.service.cart.paging.CartPagingService;
-import internet_store.core.service.ordering.OrderService;
-import internet_store.core.persistence.CartRepository;
+import internet_store.core.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,9 +33,9 @@ public class CartController {
     @Autowired
     private DeleteProductFromCartService service;
     @Autowired
-    private OrderService orderService;
+    private SessionService sessionService;
 
-    @GetMapping(value = "cart")
+    @GetMapping(value = "/cart")
     public String getCart(ModelMap modelMap) {
         long countProductInCart = cartCountService.getCartCount();
 
@@ -86,7 +86,7 @@ public class CartController {
 
         modelMap.addAttribute("info", "");
         refreshData(modelMap);
-        orderService.setClient(new Client());
+        sessionService.setSessionClient(new Client());
         return "cart/cart";
     }
 

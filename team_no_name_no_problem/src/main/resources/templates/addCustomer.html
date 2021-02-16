@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Internet store demo project">
-    <meta name="NoNameNoProblem" content="internet_store">
+    <meta name="author" content="NoNameNoProblem">
     <title>Internet store</title>
 </head>
 
@@ -22,11 +22,11 @@
 
     <tr>
         <form action="/addCustomer" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.name}"/></td>
-            <td><input type="text" th:field="${request.surname}"/></td>
-            <td><input type="text" th:field="${request.phoneNumber}"/></td>
-            <td><input type="text" th:field="${request.address}"/></td>
-            <td><input type="text" th:field="${request.email}"/></td>
+            <td><input type="text" th:field="${request.customer.name}"/></td>
+            <td><input type="text" th:field="${request.customer.surname}"/></td>
+            <td><input type="text" th:field="${request.customer.phoneNumber}"/></td>
+            <td><input type="text" th:field="${request.customer.address}"/></td>
+            <td><input type="text" th:field="${request.customer.email}"/></td>
             <td>
                 <input type="submit" value="Add Customer"/>
                 <input type="reset" value="Clear"/>
@@ -42,6 +42,10 @@
         <td th:text="${error.message}" /> </br>
     </tr>
 </td>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
 
 </body>
 

@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteProductFromCartServiceTest {
     @Mock
-    CartRepository cartRepository;
+    private CartRepository cartRepository;
     @InjectMocks
-    DeleteProductFromCartService deleteService;
+    private DeleteProductFromCartService deleteService;
 
     @Test
     public void noCorrect_Id_Return_Error() {
