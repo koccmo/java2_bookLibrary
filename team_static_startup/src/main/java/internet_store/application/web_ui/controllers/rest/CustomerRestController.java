@@ -1,10 +1,16 @@
 package internet_store.application.web_ui.controllers.rest;
 
 import internet_store.application.core.requests.customer.AddCustomerRequest;
+import internet_store.application.core.requests.customer.ChangeCustomerFirstNameRequest;
+import internet_store.application.core.requests.customer.DeleteByCustomerIdRequest;
 import internet_store.application.core.requests.customer.GetCustomerRequest;
 import internet_store.application.core.responses.customer.AddCustomerResponse;
+import internet_store.application.core.responses.customer.ChangeCustomerFirstNameResponse;
+import internet_store.application.core.responses.customer.DeleteByCustomerIdResponse;
 import internet_store.application.core.responses.customer.GetCustomerResponse;
 import internet_store.application.core.services.customer.AddCustomerService;
+import internet_store.application.core.services.customer.ChangeCustomerFirstNameService;
+import internet_store.application.core.services.customer.DeleteByCustomerIdService;
 import internet_store.application.core.services.customer.GetCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +35,23 @@ public class CustomerRestController {
             produces = "application/json")
     public AddCustomerResponse addCustomer(@RequestBody AddCustomerRequest request) {
         return addCustomerService.execute(request);
+    }
+
+    @Autowired private ChangeCustomerFirstNameService changeCustomerFirstNameService;
+
+    @PutMapping(path = "/{id}",
+            consumes = "application/json",
+            produces = "application/json")
+    public ChangeCustomerFirstNameResponse updateBook(@RequestBody ChangeCustomerFirstNameRequest request) {
+        return changeCustomerFirstNameService.execute(request);
+    }
+
+    @Autowired private DeleteByCustomerIdService deleteByCustomerIdService;
+
+    @DeleteMapping(path = "/{id}", produces = "application/json")
+    public DeleteByCustomerIdResponse deleteBook(@PathVariable Long id) {
+        DeleteByCustomerIdRequest request = new DeleteByCustomerIdRequest(id);
+        return deleteByCustomerIdService.execute(request);
     }
 
 }
@@ -71,4 +94,10 @@ produces = "application/json" - указывает на то, что в теле
         "author": "WWW"
     }
 }
+
+@PutMapping - указывает на то, что HTTP PUT запросы приходящие
+на относительный url /book/{id} будут обрабатываться методом updateBook()
+
+@DeleteMapping - указывает на то, что HTTP DELETE запросы приходящие
+на относительный url /book/{id} будут обрабатываться методом deleteBook()
 */

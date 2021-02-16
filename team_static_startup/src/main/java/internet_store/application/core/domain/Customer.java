@@ -10,15 +10,20 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long customerId;
-    @Column(name = "first_name")
+
+    @Column(name = "first_name", nullable = false)
     private String customerFirstName;
-    @Column(name = "second_name")
+
+    @Column(name = "second_name", nullable = false)
     private String customerSecondName;
-    @Column(name = "phone")
+
+    @Column(name = "phone", nullable = false)
     private String customerPhone;
-    @Column(name = "email")
+
+    @Column(name = "email", nullable = false)
     private String customerEmail;
-    @Column(name = "address")
+
+    @Column(name = "address", nullable = false)
     private String customerAddress;
 
     public Customer() {}

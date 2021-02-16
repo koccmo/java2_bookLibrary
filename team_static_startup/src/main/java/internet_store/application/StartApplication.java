@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-public class WebStartApplication {
+public class StartApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
-        ProgramMenu programMenu = context.getBean(ProgramMenu.class);
-        programMenu.runMenu();
+//        ProgramMenu programMenu = context.getBean(ProgramMenu.class);
+//        programMenu.runMenu();
     }
 }
