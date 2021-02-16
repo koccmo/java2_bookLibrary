@@ -11,6 +11,13 @@ public class UpdateProductRequest {
 
     public UpdateProductRequest() { }
 
+    public UpdateProductRequest(Long id, String productName, String productDescription, BigDecimal productPrice) {
+        this.id = id;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+    }
+
     public Long getId() {
         return id;
     }
