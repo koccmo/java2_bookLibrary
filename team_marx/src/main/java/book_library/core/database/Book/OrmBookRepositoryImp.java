@@ -1,6 +1,7 @@
 package book_library.core.database.Book;
 
 import book_library.core.domain.Book;
+import book_library.core.domain.Reader;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +79,13 @@ public class OrmBookRepositoryImp implements BookRepository {
         query.setParameter("title", title);
         query.setParameter("author", author);
         return query.getResultList();
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT b FROM Book b WHERE id = :id");
+        query.setParameter("id", id);
+        return (Book) query.getSingleResult();
     }
 }

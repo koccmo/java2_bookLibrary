@@ -22,5 +22,7 @@ public interface BookRepository {
 
     List<Book> findByTitleAndAuthor(String title, String author);
 
+    public Book getBookById(Long id);
+
 
 }

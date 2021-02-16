@@ -77,4 +77,11 @@ public class InMemoryBookRepositoryImpl implements BookRepository {
                 .filter(book -> book.getTitle().equals(title))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Book getBookById(Long id) {
+        return books.stream()
+                .filter(book -> book.getId().equals(id))
+                .collect(Collectors.toList()).get(0);
+    }
 }

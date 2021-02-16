@@ -69,4 +69,11 @@ public class JdbcBookRepositoryImpl implements BookRepository {
         Object[] args = new Object[]{title, author};
         return jdbcTemplate.query(sql, args, new BookRowMapper());
     }
+
+    @Override
+    public Book getBookById(Long id) {
+        String sql = "SELECT * FROM books WHERE id = ?";
+        Object[] args = new Object[]{id};
+        return (Book) jdbcTemplate.query(sql, args, new BookRowMapper());
+    }
 }

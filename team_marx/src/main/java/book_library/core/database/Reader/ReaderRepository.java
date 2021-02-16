@@ -107,4 +107,11 @@ public class ReaderRepository {
         query.setParameter("personal_code", personalCode);
         return query.getResultList();
     }
+
+    public Reader getReaderById(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r WHERE id = :id");
+        query.setParameter("id", id);
+        return (Reader) query.getSingleResult();
+    }
 }

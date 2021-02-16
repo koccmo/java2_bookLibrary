@@ -33,6 +33,12 @@ public class ReaderBook {
     public ReaderBook() {
     }
 
+    public ReaderBook(Reader reader, Book book, Date bookOutData) {
+        this.reader = reader;
+        this.book = book;
+        this.bookOutData = bookOutData;
+    }
+
     public Long getId() {
         return id;
     }

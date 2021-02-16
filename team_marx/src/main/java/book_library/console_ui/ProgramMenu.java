@@ -11,6 +11,7 @@ import book_library.console_ui.ReaderBooks.TakeBookUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,10 @@ public class ProgramMenu {
     }
 
     public void executeSelectedMenuItem(int userChoice) {
-        menuNumberToUiActionMap.get(userChoice).execute();
+        try {
+            menuNumberToUiActionMap.get(userChoice).execute();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
