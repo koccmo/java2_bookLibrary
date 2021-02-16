@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -8,7 +8,6 @@ import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.SearchUsersByLastNameRequest;
 import java2.application_target_list.core.responses.user.SearchUserByLastNameResponse;
 import java2.application_target_list.core.services.user.AddUserService;
-import java2.application_target_list.core.services.user.SearchUserByFirstNameService;
 import java2.application_target_list.core.services.user.SearchUserByLastNameService;
 import org.junit.Before;
 import org.junit.Test;
@@ -184,7 +183,7 @@ public class SearchUserByLastNameAcceptanceTest {
     }
 
     private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private DatabaseCleaner createDatabaseCleaner() {

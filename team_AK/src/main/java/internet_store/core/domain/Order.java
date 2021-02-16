@@ -17,13 +17,13 @@ public class Order {
     private String number;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
-    private Date  date;
+    private Date date;
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne
     @JoinColumn(name = "cart_id")
-    private Cart cart;
+    private ProductInCart cart;
     @Column(name = "sum")
     private BigDecimal sum;
     @Column(name = "tax")

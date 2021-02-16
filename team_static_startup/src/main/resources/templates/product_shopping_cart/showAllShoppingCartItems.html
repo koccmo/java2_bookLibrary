@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Show all shopping cart items</title>
+</head>
+<body>
+
+<h3>Show all shopping cart items</h3>
+
+<table>
+    <tr>
+        <td>ID:</td>
+        <td>Shopping cart ID:</td>
+        <td>Product ID:</td>
+        <td>Product name:</td>
+        <td>Product price:</td>
+        <td>Quantity:</td>
+    </tr>
+
+    <td th:if="${shoppingCartItems != null}">
+        <tr th:each="shoppingCartItem : ${shoppingCartItems}">
+            <td th:text="${shoppingCartItem.id}"></td>
+            <td th:text="${shoppingCartItem.shoppingCart.id}"></td>
+            <td th:text="${shoppingCartItem.product.id}"></td>
+            <td th:text="${shoppingCartItem.product.name}"></td>
+            <td th:text="${shoppingCartItem.product.price}"></td>
+            <td th:text="${shoppingCartItem.quantity}"></td>
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

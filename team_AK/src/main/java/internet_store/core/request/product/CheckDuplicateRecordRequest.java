@@ -1,12 +1,13 @@
 package internet_store.core.request.product;
 
+import internet_store.core.domain.Product;
 import lombok.Getter;
 
 public class CheckDuplicateRecordRequest {
     @Getter
-    private final Object productDatabase;
+    private final Product product;
 
-    public CheckDuplicateRecordRequest(Object productDatabase) {
-        this.productDatabase = productDatabase;
+    public CheckDuplicateRecordRequest(Product product) {
+        this.product = product;
     }
 }

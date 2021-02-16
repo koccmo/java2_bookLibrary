@@ -4,6 +4,8 @@ public class GetSpecificPatientHistoryRequest {
 
     private Long id;
 
+    public GetSpecificPatientHistoryRequest() { }
+
     public GetSpecificPatientHistoryRequest(Long id){
         this.id = id;
     }
@@ -12,4 +14,7 @@ public class GetSpecificPatientHistoryRequest {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

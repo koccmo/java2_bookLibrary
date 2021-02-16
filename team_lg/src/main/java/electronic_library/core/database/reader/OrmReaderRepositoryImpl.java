@@ -110,4 +110,15 @@ public class OrmReaderRepositoryImpl implements ReaderRepository {
     public List<Reader> getReaders() {
         return sessionFactory.getCurrentSession().getSession().createQuery("FROM Reader").list();
     }
+
+    @Override
+    public boolean containsReader(Reader reader) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reader r where readerFirstName = : readerFirstName AND readerLastName = : readerLastName AND readerPersonalCode = : readerPersonalCode");
+        query.setParameter("readerFirstName", reader.getReaderFirstName());
+        query.setParameter("readerLastName", reader.getReaderLastName());
+        query.setParameter("readerPersonalCode", reader.getReaderPersonalCode());
+        return query.getResultList().size() > 0;
+        }
+
 }

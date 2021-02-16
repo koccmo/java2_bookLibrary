@@ -9,6 +9,9 @@ public class AddOrderRequest {
     private LocalDateTime orderDate;
     private boolean isActive;
 
+    public AddOrderRequest() {
+    }
+
     public AddOrderRequest(Long shoppingCartId) {
         this.shoppingCartId = shoppingCartId;
     }

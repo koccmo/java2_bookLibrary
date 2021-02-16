@@ -7,6 +7,8 @@ public class FillDoctorsWorkGraphicRequest {
     private String start;
     private String end;
 
+    public FillDoctorsWorkGraphicRequest () { }
+
     public FillDoctorsWorkGraphicRequest(Long id, Integer day, String start, String end) {
         this.id = id;
         this.day = day;
@@ -28,5 +30,21 @@ public class FillDoctorsWorkGraphicRequest {
 
     public String getEnd() {
         return end;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

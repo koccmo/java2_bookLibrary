@@ -10,15 +10,20 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long customerId;
-    @Column(name = "first_name")
+
+    @Column(name = "first_name", nullable = false)
     private String customerFirstName;
-    @Column(name = "second_name")
+
+    @Column(name = "second_name", nullable = false)
     private String customerSecondName;
-    @Column(name = "phone")
+
+    @Column(name = "phone", nullable = false)
     private String customerPhone;
-    @Column(name = "email")
+
+    @Column(name = "email", nullable = false)
     private String customerEmail;
-    @Column(name = "address")
+
+    @Column(name = "address", nullable = false)
     private String customerAddress;
 
     public Customer() {}
@@ -32,44 +37,44 @@ public class Customer {
         return customerId;
     }
 
-    public String getCustomerFirstName() {
-        return customerFirstName;
-    }
-
-    public String getCustomerSecondName() {
-        return customerSecondName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerFirstName() {
+        return customerFirstName;
     }
 
     public void setCustomerFirstName(String customerFirstName) {
         this.customerFirstName = customerFirstName;
     }
 
+    public String getCustomerSecondName() {
+        return customerSecondName;
+    }
+
     public void setCustomerSecondName(String customerSecondName) {
         this.customerSecondName = customerSecondName;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
 
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
     }
 
     public void setCustomerAddress(String customerAddress) {

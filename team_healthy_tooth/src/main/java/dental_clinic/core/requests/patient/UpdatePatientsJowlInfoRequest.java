@@ -7,18 +7,38 @@ import java.util.Map;
 public class UpdatePatientsJowlInfoRequest {
 
     private Long id;
-    private Map<Integer, ToothStatus> jowlInfo;
+    private Integer toothNumber;
+    private ToothStatus toothStatus;
 
-    public UpdatePatientsJowlInfoRequest(Long id, Map<Integer, ToothStatus> jowlInfo) {
+    public UpdatePatientsJowlInfoRequest() { }
+
+    public UpdatePatientsJowlInfoRequest(Long id, Integer toothNumber, ToothStatus toothStatus) {
         this.id = id;
-        this.jowlInfo = jowlInfo;
+        this.toothNumber = toothNumber;
+        this.toothStatus = toothStatus;
     }
 
     public Long getId() {
         return id;
     }
 
-    public Map<Integer, ToothStatus> getJowlInfo() {
-        return jowlInfo;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getToothNumber() {
+        return toothNumber;
+    }
+
+    public void setToothNumber(Integer toothNumber) {
+        this.toothNumber = toothNumber;
+    }
+
+    public ToothStatus getToothStatus() {
+        return toothStatus;
+    }
+
+    public void setToothStatus(ToothStatus toothStatus) {
+        this.toothStatus = toothStatus;
     }
 }

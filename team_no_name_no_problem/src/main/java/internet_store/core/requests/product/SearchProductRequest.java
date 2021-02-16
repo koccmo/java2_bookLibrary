@@ -22,6 +22,8 @@ public class SearchProductRequest {
         this.paging = paging;
     }
 
+    public SearchProductRequest(){}
+
     public String getTitle(){
         return title;
     }

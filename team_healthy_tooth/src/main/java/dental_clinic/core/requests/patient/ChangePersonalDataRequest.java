@@ -6,6 +6,7 @@ public class ChangePersonalDataRequest {
     private String updatedSurname;
     private String updatedPhoneNumber;
 
+    public ChangePersonalDataRequest() { }
     public ChangePersonalDataRequest(Long patientIdNumber,
                                      String updatedSurname,
                                      String updatedPhoneNumber) {
@@ -16,6 +17,18 @@ public class ChangePersonalDataRequest {
 
     public Long getPatientIdNumber() {
         return patientIdNumber;
+    }
+
+    public void setUpdatedSurname(String updatedSurname) {
+        this.updatedSurname = updatedSurname;
+    }
+
+    public void setPatientIdNumber(Long patientIdNumber) {
+        this.patientIdNumber = patientIdNumber;
+    }
+
+    public void setUpdatedPhoneNumber(String updatedPhoneNumber) {
+        this.updatedPhoneNumber = updatedPhoneNumber;
     }
 
     public String getUpdatedSurname() {

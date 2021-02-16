@@ -8,6 +8,9 @@ public class AddCustomerRequest {
     private String customerEMail;
     private String customerAddress;
 
+    public AddCustomerRequest() {
+    }
+
     public AddCustomerRequest(String customerFirstName, String customerSecondName) {
         this.customerFirstName = customerFirstName;
         this.customerSecondName = customerSecondName;
@@ -31,6 +34,14 @@ public class AddCustomerRequest {
 
     public String getCustomerAddress() {
         return customerAddress;
+    }
+
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
+
+    public void setCustomerSecondName(String customerSecondName) {
+        this.customerSecondName = customerSecondName;
     }
 
     public void setCustomerPhone(String customerPhone) {

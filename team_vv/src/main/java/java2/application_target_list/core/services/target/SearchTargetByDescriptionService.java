@@ -39,8 +39,6 @@ public class SearchTargetByDescriptionService {
             return new SearchTargetByDescriptionResponse(errors, null);
         }
 
-
-
         List<Target> targets = targetRepository.findByTargetDescription(request.getDescription());
         targets = order(targets, request.getOrdering());
         targets = paging(targets, request.getPaging());

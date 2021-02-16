@@ -1,39 +1,34 @@
 package dental_clinic.web_ui.controllers;
 
-import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.requests.doctor.AddDoctorRequest;
 import dental_clinic.core.responses.doctor.AddDoctorResponse;
 import dental_clinic.core.services.doctor.AddDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AddDoctorController {
 
-    @Autowired
-    private AddDoctorService addDoctorService;
+    @Autowired private AddDoctorService addDoctorService;
 
     @GetMapping(value = "/addDoctor")
     public String showAddDoctorPage(ModelMap modelMap) {
-        Doctor doctor = new Doctor();
-        modelMap.addAttribute("request",new AddDoctorRequest(doctor));
+        modelMap.addAttribute("request", new AddDoctorRequest());
         return "addDoctor";
     }
 
     @PostMapping("/addDoctor")
-    public String processAddDoctorRequest(@RequestParam(value = "doctor.name") String name,
-                                          @RequestParam(value = "doctor.surname") String surname,
-                                          @RequestParam(value = "doctor.phone") String phone, ModelMap modelMap) {
-        Doctor doctor = new Doctor(name,surname,phone);
-        AddDoctorResponse addDoctorResponse = addDoctorService.execute(new AddDoctorRequest(doctor));
+    public String processAddDoctorRequest(@ModelAttribute(value = "request") AddDoctorRequest addDoctorRequest, ModelMap modelMap) {
+        AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);
         if (addDoctorResponse.hasErrors()) {
             modelMap.addAttribute("errors", addDoctorResponse.getErrors());
-            return "addDoctor";
+            return "/addDoctor";
         } else {
             return "redirect:/";
         }
     }
 }
-

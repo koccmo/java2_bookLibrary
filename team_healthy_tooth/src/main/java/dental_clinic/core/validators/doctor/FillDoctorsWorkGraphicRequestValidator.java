@@ -16,9 +16,23 @@ public class FillDoctorsWorkGraphicRequestValidator {
     public List<CoreError> validate (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
         List <CoreError> errorList = new ArrayList<>();
 
+        errorList.addAll(isFilledNotCorrect(fillDoctorsWorkGraphicRequest));
         errorList.addAll(idValidationErrors(fillDoctorsWorkGraphicRequest.getId()));
         errorList.addAll(workGraphicTimeFormatErrors(fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd()));
 
+        return errorList;
+    }
+
+    private List<CoreError> isFilledNotCorrect(FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
+        List <CoreError> errorList = new ArrayList<>();
+        if (fillDoctorsWorkGraphicRequest.getDay() == null
+                || fillDoctorsWorkGraphicRequest.getDay() < 1 || fillDoctorsWorkGraphicRequest.getDay() > 7) {
+            errorList.add(new CoreError("day", "Not valid input for day"));
+        }
+        if (fillDoctorsWorkGraphicRequest.getStart() == null || fillDoctorsWorkGraphicRequest.getStart().isEmpty()
+                || fillDoctorsWorkGraphicRequest.getEnd() == null || fillDoctorsWorkGraphicRequest.getEnd().isEmpty()) {
+            errorList.add(new CoreError("time", "Time can't be empty"));
+        }
         return errorList;
     }
 

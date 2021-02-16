@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <title>Product Library</title>
+</head>
+
+<body>
+
+<h3>Delete product by product</h3>
+
+<table>
+    <tr>
+        <td>Product Name:</td>
+        <td>Product Description:</td>
+        <td>Product Price:</td>
+    </tr>
+
+    <tr>
+        <form action="/product/deleteProductByProduct" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.productName}"/></td>
+            <td><input type="text" th:field="${request.productDescription}"/></td>
+            <td><input type="text" th:field="${request.productPrice}"/></td>
+            <td>
+                <input type="submit" value="Delete product"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

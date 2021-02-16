@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -10,35 +10,35 @@
 
 <body>
 
-<h3>Change Personal Data</h3>
+<h3>Change personal data</h3>
 
 <table>
     <tr>
-        <td>Patient Id Number:</td>
-        <td>Updated Surname:</td>
-        <td>Updated Phone :</td>
+        <td>Patient's id:</td>
+        <td>New surname:</td>
+        <td>New phone:</td>
     </tr>
 
     <tr>
         <form action="/changePersonalData" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.patientIdNumber}"/></td>
+            <td><input type="number" min="1" th:field="${request.patientIdNumber}"/></td>
             <td><input type="text" th:field="${request.updatedSurname}"/></td>
             <td><input type="text" th:field="${request.updatedPhoneNumber}"/></td>
             <td>
-                <input type="submit" value="Update"/>
+                <input type="submit" value="Change personal data"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
     </tr>
-
 </table>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}"></td>
-        <td th:text="${error.message}"></td>
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
     </tr>
 </td>
+
 </body>
 
 </html>

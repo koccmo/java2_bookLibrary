@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Target list demo project">
+    <meta name="author" content="Vadims Vladisevs">
+    <title>Target list</title>
+</head>
+
+<body>
+
+<h3>Set record complete date</h3>
+
+<table>
+    <tr>
+        <td>Record id</td>
+        <td>Target name</td>
+        <td>Target description</td>
+        <td>Target deadline</td>
+        <td>User first name</td>
+        <td>User last name</td>
+        <td>Target added date</td>
+        <td>Target date of completion</td>
+    </tr>
+
+    <td th:if="${records != null}">
+        <tr th:each="records : ${records}">
+            <td th:text="${records.recordId}" />
+            <td th:text="${records.target.name}" />
+            <td th:text="${records.target.description}" />
+            <td th:text="${records.target.deadline}" />
+            <td th:text="${records.user.firstName}" />
+            <td th:text="${records.user.lastName}" />
+            <td th:text="${records.dateAdded}" />
+            <td th:text="${records.dateComplete}" />
+        </tr>
+    </td>
+
+</table>
+
+<table>
+    <tr>
+        <td>Record id:</td>
+    </tr>
+
+    <tr>
+        <form action="/board/setRecordCompleteDate" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.recordIdToSetCompleteDate}"/></td>
+            <td>
+                <input type="submit" value="Set Date"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

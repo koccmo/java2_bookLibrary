@@ -13,8 +13,8 @@ public class AddManipulationRequestValidator {
     public List<CoreError> validate (AddManipulationRequest addManipulationRequest) {
         List <CoreError> errorList = new ArrayList<>();
 
-        if (addManipulationRequest.getManipulation().getManipulation_type() == null ||
-            addManipulationRequest.getManipulation().getManipulation_type().isEmpty()) {
+        if (addManipulationRequest.getManipulation().getManipulationType() == null ||
+            addManipulationRequest.getManipulation().getManipulationType().isEmpty()) {
             errorList.add(new CoreError("manipulation type", "Not valid manipulation type"));
         }
 

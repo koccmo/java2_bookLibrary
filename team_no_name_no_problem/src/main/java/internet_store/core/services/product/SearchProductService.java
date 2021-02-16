@@ -94,7 +94,7 @@ import java.util.stream.Collectors;
     private boolean isTitleAndDescriptionAndPriceNotEmpty(String title, String description,
                                                           Integer startPrice, Integer endPrice){
         return title != null && !title.isEmpty() && description != null && !description.isEmpty() &&
-                startPrice != null && endPrice != null;
+                startPrice != 0 && endPrice != 0;
     }
 
     private SearchProductResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductRequest searchProductRequest){
@@ -120,7 +120,7 @@ import java.util.stream.Collectors;
     }
 
     private boolean isPriceRangeFilled(Integer startPrice, Integer endPrice) {
-        return startPrice != null && endPrice != null;
+        return startPrice != 0 && endPrice != 0;
     }
 
     private boolean isTitleAndDescriptionFilled(String title, String description){
@@ -128,11 +128,11 @@ import java.util.stream.Collectors;
     }
 
     private boolean isTitleFilledAndPriceRangeNotEmpty(String title, Integer startPrice, Integer endPrice) {
-        return title != null && !title.isEmpty() && startPrice != null && endPrice != null;
+        return title != null && !title.isEmpty() && startPrice != 0 && endPrice != 0;
     }
 
     private boolean isDescriptionFilledPriceRangeNotEmpty(String description, Integer startPrice, Integer endPrice) {
-        return description != null && !description.isEmpty() && startPrice != null && endPrice != null;
+        return description != null && !description.isEmpty() && startPrice != 0 && endPrice != 0;
     }
 
     private SearchProductResponse searchByTitleIsProvided(SearchProductRequest searchProductRequest){

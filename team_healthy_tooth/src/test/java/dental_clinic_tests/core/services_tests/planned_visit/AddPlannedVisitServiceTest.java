@@ -1,5 +1,5 @@
 package dental_clinic_tests.core.services_tests.planned_visit;
-
+/*
 import dental_clinic.core.domain.Doctor;
 import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
@@ -79,4 +79,4 @@ public class AddPlannedVisitServiceTest {
         assertTrue(addPlannedVisitResponse.getErrors().contains(coreError));
         Mockito.verifyNoInteractions(plannedVisitsRepository);
     }
-}
+}*/

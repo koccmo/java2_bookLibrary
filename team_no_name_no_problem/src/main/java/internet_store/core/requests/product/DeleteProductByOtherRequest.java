@@ -14,6 +14,8 @@ public class DeleteProductByOtherRequest {
         this.endPrice = endPrice;
     }
 
+    public DeleteProductByOtherRequest() {}
+
     public String getTitle() {
         return title;
     }
@@ -28,4 +30,21 @@ public class DeleteProductByOtherRequest {
     public Integer getEndPrice() {
         return endPrice;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartPrice(Integer startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public void setEndPrice(Integer endPrice) {
+        this.endPrice = endPrice;
+    }
 }
+

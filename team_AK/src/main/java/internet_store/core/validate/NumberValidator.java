@@ -17,27 +17,27 @@ public class NumberValidator<T> {
         List<CoreError> errors = new ArrayList<>();
 
         if (inputValue == null) {
-            errors.add(new CoreError("Input error ", "Empty field"));
+            errors.add(new CoreError("error", "Empty field"));
             return errors;
         }
 
         if (inputValue instanceof Integer) {
             if ((int) inputValue < 0) {
-                errors.add(new CoreError("Integer input error ", "only positive number allowed"));
+                errors.add(new CoreError("Integer input error", "only positive number allowed"));
                 return errors;
             }
         }
 
         if (inputValue instanceof Long) {
             if ((long) inputValue < 0) {
-                errors.add(new CoreError("Long input error ", "only positive number allowed"));
+                errors.add(new CoreError("Long input error", "only positive number allowed"));
                 return errors;
             }
         }
 
         if (inputValue instanceof BigDecimal) {
             if (new BigDecimal(String.valueOf(inputValue)).compareTo(new BigDecimal("0")) < 0) {
-                errors.add(new CoreError("BigDecimal input error ", "only positive number allowed"));
+                errors.add(new CoreError("BigDecimal input error", "only positive number allowed"));
                 return errors;
             }
         }

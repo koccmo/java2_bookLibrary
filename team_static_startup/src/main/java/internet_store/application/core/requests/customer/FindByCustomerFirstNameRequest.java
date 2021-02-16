@@ -4,6 +4,9 @@ public class FindByCustomerFirstNameRequest {
 
     private String customerFirstName;
 
+    public FindByCustomerFirstNameRequest() {
+    }
+
     public FindByCustomerFirstNameRequest(String customerFirstName) {
         this.customerFirstName = customerFirstName;
     }
@@ -12,4 +15,7 @@ public class FindByCustomerFirstNameRequest {
         return customerFirstName;
     }
 
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
 }

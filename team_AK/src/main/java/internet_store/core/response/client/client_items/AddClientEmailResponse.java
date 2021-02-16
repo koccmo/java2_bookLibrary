@@ -13,8 +13,4 @@ public class AddClientEmailResponse extends CoreErrorResponse {
     public AddClientEmailResponse(List<CoreError> errors) {
         super(errors);
     }
-
-    public AddClientEmailResponse(String email) {
-        this.email = email;
-    }
 }

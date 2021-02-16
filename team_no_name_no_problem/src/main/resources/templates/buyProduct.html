@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="NoNameNoProblem" content="internet_store">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3>Buy product</h3>
+
+<table>
+    <tr>
+        <td>ID:</td>
+        <td>Quantity:</td>
+    </tr>
+
+    <tr>
+        <form action="/buyProduct" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="text" th:field="${request.quantity}"/></td>
+            <td>
+                <input type="submit" value="Add Product to Shopping Cart"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+</body>
+
+</html>

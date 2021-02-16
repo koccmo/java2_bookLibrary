@@ -4,11 +4,18 @@ public class SetRecordCompleteDateRequest {
 
     private Long recordIdToSetCompleteDate;
 
+    public SetRecordCompleteDateRequest() {
+    }
+
     public SetRecordCompleteDateRequest(Long recordIdToSetCompleteDate) {
         this.recordIdToSetCompleteDate = recordIdToSetCompleteDate;
     }
 
     public Long getRecordIdToSetCompleteDate() {
         return recordIdToSetCompleteDate;
+    }
+
+    public void setRecordIdToSetCompleteDate(Long recordIdToSetCompleteDate) {
+        this.recordIdToSetCompleteDate = recordIdToSetCompleteDate;
     }
 }

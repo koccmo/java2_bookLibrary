@@ -1,6 +1,10 @@
 package electronic_library.core.requests.reader;
 
+import electronic_library.core.domain.Reader;
+
 public class AddReaderRequest {
+
+    private Reader reader;
 
     private String readerFirstName;
     private String readerLastName;
@@ -50,7 +54,7 @@ public class AddReaderRequest {
         return readerAddress;
     }
 
-    public void setReaderAddress(String readerAddress) {
-        this.readerAddress = readerAddress;
+    public Reader getReader(){
+        return reader;
     }
 }

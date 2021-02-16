@@ -13,7 +13,7 @@ import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.main_menu_services.AddBookService;
 import team_VK.application.core.services.matchers.BookMatcher;
 import team_VK.application.core.services.validators.AddBookServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddBookServiceTest {
 
     @Mock private AddBookServiceValidator validator;
-    @Mock private Database database;
+    @Mock private BookRepository database;
     @InjectMocks AddBookService addBookService;
 
 

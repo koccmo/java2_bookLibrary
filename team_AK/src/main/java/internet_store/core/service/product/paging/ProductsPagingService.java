@@ -1,22 +1,24 @@
 package internet_store.core.service.product.paging;
 
 import internet_store.core.domain.Product;
-import internet_store.persistence.ProductRepository;
+import internet_store.core.persistence.ProductRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductsPagingService {
     private final int PAGE_OFFSET = 1;
     private final int FIRST_PAGE = 1;
     private final int START_FROM_FIRST_RECORD = 0;
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @Getter
     @Setter
     @Value("${product-records-on-page}")
@@ -56,7 +58,7 @@ public class ProductsPagingService {
     }
 
     private void nextPage() {
-        if (currentPage + PAGE_OFFSET == pagesQuantity) {
+        if (currentPage + PAGE_OFFSET >= pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
             isLastPage = true;
@@ -72,7 +74,7 @@ public class ProductsPagingService {
     }
 
     private void prevPage() {
-        if (currentPage - PAGE_OFFSET == FIRST_PAGE) {
+        if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
             endRecordOffset = recordsCountOnPage;

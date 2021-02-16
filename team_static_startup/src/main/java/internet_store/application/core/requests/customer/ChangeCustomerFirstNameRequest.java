@@ -5,6 +5,9 @@ public class ChangeCustomerFirstNameRequest {
     private Long id;
     private String customerNewName;
 
+    public ChangeCustomerFirstNameRequest() {
+    }
+
     public ChangeCustomerFirstNameRequest(Long id, String customerNewName) {
         this.id = id;
         this.customerNewName = customerNewName;
@@ -18,4 +21,11 @@ public class ChangeCustomerFirstNameRequest {
         return customerNewName;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCustomerNewName(String customerNewName) {
+        this.customerNewName = customerNewName;
+    }
 }

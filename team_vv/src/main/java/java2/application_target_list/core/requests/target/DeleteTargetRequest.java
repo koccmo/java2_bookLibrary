@@ -4,6 +4,13 @@ public class DeleteTargetRequest {
 
     private Long targetIdToDelete;
 
+    public DeleteTargetRequest() {
+    }
+
+    public void setTargetIdToDelete(Long targetIdToDelete) {
+        this.targetIdToDelete = targetIdToDelete;
+    }
+
     public DeleteTargetRequest(Long targetIdToDelete) {
         this.targetIdToDelete = targetIdToDelete;
     }

@@ -1,22 +1,20 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.config.AppConfig;
+import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.DeleteByProductNameRequest;
 import internet_store.application.core.responses.product.DeleteByProductNameResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.DeleteByProductNameService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
 
 @Profile("hibernate")
 public class DeleteByProductNameAcceptanceTest {
@@ -25,7 +23,7 @@ public class DeleteByProductNameAcceptanceTest {
 
     @Before
     public void before() {
-        appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

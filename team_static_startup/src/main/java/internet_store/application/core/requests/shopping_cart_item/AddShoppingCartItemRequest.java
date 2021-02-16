@@ -6,6 +6,9 @@ public class AddShoppingCartItemRequest {
     private Long productId;
     private Long quantity;
 
+    public AddShoppingCartItemRequest() {
+    }
+
     public AddShoppingCartItemRequest(Long shoppingCartId, Long productId, Long quantity) {
         this.shoppingCartId = shoppingCartId;
         this.productId = productId;

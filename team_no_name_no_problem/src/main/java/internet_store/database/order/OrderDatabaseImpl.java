@@ -1,12 +1,12 @@
 package internet_store.database.order;
-/*
+
 import internet_store.core.domain.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+//@Component
 public class OrderDatabaseImpl implements OrderDatabase{
 
     private Long id = 1L;
@@ -25,4 +25,3 @@ public class OrderDatabaseImpl implements OrderDatabase{
         id++;
     }
 }
-*/

@@ -2,13 +2,15 @@ package team_VK.application.core.services.main_menu_services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import team_VK.application.database.Database;
+import org.springframework.transaction.annotation.Transactional;
+import team_VK.application.database.BookRepository;
 
 @Component
+@Transactional
 public class ShowBookService {
 
     @Autowired
-    Database database;
+    BookRepository database;
 
     public void showBook(long showingBookID) {
         database.getListBooks().stream()

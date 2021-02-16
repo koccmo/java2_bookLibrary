@@ -6,6 +6,7 @@ import internet_store.console_ui.customer.DeleteCustomerUIAction;
 import internet_store.console_ui.customer.FindCustomerByIdUIAction;
 import internet_store.console_ui.customer.SearchCustomerUIAction;
 //import internet_store.console_ui.order.GetOrdersUIAction;
+import internet_store.console_ui.order.GetOrdersUIAction;
 import internet_store.console_ui.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,20 +28,19 @@ public class ProgramMenu {
         menuNumberToActionMap.put(3, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(4, findUIAction(uiActionList, ChangeProductUIAction.class));
         menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
-        menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteByOtherUIAction.class));
+        menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteProductByOtherUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
-       // menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
+        menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));
         // Deletecustomer ui
 
-        menuNumberToActionMap.put(9, findUIAction(uiActionList, AddCustomerUIAction.class));
+        menuNumberToActionMap.put(9, findUIAction(uiActionList,  AddCustomerUIAction.class));
         menuNumberToActionMap.put(10, findUIAction(uiActionList, DeleteCustomerUIAction.class));
-        menuNumberToActionMap.put(11, findUIAction(uiActionList, SearchProductUIAction.class));
-        menuNumberToActionMap.put(12, findUIAction(uiActionList, GetAllProductsUIAction.class));
-        menuNumberToActionMap.put(13, findUIAction(uiActionList, BuyProductUIAction.class));
+        menuNumberToActionMap.put(11, findUIAction(uiActionList, GetAllProductsUIAction.class));
+        menuNumberToActionMap.put(12, findUIAction(uiActionList, BuyProductUIAction.class));
         // Get my order list
 
-        menuNumberToActionMap.put(14, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
-        menuNumberToActionMap.put(15, findUIAction(uiActionList, SearchCustomerUIAction.class));
+        menuNumberToActionMap.put(13, findUIAction(uiActionList, FindCustomerByIdUIAction.class));
+        menuNumberToActionMap.put(14, findUIAction(uiActionList, SearchCustomerUIAction.class));
 
         menuNumberToActionMap.put(0, new ExitFromApplicationUIAction());
     }
@@ -72,12 +72,11 @@ public class ProgramMenu {
 
         System.out.println("\nCustomer Menu\n\n" +
                 "9   Sign in\n" +
-                "10  Delete account by id\n" +
-                "11  Search product\n" +
-                "12  See product list\n" +
-                "13  Buy product\n\n"+
-                "14  Search customer by ID\n" +
-                "15  Search customer by other criteria\n" +
+                "10  Delete account by ID\n" +
+                "11  See product list\n" +
+                "12  Buy product\n\n"+
+                "13  Search customer by ID\n" +
+                "14  Search customer by other criteria\n" +
                 "*****************************\n");
 
         System.out.println("0   Exit\n");

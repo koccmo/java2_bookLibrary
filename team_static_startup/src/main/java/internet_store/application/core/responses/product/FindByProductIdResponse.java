@@ -1,5 +1,6 @@
 package internet_store.application.core.responses.product;
 
+import internet_store.application.core.domain.Customer;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.CoreResponse;
@@ -22,4 +23,5 @@ public class FindByProductIdResponse extends CoreResponse {
     public Optional<Product> getProductFoundById() {
         return productFoundById;
     }
+
 }
