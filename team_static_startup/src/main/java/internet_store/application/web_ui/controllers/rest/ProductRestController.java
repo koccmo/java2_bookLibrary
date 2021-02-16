@@ -1,11 +1,14 @@
 package internet_store.application.web_ui.controllers.rest;
 
+import internet_store.application.core.requests.product.UpdateProductRequest;
 import internet_store.application.core.requests.product.AddProductRequest;
 import internet_store.application.core.requests.product.FindByIdRequest;
 import internet_store.application.core.responses.product.AddProductResponse;
 import internet_store.application.core.responses.product.FindByProductIdResponse;
+import internet_store.application.core.responses.product.UpdateProductResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.FindByProductIdService;
+import internet_store.application.core.services.product.UpdateProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,7 @@ public class ProductRestController {
 
     @Autowired private FindByProductIdService findByProductIdService;
     @Autowired private AddProductService addProductService;
+    @Autowired private UpdateProductService updateProductService;
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public FindByProductIdResponse getProduct(@PathVariable Long id) {
@@ -29,5 +33,11 @@ public class ProductRestController {
         return  addProductService.execute(request);
     }
 
+    @PutMapping(path = "/",
+            produces = "application/json",
+            consumes = "application/json")
+    public UpdateProductResponse updateProduct(@RequestBody UpdateProductRequest request){
+        return updateProductService.execute(request);
+    }
 
 }
