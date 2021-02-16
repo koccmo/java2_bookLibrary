@@ -12,6 +12,9 @@ public class AddBookRequest {
         this.bookingDurationPermitted = bookingDurationPermitted;
     }
 
+    public AddBookRequest() {
+    }
+
     public String getBookTitle() {
         return bookTitle;
     }
@@ -22,5 +25,17 @@ public class AddBookRequest {
 
     public int getBookingDurationPermitted() {
         return bookingDurationPermitted;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public void setBookingDurationPermitted(int bookingDurationPermitted) {
+        this.bookingDurationPermitted = bookingDurationPermitted;
     }
 }

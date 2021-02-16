@@ -1,21 +1,26 @@
 package team_VK.application;
 
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import team_VK.application.configuration.LibraryConfig;
+import team_VK.application.configuration.SpringCoreConfiguration;
 import team_VK.application.console_vi.ProgramMenu;
 import team_VK.application.core.services.additional_functions.DataBaseFillAdditionalFunction;
+import team_VK.application.web_ui.config.SpringWebConfiguration;
 
 import java.text.ParseException;
 
-
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class LibraryApplication {
 
 
     public static void main(String[] args) throws ParseException {
 
-        ApplicationContext context = getApplicationContext();
+        ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
 
         DataBaseFillAdditionalFunction   dataBaseFillAdditionalFunction =
                 context.getBean(DataBaseFillAdditionalFunction.class);
@@ -33,7 +38,7 @@ public class LibraryApplication {
     }
 
     private static ApplicationContext getApplicationContext() {
-        return new AnnotationConfigApplicationContext(LibraryConfig.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
 //
