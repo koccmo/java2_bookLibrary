@@ -22,7 +22,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "team_VK.application")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
-public class LibraryConfig {
+public class SpringCoreConfiguration {
 
     @Value("${jdbc.url}")
     private String jdbcUrl;
