@@ -24,8 +24,8 @@
 
     <tr>
         <form action="/searchCustomer" th:object="${request}" method="post">
-                <td><input type="text" th:field="${request.name}"/></td>
-                <td><input type="text" th:field="${request.surname}"/></td>
+                <td><input type="text" th:field="${request.customer.name}"/></td>
+                <td><input type="text" th:field="${request.customer.surname}"/></td>
                 <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
                 <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
                 <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>

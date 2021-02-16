@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ChangeProductNameController {
 
     @Autowired
-    ChangeProductNameService changeProductNameService;
+    private ChangeProductNameService changeProductNameService;
 
     @GetMapping(value = "product/changeProductName")
     public String showChangeProductNamePage(ModelMap modelMap) {

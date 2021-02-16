@@ -20,7 +20,7 @@
     <tr>
         <form action="/deleteCustomerById" th:object="${request}" method="post">
             <td>
-                <input type="text" th:field="${request.id}"/>
+                <input type="number" min="1" th:field="${request.id}"/>
             </td>
             <td>
                 <input type="submit" value="Delete customer"/>
@@ -36,10 +36,6 @@
         <td th:text="${error.message}" /> </br>
     </tr>
 </td>
-
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
 
 </body>
 

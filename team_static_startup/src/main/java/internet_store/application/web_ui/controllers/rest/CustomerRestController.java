@@ -1,11 +1,8 @@
 package internet_store.application.web_ui.controllers.rest;
 
-import internet_store.application.core.requests.customer.AddCustomerRequest;
-import internet_store.application.core.requests.customer.GetCustomerRequest;
-import internet_store.application.core.responses.customer.AddCustomerResponse;
-import internet_store.application.core.responses.customer.GetCustomerResponse;
-import internet_store.application.core.services.customer.AddCustomerService;
-import internet_store.application.core.services.customer.GetCustomerService;
+import internet_store.application.core.requests.customer.*;
+import internet_store.application.core.responses.customer.*;
+import internet_store.application.core.services.customer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +26,22 @@ public class CustomerRestController {
             produces = "application/json")
     public AddCustomerResponse addCustomer(@RequestBody AddCustomerRequest request) {
         return addCustomerService.execute(request);
+    }
+    @Autowired private UpdateCustomerService updateCustomerService;
+
+    @PutMapping(path = "/{id}",
+            consumes = "application/json",
+            produces = "application/json")
+    public UpdateCustomerResponse updateCustomer(@RequestBody UpdateCustomerRequest request) {
+        return updateCustomerService.execute(request);
+    }
+
+    @Autowired private DeleteByCustomerIdService deleteByCustomerIdService;
+
+    @DeleteMapping(path = "/{id}", produces = "application/json")
+    public DeleteByCustomerIdResponse deleteBook(@PathVariable Long id) {
+        DeleteByCustomerIdRequest request = new DeleteByCustomerIdRequest(id);
+        return deleteByCustomerIdService.execute(request);
     }
 
 }
@@ -71,4 +84,10 @@ produces = "application/json" - указывает на то, что в теле
         "author": "WWW"
     }
 }
+
+@PutMapping - указывает на то, что HTTP PUT запросы приходящие
+на относительный url /book/{id} будут обрабатываться методом updateBook()
+
+@DeleteMapping - указывает на то, что HTTP DELETE запросы приходящие
+на относительный url /book/{id} будут обрабатываться методом deleteBook()
 */
