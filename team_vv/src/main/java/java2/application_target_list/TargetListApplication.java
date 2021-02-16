@@ -1,19 +1,19 @@
 package java2.application_target_list;
 
-import java2.application_target_list.config.TargetListConfiguration;
+
 import java2.application_target_list.console_ui.Menu;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import java2.application_target_list.web_ui.config.SpringWebConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public  class TargetListApplication {
-    
-     public static void main(String[] args) {
-         ApplicationContext applicationContext = createApplicationContext();
-         Menu menu = applicationContext.getBean(Menu.class);
-         menu.start();
-     }
 
-    private static ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
-    }
+     public static void main(String[] args) {
+         ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
+         Menu programMenu = context.getBean(Menu.class);
+         programMenu.start();
+     }
 }

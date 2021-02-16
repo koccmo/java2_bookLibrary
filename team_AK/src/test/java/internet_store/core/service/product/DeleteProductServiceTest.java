@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteProductServiceTest {
     @Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @InjectMocks
-    DeleteProductService deleteProductService;
+    private DeleteProductService deleteProductService;
 
     @Test
     public void shouldReturnNoError_DeleteProduct() {

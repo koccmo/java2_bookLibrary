@@ -71,6 +71,5 @@ public class AddTargetUIAction implements UIAction {
         System.out.print("Enter target deadline(days): ");
 //        return Integer.parseInt(scr.nextLine());
         return Long.parseLong(scr.nextLine());
-
     }
 }

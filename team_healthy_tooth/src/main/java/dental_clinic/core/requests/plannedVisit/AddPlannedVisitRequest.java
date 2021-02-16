@@ -1,34 +1,40 @@
 package dental_clinic.core.requests.plannedVisit;
 
-import dental_clinic.core.domain.PersonalData;
-
 public class AddPlannedVisitRequest {
 
-    private boolean isNewPatient;
     private String visitDataText;
-    private PersonalData personalData;
+    private String personalCode;
     private Long doctorsId;
 
-    public AddPlannedVisitRequest(boolean isNewPatient, String visitDataText, PersonalData personalData, Long doctorsId) {
-        this.isNewPatient = isNewPatient;
-        this.visitDataText = visitDataText;
-        this.personalData = personalData;
-        this.doctorsId = doctorsId;
-    }
+    public AddPlannedVisitRequest() { }
 
-    public boolean getIsNewPatient() {
-        return isNewPatient;
+    public AddPlannedVisitRequest(String visitDataText, String personalCode, Long doctorsId) {
+        this.visitDataText = visitDataText;
+        this.personalCode = personalCode;
+        this.doctorsId = doctorsId;
     }
 
     public String getVisitDataText() {
         return visitDataText;
     }
 
-    public PersonalData getPersonalData() {
-        return personalData;
+    public void setVisitDataText(String visitDataText) {
+        this.visitDataText = visitDataText;
     }
 
-    public Long getId() {
+    public String getPersonalCode() {
+        return personalCode;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
+    }
+
+    public Long getDoctorsId() {
         return doctorsId;
+    }
+
+    public void setDoctorsId(Long doctorsId) {
+        this.doctorsId = doctorsId;
     }
 }

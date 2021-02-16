@@ -1,11 +1,18 @@
 package internet_store.core.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
 @Data
-@AllArgsConstructor
+@Table(name = "telegram", schema = "store")
 public class TelegramChatId {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "chatid")
     private Long chatId;
-    private Integer orderNumber;
+    @Column(name = "order_number")
+    private String orderNumber;
 }

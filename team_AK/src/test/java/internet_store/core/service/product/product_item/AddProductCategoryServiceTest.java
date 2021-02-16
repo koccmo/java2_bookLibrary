@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AddProductCategoryServiceTest {
-    AddProductCategoryService service = new AddProductCategoryService();
+    private final AddProductCategoryService service = new AddProductCategoryService();
 
     @Test
     public void shouldReturnCurrentInteger() {

@@ -3,22 +3,22 @@ package internet_store.core.service.ordering;
 import internet_store.core.domain.Order;
 import internet_store.core.domain.TelegramChatId;
 import internet_store.core.persistence.OrderRepository;
-import internet_store.core.request.ordering.OrderStatusRequest;
-import internet_store.core.service.telegram.FindTelegramChatIdService;
+import internet_store.integration.PrintService;
 import internet_store.integration.mail.EmailServiceImpl;
 import internet_store.integration.telegram.ChatBot;
-import lombok.SneakyThrows;
+import internet_store.integration.telegram.service.FindTelegramChatIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class OrderStatusService {
+    @Autowired
+    private FindTelegramChatIdService findTelegramChatIdService;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -27,65 +27,60 @@ public class OrderStatusService {
     private ChatBot chatBot;
     @Autowired
     private EmailServiceImpl emailService;
-    private OrderStatus orderStatus;
+    @Autowired
+    private PrintService printService;
     private Order order;
 
     public void changeOrderStatus(String orderNumber, String orderStatus) {
         List<Order> orders = orderRepository.findAllByNumber(orderNumber);
-        if (orders != null) {
-            for (Order order : orders) {
-                order.setStatus(orderStatus);
-                orderRepository.save(order);
-            }
-            this.order = orders.get(0);
-            if (orderStatus.equals("ORDER RECEIVED")) {
-                sendEmailAboutConfirmationOrder();
-            } else {
-                sendEmailAboutChangedStatus();
-            }
+        Optional<List<Order>> optionalOrderList = Optional.ofNullable(orders);
+
+        optionalOrderList.ifPresent(orderList -> {
+            this.order = orderList.get(0);
+            changeOrderStatusAndSave(orderStatus, orderList);
+            checkIsFirstOrderStatus(orderStatus);
+            telegramNotification();
+        });
+    }
+
+    private void checkIsFirstOrderStatus(String orderStatus) {
+        if (orderStatus.equals("ORDER RECEIVED")) {
+            sendEmailAboutConfirmationOrder();
+        } else {
+            sendEmailAboutChangedStatus();
         }
     }
 
-    public void sendEmailAboutConfirmationOrder() {
-        emailService.sendSimpleMessage(order.getClient().getEmail(), "Order confirmed",
-                createChangeOrderText());
+    private void changeOrderStatusAndSave(String orderStatus, List<Order> orders) {
+        for (Order order : orders) {
+            order.setStatus(orderStatus);
+            orderRepository.save(order);
+        }
+    }
+
+    private void sendEmailAboutConfirmationOrder() {
+        Thread sendMailConfirmationThread = new Thread(() -> emailService.sendSimpleMessage(order
+                .getClient().getEmail(), "Order confirmed", printService.createPrintReport(order)));
+        sendMailConfirmationThread.setDaemon(true);
+        sendMailConfirmationThread.start();
     }
 
     private void sendEmailAboutChangedStatus() {
-        emailService.sendSimpleMessage(order.getClient().getEmail(), "Order status changed",
-                createChangeOrderText());
+        Thread sendMailThread = new Thread(() -> emailService.sendSimpleMessage(order.getClient()
+                .getEmail(), "Order status changed", printService.createPrintReport(order)));
+        sendMailThread.setDaemon(true);
+        sendMailThread.start();
     }
 
-    public void execute(OrderStatusRequest orderStatusRequest) {
-        long orderId = orderStatusRequest.getOrderId();
+    public void telegramNotification() {
+        List<TelegramChatId> clientsChatId = findTelegramChatIdService.execute(order.getNumber());
+        Optional<List<TelegramChatId>> optionalClientChatId = Optional.ofNullable(clientsChatId);
 
-
-//        order.setOrderStatus(orderStatusRequest.getOrderStatus());
-
-        List<TelegramChatId> clientChatId = tryFindClientChatId();
-        clientChatId.forEach(this::sendTelegramChatNewInformation);
-
-    }
-
-    private List<TelegramChatId> tryFindClientChatId() {
-        return null;
-////        FindTelegramChatIdRequest request = new FindTelegramChatIdRequest(order.getOrderNumber());
-//        return telegramChatIdService.execute(request);
-    }
-
-    @SneakyThrows(TelegramApiException.class)
-    private void sendTelegramChatNewInformation(TelegramChatId clientChatId) {
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(String.valueOf(clientChatId.getChatId()))
-                .text(createChangeOrderText())
-                .build();
-        chatBot.execute(sendMessage);
-    }
-
-    private String createChangeOrderText() {
-        return "New information about order number: " + order.getNumber() + "\n"
-                + "Order date: " + order.getDate() + "\n"
-                + "Total sum: " + order.getTotal() + "\n"
-                + "Order status: " + order.getStatus();
+        optionalClientChatId.ifPresent(listChatid -> {
+            Thread sendTelegramNotificationThread = new Thread(() ->
+                    listChatid.forEach(id -> printService.printOrder(order, id.getChatId())));
+            sendTelegramNotificationThread.setDaemon(true);
+            sendTelegramNotificationThread.start();
+        });
     }
 }

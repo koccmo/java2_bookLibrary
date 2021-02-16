@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="author" content="NoNameNoProblem">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3>Change product</h3>
+
+<table>
+    <tr>
+        <td>Please enter id:</td>
+        <td>Please enter new title:</td>
+        <td>Please enter new description:</td>
+        <td>Please enter new price:</td>
+    </tr>
+
+    <tr>
+        <form action="/changeProduct" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="text" th:field="${request.title}"/></td>
+            <td><input type="text" th:field="${request.description}"/></td>
+            <td><input type="text" th:field="${request.price}"/></td>
+            <td>
+                <input type="submit" value="Change product"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+</body>
+
+</html>

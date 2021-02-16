@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "internet_store.application")
+@ComponentScan(basePackages = "internet_store.application.core")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
 public class SpringCoreConfiguration {
@@ -33,10 +33,10 @@ public class SpringCoreConfiguration {
     @Value("${database.driverName}")
     private String databaseDriverName;
 
-    @Bean
+/*    @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
+    }*/
 
     @Bean
     public DataSource dataSource() {
@@ -49,7 +49,7 @@ public class SpringCoreConfiguration {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate() {
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource());
     }
 
@@ -75,12 +75,12 @@ public class SpringCoreConfiguration {
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
         sessionFactoryBean.afterPropertiesSet();
-        return (SessionFactory) sessionFactoryBean.getObject();
+        return sessionFactoryBean.getObject();
     }
 
     @Bean
     public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-        return new HibernateTransactionManager((org.hibernate.SessionFactory) sessionFactory);
+        return new HibernateTransactionManager(sessionFactory);
     }
 
 }

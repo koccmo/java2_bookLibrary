@@ -8,7 +8,7 @@ import java2.application_target_list.core.requests.target.SearchTargetByDescript
 import java2.application_target_list.core.services.target.SearchTargetByDescriptionService;
 import java2.application_target_list.core.responses.target.SearchTargetByDescriptionResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -284,7 +284,7 @@ public class SearchByDescriptionAcceptanceTests {
     }
 
     private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private void addTargetsToDB() {

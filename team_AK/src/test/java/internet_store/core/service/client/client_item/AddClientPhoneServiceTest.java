@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class AddClientPhoneServiceTest {
-    AddClientPhoneService service = new AddClientPhoneService();
+    private final AddClientPhoneService service = new AddClientPhoneService();
 
     @Test
     public void shouldReturnNoError_1() {

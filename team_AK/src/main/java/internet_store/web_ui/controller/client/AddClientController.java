@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddClientController {
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
     @Autowired
-    AddClientService addClientService;
+    private AddClientService addClientService;
 
     @GetMapping(value = "add_client")
     public String showAddClient(ModelMap modelMap) {
@@ -30,6 +30,7 @@ public class AddClientController {
 
     @GetMapping(value = "/back_client")
     public String backButtonClientFormPressed() {
+
         return "service/service";
     }
 

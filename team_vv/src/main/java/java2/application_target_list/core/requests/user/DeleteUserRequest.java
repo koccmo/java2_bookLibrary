@@ -4,12 +4,19 @@ public class DeleteUserRequest {
 
     private Long userIdToDelete;
 
+    public DeleteUserRequest() {
+    }
+
     public DeleteUserRequest(Long userIdToDelete) {
         this.userIdToDelete = userIdToDelete;
     }
 
     public Long getUserIdToDelete() {
         return userIdToDelete;
+    }
+
+    public void setUserIdToDelete(Long userIdToDelete) {
+        this.userIdToDelete = userIdToDelete;
     }
 }
 

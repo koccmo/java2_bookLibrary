@@ -3,7 +3,7 @@ package internet_store_tests.core.validators_tests.product;
 import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.requests.product.DeleteProductRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.services.product.validators.DeleteByOtherRequestValidator;
+import internet_store.core.services.product.validators.DeleteProductByOtherRequestValidator;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class DeleteProductRequestValidatorTest {
 
     DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
-    DeleteByOtherRequestValidator deleteByOtherRequestValidator = new DeleteByOtherRequestValidator();
+    DeleteProductByOtherRequestValidator deleteByOtherRequestValidator = new DeleteProductByOtherRequestValidator();
 
     @Test
     public void testNotValidId(){

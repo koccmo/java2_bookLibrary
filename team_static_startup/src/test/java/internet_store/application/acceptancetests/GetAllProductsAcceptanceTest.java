@@ -1,12 +1,11 @@
 package internet_store.application.acceptancetests;
 
 import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.AddProductRequest;
-import internet_store.application.core.requests.product.GetAllProductsRequest;
 import internet_store.application.core.responses.product.GetAllProductsResponse;
 import internet_store.application.core.services.product.AddProductService;
 import internet_store.application.core.services.product.GetAllProductsService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertEquals;
 
 @Profile("hibernate")
 public class GetAllProductsAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -39,7 +37,7 @@ public class GetAllProductsAcceptanceTest {
                 "Receiver", "Denon", new BigDecimal("1500"));
         getAddProductService().execute(addBookRequest2);
 
-        GetAllProductsResponse response = getAllProductsService().execute(new GetAllProductsRequest());
+        GetAllProductsResponse response = getAllProductsService().execute();
         assertEquals(response.getProductList().size(), 2);
     }
 
@@ -54,6 +52,5 @@ public class GetAllProductsAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }

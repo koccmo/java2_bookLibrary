@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart"><b>Cart</b>
+                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light" id="product_count"></span></a>
                 </li>
                 <li class="nav-item">
@@ -162,14 +162,14 @@
                                 class="btn btn-outline-secondary">Back
                         </button>
                         <p></p>
-                        <div th:if="${errors.length>5}">
+                        <div th:if="${errors.length>0}">
                             <div class="alert alert-danger" role="alert">
                                 <div th:text="${errors}"></div>
                             </div>
                         </div>
-                        <div th:if="${errors.length==0}">
+                        <div th:if="${info.length>0}">
                             <div class="alert alert-success" role="alert">
-                                Product successful add to database
+                                <div th:text="${info}"></div>
                             </div>
                         </div>
                     </div>

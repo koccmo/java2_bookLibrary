@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Target list demo project">
+    <meta name="author" content="Vadims Vladisevs">
+    <title>Target list</title>
+</head>
+
+<body>
+
+<h3>Show all users in the list</h3>
+
+<table>
+    <tr>
+        <td>User first name</td>
+        <td>User last name</td>
+    </tr>
+
+    <td th:if="${users != null}">
+        <tr th:each="users : ${users}">
+            <td th:text="${users.firstName}" />
+            <td th:text="${users.lastName}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

@@ -12,7 +12,7 @@ public class FindByCustomerFirstNameValidator {
 
     public List<CoreError> validate(FindByCustomerFirstNameRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        if (request.getCustomerFirstName().isEmpty() || request.getCustomerFirstName() == null) {
+        if (request.getCustomerFirstName() == null || request.getCustomerFirstName().isEmpty()) {
             errors.add(new CoreError("Customer first name", "must not be empty"));
         }
         return errors;

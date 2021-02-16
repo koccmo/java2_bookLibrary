@@ -14,6 +14,8 @@ public class ChangeProductRequest {
         this.price = price;
     }
 
+    public ChangeProductRequest() {}
+
     public Long getId() {
         return id;
     }
@@ -28,5 +30,21 @@ public class ChangeProductRequest {
 
     public Integer getPrice() {
         return price;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

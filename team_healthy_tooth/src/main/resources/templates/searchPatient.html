@@ -6,66 +6,116 @@
     <meta name="description" content="Dental Clinic demo project">
     <meta name="author" content="Valeria">
     <title>Dental clinic Healthy tooth</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                color: #800040;
+            }
+                page {
+                width: 900px;
+                margin: 0 auto;
+            }
+            #title {
+                height: 100px;
+                background-color: #ffe6f2;
+                font-family: "Brush Script MT", "Courier New", serif;
+                font-size: 4em;
+                color: white;
+                text-shadow: 2px 2px 5px #ffffff;
+                text-align: center;
+            }
+            #content{
+                float: left;
+                width: 1950px;
+                height: 80px;
+                background-color: #ffe6f2;
+            }
+            #footer{
+                overflow: hidden;
+                background-color: #660033;
+            }
+            #menu {
+                float: left;
+                width: 98%;
+                margin: 20px 1.15%;
+                height: 900px;
+                background-color: #ffe6f2;
+                font-family: "Brush Script MT", "Courier New", serif;
+                font-size: 2em;
+                text-align: center;
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
 </head>
 
 <body>
 
-<h3>Search patient</h3>
+    <div id="title">
+        <h3>Search patient</h3>
+    </div>
 
-<table>
-    <tr>
-        <td>Input for search:</td>
-        <td>Order by name/surname:</td>
-        <td>Ordering direction ASC/DESC:</td>
-        <td>Page number:</td>
-        <td>Page size:</td>
-    </tr>
+    <div id="menu">
+        <table>
+            <tr>
+                <td>Input for search:</td>
+                <td>Order by name/surname:</td>
+                <td>Ordering direction ASC/DESC:</td>
+                <td>Page number:</td>
+                <td>Page size:</td>
+            </tr>
 
-    <tr>
-        <form action="/searchPatient" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.inputForSearch}"/></td>
-            <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
-            <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
-            <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>
-            <td><input type="number" min = "1" th:field="${request.paging.pageSize}"/></td>
-            <td>
-                <input type="submit" value="Search patient"/>
-                <input type="reset" value="Clear"/>
-            </td>
-        </form>
-    </tr>
-</table>
+            <tr>
+                <form action="/searchPatient" th:object="${request}" method="post">
+                    <td><input type="text" th:field="${request.inputForSearch}"/></td>
+                    <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
+                    <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
+                    <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>
+                    <td><input type="number" min = "1" th:field="${request.paging.pageSize}"/></td>
+                    <td>
+                        <input type="submit" value="Search patient"/>
+                        <input type="reset" value="Clear"/>
+                    </td>
+                </form>
+            </tr>
+        </table>
 
-<td th:if="${errors != null}">
-    <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.message}" /> </br>
-    </tr>
-</td>
-
-<td th:if="${patients != null}">
-    <h4>Personal data</h4>
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td>Surname:</td>
-            <td>Phone:</td>
-            <td>PersonalCode:</td>
-        </tr>
-        <td th:if="${patients != null}">
-            <tr th:each="patient : ${patients}">
-                <td th:text="${patient.name}" />
-                <td th:text="${patient.surname}" />
-                <td th:text="${patient.phone}" />
-                <td th:text="${patient.personalCode}" />
+        <td th:if="${errors != null}">
+            <tr th:each="error : ${errors}">
+                <td th:text="${error.field}" />
+                <td th:text="${error.message}" /> </br>
             </tr>
         </td>
-    </table>
-</td>
 
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
+        <td th:if="${patients != null}">
+            <h4>Personal data</h4>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td>Surname:</td>
+                    <td>Phone:</td>
+                    <td>PersonalCode:</td>
+                </tr>
+                <td th:if="${patients != null}">
+                    <tr th:each="patient : ${patients}">
+                        <td th:text="${patient.name}" />
+                        <td th:text="${patient.surname}" />
+                        <td th:text="${patient.phone}" />
+                        <td th:text="${patient.personalCode}" />
+                    </tr>
+                </td>
+            </table>
+        </td>
+
+        <form action="/" method="get">
+            <input type="submit" value="Go to main page" name="Submit" />
+        </form>
+
+    </div>
 </body>
 
 </html>

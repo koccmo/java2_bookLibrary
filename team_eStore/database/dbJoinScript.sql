@@ -1,31 +1,31 @@
-SELECT product_id, customers.first_name, customers.last_name, shopping_cart.purchase_date, shopping_cart.product_id
-FROM shopping_cart
-INNER JOIN customers ON shopping_cart.customer_id=customers.id;
+SELECT product_id, users.first_name, users.last_name, deals.deal_date, deals.product_id
+FROM deals
+INNER JOIN users ON deals.user_id=users.id;
 
-SELECT * FROM `products` JOIN `shopping_cart`;
+SELECT * FROM `products` JOIN `deals`;
 
-SELECT  customers.first_name, customers.last_name, shopping_cart.product_id
-FROM shopping_cart
-RIGHT JOIN customers ON shopping_cart.customer_id=customers.id;
+SELECT  users.first_name, users.last_name, deals.product_id
+FROM deals
+RIGHT JOIN users ON deals.user_id=users.id;
 
-SELECT  customers.first_name, customers.last_name, shopping_cart.product_id
-FROM shopping_cart
-LEFT JOIN customers ON shopping_cart.customer_id=customers.id;
+SELECT  users.first_name, users.last_name, deals.product_id
+FROM deals
+LEFT JOIN users ON deals.user_id=users.id;
 
-SELECT  products.id, products.name, products.price, customers.first_name, customers.last_name, purchase_date
-FROM shopping_cart
-INNER JOIN customers ON shopping_cart.customer_id=customers.id
-INNER JOIN products ON shopping_cart.product_id=products.id;
+SELECT  products.id, products.name, products.price, users.first_name, users.last_name, deal_date
+FROM deals
+INNER JOIN users ON deals.user_id=users.id
+INNER JOIN products ON deals.product_id=products.id;
 
-SELECT  products.id, products.name, products.price, customers.first_name, customers.last_name, purchase_date
-FROM shopping_cart
-INNER JOIN customers ON shopping_cart.customer_id=customers.id
-INNER JOIN products ON shopping_cart.product_id=products.id
+SELECT  products.id, products.name, products.price, users.first_name, users.last_name, deal_date
+FROM deals
+INNER JOIN users ON deals.user_id=users.id
+INNER JOIN products ON deals.product_id=products.id
 WHERE products.name = 'mouse';
 
-SELECT  products.name, shopping_cart.id, COUNT(shopping_cart.product_id) AS number_of_orders
-FROM shopping_cart
-LEFT JOIN products ON shopping_cart.product_id=products.id
+SELECT  products.name, deals.id, COUNT(deals.product_id) AS number_of_orders
+FROM deals
+LEFT JOIN products ON deals.product_id=products.id
 group by products.name
-HAVING COUNT(shopping_cart.product_id) > 0
-ORDER BY COUNT(shopping_cart.product_id) DESC;
+HAVING COUNT(deals.product_id) > 0
+ORDER BY COUNT(deals.product_id) DESC;

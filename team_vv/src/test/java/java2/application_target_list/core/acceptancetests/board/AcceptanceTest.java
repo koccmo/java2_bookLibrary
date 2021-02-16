@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.database.user.UserRepository;
@@ -20,10 +20,13 @@ import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.board.SetRecordCompleteDateService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
+import java2.application_target_list.web_ui.config.SpringWebConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Optional;
@@ -206,6 +209,7 @@ public class AcceptanceTest {
     }
 
     private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
+
 }

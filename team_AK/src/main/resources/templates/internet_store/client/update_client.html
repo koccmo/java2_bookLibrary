@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart"><b>Cart</b>
+                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light" id="product_count"></span></a>
                 </li>
                 <li class="nav-item">
@@ -183,6 +183,7 @@
                         </div>
 
                         <input type="email" class="form-control form-control-sm"
+
                                th:disabled="${disabled}"
                                th:field="${client.email}"
                                aria-describedby="priceHelp"

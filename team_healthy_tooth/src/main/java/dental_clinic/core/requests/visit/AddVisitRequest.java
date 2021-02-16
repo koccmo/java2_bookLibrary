@@ -3,47 +3,73 @@ package dental_clinic.core.requests.visit;
 import dental_clinic.core.domain.*;
 
 import java.util.Date;
-import java.util.List;
 
 public class AddVisitRequest {
 
-    private Long id;
-    private Visit visit;
-    private Manipulation manipulation;
+    private Long patientId;
+    private Long manipulationId;
+    private Long doctorId;
+    private Integer toothNumber;
+    private ToothStatus toothStatus;
+    private String comment;
 
+    public AddVisitRequest() { }
 
-    public AddVisitRequest(Long id, Visit visit, Manipulation manipulation){
-        this.id = id;
-        this.visit = visit;
-        this.manipulation = manipulation;
+    public AddVisitRequest(Long patientId, Long manipulationId, Long doctorId,
+                           Integer toothNumber, ToothStatus toothStatus, String comment) {
+        this.patientId = patientId;
+        this.manipulationId = manipulationId;
+        this.doctorId = doctorId;
+        this.toothNumber = toothNumber;
+        this.toothStatus = toothStatus;
+        this.comment = comment;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public Long getManipulationId() {
+        return manipulationId;
+    }
+
+    public void setManipulationId(Long manipulationId) {
+        this.manipulationId = manipulationId;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public Integer getToothNumber() {
-        return visit.getToothNumber();
+        return toothNumber;
     }
 
-    public String getComment() {
-        return visit.getComment();
+    public void setToothNumber(Integer toothNumber) {
+        this.toothNumber = toothNumber;
     }
 
     public ToothStatus getToothStatus() {
-        return visit.getToothStatus();
+        return toothStatus;
     }
 
-    public Doctor getDoctor() {
-        return visit.getDoctor();
+    public void setToothStatus(ToothStatus toothStatus) {
+        this.toothStatus = toothStatus;
     }
 
-    public Manipulation getManipulation() {
-        return manipulation;
+    public String getComment() {
+        return comment;
     }
 
-    public Date getDate() {
-        return visit.getDate();
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-
 }

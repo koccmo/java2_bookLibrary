@@ -19,4 +19,5 @@ public interface CustomerRepository {
 
     boolean changeFirstName(Long id, String newFirstName);
 
+    Optional<Customer> getById(Long id);
 }

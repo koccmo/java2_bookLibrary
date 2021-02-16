@@ -18,6 +18,8 @@ public class SearchCustomerRequest {
         this.paging = paging;
     }
 
+    public SearchCustomerRequest(){ }
+
     public String getName() {
         return name;
     }
@@ -34,4 +36,19 @@ public class SearchCustomerRequest {
         return paging;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
 }

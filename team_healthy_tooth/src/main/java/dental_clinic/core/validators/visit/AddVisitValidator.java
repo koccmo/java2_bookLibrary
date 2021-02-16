@@ -15,7 +15,7 @@ public class AddVisitValidator {
 
         List <CoreError> coreErrors = new ArrayList<>();
 
-        coreErrors.addAll(idValidationErrors(addVisitRequest.getId()));
+        coreErrors.addAll(idValidationErrors(addVisitRequest.getPatientId()));
 
         coreErrors.addAll(toothNumberValidationErrors(addVisitRequest.getToothNumber()));
 
@@ -52,27 +52,10 @@ public class AddVisitValidator {
     }
 
     private List<CoreError> doctorValidationErrors (AddVisitRequest addVisitRequest) {
-        List<CoreError> coreErrors = new ArrayList<>();
-        if (addVisitRequest.getDoctor() == null) {
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
+        List <CoreError> coreErrors = new ArrayList<>();
+        if ((addVisitRequest.getDoctorId() == null) || (addVisitRequest.getDoctorId() < 1)){
+            coreErrors.add(new CoreError("id", "Not valid input of id"));
         }
-        String text = addVisitRequest.getDoctor().getName();
-        if (text == null || text.isEmpty()){
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
-        }
-        if (isIdAdded(text)) {
-            if (Long.parseLong(text) < 0)
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
-        }
-        if (areThreeWordsEntered(text)) {
-            Doctor doctor = new Doctor(text.split(" ")[0], text.split(" ")[1], text.split(" ")[2]);
-            coreErrors.addAll(validateDoctorsPersonalData(doctor));
-            return coreErrors;
-        }
-        coreErrors.add(new CoreError("doctor", "Not id, not name surname"));
         return coreErrors;
     }
 

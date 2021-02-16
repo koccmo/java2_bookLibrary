@@ -51,22 +51,17 @@ public class AddVisitUIAction implements UIAction {
             containsDatabaseIdResponse.getErrors().forEach(System.out::println);
         } else {
 
-            PersonalData personalData = patientRepository.getPersonalDataById(id);
-
             Integer toothNumber = inputFormatsValidator.inputInteger("Please input tooth number");
 
             String comment = enterComment();
 
             ToothStatus toothStatus = enterToothStatus();
 
-            Doctor doctor = new Doctor(enterDoctor(), "", "");
+            Long doctorId = enterDoctor();
 
-            Manipulation manipulation = enterManipulation();
+            Long manipulationId = enterManipulation();
 
-            Date date = new Date();
-
-            Visit visit = new Visit(personalData, toothNumber, comment, toothStatus, doctor, manipulation, date, manipulation.getPrice());
-            AddVisitRequest addVisitRequest = new AddVisitRequest(id, visit, manipulation);
+            AddVisitRequest addVisitRequest = new AddVisitRequest(id, manipulationId, doctorId, toothNumber, toothStatus, comment);
             AddVisitResponse addVisitResponse = addVisitService.execute(addVisitRequest);
 
             if (addVisitResponse.hasErrors()) {
@@ -127,7 +122,7 @@ public class AddVisitUIAction implements UIAction {
         return commentIn;
     }
 
-    private String enterDoctor() {
+    private Long enterDoctor() {
         Scanner in = new Scanner(System.in);
         GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
         GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
@@ -135,27 +130,20 @@ public class AddVisitUIAction implements UIAction {
         if (!getDoctorListResponse.hasErrors()) {
             getDoctorListResponse.getDoctorAndGraphic().forEach(System.out::println);
         }
-        return in.nextLine();
+        return in.nextLong();
     }
 
-    private Manipulation enterManipulation() {
-        Manipulation manipulation = new Manipulation();
+    private Long enterManipulation() {
+        Long manipulationsId = 1L;
         GetManipulationsListRequest getManipulationsListRequest = new GetManipulationsListRequest();
         GetManipulationsListResponse getManipulationsListResponse = getManipulationsListService.execute(getManipulationsListRequest);
         if (!getManipulationsListResponse.hasErrors()) {
             while (true) {
                 getManipulationsListResponse.getManipulationList().forEach(System.out::println);
-                Long manipulationsId = inputFormatsValidator.inputLong("Please input manipulation's id");
-                if (manipulationRepository.containsId(manipulationsId)) {
-                    manipulation = manipulationRepository.getManipulationById(manipulationsId);
-                    manipulation.setId(manipulationsId);
-                    break;
-                } else {
-                    System.out.println("Not valid id, please enter valid id number!");
-                }
+                manipulationsId = inputFormatsValidator.inputLong("Please input manipulation's id");
             }
         }
-        return manipulation;
+        return manipulationsId;
     }
 
 }

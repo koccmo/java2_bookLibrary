@@ -20,7 +20,8 @@ public class AddProductController {
     @GetMapping(value = "add_product")
     public String showAddProduct(ModelMap modelMap) {
         modelMap.addAttribute("product", new Product());
-        modelMap.addAttribute("errors", "start");
+        modelMap.addAttribute("errors", "");
+        modelMap.addAttribute("info", "");
         return "product/add_product";
     }
 
@@ -38,6 +39,11 @@ public class AddProductController {
 
         for (CoreError error : response.getErrors()) {
             allErrors.append(error.getField()).append(" ").append(error.getMessage()).append(" ");
+        }
+        if (!(response.hasErrors())) {
+            modelMap.addAttribute("info", "Product successful add to database");
+        } else {
+            modelMap.addAttribute("info", "");
         }
         modelMap.addAttribute("errors", allErrors.toString());
         modelMap.addAttribute("product", product);

@@ -1,8 +1,8 @@
 DELETE FROM products
 WHERE id = 1007;
 
-DELETE FROM customers;
+DELETE FROM users;
 
 
-DELETE FROM shopping_cart
-WHERE purchase_date = '2020-12-31 10:00:00';
+DELETE FROM deals
+WHERE deal_date = '2020-12-31 10:00:00';

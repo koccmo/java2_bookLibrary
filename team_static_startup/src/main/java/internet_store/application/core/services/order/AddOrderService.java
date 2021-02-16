@@ -10,6 +10,8 @@ import internet_store.application.core.responses.order.AddOrderResponse;
 import internet_store.application.core.services.order.validators.AddOrderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -31,8 +33,10 @@ public class AddOrderService {
         ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getShoppingCartId());
 
         Order order = new Order(shoppingCart);
-        order.setOrderDate(request.getOrderDate());
-        order.setActive(request.isActive());
+        order.setOrderDate(LocalDateTime.now());
+        order.setActive(true);
+        // order.setOrderDate(request.getOrderDate());
+        // order.setActive(request.isActive());
         orderRepository.add(order);
         return new AddOrderResponse(order);
     }

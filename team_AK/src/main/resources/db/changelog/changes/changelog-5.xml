@@ -24,6 +24,14 @@
             <column name="ordered" type="BOOLEAN" defaultValue="false">
                 <constraints nullable="false"/>
             </column>
+            <column name="session_id" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+        <rollback>
+            <dropTable schemaName="store"
+                       tableName="cart"
+                       cascadeConstraints="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>
