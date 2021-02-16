@@ -8,9 +8,11 @@ import internet_store.application.core.responses.product.AddProductResponse;
 import internet_store.application.core.services.product.validators.AddProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Component
 public class AddProductService {
 
