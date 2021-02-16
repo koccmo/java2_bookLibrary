@@ -1,17 +1,8 @@
 package internet_store.application.web_ui.controllers.rest;
 
-import internet_store.application.core.requests.customer.AddCustomerRequest;
-import internet_store.application.core.requests.customer.ChangeCustomerFirstNameRequest;
-import internet_store.application.core.requests.customer.DeleteByCustomerIdRequest;
-import internet_store.application.core.requests.customer.GetCustomerRequest;
-import internet_store.application.core.responses.customer.AddCustomerResponse;
-import internet_store.application.core.responses.customer.ChangeCustomerFirstNameResponse;
-import internet_store.application.core.responses.customer.DeleteByCustomerIdResponse;
-import internet_store.application.core.responses.customer.GetCustomerResponse;
-import internet_store.application.core.services.customer.AddCustomerService;
-import internet_store.application.core.services.customer.ChangeCustomerFirstNameService;
-import internet_store.application.core.services.customer.DeleteByCustomerIdService;
-import internet_store.application.core.services.customer.GetCustomerService;
+import internet_store.application.core.requests.customer.*;
+import internet_store.application.core.responses.customer.*;
+import internet_store.application.core.services.customer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,14 +27,13 @@ public class CustomerRestController {
     public AddCustomerResponse addCustomer(@RequestBody AddCustomerRequest request) {
         return addCustomerService.execute(request);
     }
-
-    @Autowired private ChangeCustomerFirstNameService changeCustomerFirstNameService;
+    @Autowired private UpdateCustomerService updateCustomerService;
 
     @PutMapping(path = "/{id}",
             consumes = "application/json",
             produces = "application/json")
-    public ChangeCustomerFirstNameResponse updateBook(@RequestBody ChangeCustomerFirstNameRequest request) {
-        return changeCustomerFirstNameService.execute(request);
+    public UpdateCustomerResponse updateCustomer(@RequestBody UpdateCustomerRequest request) {
+        return updateCustomerService.execute(request);
     }
 
     @Autowired private DeleteByCustomerIdService deleteByCustomerIdService;
