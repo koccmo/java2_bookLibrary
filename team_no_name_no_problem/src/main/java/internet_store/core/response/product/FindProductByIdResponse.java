@@ -8,18 +8,18 @@ import java.util.List;
 
 public class FindProductByIdResponse extends CoreResponse {
 
-    private Product product;
+    private Product products;
 
     public FindProductByIdResponse(Product product){
-        this.product = product;
+        this.products = product;
     }
 
     public FindProductByIdResponse(List<CoreError> errors){
         super(errors);
     }
 
-    public Product getProduct(){
-        return product;
+    public Product getProducts(){
+        return products;
     }
 
 
