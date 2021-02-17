@@ -1,3 +1,13 @@
+
+    .ADM{
+        border: 5px outset black;
+        text-align: center;
+    }
+
+    .CM{
+        border: 5px outside black;
+        text_align: center;
+    }
     h3{
         font-size: 50px;
         text-align: center;
