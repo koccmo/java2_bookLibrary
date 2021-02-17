@@ -43,4 +43,28 @@ public class SearchProductRequest {
     public Paging getPaging(){
         return paging;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartPrice(Integer startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public void setEndPrice(Integer endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
 }
