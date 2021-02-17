@@ -5,15 +5,15 @@ import internet_store.core.response.CoreResponse;
 
 import java.util.List;
 
-public class DeleteProductResponse extends CoreResponse {
+public class DeleteProductByIdResponse extends CoreResponse {
 
     private Long id;
 
-    public DeleteProductResponse(List<CoreError> errors){
+    public DeleteProductByIdResponse(List<CoreError> errors){
         super(errors);
     }
 
-    public DeleteProductResponse(Long id){
+    public DeleteProductByIdResponse(Long id){
         this.id = id;
     }
 

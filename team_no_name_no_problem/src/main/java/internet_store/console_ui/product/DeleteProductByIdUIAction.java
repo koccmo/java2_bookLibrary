@@ -2,7 +2,7 @@ package internet_store.console_ui.product;
 
 import internet_store.console_ui.UIAction;
 import internet_store.core.requests.product.DeleteProductByIdRequest;
-import internet_store.core.response.product.DeleteProductResponse;
+import internet_store.core.response.product.DeleteProductByIdResponse;
 import internet_store.core.services.product.DeleteByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import java.util.Scanner;
         Long id = in.nextLong();
 
         DeleteProductByIdRequest deleteProductRequest = new DeleteProductByIdRequest(id);
-        DeleteProductResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
+        DeleteProductByIdResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
 
         if (deleteProductResponse.hasErrors()){
             deleteProductResponse.getErrors().forEach(System.out::println);

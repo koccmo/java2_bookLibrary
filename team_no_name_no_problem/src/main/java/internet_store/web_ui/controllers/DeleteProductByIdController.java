@@ -2,7 +2,7 @@ package internet_store.web_ui.controllers;
 
 
 import internet_store.core.requests.product.DeleteProductByIdRequest;
-import internet_store.core.response.product.DeleteProductResponse;
+import internet_store.core.response.product.DeleteProductByIdResponse;
 import internet_store.core.services.product.DeleteByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class DeleteProductByIdController {
 
     @PostMapping("/deleteProductById")
     public String processDeleteProductByIdRequest(@ModelAttribute(value = "request") DeleteProductByIdRequest deleteProductRequest, ModelMap modelMap) {
-        DeleteProductResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
+        DeleteProductByIdResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
         if (deleteProductResponse.hasErrors()) {
             modelMap.addAttribute("errors", deleteProductResponse.getErrors());
             return "/deleteProductById";

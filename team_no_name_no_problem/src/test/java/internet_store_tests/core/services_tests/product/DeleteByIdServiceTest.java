@@ -3,7 +3,7 @@ package internet_store_tests.core.services_tests.product;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
-import internet_store.core.response.product.DeleteProductResponse;
+import internet_store.core.response.product.DeleteProductByIdResponse;
 import internet_store.core.services.product.DeleteByIdService;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
@@ -39,7 +39,7 @@ public class DeleteByIdServiceTest {
 
         Mockito.when(deleteProductRequestValidator.validate(request1)).thenReturn(errors1);
 
-        DeleteProductResponse response = deleteByIdService.execute(request1);
+        DeleteProductByIdResponse response = deleteByIdService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "id");
@@ -57,7 +57,7 @@ public class DeleteByIdServiceTest {
         Mockito.when(deleteProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.containsId(2L)).thenReturn(false);
 
-        DeleteProductResponse response = deleteByIdService.execute(request1);
+        DeleteProductByIdResponse response = deleteByIdService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().contains(expectedError), true);
@@ -76,7 +76,7 @@ public class DeleteByIdServiceTest {
         Mockito.when(productDatabase.containsId(2L)).thenReturn(true);
         Mockito.when(productDatabase.getProducts()).thenReturn(products);
 
-        DeleteProductResponse response = deleteByIdService.execute(request1);
+        DeleteProductByIdResponse response = deleteByIdService.execute(request1);
         assertFalse(response.hasErrors());
         assertTrue(response.getId().equals(2L));
     }
