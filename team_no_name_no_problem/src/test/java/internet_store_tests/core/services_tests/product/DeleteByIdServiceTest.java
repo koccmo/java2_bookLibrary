@@ -4,7 +4,7 @@ import internet_store.core.domain.Product;
 import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductByIdResponse;
-import internet_store.core.services.product.DeleteByIdService;
+import internet_store.core.services.product.DeleteProductByIdService;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class DeleteByIdServiceTest {
     @Mock
     private DeleteProductRequestValidator deleteProductRequestValidator;
     @InjectMocks
-    DeleteByIdService deleteByIdService;
+    DeleteProductByIdService deleteByIdService;
 
     @Test
     public void deleteNotValidRequest() {

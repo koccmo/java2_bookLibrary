@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class DeleteByIdService {
+public class DeleteProductByIdService {
 
     @Autowired private ProductDatabase productDatabase;
     @Autowired private DeleteProductRequestValidator deleteProductRequestValidator;
