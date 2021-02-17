@@ -1,15 +1,15 @@
 package internet_store.web_ui.controllers.rest;
 
+import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.requests.customer.FindCustomerByIdRequest;
-import internet_store.core.requests.product.FindProductByIdRequest;
+import internet_store.core.requests.product.AddProductRequest;
+import internet_store.core.response.customer.AddCustomerResponse;
 import internet_store.core.response.customer.FindCustomerByIdResponse;
-import internet_store.core.response.product.FindProductByIdResponse;
+import internet_store.core.response.product.AddProductResponse;
+import internet_store.core.services.customer.AddCustomerService;
 import internet_store.core.services.customer.FindCustomerByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
@@ -24,5 +24,13 @@ public class CustomerRestController {
         return findCustomerByIdService.execute(request);
     }
 
+    @Autowired
+    private AddCustomerService addCustomerService;
 
+    @PostMapping(path = "/",
+            consumes = "application/json",
+            produces = "application/json")
+    public AddCustomerResponse addCustomer(@RequestBody AddCustomerRequest request) {
+        return addCustomerService.execute(request);
+    }
 }
