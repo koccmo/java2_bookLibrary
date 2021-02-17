@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component public class DeleteByIdUIAction implements UIAction {
+@Component public class DeleteProductByIdUIAction implements UIAction {
 
     @Autowired private DeleteByIdService deleteByIdService;
 

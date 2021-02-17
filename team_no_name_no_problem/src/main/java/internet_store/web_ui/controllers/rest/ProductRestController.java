@@ -44,5 +44,6 @@ public class ProductRestController {
     public ChangeProductResponse changeProduct(@RequestBody ChangeProductRequest request) {
         return changeProductService.execute(request);
     }
+
 }
 
