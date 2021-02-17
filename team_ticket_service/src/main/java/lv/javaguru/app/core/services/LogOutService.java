@@ -6,8 +6,8 @@ import lv.javaguru.app.core.response.LogOutResponse;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class LogOutService {
 	public LogOutResponse execute (LogOutRequest request) {
 		List<CodeError> errors = new ArrayList<>();
 
-		if (request.getPerson() != null)
+		if (request.getUser() != null)
 			errors.add(new CodeError("", "When logging out, request should contain null!"));
 
 		if (!errors.isEmpty())

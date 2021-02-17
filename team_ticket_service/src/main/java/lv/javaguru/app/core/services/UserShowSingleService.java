@@ -6,8 +6,7 @@ import lv.javaguru.app.core.response.UserShowSingleResponse;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional

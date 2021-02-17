@@ -10,8 +10,8 @@ import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
 import lv.javaguru.app.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,10 +42,10 @@ public class FlightEditService {
 		if (errors.size() > 0)
 			return new FlightEditResponse(errors);
 
-		if (request.getUser().getPersonType() != PersonType.ADMIN &&
-				!flightRepository.isUserFlight(request.getRequestId(), request.getUser())) {
-			errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
-		}
+	//if (request.getUser().getPersonType() != PersonType.ADMIN &&
+	//		!flightRepository.isUserFlight(request.getRequestId(), request.getUser())) {
+	//	errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
+	//}
 
 		if (!errors.isEmpty())
 			return new FlightEditResponse(errors);

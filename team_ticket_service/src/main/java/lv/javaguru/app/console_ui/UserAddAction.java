@@ -1,5 +1,6 @@
 package lv.javaguru.app.console_ui;
 
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserAddRequest;
 import lv.javaguru.app.core.response.UserAddResponse;
@@ -16,9 +17,9 @@ public class UserAddAction extends Action implements UIActions {
 
 	@Override
 	public void execute () {
-		User newUser = fillRegistrationForm();
+		User user = fillRegistrationForm();
 
-		UserAddRequest request = new UserAddRequest(newUser);
+		UserAddRequest request = new UserAddRequest(user.getName(), user.getLastName());
 		UserAddResponse response = userAddService.execute(request);
 
 		if (response.hasErrors())

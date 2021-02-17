@@ -13,8 +13,8 @@ public class AddUserRequestValidator extends Validator {
 	public List<CodeError> validate (UserAddRequest request) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		verifyNameAndSurname(request.getUser().getName(), "First name", errorList);
-		verifyNameAndSurname(request.getUser().getSurname(), "Second name", errorList);
+		verifyNameAndSurname(request.getName(), "First name", errorList);
+		verifyNameAndSurname(request.getSurname(), "Second name", errorList);
 
 		return errorList;
 	}

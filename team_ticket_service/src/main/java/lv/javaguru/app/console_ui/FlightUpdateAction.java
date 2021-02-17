@@ -40,7 +40,8 @@ public class FlightUpdateAction extends Action implements UIActions {
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
 			BaseFunc.printLineSeparator();
-			if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
+			//if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
+			if (true) {
 				System.out.println("[1] Edit flight's ticket\n" +
 						"[2] Edit flight's user\n\n" +
 						"[0] Cancel");

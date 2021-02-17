@@ -1,5 +1,6 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserAddRequest;
 import lv.javaguru.app.core.domain.CodeError;
@@ -8,8 +9,8 @@ import lv.javaguru.app.core.services.validators.AddUserRequestValidator;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -25,7 +26,7 @@ public class UserAddService {
 
 	public UserAddResponse execute (UserAddRequest request) {
 		List<CodeError> errors = validator.validate(request);
-		User user = request.getUser();
+		User user = new User(request.getName(), request.getSurname(), PersonType.CLIENT);
 
 		if (!errors.isEmpty())
 			return new UserAddResponse(errors);
@@ -37,7 +38,7 @@ public class UserAddService {
 			return new UserAddResponse(errors);
 		}
 
-		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getSurname());
+		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getLastName());
 
 		return new UserAddResponse(message);
 	}

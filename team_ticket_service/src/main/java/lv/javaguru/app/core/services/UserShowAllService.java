@@ -8,8 +8,8 @@ import lv.javaguru.app.core.response.UserShowAllResponse;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +42,8 @@ public class UserShowAllService {
 
 		if (u == null)
 			errorList.add(new CodeError("User", "no user in database"));
-		if (user.getPersonType() != PersonType.ADMIN)
-			errorList.add(new CodeError("User", "User don't have required permission!"));
+	//	if (user.getPersonType() != PersonType.ADMIN)
+	//		errorList.add(new CodeError("User", "User don't have required permission!"));
 
 		return errorList;
 	}

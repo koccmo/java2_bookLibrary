@@ -46,7 +46,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketUserSurname (AddFlightRequest request) {
-		String userSurname = request.getFlight().getUser().getSurname();
+		String userSurname = request.getFlight().getUser().getLastName();
 
 		List<CodeError> errors = new ArrayList<>();
 
