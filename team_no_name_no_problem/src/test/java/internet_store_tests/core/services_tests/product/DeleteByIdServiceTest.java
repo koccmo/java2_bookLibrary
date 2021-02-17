@@ -1,7 +1,7 @@
 package internet_store_tests.core.services_tests.product;
 
 import internet_store.core.domain.Product;
-import internet_store.core.requests.product.DeleteProductRequest;
+import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.DeleteByIdService;
@@ -32,7 +32,7 @@ public class DeleteByIdServiceTest {
     @Test
     public void deleteNotValidRequest() {
 
-        DeleteProductRequest request1 = new DeleteProductRequest(-2L);
+        DeleteProductByIdRequest request1 = new DeleteProductByIdRequest(-2L);
 
         List<CoreError> errors1 = new ArrayList<>();
         errors1.add(new CoreError("id", "Not valid input for id"));
@@ -48,7 +48,7 @@ public class DeleteByIdServiceTest {
     @Test
     public void testNoIdInDatabase() {
 
-        DeleteProductRequest request1 = new DeleteProductRequest(2L);
+        DeleteProductByIdRequest request1 = new DeleteProductByIdRequest(2L);
 
         List<CoreError> errors1 = new ArrayList<>();
         CoreError expectedError = new CoreError("database", "database doesn't contain product with id 2");
@@ -66,7 +66,7 @@ public class DeleteByIdServiceTest {
     @Test
     public void testDeletedSuccessfully() {
 
-        DeleteProductRequest request1 = new DeleteProductRequest(2L);
+        DeleteProductByIdRequest request1 = new DeleteProductByIdRequest(2L);
         Product product = new Product("Title", "D", 5);
         product.setId(2L);
         List<Product>products = new ArrayList<>();

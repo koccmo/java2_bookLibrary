@@ -1,7 +1,7 @@
 package internet_store.console_ui.product;
 
 import internet_store.console_ui.UIAction;
-import internet_store.core.requests.product.DeleteProductRequest;
+import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.DeleteByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Scanner;
         System.out.println("Please enter product's id to delete");
         Long id = in.nextLong();
 
-        DeleteProductRequest deleteProductRequest = new DeleteProductRequest(id);
+        DeleteProductByIdRequest deleteProductRequest = new DeleteProductByIdRequest(id);
         DeleteProductResponse deleteProductResponse = deleteByIdService.execute(deleteProductRequest);
 
         if (deleteProductResponse.hasErrors()){

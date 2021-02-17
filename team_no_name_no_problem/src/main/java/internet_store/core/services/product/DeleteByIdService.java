@@ -1,6 +1,6 @@
 package internet_store.core.services.product;
 
-import internet_store.core.requests.product.DeleteProductRequest;
+import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductResponse;
 import internet_store.core.services.product.validators.DeleteProductRequestValidator;
@@ -19,7 +19,7 @@ public class DeleteByIdService {
     @Autowired private ProductDatabase productDatabase;
     @Autowired private DeleteProductRequestValidator deleteProductRequestValidator;
 
-    public DeleteProductResponse execute(DeleteProductRequest deleteProductRequest) {
+    public DeleteProductResponse execute(DeleteProductByIdRequest deleteProductRequest) {
 
         List<CoreError> errors = deleteProductRequestValidator.validate(deleteProductRequest);
 
