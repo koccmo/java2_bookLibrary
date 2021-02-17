@@ -2,12 +2,15 @@ package internet_store.web_ui.controllers.rest;
 
 import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.ChangeProductRequest;
+import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.requests.product.FindProductByIdRequest;
 import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.response.product.ChangeProductResponse;
+import internet_store.core.response.product.DeleteProductByIdResponse;
 import internet_store.core.response.product.FindProductByIdResponse;
 import internet_store.core.services.product.AddProductService;
 import internet_store.core.services.product.ChangeProductService;
+import internet_store.core.services.product.DeleteProductByIdService;
 import internet_store.core.services.product.FindProductByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +46,15 @@ public class ProductRestController {
             produces = "application/json")
     public ChangeProductResponse changeProduct(@RequestBody ChangeProductRequest request) {
         return changeProductService.execute(request);
+    }
+
+    @Autowired
+    private DeleteProductByIdService deleteProductByIdService;
+
+    @DeleteMapping(path = "/{id}", produces = "application/json")
+    public DeleteProductByIdResponse deleteProduct(@PathVariable Long id) {
+        DeleteProductByIdRequest request = new DeleteProductByIdRequest(id);
+        return deleteProductByIdService.execute(request);
     }
 }
 

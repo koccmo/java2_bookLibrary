@@ -18,7 +18,7 @@ public class UserUpdateAction extends Action implements UIActions {
 
 
 	private static void adminMode_printEditUser (User currentUser) {
-		BaseFunc.printHeader("EDIT USER:", currentUser.getName() + ", " + currentUser.getSurname());
+		BaseFunc.printHeader("EDIT USER:", currentUser.getName() + ", " + currentUser.getLastName());
 		System.out.println(
 				"[1] Edit first name\n" +
 						"[2] Edit second name\n" +

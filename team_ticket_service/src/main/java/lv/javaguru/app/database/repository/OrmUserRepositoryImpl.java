@@ -21,14 +21,14 @@ public class OrmUserRepositoryImpl implements UserRepository{
 		return (Long) sessionFactory.getCurrentSession().save(user);
 	}
 
-	public User getUserByNameAndSurname (User user) {
-		String sql = "SELECT u FROM User u WHERE u.name = :name AND u.surname = :surname";
+	public User getUserByNameAndSurname (String name, String lastName) {
+		String sql = "SELECT u FROM User u WHERE u.name = :name AND u.lastName = :lastName";
 
 		Query query = sessionFactory.getCurrentSession()
 				.createQuery(sql);
 
-		query.setParameter("name", user.getName());
-		query.setParameter("surname", user.getSurname());
+		query.setParameter("name", name);
+		query.setParameter("lastName", lastName);
 
 		return (User) query.getSingleResult();
 	}

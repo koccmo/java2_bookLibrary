@@ -6,8 +6,8 @@ import lv.javaguru.app.core.response.UserDeleteResponse;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 

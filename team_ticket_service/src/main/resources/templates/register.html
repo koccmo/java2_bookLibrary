@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Ticket service">
+    <meta name="author" content="Aleksejevs">
+    <title>Ticket service</title>
+</head>
+
+<body>
+
+<h3>Register user</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+    </tr>
+
+    <tr>
+        <form action="/register" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.name}"/></td>
+            <td><input type="text" th:field="${request.surname}"/></td>
+            <td>
+                <input type="submit" value="Register"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+    <tr>
+        <td>
+            <a href="javascript:history.back()">Go Back</a>
+        </td>
+
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+</body>
+
+</html>
