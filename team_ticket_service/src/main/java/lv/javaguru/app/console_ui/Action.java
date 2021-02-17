@@ -1,10 +1,12 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
+
 @Component
 public class Action {
 	private static User loggedInUser;
@@ -23,7 +25,7 @@ public class Action {
 		String name = ProcessLoginInput(scanner, "Enter name:");
 		String surname = ProcessLoginInput(scanner, "Enter surname:");
 
-		return new User(name, surname);
+		return new User(name, surname, PersonType.CLIENT);
 	}
 
 	public User registerUser () {
@@ -33,7 +35,7 @@ public class Action {
 
 		String surname = ProcessRegisterInput(scanner, "Enter surname:");
 
-		return new User(name, surname);
+		return new User(name, surname, PersonType.CLIENT);
 	}
 
 	private String ProcessLoginInput (Scanner scanner, String s) {

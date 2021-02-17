@@ -16,12 +16,13 @@ public class Flight {
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "tickets_id", nullable = false)
 	private Ticket ticket;
 
 
-	public Flight () {	}
+	public Flight () {
+	}
 
 	public Flight (User user, Ticket ticket) {
 		this.user = user;

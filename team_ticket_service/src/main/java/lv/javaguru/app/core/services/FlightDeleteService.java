@@ -9,8 +9,8 @@ import lv.javaguru.app.core.response.FlightDeleteResponse;
 import lv.javaguru.app.database.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,16 +43,15 @@ public class FlightDeleteService {
 		Flight flight = flightRepository.getFlightById(request.getId());
 		if (flight == null) {
 			errors.add(new CodeError("Id", "wrong ID"));
-
-			return errors;
+		//	return errors;
 		}
 
-		User u;
-		if (request.getUser().getPersonType() != PersonType.ADMIN) {
-			u = flight.getUser();
-			if (!u.equals(request.getUser()))
-				errors.add(new CodeError("Id", "User don't have flight with such ID!"));
-		}
+	//User u;
+	//if (request.getUser().getPersonType() != PersonType.ADMIN) {
+	//	u = flight.getUser();
+	//	if (!u.equals(request.getUser()))
+	//		errors.add(new CodeError("Id", "User don't have flight with such ID!"));
+	//}
 
 		return errors;
 	}

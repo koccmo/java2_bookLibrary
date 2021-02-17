@@ -13,8 +13,8 @@ public class LoginRequestValidator extends Validator {
 	public List<CodeError> validate (LogInRequest request) {
 		List<CodeError> errorList = new ArrayList<>();
 
-		verifyNameAndSurname(request.getUser().getName(), "User name", errorList);
-		verifyNameAndSurname(request.getUser().getSurname(), "User surname", errorList);
+		verifyNameAndSurname(request.getName(), "User name", errorList);
+		verifyNameAndSurname(request.getSurname(), "User surname", errorList);
 
 		return errorList;
 	}

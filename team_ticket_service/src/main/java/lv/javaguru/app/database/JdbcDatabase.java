@@ -20,7 +20,7 @@ public class JdbcDatabase {
 		String sql = "SELECT * FROM users WHERE users.name = ?  AND users.surname = ?";
 		Object[] args = new Object[]{
 				user.getName(),
-				user.getSurname()
+				user.getLastName()
 		};
 
 		List<User> users = jdbcTemplate.query(sql, args, new UserRowMapper());
@@ -53,7 +53,7 @@ public class JdbcDatabase {
 				"VALUES (?, ?, ?)";
 		Object[] args = new Object[]{
 				userToAdd.getName(),
-				userToAdd.getSurname(),
+				userToAdd.getLastName(),
 				userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
 		};
 
@@ -195,7 +195,7 @@ public class JdbcDatabase {
 				"WHERE users.id = ? " +
 				"AND users.name = ? " +
 				"AND users.surname = ?";
-		Object[] args = new Object[]{user.getId(), user.getName(), user.getSurname()};
+		Object[] args = new Object[]{user.getId(), user.getName(), user.getLastName()};
 
 		return jdbcTemplate.query(sql, args, new FlightRowMapper());
 	}

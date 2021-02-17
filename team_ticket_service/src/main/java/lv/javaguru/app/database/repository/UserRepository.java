@@ -8,7 +8,7 @@ public interface UserRepository {
 
 	Long addUser (User user);
 
-	User getUserByNameAndSurname (User user);
+	User getUserByNameAndSurname (String name, String surname);
 
 	boolean updateUserNameByUserId (Long id, String name);
 
