@@ -13,4 +13,5 @@ public interface ShoppingCartItemRepository {
 
     List<ProductShoppingCart> findAll();
 
+    Optional<ProductShoppingCart> getById(Long id);
 }

@@ -2,6 +2,7 @@ package internet_store.application.core.database.shopping_cart_item;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
+import internet_store.application.core.domain.Customer;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.domain.ProductShoppingCart;
 import internet_store.application.core.domain.ShoppingCart;
@@ -9,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +44,19 @@ public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository
 
     @Override
     public List<ProductShoppingCart> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("FROM ProductShoppingCart").getResultList();
+        CriteriaQuery<ProductShoppingCart> query = sessionFactory.getCriteriaBuilder().createQuery(ProductShoppingCart.class);
+        query.from(ProductShoppingCart.class);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
+        //return sessionFactory.getCurrentSession().createQuery("FROM ProductShoppingCart").getResultList();
     }
 
+    @Override
+    public Optional<ProductShoppingCart> getById(Long id) {
+        ProductShoppingCart productShoppingCart = sessionFactory.getCurrentSession().get(ProductShoppingCart.class, id);
+        if (productShoppingCart == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(productShoppingCart);
+        }
+    }
 }
