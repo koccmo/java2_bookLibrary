@@ -27,36 +27,36 @@ public class TakeBookValidator {
         validatePresenceOfReaderId(request).ifPresent(errors::add);
         validatePresenceOfBookId(request).ifPresent(errors::add);
         validatePresenceOfBookOutDate(request).ifPresent(errors::add);
-        if(errors.isEmpty()) {
+        if (errors.isEmpty()) {
             validateReaderIdPresenceInReaderRepository(request).ifPresent(errors::add);
             validateBookIdPresenceInBookRepository(request).ifPresent(errors::add);
             validateDateAndTimeEnteredIsNotBiggerThenNow(request).ifPresent(errors::add);
-            if(errors.isEmpty()) {
+            if (errors.isEmpty()) {
                 validateIsBookInLibrary(request).ifPresent(errors::add);
             }
         }
         return errors;
     }
 
-    private Optional<CoreError> validatePresenceOfReaderId (TakeBookRequest request) {
+    private Optional<CoreError> validatePresenceOfReaderId(TakeBookRequest request) {
         return (request.getReaderId() == null)
                 ? Optional.of(new CoreError("readerId", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validatePresenceOfBookId (TakeBookRequest request) {
+    private Optional<CoreError> validatePresenceOfBookId(TakeBookRequest request) {
         return (request.getBookId() == null)
                 ? Optional.of(new CoreError("bookId", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validatePresenceOfBookOutDate (TakeBookRequest request) {
-        return (request.getBookId() == null)
+    private Optional<CoreError> validatePresenceOfBookOutDate(TakeBookRequest request) {
+        return (request.getBookOutDate() == null)
                 ? Optional.of(new CoreError("bookOutDate", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateReaderIdPresenceInReaderRepository (TakeBookRequest request) {
+    private Optional<CoreError> validateReaderIdPresenceInReaderRepository(TakeBookRequest request) {
         return (readerRepository.isSuchIdPresentsInDatabase(request.getReaderId()))
                 ? Optional.empty()
                 : Optional.of(new CoreError("readerId", "No reader with such id is present in database!"));
@@ -70,14 +70,14 @@ public class TakeBookValidator {
 
     }
 
-    private Optional<CoreError> validateIsBookInLibrary (TakeBookRequest request) {
+    private Optional<CoreError> validateIsBookInLibrary(TakeBookRequest request) {
         return (readerBookRepository.isBookInLibrary(request.getBookId()))
                 ? Optional.empty()
                 : Optional.of(new CoreError("bookId", "This book is already taken from Library."));
 
     }
 
-    private Optional<CoreError> validateDateAndTimeEnteredIsNotBiggerThenNow (TakeBookRequest request) {
+    private Optional<CoreError> validateDateAndTimeEnteredIsNotBiggerThenNow(TakeBookRequest request) {
         Date dateNow = Calendar.getInstance().getTime();
         return (dateNow.after(request.getBookOutDate()))
                 ? Optional.empty()
