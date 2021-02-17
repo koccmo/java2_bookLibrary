@@ -55,9 +55,6 @@ public class TakeBookValidatorTest {
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date bookOutDate = formatter1.parse("2020/01/01 14:45");
         TakeBookRequest request = new TakeBookRequest(null,1L, bookOutDate);
-        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(readerBookRepository.isBookInLibrary(any())).thenReturn(true);
         List<CoreError> errors = validator.validate(request);
         Mockito.verifyNoInteractions(readerRepository);
         Mockito.verifyNoInteractions(bookRepository);
@@ -72,9 +69,6 @@ public class TakeBookValidatorTest {
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date bookOutDate = formatter1.parse("2020/01/01 14:45");
         TakeBookRequest request = new TakeBookRequest(1L,null, bookOutDate);
-        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(readerBookRepository.isBookInLibrary(any())).thenReturn(true);
         List<CoreError> errors = validator.validate(request);
         Mockito.verifyNoInteractions(readerRepository);
         Mockito.verifyNoInteractions(bookRepository);
@@ -89,9 +83,6 @@ public class TakeBookValidatorTest {
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date bookOutDate = formatter1.parse("2020/01/01 14:45");
         TakeBookRequest request = new TakeBookRequest(1L,1L, null);
-        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
-        Mockito.when(readerBookRepository.isBookInLibrary(any())).thenReturn(true);
         List<CoreError> errors = validator.validate(request);
         Mockito.verifyNoInteractions(readerRepository);
         Mockito.verifyNoInteractions(bookRepository);
@@ -99,5 +90,20 @@ public class TakeBookValidatorTest {
         assertEquals(1, errors.size());
         assertEquals("bookOutDate", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenReaderIdIsNotPresenceInReaderRepository() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookOutDate = formatter1.parse("2020/01/01 14:45");
+        TakeBookRequest request = new TakeBookRequest(1L,1L, bookOutDate);
+        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(false);
+        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("readerId", errors.get(0).getField());
+        assertEquals("No reader with such id is present in database!", errors.get(0).getMessage());
+        Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
+        Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
     }
 }
