@@ -1,12 +1,15 @@
 package internet_store.application.web_ui.controllers.rest;
 
 import internet_store.application.core.requests.shopping_cart_item.AddShoppingCartItemRequest;
+import internet_store.application.core.requests.shopping_cart_item.DeleteShoppingCartItemRequest;
 import internet_store.application.core.requests.shopping_cart_item.GetShoppingCartItemRequest;
 import internet_store.application.core.requests.shopping_cart_item.UpdateShoppingCartItemRequest;
 import internet_store.application.core.responses.shopping_cart_item.AddShoppingCartItemResponse;
+import internet_store.application.core.responses.shopping_cart_item.DeleteShoppingCartItemResponse;
 import internet_store.application.core.responses.shopping_cart_item.GetShoppingCartItemResponse;
 import internet_store.application.core.responses.shopping_cart_item.UpdateShoppingCartItemResponse;
 import internet_store.application.core.services.shopping_cart_item.AddShoppingCartItemService;
+import internet_store.application.core.services.shopping_cart_item.DeleteShoppingCartItemService;
 import internet_store.application.core.services.shopping_cart_item.GetShoppingCartItemService;
 import internet_store.application.core.services.shopping_cart_item.UpdateShoppingCartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,7 @@ public class ShoppingCartItemRestController {
     @Autowired private GetShoppingCartItemService getShoppingCartItemService;
     @Autowired private AddShoppingCartItemService addShoppingCartItemService;
     @Autowired private UpdateShoppingCartItemService updateShoppingCartItemService;
-//    @Autowired private DeleteShoppingCartItemService deleteShoppingCartItemService;
+    @Autowired private DeleteShoppingCartItemService deleteShoppingCartItemService;
 
 
     @GetMapping(path = "/{id}", produces = "application/json")
@@ -42,11 +45,10 @@ public class ShoppingCartItemRestController {
         return updateShoppingCartItemService.execute(request);
     }
 
-//    @DeleteMapping(path = "/{id}", produces = "application/json")
-//    public DeleteShoppingCartItemResponse deleteShoppingCartItem(@PathVariable Long id){
-//        DeleteShoppingCartItemRequest request = new DeleteShoppingCartItemRequest(id);
-//        return deleteShoppingCartItemService.execute(request);
-//    }
-
+    @DeleteMapping(path = "/{id}", produces = "application/json")
+    public DeleteShoppingCartItemResponse deleteShoppingCartItem(@PathVariable Long id){
+        DeleteShoppingCartItemRequest request = new DeleteShoppingCartItemRequest(id);
+        return deleteShoppingCartItemService.execute(request);
+    }
 
 }
