@@ -9,10 +9,10 @@ import java.util.Optional;
 
 public class FindCustomerByIdResponse extends CoreResponse {
 
-    private Optional<Customer> expectedCustomer;
+    private Optional<Customer> customer;
 
     public FindCustomerByIdResponse(Optional<Customer> customer){
-        this.expectedCustomer = customer;
+        this.customer = customer;
     }
 
     public FindCustomerByIdResponse(List<CoreError> errors){
@@ -20,6 +20,6 @@ public class FindCustomerByIdResponse extends CoreResponse {
     }
 
     public Optional<Customer> getCustomer(){
-        return expectedCustomer;
+        return customer;
     }
 }
