@@ -136,4 +136,21 @@ public class TakeBookValidatorTest {
         Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
         Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
     }
+
+    @Test
+    public void shouldReturnErrorWhenBookIsNotInLibrary() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookOutDate = formatter1.parse("2020/01/01 14:45");
+        TakeBookRequest request = new TakeBookRequest(1L,1L, bookOutDate);
+        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        Mockito.when(readerBookRepository.isBookInLibrary(any())).thenReturn(false);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("bookId", errors.get(0).getField());
+        assertEquals("This book is already taken from Library.", errors.get(0).getMessage());
+        Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
+        Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
+        Mockito.verify(readerBookRepository).isBookInLibrary(1L);
+    }
 }
