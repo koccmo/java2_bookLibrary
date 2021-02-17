@@ -4,7 +4,7 @@ import internet_store.core.requests.product.DeleteProductByOtherRequest;
 import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.services.product.validators.DeleteProductByOtherRequestValidator;
-import internet_store.core.services.product.validators.DeleteProductRequestValidator;
+import internet_store.core.services.product.validators.DeleteProductByIdRequestValidator;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class DeleteProductRequestValidatorTest {
 
-    DeleteProductRequestValidator deleteProductRequestValidator = new DeleteProductRequestValidator();
+    DeleteProductByIdRequestValidator deleteProductRequestValidator = new DeleteProductByIdRequestValidator();
     DeleteProductByOtherRequestValidator deleteByOtherRequestValidator = new DeleteProductByOtherRequestValidator();
 
     @Test

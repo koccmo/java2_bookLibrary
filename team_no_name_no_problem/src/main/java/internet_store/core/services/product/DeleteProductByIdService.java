@@ -3,7 +3,7 @@ package internet_store.core.services.product;
 import internet_store.core.requests.product.DeleteProductByIdRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.DeleteProductByIdResponse;
-import internet_store.core.services.product.validators.DeleteProductRequestValidator;
+import internet_store.core.services.product.validators.DeleteProductByIdRequestValidator;
 import internet_store.database.product.ProductDatabase;
 import internet_store.core.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class DeleteProductByIdService {
 
     @Autowired private ProductDatabase productDatabase;
-    @Autowired private DeleteProductRequestValidator deleteProductRequestValidator;
+    @Autowired private DeleteProductByIdRequestValidator deleteProductRequestValidator;
 
     public DeleteProductByIdResponse execute(DeleteProductByIdRequest deleteProductRequest) {
 
