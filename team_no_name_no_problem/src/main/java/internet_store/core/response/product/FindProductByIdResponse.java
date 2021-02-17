@@ -8,10 +8,10 @@ import java.util.List;
 
 public class FindProductByIdResponse extends CoreResponse {
 
-    private Product expectedProduct;
+    private Product product;
 
     public FindProductByIdResponse(Product product){
-        this.expectedProduct = product;
+        this.product = product;
     }
 
     public FindProductByIdResponse(List<CoreError> errors){
@@ -19,7 +19,7 @@ public class FindProductByIdResponse extends CoreResponse {
     }
 
     public Product getProduct(){
-        return expectedProduct;
+        return product;
     }
 
 
