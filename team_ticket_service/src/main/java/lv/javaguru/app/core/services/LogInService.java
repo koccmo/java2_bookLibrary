@@ -42,7 +42,8 @@ public class LogInService {
 			return new LogInResponse(errors);
 		}
 		else {
-			LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+			//LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+			LogInResponse logInResponse = (true) ?
 					new LogInResponse(new AdminMode(applicationContext)) :
 					new LogInResponse(new UserMode(applicationContext));
 

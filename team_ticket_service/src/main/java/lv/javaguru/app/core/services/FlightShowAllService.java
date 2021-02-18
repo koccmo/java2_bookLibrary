@@ -22,24 +22,20 @@ public class FlightShowAllService {
 	private UserRepository userRepository;
 
 
-	public FlightShowAllResponse<?> execute (FlightShowAllRequest request) {
+	public FlightShowAllResponse execute (FlightShowAllRequest request) {
 		List<?> responseList = validate(request.getUser());
 
 		if (!responseList.isEmpty()) {
-			return new FlightShowAllResponse<>(responseList);
+			return new FlightShowAllResponse(responseList.toString());
 		}
-		//else if (request.getUser().getRoles().stream().findFirst() != Role.ADMIN)
-		//	responseList = flightRepository.getAllUserFlights(request.getUser());
-		else {
-			responseList = flightRepository.getAllFlights();
-		}
+			responseList = flightRepository.getAllUserFlights(request.getUser());
 
-		return new FlightShowAllResponse<>(responseList);
+		return new FlightShowAllResponse(responseList.toString());
 	}
 
-	public FlightShowAllResponse<?> execute () {
-		return new FlightShowAllResponse<>(flightRepository.getAllFlights());
-	}
+	//public FlightShowAllResponse<?> execute () {
+	//	return new FlightShowAllResponse<>(flightRepository.getAllFlights());
+	//}
 
 	private List<CodeError> validate (User user) {
 		List<CodeError> errorList = new ArrayList<>();

@@ -5,8 +5,7 @@ import lv.javaguru.app.core.domain.User;
 public class FlightShowAllRequest {
 	private User user;
 
-	public FlightShowAllRequest () {
-	}
+
 
 	public FlightShowAllRequest (User user) {
 		this.user = user;
