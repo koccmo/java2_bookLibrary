@@ -17,4 +17,8 @@ public class ReturnBookResponse extends CoreResponse {
     public ReturnBookResponse(ReaderBook readerBook) {
         this.readerBook = readerBook;
     }
+
+    public ReaderBook getReaderBook() {
+        return readerBook;
+    }
 }

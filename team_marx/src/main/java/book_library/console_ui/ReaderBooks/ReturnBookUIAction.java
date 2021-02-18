@@ -1,8 +1,8 @@
 package book_library.console_ui.ReaderBooks;
 
 import book_library.console_ui.UIAction;
-import book_library.core.requests.ReaderBook.TakeBookRequest;
-import book_library.core.responses.ReaderBook.TakeBookResponse;
+import book_library.core.requests.ReaderBook.ReturnBookRequest;
+import book_library.core.responses.ReaderBook.ReturnBookResponse;
 import book_library.core.services.ReaderBooks.ReturnBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,23 +42,21 @@ public class ReturnBookUIAction implements UIAction {
             bookId = Long.parseLong(bookIdString);
         }
 
-        Date bookOutDate = null;
+        Date bookReturnDate = null;
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         if (bookReturnDateString.isEmpty()) {
-            bookOutDate = null;
+            bookReturnDate = null;
         } else {
-            bookOutDate = formatter1.parse(bookReturnDateString);
+            bookReturnDate = formatter1.parse(bookReturnDateString);
         }
-        TakeBookRequest request = new TakeBookRequest(readerId, bookId, bookOutDate);
-        TakeBookResponse response = takeBookService.execute(request);
+        ReturnBookRequest request = new ReturnBookRequest(readerId, bookId, bookReturnDate);
+        ReturnBookResponse response = returnBookService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(System.out::println);
         } else {
             System.out.println("The returning of the book has been successfully registered.");
-            System.out.println("New readerBook id is: " + response.getNewReaderBook().getId());
+            System.out.println("The record in readerBook with id : " + response.getReaderBook().getId() + " was updated");
         }
-    }
-
     }
 }
