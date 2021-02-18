@@ -20,5 +20,4 @@ public class ShowAllRecordsController {
         modelMap.addAttribute("records", getFullInfoAboutRecordsResponse.getRecordList());
         return "board/showAllRecords";
     }
-
 }

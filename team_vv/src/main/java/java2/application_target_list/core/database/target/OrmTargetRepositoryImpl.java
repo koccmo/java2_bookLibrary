@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -93,5 +94,15 @@ public class OrmTargetRepositoryImpl implements TargetRepository{
                 "FROM Target WHERE target_description LIKE :targetDescription");
         query.setParameter("targetDescription","%" + targetDescription + "%");
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Target> getById(Long id) {
+        Target target = sessionFactory.getCurrentSession().get(Target.class, id);
+        if (target == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(target);
+        }
     }
 }
