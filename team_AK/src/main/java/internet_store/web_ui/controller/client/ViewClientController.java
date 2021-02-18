@@ -16,7 +16,7 @@ public class ViewClientController {
     @Value("${client-records-on-page}")
     private int recordsCountOnPage;
 
-    @GetMapping(value = "view_client")
+    @GetMapping(value = "/service/view_client")
     public String showClient(ModelMap modelMap) {
         paging.startPaging();
         modelMap.addAttribute("info", "");

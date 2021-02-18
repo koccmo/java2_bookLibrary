@@ -4,7 +4,6 @@ import internet_store.core.domain.Order;
 import internet_store.core.persistence.OrderRepository;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,6 @@ public class OrderControlPagingService {
     @Value("${order-records-on-page}")
     private int recordsCountOnPage;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -41,7 +39,6 @@ public class OrderControlPagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = recordsCountOnPage;
         currentPage = FIRST_PAGE;
         listOnePage = orderRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
         calculatePagesQuantity();
@@ -71,7 +68,6 @@ public class OrderControlPagingService {
         } else {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
-            endRecordOffset += recordsCountOnPage;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -82,7 +78,6 @@ public class OrderControlPagingService {
         if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = recordsCountOnPage;
             isFirstPage = true;
             isLastPage = false;
         } else {

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -39,13 +37,11 @@ public class IndexController {
 
     @GetMapping(value = "/index")
     public String index(ModelMap modelMap) {
-        updatePage();
-
-        Path resourceDirectory = Paths.get("resources");
+        newRandomProductsOnScreen();
 
         modelMap.addAttribute("error", "");
         refreshData(modelMap);
-        return "index";
+        return "/index";
     }
 
     @PostMapping(value = "/buy_product")
@@ -63,24 +59,17 @@ public class IndexController {
             addToCartService.execute(addRequest);
             modelMap.addAttribute("error", "");
         }
-        updatePage();
+        newRandomProductsOnScreen();
         refreshData(modelMap);
         return "index";
     }
 
-    @PostMapping(value = "/pass")
-    // TODO: 24.01.2021  It's only example. Here must be Spring Security
-    public String checkPass(@RequestParam(value = "pass") String password, ModelMap modelMap) {
-        if (password.equals("admin")) {
-            return "service/service";
-        }
-        updatePage();
-        refreshData(modelMap);
-        modelMap.addAttribute("error", "Login error : Incorrect password");
-        return "index";
+    @GetMapping(value = "service")
+    public String logIn() {
+        return "service/service";
     }
 
-    private void updatePage() {
+    private void newRandomProductsOnScreen() {
         List<Product> randomList = randomService.createRandomProductsList();
         if (randomList.size() < 6) {
             startPageProducts = rangeService.getProductsRange(6, 0);

@@ -20,7 +20,7 @@ public class AddClientController {
     @Autowired
     private AddClientService addClientService;
 
-    @GetMapping(value = "add_client")
+    @GetMapping(value = "/service/add_client")
     public String showAddClient(ModelMap modelMap) {
         modelMap.addAttribute("client", new Client());
         modelMap.addAttribute("errors", "");
@@ -30,7 +30,6 @@ public class AddClientController {
 
     @GetMapping(value = "/back_client")
     public String backButtonClientFormPressed() {
-
         return "service/service";
     }
 

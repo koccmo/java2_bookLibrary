@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@WebServlet(name = "cart", urlPatterns = {"/add_product_for_cart"}, loadOnStartup = 3)
+@WebServlet(name = "cart", urlPatterns = {"/estore/add_product_for_cart"}, loadOnStartup = 3)
 public class CartServlet extends HttpServlet {
     @Autowired
     private SessionConfiguration sessionConfiguration;
@@ -20,7 +20,7 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         sessionConfiguration.sessionConfigurator(request, response);
 
-        response.sendRedirect("/cart");
+        response.sendRedirect("/estore/cart");
         response.flushBuffer();
     }
 }

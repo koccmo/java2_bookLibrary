@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AllCateroriesController {
+public class AllCategoriesController {
     @Autowired
     private CartProductsCountService cartCountService;
     @Autowired
@@ -28,7 +28,7 @@ public class AllCateroriesController {
     @Autowired
     private CartRepository CartRepository;
 
-    @GetMapping(value = "categories")
+    @GetMapping(value = "/estore/categories")
     public String showAllCategories(ModelMap modelMap) {
         paging.startPaging();
         modelMap.addAttribute("info", "");
@@ -37,22 +37,14 @@ public class AllCateroriesController {
         return "categories/categories";
     }
 
-    @PostMapping(value = "/pass_from_all_categories")
-    // TODO: 24.01.2021  It's only example. Here must be Spring Security
-    public String checkPassFromAllCategories(@RequestParam(value = "pass") String password, ModelMap modelMap) {
-        if (password.equals("admin")) {
-            return "service/service";
-        }
-
-        refreshData(modelMap);
-        modelMap.addAttribute("info", "");
-        modelMap.addAttribute("error", "Login error : Incorrect password");
-        return "categories/categories";
+    @GetMapping(value = "service_login_all_categories")
+    public String loginFromAllCategories() {
+        return "service/service";
     }
 
-    @PostMapping(value = "/buy_product_all_categories")
+    @PostMapping(value = "/estore/buy_product_all_categories")
     public String productBuyFromCategories(@RequestParam(value = "quantity") Long quantity,
-                                           @RequestParam(value = "products") String productTitle, ModelMap modelMap) {
+                                           @RequestParam(value = "productTitle") String productTitle, ModelMap modelMap) {
 
         CheckStockQuantityRequest request = new CheckStockQuantityRequest(quantity, productTitle);
         CheckStockQuantityResponse response = quantityService.execute(request);
@@ -71,7 +63,7 @@ public class AllCateroriesController {
         return "categories/categories";
     }
 
-    @PostMapping(value = "/categories_next")
+    @PostMapping(value = "/estore/categories_next")
     public String nextPageCategoriesControl(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -85,7 +77,7 @@ public class AllCateroriesController {
         return "categories/categories";
     }
 
-    @PostMapping(value = "/categories_prev")
+    @PostMapping(value = "/estore/categories_prev")
     public String prevPageCategoriesControl(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");

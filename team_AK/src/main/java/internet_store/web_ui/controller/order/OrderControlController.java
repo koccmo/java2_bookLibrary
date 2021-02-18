@@ -22,7 +22,7 @@ public class OrderControlController {
     @Autowired
     private OrderStatusService orderStatusService;
 
-    @GetMapping(value = "/order_control")
+    @GetMapping(value = "/service/order_control")
     public String getOrders(ModelMap modelMap) {
         paging.startPaging();
 
@@ -31,7 +31,7 @@ public class OrderControlController {
         return "order/order_control";
     }
 
-    @PostMapping(value = "/order_control_next")
+    @PostMapping(value = "/service/order_control_next")
     public String nextPageOrderControl(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -44,7 +44,7 @@ public class OrderControlController {
         return "order/order_control";
     }
 
-    @PostMapping(value = "/order_control_prev")
+    @PostMapping(value = "/service/order_control_prev")
     public String prevPageOrderControl(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");
@@ -57,7 +57,7 @@ public class OrderControlController {
         return "order/order_control";
     }
 
-    @PostMapping(value = "/status_change")
+    @PostMapping(value = "/service/status_change")
     public String statusChange(@RequestParam(value = "orderNumber") String orderNumber,
                                @RequestParam(value = "order_status") String status,
                                ModelMap modelMap) {
@@ -70,7 +70,7 @@ public class OrderControlController {
     }
 
     private void refreshData(ModelMap modelMap) {
-        modelMap.addAttribute("orders", paging.getListOnePage());
+        modelMap.addAttribute("orders", paging.refreshTableContent());
         modelMap.addAttribute("currency_symbol", tax.getCurrencySymbol());
         modelMap.addAttribute("pages", "Page " + paging.getCurrentPage() + " of "
                 + paging.getPagesQuantity());

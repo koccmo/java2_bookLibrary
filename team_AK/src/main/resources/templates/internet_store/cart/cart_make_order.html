@@ -61,37 +61,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light">
                                 <div th:text="${cartCount}"></div>
                     </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about"><b>About</b></a>
+                    <a class="nav-link" href="#"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact"><b>Contact</b></a>
+                    <a class="nav-link" href="#"><b>Contact</b></a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropDown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href=""><b>Service</b></a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropDown">
-                        <form id="pass_enter">
-                            <li onclick="pass_enter.submit();">
-                                <div class="input-group">
-                                    &nbsp&nbsp<input name="pass" type="password" class="form-control form-control-sm"
-                                                     placeholder="password">
-                                    <button type="submit" class="btn btn-primary btn-sm"
-                                            formaction="/pass" value="pass"
-                                            formmethod="post">Ok
-                                    </button>
-                                    &nbsp&nbsp
-                                </div>
-                            </li>
-                        </form>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service"><b>Service</b></a>
                 </li>
             </ul>
         </div>
@@ -146,7 +128,7 @@
                     <a class="nav-link" aria-current="page" href="add_product_for_cart">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add_client_for_cart">Client</a>
+                    <a class="nav-link" href="/estore/add_client_for_cart">Client</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="cart_make_order" th:disabled="disabled">Order</a>
@@ -223,7 +205,7 @@
                                     <div th:text="'Order number ' + ${orderNumber} + ' completed.'"></div>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="/make_order" method="post">
+                                    <form action="/estore/make_order" method="post">
                                         <button type="submit" class="btn btn-primary">Ok</button>
                                     </form>
                                 </div>

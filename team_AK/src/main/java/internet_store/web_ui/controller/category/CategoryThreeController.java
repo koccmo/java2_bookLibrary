@@ -28,7 +28,7 @@ public class CategoryThreeController {
     @Autowired
     private CartRepository CartRepository;
 
-    @GetMapping(value = "category_3")
+    @GetMapping(value = "/estore/category_3")
     public String showCategoryThree(ModelMap modelMap) {
         paging.startPaging();
         modelMap.addAttribute("info", "");
@@ -37,20 +37,12 @@ public class CategoryThreeController {
         return "categories/category_three";
     }
 
-    @PostMapping(value = "/pass_from_category_three")
-    // TODO: 24.01.2021  It's only example. Here must be Spring Security
-    public String checkPassFromCategoryThree(@RequestParam(value = "pass") String password, ModelMap modelMap) {
-        if (password.equals("admin")) {
+    @GetMapping(value = "service_login_category_3")
+    public String loginFromCategoriesThree() {
             return "service/service";
-        }
-
-        refreshData(modelMap);
-        modelMap.addAttribute("info", "");
-        modelMap.addAttribute("error", "Login error : Incorrect password");
-        return "categories/category_two";
     }
 
-    @PostMapping(value = "/buy_product_category_three")
+    @PostMapping(value = "/estore/buy_product_category_three")
     public String productBuyFromCategoryThree(@RequestParam(value = "quantity") Long quantity,
                                               @RequestParam(value = "productTitle") String title, ModelMap modelMap) {
 
@@ -71,7 +63,7 @@ public class CategoryThreeController {
         return "categories/category_three";
     }
 
-    @PostMapping(value = "/categoryThree_next")
+    @PostMapping(value = "/estore/categoryThree_next")
     public String nextPageCategoryThreeControl(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -85,7 +77,7 @@ public class CategoryThreeController {
         return "categories/category_three";
     }
 
-    @PostMapping(value = "/categoryThree_prev")
+    @PostMapping(value = "/estore/categoryThree_prev")
     public String prevPageCategoryThreeControl(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");

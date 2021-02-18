@@ -28,7 +28,7 @@ public class CategoryTwoController {
     @Autowired
     private CartRepository CartRepository;
 
-    @GetMapping(value = "category_2")
+    @GetMapping(value = "/estore/category_2")
     public String showCategoryTwo(ModelMap modelMap) {
         paging.startPaging();
         modelMap.addAttribute("info", "");
@@ -37,20 +37,12 @@ public class CategoryTwoController {
         return "categories/category_two";
     }
 
-    @PostMapping(value = "/pass_from_category_two")
-    // TODO: 24.01.2021  It's only example. Here must be Spring Security
-    public String checkPassFromCategoryTwo(@RequestParam(value = "pass") String password, ModelMap modelMap) {
-        if (password.equals("admin")) {
-            return "service/service";
-        }
-
-        refreshData(modelMap);
-        modelMap.addAttribute("info", "");
-        modelMap.addAttribute("error", "Login error : Incorrect password");
-        return "categories/category_two";
+    @GetMapping(value = "service_login_category_2")
+    public String loginFromCategoriesTwo() {
+        return "service/service";
     }
 
-    @PostMapping(value = "/buy_product_category_two")
+    @PostMapping(value = "/estore/buy_product_category_two")
     public String productBuyFromCategoryTwo(@RequestParam(value = "quantity") Long quantity,
                                             @RequestParam(value = "productTitle") String title, ModelMap modelMap) {
 
@@ -71,7 +63,7 @@ public class CategoryTwoController {
         return "categories/category_two";
     }
 
-    @PostMapping(value = "/categoryTwo_next")
+    @PostMapping(value = "/estore/categoryTwo_next")
     public String nextPageCategoryTwoControl(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -85,7 +77,7 @@ public class CategoryTwoController {
         return "categories/category_two";
     }
 
-    @PostMapping(value = "/categoryTwo_prev")
+    @PostMapping(value = "/estore/categoryTwo_prev")
     public String prevPageCategoryTwoControl(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");
