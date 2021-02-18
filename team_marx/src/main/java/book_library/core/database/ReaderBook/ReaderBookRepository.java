@@ -29,4 +29,7 @@ public class ReaderBookRepository {
         query.setParameter("book_id", id);
         return !query.getResultList().isEmpty();
     }
+
+    public void returnBook(ReaderBook readerBook) {
+    }
 }
