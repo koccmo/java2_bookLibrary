@@ -1,17 +1,8 @@
 package internet_store.application.web_ui.controllers.rest;
 
-import internet_store.application.core.requests.shopping_cart_item.AddShoppingCartItemRequest;
-import internet_store.application.core.requests.shopping_cart_item.DeleteShoppingCartItemRequest;
-import internet_store.application.core.requests.shopping_cart_item.GetShoppingCartItemRequest;
-import internet_store.application.core.requests.shopping_cart_item.UpdateShoppingCartItemRequest;
-import internet_store.application.core.responses.shopping_cart_item.AddShoppingCartItemResponse;
-import internet_store.application.core.responses.shopping_cart_item.DeleteShoppingCartItemResponse;
-import internet_store.application.core.responses.shopping_cart_item.GetShoppingCartItemResponse;
-import internet_store.application.core.responses.shopping_cart_item.UpdateShoppingCartItemResponse;
-import internet_store.application.core.services.shopping_cart_item.AddShoppingCartItemService;
-import internet_store.application.core.services.shopping_cart_item.DeleteShoppingCartItemService;
-import internet_store.application.core.services.shopping_cart_item.GetShoppingCartItemService;
-import internet_store.application.core.services.shopping_cart_item.UpdateShoppingCartItemService;
+import internet_store.application.core.requests.shopping_cart_item.*;
+import internet_store.application.core.responses.shopping_cart_item.*;
+import internet_store.application.core.services.shopping_cart_item.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

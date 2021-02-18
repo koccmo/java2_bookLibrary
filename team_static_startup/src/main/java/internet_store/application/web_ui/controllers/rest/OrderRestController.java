@@ -1,16 +1,8 @@
 package internet_store.application.web_ui.controllers.rest;
 
-import internet_store.application.core.requests.order.AddOrderRequest;
-import internet_store.application.core.requests.order.FindOrderByIdRequest;
-import internet_store.application.core.requests.shopping_cart.FindShoppingCartByIdRequest;
-import internet_store.application.core.responses.order.AddOrderResponse;
-import internet_store.application.core.responses.order.FindAllOrdersResponse;
-import internet_store.application.core.responses.order.FindOrderByIdResponse;
-import internet_store.application.core.responses.shopping_cart.FindAllShoppingCartsResponse;
-import internet_store.application.core.responses.shopping_cart.FindShoppingCartByIdResponse;
-import internet_store.application.core.services.order.AddOrderService;
-import internet_store.application.core.services.order.FindAllOrdersService;
-import internet_store.application.core.services.order.FindOrderByIdService;
+import internet_store.application.core.requests.order.*;
+import internet_store.application.core.responses.order.*;
+import internet_store.application.core.services.order.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
