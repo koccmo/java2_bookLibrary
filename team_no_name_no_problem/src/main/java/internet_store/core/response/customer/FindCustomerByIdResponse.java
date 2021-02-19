@@ -9,17 +9,17 @@ import java.util.Optional;
 
 public class FindCustomerByIdResponse extends CoreResponse {
 
-    private Optional<Customer> customer;
+    private Customer customers;
 
-    public FindCustomerByIdResponse(Optional<Customer> customer){
-        this.customer = customer;
+    public FindCustomerByIdResponse(Customer customer){
+        this.customers = customer;
     }
 
     public FindCustomerByIdResponse(List<CoreError> errors){
         super(errors);
     }
 
-    public Optional<Customer> getCustomer(){
-        return customer;
+    public Customer getCustomers(){
+        return customers;
     }
 }
