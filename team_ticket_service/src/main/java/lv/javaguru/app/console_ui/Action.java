@@ -25,7 +25,7 @@ public class Action {
 		String name = ProcessLoginInput(scanner, "Enter name:");
 		String surname = ProcessLoginInput(scanner, "Enter surname:");
 
-		return new User(name, surname, PersonType.CLIENT);
+		return new User(name, surname, true);
 	}
 
 	public User registerUser () {
@@ -35,7 +35,7 @@ public class Action {
 
 		String surname = ProcessRegisterInput(scanner, "Enter surname:");
 
-		return new User(name, surname, PersonType.CLIENT);
+		return new User(name, surname, true);
 	}
 
 	private String ProcessLoginInput (Scanner scanner, String s) {

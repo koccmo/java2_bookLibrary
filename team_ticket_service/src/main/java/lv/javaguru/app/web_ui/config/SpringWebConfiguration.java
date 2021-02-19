@@ -31,4 +31,6 @@ public class SpringWebConfiguration implements WebMvcConfigurer {
 		return resourceViewResolver;
 	}
 
+
+
 }

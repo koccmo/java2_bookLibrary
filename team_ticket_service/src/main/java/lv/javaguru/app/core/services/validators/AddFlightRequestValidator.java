@@ -28,7 +28,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketUserName (AddFlightRequest request) {
-		String userName = request.getFlight().getUser().getName();
+		String userName = request.getFlight().getUser().getUsername();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketUserSurname (AddFlightRequest request) {
-		String userSurname = request.getFlight().getUser().getLastName();
+		String userSurname = request.getFlight().getUser().getPassword();
 
 		List<CodeError> errors = new ArrayList<>();
 

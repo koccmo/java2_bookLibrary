@@ -19,8 +19,8 @@ public class JdbcDatabase {
 	public User getUserByNameAndSurname (User user) {
 		String sql = "SELECT * FROM users WHERE users.name = ?  AND users.surname = ?";
 		Object[] args = new Object[]{
-				user.getName(),
-				user.getLastName()
+				user.getUsername(),
+				user.getPassword()
 		};
 
 		List<User> users = jdbcTemplate.query(sql, args, new UserRowMapper());
@@ -49,12 +49,13 @@ public class JdbcDatabase {
 
 
 	public boolean addUser (User userToAdd) {
-		String sql = "INSERT INTO users (name, surname, person_type) " +
-				"VALUES (?, ?, ?)";
+		String sql = "INSERT INTO users (name, surname) " +
+				"VALUES (?, ?)";
+			//	"VALUES (?, ?, ?)";
 		Object[] args = new Object[]{
-				userToAdd.getName(),
-				userToAdd.getLastName(),
-				userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
+				userToAdd.getUsername(),
+				userToAdd.getPassword(),
+			//	userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
 		};
 
 		return jdbcTemplate.update(sql, args) == 1;
@@ -195,7 +196,7 @@ public class JdbcDatabase {
 				"WHERE users.id = ? " +
 				"AND users.name = ? " +
 				"AND users.surname = ?";
-		Object[] args = new Object[]{user.getId(), user.getName(), user.getLastName()};
+		Object[] args = new Object[]{user.getId(), user.getUsername(), user.getPassword()};
 
 		return jdbcTemplate.query(sql, args, new FlightRowMapper());
 	}

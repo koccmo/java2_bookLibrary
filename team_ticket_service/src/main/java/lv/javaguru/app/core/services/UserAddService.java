@@ -26,7 +26,7 @@ public class UserAddService {
 
 	public UserAddResponse execute (UserAddRequest request) {
 		List<CodeError> errors = validator.validate(request);
-		User user = new User(request.getName(), request.getSurname(), PersonType.CLIENT);
+		User user = new User(request.getName(), request.getSurname(), true);
 
 		if (!errors.isEmpty())
 			return new UserAddResponse(errors);
@@ -38,7 +38,7 @@ public class UserAddService {
 			return new UserAddResponse(errors);
 		}
 
-		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getName(), user.getLastName());
+		String message = String.format("\nCongrats! %s %s, You have been registered!", user.getUsername(), user.getPassword());
 
 		return new UserAddResponse(message);
 	}

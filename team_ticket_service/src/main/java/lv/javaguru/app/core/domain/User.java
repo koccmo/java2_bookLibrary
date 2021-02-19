@@ -20,29 +20,38 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	//@Column(name = "name")
+	//private String name;
+//
+	//@Column(name = "last_name")
+	//private String lastName;
+//
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
 
-	@Column(name = "last_name", nullable = false)
-	private String lastName;
+	@Column(name = "username", nullable = false)
+	private String username;
 
-	@Column(name = "role_type", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private PersonType personType;
+	@Column(name = "password", nullable = false)
+	private String password;
+
+	//@Column(name = "role_type", nullable = false)
+	//@Enumerated(EnumType.STRING)
+	//private PersonType personType;
 
 
-	public User (String name, String lastName, PersonType personType) {
-		this.name = name.trim();
-		this.lastName = lastName.trim();
-		this.personType = personType;
+	public User (String username, String password, boolean enabled) {
+		this.username = username.trim();
+		this.password = password.trim();
+		this.enabled = enabled;
 	}
 
 
 	@Override
 	public String toString () {
 		return "ID: " + id +
-				", " + name +
-				", " + lastName;
+				", " + username +
+				", " + password;
 	}
 
 
