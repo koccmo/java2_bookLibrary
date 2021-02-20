@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class DeleteProductByOtherCriteriaController {
 
     @Autowired
-    private DeleteProductByOtherService deleteByOtherService;
+    private DeleteProductByOtherService deleteProductByOtherService;
 
     @GetMapping(value = "/deleteProductByOtherCriteria")
     public String showDeleteProductByOtherCriteriaPage(ModelMap modelMap) {
@@ -26,12 +26,12 @@ public class DeleteProductByOtherCriteriaController {
     @PostMapping("/deleteProductByOtherCriteria")
     public String processDeleteProductByOtherCriteriaRequest(
             @ModelAttribute(value = "request") DeleteProductByOtherRequest deleteProductByOtherRequest, ModelMap modelMap) {
-        DeleteProductByOtherResponse deleteByOtherResponse = deleteByOtherService.execute(deleteProductByOtherRequest);{
-            if (deleteByOtherResponse.hasErrors()) {
-                modelMap.addAttribute("errors", deleteByOtherResponse.hasErrors());
+        DeleteProductByOtherResponse deleteProductByOtherResponse = deleteProductByOtherService.execute(deleteProductByOtherRequest);{
+            if (deleteProductByOtherResponse.hasErrors()) {
+                modelMap.addAttribute("errors", deleteProductByOtherResponse.getErrors());
                 return "/deleteProductByOtherCriteria";
             } else {
-                return "index";
+                return "/deleteProductByOtherCriteria";
             }
         }
     }
