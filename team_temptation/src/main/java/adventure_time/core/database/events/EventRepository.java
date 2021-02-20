@@ -1,4 +1,4 @@
-package adventure_time.database.events;
+package adventure_time.core.database.events;
 
 import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.requests.events.SearchEventRequest;
@@ -8,7 +8,7 @@ import adventure_time.core.requests.events.UpdateEventRequest;
 import java.util.List;
 import java.util.Optional;
 
-public interface EventDatabase {
+public interface EventRepository {
 
     boolean add (Events event);
 

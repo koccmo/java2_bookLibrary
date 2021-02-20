@@ -1,4 +1,4 @@
-package adventure_time.database.guides;
+package adventure_time.core.database.guides;
 
 import adventure_time.core.domain.Guides;
 

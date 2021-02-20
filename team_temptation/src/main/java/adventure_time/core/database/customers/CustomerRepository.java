@@ -1,4 +1,4 @@
-package adventure_time.database.customers;
+package adventure_time.core.database.customers;
 
 import adventure_time.core.domain.Customers;
 import adventure_time.core.requests.customers.LoginCustomerRequest;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface DatabaseCustomers {
+public interface CustomerRepository {
 
     boolean add(Customers customer);
 

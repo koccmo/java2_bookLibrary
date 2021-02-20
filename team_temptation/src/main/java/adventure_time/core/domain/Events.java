@@ -1,19 +1,39 @@
 package adventure_time.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="events")
 public class Events {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "id")
     private Long eventId;
+
+    @Column (name = "name", nullable = false, unique = true)
     private String eventName;
+
+    @Column (name = "kind", nullable = false)
     private String eventKind;
-    //    private Guides guide;
+
+    @Column (name = "duration", nullable = false)
     private Integer durationHours;
+
+    @Column (name = "max_num_guys", nullable = false)
     private Integer maxNumberParticipants;
+
+    @Column (name = "min_num_guys", nullable = false)
     private Integer minNumberParticipants;
+
+    @Column (name = "route", nullable = false)
     private String route; // List<StayPoint>
+
+    @Column (name = "detail", nullable = false)
     private String detailsDescription;
 
+    public Events() {}
 
     public Events(String eventName, String eventKind, Integer durationHours,
                   Integer maxNumberParticipants, Integer minNumberParticipants,

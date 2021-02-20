@@ -1,6 +1,6 @@
 package adventure_time.ui.events;
 
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.database.events.EventRepository;
 import adventure_time.core.domain.Events;
 import adventure_time.ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class StartUpEventUIAction implements UIAction {
 
 //    @DIDependency
     @Autowired
-    private EventDatabase databaseEvents;
+    private EventRepository databaseEvents;
 
 //    public StartUpEventUIAction(EventDatabase databaseEvents) {
 //        this.databaseEvents = databaseEvents;

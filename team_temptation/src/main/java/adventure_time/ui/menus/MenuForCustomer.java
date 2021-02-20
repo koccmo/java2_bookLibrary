@@ -1,6 +1,6 @@
 package adventure_time.ui.menus;
 
-public class CustomerMenu implements SubjectMenu {
+public class MenuForCustomer implements SubjectMenu {
 
     @Override
     public void show() {

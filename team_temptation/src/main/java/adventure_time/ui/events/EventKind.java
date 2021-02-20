@@ -1,4 +1,4 @@
-package adventure_time.core.domain;
+package adventure_time.ui.events;
 
 import java.util.HashMap;
 import java.util.Map;

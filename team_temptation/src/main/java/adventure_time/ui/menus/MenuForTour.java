@@ -1,6 +1,6 @@
 package adventure_time.ui.menus;
 
-public class TourMenu implements SubjectMenu {
+public class  MenuForTour implements SubjectMenu {
     @Override
     public void show() {
         System.out.println("TOURS:");

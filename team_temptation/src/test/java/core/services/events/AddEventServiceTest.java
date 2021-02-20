@@ -5,8 +5,7 @@ import adventure_time.core.services.events.AddEventRequestValidator;
 import adventure_time.core.services.events.AddEventService;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.AddEventResponse;
-import adventure_time.database.events.EventDatabase;
-import adventure_time.core.domain.Events;
+import adventure_time.core.database.events.EventRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +26,7 @@ class AddEventServiceTest {
 
     @Mock
     private AddEventRequestValidator validator;
-    @Mock private EventDatabase database;
+    @Mock private EventRepository database;
     @InjectMocks
     private AddEventService service;
 

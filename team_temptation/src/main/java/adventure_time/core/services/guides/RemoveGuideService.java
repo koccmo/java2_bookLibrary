@@ -3,7 +3,7 @@ package adventure_time.core.services.guides;
 import adventure_time.core.requests.guides.RemoveGuideRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.guides.RemoveGuideResponse;
-import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.database.guides.DatabaseGuides;
 
 import java.util.List;
 
