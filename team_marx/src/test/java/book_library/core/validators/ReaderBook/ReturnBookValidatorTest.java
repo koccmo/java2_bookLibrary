@@ -4,7 +4,6 @@ import book_library.core.database.Book.BookRepository;
 import book_library.core.database.Reader.ReaderRepository;
 import book_library.core.database.ReaderBook.ReaderBookRepository;
 import book_library.core.requests.ReaderBook.ReturnBookRequest;
-import book_library.core.requests.ReaderBook.TakeBookRequest;
 import book_library.core.responses.CoreError;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -21,7 +21,7 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-public class AcceptanceTest9Lesson12Task15TakeBookRequest {
+public class AcceptanceTest10Lesson12Task15TakeBookRequest {
 
     private ApplicationContext appContext;
 
@@ -36,21 +36,21 @@ public class AcceptanceTest9Lesson12Task15TakeBookRequest {
         return appContext.getBean(TestDatabaseRestorer.class);
     }
 
-//    @Test
-//    public void success() throws ParseException {
-//        AddBookRequest addBookRequest= new AddBookRequest("Title1", "Author1");
-//        getAddBookService().execute(addBookRequest);
-//
-//        RegisterReaderRequest registerReaderRequest = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
-//        getRegisterReaderService().execute(registerReaderRequest);
-//
-//        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-//        Date bookOutDate = formatter1.parse("2020/01/01 14:45");
-//        TakeBookRequest takeBookRequest = new TakeBookRequest(1L,1L, bookOutDate);
-//        TakeBookResponse takeBookResponse = getTakeBookService().execute(takeBookRequest);
-//
-//        assertEquals(null, takeBookResponse.getErrors());
-//    }
+    @Test
+    public void success() throws ParseException {
+        AddBookRequest addBookRequest= new AddBookRequest("Title1", "Author1");
+        getAddBookService().execute(addBookRequest);
+
+        RegisterReaderRequest registerReaderRequest = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
+        getRegisterReaderService().execute(registerReaderRequest);
+
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookOutDate = formatter1.parse("2020/01/01 14:45");
+        TakeBookRequest takeBookRequest = new TakeBookRequest(1L,1L, bookOutDate);
+        TakeBookResponse takeBookResponse = getTakeBookService().execute(takeBookRequest);
+
+        assertEquals(null, takeBookResponse.getErrors());
+    }
 
     @Test
     public void shouldReturnErrorWhenBookIsNotInLibrary() throws ParseException {
@@ -62,8 +62,10 @@ public class AcceptanceTest9Lesson12Task15TakeBookRequest {
 
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date bookOutDate = formatter1.parse("2020/01/01 14:45");
-        TakeBookRequest takeBookRequest = new TakeBookRequest(1L,1L, bookOutDate);
-        TakeBookResponse takeBookResponse = getTakeBookService().execute(takeBookRequest);
+        TakeBookRequest takeBookRequest1 = new TakeBookRequest(1L,1L, bookOutDate);
+        getTakeBookService().execute(takeBookRequest1);
+        TakeBookRequest takeBookRequest2 = new TakeBookRequest(1L,1L, bookOutDate);
+        TakeBookResponse takeBookResponse = getTakeBookService().execute(takeBookRequest2);
 
         assertEquals(1, takeBookResponse.getErrors().size());
         assertEquals("bookId", takeBookResponse.getErrors().get(0).getField());
