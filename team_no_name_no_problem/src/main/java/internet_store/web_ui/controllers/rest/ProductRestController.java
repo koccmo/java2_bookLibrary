@@ -1,17 +1,8 @@
 package internet_store.web_ui.controllers.rest;
 
-import internet_store.core.requests.product.AddProductRequest;
-import internet_store.core.requests.product.ChangeProductRequest;
-import internet_store.core.requests.product.DeleteProductByIdRequest;
-import internet_store.core.requests.product.FindProductByIdRequest;
-import internet_store.core.response.product.AddProductResponse;
-import internet_store.core.response.product.ChangeProductResponse;
-import internet_store.core.response.product.DeleteProductByIdResponse;
-import internet_store.core.response.product.FindProductByIdResponse;
-import internet_store.core.services.product.AddProductService;
-import internet_store.core.services.product.ChangeProductService;
-import internet_store.core.services.product.DeleteProductByIdService;
-import internet_store.core.services.product.FindProductByIdService;
+import internet_store.core.requests.product.*;
+import internet_store.core.response.product.*;
+import internet_store.core.services.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +46,15 @@ public class ProductRestController {
     public DeleteProductByIdResponse deleteProduct(@PathVariable Long id) {
         DeleteProductByIdRequest request = new DeleteProductByIdRequest(id);
         return deleteProductByIdService.execute(request);
+    }
+
+    @Autowired
+    private DeleteProductByOtherService deleteProductByOtherService;
+
+    @DeleteMapping(path = "/deleteByTitle", produces = "application/json")
+    public DeleteProductByOtherResponse deleteProductByTitle(@PathVariable String title) {
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",null,null);
+        return deleteProductByOtherService.execute(request);
     }
 }
 
