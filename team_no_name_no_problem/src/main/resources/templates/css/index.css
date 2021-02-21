@@ -1,21 +1,6 @@
-
-    .ADM{
-        border: 5px outset black;
-        text-align: center;
-    }
-
-    .CM{
-        border: 5px outside black;
-        text_align: center;
-    }
-    h3{
-        font-size: 50px;
-        text-align: center;
-        }
-        body {
-        background-color: powderblue;
-        }
-
-    h4{
-    font-size: 30px;
-    }
+{
+margin: 0
+padding: 0
+box-sizing: border-box;
+color: #800040
+}
