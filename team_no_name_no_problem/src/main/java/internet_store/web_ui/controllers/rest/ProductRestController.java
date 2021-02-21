@@ -49,12 +49,21 @@ public class ProductRestController {
     }
 
     @Autowired
-    private DeleteProductByOtherService deleteProductByOtherService;
+    private DeleteProductByOtherService deleteProductByTitle;
 
-    @DeleteMapping(path = "/deleteByTitle", produces = "application/json")
+    @DeleteMapping(path = "/title", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByTitle(@PathVariable String title) {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",null,null);
-        return deleteProductByOtherService.execute(request);
+        return deleteProductByTitle.execute(request);
+    }
+
+    @Autowired
+    private DeleteProductByOtherService deleteProductByDescription;
+
+    @DeleteMapping(path = "/description", produces = "application/json")
+    public DeleteProductByOtherResponse deleteProductByDescription(@PathVariable String description) {
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,null,null);
+        return deleteProductByDescription.execute(request);
     }
 }
 
