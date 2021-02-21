@@ -92,4 +92,19 @@ public class ReturnBookValidatorTest {
         assertEquals("bookReturnDate", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
+
+    @Test
+    public void shouldReturnErrorWhenReaderIdIsNotPresenceInReaderRepository() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookReturnDate = formatter1.parse("9020/01/01 14:45");
+        ReturnBookRequest request = new ReturnBookRequest(1L,1L, bookReturnDate);
+        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(false);
+        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("readerId", errors.get(0).getField());
+        assertEquals("No reader with such id is present in database!", errors.get(0).getMessage());
+        Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
+        Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
+    }
 }
