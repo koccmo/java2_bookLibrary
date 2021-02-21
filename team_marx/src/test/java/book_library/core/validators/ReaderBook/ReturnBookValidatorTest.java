@@ -78,4 +78,18 @@ public class ReturnBookValidatorTest {
         assertEquals("bookId", errors.get(0).getField());
         assertEquals("Must not be empty!", errors.get(0).getMessage());
     }
+
+    @Test
+    public void shouldReturnErrorWhenBookOutDataIsNull() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookReturnDate = formatter1.parse("9020/01/01 14:45");
+        ReturnBookRequest request = new ReturnBookRequest(1L,1L, null);
+        List<CoreError> errors = validator.validate(request);
+        Mockito.verifyNoInteractions(readerRepository);
+        Mockito.verifyNoInteractions(bookRepository);
+        Mockito.verifyNoInteractions(readerBookRepository);
+        assertEquals(1, errors.size());
+        assertEquals("bookReturnDate", errors.get(0).getField());
+        assertEquals("Must not be empty!", errors.get(0).getMessage());
+    }
 }
