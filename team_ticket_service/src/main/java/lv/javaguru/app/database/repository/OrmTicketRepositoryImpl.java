@@ -11,19 +11,31 @@ import java.util.Date;
 
 @Component
 @Transactional
-public class OrmTicketRepositoryImpl implements TicketRepository{
+public class OrmTicketRepositoryImpl implements TicketRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 
 	public Long addTicket (Ticket ticket) {
-		return (Long) sessionFactory.getCurrentSession().save(ticket);
+		return (Long) sessionFactory.getCurrentSession()
+				.save(ticket);
 	}
 
 	public Ticket getTicketById (Long id) {
 		return sessionFactory.getCurrentSession()
 				.get(Ticket.class, id);
+	}
+
+
+	@Override
+	public boolean deleteTicketById (Long id) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"DELETE Ticket WHERE id = :id");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
+
+		return result == 1;
 	}
 
 	public boolean updateTicketDateByTicketId (Long id, Date date) {

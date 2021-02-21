@@ -24,6 +24,10 @@ public class UserShowAllResponse<T> extends ArrayList<T> {
 		return false;
 	}
 
+	public String getResponseAsString () {
+		return response.toString();
+	}
+
 	public void printResponse () {
 		if (!response.isEmpty())
 			for (T s : response) {
