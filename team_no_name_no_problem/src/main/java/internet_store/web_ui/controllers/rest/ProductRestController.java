@@ -22,10 +22,19 @@ public class ProductRestController {
     @Autowired
     private SearchProductByOtherService searchProductByTitle;
 
-    @GetMapping(path = "/title", produces = "application/json")
+    @GetMapping(path = "/{title}", produces = "application/json")
     public SearchProductByOtherResponse searchProductByTitle(@PathVariable String title) {
         SearchProductByOtherRequest request = new SearchProductByOtherRequest(title,"",null,null,null,null);
         return searchProductByTitle.execute(request);
+    }
+
+    @Autowired
+    private SearchProductByOtherService searchProductByDescription;
+
+    @GetMapping(path = "/description}", produces = "application/json")
+    public SearchProductByOtherResponse searchProductByDescription(@PathVariable String description) {
+        SearchProductByOtherRequest request = new SearchProductByOtherRequest("",description,null,null,null,null);
+        return searchProductByDescription.execute(request);
     }
 
     @Autowired
@@ -60,7 +69,7 @@ public class ProductRestController {
     @Autowired
     private DeleteProductByOtherService deleteProductByTitle;
 
-    @DeleteMapping(path = "/title", produces = "application/json")
+    @DeleteMapping(path = "/{title}", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByTitle(@PathVariable String title) {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",null,null);
         return deleteProductByTitle.execute(request);
@@ -69,7 +78,7 @@ public class ProductRestController {
     @Autowired
     private DeleteProductByOtherService deleteProductByDescription;
 
-    @DeleteMapping(path = "/description", produces = "application/json")
+    @DeleteMapping(path = "/{description}", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByDescription(@PathVariable String description) {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,null,null);
         return deleteProductByDescription.execute(request);
