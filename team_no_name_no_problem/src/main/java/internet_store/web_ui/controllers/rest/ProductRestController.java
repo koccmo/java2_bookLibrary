@@ -31,10 +31,19 @@ public class ProductRestController {
     @Autowired
     private SearchProductByOtherService searchProductByDescription;
 
-    @GetMapping(path = "/description}", produces = "application/json")
+    @GetMapping(path = "/{description}", produces = "application/json")
     public SearchProductByOtherResponse searchProductByDescription(@PathVariable String description) {
         SearchProductByOtherRequest request = new SearchProductByOtherRequest("",description,null,null,null,null);
         return searchProductByDescription.execute(request);
+    }
+
+    @Autowired
+    private SearchProductByOtherService searchProductByPriceRange;
+
+    @GetMapping(path = "/{startPrice}/{enPrice}", produces = "application/json")
+    public SearchProductByOtherResponse searchProductByPriceRange(@PathVariable Integer startPrice, Integer endPrice) {
+        SearchProductByOtherRequest request = new SearchProductByOtherRequest("","",startPrice,endPrice,null,null);
+        return searchProductByPriceRange.execute(request);
     }
 
     @Autowired
