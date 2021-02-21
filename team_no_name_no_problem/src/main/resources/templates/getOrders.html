@@ -10,22 +10,22 @@
 
 <body>
 
-<h3>Get list of all products</h3>
+<h3>Order list</h3>
 
 <table>
     <tr>
         <td>Id:</td>
-        <td>Title:</td>
-        <td>Description:</td>
-        <td>Price:</td>
+        <td>Customer:</td>
+        <td>Shopping cart:</td>
+        <td>Sum:</td>
     </tr>
 
-    <td th:if="${products != null}">
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"/>
-            <td th:text="${product.title}" />
-            <td th:text="${product.description}" />
-            <td th:text="${product.price}" />
+    <td th:if="${orders != null}">
+        <tr th:each="order : ${orders}">
+            <td th:text="${id}"/>
+            <td th:text="${customer.name}" />
+            <td th:text="${shoppingCart}"/>
+            <td th:text="${sum}" />
         </tr>
     </td>
 

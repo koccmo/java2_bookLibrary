@@ -1,10 +1,7 @@
 package internet_store.web_ui.controllers;
 
-import internet_store.core.requests.product.AddProductRequest;
 import internet_store.core.requests.product.BuyProductRequest;
-import internet_store.core.response.product.AddProductResponse;
 import internet_store.core.response.product.BuyProductResponse;
-import internet_store.core.services.product.AddProductService;
 import internet_store.core.services.product.BuyProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,7 @@ public class BuyProductController {
 
         @GetMapping(value = "/buyProduct")
         public String showBuyProductPage(ModelMap modelMap) {
-            modelMap.addAttribute("request", new AddProductRequest());
+            modelMap.addAttribute("request", new BuyProductRequest());
             return "buyProduct";
         }
 
@@ -30,7 +27,7 @@ public class BuyProductController {
             BuyProductResponse buyProductResponse = buyProductService.execute(request);
             if (buyProductResponse.hasErrors()) {
                 modelMap.addAttribute("errors", buyProductResponse.getErrors());
-                return "buyProduct";
+                return "/buyProduct";
             } else {
                 return "index";
             }

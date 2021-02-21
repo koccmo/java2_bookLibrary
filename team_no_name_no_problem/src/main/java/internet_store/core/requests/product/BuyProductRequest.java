@@ -6,6 +6,8 @@ public class BuyProductRequest {
     private Integer quantity;
     private String endOfShopping;
 
+    public BuyProductRequest() { }
+
     public BuyProductRequest(Long id, Integer quantity, String endOfShopping) {
         this.id = id;
         this.quantity = quantity;
@@ -26,5 +28,13 @@ public class BuyProductRequest {
 
     public String getEndOfShopping() {
         return endOfShopping;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setEndOfShopping(String endOfShopping) {
+        this.endOfShopping = endOfShopping;
     }
 }

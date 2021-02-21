@@ -30,9 +30,8 @@ public class DeleteProductByOtherCriteriaController {
             if (deleteProductByOtherResponse.hasErrors()) {
                 modelMap.addAttribute("errors", deleteProductByOtherResponse.getErrors());
                 return "/deleteProductByOtherCriteria";
-            } else {
-                return "/deleteProductByOtherCriteria";
             }
+            return "/deleteProductByOtherCriteria";
         }
     }
 }
