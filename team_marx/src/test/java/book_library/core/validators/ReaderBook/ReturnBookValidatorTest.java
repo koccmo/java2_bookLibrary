@@ -122,4 +122,19 @@ public class ReturnBookValidatorTest {
         Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
         Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
     }
+
+    @Test
+    public void shouldReturnErrorWhenDateAndTimeEnteredIsBeforeNow() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookReturnDate = formatter1.parse("1020/01/01 14:45");
+        ReturnBookRequest request = new ReturnBookRequest(1L,1L, bookReturnDate);
+        Mockito.when(readerRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        Mockito.when(bookRepository.isSuchIdPresentsInDatabase(any())).thenReturn(true);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(1, errors.size());
+        assertEquals("bookReturnDate", errors.get(0).getField());
+        assertEquals("bookReturnDate and time cannot be earlier than the current date and time.", errors.get(0).getMessage());
+        Mockito.verify(readerRepository).isSuchIdPresentsInDatabase(1L);
+        Mockito.verify(bookRepository).isSuchIdPresentsInDatabase(1L);
+    }
 }
