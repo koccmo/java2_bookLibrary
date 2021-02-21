@@ -88,7 +88,7 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> searchById(Long id) {
         return Optional.empty();
     }
 
@@ -108,21 +108,21 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitle(String title) {
+    public List<Product> searchAllByTitle(String title) {
         String sql = "SELECT * FROM products WHERE title = ?";
         Object[] args = new Object[]{title};
         return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
-    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByPriceRange(Integer startPrice, Integer endPrice) {
         String sql = "SELECT * FROM products WHERE price >= :startPrice and price <= :endPrice ";
         Object[] args = new Object[] {startPrice,endPrice};
         return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
         String sql = "SELECT FROM products WHERE title = ? " +
                 "and WHERE description = ? and WHERE price >= :startPrice and price <= :endPrice";
         Object[] args = new Object[]{title, startPrice, endPrice};
@@ -130,21 +130,21 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByDescription(String description) {
+    public List<Product> searchAllByDescription(String description) {
         String sql = "SELECT * FROM products WHERE description = ?";
         Object[] args = new Object[]{description};
         return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescription(String title, String description) {
+    public List<Product> searchAllByTitleAndDescription(String title, String description) {
         String sql = "SELECT * FROM products WHERE title = ? AND description = ?";
         Object[] args = new Object[]{title, description};
         return jdbcTemplate.query(sql, args, new ProductRowMapper());
     }
 
     @Override
-    public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         String sql = "SELECT FROM products WHERE title = ? " +
                 "and WHERE price >= :startPrice and price <= :endPrice";
         Object[] args = new Object[]{title, startPrice, endPrice};
@@ -152,7 +152,7 @@ public class JDBCProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
         String sql = "SELECT FROM products WHERE description = ? " +
                 "and WHERE price >= :startPrice and price <= :endPrice";
         Object[] args = new Object[]{description, startPrice, endPrice};

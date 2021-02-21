@@ -1,12 +1,9 @@
 package internet_store.web_ui.controllers;
 
 
-import internet_store.core.requests.product.FindProductByIdRequest;
-import internet_store.core.requests.product.SearchProductRequest;
-import internet_store.core.response.product.FindProductByIdResponse;
-import internet_store.core.response.product.SearchProductResponse;
-import internet_store.core.services.product.FindProductByIdService;
-import internet_store.core.services.product.SearchProductService;
+import internet_store.core.requests.product.SearchProductByIdRequest;
+import internet_store.core.response.product.SearchProductByIdResponse;
+import internet_store.core.services.product.SearchProductByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,20 +12,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class FindProductByIdController {
+public class SearchProductByIdController {
 
     @Autowired
-    private FindProductByIdService findProductByIdService;
+    private SearchProductByIdService findProductByIdService;
 
     @GetMapping(value = "/findProductById")
     public String showFindProductByIdPage(ModelMap modelMap) {
-        modelMap.addAttribute("request", new FindProductByIdRequest());
+        modelMap.addAttribute("request", new SearchProductByIdRequest());
         return "findProductById";
     }
 
     @PostMapping("/findProductById")
-    public String processFindProductByIDRequest(@ModelAttribute(value = "request") FindProductByIdRequest findProductByIdRequest, ModelMap modelMap) {
-        FindProductByIdResponse findProductByIdResponse = findProductByIdService.execute(findProductByIdRequest);
+    public String processFindProductByIDRequest(@ModelAttribute(value = "request") SearchProductByIdRequest findProductByIdRequest, ModelMap modelMap) {
+        SearchProductByIdResponse findProductByIdResponse = findProductByIdService.execute(findProductByIdRequest);
         if (findProductByIdResponse.hasErrors()) {
             modelMap.addAttribute("errors", findProductByIdResponse.getErrors());
         } else {

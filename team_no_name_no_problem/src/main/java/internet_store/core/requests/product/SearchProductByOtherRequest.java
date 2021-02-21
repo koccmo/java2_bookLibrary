@@ -3,7 +3,7 @@ package internet_store.core.requests.product;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
 
-public class SearchProductRequest {
+public class SearchProductByOtherRequest {
 
     private String title;
     private String description;
@@ -12,8 +12,10 @@ public class SearchProductRequest {
     public Ordering ordering;
     public Paging paging;
 
-    public SearchProductRequest(String title, String description, Integer startPrice,
-                                Integer endPrice, Ordering ordering, Paging paging){
+    public SearchProductByOtherRequest(){}
+
+    public SearchProductByOtherRequest(String title, String description, Integer startPrice,
+                                       Integer endPrice, Ordering ordering, Paging paging){
         this.title = title;
         this.description = description;
         this.startPrice = startPrice;
@@ -21,8 +23,6 @@ public class SearchProductRequest {
         this.ordering = ordering;
         this.paging = paging;
     }
-
-    public SearchProductRequest(){}
 
     public String getTitle(){
         return title;

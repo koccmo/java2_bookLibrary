@@ -131,28 +131,28 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitle(String title) {
+    public List<Product> searchAllByTitle(String title) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findAllByDescription(String description) {
+    public List<Product> searchAllByDescription(String description) {
         return productList.stream()
                 .filter(product -> product.getDescription().toLowerCase().startsWith(description.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByPriceRange(Integer startPrice, Integer endPrice) {
         return productList.stream()
                 .filter(product -> product.getPrice() >= startPrice && product.getPrice() <= endPrice)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescription(String title, String description) {
+    public List<Product> searchAllByTitleAndDescription(String title, String description) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
                         product.getDescription().toLowerCase().startsWith(description.toLowerCase()))
@@ -160,7 +160,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
                         product.getDescription().toLowerCase().startsWith(description.toLowerCase()) &&
@@ -169,7 +169,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
         return productList.stream()
                 .filter(product -> product.getDescription().toLowerCase().startsWith(description.toLowerCase()) &&
                         product.getPrice() >= startPrice && product.getPrice() <= endPrice)
@@ -177,7 +177,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+    public List<Product> searchAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
         return productList.stream()
                 .filter(product -> product.getTitle().toLowerCase().startsWith(title.toLowerCase()) &&
                         product.getPrice() >= startPrice && product.getPrice() <= endPrice)
@@ -186,7 +186,7 @@ public class ProductDatabaseImpl implements ProductDatabase{
 
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> searchById(Long id) {
         return productList.stream()
             .filter(product -> product.getId().equals(id))
                 .findAny();

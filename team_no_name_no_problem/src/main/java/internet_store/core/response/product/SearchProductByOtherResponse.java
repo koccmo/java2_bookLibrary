@@ -6,15 +6,15 @@ import internet_store.core.response.CoreResponse;
 
 import java.util.List;
 
-public class SearchProductResponse extends CoreResponse {
+public class SearchProductByOtherResponse extends CoreResponse {
 
     private List<Product> products;
 
-    public SearchProductResponse(List<Product> products) {
+    public SearchProductByOtherResponse(List<Product> products) {
         this.products = products;
     }
 
-    public SearchProductResponse(List<CoreError> errors, List<Product> products) {
+    public SearchProductByOtherResponse(List<CoreError> errors, List<Product> products) {
         super(errors);
     }
 

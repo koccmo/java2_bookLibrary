@@ -28,7 +28,7 @@ public class SearchProductByIdService {
             return new SearchProductByIdResponse(errors);
 
         }
-        Optional<Product> expectedProduct = productDatabase.findById(findByIdRequest.getId());
+        Optional<Product> expectedProduct = productDatabase.searchById(findByIdRequest.getId());
 
         if (expectedProduct.isEmpty()) {
             errors.add(new CoreError("database", "Database doesn't contain product with id "
@@ -36,7 +36,7 @@ public class SearchProductByIdService {
             return new SearchProductByIdResponse(errors);
         }
 
-        return new SearchProductByIdResponse(productDatabase.findById(findByIdRequest.getId()).get());
+        return new SearchProductByIdResponse(productDatabase.searchById(findByIdRequest.getId()).get());
 
     }
 }

@@ -11,12 +11,21 @@ import org.springframework.web.bind.annotation.*;
 public class ProductRestController {
 
     @Autowired
-    private FindProductByIdService findProductByIdService;
+    private SearchProductByIdService searchProductByIdService;
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public SearchProductByIdResponse searchProductById(@PathVariable Long id) {
         SearchProductByIdRequest request = new SearchProductByIdRequest(id);
-        return findProductByIdService.execute(request);
+        return searchProductByIdService.execute(request);
+    }
+
+    @Autowired
+    private SearchProductByOtherService searchProductByTitle;
+
+    @GetMapping(path = "/searchByTitle", produces = "application/json")
+    public SearchProductByOtherResponse searchProductByTitle(@PathVariable String title) {
+        SearchProductByOtherRequest request = new SearchProductByOtherRequest(title,"",null,null,null,null);
+        return searchProductByTitle.execute(request);
     }
 
     @Autowired
