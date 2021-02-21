@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Transactional
-public class SearchProductService {
+public class SearchProductByOtherService {
 
     @Value("${search.ordering.enabled}")
     private boolean orderingEnabled;
@@ -102,7 +102,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List <Product> products = productDatabase.findAllByTitleAndDescription(searchProductRequest.getTitle(), searchProductRequest.getDescription());
+        List <Product> products = productDatabase.searchAllByTitleAndDescription(searchProductRequest.getTitle(), searchProductRequest.getDescription());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain product with title: " +
                     searchProductRequest.getTitle() + ", description: " + searchProductRequest.getDescription() +
@@ -140,7 +140,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByTitleIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitle(searchProductRequest.getTitle());
+        List<Product> products = productDatabase.searchAllByTitle(searchProductRequest.getTitle());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " +
                     searchProductRequest.getTitle()));
@@ -153,7 +153,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByDescriptionIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product>products = productDatabase.findAllByDescription(searchProductRequest.getDescription());
+        List<Product>products = productDatabase.searchAllByDescription(searchProductRequest.getDescription());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with description: " +
                     searchProductRequest.getDescription()));
@@ -166,7 +166,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByPriceRangeIsProvided(SearchProductRequest searchProductRequest) {
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByPriceRange(searchProductRequest.getStartPrice(),
+        List<Product> products = productDatabase.searchAllByPriceRange(searchProductRequest.getStartPrice(),
                 searchProductRequest.getEndPrice());
         if (products.isEmpty()) {
             errors.add (new CoreError("database","Database doesn't contain products with price" +
@@ -181,7 +181,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByTitleAndDescriptionIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitleAndDescription(searchProductRequest.getTitle(),
+        List<Product> products = productDatabase.searchAllByTitleAndDescription(searchProductRequest.getTitle(),
                 searchProductRequest.getDescription());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " +
@@ -195,7 +195,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByTitleAndPriceRangeIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitleAndPriceRange(searchProductRequest.getTitle(),
+        List<Product> products = productDatabase.searchAllByTitleAndPriceRange(searchProductRequest.getTitle(),
                 searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " + searchProductRequest.getTitle() +
@@ -209,7 +209,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByDescriptionAndPriceRangeIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByDescriptionAndPriceRange(searchProductRequest.getDescription(),
+        List<Product> products = productDatabase.searchAllByDescriptionAndPriceRange(searchProductRequest.getDescription(),
                 searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with description: " + searchProductRequest.getDescription() +
@@ -223,7 +223,7 @@ public class SearchProductService {
 
     private SearchProductResponse searchByTitleAndDescriptionAndPriceRangeIsProvided(SearchProductRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List<Product> products = productDatabase.findAllByTitleAndDescriptionAndPriceRange(searchProductRequest.getTitle(),
+        List<Product> products = productDatabase.searchAllByTitleAndDescriptionAndPriceRange(searchProductRequest.getTitle(),
                 searchProductRequest.getDescription(),searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain products with title: " + searchProductRequest.getTitle() +
