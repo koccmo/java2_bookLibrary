@@ -35,9 +35,9 @@ public interface ProductDatabase {
 
     void changePrice(Long id, Integer newPrice);
 
-    List<Product> findAllByTitle(String title);
+    List<Product> searchAllByTitle(String title);
 
-    List<Product> findAllByDescription(String description);
+    List<Product> searchAllByDescription(String description);
 
     List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice);
 
