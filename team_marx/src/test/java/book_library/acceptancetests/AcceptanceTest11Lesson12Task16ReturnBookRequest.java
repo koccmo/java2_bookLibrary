@@ -77,6 +77,44 @@ public class AcceptanceTest11Lesson12Task16ReturnBookRequest {
         assertEquals("No reader with such id is present in database!", returnBookResponse.getErrors().get(0).getMessage());
     }
 
+    @Test
+    public void shouldReturnErrorWhenNoBookWithSuchIdIsInLibrary() throws ParseException {
+        AddBookRequest addBookRequest = new AddBookRequest("Title1", "Author1");
+        getAddBookService().execute(addBookRequest);
+
+        RegisterReaderRequest registerReaderRequest = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
+        getRegisterReaderService().execute(registerReaderRequest);
+
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+        Date bookReturnDate = formatter1.parse("9020/01/01 14:45");
+        ReturnBookRequest returnBookRequest = new ReturnBookRequest(1L, 2L, bookReturnDate);
+        ReturnBookResponse returnBookResponse = getReturnBookService().execute(returnBookRequest);
+
+        assertEquals(1, returnBookResponse.getErrors().size());
+        assertEquals("bookId", returnBookResponse.getErrors().get(0).getField());
+        assertEquals("No book with such id is present in database!", returnBookResponse.getErrors().get(0).getMessage());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenBookIsInLibrary() throws ParseException {
+        AddBookRequest addBookRequest = new AddBookRequest("Title1", "Author1");
+        getAddBookService().execute(addBookRequest);
+
+        RegisterReaderRequest registerReaderRequest = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
+        getRegisterReaderService().execute(registerReaderRequest);
+
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+
+        Date bookReturnDate = formatter1.parse("9020/01/01 14:45");
+        ReturnBookRequest returnBookRequest = new ReturnBookRequest(1L, 1L, bookReturnDate);
+        ReturnBookResponse returnBookResponse = getReturnBookService().execute(returnBookRequest);
+
+        assertEquals(1, returnBookResponse.getErrors().size());
+        assertEquals("bookId", returnBookResponse.getErrors().get(0).getField());
+        assertEquals("This book is already in Library.", returnBookResponse.getErrors().get(0).getMessage());
+    }
+
     private AddBookService getAddBookService() {
         return appContext.getBean(AddBookService.class);
     }
