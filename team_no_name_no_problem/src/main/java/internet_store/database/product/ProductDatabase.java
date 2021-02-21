@@ -47,7 +47,7 @@ public interface ProductDatabase {
 
     List<Product> searchAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
+    List<Product> searchAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
 
     boolean containsProduct (Product product);
 
