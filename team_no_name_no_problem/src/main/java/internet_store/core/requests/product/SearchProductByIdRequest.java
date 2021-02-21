@@ -1,12 +1,12 @@
 package internet_store.core.requests.product;
 
-public class FindProductByIdRequest {
+public class SearchProductByIdRequest {
 
     private Long id;
 
-    public FindProductByIdRequest() { }
+    public SearchProductByIdRequest() { }
 
-    public FindProductByIdRequest(Long id){
+    public SearchProductByIdRequest(Long id){
         this.id = id;
     }
 
