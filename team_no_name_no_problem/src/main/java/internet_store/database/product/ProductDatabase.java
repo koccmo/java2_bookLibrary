@@ -27,7 +27,7 @@ public interface ProductDatabase {
 
     boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
-    Optional<Product> findById(Long id);
+    Optional<Product> searchById(Long id);
 
     void changeTitle(Long id, String newTitle);
 
