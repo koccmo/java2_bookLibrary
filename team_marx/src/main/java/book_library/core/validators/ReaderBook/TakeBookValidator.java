@@ -30,7 +30,7 @@ public class TakeBookValidator {
         if (errors.isEmpty()) {
             validateReaderIdPresenceInReaderRepository(request).ifPresent(errors::add);
             validateBookIdPresenceInBookRepository(request).ifPresent(errors::add);
-            validateDateAndTimeEnteredIsNotBiggerThenNow(request).ifPresent(errors::add);
+            validateDateAndTimeEnteredIsBeforeNow(request).ifPresent(errors::add);
             if (errors.isEmpty()) {
                 validateIsBookInLibrary(request).ifPresent(errors::add);
             }
@@ -77,7 +77,7 @@ public class TakeBookValidator {
 
     }
 
-    private Optional<CoreError> validateDateAndTimeEnteredIsNotBiggerThenNow(TakeBookRequest request) {
+    private Optional<CoreError> validateDateAndTimeEnteredIsBeforeNow(TakeBookRequest request) {
         Date dateNow = Calendar.getInstance().getTime();
         return (dateNow.after(request.getBookOutDate()))
                 ? Optional.empty()
