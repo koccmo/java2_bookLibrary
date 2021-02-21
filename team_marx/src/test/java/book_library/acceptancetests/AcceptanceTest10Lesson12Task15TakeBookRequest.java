@@ -73,7 +73,7 @@ public class AcceptanceTest10Lesson12Task15TakeBookRequest {
     }
 
     @Test
-    public void shouldReturnErrorWhenNoReaderWithSuchIdIsInInLibrary() throws ParseException {
+    public void shouldReturnErrorWhenNoReaderWithSuchIdIsInLibrary() throws ParseException {
         AddBookRequest addBookRequest= new AddBookRequest("Title1", "Author1");
         getAddBookService().execute(addBookRequest);
 
