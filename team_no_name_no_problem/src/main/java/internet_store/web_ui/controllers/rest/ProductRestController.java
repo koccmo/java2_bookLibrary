@@ -56,6 +56,15 @@ public class ProductRestController {
     }
 
     @Autowired
+    private SearchProductByOtherService searchProductByTitleAndPriceRange;
+
+    @GetMapping(path = "/{title}/{startPrice}/{endPrice}", produces = "application/json")
+    public SearchProductByOtherResponse searchProductByTitleAndPriceRange(@PathVariable String title, Integer startPrice, Integer endPrice) {
+        SearchProductByOtherRequest request = new SearchProductByOtherRequest(title,"",startPrice,endPrice,null,null);
+        return searchProductByPriceRange.execute(request);
+    }
+
+    @Autowired
     private AddProductService addProductService;
 
     @PostMapping(path = "/",
