@@ -135,7 +135,16 @@ public class ProductRestController {
     @DeleteMapping(path = "/{title}/{description}", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByTitleAndPriceRange(@PathVariable String title, Integer startPrice, Integer endPrice) {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",startPrice,endPrice);
-        return deleteProductByTitleAndDescription.execute(request);
+        return deleteProductByTitleAnPriceRange.execute(request);
+    }
+
+    @Autowired
+    private DeleteProductByOtherService deleteProductByDescriptionAnPriceRange;
+
+    @DeleteMapping(path = "/{title}/{description}", produces = "application/json")
+    public DeleteProductByOtherResponse deleteProductByDescriptionAndPriceRange(@PathVariable String description, Integer startPrice, Integer endPrice) {
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,startPrice,endPrice);
+        return deleteProductByDescriptionAnPriceRange.execute(request);
     }
 }
 
