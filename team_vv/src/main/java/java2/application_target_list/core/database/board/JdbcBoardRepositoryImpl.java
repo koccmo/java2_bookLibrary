@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class JdbcBoardRepositoryImpl implements BoardRepository {
@@ -63,6 +64,11 @@ public class JdbcBoardRepositoryImpl implements BoardRepository {
     @Override
     public List<Record> getUnfinishedRecords() {
         return null;
+    }
+
+    @Override
+    public Optional<Record> getById(Long id) {
+        return Optional.empty();
     }
 
     private String getDate() {

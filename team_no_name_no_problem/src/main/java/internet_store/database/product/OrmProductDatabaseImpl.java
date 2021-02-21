@@ -57,7 +57,12 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByPriceRange(Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE price >= :startPrice and price <= :endPrice ");
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
@@ -72,21 +77,43 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Override
     public boolean deleteAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE description = :description " +
+                        "  AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
     public boolean deleteAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE title = :title " +
+                        "  AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
     public boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
-        return false;
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("DELETE Product WHERE title = :title " +
+                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> searchById(Long id) {
         Product product = (Product) sessionFactory.getCurrentSession().createCriteria(Product.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
@@ -117,7 +144,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitle(String title) {
+    public List<Product> searchAllByTitle(String title) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM Product p WHERE title = :title");
         query.setParameter("title", title);
@@ -125,7 +152,7 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByDescription(String description) {
+    public List<Product> searchAllByDescription(String description) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM Product p WHERE description = :description");
         query.setParameter("description", description);
@@ -133,17 +160,28 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice) {
-        return null;
+    public List<Product> searchAllByPriceRange(Integer startPrice, Integer endPrice) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM Product p WHERE price >= :startPrice and price <= :endPrice");
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        return query.getResultList();
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
-        return null;
+    public List<Product> searchAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM Product p WHERE title = :title " +
+                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        return query.getResultList();
     }
 
     @Override
-    public List<Product> findAllByTitleAndDescription(String title, String description) {
+    public List<Product> searchAllByTitleAndDescription(String title, String description) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM Product p WHERE title = :title AND description = :description");
         query.setParameter("title", title);
@@ -152,13 +190,25 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     }
 
     @Override
-    public List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
-        return null;
+    public List<Product> searchAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM Product p WHERE title = :title " +
+                        "  AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("title", title);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        return query.getResultList();
     }
 
     @Override
-    public List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
-        return null;
+    public List<Product> searchAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM Product p WHERE description = :description " +
+                        "  AND description =: description AND price >= :startPrice and price <= :endPrice ");
+        query.setParameter("description", description);
+        query.setParameter("startPrice", startPrice);
+        query.setParameter("endPrice", endPrice);
+        return query.getResultList();
     }
 
     @Override
@@ -180,5 +230,15 @@ public class OrmProductDatabaseImpl implements ProductDatabase{
     @Override
     public boolean containsDescription(String description) {
         return true;
+    }
+
+    @Override
+    public boolean containsPrice(Integer price) {
+        return false;
+    }
+
+    @Override
+    public boolean containsTitleAndDescription(String title, String description) {
+        return false;
     }
 }

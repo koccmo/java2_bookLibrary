@@ -1,14 +1,30 @@
 package adventure_time.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity                     // этот класс используется для ORM маппинга
+@Table(name="customers")    // название таблицы в базе данных на которую мапятся свойства этого класса
 public class Customers {
 
+    @Id                     // поле является первичным ключём
+    @Column(name="id")      // указывает название колонки в таблице базы
+    @GeneratedValue(strategy = GenerationType.AUTO) // стратегия генерации первичного ключа
     private Long customerID;
+
+    @Column(name="name", nullable = false)
     private String customerName;
+
+    @Column(name="email", unique = true, nullable = false)
     private String customerEmail;
+
+    @Column(name="phone", unique = true, nullable = false)
     private String customerPhone;
+
+    @Column(name="password", nullable = false)
     private String customerPassword;
+
+    @Column(name="activity")
     private Boolean activity;
 
     public Customers() {

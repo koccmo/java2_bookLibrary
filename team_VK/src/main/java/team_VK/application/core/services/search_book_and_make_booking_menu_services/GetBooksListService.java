@@ -8,7 +8,7 @@ import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.responses.GetBookListResponse;
 import team_VK.application.core.services.additional_functions.ResultBookListPrinter;
 import team_VK.application.core.services.validators.GetBooksListServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class GetBooksListService {
 
     @Autowired
-    private Database database;
+    private BookRepository database;
     @Autowired private GetBooksListServiceValidator validator;
     @Autowired public ResultBookListPrinter resultBookListPrinter;
 
@@ -28,6 +28,7 @@ public class GetBooksListService {
 
 
         if (errors.size() == 0) {
+            database.getListBooks();
             List<Book> resultList = switch (request.getSortingCriteria()) {
                 case 1 -> database.getListBooks().stream()
                         .sorted(Comparator.comparing(Book::getBookTitle))

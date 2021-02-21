@@ -1,19 +1,17 @@
 package internet_store.application.acceptancetests;
 
-import internet_store.application.config.AppConfig;
+import internet_store.application.config.SpringCoreConfiguration;
+import internet_store.application.core.DatabaseCleaner;
 import internet_store.application.core.requests.product.FindProductsRequest;
 import internet_store.application.core.requests.product.Ordering;
 import internet_store.application.core.requests.product.Paging;
 import internet_store.application.core.responses.product.FindProductsResponse;
 import internet_store.application.core.services.product.FindProductsService;
-import internet_store.application.database_cleaner.DatabaseCleaner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
-
 import static org.junit.Assert.*;
 
 @Profile("hibernate")
@@ -23,7 +21,7 @@ public class FindProductsAcceptanceTest {
 
     @Before
     public void before(){
-        appContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

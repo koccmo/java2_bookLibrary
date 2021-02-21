@@ -16,7 +16,6 @@ public class GetOrdersResponse extends CoreResponse {
 
     public GetOrdersResponse(List<CoreError> errors, List<Order> orders) {
         super(errors);
-        this.orders = orders;
     }
 
     public List<Order> getOrders() {

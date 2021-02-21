@@ -83,10 +83,10 @@ public class AdminMenu {
 
     public Map<Integer, SubjectMenu> subjectMenuSelect () {
         Map<Integer, SubjectMenu> menuMap = new HashMap<>();
-        menuMap.put(1, new CustomerMenu());
-        menuMap.put(2, new GuideMenu());
-        menuMap.put(3, new EventMenu());
-        menuMap.put(4, new TourMenu());
+        menuMap.put(1, new MenuForCustomer());
+        menuMap.put(2, new MenuForGuide());
+        menuMap.put(3, new MenuForEvent());
+        menuMap.put(4, new MenuForTour());
         menuMap.put(5, new ExitMenu());
         menuMap.put(6, new ExitMenu());
         return menuMap;

@@ -8,7 +8,7 @@ import team_VK.application.core.responses.BookSearchResponse;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.additional_functions.ResultBookListPrinter;
 import team_VK.application.core.services.validators.BookSearchServiceValidator;
-import team_VK.application.database.Database;
+import team_VK.application.database.BookRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class SearchBookByONECriteriaService {
 
     @Autowired
-    private Database database;
+    private BookRepository database;
     @Autowired private BookSearchServiceValidator validator;
     @Autowired public ResultBookListPrinter resultBookListPrinter;
 

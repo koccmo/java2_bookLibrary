@@ -4,7 +4,7 @@ import dental_clinic.core.requests.doctor.FillDoctorsWorkGraphicRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.doctor.FillDoctorsWorkGraphicResponse;
 import dental_clinic.core.validators.doctor.FillDoctorsWorkGraphicRequestValidator;
-import dental_clinic.database.in_memory.doctor.DoctorDatabase;
+import dental_clinic.core.database.doctor.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class FillDoctorsWorkGraphicService {
     @Autowired
     private FillDoctorsWorkGraphicRequestValidator fillDoctorsWorkGraphicRequestValidator;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     public FillDoctorsWorkGraphicResponse execute (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
 
@@ -31,7 +31,7 @@ public class FillDoctorsWorkGraphicService {
             return new FillDoctorsWorkGraphicResponse(errorList);
         }
 
-        if (!doctorDatabase.containsId(fillDoctorsWorkGraphicRequest.getId())) {
+        if (!doctorRepository.containsId(fillDoctorsWorkGraphicRequest.getId())) {
             return notExistingIdResponse(fillDoctorsWorkGraphicRequest);
         }
 
@@ -70,7 +70,7 @@ public class FillDoctorsWorkGraphicService {
     }
 
     private FillDoctorsWorkGraphicResponse workGraphicUpdated (FillDoctorsWorkGraphicRequest fillDoctorsWorkGraphicRequest) {
-        doctorDatabase.updateWorkGraphicForSpecificDate(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
+        doctorRepository.updateWorkGraphicForSpecificDate(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
                 fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());
         return new FillDoctorsWorkGraphicResponse(fillDoctorsWorkGraphicRequest.getId(), fillDoctorsWorkGraphicRequest.getDay(),
                 fillDoctorsWorkGraphicRequest.getStart(), fillDoctorsWorkGraphicRequest.getEnd());

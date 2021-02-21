@@ -12,19 +12,15 @@ import java.util.List;
 public class LoginRequestValidatorTest {
 	private LoginRequestValidator validator;
 	private LogInRequest request;
-	private User user;
 
 	@Before
 	public void setUp () {
 		validator = new LoginRequestValidator();
-		user = new User();
 	}
 
 	@Test
 	public void noUserNameTest () {
-		user.setSurname("aleksejevs");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -33,10 +29,7 @@ public class LoginRequestValidatorTest {
 
 	@Test
 	public void UserNameContainsDigitsTest () {
-		user.setName("sergejs342324");
-		user.setSurname("aleksejevs");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("sergejs342324", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -45,10 +38,7 @@ public class LoginRequestValidatorTest {
 
 	@Test
 	public void UserNameContainsSymbolsTest () {
-		user.setName("sergejs$#@$@#");
-		user.setSurname("aleksejevs");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("sergejs$#@$@#", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -57,9 +47,7 @@ public class LoginRequestValidatorTest {
 
 	@Test
 	public void noUserSurnameTest () {
-		user.setName("Sergejs");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("Sergejs", "");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -68,10 +56,7 @@ public class LoginRequestValidatorTest {
 
 	@Test
 	public void UserSurnameContainsDigitsTest () {
-		user.setName("sergejs");
-		user.setSurname("aleksejevs342324");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("Sergejs", "aleksejevs342324");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -80,10 +65,7 @@ public class LoginRequestValidatorTest {
 
 	@Test
 	public void LoginSurnameContainsSymbolsTest () {
-		user.setName("sergejs");
-		user.setSurname("aleksejevs$#@$@#");
-
-		request = new LogInRequest(user);
+		request = new LogInRequest("Sergejs", "aleksejevs$#@$@#");
 
 		List<CodeError> errors = validator.validate(request);
 

@@ -2,13 +2,15 @@ package internet_store.core.requests;
 
 public class Paging {
 
-    private Integer pageNumber;
-    private Integer pageSize;
+    public Integer pageNumber;
+    public Integer pageSize;
 
     public Paging(Integer pageNumber, Integer pageSize) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
     }
+
+    public Paging () { }
 
     public Integer getPageNumber() {
         return pageNumber;
@@ -29,5 +31,13 @@ public class Paging {
     public boolean isFilledOne(){
         return (pageNumber == null && pageSize != null ) ||
                 (pageNumber != null && pageSize == null);
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }

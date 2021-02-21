@@ -3,8 +3,10 @@ package lv.javaguru.app.console_ui.utility;
 import lv.javaguru.app.core.common.BaseFunc;
 import lv.javaguru.app.core.domain.Ticket;
 
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
@@ -40,11 +42,11 @@ public class TicketFiller {
 			return false;
 		}
 
-		LocalDate date = acquireDate(ticket);
-		if (date != null)
-			ticket.setDepartureDate(date);
-		else
-			return false;
+	//	Date date = acquireDate(ticket);
+	//	if (date != null)
+	//		ticket.setDepartureDate(date);
+	//	else
+	//		return false;
 
 
 		System.out.println("Enter seat: ");
@@ -166,7 +168,7 @@ public class TicketFiller {
 		return city;
 	}
 
-	public LocalDate acquireDate (Ticket ticket) {
+	public Date acquireDate (Ticket ticket) {
 		String input;
 		LocalDate date;
 
@@ -194,7 +196,9 @@ public class TicketFiller {
 				}
 			}
 		}
-		return date;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+
+		return Date.from(date.atStartOfDay(defaultZoneId).toInstant());
 	}
 
 	private boolean isInputValid (String input) {

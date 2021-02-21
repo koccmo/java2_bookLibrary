@@ -15,13 +15,11 @@ public class AddVisitValidator {
 
         List <CoreError> coreErrors = new ArrayList<>();
 
-        coreErrors.addAll(idValidationErrors(addVisitRequest.getPatientsId()));
+        coreErrors.addAll(idValidationErrors(addVisitRequest.getPatientId()));
 
         coreErrors.addAll(toothNumberValidationErrors(addVisitRequest.getToothNumber()));
 
         coreErrors.addAll(doctorValidationErrors(addVisitRequest));
-
-        coreErrors.addAll(manipulationIdsValidationErrors(addVisitRequest.getManipulationsIds()));
 
         return coreErrors;
     }
@@ -54,36 +52,11 @@ public class AddVisitValidator {
     }
 
     private List<CoreError> doctorValidationErrors (AddVisitRequest addVisitRequest) {
-        List<CoreError> coreErrors = new ArrayList<>();
-        if (addVisitRequest.getDoctor() == null) {
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
+        List <CoreError> coreErrors = new ArrayList<>();
+        if ((addVisitRequest.getDoctorId() == null) || (addVisitRequest.getDoctorId() < 1)){
+            coreErrors.add(new CoreError("id", "Not valid input of id"));
         }
-        String text = addVisitRequest.getDoctor().getName();
-        if (text == null || text.isEmpty()){
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
-        }
-        if (isIdAdded(text)) {
-            if (Long.parseLong(text) < 0)
-            coreErrors.add(new CoreError("doctor", "Doctor can't be empty"));
-            return coreErrors;
-        }
-        if (areTwoWordsEntered(text)) {
-            Doctor doctor = new Doctor(text.split(" ")[0], text.split(" ")[1]);
-            coreErrors.addAll(validateDoctorsPersonalData(doctor));
-            return coreErrors;
-        }
-        coreErrors.add(new CoreError("doctor", "Not id, not name surname"));
         return coreErrors;
-    }
-
-    private List<CoreError> manipulationIdsValidationErrors(List<Long> ids) {
-        List<CoreError> errors = new ArrayList<>();
-        for (Long id : ids) {
-            errors.addAll(idValidationErrors(id));
-        }
-        return errors;
     }
 
     private boolean isIdAdded(String text) {
@@ -103,10 +76,13 @@ public class AddVisitValidator {
         if (!doctor.getSurname().matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")){
             errors.add(new CoreError("doctor's surname", "Surname can contain only letters"));
         }
+        if (!doctor.getPhone().matches("\\d{8}|\\d{11}|\\d{12}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
+        }
         return errors;
     }
 
-    private boolean areTwoWordsEntered(String text) {
-        return text.split(" ").length == 2;
+    private boolean areThreeWordsEntered(String text) {
+        return text.split(" ").length == 3;
     }
 }

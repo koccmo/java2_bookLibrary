@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore_project">
+    <meta name="author" content="team_estore">
+    <title>eStore</title>
+</head>
+
+<body>
+<h3>Find Product By ID</h3>
+<table>
+    <tr>
+        <td>Product Id:</td>
+    </tr>
+    <tr>
+        <form action="/users/findUserById" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="submit" value="Find User"/>
+                <input type="reset" value="Clear"/></td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+<td th:if="${user != null}">
+    <table class="centered">
+        <tr>
+            <td>Id:</td>
+            <td>FirstName:</td>
+            <td>LastName:</td>
+            <td>Email:</td>
+            <td>Profile created at:</td>
+        </tr>
+
+        <tr>
+            <td><span th:text="${user.id}"/></td>
+            <td><span th:text="${user.firstName}"/></td>
+            <td><span th:text="${user.lastName}"/></td>
+            <td><span th:text="${user.email}"/></td>
+            <td><span th:text="${user.profileCreatedAt}"/></td>
+        </tr>
+    </table>
+</td>
+
+<br>
+    <form action="/users" method="get">
+        <input type="submit" value="Users page" name="Submit" />
+    </form>
+
+</body>
+</html>

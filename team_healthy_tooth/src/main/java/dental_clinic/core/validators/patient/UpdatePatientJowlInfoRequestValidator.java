@@ -17,7 +17,7 @@ public class UpdatePatientJowlInfoRequestValidator {
 
         coreErrors.addAll(idValidationErrors(updatePatientsJowlInfoRequest.getId()));
 
-        coreErrors.addAll(jowlInfoValidationErrors(updatePatientsJowlInfoRequest.getJowlInfo()));
+        coreErrors.addAll(jowlInfoValidationErrors(updatePatientsJowlInfoRequest));
 
         return coreErrors;
     }
@@ -30,15 +30,17 @@ public class UpdatePatientJowlInfoRequestValidator {
         return coreErrors;
     }
 
-    private List<CoreError> jowlInfoValidationErrors (Map<Integer, ToothStatus> jowlInfo) {
+    private List<CoreError> jowlInfoValidationErrors (UpdatePatientsJowlInfoRequest updatePatientsJowlInfoRequest) {
         List <CoreError> coreErrors = new ArrayList<>();
-        for (Integer key : jowlInfo.keySet()) {
-            if (!isValidToothNumber(key)) {
-                coreErrors.add(new CoreError("tooth number", "Not valid tooth number " + key));
-            }
-            if (!isValidToothStatus(jowlInfo.get(key))) {
-                coreErrors.add(new CoreError("tooth status", "Not valid tooth status for tooth number " + key));
-            }
+        if (updatePatientsJowlInfoRequest.getToothNumber() == null || updatePatientsJowlInfoRequest.getToothStatus() == null) {
+            coreErrors.add(new CoreError("toothInfo", "Can't be empty!"));
+            return coreErrors;
+        }
+        if (!isValidToothNumber(updatePatientsJowlInfoRequest.getToothNumber())) {
+            coreErrors.add(new CoreError("tooth number", "Not valid tooth number " + updatePatientsJowlInfoRequest.getToothNumber()));
+        }
+        if (!isValidToothStatus(updatePatientsJowlInfoRequest.getToothStatus())) {
+            coreErrors.add(new CoreError("tooth status", "Not valid tooth status for tooth number " + updatePatientsJowlInfoRequest.getToothStatus()));
         }
         return coreErrors;
     }
@@ -55,7 +57,19 @@ public class UpdatePatientJowlInfoRequestValidator {
     }
 
     private boolean isValidToothStatus (ToothStatus toothStatus) {
-        return !toothStatus.equals(ToothStatus.OTHER);
+        return toothStatus.equals(ToothStatus.KARIES) ||
+                toothStatus.equals(ToothStatus.PLOMBA) ||
+                toothStatus.equals(ToothStatus.SAKNE) ||
+                toothStatus.equals(ToothStatus.KRONITIS) ||
+                toothStatus.equals(ToothStatus.KLAMERS) ||
+                toothStatus.equals(ToothStatus.NAV_ZOBA) ||
+                toothStatus.equals(ToothStatus.FASETE) ||
+                toothStatus.equals(ToothStatus.NONEMAMA_PROTEZE) ||
+                toothStatus.equals(ToothStatus.KRONITIS_AR_FAS) ||
+                toothStatus.equals(ToothStatus.PLAST_KRONITIS) ||
+                toothStatus.equals(ToothStatus.TILTINI) ||
+                toothStatus.equals(ToothStatus.HEALTHY) ||
+                !toothStatus.equals(ToothStatus.OTHER);
     }
 
 }

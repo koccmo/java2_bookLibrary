@@ -1,15 +1,30 @@
 package dental_clinic.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="personalData")
 public class PersonalData {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private final String name;
-    private String surname;
-    private String phone;
-    private final String personalCode;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "personalCode")
+    private String personalCode;
+
+    public PersonalData() { }
 
     public PersonalData(String name, String surname, String phone, String personalCode){
         this.name = name;
@@ -26,6 +41,10 @@ public class PersonalData {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSurname() {
         return surname;
     }
@@ -36,6 +55,10 @@ public class PersonalData {
 
     public String getPersonalCode() {
         return personalCode;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
     }
 
     public void setId (Long id){
@@ -56,7 +79,6 @@ public class PersonalData {
         if (o == null || getClass() != o.getClass()) return false;
         PersonalData personalData = (PersonalData) o;
         return Objects.equals(personalCode, personalData.personalCode);
-
     }
 
     @Override

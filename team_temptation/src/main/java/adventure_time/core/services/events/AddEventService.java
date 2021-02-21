@@ -3,7 +3,7 @@ package adventure_time.core.services.events;
 import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.AddEventResponse;
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.database.events.EventRepository;
 //import adventure_time.dependencies.DIComponent;
 //import adventure_time.dependencies.DIDependency;
 import adventure_time.core.domain.Events;
@@ -16,7 +16,7 @@ import java.util.List;
 public class AddEventService {
 
     @Autowired
-    private EventDatabase databaseEvents;
+    private EventRepository databaseEvents;
     @Autowired private AddEventRequestValidator validator;
 
 //    public AddEventService(EventDatabase databaseEvents, AddEventRequestValidator validator) {

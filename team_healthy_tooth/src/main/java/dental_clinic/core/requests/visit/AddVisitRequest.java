@@ -1,53 +1,75 @@
 package dental_clinic.core.requests.visit;
 
-import dental_clinic.core.domain.Doctor;
-import dental_clinic.core.domain.Manipulation;
-import dental_clinic.core.domain.ToothStatus;
-import dental_clinic.core.domain.Visit;
+import dental_clinic.core.domain.*;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 public class AddVisitRequest {
 
-    private Long patientsId;
-    private Visit visit;
-    private List<Long> manipulationsIds;
+    private Long patientId;
+    private Long manipulationId;
+    private Long doctorId;
+    private Integer toothNumber;
+    private ToothStatus toothStatus;
+    private String comment;
 
+    public AddVisitRequest() { }
 
-    public AddVisitRequest(Long patientsId, Visit visit, List<Long> manipulationsIds){
-        this.patientsId = patientsId;
-        this.visit = visit;
-        this.manipulationsIds = manipulationsIds;
+    public AddVisitRequest(Long patientId, Long manipulationId, Long doctorId,
+                           Integer toothNumber, ToothStatus toothStatus, String comment) {
+        this.patientId = patientId;
+        this.manipulationId = manipulationId;
+        this.doctorId = doctorId;
+        this.toothNumber = toothNumber;
+        this.toothStatus = toothStatus;
+        this.comment = comment;
     }
 
-    public Long getPatientsId() {
-        return patientsId;
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public Long getManipulationId() {
+        return manipulationId;
+    }
+
+    public void setManipulationId(Long manipulationId) {
+        this.manipulationId = manipulationId;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public Integer getToothNumber() {
-        return visit.getToothNumber();
+        return toothNumber;
     }
 
-    public Optional<String> getComment() {
-        return visit.getComment();
+    public void setToothNumber(Integer toothNumber) {
+        this.toothNumber = toothNumber;
     }
 
     public ToothStatus getToothStatus() {
-        return visit.getToothStatus();
+        return toothStatus;
     }
 
-    public Doctor getDoctor() {
-        return visit.getDoctor();
+    public void setToothStatus(ToothStatus toothStatus) {
+        this.toothStatus = toothStatus;
     }
 
-    public List<Long> getManipulationsIds() {
-        return manipulationsIds;
+    public String getComment() {
+        return comment;
     }
 
-    public Date getDate() {
-        return visit.getDate();
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-
 }

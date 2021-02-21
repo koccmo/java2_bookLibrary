@@ -22,4 +22,5 @@ public class FindByProductIdResponse extends CoreResponse {
     public Optional<Product> getProductFoundById() {
         return productFoundById;
     }
+
 }

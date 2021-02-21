@@ -7,6 +7,7 @@ import internet_store.application.core.responses.CoreResponse;
 import java.util.List;
 
 public class FindProductsResponse extends CoreResponse {
+
     private final List<Product> products;
 
     public FindProductsResponse(List<Product> products, List<CoreError> errors) {

@@ -1,16 +1,37 @@
 package adventure_time.core.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table (name = "tickets")
 public class Tickets {
 
+    @Id
+    @Column (name = "id")
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column (name = "number", unique = true, nullable = false)
     private String number;
+
+    @ManyToOne
+    @JoinColumn (name = "tour", nullable = false)
     private Tours tour;
+
+    @ManyToOne
+    @JoinColumn (name = "customer", nullable = false)
     private Customers customer;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "issue_date", nullable = false)
     private Date issueDate;
+
+    @Column (name = "validity")
     private Boolean validity;
+
+    public Tickets() {}
 
     public Tickets(String number, Tours tour, Customers customer) {
         this.number = number;

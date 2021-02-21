@@ -1,13 +1,13 @@
 package dental_clinic.core.services.patient;
 
-import dental_clinic.core.domain.Patient;
+import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.Ordering;
 import dental_clinic.core.requests.Paging;
 import dental_clinic.core.requests.patient.SearchPatientRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.SearchPatientResponse;
 import dental_clinic.core.validators.patient.SearchPatientRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,8 @@ public class SearchPatientService {
     private boolean pagingEnabled;
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
+
     @Autowired private SearchPatientRequestValidator searchPatientRequestValidator;
 
     public SearchPatientResponse execute (SearchPatientRequest searchPatientRequest){
@@ -54,7 +55,7 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchByPersonalCodeIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List <Patient> patients = patientDatabase.findPatientsByPersonalCode(searchPatientRequest.getInputForSearch());
+        List <PersonalData> patients = patientRepository.findPatientsByPersonalCode(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with personal code " +
                     searchPatientRequest.getInputForSearch()));
@@ -67,7 +68,7 @@ public class SearchPatientService {
 
     private SearchPatientResponse searchBySurnameIsProvided(SearchPatientRequest searchPatientRequest){
         List<CoreError>errors = new ArrayList<>();
-        List<Patient>patients = patientDatabase.findPatientsBySurname(searchPatientRequest.getInputForSearch());
+        List<PersonalData>patients = patientRepository.findPatientsBySurname(searchPatientRequest.getInputForSearch());
         if (patients.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain patient with surname " +
                     searchPatientRequest.getInputForSearch()));
@@ -78,7 +79,7 @@ public class SearchPatientService {
         return new SearchPatientResponse(patients);
     }
 
-    private List<Patient> order(List<Patient> patients, Ordering ordering) {
+    private List<PersonalData> order(List<PersonalData> patients, Ordering ordering) {
         if (orderingEnabled)
         if (ordering.filledBoth()){
             if (ordering.getOrderBy().equals("name")){
@@ -90,31 +91,31 @@ public class SearchPatientService {
         return patients;
     }
 
-    private List<Patient> sortByName(List<Patient> patients, Ordering ordering){
+    private List<PersonalData> sortByName(List<PersonalData> patients, Ordering ordering){
         if (ordering.getOrderDirection().equals("ASC")){
             return patients.stream()
-                    .sorted(Comparator.comparing(patient -> patient.getPersonalData().getName()))
+                    .sorted(Comparator.comparing(patient -> patient.getName()))
                     .collect(Collectors.toList());
         }else{
             return patients.stream()
-                    .sorted((o1,o2) -> o2.getPersonalData().getName().compareTo(o1.getPersonalData().getName()))
+                    .sorted((o1,o2) -> o2.getName().compareTo(o1.getName()))
                     .collect(Collectors.toList());
         }
     }
 
-    private List<Patient> sortBySurname(List<Patient> patients, Ordering ordering){
+    private List<PersonalData> sortBySurname(List<PersonalData> patients, Ordering ordering){
         if (ordering.getOrderDirection().equals("ASC")){
             return patients.stream()
-                    .sorted(Comparator.comparing(patient -> patient.getPersonalData().getSurname()))
+                    .sorted(Comparator.comparing(patient -> patient.getSurname()))
                     .collect(Collectors.toList());
         }else{
             return patients.stream()
-                    .sorted((o1,o2) -> o2.getPersonalData().getSurname().compareTo(o1.getPersonalData().getSurname()))
+                    .sorted((o1,o2) -> o2.getSurname().compareTo(o1.getSurname()))
                     .collect(Collectors.toList());
         }
     }
 
-    private List<Patient> paging(List<Patient> patients, Paging paging) {
+    private List<PersonalData> paging(List<PersonalData> patients, Paging paging) {
         if (pagingEnabled)
         if (paging != null) {
             Integer skip = (paging.getPageNumber() - 1) * paging.getPageSize();

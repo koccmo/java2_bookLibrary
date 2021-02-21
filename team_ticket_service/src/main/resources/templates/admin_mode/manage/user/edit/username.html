@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Ticket service demo project">
+    <meta name="author" content="S. Aleksejevs">
+    <title>Ticket service || Edit username</title>
+</head>
+
+<body>
+
+<h3>Edit user's username</h3>
+
+<table>
+    <tr>
+        <td>User ID:</td>
+        <td>New user's username:</td>
+    </tr>
+
+    <tr>
+        <form action="/admin_mode/manage/user/edit/username" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="text" th:field="${request.userNewUsername}"/></td>
+
+            <td>
+                <input type="submit" value="Edit"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+</table>
+
+<a href="/admin_mode/manage/user/editUser">Back to menu</a>
+
+</body>
+
+</html>

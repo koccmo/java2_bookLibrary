@@ -1,7 +1,8 @@
 package electronic_library.core.services.validators;
 
-import electronic_library.core.requests.DeleteBookByTitleRequest;
+import electronic_library.core.requests.book.DeleteBookByTitleRequest;
 import electronic_library.core.responses.CoreError;
+import electronic_library.core.services.book.validators.DeleteBookByTitleValidator;
 import org.junit.Before;
 import org.junit.Test;
 

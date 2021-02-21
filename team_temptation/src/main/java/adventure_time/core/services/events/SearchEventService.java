@@ -5,7 +5,7 @@ import adventure_time.core.requests.Paging;
 import adventure_time.core.requests.events.SearchEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.SearchEventResponse;
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.database.events.EventRepository;
 import adventure_time.core.domain.Events;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class SearchEventService {
 
 //    @DIDependency
     @Autowired
-    private EventDatabase database;
+    private EventRepository database;
 //    @DIDependency
     @Autowired private SearchEventRequestValidator validator;
 

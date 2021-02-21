@@ -1,28 +1,29 @@
 package internet_store.core.service.product.paging;
 
 import internet_store.core.domain.Product;
-import internet_store.persistence.ProductRepository;
+import internet_store.core.persistence.ProductRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductsPagingService {
     private final int PAGE_OFFSET = 1;
     private final int FIRST_PAGE = 1;
     private final int START_FROM_FIRST_RECORD = 0;
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @Getter
     @Setter
     @Value("${product-records-on-page}")
     private int recordsCountOnPage;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -38,7 +39,6 @@ public class ProductsPagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = recordsCountOnPage;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
         listOnePage = productRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
@@ -49,14 +49,14 @@ public class ProductsPagingService {
 
     public void nextPage(boolean pagingDirection) {
         if (pagingDirection) {
-            nextPage(productRepository.count());
+            nextPage();
         } else {
             prevPage();
         }
     }
 
-    private void nextPage(long allRecordsNumber) {
-        if (currentPage + PAGE_OFFSET == pagesQuantity) {
+    private void nextPage() {
+        if (currentPage + PAGE_OFFSET >= pagesQuantity) {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
             isLastPage = true;
@@ -64,7 +64,6 @@ public class ProductsPagingService {
         } else {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
-            endRecordOffset += recordsCountOnPage;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -72,10 +71,9 @@ public class ProductsPagingService {
     }
 
     private void prevPage() {
-        if (currentPage - PAGE_OFFSET == FIRST_PAGE) {
+        if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = recordsCountOnPage;
             isFirstPage = true;
             isLastPage = false;
         } else {

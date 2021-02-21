@@ -25,16 +25,40 @@ CREATE TABLE IF NOT EXISTS `products` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
-CREATE TABLE IF NOT EXISTS `customer_order` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `shopping_cart`  (
+  `shopping_cart_id` BIGINT  NOT NULL AUTO_INCREMENT,
   `customer_id` BIGINT NOT NULL,
-  `product_id` BIGINT NOT NULL,
-    `price` INTEGER(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`),
-  FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
-  )
+  `sum_total` INTEGER(100) NOT NULL,
+  PRIMARY KEY (`shopping_cart_id`),
+  FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`)
+)
 ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+
+CREATE TABLE IF NOT EXISTS `shopping_cart_item` (
+    `shopping_cart_item_id` BIGINT NOT NULL AUTO_INCREMENT,
+    `shopping_cart_id` BIGINT NOT NULL,
+    `product_id` BIGINT NOT NULL,
+    `quantity` INTEGER(100) NOT NULL,
+    `price` INTEGER(10000) NOT NULL,
+    PRIMARY KEY (`shopping_cart_item_id`),
+    FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart`(`shopping_cart_id`),
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+
+
+CREATE TABLE IF NOT EXISTS `order_item` (
+    `order_item_id` BIGINT NOT NULL AUTO_INCREMENT,
+    `product_id` BIGINT NOT NULL,
+    `shopping_cart_id` BIGINT NOT NULL,
+    `itemQuantity` INTEGER (100) NOT NULL,
+    PRIMARY KEY (`order_item_id`),
+    FOREIGN KEY (`shopping_cart_id`) REFERENCES `shopping_cart`(`shopping_cart_id`),
+    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`)
+)
+ENGINE = innoDB
 AUTO_INCREMENT = 1;
 
 

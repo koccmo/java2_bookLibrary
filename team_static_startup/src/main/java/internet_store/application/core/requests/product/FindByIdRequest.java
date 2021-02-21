@@ -4,6 +4,9 @@ public class FindByIdRequest {
 
     private String productId;
 
+    public FindByIdRequest() {
+    }
+
     public FindByIdRequest(String productId) {
         this.productId = productId;
     }
@@ -12,4 +15,7 @@ public class FindByIdRequest {
         return productId;
     }
 
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 }

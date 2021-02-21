@@ -5,10 +5,9 @@ import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.AddFlightRequest;
-import lv.javaguru.app.core.response.FlightAddResponse;
+import lv.javaguru.app.core.response.AddFlightResponse;
 import lv.javaguru.app.core.services.validators.AddFlightRequestValidator;
 import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,20 +17,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FlightAddServiceTest {
 	@Mock
 	private Database flights;
-	@Mock
-	private SqlDatabase d;
+	//@Mock
+	//private JdbcDatabase d;
 	@Mock
 	private AddFlightRequestValidator validator;
 	@InjectMocks
@@ -43,40 +40,42 @@ public class FlightAddServiceTest {
 
 	@Before
 	public void setUp () {
-		user = new User("Jimbo", "Johnson");
+		this.user = new User("Jimbo", "Johnson");
 
-		ticket = new Ticket("Riga", "Paphos", LocalDate.now().plusMonths(1), "155d");
-		ticket.setOriginCountry("Latvia");
-		ticket.setDestinationCountry("Cyprus");
-
-		flight = new Flight(user, ticket);
+		this.ticket = new Ticket();
+		this.ticket.setOriginCountry("Latvia");
+		this.ticket.setOriginCity("Riga");
+		this.ticket.setDestinationCountry("United Kingdom");
+		this.ticket.setDestinationCity("London");
+		this.ticket.setDepartureDate(new Date());
+		this.ticket.setSeat("1001");
 	}
 
 	@Test
 	@Ignore
 	public void shouldReturnNoErrors () {
-		AddFlightRequest request = new AddFlightRequest(flight);
+		AddFlightRequest request = new AddFlightRequest(user, ticket);
 
 		List<CodeError> errors = new ArrayList<>();
 		Mockito.when(validator.validate(request)).thenReturn(errors);
 
-		FlightAddResponse response = service.execute(request);
+		AddFlightResponse response = service.execute(request);
 
 		assertFalse(response.hasErrors());
 	}
 
 	@Test
 	public void shouldReturnUserNoNameError () {
-		user.setName(null);
+		user.setUsername(null);
 
-		AddFlightRequest request = new AddFlightRequest(flight);
+		AddFlightRequest request = new AddFlightRequest(user, ticket);
 
 		List<CodeError> errors = new ArrayList<>();
-		errors.add(new CodeError("User Name","Shouldn't be null or empty!"));
+		errors.add(new CodeError("User Name", "Shouldn't be null or empty!"));
 
 		Mockito.when(validator.validate(request)).thenReturn(errors);
 
-		FlightAddResponse response = service.execute(request);
+		AddFlightResponse response = service.execute(request);
 
 		assertTrue(response.hasErrors());
 		Mockito.verifyNoInteractions(flights);

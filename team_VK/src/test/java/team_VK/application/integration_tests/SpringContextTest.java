@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import team_VK.application.ApplicationContext;
-import team_VK.application.configuration.LibraryConfig;
+import team_VK.application.configuration.SpringCoreConfiguration;
 
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {LibraryConfig.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 
 public class SpringContextTest {
 

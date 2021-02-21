@@ -1,19 +1,42 @@
 package adventure_time.core.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table (name = "tours")
 public class Tours {
 
     private final static Long TWELVE_HOURS = 43200000L;
 
+    @Id
+    @Column (name = "id")
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "event", nullable = false)
     private Events event;       // foreign key
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "release_date", nullable = false)
     private Date releaseDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "starting_date", nullable = false)
     private Date startingDate;
+
+    @Column (name = "ticket_coast", nullable = false)
     private Double ticketCoast;
+
+    @Column (name = "completed")
     private Boolean completed;
+
+    @Column (name = "sold_tickets")
     private Integer soldTickets;
+
+    public Tours () {}
 
     public Tours(Events event, Date releaseDate, Date startingDate, Double ticketCoast) {
         this.event = event;

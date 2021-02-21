@@ -1,9 +1,10 @@
 package electronic_library.core.services;
 
-import electronic_library.core.database.ElectronicLibraryRepository;
+import electronic_library.core.database.book.ElectronicLibraryRepository;
 import electronic_library.core.domain.Book;
-import electronic_library.core.requests.GetAllBooksRequest;
-import electronic_library.core.responses.GetAllBooksResponse;
+import electronic_library.core.requests.book.GetAllBooksRequest;
+import electronic_library.core.responses.book.GetAllBooksResponse;
+import electronic_library.core.services.book.GetAllBooksService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

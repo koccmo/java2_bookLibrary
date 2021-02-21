@@ -1,7 +1,7 @@
 package java2.application_target_list.console_ui;
 
 import java2.application_target_list.console_ui.actions.*;
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.console_ui.actions.board.*;
 import java2.application_target_list.console_ui.actions.target.*;
 import java2.application_target_list.console_ui.actions.user.*;
@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Menu {
 
     private Map<Integer, UIAction> menuNumberToUIActionMap;
-    private static final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+    private static final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
 
 
     @Autowired

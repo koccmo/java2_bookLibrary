@@ -5,7 +5,7 @@ import dental_clinic.core.responses.ContainsDatabaseIdResponse;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.services.ContainsDatabaseIdService;
 import dental_clinic.core.validators.ContainsDatabaseIdValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class ContainsDatabaseIdServiceTest {
 
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private ContainsDatabaseIdValidator containsDatabaseIdValidator;
     @InjectMocks
@@ -53,7 +53,7 @@ public class ContainsDatabaseIdServiceTest {
         errors.add(expectedError);
 
         Mockito.when(containsDatabaseIdValidator.validate(containsDatabaseIdRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(7L)).thenReturn(false);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(7L)).thenReturn(false);
         ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);
 
         assertTrue(containsDatabaseIdResponse.hasErrors());
@@ -66,7 +66,7 @@ public class ContainsDatabaseIdServiceTest {
         ContainsDatabaseIdRequest containsDatabaseIdRequest = new ContainsDatabaseIdRequest(7L);
 
         Mockito.when(containsDatabaseIdValidator.validate(containsDatabaseIdRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(7L)).thenReturn(true);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(7L)).thenReturn(true);
         ContainsDatabaseIdResponse containsDatabaseIdResponse = containsDatabaseIdService.execute(containsDatabaseIdRequest);
 
         assertTrue(containsDatabaseIdResponse.getId().equals(7L));

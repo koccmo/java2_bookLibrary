@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Dental Clinic demo project">
+        <meta name="author" content="Valeria">
+        <title>Dental clinic Healthy tooth</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                color: #800040;
+            }
+                page {
+                width: 900px;
+                margin: 0 auto;
+            }
+            #title {
+                height: 100px;
+                background-color: #ffe6f2;
+                font-family: "Brush Script MT", "Courier New", serif;
+                font-size: 4em;
+                color: white;
+                text-shadow: 2px 2px 5px #ffffff;
+                text-align: center;
+            }
+            #content{
+                float: left;
+                width: 1950px;
+                height: 80px;
+                background-color: #ffe6f2;
+            }
+            #footer{
+                overflow: hidden;
+                background-color: #660033;
+            }
+            #menu {
+                float: left;
+                width: 98%;
+                margin: 20px 1.15%;
+                height: 900px;
+                background-color: #ffe6f2;
+                font-family: "Brush Script MT", "Courier New", serif;
+                font-size: 2em;
+                text-align: center;
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="title">
+            <h3>Get manipulation's list</h3>
+        </div>
+
+        <div id="menu">
+            </br>
+            <table>
+                <tr>
+                    <td>Manipulation type:</td>
+                    <td>Price:</td>
+                    <td>Is active:</td>
+                </tr>
+
+                <td th:if="${list != null}">
+                    <tr th:each="manipulation : ${list}">
+                        <td th:text="${manipulation.manipulationType}" />
+                        <td th:text="${manipulation.price}" />
+                        <td th:text="${manipulation.isActive}" />
+                    </tr>
+                </td>
+
+            </table>
+
+            <form action="/" method="get">
+                <input type="submit" value="Go to main page" name="Submit" />
+            </form>
+        </div>
+    </body>
+
+</html>

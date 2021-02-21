@@ -1,8 +1,9 @@
 package lv.estore.app.core.validators;
 
 import lv.estore.app.core.errors.CoreError;
-import lv.estore.app.core.request.Ordering;
-import lv.estore.app.core.request.Paging;
+import lv.estore.app.core.request.products.Ordering;
+import lv.estore.app.core.request.products.Paging;
+import lv.estore.app.core.validators.common_validation_rules.ValidationRules;
 import lv.estore.app.utils.ValidationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,14 +30,14 @@ public class ValidationRulesTest {
     @Test
     public void testValidateId_EmptyError() {
         Mockito.when(utils.isValidId(any())).thenReturn(true);
-        Optional<CoreError> error = rules.validateId("1");
-        assertTrue(Optional.empty().equals(error));
+        Optional<CoreError> error = rules.validateId(any(),"1");
+        assertEquals(Optional.empty(), error);
     }
 
     @Test
     public void testValidateId_ErrorPresent() {
         Mockito.when(utils.isValidId(any())).thenReturn(false);
-        Optional<CoreError> error = rules.validateId( "");
+        Optional<CoreError> error = rules.validateId("Id", "");
         assertEquals("Id", error.get().getField());
         assertEquals("Value should be valid", error.get().getMessage());
     }
@@ -45,14 +46,14 @@ public class ValidationRulesTest {
     @Test
     public void testValidateForEmptyField_ErrorAbsent() {
         Mockito.when(utils.isEmptyField(any())).thenReturn(false);
-        Optional<CoreError> error = rules.validateName("");
-        assertTrue(Optional.empty().equals(error));
+        Optional<CoreError> error = rules.validateTextField(any(),"");
+        assertEquals(Optional.empty(), error);
     }
 
     @Test
     public void testValidateForEmptyField_ErrorPresent() {
         Mockito.when(utils.isEmptyField(any())).thenReturn(true);
-        Optional<CoreError> error = rules.validateId( "");
+        Optional<CoreError> error = rules.validateId("Id", "");
         assertEquals("Id", error.get().getField());
         assertEquals("Field should not be empty", error.get().getMessage());
     }
@@ -68,7 +69,7 @@ public class ValidationRulesTest {
     public void testValidatePrice_ErrorPresent() {
         Mockito.when(utils.isValidPrice(any())).thenReturn(false);
         Optional<CoreError> error = rules.validatePrice("1");
-        assertEquals("Price", error.get().getField());
+        assertEquals("productPrice", error.get().getField());
         assertEquals("Field should be valid", error.get().getMessage());
     }
 
@@ -77,7 +78,7 @@ public class ValidationRulesTest {
         Mockito.when(utils.isValidOrderBy(any())).thenReturn(true);
         Ordering ordering = new Ordering("", "");
         Optional<CoreError> error = rules.validateOrderBy(ordering);
-        assertTrue(Optional.empty().equals(error));
+        assertEquals(Optional.empty(), error);
     }
 
     @Test

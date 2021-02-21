@@ -12,7 +12,7 @@ import team_VK.application.core.responses.AddClientResponse;
 import team_VK.application.core.responses.CoreError;
 import team_VK.application.core.services.main_menu_services.AddClientService;
 import team_VK.application.core.services.validators.AddClientServiceValidator;
-import team_VK.application.database.DatabaseClients;
+import team_VK.application.database.ClientsRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import java.util.List;
 public class AddClientServiceTest  {
 
     @Mock private AddClientServiceValidator subject;
-    @Mock private DatabaseClients databaseClient;
+    @Mock private ClientsRepository databaseClient;
     @InjectMocks AddClientService service;
 
 

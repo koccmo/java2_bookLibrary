@@ -9,13 +9,10 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="product_title" type="VARCHAR(255)">
+            <column name="product_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="quantity" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="price" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
             <column name="sum" type="DECIMAL(10,2)">
@@ -24,6 +21,17 @@
             <column name="deleted" type="BOOLEAN" defaultValue="false">
                 <constraints nullable="false"/>
             </column>
+            <column name="ordered" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+        <rollback>
+            <dropTable schemaName="store"
+                       tableName="cart"
+                       cascadeConstraints="true"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>

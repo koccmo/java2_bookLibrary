@@ -1,100 +1,48 @@
 package lv.javaguru.app.core.domain;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@Entity
+@Table(name = "users")
 public class User {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	//private final String login;
-	//private String password;
-	private String name;
-	private String surname;
-	private PersonType personType;
 
-//private User (String login, String password) {
-//	this.login = login;
-//	this.password = password;
-//	this.personType = PersonType.CLIENT;
-//}
+	@Column(name = "username", nullable = false)
+	private String username;
 
-	//public User (String login, String password, String name, String surname) {
-//	this(login, password);
-//	this.name = name;
-//	this.surname = surname;
-//}
-	public User () {
+	@Column(name = "password", nullable = false)
+	private String password;
+
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
+
+
+	public User (String username, String password) {
+		this.username = username.trim();
+		this.password = password.trim();
+		this.enabled = true;
 	}
 
-	public User (String name) {
-		this.name = name;
-	}
-
-	public User (String name, String surname) {
-		this.name = name.trim();
-		this.surname = surname.trim();
-		this.personType = PersonType.CLIENT;
-	}
-
-	//
-	public User (String name, String surname, PersonType personType) {
-		this(name, surname);
-		this.personType = personType;
-	}
-	public User (Long id, String name, String surname, PersonType personType) {
-		this(name, surname, personType);
-		this.id = id;
-	}
-
-	public PersonType getPersonType () {
-		return personType;
-	}
-
-	public void setPersonType (PersonType personType) {
-		this.personType = personType;
-	}
-
-	public Long getId () {
-		return id;
-	}
-
-	public void setId (Long id) {
-		this.id = id;
-	}
-
-
-	@Override
-	public boolean equals (Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		User user = (User) o;
-		return id.equals(user.id) && name.equals(user.name) && surname.equals(user.surname);
-	}
-
-	@Override
-	public int hashCode () {
-		return Objects.hash(id, name, surname);
-	}
 
 	@Override
 	public String toString () {
 		return "ID: " + id +
-				", " + name +
-				", " + surname;
+				", " + username +
+				", " + password;
 	}
 
-	public String getName () {
-		return name;
-	}
 
-	public void setName (String name) {
-		this.name = name;
-	}
-
-	public String getSurname () {
-		return surname;
-	}
-
-	public void setSurname (String surname) {
-		this.surname = surname;
-	}
 }

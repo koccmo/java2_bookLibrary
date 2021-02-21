@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Team Static Startup">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Internet Store Main Menu</title>
+</head>
+
+<body>
+
+<div class="top-nav">
+    <img class="logo" src="images/logo.jpg" alt="logo">
+    <h1 class="top-nav-text">Static Startup Internet Store</h1>
+</div>
+
+<table style="width:70%; align-content: center">
+    <tr class="program-menu-title">
+        <th colspan="5">
+            <h3>Program Menu</h3>
+            <img class="menu-icons" src="icons/menu.png" alt="menu-icon">
+        </th>
+    </tr>
+    <tr class="program-object-type">
+        <th>
+            Product<br>
+            <img class="menu-icons" src="icons/open-box.png" alt="product-icon">
+        </th>
+        <th>
+            Customer<br>
+            <img class="menu-icons" src="icons/user.png" alt="customer-icon">
+        </th>
+        <th>
+            Shopping Cart<br>
+            <img class="menu-icons" src="icons/shopping-cart.png" alt="shopping-cart-icon">
+        </th>
+        <th>
+            Shopping Cart Item<br>
+            <img class="menu-icons" src="icons/shopping-items.png" alt="shopping-cart-item-icon">
+        </th>
+        <th>
+            Order<br>
+            <img class="menu-icons" src="icons/checklist.png" alt="order-icon">
+        </th>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/addProduct">Add</a></td>
+        <td><a class="program-object-action" href="/customer/addCustomer">Add</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/addShoppingCart">Add</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/addShoppingCartItem">Add</a></td>
+        <td><a class="program-object-action" href="/order/addOrder">Add</a></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/findProductById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/customer/findCustomerById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/findCartById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/searchCartItemById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/order/findOrderById">Find by ID</a></td>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/showAllProducts">Show all</a></td>
+        <td><a class="program-object-action" href="/customer/showAllCustomers">Show all</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/showAllShoppingCarts">Show all</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/showAllShoppingCartItems">Show all</a></td>
+        <td><a class="program-object-action" href="/order/showAllOrders">Show all</a></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/SearchProductBy">Find by criteria</a></td>
+        <td><a class="program-object-action" href="/customer/findCustomerByFirstName">Find by First Name</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/changeProductName">Change Name</a></td>
+        <td><a class="program-object-action" href="/customer/changeCustomerFirstName">Change First Name</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/deleteProduct">Delete by ID</a></td>
+        <td><a class="program-object-action" href="/customer/deleteCustomer">Delete by ID</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/deleteProductByProduct">Delete by Product</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/deleteProductByName">Delete by Name</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="background-color: #ffcccc"><a class="program-object-action" href="/exitProgram">Exit Program</a></td>
+    </tr>
+
+</table>
+
+</body>
+
+</html>

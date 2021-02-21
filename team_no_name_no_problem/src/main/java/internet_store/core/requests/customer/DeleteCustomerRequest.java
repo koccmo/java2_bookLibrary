@@ -4,6 +4,8 @@ public class DeleteCustomerRequest {
 
     private Long id;
 
+    public DeleteCustomerRequest () {}
+
     public DeleteCustomerRequest(Long id){
         this.id = id;
     }
@@ -12,4 +14,7 @@ public class DeleteCustomerRequest {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

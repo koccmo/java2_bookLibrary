@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class StringTypeValidatorTest {
-    StringTypeValidator stringValidator = new StringTypeValidator();
+    private final StringTypeValidator stringValidator = new StringTypeValidator();
 
     @Test
     public void shouldReturnNoError() {
@@ -20,7 +20,7 @@ public class StringTypeValidatorTest {
     public void shouldReturnError_NullString() {
         List<CoreError> errors = stringValidator.validate(null);
         assertEquals(1, errors.size());
-        assertEquals("Input error", errors.get(0).getField());
+        assertEquals("error", errors.get(0).getField());
         assertEquals("Empty field", errors.get(0).getMessage());
     }
 
@@ -28,7 +28,7 @@ public class StringTypeValidatorTest {
     public void shouldReturnError_EmptyString() {
         List<CoreError> errors = stringValidator.validate("");
         assertEquals(1, errors.size());
-        assertEquals("Input error", errors.get(0).getField());
+        assertEquals("error", errors.get(0).getField());
         assertEquals("Empty field", errors.get(0).getMessage());
     }
 }

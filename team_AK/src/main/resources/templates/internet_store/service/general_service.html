@@ -30,17 +30,17 @@
         padding-top: 60px;
         }
 
-
-
     </style>
 </head>
 
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
     <div class="container">
-        <a class="navbar-brand" href="/">EStore Internet Shop</a>
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,21 +48,24 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
+                    <a class="nav-link" href="/"><b>Home</b>
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart">Cart</a>
+                    <a class="nav-link" href="/add_product_for_cart"><b>Cart</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
+                    <a class="nav-link" href="#"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact">Contact</a>
+                    <a class="nav-link" href="#"><b>Contact</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="service">Service</a>
+                    <a class="nav-link" href="/service"><b>Service</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
                 </li>
             </ul>
         </div>
@@ -96,8 +99,7 @@
                     </ul>
                 <li><span class="caret">Order Control</span>
                     <ul class="nested">
-                        <a class="nav-link" href="view_order">View order</a>
-                        <a class="nav-link" href="update_order">Update order status</a>
+                        <a class="nav-link" href="order_control">Update order status</a>
                     </ul>
             </ul>
         </div>
@@ -131,6 +133,17 @@
                             </button>
                         </div>
                         <p></p>
+                        <label style="margin-bottom:0rem !important;">Set number of records for order table</label>
+                        <div class="input-group-append">
+                            <input name="order_on_page" style="width:280px" type="number" required
+                                   class="form-control form-control-sm" value="1"
+                                   min="1" th:value="${order_page_quantity}"/>
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                    formmethod="post" formaction="/set_order_on_page"
+                                    value="order_on_page">Set
+                            </button>
+                        </div>
+                        <p></p>
                         <label style="margin-bottom:0rem !important;">Set tax rate</label>
                         <div class="input-group-append">
                             <input name="tax_rate" style="width:280px" type="number" required
@@ -150,6 +163,17 @@
                             <button type="submit" class="btn btn-primary btn-sm"
                                     formmethod="post" formaction="/currency"
                                     value="currency">Set
+                            </button>
+                        </div>
+                        <p></p>
+                        <label style="margin-bottom:0rem !important;">Set order number</label>
+                        <div class="input-group-append">
+                            <input name="orderNumber" style="width:280px" type="number" min="1" required
+                                   value="1" class="form-control form-control-sm"
+                                   th:value="${orderNumber}"/>
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                    formmethod="post" formaction="/order_number"
+                                    value="orderNumber">Set
                             </button>
                         </div>
                     </form>

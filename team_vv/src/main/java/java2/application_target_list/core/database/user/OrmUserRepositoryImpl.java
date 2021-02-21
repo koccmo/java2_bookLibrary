@@ -1,5 +1,6 @@
 package java2.application_target_list.core.database.user;
 
+import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -88,5 +90,15 @@ public class OrmUserRepositoryImpl implements UserRepository{
             }
         }
         return false;
+    }
+
+    @Override
+    public Optional<User> getById(Long id) {
+        User user = sessionFactory.getCurrentSession().get(User.class, id);
+        if (user == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(user);
+        }
     }
 }

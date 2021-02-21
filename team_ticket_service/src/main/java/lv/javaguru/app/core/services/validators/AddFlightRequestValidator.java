@@ -4,8 +4,8 @@ import lv.javaguru.app.core.request.AddFlightRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,19 +16,19 @@ public class AddFlightRequestValidator {
 		List<CodeError> errorList = new ArrayList<>();
 
 		errorList.addAll(validateTicketUserName(request));
-		errorList.addAll(validateTicketUserSurname(request));
+		//errorList.addAll(validateTicketUserSurname(request));
 
 		errorList.addAll(validateTicketOriginCountry(request));
 		errorList.addAll(validateTicketOriginCity(request));
 		errorList.addAll(validateTicketDestinationCountry(request));
 		errorList.addAll(validateTicketDestinationCity(request));
-		errorList.addAll(validateTicketDepartureDate(request));
+	//	errorList.addAll(validateTicketDepartureDate(request));
 
 		return errorList;
 	}
 
 	private List<CodeError> validateTicketUserName (AddFlightRequest request) {
-		String userName = request.getFlight().getUser().getName();
+		String userName = request.getUser().getUsername();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketUserSurname (AddFlightRequest request) {
-		String userSurname = request.getFlight().getUser().getSurname();
+		String userSurname = request.getUser().getPassword();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketOriginCountry (AddFlightRequest request) {
-		String originCountry = request.getFlight().getTicket().getOriginCountry();
+		String originCountry = request.getTicket().getOriginCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketOriginCity (AddFlightRequest request) {
-		String originCity = request.getFlight().getTicket().getOriginCity();
+		String originCity = request.getTicket().getOriginCity();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -98,7 +98,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDestinationCountry (AddFlightRequest request) {
-		String destinationCountry = request.getFlight().getTicket().getDestinationCountry();
+		String destinationCountry = request.getTicket().getDestinationCountry();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -115,7 +115,7 @@ public class AddFlightRequestValidator {
 	}
 
 	private List<CodeError> validateTicketDestinationCity (AddFlightRequest request) {
-		String destinationCity = request.getFlight().getTicket().getDestinationCity();
+		String destinationCity = request.getTicket().getDestinationCity();
 
 		List<CodeError> errors = new ArrayList<>();
 
@@ -131,24 +131,24 @@ public class AddFlightRequestValidator {
 		return errors;
 	}
 
-	private List<CodeError> validateTicketDepartureDate (AddFlightRequest request) {
-		LocalDate date = request.getFlight().getTicket().getDepartureDate();
+	//private List<CodeError> validateTicketDepartureDate (AddFlightRequest request) {
+	//	Date date = request.getTicket().getDepartureDate();
+//
+	//	List<CodeError> errors = new ArrayList<>();
+//
+	//	Optional<CodeError> codeError = dateIsNotNullOrEmpty(date, "Departure date");
+	//	if (codeError.isPresent()) {
+	//		errors.add(codeError.get());
+	//		return errors;
+	//	}
+//
+	//	isDateAfter(date, "Departure date").ifPresent(errors::add);
+//
+	//	return errors;
+	//}
 
-		List<CodeError> errors = new ArrayList<>();
 
-		Optional<CodeError> codeError = dateIsNotNullOrEmpty(date, "Departure date");
-		if (codeError.isPresent()) {
-			errors.add(codeError.get());
-			return errors;
-		}
-
-		isDateAfter(date, "Departure date").ifPresent(errors::add);
-
-		return errors;
-	}
-
-
-	private Optional<CodeError> dateIsNotNullOrEmpty (LocalDate dateRequest, String field) {
+	private Optional<CodeError> dateIsNotNullOrEmpty (Date dateRequest, String field) {
 		return (isNullOrEmpty(dateRequest))
 				? Optional.of(new CodeError(field, "The string mustn't be empty!"))
 				: Optional.empty();
@@ -172,7 +172,7 @@ public class AddFlightRequestValidator {
 				: Optional.empty();
 	}
 
-	private Optional<CodeError> isDateAfter (LocalDate request, String field) {
+	private Optional<CodeError> isDateAfter (Date request, String field) {
 		return (!isDateAfter(request))
 				? Optional.of(new CodeError(field, "Date shouldn't be in past!"))
 				: Optional.empty();
@@ -190,7 +190,7 @@ public class AddFlightRequestValidator {
 		return str.length() - str.replaceAll("(?i)[^a-z-\\s\\d]", "").length() != 0;
 	}
 
-	private boolean isNullOrEmpty (LocalDate date) {
+	private boolean isNullOrEmpty (Date date) {
 		return (date == null);
 	}
 
@@ -198,7 +198,7 @@ public class AddFlightRequestValidator {
 		return (str == null || str.isEmpty());
 	}
 
-	private boolean isDateAfter (LocalDate date) {
-		return date.isAfter(LocalDate.now());
+	private boolean isDateAfter (Date date) {
+		return date.after(new Date());
 	}
 }

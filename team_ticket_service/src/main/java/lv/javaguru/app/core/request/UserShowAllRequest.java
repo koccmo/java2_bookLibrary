@@ -6,6 +6,9 @@ public class UserShowAllRequest {
 	private User user;
 	private Long id;
 
+	public UserShowAllRequest () {
+	}
+
 	public UserShowAllRequest (Long id) {
 		this.id = id;
 	}

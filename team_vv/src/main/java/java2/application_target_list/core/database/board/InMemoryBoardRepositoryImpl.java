@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class InMemoryBoardRepositoryImpl implements BoardRepository {
@@ -72,6 +73,11 @@ public class InMemoryBoardRepositoryImpl implements BoardRepository {
     @Override
     public List<Record> getUnfinishedRecords() {
         return null;
+    }
+
+    @Override
+    public Optional<Record> getById(Long id) {
+        return Optional.empty();
     }
 
     private int getBoardIndexFromListById(Long boardId) {

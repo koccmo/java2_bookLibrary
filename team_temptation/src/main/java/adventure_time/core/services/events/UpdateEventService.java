@@ -5,7 +5,7 @@ import adventure_time.core.requests.events.AddEventRequest;
 import adventure_time.core.requests.events.UpdateEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.UpdateEventResponse;
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.database.events.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UpdateEventService {
 
     @Autowired
-    private EventDatabase databaseEvents;
+    private EventRepository databaseEvents;
     @Autowired private UpdateEventRequestValidator updateValidator;
     @Autowired private AddEventRequestValidator addValidator;
 

@@ -4,7 +4,7 @@ import dental_clinic.core.requests.plannedVisit.ChangePlannedVisitTimeRequest;
 import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.planned_visit.ChangePlannedVisitTimeResponse;
 import dental_clinic.core.validators.planned_visit.ChangePlannedVisitTimeRequestValidator;
-import dental_clinic.database.in_memory.planned_visit.PlannedVisitsInMemoryDatabase;
+import dental_clinic.core.database.planned_visit.PlannedVisitsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class ChangePlannedVisitTimeService {
 
     @Autowired
-    private PlannedVisitsInMemoryDatabase plannedVisitsInMemoryDatabase;
+    private PlannedVisitsRepository plannedVisitsRepository;
     @Autowired
     private ChangePlannedVisitTimeRequestValidator changePlannedVisitTimeRequestValidator;
 
@@ -30,38 +30,38 @@ public class ChangePlannedVisitTimeService {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        if (!plannedVisitsInMemoryDatabase.containsId(changePlannedVisitTimeRequest.getId())) {
+        if (!plannedVisitsRepository.containsId(changePlannedVisitTimeRequest.getId())) {
             errorList.add(new CoreError("database", "Database doesn't contain id "
                     + changePlannedVisitTimeRequest.getId()));
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        GregorianCalendar visitDate = getVisitDate(changePlannedVisitTimeRequest.getVisitTime());
+        Date visitDate = getVisitDate(changePlannedVisitTimeRequest.getVisitTime());
         errorList.addAll(dateNotInFuture(visitDate));
         if (!errorList.isEmpty()) {
             return new ChangePlannedVisitTimeResponse(errorList);
         }
 
-        plannedVisitsInMemoryDatabase.changePlannedVisitTime(changePlannedVisitTimeRequest.getId(), visitDate);
+        plannedVisitsRepository.changePlannedVisitTime(changePlannedVisitTimeRequest.getId(), visitDate);
         return new ChangePlannedVisitTimeResponse(changePlannedVisitTimeRequest.getId(), visitDate);
     }
 
-    private GregorianCalendar getVisitDate (String visitDate) {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    private Date getVisitDate (String visitDate) {
+        Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         try {
-            Date date = simpleDateFormat.parse(visitDate);
-            gregorianCalendar.setTime(date);
+            date = simpleDateFormat.parse(visitDate);
+
         }
         catch (ParseException e) {
 
         }
-        return gregorianCalendar;
+        return date;
     }
 
-    private List<CoreError> dateNotInFuture(GregorianCalendar visitDate) {
+    private List<CoreError> dateNotInFuture(Date visitDate) {
         List<CoreError> errors = new ArrayList<>();
-        GregorianCalendar currentDate = new GregorianCalendar();
+        Date currentDate = new Date();
         if (visitDate.before(currentDate)) {
             errors.add(new CoreError("date", "Visit date must be in future"));
         }

@@ -5,7 +5,7 @@ import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.services.target.DeleteTargetService;
-import java2.application_target_list.config.TargetListConfiguration;
+import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.responses.target.DeleteTargetResponse;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
@@ -104,7 +104,7 @@ public class DeleteTargetAcceptanceTests {
     }
 
     private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(TargetListConfiguration.class);
+        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
 }

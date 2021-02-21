@@ -15,6 +15,7 @@ public class AddDoctorRequestValidator {
 
         errors.addAll(addNameValidationErrors(addDoctorRequest.getDoctor().getName()));
         errors.addAll(addSurnameValidationErrors(addDoctorRequest.getDoctor().getSurname()));
+        errors.addAll(phoneValidationErrors(addDoctorRequest.getDoctor().getPhone()));
 
         return errors;
     }
@@ -39,6 +40,14 @@ public class AddDoctorRequestValidator {
             if (!name.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")){
                 errors.add(new CoreError("surname", "Surname can contain only letters"));
             }
+        }
+        return errors;
+    }
+
+    private List<CoreError> phoneValidationErrors(String phone){
+        List <CoreError> errors = new ArrayList<>();
+        if (!phone.matches("\\d{8}|\\d{11}|\\d{12}")) {
+            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
         }
         return errors;
     }

@@ -2,10 +2,12 @@ package internet_store.application.core.requests.product;
 
 public class FindProductsRequest {
 
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
     private Ordering ordering;
     private Paging paging;
+
+    public FindProductsRequest() { }
 
     public FindProductsRequest(String name, String description) {
         this.name = name;
@@ -35,16 +37,32 @@ public class FindProductsRequest {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Ordering getOrdering() {
         return ordering;
     }
 
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
     public Paging getPaging() {
         return paging;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
     }
 
     public boolean isNameProvided() {

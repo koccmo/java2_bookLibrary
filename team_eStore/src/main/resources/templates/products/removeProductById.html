@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore_project">
+    <meta name="author" content="team_estore">
+    <title>eStore</title>
+</head>
+
+<body>
+
+<h3>RemoveProduct By Id</h3>
+
+<table>
+    <tr>
+        <td>Product Id:</td>
+    </tr>
+
+    <tr>
+        <form action="/products/removeProductById" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td>
+                <input type="submit" value="Remove product"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+</table>
+
+<br>
+<form action="/products" method="get">
+    <input type="submit" value="Products page" name="Submit" />
+</form>
+
+</body>
+
+</html>

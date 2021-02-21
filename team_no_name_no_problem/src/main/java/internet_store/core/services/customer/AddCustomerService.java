@@ -1,6 +1,5 @@
 package internet_store.core.services.customer;
 
-
 import internet_store.core.requests.customer.AddCustomerRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.customer.AddCustomerResponse;
@@ -9,9 +8,11 @@ import internet_store.database.customer.CustomerDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 public class AddCustomerService {
 
     @Autowired private CustomerDatabase customerDatabase;

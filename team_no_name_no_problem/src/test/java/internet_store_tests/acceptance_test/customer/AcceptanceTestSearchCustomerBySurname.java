@@ -1,7 +1,7 @@
 package internet_store_tests.acceptance_test.customer;
 
-import internet_store.DatabaseCleaner;
-import internet_store.config.MainMenuConfiguration;
+import internet_store.core.DatabaseCleaner;
+import internet_store.config.SpringCoreConfiguration;
 import internet_store.core.domain.Customer;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
@@ -27,7 +27,7 @@ public class AcceptanceTestSearchCustomerBySurname {
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(MainMenuConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
     @Test
@@ -59,8 +59,8 @@ public class AcceptanceTestSearchCustomerBySurname {
         GetAllCustomersResponse getAllCustomersResponse = getAllCustomersService().execute(getAllCustomersRequest);
 
         assertTrue(getAllCustomersResponse.getCustomers().size() == 3);
-        assertFalse(searchCustomerResponse.getCustomers().get(0).equals(customer));
-        assertFalse(searchCustomerResponse1.getCustomers().get(0).equals(customer1));
+        assertTrue(searchCustomerResponse.getCustomers().get(0).equals(customer));
+        assertTrue(searchCustomerResponse1.getCustomers().get(0).equals(customer1));
     }
 
     private AddCustomerService addCustomerService(){

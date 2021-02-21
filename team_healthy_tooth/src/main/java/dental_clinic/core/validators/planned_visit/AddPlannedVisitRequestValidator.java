@@ -1,6 +1,5 @@
 package dental_clinic.core.validators.planned_visit;
 
-import dental_clinic.core.domain.PersonalData;
 import dental_clinic.core.requests.plannedVisit.AddPlannedVisitRequest;
 import dental_clinic.core.responses.CoreError;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ public class AddPlannedVisitRequestValidator {
 
         List <CoreError> errors = new ArrayList<>();
         errors.addAll(visitTimeValidationErrors(addPlannedVisitRequest.getVisitDataText()));
-        errors.addAll(personalDataValidationErrors(addPlannedVisitRequest.getPersonalData()));
+        errors.addAll(personalCodeValidationErrors(addPlannedVisitRequest.getPersonalCode()));
         errors.addAll(doctorIdValidationErrors(addPlannedVisitRequest));
         return errors;
     }
@@ -43,47 +42,6 @@ public class AddPlannedVisitRequestValidator {
         return errors;
     }
 
-    private List<CoreError> personalDataValidationErrors (PersonalData personalData) {
-        List <CoreError> errors = new ArrayList<>();
-        errors.addAll(nameValidationErrors(personalData.getName()));
-        errors.addAll(surnameValidationErrors(personalData.getSurname()));
-        errors.addAll(phoneValidationErrors(personalData.getPhone()));
-        errors.addAll(personalCodeValidationErrors(personalData.getPersonalCode()));
-        return errors;
-    }
-
-    private List<CoreError> nameValidationErrors(String name){
-        List <CoreError> errors = new ArrayList<>();
-        if (name == null || name.isEmpty()) {
-            errors.add(new CoreError("Personal data : name", "Name can't be empty"));
-        }else{
-            if (!name.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")){
-                errors.add(new CoreError("Personal data : name", "Name can contain only letters"));
-            }
-        }
-        return errors;
-    }
-
-    private List<CoreError> surnameValidationErrors(String surname){
-        List <CoreError> errors = new ArrayList<>();
-        if (surname == null || surname.isEmpty()){
-            errors.add(new CoreError("Personal data : surname", "Surname can't be empty"));
-        } else{
-            if (!surname.matches("[a-zA-ZēūīōāšģķļžčņĒŪĪŌĀŠĢĶĻŽČŅ]+")) {
-                errors.add(new CoreError("Personal data : surname", "Surname can contain only letters"));
-            }
-        }
-        return errors;
-    }
-
-    private List<CoreError> phoneValidationErrors(String phone){
-        List <CoreError> errors = new ArrayList<>();
-        if (!phone.matches("\\d{8}|\\d{11}|\\d{12}")) {
-            errors.add(new CoreError("Personal data : phone", "Phone must contain 8 or 11 or 12 digits"));
-        }
-        return errors;
-    }
-
     private List<CoreError> personalCodeValidationErrors(String personalCode){
         List <CoreError> errors = new ArrayList<>();
         if (!Pattern.matches("[0-9]{2}[0,1][0-9][0-9][0-9]-?[0-9]{5}", personalCode)) {
@@ -94,7 +52,7 @@ public class AddPlannedVisitRequestValidator {
 
     private List <CoreError> doctorIdValidationErrors (AddPlannedVisitRequest addPlannedVisitRequest) {
         List <CoreError> errors = new ArrayList<>();
-        if (addPlannedVisitRequest.getId() == null || addPlannedVisitRequest.getId() < 1) {
+        if (addPlannedVisitRequest.getDoctorsId() == null || addPlannedVisitRequest.getDoctorsId() < 1) {
             errors.add(new CoreError("id", "Not valid input for id"));
         }
         return errors;

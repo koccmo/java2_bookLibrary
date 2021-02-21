@@ -9,10 +9,13 @@ import internet_store.database.customer.CustomerDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Component public class FindCustomerByIdService {
+@Component
+@Transactional
+public class FindCustomerByIdService {
 
     @Autowired private CustomerDatabase customerDatabase;
     @Autowired private FindCustomerByIdRequestValidator findCustomerByIdRequestValidator;
@@ -31,6 +34,6 @@ import java.util.Optional;
             + findCustomerByIdRequest.getId()));
             return new FindCustomerByIdResponse(errors);
         }
-        return new FindCustomerByIdResponse(customerDatabase.findById(findCustomerByIdRequest.getId()));
+        return new FindCustomerByIdResponse(customerDatabase.findById(findCustomerByIdRequest.getId()).get());
     }
 }

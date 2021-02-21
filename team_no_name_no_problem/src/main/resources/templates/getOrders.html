@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="author" content="NoNameNoProblem">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3>Order list</h3>
+
+<table>
+    <tr>
+        <td>Id:</td>
+        <td>Customer:</td>
+        <td>Shopping cart:</td>
+        <td>Sum:</td>
+    </tr>
+
+    <td th:if="${orders != null}">
+        <tr th:each="order : ${orders}">
+            <td th:text="${id}"/>
+            <td th:text="${customer.name}" />
+            <td th:text="${shoppingCart}"/>
+            <td th:text="${sum}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

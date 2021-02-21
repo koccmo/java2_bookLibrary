@@ -91,7 +91,7 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return phoneNumber == customer.phoneNumber &&
+        return phoneNumber.equals(customer.phoneNumber)  &&
                 Objects.equals(name.toLowerCase(), customer.name.toLowerCase()) &&
                 Objects.equals(surname.toLowerCase(), customer.surname.toLowerCase()) &&
                 Objects.equals(address.toLowerCase(), customer.address.toLowerCase()) &&

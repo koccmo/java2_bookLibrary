@@ -1,48 +1,58 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.domain.*;
 import lv.javaguru.app.core.request.EditFlightRequest;
 import lv.javaguru.app.core.request.EditFlightValueRequest;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketDestination;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketOrigin;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketSeat;
 import lv.javaguru.app.core.response.FlightEditResponse;
 import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
-import lv.javaguru.app.database.Database;
-import lv.javaguru.app.database.SqlDatabase;
+import lv.javaguru.app.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
+@Transactional
 public class FlightEditService {
 
 	@Autowired
-	private Database database;
+	private UserRepository userRepository;
+
 	@Autowired
-	private SqlDatabase sqlDatabase;
+	private FlightRepository flightRepository;
+
+	@Autowired
+	private TicketRepository ticketRepository;
+
 	@Autowired
 	private EditFlightRequestValidator validator;
 
 
 	public FlightEditResponse execute (EditFlightRequest request) {
-		List<CodeError> errors = validator.validateId(request.getRequestId());
+		List<CodeError> errors = validator.validateId(request.getId());
 
-
-		if (sqlDatabase.getUserById(request.getUser().getId()) == null) {
+		if (userRepository.getUserById(request.getUser().getId()) == null) {
 			errors.add(new CodeError("Id error ", "wrong ID"));
 		}
 		if (errors.size() > 0)
 			return new FlightEditResponse(errors);
 
-		if (request.getUser().getPersonType() != PersonType.ADMIN &&
-				!sqlDatabase.isUserFlight(request.getRequestId(), request.getUser())) {
-			errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
-		}
+		//if (request.getUser().getPersonType() != PersonType.ADMIN &&
+		//		!flightRepository.isUserFlight(request.getRequestId(), request.getUser())) {
+		//	errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
+		//}
 
 		if (!errors.isEmpty())
 			return new FlightEditResponse(errors);
 
-		Flight flight = sqlDatabase.getFlightById(request.getRequestId());
+		Flight flight = flightRepository.getFlightById(request.getId());
 
 		if (flight == null) {
 			errors.add(new CodeError("Id error", "No flight with entered ID"));
@@ -53,14 +63,66 @@ public class FlightEditService {
 	}
 
 
+	public FlightEditResponse execute (UpdateTicketOrigin request) {
+		String originCountry = request.getTicketNewOriginCountry();
+		String originCity = request.getTicketNewOriginCity();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketOriginByTicketId(id, originCountry, originCity))
+			errors.add(new CodeError("Ticket's origin", "Haven't managed to update ticket's origin!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's origin was updated!";
+		return new FlightEditResponse(message);
+	}
+
+
+	public FlightEditResponse execute (UpdateTicketDestination request) {
+		String destinationCountry = request.getTicketNewDestinationCountry();
+		String destinationCity = request.getTicketNewDestinationCity();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketDestinationByTicketId(id, destinationCountry, destinationCity))
+			errors.add(new CodeError("Ticket's destination", "Haven't managed to update ticket's destination!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's destination was updated!";
+		return new FlightEditResponse(message);
+	}
+
+	public FlightEditResponse execute (UpdateTicketSeat request) {
+		String seat = request.getTicketNewSeat();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketSeatByTicketId(id, seat))
+			errors.add(new CodeError("Ticket's seat", "Haven't managed to update ticket's seat!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's seat was updated!";
+		return new FlightEditResponse(message);
+	}
+
+
 	public FlightEditResponse executeUserNameUpdate (EditFlightValueRequest request) {
 		String name = request.getValue();
 		Long userId = request.getFlight().getUser().getId();
 
 		List<CodeError> errors = validator.validateName(name);
 
-		if (!sqlDatabase.updateUserNameByUserId(userId, name))
-			errors.add(new CodeError("Name", "Haven't managed to update user name!"));
+		if (!userRepository.updateUserNameByUserId(userId, name))
+			errors.add(new CodeError("Name", "Haven't managed to update user's name!"));
 
 		if (!errors.isEmpty())
 			return new FlightEditResponse(errors);
@@ -80,7 +142,7 @@ public class FlightEditService {
 
 		Long userId = request.getFlight().getUser().getId();
 
-		if (!sqlDatabase.updateUserSurnameById(userId, surname)) {
+		if (!userRepository.updateUserSurnameById(userId, surname)) {
 			errors.add(new CodeError("Surname", "Haven't managed to update user's surname!"));
 			return new FlightEditResponse(errors);
 		}
@@ -103,7 +165,7 @@ public class FlightEditService {
 
 		Long ticketId = request.getFlight().getTicket().getId();
 
-		if (!sqlDatabase.updateTicketOriginByTicketId(ticketId, originCountry, originCity)) {
+		if (!ticketRepository.updateTicketOriginByTicketId(ticketId, originCountry, originCity)) {
 			errors.add(new CodeError("Origin", "Haven't managed to update ticket's origin!"));
 			return new FlightEditResponse(errors);
 		}
@@ -124,7 +186,7 @@ public class FlightEditService {
 
 		Long ticketId = request.getFlight().getTicket().getId();
 
-		if (!sqlDatabase.updateTicketDestinationByTicketId(ticketId, destinationCountry, destinationCity)) {
+		if (!ticketRepository.updateTicketDestinationByTicketId(ticketId, destinationCountry, destinationCity)) {
 			errors.add(new CodeError("Destination", "Haven't managed to update ticket's destination!"));
 			return new FlightEditResponse(errors);
 		}
@@ -142,9 +204,9 @@ public class FlightEditService {
 			return new FlightEditResponse(errors);
 
 		Long ticketId = request.getFlight().getTicket().getId();
-		String ticketDate = request.getNewDate().toString();
+		Date ticketDate = request.getNewDate();
 
-		if (!sqlDatabase.updateTicketDateByTicketId(ticketId, ticketDate)) {
+		if (!ticketRepository.updateTicketDateByTicketId(ticketId, ticketDate)) {
 			errors.add(new CodeError("Date", "Haven't managed to update ticket's date!"));
 			return new FlightEditResponse(errors);
 		}
@@ -162,7 +224,7 @@ public class FlightEditService {
 		Long ticketId = request.getFlight().getTicket().getId();
 		String ticketSeat = request.getValue();
 
-		if (!sqlDatabase.updateTicketSeatByTicketId(ticketId, ticketSeat)) {
+		if (!ticketRepository.updateTicketSeatByTicketId(ticketId, ticketSeat)) {
 			errors.add(new CodeError("Seat", "Haven't managed to update ticket's seat!"));
 			return new FlightEditResponse(errors);
 		}

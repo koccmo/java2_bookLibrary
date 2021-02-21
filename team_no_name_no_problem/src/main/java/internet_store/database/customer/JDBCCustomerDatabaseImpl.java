@@ -71,11 +71,13 @@ public class JDBCCustomerDatabaseImpl implements CustomerDatabase{
 
     @Override
     public boolean containsCustomer(Customer customer) {
-        return true;
+        String sql = "SELECT * FROM customers WHERE name = \"" + customer.getName() +
+   "\" AND surname = \"" + customer.getSurname() + "\";";
+        return jdbcTemplate.query(sql, new CustomerRowMapper()).size() == 1;
     }
-
     @Override
     public boolean containsId(Long id) {
-        return true;
+        String sql = "SELECT * FROM customers WHERE id = " + id + ";";
+        return jdbcTemplate.query(sql, new CustomerRowMapper()).size() == 1;
     }
 }

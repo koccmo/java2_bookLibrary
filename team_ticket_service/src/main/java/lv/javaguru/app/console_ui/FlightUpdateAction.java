@@ -10,7 +10,7 @@ import lv.javaguru.app.core.services.FlightEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 @Component
@@ -40,7 +40,8 @@ public class FlightUpdateAction extends Action implements UIActions {
 		while (true) {
 			System.out.println("UPDATE: " + response.getFlight());
 			BaseFunc.printLineSeparator();
-			if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
+			//if (getLoggedInUser().getPersonType() == PersonType.ADMIN) {
+			if (true) {
 				System.out.println("[1] Edit flight's ticket\n" +
 						"[2] Edit flight's user\n\n" +
 						"[0] Cancel");
@@ -76,7 +77,7 @@ public class FlightUpdateAction extends Action implements UIActions {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			flightEdit_printTicketEditMenu(response.getFlight().getId());
+			flightEdit_printTicketEditMenu(response.getFlight().getTicket().getId());
 
 			int menuNumber = BaseFunc.getMenuNumberFromUser();
 
@@ -131,7 +132,8 @@ public class FlightUpdateAction extends Action implements UIActions {
 
 	private void editFlightDepartureDate (FlightEditResponse response) {
 		TicketFiller ticketFiller = new TicketFiller();
-		LocalDate date = ticketFiller.acquireDate(response.getFlight().getTicket());
+
+		Date date = ticketFiller.acquireDate(response.getFlight().getTicket());
 
 		EditFlightValueRequest request = new EditFlightValueRequest(response.getFlight(), date);
 		FlightEditResponse responseEdit = flightEditService.updateDate(request);

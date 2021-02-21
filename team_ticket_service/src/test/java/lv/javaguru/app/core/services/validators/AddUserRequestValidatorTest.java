@@ -1,6 +1,5 @@
 package lv.javaguru.app.core.services.validators;
 
-import junit.framework.TestCase;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.UserAddRequest;
@@ -15,19 +14,19 @@ public class AddUserRequestValidatorTest {
 
 	private AddUserRequestValidator validator;
 	private UserAddRequest request;
-	private User user;
+	//private User user;
 
 	@Before
 	public void setUp () {
 		validator = new AddUserRequestValidator();
-		user = new User();
+		//user = new User();
 	}
 
 	@Test
 	public void noUserNameTest () {
-		user.setSurname("aleksejevs");
+		//user.setSurname("aleksejevs");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -36,10 +35,10 @@ public class AddUserRequestValidatorTest {
 
 	@Test
 	public void UserNameContainsDigitsTest () {
-		user.setName("sergejs342324");
-		user.setSurname("aleksejevs");
+		//user.setName("sergejs342324");
+		//user.setSurname("aleksejevs");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("sergejs342324", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -48,10 +47,10 @@ public class AddUserRequestValidatorTest {
 
 	@Test
 	public void UserNameContainsSymbolsTest () {
-		user.setName("sergejs$#@$@#");
-		user.setSurname("aleksejevs");
+		//user.setName("sergejs$#@$@#");
+		//user.setSurname("aleksejevs");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("sergejs$#@$@#", "aleksejevs");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -60,9 +59,9 @@ public class AddUserRequestValidatorTest {
 
 	@Test
 	public void noUserSurnameTest () {
-		user.setName("Sergejs");
+		//user.setName("Sergejs");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("Sergejs", null);
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -71,10 +70,10 @@ public class AddUserRequestValidatorTest {
 
 	@Test
 	public void UserSurnameContainsDigitsTest () {
-		user.setName("sergejs");
-		user.setSurname("aleksejevs342324");
+		//user.setName("sergejs");
+		//user.setSurname("aleksejevs342324");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("sergejs", "aleksejevs342324");
 
 		List<CodeError> errors = validator.validate(request);
 
@@ -83,10 +82,10 @@ public class AddUserRequestValidatorTest {
 
 	@Test
 	public void UserSurnameContainsSymbolsTest () {
-		user.setName("sergejs");
-		user.setSurname("aleksejevs$#@$@#");
+		//user.setName("sergejs");
+		//user.setSurname("aleksejevs$#@$@#");
 
-		request = new UserAddRequest(user);
+		request = new UserAddRequest("sergejs", "aleksejevs$#@$@#");
 
 		List<CodeError> errors = validator.validate(request);
 

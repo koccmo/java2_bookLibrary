@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="author" content="NoNameNoProblem">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3>Add customer</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Phone number:</td>
+        <td>Address:</td>
+        <td>E-mail:</td>
+    </tr>
+
+    <tr>
+        <form action="/addCustomer" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.customer.name}"/></td>
+            <td><input type="text" th:field="${request.customer.surname}"/></td>
+            <td><input type="text" th:field="${request.customer.phoneNumber}"/></td>
+            <td><input type="text" th:field="${request.customer.address}"/></td>
+            <td><input type="text" th:field="${request.customer.email}"/></td>
+            <td>
+                <input type="submit" value="Add Customer"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

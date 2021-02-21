@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Internet store demo project">
+    <meta name="author" content="NoNameNoProblem">
+    <title>Internet store</title>
+</head>
+
+<body>
+
+<h3> Search product </h3>
+
+<table>
+    <tr>
+        <td>Enter title:</td>
+        <td>Enter description:</td>
+        <td>Enter start price:</td>
+        <td>Enter end price:</td>
+        <td>Enter order by title, description or price:</td>
+        <td>Ordering direction ASC/DESC:</td>
+        <td>Page number:</td>
+        <td>Page size:</td>
+    </tr>
+
+    <tr>
+        <form action ="/searchProduct" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.title}"/></td>
+            <td><input type="text" th:field="${request.description}"/></td>
+            <td><input type="number" min = "1" th:field="${request.startPrice}"/></td>
+            <td><input type="number" min = "1" th:field="${request.endPrice}"/></td>
+            <td><input type="text" th:field="${request.ordering.orderBy}"/></td>
+            <td><input type="text" th:field="${request.ordering.orderDirection}"/></td>
+            <td><input type="number" min = "1" th:field="${request.paging.pageNumber}"/></td>
+            <td><input type="number" min = "1" th:field="${request.paging.pageSize}"/></td>
+
+            <td>
+                <input type="submit" value="Search product"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+
+    </tr>
+
+</table>
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" /> </br>
+    </tr>
+</td>
+
+<td th:if="${products != null}">
+    <h4>Product list</h4>
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td>Description:</td>
+            <td>Price:</td>
+        </tr>
+        <td th:if="${products != null}">
+            <tr th:each="product : ${products}">
+                <td th:text="${product.title}" />
+                <td th:text="${product.description}" />
+                <td th:text="${product.price}" />
+            </tr>
+        </td>
+    </table>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

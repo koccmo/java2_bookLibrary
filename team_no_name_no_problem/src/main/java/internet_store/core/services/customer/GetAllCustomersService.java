@@ -9,10 +9,13 @@ import internet_store.core.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component public class GetAllCustomersService {
+@Component
+@Transactional
+public class GetAllCustomersService {
 
     @Autowired private CustomerDatabase customerDatabase;
     @Autowired private GetAllCustomersValidator getAllCustomersValidator;

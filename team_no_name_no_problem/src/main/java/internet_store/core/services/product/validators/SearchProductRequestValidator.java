@@ -1,6 +1,6 @@
 package internet_store.core.services.product.validators;
 
-import internet_store.core.requests.product.SearchProductRequest;
+import internet_store.core.requests.product.SearchProductByOtherRequest;
 import internet_store.core.response.CoreError;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class SearchProductRequestValidator {
 
-    public List<CoreError> validate (SearchProductRequest searchProductRequest){
+    public List<CoreError> validate (SearchProductByOtherRequest searchProductRequest){
 
         List <CoreError> errors = new ArrayList<>();
 
@@ -41,43 +41,43 @@ public class SearchProductRequestValidator {
                 startPrice == null && endPrice == null;
     }
 
-    private boolean isNotValidInputForPriceSearch(SearchProductRequest searchProductRequest) {
+    private boolean isNotValidInputForPriceSearch(SearchProductByOtherRequest searchProductRequest) {
         if (searchProductRequest.getEndPrice() != null && searchProductRequest.getStartPrice() != null) {
             return pricesNegative(searchProductRequest) || !fieldsFilledCorrect(searchProductRequest);
         } else
         return !fieldsFilledCorrect(searchProductRequest);
     }
 
-    private boolean pricesNegative(SearchProductRequest searchProductRequest) {
+    private boolean pricesNegative(SearchProductByOtherRequest searchProductRequest) {
         return searchProductRequest.getStartPrice() < 0
                 || searchProductRequest.getEndPrice() < 0;
     }
 
-    private boolean fieldsFilledCorrect(SearchProductRequest searchProductRequest) {
+    private boolean fieldsFilledCorrect(SearchProductByOtherRequest searchProductRequest) {
         return (searchProductRequest.getStartPrice() != null && searchProductRequest.getEndPrice() != null)
                 || (searchProductRequest.getStartPrice() == null && searchProductRequest.getEndPrice() == null);
     }
 
 
-    private boolean isNotValidInputForOrdering(SearchProductRequest searchProductRequest){
+    private boolean isNotValidInputForOrdering(SearchProductByOtherRequest searchProductRequest){
         return (!searchProductRequest.getOrdering().filledBoth() &&
                 !searchProductRequest.getOrdering().emptyBothFields()) ||
                 (isNotValidInputForOrderBy(searchProductRequest)) ||
                 (isNotValidInputForOrderDirection(searchProductRequest));
     }
 
-    private boolean isNotValidInputForOrderBy(SearchProductRequest searchProductRequest){
+    private boolean isNotValidInputForOrderBy(SearchProductByOtherRequest searchProductRequest){
         return !searchProductRequest.getOrdering().getOrderBy().equals("title") &&
                 !searchProductRequest.getOrdering().getOrderBy().equals("description") &&
                 !searchProductRequest.getOrdering().getOrderBy().equals("price");
     }
 
-    private boolean isNotValidInputForOrderDirection(SearchProductRequest searchProductRequest){
+    private boolean isNotValidInputForOrderDirection(SearchProductByOtherRequest searchProductRequest){
         return !searchProductRequest.getOrdering().getOrderDirection().equals("ASC") &&
                 !searchProductRequest.getOrdering().getOrderDirection().equals("DESC");
     }
 
-    private List<CoreError> updateErrorsListForOrdering(SearchProductRequest searchProductRequest){
+    private List<CoreError> updateErrorsListForOrdering(SearchProductByOtherRequest searchProductRequest){
 
         List<CoreError>errors = new ArrayList<>();
 
@@ -95,22 +95,22 @@ public class SearchProductRequestValidator {
         return  errors;
     }
 
-    private boolean isNotValidRequestForPaging (SearchProductRequest searchProductRequest){
+    private boolean isNotValidRequestForPaging (SearchProductByOtherRequest searchProductRequest){
         return (!searchProductRequest.getPaging().isFilledBoth() &&
                 !searchProductRequest.getPaging().isEmptyBoth()) ||
                 (isNotValidInputForPageNumber(searchProductRequest)) ||
                 isNotValidInputForPageSize(searchProductRequest);
     }
 
-    private boolean isNotValidInputForPageNumber(SearchProductRequest searchProductRequest){
+    private boolean isNotValidInputForPageNumber(SearchProductByOtherRequest searchProductRequest){
         return searchProductRequest.getPaging().getPageNumber() <= 0;
     }
 
-    private boolean isNotValidInputForPageSize(SearchProductRequest searchProductRequest){
+    private boolean isNotValidInputForPageSize(SearchProductByOtherRequest searchProductRequest){
         return searchProductRequest.getPaging().getPageSize() <= 0;
     }
 
-    private List<CoreError> updateErrorsListForPaging(SearchProductRequest searchProductRequest){
+    private List<CoreError> updateErrorsListForPaging(SearchProductByOtherRequest searchProductRequest){
 
         List<CoreError>errors = new ArrayList<>();
 

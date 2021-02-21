@@ -7,7 +7,7 @@ import dental_clinic.core.responses.CoreError;
 import dental_clinic.core.responses.patient.GetSpecificPatientHistoryResponse;
 import dental_clinic.core.services.patient.GetSpecificPatientHistoryService;
 import dental_clinic.core.validators.patient.GetSpecificPatientHistoryRequestValidator;
-import dental_clinic.database.in_memory.patient.PatientDatabase;
+import dental_clinic.core.database.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 public class GetSpecificPatientHistoryServiceTest {
 
     @Mock
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Mock
     private GetSpecificPatientHistoryRequestValidator getSpecificPatientHistoryRequestValidator;
     @InjectMocks
@@ -58,7 +58,7 @@ public class GetSpecificPatientHistoryServiceTest {
         GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(8L);
 
         Mockito.when(getSpecificPatientHistoryRequestValidator.validate(getSpecificPatientHistoryRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(8L)).thenReturn(false);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(8L)).thenReturn(false);
         GetSpecificPatientHistoryResponse getSpecificPatientHistoryResponse = getSpecificPatientHistoryService.execute(getSpecificPatientHistoryRequest);
 
         assertTrue(getSpecificPatientHistoryResponse.hasErrors());
@@ -78,8 +78,8 @@ public class GetSpecificPatientHistoryServiceTest {
         GetSpecificPatientHistoryRequest getSpecificPatientHistoryRequest = new GetSpecificPatientHistoryRequest(8L);
 
         Mockito.when(getSpecificPatientHistoryRequestValidator.validate(getSpecificPatientHistoryRequest)).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.containsPatientWithSpecificId(8L)).thenReturn(true);
-        Mockito.when(patientDatabase.getPatients()).thenReturn(patients);
+        Mockito.when(patientRepository.containsPatientWithSpecificId(8L)).thenReturn(true);
+        Mockito.when(patientRepository.getPatients()).thenReturn(patients);
 
         GetSpecificPatientHistoryResponse getSpecificPatientHistoryResponse = getSpecificPatientHistoryService.execute(getSpecificPatientHistoryRequest);
 

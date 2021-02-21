@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Dental Clinic demo project">
+        <meta name="author" content="Valeria">
+        <title>Dental clinic Healthy tooth</title>
+        <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    color: #800040;
+                }
+                    page {
+                    width: 900px;
+                    margin: 0 auto;
+                }
+                #title {
+                    height: 100px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 4em;
+                    color: white;
+                    text-shadow: 2px 2px 5px #ffffff;
+                    text-align: center;
+                }
+                #content{
+                    float: left;
+                    width: 1950px;
+                    height: 80px;
+                    background-color: #ffe6f2;
+                }
+                #footer{
+                    overflow: hidden;
+                    background-color: #660033;
+                }
+                #menu1 {
+                    float: left;
+                    width: 47%;
+                    margin: 20px 1.15%;
+                    height: 680px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 2em;
+                    text-align: center;
+                }
+                #menu {
+                    float: left;
+                    width: 98%;
+                    margin: 20px 1.15%;
+                    height: 200px;
+                    background-color: #ffe6f2;
+                    font-family: "Brush Script MT", "Courier New", serif;
+                    font-size: 2em;
+                    text-align: center;
+                }
+                table {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            </style>
+    </head>
+
+    <body>
+
+        <div id="title">
+            <h3>Change personal data</h3>
+        </div>
+
+
+        <div id="menu">
+            </br>
+            <table>
+                <tr>
+                    <td>Patient's id:</td>
+                    <td>New surname:</td>
+                    <td>New phone:</td>
+                </tr>
+
+                <tr>
+                    <form action="/changePersonalData" th:object="${request}" method="post">
+                        <td><input type="number" min="1" th:field="${request.patientIdNumber}"/></td>
+                        <td><input type="text" th:field="${request.updatedSurname}"/></td>
+                        <td><input type="text" th:field="${request.updatedPhoneNumber}"/></td>
+                        <td>
+                            <input type="submit" value="Change personal data"/>
+                            <input type="reset" value="Clear"/>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+
+            <td th:if="${errors != null}">
+                <tr th:each="error : ${errors}">
+                    <td th:text="${error.field}" />
+                    <td th:text="${error.message}" /> </br>
+                </tr>
+            </td>
+        </div>
+
+    </body>
+
+</html>

@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ProductQuantityValidatorTest {
 
-    ProductQuantityValidator validator = new ProductQuantityValidator();
+    private final ProductQuantityValidator validator = new ProductQuantityValidator();
 
     @Test
     public void shouldReturnTrue_QuantityMoreZero() {

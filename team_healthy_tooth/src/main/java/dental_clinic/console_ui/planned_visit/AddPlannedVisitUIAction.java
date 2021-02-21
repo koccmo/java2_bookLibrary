@@ -43,35 +43,17 @@ public class AddPlannedVisitUIAction implements UIAction {
         System.out.println("Please enter personal code");
         String personalCode = in.nextLine();
 
-        SearchPatientRequest searchPatientRequest = new SearchPatientRequest(personalCode, new Ordering("name", OrderingDirection.ASC), new Paging(1, 100));
-        SearchPatientResponse searchPatientResponse = searchPatientService.execute(searchPatientRequest);
-
-        PersonalData personalData = new PersonalData(null, null, null, personalCode);
-        Boolean isNewPatient = false;
-
-        if (searchPatientResponse.hasErrors()) {
-            System.out.println("Please enter name");
-            String name = in.nextLine();
-            System.out.println("Please enter surname");
-            String surname = in.nextLine();
-            System.out.println("Please enter phone");
-            String phone = in.nextLine();
-
-            personalData = new PersonalData(name, surname, phone, personalCode);
-            isNewPatient = true;
-        }
-
         GetDoctorListRequest getDoctorListRequest = new GetDoctorListRequest();
         GetDoctorListResponse getDoctorListResponse = getDoctorListService.execute(getDoctorListRequest);
 
         if (getDoctorListResponse.hasErrors()) {
             System.out.println("Planned visit canned be registered");
         } else {
-            getDoctorListResponse.getDoctors().forEach(System.out::println);
+            getDoctorListResponse.getDoctorAndGraphic().forEach(System.out::println);
 
             Long id = inputFormatsValidator.inputLong("Please input doctor's id");
 
-            AddPlannedVisitRequest addPlannedVisitRequest = new AddPlannedVisitRequest(isNewPatient, visitDate, personalData, id);
+            AddPlannedVisitRequest addPlannedVisitRequest = new AddPlannedVisitRequest(visitDate, personalCode, id);
             AddPlannedVisitResponse addPlannedVisitResponse = addPlannedVisitService.execute(addPlannedVisitRequest);
 
             if (addPlannedVisitResponse.hasErrors()) {

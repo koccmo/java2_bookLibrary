@@ -8,6 +8,7 @@ import lv.javaguru.app.core.response.LogInResponse;
 import lv.javaguru.app.core.services.LogInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class LogInAction extends Action implements UIActions {
@@ -20,7 +21,7 @@ public class LogInAction extends Action implements UIActions {
 	public void execute () {
 		User user = fillLoginForm();
 
-		LogInRequest request = new LogInRequest(user);
+		LogInRequest request = new LogInRequest(user.getUsername(), user.getPassword());
 		LogInResponse response = loginService.execute(request);
 
 		if (response.hasErrors()) {

@@ -1,20 +1,14 @@
 package internet_store.core.response.cart;
 
-import internet_store.core.core_error.CoreError;
-import internet_store.core.core_error.CoreErrorResponse;
 import lombok.Getter;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-public class AddProductToCartResponse extends CoreErrorResponse {
+public class AddProductToCartResponse  {
     @Getter
-    private long id;
+    private final BigDecimal productSum;
 
-    public AddProductToCartResponse(List<CoreError> errors) {
-        super(errors);
-    }
-
-    public AddProductToCartResponse(long id) {
-        this.id = id;
+    public AddProductToCartResponse(BigDecimal productSum) {
+        this.productSum = productSum;
     }
 }

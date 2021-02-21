@@ -3,12 +3,10 @@ package lv.javaguru.app.database;
 import lv.javaguru.app.core.domain.Flight;
 import lv.javaguru.app.core.domain.Ticket;
 import lv.javaguru.app.core.domain.User;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
 public class InMemoryDatabase implements Database {
 	private final Map<Long, Ticket> ticketTable = new HashMap<>();
 	private final Map<Long, User> userTable = new HashMap<>();
@@ -70,7 +68,7 @@ public class InMemoryDatabase implements Database {
 
 	public Optional<User> getUserByNameAndSurname (User user) {
 		return userTable.values().stream()
-				.filter(u -> u.getName().equals(user.getName()) && u.getSurname().equals(user.getSurname()))
+				.filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()))
 				.findFirst();
 	}
 

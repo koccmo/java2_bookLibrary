@@ -1,16 +1,30 @@
 package dental_clinic.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="manipulation")
 public class Manipulation {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
-    private String manipulation_type;
+
+    @Column(name="manipulation_type", nullable = false)
+    private String manipulationType;
+
+    @Column(name="price", nullable = false)
     private Integer price;
+
+    @Column(name="isActive", nullable = false)
     private boolean isActive = true;
 
-    public Manipulation(String manipulation_type, Integer price) {
-        this.manipulation_type = manipulation_type;
+    public Manipulation() { }
+
+    public Manipulation(String manipulationType, Integer price) {
+        this.manipulationType = manipulationType;
         this.price = price;
     }
 
@@ -22,20 +36,28 @@ public class Manipulation {
         this.id = id;
     }
 
-    public String getManipulation_type() {
-        return manipulation_type;
+    public String getManipulationType() {
+        return manipulationType;
+    }
+
+    public void setManipulationType(String manipulationType) {
+        this.manipulationType = manipulationType;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-    public boolean getIsActive() {
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public boolean isActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
@@ -43,19 +65,19 @@ public class Manipulation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manipulation that = (Manipulation) o;
-        return isActive == that.isActive && Objects.equals(manipulation_type, that.manipulation_type) && Objects.equals(price, that.price);
+        return isActive == that.isActive && Objects.equals(manipulationType, that.manipulationType) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manipulation_type, price, isActive);
+        return Objects.hash(manipulationType, price, isActive);
     }
 
     @Override
     public String toString() {
         return "Manipulation:\n" +
                 "id: " + id +
-                ", manipulation_type: " + manipulation_type +
+                ", manipulation_type: " + manipulationType +
                 ", price: " + price +
                 ", isActive: " + isActive;
     }
