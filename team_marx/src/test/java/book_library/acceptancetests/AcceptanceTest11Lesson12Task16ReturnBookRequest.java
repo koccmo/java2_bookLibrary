@@ -115,6 +115,30 @@ public class AcceptanceTest11Lesson12Task16ReturnBookRequest {
         assertEquals("This book is already in Library.", returnBookResponse.getErrors().get(0).getMessage());
     }
 
+    @Test
+    public void successByTakingBookAgain() throws ParseException {
+        AddBookRequest addBookRequest = new AddBookRequest("Title1", "Author1");
+        getAddBookService().execute(addBookRequest);
+
+        RegisterReaderRequest registerReaderRequest = new RegisterReaderRequest("FirstName", "LastName", 11111111111L);
+        getRegisterReaderService().execute(registerReaderRequest);
+
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date bookOutDate = formatter1.parse("2020/01/01 14:45");
+        TakeBookRequest takeBookRequest = new TakeBookRequest(1L, 1L, bookOutDate);
+        getTakeBookService().execute(takeBookRequest);
+
+        Date bookReturnDate = formatter1.parse("9020/01/01 14:45");
+        ReturnBookRequest returnBookRequest = new ReturnBookRequest(1L, 1L, bookReturnDate);
+        getReturnBookService().execute(returnBookRequest);
+
+        Date bookOutDate2 = formatter1.parse("2020/01/01 14:45");
+        TakeBookRequest takeBookRequest2 = new TakeBookRequest(1L, 1L, bookOutDate);
+        TakeBookResponse takeBookResponse = getTakeBookService().execute(takeBookRequest2);
+
+        assertEquals(null, takeBookResponse.getErrors());
+    }
+
     private AddBookService getAddBookService() {
         return appContext.getBean(AddBookService.class);
     }
