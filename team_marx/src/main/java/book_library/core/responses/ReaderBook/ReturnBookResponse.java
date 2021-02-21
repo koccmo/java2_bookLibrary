@@ -8,17 +8,17 @@ import java.util.List;
 
 public class ReturnBookResponse extends CoreResponse {
 
-    private ReaderBook readerBook;
+    private Long updatedReaderBookId;
 
     public ReturnBookResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public ReturnBookResponse(ReaderBook readerBook) {
-        this.readerBook = readerBook;
+    public ReturnBookResponse(Long updatedReaderBookId) {
+        this.updatedReaderBookId = updatedReaderBookId;
     }
 
-    public ReaderBook getReaderBook() {
-        return readerBook;
+    public Long getUpdatedReaderBookId() {
+        return updatedReaderBookId;
     }
 }

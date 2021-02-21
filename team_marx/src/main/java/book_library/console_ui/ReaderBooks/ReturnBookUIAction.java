@@ -56,7 +56,7 @@ public class ReturnBookUIAction implements UIAction {
             response.getErrors().forEach(System.out::println);
         } else {
             System.out.println("The returning of the book has been successfully registered.");
-            System.out.println("The record in readerBook with id : " + response.getReaderBook().getId() + " was updated");
+            System.out.println("The record in readerBook with id : " + response.getUpdatedReaderBookId() + " was updated");
         }
     }
 }
