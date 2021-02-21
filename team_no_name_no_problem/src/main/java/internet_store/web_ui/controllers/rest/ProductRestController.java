@@ -119,5 +119,14 @@ public class ProductRestController {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,null,null);
         return deleteProductByDescription.execute(request);
     }
+
+    @Autowired
+    private DeleteProductByOtherService deleteProductByTitleAndDescription;
+
+    @DeleteMapping(path = "/{description}", produces = "application/json")
+    public DeleteProductByOtherResponse deleteProductByTitleAndDescription(@PathVariable String title, String description) {
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,null,null);
+        return deleteProductByTitleAndDescription.execute(request);
+    }
 }
 
