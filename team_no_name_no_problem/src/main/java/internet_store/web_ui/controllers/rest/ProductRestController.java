@@ -14,8 +14,8 @@ public class ProductRestController {
     private FindProductByIdService findProductByIdService;
 
     @GetMapping(path = "/{id}", produces = "application/json")
-    public FindProductByIdResponse findProductById(@PathVariable Long id) {
-        FindProductByIdRequest request = new FindProductByIdRequest(id);
+    public SearchProductByIdResponse searchProductById(@PathVariable Long id) {
+        SearchProductByIdRequest request = new SearchProductByIdRequest(id);
         return findProductByIdService.execute(request);
     }
 
