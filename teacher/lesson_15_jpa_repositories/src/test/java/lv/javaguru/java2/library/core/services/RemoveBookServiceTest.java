@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import lv.javaguru.java2.library.core.database.BookRepository;
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.requests.RemoveBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.RemoveBookResponse;
@@ -22,7 +23,7 @@ import lv.javaguru.java2.library.core.services.validators.RemoveBookRequestValid
 @RunWith(MockitoJUnitRunner.class)
 public class RemoveBookServiceTest {
 
-	@Mock private BookRepository bookRepository;
+	@Mock private JpaBookRepository bookRepository;
 	@Mock private RemoveBookRequestValidator validator;
 	@InjectMocks private RemoveBookService service;
 
@@ -42,7 +43,6 @@ public class RemoveBookServiceTest {
 	@Test
 	public void shouldDeleteBookWithIdFromDatabase() {
 		Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-		Mockito.when(bookRepository.deleteById(1L)).thenReturn(true);
 		RemoveBookRequest request = new RemoveBookRequest(1L);
 		RemoveBookResponse response = service.execute(request);
 		assertFalse(response.hasErrors());

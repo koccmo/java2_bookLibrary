@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.Ordering;
@@ -27,7 +28,7 @@ import lv.javaguru.java2.library.core.services.validators.SearchBooksRequestVali
 @RunWith(MockitoJUnitRunner.class)
 public class SearchBooksServiceTest {
 
-	@Mock private BookRepository bookRepository;
+	@Mock private JpaBookRepository bookRepository;
 	@Mock private SearchBooksRequestValidator validator;
 	@InjectMocks private SearchBooksService service;
 

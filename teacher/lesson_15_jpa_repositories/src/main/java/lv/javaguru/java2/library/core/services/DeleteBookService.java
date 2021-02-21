@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.database.BookRepository;
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.requests.DeleteBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.DeleteBookResponse;
@@ -16,7 +17,7 @@ import lv.javaguru.java2.library.core.services.validators.DeleteBookValidator;
 @Transactional
 public class DeleteBookService {
 
-	@Autowired private BookRepository bookRepository;
+	@Autowired private JpaBookRepository bookRepository;
 	@Autowired private DeleteBookValidator validator;
 
 	public DeleteBookResponse execute(DeleteBookRequest request) {
@@ -24,7 +25,7 @@ public class DeleteBookService {
 		if (!errors.isEmpty()) {
 			return new DeleteBookResponse(errors);
 		}
-		return bookRepository.getById(request.getId())
+		return bookRepository.findById(request.getId())
 				.map(book -> {
 					bookRepository.deleteById(request.getId());
 					return new DeleteBookResponse(book);

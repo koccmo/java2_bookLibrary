@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
@@ -16,10 +17,10 @@ import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 @Transactional
 public class GetAllBooksService {
 
-	@Autowired private BookRepository bookRepository;
+	@Autowired private JpaBookRepository bookRepository;
 
 	public GetAllBooksResponse execute(GetAllBooksRequest request) {
-		List<Book> books = bookRepository.getAllBooks();
+		List<Book> books = bookRepository.findAll();
 		return new GetAllBooksResponse(books);
 	}
 

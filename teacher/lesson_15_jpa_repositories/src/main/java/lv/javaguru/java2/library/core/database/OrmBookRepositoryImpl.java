@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.domain.Book;
 
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class OrmBookRepositoryImpl implements BookRepository {
 
 	@Autowired private SessionFactory sessionFactory;

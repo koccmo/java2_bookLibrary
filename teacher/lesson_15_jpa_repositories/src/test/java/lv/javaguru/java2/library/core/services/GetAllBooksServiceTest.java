@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.GetAllBooksRequest;
@@ -20,14 +21,14 @@ import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllBooksServiceTest {
 
-	@Mock private BookRepository bookRepository;
+	@Mock private JpaBookRepository bookRepository;
 	@InjectMocks private GetAllBooksService service;
 
 	@Test
 	public void shouldGetBooksFromDb() {
 		List<Book> books = new ArrayList<>();
 		books.add(new Book("Title", "Author"));
-		Mockito.when(bookRepository.getAllBooks()).thenReturn(books);
+		Mockito.when(bookRepository.findAll()).thenReturn(books);
 
 		GetAllBooksRequest request = new GetAllBooksRequest();
 		GetAllBooksResponse response = service.execute(request);

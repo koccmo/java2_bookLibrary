@@ -58,4 +58,14 @@ public class BookRestController {
 		return deleteBookService.execute(request);
 	}
 
+
+/*
+	@DeleteMapping(path = "/deleteByAuthor",
+			consumes = "application/json",
+			produces = "application/json")
+	public DeleteBookResponse deleteBooksByAuthor(@RequestBody DeleteBookByAuthorRequest request) {
+		return deleteBookNByAuthorService.execute(request);
+	}
+*/
+
 }
