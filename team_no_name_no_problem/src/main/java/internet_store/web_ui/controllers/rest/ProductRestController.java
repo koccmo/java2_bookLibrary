@@ -123,9 +123,9 @@ public class ProductRestController {
     @Autowired
     private DeleteProductByOtherService deleteProductByTitleAndDescription;
 
-    @DeleteMapping(path = "/{description}", produces = "application/json")
+    @DeleteMapping(path = "/{title}/{description}", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByTitleAndDescription(@PathVariable String title, String description) {
-        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,null,null);
+        DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,description,null,null);
         return deleteProductByTitleAndDescription.execute(request);
     }
 }
