@@ -3,29 +3,44 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Internet Store demo project">
-    <meta name="author" content="Team Static Startup">
+    <meta name="description" content="Ticket service demo project">
+    <meta name="author" content="S. Aleksejevs">
     <title>Add Product</title>
 </head>
 
 <body>
 
-<h3>Add product</h3>
+<h3>Add Flight</h3>
 
 <table>
     <tr>
-        <td>Name:</td>
-        <td>Description:</td>
-        <td>Price:</td>
+        <td>User ID:</td>
+        <td>Username:</td>
+    </tr>
+    <tr>
+        <form action="/user_mode/addFlight" th:object="${user}" method="get">
+            <td><input type="text" th:field="${user.id}"/></td>
+            <td><input type="text" th:field="${user.username}"/></td>
+        </form>
+    </tr>
+    <tr>
+        <td>Origin country:</td>
+        <td>Origin city:</td>
+        <td>Destination country:</td>
+        <td>Destination city:</td>
+        <td>Departure date:</td>
+        <td>Seat number:</td>
     </tr>
 
     <tr>
-        <form action="/product/addProduct" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.productName}"/></td>
-            <td><input type="text" th:field="${request.productDescription}"/></td>
-            <td><input type="text" th:field="${request.productPrice}"/></td>
+        <form action="/user_mode/addFlight" th:object="${ticket}" method="post">
+            <td><input type="text" th:field="${ticket.originCountry}"/></td>
+            <td><input type="text" th:field="${ticket.originCity}"/></td>
+            <td><input type="text" th:field="${ticket.destinationCountry}"/></td>
+            <td><input type="text" th:field="${ticket.destinationCity}"/></td>
+            <td><input type="text" th:field="${ticket.seat}"/></td>
             <td>
-                <input type="submit" value="Add Product"/>
+                <input type="submit" value="Add Flight"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
@@ -40,9 +55,7 @@
     </td>
 </table>
 
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
+<a href="/user_mode">back</a>
 
 </body>
 

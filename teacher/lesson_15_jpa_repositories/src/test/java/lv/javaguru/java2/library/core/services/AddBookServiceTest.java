@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import lv.javaguru.java2.library.core.database.BookRepository;
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
@@ -24,7 +25,7 @@ import lv.javaguru.java2.library.core.matchers.BookMatcher;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBookServiceTest {
 
-	@Mock private BookRepository bookRepository;
+	@Mock private JpaBookRepository bookRepository;
 	@Mock private AddBookRequestValidator validator;
 	@InjectMocks private AddBookService service;
 

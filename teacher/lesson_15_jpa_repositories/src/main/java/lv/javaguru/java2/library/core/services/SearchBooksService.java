@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.domain.Book;
 import lv.javaguru.java2.library.core.database.BookRepository;
 import lv.javaguru.java2.library.core.requests.Ordering;
@@ -29,7 +30,7 @@ public class SearchBooksService {
 	@Value("${search.paging.enabled}")
 	private boolean pagingEnabled;
 
-	@Autowired private BookRepository bookRepository;
+	@Autowired private JpaBookRepository bookRepository;
 	@Autowired private SearchBooksRequestValidator validator;
 
 	public SearchBooksResponse execute(SearchBooksRequest request) {

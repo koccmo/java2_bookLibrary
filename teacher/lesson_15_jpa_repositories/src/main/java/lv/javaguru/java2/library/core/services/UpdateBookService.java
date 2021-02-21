@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.database.BookRepository;
+import lv.javaguru.java2.library.core.database.jpa.JpaBookRepository;
 import lv.javaguru.java2.library.core.requests.UpdateBookRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
 import lv.javaguru.java2.library.core.responses.UpdateBookResponse;
@@ -16,7 +17,7 @@ import lv.javaguru.java2.library.core.services.validators.UpdateBookRequestValid
 @Transactional
 public class UpdateBookService {
 
-	@Autowired private BookRepository bookRepository;
+	@Autowired private JpaBookRepository bookRepository;
 	@Autowired private UpdateBookRequestValidator validator;
 
 	public UpdateBookResponse execute(UpdateBookRequest request) {
@@ -25,7 +26,7 @@ public class UpdateBookService {
 			return new UpdateBookResponse(errors);
 		}
 
-		return bookRepository.getById(request.getId())
+		return bookRepository.findById(request.getId())
 				.map(book -> {
 					book.setTitle(request.getNewTitle());
 					book.setAuthor(request.getNewAuthor());

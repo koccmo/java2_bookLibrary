@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Target list demo project">
+    <meta name="author" content="Vadims Vladisevs">
+    <title>Target list</title>
+</head>
+
+<body>
+
+<h3>Add target to list</h3>
+
+<table>
+    <tr>
+        <td><b>Enter Target name:</b></td>
+        <td><b>Enter Target description:</b></td>
+        <td><b>Enter Target deadline:</b></td>
+    </tr>
+
+    <tr>
+        <form action="/admin_menu/target/addTargetToList" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.name}"/></td>
+            <td><input type="text" th:field="${request.description}"/></td>
+            <td><input type="text" th:field="${request.deadline}"/></td>
+            <td>
+                <input type="submit" value="OK"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+<form action="/admin_menu/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import lv.javaguru.java2.library.core.database.ReaderRepository;
+import lv.javaguru.java2.library.core.database.jpa.JpaReaderRepository;
 import lv.javaguru.java2.library.core.domain.Reader;
 import lv.javaguru.java2.library.core.requests.RegisterReaderRequest;
 import lv.javaguru.java2.library.core.responses.CoreError;
@@ -17,7 +17,7 @@ import lv.javaguru.java2.library.core.services.validators.RegisterReaderRequestV
 @Transactional
 public class RegisterReaderService {
 
-	@Autowired private ReaderRepository readerRepository;
+	@Autowired private JpaReaderRepository readerRepository;
 	@Autowired private RegisterReaderRequestValidator validator;
 
 	public RegisterReaderResponse execute(RegisterReaderRequest request) {

@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lv.javaguru.java2.library.core.domain.ReaderBook;
 
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class ReaderBookRepository {
 
 	@Autowired

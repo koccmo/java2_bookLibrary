@@ -1,15 +1,17 @@
 package lv.javaguru.app.core.request;
 
-import lv.javaguru.app.core.domain.Flight;
+import lombok.*;
+import lv.javaguru.app.core.domain.Ticket;
+import lv.javaguru.app.core.domain.User;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddFlightRequest {
-	private final Flight Flight;
 
-	public AddFlightRequest (Flight flight) {
-		Flight = flight;
-	}
+	private User user;
 
-	public Flight getFlight () {
-		return Flight;
-	}
+	private Ticket ticket;
+
 }
