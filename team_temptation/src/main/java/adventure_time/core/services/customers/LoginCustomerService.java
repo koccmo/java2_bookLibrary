@@ -4,11 +4,10 @@ import adventure_time.core.domain.Customers;
 import adventure_time.core.requests.customers.LoginCustomerRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.customer.LoginCustomerResponse;
-import adventure_time.database.customers.DatabaseCustomers;
+import adventure_time.core.database.customers.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ import java.util.Optional;
 public class LoginCustomerService {
 
     @Autowired
-    private DatabaseCustomers database;
+    private CustomerRepository database;
     @Autowired
     private LoginCustomerRequestValidator validator;
 

@@ -19,7 +19,7 @@ public class UserAddAction extends Action implements UIActions {
 	public void execute () {
 		User user = fillRegistrationForm();
 
-		UserAddRequest request = new UserAddRequest(user.getName(), user.getLastName());
+		UserAddRequest request = new UserAddRequest(user.getUsername(), user.getPassword());
 		UserAddResponse response = userAddService.execute(request);
 
 		if (response.hasErrors())

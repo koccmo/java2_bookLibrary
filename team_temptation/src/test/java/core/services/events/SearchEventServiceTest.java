@@ -7,7 +7,7 @@ import adventure_time.core.requests.Paging;
 import adventure_time.core.requests.events.SearchEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.SearchEventResponse;
-import adventure_time.database.events.EventDatabase;
+import adventure_time.core.database.events.EventRepository;
 import adventure_time.core.domain.Events;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,7 @@ class SearchEventServiceTest {
 //     private EventDatabase database;
 
     @Mock private SearchEventRequestValidator validator;
-    @Mock private EventDatabase database;
+    @Mock private EventRepository database;
     @InjectMocks private SearchEventService service;
 
 

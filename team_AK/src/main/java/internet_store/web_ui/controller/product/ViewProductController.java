@@ -13,7 +13,7 @@ public class ViewProductController {
     @Autowired
     private ProductsPagingService paging;
 
-    @GetMapping(value = "view_product")
+    @GetMapping(value = "/service/view_product")
     public String showProduct(ModelMap modelMap) {
         paging.startPaging();
 

@@ -48,37 +48,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light">
                                 <div th:text="${cartCount}"></div>
                     </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about"><b>About</b></a>
+                    <a class="nav-link" href="#"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact"><b>Contact</b></a>
+                    <a class="nav-link" href="#"><b>Contact</b></a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropDown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href=""><b>Service</b></a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropDown">
-                        <form id="pass_enter">
-                            <li onclick="pass_enter.submit();">
-                                <div class="input-group">
-                                    &nbsp&nbsp<input name="pass" type="password" class="form-control form-control-sm"
-                                                     placeholder="password">
-                                    <button type="submit" class="btn btn-primary btn-sm"
-                                            formaction="/pass" value="pass"
-                                            formmethod="post">Ok
-                                    </button>
-                                    &nbsp&nbsp
-                                </div>
-                            </li>
-                        </form>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service_login_all_categories"><b>Service</b></a>
                 </li>
             </ul>
         </div>
@@ -93,10 +75,10 @@
                 <h3 class="my-4" style="color:#007BFF;">Categories</h3>
             </center>
             <div class="list-group">
-                <a href="categories" class="list-group-item"><b>All Categories</b></a>
-                <a href="category_1" class="list-group-item"><b>Category 1</b></a>
-                <a href="category_2" class="list-group-item"><b>Category 2</b></a>
-                <a href="category_3" class="list-group-item"><b>Category 3</b></a>
+                <a href="/estore/categories" class="list-group-item"><b>All Categories</b></a>
+                <a href="/estore/category_1" class="list-group-item"><b>Category 1</b></a>
+                <a href="/estore/category_2" class="list-group-item"><b>Category 2</b></a>
+                <a href="/estore/category_3" class="list-group-item"><b>Category 3</b></a>
             </div>
             <p></p>
             <div class="input-group mb-3">
@@ -111,10 +93,10 @@
                                         aria-haspopup="true" aria-expanded="false">Search</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                     <button name="clientName" class="dropdown-item" type="submit"
-                                            formaction="/search_product" formmethod="post"
+                                            formaction="/estore/search_product" formmethod="post"
                                             value="name" data-value="search">Search by Title</button>
                                     <button name="clientName" class="dropdown-item" type="submit"
-                                            formaction="/search_product_price" formmethod="post"
+                                            formaction="/estore/search_product_price" formmethod="post"
                                             value="surname" data-value="search">Search by Price</button>
                                 </div>
                             </div>
@@ -139,24 +121,24 @@
             </div>
 
             <div class="row row-cols-1 row-cols-md-3">
-                <div th:each="products : ${products}">
+                <div th:each="product : ${products}">
                     <div class="col-lg-10 col-md-6 mb-4">
                         <div class="card h-51" style="width:250px">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <div th:text="${products.title}"></div>
+                                    <div th:text="${product.title}"></div>
                                 </h5>
                                 <h5>
-                                    <div th:text="'€'+${products.price}"></div>
+                                    <div th:text="'€'+${product.price}"></div>
                                 </h5>
                                 <p class="card-text"><small>
-                                    <tr th:text="${products.description}">
+                                    <tr th:text="${product.description}">
                                 </small></p>
                                 <h6 class="card-category"><small>
-                                    <tr th:text="'Category&nbsp'+${products.category}"></tr>
+                                    <tr th:text="'Category&nbsp'+${product.category}"></tr>
                                 </small></h6>
                                 <h6 class="card-category"><small>
-                                    <tr th:text="'In Stock:&nbsp'+${products.quantity}">
+                                    <tr th:text="'In Stock:&nbsp'+${product.quantity}">
                                 </small></h6>
                             </div>
                             <div class="card-footer">
@@ -167,8 +149,8 @@
                                                    min="1"/>
 
                                             <button type="submit" class="btn btn-primary btn"
-                                                    formmethod="post" formaction="/buy_product_all_categories"
-                                                    th:name="productTitle" th:value="${products.title}"
+                                                    formmethod="post" formaction="/estore/buy_product_all_categories"
+                                                    th:name="productTitle" th:value="${product.title}"
                                                     data-value="quantity">Buy
                                             </button>
                                         </div>
@@ -182,7 +164,7 @@
 
             <center>
                 <div class="one_row">
-                    <form action="/categories_prev">
+                    <form action="/estore/categories_prev">
                         <button type="submit" formmethod="post"
                                 class="btn btn-outline-primary">Prev
                         </button>
@@ -192,7 +174,7 @@
                     <div th:text="${pages}"></div>
                 </div>
                 <div class="one_row">
-                    <form action="/categories_next">
+                    <form action="/estore/categories_next">
                         <button type="submit" formmethod="post"
                                 class="btn btn-outline-primary">Next
                         </button>

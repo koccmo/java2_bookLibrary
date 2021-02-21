@@ -5,8 +5,7 @@ import adventure_time.core.services.events.RemoveEventService;
 import adventure_time.core.requests.events.RemoveEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.RemoveEventResponse;
-import adventure_time.database.events.EventDatabase;
-import adventure_time.core.domain.Events;
+import adventure_time.core.database.events.EventRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 class RemoveEventServiceTest {
 
     @Mock
-    private EventDatabase database;
+    private EventRepository database;
     @Mock private RemoveEventRequestValidator validator;
     @InjectMocks
     private RemoveEventService service;

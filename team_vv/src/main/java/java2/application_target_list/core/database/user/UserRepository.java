@@ -1,9 +1,11 @@
 package java2.application_target_list.core.database.user;
 
 
+import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository {
     void addUser(User user);
@@ -14,5 +16,5 @@ public interface UserRepository {
     List<User> findUserByFirstName(String userFirstName);
     List<User> findUserByLastName(String userLastName);
     boolean isIdInUserList(Long userId);
-
+    Optional<User> getById(Long id);
 }

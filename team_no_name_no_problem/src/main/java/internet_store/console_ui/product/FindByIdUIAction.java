@@ -29,7 +29,7 @@ public class FindByIdUIAction implements UIAction {
             findByIdResponse.getErrors().forEach(System.out::println);
         }else{
             System.out.println("Product with id " + id);
-            System.out.println(findByIdResponse.getProduct());
+            System.out.println(findByIdResponse.getProducts());
         }
     }
 }

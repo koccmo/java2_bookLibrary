@@ -3,9 +3,7 @@ package adventure_time.core.services.events;
 import adventure_time.core.requests.events.RemoveEventRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.events.RemoveEventResponse;
-import adventure_time.database.events.EventDatabase;
-import adventure_time.dependencies.DIComponent;
-import adventure_time.dependencies.DIDependency;
+import adventure_time.core.database.events.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import java.util.List;
 public class RemoveEventService {
 //    @DIDependency
     @Autowired
-    private EventDatabase databaseEvents;
+    private EventRepository databaseEvents;
 //    @DIDependency
     @Autowired private RemoveEventRequestValidator validator;
 

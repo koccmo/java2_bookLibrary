@@ -20,7 +20,6 @@ public class CategoryThreePagingService {
     @Autowired
     private ProductRepository productRepository;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -37,7 +36,6 @@ public class CategoryThreePagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = RECORDS_COUNT_ON_PAGE;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
         listOnePage = productRepository.getLimitsProductsCategoryThree(RECORDS_COUNT_ON_PAGE, startRecordOffset);
@@ -63,7 +61,6 @@ public class CategoryThreePagingService {
         } else {
             currentPage++;
             startRecordOffset += RECORDS_COUNT_ON_PAGE;
-            endRecordOffset += RECORDS_COUNT_ON_PAGE;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -74,7 +71,6 @@ public class CategoryThreePagingService {
         if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = RECORDS_COUNT_ON_PAGE;
             isFirstPage = true;
             isLastPage = false;
         } else {

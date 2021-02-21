@@ -9,8 +9,8 @@ public class SearchProductRequest {
     private String description;
     private Integer startPrice;
     private Integer endPrice;
-    private Ordering ordering;
-    private Paging paging;
+    public Ordering ordering;
+    public Paging paging;
 
     public SearchProductRequest(String title, String description, Integer startPrice,
                                 Integer endPrice, Ordering ordering, Paging paging){

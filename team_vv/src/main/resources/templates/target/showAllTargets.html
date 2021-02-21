@@ -5,6 +5,19 @@
     <meta charset="utf-8">
     <meta name="description" content="Target list demo project">
     <meta name="author" content="Vadims Vladisevs">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .table1 {
+         border-collapse: collapse;
+
+    }
+    th, td {
+    text-align: left;
+    padding: 8px;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2;}
+        }
+    </style>
     <title>Target list</title>
 </head>
 
@@ -12,11 +25,11 @@
 
 <h3>Show all targets in the list</h3>
 
-<table>
+<table class="table1">
     <tr>
-        <td>Target name</td>
-        <td>Target description</td>
-        <td>Target deadline</td>
+        <td><b>Target name</b></td>
+        <td><b>Target description</b></td>
+        <td><b>Target deadline</b></td>
     </tr>
 
     <td th:if="${targets != null}">

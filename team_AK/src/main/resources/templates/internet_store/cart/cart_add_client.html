@@ -61,37 +61,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light">
                                 <div th:text="${cartCount}"></div>
                     </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about"><b>About</b></a>
+                    <a class="nav-link" href="#"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact"><b>Contact</b></a>
+                    <a class="nav-link" href="#"><b>Contact</b></a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropDown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" href=""><b>Service</b></a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropDown">
-                        <form id="pass_enter">
-                            <li onclick="pass_enter.submit();">
-                                <div class="input-group">
-                                    &nbsp&nbsp<input name="pass" type="password" class="form-control form-control-sm"
-                                                     placeholder="password">
-                                    <button type="submit" class="btn btn-primary btn-sm"
-                                            formaction="/pass" value="pass"
-                                            formmethod="post">Ok
-                                    </button>
-                                    &nbsp&nbsp
-                                </div>
-                            </li>
-                        </form>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service"><b>Service</b></a>
                 </li>
             </ul>
         </div>
@@ -194,7 +176,7 @@
                            placeholder="Enter email address">
                     <p></p>
                     <center>
-                        <button type="submit" formaction="/order_add_client" th:object="${client}"
+                        <button type="submit" formaction="/estore/order_add_client" th:object="${client}"
                                 formmethod="post" data-target="#infoMessage"
                                 class="btn btn-outline-primary">Apply
                         </button>

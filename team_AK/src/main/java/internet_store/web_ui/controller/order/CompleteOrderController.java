@@ -46,7 +46,7 @@ public class CompleteOrderController {
     @Autowired
     private FindSessionService findSessionService;
 
-    @GetMapping(value = "/cart_make_order")
+    @GetMapping(value = "/estore/cart_make_order")
     public String getCartOrder(ModelMap modelMap) {
         Client client = sessionService.getSessionClient();
 
@@ -71,7 +71,7 @@ public class CompleteOrderController {
         return "cart/cart_make_order";
     }
 
-    @PostMapping(value = "/make_order")
+    @PostMapping(value = "/estore/make_order")
     public String makeOrder(@ModelAttribute(value = "client") Client client, ModelMap modelMap) {
 
         orderService.saveOrder();

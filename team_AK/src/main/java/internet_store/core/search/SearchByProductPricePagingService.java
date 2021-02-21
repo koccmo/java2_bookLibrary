@@ -20,7 +20,6 @@ public class SearchByProductPricePagingService {
     @Autowired
     private ProductRepository productRepository;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -39,7 +38,6 @@ public class SearchByProductPricePagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = RECORDS_COUNT_ON_PAGE;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
         listOnePage = productRepository.searchByPrice(this.searchPrice, RECORDS_COUNT_ON_PAGE, startRecordOffset);
@@ -65,7 +63,6 @@ public class SearchByProductPricePagingService {
         } else {
             currentPage++;
             startRecordOffset += RECORDS_COUNT_ON_PAGE;
-            endRecordOffset += RECORDS_COUNT_ON_PAGE;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -76,7 +73,6 @@ public class SearchByProductPricePagingService {
         if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = RECORDS_COUNT_ON_PAGE;
             isFirstPage = true;
             isLastPage = false;
         } else {

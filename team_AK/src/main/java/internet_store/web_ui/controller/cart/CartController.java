@@ -35,7 +35,7 @@ public class CartController {
     @Autowired
     private SessionService sessionService;
 
-    @GetMapping(value = "/cart")
+    @GetMapping(value = "/estore/cart")
     public String getCart(ModelMap modelMap) {
         long countProductInCart = cartCountService.getCartCount();
 
@@ -50,7 +50,7 @@ public class CartController {
         return "cart/cart";
     }
 
-    @PostMapping(value = "/view_cart_next")
+    @PostMapping(value = "/estore/view_cart_next")
     public String nextPageCartControl(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -63,7 +63,7 @@ public class CartController {
         return "cart/cart";
     }
 
-    @PostMapping(value = "/view_cart_prev")
+    @PostMapping(value = "/estore/view_cart_prev")
     public String prevPageCartControl(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");
@@ -76,7 +76,7 @@ public class CartController {
         return "cart/cart";
     }
 
-    @PostMapping(value = "/deleted_from_cart")
+    @PostMapping(value = "/estore/deleted_from_cart")
     public String deleteProductFromCart(@RequestParam(value = "deletedProduct") Long deletedCartId,
                                         ModelMap modelMap) {
 

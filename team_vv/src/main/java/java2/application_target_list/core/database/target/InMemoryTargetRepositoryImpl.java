@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class InMemoryTargetRepositoryImpl implements TargetRepository {
@@ -92,6 +93,11 @@ public class InMemoryTargetRepositoryImpl implements TargetRepository {
             }
         }
         return targets;
+    }
+
+    @Override
+    public Optional<Target> getById(Long id) {
+        return Optional.empty();
     }
 
     private int getTargetIndexFromListById(Long targetId) {

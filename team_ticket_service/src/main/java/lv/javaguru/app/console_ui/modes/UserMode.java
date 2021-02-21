@@ -56,7 +56,7 @@ public class UserMode {
 
 
 	private static void userMode_printMainMenu (User currentUser) {
-		BaseFunc.printHeader("MENU", currentUser.getName());
+		BaseFunc.printHeader("MENU", currentUser.getUsername());
 		System.out.println(
 				"[1] Add flight\n" +
 						"[2] Show all flights\n" +

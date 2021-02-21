@@ -8,9 +8,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserModeController {
 
-	@GetMapping(value = "/user_mode")
-	public String showUserModePage(ModelMap modelMap) {
-	//	modelMap.addAttribute("request", new UserAddRequest());
-		return "user_mode";
-	}
+
 }

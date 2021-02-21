@@ -20,13 +20,13 @@ public class FlightShowAllAction extends Action implements UIActions {
 		User currUser = getLoggedInUser();
 
 		FlightShowAllRequest request = new FlightShowAllRequest(currUser);
-		FlightShowAllResponse<?> response = flightShowAllService.execute(request);
+		FlightShowAllResponse response = flightShowAllService.execute(request);
 
 		if (response.hasErrors())
-			BaseFunc.printHeader("Error:", getLoggedInUser().getName());
+			BaseFunc.printHeader("Error:", getLoggedInUser().getUsername());
 		else
-			BaseFunc.printHeader("Flight list:", getLoggedInUser().getName());
+			BaseFunc.printHeader("Flight list:", getLoggedInUser().getUsername());
 
-		response.printResponse();
+		response.getListAsString();
 	}
 }

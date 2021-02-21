@@ -23,13 +23,13 @@ import java.util.Scanner;
         long id = in.nextLong();
 
         FindCustomerByIdRequest findCustomersByIdRequest = new FindCustomerByIdRequest(id);
-        FindCustomerByIdResponse findCUstomerByIdResponse = findCustomerByIdService.execute(findCustomersByIdRequest);
+        FindCustomerByIdResponse findCustomerByIdResponse = findCustomerByIdService.execute(findCustomersByIdRequest);
 
-        if (findCUstomerByIdResponse.hasErrors()){
-            findCUstomerByIdResponse.getErrors().forEach(System.out::println);
+        if (findCustomerByIdResponse.hasErrors()){
+            findCustomerByIdResponse.getErrors().forEach(System.out::println);
         } else {
             System.out.println("Customer with id: " + id);
-            System.out.println(findCUstomerByIdResponse.getCustomer().get());
+            System.out.println(findCustomerByIdResponse.getCustomers());
         }
     }
 }

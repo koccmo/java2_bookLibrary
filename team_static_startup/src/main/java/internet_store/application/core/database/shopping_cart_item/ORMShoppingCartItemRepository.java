@@ -2,7 +2,6 @@ package internet_store.application.core.database.shopping_cart_item;
 
 import internet_store.application.core.database.product.ProductRepository;
 import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
-import internet_store.application.core.domain.Customer;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.domain.ProductShoppingCart;
 import internet_store.application.core.domain.ShoppingCart;
@@ -10,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -59,4 +59,12 @@ public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository
             return Optional.of(productShoppingCart);
         }
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE ProductShoppingCart WHERE id = :id");
+        query.setParameter("id", id);
+        return query.executeUpdate() == 0;
+    }
+
 }
