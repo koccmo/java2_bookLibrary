@@ -97,13 +97,14 @@ public class JdbcDatabase {
 	}
 
 	public Ticket getAddedTicketId (Ticket ticket) {
-		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
+	//	String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
+		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND seat = ?";
 		Object[] args = new Object[]{
 				ticket.getOriginCountry(),
 				ticket.getOriginCity(),
 				ticket.getDestinationCountry(),
 				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
+			//	ticket.getDepartureDate(),
 				ticket.getSeat()
 		};
 		List<Ticket> tickets = jdbcTemplate.query(sql, args, new TicketRowMapper());
@@ -112,14 +113,15 @@ public class JdbcDatabase {
 	}
 
 	public void addTicket (Ticket ticket) {
-		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
-				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		//String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
+		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, seat) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		Object[] args = new Object[]{
 				ticket.getOriginCountry(),
 				ticket.getOriginCity(),
 				ticket.getDestinationCountry(),
 				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
+			//	ticket.getDepartureDate(),
 				ticket.getSeat()
 		};
 

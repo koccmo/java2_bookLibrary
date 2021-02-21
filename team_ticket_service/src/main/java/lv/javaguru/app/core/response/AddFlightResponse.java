@@ -4,12 +4,12 @@ import lv.javaguru.app.core.domain.CodeError;
 
 import java.util.List;
 
-public class FlightAddResponse extends  Response{
+public class AddFlightResponse extends  Response{
 
-    public FlightAddResponse () {
+    public AddFlightResponse () {
     }
 
-    public FlightAddResponse (List<CodeError> errorList) {
+    public AddFlightResponse (List<CodeError> errorList) {
         super(errorList);
     }
 }

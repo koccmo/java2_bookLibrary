@@ -21,8 +21,10 @@ public class UserShowAllService {
 	private UserRepository userRepository;
 
 	public UserShowAllResponse<?> execute (UserShowAllRequest request) {
-		List<?> errorList = validate(request.getUser());
+		List<?> errorList = new ArrayList<>();
 
+		if (request.getUser() != null)
+			errorList = validate(request.getUser());
 
 		if (!errorList.isEmpty()) {
 			return new UserShowAllResponse<>(errorList);
@@ -42,8 +44,8 @@ public class UserShowAllService {
 
 		if (u == null)
 			errorList.add(new CodeError("User", "no user in database"));
-	//	if (user.getPersonType() != PersonType.ADMIN)
-	//		errorList.add(new CodeError("User", "User don't have required permission!"));
+		//	if (user.getPersonType() != PersonType.ADMIN)
+		//		errorList.add(new CodeError("User", "User don't have required permission!"));
 
 		return errorList;
 	}

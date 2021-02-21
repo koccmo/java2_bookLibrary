@@ -42,11 +42,11 @@ public class TicketFiller {
 			return false;
 		}
 
-		Date date = acquireDate(ticket);
-		if (date != null)
-			ticket.setDepartureDate(date);
-		else
-			return false;
+	//	Date date = acquireDate(ticket);
+	//	if (date != null)
+	//		ticket.setDepartureDate(date);
+	//	else
+	//		return false;
 
 
 		System.out.println("Enter seat: ");

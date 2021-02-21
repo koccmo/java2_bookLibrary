@@ -1,9 +1,11 @@
 package lv.javaguru.app.core.services;
 
+import lv.javaguru.app.core.domain.Role;
 import lv.javaguru.app.core.domain.User;
 import lv.javaguru.app.core.request.FlightShowAllRequest;
 import lv.javaguru.app.core.domain.CodeError;
 import lv.javaguru.app.core.response.FlightShowAllResponse;
+import lv.javaguru.app.database.repository.AuthoritiesRepository;
 import lv.javaguru.app.database.repository.FlightRepository;
 import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,12 @@ public class FlightShowAllService {
 
 	@Autowired
 	private FlightRepository flightRepository;
+
+	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private AuthoritiesRepository authoritiesRepository;
 
 
 	public FlightShowAllResponse execute (FlightShowAllRequest request) {
@@ -28,6 +35,13 @@ public class FlightShowAllService {
 		if (!responseList.isEmpty()) {
 			return new FlightShowAllResponse(responseList.toString());
 		}
+
+		Role userRole = authoritiesRepository.getUserRoleByUsername(request.getUser().getUsername());
+
+		if (userRole.getAuthority().equals("ROLE_ADMIN"))
+			responseList = flightRepository.getAllFlights();
+
+		if (userRole.getAuthority().equals("ROLE_USER"))
 			responseList = flightRepository.getAllUserFlights(request.getUser());
 
 		return new FlightShowAllResponse(responseList.toString());

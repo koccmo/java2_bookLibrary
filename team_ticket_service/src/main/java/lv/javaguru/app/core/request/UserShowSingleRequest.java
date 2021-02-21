@@ -1,14 +1,16 @@
 package lv.javaguru.app.core.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserShowSingleRequest {
-	private final Long id;
 
-	public UserShowSingleRequest (Long id) {
-		this.id = id;
-	}
+	private Long id;
 
-	public Long getId () {
-		return id;
-	}
 }

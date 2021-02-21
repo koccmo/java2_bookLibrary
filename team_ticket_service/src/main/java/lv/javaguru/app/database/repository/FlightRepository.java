@@ -11,6 +11,8 @@ public interface FlightRepository {
 
 	boolean deleteFlightById (Long id);
 
+	boolean deleteFlightsByUserId (Long id);
+
 	Flight getFlightById (Long id);
 
 	List<Flight> getAllFlights ();

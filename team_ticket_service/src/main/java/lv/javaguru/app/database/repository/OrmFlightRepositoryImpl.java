@@ -29,6 +29,15 @@ public class OrmFlightRepositoryImpl implements FlightRepository {
 		return result == 1;
 	}
 
+	@Override
+	public boolean deleteFlightsByUserId (Long id) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"DELETE Flight WHERE users_id = :id");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
+		return result == 1;
+	}
+
 	public Flight getFlightById (Long id) {
 		return sessionFactory.getCurrentSession()
 				.get(Flight.class, id);

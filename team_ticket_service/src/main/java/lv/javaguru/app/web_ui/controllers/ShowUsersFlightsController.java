@@ -19,7 +19,7 @@ public class ShowUsersFlightsController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping(value = "user_mode/showflights")
+	@GetMapping(value = "user_mode/showFlights")
 	public String showUserFlights (ModelMap modelMap) {
 
 	Object principal = SecurityContextHolder.getContext()
@@ -30,7 +30,7 @@ public class ShowUsersFlightsController {
 		FlightShowAllRequest request = new FlightShowAllRequest(user);
 		FlightShowAllResponse response = flightShowAllService.execute(request);
 		modelMap.addAttribute("flights", response.getListAsString());
-		return "user_mode/showflights";
+		return "user_mode/showFlights";
 	}
 
 }
