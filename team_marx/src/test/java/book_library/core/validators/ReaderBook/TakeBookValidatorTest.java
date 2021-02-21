@@ -108,7 +108,7 @@ public class TakeBookValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenBooIdIsNotPresenceInBookRepository() throws ParseException {
+    public void shouldReturnErrorWhenBookIdIsNotPresenceInBookRepository() throws ParseException {
         SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date bookOutDate = formatter1.parse("2020/01/01 14:45");
         TakeBookRequest request = new TakeBookRequest(1L,1L, bookOutDate);
