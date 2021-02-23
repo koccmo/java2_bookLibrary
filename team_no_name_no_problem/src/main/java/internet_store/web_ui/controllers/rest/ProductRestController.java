@@ -5,7 +5,7 @@ import internet_store.core.response.product.*;
 import internet_store.core.services.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-/*
+
 @RestController
 @RequestMapping("/product")
 
@@ -19,7 +19,7 @@ public class ProductRestController {
         SearchProductByIdRequest request = new SearchProductByIdRequest(id);
         return searchProductByIdService.execute(request);
     }
-
+/*
     @Autowired
     private SearchProductByOtherService searchProductByTitle;
 
@@ -29,6 +29,8 @@ public class ProductRestController {
         return searchProductByTitle.execute(request);
     }
 
+ */
+/*
     @Autowired
     private SearchProductByOtherService searchProductByDescription;
 
@@ -47,6 +49,8 @@ public class ProductRestController {
         return searchProductByPriceRange.execute(request);
     }
 
+ */
+/*
     @Autowired
     private SearchProductByOtherService searchProductByTitleAndDescription;
 
@@ -56,6 +60,8 @@ public class ProductRestController {
         return searchProductByPriceRange.execute(request);
     }
 
+ */
+/*
     @Autowired
     private SearchProductByOtherService searchProductByTitleAndPriceRange;
 
@@ -65,6 +71,8 @@ public class ProductRestController {
         return searchProductByPriceRange.execute(request);
     }
 
+ */
+/*
     @Autowired
     private SearchProductByOtherService searchProductByTitleAndDescriptionAndPriceRange;
 
@@ -73,7 +81,7 @@ public class ProductRestController {
         SearchProductByOtherRequest request = new SearchProductByOtherRequest(title,"",startPrice,endPrice,null,null);
         return searchProductByPriceRange.execute(request);
     }
-
+*/
     @Autowired
     private AddProductService addProductService;
 
@@ -93,16 +101,16 @@ public class ProductRestController {
     public ChangeProductResponse changeProduct(@RequestBody ChangeProductRequest request) {
         return changeProductService.execute(request);
     }
-
+/*
     @Autowired
     private DeleteProductByIdService deleteProductByIdService;
-
+/*
     @DeleteMapping(path = "/{id}", produces = "application/json")
     public DeleteProductByIdResponse deleteProduct(@PathVariable Long id) {
         DeleteProductByIdRequest request = new DeleteProductByIdRequest(id);
         return deleteProductByIdService.execute(request);
     }
-
+*/
     @Autowired
     private DeleteProductByOtherService deleteProductByTitle;
 
@@ -111,7 +119,7 @@ public class ProductRestController {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",null,null);
         return deleteProductByTitle.execute(request);
     }
-
+/*
     @Autowired
     private DeleteProductByOtherService deleteProductByDescription;
 
@@ -138,7 +146,7 @@ public class ProductRestController {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,"",startPrice,endPrice);
         return deleteProductByTitleAnPriceRange.execute(request);
     }
-
+/*
     @Autowired
     private DeleteProductByOtherService deleteProductByDescriptionAnPriceRange;
 
@@ -147,17 +155,18 @@ public class ProductRestController {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest("",description,startPrice,endPrice);
         return deleteProductByDescriptionAnPriceRange.execute(request);
     }
-
+/*
     @Autowired
     private DeleteProductByOtherService deleteProductByTitleAndDescriptionAndPriceRange;
 
-    @DeleteMapping(path = "/{title}/{description}", produces = "application/json")
+    @DeleteMapping(path = "/{title}/{description}/{startPrice}/{endPrice}", produces = "application/json")
     public DeleteProductByOtherResponse deleteProductByTitleAndDescriptionAndPriceRange(@PathVariable String title, String description, Integer startPrice, Integer endPrice) {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,description,startPrice,endPrice);
         return deleteProductByTitleAndDescriptionAndPriceRange.execute(request);
     }
+*/
+
 
 }
 
- */
 
