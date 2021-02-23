@@ -1,61 +1,44 @@
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: #800040;
+.header {
+    height: 200px;
+    font-family: italic, serif;
+    text-align: center;
+    font-size: 50px;
+    border-style: solid;
+    background-color: #f0f0f0;
+    box-align: center;
 }
 
-page{
+.page{
+    overflow: hidden;
+    background-color: #f0f0f0;
     width: 900px;
     margin: 0 auto;
 }
 
-h3{
-    height: 100px;
-    background-color: #ffe6f2;
-    font-family: "Brush Script MT", "Courier New", serif;
-    font-size: 4em;
-    color: white;
-    text-shadow: 2px 2px 5px #ffffff;
-    text-align: center;
-}
 .ADM{
     float: left;
-                    width: 47%;
-                    margin: 20px 1.15%;
-                    height: 680px;
-                    background-color: #ffe6f2;
-                    font-family: "Brush Script MT", "Courier New", serif;
-                    font-size: 2em;
-                    text-align: center;
+    width: 47%;
+    margin: 20px 1.15%;
+    height: 680px;
+    font-family: italic, serif;
+    text-align: center;
+    font-size: 1.5em;
+    border-box: solid;
 }
 
 .CM{
-    float: left;
-                    width: 47%;
-                    margin: 20px 1.15%;
-                    height: 680px;
-                    background-color: #ffe6f2;
-                    font-family: "Brush Script MT", "Courier New", serif;
-                    font-size: 2em;
-                    text-align: center;
+    float: right;
+    width: 47%;
+    margin: 20px 1.15%;
+    height: 680px;
+    font-family: italic, serif;
+    text-align: center;
+    font-size: 1.5em;
+    border-box: solid;
 }
 
-.page{
-     overflow: hidden;
-                    background-color: #660033;
-}
-
-.header{
-    height: 10px;
-                    background-color: #ffe6f2;
-                    font-family: "Brush Script MT", "Courier New", serif;
-
-}
-
-.content{
-    float: left;
-                    width: 1950px;
-                    height: 80px;
-                    background-color: #ffe6f2;
+body{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 20px;
 }
