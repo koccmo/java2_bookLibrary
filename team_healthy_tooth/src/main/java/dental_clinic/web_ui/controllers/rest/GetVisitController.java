@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("visit")
+@RequestMapping("/visit")
 public class GetVisitController {
 
     @Autowired private GetVisitService getVisitService;
@@ -24,7 +24,7 @@ public class GetVisitController {
     @Autowired private SearchVisitByDateService searchVisitByDateService;
     @Autowired private SearchVisitByPatientIdService searchVisitByPatientIdService;
 
-    @GetMapping(path = "/id", produces = "application/json")
+    @GetMapping(path = "/{id}", produces = "application/json")
     public GetVisitResponse getVisit(@PathVariable Long id) {
         GetVisitRequest getVisitRequest = new GetVisitRequest(id);
         return getVisitService.execute(getVisitRequest);
