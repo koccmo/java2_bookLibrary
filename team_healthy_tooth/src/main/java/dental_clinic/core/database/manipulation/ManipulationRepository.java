@@ -15,7 +15,7 @@ public interface ManipulationRepository {
 
     void deactivateManipulation(Long id);
 
-    boolean containsTheSameManipulation (Manipulation manipulation);
+    boolean containsTheSameManipulation (String manipulationType, Integer price);
 
     boolean manipulationIsActive(Long id);
 
