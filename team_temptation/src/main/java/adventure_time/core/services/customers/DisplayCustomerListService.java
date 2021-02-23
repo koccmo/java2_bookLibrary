@@ -13,12 +13,9 @@ public class DisplayCustomerListService {
     @Autowired
     private CustomerRepository database;
 
-    public List<Customers> getActiveCustomersList () {
-        return database.findAllActiveCustomers();
+    public List<Customers> getCustomersList() {
+        return database.findAllCustomers();
     }
 
-    public List<Customers> getInactiveCustomersList () {
-        return database.findAllInactiveCustomers();
-    }
 
 }
