@@ -131,8 +131,7 @@ public class SearchProductServiceTest {
                                      request1.getDescription())).thenReturn(products);
 
         SearchProductByOtherResponse response = searchProductService.execute(request1);
-        assertTrue(response.getProducts().get(0).getTitle().equals("Mobile phone"));
-        assertTrue(response.getProducts().size() == 1);
+        assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
 
