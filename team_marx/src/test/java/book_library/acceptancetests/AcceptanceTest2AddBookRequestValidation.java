@@ -2,9 +2,9 @@ package book_library.acceptancetests;
 
 import book_library.DatabaseCleaner;
 import book_library.config.BookListConfiguration;
-import book_library.core.requests.AddBookRequest;
-import book_library.core.responses.AddBookResponse;
-import book_library.core.services.AddBookService;
+import book_library.core.requests.Book.AddBookRequest;
+import book_library.core.responses.Book.AddBookResponse;
+import book_library.core.services.Book.AddBookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

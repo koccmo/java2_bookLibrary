@@ -5,9 +5,10 @@ import internet_store.core.response.product.*;
 import internet_store.core.services.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+/*
 @RestController
 @RequestMapping("/product")
+
 public class ProductRestController {
 
     @Autowired
@@ -157,4 +158,6 @@ public class ProductRestController {
     }
 
 }
+
+ */
 
