@@ -25,9 +25,9 @@
 
                 <tr>
                     <form action="/addDoctor" th:object="${request}" method="post">
-                        <td><input type="text" th:field="${request.doctor.name}"/></td>
-                        <td><input type="text" th:field="${request.doctor.surname}"/></td>
-                        <td><input type="text" th:field="${request.doctor.phone}"/></td>
+                        <td><input type="text" th:field="${request.name}"/></td>
+                        <td><input type="text" th:field="${request.surname}"/></td>
+                        <td><input type="text" th:field="${request.phone}"/></td>
                         <td>
                             <input type="submit" value="Add Doctor"/>
                             <input type="reset" value="Clear"/>
