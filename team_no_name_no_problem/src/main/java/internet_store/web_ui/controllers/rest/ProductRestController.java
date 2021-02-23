@@ -155,5 +155,6 @@ public class ProductRestController {
         DeleteProductByOtherRequest request = new DeleteProductByOtherRequest(title,description,startPrice,endPrice);
         return deleteProductByTitleAndDescriptionAndPriceRange.execute(request);
     }
+
 }
 
