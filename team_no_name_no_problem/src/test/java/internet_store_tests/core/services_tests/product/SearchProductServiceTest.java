@@ -206,7 +206,7 @@ public class SearchProductServiceTest {
 
         SearchProductByOtherResponse response = searchProductService.execute(request);
         assertTrue(response.getProducts().contains(pen));
-        assertTrue(response.getProducts().size() == 1);
+        assertFalse(response.hasErrors());
     }
 
     @Test
