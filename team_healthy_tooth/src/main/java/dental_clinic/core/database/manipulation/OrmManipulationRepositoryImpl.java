@@ -48,8 +48,11 @@ public class OrmManipulationRepositoryImpl implements ManipulationRepository{
     }
 
     @Override
-    public boolean containsTheSameManipulation(Manipulation manipulation) {
-        return sessionFactory.getCurrentSession().contains(manipulation);
+    public boolean containsTheSameManipulation(String manipulationType, Integer price) {
+        List<Manipulation>manipulations = getManipulationsList();
+        return manipulations.stream()
+                .anyMatch(manipulation -> manipulation.getManipulationType().equals(manipulationType) &&
+                        manipulation.getPrice().equals(price));
     }
 
     @Override
