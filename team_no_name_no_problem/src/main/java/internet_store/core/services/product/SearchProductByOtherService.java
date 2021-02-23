@@ -102,7 +102,8 @@ public class SearchProductByOtherService {
 
     private SearchProductByOtherResponse searchByTitleAndDescriptionAndPriceIsProvided(SearchProductByOtherRequest searchProductRequest){
         List <CoreError>errors = new ArrayList<>();
-        List <Product> products = productDatabase.searchAllByTitleAndDescription(searchProductRequest.getTitle(), searchProductRequest.getDescription());
+        List <Product> products = productDatabase.searchAllByTitleAndDescriptionAndPriceRange(searchProductRequest.getTitle(), searchProductRequest.getDescription(),
+                                                                                              searchProductRequest.getStartPrice(),searchProductRequest.getEndPrice());
         if (products.isEmpty()){
             errors.add(new CoreError("database", "Database doesn't contain product with title: " +
                     searchProductRequest.getTitle() + ", description: " + searchProductRequest.getDescription() +
