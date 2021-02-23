@@ -113,7 +113,8 @@ public class SearchProductServiceTest {
 
         SearchProductByOtherResponse response = searchProductService.execute(request1);
         assertTrue(products.size() == 1);
-        //assertTrue(productDatabase.containsTitleAndDescription("Mobile phone","Nokia"));
+        assertTrue(products.contains(mobilePhone));
+        assertTrue(products.contains(mobilePhone));
         //assertTrue(productDatabase.containsPrice(50));
     }
 
