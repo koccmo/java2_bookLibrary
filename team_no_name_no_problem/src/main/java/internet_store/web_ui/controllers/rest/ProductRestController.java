@@ -29,7 +29,6 @@ public class ProductRestController {
         return searchProductByTitle.execute(request);
     }
 
- */
 /*
     @Autowired
     private SearchProductByOtherService searchProductByDescription;
@@ -101,16 +100,16 @@ public class ProductRestController {
     public ChangeProductResponse changeProduct(@RequestBody ChangeProductRequest request) {
         return changeProductService.execute(request);
     }
-/*
+
     @Autowired
     private DeleteProductByIdService deleteProductByIdService;
-/*
     @DeleteMapping(path = "/{id}", produces = "application/json")
     public DeleteProductByIdResponse deleteProduct(@PathVariable Long id) {
         DeleteProductByIdRequest request = new DeleteProductByIdRequest(id);
         return deleteProductByIdService.execute(request);
     }
-*/
+
+    /*
     @Autowired
     private DeleteProductByOtherService deleteProductByTitle;
 
