@@ -1,15 +1,18 @@
-Отключите старые версии репозиториев, что бы они больше
-не поднимались в IoC контейнере:
+В файле SpringCoreConfiguration пропишите создание SpringLiquibase
+следующим образом:
 
+public class SpringCoreConfiguration {
 
-//@Component
-//@Transactional
-public class OrmBookRepositoryImpl implements BookRepository { }
+	@Bean
+	public SpringLiquibase springLiquibase(DataSource dataSource) {
+		SpringLiquibase liquibase = new SpringLiquibase();
+		liquibase.setChangeLog("classpath:/db/changelog/changelog-master.xml");
+		liquibase.setShouldRun(true);
+		liquibase.setDataSource(dataSource);
+		return liquibase;
+	}
 
-//@Component
-//@Transactional
-public class ReaderBookRepository { }
+}
 
-//@Component
-//@Transactional
-public class ReaderRepository { }
+Этот класс при стартапе приложения (при поднятии IoC контейнера)
+запустит процесс миграции базы данных.

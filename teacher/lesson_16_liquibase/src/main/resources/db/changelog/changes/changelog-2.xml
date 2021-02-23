@@ -1,6 +1,3 @@
-В папке src/main/resources/db/changelog/changes
-создайте файл changelog-2.xml:
-
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -29,5 +26,3 @@
         </rollback>
     </changeSet>
 </databaseChangeLog>
-
-В этом файле представлен скрипт создания таблицы базы данных readers.

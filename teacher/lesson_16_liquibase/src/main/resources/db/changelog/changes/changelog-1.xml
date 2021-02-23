@@ -1,6 +1,3 @@
-В папке src/main/resources/db/changelog/changes
-создайте файл changelog-2.xml:
-
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -8,26 +5,21 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet author="javaguru" id="2">
-        <createTable tableName="readers">
+    <changeSet author = "javaguru" id = "1">
+        <createTable tableName="books">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-
-            <column name="first_name" type="VARCHAR(200)">
+            <column name="title" type="VARCHAR(200)">
                 <constraints nullable="false"/>
             </column>
-
-            <column name="last_name" type="VARCHAR(200)">
+            <column name="author" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-
         </createTable>
         <rollback>
-            <dropTable tableName="readers"
+            <dropTable tableName="books"
                        cascadeConstraints="true"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>
-
-В этом файле представлен скрипт создания таблицы базы данных readers.
