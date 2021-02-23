@@ -116,7 +116,7 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
-
+ /*
     @Test
     public void databaseContainsSuchProductTitleAndDescription() {
 
@@ -134,6 +134,27 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
+    */
+    @Test
+    public void databaseContainsSuchProductTitleAndPriceRange() {
+
+        Product mobilePhone = new Product("Mobile phone", "Nokia", 50);
+        List<Product> products = new ArrayList<>();
+        products.add(mobilePhone);
+
+        SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("Mobile phone", "",
+            1, 51, ordering, paging);
+
+        Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
+        Mockito.when(productDatabase.searchAllByTitleAndPriceRange(request1.getTitle(), request1.getStartPrice(),
+                                                                   request1.getEndPrice())).thenReturn(products);
+
+        SearchProductByOtherResponse response = searchProductService.execute(request1);
+        assertTrue(products.size() == 1);
+        assertTrue(response.getProducts().contains(mobilePhone));
+        assertFalse(response.hasErrors());
+    }
+
 
     @Test
     public void databaseContainsSuchProductTitle() {
