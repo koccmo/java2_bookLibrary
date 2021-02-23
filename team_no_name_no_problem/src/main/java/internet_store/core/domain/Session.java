@@ -1,7 +1,7 @@
 package internet_store.core.domain;
 
 import javax.persistence.*;
-
+/*
 @Entity
 @Table(name = "session", schema = "internet_store")
 public class Session {
@@ -15,3 +15,4 @@ public class Session {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 }
+*/
