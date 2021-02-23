@@ -20,7 +20,7 @@
     <tr>
         <form action="/buyProduct" th:object="${request}" method="post">
             <td><input type="text" th:field="${request.id}"/></td>
-            <td><input type="text" th:field="${request.quantity}"/></td>
+            <td><input type="number" min= "1" th:field="${request.quantity}"/></td>
             <td>
                 <input type="submit" value="Add Product to Shopping Cart"/>
                 <input type="reset" value="Clear"/>

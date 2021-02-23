@@ -2,6 +2,7 @@ package lv.javaguru.app.web_ui.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -31,8 +32,9 @@ public class SpringSecurityConfigurator extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin_mode").hasRole("ADMIN")
 				.antMatchers("/user_mode").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/").permitAll()
+			//	.antMatchers(HttpMethod.POST, "/register").permitAll()
 				.and()
-				.formLogin();
+				.formLogin().and().csrf().disable();
 	}
 
 	@Bean

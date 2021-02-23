@@ -1,6 +1,5 @@
 package internet_store.core.domain;
 
-import javax.persistence.*;
 import java.util.Map;
 import java.util.Objects;
 
@@ -72,7 +71,9 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
+                ", customer=" + customer +
                 ", shoppingCart=" + shoppingCart +
+                ", sum=" + sum +
                 '}';
     }
 }

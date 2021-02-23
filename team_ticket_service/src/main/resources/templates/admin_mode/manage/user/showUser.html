@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Ticket service demo project">
+    <meta name="author" content="S. Aleksejevs">
+    <title>Ticket service || Show user</title>
+</head>
+
+<body>
+
+<h3>Show user</h3>
+
+<table>
+    <tr>
+        <td>User ID:</td>
+
+    </tr>
+
+    <tr>
+        <form action="/admin_mode/manage/user/showUserById" th:object="${request}" method="get">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+    <tr>
+        <td>
+            <a href="/admin_mode/manage/user/menu">Back to menu</a>
+        </td>
+
+    </tr>
+
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"/>
+        <td th:text="${error.message}"/>
+    </tr>
+</td>
+
+</body>
+
+</html>

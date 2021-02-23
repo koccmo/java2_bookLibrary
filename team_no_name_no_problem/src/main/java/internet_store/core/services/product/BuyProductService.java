@@ -35,6 +35,6 @@ public class BuyProductService {
             return new BuyProductResponse(errors);
         }
 
-        return new BuyProductResponse(productDatabase.findById(buyProductRequest.getId()).get(), buyProductRequest.getQuantity(), buyProductRequest.getEndOfShopping());
+        return new BuyProductResponse(productDatabase.searchById(buyProductRequest.getId()).get(), buyProductRequest.getQuantity(), buyProductRequest.getEndOfShopping());
     }
 }

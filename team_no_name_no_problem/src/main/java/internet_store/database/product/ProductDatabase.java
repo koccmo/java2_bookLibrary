@@ -27,7 +27,7 @@ public interface ProductDatabase {
 
     boolean deleteAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
-    Optional<Product> findById(Long id);
+    Optional<Product> searchById(Long id);
 
     void changeTitle(Long id, String newTitle);
 
@@ -35,19 +35,19 @@ public interface ProductDatabase {
 
     void changePrice(Long id, Integer newPrice);
 
-    List<Product> findAllByTitle(String title);
+    List<Product> searchAllByTitle(String title);
 
-    List<Product> findAllByDescription(String description);
+    List<Product> searchAllByDescription(String description);
 
-    List<Product> findAllByPriceRange(Integer startPrice, Integer endPrice);
+    List<Product> searchAllByPriceRange(Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
+    List<Product> searchAllByTitleAndDescriptionAndPriceRange(String title, String description, Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByTitleAndDescription(String title, String description);
+    List<Product> searchAllByTitleAndDescription(String title, String description);
 
-    List<Product> findAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
+    List<Product> searchAllByTitleAndPriceRange(String title, Integer startPrice, Integer endPrice);
 
-    List<Product> findAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
+    List<Product> searchAllByDescriptionAndPriceRange(String description, Integer startPrice, Integer endPrice);
 
     boolean containsProduct (Product product);
 

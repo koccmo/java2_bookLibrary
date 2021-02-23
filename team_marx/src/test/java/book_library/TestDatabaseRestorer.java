@@ -80,6 +80,9 @@ public class TestDatabaseRestorer {
                 ")\n" +
                 "ENGINE = InnoDB\n" +
                 "AUTO_INCREMENT = 1;");
+        readersCreationSql.add("ALTER TABLE readers\n" +
+                "\tADD personal_code BIGINT(11) NOT NULL\n" +
+                "    DEFAULT (11111111111);");
         return readersCreationSql;
     }
 

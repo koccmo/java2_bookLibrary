@@ -20,30 +20,20 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	//@Column(name = "name")
-	//private String name;
-//
-	//@Column(name = "last_name")
-	//private String lastName;
-//
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled;
-
 	@Column(name = "username", nullable = false)
 	private String username;
 
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	//@Column(name = "role_type", nullable = false)
-	//@Enumerated(EnumType.STRING)
-	//private PersonType personType;
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
 
 
-	public User (String username, String password, boolean enabled) {
+	public User (String username, String password) {
 		this.username = username.trim();
 		this.password = password.trim();
-		this.enabled = enabled;
+		this.enabled = true;
 	}
 
 

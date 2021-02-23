@@ -45,12 +45,12 @@ public class OrmUserRepositoryImpl implements UserRepository{
 		return (User) query.getSingleResult();
 	}
 
-	public boolean updateUserNameByUserId (Long id, String name) {
-		String sql = "UPDATE User AS u SET u.name = :name WHERE u.id = :id";
+	public boolean updateUserNameByUserId (Long id, String username) {
+		String sql = "UPDATE User AS u SET u.username = :username WHERE u.id = :id";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(sql);
 		query.setParameter("id", id);
-		query.setParameter("name", name);
+		query.setParameter("username", username);
 
 		int result = query.executeUpdate();
 
