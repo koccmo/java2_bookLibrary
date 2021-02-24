@@ -38,12 +38,7 @@ public class SpringCoreConfiguration {
     private String databaseUrl;
     @Value("${spring.database.driverName}")
     private String databaseDriverName;
-/*
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-*/
+
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -53,7 +48,12 @@ public class SpringCoreConfiguration {
         dataSource.setDriverClassName(databaseDriverName);
         return dataSource;
     }
+
 /*
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
@@ -90,5 +90,4 @@ public class SpringCoreConfiguration {
         return new HibernateTransactionManager(sessionFactory);
     }
 */
-
 }
