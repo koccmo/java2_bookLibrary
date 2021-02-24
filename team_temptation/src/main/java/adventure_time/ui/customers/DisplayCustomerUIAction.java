@@ -18,25 +18,11 @@ public class DisplayCustomerUIAction implements UIAction {
     @Override
     public void execute() {
 
-        System.out.println("Would you like to get a list of: ");
-        System.out.println("   1. Active customers ");
-        System.out.println("   2. Inactive customers ");
+        List<Customers> customers = service.getCustomersList();
 
-        Scanner scanner = new Scanner(System.in);
-
-        List<Customers> customers;
-        String criteria;
-        if (scanner.nextLine().equals("1")) {
-            customers = service.getActiveCustomersList();
-            criteria = "active";
-        } else {
-            customers = service.getInactiveCustomersList();
-            criteria = "inactive";
-        }
-
-        System.out.println("Here is a list of the " + criteria + " customers: ");
+        System.out.println("Here is a list of the customers: ");
         if (customers.isEmpty()) {
-            System.out.println("The database does not contain any " + criteria + " customer.");
+            System.out.println("The database does not contain any customer.");
         } else {
             customers.forEach(System.out::println);
         }

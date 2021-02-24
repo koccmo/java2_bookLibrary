@@ -81,7 +81,7 @@ public class AddVisitService {
 
         visitRepository.addVisit(visit);
 
-        return new AddVisitResponse(errors);
+        return new AddVisitResponse(visit);
     }
 
     private boolean isNewDoctor(Doctor doctor) {

@@ -26,10 +26,10 @@
 
                 <tr>
                     <form action="/addPatient" th:object="${request}" method="post">
-                        <td><input type="text" th:field="${request.personalData.name}"/></td>
-                        <td><input type="text" th:field="${request.personalData.surname}"/></td>
-                        <td><input type="text" th:field="${request.personalData.phone}"/></td>
-                        <td><input type="text" th:field="${request.personalData.personalCode}"/></td>
+                        <td><input type="text" th:field="${request.name}"/></td>
+                        <td><input type="text" th:field="${request.surname}"/></td>
+                        <td><input type="text" th:field="${request.phone}"/></td>
+                        <td><input type="text" th:field="${request.personalCode}"/></td>
                         <td>
                             <input type="submit" value="Add Patient"/>
                             <input type="reset" value="Clear"/>

@@ -24,8 +24,8 @@
 
                 <tr>
                     <form action="/addManipulation" th:object="${request}" method="post">
-                        <td><input type="text" th:field="${request.manipulation.manipulationType}"/></td>
-                        <td><input type="text" th:field="${request.manipulation.price}"/></td>
+                        <td><input type="text" th:field="${request.manipulationType}"/></td>
+                        <td><input type="text" th:field="${request.price}"/></td>
                         <td>
                             <input type="submit" value="Add manipulation"/>
                             <input type="reset" value="Clear"/>
