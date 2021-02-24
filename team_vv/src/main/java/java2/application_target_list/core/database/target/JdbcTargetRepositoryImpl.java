@@ -2,11 +2,7 @@ package java2.application_target_list.core.database.target;
 
 import java2.application_target_list.core.domain.Target;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
-
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 

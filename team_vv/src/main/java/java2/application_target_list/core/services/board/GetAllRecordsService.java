@@ -1,17 +1,22 @@
 package java2.application_target_list.core.services.board;
 
-import java2.application_target_list.core.database.board.BoardRepository;
+import java2.application_target_list.core.database.jpa.JpaBoardRepository;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+import javax.transaction.Transactional;
+
+//@Component
+@Service
+@Transactional
 public class GetAllRecordsService {
 
-    @Autowired private BoardRepository boardRepository;
+    @Autowired private JpaBoardRepository jpaBoardRepository;
 
     public GetAllRecordsResponse execute(GetAllRecordsRequest getAllRecordsRequest){
-        return new GetAllRecordsResponse(boardRepository.getAllRecordsList());
+        return new GetAllRecordsResponse(jpaBoardRepository.findAll());
     }
 }

@@ -2,7 +2,6 @@ package java2.application_target_list.console_ui.actions.board;
 
 import java2.application_target_list.console_ui.UIAction;
 import java2.application_target_list.core.domain.Record;
-import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
 import java2.application_target_list.core.services.board.GetAllRecordsService;

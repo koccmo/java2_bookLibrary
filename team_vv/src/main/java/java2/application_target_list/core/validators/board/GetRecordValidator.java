@@ -3,7 +3,6 @@ package java2.application_target_list.core.validators.board;
 import java2.application_target_list.core.requests.board.GetRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
