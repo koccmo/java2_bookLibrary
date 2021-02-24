@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -27,7 +27,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<User> users;
-    @Mock private UserRepository userRepository;
+    @Mock private JpaUserRepository jpaUserRepository;
     @Mock private SearchUserByFirstNameValidator searchUserByLastNameValidator;
     @InjectMocks private SearchUserByFirstNameService searchUserByFirstNameService;
 
@@ -44,7 +44,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         SearchUsersByFirstNameRequest searchUsersByFirstNameRequest = new SearchUsersByFirstNameRequest("name");
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name", "surname"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
@@ -59,7 +59,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
@@ -76,7 +76,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
@@ -93,7 +93,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
@@ -110,7 +110,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
@@ -127,7 +127,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
@@ -143,7 +143,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
@@ -159,7 +159,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
@@ -175,7 +175,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name1", "surname1"));
         users.add(new User("name2", "surname2"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
@@ -191,7 +191,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByFirstNameRequest)).thenReturn(new ArrayList<>());
         users.add(new User("name2", "surname2"));
         users.add(new User("name1", "surname1"));
-        Mockito.when(userRepository.findUserByFirstName("name")).thenReturn(users);
+        Mockito.when(jpaUserRepository.findByFirstName("name")).thenReturn(users);
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
         assertFalse(searchUserByFirstNameResponse.hasErrors());
         assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);

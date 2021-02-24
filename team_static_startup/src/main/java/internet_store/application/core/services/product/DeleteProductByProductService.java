@@ -1,6 +1,6 @@
 package internet_store.application.core.services.product;
 
-import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.database.jpa.JpaProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
@@ -14,10 +14,8 @@ import java.util.List;
 @Component
 public class DeleteProductByProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private DeleteByProductValidator deleteByProductValidator;
+    @Autowired private JpaProductRepository productRepository;
+    @Autowired private DeleteByProductValidator deleteByProductValidator;
 
     public DeleteByProductResponse execute(DeleteByProductRequest request) {
         List<CoreError> errors = deleteByProductValidator.validate(request);
@@ -30,7 +28,9 @@ public class DeleteProductByProductService {
     }
 
     public boolean delete(Product product) {
-        return productRepository.delete(product);
+        Long deletedProducts = productRepository.deleteByNameAndDescriptionAndPrice(
+                product.getName(), product.getDescription(), product.getPrice());
+        return deletedProducts ==  1;
     }
 
 

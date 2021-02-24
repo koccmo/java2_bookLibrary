@@ -6,12 +6,9 @@ import java2.application_target_list.core.requests.target.SearchTargetByDescript
 import java2.application_target_list.core.services.target.SearchTargetByDescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java2.application_target_list.console_ui.UIAction;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.responses.target.SearchTargetByDescriptionResponse;
-
-
 import java.util.Scanner;
 
 @Component

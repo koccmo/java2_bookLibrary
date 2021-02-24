@@ -2,8 +2,8 @@ package java2.application_target_list.core.acceptancetests.board;
 
 import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
-import java2.application_target_list.core.database.target.TargetRepository;
-import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
+import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
@@ -27,8 +27,8 @@ public class SetRecordCompleteDateAcceptanceTest {
     private GetAllRecordsService getAllRecordsService;
     private SetRecordCompleteDateService setRecordCompleteDateService;
     private ApplicationContext applicationContext;
-    private UserRepository userRepository;
-    private TargetRepository targetRepository;
+    private JpaTargetRepository jpaTargetRepository;
+    private JpaUserRepository jpaUserRepository;
     private DatabaseCleaner databaseCleaner;
     private AddTargetService addTargetService;
     private AddUserService addUserService;
@@ -65,10 +65,10 @@ public class SetRecordCompleteDateAcceptanceTest {
         Assert.assertTrue(setRecordCompleteDateResponse.hasErrors());
         Assert.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "no record with that ID");
         Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "must not be negative!");
+        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     private void addRecordsToDB() {
@@ -80,21 +80,25 @@ public class SetRecordCompleteDateAcceptanceTest {
     private void addUsersToDB() {
         AddUserRequest addUserRequest = new AddUserRequest("name1", "surname1");
         addUserService.execute(addUserRequest);
-        userId = userRepository.getUsersList().get(0).getId();
+//        userId = userRepository.getUsersList().get(0).getId();
+        userId = jpaUserRepository.findAll().get(0).getId();
     }
 
     private void addTargetsToDB() {
         AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
         addTargetService.execute(addTargetRequest);
-        targetId = targetRepository.getTargetsList().get(0).getId();
+//        targetId = targetRepository.getTargetsList().get(0).getId();
+        targetId = jpaTargetRepository.findAll().get(0).getId();
     }
 
     private void createServices() {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-        userRepository = createUserRepository();
-        targetRepository = createTargetRepository();
+//        userRepository = createUserRepository();
+//        targetRepository = createTargetRepository();
+        jpaTargetRepository = createJpaTargetRepository();
+        jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
         addTargetService = createAddTargetService();
         addUserService = createAddUserService();
@@ -117,12 +121,19 @@ public class SetRecordCompleteDateAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-    private TargetRepository createTargetRepository() {
-        return applicationContext.getBean(TargetRepository.class);
+//    private TargetRepository createTargetRepository() {
+//        return applicationContext.getBean(TargetRepository.class);
+//    }
+//
+//    private UserRepository createUserRepository() {
+//        return applicationContext.getBean(UserRepository.class);
+//    }
+    private JpaTargetRepository createJpaTargetRepository() {
+        return applicationContext.getBean(JpaTargetRepository.class);
     }
 
-    private UserRepository createUserRepository() {
-        return applicationContext.getBean(UserRepository.class);
+    private JpaUserRepository createJpaUserRepository() {
+        return applicationContext.getBean(JpaUserRepository.class);
     }
 
     private GetAllRecordsService createGetAllRecordsService() {

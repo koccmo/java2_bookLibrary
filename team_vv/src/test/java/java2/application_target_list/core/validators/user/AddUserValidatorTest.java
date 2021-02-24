@@ -2,7 +2,6 @@ package java2.application_target_list.core.validators.user;
 
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

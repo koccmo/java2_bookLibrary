@@ -1,24 +1,17 @@
 package java2.application_target_list.core.validators.target;
 
-import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.UpdateTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class UpdateTargetValidator {
 
-    public List<CoreError> validate(UpdateTargetRequest updateTargetRequest,
-                                    TargetRepository targetRepository) {
+
+    public List<CoreError> validate(UpdateTargetRequest updateTargetRequest) {
         List<CoreError> errors = new ArrayList<>();
-
-
-        if (!targetRepository.isIdInTargetList(updateTargetRequest.getTargetIdToChange())){
-            errors.add(new CoreError("Target ID;","no target with that ID"));
-        }
 
         if (isTargetIdEmpty(updateTargetRequest)){
             errors.add(new CoreError("Target ID","must not be empty!"));
@@ -42,7 +35,6 @@ public class UpdateTargetValidator {
         if (isDeadlineEmpty(updateTargetRequest)){
             errors.add(new CoreError("Target new deadline", "must not be empty!"));
         }
-
         return errors;
     }
 
@@ -69,4 +61,5 @@ public class UpdateTargetValidator {
     private boolean isDeadlineNegative(UpdateTargetRequest request){
         return request.getNewTargetDeadline() < 0;
     }
+
 }

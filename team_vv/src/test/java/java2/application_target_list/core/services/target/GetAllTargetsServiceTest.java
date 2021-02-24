@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
@@ -19,9 +19,8 @@ import java.util.List;
 public class GetAllTargetsServiceTest extends TestCase {
 
     private  List<Target>targets;
-    @Mock private TargetRepository targetRepository;
-    @InjectMocks
-    GetAllTargetsService service;
+    @Mock private JpaTargetRepository jpaTargetRepository;
+    @InjectMocks private GetAllTargetsService service;
 
     @Before
     public void setup() {
@@ -31,7 +30,7 @@ public class GetAllTargetsServiceTest extends TestCase {
     @Test
     public void shouldGetTargetsFromDB_v1() {
         targets.add(new Target("name", "description", 1L));
-        Mockito.when(targetRepository.getTargetsList()).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -44,7 +43,7 @@ public class GetAllTargetsServiceTest extends TestCase {
     public void shouldGetTargetsFromDB_v2() {
         targets.add(new Target("name", "description", 1L));
         targets.add(new Target("n", "d", 4L));
-        Mockito.when(targetRepository.getTargetsList()).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -57,7 +56,7 @@ public class GetAllTargetsServiceTest extends TestCase {
 
     @Test
     public void shouldGetTargetsFromDB_v3() {
-        Mockito.when(targetRepository.getTargetsList()).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

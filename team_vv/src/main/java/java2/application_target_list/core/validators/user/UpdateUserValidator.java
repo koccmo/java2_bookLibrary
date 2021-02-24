@@ -1,26 +1,17 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.user.UserRepository;
-import java2.application_target_list.core.requests.user.ChangeUserFirstNameRequest;
-import java2.application_target_list.core.requests.user.ChangeUserLastNameRequest;
+
 import java2.application_target_list.core.requests.user.UpdateUserRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class UpdateUserValidator {
 
-    public List<CoreError> validate(UpdateUserRequest updateUserRequest,
-                                    UserRepository userRepository) {
+    public List<CoreError> validate(UpdateUserRequest updateUserRequest) {
         List<CoreError> errors = new ArrayList<>();
-
-        if (!userRepository.isIdInUserList(updateUserRequest.getUserIdToChange())){
-            errors.add(new CoreError("User ID;","no user with that ID"));
-        }
 
         if (isUserIdEmpty(updateUserRequest)){
             errors.add(new CoreError("User ID","must not be empty!"));
@@ -38,7 +29,6 @@ public class UpdateUserValidator {
         }
 
         return errors;
-
     }
 
     private boolean isUserFirstNameEmpty(UpdateUserRequest request) {

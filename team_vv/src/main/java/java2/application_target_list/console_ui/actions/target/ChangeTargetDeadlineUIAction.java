@@ -4,12 +4,8 @@ import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRe
 import java2.application_target_list.core.services.target.ChangeTargetDeadlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java2.application_target_list.console_ui.UIAction;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
-
-
-import java.math.BigInteger;
 import java.util.Scanner;
 
 @Component
@@ -61,7 +57,6 @@ public class ChangeTargetDeadlineUIAction implements UIAction {
 
     private Long getNewDeadlineFromUser(){
         System.out.print("Enter new target deadline: ");
-//       return Integer.parseInt(scr.nextLine());
        return Long.parseLong(scr.nextLine());
     }
 
