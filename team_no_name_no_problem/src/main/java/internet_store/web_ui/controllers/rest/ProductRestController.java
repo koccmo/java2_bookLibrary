@@ -24,7 +24,7 @@ public class ProductRestController {
     private SearchProductByOtherService searchProductByOtherService;
 
     @PostMapping(path = "/search", produces = "application/json")
-    public SearchProductByOtherResponse searchProductByOtherCriteria(@RequestBody SearchProductByOtherRequest request) {
+    public SearchProductByOtherResponse searchProductByOther(@RequestBody SearchProductByOtherRequest request) {
         return searchProductByOtherService.execute(request);
     }
 
@@ -51,11 +51,17 @@ public class ProductRestController {
     @Autowired
     private DeleteProductByIdService deleteProductByIdService;
     @DeleteMapping(path = "/{id}", produces = "application/json")
-    public DeleteProductByIdResponse deleteProduct(@PathVariable Long id) {
+    public DeleteProductByIdResponse deleteProductById(@PathVariable Long id) {
         DeleteProductByIdRequest request = new DeleteProductByIdRequest(id);
         return deleteProductByIdService.execute(request);
     }
 
+    @Autowired
+    private DeleteProductByOtherService deleteProductByOtherService;
+    @DeleteMapping(path = "/delete", produces = "application/json")
+    public DeleteProductByOtherResponse deleteProductByOther(@RequestBody DeleteProductByOtherRequest request) {
+        return deleteProductByOtherService.execute(request);
+    }
 
 }
 
