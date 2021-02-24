@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 
 @Profile("hibernate")
 public class DeleteByProductNameAcceptanceTest {
+/*
 
     private ApplicationContext appContext;
 
@@ -72,5 +73,6 @@ public class DeleteByProductNameAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
+*/
 
 }
