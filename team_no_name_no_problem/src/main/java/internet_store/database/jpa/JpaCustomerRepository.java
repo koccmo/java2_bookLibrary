@@ -2,6 +2,7 @@ package internet_store.database.jpa;
 
 import internet_store.core.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,11 +13,12 @@ public interface JpaCustomerRepository extends JpaRepository<Customer, Long> {
 
     List<Customer> addCustomer(Customer customer);
 
-    List<Customer> deleteCustomerById(Long id);
+    @Query("delete from Customers c WHERE c.id=:id")
+    void deleteCustomerById(Long id);
 
     Optional<Customer> findById(Long id);
 
-    List<Customer> findCustomerByNameAndSurname(String name, String surname);
+    Optional<Customer> findCustomerByNameAndSurname(String name, String surname);
 
     List<Customer> findAllCustomersByName(String name);
 

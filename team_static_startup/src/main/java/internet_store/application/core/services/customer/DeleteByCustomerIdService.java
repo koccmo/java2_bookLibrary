@@ -1,6 +1,7 @@
 package internet_store.application.core.services.customer;
 
 import internet_store.application.core.database.customer.CustomerRepository;
+import internet_store.application.core.database.jpa.JpaCustomerRepository;
 import internet_store.application.core.requests.customer.DeleteByCustomerIdRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.customer.DeleteByCustomerIdResponse;
@@ -13,7 +14,7 @@ import java.util.List;
 @Component
 public class DeleteByCustomerIdService {
 
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private JpaCustomerRepository customerRepository;
     @Autowired private DeleteByCustomerIdValidator validator;
 
     public DeleteByCustomerIdResponse execute(DeleteByCustomerIdRequest customerIdRequest) {

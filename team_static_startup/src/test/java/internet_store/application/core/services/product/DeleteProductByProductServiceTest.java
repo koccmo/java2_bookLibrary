@@ -1,6 +1,6 @@
 package internet_store.application.core.services.product;
 
-import internet_store.application.core.database.product.ProductRepository;
+import internet_store.application.core.database.jpa.JpaProductRepository;
 import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
@@ -21,22 +21,26 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.lenient;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteProductByProductServiceTest {
 
-    @Mock private ProductRepository productRepository;
+    @Mock private JpaProductRepository productRepository;
     @Mock private DeleteByProductValidator validator;
     @InjectMocks private DeleteProductByProductService service;
 
     @Test
     public void shouldDeleteProductWithoutErrors() {
-        Product product = new Product("tv", "good tv", new BigDecimal("399.99"));
-        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.delete(product)).thenReturn(true);
+        String name = "tv";
+        String description = "good tv";
+        BigDecimal price = new BigDecimal("399.99");
 
-        DeleteByProductRequest request = new DeleteByProductRequest(product.getName(), product.getDescription(),
-                product.getPrice());
+        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
+        lenient().when(productRepository.deleteByNameAndDescriptionAndPrice(
+                name, description, price)).thenReturn(1L);
+
+        DeleteByProductRequest request = new DeleteByProductRequest(name, description, price);
         DeleteByProductResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());

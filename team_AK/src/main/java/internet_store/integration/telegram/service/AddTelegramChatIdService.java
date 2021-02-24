@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AddtTelegramChatIdService {
+public class AddTelegramChatIdService {
     @Autowired
     private TelegramRepository telegramRepository;
 

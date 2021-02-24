@@ -14,39 +14,27 @@ import java.util.List;
 public class DeleteUserValidatorTest {
 
     private DeleteUserValidator deleteUserValidator;
-    private UserRepository userRepository;
 
     @Before
     public void setup() {
         deleteUserValidator = new DeleteUserValidator();
-        userRepository = new InMemoryUserRepositoryImpl();
+        UserRepository userRepository = new InMemoryUserRepositoryImpl();
         userRepository.addUser(new User("name", "surname"));
     }
 
     @Test
     public void testValidate_validRequest() {
         DeleteUserRequest request = new DeleteUserRequest(1L);
-        List<CoreError> actualErrors = deleteUserValidator.validate(request, userRepository);
+        List<CoreError> actualErrors = deleteUserValidator.validate(request);
         Assert.assertEquals(actualErrors.size(), 0);
-    }
-
-    @Test
-    public void testValidate_invalidRequest_v1() {
-        DeleteUserRequest request = new DeleteUserRequest(2L);
-        List<CoreError> actualErrors = deleteUserValidator.validate(request, userRepository);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("User ID;"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("no user with that ID"));
     }
 
     @Test
     public void testValidate_invalidRequest_v2() {
         DeleteUserRequest request = new DeleteUserRequest(-2L);
-        List<CoreError> actualErrors = deleteUserValidator.validate(request, userRepository);
-        Assert.assertEquals(actualErrors.size(), 2);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("User ID;"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("no user with that ID"));
-        Assert.assertTrue(actualErrors.get(1).getField().contains("User ID"));
-        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must not be negative!"));
+        List<CoreError> actualErrors = deleteUserValidator.validate(request);
+        Assert.assertEquals(actualErrors.size(), 1);
+        Assert.assertTrue(actualErrors.get(0).getField().contains("User ID"));
+        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
     }
 }

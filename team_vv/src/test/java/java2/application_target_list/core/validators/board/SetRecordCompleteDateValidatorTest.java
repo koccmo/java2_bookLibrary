@@ -14,53 +14,42 @@ import java.util.List;
 public class SetRecordCompleteDateValidatorTest {
 
     private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
-    private BoardRepository boardRepository;
 
     @Before
     public void setup(){
         setRecordCompleteDateValidator = new SetRecordCompleteDateValidator();
-        boardRepository = new InMemoryBoardRepositoryImpl();
+        BoardRepository boardRepository = new InMemoryBoardRepositoryImpl();
         boardRepository.addToBoard(new Record(1L, 1L));
     }
 
     @Test
     public void testValidate_validRequest() {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
-        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository);
+        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
         Assert.assertTrue(actualErrors.isEmpty());
-    }
-
-    @Test
-    public void testValidate_invalidRequest_v1() {
-        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(2L);
-        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "no record with that ID");
     }
 
     @Test
     public void testValidate_invalidRequest_v2() {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(-2L);
-        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardRepository);
+        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
         Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 2);
+        Assert.assertEquals(actualErrors.size(), 1);
         Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "no record with that ID");
-        Assert.assertEquals(actualErrors.get(1).getField(), "Record ID");
-        Assert.assertEquals(actualErrors.get(1).getMessage(), "must not be negative!");
+        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
-//    @Test
-//    public void testValidate_invalidRequest_v3() {
-//        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(null);
-//        List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest, boardDatabase);
-//        Assert.assertFalse(actualErrors.isEmpty());
-//        Assert.assertEquals(actualErrors.size(), 2);
-//        Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-//        Assert.assertEquals(actualErrors.get(0).getMessage(), "no record with that ID");
-//        Assert.assertEquals(actualErrors.get(1).getField(), "Record ID");
-//        Assert.assertEquals(actualErrors.get(1).getMessage(), "must not be negative!");
-//    }
+    @Test
+    public void testValidate_invalidRequest_v3() {
+        try {
+            SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(null);
+            List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
+            Assert.assertFalse(actualErrors.isEmpty());
+            Assert.assertEquals(actualErrors.size(), 1);
+            Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
+            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        } catch (NullPointerException ignored) {
+
+        }
+    }
 }

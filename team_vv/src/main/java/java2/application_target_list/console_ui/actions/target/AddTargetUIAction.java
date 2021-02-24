@@ -3,13 +3,9 @@ package java2.application_target_list.console_ui.actions.target;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java2.application_target_list.console_ui.UIAction;
 import java2.application_target_list.core.responses.target.AddTargetResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
-
-
-import java.math.BigInteger;
 import java.util.Scanner;
 
 @Component
@@ -69,7 +65,6 @@ public class AddTargetUIAction implements UIAction {
 
     private Long getDeadlineFromUser(){
         System.out.print("Enter target deadline(days): ");
-//        return Integer.parseInt(scr.nextLine());
         return Long.parseLong(scr.nextLine());
     }
 }

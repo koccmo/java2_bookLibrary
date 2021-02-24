@@ -1,11 +1,6 @@
 package java2.application_target_list.core.database.user;
 
-import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +16,6 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     public void addUser(User user) {
         user.setId(userId += 1);
         userList.add(user);
-//        return user.getId();
     }
 
     @Override

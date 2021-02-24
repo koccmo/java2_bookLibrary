@@ -1,9 +1,7 @@
 package java2.application_target_list.core.validators.target;
 
-import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.target.ChangeTargetDescriptionRequest;
 import org.springframework.stereotype.Component;
-
 import java2.application_target_list.core.responses.CoreError;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +9,18 @@ import java.util.List;
 @Component
 public class ChangeTargetDescriptionValidator {
 
-    public List<CoreError> validate(ChangeTargetDescriptionRequest request, TargetRepository targetRepository) {
+    public List<CoreError> validate(ChangeTargetDescriptionRequest request) {
         List<CoreError> errors = new ArrayList<>();
 
-        if (!targetRepository.isIdInTargetList(request.getTargetIdToChange())){
-            errors.add(new CoreError("Target ID;","no target with that ID"));
+        if (isTargetIdEmpty(request)) {
+            errors.add(new CoreError("Target ID", "must not be empty!"));
+        }
+        if (isTargetIdNegative(request)) {
+            errors.add(new CoreError("Target ID", "must not be negative!"));
         }
 
-
-        if (isTargetIdEmpty(request)){
-            errors.add(new CoreError("Target ID","must not be empty!"));
-        }
-        if (isTargetIdNegative(request)){
-            errors.add(new CoreError("Target ID","must not be negative!"));
-        }
-
-        if (isTargetDescriptionEmpty(request)){
-            errors.add(new CoreError("Target new description","must not be empty!"));
+        if (isTargetDescriptionEmpty(request)) {
+            errors.add(new CoreError("Target new description", "must not be empty!"));
         }
 
         return errors;
@@ -41,7 +34,7 @@ public class ChangeTargetDescriptionValidator {
         return request.getTargetIdToChange() == null;
     }
 
-    private boolean isTargetIdNegative(ChangeTargetDescriptionRequest request){
+    private boolean isTargetIdNegative(ChangeTargetDescriptionRequest request) {
         return request.getTargetIdToChange() < 0;
     }
 

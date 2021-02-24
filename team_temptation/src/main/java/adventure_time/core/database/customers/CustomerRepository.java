@@ -12,9 +12,7 @@ public interface CustomerRepository {
 
     boolean add(Customers customer);
 
-    boolean activate (Long id);
-
-    boolean deactivate (Long id);
+    boolean delete (Long id);
 
     Optional<Customers> findById (Long id);
 
@@ -22,8 +20,6 @@ public interface CustomerRepository {
 
     boolean updateCustomer (Customers customer, Long id);
 
-    List<Customers> findAllActiveCustomers ();
-
-    List<Customers> findAllInactiveCustomers ();
+    List<Customers> findAllCustomers ();
 
 }

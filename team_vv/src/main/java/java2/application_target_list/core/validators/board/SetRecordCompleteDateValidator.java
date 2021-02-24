@@ -1,7 +1,5 @@
 package java2.application_target_list.core.validators.board;
 
-import java2.application_target_list.core.database.board.BoardRepository;
-
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
@@ -12,13 +10,8 @@ import java.util.List;
 @Component
 public class SetRecordCompleteDateValidator {
 
-    public List<CoreError> validate(SetRecordCompleteDateRequest request, BoardRepository boardRepository) {
+    public List<CoreError> validate(SetRecordCompleteDateRequest request) {
         List<CoreError> errors = new ArrayList<>();
-
-
-        if (!boardRepository.isIdInBoardList(request.getRecordIdToSetCompleteDate())){
-            errors.add(new CoreError("Record ID","no record with that ID"));
-        }
 
         if (isUserIdEmpty(request)){
             errors.add(new CoreError("Record ID","must not be empty!"));
@@ -29,7 +22,6 @@ public class SetRecordCompleteDateValidator {
 
         return errors;
     }
-
 
     private boolean isUserIdEmpty(SetRecordCompleteDateRequest request) {
         return request.getRecordIdToSetCompleteDate() == null;

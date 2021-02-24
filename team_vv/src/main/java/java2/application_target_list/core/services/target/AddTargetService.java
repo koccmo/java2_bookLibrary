@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.responses.target.AddTargetResponse;
@@ -8,14 +8,17 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.validators.target.AddTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Component
+//@Component
+@Service
+@Transactional
 public class AddTargetService {
 
-    @Autowired private TargetRepository targetRepository;
+    @Autowired private JpaTargetRepository jpaTargetRepository;
     @Autowired private AddTargetValidator validator;
 
     public AddTargetResponse execute(AddTargetRequest request){
@@ -26,7 +29,7 @@ public class AddTargetService {
         }
 
         Target target = new Target(request.getName(), request.getDescription(), request.getDeadline());
-        targetRepository.addTarget(target);
+        jpaTargetRepository.save(target);
         return new AddTargetResponse(target);
     }
 

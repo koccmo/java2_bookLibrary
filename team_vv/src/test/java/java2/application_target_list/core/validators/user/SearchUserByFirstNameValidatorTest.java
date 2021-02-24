@@ -16,12 +16,11 @@ import java.util.List;
 public class SearchUserByFirstNameValidatorTest {
 
     private SearchUserByFirstNameValidator searchUserByFirstNameValidator;
-    private UserRepository userRepository;
 
     @Before
     public void setup() {
         searchUserByFirstNameValidator = new SearchUserByFirstNameValidator();
-        userRepository = new InMemoryUserRepositoryImpl();
+        UserRepository userRepository = new InMemoryUserRepositoryImpl();
         userRepository.addUser(new User("name", "surname"));
     }
 
