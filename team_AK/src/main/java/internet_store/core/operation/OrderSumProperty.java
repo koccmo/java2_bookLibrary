@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class Tax {
+public class OrderSumProperty {
     @Autowired
     private Arithmetic arithmetic;
     @Getter
