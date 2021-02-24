@@ -15,8 +15,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository {
 
     @Autowired
