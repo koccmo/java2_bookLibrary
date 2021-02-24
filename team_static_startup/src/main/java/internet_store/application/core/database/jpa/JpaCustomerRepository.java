@@ -22,8 +22,6 @@ public interface JpaCustomerRepository extends JpaRepository<Customer, Long> {
 
     boolean changeFirstName(Long id, String newFirstName);
 
-    // Optional<Customer> getById(Long id);
-
     Optional<Customer> findById(Long id);
 
 }

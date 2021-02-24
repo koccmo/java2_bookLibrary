@@ -29,21 +29,15 @@ import java.util.Properties;
 @EntityScan(basePackages = "internet_store.application.core.domain")
 @EnableJpaRepositories(value = "internet_store.application.core.database.jpa")
 public class SpringCoreConfiguration {
-/*
 
-    @Value("${database.username}")
+    @Value("${spring.database.username}")
     private String username;
-    @Value("${database.password}")
+    @Value("${spring.database.password}")
     private String userPassword;
-    @Value("${database.url}")
+    @Value("${spring.database.url}")
     private String databaseUrl;
-    @Value("${database.driverName}")
+    @Value("${spring.database.driverName}")
     private String databaseDriverName;
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
 
     @Bean
     public DataSource dataSource() {
@@ -53,6 +47,12 @@ public class SpringCoreConfiguration {
         dataSource.setPassword(userPassword);
         dataSource.setDriverClassName(databaseDriverName);
         return dataSource;
+    }
+
+/*
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Bean
@@ -90,5 +90,4 @@ public class SpringCoreConfiguration {
         return new HibernateTransactionManager(sessionFactory);
     }
 */
-
 }
