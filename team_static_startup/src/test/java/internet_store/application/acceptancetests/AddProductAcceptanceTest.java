@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-@Profile("hibernate")
+// @Profile("hibernate")
 public class AddProductAcceptanceTest {
 /*
 

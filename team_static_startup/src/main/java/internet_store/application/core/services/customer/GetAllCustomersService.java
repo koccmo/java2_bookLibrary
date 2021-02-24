@@ -1,6 +1,7 @@
 package internet_store.application.core.services.customer;
 
 import internet_store.application.core.database.customer.CustomerRepository;
+import internet_store.application.core.database.jpa.JpaCustomerRepository;
 import internet_store.application.core.domain.Customer;
 import internet_store.application.core.responses.customer.GetAllCustomersResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 public class GetAllCustomersService {
 
     @Autowired
-    CustomerRepository ormCustomerRepository;
+    JpaCustomerRepository ormCustomerRepository;
 
     public GetAllCustomersResponse execute() {
         List<Customer> customerList = ormCustomerRepository.findAll();
