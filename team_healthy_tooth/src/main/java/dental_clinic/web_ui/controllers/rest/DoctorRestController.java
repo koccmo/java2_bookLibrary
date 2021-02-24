@@ -22,14 +22,14 @@ public class DoctorRestController {
         return getDoctorService.execute(getDoctorRequest);
     }
 
-    @PostMapping(path = "/",
+    @PostMapping(path = "/add/",
     consumes = "application/json",
     produces = "application/json")
     public AddDoctorResponse addDoctor(@RequestBody AddDoctorRequest addDoctorRequest) {
         return addDoctorService.execute(addDoctorRequest);
     }
 
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/fire/",
     consumes = "application/json",
     produces = "application/json")
     public DeleteDoctorResponse fireDoctor(@RequestBody DeleteDoctorRequest deleteDoctorRequest) {
@@ -43,7 +43,7 @@ public class DoctorRestController {
         return fillDoctorsWorkGraphicService.execute(fillDoctorsWorkGraphicRequest);
     }
 
-    @GetMapping(path = "/", produces = "application/json")
+    @GetMapping(path = "/getAll/", produces = "application/json")
     public GetDoctorListResponse getDoctors() {
         GetDoctorListRequest getDoctorRequest = new GetDoctorListRequest();
         return getDoctorListService.execute(getDoctorRequest);

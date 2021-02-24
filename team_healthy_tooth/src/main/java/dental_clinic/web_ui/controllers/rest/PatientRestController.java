@@ -25,21 +25,21 @@ public class PatientRestController {
         return getPersonalDataService.execute(getPersonalDataRequest);
     }
 
-    @PostMapping(path = "/",
+    @PostMapping(path = "/add/",
     consumes = "application/json",
     produces = "application/json")
     public AddPatientResponse addPatient(@RequestBody AddPatientRequest addPatientRequest) {
         return addPatientService.execute(addPatientRequest);
     }
 
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/change/",
     consumes = "application/json",
     produces = "application/json")
     public ChangePersonalDataResponse changePersonalData(@RequestBody ChangePersonalDataRequest changePersonalDataRequest) {
         return changePersonalDataService.execute(changePersonalDataRequest);
     }
 
-    @GetMapping(path = "/", produces = "application/json")
+    @GetMapping(path = "/getAll/", produces = "application/json")
     public GetAllPatientsResponse getAllPatients() {
         GetAllPatientsRequest getAllPatientsRequest = new GetAllPatientsRequest();
         return getAllPatientsService.execute(getAllPatientsRequest);

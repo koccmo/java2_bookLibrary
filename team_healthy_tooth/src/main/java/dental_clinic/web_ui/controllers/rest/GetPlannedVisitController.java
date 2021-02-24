@@ -24,27 +24,27 @@ public class GetPlannedVisitController {
         return getPlannedVisitService.execute(getPlannedVisitRequest);
     }
 
-    @PostMapping(path = "/",
+    @PostMapping(path = "/add/",
     consumes = "application/json",
     produces = "application/json")
     public AddPlannedVisitResponse addPlannedVisit(@RequestBody AddPlannedVisitRequest addPlannedVisitRequest) {
         return addPlannedVisitService.execute(addPlannedVisitRequest);
     }
 
-    @DeleteMapping(path = "/{id}", produces = "application/json")
+    @DeleteMapping(path = "/cancel/{id}", produces = "application/json")
     public CancelPlannedVisitResponse cancelVisit(@PathVariable Long id) {
         CancelPlannedVisitRequest cancelPlannedVisitRequest = new CancelPlannedVisitRequest(id);
         return cancelPlannedVisitService.execute(cancelPlannedVisitRequest);
     }
 
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/changeTime/",
     consumes = "application/json",
     produces = "application/json")
     public ChangePlannedVisitTimeResponse changeTime(@RequestBody ChangePlannedVisitTimeRequest changePlannedVisitTimeRequest) {
         return changePlannedVisitTimeService.execute(changePlannedVisitTimeRequest);
     }
 
-    @GetMapping(path = "/", produces = "application/json")
+    @GetMapping(path = "/getAll/", produces = "application/json")
     public GetPlannedVisitsResponse getPlannedVisits() {
         GetPlannedVisitsRequest getPlannedVisitsRequest = new GetPlannedVisitsRequest();
         return getPlannedVisitsService.execute(getPlannedVisitsRequest);
