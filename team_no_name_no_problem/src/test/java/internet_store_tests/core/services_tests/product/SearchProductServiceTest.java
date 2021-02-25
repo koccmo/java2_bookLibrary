@@ -1,6 +1,5 @@
 package internet_store_tests.core.services_tests.product;
 
-import internet_store.core.domain.Customer;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
@@ -11,7 +10,6 @@ import internet_store.core.services.product.validators.SearchProductRequestValid
 import internet_store.core.services.product.SearchProductByOtherService;
 import internet_store.database.product.ProductDatabase;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -197,7 +195,7 @@ public class SearchProductServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(pen);
         SearchProductByOtherRequest request = new SearchProductByOtherRequest(null, "Parker",
-                                                null,null,ordering, paging);
+                                                0,0,ordering, paging);
 
         Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.searchAllByDescription(request.getDescription())).thenReturn(products);
