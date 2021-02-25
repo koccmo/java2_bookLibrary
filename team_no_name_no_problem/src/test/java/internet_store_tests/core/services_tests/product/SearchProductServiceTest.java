@@ -35,7 +35,7 @@ public class SearchProductServiceTest {
     SearchProductByOtherService searchProductService;
 
     private Ordering ordering = new Ordering("title", "ASC");
-    private Paging paging = new Paging(1, 4);
+    private Paging paging = new Paging(1, 2);
 
     @Test
     public void notValidSearch() {
@@ -52,9 +52,8 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "search");
     }
-    //
+    /*
     @Test
-	@Ignore
     public void databaseDoesNotContainsSuchProductTitleAndDescription() {
 
         SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("Mobile phone", "Nokia",
@@ -72,9 +71,8 @@ public class SearchProductServiceTest {
         SearchProductByOtherResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        assertTrue(response.getErrors().contains(expectedError));
     }
-
+*/
     @Test
     public void databaseDoesNotContainsSuchProductTitleAndDescriptionAndPriceRange() {
 
@@ -116,7 +114,7 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
- /*
+
     @Test
     public void databaseContainsSuchProductTitleAndDescription() {
 
@@ -124,7 +122,7 @@ public class SearchProductServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(mobilePhone);
         SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("Mobile phone", "Nokia",
-                                                          null,null,ordering, paging);
+                                                          0,0,ordering, paging);
 
         Mockito.when(searchProductRequestValidator.validate(request1)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.searchAllByTitleAndDescription(request1.getTitle(),
@@ -134,7 +132,7 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
-    */
+
     @Test
     public void databaseContainsSuchProductTitleAndPriceRange() {
 
