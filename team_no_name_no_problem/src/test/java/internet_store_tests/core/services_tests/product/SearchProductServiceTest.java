@@ -177,7 +177,7 @@ public class SearchProductServiceTest {
         List<Product> products = new ArrayList<>();
         products.add(pen);
         SearchProductByOtherRequest request = new SearchProductByOtherRequest("Pen", null,
-                                             null,null,ordering, paging);
+                                             0,0,ordering, paging);
 
         Mockito.when(searchProductRequestValidator.validate(request)).thenReturn(new ArrayList<>());
         Mockito.when(productDatabase.searchAllByTitle(request.getTitle())).thenReturn(products);
