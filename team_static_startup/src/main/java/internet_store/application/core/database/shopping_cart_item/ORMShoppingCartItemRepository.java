@@ -51,16 +51,6 @@ public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository
     }
 
     @Override
-    public Optional<ProductShoppingCart> getById(Long id) {
-        ProductShoppingCart productShoppingCart = sessionFactory.getCurrentSession().get(ProductShoppingCart.class, id);
-        if (productShoppingCart == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(productShoppingCart);
-        }
-    }
-
-    @Override
     public boolean deleteById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery("DELETE ProductShoppingCart WHERE id = :id");
         query.setParameter("id", id);

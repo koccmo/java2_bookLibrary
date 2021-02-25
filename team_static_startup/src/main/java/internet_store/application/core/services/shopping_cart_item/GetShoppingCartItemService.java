@@ -25,7 +25,7 @@ public class GetShoppingCartItemService {
         if (!errors.isEmpty()) {
             return new GetShoppingCartItemResponse(errors);
         }
-        return shoppingCartItemRepository.getById(request.getId())
+        return shoppingCartItemRepository.findById(request.getId())
                 .map(GetShoppingCartItemResponse::new)
                 .orElseGet(() -> {
                     errors.add(new CoreError("id", "Not found!"));
