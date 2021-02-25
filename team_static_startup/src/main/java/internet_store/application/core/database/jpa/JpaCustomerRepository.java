@@ -13,12 +13,13 @@ public interface JpaCustomerRepository extends JpaRepository<Customer, Long> {
 
 //    @Query("delete from Customer c where c.customerId = :id")
 //    Long deleteByCustomerId(@Param("id")Long id);
+
     Long deleteByCustomerId(Long id);
 
     @Query("select c from Customer c where c.customerFirstName = :firstname")
     List<Customer> findByFirstName(@Param("firstname") String customerFirstName);
 
     @Query("update Customer c SET c.customerFirstName = :name where c.customerId = :id")
-    boolean changeFirstName(@Param("id") Long id, @Param("name") String newFirstName);
+    Long changeFirstName(@Param("id") Long id, @Param("name") String newFirstName);
 
 }

@@ -25,7 +25,7 @@ public class ChangeCustomerFirstNameService {
         }
 
         return new ChangeCustomerFirstNameResponse(
-                customerRepository.changeFirstName(request.getId(), request.getCustomerNewName()));
+                customerRepository.changeFirstName(request.getId(), request.getCustomerNewName()) == 1);
     }
 
 }
