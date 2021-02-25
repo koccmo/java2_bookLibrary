@@ -239,7 +239,6 @@ public class SearchProductServiceTest {
         SearchProductByOtherResponse response = searchProductService.execute(request1);
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
-        //assertTrue(response.getErrors().contains(expectedError));
     }
 
     @Test
