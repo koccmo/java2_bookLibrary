@@ -37,7 +37,7 @@ public class DeleteProductByProductServiceTest {
         BigDecimal price = new BigDecimal("399.99");
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        lenient().when(productRepository.deleteByNameAndDescriptionAndPrice(
+        lenient().when(productRepository.deleteByProductNameAndProductDescriptionAndPrice(
                 name, description, price)).thenReturn(1L);
 
         DeleteByProductRequest request = new DeleteByProductRequest(name, description, price);

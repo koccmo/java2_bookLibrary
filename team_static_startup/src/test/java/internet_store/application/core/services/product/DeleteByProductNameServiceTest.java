@@ -56,7 +56,7 @@ public class DeleteByProductNameServiceTest {
     @Test
     public void shouldDeleteProductWithProductNameFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.deleteByName("Receiver")).thenReturn(1L);
+        Mockito.when(productRepository.deleteByProductName("Receiver")).thenReturn(1L);
         DeleteByProductNameRequest request = new DeleteByProductNameRequest("Receiver");
         DeleteByProductNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
