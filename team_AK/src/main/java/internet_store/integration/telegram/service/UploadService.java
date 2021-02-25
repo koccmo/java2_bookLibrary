@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 public class UploadService {
@@ -35,6 +36,7 @@ public class UploadService {
 
         Response response = client.newCall(request).execute();
         isSuccessful = response.isSuccessful();
+        Objects.requireNonNull(response.body()).close();
     }
 
     public boolean isSuccessful() {

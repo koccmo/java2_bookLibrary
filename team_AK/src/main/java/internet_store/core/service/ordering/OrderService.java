@@ -81,11 +81,11 @@ public class OrderService {
             productInCart.getProduct().setQuantity(newProductQuantity(productInCart));
             orderRepository.saveAndFlush(orderForSave);
         });
+        createOrderReport();
         orderStatusService.changeOrderStatus(orderNumber, "ORDER RECEIVED");
-        createPdfOrder();
     }
 
-    private void createPdfOrder() {
+    private void createOrderReport() {
         List<Order> orders = orderRepository.findAllByNumber(orderNumber);
         Thread createPdf = new Thread(() -> {
             try {

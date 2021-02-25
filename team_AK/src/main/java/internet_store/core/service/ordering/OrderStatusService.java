@@ -61,9 +61,11 @@ public class OrderStatusService {
     }
 
     private void sendEmailAboutConfirmationOrder() {
-        Thread sendMailConfirmationThread = new Thread(() -> emailService.sendSimpleMessage(order
-                .getClient().getEmail(), "Order confirmed", printService.createPrintReport(order)));
-        sendMailConfirmationThread.start();
+        Thread sendEmailConfirmationThread = new Thread(() ->
+                emailService.sendSimpleMessage(order.getClient().getEmail(), "Order confirmed",
+                        printService.createPrintReport(order) + "\n\n<< Please find our Telegram bot " +
+                                "EStoreBot for more information >>"));
+        sendEmailConfirmationThread.start();
     }
 
     public void telegramNotification() {
