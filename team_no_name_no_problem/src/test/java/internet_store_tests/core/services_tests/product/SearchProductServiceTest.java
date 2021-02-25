@@ -209,7 +209,7 @@ public class SearchProductServiceTest {
     public void databaseDoesNotContainsSuchProductDescription() {
 
         SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("", "Nokia",
-                null,null,ordering, paging);
+                0,0,ordering, paging);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("database", "Database doesn't contain products wits description: Nokia");
         errors.add(expectedError);
@@ -220,7 +220,6 @@ public class SearchProductServiceTest {
         SearchProductByOtherResponse response = searchProductService.execute(request1);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
-       // assertTrue(response.getErrors().contains(expectedError));
     }
 
     @Test
