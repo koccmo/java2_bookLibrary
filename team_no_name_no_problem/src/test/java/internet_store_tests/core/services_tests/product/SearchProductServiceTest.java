@@ -52,12 +52,11 @@ public class SearchProductServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "search");
     }
-    /*
     @Test
     public void databaseDoesNotContainsSuchProductTitleAndDescription() {
 
         SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("Mobile phone", "Nokia",
-                                                          null,null, ordering, paging);
+                                                          0,0, ordering, paging);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError =
                 new CoreError("database", "Database doesn't contain product with title: " +
@@ -72,7 +71,7 @@ public class SearchProductServiceTest {
         assertEquals(response.hasErrors(), true);
         assertEquals(response.getErrors().size(), 1);
     }
-*/
+
     @Test
     public void databaseDoesNotContainsSuchProductTitleAndDescriptionAndPriceRange() {
 
