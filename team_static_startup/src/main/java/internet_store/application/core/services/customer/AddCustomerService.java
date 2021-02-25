@@ -30,7 +30,7 @@ public class AddCustomerService {
         customer.setCustomerEmail(request.getCustomerEMail());
         customer.setCustomerAddress(request.getCustomerAddress());
 
-        customerRepository.addCustomer(customer);
+        customerRepository.save(customer);
         return new AddCustomerResponse(customer);
     }
 }

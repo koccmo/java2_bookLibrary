@@ -37,7 +37,7 @@ public class AddCustomerServiceTest {
 
         AddCustomerResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(customerRepository).addCustomer(argThat(new CustomerMatcher("Ivan",
+        Mockito.verify(customerRepository).save(argThat(new CustomerMatcher("Ivan",
                 "Ivanov")));
     }
 

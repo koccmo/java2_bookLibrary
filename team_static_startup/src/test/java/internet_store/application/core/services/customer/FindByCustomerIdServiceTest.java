@@ -32,7 +32,7 @@ public class FindByCustomerIdServiceTest {
     public void shouldReturnResponseWithoutErrors() {
         FindByCustomerIdRequest request = new FindByCustomerIdRequest("1");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(customerRepository.findByCustomerId(1L)).thenReturn(Optional.of(
+        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(
                 new Customer("customerFirst", "customerLast")));
 
         FindByCustomerIdResponse response = service.execute(request);

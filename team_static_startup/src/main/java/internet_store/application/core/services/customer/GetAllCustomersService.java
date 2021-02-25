@@ -13,10 +13,10 @@ import java.util.List;
 public class GetAllCustomersService {
 
     @Autowired
-    JpaCustomerRepository ormCustomerRepository;
+    JpaCustomerRepository customerRepository;
 
     public GetAllCustomersResponse execute() {
-        List<Customer> customerList = ormCustomerRepository.findAll();
+        List<Customer> customerList = customerRepository.findAll();
         return new GetAllCustomersResponse(customerList);
     }
 
