@@ -1,5 +1,6 @@
 package internet_store.application.core.services.order;
 
+import internet_store.application.core.database.jpa.JpaOrderRepository;
 import internet_store.application.core.database.order.OrderRepository;
 import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
 import internet_store.application.core.domain.Order;
@@ -18,7 +19,7 @@ import java.util.List;
 public class AddOrderService {
 
     @Autowired
-    OrderRepository orderRepository;
+    JpaOrderRepository orderRepository;
     @Autowired
     ShoppingCartRepository shoppingCartRepository;
     @Autowired
@@ -37,7 +38,7 @@ public class AddOrderService {
         order.setActive(true);
         // order.setOrderDate(request.getOrderDate());
         // order.setActive(request.isActive());
-        orderRepository.add(order);
+        orderRepository.save(order);
         return new AddOrderResponse(order);
     }
 
