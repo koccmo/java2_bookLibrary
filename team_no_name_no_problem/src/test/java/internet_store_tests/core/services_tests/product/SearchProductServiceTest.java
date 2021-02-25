@@ -350,7 +350,7 @@ public class SearchProductServiceTest {
         products.add(mobilePhone3);
 
         SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("Mobile phone",
-                null,null,null, new Ordering("description","ASC"),
+                null,0,0, new Ordering("description","ASC"),
                 new Paging(2,2));
 
         Mockito.when(searchProductRequestValidator.validate(searchProductRequest)).thenReturn(new ArrayList<>());
