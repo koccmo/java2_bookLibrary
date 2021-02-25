@@ -30,19 +30,19 @@ public class GetVisitController {
         return getVisitService.execute(getVisitRequest);
     }
 
-    @PostMapping(path = "/",
+    @PostMapping(path = "/add/",
     consumes = "application/json",
     produces = "application/json")
     public AddVisitResponse addVisit(@RequestBody AddVisitRequest addVisitRequest) {
         return addVisitService.execute(addVisitRequest);
     }
 
-    @GetMapping(path = "/searchByDate")
+    @GetMapping(path = "/searchByDate/")
     public SearchVisitByDateResponse searchByDate(@RequestBody SearchVisitByDateRequest searchVisitByDateRequest) {
         return searchVisitByDateService.execute(searchVisitByDateRequest);
     }
 
-    @GetMapping(path = "/searchByPatientId")
+    @GetMapping(path = "/searchByPatientId/")
     public SearchVisitByPatientIdResponse searchById(@RequestBody SearchVisitByPatientIdRequest searchVisitByPatientIdRequest) {
         return searchVisitByPatientIdService.execute(searchVisitByPatientIdRequest);
     }

@@ -23,7 +23,7 @@ public class DeleteByCustomerIdService {
 
         if (!errors.isEmpty()) {
             return new DeleteByCustomerIdResponse(errors);
-        } else return new DeleteByCustomerIdResponse(customerRepository.deleteByCustomerId(id));
+        } else return new DeleteByCustomerIdResponse(customerRepository.deleteByCustomerId(id) == 1);
     }
 
 }

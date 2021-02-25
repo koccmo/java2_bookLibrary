@@ -23,7 +23,7 @@ public class FindByCustomerIdService {
             return new FindByCustomerIdResponse(errors);
         }
         Long id = Long.valueOf(request.getCustomerId());
-        return new FindByCustomerIdResponse(customerRepository.findByCustomerId(id));
+        return new FindByCustomerIdResponse(customerRepository.findById(id));
     }
 
 }

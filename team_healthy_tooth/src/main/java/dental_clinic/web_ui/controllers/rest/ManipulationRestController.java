@@ -30,21 +30,21 @@ public class ManipulationRestController {
         return getManipulationService.execute(getManipulationRequest);
     }
 
-    @PostMapping(path = "/",
+    @PostMapping(path = "/add/",
     consumes = "application/json",
     produces = "application/json")
     public AddManipulationResponse addManipulation(@RequestBody AddManipulationRequest addManipulationRequest) {
         return addManipulationService.execute(addManipulationRequest);
     }
 
-    @PutMapping(path = "/{id}",
+    @PutMapping(path = "/deactivate/",
     consumes = "application/json",
     produces = "application/json")
     public DeactivateManipulationResponse deactivateManipulation(@RequestBody DeactivateManipulationRequest deactivateManipulationRequest) {
         return deactivateManipulationService.execute(deactivateManipulationRequest);
     }
 
-    @GetMapping(path = "/", produces = "application/json")
+    @GetMapping(path = "/getAll/", produces = "application/json")
     public GetManipulationsListResponse getManipulations() {
         GetManipulationsListRequest getManipulationRequest = new GetManipulationsListRequest();
         return getManipulationsListService.execute(getManipulationRequest);

@@ -29,7 +29,7 @@ public class ChangeCustomerFirstNameServiceTest {
     public void shouldReturnResponseWithoutErrors() {
         ChangeCustomerFirstNameRequest request = new ChangeCustomerFirstNameRequest(1L, "newName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(repository.changeFirstName(1L, "newName")).thenReturn(true);
+        Mockito.when(repository.changeFirstName(1L, "newName")).thenReturn(1L);
 
         ChangeCustomerFirstNameResponse response = service.execute(request);
 
