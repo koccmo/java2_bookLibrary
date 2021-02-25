@@ -1,5 +1,6 @@
 package internet_store.application.core.services.shopping_cart_item;
 
+import internet_store.application.core.database.jpa.JpaShoppingCartItemRepository;
 import internet_store.application.core.database.shopping_cart_item.ShoppingCartItemRepository;
 import internet_store.application.core.requests.shopping_cart_item.AddShoppingCartItemRequest;
 import internet_store.application.core.responses.CoreError;
@@ -13,7 +14,7 @@ import java.util.List;
 @Component
 public class AddShoppingCartItemService {
 
-    @Autowired private ShoppingCartItemRepository itemRepository;
+    @Autowired private JpaShoppingCartItemRepository itemRepository;
     @Autowired private AddShoppingCartItemValidator validator;
 
     public AddShoppingCartItemResponse execute(AddShoppingCartItemRequest request) {
@@ -22,7 +23,7 @@ public class AddShoppingCartItemService {
             return new AddShoppingCartItemResponse(errors);
         }
 
-        Long cartItemId = itemRepository.add(
+        Long cartItemId = itemRepository.save(
                 request.getShoppingCartId(), request.getProductId(), request.getQuantity());
 
         return new AddShoppingCartItemResponse(cartItemId);

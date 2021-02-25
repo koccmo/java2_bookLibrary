@@ -1,12 +1,13 @@
 package internet_store.application.core.database.jpa;
 
+import internet_store.application.core.domain.ProductShoppingCart;
 import internet_store.application.core.dto.ShoppingCartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaShoppingCartItemRepository extends JpaRepository<ShoppingCartItem, Long> {
+public interface JpaShoppingCartItemRepository extends JpaRepository<ProductShoppingCart, Long> {
 
     @Query(value = "INSERT INTO shopping_cart_items(" +
             "shopping_cart_id, product_id, quantity) " +
