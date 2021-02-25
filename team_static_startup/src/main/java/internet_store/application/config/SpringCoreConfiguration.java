@@ -30,7 +30,7 @@ import java.util.Properties;
 @EnableJpaRepositories(value = "internet_store.application.core.database.jpa")
 public class SpringCoreConfiguration {
 
-    @Value("${spring.database.username}")
+/*    @Value("${spring.database.username}")
     private String username;
     @Value("${spring.database.password}")
     private String userPassword;
@@ -47,9 +47,7 @@ public class SpringCoreConfiguration {
         dataSource.setPassword(userPassword);
         dataSource.setDriverClassName(databaseDriverName);
         return dataSource;
-    }
 
-/*
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
