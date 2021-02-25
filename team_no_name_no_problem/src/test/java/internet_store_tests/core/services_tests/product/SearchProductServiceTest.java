@@ -174,7 +174,7 @@ public class SearchProductServiceTest {
         assertTrue(response.getProducts().contains(mobilePhone));
         assertFalse(response.hasErrors());
     }
-/*
+
     @Test
     public void databaseContainsSuchProductTitle() {
 
@@ -396,5 +396,5 @@ public class SearchProductServiceTest {
         assertTrue(!response.hasErrors());
         assertTrue(response.getProducts().isEmpty());
     }
-*/
+
 }
