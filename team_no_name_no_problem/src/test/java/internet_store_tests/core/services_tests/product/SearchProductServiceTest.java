@@ -226,7 +226,7 @@ public class SearchProductServiceTest {
     public void databaseDoesNotContainsSuchProductTitle() {
 
         SearchProductByOtherRequest request1 = new SearchProductByOtherRequest("Mobile phone", "",
-                                                      null,null,ordering, paging);
+                                                      0,0,ordering, paging);
         List<CoreError> errors = new ArrayList<>();
         CoreError expectedError = new CoreError("database", "Database doesn't contain products wits title: Mobile phone");
         errors.add(expectedError);
