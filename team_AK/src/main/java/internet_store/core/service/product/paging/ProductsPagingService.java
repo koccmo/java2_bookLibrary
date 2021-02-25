@@ -24,7 +24,6 @@ public class ProductsPagingService {
     @Value("${product-records-on-page}")
     private int recordsCountOnPage;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -40,7 +39,6 @@ public class ProductsPagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = recordsCountOnPage;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
         listOnePage = productRepository.getLimitsProductsRecords(recordsCountOnPage, startRecordOffset);
@@ -66,7 +64,6 @@ public class ProductsPagingService {
         } else {
             currentPage++;
             startRecordOffset += recordsCountOnPage;
-            endRecordOffset += recordsCountOnPage;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -77,7 +74,6 @@ public class ProductsPagingService {
         if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = recordsCountOnPage;
             isFirstPage = true;
             isLastPage = false;
         } else {

@@ -1,96 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Internet Store demo project">
     <meta name="author" content="Team Static Startup">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
     <title>Internet Store Main Menu</title>
 </head>
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        margin-top: 50px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    th, td {
-        padding: 5px;
-        text-align: center;
-    }
-</style>
 
 <body>
 
-<table style="width:70%; align-content: center">
-    <tr>
-        <th colspan="5"><h3>Program Menu</h3></th>
-    </tr>
-    <tr>
-        <th>Product</th>
-        <th>Customer</th>
-        <th>Shopping Cart</th>
-        <th>Shopping Cart Item</th>
-        <th>Order</th>
-    </tr>
-    <tr>
-        <td><a href="/product/addProduct">Add Product</a></td>
-        <td><a href="/customer/addCustomer">Add Customer</a></td>
-        <td><a href="/shopping_cart/addShoppingCart">Add Shopping Cart</a></td>
-        <td><a href="/product_shopping_cart/addShoppingCartItem">Add Shopping Cart Item</a></td>
-        <td><a href="/order/addOrder">Add Order</a></td>
-    </tr>
-    <tr>
-        <td><a href="/product/deleteProduct">Delete Product by Id</a></td>
-        <td><a href="/customer/deleteCustomer">Delete Customer by Id</a></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><a href="/product/deleteProductByProduct">Delete Product by Product</a></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+<div class="top-nav">
+    <img class="logo" src="images/logo.jpg" alt="logo">
+    <h1 class="top-nav-text">Static Startup Internet Store</h1>
+</div>
 
-    <tr>
-        <td><a href="/product/showAllProducts">Show all Products</a></td>
-        <td><a href="/customer/showAllCustomers">Show all Customers</a></td>
-        <td><a href="/shopping_cart/showAllShoppingCarts">Show all Shopping Carts</a></td>
-        <td><a href="/product_shopping_cart/showAllShoppingCartItems">Show all Shopping Cart Items</a></td>
-        <td><a href="/order/showAllOrders">Show all Orders</a></td>
+<table style="width:70%; align-content: center">
+    <tr class="program-menu-title">
+        <th colspan="5">
+            <h3>Program Menu</h3>
+            <img class="menu-icons" src="icons/menu.png" alt="menu-icon">
+        </th>
     </tr>
-    <tr>
-        <td><a href="/product/findProductById">Find Product by Id</a></td>
-        <td><a href="/customer/findCustomerById">Find Customer by Id</a></td>
-        <td><a href="/shopping_cart/findCartById">Find Shopping Cart by Id</a></td>
-        <td><a href="/product_shopping_cart/searchCartItemById">Find Shopping Cart Item by Id</a></td>
-        <td><a href="/order/findOrderById">Find Order by Id</a></td>
+    <tr class="program-object-type">
+        <th>
+            Product<br>
+            <img class="menu-icons" src="icons/open-box.png" alt="product-icon">
+        </th>
+        <th>
+            Customer<br>
+            <img class="menu-icons" src="icons/user.png" alt="customer-icon">
+        </th>
+        <th>
+            Shopping Cart<br>
+            <img class="menu-icons" src="icons/shopping-cart.png" alt="shopping-cart-icon">
+        </th>
+        <th>
+            Shopping Cart Item<br>
+            <img class="menu-icons" src="icons/shopping-items.png" alt="shopping-cart-item-icon">
+        </th>
+        <th>
+            Order<br>
+            <img class="menu-icons" src="icons/checklist.png" alt="order-icon">
+        </th>
     </tr>
-    <tr>
-        <td><a href="/product/SearchProductBy">Find Product by criteria</a></td>
-        <td><a href="/customer/findCustomerByFirstName">Find Customers by First Name</a></td>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/addProduct">Add</a></td>
+        <td><a class="program-object-action" href="/customer/addCustomer">Add</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/addShoppingCart">Add</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/addShoppingCartItem">Add</a></td>
+        <td><a class="program-object-action" href="/order/addOrder">Add</a></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/findProductById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/customer/findCustomerById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/findCartById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/searchCartItemById">Find by ID</a></td>
+        <td><a class="program-object-action" href="/order/findOrderById">Find by ID</a></td>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/showAllProducts">Show all</a></td>
+        <td><a class="program-object-action" href="/customer/showAllCustomers">Show all</a></td>
+        <td><a class="program-object-action" href="/shopping_cart/showAllShoppingCarts">Show all</a></td>
+        <td><a class="program-object-action" href="/product_shopping_cart/showAllShoppingCartItems">Show all</a></td>
+        <td><a class="program-object-action" href="/order/showAllOrders">Show all</a></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/SearchProductBy">Find by criteria</a></td>
+        <td><a class="program-object-action" href="/customer/findCustomerByFirstName">Find by First Name</a></td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
-    <tr>
-        <td><a href="/product/changeProductName">Change Product Name</a></td>
-        <td><a href="/customer/changeCustomerFirstName">Change Customer First Name</a></td>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/changeProductName">Change Name</a></td>
+        <td><a class="program-object-action" href="/customer/changeCustomerFirstName">Change First Name</a></td>
         <td></td>
         <td></td>
-        <td><a href="/exitProgram">Exit Program</a></td>
+        <td></td>
     </tr>
-    <tr>
-        <td><a href="/product/deleteProductByName">Delete Product by Name</a></td>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/deleteProduct">Delete by ID</a></td>
+        <td><a class="program-object-action" href="/customer/deleteCustomer">Delete by ID</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="program-object-row-1">
+        <td><a class="program-object-action" href="/product/deleteProductByProduct">Delete by Product</a></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
+    </tr>
+    <tr class="program-object-row-2">
+        <td><a class="program-object-action" href="/product/deleteProductByName">Delete by Name</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="background-color: #ffcccc"><a class="program-object-action" href="/exitProgram">Exit Program</a></td>
     </tr>
 
 </table>

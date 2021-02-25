@@ -1,6 +1,5 @@
 package java2.application_target_list.core.requests.target;
 
-import java.math.BigInteger;
 
 public class ChangeTargetDeadlineRequest {
 

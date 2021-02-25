@@ -24,10 +24,10 @@ public class ProgramMenu {
     @Autowired
     public ProgramMenu (List<UIAction> uiActionList) {
         menuNumberToActionMap.put(1, findUIAction(uiActionList, AddProductUIAction.class));
-        menuNumberToActionMap.put(2, findUIAction(uiActionList, FindByIdUIAction.class));
+        menuNumberToActionMap.put(2, findUIAction(uiActionList, SearchByIdUIAction.class));
         menuNumberToActionMap.put(3, findUIAction(uiActionList, SearchProductUIAction.class));
         menuNumberToActionMap.put(4, findUIAction(uiActionList, ChangeProductUIAction.class));
-        menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteByIdUIAction.class));
+        menuNumberToActionMap.put(5, findUIAction(uiActionList, DeleteProductByIdUIAction.class));
         menuNumberToActionMap.put(6, findUIAction(uiActionList, DeleteProductByOtherUIAction.class));
         menuNumberToActionMap.put(7, findUIAction(uiActionList, GetAllProductsUIAction.class));
         menuNumberToActionMap.put(8, findUIAction(uiActionList, GetOrdersUIAction.class));

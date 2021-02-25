@@ -1,15 +1,28 @@
 package adventure_time.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity                     // этот класс используется для ORM маппинга
+@Table(name="customers")    // название таблицы в базе данных на которую мапятся свойства этого класса
 public class Customers {
 
+    @Id                     // поле является первичным ключём
+    @Column(name="id")      // указывает название колонки в таблице базы
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // стратегия генерации первичного ключа
     private Long customerID;
+
+    @Column(name="name", nullable = false, length = 50)
     private String customerName;
+
+    @Column(name="email", unique = true, nullable = false, length = 30)
     private String customerEmail;
+
+    @Column(name="phone", unique = true, nullable = false, length = 12)
     private String customerPhone;
+
+    @Column(name="password", nullable = false, length = 20)
     private String customerPassword;
-    private Boolean activity;
 
     public Customers() {
     }
@@ -19,7 +32,6 @@ public class Customers {
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
         this.customerPassword = customerPassword;
-        this.activity = true;
     }
 
     public Long getCustomerID() {
@@ -54,14 +66,6 @@ public class Customers {
         this.customerPhone = customerPhone;
     }
 
-    public Boolean getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Boolean activity) {
-        this.activity = activity;
-    }
-
     public String getCustomerPassword() {
         return customerPassword;
     }
@@ -79,13 +83,12 @@ public class Customers {
                 Objects.equals(customerName, customers.customerName) &&
                 Objects.equals(customerEmail, customers.customerEmail) &&
                 Objects.equals(customerPhone, customers.customerPhone) &&
-                Objects.equals(customerPassword, customers.customerPassword) &&
-                Objects.equals(activity, customers.activity);
+                Objects.equals(customerPassword, customers.customerPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerPassword, activity);
+        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerPassword);
     }
 
     @Override
@@ -96,7 +99,6 @@ public class Customers {
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
                 ", customerPassword='" + customerPassword + '\'' +
-                ", activity=" + activity +
                 '}';
     }
 }

@@ -24,9 +24,13 @@ public class AdminApplication {
         }
     }
 
+    private static ApplicationContext createApplicationContext() {
+        return new AnnotationConfigApplicationContext(AdminConfiguration.class);
+    }
+
     public static void main(String[] args) {
 
-        ApplicationContext adminApp = new AnnotationConfigApplicationContext(AdminConfiguration.class);
+        ApplicationContext adminApp = createApplicationContext();
         AdminMenu adminMenu = adminApp.getBean(AdminMenu.class);
 
         menuMap = adminMenu.subjectMenuSelect();

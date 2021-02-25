@@ -1,5 +1,7 @@
 package internet_store.application.core.services.order;
 
+import internet_store.application.core.database.jpa.JpaOrderRepository;
+import internet_store.application.core.database.jpa.JpaShoppingCartRepository;
 import internet_store.application.core.database.order.OrderRepository;
 import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
 import internet_store.application.core.domain.Order;
@@ -18,9 +20,9 @@ import java.util.List;
 public class AddOrderService {
 
     @Autowired
-    OrderRepository orderRepository;
+    JpaOrderRepository orderRepository;
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    JpaShoppingCartRepository shoppingCartRepository;
     @Autowired
     AddOrderValidator validator;
 
@@ -30,14 +32,14 @@ public class AddOrderService {
         if (!errors.isEmpty()) {
             return new AddOrderResponse(errors);
         }
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getShoppingCartId());
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getShoppingCartId()).get();
 
         Order order = new Order(shoppingCart);
         order.setOrderDate(LocalDateTime.now());
         order.setActive(true);
         // order.setOrderDate(request.getOrderDate());
         // order.setActive(request.isActive());
-        orderRepository.add(order);
+        orderRepository.save(order);
         return new AddOrderResponse(order);
     }
 

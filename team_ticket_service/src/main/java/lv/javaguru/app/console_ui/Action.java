@@ -1,10 +1,12 @@
 package lv.javaguru.app.console_ui;
 
 import lv.javaguru.app.core.common.BaseFunc;
+import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
+
 @Component
 public class Action {
 	private static User loggedInUser;

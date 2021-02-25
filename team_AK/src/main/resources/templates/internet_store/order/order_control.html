@@ -62,17 +62,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="add_product_for_cart"><b>Cart</b>
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
                         <span class="badge badge-light" id="product_count"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about"><b>About</b></a>
+                    <a class="nav-link" href="#"><b>About</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact"><b>Contact</b></a>
+                    <a class="nav-link" href="#"><b>Contact</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="service"><b>Service</b></a>
+                    <a class="nav-link" href="/service"><b>Service</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
                 </li>
             </ul>
         </div>
@@ -86,7 +89,7 @@
 
         <div class="col-lg-3">
 
-            <h3 class="my-4">Settings</h3>
+            <h6 class="my-4">Settings</h6>
             <ul id="settings">
                 <li><span class="caret">Client Control</span>
                     <ul class="nested">
@@ -151,7 +154,7 @@
                                     <td scope="row" class="text-center" style="vertical-align: middle;"
                                         th:text="${order.status}"></td>
                                     <td align="center">
-                                        <form>
+
                                             <div class="dropdown">
                                                 <button type="button" title="Change Status" data-toggle="dropdown"
                                                         class="btn btn-info  button-center">
@@ -161,7 +164,7 @@
                                                         <input type="hidden" name="order_status" value="ORDER RECEIVED">
                                                         <button name="order_received" id="name" class="dropdown-item"
                                                                 type="submit"
-                                                                formaction="/status_change" formmethod="post"
+                                                                formaction="/service/status_change" formmethod="post"
                                                                 th:name="orderNumber" th:value="${order.number}"
                                                                 data-value="order_status"
                                                         >ORDER RECEIVED
@@ -171,7 +174,7 @@
                                                     <form>
                                                         <input type="hidden" name="order_status" value="ITEM ORDERED TO STOCK">
                                                         <button name="to_stock" class="dropdown-item" type="submit"
-                                                                formaction="/status_change" formmethod="post"
+                                                                formaction="/service/status_change" formmethod="post"
                                                                 th:name="orderNumber" th:value="${order.number}"
                                                                 data-value="order_status"
                                                         >ITEM ORDERED TO STOCK
@@ -180,7 +183,7 @@
                                                     <form>
                                                         <input type="hidden" name="order_status" value="ORDER WAITING OFFICE">
                                                         <button name="office" class="dropdown-item" type="submit"
-                                                                formaction="/status_change" formmethod="post"
+                                                                formaction="/service/status_change" formmethod="post"
                                                                 th:name="orderNumber" th:value="${order.number}"
                                                                 data-value="order_status"
                                                         >ORDER WAITING OFFICE
@@ -190,32 +193,39 @@
                                                     <form>
                                                         <input type="hidden" name="order_status" value="CLIENT INFO BY PHONE">
                                                         <button name="by_phone" class="dropdown-item" type="submit"
-                                                                formaction="/status_change" formmethod="post"
+                                                                formaction="/service/status_change" formmethod="post"
                                                                 th:name="orderNumber" th:value="${order.number}"
                                                                 data-value="order_status"
                                                         >CLIENT INFO BY PHONE
                                                         </button>
                                                     </form>
-
                                                     <form>
                                                         <input type="hidden" name="order_status" value="DELIVERED">
                                                         <button name="delivered" class="dropdown-item" type="submit"
-                                                                formaction="/status_change" formmethod="post"
+                                                                formaction="/service/status_change" formmethod="post"
                                                                 th:name="orderNumber" th:value="${order.number}"
                                                                 data-value="order_status"
                                                         >DELIVERED
                                                         </button>
                                                     </form>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form>
+                                                        <button name="pdf" class="dropdown-item" type="submit"
+                                                                formaction="/service/view_pdf" formmethod="post"
+                                                                th:name="orderNumber" th:value="${order.number}"
+                                                        >VIEW ORDER PDF
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </form>
+
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                             <center>
                                 <div class="one_row">
-                                    <button type="submit" formaction="/order_control_prev" formmethod="post"
+                                    <button type="submit" formaction="/service/order_control_prev" formmethod="post"
                                             data-toggle="modal" data-target="#infoMessage"
                                             class="btn btn-outline-primary">
                                         Prev
@@ -225,7 +235,7 @@
                                     <div th:text="${pages}"></div>
                                 </div>
                                 <div class="one_row">
-                                    <button type="submit" formaction="/order_control_next" formmethod="post"
+                                    <button type="submit" formaction="/service/order_control_next" formmethod="post"
                                             data-toggle="modal" data-target="#infoMessage"
                                             class="btn btn-outline-primary">
                                         Next

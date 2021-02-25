@@ -1,6 +1,6 @@
 package internet_store.application.core.services.shopping_cart;
 
-import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
+import internet_store.application.core.database.jpa.JpaShoppingCartRepository;
 import internet_store.application.core.domain.ShoppingCart;
 import internet_store.application.core.requests.shopping_cart.FindShoppingCartByIdRequest;
 import internet_store.application.core.responses.CoreError;
@@ -15,7 +15,7 @@ import java.util.List;
 public class FindShoppingCartByIdService {
 
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    JpaShoppingCartRepository shoppingCartRepository;
     @Autowired
     FindShoppingCartByIdValidator validator;
 
@@ -26,7 +26,7 @@ public class FindShoppingCartByIdService {
             return new FindShoppingCartByIdResponse(errors);
         }
 
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getId());
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getId()).get();
         return new FindShoppingCartByIdResponse(shoppingCart);
     }
 

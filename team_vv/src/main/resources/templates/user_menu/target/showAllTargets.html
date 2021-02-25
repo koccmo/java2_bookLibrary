@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Target list demo project">
+    <meta name="author" content="Vadims Vladisevs">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Target list</title>
+</head>
+
+<body>
+
+<h3>Show all targets in the list</h3>
+
+<table class="table1">
+    <tr>
+        <td><b>Target name</b></td>
+        <td><b>Target description</b></td>
+        <td><b>Target deadline</b></td>
+    </tr>
+
+    <td th:if="${targets != null}">
+        <tr th:each="targets : ${targets}">
+            <td th:text="${targets.name}" />
+            <td th:text="${targets.description}" />
+            <td th:text="${targets.deadline}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/user_menu/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

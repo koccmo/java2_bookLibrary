@@ -2,13 +2,13 @@ package book_library.acceptancetests;
 
 import book_library.DatabaseCleaner;
 import book_library.config.BookListConfiguration;
-import book_library.core.requests.AddBookRequest;
+import book_library.core.requests.Book.AddBookRequest;
 import book_library.core.requests.Ordering;
 import book_library.core.requests.Paging;
-import book_library.core.requests.SearchBooksRequest;
-import book_library.core.responses.SearchBooksResponse;
-import book_library.core.services.AddBookService;
-import book_library.core.services.SearchBooksService;
+import book_library.core.requests.Book.SearchBooksRequest;
+import book_library.core.responses.Book.SearchBooksResponse;
+import book_library.core.services.Book.AddBookService;
+import book_library.core.services.Book.SearchBooksService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

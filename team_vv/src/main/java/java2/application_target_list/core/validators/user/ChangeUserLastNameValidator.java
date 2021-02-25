@@ -1,23 +1,17 @@
 package java2.application_target_list.core.validators.user;
 
-import java2.application_target_list.core.database.user.UserRepository;
-
 import java2.application_target_list.core.requests.user.ChangeUserLastNameRequest;
 import java2.application_target_list.core.responses.CoreError;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ChangeUserLastNameValidator {
 
-    public List<CoreError> validate(ChangeUserLastNameRequest request, UserRepository userRepository) {
-        List<CoreError> errors = new ArrayList<>();
 
-        if (!userRepository.isIdInUserList(request.getUserIdToChange())){
-            errors.add(new CoreError("User ID;","no user with that ID"));
-        }
+    public List<CoreError> validate(ChangeUserLastNameRequest request) {
+        List<CoreError> errors = new ArrayList<>();
 
         if (isUserIdEmpty(request)){
             errors.add(new CoreError("User ID","must not be empty!"));

@@ -4,11 +4,14 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -20,10 +23,13 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableAutoConfiguration
 @ComponentScan(basePackages = "internet_store.core")
 @PropertySource(value = "classpath:application.properties")
 @PropertySource(value = "classpath:database.properties")
 @EnableTransactionManagement
+@EntityScan(basePackages = "internet_store.core.domain")
+@EnableJpaRepositories(value = "internet_store.core.database.jpa")
 public class SpringCoreConfiguration {
 
     @Value("${jdbc.url}") private String jdbcUrl;

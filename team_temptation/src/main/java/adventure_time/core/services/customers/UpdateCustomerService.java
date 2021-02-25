@@ -1,23 +1,20 @@
 package adventure_time.core.services.customers;
 
 import adventure_time.core.domain.Customers;
-import adventure_time.core.requests.customers.LoginCustomerRequest;
 import adventure_time.core.requests.customers.UpdateCustomerRequest;
 import adventure_time.core.responses.CoreError;
-import adventure_time.core.responses.customer.LoginCustomerResponse;
 import adventure_time.core.responses.customer.UpdateCustomerResponse;
-import adventure_time.database.customers.DatabaseCustomers;
+import adventure_time.core.database.customers.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class UpdateCustomerService {
 
     @Autowired
-    private DatabaseCustomers database;
+    private CustomerRepository database;
     @Autowired
     private UpdateCustomerRequestValidator validatorUpdate;
 

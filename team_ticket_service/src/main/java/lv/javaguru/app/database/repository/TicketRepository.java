@@ -10,6 +10,8 @@ public interface TicketRepository {
 
 	Ticket getTicketById (Long id);
 
+	boolean deleteTicketById (Long id);
+
 	boolean updateTicketDateByTicketId (Long id, Date date);
 
 	boolean updateTicketDestinationByTicketId (Long id, String destinationCountry, String destinationCity);

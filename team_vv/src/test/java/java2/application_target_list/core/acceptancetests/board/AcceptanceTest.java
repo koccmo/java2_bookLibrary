@@ -2,8 +2,8 @@ package java2.application_target_list.core.acceptancetests.board;
 
 import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
-import java2.application_target_list.core.database.target.TargetRepository;
-import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
+import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
@@ -20,13 +20,10 @@ import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.board.SetRecordCompleteDateService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import java2.application_target_list.web_ui.config.SpringWebConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Optional;
@@ -38,8 +35,8 @@ public class AcceptanceTest {
     private DeleteRecordService deleteRecordService;
     private AddRecordService addRecordService;
     private ApplicationContext applicationContext;
-    private TargetRepository targetRepository;
-    private UserRepository userRepository;
+    private JpaTargetRepository jpaTargetRepository;
+    private JpaUserRepository jpaUserRepository;
     private DatabaseCleaner databaseCleaner;
     private AddTargetService addTargetService;
     private AddUserService addUserService;
@@ -114,26 +111,34 @@ public class AcceptanceTest {
     }
 
     private void addRecordsToDB() {
-        targetId = targetRepository.getTargetsList().get(0).getId();
-        userId = userRepository.getUsersList().get(0).getId();
+//        targetId = targetRepository.getTargetsList().get(0).getId();
+//        userId = userRepository.getUsersList().get(0).getId();
+        targetId = jpaTargetRepository.findAll().get(0).getId();
+        userId = jpaUserRepository.findAll().get(0).getId();
         AddRecordRequest addRecordRequest1 = new AddRecordRequest(targetId, userId);
         AddRecordResponse addRecordResponse1 = addRecordService.execute(addRecordRequest1);
         Assert.assertFalse(addRecordResponse1.hasErrors());
 
-        targetId = targetRepository.getTargetsList().get(1).getId();
-        userId = userRepository.getUsersList().get(1).getId();
+//        targetId = targetRepository.getTargetsList().get(1).getId();
+//        userId = userRepository.getUsersList().get(1).getId();
+        targetId = jpaTargetRepository.findAll().get(1).getId();
+        userId = jpaUserRepository.findAll().get(1).getId();
         AddRecordRequest addRecordRequest2 = new AddRecordRequest(targetId, userId);
         AddRecordResponse addRecordResponse2 = addRecordService.execute(addRecordRequest2);
         Assert.assertFalse(addRecordResponse2.hasErrors());
 
-        targetId = targetRepository.getTargetsList().get(2).getId();
-        userId = userRepository.getUsersList().get(0).getId();
+//        targetId = targetRepository.getTargetsList().get(2).getId();
+//        userId = userRepository.getUsersList().get(0).getId();
+        targetId = jpaTargetRepository.findAll().get(2).getId();
+        userId = jpaUserRepository.findAll().get(0).getId();
         AddRecordRequest addRecordRequest3 = new AddRecordRequest(targetId, userId);
         AddRecordResponse addRecordResponse3 = addRecordService.execute(addRecordRequest3);
         Assert.assertFalse(addRecordResponse3.hasErrors());
 
-        targetId = targetRepository.getTargetsList().get(3).getId();
-        userId = userRepository.getUsersList().get(2).getId();
+//        targetId = targetRepository.getTargetsList().get(3).getId();
+//        userId = userRepository.getUsersList().get(2).getId();
+        targetId = jpaTargetRepository.findAll().get(3).getId();
+        userId = jpaUserRepository.findAll().get(2).getId();
         AddRecordRequest addRecordRequest4 = new AddRecordRequest(targetId, userId);
         AddRecordResponse addRecordResponse4 = addRecordService.execute(addRecordRequest4);
         Assert.assertFalse(addRecordResponse4.hasErrors());
@@ -163,8 +168,10 @@ public class AcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-        userRepository = createUserRepository();
-        targetRepository = createTargetRepository();
+//        userRepository = createUserRepository();
+        jpaTargetRepository = createJpaTargetRepository();
+        jpaUserRepository = createJpaUserRepository();
+//        targetRepository = createTargetRepository();
         databaseCleaner = createDatabaseCleaner();
         addTargetService = createAddTargetService();
         addUserService = createAddUserService();
@@ -192,12 +199,19 @@ public class AcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-    private TargetRepository createTargetRepository() {
-        return applicationContext.getBean(TargetRepository.class);
+//    private TargetRepository createTargetRepository() {
+//        return applicationContext.getBean(TargetRepository.class);
+//    }
+
+    private JpaTargetRepository createJpaTargetRepository() {
+        return applicationContext.getBean(JpaTargetRepository.class);
     }
 
-    private UserRepository createUserRepository() {
-        return applicationContext.getBean(UserRepository.class);
+//    private UserRepository createUserRepository() {
+//        return applicationContext.getBean(UserRepository.class);
+//    }
+    private JpaUserRepository createJpaUserRepository() {
+        return applicationContext.getBean(JpaUserRepository.class);
     }
 
     private GetAllRecordsService createGetAllRecordsService() {

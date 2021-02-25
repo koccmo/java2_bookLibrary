@@ -22,7 +22,7 @@ public class UpdateProductController {
     private AddProductService addProductService;
     private Product updatedProduct;
 
-    @GetMapping(value = "update_product")
+    @GetMapping(value = "/service/update_product")
     public String updateProduct(ModelMap modelMap) {
         modelMap.addAttribute("error", "");
         modelMap.addAttribute("disabled", "true");

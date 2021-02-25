@@ -2,7 +2,7 @@ package internet_store_tests.core.validators_tests.product;
 
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
-import internet_store.core.requests.product.SearchProductRequest;
+import internet_store.core.requests.product.SearchProductByOtherRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.services.product.validators.SearchProductRequestValidator;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class SearchProductRequestValidatorTest {
     public void testEmptySearch(){
         CoreError expectedError = new CoreError("search", "Not valid input for search");
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest(null, "",null,null, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest(null, "",null,null, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 1);
@@ -32,7 +32,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testValidSearchTitleFilled(){
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("Bob", "",null,null, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("Bob", "",null,null, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 0);
@@ -41,7 +41,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testValidSearchDescriptionFilled(){
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("", "D",null,null, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("", "D",null,null, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 0);
@@ -50,7 +50,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testValidSearchTitleAndDescriptionFilled(){
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("Bob", "Description",null,null, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("Bob", "Description",null,null, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 0);
@@ -59,7 +59,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testValidSearchPriceRangeFilled(){
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("", "",300,400, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("", "",300,400, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 0);
@@ -68,7 +68,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testNotValidSearchStartPriceIsNotEntered() {
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("", "",null,400, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("", "",null,400, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 1);
@@ -77,7 +77,7 @@ public class SearchProductRequestValidatorTest {
     @Test
     public void testNotValidSearchEndPriceIsNotEntered() {
 
-        SearchProductRequest searchProductRequest = new SearchProductRequest("", "",300,null, validOrdering, validPaging);
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest("", "",300,null, validOrdering, validPaging);
         List<CoreError> errors= searchProductRequestValidator.validate(searchProductRequest);
 
         assertTrue(errors.size() == 1);

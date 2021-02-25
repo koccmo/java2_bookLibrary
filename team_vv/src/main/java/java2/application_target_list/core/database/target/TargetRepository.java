@@ -4,6 +4,7 @@ import java2.application_target_list.core.domain.Target;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 public interface TargetRepository {
 
@@ -16,5 +17,6 @@ public interface TargetRepository {
     boolean isIdInTargetList(Long targetId);
     List<Target> findByTargetName(String targetName);
     List<Target> findByTargetDescription(String targetDescription);
+    Optional<Target> getById(Long id);
 
 }

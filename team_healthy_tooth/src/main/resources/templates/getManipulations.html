@@ -6,33 +6,38 @@
         <meta name="description" content="Dental Clinic demo project">
         <meta name="author" content="Valeria">
         <title>Dental clinic Healthy tooth</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
 
     <body>
 
-        <h3>Get manipulation's list</h3>
+        <div class="title">
+            <h3>Get manipulation's list</h3>
+        </div>
 
-        <table>
-            <tr>
-                <td>Manipulation type:</td>
-                <td>Price:</td>
-                <td>Is active:</td>
-            </tr>
-
-            <td th:if="${list != null}">
-                <tr th:each="manipulation : ${list}">
-                    <td th:text="${manipulation.manipulationType}" />
-                    <td th:text="${manipulation.price}" />
-                    <td th:text="${manipulation.isActive}" />
+        <div class="menuLong">
+            </br>
+            <table>
+                <tr>
+                    <td>Manipulation type:</td>
+                    <td>Price:</td>
+                    <td>Is active:</td>
                 </tr>
-            </td>
 
-        </table>
+                <td th:if="${list != null}">
+                    <tr th:each="manipulation : ${list}">
+                        <td th:text="${manipulation.manipulationType}" />
+                        <td th:text="${manipulation.price}" />
+                        <td th:text="${manipulation.isActive}" />
+                    </tr>
+                </td>
 
-        <form action="/" method="get">
-            <input type="submit" value="Go to main page" name="Submit" />
-        </form>
+            </table>
 
+            <form action="/" method="get">
+                <input type="submit" value="Go to main page" name="Submit" />
+            </form>
+        </div>
     </body>
 
 </html>

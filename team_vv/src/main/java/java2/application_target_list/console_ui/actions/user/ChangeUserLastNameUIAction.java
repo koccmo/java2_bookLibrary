@@ -6,7 +6,6 @@ import java2.application_target_list.core.responses.user.ChangeUserLastNameRespo
 import java2.application_target_list.core.services.user.ChangeUserLastNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
 @Component

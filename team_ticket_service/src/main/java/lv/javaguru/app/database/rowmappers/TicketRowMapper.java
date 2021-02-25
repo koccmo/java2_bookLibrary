@@ -26,13 +26,13 @@ public class TicketRowMapper implements RowMapper<Ticket> {
 		LocalDate date = LocalDate.parse(dateStr.trim());
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		Date d = null;
-		try {
-			d = formatter.parse(dateStr.trim());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		ticket.setDepartureDate(d);
+	//	Date d = null;
+	//	try {
+	//		d = formatter.parse(dateStr.trim());
+	//	} catch (ParseException e) {
+	//		e.printStackTrace();
+	//	}
+	//	ticket.setDepartureDate(d);
 		ticket.setSeat(rs.getString("tickets.seat"));
 
 		return ticket;

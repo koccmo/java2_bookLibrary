@@ -46,15 +46,4 @@ public class GetFullInfoAboutRecordsUIAction implements UIAction {
         }
         System.out.println("----------");
     }
-
-//    private void printRecordsList(GetFullInfoAboutRecordsResponse getFullInfoAboutRecordsResponse) {
-//        System.out.println("ID. [Target name]  [Target description] [Target deadline] [User first name; User Last name] [Record Added Date] [Record Complete Date]");
-//        for (Record record : getFullInfoAboutRecordsResponse.getRecordList()){
-//            System.out.println(record.getRecordId() + ". ["
-//                    + record.getTargetName() + "] [" + record.getTargetDescription() + "] [" + record.getTargetDeadline() + "] ["
-//                    + record.getUserFirstName() + " " + record.getUserLastName() + "] ["
-//                    + record.getDateAdded() + "] [" + record.getDateComplete() + "]");
-//        }
-//        System.out.println("----------");
-//    }
 }

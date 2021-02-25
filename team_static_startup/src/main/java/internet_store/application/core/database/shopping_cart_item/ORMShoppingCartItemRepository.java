@@ -9,12 +9,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository {
 
     @Autowired
@@ -42,7 +44,17 @@ public class ORMShoppingCartItemRepository implements ShoppingCartItemRepository
 
     @Override
     public List<ProductShoppingCart> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("FROM ProductShoppingCart").getResultList();
+        CriteriaQuery<ProductShoppingCart> query = sessionFactory.getCriteriaBuilder().createQuery(ProductShoppingCart.class);
+        query.from(ProductShoppingCart.class);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
+        //return sessionFactory.getCurrentSession().createQuery("FROM ProductShoppingCart").getResultList();
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("DELETE ProductShoppingCart WHERE id = :id");
+        query.setParameter("id", id);
+        return query.executeUpdate() == 0;
     }
 
 }

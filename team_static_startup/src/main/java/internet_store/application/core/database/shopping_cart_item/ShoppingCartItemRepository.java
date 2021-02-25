@@ -13,4 +13,6 @@ public interface ShoppingCartItemRepository {
 
     List<ProductShoppingCart> findAll();
 
+    boolean deleteById(Long id);
+
 }

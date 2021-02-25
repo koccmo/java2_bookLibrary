@@ -1,16 +1,9 @@
 package java2.application_target_list.core.database.target;
 
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
-
 import java2.application_target_list.core.domain.Target;
-import org.springframework.transaction.annotation.Transactional;
-
-
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class InMemoryTargetRepositoryImpl implements TargetRepository {
@@ -22,7 +15,6 @@ public class InMemoryTargetRepositoryImpl implements TargetRepository {
     public void addTarget(Target target) {
         target.setId(targetId += 1);
         targetsList.add(target);
-//        return target.getId();
     }
 
     @Override
@@ -92,6 +84,11 @@ public class InMemoryTargetRepositoryImpl implements TargetRepository {
             }
         }
         return targets;
+    }
+
+    @Override
+    public Optional<Target> getById(Long id) {
+        return Optional.empty();
     }
 
     private int getTargetIndexFromListById(Long targetId) {

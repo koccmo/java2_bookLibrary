@@ -113,9 +113,9 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(laptopAcer);
 
-        List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitle("Laptop");
-        List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
-        List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
+        List<Product> resultOfFindingAllLaptops = productDatabase.searchAllByTitle("Laptop");
+        List<Product> resultOfFindingAllTV = productDatabase.searchAllByTitle("tv");
+        List<Product> resultOfFindingAllPC = productDatabase.searchAllByTitle("PC");
 
         assertTrue(resultOfFindingAllLaptops.contains(laptopDell));
         assertTrue(resultOfFindingAllLaptops.contains(laptopAcer));
@@ -133,9 +133,9 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(laptopAcer);
 
-        List<Product> resultOfFindingAllLaptopAcer = productDatabase.findAllByDescription("Acer");
-        List<Product> resultOfFindingAllTV = productDatabase.findAllByTitle("tv");
-        List<Product> resultOfFindingAllPC = productDatabase.findAllByTitle("PC");
+        List<Product> resultOfFindingAllLaptopAcer = productDatabase.searchAllByDescription("Acer");
+        List<Product> resultOfFindingAllTV = productDatabase.searchAllByTitle("tv");
+        List<Product> resultOfFindingAllPC = productDatabase.searchAllByTitle("PC");
 
         assertTrue(resultOfFindingAllLaptopAcer.contains(laptopAcer));
         assertEquals(resultOfFindingAllLaptopAcer.size(), 1);
@@ -152,10 +152,10 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(gpsNavigator);
 
-        Optional<Product> resultOfFindingLaptopDell = productDatabase.findById(1L);
-        Optional<Product> resultOfFindingLaptopAcer = productDatabase.findById(2L);
-        Optional<Product> resultOfFindingTV = productDatabase.findById(5L);
-        Optional<Product> resultOfFiningGPS = productDatabase.findById(7L);
+        Optional<Product> resultOfFindingLaptopDell = productDatabase.searchById(1L);
+        Optional<Product> resultOfFindingLaptopAcer = productDatabase.searchById(2L);
+        Optional<Product> resultOfFindingTV = productDatabase.searchById(5L);
+        Optional<Product> resultOfFiningGPS = productDatabase.searchById(7L);
 
         assertTrue(resultOfFindingLaptopDell.isPresent());
         assertTrue(resultOfFindingLaptopAcer.isPresent());
@@ -168,8 +168,8 @@ public class ProductDatabaseImplTest {
     public void findAllProductsByPriceTest() {
         productDatabase.add(laptopAcer);
 
-        List<Product> resultOfFindingRefrigeratorAndLaptopBySamePriceRange = productDatabase.findAllByPriceRange(299,401);
-        List<Product> resultOfFindingLaptopDell = productDatabase.findAllByPriceRange(301,401);
+        List<Product> resultOfFindingRefrigeratorAndLaptopBySamePriceRange = productDatabase.searchAllByPriceRange(299,401);
+        List<Product> resultOfFindingLaptopDell = productDatabase.searchAllByPriceRange(301,401);
 
         assertTrue(resultOfFindingRefrigeratorAndLaptopBySamePriceRange.contains(refrigerator));
         assertTrue(resultOfFindingRefrigeratorAndLaptopBySamePriceRange.contains(laptopAcer));
@@ -247,8 +247,8 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        List<Product> resultOfFindingRefrigerator = productDatabase.findAllByTitleAndDescription("","Electrolux");
-        List<Product> resultOfFindingAllLaptops = productDatabase.findAllByTitleAndDescription("Laptop","");
+        List<Product> resultOfFindingRefrigerator = productDatabase.searchAllByTitleAndDescription("","Electrolux");
+        List<Product> resultOfFindingAllLaptops = productDatabase.searchAllByTitleAndDescription("Laptop","");
 
         assertTrue(resultOfFindingRefrigerator.contains(refrigerator));
         assertTrue(resultOfFindingAllLaptops.contains(laptopAcer));
@@ -267,7 +267,7 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByTitleAndPriceRange("Laptop",1,5);
+        List<Product> resultOfFindingJunkLaptop = productDatabase.searchAllByTitleAndPriceRange("Laptop",1,5);
 
         assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
         assertFalse(resultOfFindingJunkLaptop.contains(tv));
@@ -285,7 +285,7 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByDescriptionAndPriceRange("Junk",1,5);
+        List<Product> resultOfFindingJunkLaptop = productDatabase.searchAllByDescriptionAndPriceRange("Junk",1,5);
 
         assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
         assertFalse(resultOfFindingJunkLaptop.contains(tv));
@@ -303,7 +303,7 @@ public class ProductDatabaseImplTest {
         productDatabase.add(tv);
         productDatabase.add(headphones);
 
-        List<Product> resultOfFindingJunkLaptop = productDatabase.findAllByTitleAndDescriptionAndPriceRange("Laptop","Junks",1,5);
+        List<Product> resultOfFindingJunkLaptop = productDatabase.searchAllByTitleAndDescriptionAndPriceRange("Laptop","Junks",1,5);
 
         assertTrue(resultOfFindingJunkLaptop.contains(junkLaptop));
         assertFalse(resultOfFindingJunkLaptop.contains(tv));

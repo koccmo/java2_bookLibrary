@@ -19,8 +19,8 @@ public class JdbcDatabase {
 	public User getUserByNameAndSurname (User user) {
 		String sql = "SELECT * FROM users WHERE users.name = ?  AND users.surname = ?";
 		Object[] args = new Object[]{
-				user.getName(),
-				user.getSurname()
+				user.getUsername(),
+				user.getPassword()
 		};
 
 		List<User> users = jdbcTemplate.query(sql, args, new UserRowMapper());
@@ -49,12 +49,13 @@ public class JdbcDatabase {
 
 
 	public boolean addUser (User userToAdd) {
-		String sql = "INSERT INTO users (name, surname, person_type) " +
-				"VALUES (?, ?, ?)";
+		String sql = "INSERT INTO users (name, surname) " +
+				"VALUES (?, ?)";
+			//	"VALUES (?, ?, ?)";
 		Object[] args = new Object[]{
-				userToAdd.getName(),
-				userToAdd.getSurname(),
-				userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
+				userToAdd.getUsername(),
+				userToAdd.getPassword(),
+			//	userToAdd.getPersonType() == PersonType.CLIENT ? "CLIENT" : "ADMIN"
 		};
 
 		return jdbcTemplate.update(sql, args) == 1;
@@ -96,13 +97,14 @@ public class JdbcDatabase {
 	}
 
 	public Ticket getAddedTicketId (Ticket ticket) {
-		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
+	//	String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND date = ? AND seat = ?";
+		String sql = "SELECT * FROM tickets WHERE fromCountry = ? AND fromCity = ? AND toCountry = ? AND toCity = ? AND seat = ?";
 		Object[] args = new Object[]{
 				ticket.getOriginCountry(),
 				ticket.getOriginCity(),
 				ticket.getDestinationCountry(),
 				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
+			//	ticket.getDepartureDate(),
 				ticket.getSeat()
 		};
 		List<Ticket> tickets = jdbcTemplate.query(sql, args, new TicketRowMapper());
@@ -111,14 +113,15 @@ public class JdbcDatabase {
 	}
 
 	public void addTicket (Ticket ticket) {
-		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
-				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		//String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, date, seat) "
+		String sql = "INSERT INTO tickets (fromCountry, fromCity, toCountry, toCity, seat) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		Object[] args = new Object[]{
 				ticket.getOriginCountry(),
 				ticket.getOriginCity(),
 				ticket.getDestinationCountry(),
 				ticket.getDestinationCity(),
-				ticket.getDepartureDate(),
+			//	ticket.getDepartureDate(),
 				ticket.getSeat()
 		};
 
@@ -195,7 +198,7 @@ public class JdbcDatabase {
 				"WHERE users.id = ? " +
 				"AND users.name = ? " +
 				"AND users.surname = ?";
-		Object[] args = new Object[]{user.getId(), user.getName(), user.getSurname()};
+		Object[] args = new Object[]{user.getId(), user.getUsername(), user.getPassword()};
 
 		return jdbcTemplate.query(sql, args, new FlightRowMapper());
 	}

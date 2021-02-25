@@ -6,34 +6,38 @@
     <meta name="description" content="Dental Clinic demo project">
     <meta name="author" content="Valeria">
     <title>Dental clinic Healthy tooth</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body>
+    <div class="title">
+        <h3>Get patient's list</h3>
+    </div>
 
-<h3>Get patient's list</h3>
+    <div class="menuLong">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>Surname:</td>
+                <td>Phone:</td>
+                <td>PersonalCode:</td>
+            </tr>
 
-<table>
-    <tr>
-        <td>Name:</td>
-        <td>Surname:</td>
-        <td>Phone:</td>
-        <td>PersonalCode:</td>
-    </tr>
+            <td th:if="${list != null}">
+                <tr th:each="patient : ${list}">
+                    <td th:text="${patient.personalData.name}" />
+                    <td th:text="${patient.personalData.surname}" />
+                    <td th:text="${patient.personalData.phone}" />
+                    <td th:text="${patient.personalData.personalCode}" />
+                </tr>
+            </td>
 
-    <td th:if="${list != null}">
-        <tr th:each="patient : ${list}">
-            <td th:text="${patient.personalData.name}" />
-            <td th:text="${patient.personalData.surname}" />
-            <td th:text="${patient.personalData.phone}" />
-            <td th:text="${patient.personalData.personalCode}" />
-        </tr>
-    </td>
+        </table>
 
-</table>
-
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
+        <form action="/" method="get">
+            <input type="submit" value="Go to main page" name="Submit" />
+        </form>
+    </div>
 
 </body>
 

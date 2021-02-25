@@ -8,9 +8,12 @@ import internet_store.database.product.ProductDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Component public class  AddProductService {
+@Component
+@Transactional
+public class  AddProductService {
 
     @Autowired private ProductDatabase productDatabase;
     @Autowired private AddProductRequestValidator addProductRequestValidator;

@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import team_VK.application.configuration.LibraryConfig;
+import team_VK.application.configuration.SpringCoreConfiguration;
 import team_VK.application.core.requests.AddBookRequest;
 import team_VK.application.core.responses.AddBookResponse;
 import team_VK.application.core.services.main_menu_services.AddBookService;
@@ -24,7 +24,7 @@ public class AcceptanceTestAddBook {
     ApplicationContext context;
     @Before
     public void setup() {
-        context = new AnnotationConfigApplicationContext(LibraryConfig.class);
+        context = new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
         DatabaseCleaner databaseCleaner = context.getBean(DatabaseCleaner.class);
         databaseCleaner.clean();
     }

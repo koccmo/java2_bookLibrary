@@ -29,7 +29,7 @@ public class FindCustomerController {
         if (findCustomerByIdResponse.hasErrors()){
             modelMap.addAttribute("errors", findCustomerByIdResponse.getErrors());
         } else {
-            modelMap.addAttribute("customers", findCustomerByIdResponse.getErrors());
+            modelMap.addAttribute("customers", findCustomerByIdResponse.getCustomers());
         }
         return "/findCustomerById";
     }

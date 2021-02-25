@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="Dental Clinic demo project">
-    <meta name="author" content="Valeria">
-    <title>Dental clinic Healthy tooth</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Dental Clinic demo project">
+        <meta name="author" content="Valeria">
+        <title>Dental clinic Healthy tooth</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
 
-<body>
+    <body>
 
-    <h3>Update patient jowl info</h3>
+        <div class="title">
+            <h3>Update patient jowl info</h3>
+        </div>
 
-    <table>
-        <tr>
-            <td>Id:</td>
-            <td>Tooth number:</td>
-            <td>Tooth status:</td>
-        </tr>
+        <div class="menuLong">
+            <table>
+                <tr>
+                    <td>Id:</td>
+                    <td>Tooth number:</td>
+                    <td>Tooth status:</td>
+                </tr>
 
-        <tr>
-            <form action="/updatePatientJowlInfo" th:object="${request}" method="post">
-                <td><input type="number" min="1" th:field="${request.id}"/></td>
-                <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
-                <td><input type="text" th:field="${request.toothStatus}"/></td>
-                <td>
-                    <input type="submit" value="Update jowl info"/>
-                    <input type="reset" value="Clear"/>
-                </td>
-            </form>
-        </tr>
-    </table>
+                <tr>
+                    <form action="/updatePatientJowlInfo" th:object="${request}" method="post">
+                        <td><input type="number" min="1" th:field="${request.id}"/></td>
+                        <td><input type="number" min="1" th:field="${request.toothNumber}"/></td>
+                        <td><input type="text" th:field="${request.toothStatus}"/></td>
+                        <td>
+                            <input type="submit" value="Update jowl info"/>
+                            <input type="reset" value="Clear"/>
+                        </td>
+                    </form>
+                </tr>
+            </table>
 
-    <h4>Tooth statuses:</h4>
-    <table>
-        <tr>
-           <td>KARIES</td>
-           <td>PLOMBA</td>
-           <td>SAKNE</td>
-           <td>KRONITIS</td>
-           <td>KLAMERS</td>
-           <td>NAV_ZOBA</td>
-           <td>NONEMAMA_PROTEZE</td>
-           <td>KRONITIS_AR_FAS</td>
-           <td>PLAST_KRONITIS</td>
-           <td>TILTINI</td>
-           <td>HEALTHY</td>
-        </tr>
-    </table>
+            </br>
 
-    <td th:if="${errors != null}">
-        <tr th:each="error : ${errors}">
-            <td th:text="${error.field}" />
-            <td th:text="${error.message}" /> </br>
-        </tr>
-    </td>
+            <h4>Tooth statuses:</h4>
+            <ul>
+                <li>KARIES</li>
+                <li>PLOMBA</li>
+                <li>SAKNE</li>
+                <li>KRONITIS</li>
+                <li>KLAMERS</li>
+                <li>NAV_ZOBA</li>
+                <li>NONEMAMA_PROTEZE</li>
+                <li>KRONITIS_AR_FAS</li>
+                <li>PLAST_KRONITIS</li>
+                <li>TILTINI</li>
+            <li>HEALTHY</li>
+            </ul>
 
-</body>
+            <td th:if="${errors != null}">
+                <tr th:each="error : ${errors}">
+                    <td th:text="${error.field}" />
+                    <td th:text="${error.message}" /> </br>
+                </tr>
+            </td>
+        </div>
+
+    </body>
 
 </html>

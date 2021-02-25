@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.user;
 
-import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -11,12 +11,16 @@ import java2.application_target_list.core.validators.user.SearchUserByLastNameVa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
+@Service
+@Transactional
 public class SearchUserByLastNameService {
 
     @Value("${search.ordering.enabled}")
@@ -25,8 +29,8 @@ public class SearchUserByLastNameService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private UserRepository userRepository;
     @Autowired private SearchUserByLastNameValidator searchUserByLastNameValidator;
+    @Autowired private JpaUserRepository jpaUserRepository;
 
     public SearchUserByLastNameResponse execute(SearchUsersByLastNameRequest request){
         List<CoreError> errors = searchUserByLastNameValidator.validate(request);
@@ -35,7 +39,7 @@ public class SearchUserByLastNameService {
             return new SearchUserByLastNameResponse(errors, null);
         }
 
-        List<User> users = userRepository.findUserByLastName(request.getLastName());
+        List<User> users = jpaUserRepository.findByLastName(request.getLastName());
         users = order(users, request.getOrdering());
         users = paging(users, request.getPaging());
 

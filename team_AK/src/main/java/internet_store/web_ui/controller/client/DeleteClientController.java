@@ -26,7 +26,7 @@ public class DeleteClientController {
     private ClientRepository clientRepository;
     private Client deletedClient;
 
-    @GetMapping(value = "delete_client")
+    @GetMapping(value = "/service/delete_client")
     public String deleteClient(ModelMap modelMap) {
         modelMap.addAttribute("error", "");
         return "client/delete_client";

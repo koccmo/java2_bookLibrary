@@ -4,12 +4,12 @@ import internet_store.core.DatabaseCleaner;
 import internet_store.config.SpringCoreConfiguration;
 import internet_store.core.domain.Product;
 import internet_store.core.requests.product.AddProductRequest;
-import internet_store.core.requests.product.FindByIdRequest;
+import internet_store.core.requests.product.SearchProductByIdRequest;
 import internet_store.core.requests.product.GetProductsRequest;
-import internet_store.core.response.product.FindByIdResponse;
+import internet_store.core.response.product.SearchProductByIdResponse;
 import internet_store.core.response.product.GetProductsResponse;
 import internet_store.core.services.product.AddProductService;
-import internet_store.core.services.product.FindProductByIdService;
+import internet_store.core.services.product.SearchProductByIdService;
 import internet_store.core.services.product.GetAllProductsService;
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
@@ -35,8 +35,8 @@ public class AcceptanceTestAddProduct2 {
         AddProductRequest addProductRequest = new AddProductRequest(product);
         addProductService().execute(addProductRequest);
 
-        FindByIdRequest findByIdRequest = new FindByIdRequest(5L);
-        FindByIdResponse findByIdResponse = findProductByIdService().execute(findByIdRequest);
+        SearchProductByIdRequest findByIdRequest = new SearchProductByIdRequest(5L);
+        SearchProductByIdResponse findByIdResponse = findProductByIdService().execute(findByIdRequest);
 
         GetProductsRequest getProductsRequest = new GetProductsRequest();
         GetProductsResponse getProductsResponse = getAllProductsService().execute(getProductsRequest);
@@ -50,8 +50,8 @@ public class AcceptanceTestAddProduct2 {
         return appContext.getBean(AddProductService.class);
     }
 
-    private FindProductByIdService findProductByIdService() {
-        return appContext.getBean(FindProductByIdService.class);
+    private SearchProductByIdService findProductByIdService() {
+        return appContext.getBean(SearchProductByIdService.class);
     }
 
     private GetAllProductsService getAllProductsService(){

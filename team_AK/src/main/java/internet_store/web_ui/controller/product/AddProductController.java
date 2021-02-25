@@ -17,7 +17,7 @@ public class AddProductController {
     @Autowired
     private AddProductService addProductService;
 
-    @GetMapping(value = "add_product")
+    @GetMapping(value = "/service/add_product")
     public String showAddProduct(ModelMap modelMap) {
         modelMap.addAttribute("product", new Product());
         modelMap.addAttribute("errors", "");

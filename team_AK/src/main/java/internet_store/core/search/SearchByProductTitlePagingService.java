@@ -20,7 +20,6 @@ public class SearchByProductTitlePagingService {
     @Autowired
     private ProductRepository productRepository;
     private int startRecordOffset;
-    private int endRecordOffset;
     @Getter
     private int pagesQuantity;
     @Getter
@@ -39,11 +38,10 @@ public class SearchByProductTitlePagingService {
         isFirstPage = true;
         isLastPage = false;
         startRecordOffset = START_FROM_FIRST_RECORD;
-        endRecordOffset = RECORDS_COUNT_ON_PAGE;
         currentPage = FIRST_PAGE;
         calculatePagesQuantity();
         listOnePage = productRepository.searchByTitle(this.searchTitle, RECORDS_COUNT_ON_PAGE, startRecordOffset);
-        if ((startRecordOffset + RECORDS_COUNT_ON_PAGE) >= productRepository.searcByProductTitleCount(this.searchTitle)) {
+        if ((startRecordOffset + RECORDS_COUNT_ON_PAGE) >= productRepository.searchByProductTitleCount(this.searchTitle)) {
             isLastPage = true;
         }
     }
@@ -65,7 +63,6 @@ public class SearchByProductTitlePagingService {
         } else {
             currentPage++;
             startRecordOffset += RECORDS_COUNT_ON_PAGE;
-            endRecordOffset += RECORDS_COUNT_ON_PAGE;
             isLastPage = false;
             isFirstPage = false;
         }
@@ -76,7 +73,6 @@ public class SearchByProductTitlePagingService {
         if (currentPage - PAGE_OFFSET <= FIRST_PAGE) {
             currentPage--;
             startRecordOffset = START_FROM_FIRST_RECORD;
-            endRecordOffset = RECORDS_COUNT_ON_PAGE;
             isFirstPage = true;
             isLastPage = false;
         } else {
@@ -91,7 +87,7 @@ public class SearchByProductTitlePagingService {
     private void calculatePagesQuantity() {
         final int NO_EXTRA_PAGE = 0;
 
-        long searchResultCount = productRepository.searcByProductTitleCount(searchTitle);
+        long searchResultCount = productRepository.searchByProductTitleCount(searchTitle);
 
         if (isAllRecordsCanSetOnePage(searchResultCount)) return;
 

@@ -21,24 +21,36 @@ public class OrmUserRepositoryImpl implements UserRepository{
 		return (Long) sessionFactory.getCurrentSession().save(user);
 	}
 
-	public User getUserByNameAndSurname (User user) {
-		String sql = "SELECT u FROM User u WHERE u.name = :name AND u.surname = :surname";
+	@Override
+	public User getUserByUsername (String username) {
+		String sql = "SELECT u FROM User u WHERE u.username = :username ";
 
 		Query query = sessionFactory.getCurrentSession()
 				.createQuery(sql);
 
-		query.setParameter("name", user.getName());
-		query.setParameter("surname", user.getSurname());
+		query.setParameter("username", username);
 
 		return (User) query.getSingleResult();
 	}
 
-	public boolean updateUserNameByUserId (Long id, String name) {
-		String sql = "UPDATE User AS u SET u.name = :name WHERE u.id = :id";
+	public User getUserByNameAndSurname (String name, String lastName) {
+		String sql = "SELECT u FROM User u WHERE u.name = :name AND u.lastName = :lastName";
+
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery(sql);
+
+		query.setParameter("name", name);
+		query.setParameter("lastName", lastName);
+
+		return (User) query.getSingleResult();
+	}
+
+	public boolean updateUserNameByUserId (Long id, String username) {
+		String sql = "UPDATE User AS u SET u.username = :username WHERE u.id = :id";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(sql);
 		query.setParameter("id", id);
-		query.setParameter("name", name);
+		query.setParameter("username", username);
 
 		int result = query.executeUpdate();
 

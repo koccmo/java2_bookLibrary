@@ -5,14 +5,11 @@ import internet_store.console_ui.ProgramMenu.ProgramMenu;
 import internet_store.web_ui.config.SpringWebConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
-@ComponentScan(basePackages = {"internet_store"})
+@SpringBootApplication
 public class WebInternetStoreApplication {
 
     public static void main(String[] args) {

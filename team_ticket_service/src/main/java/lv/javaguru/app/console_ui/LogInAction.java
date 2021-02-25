@@ -21,7 +21,7 @@ public class LogInAction extends Action implements UIActions {
 	public void execute () {
 		User user = fillLoginForm();
 
-		LogInRequest request = new LogInRequest(user);
+		LogInRequest request = new LogInRequest(user.getUsername(), user.getPassword());
 		LogInResponse response = loginService.execute(request);
 
 		if (response.hasErrors()) {

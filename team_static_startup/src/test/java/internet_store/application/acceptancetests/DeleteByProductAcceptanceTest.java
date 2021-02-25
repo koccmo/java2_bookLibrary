@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
-@Profile("hibernate")
 public class DeleteByProductAcceptanceTest {
 
     private ApplicationContext appContext;

@@ -2,8 +2,8 @@ package java2.application_target_list.core.acceptancetests.board;
 
 import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
-import java2.application_target_list.core.database.target.TargetRepository;
-import java2.application_target_list.core.database.user.UserRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
+import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
@@ -30,8 +30,8 @@ public class DeleteRecordAcceptanceTest {
     private GetAllRecordsService getAllRecordsService;
     private ApplicationContext applicationContext;
     private AddRecordService addRecordService;
-    private UserRepository userRepository;
-    private TargetRepository targetRepository;
+    private JpaTargetRepository jpaTargetRepository;
+    private JpaUserRepository jpaUserRepository;
     private DatabaseCleaner databaseCleaner;
     private AddTargetService addTargetService;
     private AddUserService addUserService;
@@ -80,17 +80,20 @@ public class DeleteRecordAcceptanceTest {
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         Assert.assertTrue(deleteRecordResponse.hasErrors());
         Assert.assertEquals(deleteRecordResponse.getErrorList().size(), 2);
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "no record with that ID");
         Assert.assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "must not be negative!");
+        Assert.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
+        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
 
     }
 
     private void addRecordsToDB() {
-        firstTargetId = targetRepository.getTargetsList().get(0).getId();
-        secondTargetId = targetRepository.getTargetsList().get(1).getId();
-        userId = userRepository.getUsersList().get(0).getId();
+//        firstTargetId = targetRepository.getTargetsList().get(0).getId();
+//        secondTargetId = targetRepository.getTargetsList().get(1).getId();
+//        userId = userRepository.getUsersList().get(0).getId();
+        firstTargetId = jpaTargetRepository.findAll().get(0).getId();
+        secondTargetId = jpaTargetRepository.findAll().get(1).getId();
+        userId = jpaUserRepository.findAll().get(0).getId();
 
         AddRecordRequest addRecordRequest1 = new AddRecordRequest(firstTargetId, userId);
         AddRecordRequest addRecordRequest2 = new AddRecordRequest(secondTargetId, userId);
@@ -114,8 +117,10 @@ public class DeleteRecordAcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-        userRepository = createUserRepository();
-        targetRepository = createTargetRepository();
+//        userRepository = createUserRepository();
+//        targetRepository = createTargetRepository();
+        jpaTargetRepository = createJpaTargetRepository();
+        jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
         addTargetService = createAddTargetService();
         addUserService = createAddUserService();
@@ -138,12 +143,19 @@ public class DeleteRecordAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-    private TargetRepository createTargetRepository() {
-        return applicationContext.getBean(TargetRepository.class);
+//    private TargetRepository createTargetRepository() {
+//        return applicationContext.getBean(TargetRepository.class);
+//    }
+//
+//    private UserRepository createUserRepository() {
+//        return applicationContext.getBean(UserRepository.class);
+//    }
+    private JpaTargetRepository createJpaTargetRepository() {
+        return applicationContext.getBean(JpaTargetRepository.class);
     }
 
-    private UserRepository createUserRepository() {
-        return applicationContext.getBean(UserRepository.class);
+    private JpaUserRepository createJpaUserRepository() {
+        return applicationContext.getBean(JpaUserRepository.class);
     }
 
     private GetAllRecordsService createGetAllRecordsService() {

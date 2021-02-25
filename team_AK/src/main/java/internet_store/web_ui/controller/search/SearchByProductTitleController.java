@@ -11,6 +11,7 @@ import internet_store.core.service.product.CheckStockQuantityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,7 +28,7 @@ public class SearchByProductTitleController {
     @Autowired
     private CartRepository CartRepository;
 
-    @PostMapping("search_product")
+    @PostMapping("/estore/search_product")
     public String startSearchByTitle(@RequestParam(value = "search") String search, ModelMap modelMap) {
         paging.startPaging(search);
 
@@ -37,19 +38,12 @@ public class SearchByProductTitleController {
         return "search/search_by_product_title";
     }
 
-    @PostMapping(value = "/pass_from_search_title")
-    // TODO: 24.01.2021  It's only example. Here must be Spring Security
-    public String checkPassFromSearch(@RequestParam(value = "pass") String password, ModelMap modelMap) {
-        if (password.equals("admin")) {
-            return "service/service";
-        }
-        refreshData(modelMap);
-        modelMap.addAttribute("info", "");
-        modelMap.addAttribute("error", "Login error : Incorrect password");
-        return "search/search_by_product_title";
+    @GetMapping(value = "service_login_search_title")
+    public String loginFromSearchTitle() {
+        return "service/service";
     }
 
-    @PostMapping(value = "/buy_product_search_title")
+    @PostMapping(value = "/estore/buy_product_search_title")
     public String productBuyFromSearchTitle(@RequestParam(value = "quantity") Long quantity,
                                             @RequestParam(value = "productTitle") String title, ModelMap modelMap) {
 
@@ -69,7 +63,7 @@ public class SearchByProductTitleController {
         return "search/search_by_product_title";
     }
 
-    @PostMapping(value = "/search_title_next")
+    @PostMapping(value = "/estore/search_title_next")
     public String nextPageSearchTitle(ModelMap modelMap) {
         if (paging.isLastPage()) {
             modelMap.addAttribute("info", "View control : Last page");
@@ -82,7 +76,7 @@ public class SearchByProductTitleController {
         return "search/search_by_product_title";
     }
 
-    @PostMapping(value = "/search_title_prev")
+    @PostMapping(value = "/estore/search_title_prev")
     public String prevPageSearchTitle(ModelMap modelMap) {
         if (paging.isFirstPage()) {
             modelMap.addAttribute("info", "View control : First page");

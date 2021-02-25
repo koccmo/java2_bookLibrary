@@ -7,14 +7,14 @@ public class DeleteProductByOtherRequest {
     private Integer startPrice;
     private Integer endPrice;
 
+    public DeleteProductByOtherRequest() {}
+
     public DeleteProductByOtherRequest(String title, String description, Integer startPrice, Integer endPrice) {
         this.title = title;
         this.description = description;
         this.startPrice = startPrice;
         this.endPrice = endPrice;
     }
-
-    public DeleteProductByOtherRequest() {}
 
     public String getTitle() {
         return title;

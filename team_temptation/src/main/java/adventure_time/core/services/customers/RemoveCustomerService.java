@@ -3,7 +3,7 @@ package adventure_time.core.services.customers;
 import adventure_time.core.requests.customers.RemoveCustomerRequest;
 import adventure_time.core.responses.CoreError;
 import adventure_time.core.responses.customer.RemoveCustomerResponse;
-import adventure_time.database.customers.DatabaseCustomers;
+import adventure_time.core.database.customers.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class RemoveCustomerService {
 
     @Autowired
-    private DatabaseCustomers database;
+    private CustomerRepository database;
     @Autowired private RemoveCustomerRequestValidator validator;
 
     public RemoveCustomerResponse remove (RemoveCustomerRequest request) {
@@ -24,7 +24,7 @@ public class RemoveCustomerService {
             return new RemoveCustomerResponse(errors);
         }
 
-        if (!database.deactivate(request.getCustomerId())) {
+        if (!database.delete(request.getCustomerId())) {
             errors.add(new CoreError("customerId",
                     "There is no customer with ID: " + request.getCustomerId() + " in the database"));
             return new RemoveCustomerResponse(errors);

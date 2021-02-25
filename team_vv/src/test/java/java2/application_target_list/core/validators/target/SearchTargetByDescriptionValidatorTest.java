@@ -15,12 +15,11 @@ import java.util.List;
 public class SearchTargetByDescriptionValidatorTest {
 
     private SearchTargetByDescriptionValidator validator;
-    private TargetRepository targetRepository;
 
     @Before
     public void setup() {
        validator = new SearchTargetByDescriptionValidator();
-       targetRepository = new InMemoryTargetRepositoryImpl();
+        TargetRepository targetRepository = new InMemoryTargetRepositoryImpl();
     }
 
     @Test

@@ -1,7 +1,6 @@
 package java2.application_target_list.core.validators.target;
 
 import org.springframework.stereotype.Component;
-
 import java2.application_target_list.core.requests.target.SearchTargetByDescriptionRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java.util.ArrayList;

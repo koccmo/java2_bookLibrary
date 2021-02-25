@@ -68,7 +68,7 @@ public class InMemoryDatabase implements Database {
 
 	public Optional<User> getUserByNameAndSurname (User user) {
 		return userTable.values().stream()
-				.filter(u -> u.getName().equals(user.getName()) && u.getSurname().equals(user.getSurname()))
+				.filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()))
 				.findFirst();
 	}
 

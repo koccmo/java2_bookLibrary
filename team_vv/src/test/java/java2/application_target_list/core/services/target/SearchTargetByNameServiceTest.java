@@ -1,5 +1,6 @@
 package java2.application_target_list.core.services.target;
 
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -27,10 +28,9 @@ public class SearchTargetByNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<Target> targets;
-    @Mock private TargetRepository targetRepository;
     @Mock private SearchTargetByNameValidator validator;
-    @InjectMocks
-    SearchTargetByNameService service;
+    @Mock private JpaTargetRepository jpaTargetRepository;
+    @InjectMocks private SearchTargetByNameService service;
 
     @Before
     public void setup() {
@@ -45,7 +45,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         SearchTargetByNameRequest request = new SearchTargetByNameRequest("name");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name", "description", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -61,7 +61,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 1L));
         targets.add(new Target("name1", "description1", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -80,7 +80,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 10L));
         targets.add(new Target("name2", "description2", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -99,7 +99,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 10L));
         targets.add(new Target("name2", "description2", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -118,7 +118,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 1L));
         targets.add(new Target("name1", "description1", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -137,7 +137,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 10L));
         targets.add(new Target("name1", "description1", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -156,7 +156,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 1L));
         targets.add(new Target("name2", "description2", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 2);
@@ -175,7 +175,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 10L));
         targets.add(new Target("name1", "description1", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -192,7 +192,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 1L));
         targets.add(new Target("name1", "description1", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -209,7 +209,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 10L));
         targets.add(new Target("name2", "description2", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -226,7 +226,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 10L));
         targets.add(new Target("name2", "description2", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -243,7 +243,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 1L));
         targets.add(new Target("name1", "description1", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -260,7 +260,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name2", "description2", 10L));
         targets.add(new Target("name1", "description1", 1L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);
@@ -277,7 +277,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
         targets.add(new Target("name1", "description1", 1L));
         targets.add(new Target("name2", "description2", 10L));
-        Mockito.when(targetRepository.findByTargetName("name")).thenReturn(targets);
+        Mockito.when(jpaTargetRepository.findByName("name")).thenReturn(targets);
         SearchTargetByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getTargetsList().size(), 1);

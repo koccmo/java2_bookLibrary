@@ -26,4 +26,9 @@ dependencies {
     compile ('org.reactivestreams:reactive-streams:1.0.3')
     compile ('org.liquibase:liquibase-core:4.2.2')
     compile ('org.springframework.boot:spring-boot-devtools:2.4.2')
+    implementation ('org.springframework.boot:spring-boot-starter-security:2.4.2') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    implementation ('com.itextpdf:itextpdf:5.5.13.2')
+    implementation ('com.squareup.okhttp3:okhttp:4.9.1')
 }

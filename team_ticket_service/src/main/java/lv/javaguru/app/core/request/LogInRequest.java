@@ -1,18 +1,32 @@
 package lv.javaguru.app.core.request;
 
-import lv.javaguru.app.core.domain.User;
 
 public class LogInRequest {
 
-	private final User user;
+	private String name;
+	private String surname;
 
-
-	public LogInRequest (User user) {
-		this.user = user;
+	public LogInRequest () {
 	}
 
-	public User getUser () {
-		return user;
+	public LogInRequest (String name, String surname) {
+		this.name = name;
+		this.surname = surname;
 	}
 
+	public String getName () {
+		return name;
+	}
+
+	public void setName (String name) {
+		this.name = name;
+	}
+
+	public String getSurname () {
+		return surname;
+	}
+
+	public void setSurname (String surname) {
+		this.surname = surname;
+	}
 }

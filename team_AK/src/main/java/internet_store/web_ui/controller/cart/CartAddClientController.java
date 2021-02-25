@@ -30,7 +30,7 @@ public class CartAddClientController {
     @Autowired
     private SaveSessionService saveSessionService;
 
-    @GetMapping(value = "/cart_add_client")
+    @GetMapping(value = "/estore/cart_add_client")
     public String getCartClient(ModelMap modelMap) {
         modelMap.addAttribute("client", sessionService.getSessionClient());
         modelMap.addAttribute("cartCount", cartCountService.getCartCount());
@@ -40,7 +40,7 @@ public class CartAddClientController {
         return "cart/cart_add_client";
     }
 
-    @PostMapping(value = "/order_add_client")
+    @PostMapping(value = "/estore/order_add_client")
     public String addNewClient(@ModelAttribute(value = "client") Client client, ModelMap modelMap) {
         StringBuilder allErrors = new StringBuilder();
 

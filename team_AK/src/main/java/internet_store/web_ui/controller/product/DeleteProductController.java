@@ -22,7 +22,7 @@ public class DeleteProductController {
     private DeleteProductService deletedProductService;
     private Product deletedProduct;
 
-    @GetMapping(value = "delete_product")
+    @GetMapping(value = "/service/delete_product")
     public String deleteProduct(ModelMap modelMap) {
         modelMap.addAttribute("error", "");
         return "product/delete_product";

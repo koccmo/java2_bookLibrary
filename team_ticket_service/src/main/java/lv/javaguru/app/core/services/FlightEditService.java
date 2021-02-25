@@ -1,17 +1,19 @@
 package lv.javaguru.app.core.services;
 
 import lv.javaguru.app.core.domain.CodeError;
-import lv.javaguru.app.core.domain.PersonType;
 import lv.javaguru.app.core.domain.*;
 import lv.javaguru.app.core.request.EditFlightRequest;
 import lv.javaguru.app.core.request.EditFlightValueRequest;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketDestination;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketOrigin;
+import lv.javaguru.app.core.request.ticket_update.UpdateTicketSeat;
 import lv.javaguru.app.core.response.FlightEditResponse;
 import lv.javaguru.app.core.services.validators.EditFlightRequestValidator;
 import lv.javaguru.app.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +36,7 @@ public class FlightEditService {
 
 
 	public FlightEditResponse execute (EditFlightRequest request) {
-		List<CodeError> errors = validator.validateId(request.getRequestId());
+		List<CodeError> errors = validator.validateId(request.getId());
 
 		if (userRepository.getUserById(request.getUser().getId()) == null) {
 			errors.add(new CodeError("Id error ", "wrong ID"));
@@ -42,15 +44,15 @@ public class FlightEditService {
 		if (errors.size() > 0)
 			return new FlightEditResponse(errors);
 
-		if (request.getUser().getPersonType() != PersonType.ADMIN &&
-				!flightRepository.isUserFlight(request.getRequestId(), request.getUser())) {
-			errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
-		}
+		//if (request.getUser().getPersonType() != PersonType.ADMIN &&
+		//		!flightRepository.isUserFlight(request.getRequestId(), request.getUser())) {
+		//	errors.add(new CodeError("Id error", "User don't have ticket with entered ID"));
+		//}
 
 		if (!errors.isEmpty())
 			return new FlightEditResponse(errors);
 
-		Flight flight = flightRepository.getFlightById(request.getRequestId());
+		Flight flight = flightRepository.getFlightById(request.getId());
 
 		if (flight == null) {
 			errors.add(new CodeError("Id error", "No flight with entered ID"));
@@ -58,6 +60,58 @@ public class FlightEditService {
 		}
 
 		return new FlightEditResponse(flight);
+	}
+
+
+	public FlightEditResponse execute (UpdateTicketOrigin request) {
+		String originCountry = request.getTicketNewOriginCountry();
+		String originCity = request.getTicketNewOriginCity();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketOriginByTicketId(id, originCountry, originCity))
+			errors.add(new CodeError("Ticket's origin", "Haven't managed to update ticket's origin!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's origin was updated!";
+		return new FlightEditResponse(message);
+	}
+
+
+	public FlightEditResponse execute (UpdateTicketDestination request) {
+		String destinationCountry = request.getTicketNewDestinationCountry();
+		String destinationCity = request.getTicketNewDestinationCity();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketDestinationByTicketId(id, destinationCountry, destinationCity))
+			errors.add(new CodeError("Ticket's destination", "Haven't managed to update ticket's destination!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's destination was updated!";
+		return new FlightEditResponse(message);
+	}
+
+	public FlightEditResponse execute (UpdateTicketSeat request) {
+		String seat = request.getTicketNewSeat();
+		Long id = request.getId();
+
+		List<CodeError> errors = new ArrayList<>();//validator.validateName(name);
+
+		if (!ticketRepository.updateTicketSeatByTicketId(id, seat))
+			errors.add(new CodeError("Ticket's seat", "Haven't managed to update ticket's seat!"));
+
+		if (!errors.isEmpty())
+			return new FlightEditResponse(errors);
+
+		String message = "Ticket's seat was updated!";
+		return new FlightEditResponse(message);
 	}
 
 

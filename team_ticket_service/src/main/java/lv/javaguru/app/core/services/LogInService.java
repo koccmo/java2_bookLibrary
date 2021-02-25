@@ -12,8 +12,8 @@ import lv.javaguru.app.database.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -36,13 +36,14 @@ public class LogInService {
 		if (!errors.isEmpty())
 			return new LogInResponse(errors);
 
-		User u = userRepository.getUserByNameAndSurname(request.getUser());
+		User u = userRepository.getUserByNameAndSurname(request.getName(), request.getSurname());
 		if (u == null) {
 			errors.add(new CodeError("database", "No such user"));
 			return new LogInResponse(errors);
 		}
 		else {
-			LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+			//LogInResponse logInResponse = (u.getPersonType() == PersonType.ADMIN) ?
+			LogInResponse logInResponse = (true) ?
 					new LogInResponse(new AdminMode(applicationContext)) :
 					new LogInResponse(new UserMode(applicationContext));
 

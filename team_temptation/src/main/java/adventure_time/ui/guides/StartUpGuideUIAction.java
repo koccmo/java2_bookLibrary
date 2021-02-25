@@ -1,6 +1,6 @@
 package adventure_time.ui.guides;
 
-import adventure_time.database.guides.DatabaseGuides;
+import adventure_time.core.database.guides.DatabaseGuides;
 import adventure_time.core.domain.Guides;
 import adventure_time.ui.UIAction;
 

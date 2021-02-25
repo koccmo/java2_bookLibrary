@@ -27,7 +27,7 @@ public class UpdateClientController {
     private ClientRepository clientRepository;
     private Client updatedClient;
 
-    @GetMapping(value = "update_client")
+    @GetMapping(value = "/service/update_client")
     public String updateProduct(ModelMap modelMap) {
         modelMap.addAttribute("error", "");
         modelMap.addAttribute("disabled", "true");
@@ -47,7 +47,7 @@ public class UpdateClientController {
 
         if (clientsResultList.size() > 1) {
             modelMap.addAttribute("error", "Search criterion "
-                    + searchClient + " heve more one result. Please change search criterion and try again.");
+                    + searchClient + " have more one result. Please change search criterion and try again.");
             return "client/update_client";
         }
 

@@ -1,9 +1,9 @@
 package internet_store.web_ui.controllers;
 
 
-import internet_store.core.requests.product.SearchProductRequest;
-import internet_store.core.response.product.SearchProductResponse;
-import internet_store.core.services.product.SearchProductService;
+import internet_store.core.requests.product.SearchProductByOtherRequest;
+import internet_store.core.response.product.SearchProductByOtherResponse;
+import internet_store.core.services.product.SearchProductByOtherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SearchProductController {
 
     @Autowired
-    private SearchProductService searchProductService;
+    private SearchProductByOtherService searchProductService;
 
     @GetMapping(value = "/searchProduct")
     public String showSearchProductPage(ModelMap modelMap) {
-        modelMap.addAttribute("request", new SearchProductRequest());
+        modelMap.addAttribute("request", new SearchProductByOtherRequest());
         return "searchProduct";
     }
 
     @PostMapping("/searchProduct")
-    public String processSearchProductRequest(@ModelAttribute(value = "request") SearchProductRequest searchProductRequest, ModelMap modelMap) {
-        SearchProductResponse searchProductResponse = searchProductService.execute(searchProductRequest);
+    public String processSearchProductRequest(@ModelAttribute(value = "request") SearchProductByOtherRequest searchProductRequest, ModelMap modelMap) {
+        SearchProductByOtherResponse searchProductResponse = searchProductService.execute(searchProductRequest);
         if (searchProductResponse.hasErrors()) {
             modelMap.addAttribute("errors", searchProductResponse.getErrors());
         } else {

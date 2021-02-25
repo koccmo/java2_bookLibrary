@@ -16,12 +16,11 @@ import java.util.List;
 public class SearchTargetByNameValidatorTest {
 
     private SearchTargetByNameValidator validator;
-    private TargetRepository targetRepository;
 
     @Before
     public void setup() {
         validator = new SearchTargetByNameValidator();
-        targetRepository = new InMemoryTargetRepositoryImpl();
+        TargetRepository targetRepository = new InMemoryTargetRepositoryImpl();
         targetRepository.addTarget(new Target("name", "description", 1L));
     }
 

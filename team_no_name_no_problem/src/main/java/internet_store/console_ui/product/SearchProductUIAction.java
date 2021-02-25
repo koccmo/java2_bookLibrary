@@ -3,9 +3,9 @@ package internet_store.console_ui.product;
 import internet_store.console_ui.UIAction;
 import internet_store.core.requests.Ordering;
 import internet_store.core.requests.Paging;
-import internet_store.core.requests.product.SearchProductRequest;
-import internet_store.core.response.product.SearchProductResponse;
-import internet_store.core.services.product.SearchProductService;
+import internet_store.core.requests.product.SearchProductByOtherRequest;
+import internet_store.core.response.product.SearchProductByOtherResponse;
+import internet_store.core.services.product.SearchProductByOtherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 @Component public class SearchProductUIAction implements UIAction {
 
-    @Autowired private SearchProductService searchProductService;
+    @Autowired private SearchProductByOtherService searchProductService;
 
     @Override
     public void execute (){
@@ -54,9 +54,9 @@ import java.util.Scanner;
 
         Ordering ordering = new Ordering(orderBy, orderDirection);
         Paging paging = new Paging(pageNumber, pageSize);
-        SearchProductRequest searchProductRequest = new SearchProductRequest(title, description, startPrice,
+        SearchProductByOtherRequest searchProductRequest = new SearchProductByOtherRequest(title, description, startPrice,
                                                                              endPrice, ordering, paging);
-        SearchProductResponse searchProductResponse = searchProductService.execute(searchProductRequest);
+        SearchProductByOtherResponse searchProductResponse = searchProductService.execute(searchProductRequest);
 
         if (searchProductResponse.hasErrors()){
             searchProductResponse.getErrors().forEach(System.out::println);

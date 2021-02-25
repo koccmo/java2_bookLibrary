@@ -1,6 +1,6 @@
 package java2.application_target_list.core.services.target;
 
-import java2.application_target_list.core.database.target.TargetRepository;
+import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.matchers.TargetMatcher;
 import java2.application_target_list.core.responses.target.AddTargetResponse;
@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddTargetServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private TargetRepository targetRepository;
+    @Mock private JpaTargetRepository jpaTargetRepository;
     @Mock private AddTargetValidator validator;
     @InjectMocks
     AddTargetService service;
@@ -39,7 +39,7 @@ public class AddTargetServiceTest extends TestCase {
         AddTargetRequest request = new AddTargetRequest("name", "description", 1L);
         AddTargetResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(targetRepository).addTarget(
+        Mockito.verify(jpaTargetRepository).save(
                 argThat(new TargetMatcher("name", "description", 1L)));
     }
 
@@ -53,7 +53,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target name");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target description");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
         assertEquals(response.getErrorList().get(1).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(1).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class AddTargetServiceTest extends TestCase {
         assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty!");
         assertEquals(response.getErrorList().get(2).getField(), "Target deadline");
         assertEquals(response.getErrorList().get(2).getMessage(), "must not be negative!");
-        Mockito.verifyNoInteractions(targetRepository);
+        Mockito.verifyNoInteractions(jpaTargetRepository);
     }
 
 
