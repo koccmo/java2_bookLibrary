@@ -44,13 +44,13 @@ public class FindProductsService {
     private List<Product> search(FindProductsRequest request) {
         List<Product> products = null;
         if (request.isNameProvided() && !request.isDescriptionProvided()) {
-            products = productRepository.findProductByName(request.getName());
+            products = productRepository.findProductByProductName(request.getName());
         }
         if (!request.isNameProvided() && request.isDescriptionProvided()) {
-            products = productRepository.findProductByDescription(request.getDescription());
+            products = productRepository.findProductByProductDescription(request.getDescription());
         }
         if (request.isNameProvided() && request.isDescriptionProvided()) {
-            products = productRepository.findProductByNameAndDescription(request.getName(), request.getDescription());
+            products = productRepository.findProductByProductNameAndProductDescription(request.getName(), request.getDescription());
         }
         return products;
     }

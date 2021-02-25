@@ -28,7 +28,7 @@ public class DeleteProductByProductService {
     }
 
     public boolean delete(Product product) {
-        Long deletedProducts = productRepository.deleteByNameAndDescriptionAndPrice(
+        Long deletedProducts = productRepository.deleteByProductNameAndProductDescriptionAndPrice(
                 product.getName(), product.getDescription(), product.getPrice());
         return deletedProducts ==  1;
     }

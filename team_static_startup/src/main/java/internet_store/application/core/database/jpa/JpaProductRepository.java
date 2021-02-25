@@ -18,14 +18,14 @@ public interface JpaProductRepository extends JpaRepository<Product, Long> {
     @Query("DELETE FROM Product WHERE id = :id")
     Long deleteByProductId(Long id);
 
-    Long deleteByName(String name);
+    Long deleteByProductName(String name);
 
-    Long deleteByNameAndDescriptionAndPrice(String name, String description, BigDecimal price);
+    Long deleteByProductNameAndProductDescriptionAndPrice(String name, String description, BigDecimal price);
 
-    List<Product> findProductByName(String name);
+    List<Product> findProductByProductName(String name);
 
-    List<Product> findProductByDescription(String description);
+    List<Product> findProductByProductDescription(String description);
 
-    List<Product> findProductByNameAndDescription (String name, String description);
+    List<Product> findProductByProductNameAndProductDescription (String name, String description);
 
 }

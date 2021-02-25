@@ -1,6 +1,8 @@
 package internet_store.application.core.services.shopping_cart;
 
 import internet_store.application.core.database.customer.CustomerRepository;
+import internet_store.application.core.database.jpa.JpaCustomerRepository;
+import internet_store.application.core.database.jpa.JpaShoppingCartRepository;
 import internet_store.application.core.database.shopping_cart.ShoppingCartRepository;
 import internet_store.application.core.domain.Customer;
 import internet_store.application.core.domain.ShoppingCart;
@@ -17,9 +19,9 @@ import java.util.List;
 public class AddShoppingCartService {
 
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    JpaShoppingCartRepository shoppingCartRepository;
     @Autowired
-    CustomerRepository customerRepository;
+    JpaCustomerRepository customerRepository;
     @Autowired
     AddShoppingCartValidator validator;
 
@@ -31,7 +33,7 @@ public class AddShoppingCartService {
         }
 
         shoppingCartRepository.add(request.getCustomerId());
-        Customer customer = customerRepository.findByCustomerId(request.getCustomerId()).get();
+        Customer customer = customerRepository.findById(request.getCustomerId()).get();
         ShoppingCart shoppingCart = new ShoppingCart(customer, true);
         return new AddShoppingCartResponse(shoppingCart);
     }

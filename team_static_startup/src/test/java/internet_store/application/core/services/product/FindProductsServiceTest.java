@@ -62,7 +62,7 @@ public class FindProductsServiceTest {
     @Test
     public void shouldReturnListWithTwoUnorderedProducts () {
         FindProductsRequest request = new FindProductsRequest("A", "");
-        Mockito.when(productRepository.findProductByName("A")).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductName("A")).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         assertEquals(2, response.getProducts().size());
         assertEquals(product1, response.getProducts().get(0));
@@ -73,7 +73,7 @@ public class FindProductsServiceTest {
     public void shouldReturnByDescriptionOrderedAscending () {
         Ordering ordering = new Ordering("Description", "Ascending");
         FindProductsRequest request = new FindProductsRequest("A", "", ordering);
-        Mockito.when(productRepository.findProductByName(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductName(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product1);
         expected.add(product2);
@@ -85,7 +85,7 @@ public class FindProductsServiceTest {
     public void shouldReturnByDescriptionOrderedDescending () {
         Ordering ordering = new Ordering("Description", "Descending");
         FindProductsRequest request = new FindProductsRequest("A", "", ordering);
-        Mockito.when(productRepository.findProductByName(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductName(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product2);
         expected.add(product1);
@@ -97,7 +97,7 @@ public class FindProductsServiceTest {
     public void shouldReturnByNameOrderedAscending () {
         Ordering ordering = new Ordering("Name", "Ascending");
         FindProductsRequest request = new FindProductsRequest(null, "B", ordering);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product1);
         expected.add(product2);
@@ -109,7 +109,7 @@ public class FindProductsServiceTest {
     public void shouldReturnByNameOrderedDescending () {
         Ordering ordering = new Ordering("Name", "Descending");
         FindProductsRequest request = new FindProductsRequest(null, "B", ordering);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product2);
         expected.add(product1);
@@ -121,7 +121,7 @@ public class FindProductsServiceTest {
     public void shouldReturnAscendingNameAndDescription () {
         Ordering ordering = new Ordering("Name", "Ascending");
         FindProductsRequest request = new FindProductsRequest("A", "B", ordering);
-        Mockito.when(productRepository.findProductByNameAndDescription(request.getName(),
+        Mockito.when(productRepository.findProductByProductNameAndProductDescription(request.getName(),
                 request.getDescription())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product1);
@@ -134,7 +134,7 @@ public class FindProductsServiceTest {
     public void shouldReturnDescendingNameAndDescription () {
         Ordering ordering = new Ordering("Name", "Descending");
         FindProductsRequest request = new FindProductsRequest("A", "B", ordering);
-        Mockito.when(productRepository.findProductByNameAndDescription(request.getName(),
+        Mockito.when(productRepository.findProductByProductNameAndProductDescription(request.getName(),
                 request.getDescription())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product2);
@@ -147,7 +147,7 @@ public class FindProductsServiceTest {
     public void shouldReturnPageOneWithOneProduct () {
         Paging paging = new Paging(1, 1);
         FindProductsRequest request = new FindProductsRequest(null, "B", paging);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product1);
         assertEquals(expected.size(), response.getProducts().size());
@@ -157,7 +157,7 @@ public class FindProductsServiceTest {
     public void shouldReturnPageOneWithTwoProducts () {
         Paging paging = new Paging(1, 2);
         FindProductsRequest request = new FindProductsRequest(null, "B", paging);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product1);
         expected.add(product2);
@@ -168,7 +168,7 @@ public class FindProductsServiceTest {
     public void shouldReturnPageTwoWithZeroProducts () {
         Paging paging = new Paging(2, 2);
         FindProductsRequest request = new FindProductsRequest(null, "B", paging);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         assertEquals(expected.size(), response.getProducts().size());
     }
@@ -178,7 +178,7 @@ public class FindProductsServiceTest {
         Ordering ordering = new Ordering("Name", "Descending");
         Paging paging = new Paging(1, 1);
         FindProductsRequest request = new FindProductsRequest(null, "B", ordering, paging);
-        Mockito.when(productRepository.findProductByDescription(any())).thenReturn(products);
+        Mockito.when(productRepository.findProductByProductDescription(any())).thenReturn(products);
         FindProductsResponse response = service.execute(request);
         expected.add(product2);
         assertEquals(expected.size(), response.getProducts().size());
@@ -190,7 +190,7 @@ public class FindProductsServiceTest {
         List<Product> productList = new ArrayList<>();
         productList.add(product1);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.findProductByName("A1")).thenReturn(productList);
+        Mockito.when(productRepository.findProductByProductName("A1")).thenReturn(productList);
 
         FindProductsResponse response = service.execute(request);
         assertEquals(1, response.getProducts().size());
@@ -204,7 +204,7 @@ public class FindProductsServiceTest {
         List<Product> productList = new ArrayList<>();
         productList.add(product1);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.findProductByDescription("B1")).thenReturn(productList);
+        Mockito.when(productRepository.findProductByProductDescription("B1")).thenReturn(productList);
 
         FindProductsResponse response = service.execute(request);
         assertEquals(1, response.getProducts().size());
@@ -218,7 +218,7 @@ public class FindProductsServiceTest {
         List<Product> productList = new ArrayList<>();
         productList.add(product1);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.findProductByNameAndDescription("A1", "B1")).thenReturn(productList);
+        Mockito.when(productRepository.findProductByProductNameAndProductDescription("A1", "B1")).thenReturn(productList);
 
         FindProductsResponse response = service.execute(request);
         assertEquals(1, response.getProducts().size());
