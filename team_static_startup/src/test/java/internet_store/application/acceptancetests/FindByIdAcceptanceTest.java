@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@Profile("hibernate")
 public class FindByIdAcceptanceTest {
 /*
+
     private ApplicationContext appContext;
     private ProductRepository repository;
 

@@ -14,10 +14,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Profile;
 import static org.junit.Assert.*;
 
-@Profile("hibernate")
 public class FindProductsAcceptanceTest {
 /*
-
     private ApplicationContext appContext;
 
     @Before
@@ -209,5 +207,4 @@ public class FindProductsAcceptanceTest {
         return appContext.getBean(DatabaseCleaner.class);
     }
 */
-
 }
