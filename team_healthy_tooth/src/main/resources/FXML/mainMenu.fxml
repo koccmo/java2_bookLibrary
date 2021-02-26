@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainMenu" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FBEAFF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dental_clinic.gui.MainMenuController">
+   <children>
+      <MenuButton layoutX="28.0" layoutY="62.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="127.0" style="-fx-background-color: #FBEAFF; -fx-border-color: #008E9B;" text="Patient" textAlignment="CENTER" textFill="#2f19c2">
+        <items>
+          <MenuItem fx:id="addPatientItem" mnemonicParsing="false" text="Add patient" />
+          <MenuItem fx:id="changePersonalDataItem" mnemonicParsing="false" text="Change personal data" />
+            <MenuItem fx:id="searchPatientItem" mnemonicParsing="false" text="Search patient" />
+            <MenuItem fx:id="updatePatientJowl" mnemonicParsing="false" text="Update patient tooth" />
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuButton>
+      <MenuButton layoutX="28.0" layoutY="139.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="127.0" style="-fx-background-color: #FBEAFF; -fx-border-color: #008E9B;" text="Doctor" textAlignment="CENTER" textFill="#2f19c2">
+         <items>
+            <MenuItem fx:id="addDoctorItem" mnemonicParsing="false" text="Add doctor" />
+            <MenuItem fx:id="fillDoctorGraphicItem" mnemonicParsing="false" text="Work graphic" />
+            <MenuItem fx:id="getDoctorListItem" mnemonicParsing="false" text="Doctor list" />
+            <MenuItem fx:id="deleteDoctorItem" mnemonicParsing="false" text="Delete doctor" />
+         </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuButton>
+      <MenuButton layoutX="28.0" layoutY="219.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="127.0" style="-fx-background-color: #FBEAFF; -fx-border-color: #008E9B;" text="Visit" textAlignment="CENTER" textFill="#2f19c2">
+         <items>
+            <MenuItem fx:id="addVisitItem" mnemonicParsing="false" text="Add visit" />
+            <MenuItem fx:id="changeVisitTimeItem" mnemonicParsing="false" text="Change visit time" />
+            <MenuItem fx:id="searchVsitByDateItem" mnemonicParsing="false" text="Search visit by date" />
+            <MenuItem fx:id="searchVisitByPersonalCodeItem" mnemonicParsing="false" text="Search visits by personal code" />
+            <MenuItem fx:id="deletePlannedVisitItem" mnemonicParsing="false" text="Delete visit" />
+         </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuButton>
+      <Button fx:id="backButton" layoutX="47.0" layoutY="307.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Back" />
+   </children>
+</AnchorPane>
