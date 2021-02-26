@@ -23,8 +23,10 @@ public interface JpaProductRepository extends JpaRepository<Product, Long> {
     @Query("DELETE FROM Product WHERE id = :id")
     Integer deleteByProductId(@Param("id") Long id);
 
+    @Modifying
     Long deleteByProductName(String name);
 
+    @Modifying
     Long deleteByProductNameAndProductDescriptionAndPrice(String name, String description, BigDecimal price);
 
     List<Product> findProductByProductName(String name);
