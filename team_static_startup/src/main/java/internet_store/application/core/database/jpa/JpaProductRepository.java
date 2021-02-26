@@ -12,15 +12,16 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface JpaProductRepository extends JpaRepository<Product, Long> {
 
     @Modifying
-    @Transactional
     @Query("UPDATE Product p SET p.productName = :name WHERE p.id =:id")
     Integer changeProductName(@Param("id") Long id, @Param("name") String newName);
 
+    @Modifying
     @Query("DELETE FROM Product WHERE id = :id")
-    Long deleteByProductId(Long id);
+    Integer deleteByProductId(@Param("id") Long id);
 
     Long deleteByProductName(String name);
 

@@ -24,7 +24,7 @@ public class DeleteByProductIdService {
             return new DeleteByProductIdResponse(errors);
         }
 
-        Long productsDeleted = productRepository.deleteByProductId(id);
+        Integer productsDeleted = productRepository.deleteByProductId(id);
         return new DeleteByProductIdResponse(productsDeleted == 1);
 
     }
