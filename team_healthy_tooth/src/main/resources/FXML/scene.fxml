@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dental_clinic.gui.Controller">
+   <children>
+      <AnchorPane layoutY="120.0" prefHeight="280.0" prefWidth="600.0" style="-fx-background-color: #fafafa;">
+         <children>
+            <TextField layoutX="209.0" layoutY="36.0" prefHeight="30.0" prefWidth="182.0" promptText="user name" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+            <PasswordField layoutX="209.0" layoutY="92.0" prefHeight="30.0" prefWidth="182.0" promptText="password" style="-fx-background-color: #fafafa; -fx-border-radius: 5; -fx-border-color: silver;" />
+            <Button fx:id="signInButton" layoutX="209.0" layoutY="175.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Enter" />
+            <Button fx:id="exitButton" layoutX="320.0" layoutY="175.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" text="Exit" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="175.0" />
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="32.0" prefHeight="67.0" prefWidth="334.0" text="Dental Clinic" textAlignment="JUSTIFY" textFill="#fafafa" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Arial Narrow" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
