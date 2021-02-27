@@ -22,7 +22,7 @@ public class DeleteByProductNameService {
             return new DeleteByProductNameResponse(errors);
         }
 
-        Long removedProductsQty = productRepository.deleteByProductName(productNameRequest.getProductName());
+        Integer removedProductsQty = productRepository.deleteByProductName(productNameRequest.getProductName());
         return new DeleteByProductNameResponse(removedProductsQty == 1);
     }
 
