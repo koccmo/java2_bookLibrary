@@ -28,4 +28,6 @@ dependencies {
 	//Documentation REST API: http://localhost:8080/documentation.html
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.2'
 
+	compile ('org.liquibase:liquibase-core:4.2.2')
+
 }
