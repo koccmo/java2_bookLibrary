@@ -48,13 +48,13 @@ public class DeleteByProductIdServiceTest {
         Mockito.verifyNoInteractions(productRepository);
     }
 
-/*@Test
+@Test
    public void shouldDeleteProductByIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.deleteByProductId(1L)).thenReturn(1L);
+        Mockito.when(productRepository.deleteByProductId(1L)).thenReturn(1);
         DeleteByProductIdRequest request = new DeleteByProductIdRequest(1L);
         DeleteByProductIdResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isProductRemoved());
-    }*/
+    }
 }
