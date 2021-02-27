@@ -1,12 +1,10 @@
 package internet_store.application.console_ui.product;
 
 import internet_store.application.console_ui.UIAction;
-import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.DeleteByProductRequest;
 import internet_store.application.core.responses.product.DeleteByProductResponse;
 import internet_store.application.core.services.product.DeleteProductByProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -40,12 +38,12 @@ public class DeleteByProductUIAction implements UIAction {
                     + response.getDeletedProduct().getPrice() + " EUR");
         }
 
-        boolean productDeleted = deleteProductByProductService.delete(new Product(productName, productDescription, productPrice));
-        if (productDeleted) {
-            System.out.println("\nProduct deleted");
-        } else {
-            System.out.println("\nThere is no such product in the database");
-        }
+//        boolean productDeleted = deleteProductByProductService.delete(new Product(productName, productDescription, productPrice));
+//        if (productDeleted) {
+//            System.out.println("\nProduct deleted");
+//        } else {
+//            System.out.println("\nThere is no such product in the database");
+//        }
     }
 
 }
