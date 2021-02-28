@@ -9,7 +9,8 @@ import java.util.Optional;
 //@Component
 public class JdbcTargetRepositoryImpl implements TargetRepository {
 
-    @Autowired JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void addTarget(Target target) {

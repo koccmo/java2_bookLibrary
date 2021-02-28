@@ -8,7 +8,6 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @ComponentScan(basePackages = {"java2.application_target_list"})
-//@EnableWebMvc
 public class SpringWebConfiguration implements WebMvcConfigurer {
 
     @Override

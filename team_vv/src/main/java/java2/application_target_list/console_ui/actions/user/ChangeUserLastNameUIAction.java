@@ -11,7 +11,9 @@ import java.util.Scanner;
 @Component
 public class ChangeUserLastNameUIAction implements UIAction {
 
-    @Autowired ChangeUserLastNameService changeUserLastNameService;
+    @Autowired
+    private ChangeUserLastNameService changeUserLastNameService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -20,8 +22,8 @@ public class ChangeUserLastNameUIAction implements UIAction {
             Long userId = getIdFromUser();
             String newUserLastName = getNewLastNameFromUser();
 
-            ChangeUserLastNameRequest changeUserLastNameRequest = createRequest(userId, newUserLastName);
-            ChangeUserLastNameResponse changeUserLastNameResponse = createResponse(changeUserLastNameRequest);
+            ChangeUserLastNameRequest changeUserLastNameRequest = createChangeUserLastNameRequest(userId, newUserLastName);
+            ChangeUserLastNameResponse changeUserLastNameResponse = validateChangeUserLastNameRequest(changeUserLastNameRequest);
 
             if (changeUserLastNameResponse.hasErrors()) {
                 printResponseErrors(changeUserLastNameResponse);
@@ -42,11 +44,11 @@ public class ChangeUserLastNameUIAction implements UIAction {
         changeUserLastNameResponse.getErrorList().forEach(System.out::println);
     }
 
-    private ChangeUserLastNameResponse createResponse(ChangeUserLastNameRequest changeUserLastNameRequest){
+    private ChangeUserLastNameResponse validateChangeUserLastNameRequest(ChangeUserLastNameRequest changeUserLastNameRequest){
         return changeUserLastNameService.execute(changeUserLastNameRequest);
     }
 
-    private ChangeUserLastNameRequest createRequest(Long targetId, String newTargetName){
+    private ChangeUserLastNameRequest createChangeUserLastNameRequest(Long targetId, String newTargetName){
         return new ChangeUserLastNameRequest (targetId, newTargetName);
     }
 

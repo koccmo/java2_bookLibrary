@@ -1,6 +1,7 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
+import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
 import java2.application_target_list.core.responses.CoreError;
@@ -42,6 +43,7 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
 //        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
 //        ChangeTargetDeadlineResponse response = service.execute(request);
 ////        assertFalse(response.hasErrors());
+//
 //    }
 
     @Test

@@ -8,8 +8,8 @@ import java.util.Optional;
 //@Component
 public class InMemoryTargetRepositoryImpl implements TargetRepository {
 
-    List<Target> targetsList = new ArrayList<>();
-    Long targetId = 0L;
+    private List<Target> targetsList = new ArrayList<>();
+    private Long targetId = 0L;
 
     @Override
     public void addTarget(Target target) {

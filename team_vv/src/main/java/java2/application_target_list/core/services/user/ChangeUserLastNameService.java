@@ -6,33 +6,64 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.ChangeUserLastNameResponse;
 import java2.application_target_list.core.validators.user.ChangeUserLastNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class ChangeUserLastNameService {
 
-    @Autowired private ChangeUserLastNameValidator changeUserLastNameValidator;
-    @Autowired private JpaUserRepository jpaUserRepository;
+    @Autowired
+    private ChangeUserLastNameValidator changeUserLastNameValidator;
+    @Autowired
+    private JpaUserRepository jpaUserRepository;
 
-    public ChangeUserLastNameResponse execute(ChangeUserLastNameRequest request){
-        List<CoreError> errors = changeUserLastNameValidator.validate(request);
+    private List<CoreError> errors;
 
-        if (!jpaUserRepository.existsById(request.getUserIdToChange())){
-            errors.add(new CoreError("User ID;","no user with that ID"));
+    public ChangeUserLastNameResponse execute(ChangeUserLastNameRequest changeUserLastNameRequest){
+        errors = checkRequestForErrors(changeUserLastNameRequest);
+        checkAvailabilityInDB(changeUserLastNameRequest);
+
+        if (requestHaveErrors()){
+            return createChangeUserLastNameResponseWithErrors();
         }
 
-        if (!errors.isEmpty()){
-            return new ChangeUserLastNameResponse(errors);
+        changeUserLastName(changeUserLastNameRequest);
+        return createChangeUserLastNameResponse(changeUserLastNameRequest);
+    }
+
+    private ChangeUserLastNameResponse createChangeUserLastNameResponse(ChangeUserLastNameRequest changeUserLastNameRequest){
+        return new ChangeUserLastNameResponse(changeUserLastNameRequest.getUserIdToChange(), changeUserLastNameRequest.getNewUserLastName());
+    }
+
+    private void changeUserLastName(ChangeUserLastNameRequest changeUserLastNameRequest){
+        jpaUserRepository.changeUserLastName(changeUserLastNameRequest.getUserIdToChange(), changeUserLastNameRequest.getNewUserLastName());
+    }
+
+    private ChangeUserLastNameResponse createChangeUserLastNameResponseWithErrors(){
+        return new ChangeUserLastNameResponse(errors);
+    }
+
+    private boolean requestHaveErrors() {
+        return !errors.isEmpty();
+    }
+
+    private boolean userDoesNotExist(ChangeUserLastNameRequest changeUserLastNameRequest){
+        return !jpaUserRepository.existsById(changeUserLastNameRequest.getUserIdToChange());
+    }
+
+    private CoreError createUserDoesNotExistError(){
+        return new CoreError("User ID;","no user with that ID");
+    }
+
+    private void checkAvailabilityInDB(ChangeUserLastNameRequest changeUserLastNameRequest){
+        if (userDoesNotExist(changeUserLastNameRequest)){
+            errors.add(createUserDoesNotExistError());
         }
+    }
 
-        jpaUserRepository.changeUserLastName(request.getUserIdToChange(), request.getNewUserLastName());
-        return new ChangeUserLastNameResponse(request.getUserIdToChange(), request.getNewUserLastName());
-
+    private List<CoreError> checkRequestForErrors(ChangeUserLastNameRequest changeUserLastNameRequest) {
+        return changeUserLastNameValidator.validate(changeUserLastNameRequest);
     }
 }

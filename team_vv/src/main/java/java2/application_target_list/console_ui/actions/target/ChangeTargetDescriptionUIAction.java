@@ -11,7 +11,9 @@ import java.util.Scanner;
 @Component
 public class ChangeTargetDescriptionUIAction implements UIAction {
 
-    @Autowired ChangeTargetDescriptionService changeTargetDescriptionService;
+    @Autowired
+    private ChangeTargetDescriptionService changeTargetDescriptionService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -21,11 +23,11 @@ public class ChangeTargetDescriptionUIAction implements UIAction {
             Long targetId = getIdFromUser();
             String newTargetDescription = getNewDescriptionFromUser();
 
-            ChangeTargetDescriptionRequest request = createRequest(targetId, newTargetDescription);
-            ChangeTargetDescriptionResponse response = createResponse(request);
+            ChangeTargetDescriptionRequest changeTargetDescriptionRequest = createChangeTargetDescriptionRequest(targetId, newTargetDescription);
+            ChangeTargetDescriptionResponse changeTargetDescriptionResponse = validateChangeTargetDescriptionRequest(changeTargetDescriptionRequest);
 
-            if (response.hasErrors()) {
-                printResponseErrors(response);
+            if (changeTargetDescriptionResponse.hasErrors()) {
+                printResponseErrors(changeTargetDescriptionResponse);
             } else {
                 printResponseResultMessage();
                 break;
@@ -43,11 +45,11 @@ public class ChangeTargetDescriptionUIAction implements UIAction {
         response.getErrorList().forEach(System.out::println);
     }
 
-    private ChangeTargetDescriptionResponse createResponse(ChangeTargetDescriptionRequest request){
-        return changeTargetDescriptionService.execute(request);
+    private ChangeTargetDescriptionResponse validateChangeTargetDescriptionRequest(ChangeTargetDescriptionRequest changeTargetDescriptionRequest){
+        return changeTargetDescriptionService.execute(changeTargetDescriptionRequest);
     }
 
-    private ChangeTargetDescriptionRequest createRequest(Long targetId, String newTargetDescription){
+    private ChangeTargetDescriptionRequest createChangeTargetDescriptionRequest(Long targetId, String newTargetDescription){
         return new ChangeTargetDescriptionRequest(targetId, newTargetDescription);
     }
 

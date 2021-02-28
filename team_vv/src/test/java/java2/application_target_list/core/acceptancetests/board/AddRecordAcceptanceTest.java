@@ -44,10 +44,6 @@ public class AddRecordAcceptanceTest {
 
     @Test
     public void shouldAddRecordToList() {
-//        Long targetId = targetRepository.getTargetsList().get(0).getId();
-//        Long firstUserId = userRepository.getUsersList().get(0).getId();
-//        Long secondUserId = userRepository.getUsersList().get(1).getId();
-
         Long targetId = jpaTargetRepository.findAll().get(0).getId();
         Long firstUserId = jpaUserRepository.findAll().get(0).getId();
         Long secondUserId = jpaUserRepository.findAll().get(1).getId();
@@ -70,7 +66,6 @@ public class AddRecordAcceptanceTest {
 
     @Test
     public void shouldReturnErrorList() {
-//        Long firstUserId = userRepository.getUsersList().get(0).getId();
         Long firstUserId = jpaUserRepository.findAll().get(0).getId();
         AddRecordRequest addRecordRequest1 = new AddRecordRequest(-1L, firstUserId);
         AddRecordResponse addRecordResponse = addRecordService.execute(addRecordRequest1);
@@ -99,8 +94,6 @@ public class AddRecordAcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
         jpaTargetRepository = createJpaTargetRepository();
         jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
@@ -120,13 +113,6 @@ public class AddRecordAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
     private JpaTargetRepository createJpaTargetRepository() {
         return applicationContext.getBean(JpaTargetRepository.class);
     }

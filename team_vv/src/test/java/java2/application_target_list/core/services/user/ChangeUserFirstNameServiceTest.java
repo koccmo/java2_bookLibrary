@@ -21,9 +21,12 @@ import java.util.ArrayList;
 public class ChangeUserFirstNameServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private ChangeUserFirstNameValidator changeUserFirstNameValidator;
-    @InjectMocks private ChangeUserFirstNameService changeUserFirstNameService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private ChangeUserFirstNameValidator changeUserFirstNameValidator;
+    @InjectMocks
+    private ChangeUserFirstNameService changeUserFirstNameService;
 
     @Before
     public void setup() {

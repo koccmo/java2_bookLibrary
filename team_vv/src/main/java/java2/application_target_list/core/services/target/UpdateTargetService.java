@@ -6,39 +6,82 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.UpdateTargetResponse;
 import java2.application_target_list.core.validators.target.UpdateTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class UpdateTargetService {
 
-    @Autowired private UpdateTargetValidator updateTargetValidator;
-    @Autowired private JpaTargetRepository jpaTargetRepository;
+    @Autowired
+    private UpdateTargetValidator updateTargetValidator;
+    @Autowired
+    private JpaTargetRepository jpaTargetRepository;
+
+    private List<CoreError> errors;
 
     public UpdateTargetResponse execute(UpdateTargetRequest updateTargetRequest) {
-        List<CoreError> errors = updateTargetValidator.validate(updateTargetRequest);
+        errors = checkRequestForErrors(updateTargetRequest);
+        checkAvailabilityInDB(updateTargetRequest);
 
-
-        if (!jpaTargetRepository.existsById(updateTargetRequest.getTargetIdToChange())){
-            errors.add(new CoreError("Target ID;","no target with that ID"));
+        if (requestHaveError()) {
+            return createUpdateTargetResponseWithErrors();
         }
 
-        if (!errors.isEmpty()) {
-            return new UpdateTargetResponse(errors);
-        }
+        updateTarget(updateTargetRequest);
 
-        jpaTargetRepository.changeTargetName(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetName());
-        jpaTargetRepository.changeTargetDescription(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetDescription());
-        jpaTargetRepository.changeTargetDeadline(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetDeadline());
+        return createUpdateTargetResponse(updateTargetRequest);
+    }
 
+    private UpdateTargetResponse createUpdateTargetResponse(UpdateTargetRequest updateTargetRequest){
         return new UpdateTargetResponse(updateTargetRequest.getTargetIdToChange(),
                 updateTargetRequest.getNewTargetName(),
                 updateTargetRequest.getNewTargetDescription(),
                 updateTargetRequest.getNewTargetDeadline());
+    }
+
+    private void updateTargetName(UpdateTargetRequest updateTargetRequest) {
+        jpaTargetRepository.changeTargetName(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetName());
+    }
+
+    private void updateTargetDescription(UpdateTargetRequest updateTargetRequest) {
+        jpaTargetRepository.changeTargetDescription(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetDescription());
+    }
+
+    private void updateTargetDeadline(UpdateTargetRequest updateTargetRequest) {
+        jpaTargetRepository.changeTargetDeadline(updateTargetRequest.getTargetIdToChange(), updateTargetRequest.getNewTargetDeadline());
+    }
+
+    private void updateTarget(UpdateTargetRequest updateTargetRequest) {
+        updateTargetName(updateTargetRequest);
+        updateTargetDescription(updateTargetRequest);
+        updateTargetDeadline(updateTargetRequest);
+    }
+
+    private UpdateTargetResponse createUpdateTargetResponseWithErrors(){
+        return new UpdateTargetResponse(errors);
+    }
+
+    private boolean requestHaveError() {
+        return !errors.isEmpty();
+    }
+
+    private void checkAvailabilityInDB(UpdateTargetRequest updateTargetRequest) {
+        if (targetDoesNotExist(updateTargetRequest)){
+            errors.add(createTargetDoesNotExistError());
+        }
+    }
+
+    private CoreError createTargetDoesNotExistError() {
+        return new CoreError("Target ID;","no target with that ID");
+    }
+
+    private boolean targetDoesNotExist(UpdateTargetRequest updateTargetRequest){
+        return !jpaTargetRepository.existsById(updateTargetRequest.getTargetIdToChange());
+    }
+
+    private List<CoreError> checkRequestForErrors(UpdateTargetRequest updateTargetRequest){
+        return updateTargetValidator.validate(updateTargetRequest);
     }
 }

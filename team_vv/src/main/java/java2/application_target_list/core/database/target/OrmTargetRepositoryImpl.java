@@ -11,7 +11,8 @@ import java.util.Optional;
 //@Transactional
 public class OrmTargetRepositoryImpl implements TargetRepository{
 
-    @Autowired private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public void addTarget(Target target) {

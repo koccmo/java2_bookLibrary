@@ -10,15 +10,21 @@ import java.util.Optional;
 @Component
 public class GetUserValidator {
 
+    private List<CoreError> errors;
+
     public List<CoreError> validate (GetUserRequest getUserRequest){
-        List<CoreError> errors = new ArrayList<>();
+        errors = new ArrayList<>();
         validateId(getUserRequest).ifPresent(errors::add);
         return errors;
     }
 
     private Optional<CoreError> validateId(GetUserRequest getUserRequest){
         return (getUserRequest.getId() == null)
-                ? Optional.of(new CoreError("id", "Must not be empty!"))
+                ? Optional.of(createUserIdError())
                 : Optional.empty();
+    }
+
+    private CoreError createUserIdError(){
+        return new CoreError("id", "Must not be empty!");
     }
 }

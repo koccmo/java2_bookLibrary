@@ -27,9 +27,12 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<User> users;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private SearchUserByFirstNameValidator searchUserByLastNameValidator;
-    @InjectMocks private SearchUserByFirstNameService searchUserByFirstNameService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private SearchUserByFirstNameValidator searchUserByLastNameValidator;
+    @InjectMocks
+    private SearchUserByFirstNameService searchUserByFirstNameService;
 
     @Before
     public void setup() {

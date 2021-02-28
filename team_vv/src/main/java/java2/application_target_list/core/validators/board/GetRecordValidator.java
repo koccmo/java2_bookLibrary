@@ -10,8 +10,10 @@ import java.util.Optional;
 @Component
 public class GetRecordValidator {
 
+    private List<CoreError> errors;
+
     public List<CoreError> validate (GetRecordRequest getRecordRequest) {
-        List<CoreError> errors = new ArrayList<>();
+        errors = new ArrayList<>();
         validateId(getRecordRequest).ifPresent(errors::add);
         return errors;
     }
