@@ -25,9 +25,12 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddUserServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private AddUserValidator addUserValidator;
-    @InjectMocks private AddUserService addUserService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private AddUserValidator addUserValidator;
+    @InjectMocks
+    private AddUserService addUserService;
 
     @Before
     public void setup() {

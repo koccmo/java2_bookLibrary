@@ -12,18 +12,26 @@ import org.springframework.stereotype.Component;
 public class GetAllRecordsUIActions implements UIAction {
 
     @Autowired
-    GetAllRecordsService getAllRecordsService;
+    private GetAllRecordsService getAllRecordsService;
 
     @Override
     public void execute() {
-        GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
-        GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
+        GetAllRecordsRequest getAllRecordsRequest = createGetAllRecordsRequest();
+        GetAllRecordsResponse getAllRecordsResponse = validateGetAllRecordRequest(getAllRecordsRequest);
 
         if (isRecordListEmpty(getAllRecordsResponse)){
             printResponseMessage();
         } else {
             printRecordsList(getAllRecordsResponse);
         }
+    }
+
+    private GetAllRecordsResponse validateGetAllRecordRequest(GetAllRecordsRequest getAllRecordsRequest){
+        return getAllRecordsService.execute(getAllRecordsRequest);
+    }
+
+    private GetAllRecordsRequest createGetAllRecordsRequest() {
+        return new GetAllRecordsRequest();
     }
 
     private boolean isRecordListEmpty(GetAllRecordsResponse getAllRecordsResponse){

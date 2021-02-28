@@ -88,9 +88,6 @@ public class DeleteRecordAcceptanceTest {
     }
 
     private void addRecordsToDB() {
-//        firstTargetId = targetRepository.getTargetsList().get(0).getId();
-//        secondTargetId = targetRepository.getTargetsList().get(1).getId();
-//        userId = userRepository.getUsersList().get(0).getId();
         firstTargetId = jpaTargetRepository.findAll().get(0).getId();
         secondTargetId = jpaTargetRepository.findAll().get(1).getId();
         userId = jpaUserRepository.findAll().get(0).getId();
@@ -117,8 +114,6 @@ public class DeleteRecordAcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
         jpaTargetRepository = createJpaTargetRepository();
         jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
@@ -143,13 +138,6 @@ public class DeleteRecordAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
     private JpaTargetRepository createJpaTargetRepository() {
         return applicationContext.getBean(JpaTargetRepository.class);
     }

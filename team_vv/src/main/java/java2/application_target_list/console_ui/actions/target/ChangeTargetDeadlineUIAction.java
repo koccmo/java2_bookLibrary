@@ -11,7 +11,9 @@ import java.util.Scanner;
 @Component
 public class ChangeTargetDeadlineUIAction implements UIAction {
 
-    @Autowired ChangeTargetDeadlineService changeTargetDeadlineService;
+    @Autowired
+    private ChangeTargetDeadlineService changeTargetDeadlineService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -20,11 +22,11 @@ public class ChangeTargetDeadlineUIAction implements UIAction {
             Long targetId = getIdFromUser();
             Long newTargetDeadline = getNewDeadlineFromUser();
 
-            ChangeTargetDeadlineRequest request = createRequest(targetId, newTargetDeadline);
-            ChangeTargetDeadlineResponse response = createResponse(request);
+            ChangeTargetDeadlineRequest changeTargetDeadlineRequest = createChangeTargetDeadlineRequest(targetId, newTargetDeadline);
+            ChangeTargetDeadlineResponse changeTargetDeadlineResponse = validateChangeTargetDeadlineRequest(changeTargetDeadlineRequest);
 
-            if (response.hasErrors()) {
-                printResponseErrors(response);
+            if (changeTargetDeadlineResponse.hasErrors()) {
+                printResponseErrors(changeTargetDeadlineResponse);
             } else {
                 printResponseResultMessage();
                 break;
@@ -42,11 +44,11 @@ public class ChangeTargetDeadlineUIAction implements UIAction {
         response.getErrorList().forEach(System.out::println);
     }
 
-    private ChangeTargetDeadlineResponse createResponse(ChangeTargetDeadlineRequest request){
-        return changeTargetDeadlineService.execute(request);
+    private ChangeTargetDeadlineResponse validateChangeTargetDeadlineRequest(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+        return changeTargetDeadlineService.execute(changeTargetDeadlineRequest);
     }
 
-    private ChangeTargetDeadlineRequest createRequest(Long targetId, Long newTargetDeadline){
+    private ChangeTargetDeadlineRequest createChangeTargetDeadlineRequest(Long targetId, Long newTargetDeadline){
         return new ChangeTargetDeadlineRequest(targetId, newTargetDeadline);
     }
 

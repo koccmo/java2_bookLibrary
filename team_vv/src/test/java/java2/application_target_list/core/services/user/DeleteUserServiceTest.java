@@ -21,9 +21,12 @@ import java.util.List;
 public class DeleteUserServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private DeleteUserValidator deleteUserValidator;
-    @InjectMocks private DeleteUserService deleteUserService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private DeleteUserValidator deleteUserValidator;
+    @InjectMocks
+    private DeleteUserService deleteUserService;
 
     @Before
     public void setup() {

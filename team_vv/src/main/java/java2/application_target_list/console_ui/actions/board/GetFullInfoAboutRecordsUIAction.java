@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 public class GetFullInfoAboutRecordsUIAction implements UIAction {
 
     @Autowired
-    GetFullInfoAboutRecordsService getFullInfoAboutRecordsService;
+    private GetFullInfoAboutRecordsService getFullInfoAboutRecordsService;
 
     @Override
     public void execute() {
-    GetFullInfoAboutRecordsRequest getFullInfoAboutRecordsRequest = new GetFullInfoAboutRecordsRequest();
-    GetFullInfoAboutRecordsResponse getFullInfoAboutRecordsResponse = getFullInfoAboutRecordsService.execute(getFullInfoAboutRecordsRequest);
+    GetFullInfoAboutRecordsRequest getFullInfoAboutRecordsRequest = createGetFullInfoAboutRecordsRequest();
+    GetFullInfoAboutRecordsResponse getFullInfoAboutRecordsResponse = validateGetFullInfoAboutRecordsRequest(getFullInfoAboutRecordsRequest);
 
         if (isRecordListEmpty(getFullInfoAboutRecordsResponse)){
         printResponseMessage();
@@ -25,6 +25,14 @@ public class GetFullInfoAboutRecordsUIAction implements UIAction {
         printRecordsList(getFullInfoAboutRecordsResponse);
     }
 }
+
+    private GetFullInfoAboutRecordsResponse validateGetFullInfoAboutRecordsRequest(GetFullInfoAboutRecordsRequest getFullInfoAboutRecordsRequest){
+        return getFullInfoAboutRecordsService.execute(getFullInfoAboutRecordsRequest);
+    }
+
+    private GetFullInfoAboutRecordsRequest createGetFullInfoAboutRecordsRequest() {
+        return new GetFullInfoAboutRecordsRequest();
+    }
 
     private boolean isRecordListEmpty(GetFullInfoAboutRecordsResponse getFullInfoAboutRecordsResponse){
         return getFullInfoAboutRecordsResponse.getRecordList().isEmpty();

@@ -20,9 +20,12 @@ import java.util.List;
 public class UpdateUserServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private UpdateUserValidator updateUserValidator;
-    @InjectMocks private UpdateUserService updateUserService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private UpdateUserValidator updateUserValidator;
+    @InjectMocks
+    private UpdateUserService updateUserService;
 
     @Before
     public void setup() {

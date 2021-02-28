@@ -11,7 +11,8 @@ import java.util.Optional;
 //@Transactional
 public class OrmUserRepositoryImpl implements UserRepository{
 
-    @Autowired private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public void addUser(User user) {

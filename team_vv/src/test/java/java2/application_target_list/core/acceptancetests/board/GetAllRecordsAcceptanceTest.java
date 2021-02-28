@@ -42,8 +42,6 @@ public class GetAllRecordsAcceptanceTest {
 
     @Test
     public void shouldReturnRecordsList() {
-//        Long targetId = targetRepository.getTargetsList().get(0).getId();
-//        Long userId = userRepository.getUsersList().get(0).getId();
         Long targetId = jpaTargetRepository.findAll().get(0).getId();
         Long userId = jpaUserRepository.findAll().get(0).getId();
 
@@ -71,8 +69,6 @@ public class GetAllRecordsAcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
         jpaTargetRepository = createJpaTargetRepository();
         jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
@@ -92,13 +88,6 @@ public class GetAllRecordsAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
     private JpaTargetRepository createJpaTargetRepository() {
         return applicationContext.getBean(JpaTargetRepository.class);
     }

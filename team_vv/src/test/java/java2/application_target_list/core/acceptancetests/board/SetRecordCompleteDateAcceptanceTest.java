@@ -80,14 +80,12 @@ public class SetRecordCompleteDateAcceptanceTest {
     private void addUsersToDB() {
         AddUserRequest addUserRequest = new AddUserRequest("name1", "surname1");
         addUserService.execute(addUserRequest);
-//        userId = userRepository.getUsersList().get(0).getId();
         userId = jpaUserRepository.findAll().get(0).getId();
     }
 
     private void addTargetsToDB() {
         AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
         addTargetService.execute(addTargetRequest);
-//        targetId = targetRepository.getTargetsList().get(0).getId();
         targetId = jpaTargetRepository.findAll().get(0).getId();
     }
 
@@ -95,8 +93,6 @@ public class SetRecordCompleteDateAcceptanceTest {
         applicationContext = createApplicationContext();
         addRecordService = createAddRecordService();
         getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
         jpaTargetRepository = createJpaTargetRepository();
         jpaUserRepository = createJpaUserRepository();
         databaseCleaner = createDatabaseCleaner();
@@ -121,13 +117,6 @@ public class SetRecordCompleteDateAcceptanceTest {
         return applicationContext.getBean(DatabaseCleaner.class);
     }
 
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
     private JpaTargetRepository createJpaTargetRepository() {
         return applicationContext.getBean(JpaTargetRepository.class);
     }

@@ -16,8 +16,11 @@ import java.util.Scanner;
 @Component
 public class DeleteUIAction implements UIAction {
 
-    @Autowired private DeleteTargetService deleteTargetService;
-    @Autowired private JpaTargetRepository jpaTargetRepository;
+    @Autowired
+    private DeleteTargetService deleteTargetService;
+    @Autowired
+    private JpaTargetRepository jpaTargetRepository;
+
     private final Scanner scr = new Scanner(System.in);
 
 
@@ -33,11 +36,11 @@ public class DeleteUIAction implements UIAction {
             Long targetId = getIdFromUser();
 
 
-            DeleteTargetRequest request = createRequest(targetId);
-            DeleteTargetResponse response = createResponse(request);
+            DeleteTargetRequest deleteTargetRequest = createDeleteTargetRequest(targetId);
+            DeleteTargetResponse deleteTargetResponse = validateDeleteTargetRequest(deleteTargetRequest);
 
-            if (response.hasErrors()) {
-                printResponseErrors(response);
+            if (deleteTargetResponse.hasErrors()) {
+                printResponseErrors(deleteTargetResponse);
             } else {
                 printResponseResultMessage();
                 break;
@@ -55,11 +58,11 @@ public class DeleteUIAction implements UIAction {
         response.getErrorList().forEach(System.out::println);
     }
 
-    private DeleteTargetResponse createResponse(DeleteTargetRequest request){
-        return deleteTargetService.execute(request);
+    private DeleteTargetResponse validateDeleteTargetRequest(DeleteTargetRequest deleteTargetRequest){
+        return deleteTargetService.execute(deleteTargetRequest);
     }
 
-    private DeleteTargetRequest createRequest(Long targetId){
+    private DeleteTargetRequest createDeleteTargetRequest(Long targetId){
         return new DeleteTargetRequest(targetId);
     }
 

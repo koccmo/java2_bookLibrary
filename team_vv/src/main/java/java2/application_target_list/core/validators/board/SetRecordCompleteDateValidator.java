@@ -10,17 +10,29 @@ import java.util.List;
 @Component
 public class SetRecordCompleteDateValidator {
 
-    public List<CoreError> validate(SetRecordCompleteDateRequest request) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
-        if (isUserIdEmpty(request)){
-            errors.add(new CoreError("Record ID","must not be empty!"));
-        }
-        if (isUserIdNegative(request)){
-            errors.add(new CoreError("Record ID","must not be negative!"));
-        }
-
+    public List<CoreError> validate(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
+        errors = new ArrayList<>();
+        checkRecordId(setRecordCompleteDateRequest);
         return errors;
+    }
+
+    private void checkRecordId(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
+        if (isUserIdEmpty(setRecordCompleteDateRequest)){
+            errors.add(createRecordIdIsEmptyError());
+        }
+        if (isUserIdNegative(setRecordCompleteDateRequest)){
+            errors.add(createRecordIdISNegativeError());
+        }
+    }
+
+    private CoreError createRecordIdISNegativeError(){
+        return new CoreError("Record ID","must not be negative!");
+    }
+
+    private CoreError createRecordIdIsEmptyError(){
+        return new CoreError("Record ID","must not be empty!");
     }
 
     private boolean isUserIdEmpty(SetRecordCompleteDateRequest request) {

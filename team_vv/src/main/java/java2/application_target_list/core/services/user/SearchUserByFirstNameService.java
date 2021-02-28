@@ -10,15 +10,12 @@ import java2.application_target_list.core.responses.user.SearchUserByFirstNameRe
 import java2.application_target_list.core.validators.user.SearchUserByFirstNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Component
 @Service
 @Transactional
 public class SearchUserByFirstNameService {
@@ -29,22 +26,46 @@ public class SearchUserByFirstNameService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private SearchUserByFirstNameValidator searchUserByFirstNameValidator;
-    @Autowired private JpaUserRepository jpaUserRepository;
+    @Autowired
+    private SearchUserByFirstNameValidator searchUserByFirstNameValidator;
+    @Autowired
+    private JpaUserRepository jpaUserRepository;
 
-    public SearchUserByFirstNameResponse execute(SearchUsersByFirstNameRequest request){
-        List<CoreError> errors = searchUserByFirstNameValidator.validate(request);
+    private List<CoreError> errors;
+    private List<User> users;
 
-        if (!errors.isEmpty()){
-            return new SearchUserByFirstNameResponse(errors, null);
+    public SearchUserByFirstNameResponse execute(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+        errors = checkRequestForErrors(searchUsersByFirstNameRequest);
+
+        if (requestHaveErrors()){
+            return createSearchUserByFirstNameResponseWithErrors();
         }
 
-        List<User> users = jpaUserRepository.findByFirstName(request.getFirstName());
-        users = order(users, request.getOrdering());
-        users = paging(users, request.getPaging());
+        users = findUsersInDB(searchUsersByFirstNameRequest);
+        users = order(users, searchUsersByFirstNameRequest.getOrdering());
+        users = paging(users, searchUsersByFirstNameRequest.getPaging());
 
+        return createSearchUserByFirstNameResponse();
+    }
+
+    private SearchUserByFirstNameResponse createSearchUserByFirstNameResponse(){
         return new SearchUserByFirstNameResponse(null, users);
+    }
 
+    private List<User> findUsersInDB(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+        return jpaUserRepository.findByFirstName(searchUsersByFirstNameRequest.getFirstName());
+    }
+
+    private SearchUserByFirstNameResponse createSearchUserByFirstNameResponseWithErrors(){
+        return new SearchUserByFirstNameResponse(errors, null);
+    }
+
+    private boolean requestHaveErrors(){
+        return !errors.isEmpty();
+    }
+
+    private List<CoreError> checkRequestForErrors(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+        return searchUserByFirstNameValidator.validate(searchUsersByFirstNameRequest);
     }
 
     private List<User> order(List<User> users, Ordering ordering) {

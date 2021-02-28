@@ -26,9 +26,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<User> users;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private SearchUserByLastNameValidator searchUserByLastNameValidator;
-    @InjectMocks private SearchUserByLastNameService searchUserByLastNameService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private SearchUserByLastNameValidator searchUserByLastNameValidator;
+    @InjectMocks
+    private SearchUserByLastNameService searchUserByLastNameService;
 
     @Before
     public void setup() {

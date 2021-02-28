@@ -1,7 +1,6 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
-
 import java2.application_target_list.core.requests.target.UpdateTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.UpdateTargetResponse;

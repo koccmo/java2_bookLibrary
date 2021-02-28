@@ -10,18 +10,33 @@ import java.util.List;
 @Component
 public class AddUserValidator {
 
-    public List<CoreError> validate(AddUserRequest request) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
-        if (isUserFirstNameEmpty(request)){
-            errors.add(new CoreError("User first name","must not be empty!"));
-        }
-
-        if (isUserLastNameEmpty(request)){
-            errors.add(new CoreError("User last name", "must not be empty!"));
-        }
-
+    public List<CoreError> validate(AddUserRequest addUserRequest) {
+        errors = new ArrayList<>();
+        checkUserFirstName(addUserRequest);
+        checkUserLastName(addUserRequest);
         return errors;
+    }
+
+    private void  checkUserLastName(AddUserRequest addUserRequest){
+        if (isUserLastNameEmpty(addUserRequest)){
+            errors.add(createUserLastNameIsEmptyError());
+        }
+    }
+
+    private void checkUserFirstName(AddUserRequest addUserRequest){
+        if (isUserFirstNameEmpty(addUserRequest)){
+            errors.add(createUserFirstNameIsEmptyError());
+        }
+    }
+
+    private CoreError createUserFirstNameIsEmptyError(){
+        return new CoreError("User first name","must not be empty!");
+    }
+
+    private CoreError createUserLastNameIsEmptyError(){
+        return new CoreError("User last name", "must not be empty!");
     }
 
     private boolean isUserFirstNameEmpty(AddUserRequest request) {

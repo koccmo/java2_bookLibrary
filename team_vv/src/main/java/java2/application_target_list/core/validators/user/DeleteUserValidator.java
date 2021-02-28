@@ -10,17 +10,29 @@ import java.util.List;
 @Component
 public class DeleteUserValidator {
 
-    public List<CoreError> validate(DeleteUserRequest request) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
-        if (isUserIdEmpty(request)){
-            errors.add(new CoreError("User ID","must not be empty!"));
-        }
-        if (isUserIdNegative(request)){
-            errors.add(new CoreError("User ID","must not be negative!"));
-        }
-
+    public List<CoreError> validate(DeleteUserRequest deleteUserRequest) {
+        errors = new ArrayList<>();
+        checkUserId(deleteUserRequest);
         return errors;
+    }
+
+    private void checkUserId(DeleteUserRequest deleteUserRequest){
+        if (isUserIdEmpty(deleteUserRequest)){
+            errors.add(createUserIdIsEmptyError());
+        }
+        if (isUserIdNegative(deleteUserRequest)){
+            errors.add(createUserIdIsNegativeError());
+        }
+    }
+
+    private CoreError createUserIdIsNegativeError(){
+        return new CoreError("User ID","must not be negative!");
+    }
+
+    private CoreError createUserIdIsEmptyError(){
+        return new CoreError("User ID","must not be empty!");
     }
 
     private boolean isUserIdEmpty(DeleteUserRequest request) {

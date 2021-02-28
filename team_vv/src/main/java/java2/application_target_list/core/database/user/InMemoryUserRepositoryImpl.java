@@ -8,8 +8,8 @@ import java.util.Optional;
 //@Component
 public class InMemoryUserRepositoryImpl implements UserRepository {
 
-    List<User> userList = new ArrayList<>();
-    Long userId = 0L;
+    private List<User> userList = new ArrayList<>();
+    private Long userId = 0L;
 
 
     @Override

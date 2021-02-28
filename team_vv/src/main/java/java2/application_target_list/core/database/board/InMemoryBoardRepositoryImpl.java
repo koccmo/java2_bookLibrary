@@ -10,8 +10,8 @@ import java.util.Optional;
 //@Component
 public class InMemoryBoardRepositoryImpl implements BoardRepository {
 
-    Long recordId = 0L;
-    List<Record> recordsList = new ArrayList<>();
+    private Long recordId = 0L;
+    private List<Record> recordsList = new ArrayList<>();
 
 
     @Override
