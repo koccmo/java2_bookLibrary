@@ -21,10 +21,12 @@ import java.util.List;
 public class DeleteRecordServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock DeleteRecordValidator deleteRecordValidator;
     @Mock
-    JpaBoardRepository jpaBoardRepository;
-    @InjectMocks DeleteRecordService deleteRecordService;
+    private DeleteRecordValidator deleteRecordValidator;
+    @Mock
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    private DeleteRecordService deleteRecordService;
 
     @Before
     public void setup() {

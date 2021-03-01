@@ -21,10 +21,12 @@ import java.util.ArrayList;
 public class DeleteTargetServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private DeleteTargetValidator validator;
-    @Mock private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private DeleteTargetValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    DeleteTargetService service;
+    private DeleteTargetService service;
 
     @Before
     public void setup() {

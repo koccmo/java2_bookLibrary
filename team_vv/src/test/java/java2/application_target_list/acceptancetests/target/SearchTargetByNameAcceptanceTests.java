@@ -1,5 +1,6 @@
-package java2.application_target_list.core.acceptancetests.target;
+package java2.application_target_list.acceptancetests.target;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.Ordering;
@@ -8,27 +9,34 @@ import java2.application_target_list.core.requests.target.SearchTargetByNameRequ
 import java2.application_target_list.core.services.target.SearchTargetByNameService;
 import java2.application_target_list.core.responses.target.SearchTargetByNameResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
-import java2.application_target_list.config.SpringCoreConfiguration;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class SearchTargetByNameAcceptanceTests {
 
+    @Autowired
     private SearchTargetByNameService searchTargetByNameService;
+    @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
 
     @Before
     public void setup(){
-        createServices();
         databaseCleaner.clean();
         addTargetsToDB();
 
@@ -264,30 +272,6 @@ public class SearchTargetByNameAcceptanceTests {
         assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
         assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
         assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addTargetService = createAddTargetService();
-        databaseCleaner = createDatabaseCleaner();
-        searchTargetByNameService = createSearchTargetByNameService();
-    }
-
-    private SearchTargetByNameService createSearchTargetByNameService() {
-        return applicationContext.getBean(SearchTargetByNameService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private void addTargetsToDB() {

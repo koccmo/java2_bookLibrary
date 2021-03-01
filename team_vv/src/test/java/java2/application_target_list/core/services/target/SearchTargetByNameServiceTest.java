@@ -28,9 +28,12 @@ public class SearchTargetByNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
     private List<Target> targets;
-    @Mock private SearchTargetByNameValidator validator;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @InjectMocks private SearchTargetByNameService service;
+    @Mock
+    private SearchTargetByNameValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @InjectMocks
+    private SearchTargetByNameService service;
 
     @Before
     public void setup() {

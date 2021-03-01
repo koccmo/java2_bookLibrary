@@ -1,5 +1,6 @@
-package java2.application_target_list.core.acceptancetests.user;
+package java2.application_target_list.acceptancetests.user;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.Ordering;
@@ -11,18 +12,28 @@ import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.SearchUserByLastNameService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class SearchUserByLastNameAcceptanceTest {
 
+    @Autowired
     private SearchUserByLastNameService searchUserByLastNameService;
+    @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
     @Before

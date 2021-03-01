@@ -11,6 +11,7 @@ public class TargetListApplication {
 
      public static void main(String[] args) {
          ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
+         context.start();
 //         Menu programMenu = context.getBean(Menu.class);
 //         programMenu.start();
          System.out.println("Application is running");

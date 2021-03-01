@@ -21,9 +21,12 @@ import java.util.List;
 public class UpdateTargetServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private UpdateTargetValidator updateTargetValidator;
-    @InjectMocks private UpdateTargetService updateTargetService;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private UpdateTargetValidator updateTargetValidator;
+    @InjectMocks
+    private UpdateTargetService updateTargetService;
 
     @Before
     public void setup() {

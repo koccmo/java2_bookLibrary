@@ -23,10 +23,12 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddTargetServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private AddTargetValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private AddTargetValidator validator;
     @InjectMocks
-    AddTargetService service;
+    private AddTargetService service;
 
     @Before
     public void setup() {
