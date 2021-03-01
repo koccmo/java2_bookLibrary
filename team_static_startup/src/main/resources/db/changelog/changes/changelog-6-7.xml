@@ -12,7 +12,7 @@
                                  referencedTableName="shopping_carts"
                                  referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableSchemaName="internet_store"
+            <dropForeignKeyConstraint baseTableSchemaName="internet_store_liquibase"
                                       baseTableName="shopping_cart_items"
                                       constraintName="fk_cart_item_cart"/>
         </rollback>
@@ -25,7 +25,7 @@
                                  referencedTableName="products"
                                  referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableSchemaName="internet_store"
+            <dropForeignKeyConstraint baseTableSchemaName="internet_store_liquibase"
                                       baseTableName="shopping_cart_items"
                                       constraintName="fk_cart_item_product"/>
         </rollback>

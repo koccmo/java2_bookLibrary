@@ -21,7 +21,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         </column>
     </createTable>
     <rollback>
-        <dropTable schemaName="internet_store"
+        <dropTable schemaName="internet_store_liquibase"
                    tableName="shopping_cart_items"
                    cascadeConstraints="true"/>
     </rollback>

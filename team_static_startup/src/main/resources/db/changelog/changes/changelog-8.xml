@@ -12,7 +12,7 @@
                                  referencedTableName="customers"
                                  referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableSchemaName="internet_store"
+            <dropForeignKeyConstraint baseTableSchemaName="internet_store_liquibase"
                                       baseTableName="shopping_carts"
                                       constraintName="fk_customer"/>
         </rollback>
