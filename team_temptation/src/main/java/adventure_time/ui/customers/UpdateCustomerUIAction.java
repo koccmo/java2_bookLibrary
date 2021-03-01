@@ -82,7 +82,7 @@ public class UpdateCustomerUIAction implements UIAction {
             passwordTwo = passwordOne;
         }
 
-        UpdateCustomerRequest requestUpdate = new UpdateCustomerRequest(name, email, phone, passwordOne, passwordTwo, customer.getCustomerID());
+        UpdateCustomerRequest requestUpdate = new UpdateCustomerRequest(name, email, phone, passwordOne, passwordTwo, customer.getCustomerId());
         UpdateCustomerResponse responseUpdate = updateService.updateCustomer(requestUpdate);
 
         if (responseUpdate.hasError()) {

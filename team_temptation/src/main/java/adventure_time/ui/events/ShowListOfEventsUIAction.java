@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 //@DIComponent
 @Component
-public class DisplayEventUIAction implements UIAction {
+public class ShowListOfEventsUIAction implements UIAction {
 
 //    @DIDependency
     @Autowired

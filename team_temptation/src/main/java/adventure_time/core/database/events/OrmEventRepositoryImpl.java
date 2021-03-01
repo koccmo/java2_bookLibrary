@@ -16,25 +16,15 @@ public class OrmEventRepositoryImpl implements EventRepository {
 
     @Autowired private SessionFactory sessionFactory;
 
+
     @Override
     public boolean add(Events event) {
-        sessionFactory.getCurrentSession().save(event);
-        return true;
-    }
-
-    @Override
-    public boolean removeByName(String eventName) {
         return false;
     }
 
     @Override
-    public boolean removeById(Long id) {
+    public boolean delete(Long id) {
         return false;
-    }
-
-    @Override
-    public List<Events> getEventsList() {
-        return null;
     }
 
     @Override
@@ -43,42 +33,17 @@ public class OrmEventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public boolean updateEvent(Events event) {
+    public Optional<Events> findByName(String name) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean updateEvent(Events event, Long id) {
         return false;
     }
 
     @Override
-    public List<Events> findByEventKind(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByEventKindAndRoute(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByEventKindAndDuration(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByEventKindAndDurationAndRoute(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByEventDuration(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByEventDurationAndRoute(SearchEventRequest request) {
-        return null;
-    }
-
-    @Override
-    public List<Events> findByRoute(SearchEventRequest request) {
+    public List<Events> findEvents(String query) {
         return null;
     }
 }

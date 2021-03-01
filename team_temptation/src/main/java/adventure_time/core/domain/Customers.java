@@ -10,7 +10,7 @@ public class Customers {
     @Id                     // поле является первичным ключём
     @Column(name="id")      // указывает название колонки в таблице базы
     @GeneratedValue(strategy = GenerationType.IDENTITY) // стратегия генерации первичного ключа
-    private Long customerID;
+    private Long customerId;
 
     @Column(name="name", nullable = false, length = 50)
     private String customerName;
@@ -34,12 +34,12 @@ public class Customers {
         this.customerPassword = customerPassword;
     }
 
-    public Long getCustomerID() {
-        return customerID;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(Long customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
@@ -79,7 +79,7 @@ public class Customers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customers customers = (Customers) o;
-        return Objects.equals(customerID, customers.customerID) &&
+        return Objects.equals(customerId, customers.customerId) &&
                 Objects.equals(customerName, customers.customerName) &&
                 Objects.equals(customerEmail, customers.customerEmail) &&
                 Objects.equals(customerPhone, customers.customerPhone) &&
@@ -88,13 +88,13 @@ public class Customers {
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerID, customerName, customerEmail, customerPhone, customerPassword);
+        return Objects.hash(customerId, customerName, customerEmail, customerPhone, customerPassword);
     }
 
     @Override
     public String toString() {
         return "Customers{" +
-                "customerID=" + customerID +
+                "customerID=" + customerId +
                 ", customerName='" + customerName + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
