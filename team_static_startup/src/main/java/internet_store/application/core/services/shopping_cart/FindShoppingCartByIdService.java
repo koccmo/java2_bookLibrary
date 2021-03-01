@@ -10,14 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FindShoppingCartByIdService {
 
-    @Autowired
-    JpaShoppingCartRepository shoppingCartRepository;
-    @Autowired
-    FindShoppingCartByIdValidator validator;
+    @Autowired JpaShoppingCartRepository shoppingCartRepository;
+    @Autowired FindShoppingCartByIdValidator validator;
 
     public FindShoppingCartByIdResponse execute(FindShoppingCartByIdRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -26,8 +25,14 @@ public class FindShoppingCartByIdService {
             return new FindShoppingCartByIdResponse(errors);
         }
 
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(request.getId()).get();
-        return new FindShoppingCartByIdResponse(shoppingCart);
+        Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findById(request.getId());
+
+        if (shoppingCart.isEmpty()) {
+            errors.add(new CoreError("id", "Not found!"));
+            return new FindShoppingCartByIdResponse(errors);
+        }
+
+        return new FindShoppingCartByIdResponse(shoppingCart.get());
     }
 
 }
