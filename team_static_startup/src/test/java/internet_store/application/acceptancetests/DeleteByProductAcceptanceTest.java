@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 
 @SpringBootTest
 public class DeleteByProductAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -86,6 +85,5 @@ public class DeleteByProductAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
