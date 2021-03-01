@@ -32,7 +32,7 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
     @Mock
     private SearchTargetByDescriptionValidator validator;
     @InjectMocks
-    private SearchTargetByDescriptionService service;
+    SearchTargetByDescriptionService service;
 
     @Before
     public void setup() {

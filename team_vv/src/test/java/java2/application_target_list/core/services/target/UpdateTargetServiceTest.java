@@ -26,7 +26,7 @@ public class UpdateTargetServiceTest extends TestCase {
     @Mock
     private UpdateTargetValidator updateTargetValidator;
     @InjectMocks
-    private UpdateTargetService updateTargetService;
+    UpdateTargetService updateTargetService;
 
     @Before
     public void setup() {

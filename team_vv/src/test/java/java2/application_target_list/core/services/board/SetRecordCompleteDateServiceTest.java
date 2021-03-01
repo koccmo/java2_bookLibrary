@@ -28,7 +28,7 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
     @Mock
     private JpaBoardRepository jpaBoardRepository;
     @InjectMocks
-    private SetRecordCompleteDateService setRecordCompleteDateService;
+    SetRecordCompleteDateService setRecordCompleteDateService;
 
     @Before
     public void setup() {

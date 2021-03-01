@@ -28,7 +28,7 @@ public class AddTargetServiceTest extends TestCase {
     @Mock
     private AddTargetValidator validator;
     @InjectMocks
-    private AddTargetService service;
+    AddTargetService service;
 
     @Before
     public void setup() {

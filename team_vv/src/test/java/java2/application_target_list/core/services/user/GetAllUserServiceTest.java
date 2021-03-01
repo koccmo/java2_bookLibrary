@@ -23,7 +23,7 @@ public class GetAllUserServiceTest extends TestCase {
     @Mock
     private JpaUserRepository jpaUserRepository;
     @InjectMocks
-    private GetAllUserService getAllUserService;
+    GetAllUserService getAllUserService;
 
     @Before
     public void setup() {

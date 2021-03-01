@@ -26,7 +26,7 @@ public class ChangeTargetNameServiceTest extends TestCase {
     @Mock
     private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    private ChangeTargetNameService service;
+    ChangeTargetNameService service;
 
     @Before
     public void setup() {

@@ -26,7 +26,7 @@ public class DeleteUserServiceTest extends TestCase {
     @Mock
     private DeleteUserValidator deleteUserValidator;
     @InjectMocks
-    private DeleteUserService deleteUserService;
+    DeleteUserService deleteUserService;
 
     @Before
     public void setup() {

@@ -27,7 +27,7 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
     @Mock
     private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    private ChangeTargetDeadlineService service;
+    ChangeTargetDeadlineService service;
 
     @Before
     public void setup() {

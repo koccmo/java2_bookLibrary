@@ -26,7 +26,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     @Mock
     private ChangeUserFirstNameValidator changeUserFirstNameValidator;
     @InjectMocks
-    private ChangeUserFirstNameService changeUserFirstNameService;
+    ChangeUserFirstNameService changeUserFirstNameService;
 
     @Before
     public void setup() {

@@ -32,7 +32,7 @@ public class SearchUserByFirstNameServiceTest extends TestCase {
     @Mock
     private SearchUserByFirstNameValidator searchUserByLastNameValidator;
     @InjectMocks
-    private SearchUserByFirstNameService searchUserByFirstNameService;
+    SearchUserByFirstNameService searchUserByFirstNameService;
 
     @Before
     public void setup() {

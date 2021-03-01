@@ -28,7 +28,7 @@ public class ChangeTargetDescriptionServiceTest extends TestCase {
     @Mock
     private ChangeTargetDescriptionValidator validator;
     @InjectMocks
-    private ChangeTargetDescriptionService service;
+    ChangeTargetDescriptionService service;
 
     @Before
     public void setup() {

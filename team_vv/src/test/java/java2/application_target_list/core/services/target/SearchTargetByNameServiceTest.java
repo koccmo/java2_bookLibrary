@@ -33,7 +33,7 @@ public class SearchTargetByNameServiceTest extends TestCase {
     @Mock
     private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    private SearchTargetByNameService service;
+    SearchTargetByNameService service;
 
     @Before
     public void setup() {

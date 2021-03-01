@@ -26,7 +26,7 @@ public class DeleteRecordServiceTest extends TestCase {
     @Mock
     private JpaBoardRepository jpaBoardRepository;
     @InjectMocks
-    private DeleteRecordService deleteRecordService;
+    DeleteRecordService deleteRecordService;
 
     @Before
     public void setup() {

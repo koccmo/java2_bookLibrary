@@ -22,7 +22,7 @@ public class GetAllTargetsServiceTest extends TestCase {
     @Mock
     private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    private GetAllTargetsService service;
+    GetAllTargetsService service;
 
     @Before
     public void setup() {

@@ -26,7 +26,7 @@ public class DeleteTargetServiceTest extends TestCase {
     @Mock
     private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
-    private DeleteTargetService service;
+    DeleteTargetService service;
 
     @Before
     public void setup() {
