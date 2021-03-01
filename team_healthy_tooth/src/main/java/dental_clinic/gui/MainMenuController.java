@@ -9,10 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class MainMenuController {
 
     @FXML
@@ -27,34 +30,70 @@ public class MainMenuController {
     @FXML
     private Button backButton;
 
-   /*@FXML
-   public void backButton {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
-    }*/
+    @FXML
+    private Button addUser;
+
+    @FXML
+    private Button blockUser;
+
+    @FXML
+    private MenuItem addPatientItem;
+
+    @FXML
+    private MenuItem changePersonalDataItem;
+
+    @FXML
+    private MenuItem searchPatientItem;
+
+    @FXML
+    private MenuItem updatePatientJowl;
+
+    @FXML
+    private MenuItem addDoctorItem;
+
+    @FXML
+    private MenuItem fillDoctorGraphicItem;
+
+    @FXML
+    private MenuItem getDoctorListItem;
+
+    @FXML
+    private MenuItem deleteDoctorItem;
+
+    @FXML
+    private MenuItem addVisitItem;
+
+    @FXML
+    private MenuItem changeVisitTimeItem;
+
+    @FXML
+    private MenuItem searchVsitByDateItem;
+
+    @FXML
+    private MenuItem searchVisitByPersonalCodeItem;
+
+    @FXML
+    private MenuItem deletePlannedVisitItem;
 
     @FXML
     void initialize() {
-        backButton.setOnAction(event -> {
-            backButton.getScene().getWindow().hide();
+        addUser.setOnAction(event -> {
             Parent root = null;
+            try {
+                addUser.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addUser.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
             Image iconMain =new Image(iconStream);
             Stage stage = new Stage();
             stage.getIcons().add(iconMain);
-            try {
-                root = FXMLLoader.load(getClass().getResource("/FXML/scene.fxml"));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             stage.setTitle("Dental Clinic");
             stage.setScene(new Scene(root, 600, 400));
             stage.show();
         });
 
-
-
+        backButton.setOnAction(event ->  System.exit(0));
     }
 }
-

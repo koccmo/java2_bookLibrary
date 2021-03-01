@@ -1,12 +1,13 @@
 package electronic_library.core.domain;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "reader_books")
-public class ReaderBook {
+public class ReaderBooks {
 
     @Id
     @Column(name = "id")
@@ -28,6 +29,25 @@ public class ReaderBook {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "book_return_date")
     private Date bookReturnDate;
+
+    public ReaderBooks(Reader reader, Book book, Date bookOutDate, Date bookReturnDate) {
+        this.reader = reader;
+        this.book = book;
+        this.bookOutDate = bookOutDate;
+        this.bookReturnDate = bookReturnDate;
+    }
+
+    public ReaderBooks(Long readerId, Long bookId, Date bookOutDate, Date bookReturnDate) {
+        this.bookOutDate = bookOutDate;
+        this.bookReturnDate = bookReturnDate;
+    }
+
+    public ReaderBooks() {
+    }
+
+    public ReaderBooks(Long readerId, Long bookId, String bookOutDate, Date bookReturnDate) {
+
+    }
 
     public Long getId() {
         return id;
@@ -75,7 +95,7 @@ public class ReaderBook {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        ReaderBook that = (ReaderBook) o;
+        ReaderBooks that = (ReaderBooks) o;
         return Objects.equals(id, that.id) && Objects.equals(reader, that.reader) && Objects
                 .equals(book, that.book) && Objects.equals(bookOutDate, that.bookOutDate) && Objects
                 .equals(bookReturnDate, that.bookReturnDate);
@@ -88,7 +108,7 @@ public class ReaderBook {
 
     @Override
     public String toString() {
-        return "ReaderBook{" +
+        return "ReaderBooks{" +
                 "id=" + id +
                 ", reader=" + reader +
                 ", book=" + book +
