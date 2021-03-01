@@ -16,9 +16,8 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-//@SpringBootTest
+@SpringBootTest
 public class AddProductAcceptanceTest {
-/*
 
     private ApplicationContext appContext;
 
@@ -83,6 +82,5 @@ public class AddProductAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
 
 }
