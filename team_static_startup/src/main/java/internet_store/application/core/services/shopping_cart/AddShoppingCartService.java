@@ -11,19 +11,19 @@ import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.shopping_cart.AddShoppingCartResponse;
 import internet_store.application.core.services.shopping_cart.validators.AddShoppingCartValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddShoppingCartService {
 
-    @Autowired
-    JpaShoppingCartRepository shoppingCartRepository;
-    @Autowired
-    JpaCustomerRepository customerRepository;
-    @Autowired
-    AddShoppingCartValidator validator;
+    @Autowired JpaShoppingCartRepository shoppingCartRepository;
+    @Autowired JpaCustomerRepository customerRepository;
+    @Autowired AddShoppingCartValidator validator;
 
     public AddShoppingCartResponse execute(AddShoppingCartRequest request) {
         List<CoreError> errors = validator.validate(request);

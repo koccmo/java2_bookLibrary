@@ -8,10 +8,12 @@ import internet_store.application.core.responses.shopping_cart_item.AddShoppingC
 import internet_store.application.core.services.shopping_cart_item.validators.AddShoppingCartItemValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddShoppingCartItemService {
 
     @Autowired private JpaShoppingCartItemRepository itemRepository;
