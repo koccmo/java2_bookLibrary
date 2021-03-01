@@ -1,6 +1,6 @@
-package java2.application_target_list.core.acceptancetests.user;
+package java2.application_target_list.acceptancetests.user;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
@@ -13,23 +13,33 @@ import java2.application_target_list.core.services.user.DeleteUserService;
 import java2.application_target_list.core.services.user.GetAllUserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class DeleteUserAcceptanceTest {
 
+    @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private GetAllUserService getAllUserService;
+    @Autowired
     private DeleteUserService deleteUserService;
+
     private Long idToDelete;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
     @Before
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addUsersToDatabase();
     }
@@ -137,29 +147,5 @@ public class DeleteUserAcceptanceTest {
 
     private AddUserRequest createAddUserRequest(String userFirstName, String userLastName) {
         return new AddUserRequest(userFirstName, userLastName);
-    }
-
-    private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllUserService createGetAllUserService() {
-        return applicationContext.getBean(GetAllUserService.class);
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addUserService = createAddUserService();
-        getAllUserService = createGetAllUserService();
-        deleteUserService = createDeleteUserService();
-        databaseCleaner = createDatabaseCleaner();
     }
 }

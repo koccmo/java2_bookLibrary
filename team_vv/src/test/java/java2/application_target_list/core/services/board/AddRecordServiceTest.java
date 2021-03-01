@@ -26,11 +26,16 @@ import static org.mockito.ArgumentMatchers.argThat;
 public class AddRecordServiceTest extends TestCase {
 
     private List<CoreError> errorList;
-    @Mock private AddRecordValidator addRecordValidator;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private JpaBoardRepository jpaBoardRepository;
-    @InjectMocks AddRecordService addRecordService;
+    @Mock
+    private AddRecordValidator addRecordValidator;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    private AddRecordService addRecordService;
 
     @Before
     public void setup() {

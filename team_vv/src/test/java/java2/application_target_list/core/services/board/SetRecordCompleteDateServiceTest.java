@@ -23,9 +23,12 @@ import java.util.List;
 public class SetRecordCompleteDateServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock SetRecordCompleteDateValidator setRecordCompleteDateValidator;
-    @Mock private JpaBoardRepository jpaBoardRepository;
-    @InjectMocks SetRecordCompleteDateService setRecordCompleteDateService;
+    @Mock
+    private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
+    @Mock
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    private SetRecordCompleteDateService setRecordCompleteDateService;
 
     @Before
     public void setup() {

@@ -1,6 +1,6 @@
-package java2.application_target_list.core.acceptancetests.user;
+package java2.application_target_list.acceptancetests.user;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
@@ -11,23 +11,31 @@ import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.SearchUserByFirstNameService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class SearchUserByFirstNameAcceptanceTest {
 
+    @Autowired
     private SearchUserByFirstNameService searchUserByFirstNameService;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
 
     @Before
     public void setup(){
-        createServices();
         databaseCleaner.clean();
         addUsersToDatabase();
 
@@ -180,23 +188,6 @@ public class SearchUserByFirstNameAcceptanceTest {
         assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
     }
 
-    private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private SearchUserByFirstNameService createSearchUserByFirstNameService() {
-        return applicationContext.getBean(SearchUserByFirstNameService.class);
-    }
-
-
     private void addUsersToDatabase() {
         AddUserRequest addUserRequest1 = new AddUserRequest("name1", "surname1");
         AddUserRequest addUserRequest2 = new AddUserRequest("name2", "surname2");
@@ -207,12 +198,5 @@ public class SearchUserByFirstNameAcceptanceTest {
         addUserService.execute(addUserRequest2);
         addUserService.execute(addUserRequest3);
         addUserService.execute(addUserRequest4);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        searchUserByFirstNameService = createSearchUserByFirstNameService();
-        addUserService = createAddUserService();
-        databaseCleaner = createDatabaseCleaner();
     }
 }

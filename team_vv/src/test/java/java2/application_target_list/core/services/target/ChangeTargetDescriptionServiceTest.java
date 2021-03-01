@@ -23,10 +23,12 @@ import java.util.List;
 public class ChangeTargetDescriptionServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private ChangeTargetDescriptionValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private ChangeTargetDescriptionValidator validator;
     @InjectMocks
-    ChangeTargetDescriptionService service;
+    private ChangeTargetDescriptionService service;
 
     @Before
     public void setup() {

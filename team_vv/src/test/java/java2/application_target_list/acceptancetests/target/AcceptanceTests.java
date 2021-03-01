@@ -1,5 +1,6 @@
-package java2.application_target_list.core.acceptancetests.target;
+package java2.application_target_list.acceptancetests.target;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.*;
 import java2.application_target_list.config.SpringCoreConfiguration;
@@ -8,26 +9,42 @@ import java2.application_target_list.core.services.target.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class AcceptanceTests {
 
-
+    @Autowired
     private ChangeTargetNameService changeTargetNameService;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private ChangeTargetDescriptionService changeTargetDescriptionService;
+    @Autowired
     private ChangeTargetDeadlineService changeTargetDeadlineService;
+    @Autowired
     private SearchTargetByNameService searchTargetByNameService;
+    @Autowired
     private ApplicationContext applicationContext;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private GetAllTargetsService getAllTargetsService;
+    @Autowired
     private DeleteTargetService deleteTargetService;
+    @Autowired
     private SearchTargetByDescriptionService searchTargetByDescriptionService;
+
     private Long targetId;
 
     @Before
