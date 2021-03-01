@@ -1,46 +1,24 @@
-package dental_clinic.core.domain;
+package dental_clinic.core.requests.user;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
-public class User {
+import dental_clinic.core.domain.Role;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class AddUserRequest {
 
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "surname")
     private String surname;
-
-    @Column(name = "login")
     private String login;
-
-    @Column(name = "password")
     private String password;
+    private Long roleId;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    public AddUserRequest() { }
 
-    public User(String name, String surname, String login, String password, Role role) {
+    public AddUserRequest(String name, String surname, String login, String password, Long roleId) {
         this.name = name;
         this.surname = surname;
         this.login = login;
         this.password = password;
-        this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.roleId = roleId;
     }
 
     public String getName() {
@@ -75,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }

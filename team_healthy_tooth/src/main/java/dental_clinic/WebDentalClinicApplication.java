@@ -20,7 +20,6 @@ public class WebDentalClinicApplication {
             programMenu.executeMenuUIAction(menuNumber);
         }
     }
-
 }
 
 /*@SpringBootApplication - данная аннотация необходима для

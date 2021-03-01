@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
+import dental_clinic.core.services.user.ContainsUserServiceGUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +15,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-public class Controller {
+@Controller
+public class LoginController {
+
+    @Autowired
+    private ContainsUserServiceGUI containsUserServiceGUI; //Why null?
 
     @FXML
     private ResourceBundle resources;
@@ -25,10 +31,10 @@ public class Controller {
     private URL location;
 
     @FXML
-    private TextField login_field;
+    private TextField userName;
 
     @FXML
-    private PasswordField password_field;
+    private PasswordField password;
 
     @FXML
     private Button signInButton;
@@ -39,13 +45,15 @@ public class Controller {
     @FXML
     void initialize( ) {
         signInButton.setOnAction(event -> {
-            // TODO Action is login true
-            signInButton.getScene().getWindow().hide();
+            //if (containsUserServiceGUI.execute(userName.getText(), password.getText())) {}
             Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/FXML/mainMenu.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (userName.getText().equals("admin") && password.getText().equals("admin")) {
+                try {
+                    signInButton.getScene().getWindow().hide();
+                    root = FXMLLoader.load(getClass().getResource("/FXML/mainMenu.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
             Image iconMain =new Image(iconStream);
