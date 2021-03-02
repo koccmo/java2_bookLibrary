@@ -5,20 +5,21 @@ import java2.application_target_list.core.requests.user.ChangeUserFirstNameReque
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.ChangeUserFirstNameResponse;
 import java2.application_target_list.core.validators.user.ChangeUserFirstNameValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.ArrayList;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class ChangeUserFirstNameServiceTest extends TestCase {
+@SpringBootTest
+public class ChangeUserFirstNameServiceTest {
 
     private List<CoreError> errorList;
     @Mock
@@ -28,7 +29,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
     @InjectMocks
     ChangeUserFirstNameService changeUserFirstNameService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errorList = new ArrayList<>();
     }
@@ -39,7 +40,7 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
 //        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
 //        ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "new name");
 //        ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-//        assertFalse(changeUserFirstNameResponse.hasErrors());
+//        Assertions.assertFalse(changeUserFirstNameResponse.hasErrors());
 //    }
 
     @Test
@@ -47,10 +48,10 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(2L, "new name");
         Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        assertTrue(changeUserFirstNameResponse.hasErrors());
-        assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID;");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "no user with that ID");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -59,12 +60,12 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(null, "new name");
         Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        assertTrue(changeUserFirstNameResponse.hasErrors());
-        assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -73,12 +74,12 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(-3L, "new name");
         Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        assertTrue(changeUserFirstNameResponse.hasErrors());
-        assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be negative!");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -87,12 +88,12 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "");
         Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        assertTrue(changeUserFirstNameResponse.hasErrors());
-        assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User new first name");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User new first name");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -102,13 +103,13 @@ public class ChangeUserFirstNameServiceTest extends TestCase {
         ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(-1L, "");
         Mockito.when(changeUserFirstNameValidator.validate(changeUserFirstNameRequest)).thenReturn(errorList);
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        assertTrue(changeUserFirstNameResponse.hasErrors());
-        assertEquals(changeUserFirstNameResponse.getErrorList().size(), 3);
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User new first name");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "must not be negative!");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(2).getField(), "User ID;");
-        assertEquals(changeUserFirstNameResponse.getErrorList().get(2).getMessage(), "no user with that ID");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 3);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User new first name");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getField(), "User ID");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(1).getMessage(), "must not be negative!");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(2).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(2).getMessage(), "no user with that ID");
     }
 }

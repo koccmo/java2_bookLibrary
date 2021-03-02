@@ -5,14 +5,15 @@ import java2.application_target_list.core.database.board.InMemoryBoardRepository
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+@SpringBootTest
 public class RecordListImplTest {
 
     private BoardRepository boardRepository;
@@ -25,7 +26,7 @@ public class RecordListImplTest {
     private User firstUser;
     private User secondUser;
 
-    @Before
+    @BeforeEach
     public void setup(){
         boardRepository = new InMemoryBoardRepositoryImpl();
         firstTarget = new Target("name", "description", 5L);
@@ -41,10 +42,10 @@ public class RecordListImplTest {
     @Test
     public void testAddToBoard_v1() {
         boardRepository.addToBoard(record1);
-        Assert.assertEquals(boardRepository.getAllRecordsList().size(), 1);
-        Assert.assertEquals(java.util.Optional.ofNullable(record1.getRecordId()), Optional.of(1L));
-        Assert.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
-        Assert.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().size(), 1);
+        Assertions.assertEquals(java.util.Optional.ofNullable(record1.getRecordId()), Optional.of(1L));
+        Assertions.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
     }
 
     @Test
@@ -52,16 +53,16 @@ public class RecordListImplTest {
         boardRepository.addToBoard(record1);
         boardRepository.addToBoard(record2);
         boardRepository.addToBoard(record3);
-        Assert.assertEquals(boardRepository.getAllRecordsList().size(), 3);
-        Assert.assertEquals(java.util.Optional.ofNullable(record1.getRecordId()), Optional.of(1L));
-        Assert.assertEquals(java.util.Optional.ofNullable(record2.getRecordId()), Optional.of(2L));
-        Assert.assertEquals(java.util.Optional.ofNullable(record3.getRecordId()), Optional.of(3L));
-        Assert.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
-        Assert.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
-        Assert.assertNotNull(boardRepository.getAllRecordsList().get(1).getDateAdded());
-        Assert.assertNull(boardRepository.getAllRecordsList().get(1).getDateComplete());
-        Assert.assertNotNull(boardRepository.getAllRecordsList().get(2).getDateAdded());
-        Assert.assertNull(boardRepository.getAllRecordsList().get(2).getDateComplete());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().size(), 3);
+        Assertions.assertEquals(java.util.Optional.ofNullable(record1.getRecordId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(record2.getRecordId()), Optional.of(2L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(record3.getRecordId()), Optional.of(3L));
+        Assertions.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
+        Assertions.assertNotNull(boardRepository.getAllRecordsList().get(1).getDateAdded());
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(1).getDateComplete());
+        Assertions.assertNotNull(boardRepository.getAllRecordsList().get(2).getDateAdded());
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(2).getDateComplete());
     }
 
     @Test
@@ -70,20 +71,20 @@ public class RecordListImplTest {
         boardRepository.addToBoard(record2);
         boardRepository.addToBoard(record3);
         boardRepository.deleteFromBoard(1L);
-        Assert.assertEquals(boardRepository.getAllRecordsList().size(), 2);
-        Assert.assertEquals(Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(2L));
-        Assert.assertEquals(Optional.ofNullable(boardRepository.getAllRecordsList().get(1).getRecordId()), Optional.of(3L));
+        Assertions.assertEquals(boardRepository.getAllRecordsList().size(), 2);
+        Assertions.assertEquals(Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(2L));
+        Assertions.assertEquals(Optional.ofNullable(boardRepository.getAllRecordsList().get(1).getRecordId()), Optional.of(3L));
     }
 
     @Test
     public void testGetAllList_v1() {
         boardRepository.addToBoard(record1);
-        Assert.assertEquals(boardRepository.getAllRecordsList().size(), 1);
-        Assert.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(1L));
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getTargetId(), firstTarget.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getUserId(), firstUser.getId());
-        Assert.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
-        Assert.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().size(), 1);
+        Assertions.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(1L));
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getTargetId(), firstTarget.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getUserId(), firstUser.getId());
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(0).getDateComplete());
+        Assertions.assertNotNull(boardRepository.getAllRecordsList().get(0).getDateAdded());
     }
 
     @Test
@@ -91,16 +92,16 @@ public class RecordListImplTest {
         boardRepository.addToBoard(record1);
         boardRepository.addToBoard(record2);
         boardRepository.addToBoard(record3);
-        Assert.assertEquals(boardRepository.getAllRecordsList().size(), 3);
-        Assert.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(1L));
-        Assert.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(1).getRecordId()), Optional.of(2L));
-        Assert.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(2).getRecordId()), Optional.of(3L));
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getTargetId(), firstTarget.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getUserId(), firstUser.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(1).getTargetId(), secondTarget.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(1).getUserId(), secondUser.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(2).getTargetId(), thirdTarget.getId());
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(2).getUserId(), firstUser.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().size(), 3);
+        Assertions.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(0).getRecordId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(1).getRecordId()), Optional.of(2L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(boardRepository.getAllRecordsList().get(2).getRecordId()), Optional.of(3L));
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getTargetId(), firstTarget.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getUserId(), firstUser.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(1).getTargetId(), secondTarget.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(1).getUserId(), secondUser.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(2).getTargetId(), thirdTarget.getId());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(2).getUserId(), firstUser.getId());
 
     }
 
@@ -111,7 +112,7 @@ public class RecordListImplTest {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter myFormatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String expectedDate =  localDateTime.format(myFormatDate);
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getDateComplete(), expectedDate);
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getDateComplete(), expectedDate);
     }
 
     @Test
@@ -122,7 +123,7 @@ public class RecordListImplTest {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter myFormatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String expectedDate =  localDateTime.format(myFormatDate);
-        Assert.assertEquals(boardRepository.getAllRecordsList().get(0).getDateComplete(), expectedDate);
-        Assert.assertNull(boardRepository.getAllRecordsList().get(1).getDateComplete());
+        Assertions.assertEquals(boardRepository.getAllRecordsList().get(0).getDateComplete(), expectedDate);
+        Assertions.assertNull(boardRepository.getAllRecordsList().get(1).getDateComplete());
     }
 }

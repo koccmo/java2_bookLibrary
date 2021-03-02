@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -16,18 +15,14 @@ import java2.application_target_list.core.services.board.DeleteRecordService;
 import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+@SpringBootTest
 public class DeleteRecordAcceptanceTest {
 
     @Autowired
@@ -51,7 +46,7 @@ public class DeleteRecordAcceptanceTest {
     private Long secondTargetId;
     private Long userId;
 
-    @Before
+    @BeforeEach
     public void setup(){
         databaseCleaner.clean();
         addUsersToDB();
@@ -66,10 +61,10 @@ public class DeleteRecordAcceptanceTest {
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(deleteRecordResponse.hasErrors());
-        Assert.assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(secondTargetId));
-        Assert.assertEquals(Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(userId));
+        Assertions.assertFalse(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(secondTargetId));
+        Assertions.assertEquals(Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(userId));
     }
 
     @Test
@@ -79,22 +74,22 @@ public class DeleteRecordAcceptanceTest {
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(deleteRecordResponse.hasErrors());
-        Assert.assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(firstTargetId));
-        Assert.assertEquals(Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(userId));
+        Assertions.assertFalse(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(firstTargetId));
+        Assertions.assertEquals(Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(userId));
     }
 
     @Test
     public void shouldReturnErrorsList() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(-3L);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
-        Assert.assertTrue(deleteRecordResponse.hasErrors());
-        Assert.assertEquals(deleteRecordResponse.getErrorList().size(), 2);
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
-        Assert.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
 
     }
 

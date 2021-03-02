@@ -22,6 +22,13 @@ dependencies {
 	testCompile('junit:junit:4.13.1')
 	testCompile('org.mockito:mockito-core:3.6.0')
 	testCompile('org.springframework:spring-test:5.2.6.RELEASE')
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test:2.4.1')
+
+}
+
+test {
+	useJUnitPlatform()
 }
 
 

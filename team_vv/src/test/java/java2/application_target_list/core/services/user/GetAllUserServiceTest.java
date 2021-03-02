@@ -4,20 +4,21 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class GetAllUserServiceTest extends TestCase {
+@SpringBootTest
+public class GetAllUserServiceTest {
 
     private List<User> userList;
     @Mock
@@ -25,7 +26,7 @@ public class GetAllUserServiceTest extends TestCase {
     @InjectMocks
     GetAllUserService getAllUserService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         userList = new ArrayList<>();
     }
@@ -36,11 +37,11 @@ public class GetAllUserServiceTest extends TestCase {
         Mockito.when(jpaUserRepository.findAll()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
-        assertFalse(getAllUsersResponse.getUsersList().isEmpty());
-        assertFalse(getAllUsersResponse.hasErrors());
-        assertEquals(getAllUsersResponse.getUsersList().size(), 1);
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertFalse(getAllUsersResponse.getUsersList().isEmpty());
+        Assertions.assertFalse(getAllUsersResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
     }
 
     @Test
@@ -50,19 +51,19 @@ public class GetAllUserServiceTest extends TestCase {
         Mockito.when(jpaUserRepository.findAll()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
-        assertFalse(getAllUsersResponse.getUsersList().isEmpty());
-        assertFalse(getAllUsersResponse.hasErrors());
-        assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name1");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(getAllUsersResponse.getUsersList().isEmpty());
+        Assertions.assertFalse(getAllUsersResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name1");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }    @Test
     public void shouldReturnDB_v3() {
         Mockito.when(jpaUserRepository.findAll()).thenReturn(userList);
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(getAllUsersRequest);
-        assertTrue(getAllUsersResponse.getUsersList().isEmpty());
-        assertFalse(getAllUsersResponse.hasErrors());
+        Assertions.assertTrue(getAllUsersResponse.getUsersList().isEmpty());
+        Assertions.assertFalse(getAllUsersResponse.hasErrors());
     }
 }

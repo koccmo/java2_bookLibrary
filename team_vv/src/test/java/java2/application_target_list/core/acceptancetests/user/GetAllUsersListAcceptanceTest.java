@@ -1,23 +1,19 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
 import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
-import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java2.application_target_list.core.services.user.GetAllUserService;;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+@SpringBootTest
 public class GetAllUsersListAcceptanceTest {
 
     @Autowired
@@ -28,7 +24,7 @@ public class GetAllUsersListAcceptanceTest {
     private DatabaseCleaner databaseCleaner;
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         databaseCleaner.clean();
     }
@@ -41,10 +37,10 @@ public class GetAllUsersListAcceptanceTest {
         GetAllUsersRequest getAllUsersRequest = createGetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = createGetAllUserResponse(getAllUsersRequest);
 
-        Assert.assertFalse(addUserResponse.hasErrors());
-        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 1);
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertFalse(addUserResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
     }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {

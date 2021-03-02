@@ -4,21 +4,22 @@ import java2.application_target_list.core.database.jpa.JpaBoardRepository;
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.GetAllRecordsRequest;
 import java2.application_target_list.core.responses.board.GetAllRecordsResponse;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class GetAllRecordsServiceTest extends TestCase {
+@SpringBootTest
+public class GetAllRecordsServiceTest {
 
     private List<Record> recordList;
     @Mock
@@ -26,7 +27,7 @@ public class GetAllRecordsServiceTest extends TestCase {
     @InjectMocks
     GetAllRecordsService getAllRecordsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         recordList = new ArrayList<>();
     }
@@ -37,10 +38,10 @@ public class GetAllRecordsServiceTest extends TestCase {
         Mockito.when(jpaBoardRepository.findAll()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
-        assertFalse(getAllRecordsResponse.hasErrors());
-        assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
+        Assertions.assertFalse(getAllRecordsResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 1);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
     }
 
     @Test
@@ -50,12 +51,12 @@ public class GetAllRecordsServiceTest extends TestCase {
         Mockito.when(jpaBoardRepository.findAll()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
-        assertFalse(getAllRecordsResponse.hasErrors());
-        assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(2L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(1L));
+        Assertions.assertFalse(getAllRecordsResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(2L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(1L));
     }
 
     @Test
@@ -66,13 +67,13 @@ public class GetAllRecordsServiceTest extends TestCase {
         Mockito.when(jpaBoardRepository.findAll()).thenReturn(recordList);
         GetAllRecordsRequest getAllRecordsRequest = new GetAllRecordsRequest();
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(getAllRecordsRequest);
-        assertFalse(getAllRecordsResponse.hasErrors());
-        assertEquals(getAllRecordsResponse.getRecordList().size(), 3);
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(2L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(1L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(2).getTargetId()), Optional.of(3L));
-        assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(2).getUserId()), Optional.of(2L));
+        Assertions.assertFalse(getAllRecordsResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 3);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(2L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(1L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(2).getTargetId()), Optional.of(3L));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(2).getUserId()), Optional.of(2L));
     }
 }

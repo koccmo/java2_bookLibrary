@@ -8,18 +8,21 @@ import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class AddRecordValidatorTest {
 
+    @Autowired
     private AddRecordValidator addRecordValidator;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        addRecordValidator = new AddRecordValidator();
         UserRepository userDatabase = new InMemoryUserRepositoryImpl();
         TargetRepository targetDatabase = new InMemoryTargetRepositoryImpl();
         userDatabase.addUser(new User("name", "surname"));
@@ -32,7 +35,7 @@ public class AddRecordValidatorTest {
     public void testValidate_validRequest() {
         AddRecordRequest addRecordRequest = new AddRecordRequest(1L, 1L);
         List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-        Assert.assertTrue(actualErrors.isEmpty());
+        Assertions.assertTrue(actualErrors.isEmpty());
     }
 
 
@@ -40,32 +43,32 @@ public class AddRecordValidatorTest {
     public void testValidate_invalidRequest_v3() {
         AddRecordRequest addRecordRequest = new AddRecordRequest(-1L, 1L);
         List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
     public void testValidate_invalidRequest_v4() {
         AddRecordRequest addRecordRequest = new AddRecordRequest(1L, -1L);
         List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "User ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "User ID");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
     public void testValidate_invalidRequest_v5() {
         AddRecordRequest addRecordRequest = new AddRecordRequest(-1L, -1L);
         List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 2);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
-        Assert.assertEquals(actualErrors.get(1).getField(), "User ID");
-        Assert.assertEquals(actualErrors.get(1).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 2);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertEquals(actualErrors.get(1).getField(), "User ID");
+        Assertions.assertEquals(actualErrors.get(1).getMessage(), "must not be negative!");
     }
 
         @Test
@@ -73,10 +76,10 @@ public class AddRecordValidatorTest {
         try {
             AddRecordRequest addRecordRequest = new AddRecordRequest(null, 1L);
             List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
         } catch (NullPointerException ignored) {
 
         }
@@ -87,10 +90,10 @@ public class AddRecordValidatorTest {
         try {
             AddRecordRequest addRecordRequest = new AddRecordRequest(1L, null);
             List<CoreError> actualErrors = addRecordValidator.validate(addRecordRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "User ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "User ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
         } catch (NullPointerException ignored) {
 
         }

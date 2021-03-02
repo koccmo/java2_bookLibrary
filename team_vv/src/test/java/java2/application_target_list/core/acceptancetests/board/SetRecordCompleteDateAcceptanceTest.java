@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -16,16 +15,13 @@ import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.board.SetRecordCompleteDateService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+@SpringBootTest
 public class SetRecordCompleteDateAcceptanceTest {
 
     @Autowired
@@ -49,7 +45,7 @@ public class SetRecordCompleteDateAcceptanceTest {
     private Long targetId;
     private Long recordId;
 
-    @Before
+    @BeforeEach
     public void setup() {
         databaseCleaner.clean();
         addTargetsToDB();
@@ -63,8 +59,8 @@ public class SetRecordCompleteDateAcceptanceTest {
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(setRecordCompleteDateResponse.hasErrors());
-        Assert.assertNotNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
+        Assertions.assertFalse(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertNotNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
     }
 
     @Test
@@ -73,13 +69,13 @@ public class SetRecordCompleteDateAcceptanceTest {
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertTrue(setRecordCompleteDateResponse.hasErrors());
-        Assert.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     private void addRecordsToDB() {

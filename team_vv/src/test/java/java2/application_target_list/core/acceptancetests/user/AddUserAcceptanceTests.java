@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
@@ -8,17 +7,13 @@ import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+@SpringBootTest
 public class AddUserAcceptanceTests {
 
     @Autowired
@@ -28,7 +23,7 @@ public class AddUserAcceptanceTests {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    @Before
+    @BeforeEach
     public void setup() {
         databaseCleaner.clean();
     }
@@ -44,14 +39,14 @@ public class AddUserAcceptanceTests {
         GetAllUsersRequest getAllUsersRequest = createGetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = createGetAllUserResponse(getAllUsersRequest);
 
-        assertFalse(addUserResponse1.hasErrors());
-        assertFalse(addUserResponse2.hasErrors());
-        assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        assertNull(getAllUsersResponse.getErrorList());
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(addUserResponse1.hasErrors());
+        Assertions.assertFalse(addUserResponse2.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assertions.assertNull(getAllUsersResponse.getErrorList());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -59,10 +54,10 @@ public class AddUserAcceptanceTests {
         AddUserRequest addUserRequest = createAddUserRequest("", "surname2");
         AddUserResponse addUserResponse = createAddUserResponse(addUserRequest);
 
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {

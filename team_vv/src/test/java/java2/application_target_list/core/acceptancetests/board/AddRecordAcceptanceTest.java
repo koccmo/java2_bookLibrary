@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -14,17 +13,15 @@ import java2.application_target_list.core.services.board.AddRecordService;
 import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+
+@SpringBootTest
 public class AddRecordAcceptanceTest {
 
     @Autowired
@@ -43,7 +40,7 @@ public class AddRecordAcceptanceTest {
     private AddTargetService addTargetService;
 
 
-    @Before
+    @BeforeEach
     public void setup(){
         databaseCleaner.clean();
         addUsersToDB();
@@ -62,14 +59,14 @@ public class AddRecordAcceptanceTest {
         AddRecordResponse addRecordResponse2 = addRecordService.execute(addRecordRequest2);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(addRecordResponse1.hasErrors());
-        Assert.assertFalse(addRecordResponse2.hasErrors());
-        Assert.assertFalse(getAllRecordsResponse.hasErrors());
-        Assert.assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(targetId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(firstUserId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(targetId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(secondUserId));
+        Assertions.assertFalse(addRecordResponse1.hasErrors());
+        Assertions.assertFalse(addRecordResponse2.hasErrors());
+        Assertions.assertFalse(getAllRecordsResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(targetId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(firstUserId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(targetId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(secondUserId));
     }
 
     @Test
@@ -78,12 +75,12 @@ public class AddRecordAcceptanceTest {
         AddRecordRequest addRecordRequest1 = new AddRecordRequest(-1L, firstUserId);
         AddRecordResponse addRecordResponse = addRecordService.execute(addRecordRequest1);
 
-        Assert.assertTrue(addRecordResponse.hasErrors());
-        Assert.assertEquals(addRecordResponse.getErrorList().size(), 2);
-        Assert.assertEquals(addRecordResponse.getErrorList().get(0).getField(), "Target ID");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(1).getField(), "Target ID");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(1).getMessage(), "no target with that ID!");
+        Assertions.assertTrue(addRecordResponse.hasErrors());
+        Assertions.assertEquals(addRecordResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(0).getField(), "Target ID");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(1).getField(), "Target ID");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(1).getMessage(), "no target with that ID!");
     }
 
     private void addUsersToDB(){

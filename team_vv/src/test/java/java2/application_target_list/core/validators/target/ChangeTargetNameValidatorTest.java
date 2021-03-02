@@ -5,19 +5,21 @@ import java2.application_target_list.core.database.target.InMemoryTargetReposito
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class ChangeTargetNameValidatorTest {
 
+    @Autowired
     private ChangeTargetNameValidator validator;
 
-    @Before
-    public void setup() {
-        validator = new ChangeTargetNameValidator();
+    @BeforeEach
+    public void setup() { ;
         TargetRepository targetRepository = new InMemoryTargetRepositoryImpl();
         targetRepository.addTarget(new Target("name", "description", 1L));
     }
@@ -25,34 +27,34 @@ public class ChangeTargetNameValidatorTest {
     public void testValidate_validRequest() {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "new name");
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 0);
+        Assertions.assertEquals(actualErrors.size(), 0);
     }
 
     @Test
     public void testValidate_invalidRequestId() {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(-1L, "new name");
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
     }
 
     @Test
     public void testValidate_invalidRequestNewName_v1() {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "");
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target new name"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target new name"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
     @Test
     public void testValidate_invalidRequestNewName_v2() {
         ChangeTargetNameRequest request = new ChangeTargetNameRequest(0L, null);
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target new name"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target new name"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be empty!"));
     }
 
 }

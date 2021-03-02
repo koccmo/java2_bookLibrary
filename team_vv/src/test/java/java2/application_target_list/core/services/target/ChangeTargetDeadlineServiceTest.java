@@ -6,20 +6,22 @@ import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRe
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.validators.target.ChangeTargetDeadlineValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.ArrayList;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ChangeTargetDeadlineServiceTest extends TestCase {
+@SpringBootTest
+public class ChangeTargetDeadlineServiceTest {
 
     private List<CoreError> errors;
     @Mock
@@ -29,7 +31,7 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
     @InjectMocks
     ChangeTargetDeadlineService service;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errors = new ArrayList<>();
     }
@@ -53,10 +55,10 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 1);
-        assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(0).getMessage(), "no target with that ID");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 1);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "no target with that ID");
     }
 
     @Test
@@ -65,12 +67,12 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         errors.add(new CoreError("Target ID;", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
-        assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -79,12 +81,12 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         errors.add(new CoreError("Target ID;", "must not be negative!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
-        assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -93,12 +95,12 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         errors.add(new CoreError("Target new deadline", "must not be negative!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
-        assertEquals(response.getErrorList().get(0).getField(), "Target new deadline");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target new deadline");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -108,14 +110,14 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         errors.add(new CoreError("Target new deadline", "must not be negative!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 3);
-        assertEquals(response.getErrorList().get(2).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(2).getMessage(), "no target with that ID");
-        assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
-        assertEquals(response.getErrorList().get(1).getField(), "Target new deadline");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must not be negative!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 3);
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "no target with that ID");
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Target new deadline");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -124,11 +126,11 @@ public class ChangeTargetDeadlineServiceTest extends TestCase {
         errors.add(new CoreError("Target new deadline", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         ChangeTargetDeadlineResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
-        assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
-        assertEquals(response.getErrorList().get(0).getField(), "Target new deadline");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Target ID;");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "no target with that ID");
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target new deadline");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 }

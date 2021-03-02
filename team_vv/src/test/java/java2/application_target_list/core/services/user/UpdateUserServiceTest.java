@@ -5,9 +5,6 @@ import java2.application_target_list.core.requests.user.UpdateUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.UpdateUserResponse;
 import java2.application_target_list.core.validators.user.UpdateUserValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,9 +12,14 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class UpdateUserServiceTest extends TestCase {
+@SpringBootTest
+public class UpdateUserServiceTest {
 
     private List<CoreError> errorList;
     @Mock
@@ -27,7 +29,7 @@ public class UpdateUserServiceTest extends TestCase {
     @InjectMocks
     UpdateUserService updateUserService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errorList = new ArrayList<>();
     }
@@ -38,7 +40,7 @@ public class UpdateUserServiceTest extends TestCase {
 //        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
 //        UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, "new first name", "new last name");
 //        UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-//        assertFalse(updateUserResponse.hasErrors());
+//        Assertions.assertFalse(updateUserResponse.hasErrors());
 //    }
 
     @Test
@@ -46,10 +48,10 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(2L, "new first name", "new last name");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 1);
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "no user with that ID");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -58,12 +60,12 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(null, "new first name", "new last name");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 2);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -72,12 +74,12 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(-3L, "new first name", "new last name");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 2);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be negative!");
 
     }
 
@@ -87,12 +89,12 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, null, "new last name");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 2);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -102,14 +104,14 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(-1L, null, "new last name");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 3);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "must not be negative!");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(updateUserResponse.getErrorList().get(2).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(2).getMessage(), "no user with that ID");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 3);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "must not be negative!");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(2).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(2).getMessage(), "no user with that ID");
     }
 
     @Test
@@ -118,12 +120,12 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, "new first name", null);
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 2);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new last name");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new last name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -132,12 +134,12 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, "new first name", "");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 2);
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new last name");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new last name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
     @Test
     public void shouldReturnResponseWithErrors_v8() {
@@ -147,16 +149,16 @@ public class UpdateUserServiceTest extends TestCase {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(-1L, null, "");
         Mockito.when(updateUserValidator.validate(updateUserRequest)).thenReturn(errorList);
         UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-        assertTrue(updateUserResponse.hasErrors());
-        assertEquals(updateUserResponse.getErrorList().size(), 4);
-        assertEquals(updateUserResponse.getErrorList().get(2).getField(), "User ID");
-        assertEquals(updateUserResponse.getErrorList().get(2).getMessage(), "must not be negative!");
-        assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
-        assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(updateUserResponse.getErrorList().get(3).getField(), "User ID;");
-        assertEquals(updateUserResponse.getErrorList().get(3).getMessage(), "no user with that ID");
-        assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User new last name");
-        assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "must not be empty!");
+        Assertions.assertTrue(updateUserResponse.hasErrors());
+        Assertions.assertEquals(updateUserResponse.getErrorList().size(), 4);
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(2).getField(), "User ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(2).getMessage(), "must not be negative!");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getField(), "User new first name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(3).getField(), "User ID;");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(3).getMessage(), "no user with that ID");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getField(), "User new last name");
+        Assertions.assertEquals(updateUserResponse.getErrorList().get(1).getMessage(), "must not be empty!");
     }
 
 }

@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.AddUserRequest;
@@ -12,18 +11,14 @@ import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.ChangeUserFirstNameService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TargetListApplication.class})
+@SpringBootTest
 public class ChangeUserFirstNameAcceptanceTest {
 
     @Autowired
@@ -40,7 +35,7 @@ public class ChangeUserFirstNameAcceptanceTest {
 
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         databaseCleaner.clean();
         addUsersToDatabase();
@@ -55,13 +50,13 @@ public class ChangeUserFirstNameAcceptanceTest {
 
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(new GetAllUsersRequest());
 
-        Assert.assertFalse(changeUserFirstNameResponse.hasErrors());
-        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assert.assertFalse(getAllUsersResponse.hasErrors());
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assertions.assertFalse(getAllUsersResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -71,16 +66,16 @@ public class ChangeUserFirstNameAcceptanceTest {
 
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(new GetAllUsersRequest());
 
-        Assert.assertTrue(changeUserFirstNameResponse.hasErrors());
-        Assert.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
-        Assert.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID;");
-        Assert.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "no user with that ID");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assert.assertFalse(getAllUsersResponse.hasErrors());
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertTrue(changeUserFirstNameResponse.hasErrors());
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getField(), "User ID;");
+        Assertions.assertEquals(changeUserFirstNameResponse.getErrorList().get(0).getMessage(), "no user with that ID");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assertions.assertFalse(getAllUsersResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
 

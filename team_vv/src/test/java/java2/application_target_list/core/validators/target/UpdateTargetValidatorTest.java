@@ -5,19 +5,21 @@ import java2.application_target_list.core.database.target.TargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.UpdateTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class UpdateTargetValidatorTest {
 
+    @Autowired
     private UpdateTargetValidator updateTargetValidator;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        updateTargetValidator = new UpdateTargetValidator();
         TargetRepository targetRepository = new InMemoryTargetRepositoryImpl();
         targetRepository.addTarget(new Target("name", "description", 123L));
     }
@@ -29,7 +31,7 @@ public class UpdateTargetValidatorTest {
                                                                           "new description",
                                                                           100L);
         List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-        Assert.assertTrue(actualErrors.isEmpty());
+        Assertions.assertTrue(actualErrors.isEmpty());
     }
 
     @Test
@@ -40,10 +42,10 @@ public class UpdateTargetValidatorTest {
                     "new description",
                     100L);
             List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
         } catch (NullPointerException ignored) {
 
         }
@@ -56,10 +58,10 @@ public class UpdateTargetValidatorTest {
                     "new description",
                     100L);
             List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -69,10 +71,10 @@ public class UpdateTargetValidatorTest {
                 "new description",
                 100L);
         List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Target new name");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Target new name");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -82,10 +84,10 @@ public class UpdateTargetValidatorTest {
                 "",
                 100L);
         List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Target new description");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Target new description");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -95,10 +97,10 @@ public class UpdateTargetValidatorTest {
                 "new description",
                 -100L);
         List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Target new deadline");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Target new deadline");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -109,10 +111,10 @@ public class UpdateTargetValidatorTest {
                     "new description",
                     null);
             List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Target new deadline");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Target new deadline");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
         } catch (NullPointerException ignored) {
 
         }
@@ -125,16 +127,16 @@ public class UpdateTargetValidatorTest {
                     null,
                     -5L);
             List<CoreError> actualErrors = updateTargetValidator.validate(updateTargetRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 4);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Target ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
-            Assert.assertEquals(actualErrors.get(1).getField(), "Target new name");
-            Assert.assertEquals(actualErrors.get(1).getMessage(), "must not be empty!");
-            Assert.assertEquals(actualErrors.get(2).getField(), "Target new description");
-            Assert.assertEquals(actualErrors.get(2).getMessage(), "must not be empty!");
-            Assert.assertEquals(actualErrors.get(3).getField(), "Target new deadline");
-            Assert.assertEquals(actualErrors.get(3).getMessage(), "must not be negative!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 4);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Target ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+            Assertions.assertEquals(actualErrors.get(1).getField(), "Target new name");
+            Assertions.assertEquals(actualErrors.get(1).getMessage(), "must not be empty!");
+            Assertions.assertEquals(actualErrors.get(2).getField(), "Target new description");
+            Assertions.assertEquals(actualErrors.get(2).getMessage(), "must not be empty!");
+            Assertions.assertEquals(actualErrors.get(3).getField(), "Target new deadline");
+            Assertions.assertEquals(actualErrors.get(3).getMessage(), "must not be negative!");
 
     }
 }

@@ -4,9 +4,6 @@ import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -14,9 +11,14 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetAllTargetsServiceTest extends TestCase {
+@SpringBootTest
+public class GetAllTargetsServiceTest {
 
     private  List<Target>targets;
     @Mock
@@ -24,7 +26,7 @@ public class GetAllTargetsServiceTest extends TestCase {
     @InjectMocks
     GetAllTargetsService service;
 
-    @Before
+    @BeforeEach
     public void setup() {
         targets = new ArrayList<>();
     }
@@ -35,10 +37,10 @@ public class GetAllTargetsServiceTest extends TestCase {
         Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description");
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description");
     }
 
     @Test
@@ -48,12 +50,12 @@ public class GetAllTargetsServiceTest extends TestCase {
         Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description");
-        assertEquals(response.getTargetList().get(1).getName(), "n");
-        assertEquals(response.getTargetList().get(1).getDescription(), "d");
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description");
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "n");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "d");
     }
 
     @Test
@@ -61,7 +63,7 @@ public class GetAllTargetsServiceTest extends TestCase {
         Mockito.when(jpaTargetRepository.findAll()).thenReturn(targets);
         GetAllTargetsRequest request = new GetAllTargetsRequest();
         GetAllTargetsResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 0);
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 0);
     }
 }
