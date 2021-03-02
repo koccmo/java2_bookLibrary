@@ -5,29 +5,33 @@ import java2.application_target_list.core.requests.board.SetRecordCompleteDateRe
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.SetRecordCompleteDateResponse;
 import java2.application_target_list.core.validators.board.SetRecordCompleteDateValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class SetRecordCompleteDateServiceTest extends TestCase {
+@SpringBootTest
+public class SetRecordCompleteDateServiceTest {
 
     private List<CoreError> errors;
-    @Mock SetRecordCompleteDateValidator setRecordCompleteDateValidator;
-    @Mock private JpaBoardRepository jpaBoardRepository;
-    @InjectMocks SetRecordCompleteDateService setRecordCompleteDateService;
+    @Mock
+    private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
+    @Mock
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    SetRecordCompleteDateService setRecordCompleteDateService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errors = new ArrayList<>();
     }
@@ -45,10 +49,10 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
         Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
-        assertTrue(setRecordCompleteDateResponse.hasErrors());
-        assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 1);
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "no record with that ID");
+        Assertions.assertTrue(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "no record with that ID");
     }
 
     @Test
@@ -57,12 +61,12 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(null);
         Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
-        assertTrue(setRecordCompleteDateResponse.hasErrors());
-        assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -71,12 +75,12 @@ public class SetRecordCompleteDateServiceTest extends TestCase {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(-2L);
         Mockito.when(setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest)).thenReturn(errors);
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
-        assertTrue(setRecordCompleteDateResponse.hasErrors());
-        assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     private String getDate() {

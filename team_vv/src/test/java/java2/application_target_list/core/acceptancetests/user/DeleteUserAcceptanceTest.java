@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
@@ -11,25 +11,28 @@ import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.DeleteUserService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
+@SpringBootTest
 public class DeleteUserAcceptanceTest {
 
-    private ApplicationContext applicationContext;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private GetAllUserService getAllUserService;
+    @Autowired
     private DeleteUserService deleteUserService;
+
     private Long idToDelete;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addUsersToDatabase();
     }
@@ -46,11 +49,11 @@ public class DeleteUserAcceptanceTest {
 
         GetAllUsersResponse getAllUsersResponseAfterDelete = createGetAllUserResponse(getAllUsersRequest);
 
-        assertFalse(deleteUserResponse.hasErrors());
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 1);
-        assertNull(getAllUsersResponseAfterDelete.getErrorList());
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getFirstName(), "name2");
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getLastName(), "surname2");
+        Assertions.assertFalse(deleteUserResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 1);
+        Assertions.assertNull(getAllUsersResponseAfterDelete.getErrorList());
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getFirstName(), "name2");
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getLastName(), "surname2");
     }
 
     @Test
@@ -65,11 +68,11 @@ public class DeleteUserAcceptanceTest {
 
         GetAllUsersResponse getAllUsersResponseAfterDelete = createGetAllUserResponse(getAllUsersRequest);
 
-        assertFalse(deleteUserResponse.hasErrors());
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 1);
-        assertNull(getAllUsersResponseAfterDelete.getErrorList());
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertFalse(deleteUserResponse.hasErrors());
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 1);
+        Assertions.assertNull(getAllUsersResponseAfterDelete.getErrorList());
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().get(0).getLastName(), "surname");
     }
 
     @Test
@@ -87,10 +90,10 @@ public class DeleteUserAcceptanceTest {
 
         GetAllUsersResponse getAllUsersResponseAfterDelete = createGetAllUserResponse(getAllUsersRequest);
 
-        assertFalse(deleteUserResponse1.hasErrors());
-        assertFalse(deleteUserResponse2.hasErrors());
-        assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 0);
-        assertNull(getAllUsersResponseAfterDelete.getErrorList());
+        Assertions.assertFalse(deleteUserResponse1.hasErrors());
+        Assertions.assertFalse(deleteUserResponse2.hasErrors());
+        Assertions.assertEquals(getAllUsersResponseAfterDelete.getUsersList().size(), 0);
+        Assertions.assertNull(getAllUsersResponseAfterDelete.getErrorList());
     }
 
     @Test
@@ -98,10 +101,10 @@ public class DeleteUserAcceptanceTest {
         DeleteUserRequest deleteUserRequest = createDeleteUserRequest(3L);
         DeleteUserResponse deleteUserResponse = createDeleteUserResponse(deleteUserRequest);
 
-        assertFalse(deleteUserResponse.getErrorList().isEmpty());
-        assertEquals(deleteUserResponse.getErrorList().size(), 1);
-        assertEquals(deleteUserResponse.getErrorList().get(0).getField(), "User ID;");
-        assertEquals(deleteUserResponse.getErrorList().get(0).getMessage(), "no user with that ID");
+        Assertions.assertFalse(deleteUserResponse.getErrorList().isEmpty());
+        Assertions.assertEquals(deleteUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(deleteUserResponse.getErrorList().get(0).getField(), "User ID;");
+        Assertions.assertEquals(deleteUserResponse.getErrorList().get(0).getMessage(), "no user with that ID");
     }
 
     private void addUsersToDatabase() {
@@ -119,9 +122,6 @@ public class DeleteUserAcceptanceTest {
         return new DeleteUserRequest(idToDelete);
     }
 
-    private DeleteUserService createDeleteUserService() {
-        return applicationContext.getBean(DeleteUserService.class);
-    }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {
         return addUserService.execute(addUserRequest);
@@ -137,29 +137,5 @@ public class DeleteUserAcceptanceTest {
 
     private AddUserRequest createAddUserRequest(String userFirstName, String userLastName) {
         return new AddUserRequest(userFirstName, userLastName);
-    }
-
-    private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllUserService createGetAllUserService() {
-        return applicationContext.getBean(GetAllUserService.class);
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addUserService = createAddUserService();
-        getAllUserService = createGetAllUserService();
-        deleteUserService = createDeleteUserService();
-        databaseCleaner = createDatabaseCleaner();
     }
 }

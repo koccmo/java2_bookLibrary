@@ -9,20 +9,40 @@ import java.util.List;
 @Component
 public class ChangeUserFirstNameValidator {
 
-    public List<CoreError> validate(ChangeUserFirstNameRequest request) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
-        if (isUserIdEmpty(request)){
-            errors.add(new CoreError("User ID","must not be empty!"));
-        }
-        if (isUserIdNegative(request)){
-            errors.add(new CoreError("User ID","must not be negative!"));
-        }
-
-        if (isUserFirstNameEmpty(request)){
-            errors.add(new CoreError("User new first name","must not be empty!"));
-        }
+    public List<CoreError> validate(ChangeUserFirstNameRequest changeUserFirstNameRequest) {
+        errors = new ArrayList<>();
+        checkUserId(changeUserFirstNameRequest);
+        checkUserFirstName(changeUserFirstNameRequest);
         return errors;
+    }
+
+    private void checkUserFirstName(ChangeUserFirstNameRequest changeUserFirstNameRequest){
+        if (isUserFirstNameEmpty(changeUserFirstNameRequest)){
+            errors.add(createUserFirstNameIsEmptyError());
+        }
+    }
+
+    private void checkUserId(ChangeUserFirstNameRequest changeUserFirstNameRequest){
+        if (isUserIdEmpty(changeUserFirstNameRequest)){
+            errors.add(createUserIdIsEmptyError());
+        }
+        if (isUserIdNegative(changeUserFirstNameRequest)){
+            errors.add(createUserIdIsNegativeError());
+        }
+    }
+
+    private CoreError createUserFirstNameIsEmptyError(){
+        return new CoreError("User new first name","must not be empty!");
+    }
+
+    private CoreError createUserIdIsNegativeError(){
+        return new CoreError("User ID","must not be negative!");
+    }
+
+    private CoreError createUserIdIsEmptyError(){
+        return new CoreError("User ID","must not be empty!");
     }
 
     private boolean isUserFirstNameEmpty(ChangeUserFirstNameRequest request) {

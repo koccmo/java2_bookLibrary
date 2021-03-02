@@ -6,36 +6,68 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.SetRecordCompleteDateResponse;
 import java2.application_target_list.core.validators.board.SetRecordCompleteDateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class SetRecordCompleteDateService {
 
-    @Autowired private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
-    @Autowired private JpaBoardRepository jpaBoardRepository;
+    @Autowired
+    private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
+    @Autowired
+    private JpaBoardRepository jpaBoardRepository;
+
+    private List<CoreError> errors;
 
     public SetRecordCompleteDateResponse execute(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
 
-        List<CoreError> errors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
+        errors = checkRequestForErrors(setRecordCompleteDateRequest);
+        checkAvailabilityInDB(setRecordCompleteDateRequest);
 
-        if (!jpaBoardRepository.existsById(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate())){
-            errors.add(new CoreError("Record ID","no record with that ID"));
+        if (requestHaveErrors()){
+            return createSetRecordCompleteDateResponseWithErrors();
         }
 
-        if (!errors.isEmpty()){
-            return new SetRecordCompleteDateResponse(errors);
-        }
+        setSetRecordCompleteDate(setRecordCompleteDateRequest);
+        return createSetRecordCompleteDateResponse(setRecordCompleteDateRequest);
+    }
 
-        jpaBoardRepository.setRecordCompleteDate(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate(), getDate());
+    private SetRecordCompleteDateResponse createSetRecordCompleteDateResponse(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
         return new SetRecordCompleteDateResponse(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate());
+    }
+
+    private void setSetRecordCompleteDate(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
+        jpaBoardRepository.setRecordCompleteDate(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate(), getDate());;
+    }
+
+    private SetRecordCompleteDateResponse createSetRecordCompleteDateResponseWithErrors(){
+        return new SetRecordCompleteDateResponse(errors);
+    }
+
+    private boolean requestHaveErrors() {
+        return !errors.isEmpty();
+    }
+
+    private void checkAvailabilityInDB(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
+        if (recordDoesNotExistInDB(setRecordCompleteDateRequest)){
+            errors.add(createRecordDoesNotExistInDBError());
+        }
+    }
+
+    private CoreError createRecordDoesNotExistInDBError() {
+        return new CoreError("Record ID","no record with that ID");
+    }
+
+    private boolean recordDoesNotExistInDB(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
+        return !jpaBoardRepository.existsById(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate());
+    }
+
+    private List<CoreError> checkRequestForErrors(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
+        return setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
     }
 
     private String getDate() {

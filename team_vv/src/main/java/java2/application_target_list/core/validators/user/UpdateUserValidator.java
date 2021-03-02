@@ -10,25 +10,51 @@ import java.util.List;
 @Component
 public class UpdateUserValidator {
 
-    public List<CoreError> validate(UpdateUserRequest updateUserRequest) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
+    public List<CoreError> validate(UpdateUserRequest updateUserRequest) {
+        errors = new ArrayList<>();
+        checkUserId(updateUserRequest);
+        checkUserFirstName(updateUserRequest);
+        checkUserLastName(updateUserRequest);
+        return errors;
+    }
+
+    private void checkUserId(UpdateUserRequest updateUserRequest){
         if (isUserIdEmpty(updateUserRequest)){
-            errors.add(new CoreError("User ID","must not be empty!"));
+            errors.add(createUserIdIsEmptyError());
         }
         if (isUserIdNegative(updateUserRequest)){
-            errors.add(new CoreError("User ID","must not be negative!"));
+            errors.add(createUserIdIsNegativeError());
         }
+    }
 
+    private void checkUserFirstName(UpdateUserRequest updateUserRequest){
         if (isUserLastNameEmpty(updateUserRequest)){
-            errors.add(new CoreError("User new last name","must not be empty!"));
+            errors.add(createUserFirstNameIsEmpty());
         }
+    }
 
+    private void checkUserLastName(UpdateUserRequest updateUserRequest){
         if (isUserFirstNameEmpty(updateUserRequest)){
-            errors.add(new CoreError("User new first name","must not be empty!"));
+            errors.add(createUserLastNameIsEmptyError());
         }
+    }
 
-        return errors;
+    private CoreError createUserLastNameIsEmptyError(){
+        return new CoreError("User new first name","must not be empty!");
+    }
+
+    private CoreError createUserIdIsNegativeError(){
+        return new CoreError("User ID","must not be negative!");
+    }
+
+    private CoreError createUserIdIsEmptyError(){
+        return new CoreError("User ID","must not be empty!");
+    }
+
+    private CoreError createUserFirstNameIsEmpty(){
+        return new CoreError("User new last name","must not be empty!");
     }
 
     private boolean isUserFirstNameEmpty(UpdateUserRequest request) {

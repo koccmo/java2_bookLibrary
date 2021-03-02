@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -16,30 +15,38 @@ import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.board.SetRecordCompleteDateService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@SpringBootTest
 public class SetRecordCompleteDateAcceptanceTest {
 
+    @Autowired
     private GetAllRecordsService getAllRecordsService;
+    @Autowired
     private SetRecordCompleteDateService setRecordCompleteDateService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private JpaTargetRepository jpaTargetRepository;
+    @Autowired
     private JpaUserRepository jpaUserRepository;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private AddRecordService addRecordService;
+
     private Long userId;
     private Long targetId;
     private Long recordId;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addTargetsToDB();
         addUsersToDB();
@@ -52,8 +59,8 @@ public class SetRecordCompleteDateAcceptanceTest {
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(setRecordCompleteDateResponse.hasErrors());
-        Assert.assertNotNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
+        Assertions.assertFalse(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertNotNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
     }
 
     @Test
@@ -62,13 +69,13 @@ public class SetRecordCompleteDateAcceptanceTest {
         SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertTrue(setRecordCompleteDateResponse.hasErrors());
-        Assert.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
-        Assert.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(setRecordCompleteDateResponse.hasErrors());
+        Assertions.assertNull(getAllRecordsResponse.getRecordList().get(0).getDateComplete());
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(setRecordCompleteDateResponse.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 
     private void addRecordsToDB() {
@@ -80,71 +87,12 @@ public class SetRecordCompleteDateAcceptanceTest {
     private void addUsersToDB() {
         AddUserRequest addUserRequest = new AddUserRequest("name1", "surname1");
         addUserService.execute(addUserRequest);
-//        userId = userRepository.getUsersList().get(0).getId();
         userId = jpaUserRepository.findAll().get(0).getId();
     }
 
     private void addTargetsToDB() {
         AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
         addTargetService.execute(addTargetRequest);
-//        targetId = targetRepository.getTargetsList().get(0).getId();
         targetId = jpaTargetRepository.findAll().get(0).getId();
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addRecordService = createAddRecordService();
-        getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
-        jpaTargetRepository = createJpaTargetRepository();
-        jpaUserRepository = createJpaUserRepository();
-        databaseCleaner = createDatabaseCleaner();
-        addTargetService = createAddTargetService();
-        addUserService = createAddUserService();
-        setRecordCompleteDateService = createSetRecordCompleteDateService();
-    }
-
-    private SetRecordCompleteDateService createSetRecordCompleteDateService() {
-        return applicationContext.getBean(SetRecordCompleteDateService.class);
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
-    private JpaTargetRepository createJpaTargetRepository() {
-        return applicationContext.getBean(JpaTargetRepository.class);
-    }
-
-    private JpaUserRepository createJpaUserRepository() {
-        return applicationContext.getBean(JpaUserRepository.class);
-    }
-
-    private GetAllRecordsService createGetAllRecordsService() {
-        return applicationContext.getBean(GetAllRecordsService.class);
-    }
-
-    private AddRecordService createAddRecordService() {
-        return applicationContext.getBean(AddRecordService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 }

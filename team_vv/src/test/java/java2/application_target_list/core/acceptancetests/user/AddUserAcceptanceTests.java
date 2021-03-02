@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
@@ -8,23 +7,24 @@ import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
+@SpringBootTest
 public class AddUserAcceptanceTests {
 
-    private ApplicationContext applicationContext;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private GetAllUserService getAllUserService;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        createServices();
         databaseCleaner.clean();
     }
 
@@ -39,14 +39,14 @@ public class AddUserAcceptanceTests {
         GetAllUsersRequest getAllUsersRequest = createGetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = createGetAllUserResponse(getAllUsersRequest);
 
-        assertFalse(addUserResponse1.hasErrors());
-        assertFalse(addUserResponse2.hasErrors());
-        assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        assertNull(getAllUsersResponse.getErrorList());
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(addUserResponse1.hasErrors());
+        Assertions.assertFalse(addUserResponse2.hasErrors());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assertions.assertNull(getAllUsersResponse.getErrorList());
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -54,10 +54,10 @@ public class AddUserAcceptanceTests {
         AddUserRequest addUserRequest = createAddUserRequest("", "surname2");
         AddUserResponse addUserResponse = createAddUserResponse(addUserRequest);
 
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {
@@ -74,28 +74,5 @@ public class AddUserAcceptanceTests {
 
     private AddUserRequest createAddUserRequest(String userFirstName, String userLastName) {
         return new AddUserRequest(userFirstName, userLastName);
-    }
-
-    private ApplicationContext createApplicationContext(){
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-       return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllUserService createGetAllUserService() {
-        return applicationContext.getBean(GetAllUserService.class);
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addUserService = createAddUserService();
-        getAllUserService = createGetAllUserService();
-        databaseCleaner = createDatabaseCleaner();
     }
 }

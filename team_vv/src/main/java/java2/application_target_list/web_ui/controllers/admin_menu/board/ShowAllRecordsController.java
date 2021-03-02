@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ShowAllRecordsController {
 
-    @Autowired private GetFullInfoAboutRecordsService getFullInfoAboutRecordsService;
+    @Autowired
+    private GetFullInfoAboutRecordsService getFullInfoAboutRecordsService;
 
     @GetMapping(value = "/admin_menu/board/showAllRecords")
     public String showAllRecordsAdminPage(ModelMap modelMap) {

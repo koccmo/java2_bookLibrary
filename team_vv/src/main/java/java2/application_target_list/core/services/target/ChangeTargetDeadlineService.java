@@ -2,37 +2,65 @@ package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.validators.target.ChangeTargetDeadlineValidator;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class ChangeTargetDeadlineService {
 
-    @Autowired private JpaTargetRepository jpaTargetRepository;
-    @Autowired private ChangeTargetDeadlineValidator validator;
+    @Autowired
+    private JpaTargetRepository jpaTargetRepository;
+    @Autowired
+    private ChangeTargetDeadlineValidator validator;
 
-    public ChangeTargetDeadlineResponse execute(ChangeTargetDeadlineRequest request){
+    private List<CoreError> errors;
 
-        List<CoreError> errors = validator.validate(request);
+    public ChangeTargetDeadlineResponse execute(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
 
-        if (!jpaTargetRepository.existsById(request.getTargetIdToChange())){
-            errors.add(new CoreError("Target ID;","no target with that ID"));
-        }
+        errors = checkRequestForErrors(changeTargetDeadlineRequest);
+        checkAvailabilityInDB(changeTargetDeadlineRequest);
 
-        if (!errors.isEmpty()) {
+        if (requestHaveErrors()) {
             return new ChangeTargetDeadlineResponse(errors);
         }
 
-        jpaTargetRepository.changeTargetDeadline(request.getTargetIdToChange(), request.getNewTargetDeadline());
-        return new ChangeTargetDeadlineResponse(request.getTargetIdToChange(), request.getNewTargetDeadline());
+        changeTargetDeadline(changeTargetDeadlineRequest);
+        return createChangeTargetDeadlineResponse(changeTargetDeadlineRequest);
+    }
+
+    private ChangeTargetDeadlineResponse createChangeTargetDeadlineResponse(ChangeTargetDeadlineRequest changeTargetDeadlineRequest) {
+        return new ChangeTargetDeadlineResponse(changeTargetDeadlineRequest.getTargetIdToChange(), changeTargetDeadlineRequest.getNewTargetDeadline());
+    }
+
+    private void changeTargetDeadline(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+        jpaTargetRepository.changeTargetDeadline(changeTargetDeadlineRequest.getTargetIdToChange(), changeTargetDeadlineRequest.getNewTargetDeadline());
+    }
+
+    private boolean targetDoesNotExistInDB(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+        return !jpaTargetRepository.existsById(changeTargetDeadlineRequest.getTargetIdToChange());
+    }
+
+    private void checkAvailabilityInDB(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+        if (targetDoesNotExistInDB(changeTargetDeadlineRequest)){
+            errors.add(createTargetDoesNotExistError());
+        }
+    }
+
+    private CoreError createTargetDoesNotExistError() {
+        return new CoreError("Target ID;","no target with that ID");
+    }
+
+    private boolean requestHaveErrors() {
+        return !errors.isEmpty();
+    }
+
+    private List<CoreError> checkRequestForErrors(ChangeTargetDeadlineRequest changeTargetDeadlineRequest) {
+        return validator.validate(changeTargetDeadlineRequest);
     }
 }

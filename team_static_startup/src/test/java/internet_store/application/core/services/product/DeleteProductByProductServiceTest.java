@@ -5,7 +5,6 @@ import internet_store.application.core.domain.Product;
 import internet_store.application.core.requests.product.DeleteByProductRequest;
 import internet_store.application.core.responses.CoreError;
 import internet_store.application.core.responses.product.DeleteByProductResponse;
-import internet_store.application.core.services.matchers.ProductMatcher;
 import internet_store.application.core.services.product.validators.DeleteByProductValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.lenient;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,15 +35,17 @@ public class DeleteProductByProductServiceTest {
         BigDecimal price = new BigDecimal("399.99");
 
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        lenient().when(productRepository.deleteByNameAndDescriptionAndPrice(
-                name, description, price)).thenReturn(1L);
+        lenient().when(productRepository.deleteByProductNameAndProductDescriptionAndPrice(
+                name, description, price)).thenReturn(1);
 
         DeleteByProductRequest request = new DeleteByProductRequest(name, description, price);
         DeleteByProductResponse response = service.execute(request);
 
         assertFalse(response.hasErrors());
-        Mockito.verify(productRepository).delete(argThat(new ProductMatcher("tv",
-                "good tv", new BigDecimal("399.99"))));
+//        Mockito.verify(productRepository).deleteByProductNameAndProductDescriptionAndPrice(argThat(new ProductMatcher("tv",
+//                "good tv", new BigDecimal("399.99"))));
+        Mockito.verify(productRepository).deleteByProductNameAndProductDescriptionAndPrice("tv",
+                "good tv", new BigDecimal("399.99"));
     }
 
     @Test

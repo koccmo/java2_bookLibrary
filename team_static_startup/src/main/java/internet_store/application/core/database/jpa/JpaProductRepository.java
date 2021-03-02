@@ -2,30 +2,37 @@ package internet_store.application.core.database.jpa;
 
 import internet_store.application.core.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface JpaProductRepository extends JpaRepository<Product, Long> {
 
+    @Modifying
     @Query("UPDATE Product p SET p.productName = :name WHERE p.id =:id")
-    Long changeProductName(@Param("id") Long id, @Param("name") String newName);
+    Integer changeProductName(@Param("id") Long id, @Param("name") String newName);
 
+    @Modifying
     @Query("DELETE FROM Product WHERE id = :id")
-    Long deleteByProductId(Long id);
+    Integer deleteByProductId(@Param("id") Long id);
 
-    Long deleteByName(String name);
+    @Modifying
+    Integer deleteByProductName(String name);
 
-    Long deleteByNameAndDescriptionAndPrice(String name, String description, BigDecimal price);
+    @Modifying
+    Integer deleteByProductNameAndProductDescriptionAndPrice(String name, String description, BigDecimal price);
 
-    List<Product> findProductByName(String name);
+    List<Product> findProductByProductName(String name);
 
-    List<Product> findProductByDescription(String description);
+    List<Product> findProductByProductDescription(String description);
 
-    List<Product> findProductByNameAndDescription (String name, String description);
+    List<Product> findProductByProductNameAndProductDescription (String name, String description);
 
 }

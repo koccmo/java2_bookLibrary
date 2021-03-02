@@ -6,30 +6,33 @@ import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.validators.user.AddUserValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.ArrayList;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddUserServiceTest extends TestCase {
+@SpringBootTest
+public class AddUserServiceTest {
 
     private List<CoreError> errorList;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private AddUserValidator addUserValidator;
-    @InjectMocks private AddUserService addUserService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private AddUserValidator addUserValidator;
+    @InjectMocks
+    AddUserService addUserService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errorList = new ArrayList<>();
     }
@@ -39,7 +42,7 @@ public class AddUserServiceTest extends TestCase {
         Mockito.when(addUserValidator.validate(any())).thenReturn(new ArrayList<>());
         AddUserRequest addUserRequest = new AddUserRequest("name", "surname");
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertFalse(addUserResponse.hasErrors());
+        Assertions.assertFalse(addUserResponse.hasErrors());
         Mockito.verify(jpaUserRepository).save(argThat(new UserMatcher("name", "surname")));
     }
 
@@ -49,10 +52,10 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest("", "surname");
         Mockito.when(addUserValidator.validate(any())).thenReturn(errorList);
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         Mockito.verifyNoInteractions(jpaUserRepository);
     }
 
@@ -62,10 +65,10 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest(null, "surname");
         Mockito.when(addUserValidator.validate(any())).thenReturn(errorList);
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         Mockito.verifyNoInteractions(jpaUserRepository);
     }
 
@@ -75,10 +78,10 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest("name", "");
         Mockito.when(addUserValidator.validate(any())).thenReturn(errorList);
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         Mockito.verifyNoInteractions(jpaUserRepository);
     }
 
@@ -88,10 +91,10 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest("name", null);
         Mockito.when(addUserValidator.validate(any())).thenReturn(errorList);
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().size(), 1);
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User last name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
         Mockito.verifyNoInteractions(jpaUserRepository);
     }
 
@@ -102,12 +105,12 @@ public class AddUserServiceTest extends TestCase {
         AddUserRequest addUserRequest = new AddUserRequest("", null);
         Mockito.when(addUserValidator.validate(any())).thenReturn(errorList);
         AddUserResponse addUserResponse = addUserService.execute(addUserRequest);
-        assertTrue(addUserResponse.hasErrors());
-        assertEquals(addUserResponse.getErrorList().size(), 2);
-        assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(addUserResponse.getErrorList().get(1).getField(), "User last name");
-        assertEquals(addUserResponse.getErrorList().get(1).getMessage(), "must not be empty!");
+        Assertions.assertTrue(addUserResponse.hasErrors());
+        Assertions.assertEquals(addUserResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(1).getField(), "User last name");
+        Assertions.assertEquals(addUserResponse.getErrorList().get(1).getMessage(), "must not be empty!");
         Mockito.verifyNoInteractions(jpaUserRepository);
     }
 }

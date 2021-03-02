@@ -7,31 +7,57 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.validators.user.AddUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class AddUserService {
 
-    @Autowired private AddUserValidator addUserValidator;
-    @Autowired private JpaUserRepository jpaUserRepository;
+    @Autowired
+    private AddUserValidator addUserValidator;
+    @Autowired
+    private JpaUserRepository jpaUserRepository;
 
-    public AddUserResponse execute(AddUserRequest request){
-        List<CoreError> errors = addUserValidator.validate(request);
+    private List<CoreError> errors;
+    private User user;
 
-        if (!errors.isEmpty()){
-            return new AddUserResponse(errors);
+
+    public AddUserResponse execute(AddUserRequest addUserRequest){
+        errors = checkRequestForErrors(addUserRequest);
+
+        if (requestHaveErrors()){
+            return createAddUserResponseWithErrors();
         }
 
-        User user = new User(request.getFirstName(), request.getLastName());
-        jpaUserRepository.save(user);
-        return new AddUserResponse(user);
+        user = createUser(addUserRequest);
+        addUserToDB();
+        return createUserResponse();
+    }
 
+    private AddUserResponse createUserResponse(){
+        return new AddUserResponse(user);
+    }
+
+    private void addUserToDB() {
+        jpaUserRepository.save(user);
+    }
+
+    private User createUser(AddUserRequest addUserRequest){
+        return new User(addUserRequest.getFirstName(), addUserRequest.getLastName());
+    }
+
+    private AddUserResponse createAddUserResponseWithErrors() {
+        return new AddUserResponse(errors);
+    }
+
+    private boolean requestHaveErrors() {
+        return !errors.isEmpty();
+    }
+
+    private List<CoreError> checkRequestForErrors(AddUserRequest addUserRequest) {
+        return addUserValidator.validate(addUserRequest);
     }
 
 }

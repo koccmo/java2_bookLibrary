@@ -8,7 +8,6 @@ import java2.application_target_list.core.responses.board.AddRecordResponse;
 import java2.application_target_list.core.services.board.AddRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
 @Component
@@ -32,8 +31,8 @@ public class AddRecordUIAction implements UIAction {
             Long targetId = getTargetIdFromUser();
             Long userId = getUserIdFromUser();
 
-            AddRecordRequest addRecordRequest = new AddRecordRequest(targetId, userId);
-            AddRecordResponse addRecordResponse = addRecordService.execute(addRecordRequest);
+            AddRecordRequest addRecordRequest = createAddRecordRequest(targetId, userId);
+            AddRecordResponse addRecordResponse = validateAddRecordRequest(addRecordRequest);
 
             if (addRecordResponse.hasErrors()){
                 printResponseErrors(addRecordResponse);
@@ -42,6 +41,14 @@ public class AddRecordUIAction implements UIAction {
                 break;
             }
         }
+    }
+
+    private AddRecordResponse validateAddRecordRequest(AddRecordRequest addRecordRequest){
+        return addRecordService.execute(addRecordRequest);
+    }
+
+    private AddRecordRequest createAddRecordRequest(Long targetId, Long userId) {
+        return  new AddRecordRequest(targetId, userId);
     }
 
     private void printBreakMessage(){

@@ -6,32 +6,53 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.GetUserResponse;
 import java2.application_target_list.core.validators.user.GetUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class GetUserService {
 
-    @Autowired private GetUserValidator getUserValidator;
-    @Autowired private JpaUserRepository jpaUserRepository;
+    @Autowired
+    private GetUserValidator getUserValidator;
+    @Autowired
+    private JpaUserRepository jpaUserRepository;
+
+    private List<CoreError> errors;
 
     public GetUserResponse execute(GetUserRequest getUserRequest) {
-        List<CoreError> errors = getUserValidator.validate(getUserRequest);
+         errors = checkRequestForErrors(getUserRequest);
 
-        if (!errors.isEmpty()) {
-            return new GetUserResponse(errors);
+        if (requestHaveErrors()) {
+            return createGetUserResponseWithErrors();
         }
 
+        return createGetUserResponse(getUserRequest);
+    }
+
+    private GetUserResponse createGetUserResponse(GetUserRequest getUserRequest){
         return jpaUserRepository.findById(getUserRequest.getId())
                 .map(GetUserResponse::new).orElseGet(() -> {
-                    errors.add(new CoreError("id", "Not found!"));
-                    return new GetUserResponse(errors);
+                    errors.add(createUserDoesNotExistError());
+                    return createGetUserResponseWithErrors();
                 });
+    }
+
+    private GetUserResponse createGetUserResponseWithErrors() {
+        return new GetUserResponse(errors);
+    }
+
+    private boolean requestHaveErrors(){
+        return !errors.isEmpty();
+    }
+
+    private CoreError createUserDoesNotExistError(){
+        return new CoreError("id", "Not found!");
+    }
+
+    private List<CoreError> checkRequestForErrors(GetUserRequest getUserRequest){
+        return getUserValidator.validate(getUserRequest);
     }
 }
 

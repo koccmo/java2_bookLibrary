@@ -8,30 +8,34 @@ import java2.application_target_list.core.requests.target.SearchTargetByDescript
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.SearchTargetByDescriptionResponse;
 import java2.application_target_list.core.validators.target.SearchTargetByDescriptionValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchTargetByDescriptionServiceTest extends TestCase {
+@SpringBootTest
+public class SearchTargetByDescriptionServiceTest {
 
     private List<Target> targets;
     private List<CoreError> errors;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private SearchTargetByDescriptionValidator validator;
-    @InjectMocks private SearchTargetByDescriptionService service;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private SearchTargetByDescriptionValidator validator;
+    @InjectMocks
+    SearchTargetByDescriptionService service;
 
-    @Before
+    @BeforeEach
     public void setup() {
         ReflectionTestUtils.setField(service, "orderingEnabled", true);
         ReflectionTestUtils.setField(service, "pagingEnabled", true);
@@ -46,11 +50,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name", "description", 1L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -62,14 +66,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
-        assertEquals(response.getTargetList().get(1).getName(), "name2");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -81,14 +85,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
-        assertEquals(response.getTargetList().get(1).getName(), "name1");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -100,14 +104,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
-        assertEquals(response.getTargetList().get(1).getName(), "name1");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -119,14 +123,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
-        assertEquals(response.getTargetList().get(1).getName(), "name2");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -138,14 +142,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 1L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
-        assertEquals(response.getTargetList().get(1).getName(), "name2");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -157,14 +161,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 2);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
-        assertEquals(response.getTargetList().get(1).getName(), "name1");
-        assertEquals(response.getTargetList().get(1).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 2);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertEquals(response.getTargetList().get(1).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(1).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(1).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -176,11 +180,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -193,11 +197,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -210,11 +214,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -227,11 +231,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name2", "description2", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -244,11 +248,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -261,11 +265,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 1L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -278,11 +282,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         targets.add(new Target("name1", "description1", 10L));
         Mockito.when(jpaTargetRepository.findByDescription("description")).thenReturn(targets);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name1");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description1");
-        assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
+        Assertions.assertFalse(response.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name1");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description1");
+        Assertions.assertEquals(Optional.ofNullable(response.getTargetList().get(0).getDeadline()), Optional.of(10L));
     }
 
     @Test
@@ -291,10 +295,10 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Target description", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 1);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 1);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -303,10 +307,10 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Target description", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 1);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 1);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -317,12 +321,12 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Order by", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
     }
 
     @Test
@@ -334,14 +338,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 3);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 3);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must not be empty");
     }
 
     @Test
@@ -353,14 +357,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 3);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 3);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must not be empty");
     }
 
     @Test
@@ -372,14 +376,14 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 3);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 3);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
     }
 
     @Test
@@ -393,16 +397,16 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must be greater then 0!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 4);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
-        assertEquals(response.getErrorList().get(3).getField(), "Page number");
-        assertEquals(response.getErrorList().get(3).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 4);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertEquals(response.getErrorList().get(3).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(3).getMessage(), "must be greater then 0!");
     }
 
     @Test
@@ -416,16 +420,16 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 4);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
-        assertEquals(response.getErrorList().get(3).getField(), "Page number");
-        assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 4);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertEquals(response.getErrorList().get(3).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
     }
 
     @Test
@@ -440,18 +444,18 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must be greater then 0!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 5);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
-        assertEquals(response.getErrorList().get(3).getField(), "Page number");
-        assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
-        assertEquals(response.getErrorList().get(4).getField(), "Page size");
-        assertEquals(response.getErrorList().get(4).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 5);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertEquals(response.getErrorList().get(3).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
+        Assertions.assertEquals(response.getErrorList().get(4).getField(), "Page size");
+        Assertions.assertEquals(response.getErrorList().get(4).getMessage(), "must be greater then 0!");
     }
 
     @Test
@@ -466,18 +470,18 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 5);
-        assertEquals(response.getErrorList().get(0).getField(), "Target description");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(response.getErrorList().get(1).getField(), "Order by");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
-        assertEquals(response.getErrorList().get(2).getField(), "Order direction");
-        assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
-        assertEquals(response.getErrorList().get(3).getField(), "Page number");
-        assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
-        assertEquals(response.getErrorList().get(4).getField(), "Page size");
-        assertEquals(response.getErrorList().get(4).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 5);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Target description");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Order by");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must contain NAME, DESCRIPTION or DEADLINE only!");
+        Assertions.assertEquals(response.getErrorList().get(2).getField(), "Order direction");
+        Assertions.assertEquals(response.getErrorList().get(2).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertEquals(response.getErrorList().get(3).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(3).getMessage(), "must not be empty");
+        Assertions.assertEquals(response.getErrorList().get(4).getField(), "Page size");
+        Assertions.assertEquals(response.getErrorList().get(4).getMessage(), "must not be empty");
     }
 
     @Test
@@ -487,10 +491,10 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 1);
-        assertEquals(response.getErrorList().get(0).getField(), "Page number");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 1);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must not be empty");
     }
 
     @Test
@@ -500,10 +504,10 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must be greater then 0!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 1);
-        assertEquals(response.getErrorList().get(0).getField(), "Page number");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 1);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
     }
 
     @Test
@@ -514,12 +518,12 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must not be empty"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(0).getField(), "Page number");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
-        assertEquals(response.getErrorList().get(1).getField(), "Page size");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Page size");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must not be empty");
     }
 
     @Test
@@ -530,11 +534,11 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must be greater then 0!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
         SearchTargetByDescriptionResponse response = service.execute(request);
-        assertTrue(response.hasErrors());
-        assertEquals(response.getErrorList().size(), 2);
-        assertEquals(response.getErrorList().get(0).getField(), "Page number");
-        assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
-        assertEquals(response.getErrorList().get(1).getField(), "Page size");
-        assertEquals(response.getErrorList().get(1).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(response.hasErrors());
+        Assertions.assertEquals(response.getErrorList().size(), 2);
+        Assertions.assertEquals(response.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(response.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertEquals(response.getErrorList().get(1).getField(), "Page size");
+        Assertions.assertEquals(response.getErrorList().get(1).getMessage(), "must be greater then 0!");
     }
 }

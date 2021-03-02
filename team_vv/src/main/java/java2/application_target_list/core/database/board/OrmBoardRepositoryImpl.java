@@ -13,7 +13,8 @@ import java.util.Optional;
 //@Transactional
 public class OrmBoardRepositoryImpl implements BoardRepository{
 
-    @Autowired private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public void addToBoard(Record record) {
@@ -60,9 +61,6 @@ public class OrmBoardRepositoryImpl implements BoardRepository{
 
     @Override
     public List<Record> getFullInfoAboutRecords() {
-//        return sessionFactory.getCurrentSession()
-//                .createQuery("From Record", Record.class)
-//                .getResultList();
         return getAllRecordsList();
     }
 

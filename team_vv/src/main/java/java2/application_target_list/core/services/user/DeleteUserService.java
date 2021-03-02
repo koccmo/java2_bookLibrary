@@ -6,33 +6,65 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.DeleteUserResponse;
 import java2.application_target_list.core.validators.user.DeleteUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class DeleteUserService {
 
-    @Autowired private DeleteUserValidator deleteUserValidator;
-    @Autowired private JpaUserRepository jpaUserRepository;
+    @Autowired
+    private DeleteUserValidator deleteUserValidator;
+    @Autowired
+    private JpaUserRepository jpaUserRepository;
 
-    public DeleteUserResponse execute(DeleteUserRequest request){
-        List<CoreError> errors = deleteUserValidator.validate(request);
+    private List<CoreError> errors;
 
-        if (!jpaUserRepository.existsById(request.getUserIdToDelete())){
-            errors.add(new CoreError("User ID;","no user with that ID"));
+    public DeleteUserResponse execute(DeleteUserRequest deleteUserRequest){
+        errors = checkRequestForErrors(deleteUserRequest);
+        checkAvailabilityInDB(deleteUserRequest);
+
+
+        if(requestHaveErrors()){
+            return createDeleteUserResponseWithErrors();
         }
 
-        if(!errors.isEmpty()){
-            return new DeleteUserResponse(errors);
+        deleteUserFromDB(deleteUserRequest);
+        return createDeleteUserResponse(deleteUserRequest);
+    }
+
+    private DeleteUserResponse createDeleteUserResponse(DeleteUserRequest deleteUserRequest){
+        return new DeleteUserResponse(deleteUserRequest.getUserIdToDelete());
+    }
+
+    private void deleteUserFromDB(DeleteUserRequest deleteUserRequest){
+        jpaUserRepository.deleteById(deleteUserRequest.getUserIdToDelete());
+    }
+
+    private DeleteUserResponse createDeleteUserResponseWithErrors(){
+        return new DeleteUserResponse(errors);
+    }
+
+    private boolean requestHaveErrors(){
+        return !errors.isEmpty();
+    }
+
+    private boolean userDoesNotExist(DeleteUserRequest deleteUserRequest) {
+        return !jpaUserRepository.existsById(deleteUserRequest.getUserIdToDelete());
+    }
+
+    private CoreError createUserDoesNotExistError(){
+        return new CoreError("User ID;","no user with that ID");
+    }
+
+    private void checkAvailabilityInDB(DeleteUserRequest deleteUserRequest){
+        if (userDoesNotExist(deleteUserRequest)){
+            errors.add(createUserDoesNotExistError());
         }
+    }
 
-        jpaUserRepository.deleteById(request.getUserIdToDelete());
-        return new DeleteUserResponse(request.getUserIdToDelete());
-
+    private List<CoreError> checkRequestForErrors(DeleteUserRequest deleteUserRequest){
+        return deleteUserValidator.validate(deleteUserRequest);
     }
 }

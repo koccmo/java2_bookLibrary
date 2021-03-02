@@ -10,25 +10,49 @@ import java.util.List;
 @Component
 public class AddRecordValidator {
 
-    public List<CoreError> validate(AddRecordRequest request) {
-        List<CoreError> errors = new ArrayList<>();
+    private List<CoreError> errors;
 
-        if (isTargetIdEmpty(request)){
-            errors.add(new CoreError("Target ID","must not be empty!"));
-        }
-
-        if (isTargetIdNegative(request)){
-            errors.add(new CoreError("Target ID","must not be negative!"));
-        }
-
-        if (isUserIdEmpty(request)){
-            errors.add(new CoreError("User ID", "must not be empty!"));
-        }
-
-        if (isUserIdNegative(request)){
-            errors.add(new CoreError("User ID","must not be negative!"));
-        }
+    public List<CoreError> validate(AddRecordRequest addRecordRequest) {
+        errors = new ArrayList<>();
+        checkTargetId(addRecordRequest);
+        checkUserId(addRecordRequest);
         return errors;
+    }
+
+    private void checkUserId(AddRecordRequest addRecordRequest){
+        if (isUserIdEmpty(addRecordRequest)){
+            errors.add(createUserIdIsEmptyError());
+        }
+
+        if (isUserIdNegative(addRecordRequest)){
+            errors.add(createUserIdIsNegativeError());
+        }
+    }
+
+    private void checkTargetId(AddRecordRequest addRecordRequest){
+        if (isTargetIdEmpty(addRecordRequest)){
+            errors.add(createTargetIdIsEmptyError());
+        }
+
+        if (isTargetIdNegative(addRecordRequest)){
+            errors.add(createTargetIdIsNegativeError());
+        }
+    }
+
+    private CoreError createUserIdIsNegativeError(){
+        return new CoreError("User ID","must not be negative!");
+    }
+
+    private CoreError createUserIdIsEmptyError(){
+        return new CoreError("User ID", "must not be empty!");
+    }
+
+    private CoreError createTargetIdIsNegativeError(){
+        return new CoreError("Target ID","must not be negative!");
+    }
+
+    private CoreError createTargetIdIsEmptyError(){
+        return new CoreError("Target ID","must not be empty!");
     }
 
     private boolean isTargetIdEmpty(AddRecordRequest request) {

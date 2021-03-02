@@ -5,20 +5,21 @@ import java2.application_target_list.core.database.board.InMemoryBoardRepository
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-
+@SpringBootTest
 public class DeleteRecordValidatorTest {
 
+    @Autowired
     private DeleteRecordValidator deleteRecordValidator;
-
-
-    @Before
+    
+    @BeforeEach
     public void setup() {
-        deleteRecordValidator = new DeleteRecordValidator();
         BoardRepository boardRepository = new InMemoryBoardRepositoryImpl();
         boardRepository.addToBoard(new Record(1L, 2L));
 
@@ -28,7 +29,7 @@ public class DeleteRecordValidatorTest {
     public void testValidate_validRequest() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
         List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest);
-        Assert.assertTrue(actualErrors.isEmpty());
+        Assertions.assertTrue(actualErrors.isEmpty());
     }
 
 
@@ -36,10 +37,10 @@ public class DeleteRecordValidatorTest {
     public void testValidate_invalidRequest_v2() {
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(-3L);
         List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Record ID");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -47,10 +48,10 @@ public class DeleteRecordValidatorTest {
         try {
             DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(null);
             List<CoreError> actualErrors = deleteRecordValidator.validate(deleteRecordRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Record ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be empty!");
         } catch (NullPointerException ignored) {
         }
     }

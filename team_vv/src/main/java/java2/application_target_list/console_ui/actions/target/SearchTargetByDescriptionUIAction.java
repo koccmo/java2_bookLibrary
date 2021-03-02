@@ -14,7 +14,9 @@ import java.util.Scanner;
 @Component
 public class SearchTargetByDescriptionUIAction implements UIAction {
 
-    @Autowired SearchTargetByDescriptionService searchTargetByDescriptionService;
+    @Autowired
+    private SearchTargetByDescriptionService searchTargetByDescriptionService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -25,38 +27,38 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
             int orderingFromUser = getNumberFromUser();
             printPagingMessage();
             int pagingFromUser = getNumberFromUser();
-            SearchTargetByDescriptionResponse response;
+            SearchTargetByDescriptionResponse searchTargetByDescriptionResponse;
 
             if (isOrderingNeeded(orderingFromUser) && isPagingNeeded(pagingFromUser)){
                 String orderByFromUser = getOrderByFromUser();
                 String orderDirectionFromUser = getOrderingDirectionFromUser();
                 Integer pageNumber = getPageNumberFromUser();
                 Integer pageSize = getPageSizeFromUser();
-                SearchTargetByDescriptionRequest request = createRequestWithPagingAndOrdering(descriptionFromUser,
+                SearchTargetByDescriptionRequest searchTargetByDescriptionRequest = createRequestWithPagingAndOrdering(descriptionFromUser,
                                                                                               orderByFromUser, orderDirectionFromUser,
                                                                                               pageNumber, pageSize);
-                response = createResponse(request);
+                searchTargetByDescriptionResponse = validateSearchTargetByDescriptionRequest(searchTargetByDescriptionRequest);
 
             } else if (isOrderingNeeded(orderingFromUser) && !isPagingNeeded(pagingFromUser)){
                 String orderByFromUser = getOrderByFromUser();
                 String orderDirectionFromUser = getOrderingDirectionFromUser();
-                SearchTargetByDescriptionRequest request = createRequestWithOrdering(descriptionFromUser, orderByFromUser, orderDirectionFromUser);
-                response = createResponse(request);
+                SearchTargetByDescriptionRequest searchTargetByDescriptionRequest = createRequestWithOrdering(descriptionFromUser, orderByFromUser, orderDirectionFromUser);
+                searchTargetByDescriptionResponse = validateSearchTargetByDescriptionRequest(searchTargetByDescriptionRequest);
             } else if (!isOrderingNeeded(orderingFromUser) && isPagingNeeded(pagingFromUser)){
                 Integer pageNumber = getPageNumberFromUser();
                 Integer pageSize = getPageSizeFromUser();
                 SearchTargetByDescriptionRequest request = createRequestWithPaging(descriptionFromUser, pageNumber, pageSize);
-                response = createResponse(request);
+                searchTargetByDescriptionResponse = validateSearchTargetByDescriptionRequest(request);
             } else {
                 SearchTargetByDescriptionRequest request = createRequest(descriptionFromUser);
-                response = createResponse(request);
+                searchTargetByDescriptionResponse = validateSearchTargetByDescriptionRequest(request);
             }
 
 
-            if (response.hasErrors()) {
-                printResponseErrors(response);
+            if (searchTargetByDescriptionResponse.hasErrors()) {
+                printResponseErrors(searchTargetByDescriptionResponse);
             } else {
-                printResponseResultMessage(response);
+                printResponseResultMessage(searchTargetByDescriptionResponse);
                 break;
             }
         }
@@ -119,7 +121,7 @@ public class SearchTargetByDescriptionUIAction implements UIAction {
         response.getErrorList().forEach(System.out::println);
     }
 
-    private SearchTargetByDescriptionResponse createResponse(SearchTargetByDescriptionRequest request){
+    private SearchTargetByDescriptionResponse validateSearchTargetByDescriptionRequest(SearchTargetByDescriptionRequest request){
         return searchTargetByDescriptionService.execute(request);
     }
 

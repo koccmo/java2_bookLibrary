@@ -16,16 +16,14 @@ import static org.junit.Assert.assertNotNull;
 //@WebAppConfiguration
 
 public class SpringContextTest {
-/*
-
-    @Autowired
-    private ApplicationContext applicationContext;
-
-    @Test
-    public void start() {
-        assertNotNull(applicationContext);
-    }
-*/
+//
+//    @Autowired
+//    private ApplicationContext applicationContext;
+//
+//    @Test
+//    public void start() {
+//        assertNotNull(applicationContext);
+//    }
 
 }
 

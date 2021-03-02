@@ -22,16 +22,24 @@ public class DeleteProductByProductService {
         if (!errors.isEmpty()) {
             return new DeleteByProductResponse(errors);
         }
-        Product productToDelete = new Product(request.getProductName(), request.getProductDescription(), request.getProductPrice());
-        productRepository.delete(productToDelete);
-        return new DeleteByProductResponse(productToDelete);
+
+        Integer numberOfProductsDeleted = productRepository.deleteByProductNameAndProductDescriptionAndPrice(
+                request.getProductName(), request.getProductDescription(), request.getProductPrice());
+
+        if (numberOfProductsDeleted != 1) {
+            errors.add(new CoreError("Product", "Not found!"));
+            return new DeleteByProductResponse(errors);
+        }
+
+        return new DeleteByProductResponse(
+                new Product(request.getProductName(), request.getProductDescription(), request.getProductPrice()));
     }
 
-    public boolean delete(Product product) {
-        Long deletedProducts = productRepository.deleteByNameAndDescriptionAndPrice(
-                product.getName(), product.getDescription(), product.getPrice());
-        return deletedProducts ==  1;
-    }
+//    public boolean delete(Product product) {
+//        Integer deletedProducts = productRepository.deleteByProductNameAndProductDescriptionAndPrice(
+//                product.getName(), product.getDescription(), product.getPrice());
+//        return deletedProducts ==  1;
+//    }
 
 
 }

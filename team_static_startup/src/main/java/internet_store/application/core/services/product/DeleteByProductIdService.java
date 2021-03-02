@@ -24,9 +24,15 @@ public class DeleteByProductIdService {
             return new DeleteByProductIdResponse(errors);
         }
 
-        Long productsDeleted = productRepository.deleteByProductId(id);
-        return new DeleteByProductIdResponse(productsDeleted == 1);
+        DeleteByProductIdResponse response = new DeleteByProductIdResponse(
+                productRepository.deleteByProductId(id) == 1);
 
+        if (!response.isProductRemoved()) {
+            errors.add(new CoreError("id", "Not found!"));
+            return new DeleteByProductIdResponse(errors);
+        }
+
+        return response;
     }
 
 }

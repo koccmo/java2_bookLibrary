@@ -24,16 +24,18 @@ public class ChangeProductNameServiceTest {
     @Mock private ChangeProductNameValidator validator;
     @InjectMocks private ChangeProductNameService service;
 
+
     @Test
     public void shouldReturnResponseWithoutErrors() {
         ChangeProductNameRequest request = new ChangeProductNameRequest(1L, "newName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(productRepository.changeProductName(1L, "newName")).thenReturn(1L);
+        Mockito.when(productRepository.changeProductName(1L, "newName")).thenReturn(1);
 
         ChangeProductNameResponse response = service.execute(request);
 
         assertTrue(response.isNameChanged());
     }
+
 
     @Test
     public void shouldReturnResponseWithError_whenValidationFails() {

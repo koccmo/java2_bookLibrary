@@ -8,29 +8,33 @@ import java2.application_target_list.core.requests.user.SearchUsersByLastNameReq
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.SearchUserByLastNameResponse;
 import java2.application_target_list.core.validators.user.SearchUserByLastNameValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class SearchUserByLastNameServiceTest extends TestCase {
+@SpringBootTest
+public class SearchUserByLastNameServiceTest {
 
     private List<CoreError> errors;
     private List<User> users;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @Mock private SearchUserByLastNameValidator searchUserByLastNameValidator;
-    @InjectMocks private SearchUserByLastNameService searchUserByLastNameService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @Mock
+    private SearchUserByLastNameValidator searchUserByLastNameValidator;
+    @InjectMocks
+    SearchUserByLastNameService searchUserByLastNameService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         ReflectionTestUtils.setField(searchUserByLastNameService, "orderingEnabled", true);
         ReflectionTestUtils.setField(searchUserByLastNameService, "pagingEnabled", true);
@@ -45,10 +49,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name", "surname"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname");
     }
 
     @Test
@@ -60,12 +64,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name1", "surname1"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -77,12 +81,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name2", "surname2"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByFirstNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByFirstNameResponse.hasErrors());
-        assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
-        assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name2");
-        assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname2");
-        assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name1");
-        assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname1");
+        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
+        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname1");
     }
 
     @Test
@@ -94,12 +98,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name2", "surname2"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname1");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname1");
     }
 
     @Test
@@ -111,12 +115,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name1", "surname1"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 2);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -128,10 +132,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name2", "surname2"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -144,10 +148,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name1", "surname1"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -160,10 +164,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name2", "surname2"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
     }
 
     @Test
@@ -176,10 +180,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name2", "surname2"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name2");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname2");
     }
 
     @Test
@@ -192,10 +196,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         users.add(new User("name1", "surname1"));
         Mockito.when(jpaUserRepository.findByLastName("surname")).thenReturn(users);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertFalse(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -204,10 +208,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("User last name", "must not be empty!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByFirstNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByFirstNameResponse.hasErrors());
-        assertEquals(searchUserByFirstNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByFirstNameResponse.getErrorList().get(0).getField(), "User last name");
-        assertEquals(searchUserByFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(searchUserByFirstNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByFirstNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByFirstNameResponse.getErrorList().get(0).getField(), "User last name");
+        Assertions.assertEquals(searchUserByFirstNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -216,10 +220,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("User last name", "must not be empty!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User last name");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User last name");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
@@ -229,10 +233,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order by", "must not be empty"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order by");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order by");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
     }
 
     @Test
@@ -242,10 +246,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order by", "must contain FIRST NAME or LAST NAME only!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order by");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must contain FIRST NAME or LAST NAME only!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order by");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must contain FIRST NAME or LAST NAME only!");
     }
 
     @Test
@@ -255,10 +259,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must not be empty"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order direction");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order direction");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
     }
 
     @Test
@@ -268,10 +272,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order direction");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Order direction");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must contain ASCENDING or DESCENDING only!");
     }
 
     @Test
@@ -282,12 +286,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 2);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User first name");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Order direction");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User first name");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Order direction");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must contain ASCENDING or DESCENDING only!");
     }
 
     @Test
@@ -297,10 +301,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must be greater then 0!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
     }
 
     @Test
@@ -310,10 +314,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Page number", "must not be empty"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
     }
 
     @Test
@@ -323,10 +327,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must be greater then 0!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page size");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page size");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
     }
 
     @Test
@@ -336,10 +340,10 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must not be empty"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page size");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page size");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty");
     }
 
     @Test
@@ -350,12 +354,12 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Page size", "must not be empty"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 2);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Page size");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "Page number");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must be greater then 0!");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Page size");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must not be empty");
     }
 
     @Test
@@ -370,17 +374,17 @@ public class SearchUserByLastNameServiceTest extends TestCase {
         errors.add(new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
         Mockito.when(searchUserByLastNameValidator.validate(searchUsersByLastNameRequest)).thenReturn(errors);
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        assertTrue(searchUserByLastNameResponse.hasErrors());
-        assertEquals(searchUserByLastNameResponse.getErrorList().size(), 5);
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User last name");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(3).getField(), "Order by");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(3).getMessage(), "must not be empty");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(4).getField(), "Order direction");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(4).getMessage(), "must contain ASCENDING or DESCENDING only!");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Page number");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must be greater then 0!");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(2).getField(), "Page size");
-        assertEquals(searchUserByLastNameResponse.getErrorList().get(2).getMessage(), "must not be empty");
+        Assertions.assertTrue(searchUserByLastNameResponse.hasErrors());
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().size(), 5);
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getField(), "User last name");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(3).getField(), "Order by");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(3).getMessage(), "must not be empty");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(4).getField(), "Order direction");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(4).getMessage(), "must contain ASCENDING or DESCENDING only!");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getField(), "Page number");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(1).getMessage(), "must be greater then 0!");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(2).getField(), "Page size");
+        Assertions.assertEquals(searchUserByLastNameResponse.getErrorList().get(2).getMessage(), "must not be empty");
     }
 }

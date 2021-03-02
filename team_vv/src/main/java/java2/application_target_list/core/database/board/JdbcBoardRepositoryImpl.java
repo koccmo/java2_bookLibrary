@@ -11,7 +11,8 @@ import java.util.Optional;
 //@Component
 public class JdbcBoardRepositoryImpl implements BoardRepository {
 
-    @Autowired JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
 
     @Override

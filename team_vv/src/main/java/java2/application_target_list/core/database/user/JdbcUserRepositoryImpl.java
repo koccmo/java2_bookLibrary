@@ -9,7 +9,8 @@ import java.util.Optional;
 //@Component
 public class JdbcUserRepositoryImpl implements UserRepository {
 
-    @Autowired JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void addUser(User user) {

@@ -1,6 +1,5 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -14,29 +13,35 @@ import java2.application_target_list.core.services.board.AddRecordService;
 import java2.application_target_list.core.services.board.GetAllRecordsService;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.user.AddUserService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
+
+@SpringBootTest
 public class AddRecordAcceptanceTest {
 
+    @Autowired
     private AddRecordService addRecordService;
+    @Autowired
     private GetAllRecordsService getAllRecordsService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private JpaTargetRepository jpaTargetRepository;
+    @Autowired
     private JpaUserRepository jpaUserRepository;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private AddUserService addUserService;
+    @Autowired
     private AddTargetService addTargetService;
 
 
-    @Before
+    @BeforeEach
     public void setup(){
-        createServices();
         databaseCleaner.clean();
         addUsersToDB();
         addTargetsToDB();
@@ -44,10 +49,6 @@ public class AddRecordAcceptanceTest {
 
     @Test
     public void shouldAddRecordToList() {
-//        Long targetId = targetRepository.getTargetsList().get(0).getId();
-//        Long firstUserId = userRepository.getUsersList().get(0).getId();
-//        Long secondUserId = userRepository.getUsersList().get(1).getId();
-
         Long targetId = jpaTargetRepository.findAll().get(0).getId();
         Long firstUserId = jpaUserRepository.findAll().get(0).getId();
         Long secondUserId = jpaUserRepository.findAll().get(1).getId();
@@ -58,29 +59,28 @@ public class AddRecordAcceptanceTest {
         AddRecordResponse addRecordResponse2 = addRecordService.execute(addRecordRequest2);
         GetAllRecordsResponse getAllRecordsResponse = getAllRecordsService.execute(new GetAllRecordsRequest());
 
-        Assert.assertFalse(addRecordResponse1.hasErrors());
-        Assert.assertFalse(addRecordResponse2.hasErrors());
-        Assert.assertFalse(getAllRecordsResponse.hasErrors());
-        Assert.assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(targetId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(firstUserId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(targetId));
-        Assert.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(secondUserId));
+        Assertions.assertFalse(addRecordResponse1.hasErrors());
+        Assertions.assertFalse(addRecordResponse2.hasErrors());
+        Assertions.assertFalse(getAllRecordsResponse.hasErrors());
+        Assertions.assertEquals(getAllRecordsResponse.getRecordList().size(), 2);
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getTargetId()), Optional.of(targetId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(0).getUserId()), Optional.of(firstUserId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getTargetId()), Optional.of(targetId));
+        Assertions.assertEquals(java.util.Optional.ofNullable(getAllRecordsResponse.getRecordList().get(1).getUserId()), Optional.of(secondUserId));
     }
 
     @Test
     public void shouldReturnErrorList() {
-//        Long firstUserId = userRepository.getUsersList().get(0).getId();
         Long firstUserId = jpaUserRepository.findAll().get(0).getId();
         AddRecordRequest addRecordRequest1 = new AddRecordRequest(-1L, firstUserId);
         AddRecordResponse addRecordResponse = addRecordService.execute(addRecordRequest1);
 
-        Assert.assertTrue(addRecordResponse.hasErrors());
-        Assert.assertEquals(addRecordResponse.getErrorList().size(), 2);
-        Assert.assertEquals(addRecordResponse.getErrorList().get(0).getField(), "Target ID");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(1).getField(), "Target ID");
-        Assert.assertEquals(addRecordResponse.getErrorList().get(1).getMessage(), "no target with that ID!");
+        Assertions.assertTrue(addRecordResponse.hasErrors());
+        Assertions.assertEquals(addRecordResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(0).getField(), "Target ID");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(1).getField(), "Target ID");
+        Assertions.assertEquals(addRecordResponse.getErrorList().get(1).getMessage(), "no target with that ID!");
     }
 
     private void addUsersToDB(){
@@ -93,58 +93,5 @@ public class AddRecordAcceptanceTest {
     private void addTargetsToDB() {
         AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
         addTargetService.execute(addTargetRequest);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addRecordService = createAddRecordService();
-        getAllRecordsService = createGetAllRecordsService();
-//        userRepository = createUserRepository();
-//        targetRepository = createTargetRepository();
-        jpaTargetRepository = createJpaTargetRepository();
-        jpaUserRepository = createJpaUserRepository();
-        databaseCleaner = createDatabaseCleaner();
-        addTargetService = createAddTargetService();
-        addUserService = createAddUserService();
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-//    private TargetRepository createTargetRepository() {
-//        return applicationContext.getBean(TargetRepository.class);
-//    }
-//
-//    private UserRepository createUserRepository() {
-//        return applicationContext.getBean(UserRepository.class);
-//    }
-    private JpaTargetRepository createJpaTargetRepository() {
-        return applicationContext.getBean(JpaTargetRepository.class);
-    }
-
-    private JpaUserRepository createJpaUserRepository() {
-        return applicationContext.getBean(JpaUserRepository.class);
-    }
-
-    private GetAllRecordsService createGetAllRecordsService() {
-        return applicationContext.getBean(GetAllRecordsService.class);
-    }
-
-    private AddRecordService createAddRecordService() {
-        return applicationContext.getBean(AddRecordService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-
     }
 }

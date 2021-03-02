@@ -11,7 +11,9 @@ import java.util.Scanner;
 @Component
 public class ChangeTargetNameUIAction implements UIAction {
 
-    @Autowired ChangeTargetNameService changeTargetNameService;
+    @Autowired
+    private ChangeTargetNameService changeTargetNameService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -20,11 +22,11 @@ public class ChangeTargetNameUIAction implements UIAction {
             Long targetId = getIdFromUser();
             String newTargetName = getNewNameFromUser();
 
-            ChangeTargetNameRequest request = createRequest(targetId, newTargetName);
-            ChangeTargetNameResponse response = createResponse(request);
+            ChangeTargetNameRequest changeTargetNameRequest = createChangeTargetNameRequest(targetId, newTargetName);
+            ChangeTargetNameResponse changeTargetNameResponse = validateChangeTargetNameRequest(changeTargetNameRequest);
 
-            if (response.hasErrors()) {
-                printResponseErrors(response);
+            if (changeTargetNameResponse.hasErrors()) {
+                printResponseErrors(changeTargetNameResponse);
             } else {
                 printResponseResultMessage();
                 break;
@@ -42,11 +44,11 @@ public class ChangeTargetNameUIAction implements UIAction {
         response.getErrorList().forEach(System.out::println);
     }
 
-    private ChangeTargetNameResponse createResponse(ChangeTargetNameRequest request){
-        return changeTargetNameService.execute(request);
+    private ChangeTargetNameResponse validateChangeTargetNameRequest(ChangeTargetNameRequest changeTargetNameRequest){
+        return changeTargetNameService.execute(changeTargetNameRequest);
     }
 
-    private ChangeTargetNameRequest createRequest(Long targetId, String newTargetName){
+    private ChangeTargetNameRequest createChangeTargetNameRequest(Long targetId, String newTargetName){
         return new ChangeTargetNameRequest(targetId, newTargetName);
     }
 

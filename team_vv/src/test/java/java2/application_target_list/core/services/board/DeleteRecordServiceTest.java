@@ -5,81 +5,79 @@ import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.DeleteRecordResponse;
 import java2.application_target_list.core.validators.board.DeleteRecordValidator;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class DeleteRecordServiceTest extends TestCase {
+@SpringBootTest
+public class DeleteRecordServiceTest {
 
     private List<CoreError> errors;
-    @Mock DeleteRecordValidator deleteRecordValidator;
     @Mock
-    JpaBoardRepository jpaBoardRepository;
-    @InjectMocks DeleteRecordService deleteRecordService;
+    private DeleteRecordValidator deleteRecordValidator;
+    @Mock
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    DeleteRecordService deleteRecordService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errors = new ArrayList<>();
     }
 
     @Test
     public void shouldDeleteRecordFromDatabase() {
-//        Mockito.when(boardRepository.isIdInBoardList(1L)).thenReturn(true);
         Mockito.when(jpaBoardRepository.existsById(1L)).thenReturn(true);
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
-        assertFalse(deleteRecordResponse.hasErrors());
+        Assertions.assertFalse(deleteRecordResponse.hasErrors());
     }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {
-//        errors.add(new CoreError("Record ID","no record with that ID"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(1L);
-//        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         Mockito.when(deleteRecordValidator.validate(deleteRecordRequest)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
-        assertTrue(deleteRecordResponse.hasErrors());
-        assertEquals(deleteRecordResponse.getErrorList().size(), 1);
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "no record with that ID");
+        Assertions.assertTrue(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "no record with that ID");
     }
 
     @Test
     public void shouldReturnResponseWithErrors_v2() {
         errors.add(new CoreError("Record ID","must not be empty!"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(null);
-//        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         Mockito.when(deleteRecordValidator.validate(deleteRecordRequest)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
-        assertTrue(deleteRecordResponse.hasErrors());
-        assertEquals(deleteRecordResponse.getErrorList().size(), 2);
-        assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assertions.assertTrue(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     @Test
     public void shouldReturnResponseWithErrors_v3() {
         errors.add(new CoreError("Record ID","must not be negative!"));
         DeleteRecordRequest deleteRecordRequest = new DeleteRecordRequest(-2L);
-//        Mockito.when(deleteRecordValidator.validate(deleteRecordRequest, boardRepository)).thenReturn(errors);
         Mockito.when(deleteRecordValidator.validate(deleteRecordRequest)).thenReturn(errors);
         DeleteRecordResponse deleteRecordResponse = deleteRecordService.execute(deleteRecordRequest);
-        assertTrue(deleteRecordResponse.hasErrors());
-        assertEquals(deleteRecordResponse.getErrorList().size(), 2);
-        assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
-        assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
+        Assertions.assertTrue(deleteRecordResponse.hasErrors());
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().size(), 2);
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(1).getMessage(), "no record with that ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getField(), "Record ID");
+        Assertions.assertEquals(deleteRecordResponse.getErrorList().get(0).getMessage(), "must not be negative!");
     }
 }

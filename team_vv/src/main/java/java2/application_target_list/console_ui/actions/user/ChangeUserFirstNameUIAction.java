@@ -11,7 +11,9 @@ import java.util.Scanner;
 @Component
 public class ChangeUserFirstNameUIAction implements UIAction {
 
-    @Autowired ChangeUserFirstNameService changeUserFirstNameService;
+    @Autowired
+    private ChangeUserFirstNameService changeUserFirstNameService;
+
     private final Scanner scr = new Scanner(System.in);
 
     @Override
@@ -20,8 +22,8 @@ public class ChangeUserFirstNameUIAction implements UIAction {
             Long userId = getIdFromUser();
             String newUserFirstName = getNewFirstNameFromUser();
 
-            ChangeUserFirstNameRequest changeUserFirstNameRequest = createRequest(userId, newUserFirstName);
-            ChangeUserFirstNameResponse changeUserFirstNameResponse = createResponse(changeUserFirstNameRequest);
+            ChangeUserFirstNameRequest changeUserFirstNameRequest = createUserFirstNameRequest(userId, newUserFirstName);
+            ChangeUserFirstNameResponse changeUserFirstNameResponse = validateChangeUserFirstNameRequest(changeUserFirstNameRequest);
 
             if (changeUserFirstNameResponse.hasErrors()) {
                 printResponseErrors(changeUserFirstNameResponse);
@@ -42,11 +44,11 @@ public class ChangeUserFirstNameUIAction implements UIAction {
         changeUserFirstNameResponse.getErrorList().forEach(System.out::println);
     }
 
-    private ChangeUserFirstNameResponse createResponse(ChangeUserFirstNameRequest changeUserFirstNameRequest){
+    private ChangeUserFirstNameResponse validateChangeUserFirstNameRequest(ChangeUserFirstNameRequest changeUserFirstNameRequest){
         return changeUserFirstNameService.execute(changeUserFirstNameRequest);
     }
 
-    private ChangeUserFirstNameRequest createRequest(Long targetId, String newTargetName){
+    private ChangeUserFirstNameRequest createUserFirstNameRequest(Long targetId, String newTargetName){
         return new ChangeUserFirstNameRequest(targetId, newTargetName);
     }
 

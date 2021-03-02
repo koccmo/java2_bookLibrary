@@ -6,19 +6,21 @@ import java2.application_target_list.core.database.target.InMemoryTargetReposito
 import java2.application_target_list.core.domain.Target;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class ChangeTargetDeadlineValidatorTest {
 
+    @Autowired
     private ChangeTargetDeadlineValidator validator;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        validator = new ChangeTargetDeadlineValidator();
         TargetRepository targetRepository = new InMemoryTargetRepositoryImpl();
         targetRepository.addTarget(new Target("name", "description", 1L));
     }
@@ -27,35 +29,35 @@ public class ChangeTargetDeadlineValidatorTest {
     public void testValidate_validRequest() {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L,3L);
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 0);
+        Assertions.assertEquals(actualErrors.size(), 0);
     }
 
     @Test
     public void testValidate_invalidRequestNewDeadline() {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L,-3L);
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target new deadline"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target new deadline"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
     }
 
     @Test
     public void testValidate_invalidRequestId() {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-1L,3L);
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
     }
 
     @Test
     public void testValidate_invalidRequestIdAndNewDeadline() {
         ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(-1L,-3L);
         List<CoreError> actualErrors = validator.validate(request);
-        Assert.assertEquals(actualErrors.size(), 2);
-        Assert.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
-        Assert.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
-        Assert.assertTrue(actualErrors.get(1).getField().contains("Target new deadline"));
-        Assert.assertTrue(actualErrors.get(1).getMessage().contains("must not be negative!"));
+        Assertions.assertEquals(actualErrors.size(), 2);
+        Assertions.assertTrue(actualErrors.get(0).getField().contains("Target ID"));
+        Assertions.assertTrue(actualErrors.get(0).getMessage().contains("must not be negative!"));
+        Assertions.assertTrue(actualErrors.get(1).getField().contains("Target new deadline"));
+        Assertions.assertTrue(actualErrors.get(1).getMessage().contains("must not be negative!"));
     }
 }

@@ -5,19 +5,21 @@ import java2.application_target_list.core.database.board.InMemoryBoardRepository
 import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
+@SpringBootTest
 public class SetRecordCompleteDateValidatorTest {
 
+    @Autowired
     private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
 
-    @Before
+    @BeforeEach
     public void setup(){
-        setRecordCompleteDateValidator = new SetRecordCompleteDateValidator();
         BoardRepository boardRepository = new InMemoryBoardRepositoryImpl();
         boardRepository.addToBoard(new Record(1L, 1L));
     }
@@ -26,17 +28,17 @@ public class SetRecordCompleteDateValidatorTest {
     public void testValidate_validRequest() {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
         List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
-        Assert.assertTrue(actualErrors.isEmpty());
+        Assertions.assertTrue(actualErrors.isEmpty());
     }
 
     @Test
     public void testValidate_invalidRequest_v2() {
         SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(-2L);
         List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
-        Assert.assertFalse(actualErrors.isEmpty());
-        Assert.assertEquals(actualErrors.size(), 1);
-        Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-        Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+        Assertions.assertFalse(actualErrors.isEmpty());
+        Assertions.assertEquals(actualErrors.size(), 1);
+        Assertions.assertEquals(actualErrors.get(0).getField(), "Record ID");
+        Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
     }
 
     @Test
@@ -44,10 +46,10 @@ public class SetRecordCompleteDateValidatorTest {
         try {
             SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(null);
             List<CoreError> actualErrors = setRecordCompleteDateValidator.validate(setRecordCompleteDateRequest);
-            Assert.assertFalse(actualErrors.isEmpty());
-            Assert.assertEquals(actualErrors.size(), 1);
-            Assert.assertEquals(actualErrors.get(0).getField(), "Record ID");
-            Assert.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
+            Assertions.assertFalse(actualErrors.isEmpty());
+            Assertions.assertEquals(actualErrors.size(), 1);
+            Assertions.assertEquals(actualErrors.get(0).getField(), "Record ID");
+            Assertions.assertEquals(actualErrors.get(0).getMessage(), "must not be negative!");
         } catch (NullPointerException ignored) {
 
         }

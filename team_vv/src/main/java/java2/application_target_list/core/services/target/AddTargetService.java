@@ -7,30 +7,56 @@ import java2.application_target_list.core.responses.target.AddTargetResponse;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.validators.target.AddTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Component
 @Service
 @Transactional
 public class AddTargetService {
 
-    @Autowired private JpaTargetRepository jpaTargetRepository;
-    @Autowired private AddTargetValidator validator;
+    @Autowired
+    private JpaTargetRepository jpaTargetRepository;
+    @Autowired
+    private AddTargetValidator validator;
 
-    public AddTargetResponse execute(AddTargetRequest request){
-        List<CoreError> errors = validator.validate(request);
+    private List<CoreError> errors;
+    private Target target;
 
-        if (!errors.isEmpty()) {
-            return new AddTargetResponse(errors);
+    public AddTargetResponse execute(AddTargetRequest addTargetRequest){
+        errors = checkRequestForErrors(addTargetRequest);
+
+        if (requestHaveErrors()) {
+            return createAddTargetResponseWithErrors();
         }
 
-        Target target = new Target(request.getName(), request.getDescription(), request.getDeadline());
-        jpaTargetRepository.save(target);
+        target = createTarget(addTargetRequest);
+        addTargetToDB();
+        return createAddTargetResponse();
+    }
+
+    private AddTargetResponse createAddTargetResponse() {
         return new AddTargetResponse(target);
+    }
+
+    private void addTargetToDB(){
+        jpaTargetRepository.save(target);
+    }
+
+    private Target createTarget(AddTargetRequest addTargetRequest){
+        return new Target(addTargetRequest.getName(), addTargetRequest.getDescription(), addTargetRequest.getDeadline());
+    }
+
+    private AddTargetResponse createAddTargetResponseWithErrors() {
+        return new AddTargetResponse(errors);
+    }
+
+    private boolean requestHaveErrors(){
+        return !errors.isEmpty();
+    }
+
+    private List<CoreError> checkRequestForErrors(AddTargetRequest addTargetRequest){
+        return validator.validate(addTargetRequest);
     }
 
 }

@@ -5,31 +5,32 @@ import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.services.target.DeleteTargetService;
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.responses.target.DeleteTargetResponse;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.target.GetAllTargetsService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import static org.junit.Assert.*;
-
+@SpringBootTest
 public class DeleteTargetAcceptanceTests {
 
+    @Autowired
     private GetAllTargetsService getAllTargetsService;
+    @Autowired
     private DeleteTargetService deleteTargetService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private AddTargetService addTargetService;
+
     private Long targetId;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addTargetsToDB();
     }
@@ -42,10 +43,10 @@ public class DeleteTargetAcceptanceTests {
         DeleteTargetResponse deleteTargetResponse = deleteTargetService.execute(deleteTargetRequest);
         GetAllTargetsResponse response = getAllTargetsService.execute(new GetAllTargetsRequest());
 
-        assertFalse(deleteTargetResponse.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertEquals(response.getTargetList().get(0).getName(), "name2");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description2");
+        Assertions.assertFalse(deleteTargetResponse.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name2");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description2");
     }
 
     @Test
@@ -56,28 +57,20 @@ public class DeleteTargetAcceptanceTests {
         DeleteTargetResponse deleteTargetResponse = deleteTargetService.execute(deleteTargetRequest);
         GetAllTargetsResponse response = getAllTargetsService.execute(new GetAllTargetsRequest());
 
-        assertFalse(deleteTargetResponse.hasErrors());
-        assertEquals(response.getTargetList().size(), 1);
-        assertNull(response.getErrorList());
-        assertEquals(response.getTargetList().get(0).getName(), "name");
-        assertEquals(response.getTargetList().get(0).getDescription(), "description");
+        Assertions.assertFalse(deleteTargetResponse.hasErrors());
+        Assertions.assertEquals(response.getTargetList().size(), 1);
+        Assertions.assertNull(response.getErrorList());
+        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name");
+        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description");
     }
 
     @Test
     public void shouldReturnErrorsList() {
         DeleteTargetRequest deleteTargetRequest = new DeleteTargetRequest(3L);
         DeleteTargetResponse deleteTargetResponse = deleteTargetService.execute(deleteTargetRequest);
-        assertEquals(deleteTargetResponse.getErrorList().size(), 1);
-        assertEquals(deleteTargetResponse.getErrorList().get(0).getField(), "Target ID;");
-        assertEquals(deleteTargetResponse.getErrorList().get(0).getMessage(), "no target with that ID");
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addTargetService = createAddTargetService();
-        getAllTargetsService = createGetAllTargetService();
-        databaseCleaner = createDatabaseCleaner();
-        deleteTargetService = createDeleteTargetService();
+        Assertions.assertEquals(deleteTargetResponse.getErrorList().size(), 1);
+        Assertions.assertEquals(deleteTargetResponse.getErrorList().get(0).getField(), "Target ID;");
+        Assertions.assertEquals(deleteTargetResponse.getErrorList().get(0).getMessage(), "no target with that ID");
     }
 
     private void addTargetsToDB() {
@@ -86,25 +79,4 @@ public class DeleteTargetAcceptanceTests {
         addTargetService.execute(addTargetRequest1);
         addTargetService.execute(addTargetRequest2);
     }
-
-    private DeleteTargetService createDeleteTargetService() {
-        return applicationContext.getBean(DeleteTargetService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllTargetsService createGetAllTargetService() {
-        return applicationContext.getBean(GetAllTargetsService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-    }
-
 }
