@@ -25,7 +25,7 @@ public class UpdateUserServiceTest extends TestCase {
     @Mock
     private UpdateUserValidator updateUserValidator;
     @InjectMocks
-    private UpdateUserService updateUserService;
+    UpdateUserService updateUserService;
 
     @Before
     public void setup() {

@@ -27,7 +27,7 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable schemaName="internet_store"
+            <dropTable schemaName="internet_store_liquibase"
                        tableName="customers"
                        cascadeConstraints="true"/>
         </rollback>

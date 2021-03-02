@@ -1,6 +1,6 @@
 package java2.application_target_list.core.acceptancetests.board;
 
-import java2.application_target_list.config.SpringCoreConfiguration;
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.database.jpa.JpaUserRepository;
@@ -16,25 +16,34 @@ import java2.application_target_list.core.services.user.AddUserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class GetAllRecordsAcceptanceTest {
 
+    @Autowired
     private AddRecordService addRecordService;
+    @Autowired
     private GetAllRecordsService getAllRecordsService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private JpaTargetRepository jpaTargetRepository;
+    @Autowired
     private JpaUserRepository jpaUserRepository;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private AddUserService addUserService;
 
     @Before
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addTargetsToDB();
         addUsersToDB();
@@ -63,49 +72,5 @@ public class GetAllRecordsAcceptanceTest {
     private void addTargetsToDB() {
         AddTargetRequest addTargetRequest = new AddTargetRequest("name", "description", 1L);
         addTargetService.execute(addTargetRequest);
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addRecordService = createAddRecordService();
-        getAllRecordsService = createGetAllRecordsService();
-        jpaTargetRepository = createJpaTargetRepository();
-        jpaUserRepository = createJpaUserRepository();
-        databaseCleaner = createDatabaseCleaner();
-        addTargetService = createAddTargetService();
-        addUserService = createAddUserService();
-    }
-
-    private AddUserService createAddUserService() {
-        return applicationContext.getBean(AddUserService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private JpaTargetRepository createJpaTargetRepository() {
-        return applicationContext.getBean(JpaTargetRepository.class);
-    }
-
-    private JpaUserRepository createJpaUserRepository() {
-        return applicationContext.getBean(JpaUserRepository.class);
-    }
-
-    private GetAllRecordsService createGetAllRecordsService() {
-        return applicationContext.getBean(GetAllRecordsService.class);
-    }
-
-    private AddRecordService createAddRecordService() {
-        return applicationContext.getBean(AddRecordService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
-
     }
 }

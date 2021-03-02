@@ -30,7 +30,7 @@ public class AddUserServiceTest extends TestCase {
     @Mock
     private AddUserValidator addUserValidator;
     @InjectMocks
-    private AddUserService addUserService;
+    AddUserService addUserService;
 
     @Before
     public void setup() {

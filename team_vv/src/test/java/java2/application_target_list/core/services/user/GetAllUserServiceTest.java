@@ -20,8 +20,10 @@ import java.util.List;
 public class GetAllUserServiceTest extends TestCase {
 
     private List<User> userList;
-    @Mock private JpaUserRepository jpaUserRepository;
-    @InjectMocks private GetAllUserService getAllUserService;
+    @Mock
+    private JpaUserRepository jpaUserRepository;
+    @InjectMocks
+    GetAllUserService getAllUserService;
 
     @Before
     public void setup() {

@@ -21,8 +21,10 @@ import java.util.List;
 public class ChangeTargetNameServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private ChangeTargetNameValidator validator;
-    @Mock private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private ChangeTargetNameValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
     ChangeTargetNameService service;
 

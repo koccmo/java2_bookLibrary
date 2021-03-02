@@ -1,5 +1,6 @@
 package java2.application_target_list.core.acceptancetests.target;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
@@ -12,23 +13,30 @@ import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.target.GetAllTargetsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class ChangeTargetNameAcceptanceTests {
 
-    private ApplicationContext applicationContext;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private ChangeTargetNameService changeTargetNameService;
+    @Autowired
     private GetAllTargetsService getAllTargetsService;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+
     private Long targetId;
 
     @Before
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addTargetToDB();
     }
@@ -55,34 +63,6 @@ public class ChangeTargetNameAcceptanceTests {
         assertEquals(changeTargetNameResponse.getErrorList().size(), 1);
         assertEquals(changeTargetNameResponse.getErrorList().get(0).getField(), "Target ID;");
         assertEquals(changeTargetNameResponse.getErrorList().get(0).getMessage(), "no target with that ID");
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addTargetService = createAddTargetService();
-        getAllTargetsService = createGetAllTargetService();
-        databaseCleaner = createDatabaseCleaner();
-        changeTargetNameService = createChangeTargetNameService();
-    }
-
-    private ChangeTargetNameService createChangeTargetNameService() {
-        return applicationContext.getBean(ChangeTargetNameService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllTargetsService createGetAllTargetService() {
-        return applicationContext.getBean(GetAllTargetsService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private void addTargetToDB() {

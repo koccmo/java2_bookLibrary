@@ -1,36 +1,43 @@
 package java2.application_target_list.core.acceptancetests.target;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.services.target.ChangeTargetDeadlineService;
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.target.GetAllTargetsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class ChangeTargetDeadlineAcceptanceTests {
 
+    @Autowired
     private GetAllTargetsService getAllTargetsService;
+    @Autowired
     private ChangeTargetDeadlineService changeTargetDeadlineService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+
     private Long targetId;
 
     @Before
     public void setup() {
-        createServices();
         databaseCleaner.clean();
         addTargetToDB();
     }
@@ -65,34 +72,6 @@ public class ChangeTargetDeadlineAcceptanceTests {
         assertEquals(getAllTargetsResponse.getTargetList().get(0).getName(), "name");
         assertEquals(Optional.ofNullable(getAllTargetsResponse.getTargetList().get(0).getDeadline()), Optional.of(1L));
         assertEquals(getAllTargetsResponse.getTargetList().get(0).getDescription(), "description");
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addTargetService = createAddTargetService();
-        getAllTargetsService = createGetAllTargetService();
-        databaseCleaner = createDatabaseCleaner();
-        changeTargetDeadlineService = createChangeTargetDeadlineService();
-    }
-
-    private ChangeTargetDeadlineService createChangeTargetDeadlineService() {
-        return applicationContext.getBean(ChangeTargetDeadlineService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllTargetsService createGetAllTargetService() {
-        return applicationContext.getBean(GetAllTargetsService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 
     private void addTargetToDB() {

@@ -19,8 +19,10 @@ import java.util.List;
 public class GetAllTargetsServiceTest extends TestCase {
 
     private  List<Target>targets;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @InjectMocks private GetAllTargetsService service;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @InjectMocks
+    GetAllTargetsService service;
 
     @Before
     public void setup() {

@@ -1,38 +1,49 @@
 package java2.application_target_list.core.acceptancetests.target;
 
+import java2.application_target_list.TargetListApplication;
 import java2.application_target_list.core.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.*;
-import java2.application_target_list.config.SpringCoreConfiguration;
 import java2.application_target_list.core.responses.target.*;
 import java2.application_target_list.core.services.target.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TargetListApplication.class})
 public class AcceptanceTests {
 
-
+    @Autowired
     private ChangeTargetNameService changeTargetNameService;
+    @Autowired
     private AddTargetService addTargetService;
+    @Autowired
     private ChangeTargetDescriptionService changeTargetDescriptionService;
+    @Autowired
     private ChangeTargetDeadlineService changeTargetDeadlineService;
+    @Autowired
     private SearchTargetByNameService searchTargetByNameService;
-    private ApplicationContext applicationContext;
+    @Autowired
     private DatabaseCleaner databaseCleaner;
+    @Autowired
     private GetAllTargetsService getAllTargetsService;
+    @Autowired
     private DeleteTargetService deleteTargetService;
+    @Autowired
     private SearchTargetByDescriptionService searchTargetByDescriptionService;
+
     private Long targetId;
 
     @Before
     public void setup() {
-        createServices();
         databaseCleaner.clean();
     }
 
@@ -131,58 +142,5 @@ public class AcceptanceTests {
         Assert.assertFalse(addTargetResponse.hasErrors());
         addTargetResponse = addTargetService.execute(addTargetRequest4);
         Assert.assertFalse(addTargetResponse.hasErrors());
-    }
-
-    private void createServices() {
-        applicationContext = createApplicationContext();
-        addTargetService = createAddTargetService();
-        getAllTargetsService = createGetAllTargetService();
-        databaseCleaner = createDatabaseCleaner();
-        changeTargetNameService = createChangeTargetNameService();
-        changeTargetDescriptionService = createChangeTargetDescriptionService();
-        changeTargetDeadlineService = createChangeTargetDeadlineService();
-        searchTargetByNameService = createSearchTargetByNameService();
-        searchTargetByDescriptionService = createSearchTargetByDescriptionService();
-        deleteTargetService = createDeleteTargetService();
-    }
-
-    private SearchTargetByDescriptionService createSearchTargetByDescriptionService() {
-        return applicationContext.getBean(SearchTargetByDescriptionService.class);
-    }
-
-    private ChangeTargetNameService createChangeTargetNameService() {
-        return applicationContext.getBean(ChangeTargetNameService.class);
-    }
-
-    private ChangeTargetDescriptionService createChangeTargetDescriptionService() {
-        return applicationContext.getBean(ChangeTargetDescriptionService.class);
-    }
-
-    private ChangeTargetDeadlineService createChangeTargetDeadlineService() {
-        return applicationContext.getBean(ChangeTargetDeadlineService.class);
-    }
-
-    private SearchTargetByNameService createSearchTargetByNameService() {
-        return applicationContext.getBean(SearchTargetByNameService.class);
-    }
-
-    private DeleteTargetService createDeleteTargetService() {
-        return applicationContext.getBean(DeleteTargetService.class);
-    }
-
-    private DatabaseCleaner createDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private GetAllTargetsService createGetAllTargetService() {
-        return applicationContext.getBean(GetAllTargetsService.class);
-    }
-
-    private AddTargetService createAddTargetService() {
-        return applicationContext.getBean(AddTargetService.class);
-    }
-
-    private ApplicationContext createApplicationContext() {
-        return new AnnotationConfigApplicationContext(SpringCoreConfiguration.class);
     }
 }

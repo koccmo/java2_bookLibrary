@@ -31,7 +31,7 @@ public class UpdateCustomerService {
                 request.getPhone(),
                 request.getPasswordOne()
         );
-        customer.setCustomerID(request.getId());
+        customer.setCustomerId(request.getId());
         if (database.updateCustomer(customer, request.getId())) {
             return new UpdateCustomerResponse();
         }

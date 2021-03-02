@@ -22,8 +22,10 @@ import java.util.ArrayList;
 public class ChangeTargetDeadlineServiceTest extends TestCase {
 
     private List<CoreError> errors;
-    @Mock private ChangeTargetDeadlineValidator validator;
-    @Mock private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private ChangeTargetDeadlineValidator validator;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
     @InjectMocks
     ChangeTargetDeadlineService service;
 

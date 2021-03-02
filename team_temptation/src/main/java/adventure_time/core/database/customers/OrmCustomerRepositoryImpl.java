@@ -59,9 +59,9 @@ public class OrmCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public List<Customers> findAllCustomers() {
+    public List<Customers> findCustomers(String query) {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Customers", Customers.class)
+                .createQuery(query, Customers.class)
                 .getResultList();
     }
 

@@ -22,8 +22,9 @@ public class GetAllRecordsServiceTest extends TestCase {
 
     private List<Record> recordList;
     @Mock
-    JpaBoardRepository jpaBoardRepository;
-    @InjectMocks GetAllRecordsService getAllRecordsService;
+    private JpaBoardRepository jpaBoardRepository;
+    @InjectMocks
+    GetAllRecordsService getAllRecordsService;
 
     @Before
     public void setup() {

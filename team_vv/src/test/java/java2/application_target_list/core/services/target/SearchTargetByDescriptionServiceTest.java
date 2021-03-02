@@ -27,9 +27,12 @@ public class SearchTargetByDescriptionServiceTest extends TestCase {
 
     private List<Target> targets;
     private List<CoreError> errors;
-    @Mock private JpaTargetRepository jpaTargetRepository;
-    @Mock private SearchTargetByDescriptionValidator validator;
-    @InjectMocks private SearchTargetByDescriptionService service;
+    @Mock
+    private JpaTargetRepository jpaTargetRepository;
+    @Mock
+    private SearchTargetByDescriptionValidator validator;
+    @InjectMocks
+    SearchTargetByDescriptionService service;
 
     @Before
     public void setup() {
