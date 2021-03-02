@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 @Component
 public class ShowCustomersRequestValidator {
 
-    private static final Pattern PATTERN_NAME = Pattern.compile("[a-zA-Z]", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_PHONE = Pattern.compile("[0-9]+");
+    private static final Pattern PATTERN_NAME = Pattern.compile("\\p{Alnum}{1,50}", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_PHONE = Pattern.compile("\\d{1,11}");
     private final static int MIN_PAGE_SIZE = 8;
     private final static int MAX_PAGE_SIZE = 20;
 
@@ -50,7 +50,7 @@ public class ShowCustomersRequestValidator {
         }
 
         if (!PATTERN_NAME.matcher(request.getNameStartsWith()).matches() && !request.getNameStartsWith().equals("")) {
-            CoreError error = new CoreError("customerName StartWith", "Should only contain characters");
+            CoreError error = new CoreError("customerName StartWith", "Should only contain alphanumeric characters");
             errors.add(error);
         }
 

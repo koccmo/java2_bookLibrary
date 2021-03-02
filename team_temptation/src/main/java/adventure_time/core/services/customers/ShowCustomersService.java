@@ -24,38 +24,40 @@ public class ShowCustomersService {
         if (!errors.isEmpty()) {
             return new ShowCustomersResponse(null, errors);
         }
-        //TODO валидация не проходит из-за ""
 
-        String query = "FROM Customers AS c";
-        if (!request.getNameStartsWith().equals("")) {
-            if (!request.getPhoneStartsWith().equals("")) {
-                query = query + " WHERE c.customerName LIKE '" +
-                        request.getNameStartsWith() +
-                        "%' AND c.customerPhone LIKE '+" +
-                        request.getPhoneStartsWith() + "%'";
-            } else {
-                query = query + " WHERE c.customerName LIKE '" +
-                        request.getNameStartsWith() + "%'";
-            }
+        String query = queryMaker(request);
 
-        } else {
-            query = query + " WHERE c.customerPhone LIKE '+" +
-            request.getPhoneStartsWith() + "%'";
-        }
-
-        if (!request.getOrdering().getOrderBy().equals("")) {
-            query = query + request.getOrdering().getOrderBy();
-        }
-
-        if (!request.getOrdering().getOrderDirection().equals("")) {
-            query = query + request.getOrdering().getOrderDirection();
-        }
-
-        query = query + " LIMIT " + request.getPaging().getPageSize() + "," + request.getPaging().getPageNumber();
-
-        List<Customers> result = database.findCustomers(query);
+        List<Customers> result = database.findCustomers(query, request.getPaging());
 
         return new ShowCustomersResponse(result,null);
+    }
+
+    private String queryMaker (ShowCustomersRequest request) {
+        return "FROM Customers AS c" +
+                isWhere(request) +
+                isNameStartWith(request.getNameStartsWith()) +
+                isAnd(request) +
+                isPhoneStartsWith(request.getPhoneStartsWith()) +
+                request.getOrdering().getOrderBy() +
+                request.getOrdering().getOrderDirection();
+    }
+
+    private String isWhere (ShowCustomersRequest request) {
+        return !(request.getNameStartsWith().equals("") && request.getPhoneStartsWith().equals("")) ?
+                " WHERE" : "";
+    }
+
+    private String isAnd (ShowCustomersRequest request) {
+        return !(request.getNameStartsWith().equals("") || request.getPhoneStartsWith().equals("")) ?
+                " AND" : "";
+    }
+
+    private String isPhoneStartsWith (String get) {
+        return get.equals("") ? "" : " c.customerPhone LIKE '+" + get + "%'";
+    }
+
+    private String isNameStartWith (String get) {
+        return get.equals("") ? "" : " c.customerName LIKE '" + get + "%'";
     }
 
 }

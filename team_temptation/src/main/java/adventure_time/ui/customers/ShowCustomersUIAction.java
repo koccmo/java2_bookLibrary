@@ -33,10 +33,10 @@ public class ShowCustomersUIAction implements UIAction {
         System.out.println("Define the sorting criteria by: N - name, P - phone, E - email, I - ID");
         System.out.println("If the sorting doesn't need just press Enter:");
         String order = switch (scanner.nextLine()) {
-            case "N" ->  "ORDER BY c.customerName";
-            case "P" ->  "ORDER BY c.customerPhone";
-            case "E" ->  "ORDER BY c.customerEmail";
-            case "I" ->  "ORDER BY c.customerId";
+            case "N" ->  " ORDER BY c.customerName";
+            case "P" ->  " ORDER BY c.customerPhone";
+            case "E" ->  " ORDER BY c.customerEmail";
+            case "I" ->  " ORDER BY c.customerId";
             default -> "";
         };
         System.out.println("Define the sorting order: A - ascending, D - descending,");
