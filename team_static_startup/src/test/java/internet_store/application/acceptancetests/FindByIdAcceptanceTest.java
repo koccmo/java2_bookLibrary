@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FindByIdAcceptanceTest {
 /*
 
