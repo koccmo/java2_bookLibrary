@@ -36,19 +36,15 @@ public class ChangeTargetDeadlineServiceTest {
         errors = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeTargetDeadline() {
-//        Target target = new Target("name", "description", 1L);
-//        target.setId(1L);
-////        targetRepository.addTarget(target);
-//        jpaTargetRepository.save(target);
-////        Mockito.when(targetRepository.changeTargetDeadline(1L, 100L)).thenReturn(true);
-//        Mockito.when(jpaTargetRepository.changeTargetDeadline(1L, 100L)).thenReturn(1);
-//        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
-//        ChangeTargetDeadlineResponse response = service.execute(request);
-////        assertFalse(response.hasErrors());
-//
-//    }
+    @Test
+    public void shouldChangeTargetDeadline() {
+        Mockito.when(jpaTargetRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaTargetRepository.changeTargetDeadline(1L, 100L)).thenReturn(1);
+        ChangeTargetDeadlineRequest request = new ChangeTargetDeadlineRequest(1L, 100L);
+        ChangeTargetDeadlineResponse response = service.execute(request);
+        Assertions.assertFalse(response.hasErrors());
+
+    }
 
     @Test
     public void invalidChangeTargetDeadlineRequest_v1() {

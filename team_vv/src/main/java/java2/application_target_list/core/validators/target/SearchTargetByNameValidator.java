@@ -88,14 +88,14 @@ public class SearchTargetByNameValidator {
         return new CoreError("Order by", "must not be empty");
     }
 
+    private CoreError createTargetNameIsEmptyError(){
+        return new CoreError("Target name", "must not be empty!");
+    }
+
     private void checkTargetName(SearchTargetByNameRequest searchTargetByNameRequest){
         if (isTargetNameEmpty(searchTargetByNameRequest)) {
             errors.add(createTargetNameIsEmptyError());
         }
-    }
-
-    private CoreError createTargetNameIsEmptyError(){
-        return new CoreError("Target name", "must not be empty!");
     }
 
     private boolean isOrderDirectionIncorrect(SearchTargetByNameRequest request){

@@ -34,14 +34,14 @@ public class DeleteUserServiceTest {
         errors = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldDeleteUserFromDatabase() {
-////        Mockito.when(userRepository.isIdInUserList(1L)).thenReturn(true);
-//        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
-//        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(1L);
-//        DeleteUserResponse deleteUserResponse = deleteUserService.execute(deleteUserRequest);
-//        Assertions.assertFalse(deleteUserResponse.hasErrors());
-//    }
+    @Test
+    public void shouldDeleteUserFromDatabase() {
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(1L);
+        DeleteUserResponse deleteUserResponse = deleteUserService.execute(deleteUserRequest);
+        Assertions.assertFalse(deleteUserResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

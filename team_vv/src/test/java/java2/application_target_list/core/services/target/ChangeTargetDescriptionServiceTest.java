@@ -37,18 +37,14 @@ public class ChangeTargetDescriptionServiceTest {
         errors = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeTargetDescription() {
-//        Target target = new Target("name", "description", 1L);
-//        target.setId(1L);
-////        targetRepository.addTarget(target);
-//        jpaTargetRepository.save(target);
-////        Mockito.when(targetRepository.changeTargetDescription(1L, "new description")).thenReturn(true);
-//        Mockito.when(jpaTargetRepository.changeTargetDescription(1L, "new description")).thenReturn(1);
-//        ChangeTargetDescriptionRequest request = new ChangeTargetDescriptionRequest(1L, "new description");
-//        ChangeTargetDescriptionResponse response = service.execute(request);
-//        assertFalse(response.hasErrors());
-//    }
+    @Test
+    public void shouldChangeTargetDescription() {
+        Mockito.when(jpaTargetRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaTargetRepository.changeTargetDescription(1L, "new description")).thenReturn(1);
+        ChangeTargetDescriptionRequest request = new ChangeTargetDescriptionRequest(1L, "new description");
+        ChangeTargetDescriptionResponse response = service.execute(request);
+        Assertions.assertFalse(response.hasErrors());
+    }
 
     @Test
     public void invalidChangeTargetDescriptionRequest_v1() {

@@ -89,14 +89,14 @@ public class SearchTargetByDescriptionValidator {
         return new CoreError("Order by", "must not be empty");
     }
 
+    private CoreError createDescriptionIsEmptyError(){
+        return new CoreError("Target description", "must not be empty!");
+    }
+
     private void checkTargetDescription(SearchTargetByDescriptionRequest searchTargetByDescriptionRequest){
         if (isTargetDescriptionEmpty(searchTargetByDescriptionRequest)) {
             errors.add(createDescriptionIsEmptyError());
         }
-    }
-
-    private CoreError createDescriptionIsEmptyError(){
-        return new CoreError("Target description", "must not be empty!");
     }
 
     private boolean isOrdering(SearchTargetByDescriptionRequest request){

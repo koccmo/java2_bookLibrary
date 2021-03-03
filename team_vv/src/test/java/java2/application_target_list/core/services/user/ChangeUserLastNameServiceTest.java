@@ -34,14 +34,14 @@ public class ChangeUserLastNameServiceTest {
         errorList = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeUserLastName() {
-////        Mockito.when(userRepository.changeUserLastName(1L, "new surname")).thenReturn(true);
-//        Mockito.when(jpaUserRepository.changeUserLastName(1L, "new surname")).thenReturn(1);
-//        ChangeUserLastNameRequest changeUserLastNameRequest = new ChangeUserLastNameRequest(1L, "new surname");
-//        ChangeUserLastNameResponse changeUserLastNameResponse = changeUserLastNameService.execute(changeUserLastNameRequest);
-//        Assertions.assertFalse(changeUserLastNameResponse.hasErrors());
-//    }
+    @Test
+    public void shouldChangeUserLastName() {
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaUserRepository.changeUserLastName(1L, "new surname")).thenReturn(1);
+        ChangeUserLastNameRequest changeUserLastNameRequest = new ChangeUserLastNameRequest(1L, "new surname");
+        ChangeUserLastNameResponse changeUserLastNameResponse = changeUserLastNameService.execute(changeUserLastNameRequest);
+        Assertions.assertFalse(changeUserLastNameResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

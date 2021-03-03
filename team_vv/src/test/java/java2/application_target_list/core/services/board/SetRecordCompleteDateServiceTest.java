@@ -36,13 +36,15 @@ public class SetRecordCompleteDateServiceTest {
         errors = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldSetCompleteDate() {
-//        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
-//        SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
-//        Mockito.when(jpaBoardRepository.setRecordCompleteDate(1L, getDate())).thenReturn(1);
-//        assertFalse(setRecordCompleteDateResponse.getErrorList().isEmpty());
-//    }
+    @Test
+    public void shouldSetCompleteDate() {
+        Mockito.when(jpaBoardRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaBoardRepository.setRecordCompleteDate(1L, getDate())).thenReturn(1);
+        SetRecordCompleteDateRequest setRecordCompleteDateRequest = new SetRecordCompleteDateRequest(1L);
+        SetRecordCompleteDateResponse setRecordCompleteDateResponse = setRecordCompleteDateService.execute(setRecordCompleteDateRequest);
+        Mockito.when(jpaBoardRepository.setRecordCompleteDate(1L, getDate())).thenReturn(1);
+        Assertions.assertFalse(setRecordCompleteDateResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

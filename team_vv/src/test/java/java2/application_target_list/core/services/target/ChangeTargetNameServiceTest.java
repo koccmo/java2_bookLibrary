@@ -34,14 +34,14 @@ public class ChangeTargetNameServiceTest {
         errors = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeTargetName() {
-////        Mockito.when(targetRepository.changeTargetName(1L, "new name")).thenReturn(true);
-//        Mockito.when(jpaTargetRepository.changeTargetName(1L, "new name")).thenReturn(1);
-//        ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "new name");
-//        ChangeTargetNameResponse response = service.execute(request);
-//        assertFalse(response.hasErrors());
-//    }
+    @Test
+    public void shouldChangeTargetName() {
+        Mockito.when(jpaTargetRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaTargetRepository.changeTargetName(1L, "new name")).thenReturn(1);
+        ChangeTargetNameRequest request = new ChangeTargetNameRequest(1L, "new name");
+        ChangeTargetNameResponse response = service.execute(request);
+        Assertions.assertFalse(response.hasErrors());
+    }
 
     @Test
     public void invalidChangeTargetNameRequest_v1() {

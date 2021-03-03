@@ -34,14 +34,14 @@ public class ChangeUserFirstNameServiceTest {
         errorList = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeUserName() {
-////        Mockito.when(userRepository.changeUserFirstName(1L, "new name")).thenReturn(true);
-//        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
-//        ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "new name");
-//        ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-//        Assertions.assertFalse(changeUserFirstNameResponse.hasErrors());
-//    }
+    @Test
+    public void shouldChangeUserName() {
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
+        ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(1L, "new name");
+        ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
+        Assertions.assertFalse(changeUserFirstNameResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

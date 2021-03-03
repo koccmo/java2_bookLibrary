@@ -45,16 +45,17 @@ public class AddRecordServiceTest {
         errorList = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldAddRecordToDatabase() {
-//            Mockito.when(addRecordValidator.validate(any())).thenReturn(new ArrayList<>());
-//            Mockito.when(jpaBoardRepository.save(any())).thenReturn(true);
-//            AddRecordRequest recordRequest = new AddRecordRequest(1L, 1L);
-//            AddRecordResponse addRecordResponse = addRecordService.execute(recordRequest);
-//        Assertions.assertFalse(addRecordResponse.hasErrors());
-////        Mockito.verify(boardRepository).addToBoard(argThat(new RecordMatcher(1L, 1L)));
-//            Mockito.verify(jpaBoardRepository).save(argThat(new RecordMatcher(1L, 1L)));
-//    }
+    @Test
+    public void shouldAddRecordToDatabase() {
+        Mockito.when(jpaTargetRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(addRecordValidator.validate(any())).thenReturn(new ArrayList<>());
+//        Mockito.when(jpaBoardRepository.save(any())).thenReturn(true);
+        AddRecordRequest recordRequest = new AddRecordRequest(1L, 1L);
+        AddRecordResponse addRecordResponse = addRecordService.execute(recordRequest);
+        Assertions.assertFalse(addRecordResponse.hasErrors());
+        Mockito.verify(jpaBoardRepository).save(argThat(new RecordMatcher(1L, 1L)));
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

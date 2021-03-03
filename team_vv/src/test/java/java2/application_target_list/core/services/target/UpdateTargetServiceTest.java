@@ -34,12 +34,13 @@ public class UpdateTargetServiceTest {
         errorList = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeUserName() {
-//       UpdateTargetRequest updateTargetRequest = new UpdateTargetRequest(1L, "new name", "new description", 100L);
-//       UpdateTargetResponse updateTargetResponse = updateTargetService.execute(updateTargetRequest);
-//       Assertions.assertFalse(updateTargetResponse.hasErrors());
-//    }
+    @Test
+    public void shouldChangeUserName() {
+       Mockito.when(jpaTargetRepository.existsById(1L)).thenReturn(true);
+       UpdateTargetRequest updateTargetRequest = new UpdateTargetRequest(1L, "new name", "new description", 100L);
+       UpdateTargetResponse updateTargetResponse = updateTargetService.execute(updateTargetRequest);
+       Assertions.assertFalse(updateTargetResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {

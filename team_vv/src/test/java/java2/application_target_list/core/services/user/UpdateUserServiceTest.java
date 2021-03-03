@@ -34,14 +34,14 @@ public class UpdateUserServiceTest {
         errorList = new ArrayList<>();
     }
 
-//    @Test
-//    public void shouldChangeUserName() {
-////        Mockito.when(userRepository.changeUserFirstName(1L, "new name")).thenReturn(true);
-//        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
-//        UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, "new first name", "new last name");
-//        UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
-//        Assertions.assertFalse(updateUserResponse.hasErrors());
-//    }
+    @Test
+    public void shouldChangeUserName() {
+        Mockito.when(jpaUserRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jpaUserRepository.changeUserFirstName(1L, "new name")).thenReturn(1);
+        UpdateUserRequest updateUserRequest = new UpdateUserRequest(1L, "new first name", "new last name");
+        UpdateUserResponse updateUserResponse = updateUserService.execute(updateUserRequest);
+        Assertions.assertFalse(updateUserResponse.hasErrors());
+    }
 
     @Test
     public void shouldReturnResponseWithErrors_v1() {
