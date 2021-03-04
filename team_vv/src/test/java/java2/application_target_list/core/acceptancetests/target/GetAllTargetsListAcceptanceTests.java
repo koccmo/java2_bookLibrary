@@ -1,18 +1,22 @@
 package java2.application_target_list.core.acceptancetests.target;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.target.GetAllTargetsService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class GetAllTargetsListAcceptanceTests {
 
     @Autowired
@@ -22,7 +26,7 @@ public class GetAllTargetsListAcceptanceTests {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    @BeforeEach
+    @Before
     public void setup() {
         databaseCleaner.clean();
     }
@@ -33,10 +37,10 @@ public class GetAllTargetsListAcceptanceTests {
         addTargetService.execute(request1);
         GetAllTargetsResponse response = getAllTargetsService.execute(new GetAllTargetsRequest());
 
-        Assertions.assertFalse(response.hasErrors());
-        Assertions.assertEquals(response.getTargetList().size(), 1);
-        Assertions.assertNull(response.getErrorList());
-        Assertions.assertEquals(response.getTargetList().get(0).getName(), "name");
-        Assertions.assertEquals(response.getTargetList().get(0).getDescription(), "description");
+        Assert.assertFalse(response.hasErrors());
+        Assert.assertEquals(response.getTargetList().size(), 1);
+        Assert.assertNull(response.getErrorList());
+        Assert.assertEquals(response.getTargetList().get(0).getName(), "name");
+        Assert.assertEquals(response.getTargetList().get(0).getDescription(), "description");
     }
 }

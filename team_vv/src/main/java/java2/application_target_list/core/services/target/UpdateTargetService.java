@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.UpdateTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.UpdateTargetResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.UpdateTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UpdateTargetService {
+public class UpdateTargetService extends ErrorCreator {
 
     @Autowired
     private UpdateTargetValidator updateTargetValidator;
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
 
-    private List<CoreError> errors;
-
     public UpdateTargetResponse execute(UpdateTargetRequest updateTargetRequest) {
-        errors = checkRequestForErrors(updateTargetRequest);
-        checkAvailabilityInDB(updateTargetRequest);
+        List<CoreError> errors = checkRequestForErrors(updateTargetRequest);
+        checkAvailabilityInDB(updateTargetRequest, errors);
 
-        if (requestHaveError()) {
-            return createUpdateTargetResponseWithErrors();
+        if (requestHaveError(errors)) {
+            return createUpdateTargetResponseWithErrors(errors);
         }
 
         updateTarget(updateTargetRequest);
@@ -59,22 +58,18 @@ public class UpdateTargetService {
         updateTargetDeadline(updateTargetRequest);
     }
 
-    private UpdateTargetResponse createUpdateTargetResponseWithErrors(){
+    private UpdateTargetResponse createUpdateTargetResponseWithErrors(List<CoreError> errors){
         return new UpdateTargetResponse(errors);
     }
 
-    private boolean requestHaveError() {
+    private boolean requestHaveError(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
-    private void checkAvailabilityInDB(UpdateTargetRequest updateTargetRequest) {
+    private void checkAvailabilityInDB(UpdateTargetRequest updateTargetRequest, List<CoreError> errors) {
         if (targetDoesNotExist(updateTargetRequest)){
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID;","no target with that ID"));
         }
-    }
-
-    private CoreError createTargetDoesNotExistError() {
-        return new CoreError("Target ID;","no target with that ID");
     }
 
     private boolean targetDoesNotExist(UpdateTargetRequest updateTargetRequest){

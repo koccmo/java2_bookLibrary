@@ -20,27 +20,23 @@ public class AddUserService {
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-    private User user;
-
-
     public AddUserResponse execute(AddUserRequest addUserRequest){
-        errors = checkRequestForErrors(addUserRequest);
+        List<CoreError> errors = checkRequestForErrors(addUserRequest);
 
-        if (requestHaveErrors()){
-            return createAddUserResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createAddUserResponseWithErrors(errors);
         }
 
-        user = createUser(addUserRequest);
-        addUserToDB();
-        return createUserResponse();
+        User user = createUser(addUserRequest);
+        addUserToDB(user);
+        return createUserResponse(user);
     }
 
-    private AddUserResponse createUserResponse(){
+    private AddUserResponse createUserResponse(User user){
         return new AddUserResponse(user);
     }
 
-    private void addUserToDB() {
+    private void addUserToDB(User user) {
         jpaUserRepository.save(user);
     }
 
@@ -48,16 +44,15 @@ public class AddUserService {
         return new User(addUserRequest.getFirstName(), addUserRequest.getLastName());
     }
 
-    private AddUserResponse createAddUserResponseWithErrors() {
+    private AddUserResponse createAddUserResponseWithErrors(List<CoreError> errors) {
         return new AddUserResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
     private List<CoreError> checkRequestForErrors(AddUserRequest addUserRequest) {
         return addUserValidator.validate(addUserRequest);
     }
-
 }

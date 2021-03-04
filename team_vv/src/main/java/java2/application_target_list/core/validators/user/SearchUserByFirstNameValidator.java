@@ -2,100 +2,63 @@ package java2.application_target_list.core.validators.user;
 
 import java2.application_target_list.core.requests.user.SearchUsersByFirstNameRequest;
 import java2.application_target_list.core.responses.CoreError;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SearchUserByFirstNameValidator {
-
-    private List<CoreError> errors;
+public class SearchUserByFirstNameValidator extends ErrorCreator {
 
     public List<CoreError> validate(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
-        errors = new ArrayList<>();
-        checkUserFirstName(searchUsersByFirstNameRequest);
-        checkOrdering(searchUsersByFirstNameRequest);
-        checkPaging(searchUsersByFirstNameRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkUserFirstName(searchUsersByFirstNameRequest, errors);
+        checkOrdering(searchUsersByFirstNameRequest, errors);
+        checkPaging(searchUsersByFirstNameRequest, errors);
         return errors;
     }
 
-    private void checkUserFirstName(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+    private void checkUserFirstName(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest, List<CoreError> errors){
         if (isUserFirstNameEmpty(searchUsersByFirstNameRequest)) {
-            errors.add(createUserFirstNameIsEmptyError());
+            errors.add(createCoreError("User first name", "must not be empty!"));
         }
     }
 
-    private void checkOrdering(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+    private void checkOrdering(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest, List<CoreError> errors){
         if (isOrdering(searchUsersByFirstNameRequest)){
             if (isOrderByEmpty(searchUsersByFirstNameRequest)){
-                errors.add(createOrderByIsEmptyError());
+                errors.add(createCoreError("Order by", "must not be empty"));
             }
             if (isOrderByIncorrect(searchUsersByFirstNameRequest)){
-                errors.add(createOrderByIsIncorrectError());
+                errors.add(createCoreError("Order by", "must contain FIRST NAME or LAST NAME only!"));
             }
             if (isOrderDirectionEmpty(searchUsersByFirstNameRequest)){
-                errors.add(createOrderDirectionIsEmptyError());
+                errors.add(createCoreError("Order direction", "must not be empty"));
             }
             if (isOrderDirectionIncorrect(searchUsersByFirstNameRequest)){
-                errors.add(createIncorrectOrderDirectionError());
+                errors.add(createCoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
             }
         }
     }
 
-    private void checkPaging(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest){
+    private void checkPaging(SearchUsersByFirstNameRequest searchUsersByFirstNameRequest, List<CoreError> errors){
         if (isPaging(searchUsersByFirstNameRequest)){
             if (!isPageNumberCorrect(searchUsersByFirstNameRequest)) {
-                errors.add(createIncorrectPageNumberError());
+                errors.add(createCoreError("Page number", "must be greater then 0!"));
             }
 
             if (isPageNumberEmpty(searchUsersByFirstNameRequest)){
-                errors.add(createPageNumberIsEmptyError());
+                errors.add(createCoreError("Page number", "must not be empty"));
             }
 
             if (!isPageSizeCorrect(searchUsersByFirstNameRequest)){
-                errors.add(createIncorrectPageSizeError());
+                errors.add(createCoreError("Page size", "must be greater then 0!"));
             }
 
             if (isPageSizeEmpty(searchUsersByFirstNameRequest)){
-                errors.add(createPageSizeIsEmptyError());
+                errors.add(createCoreError("Page size", "must not be empty"));
             }
         }
-    }
-
-    private CoreError createUserFirstNameIsEmptyError(){
-        return new CoreError("User first name", "must not be empty!");
-    }
-
-    private CoreError createPageSizeIsEmptyError() {
-        return new CoreError("Page size", "must not be empty");
-    }
-
-    private CoreError createIncorrectPageSizeError(){
-        return new CoreError("Page size", "must be greater then 0!");
-    }
-
-    private CoreError createPageNumberIsEmptyError(){
-        return new CoreError("Page number", "must not be empty");
-    }
-
-    private CoreError createIncorrectPageNumberError(){
-        return new CoreError("Page number", "must be greater then 0!");
-    }
-
-    private CoreError createIncorrectOrderDirectionError(){
-        return new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!");
-    }
-
-    private CoreError createOrderDirectionIsEmptyError(){
-        return new CoreError("Order direction", "must not be empty");
-    }
-
-    private CoreError createOrderByIsIncorrectError(){
-        return new CoreError("Order by", "must contain FIRST NAME or LAST NAME only!");
-    }
-
-    private CoreError createOrderByIsEmptyError(){
-        return new CoreError("Order by", "must not be empty");
     }
 
     private boolean isOrderDirectionIncorrect(SearchUsersByFirstNameRequest request){

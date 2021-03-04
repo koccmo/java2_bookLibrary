@@ -16,18 +16,16 @@ public class GetAllRecordsService {
     @Autowired
     private JpaBoardRepository jpaBoardRepository;
 
-    private List<Record> records;
-
     public GetAllRecordsResponse execute(GetAllRecordsRequest getAllRecordsRequest){
-        records = getAllRecordsFromDB();
-        return createGetAllRecordsResponse();
+        List<Record> records = getAllRecordsFromDB();
+        return createGetAllRecordsResponse(records);
     }
 
     private List<Record> getAllRecordsFromDB(){
         return jpaBoardRepository.findAll();
     }
 
-    private GetAllRecordsResponse createGetAllRecordsResponse() {
+    private GetAllRecordsResponse createGetAllRecordsResponse(List<Record> records) {
         return new GetAllRecordsResponse(records);
     }
 }

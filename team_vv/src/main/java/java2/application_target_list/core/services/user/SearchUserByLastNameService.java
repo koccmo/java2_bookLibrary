@@ -31,24 +31,21 @@ public class SearchUserByLastNameService {
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-    private List<User> users;
-
     public SearchUserByLastNameResponse execute(SearchUsersByLastNameRequest searchUsersByLastNameRequest){
-        errors = checkRequestForErrors(searchUsersByLastNameRequest);
+        List<CoreError> errors = checkRequestForErrors(searchUsersByLastNameRequest);
 
-        if (requestHaveErrors()){
-            return createSearchUserByLastNameResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createSearchUserByLastNameResponseWithErrors(errors);
         }
 
-        users = findUsersInDB(searchUsersByLastNameRequest);
+        List<User> users = findUsersInDB(searchUsersByLastNameRequest);
         users = order(users, searchUsersByLastNameRequest.getOrdering());
         users = paging(users, searchUsersByLastNameRequest.getPaging());
 
-        return createSearchUserByLastNameResponse();
+        return createSearchUserByLastNameResponse(users);
     }
 
-    private SearchUserByLastNameResponse createSearchUserByLastNameResponse(){
+    private SearchUserByLastNameResponse createSearchUserByLastNameResponse(List<User> users){
         return new SearchUserByLastNameResponse(null, users);
     }
 
@@ -56,11 +53,11 @@ public class SearchUserByLastNameService {
         return jpaUserRepository.findByLastName(searchUsersByLastNameRequest.getLastName());
     }
 
-    private SearchUserByLastNameResponse createSearchUserByLastNameResponseWithErrors(){
+    private SearchUserByLastNameResponse createSearchUserByLastNameResponseWithErrors(List<CoreError> errors){
         return new SearchUserByLastNameResponse(errors, null);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 

@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.user.ChangeUserFirstNameRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.ChangeUserFirstNameResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.user.ChangeUserFirstNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ChangeUserFirstNameService {
+public class ChangeUserFirstNameService extends ErrorCreator {
 
     @Autowired
     private ChangeUserFirstNameValidator changeUserFirstNameValidator;
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public ChangeUserFirstNameResponse execute(ChangeUserFirstNameRequest changeUserFirstNameRequest){
-        errors = checkRequestForErrors(changeUserFirstNameRequest);
-        checkAvailabilityInDB(changeUserFirstNameRequest);
+        List<CoreError> errors = checkRequestForErrors(changeUserFirstNameRequest);
+        checkAvailabilityInDB(changeUserFirstNameRequest, errors);
 
-        if (requestHaveErrors()){
-            return createChangeUserFirstNameResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createChangeUserFirstNameResponseWithErrors(errors);
         }
 
         changeUserFirstName(changeUserFirstNameRequest);
@@ -41,11 +40,11 @@ public class ChangeUserFirstNameService {
         jpaUserRepository.changeUserFirstName(changeUserFirstNameRequest.getUserIdToChange(), changeUserFirstNameRequest.getNewUserFirstName());
     }
 
-    private ChangeUserFirstNameResponse createChangeUserFirstNameResponseWithErrors() {
+    private ChangeUserFirstNameResponse createChangeUserFirstNameResponseWithErrors(List<CoreError> errors) {
         return new ChangeUserFirstNameResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
@@ -53,13 +52,9 @@ public class ChangeUserFirstNameService {
         return !jpaUserRepository.existsById(changeUserFirstNameRequest.getUserIdToChange());
     }
 
-    private CoreError createUserDoesNotExistError(){
-        return new CoreError("User ID;","no user with that ID");
-    }
-
-    private void checkAvailabilityInDB(ChangeUserFirstNameRequest changeUserFirstNameRequest){
+    private void checkAvailabilityInDB(ChangeUserFirstNameRequest changeUserFirstNameRequest, List<CoreError> errors){
         if (userDoesNotExists(changeUserFirstNameRequest)){
-            errors.add(createUserDoesNotExistError());
+            errors.add(createCoreError("User ID;","no user with that ID"));
         }
     }
 

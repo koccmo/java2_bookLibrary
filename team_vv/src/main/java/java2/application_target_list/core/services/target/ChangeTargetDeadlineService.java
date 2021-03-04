@@ -1,6 +1,7 @@
 package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDeadlineResponse;
@@ -12,21 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ChangeTargetDeadlineService {
+public class ChangeTargetDeadlineService extends ErrorCreator {
 
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
     @Autowired
     private ChangeTargetDeadlineValidator validator;
 
-    private List<CoreError> errors;
-
     public ChangeTargetDeadlineResponse execute(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
 
-        errors = checkRequestForErrors(changeTargetDeadlineRequest);
-        checkAvailabilityInDB(changeTargetDeadlineRequest);
+        List<CoreError> errors = checkRequestForErrors(changeTargetDeadlineRequest);
+        checkAvailabilityInDB(changeTargetDeadlineRequest, errors);
 
-        if (requestHaveErrors()) {
+        if (requestHaveErrors(errors)) {
             return new ChangeTargetDeadlineResponse(errors);
         }
 
@@ -46,17 +45,13 @@ public class ChangeTargetDeadlineService {
         return !jpaTargetRepository.existsById(changeTargetDeadlineRequest.getTargetIdToChange());
     }
 
-    private void checkAvailabilityInDB(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+    private void checkAvailabilityInDB(ChangeTargetDeadlineRequest changeTargetDeadlineRequest, List<CoreError> errors){
         if (targetDoesNotExistInDB(changeTargetDeadlineRequest)){
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID;","no target with that ID"));
         }
     }
 
-    private CoreError createTargetDoesNotExistError() {
-        return new CoreError("Target ID;","no target with that ID");
-    }
-
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 

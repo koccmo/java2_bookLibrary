@@ -1,5 +1,6 @@
 package java2.application_target_list.core.validators.target;
 
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java2.application_target_list.core.requests.target.ChangeTargetDeadlineRequest;
 import java2.application_target_list.core.responses.CoreError;
@@ -8,50 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ChangeTargetDeadlineValidator {
-
-    private List<CoreError> errors;
+public class ChangeTargetDeadlineValidator extends ErrorCreator {
 
     public List<CoreError> validate(ChangeTargetDeadlineRequest changeTargetDeadlineRequest) {
-        errors = new ArrayList<>();
-        checkTargetId(changeTargetDeadlineRequest);
-        checkTargetDeadline(changeTargetDeadlineRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkTargetId(changeTargetDeadlineRequest, errors);
+        checkTargetDeadline(changeTargetDeadlineRequest, errors);
         return errors;
     }
 
-    private void checkTargetDeadline(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+    private void checkTargetDeadline(ChangeTargetDeadlineRequest changeTargetDeadlineRequest, List<CoreError> errors){
         if (isDeadlineNegative(changeTargetDeadlineRequest)){
-            errors.add(createTargetDeadlineIsNegativeError());
+            errors.add(createCoreError("Target new deadline", "must not be negative!"));
         }
 
         if (isDeadlineEmpty(changeTargetDeadlineRequest)){
-            errors.add(createTargetDeadlineIsEmptyError());
+            errors.add(createCoreError("Target new deadline", "must not be empty!"));
         }
     }
 
-    private void checkTargetId(ChangeTargetDeadlineRequest changeTargetDeadlineRequest){
+    private void checkTargetId(ChangeTargetDeadlineRequest changeTargetDeadlineRequest, List<CoreError> errors){
         if (isTargetIdEmpty(changeTargetDeadlineRequest)){
-            errors.add(createTargetIdIsEmptyError());
+            errors.add(createCoreError("Target ID","must not be empty!"));
         }
         if (isTargetIdNegative(changeTargetDeadlineRequest)){
-            errors.add(createTargetIdIsNegativeError());
+            errors.add(createCoreError("Target ID","must not be negative!"));
         }
-    }
-
-    private CoreError createTargetIdIsNegativeError(){
-        return new CoreError("Target ID","must not be negative!");
-    }
-
-    private CoreError createTargetIdIsEmptyError(){
-        return new CoreError("Target ID","must not be empty!");
-    }
-
-    private CoreError createTargetDeadlineIsEmptyError(){
-        return new CoreError("Target new deadline", "must not be empty!");
-    }
-
-    private CoreError createTargetDeadlineIsNegativeError(){
-        return new CoreError("Target new deadline", "must not be negative!");
     }
 
     private boolean isTargetIdEmpty(ChangeTargetDeadlineRequest request) {

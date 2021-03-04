@@ -20,26 +20,23 @@ public class AddTargetService {
     @Autowired
     private AddTargetValidator validator;
 
-    private List<CoreError> errors;
-    private Target target;
-
     public AddTargetResponse execute(AddTargetRequest addTargetRequest){
-        errors = checkRequestForErrors(addTargetRequest);
+        List<CoreError> errors = checkRequestForErrors(addTargetRequest);
 
-        if (requestHaveErrors()) {
-            return createAddTargetResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createAddTargetResponseWithErrors(errors);
         }
 
-        target = createTarget(addTargetRequest);
-        addTargetToDB();
-        return createAddTargetResponse();
+        Target target = createTarget(addTargetRequest);
+        addTargetToDB(target);
+        return createAddTargetResponse(target);
     }
 
-    private AddTargetResponse createAddTargetResponse() {
+    private AddTargetResponse createAddTargetResponse(Target target) {
         return new AddTargetResponse(target);
     }
 
-    private void addTargetToDB(){
+    private void addTargetToDB(Target target){
         jpaTargetRepository.save(target);
     }
 
@@ -47,11 +44,11 @@ public class AddTargetService {
         return new Target(addTargetRequest.getName(), addTargetRequest.getDescription(), addTargetRequest.getDeadline());
     }
 
-    private AddTargetResponse createAddTargetResponseWithErrors() {
+    private AddTargetResponse createAddTargetResponseWithErrors(List<CoreError> errors) {
         return new AddTargetResponse(errors);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 

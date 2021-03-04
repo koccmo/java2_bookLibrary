@@ -2,6 +2,7 @@ package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.DeleteTargetRequest;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.DeleteTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import java2.application_target_list.core.responses.CoreError;
@@ -12,22 +13,20 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DeleteTargetService {
+public class DeleteTargetService extends ErrorCreator {
 
     @Autowired
     private DeleteTargetValidator validator;
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
 
-    private List<CoreError> errors;
-
     public DeleteTargetResponse execute(DeleteTargetRequest deleteTargetRequest){
 
-        errors = checkRequestForErrors(deleteTargetRequest);
-        checkAvailabilityInDB(deleteTargetRequest);
+        List<CoreError> errors = checkRequestForErrors(deleteTargetRequest);
+        checkAvailabilityInDB(deleteTargetRequest, errors);
 
-        if (requestHaveErrors()) {
-            return createDeleteTargetResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createDeleteTargetResponseWithErrors(errors);
         }
 
         deleteTargetFromDB(deleteTargetRequest);
@@ -42,26 +41,22 @@ public class DeleteTargetService {
         jpaTargetRepository.deleteById(deleteTargetRequest.getTargetIdToDelete());
     }
 
-    private DeleteTargetResponse createDeleteTargetResponseWithErrors() {
+    private DeleteTargetResponse createDeleteTargetResponseWithErrors(List<CoreError> errors) {
         return new DeleteTargetResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
-    private void checkAvailabilityInDB(DeleteTargetRequest deleteTargetRequest) {
+    private void checkAvailabilityInDB(DeleteTargetRequest deleteTargetRequest, List<CoreError> errors) {
         if (targetDoesNotExist(deleteTargetRequest)){
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID;","no target with that ID"));
         }
     }
 
     private boolean targetDoesNotExist(DeleteTargetRequest deleteTargetRequest){
         return !jpaTargetRepository.existsById(deleteTargetRequest.getTargetIdToDelete());
-    }
-
-    private CoreError createTargetDoesNotExistError() {
-        return new CoreError("Target ID;","no target with that ID");
     }
 
     private List<CoreError> checkRequestForErrors(DeleteTargetRequest deleteTargetRequest){

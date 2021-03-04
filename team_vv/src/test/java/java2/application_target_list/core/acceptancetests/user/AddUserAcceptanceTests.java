@@ -1,19 +1,23 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.GetAllUsersRequest;
 import java2.application_target_list.core.responses.user.AddUserResponse;
 import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class AddUserAcceptanceTests {
 
     @Autowired
@@ -23,7 +27,7 @@ public class AddUserAcceptanceTests {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    @BeforeEach
+    @Before
     public void setup() {
         databaseCleaner.clean();
     }
@@ -39,14 +43,14 @@ public class AddUserAcceptanceTests {
         GetAllUsersRequest getAllUsersRequest = createGetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = createGetAllUserResponse(getAllUsersRequest);
 
-        Assertions.assertFalse(addUserResponse1.hasErrors());
-        Assertions.assertFalse(addUserResponse2.hasErrors());
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assertions.assertNull(getAllUsersResponse.getErrorList());
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertFalse(addUserResponse1.hasErrors());
+        Assert.assertFalse(addUserResponse2.hasErrors());
+        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assert.assertNull(getAllUsersResponse.getErrorList());
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
     }
 
     @Test
@@ -54,10 +58,10 @@ public class AddUserAcceptanceTests {
         AddUserRequest addUserRequest = createAddUserRequest("", "surname2");
         AddUserResponse addUserResponse = createAddUserResponse(addUserRequest);
 
-        Assertions.assertEquals(addUserResponse.getErrorList().size(), 1);
-        Assertions.assertTrue(addUserResponse.hasErrors());
-        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
-        Assertions.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assert.assertEquals(addUserResponse.getErrorList().size(), 1);
+        Assert.assertTrue(addUserResponse.hasErrors());
+        Assert.assertEquals(addUserResponse.getErrorList().get(0).getField(), "User first name");
+        Assert.assertEquals(addUserResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {

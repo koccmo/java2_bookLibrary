@@ -1,100 +1,63 @@
 package java2.application_target_list.core.validators.target;
 
 import java2.application_target_list.core.requests.target.SearchTargetByNameRequest;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java2.application_target_list.core.responses.CoreError;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SearchTargetByNameValidator {
-
-    private List<CoreError> errors;
+public class SearchTargetByNameValidator extends ErrorCreator {
 
     public List<CoreError> validate(SearchTargetByNameRequest searchTargetByNameRequest){
-        errors = new ArrayList<>();
-        checkTargetName(searchTargetByNameRequest);
-        checkOrdering(searchTargetByNameRequest);
-        checkPaging(searchTargetByNameRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkTargetName(searchTargetByNameRequest, errors);
+        checkOrdering(searchTargetByNameRequest, errors);
+        checkPaging(searchTargetByNameRequest, errors);
         return errors;
     }
 
-    private void checkOrdering(SearchTargetByNameRequest searchTargetByNameRequest){
+    private void checkOrdering(SearchTargetByNameRequest searchTargetByNameRequest, List<CoreError> errors){
         if (isOrdering(searchTargetByNameRequest)){
             if (isOrderByEmpty(searchTargetByNameRequest)){
-                errors.add(createOrderByIsEmptyError());
+                errors.add(createCoreError("Order by", "must not be empty"));
             }
             if (isOrderByIncorrect(searchTargetByNameRequest)){
-                errors.add(createOrderByIsIncorrectError());
+                errors.add(createCoreError("Order by", "must contain NAME, DESCRIPTION or DEADLINE only!"));
             }
             if (isOrderDirectionEmpty(searchTargetByNameRequest)){
-                errors.add(createOrderDirectionIsEmptyError());
+                errors.add(createCoreError("Order direction", "must not be empty"));
             }
             if (isOrderDirectionIncorrect(searchTargetByNameRequest)){
-                errors.add(createIncorrectOrderDirectionError());
+                errors.add(createCoreError("Order direction", "must contain ASCENDING or DESCENDING only!"));
             }
         }
     }
 
-    private void checkPaging(SearchTargetByNameRequest searchTargetByNameRequest){
+    private void checkPaging(SearchTargetByNameRequest searchTargetByNameRequest, List<CoreError> errors){
         if (isPaging(searchTargetByNameRequest)){
             if (!isPageNumberCorrect(searchTargetByNameRequest)) {
-                errors.add(createIncorrectPageNumberError());
+                errors.add(createCoreError("Page number", "must be greater then 0!"));
             }
 
             if (isPageNumberEmpty(searchTargetByNameRequest)){
-                errors.add(createPageNumberIsEmptyError());
+                errors.add(createCoreError("Page number", "must not be empty"));
             }
 
             if (!isPageSizeCorrect(searchTargetByNameRequest)){
-                errors.add(createIncorrectPageSizeError());
+                errors.add(createCoreError("Page size", "must be greater then 0!"));
             }
 
             if (isPageSizeEmpty(searchTargetByNameRequest)){
-                errors.add(createPageSizeIsEmptyError());
+                errors.add(createCoreError("Page size", "must not be empty"));
             }
         }
     }
 
-    private CoreError createPageSizeIsEmptyError() {
-        return new CoreError("Page size", "must not be empty");
-    }
-
-    private CoreError createIncorrectPageSizeError(){
-        return new CoreError("Page size", "must be greater then 0!");
-    }
-
-    private CoreError createPageNumberIsEmptyError(){
-        return new CoreError("Page number", "must not be empty");
-    }
-
-    private CoreError createIncorrectPageNumberError(){
-        return new CoreError("Page number", "must be greater then 0!");
-    }
-
-    private CoreError createIncorrectOrderDirectionError(){
-        return new CoreError("Order direction", "must contain ASCENDING or DESCENDING only!");
-    }
-
-    private CoreError createOrderDirectionIsEmptyError(){
-        return new CoreError("Order direction", "must not be empty");
-    }
-
-    private CoreError createOrderByIsIncorrectError(){
-        return new CoreError("Order by", "must contain NAME, DESCRIPTION or DEADLINE only!");
-    }
-
-    private CoreError createOrderByIsEmptyError(){
-        return new CoreError("Order by", "must not be empty");
-    }
-
-    private CoreError createTargetNameIsEmptyError(){
-        return new CoreError("Target name", "must not be empty!");
-    }
-
-    private void checkTargetName(SearchTargetByNameRequest searchTargetByNameRequest){
+    private void checkTargetName(SearchTargetByNameRequest searchTargetByNameRequest, List<CoreError> errors){
         if (isTargetNameEmpty(searchTargetByNameRequest)) {
-            errors.add(createTargetNameIsEmptyError());
+            errors.add(createCoreError("Target name", "must not be empty!"));
         }
     }
 

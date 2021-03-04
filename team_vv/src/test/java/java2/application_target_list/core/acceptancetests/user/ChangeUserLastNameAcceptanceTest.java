@@ -1,6 +1,7 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.domain.User;
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.requests.user.ChangeUserLastNameRequest;
@@ -11,14 +12,18 @@ import java2.application_target_list.core.responses.user.GetAllUsersResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.ChangeUserLastNameService;
 import java2.application_target_list.core.services.user.GetAllUserService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.util.List;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class ChangeUserLastNameAcceptanceTest {
 
     @Autowired
@@ -30,12 +35,11 @@ public class ChangeUserLastNameAcceptanceTest {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    private Long userId;
+    private Long firstUserId;
+    private Long secondUserId;
     private List<User> userList;
 
-
-
-    @BeforeEach
+    @Before
     public void setup() {
         databaseCleaner.clean();
         addUsersToDatabase();
@@ -44,37 +48,33 @@ public class ChangeUserLastNameAcceptanceTest {
 
     @Test
     public void shouldChangeUserFirstName() {
-        userId = userList.get(1).getId();
-
         ChangeUserLastNameResponse changeUserLastNameResponse =
-                changeUserLastNameService.execute(new ChangeUserLastNameRequest(userId, "New Last Name"));
+                changeUserLastNameService.execute(new ChangeUserLastNameRequest(secondUserId, "New Last Name"));
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(new GetAllUsersRequest());
 
-        Assertions.assertFalse(changeUserLastNameResponse.hasErrors());
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "New Last Name");
+        Assert.assertFalse(changeUserLastNameResponse.hasErrors());
+        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "New Last Name");
     }
 
     @Test
     public void shouldReturnErrorList() {
-        userId = userList.get(1).getId();
-
         ChangeUserLastNameResponse changeUserLastNameResponse = changeUserLastNameService.execute(
-                new ChangeUserLastNameRequest(userId, ""));
+                new ChangeUserLastNameRequest(secondUserId, ""));
         GetAllUsersResponse getAllUsersResponse = getAllUserService.execute(new GetAllUsersRequest());
 
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertTrue(changeUserLastNameResponse.hasErrors());
-        Assertions.assertEquals(changeUserLastNameResponse.getErrorList().size(), 1);
-        Assertions.assertEquals(changeUserLastNameResponse.getErrorList().get(0).getField(), "User new last name");
-        Assertions.assertEquals(changeUserLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "name");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertTrue(changeUserLastNameResponse.hasErrors());
+        Assert.assertEquals(changeUserLastNameResponse.getErrorList().size(), 1);
+        Assert.assertEquals(changeUserLastNameResponse.getErrorList().get(0).getField(), "User new last name");
+        Assert.assertEquals(changeUserLastNameResponse.getErrorList().get(0).getMessage(), "must not be empty!");
     }
 
     private AddUserResponse createAddUserResponse(AddUserRequest addUserRequest) {
@@ -90,5 +90,7 @@ public class ChangeUserLastNameAcceptanceTest {
         AddUserRequest addUserRequest2 = createAddUserRequest("name2", "surname2");
         AddUserResponse addUserResponse1 = createAddUserResponse(addUserRequest1);
         AddUserResponse addUserResponse2 = createAddUserResponse(addUserRequest2);
+        firstUserId = addUserResponse1.getNewUser().getId();
+        secondUserId = addUserResponse2.getNewUser().getId();
     }
 }
