@@ -24,7 +24,7 @@ import org.springframework.stereotype.Controller;
 public class LoginController {
 
     @Autowired
-    private ContainsUserServiceGUI containsUserServiceGUI = new ContainsUserServiceGUI(); //Why null?
+    private ContainsUserServiceGUI containsUserServiceGUI;
 
     @FXML
     private ResourceBundle resources;
@@ -44,7 +44,6 @@ public class LoginController {
     @FXML
     private TextFlow RequiredPassword;
 
-
     @FXML
     private Button signInButton;
 
@@ -52,12 +51,13 @@ public class LoginController {
     private Button exitButton;
 
     @FXML
-    @Autowired
     void initialize( ) {
         signInButton.setOnAction(event -> {
-            if (containsUserServiceGUI.execute(userName.getText(), password.getText())) {};
             Parent root = null;
-            if (userName.getText().equals("admin") && password.getText().equals("admin")) {
+            if (
+                    userName.getText().equals("admin") && password.getText().equals("admin")
+                    //containsUserServiceGUI.execute(userName.getText(), password.getText())
+            ) {
                 try {
                     signInButton.getScene().getWindow().hide();
                     root = FXMLLoader.load(getClass().getResource("/FXML/mainMenu.fxml"));
@@ -70,7 +70,6 @@ public class LoginController {
                     if (userName.getText()==null) {userNameRequired.textProperty();};
                     if ( password.getText()==null) {RequiredPassword.getScene();};
                     root = FXMLLoader.load(getClass().getResource("/FXML/scene.fxml"));
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,11 +85,6 @@ public class LoginController {
         });
 
         exitButton.setOnAction(event ->  System.exit(0));
-
-
-
-
-
     }
 }
 
