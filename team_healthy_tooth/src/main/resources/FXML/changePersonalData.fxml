@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dental_clinic.gui.user.ChangePersonalCodeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dental_clinic.gui.patient.ChangePersonalDataController">
    <children>
       <AnchorPane layoutY="102.0" prefHeight="298.0" prefWidth="600.0" style="-fx-background-color: #fafafa;">
          <children>
@@ -19,7 +19,7 @@
                   <Font name="Segoe Script" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="personalCode" layoutX="72.0" layoutY="134.0" prefHeight="30.0" prefWidth="182.0" promptText="Personal code" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+            <TextField fx:id="surname" layoutX="72.0" layoutY="134.0" prefHeight="30.0" prefWidth="182.0" promptText="Surname" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
             <TextField fx:id="phone" layoutX="324.0" layoutY="134.0" prefHeight="30.0" prefWidth="182.0" promptText="Phone" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
          </children>
       </AnchorPane>

@@ -134,11 +134,231 @@ public class MainMenuController {
     @FXML
     void initialize() {
         addUserButton.setOnAction(event -> {
-            //addUser.getScene().getWindow().hide();
             Parent root = null ;
             try {
                 addUserButton.getScene().getWindow().hide();
                 root = FXMLLoader.load(getClass().getResource("/FXML/addUser.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        getUsersButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getUsersButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getUsers.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        blockUserButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                blockUserButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/blockUser.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        addRoleButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addRoleButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addRole.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        getRolesButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getRolesButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getRoles.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        setRoleButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                setRoleButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/setRole.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        usersRoleButton.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                usersRoleButton.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getUsersRole.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        addPersonalData.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addPersonalData.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addPatient.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        changePersonalData.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                changePersonalData.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/changePersonalData.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        getPatientCard.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getPatientCard.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getPatientCard.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        getPersonalData.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getPersonalData.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getPersonalData.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        getPatientHistory.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getPatientHistory.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getPatientHistory.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        searchPatient.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                searchPatient.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/searchPatient.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+            Image iconMain = new Image(iconStream);
+            Stage stage = new Stage();
+            stage.getIcons().add(iconMain);
+            stage.setTitle("Dental Clinic");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        });
+
+        updateJowl.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                updateJowl.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/updateJowl.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
