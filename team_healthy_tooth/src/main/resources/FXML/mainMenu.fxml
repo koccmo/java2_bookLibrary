@@ -107,17 +107,12 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="getPatientHistory" layoutX="312.0" layoutY="99.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="248.0" style="-fx-background-color: #ff8000;" text="Get patient history">
+                              <Button fx:id="searchPatient" layoutX="310.0" layoutY="99.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="249.0" style="-fx-background-color: #ff8000;" text="Search patient by personal code/id">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="searchPatient" layoutX="312.0" layoutY="141.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="249.0" style="-fx-background-color: #ff8000;" text="Search patient by personal code/id">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="updateJowl" layoutX="312.0" layoutY="184.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #ff8000;" text="Update patient' s jowl info">
+                              <Button fx:id="updateJowl" layoutX="310.0" layoutY="141.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="250.0" style="-fx-background-color: #ff8000;" text="Update patient' s jowl info">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -131,7 +126,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="addDocotr" layoutX="68.0" layoutY="74.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Add doctor">
+                              <Button fx:id="addDocotr" layoutX="68.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Add doctor">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -141,22 +136,17 @@
                                     <Font name="Segoe Script" size="24.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="deleteDoctor" layoutX="68.0" layoutY="119.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Delete doctor">
+                              <Button fx:id="deleteDoctor" layoutX="68.0" layoutY="150.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Fire doctor">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="fillGraphic" layoutX="180.0" layoutY="177.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="192.0" style="-fx-background-color: #ff8000;" text="Fill doctor' s work graphic">
+                              <Button fx:id="fillGraphic" layoutX="333.0" layoutY="150.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="192.0" style="-fx-background-color: #ff8000;" text="Fill doctor' s work graphic">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="getDoctors" layoutX="333.0" layoutY="74.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Get doctors">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="getDoctor" layoutX="333.0" layoutY="119.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Get doctor by id">
+                              <Button fx:id="getDoctors" layoutX="333.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="191.0" style="-fx-background-color: #ff8000;" text="Get doctors">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

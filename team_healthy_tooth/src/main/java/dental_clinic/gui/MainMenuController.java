@@ -83,9 +83,6 @@ public class MainMenuController {
     private Button getDoctors;
 
     @FXML
-    private Button getDoctor;
-
-    @FXML
     private Button backButtonDoctor;
 
     @FXML
