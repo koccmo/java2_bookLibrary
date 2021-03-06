@@ -12,8 +12,8 @@ import java.util.List;
 @Component
 public class ContainsUserServiceGUI {
 
-
-    UserRepository userRepository = new OrmUserRepositoryImpl();
+    @Autowired
+    private UserRepository userRepository;
 
     public boolean execute (String login, String password) {
 
