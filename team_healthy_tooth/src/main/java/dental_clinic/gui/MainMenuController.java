@@ -47,43 +47,70 @@ public class MainMenuController {
     private Button usersRoleButton;
 
     @FXML
-    private MenuItem addPatientItem;
+    private Button addPersonalData;
 
     @FXML
-    private MenuItem changePersonalDataItem;
+    private Button changePersonalData;
 
     @FXML
-    private MenuItem searchPatientItem;
+    private Button getPatientCard;
 
     @FXML
-    private MenuItem updatePatientJowl;
+    private Button getPersonalData;
 
     @FXML
-    private MenuItem addDoctorItem;
+    private Button getPatientHistory;
 
     @FXML
-    private MenuItem fillDoctorGraphicItem;
+    private Button searchPatient;
 
     @FXML
-    private MenuItem getDoctorListItem;
+    private Button updateJowl;
 
     @FXML
-    private MenuItem deleteDoctorItem;
+    private Button backButtonPatient;
 
     @FXML
-    private MenuItem addVisitItem;
+    private Button addDocotr;
 
     @FXML
-    private MenuItem changeVisitTimeItem;
+    private Button deleteDoctor;
 
     @FXML
-    private MenuItem searchVsitByDateItem;
+    private Button fillGraphic;
 
     @FXML
-    private MenuItem searchVisitByPersonalCodeItem;
+    private Button getDoctors;
 
     @FXML
-    private MenuItem deletePlannedVisitItem;
+    private Button getDoctor;
+
+    @FXML
+    private Button backButtonDoctor;
+
+    @FXML
+    private Button addManipulation;
+
+    @FXML
+    private Button deactivateManipulation;
+
+    @FXML
+    private Button getManipulations;
+
+    @FXML
+    private Button backButtonPatient1;
+
+    @FXML
+    private Button addVisit;
+
+    @FXML
+    private Button searchVisitByDate;
+
+    @FXML
+    private Button searchVisitByPatientId;
+
+    @FXML
+    private Button backButtonVisit;
 
     @FXML
     private Button addPlannedVisit;
