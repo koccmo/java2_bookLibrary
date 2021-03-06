@@ -26,13 +26,48 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="272.0" prefWidth="610.0">
                            <children>
-                              <Button fx:id="backButton" layoutX="40.0" layoutY="173.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="96.0" style="-fx-background-color: #ff8000;" text="Back" />
-                              <Button fx:id="addUserButton" layoutX="40.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Add user">
+                              <Button fx:id="backButton" layoutX="234.0" layoutY="238.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="96.0" style="-fx-background-color: #ff8000;" text="Back" />
+                              <Button fx:id="addUserButton" layoutX="60.0" layoutY="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Add user">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="blockUserButton" layoutX="41.0" layoutY="124.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Block user">
+                              <Button fx:id="blockUserButton" layoutX="60.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Block user">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="getUsersButton" layoutX="60.0" layoutY="91.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Get users">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutY="3.0" prefHeight="44.0" prefWidth="215.0" text="User menu" textAlignment="JUSTIFY" textFill="#2e3348" textOverrun="CENTER_ELLIPSIS">
+                                 <font>
+                                    <Font name="Segoe Script" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="322.0" layoutY="3.0" prefHeight="44.0" prefWidth="215.0" text="Role menu" textAlignment="JUSTIFY" textFill="#2e3348" textOverrun="CENTER_ELLIPSIS">
+                                 <font>
+                                    <Font name="Segoe Script" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="addRoleButton" layoutX="397.0" layoutY="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Add role">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="getRolesButton" layoutX="397.0" layoutY="91.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Get roles">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="setRoleButton" layoutX="397.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="Set role">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="usersRoleButton" layoutX="397.0" layoutY="181.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="94.0" style="-fx-background-color: #ff8000;" text="User' s role">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

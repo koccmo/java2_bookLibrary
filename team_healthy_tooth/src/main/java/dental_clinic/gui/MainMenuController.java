@@ -20,12 +20,6 @@ import org.springframework.stereotype.Controller;
 public class MainMenuController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private AnchorPane mainMenu;
 
     @FXML
@@ -36,6 +30,21 @@ public class MainMenuController {
 
     @FXML
     private Button blockUserButton;
+
+    @FXML
+    private Button getUsersButton;
+
+    @FXML
+    private Button addRoleButton;
+
+    @FXML
+    private Button getRolesButton;
+
+    @FXML
+    private Button setRoleButton;
+
+    @FXML
+    private Button usersRoleButton;
 
     @FXML
     private MenuItem addPatientItem;
@@ -68,7 +77,7 @@ public class MainMenuController {
     private MenuItem changeVisitTimeItem;
 
     @FXML
-    private MenuItem getSearchVisitByDateItem;
+    private MenuItem searchVsitByDateItem;
 
     @FXML
     private MenuItem searchVisitByPersonalCodeItem;
@@ -77,7 +86,6 @@ public class MainMenuController {
     private MenuItem deletePlannedVisitItem;
 
     @FXML
-    @Autowired
     void initialize() {
         addUserButton.setOnAction(event -> {
             //addUser.getScene().getWindow().hide();
