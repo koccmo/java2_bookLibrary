@@ -86,6 +86,28 @@ public class MainMenuController {
     private MenuItem deletePlannedVisitItem;
 
     @FXML
+    private Button addPlannedVisit;
+
+    @FXML
+    private Button changePlannedVisit;
+
+    @FXML
+    private Button cancelPlannedVisit;
+
+    @FXML
+    private Button getPalnnedVisitById;
+
+    @FXML
+    private Button searchPlannedVisitByDate;
+
+    @FXML
+    private Button searchPlannedVisitByPersonalCode;
+
+    @FXML
+    private Button backButtonPlannedVisit;
+
+
+    @FXML
     void initialize() {
         addUserButton.setOnAction(event -> {
             //addUser.getScene().getWindow().hide();
