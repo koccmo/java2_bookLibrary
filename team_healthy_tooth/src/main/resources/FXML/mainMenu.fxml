@@ -126,7 +126,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="addDocotr" layoutX="68.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Add doctor">
+                              <Button fx:id="addDoctor" layoutX="68.0" layoutY="104.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #ff8000;" text="Add doctor">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

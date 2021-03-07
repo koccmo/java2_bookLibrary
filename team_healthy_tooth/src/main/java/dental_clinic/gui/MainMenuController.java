@@ -2,18 +2,15 @@ package dental_clinic.gui;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -71,7 +68,7 @@ public class MainMenuController {
     private Button backButtonPatient;
 
     @FXML
-    private Button addDocotr;
+    private Button addDoctor;
 
     @FXML
     private Button deleteDoctor;
@@ -141,13 +138,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         getUsersButton.setOnAction(event -> {
@@ -158,13 +149,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         blockUserButton.setOnAction(event -> {
@@ -175,13 +160,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         addRoleButton.setOnAction(event -> {
@@ -192,13 +171,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         getRolesButton.setOnAction(event -> {
@@ -209,13 +182,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         setRoleButton.setOnAction(event -> {
@@ -226,13 +193,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         usersRoleButton.setOnAction(event -> {
@@ -243,13 +204,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         addPersonalData.setOnAction(event -> {
@@ -260,13 +215,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         changePersonalData.setOnAction(event -> {
@@ -277,13 +226,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         getPatientCard.setOnAction(event -> {
@@ -294,13 +237,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         getPersonalData.setOnAction(event -> {
@@ -311,13 +248,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         getPatientHistory.setOnAction(event -> {
@@ -328,13 +259,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         searchPatient.setOnAction(event -> {
@@ -345,13 +270,7 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
 
         updateJowl.setOnAction(event -> {
@@ -362,13 +281,117 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
+        });
+
+        updateJowl.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                updateJowl.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/updateJowl.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        addDoctor.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addDoctor.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addDoctor.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        deleteDoctor.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                deleteDoctor.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/fireDoctor.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        getDoctors.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getDoctors.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getDoctors.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        fillGraphic.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                fillGraphic.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/fillGraphic.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        addManipulation.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addManipulation.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addManipulation.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        deactivateManipulation.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                deactivateManipulation.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/deactivateManipulation.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        getManipulations.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getManipulations.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getManipulations.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        addVisit.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addVisit.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addVisit.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        searchVisitByDate.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                searchVisitByDate.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/searchVisitByDate.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
         });
 
         backButton.setOnAction(event -> {
@@ -379,13 +402,17 @@ public class MainMenuController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
-            Image iconMain = new Image(iconStream);
-            Stage stage = new Stage();
-            stage.getIcons().add(iconMain);
-            stage.setTitle("Dental Clinic");
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            niceView(root);
         });
     }
+
+    private void niceView(Parent root) {
+        InputStream iconStream = getClass().getResourceAsStream("/icon/dentalChair.png");
+        Image iconMain = new Image(iconStream);
+        Stage stage = new Stage();
+        stage.getIcons().add(iconMain);
+        stage.setTitle("Dental Clinic");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    };
 }
