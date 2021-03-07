@@ -9,7 +9,7 @@ import internet_store.core.services.order.GetOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class GetOrdersUIAction implements UIAction {
 
 

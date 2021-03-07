@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@Component
-@Transactional
-public class OrmOrderRepository implements OrderDatabase{
+//@Component
+//@Transactional
+public class OrmOrderRepository implements OrderItemDatabase{
 
     @Autowired
     private SessionFactory sessionFactory;
