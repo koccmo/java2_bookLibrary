@@ -394,6 +394,17 @@ public class MainMenuController {
             niceView(root);
         });
 
+        searchVisitByPatientId.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                searchVisitByPatientId.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/searchVisitByPatientId.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
         backButton.setOnAction(event -> {
             backButton.getScene().getWindow().hide();
             Parent root = null;
