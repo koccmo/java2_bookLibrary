@@ -7,6 +7,8 @@ import internet_store.core.requests.product.SearchProductByOtherRequest;
 import internet_store.core.response.CoreError;
 import internet_store.core.response.product.SearchProductByOtherResponse;
 import internet_store.core.services.product.validators.SearchProductRequestValidator;
+
+import internet_store.database.jpa.ProductRepository;
 import internet_store.database.product.ProductDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +31,7 @@ public class SearchProductByOtherService {
     private boolean pagingEnabled;
 
     @Autowired
-    private ProductDatabase productDatabase;
+    private ProductRepository productDatabase;
     @Autowired
     private SearchProductRequestValidator searchProductRequestValidator;
 
