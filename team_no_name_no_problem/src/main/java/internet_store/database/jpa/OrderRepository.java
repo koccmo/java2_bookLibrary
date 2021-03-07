@@ -1,13 +1,15 @@
 package internet_store.database.jpa;
 
 import internet_store.core.domain.Order;
+import internet_store.core.domain.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface JpaOrderRepository extends JpaRepository<Order, Long> {
 
-    List<Order> getOrders();
+public interface OrderRepository extends JpaRepository<OrderItem, Long> {
 
-    void addOrder(Order order);
+   List<OrderItem> findAll();
 }
+
+
