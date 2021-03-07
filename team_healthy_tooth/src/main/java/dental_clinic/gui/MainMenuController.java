@@ -405,6 +405,72 @@ public class MainMenuController {
             niceView(root);
         });
 
+        addPlannedVisit.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                addPlannedVisit.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/addPlannedVisit.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        changePlannedVisit.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                changePlannedVisit.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/changePlannedVisitTime.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        cancelPlannedVisit.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                cancelPlannedVisit.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/cancelPlannedVisit.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        getPalnnedVisitById.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                getPalnnedVisitById.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/getPlannedVisitById.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        searchPlannedVisitByDate.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                searchPlannedVisitByDate.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/searchPlannedVisitByDate.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
+        searchPlannedVisitByPersonalCode.setOnAction(event -> {
+            Parent root = null ;
+            try {
+                searchPlannedVisitByPersonalCode.getScene().getWindow().hide();
+                root = FXMLLoader.load(getClass().getResource("/FXML/searchPlannedVisitByPersonalCode.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            niceView(root);
+        });
+
         backButton.setOnAction(event -> {
             backButton.getScene().getWindow().hide();
             Parent root = null;
