@@ -2,37 +2,27 @@ package java2.application_target_list.core.validators.board;
 
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SetRecordCompleteDateValidator {
-
-    private List<CoreError> errors;
+public class SetRecordCompleteDateValidator extends ErrorCreator {
 
     public List<CoreError> validate(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
-        errors = new ArrayList<>();
-        checkRecordId(setRecordCompleteDateRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkRecordId(setRecordCompleteDateRequest, errors);
         return errors;
     }
 
-    private void checkRecordId(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
+    private void checkRecordId(SetRecordCompleteDateRequest setRecordCompleteDateRequest, List<CoreError> errors){
         if (isUserIdEmpty(setRecordCompleteDateRequest)){
-            errors.add(createRecordIdIsEmptyError());
+            errors.add(createCoreError("Record ID","must not be empty!"));
         }
         if (isUserIdNegative(setRecordCompleteDateRequest)){
-            errors.add(createRecordIdISNegativeError());
+            errors.add(createCoreError("Record ID","must not be negative!"));
         }
-    }
-
-    private CoreError createRecordIdISNegativeError(){
-        return new CoreError("Record ID","must not be negative!");
-    }
-
-    private CoreError createRecordIdIsEmptyError(){
-        return new CoreError("Record ID","must not be empty!");
     }
 
     private boolean isUserIdEmpty(SetRecordCompleteDateRequest request) {

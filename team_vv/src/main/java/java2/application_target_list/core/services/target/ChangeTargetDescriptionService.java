@@ -4,30 +4,30 @@ import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.ChangeTargetDescriptionRequest;
 import java2.application_target_list.core.responses.target.ChangeTargetDescriptionResponse;
 import java2.application_target_list.core.responses.CoreError;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.ChangeTargetDescriptionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Transactional
-public class ChangeTargetDescriptionService {
+public class ChangeTargetDescriptionService extends ErrorCreator {
 
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
     @Autowired
     private ChangeTargetDescriptionValidator validator;
 
-    private List<CoreError> errors;
-
     public ChangeTargetDescriptionResponse execute(ChangeTargetDescriptionRequest changeTargetDescriptionRequest){
 
-        errors = checkRequestFoErrors(changeTargetDescriptionRequest);
-        checkAvailabilityInDB(changeTargetDescriptionRequest);
+        List<CoreError> errors = checkRequestFoErrors(changeTargetDescriptionRequest);
+        checkAvailabilityInDB(changeTargetDescriptionRequest, errors);
 
-        if (requestHaveErrors()) {
-            return createChangeTargetDescriptionResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createChangeTargetDescriptionResponseWithErrors(errors);
         }
 
         changeTargetDescription(changeTargetDescriptionRequest);
@@ -38,7 +38,7 @@ public class ChangeTargetDescriptionService {
         jpaTargetRepository.changeTargetDescription(changeTargetDescriptionRequest.getTargetIdToChange(), changeTargetDescriptionRequest.getNewTargetDescription());
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
@@ -46,22 +46,18 @@ public class ChangeTargetDescriptionService {
         return new ChangeTargetDescriptionResponse(changeTargetDescriptionRequest.getTargetIdToChange(), changeTargetDescriptionRequest.getNewTargetDescription());
     }
 
-    private ChangeTargetDescriptionResponse createChangeTargetDescriptionResponseWithErrors() {
+    private ChangeTargetDescriptionResponse createChangeTargetDescriptionResponseWithErrors(List<CoreError> errors) {
         return new ChangeTargetDescriptionResponse(errors);
     }
 
-    private void checkAvailabilityInDB(ChangeTargetDescriptionRequest changeTargetDescriptionRequest) {
+    private void checkAvailabilityInDB(ChangeTargetDescriptionRequest changeTargetDescriptionRequest, List<CoreError> errors) {
         if (targetDoesNotExist(changeTargetDescriptionRequest)) {
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID;", "no target with that ID"));
         }
     }
 
     private boolean targetDoesNotExist(ChangeTargetDescriptionRequest changeTargetDescriptionRequest){
         return !jpaTargetRepository.existsById(changeTargetDescriptionRequest.getTargetIdToChange());
-    }
-
-    private CoreError createTargetDoesNotExistError(){
-        return new CoreError("Target ID;", "no target with that ID");
     }
 
     private List<CoreError> checkRequestFoErrors(ChangeTargetDescriptionRequest changeTargetDescriptionRequest) {

@@ -2,6 +2,7 @@ package java2.application_target_list.core.services.target;
 
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.ChangeTargetNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import java2.application_target_list.core.responses.target.ChangeTargetNameResponse;
@@ -12,22 +13,20 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ChangeTargetNameService {
+public class ChangeTargetNameService extends ErrorCreator {
 
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
     @Autowired
     private ChangeTargetNameValidator validator;
 
-    private List<CoreError> errors;
-
     public ChangeTargetNameResponse execute(ChangeTargetNameRequest changeTargetNameRequest){
 
-        errors = validator.validate(changeTargetNameRequest);
-        checkAvailabilityInDB(changeTargetNameRequest);
+        List<CoreError> errors = validator.validate(changeTargetNameRequest);
+        checkAvailabilityInDB(changeTargetNameRequest, errors);
 
-        if (requestHavErrors()) {
-            return createChangeTargetNameResponseWithErrors();
+        if (requestHavErrors(errors)) {
+            return createChangeTargetNameResponseWithErrors(errors);
         }
 
         changeTargetName(changeTargetNameRequest);
@@ -42,26 +41,22 @@ public class ChangeTargetNameService {
         jpaTargetRepository.changeTargetName(changeTargetNameRequest.getTargetIdToChange(), changeTargetNameRequest.getNewTargetName());
     }
 
-    private ChangeTargetNameResponse createChangeTargetNameResponseWithErrors() {
+    private ChangeTargetNameResponse createChangeTargetNameResponseWithErrors(List<CoreError> errors) {
         return new ChangeTargetNameResponse(errors);
     }
 
-    private boolean requestHavErrors() {
+    private boolean requestHavErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
-    private void checkAvailabilityInDB(ChangeTargetNameRequest changeTargetNameRequest) {
+    private void checkAvailabilityInDB(ChangeTargetNameRequest changeTargetNameRequest, List<CoreError> errors) {
         if (targetDoesNotExist(changeTargetNameRequest)){
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID;","no target with that ID"));
         }
     }
 
     private boolean targetDoesNotExist(ChangeTargetNameRequest changeTargetNameRequest) {
         return !jpaTargetRepository.existsById(changeTargetNameRequest.getTargetIdToChange());
-    }
-
-    private CoreError createTargetDoesNotExistError() {
-        return new CoreError("Target ID;","no target with that ID");
     }
 
     private List<CoreError> checkRequestForErrors(ChangeTargetNameRequest changeTargetNameRequest) {

@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.user.UpdateUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.UpdateUserResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.user.UpdateUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,22 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UpdateUserService {
+public class UpdateUserService extends ErrorCreator {
 
     @Autowired
     private UpdateUserValidator updateUserValidator;
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public UpdateUserResponse execute(UpdateUserRequest updateUserRequest){
-        errors = checkRequestForErrors(updateUserRequest);
-        checkAvailabilityInDB(updateUserRequest);
+        List<CoreError> errors = checkRequestForErrors(updateUserRequest);
+        checkAvailabilityInDB(updateUserRequest, errors);
 
-
-        if (requestHaveErrors()){
-            return createUpdateUserResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createUpdateUserResponseWithErrors(errors);
         }
 
         updateUser(updateUserRequest);
@@ -53,26 +51,22 @@ public class UpdateUserService {
                 updateUserRequest.getNewUserLastName());
     }
 
-    private UpdateUserResponse createUpdateUserResponseWithErrors(){
+    private UpdateUserResponse createUpdateUserResponseWithErrors(List<CoreError> errors){
         return new UpdateUserResponse(errors);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 
-    private void checkAvailabilityInDB(UpdateUserRequest updateUserRequest){
+    private void checkAvailabilityInDB(UpdateUserRequest updateUserRequest, List<CoreError> errors){
         if (userDoesNotExist(updateUserRequest)){
-            errors.add(createUserDoesNotExistError());
+            errors.add(createCoreError("User ID;","no user with that ID"));
         }
     }
 
     private boolean userDoesNotExist(UpdateUserRequest updateUserRequest){
         return !jpaUserRepository.existsById(updateUserRequest.getUserIdToChange());
-    }
-
-    private CoreError createUserDoesNotExistError(){
-        return new CoreError("User ID;","no user with that ID");
     }
 
     private List<CoreError> checkRequestForErrors(UpdateUserRequest updateUserRequest){

@@ -1,22 +1,27 @@
 package java2.application_target_list.core.acceptancetests.target;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.requests.target.SearchTargetByNameRequest;
+import java2.application_target_list.core.responses.target.AddTargetResponse;
 import java2.application_target_list.core.services.target.SearchTargetByNameService;
 import java2.application_target_list.core.responses.target.SearchTargetByNameResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Optional;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class SearchTargetByNameAcceptanceTests {
 
     @Autowired
@@ -27,7 +32,7 @@ public class SearchTargetByNameAcceptanceTests {
     private DatabaseCleaner databaseCleaner;
 
 
-    @BeforeEach
+    @Before
     public void setup(){
         databaseCleaner.clean();
         addTargetsToDB();
@@ -41,17 +46,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name");
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -60,17 +65,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -79,17 +84,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -98,17 +103,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -117,17 +122,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -136,17 +141,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -155,17 +160,17 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 3);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getName(), "name2");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(1).getDescription(), "description2");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(1).getDeadline()), Optional.of(4L));
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(2).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(2).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -174,11 +179,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -188,11 +193,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering, paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -202,11 +207,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering, paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -216,11 +221,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering, paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
     }
 
     @Test
@@ -230,11 +235,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering, paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -244,11 +249,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering, paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name1");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description1");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(1L));
     }
 
     @Test
@@ -258,11 +263,11 @@ public class SearchTargetByNameAcceptanceTests {
         SearchTargetByNameRequest searchTargetByNameRequest = new SearchTargetByNameRequest("name", ordering,paging);
         SearchTargetByNameResponse searchTargetByNameResponse = searchTargetByNameService.execute(searchTargetByNameRequest);
 
-        Assertions.assertNull(searchTargetByNameResponse.getErrorList());
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
-        Assertions.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
-        Assertions.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
+        Assert.assertNull(searchTargetByNameResponse.getErrorList());
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().size(), 1);
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getName(), "name3");
+        Assert.assertEquals(searchTargetByNameResponse.getTargetsList().get(0).getDescription(), "description3");
+        Assert.assertEquals(Optional.ofNullable(searchTargetByNameResponse.getTargetsList().get(0).getDeadline()), Optional.of(6L));
     }
 
     private void addTargetsToDB() {
@@ -271,9 +276,9 @@ public class SearchTargetByNameAcceptanceTests {
         AddTargetRequest addTargetRequest3 = new AddTargetRequest("name3", "description3", 6L);
         AddTargetRequest addTargetRequest4 = new AddTargetRequest("wdc", "sda", 156L);
 
-        addTargetService.execute(addTargetRequest1);
-        addTargetService.execute(addTargetRequest2);
-        addTargetService.execute(addTargetRequest3);
-        addTargetService.execute(addTargetRequest4);
+        AddTargetResponse addTargetResponse1 = addTargetService.execute(addTargetRequest1);
+        AddTargetResponse addTargetResponse2 = addTargetService.execute(addTargetRequest2);
+        AddTargetResponse addTargetResponse3 = addTargetService.execute(addTargetRequest3);
+        AddTargetResponse addTargetResponse4 = addTargetService.execute(addTargetRequest4);
     }
 }

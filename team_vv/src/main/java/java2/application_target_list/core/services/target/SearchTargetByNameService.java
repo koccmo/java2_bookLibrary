@@ -31,36 +31,33 @@ public class SearchTargetByNameService {
     @Autowired
     private SearchTargetByNameValidator validator;
 
-    private List<CoreError> errors;
-    private List<Target> targets;
-
     public SearchTargetByNameResponse execute(SearchTargetByNameRequest searchTargetByNameRequest){
-        errors = checkRequestForErrors(searchTargetByNameRequest);
+        List<CoreError> errors = checkRequestForErrors(searchTargetByNameRequest);
 
-        if (requestHaveErrors()) {
-            return createSearchTargetByNameResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createSearchTargetByNameResponseWithErrors(errors);
         }
 
-        targets = findAllTargetByName(searchTargetByNameRequest);
+        List<Target> targets = findAllTargetByName(searchTargetByNameRequest);
         targets = order(targets, searchTargetByNameRequest.getOrdering());
         targets = paging(targets, searchTargetByNameRequest.getPaging());
 
-        return createSearchTargetByNameResponse();
+        return createSearchTargetByNameResponse(targets);
     }
 
     private List<Target> findAllTargetByName(SearchTargetByNameRequest searchTargetByNameRequest){
         return jpaTargetRepository.findByName(searchTargetByNameRequest.getName());
     }
 
-    private SearchTargetByNameResponse createSearchTargetByNameResponse(){
+    private SearchTargetByNameResponse createSearchTargetByNameResponse(List<Target> targets){
         return new SearchTargetByNameResponse(null, targets);
     }
 
-    private SearchTargetByNameResponse createSearchTargetByNameResponseWithErrors() {
+    private SearchTargetByNameResponse createSearchTargetByNameResponseWithErrors(List<CoreError> errors) {
         return new SearchTargetByNameResponse(errors, null);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 

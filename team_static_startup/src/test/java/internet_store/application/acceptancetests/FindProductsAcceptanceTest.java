@@ -15,9 +15,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Profile;
 import static org.junit.Assert.*;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FindProductsAcceptanceTest {
-/*
+
     private ApplicationContext appContext;
 
     @Before
@@ -26,6 +26,7 @@ public class FindProductsAcceptanceTest {
         getDatabaseCleaner().clean();
     }
 
+/*
     @Test
     public void shouldReturnNoErrorsWhenNameAndDescriptionProvided() {
         FindProductsRequest request = new FindProductsRequest("A1", "B1");
@@ -200,6 +201,8 @@ public class FindProductsAcceptanceTest {
         assertEquals("Page size", response.getErrors().get(0).getField());
         assertEquals("Must be bigger than zero.", response.getErrors().get(0).getMessage());
     }
+*/
+
 
     private FindProductsService getFindProductsService() {
         return appContext.getBean(FindProductsService.class);
@@ -208,5 +211,5 @@ public class FindProductsAcceptanceTest {
     private DatabaseCleaner getDatabaseCleaner() {
         return appContext.getBean(DatabaseCleaner.class);
     }
-*/
+
 }

@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.target.GetTargetRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.GetTargetResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.GetTargetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,42 +13,36 @@ import java.util.List;
 
 @Service
 @Transactional
-public class GetTargetService {
+public class GetTargetService extends ErrorCreator {
 
     @Autowired
     private GetTargetValidator validator;
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
 
-    private List<CoreError> errors;
-
     public GetTargetResponse execute(GetTargetRequest getTargetRequest) {
-        errors = checkRequestForErrors(getTargetRequest);
+        List<CoreError> errors = checkRequestForErrors(getTargetRequest);
 
-        if (requestHaveErrors()){
-            return createGetTargetResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createGetTargetResponseWithErrors(errors);
         }
 
-        return createGetTargetResponse(getTargetRequest);
+        return createGetTargetResponse(getTargetRequest, errors);
     }
 
-    private GetTargetResponse createGetTargetResponseWithErrors() {
+    private GetTargetResponse createGetTargetResponseWithErrors(List<CoreError> errors) {
         return new GetTargetResponse(errors);
     }
 
-    private GetTargetResponse createGetTargetResponse(GetTargetRequest getTargetRequest) {
+    private GetTargetResponse createGetTargetResponse(GetTargetRequest getTargetRequest, List<CoreError> errors) {
         return jpaTargetRepository.findById(getTargetRequest.getId())
                 .map(GetTargetResponse::new)
                 .orElseGet(() -> {
-                    errors.add(createTargetDoesNotExistError());
-                    return new GetTargetResponse(errors);});
+                    errors.add(createCoreError("id", "Not found!"));
+                    return createGetTargetResponseWithErrors(errors);});
     }
 
-    private CoreError createTargetDoesNotExistError() {
-        return new CoreError("id", "Not found!");
-    }
-
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 

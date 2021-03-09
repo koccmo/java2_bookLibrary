@@ -1,6 +1,7 @@
 package java2.application_target_list.core.validators.target;
 
 import java2.application_target_list.core.requests.target.ChangeTargetDescriptionRequest;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java2.application_target_list.core.responses.CoreError;
 
@@ -8,42 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ChangeTargetDescriptionValidator {
-
-    private List<CoreError> errors;
+public class ChangeTargetDescriptionValidator extends ErrorCreator {
 
     public List<CoreError> validate(ChangeTargetDescriptionRequest changeTargetDescriptionRequest) {
-        errors = new ArrayList<>();
-        checkTargetId(changeTargetDescriptionRequest);
-        checkTargetDescription(changeTargetDescriptionRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkTargetId(changeTargetDescriptionRequest, errors);
+        checkTargetDescription(changeTargetDescriptionRequest, errors);
         return errors;
     }
 
-    private void checkTargetDescription(ChangeTargetDescriptionRequest changeTargetDescriptionRequest){
+    private void checkTargetDescription(ChangeTargetDescriptionRequest changeTargetDescriptionRequest, List<CoreError> errors){
         if (isTargetDescriptionEmpty(changeTargetDescriptionRequest)) {
-            errors.add(createTargetDescriptionIsEmptyError());
+            errors.add(createCoreError("Target new description", "must not be empty!"));
         }
     }
 
-    private void checkTargetId(ChangeTargetDescriptionRequest changeTargetDescriptionRequest){
+    private void checkTargetId(ChangeTargetDescriptionRequest changeTargetDescriptionRequest, List<CoreError> errors){
         if (isTargetIdEmpty(changeTargetDescriptionRequest)) {
-            errors.add(createTargetIdIsEmptyError());
+            errors.add(createCoreError("Target ID", "must not be empty!"));
         }
         if (isTargetIdNegative(changeTargetDescriptionRequest)) {
-            errors.add(createTargetIdIsNegative());
+            errors.add(createCoreError("Target ID", "must not be negative!"));
         }
-    }
-
-    private CoreError createTargetIdIsNegative(){
-        return new CoreError("Target ID", "must not be negative!");
-    }
-
-    private CoreError createTargetIdIsEmptyError(){
-        return new CoreError("Target ID", "must not be empty!");
-    }
-
-    private CoreError createTargetDescriptionIsEmptyError(){
-        return new CoreError("Target new description", "must not be empty!");
     }
 
     private boolean isTargetDescriptionEmpty(ChangeTargetDescriptionRequest request) {

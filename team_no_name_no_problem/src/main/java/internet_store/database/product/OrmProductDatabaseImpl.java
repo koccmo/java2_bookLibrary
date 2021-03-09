@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Component
-@Transactional
+//@Component
+//@Transactional
 public class OrmProductDatabaseImpl implements ProductDatabase{
 
     @Autowired private SessionFactory sessionFactory;

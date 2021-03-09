@@ -13,10 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import static org.junit.Assert.*;
-
 import java.math.BigDecimal;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DeleteByProductAcceptanceTest {
 
     private ApplicationContext appContext;

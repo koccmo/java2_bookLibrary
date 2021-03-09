@@ -7,6 +7,7 @@ import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.AddRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.AddRecordResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.board.AddRecordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AddRecordService {
+public class AddRecordService extends ErrorCreator {
 
     @Autowired
     private AddRecordValidator addRecordValidator;
@@ -28,15 +29,13 @@ public class AddRecordService {
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public AddRecordResponse execute(AddRecordRequest addRecordRequest){
 
-        errors = checkRequestForErrors(addRecordRequest);
-        checkAvailabilityInDB(addRecordRequest);
+        List<CoreError> errors = checkRequestForErrors(addRecordRequest);
+        checkAvailabilityInDB(addRecordRequest, errors);
 
-        if (requestHaveErrors()){
-            return createAddRecordResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createAddRecordResponseWithErrors(errors);
         }
 
         Record record = createRecord(addRecordRequest);
@@ -44,27 +43,19 @@ public class AddRecordService {
         return createAddRecordResponse(record);
     }
 
-    private void checkAvailabilityInDB(AddRecordRequest addRecordRequest){
+    private void checkAvailabilityInDB(AddRecordRequest addRecordRequest, List<CoreError> errors){
 
         if (targetDoesNotExist(addRecordRequest)){
-            errors.add(createTargetDoesNotExistError());
+            errors.add(createCoreError("Target ID","no target with that ID!"));
         }
 
         if (userDoesNotExist(addRecordRequest)){
-            errors.add(createUserDoesNotExistError());
+            errors.add(createCoreError("User ID","no user with that ID!"));
         }
     }
 
     private boolean userDoesNotExist(AddRecordRequest request) {
         return !jpaUserRepository.existsById(request.getUserId());
-    }
-
-    private CoreError createUserDoesNotExistError() {
-        return new CoreError("User ID","no user with that ID!");
-    }
-
-    private CoreError createTargetDoesNotExistError(){
-        return new CoreError("Target ID","no target with that ID!");
     }
 
     private boolean targetDoesNotExist(AddRecordRequest addRecordRequest){
@@ -75,11 +66,11 @@ public class AddRecordService {
         return new AddRecordResponse(record);
     }
 
-    private AddRecordResponse createAddRecordResponseWithErrors() {
+    private AddRecordResponse createAddRecordResponseWithErrors(List<CoreError> errors) {
         return new AddRecordResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 

@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.user.ChangeUserLastNameRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.ChangeUserLastNameResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.user.ChangeUserLastNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ChangeUserLastNameService {
+public class ChangeUserLastNameService extends ErrorCreator {
 
     @Autowired
     private ChangeUserLastNameValidator changeUserLastNameValidator;
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public ChangeUserLastNameResponse execute(ChangeUserLastNameRequest changeUserLastNameRequest){
-        errors = checkRequestForErrors(changeUserLastNameRequest);
-        checkAvailabilityInDB(changeUserLastNameRequest);
+        List<CoreError> errors = checkRequestForErrors(changeUserLastNameRequest);
+        checkAvailabilityInDB(changeUserLastNameRequest, errors);
 
-        if (requestHaveErrors()){
-            return createChangeUserLastNameResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createChangeUserLastNameResponseWithErrors(errors);
         }
 
         changeUserLastName(changeUserLastNameRequest);
@@ -41,11 +40,11 @@ public class ChangeUserLastNameService {
         jpaUserRepository.changeUserLastName(changeUserLastNameRequest.getUserIdToChange(), changeUserLastNameRequest.getNewUserLastName());
     }
 
-    private ChangeUserLastNameResponse createChangeUserLastNameResponseWithErrors(){
+    private ChangeUserLastNameResponse createChangeUserLastNameResponseWithErrors(List<CoreError> errors){
         return new ChangeUserLastNameResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
@@ -53,13 +52,9 @@ public class ChangeUserLastNameService {
         return !jpaUserRepository.existsById(changeUserLastNameRequest.getUserIdToChange());
     }
 
-    private CoreError createUserDoesNotExistError(){
-        return new CoreError("User ID;","no user with that ID");
-    }
-
-    private void checkAvailabilityInDB(ChangeUserLastNameRequest changeUserLastNameRequest){
+    private void checkAvailabilityInDB(ChangeUserLastNameRequest changeUserLastNameRequest, List<CoreError> errors){
         if (userDoesNotExist(changeUserLastNameRequest)){
-            errors.add(createUserDoesNotExistError());
+            errors.add(createCoreError("User ID;","no user with that ID"));
         }
     }
 

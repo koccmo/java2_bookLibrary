@@ -4,10 +4,14 @@ import dental_clinic.core.domain.Role;
 import dental_clinic.core.domain.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Component
+@Transactional
 public class OrmUserRepositoryImpl implements UserRepository{
 
     @Autowired

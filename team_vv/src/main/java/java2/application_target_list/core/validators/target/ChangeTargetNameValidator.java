@@ -1,6 +1,8 @@
 package java2.application_target_list.core.validators.target;
 
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
+import java2.application_target_list.core.validators.ErrorCreator;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Component;
 import java2.application_target_list.core.responses.CoreError;
 
@@ -8,42 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ChangeTargetNameValidator {
-
-    private List<CoreError> errors;
+public class ChangeTargetNameValidator extends ErrorCreator {
 
     public List<CoreError> validate(ChangeTargetNameRequest changeTargetNameRequest) {
-        errors = new ArrayList<>();
-        checkTargetId(changeTargetNameRequest);
-        checkTargetName(changeTargetNameRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkTargetId(changeTargetNameRequest, errors);
+        checkTargetName(changeTargetNameRequest, errors);
         return errors;
     }
 
-    private void checkTargetName(ChangeTargetNameRequest changeTargetNameRequest){
+    private void checkTargetName(ChangeTargetNameRequest changeTargetNameRequest, List<CoreError> errors){
         if (isTargetNameEmpty(changeTargetNameRequest)){
-            errors.add(createTargetNameIsEmptyError());
+            errors.add(createCoreError("Target new name","must not be empty!"));
         }
     }
 
-    private void checkTargetId(ChangeTargetNameRequest changeTargetNameRequest){
+    private void checkTargetId(ChangeTargetNameRequest changeTargetNameRequest, List<CoreError> errors){
         if (isTargetIdEmpty(changeTargetNameRequest)){
-            errors.add(createTargetIdIsEmptyError());
+            errors.add(createCoreError("Target ID","must not be empty!"));
         }
         if (isTargetIdNegative(changeTargetNameRequest)){
-            errors.add(createTargetIdIsNegativeError());
+            errors.add(createCoreError("Target ID","must not be negative!"));
         }
-    }
-
-    private CoreError createTargetIdIsNegativeError(){
-        return new CoreError("Target ID","must not be negative!");
-    }
-
-    private CoreError createTargetIdIsEmptyError(){
-        return new CoreError("Target ID","must not be empty!");
-    }
-
-    private CoreError createTargetNameIsEmptyError(){
-        return new CoreError("Target new name","must not be empty!");
     }
 
     private boolean isTargetNameEmpty(ChangeTargetNameRequest request) {

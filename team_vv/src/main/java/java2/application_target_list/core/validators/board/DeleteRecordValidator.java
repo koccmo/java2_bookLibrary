@@ -2,36 +2,27 @@ package java2.application_target_list.core.validators.board;
 
 import java2.application_target_list.core.requests.board.DeleteRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DeleteRecordValidator {
-
-    private List<CoreError> errors;
+public class DeleteRecordValidator extends ErrorCreator {
 
     public List<CoreError> validate(DeleteRecordRequest deleteRecordRequest) {
-        errors = new ArrayList<>();
-        checkRecordId(deleteRecordRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkRecordId(deleteRecordRequest, errors);
         return errors;
     }
 
-    private void checkRecordId(DeleteRecordRequest deleteRecordRequest){
+    private void checkRecordId(DeleteRecordRequest deleteRecordRequest, List<CoreError> errors){
         if (isUserIdEmpty(deleteRecordRequest)){
-            errors.add(createRecordIdIsEmptyError());
+            errors.add(createCoreError("Record ID","must not be empty!"));
         }
         if (isUserIdNegative(deleteRecordRequest)){
-            errors.add(createRecordIdIsNegativeError());
+            errors.add(createCoreError("Record ID","must not be negative!"));
         }
-    }
-
-    private CoreError createRecordIdIsNegativeError(){
-        return new CoreError("Record ID","must not be negative!");
-    }
-
-    private CoreError createRecordIdIsEmptyError(){
-        return new CoreError("Record ID","must not be empty!");
     }
 
     private boolean isUserIdEmpty(DeleteRecordRequest request) {

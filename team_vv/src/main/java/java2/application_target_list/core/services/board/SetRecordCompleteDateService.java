@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaBoardRepository;
 import java2.application_target_list.core.requests.board.SetRecordCompleteDateRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.SetRecordCompleteDateResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.board.SetRecordCompleteDateValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,22 +15,20 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SetRecordCompleteDateService {
+public class SetRecordCompleteDateService extends ErrorCreator {
 
     @Autowired
     private SetRecordCompleteDateValidator setRecordCompleteDateValidator;
     @Autowired
     private JpaBoardRepository jpaBoardRepository;
 
-    private List<CoreError> errors;
-
     public SetRecordCompleteDateResponse execute(SetRecordCompleteDateRequest setRecordCompleteDateRequest){
 
-        errors = checkRequestForErrors(setRecordCompleteDateRequest);
-        checkAvailabilityInDB(setRecordCompleteDateRequest);
+        List<CoreError> errors = checkRequestForErrors(setRecordCompleteDateRequest);
+        checkAvailabilityInDB(setRecordCompleteDateRequest, errors);
 
-        if (requestHaveErrors()){
-            return createSetRecordCompleteDateResponseWithErrors();
+        if (requestHaveErrors(errors)){
+            return createSetRecordCompleteDateResponseWithErrors(errors);
         }
 
         setSetRecordCompleteDate(setRecordCompleteDateRequest);
@@ -44,22 +43,18 @@ public class SetRecordCompleteDateService {
         jpaBoardRepository.setRecordCompleteDate(setRecordCompleteDateRequest.getRecordIdToSetCompleteDate(), getDate());;
     }
 
-    private SetRecordCompleteDateResponse createSetRecordCompleteDateResponseWithErrors(){
+    private SetRecordCompleteDateResponse createSetRecordCompleteDateResponseWithErrors(List<CoreError> errors){
         return new SetRecordCompleteDateResponse(errors);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
-    private void checkAvailabilityInDB(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {
+    private void checkAvailabilityInDB(SetRecordCompleteDateRequest setRecordCompleteDateRequest, List<CoreError> errors) {
         if (recordDoesNotExistInDB(setRecordCompleteDateRequest)){
-            errors.add(createRecordDoesNotExistInDBError());
+            errors.add(createCoreError("Record ID","no record with that ID"));
         }
-    }
-
-    private CoreError createRecordDoesNotExistInDBError() {
-        return new CoreError("Record ID","no record with that ID");
     }
 
     private boolean recordDoesNotExistInDB(SetRecordCompleteDateRequest setRecordCompleteDateRequest) {

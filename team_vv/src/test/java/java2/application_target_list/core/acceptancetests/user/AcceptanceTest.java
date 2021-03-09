@@ -1,16 +1,20 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.user.*;
 import java2.application_target_list.core.responses.user.*;
 import java2.application_target_list.core.services.user.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class AcceptanceTest {
 
     @Autowired
@@ -30,9 +34,11 @@ public class AcceptanceTest {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-    private Long userId;
+    private Long firstUserId;
+    private Long secondUserId;
+    private Long thirdUserId;
 
-    @BeforeEach
+    @Before
     public void setup() {
         databaseCleaner.clean();
     }
@@ -51,56 +57,53 @@ public class AcceptanceTest {
     private void searchUsersByLastName() {
         SearchUsersByLastNameRequest searchUsersByLastNameRequest = new SearchUsersByLastNameRequest("New Surname");
         SearchUserByLastNameResponse searchUserByLastNameResponse = searchUserByLastNameService.execute(searchUsersByLastNameRequest);
-        Assertions.assertFalse(searchUserByLastNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "New Surname");
+        Assert.assertFalse(searchUserByLastNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByLastNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByLastNameResponse.getUsersList().get(0).getLastName(), "New Surname");
     }
 
     private void searchUsersByFirstName() {
         SearchUsersByFirstNameRequest searchUsersByFirstNameRequest = new SearchUsersByFirstNameRequest("New Name");
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "New Name");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "New Name");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname2");
     }
 
     private void checkChanges() {
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUsersService.execute(getAllUsersRequest);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname2");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name3");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "New Surname");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getFirstName(), "name3");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(1).getLastName(), "New Surname");
     }
 
     private void changeThirdUserLastName() {
-        userId = getAllUsersService.execute(new GetAllUsersRequest()).getUsersList().get(1).getId();
-        ChangeUserLastNameRequest changeUserLastNameRequest = new ChangeUserLastNameRequest(userId, "New Surname");
+        ChangeUserLastNameRequest changeUserLastNameRequest = new ChangeUserLastNameRequest(thirdUserId, "New Surname");
         ChangeUserLastNameResponse changeUserLastNameResponse = changeUserLastNameService.execute(changeUserLastNameRequest);
-        Assertions.assertFalse(changeUserLastNameResponse.hasErrors());
+        Assert.assertFalse(changeUserLastNameResponse.hasErrors());
     }
 
     private void changeSecondUserFirstName() {
-        userId = getAllUsersService.execute(new GetAllUsersRequest()).getUsersList().get(0).getId();
-        ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(userId, "New Name");
+        ChangeUserFirstNameRequest changeUserFirstNameRequest = new ChangeUserFirstNameRequest(secondUserId, "New Name");
         ChangeUserFirstNameResponse changeUserFirstNameResponse = changeUserFirstNameService.execute(changeUserFirstNameRequest);
-        Assertions.assertFalse(changeUserFirstNameResponse.hasErrors());
+        Assert.assertFalse(changeUserFirstNameResponse.hasErrors());
 
         GetAllUsersRequest getAllUsersRequest = new GetAllUsersRequest();
         GetAllUsersResponse getAllUsersResponse = getAllUsersService.execute(getAllUsersRequest);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
-        Assertions.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname2");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().size(), 2);
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getFirstName(), "New Name");
+        Assert.assertEquals(getAllUsersResponse.getUsersList().get(0).getLastName(), "surname2");
     }
 
     private void deleteFirstUser() {
-        userId = getAllUsersService.execute(new GetAllUsersRequest()).getUsersList().get(0).getId();
-        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(userId);
+        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(firstUserId);
         DeleteUserResponse deleteUserResponse = deleteUserService.execute(deleteUserRequest);
-        Assertions.assertFalse(deleteUserResponse.hasErrors());
+        Assert.assertFalse(deleteUserResponse.hasErrors());
     }
 
     private void addUsersToDB() {
@@ -112,8 +115,12 @@ public class AcceptanceTest {
         AddUserResponse addUserResponse2 = addUserService.execute(addUserRequest2);
         AddUserResponse addUserResponse3 = addUserService.execute(addUserRequest3);
 
-        Assertions.assertFalse(addUserResponse1.hasErrors());
-        Assertions.assertFalse(addUserResponse2.hasErrors());
-        Assertions.assertFalse(addUserResponse3.hasErrors());
+        firstUserId = addUserResponse1.getNewUser().getId();
+        secondUserId = addUserResponse2.getNewUser().getId();
+        thirdUserId = addUserResponse3.getNewUser().getId();
+
+        Assert.assertFalse(addUserResponse1.hasErrors());
+        Assert.assertFalse(addUserResponse2.hasErrors());
+        Assert.assertFalse(addUserResponse3.hasErrors());
     }
 }

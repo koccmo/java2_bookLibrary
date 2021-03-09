@@ -1,6 +1,7 @@
 package java2.application_target_list.core.acceptancetests.user;
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
 import java2.application_target_list.core.requests.user.AddUserRequest;
@@ -8,14 +9,17 @@ import java2.application_target_list.core.requests.user.SearchUsersByFirstNameRe
 import java2.application_target_list.core.responses.user.SearchUserByFirstNameResponse;
 import java2.application_target_list.core.services.user.AddUserService;
 import java2.application_target_list.core.services.user.SearchUserByFirstNameService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class SearchUserByFirstNameAcceptanceTest {
 
     @Autowired
@@ -25,8 +29,7 @@ public class SearchUserByFirstNameAcceptanceTest {
     @Autowired
     private DatabaseCleaner databaseCleaner;
 
-
-    @BeforeEach
+    @Before
     public void setup(){
         databaseCleaner.clean();
         addUsersToDatabase();
@@ -40,14 +43,14 @@ public class SearchUserByFirstNameAcceptanceTest {
         SearchUsersByFirstNameRequest searchUsersByFirstNameRequest = new SearchUsersByFirstNameRequest("name");
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
     }
 
     @Test
@@ -56,14 +59,14 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("first name", "ASCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
     }
 
     @Test
@@ -72,14 +75,14 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "ASCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname3");
     }
 
     @Test
@@ -88,14 +91,14 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "DESCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
     }
 
     @Test
@@ -104,14 +107,14 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "DESCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 3);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(2).getLastName(), "surname1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
     }
 
     @Test
@@ -120,10 +123,10 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Paging(1, 1));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -133,10 +136,10 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("first name", "ASCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -146,10 +149,10 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "ASCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name1");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname1");
     }
 
     @Test
@@ -159,10 +162,10 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "DESCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 1);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
     }
 
     @Test
@@ -172,12 +175,12 @@ public class SearchUserByFirstNameAcceptanceTest {
                 new Ordering("last name", "DESCENDING"));
         SearchUserByFirstNameResponse searchUserByFirstNameResponse = searchUserByFirstNameService.execute(searchUsersByFirstNameRequest);
 
-        Assertions.assertFalse(searchUserByFirstNameResponse.hasErrors());
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
-        Assertions.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
+        Assert.assertFalse(searchUserByFirstNameResponse.hasErrors());
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().size(), 2);
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getFirstName(), "name2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(1).getLastName(), "surname2");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getFirstName(), "name3");
+        Assert.assertEquals(searchUserByFirstNameResponse.getUsersList().get(0).getLastName(), "surname3");
     }
 
     private void addUsersToDatabase() {

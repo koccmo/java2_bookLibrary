@@ -5,6 +5,7 @@ import java2.application_target_list.core.domain.Record;
 import java2.application_target_list.core.requests.board.GetRecordRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.board.GetRecordResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.board.GetRecordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,37 +14,31 @@ import java.util.List;
 
 @Service
 @Transactional
-public class GetRecordService {
+public class GetRecordService extends ErrorCreator {
 
     @Autowired
     private GetRecordValidator getRecordValidator;
     @Autowired
     private JpaBoardRepository jpaBoardRepository;
 
-    private List<CoreError> errors;
-
     public GetRecordResponse execute(GetRecordRequest getRecordRequest){
-        errors = checkRequestForErrors(getRecordRequest);
+        List<CoreError> errors = checkRequestForErrors(getRecordRequest);
 
-        if (requestHaveErrors()) {
-            createResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createResponseWithErrors(errors);
         }
 
         return jpaBoardRepository.findById(getRecordRequest.getId()).map(GetRecordResponse::new)
                 .orElseGet(() -> {
-                    errors.add(createRecordDOesNotExistError());
-                    return new GetRecordResponse(errors);});
+                    errors.add(createCoreError("id", "Not found"));
+                    return createResponseWithErrors(errors);});
     }
 
-    private CoreError createRecordDOesNotExistError(){
-        return new CoreError("id", "Not found");
-    }
-
-    private GetRecordResponse createResponseWithErrors() {
+    private GetRecordResponse createResponseWithErrors(List<CoreError> errors) {
         return new GetRecordResponse(errors);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 

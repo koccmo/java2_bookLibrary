@@ -16,18 +16,16 @@ public class GetAllUserService {
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<User> users;
-
     public GetAllUsersResponse execute(GetAllUsersRequest getAllUsersRequest){
-        users = getAllUsersFromDB();
-        return createGetAllUsersResponse();
+        List<User> users = getAllUsersFromDB();
+        return createGetAllUsersResponse(users);
     }
 
     private List<User> getAllUsersFromDB(){
         return jpaUserRepository.findAll();
     }
 
-    private GetAllUsersResponse createGetAllUsersResponse() {
+    private GetAllUsersResponse createGetAllUsersResponse(List<User> users) {
         return new GetAllUsersResponse(users);
     }
 }

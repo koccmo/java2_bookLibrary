@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.user.DeleteUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.DeleteUserResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.user.DeleteUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,22 +13,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DeleteUserService {
+public class DeleteUserService extends ErrorCreator {
 
     @Autowired
     private DeleteUserValidator deleteUserValidator;
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public DeleteUserResponse execute(DeleteUserRequest deleteUserRequest){
-        errors = checkRequestForErrors(deleteUserRequest);
-        checkAvailabilityInDB(deleteUserRequest);
+        List<CoreError> errors = checkRequestForErrors(deleteUserRequest);
+        checkAvailabilityInDB(deleteUserRequest, errors);
 
-
-        if(requestHaveErrors()){
-            return createDeleteUserResponseWithErrors();
+        if(requestHaveErrors(errors)){
+            return createDeleteUserResponseWithErrors(errors);
         }
 
         deleteUserFromDB(deleteUserRequest);
@@ -42,11 +40,11 @@ public class DeleteUserService {
         jpaUserRepository.deleteById(deleteUserRequest.getUserIdToDelete());
     }
 
-    private DeleteUserResponse createDeleteUserResponseWithErrors(){
+    private DeleteUserResponse createDeleteUserResponseWithErrors(List<CoreError> errors){
         return new DeleteUserResponse(errors);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
     }
 
@@ -54,13 +52,9 @@ public class DeleteUserService {
         return !jpaUserRepository.existsById(deleteUserRequest.getUserIdToDelete());
     }
 
-    private CoreError createUserDoesNotExistError(){
-        return new CoreError("User ID;","no user with that ID");
-    }
-
-    private void checkAvailabilityInDB(DeleteUserRequest deleteUserRequest){
+    private void checkAvailabilityInDB(DeleteUserRequest deleteUserRequest, List<CoreError> errors){
         if (userDoesNotExist(deleteUserRequest)){
-            errors.add(createUserDoesNotExistError());
+            errors.add(createCoreError("User ID;","no user with that ID"));
         }
     }
 

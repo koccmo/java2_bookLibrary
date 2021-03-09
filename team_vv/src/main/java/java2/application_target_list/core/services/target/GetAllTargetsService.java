@@ -16,14 +16,12 @@ public class GetAllTargetsService {
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
 
-    private List<Target> targetList;
-
     public GetAllTargetsResponse execute(GetAllTargetsRequest request) {
-        targetList = getAllTargetFromDB();
-        return createGetAllTargetsResponse();
+        List<Target> targetList = getAllTargetFromDB();
+        return createGetAllTargetsResponse(targetList);
     }
 
-    private GetAllTargetsResponse createGetAllTargetsResponse(){
+    private GetAllTargetsResponse createGetAllTargetsResponse(List<Target> targetList){
         return new GetAllTargetsResponse(targetList);
     }
 

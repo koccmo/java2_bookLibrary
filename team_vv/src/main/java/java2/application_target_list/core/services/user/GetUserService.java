@@ -4,6 +4,7 @@ import java2.application_target_list.core.database.jpa.JpaUserRepository;
 import java2.application_target_list.core.requests.user.GetUserRequest;
 import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.user.GetUserResponse;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.user.GetUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,43 +13,37 @@ import java.util.List;
 
 @Service
 @Transactional
-public class GetUserService {
+public class GetUserService extends ErrorCreator {
 
     @Autowired
     private GetUserValidator getUserValidator;
     @Autowired
     private JpaUserRepository jpaUserRepository;
 
-    private List<CoreError> errors;
-
     public GetUserResponse execute(GetUserRequest getUserRequest) {
-         errors = checkRequestForErrors(getUserRequest);
+        List<CoreError> errors = checkRequestForErrors(getUserRequest);
 
-        if (requestHaveErrors()) {
-            return createGetUserResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createGetUserResponseWithErrors(errors);
         }
 
-        return createGetUserResponse(getUserRequest);
+        return createGetUserResponse(getUserRequest, errors);
     }
 
-    private GetUserResponse createGetUserResponse(GetUserRequest getUserRequest){
+    private GetUserResponse createGetUserResponse(GetUserRequest getUserRequest, List<CoreError> errors){
         return jpaUserRepository.findById(getUserRequest.getId())
                 .map(GetUserResponse::new).orElseGet(() -> {
-                    errors.add(createUserDoesNotExistError());
-                    return createGetUserResponseWithErrors();
+                    errors.add(createCoreError("id", "Not found!"));
+                    return createGetUserResponseWithErrors(errors);
                 });
     }
 
-    private GetUserResponse createGetUserResponseWithErrors() {
+    private GetUserResponse createGetUserResponseWithErrors(List<CoreError> errors) {
         return new GetUserResponse(errors);
     }
 
-    private boolean requestHaveErrors(){
+    private boolean requestHaveErrors(List<CoreError> errors){
         return !errors.isEmpty();
-    }
-
-    private CoreError createUserDoesNotExistError(){
-        return new CoreError("id", "Not found!");
     }
 
     private List<CoreError> checkRequestForErrors(GetUserRequest getUserRequest){

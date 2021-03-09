@@ -3,40 +3,31 @@ package java2.application_target_list.core.validators.user;
 
 import java2.application_target_list.core.requests.user.AddUserRequest;
 import java2.application_target_list.core.responses.CoreError;
+import java2.application_target_list.core.validators.ErrorCreator;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AddUserValidator {
-
-    private List<CoreError> errors;
+public class AddUserValidator extends ErrorCreator {
 
     public List<CoreError> validate(AddUserRequest addUserRequest) {
-        errors = new ArrayList<>();
-        checkUserFirstName(addUserRequest);
-        checkUserLastName(addUserRequest);
+        List<CoreError> errors = new ArrayList<>();
+        checkUserFirstName(addUserRequest, errors);
+        checkUserLastName(addUserRequest, errors);
         return errors;
     }
 
-    private void  checkUserLastName(AddUserRequest addUserRequest){
+    private void  checkUserLastName(AddUserRequest addUserRequest, List<CoreError> errors){
         if (isUserLastNameEmpty(addUserRequest)){
-            errors.add(createUserLastNameIsEmptyError());
+            errors.add(createCoreError("User last name", "must not be empty!"));
         }
     }
 
-    private void checkUserFirstName(AddUserRequest addUserRequest){
+    private void checkUserFirstName(AddUserRequest addUserRequest, List<CoreError> errors){
         if (isUserFirstNameEmpty(addUserRequest)){
-            errors.add(createUserFirstNameIsEmptyError());
+            errors.add(createCoreError("User first name","must not be empty!"));
         }
-    }
-
-    private CoreError createUserFirstNameIsEmptyError(){
-        return new CoreError("User first name","must not be empty!");
-    }
-
-    private CoreError createUserLastNameIsEmptyError(){
-        return new CoreError("User last name", "must not be empty!");
     }
 
     private boolean isUserFirstNameEmpty(AddUserRequest request) {

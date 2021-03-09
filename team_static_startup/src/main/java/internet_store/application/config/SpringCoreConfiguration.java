@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 public class SpringCoreConfiguration {
 
     @Bean
-    public SpringLiquibase springLiquibase(@Qualifier("dataSource") DataSource dataSource) {
+    public SpringLiquibase springLiquibase(DataSource dataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setChangeLog("classpath:/db/changelog/changelog-master.xml");
         liquibase.setShouldRun(true);

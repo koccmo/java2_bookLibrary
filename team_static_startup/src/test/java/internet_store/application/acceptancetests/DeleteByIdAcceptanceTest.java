@@ -13,12 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
-
 import java.math.BigDecimal;
-
 import static org.junit.Assert.*;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DeleteByIdAcceptanceTest {
 
     private ApplicationContext appContext;
@@ -39,7 +37,7 @@ public class DeleteByIdAcceptanceTest {
         assertTrue(deleteResponse.isProductRemoved());
         assertFalse(deleteResponse.hasErrors());
     }
-*/
+
     @Test
     public void shouldNotDeleteWhenIdIsNotInDatabase() {
         DeleteByProductIdRequest deleteRequest = new DeleteByProductIdRequest(2L);
@@ -57,7 +55,7 @@ public class DeleteByIdAcceptanceTest {
         assertEquals("Product ID", deleteResponse.getErrors().get(0).getField());
         assertEquals("Should not be empty.", deleteResponse.getErrors().get(0).getMessage());
     }
-
+*/
     private AddProductService getAddProductService() {
         return appContext.getBean(AddProductService.class);
     }

@@ -1,22 +1,27 @@
 package java2.application_target_list.core.acceptancetests.target;
 
 
-import java2.application_target_list.core.DatabaseCleaner;
+import java2.application_target_list.TargetListApplication;
+import java2.application_target_list.core.acceptancetests.DatabaseCleaner;
 import java2.application_target_list.core.requests.target.AddTargetRequest;
 import java2.application_target_list.core.requests.target.ChangeTargetNameRequest;
 import java2.application_target_list.core.requests.target.GetAllTargetsRequest;
+import java2.application_target_list.core.responses.target.AddTargetResponse;
 import java2.application_target_list.core.services.target.ChangeTargetNameService;
 import java2.application_target_list.core.responses.target.ChangeTargetNameResponse;
 import java2.application_target_list.core.responses.target.GetAllTargetsResponse;
 import java2.application_target_list.core.services.target.AddTargetService;
 import java2.application_target_list.core.services.target.GetAllTargetsService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TargetListApplication.class)
 public class ChangeTargetNameAcceptanceTests {
 
     @Autowired
@@ -30,23 +35,21 @@ public class ChangeTargetNameAcceptanceTests {
 
     private Long targetId;
 
-    @BeforeEach
+    @Before
     public void setup() {
         databaseCleaner.clean();
         addTargetToDB();
     }
     @Test
     public void shouldChangeTargetName() {
-        targetId = getAllTargetsService.execute(new GetAllTargetsRequest()).getTargetList().get(0).getId();
-
         ChangeTargetNameRequest changeTargetNameRequest = new ChangeTargetNameRequest(targetId, "New Name");
         ChangeTargetNameResponse changeTargetNameResponse = changeTargetNameService.execute(changeTargetNameRequest);
         GetAllTargetsResponse getAllTargetsResponse = getAllTargetsService.execute(new GetAllTargetsRequest());
 
-        Assertions.assertNull(changeTargetNameResponse.getErrorList());
-        Assertions.assertEquals(getAllTargetsResponse.getTargetList().size(), 1);
-        Assertions.assertEquals(getAllTargetsResponse.getTargetList().get(0).getName(), "New Name");
-        Assertions.assertEquals(getAllTargetsResponse.getTargetList().get(0).getDescription(), "description");
+        Assert.assertNull(changeTargetNameResponse.getErrorList());
+        Assert.assertEquals(getAllTargetsResponse.getTargetList().size(), 1);
+        Assert.assertEquals(getAllTargetsResponse.getTargetList().get(0).getName(), "New Name");
+        Assert.assertEquals(getAllTargetsResponse.getTargetList().get(0).getDescription(), "description");
     }
 
     @Test
@@ -54,15 +57,16 @@ public class ChangeTargetNameAcceptanceTests {
         ChangeTargetNameRequest changeTargetNameRequest = new ChangeTargetNameRequest(21L, "New Name");
         ChangeTargetNameResponse changeTargetNameResponse = changeTargetNameService.execute(changeTargetNameRequest);
 
-        Assertions.assertTrue(changeTargetNameResponse.hasErrors());
-        Assertions.assertEquals(changeTargetNameResponse.getErrorList().size(), 1);
-        Assertions.assertEquals(changeTargetNameResponse.getErrorList().get(0).getField(), "Target ID;");
-        Assertions.assertEquals(changeTargetNameResponse.getErrorList().get(0).getMessage(), "no target with that ID");
+        Assert.assertTrue(changeTargetNameResponse.hasErrors());
+        Assert.assertEquals(changeTargetNameResponse.getErrorList().size(), 1);
+        Assert.assertEquals(changeTargetNameResponse.getErrorList().get(0).getField(), "Target ID;");
+        Assert.assertEquals(changeTargetNameResponse.getErrorList().get(0).getMessage(), "no target with that ID");
     }
 
     private void addTargetToDB() {
         AddTargetRequest addTargetRequest1 = new AddTargetRequest("name", "description", 1L);
-        addTargetService.execute(addTargetRequest1);
+        AddTargetResponse addTargetResponse = addTargetService.execute(addTargetRequest1);
+        targetId = addTargetResponse.getNewTarget().getId();
     }
 
 }

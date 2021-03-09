@@ -3,6 +3,7 @@ package java2.application_target_list.core.services.target;
 import java2.application_target_list.core.database.jpa.JpaTargetRepository;
 import java2.application_target_list.core.requests.Ordering;
 import java2.application_target_list.core.requests.Paging;
+import java2.application_target_list.core.validators.ErrorCreator;
 import java2.application_target_list.core.validators.target.SearchTargetByDescriptionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import java2.application_target_list.core.responses.CoreError;
 import java2.application_target_list.core.responses.target.SearchTargetByDescriptionResponse;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,24 +33,21 @@ public class SearchTargetByDescriptionService {
     @Autowired
     private JpaTargetRepository jpaTargetRepository;
 
-    private List<CoreError> errors;
-    private List<Target> targets;
-
     public SearchTargetByDescriptionResponse execute(SearchTargetByDescriptionRequest searchTargetByDescriptionRequest){
-        errors = checkRequestForErrors(searchTargetByDescriptionRequest);
+        List<CoreError> errors = checkRequestForErrors(searchTargetByDescriptionRequest);
 
-        if (requestHaveErrors()) {
-            return createSearchTargetByDescriptionResponseWithErrors();
+        if (requestHaveErrors(errors)) {
+            return createSearchTargetByDescriptionResponseWithErrors(errors);
         }
 
-        targets = findAllTargetsByDescription(searchTargetByDescriptionRequest);
+        List<Target> targets = findAllTargetsByDescription(searchTargetByDescriptionRequest);
         targets = order(targets, searchTargetByDescriptionRequest.getOrdering());
         targets = paging(targets, searchTargetByDescriptionRequest.getPaging());
 
-        return createSearchTargetByDescriptionResponse();
+        return createSearchTargetByDescriptionResponse(targets);
     }
 
-    private SearchTargetByDescriptionResponse createSearchTargetByDescriptionResponse() {
+    private SearchTargetByDescriptionResponse createSearchTargetByDescriptionResponse(List<Target> targets) {
         return new SearchTargetByDescriptionResponse(null, targets);
     }
 
@@ -56,11 +55,11 @@ public class SearchTargetByDescriptionService {
         return jpaTargetRepository.findByDescription(searchTargetByDescriptionRequest.getDescription());
     }
 
-    private SearchTargetByDescriptionResponse createSearchTargetByDescriptionResponseWithErrors(){
+    private SearchTargetByDescriptionResponse createSearchTargetByDescriptionResponseWithErrors(List<CoreError> errors){
         return new SearchTargetByDescriptionResponse(errors, null);
     }
 
-    private boolean requestHaveErrors() {
+    private boolean requestHaveErrors(List<CoreError> errors) {
         return !errors.isEmpty();
     }
 
