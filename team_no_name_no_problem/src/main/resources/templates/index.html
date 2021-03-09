@@ -12,6 +12,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <style>
+    P {text-indent: 20px;
+    }
+    .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
@@ -23,20 +38,32 @@ f
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About Us ¯\_(ツ)_/¯</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About Us</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Admin Control Panel</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact Us</a>
+
     </div>
 
 <div class="page">
 
 
-
-<a href="/addCustomer">Sign in</a> <br>
-<a href="/deleteCustomer">Delete account by ID</a> <br>
-<a href="/getAllProductList">Get list of all products</a> <br>
-<a href="/buyProduct">Buy product</a> <br>
-<a href="/findCustomerById">Search customer by ID</a> <br>
-<a href="/searchCustomer">Search customer</a> <br>
+    <P>
+        <a href="/addCustomer"><button>Sign in</button></a> <br>
+    <P>
+<a href="/deleteCustomer"><button>Delete account by ID</button></a> <br>
+    <P>
+<a href="/getAllProductList"><button>Get list of all products</button></a> <br>
+    <P>
+<a href="/buyProduct"><button>Buy product</button></a> <br>
+    <P>
+<a href="/findCustomerById"><button>Search customer by ID</button></a> <br>
+    <P>
+<a href="/searchCustomer"><button>Search customer</button></a> <br>
+    <P>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-instagram"></a>
+    <a href="#" class="fa fa-youtube"></a>
 </div>
 </div>
 
