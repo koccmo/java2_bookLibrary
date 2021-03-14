@@ -11,5 +11,5 @@ public class StartApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringWebConfiguration.class);
     }
-//test
+
 }
