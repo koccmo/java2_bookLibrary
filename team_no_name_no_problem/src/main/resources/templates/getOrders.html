@@ -20,11 +20,10 @@
     </tr>
 
     <td th:if="${orders != null}">
-        <tr th:each="order : ${orders}">
-            <td th:text="${order.id}"/>
-            <td th:text="${order.customer}" />
-            <td th:text="${shoppingCart}"/>
-            <td th:text="${order.sum}" />
+        <tr th:each="shoppingCart : ${orders}">
+            <td th:text="${shoppingCart.id}"/>
+            <td th:text="${shoppingCart.customer}" />
+            <td th:text="${shoppingCart.sum}" />
         </tr>
     </td>
 
