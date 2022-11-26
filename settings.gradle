@@ -1,56 +1,9 @@
-include 'teacher:lesson_1_introduction:step_1_simple_console_application'
-
-include 'teacher:lesson_2_single_responsibility_principle:step_1_srp_level_method'
-include 'teacher:lesson_2_single_responsibility_principle:step_2_srp_level_class'
-include 'teacher:lesson_2_single_responsibility_principle:step_3_srp_level_package'
-include 'teacher:lesson_2_single_responsibility_principle:step_4_srp_level_application_layer'
-
-include 'teacher:lesson_3_request_response_input_data_validation:step_1_request_response_model'
-include 'teacher:lesson_3_request_response_input_data_validation:step_2_input_data_validation'
-
-include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_1_search'
-include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_2_ordering'
-include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_3_paging'
-
-include 'teacher:lesson_5_testing_with_junit_and_mockito:step_1_mockito'
-include 'teacher:lesson_5_testing_with_junit_and_mockito:step_2_application_context'
-include 'teacher:lesson_5_testing_with_junit_and_mockito:step_3_acceptance_tests'
-
-include 'teacher:lesson_6_dependency_injection_inversion_of_control:step_1_dependency_injection'
-
-include 'teacher:lesson_7_spring_basics:step_1_spring'
-include 'teacher:lesson_7_spring_basics:step_2_strategy'
-
-include 'teacher:lesson_8_introduction_to_sql'
 
 
-include 'teacher:lesson_9_advanced_sql'
-include 'teacher:lesson_10_jdbc_api'
-include 'teacher:lesson_11_orm_introduction'
-include 'teacher:lesson_12_orm_relations'
-include 'teacher:lesson_13_spring_web'
-include 'teacher:lesson_14_restfull_api'
-include 'teacher:lesson_15_jpa_repositories'
-include 'teacher:lesson_16_liquibase'
 
 
-include 'team_retarded'
-include 'team_static_startup'
-include 'team_no_name_no_problem'
-include 'team_beauty_will_save_the_world'
-include 'team_VK'
-include 'team_vv'
-include 'team_dog'
-include 'team_triple_force'
-include 'team_lg'
-include 'team_dog'
-include 'team_vv'
-include 'team_healthy_tooth'
-include 'team_eStore'
-include 'team_AK'
-include 'team_ticket_service'
-include 'team_rj'
-include 'team_temptation'
-include 'team_VSB'
-include 'team_marx'
+
+
+include 'library'
+include 'untitled'
 

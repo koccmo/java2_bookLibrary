@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore_project">
+    <meta name="author" content="team_estore">
+    <title>eStore</title>
+</head>
+
+<body>
+<h3>Find Deals By Product Id</h3>
+<table>
+    <tr>
+        <td>Product Id:</td>
+    </tr>
+    <tr>
+        <form action="/deals/findDealsByProductId" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="submit" value="Find Deals"/>
+                <input type="reset" value="Clear"/></td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+<td th:if="${deals != null}">
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td>User id:</td>
+            <td>Product Id:</td>
+            <td>Status:</td>
+            <td>Created at:</td>
+        </tr>
+
+        <tr th:each="deal : ${deals}">
+            <td th:text="${deal.id}"></td>
+            <td th:text="${deal.userId}"></td>
+            <td th:text="${deal.productId}"></td>
+            <td th:text="${deal.status}"></td>
+            <td th:text="${deal.dealDate}"></td>
+        </tr>
+    </table>
+</td>
+
+<br>
+<form action="/deals" method="get">
+    <input type="submit" value="Deals page" name="Submit" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eStore_project">
+    <meta name="author" content="team_estore">
+    <title>eStore</title>
+</head>
+
+    <body>
+        <h3>Update Product</h3>
+        <table>
+            <tr>
+                <td>Id:</td>
+                <td>Name:</td>
+                <td>Description:</td>
+                <td>Price:</td>
+            </tr>
+            <tr>
+                <form action="/products/updateProduct" th:object="${request}" method="post">
+                    <td><input type="text" th:field="${request.id}"/></td>
+                    <td><input type="text" th:field="${request.name}"/></td>
+                    <td><input type="text" th:field="${request.description}"/></td>
+                    <td><input type="text" th:field="${request.price}"/></td>
+                    <td><input type="submit" value="Update Product"/>
+                        <input type="reset" value="Clear"/></td>
+                </form>
+            </tr>
+        </table>
+
+        <td th:if="${errors != null}">
+            <tr th:each="error : ${errors}">
+                <td th:text="${error.field}" />
+                <td th:text="${error.message}" />
+                <td th:text="${error.message}" />
+            </tr>
+        </td>
+        <br>
+        <form action="/products" method="get">
+            <input type="submit" value="Products page" name="Submit" />
+        </form>
+    </body>
+</html>

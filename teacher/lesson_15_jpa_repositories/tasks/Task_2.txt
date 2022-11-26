@@ -1,7 +1,0 @@
-В классе WebBookListApplication уберите дополнительные параметры
-из аннотации @SpringBootApplication:
-
-@SpringBootApplication
-public class WebBookListApplication {
-
-}
