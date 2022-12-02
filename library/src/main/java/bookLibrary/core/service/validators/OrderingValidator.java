@@ -2,12 +2,12 @@ package bookLibrary.core.service.validators;
 
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.response.CoreError;
-import bookLibrary.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-@DIComponent
+@Component
 public class OrderingValidator {
 
     public List<CoreError> validate(Ordering order) {

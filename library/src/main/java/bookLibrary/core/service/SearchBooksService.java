@@ -1,6 +1,6 @@
 package bookLibrary.core.service;
 
-import bookLibrary.Book;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;
@@ -8,17 +8,24 @@ import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.CoreError;
 import bookLibrary.core.response.SearchBooksResponse;
 import bookLibrary.core.service.validators.SearchBooksValidator;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-@DIComponent
+@Component
 public class SearchBooksService {
-    @DIDependency private DataBase dataBase;
-    @DIDependency private SearchBooksValidator searchBooksValidator;
+    @Autowired
+    private DataBase dataBase;
+    @Autowired private SearchBooksValidator searchBooksValidator;
 
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
     public SearchBooksResponse execute(SearchBooksRequest request) {
         List<CoreError> errors = searchBooksValidator.validate(request);
@@ -48,7 +55,7 @@ public class SearchBooksService {
     }
 
     private List<Book> order(List<Book> bookList, Ordering order) {
-        if(order != null) {
+        if(orderingEnabled && order != null) {
             Comparator<Book> comparator = order.getOrderBy().equals("Author")
                     ? Comparator.comparing(Book::getAuthor)
                     : Comparator.comparing(Book::getTitle);
@@ -62,7 +69,7 @@ public class SearchBooksService {
     }
 
     private List<Book> pagination (List<Book> bookList, Paging paging) {
-        if (paging != null) {
+        if (pagingEnabled && paging != null) {
             int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
             return bookList.stream()
                     .skip(skip)

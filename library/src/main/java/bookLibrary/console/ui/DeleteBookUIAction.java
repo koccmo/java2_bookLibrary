@@ -3,13 +3,13 @@ package bookLibrary.console.ui;
 import bookLibrary.core.request.DeleteBookRequest;
 import bookLibrary.core.response.DeleteBookResponse;
 import bookLibrary.core.service.DeleteBookService;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-@DIComponent
+@Component
 public class DeleteBookUIAction implements UIAction{
-    @DIDependency private DeleteBookService deleteBookService;
+    @Autowired private DeleteBookService deleteBookService;
 
 
     @Override

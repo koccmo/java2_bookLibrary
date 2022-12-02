@@ -1,14 +1,17 @@
-package bookLibrary.core.service.acceptanceTest;
+package bookLibrary.acceptanceTest;
 
-import bookLibrary.dependency_injection.ApplicationContext;
+
+import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.DeleteBookRequest;
 import bookLibrary.core.response.CoreError;
 import bookLibrary.core.service.AddBookService;
 import bookLibrary.core.service.validators.DeleteBookValidation;
-import bookLibrary.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 
@@ -16,7 +19,12 @@ import static junit.framework.TestCase.assertEquals;
 
 
 public class DeleteBookRequestValidationTest {
-    private ApplicationContext context = new DIApplicationContextBuilder().build("bookLibrary");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Test
     public void shouldReturnEmptyErrorsList() {
@@ -56,15 +64,15 @@ public class DeleteBookRequestValidationTest {
     }
 
     private DeleteBookValidation getDeleteBookValidation() {
-        return context.getBean(DeleteBookValidation.class);
+        return appContext.getBean(DeleteBookValidation.class);
     }
 
     private DataBase getDataBase() {
-       return context.getBean(DataBase.class);
+       return appContext.getBean(DataBase.class);
     }
 
     private AddBookService getAddBookService() {
-        return context.getBean(AddBookService.class);
+        return appContext.getBean(AddBookService.class);
     }
 
 

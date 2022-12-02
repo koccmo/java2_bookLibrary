@@ -15,6 +15,6 @@ public class DIComponentFilterTest {
     public void searchClassesWithDiComponentAnnotation() throws IOException, ClassNotFoundException {
         List<Class> classes = classFinder.findClassesInsidePackage("bookLibrary.core.dataBase");
         List<Class> classesWithAnnotation = diComponentFilter.findDIComponentClasses(classes);
-        assertEquals(1, classesWithAnnotation.size());
+        assertEquals(0, classesWithAnnotation.size());
     }
 }

@@ -3,12 +3,13 @@ package bookLibrary.console.ui;
 import bookLibrary.core.request.PrintAllBooksTitleRequest;
 import bookLibrary.core.response.PrintAllBooksTitleResponse;
 import bookLibrary.core.service.PrintAllBookTitleService;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class PrintAllBooksTitleUIAction implements UIAction{
-    @DIDependency private PrintAllBookTitleService printAllBookService;
+    @Autowired
+    private PrintAllBookTitleService printAllBookService;
 
 
     @Override

@@ -5,14 +5,15 @@ import bookLibrary.core.request.DeleteBookRequest;
 import bookLibrary.core.response.CoreError;
 import bookLibrary.core.response.DeleteBookResponse;
 import bookLibrary.core.service.validators.DeleteBookValidation;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-@DIComponent
+@Component
 public class DeleteBookService {
-    @DIDependency private DataBase dataBase;
-    @DIDependency private DeleteBookValidation deleteBookValidation;
+    @Autowired
+    private DataBase dataBase;
+    @Autowired private DeleteBookValidation deleteBookValidation;
 
 
     public DeleteBookResponse execute(DeleteBookRequest deleteBookRequest) {

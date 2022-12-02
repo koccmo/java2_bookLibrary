@@ -1,6 +1,6 @@
 package bookLibrary.core.service;
 
-import bookLibrary.Book;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;

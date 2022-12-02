@@ -1,6 +1,6 @@
-package bookLibrary.core.service.matchers;
+package bookLibrary.matchers;
 
-import bookLibrary.Book;
+import bookLibrary.core.domain.Book;
 import org.mockito.ArgumentMatcher;
 
 public class BookMather implements ArgumentMatcher<Book> {

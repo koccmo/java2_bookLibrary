@@ -3,13 +3,14 @@ package bookLibrary.core.service;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.PrintAllBooksTitleRequest;
 import bookLibrary.core.response.PrintAllBooksTitleResponse;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-@DIComponent
+@Component
 public class PrintAllBookTitleService {
-    @DIDependency private DataBase dataBase;
+    @Autowired
+    private DataBase dataBase;
 
 
     public PrintAllBooksTitleResponse execute(PrintAllBooksTitleRequest printAllBooksRequest) {

@@ -2,11 +2,11 @@ package bookLibrary.core.service.validators;
 
 import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.CoreError;
-import bookLibrary.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+@Component
 public class SearchBooksRequestFieldValidator {
 
     public List<CoreError> validate(SearchBooksRequest request) {

@@ -1,4 +1,4 @@
-package bookLibrary;
+package bookLibrary.core.domain;
 
 import java.util.Objects;
 

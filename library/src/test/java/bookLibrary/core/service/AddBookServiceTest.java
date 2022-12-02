@@ -1,11 +1,11 @@
 package bookLibrary.core.service;
 
-import bookLibrary.Book;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.response.AddBookResponse;
 import bookLibrary.core.response.CoreError;
-import bookLibrary.core.service.matchers.BookMather;
+import bookLibrary.matchers.BookMather;
 import bookLibrary.core.service.validators.AddBookValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,18 +1,25 @@
-package bookLibrary.core.service.acceptanceTest;
+package bookLibrary.acceptanceTest;
 
-import bookLibrary.dependency_injection.ApplicationContext;
+import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.PrintAllBooksTitleRequest;
 import bookLibrary.core.response.PrintAllBooksTitleResponse;
 import bookLibrary.core.service.AddBookService;
 import bookLibrary.core.service.PrintAllBookTitleService;
-import bookLibrary.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 
 public class PrintAllBookTitleServiceAcceptanceTest {
-    private ApplicationContext context = new DIApplicationContextBuilder().build("bookLibrary");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Test
     public void shouldReturnBookTitlesList() {
@@ -30,10 +37,10 @@ public class PrintAllBookTitleServiceAcceptanceTest {
     }
 
     private AddBookService getAddBookService() {
-        return context.getBean(AddBookService.class);
+        return appContext.getBean(AddBookService.class);
     }
 
     private PrintAllBookTitleService getPrintAllBookTitleService() {
-        return context.getBean(PrintAllBookTitleService.class);
+        return appContext.getBean(PrintAllBookTitleService.class);
     }
 }

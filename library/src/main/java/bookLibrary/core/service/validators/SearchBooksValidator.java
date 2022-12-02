@@ -4,17 +4,18 @@ import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;
 import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.CoreError;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@DIComponent
+@Component
 public class SearchBooksValidator {
-    @DIDependency private SearchBooksRequestFieldValidator fieldValidator;
-    @DIDependency private OrderingValidator orderingValidator;
+    @Autowired
+    private SearchBooksRequestFieldValidator fieldValidator;
+    @Autowired private OrderingValidator orderingValidator;
 
-    @DIDependency private PagingValidator pagingValidator;
+    @Autowired private PagingValidator pagingValidator;
 
 
     public List<CoreError> validate(SearchBooksRequest request) {

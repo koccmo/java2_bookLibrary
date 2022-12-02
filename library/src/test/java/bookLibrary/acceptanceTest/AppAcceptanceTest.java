@@ -1,6 +1,6 @@
-package bookLibrary.core.service.acceptanceTest;
+package bookLibrary.acceptanceTest;
 
-import bookLibrary.dependency_injection.ApplicationContext;
+import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.DeleteBookRequest;
 import bookLibrary.core.request.PrintAllBooksTitleRequest;
@@ -13,15 +13,22 @@ import bookLibrary.core.service.AddBookService;
 import bookLibrary.core.service.DeleteBookService;
 import bookLibrary.core.service.PrintAllBookTitleService;
 import bookLibrary.core.service.SearchBooksService;
-import bookLibrary.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AppAcceptanceTest {
 
-    ApplicationContext context = new DIApplicationContextBuilder().build("bookLibrary");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Test
     public void addDeleteBookReturnTrueBookDeleted() {
@@ -64,18 +71,18 @@ public class AppAcceptanceTest {
     }
 
     private AddBookService getAddBookService() {
-        return context.getBean(AddBookService.class);
+        return appContext.getBean(AddBookService.class);
     }
 
     private DeleteBookService getDeleteBookService() {
-        return context.getBean(DeleteBookService.class);
+        return appContext.getBean(DeleteBookService.class);
     }
 
     private PrintAllBookTitleService getPrintAllBookTitleService() {
-        return context.getBean(PrintAllBookTitleService.class);
+        return appContext.getBean(PrintAllBookTitleService.class);
     }
 
     private SearchBooksService getSearchBookService() {
-        return context.getBean(SearchBooksService.class);
+        return appContext.getBean(SearchBooksService.class);
     }
 }

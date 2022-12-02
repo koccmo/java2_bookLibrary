@@ -1,16 +1,24 @@
-package bookLibrary.core.service.acceptanceTest;
+package bookLibrary.acceptanceTest;
 
-import bookLibrary.dependency_injection.ApplicationContext;
+import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.response.AddBookResponse;
 import bookLibrary.core.service.AddBookService;
-import bookLibrary.dependency_injection.DIApplicationContextBuilder;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class AddBookRequestAcceptanceTest {
 
-    private ApplicationContext context = new DIApplicationContextBuilder().build("bookLibrary");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectBookList() {
@@ -21,7 +29,7 @@ public class AddBookRequestAcceptanceTest {
     }
 
     private AddBookService getAddBookService() {
-        return context.getBean(AddBookService.class);
+        return appContext.getBean(AddBookService.class);
     }
 
 

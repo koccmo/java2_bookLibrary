@@ -5,13 +5,14 @@ import bookLibrary.core.request.Paging;
 import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.SearchBooksResponse;
 import bookLibrary.core.service.SearchBooksService;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-@DIComponent
+@Component
 public class SearchBooksUIAction implements UIAction{
-    @DIDependency private SearchBooksService searchBooksService;
+    @Autowired
+    private SearchBooksService searchBooksService;
 
 
     @Override

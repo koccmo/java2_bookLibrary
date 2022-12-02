@@ -1,15 +1,15 @@
 package bookLibrary.core.service.validators;
 
-import bookLibrary.Book;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.response.CoreError;
-import bookLibrary.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-@DIComponent
+@Component
 public class AddBookValidator {
     public List<CoreError> validate(AddBookRequest request, DataBase dataBase) {
         List<CoreError> errors = new ArrayList<>();

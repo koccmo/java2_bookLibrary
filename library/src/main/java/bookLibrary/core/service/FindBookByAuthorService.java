@@ -3,12 +3,13 @@ package bookLibrary.core.service;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.FindByAuthorRequest;
 import bookLibrary.core.response.FindByAuthorResponse;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FindBookByAuthorService {
-    @DIDependency private DataBase dataBase;
+    @Autowired
+    private DataBase dataBase;
 
 
     public FindByAuthorResponse execute(FindByAuthorRequest findByAuthorRequest) {

@@ -1,6 +1,6 @@
-package bookLibrary.core.service.acceptanceTest;
+package bookLibrary.acceptanceTest;
 
-import bookLibrary.dependency_injection.ApplicationContext;
+import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;
@@ -8,14 +8,20 @@ import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.SearchBooksResponse;
 import bookLibrary.core.service.AddBookService;
 import bookLibrary.core.service.SearchBooksService;
-import bookLibrary.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 
 public class SearchBooksRequestAcceptanceTest {
-    private ApplicationContext context = new DIApplicationContextBuilder().build("bookLibrary");
+    private ApplicationContext appContext;
+
+    @Before
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+    }
 
     @Before
     public void init() {
@@ -88,10 +94,10 @@ public class SearchBooksRequestAcceptanceTest {
     }
 
     private SearchBooksService getSearchBookService() {
-        return context.getBean(SearchBooksService.class);
+        return appContext.getBean(SearchBooksService.class);
     }
 
     private AddBookService getAddBookService() {
-        return context.getBean(AddBookService.class);
+        return appContext.getBean(AddBookService.class);
     }
 }

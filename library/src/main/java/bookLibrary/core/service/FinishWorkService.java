@@ -3,12 +3,13 @@ package bookLibrary.core.service;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.ExitRequest;
 import bookLibrary.core.response.ExitResponse;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FinishWorkService {
-    @DIDependency private DataBase dataBase;
+    @Autowired
+    private DataBase dataBase;
 
 
     public ExitResponse execute(ExitRequest exitRequest) {

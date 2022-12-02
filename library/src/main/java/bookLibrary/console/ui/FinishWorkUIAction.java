@@ -2,12 +2,12 @@ package bookLibrary.console.ui;
 
 import bookLibrary.core.request.ExitRequest;
 import bookLibrary.core.service.FinishWorkService;
-import bookLibrary.dependency_injection.DIComponent;
-import bookLibrary.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class FinishWorkUIAction implements UIAction{
-    @DIDependency private FinishWorkService finishWorkService;
+    @Autowired private FinishWorkService finishWorkService;
 
 
     @Override
