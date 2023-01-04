@@ -14,6 +14,7 @@ public interface DataBase {
     List<Book> findByTitle(String title);
     List<Book> findByAuthorAndTitle(String author, String title);
 
+    Long getBookId(String author, String title);
 
     boolean hasBookInLibrary(Book book);
     boolean hasBookInLibraryCheckById(Long id);

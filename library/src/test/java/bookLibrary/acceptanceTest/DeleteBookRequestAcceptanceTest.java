@@ -1,7 +1,9 @@
 package bookLibrary.acceptanceTest;
 
 
+import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
+import bookLibrary.core.dataBase.JdbcDatabaseImpl;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.DeleteBookRequest;
 import bookLibrary.core.response.DeleteBookResponse;
@@ -21,8 +23,12 @@ public class DeleteBookRequestAcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
     @Test
     public void shouldReturnResponseWithErrorWhenIdEmpty() {
         DeleteBookRequest request = new DeleteBookRequest("");
@@ -37,8 +43,8 @@ public class DeleteBookRequestAcceptanceTest {
     public void shouldReturnTrueWhenBookFindAndDeleted() {
         AddBookRequest addBookRequest = new AddBookRequest("Author", "Title");
         getAddBookService().execute(addBookRequest);
-
-        DeleteBookRequest request = new DeleteBookRequest("1");
+        Long id = getJdbcDatabaseImpl().getBookId(addBookRequest.getAuthor(), addBookRequest.getTitle());
+        DeleteBookRequest request = new DeleteBookRequest(String.valueOf(id));
         DeleteBookResponse deleteBookResponse = getDeleteBookService().execute(request);
 
         assertEquals(true, deleteBookResponse.isBookDeleted());
@@ -52,4 +58,6 @@ public class DeleteBookRequestAcceptanceTest {
     private AddBookService getAddBookService() {
         return appContext.getBean(AddBookService.class);
     }
+
+    private JdbcDatabaseImpl getJdbcDatabaseImpl() { return appContext.getBean(JdbcDatabaseImpl.class); }
 }

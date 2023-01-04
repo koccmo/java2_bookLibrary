@@ -1,5 +1,6 @@
 package bookLibrary.acceptanceTest;
 
+import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.PrintAllBooksTitleRequest;
@@ -19,8 +20,12 @@ public class PrintAllBookTitleServiceAcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
     @Test
     public void shouldReturnBookTitlesList() {
         AddBookRequest addBookRequest = new AddBookRequest("Author", "Title");

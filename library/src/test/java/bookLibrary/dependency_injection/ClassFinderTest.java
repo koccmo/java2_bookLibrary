@@ -13,6 +13,6 @@ public class ClassFinderTest {
     public void findAllClassesInPackageThenSuccess() throws IOException, ClassNotFoundException {
         ClassFinder classFinder = new ClassFinder();
         List<Class> classes = classFinder.findClassesInsidePackage("bookLibrary.core.dataBase");
-        assertEquals(2, classes.size());
+        assertEquals(4, classes.size());
     }
 }

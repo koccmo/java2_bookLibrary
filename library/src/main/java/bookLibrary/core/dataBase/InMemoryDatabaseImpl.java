@@ -1,14 +1,13 @@
 package bookLibrary.core.dataBase;
 
 import bookLibrary.core.domain.Book;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class InMemoryDatabaseImpl implements DataBase{
     private Long idNumber = 1L;
     private List<Book> bookLibrary = new ArrayList<>();
@@ -77,5 +76,10 @@ public class InMemoryDatabaseImpl implements DataBase{
         return bookLibrary.stream()
                 .filter(book -> book.equals(searchingBook))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long getBookId(String author, String title) {
+        return null;
     }
 }

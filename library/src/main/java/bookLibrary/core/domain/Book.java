@@ -7,6 +7,7 @@ public class Book {
     private String title;
     private Long id;
 
+    public Book() {}
     public Book(String author, String title) {
         this.author = author;
         this.title = title;
@@ -16,6 +17,13 @@ public class Book {
         id = idNumber;
     }
 
+    public void setAuthor(String newAuthor) {
+        author = newAuthor;
+    }
+
+    public void setTitle(String newTitle) {
+        title = newTitle;
+    }
     public Long getId() {
         return id;
     }

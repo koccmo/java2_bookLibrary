@@ -1,5 +1,6 @@
 package bookLibrary.acceptanceTest;
 
+import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.dataBase.DataBase;
 import bookLibrary.core.request.AddBookRequest;
@@ -20,11 +21,16 @@ public class AddBookRequestValidationTest {
 
     private ApplicationContext appContext;
 
+
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
     @Test
     public void shouldReturnErrorWhenAuthorEmpty() {
         AddBookRequest request = new AddBookRequest("", "Title");

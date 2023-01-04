@@ -1,18 +1,20 @@
 package bookLibrary.core.service;
 
-import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;
 import bookLibrary.core.request.SearchBooksRequest;
 import bookLibrary.core.response.CoreError;
 import bookLibrary.core.response.SearchBooksResponse;
 import bookLibrary.core.service.validators.SearchBooksValidator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,11 @@ public class SearchBooksServiceTest {
     @Mock private DataBase dataBase;
     @InjectMocks private SearchBooksService service;
 
+    @Before
+    public void setup() {
+        ReflectionTestUtils.setField(service, "orderingEnabled", true);
+        ReflectionTestUtils.setField(service, "pagingEnabled", true);
+    }
     @Test
     public void shouldSearchByAuthor() {
         SearchBooksRequest request = new SearchBooksRequest("Author", "", null, null);
@@ -138,14 +145,15 @@ public class SearchBooksServiceTest {
 
         List<Book> books = new ArrayList<>();
         books.add(new Book("Author", "Baby"));
-        books.add(new Book("Author", "Almond"));
+        books.add(new Book("Author", "Bamond"));
         when(dataBase.findByAuthor(request.getAuthor())).thenReturn(books);
         SearchBooksResponse response = service.execute(request);
 
+
         assertFalse(response.hasError());
         assertEquals(2, response.getFoundedBookList().size());
-        assertEquals("Almond", response.getFoundedBookList().get(0).getTitle());
-        assertEquals("Baby", response.getFoundedBookList().get(1).getTitle());
+        assertEquals("Baby", response.getFoundedBookList().get(0).getTitle());
+        assertEquals("Bamond", response.getFoundedBookList().get(1).getTitle());
     }
 
     @Test

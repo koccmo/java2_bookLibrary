@@ -1,5 +1,6 @@
 package bookLibrary.acceptanceTest;
 
+import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.response.AddBookResponse;
@@ -18,6 +19,10 @@ public class AddBookRequestAcceptanceTest {
     @Before
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
+        getDatabaseCleaner().clean();
+    }
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
     }
 
     @Test

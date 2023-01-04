@@ -25,8 +25,9 @@ public class AddBookUIAction implements UIAction{
                     + coreError.getDescription()));
             System.out.println("Your book not been Added!");
         } else {
-            System.out.println("New book id - " + response.getBook().getId());
-            System.out.println("Book with id " + response.getBook().getId() + " been added!");
+//            System.out.println("New book id - " + response.getBook().getId());
+//            System.out.println("Book with id " + response.getBook().getId() + " been added!");
+            System.out.println("Book been ADDED!");
         }
 
     }
