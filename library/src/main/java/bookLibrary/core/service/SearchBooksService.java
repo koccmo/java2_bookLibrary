@@ -1,7 +1,7 @@
 package bookLibrary.core.service;
 
-import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.request.Ordering;
 import bookLibrary.core.request.Paging;
 import bookLibrary.core.request.SearchBooksRequest;
@@ -11,11 +11,14 @@ import bookLibrary.core.service.validators.SearchBooksValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Component
+@Transactional
 public class SearchBooksService {
     @Autowired
     private DataBase dataBase;

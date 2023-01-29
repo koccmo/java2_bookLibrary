@@ -3,11 +3,10 @@ package bookLibrary.core.dataBase;
 import bookLibrary.core.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+//@Component
 public class JdbcDatabaseImpl implements DataBase{
     @Autowired
     private JdbcTemplate jdbcTemplate;

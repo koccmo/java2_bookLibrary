@@ -31,6 +31,8 @@ public class SearchBooksUIAction implements UIAction{
         System.out.println("Enter Page Size");
         Integer pageSize = Integer.parseInt(scanner.nextLine());
         Ordering ordering = new Ordering(orderBy, orderDirection);
+        ordering.setFirstField("Author");
+        ordering.setSecondField("Title");
         Paging paging = new Paging(pageNumber, pageSize);
         SearchBooksRequest request = new SearchBooksRequest(author, title, ordering, paging);
         SearchBooksResponse response = searchBooksService.execute(request);

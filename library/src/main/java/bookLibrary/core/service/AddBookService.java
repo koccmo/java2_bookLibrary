@@ -1,20 +1,24 @@
 package bookLibrary.core.service;
 
-import bookLibrary.core.domain.Book;
 import bookLibrary.core.dataBase.DataBase;
+import bookLibrary.core.domain.Book;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.response.AddBookResponse;
 import bookLibrary.core.response.CoreError;
 import bookLibrary.core.service.validators.AddBookValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Component
+@Transactional
 public class AddBookService {
     @Autowired
     private DataBase dataBase;
-    @Autowired private AddBookValidator addBookValidator;
+    @Autowired
+    private AddBookValidator addBookValidator;
 
 
     public AddBookResponse execute (AddBookRequest addBookRequest) {

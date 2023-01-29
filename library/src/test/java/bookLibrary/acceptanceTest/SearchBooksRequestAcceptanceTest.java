@@ -53,6 +53,8 @@ public class SearchBooksRequestAcceptanceTest {
     @Test
     public void searchBookOrderingAscending() {
         Ordering ordering = new Ordering("Author", "ASCENDING");
+        ordering.setFirstField("Author");
+        ordering.setSecondField("Title");
         SearchBooksRequest request = new SearchBooksRequest("", "Title", ordering);
         SearchBooksResponse response = getSearchBookService().execute(request);
 
@@ -66,6 +68,9 @@ public class SearchBooksRequestAcceptanceTest {
     @Test
     public void searchBookOrderingDescending() {
         Ordering ordering = new Ordering("Author", "DESCENDING");
+        ordering.setFirstField("Author");
+        ordering.setSecondField("Title");
+
         SearchBooksRequest searchBooksRequest = new SearchBooksRequest("", "Title", ordering);
         SearchBooksResponse response = getSearchBookService().execute(searchBooksRequest);
 

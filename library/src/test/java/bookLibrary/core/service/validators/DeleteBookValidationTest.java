@@ -25,8 +25,8 @@ public class DeleteBookValidationTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenIdNull() {
-        DeleteBookRequest request = new DeleteBookRequest(null);
+    public void shouldReturnErrorWhenIdEmpty() {
+        DeleteBookRequest request = new DeleteBookRequest("");
         List<CoreError> errors = validation.validate(request, dataBase);
         assertFalse(errors.isEmpty());
         assertEquals(1, errors.size());
