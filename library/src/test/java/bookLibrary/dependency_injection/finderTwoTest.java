@@ -12,7 +12,7 @@ public class finderTwoTest {
     public void test() throws IOException, ClassNotFoundException {
         finderTwo finderTwo = new finderTwo();
         List<Class> classes = finderTwo.findClassesInsidePackageTwo("bookLibrary.core.dataBase");
-        assertEquals(4, classes.size());
+        assertEquals(7, classes.size());
     }
 
 }

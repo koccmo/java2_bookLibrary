@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `readers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(200) NOT NULL,
   `last_name` VARCHAR(100) NOT NULL,
+  `personal_code` BIGINT NOT NULL,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
@@ -56,6 +57,10 @@ ON reader_books (reader_id);
 
 CREATE INDEX ix_reader_books_book_id
 ON reader_books (book_id);
+
+ALTER TABLE readers ADD COLUMN personal_code BIGINT NOT NULL;
+
+CREATE UNIQUE INDEX reader ON readers (first_name, last_name, personal_code);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

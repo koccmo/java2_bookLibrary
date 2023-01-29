@@ -7,13 +7,16 @@ import bookLibrary.core.response.DeleteBookResponse;
 import bookLibrary.core.service.validators.DeleteBookValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Component
+@Transactional
 public class DeleteBookService {
     @Autowired
     private DataBase dataBase;
-    @Autowired private DeleteBookValidation deleteBookValidation;
+    @Autowired
+    private DeleteBookValidation deleteBookValidation;
 
 
     public DeleteBookResponse execute(DeleteBookRequest deleteBookRequest) {
@@ -21,11 +24,9 @@ public class DeleteBookService {
         if(errors.isEmpty()) {
             Long bookId = Long.parseLong(deleteBookRequest.getId());
             dataBase.deleteBook(bookId);
-            DeleteBookResponse deleteBookResponse = new DeleteBookResponse(true);
-            return deleteBookResponse;
+            return new DeleteBookResponse(true);
         } else {
-            DeleteBookResponse deleteBookResponse = new DeleteBookResponse(errors);
-            return deleteBookResponse;
+            return new DeleteBookResponse(errors);
         }
     }
 }

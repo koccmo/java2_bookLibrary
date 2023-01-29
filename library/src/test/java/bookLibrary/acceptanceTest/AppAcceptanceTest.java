@@ -2,19 +2,10 @@ package bookLibrary.acceptanceTest;
 
 import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
-import bookLibrary.core.dataBase.JdbcDatabaseImpl;
-import bookLibrary.core.request.AddBookRequest;
-import bookLibrary.core.request.DeleteBookRequest;
-import bookLibrary.core.request.PrintAllBooksTitleRequest;
-import bookLibrary.core.request.SearchBooksRequest;
-import bookLibrary.core.response.AddBookResponse;
-import bookLibrary.core.response.DeleteBookResponse;
-import bookLibrary.core.response.PrintAllBooksTitleResponse;
-import bookLibrary.core.response.SearchBooksResponse;
-import bookLibrary.core.service.AddBookService;
-import bookLibrary.core.service.DeleteBookService;
-import bookLibrary.core.service.PrintAllBookTitleService;
-import bookLibrary.core.service.SearchBooksService;
+import bookLibrary.core.dataBase.OrmBookRepositoryImpl;
+import bookLibrary.core.request.*;
+import bookLibrary.core.response.*;
+import bookLibrary.core.service.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -23,9 +14,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+
 public class AppAcceptanceTest {
 
     private ApplicationContext appContext;
+
 
     @Before
     public void setup() {
@@ -41,8 +34,10 @@ public class AppAcceptanceTest {
         AddBookRequest request = new AddBookRequest("Author", "Title");
         AddBookResponse addBookResponse = getAddBookService().execute(request);
 
-        Long id = getJdbcDatabaseImpl().getBookId(request.getAuthor(), request.getTitle());
-        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(String.valueOf(id));
+        GetBookIdRequest getBookIdRequest = new GetBookIdRequest("Author", "Title");
+        GetBookIdResponse getBookIdResponse = getBookIdService().execute(getBookIdRequest);
+
+        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(getBookIdResponse.getBookId());
         DeleteBookResponse deleteBookResponse = getDeleteBookService().execute(deleteBookRequest);
 
         assertEquals(true, deleteBookResponse.isBookDeleted());
@@ -52,9 +47,12 @@ public class AppAcceptanceTest {
     public void addDeleteBookGetAllTitle() {
         AddBookRequest request = new AddBookRequest("Author", "Title");
         AddBookResponse addBookResponse = getAddBookService().execute(request);
-        Long id = getJdbcDatabaseImpl().getBookId(request.getAuthor(), request.getTitle());
 
-        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(String.valueOf(id));
+        GetBookIdRequest getBookIdRequest = new GetBookIdRequest("Author", "Title");
+        GetBookIdResponse getBookIdResponse = getBookIdService().execute(getBookIdRequest);
+
+
+        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(getBookIdResponse.getBookId());
         DeleteBookResponse deleteBookResponse = getDeleteBookService().execute(deleteBookRequest);
 
         PrintAllBooksTitleRequest printAllBooksTitleRequest = new PrintAllBooksTitleRequest();
@@ -88,11 +86,13 @@ public class AppAcceptanceTest {
         return appContext.getBean(PrintAllBookTitleService.class);
     }
 
-    private JdbcDatabaseImpl getJdbcDatabaseImpl() {
-        return appContext.getBean(JdbcDatabaseImpl.class);
+    private OrmBookRepositoryImpl getOrmBookRepository() {
+        return appContext.getBean(OrmBookRepositoryImpl.class);
     }
 
     private SearchBooksService getSearchBookService() {
         return appContext.getBean(SearchBooksService.class);
     }
+
+    private GetBookIdService getBookIdService() { return appContext.getBean(GetBookIdService.class); }
 }

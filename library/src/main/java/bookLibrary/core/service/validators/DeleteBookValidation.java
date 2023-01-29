@@ -13,9 +13,9 @@ public class DeleteBookValidation {
     public List<CoreError> validate (DeleteBookRequest request , DataBase dataBase) {
         List<CoreError> errors = new ArrayList<>();
         idNotEmptyValidate(request).ifPresent(errors::add);
+        idHasOnlyNumbersValidate(request).ifPresent(errors::add);
         if (errors.isEmpty()) {
             bookInDataBase(request, dataBase).ifPresent(errors::add);
-            idHasOnlyNumbersValidate(request).ifPresent(errors::add);
         }
 
 
@@ -23,9 +23,9 @@ public class DeleteBookValidation {
     }
 
     private Optional<CoreError> idHasOnlyNumbersValidate(DeleteBookRequest request) {
-        return (!isNumbers(request))
-                ? Optional.of(new CoreError("Id", "Id must has only Numbers"))
-                : Optional.empty();
+        return (isNumbers(request))
+                ? Optional.empty()
+                :Optional.of(new CoreError("Id", "Id must has only Numbers"));
     }
 
     private Optional<CoreError> idNotEmptyValidate(DeleteBookRequest  request) {
@@ -35,16 +35,20 @@ public class DeleteBookValidation {
     }
 
     private Optional<CoreError> bookInDataBase(DeleteBookRequest request, DataBase dataBase) {
-        if (isNumbers(request)) {
-            boolean hasBookInLibrary = dataBase.hasBookInLibraryCheckById(Long.parseLong(request.getId()));
-            return (!hasBookInLibrary)
-                    ? Optional.of(new CoreError("Id", "Not found book with this ID!"))
-                    : Optional.empty();
-        } else return Optional.empty();
+        boolean hasBookInLibrary = dataBase.hasBookInLibraryCheckById(Long.parseLong(request.getId()));
+        return (!hasBookInLibrary)
+                ? Optional.of(new CoreError("Id", "Not found book with this ID!"))
+                : Optional.empty();
+//        if (isNumbers(request)) {
+//            boolean hasBookInLibrary = dataBase.hasBookInLibraryCheckById(Long.parseLong(request.getId()));
+//            return (!hasBookInLibrary)
+//                    ? Optional.of(new CoreError("Id", "Not found book with this ID!"))
+//                    : Optional.empty();
+//        } else return Optional.empty();
     }
 
     private boolean isNumbers (DeleteBookRequest request) {
-        return request.getId().matches(".*[0-9].*");
+        return request.getId().chars().allMatch(Character::isDigit);
     }
 
     private boolean fieldEmpty (DeleteBookRequest request) {

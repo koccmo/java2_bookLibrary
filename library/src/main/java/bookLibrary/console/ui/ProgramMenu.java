@@ -21,7 +21,12 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, PrintAllBooksTitleUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, FindBookByAuthorUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, SearchBooksUIAction.class));
-        menuNumberToUIActionMap.put(6, findUIAction(uiActions, FinishWorkUIAction.class));
+        menuNumberToUIActionMap.put(6, findUIAction(uiActions, GetBookIdUIAction.class));
+        menuNumberToUIActionMap.put(7, findUIAction(uiActions, ReaderRegisteringUIAction.class));
+        menuNumberToUIActionMap.put(8, findUIAction(uiActions, ReaderSearchUIAction.class));
+        menuNumberToUIActionMap.put(9, findUIAction(uiActions, TakeBookUIAction.class));
+        menuNumberToUIActionMap.put(10, findUIAction(uiActions, FinishWorkUIAction.class));
+
     }
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
@@ -45,7 +50,11 @@ public class ProgramMenu {
         System.out.println("3 : Print all books");
         System.out.println("4 : Find buy Author");
         System.out.println("5 : Search Book");
-        System.out.println("6 : Finish");
+        System.out.println("6 : Get Book ID");
+        System.out.println("7 : Reader Registering");
+        System.out.println("8 : Search Readers");
+        System.out.println("9 : Take book");
+        System.out.println("10 : Finish");
 
         System.out.println("");
     }

@@ -37,8 +37,8 @@ public class PrintAllBookTitleServiceAcceptanceTest {
         PrintAllBooksTitleResponse response = getPrintAllBookTitleService().execute(printAllBooksTitleRequest);
 
         assertEquals(2, response.getBookList().size());
-        assertEquals("Title", response.getBookList().get(0));
-        assertEquals("Garden", response.getBookList().get(1));
+        assertEquals("Garden", response.getBookList().get(0));
+        assertEquals("Title", response.getBookList().get(1));
     }
 
     private AddBookService getAddBookService() {

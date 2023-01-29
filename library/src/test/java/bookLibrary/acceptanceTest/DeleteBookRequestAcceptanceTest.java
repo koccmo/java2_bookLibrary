@@ -3,12 +3,15 @@ package bookLibrary.acceptanceTest;
 
 import bookLibrary.DatabaseCleaner;
 import bookLibrary.config.BookListConfiguration;
-import bookLibrary.core.dataBase.JdbcDatabaseImpl;
+import bookLibrary.core.dataBase.OrmBookRepositoryImpl;
 import bookLibrary.core.request.AddBookRequest;
 import bookLibrary.core.request.DeleteBookRequest;
+import bookLibrary.core.request.GetBookIdRequest;
 import bookLibrary.core.response.DeleteBookResponse;
+import bookLibrary.core.response.GetBookIdResponse;
 import bookLibrary.core.service.AddBookService;
 import bookLibrary.core.service.DeleteBookService;
+import bookLibrary.core.service.GetBookIdService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -43,8 +46,11 @@ public class DeleteBookRequestAcceptanceTest {
     public void shouldReturnTrueWhenBookFindAndDeleted() {
         AddBookRequest addBookRequest = new AddBookRequest("Author", "Title");
         getAddBookService().execute(addBookRequest);
-        Long id = getJdbcDatabaseImpl().getBookId(addBookRequest.getAuthor(), addBookRequest.getTitle());
-        DeleteBookRequest request = new DeleteBookRequest(String.valueOf(id));
+
+        GetBookIdRequest getBookIdRequest = new GetBookIdRequest("Author", "Title");
+        GetBookIdResponse getBookIdResponse = getBookIdService().execute(getBookIdRequest);
+
+        DeleteBookRequest request = new DeleteBookRequest(getBookIdResponse.getBookId());
         DeleteBookResponse deleteBookResponse = getDeleteBookService().execute(request);
 
         assertEquals(true, deleteBookResponse.isBookDeleted());
@@ -59,5 +65,7 @@ public class DeleteBookRequestAcceptanceTest {
         return appContext.getBean(AddBookService.class);
     }
 
-    private JdbcDatabaseImpl getJdbcDatabaseImpl() { return appContext.getBean(JdbcDatabaseImpl.class); }
+    private OrmBookRepositoryImpl getOrmBookRepositoryImpl() { return appContext.getBean(OrmBookRepositoryImpl.class); }
+
+    private GetBookIdService getBookIdService() { return appContext.getBean(GetBookIdService.class); }
 }

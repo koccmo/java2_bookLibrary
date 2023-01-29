@@ -18,14 +18,14 @@ VALUES (3003, "Porch", "Alex Pink");
 SELECT * FROM books;
 
 
-INSERT INTO readers(first_name, last_name)
-VALUES ("Dean", "Higgins");
+INSERT INTO readers(first_name, last_name, personal_code)
+VALUES ("Dean", "Higgins", 1);
 
-INSERT INTO readers(id, first_name, last_name)
-VALUES (2004, "Colin", "Molin");
+INSERT INTO readers(id, first_name, last_name, personal_code)
+VALUES (2004, "Colin", "Molin", 2);
 
-INSERT INTO readers(id, first_name, last_name)
-VALUES (2008, "Ben", "Morgan");
+INSERT INTO readers(id, first_name, last_name, personal_code)
+VALUES (2008, "Ben", "Morgan", 3);
 
 SELECT * FROM readers;
 

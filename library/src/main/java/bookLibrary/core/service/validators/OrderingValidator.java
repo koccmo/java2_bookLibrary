@@ -20,14 +20,17 @@ public class OrderingValidator {
     }
     private Optional<CoreError> validateOrderBy(Ordering order) {
         return (order.getOrderBy() != null
-                && !(order.getOrderBy().equals("Author") || order.getOrderBy().equals("Title")))
+                && !(order.getOrderBy().equalsIgnoreCase(order.getFirstField())
+                || order.getOrderBy().equalsIgnoreCase(order.getSecondField())))
                 ? Optional.of(new CoreError("OrderBy", "Must be equal Author or Title!"))
                 : Optional.empty();
     }
 
+
     private Optional<CoreError> validationOrderDirection(Ordering order) {
         return (order.getOrderDirection() != null
-                && !(order.getOrderDirection().equals("ASCENDING") || order.getOrderDirection().equals("DESCENDING")))
+                && !(order.getOrderDirection().equalsIgnoreCase("ASCENDING")
+                || order.getOrderDirection().equalsIgnoreCase("DESCENDING")))
                 ? Optional.of(new CoreError("OrderDirection", "Must be choosing one of Direction!"))
                 : Optional.empty();
     }
